@@ -71,7 +71,7 @@ void DebugMenu::render()
     if ( !isOpened() ){
         return;
     }
-    menu_root_.drawFrame(0, 50);
+    menu_root_.drawFrame(3, 3);
 }
 
 

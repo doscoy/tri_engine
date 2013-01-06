@@ -90,27 +90,27 @@ constexpr inline float toDegree( float radian ){
 }
 
 //  sin
-constexpr inline float sinf( float radian ){
+inline float sinf( float radian ){
     return std::sin( radian );
 }
 
 //  cos
-constexpr inline float cosf( float radian ){
+inline float cosf( float radian ){
     return std::cos( radian );
 }    
 
 //  acos
-constexpr inline float acosf( float radian ){
+inline float acosf( float radian ){
     return std::acos( radian );
 }
 
 //  sqrt
-constexpr inline float sqrtf( float value ){
+inline float sqrtf( float value ){
     return std::sqrt( value );
 }
 
 //  atan2
-constexpr inline float atan2f( float y, float x ){
+inline float atan2f( float y, float x ){
     return std::atan2( y, x );
 }
 

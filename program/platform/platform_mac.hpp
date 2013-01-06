@@ -24,13 +24,13 @@ const pointing_data_t& getPlatformPointingData();
 // *********************************************
 //  ウィンドウ幅取得
 constexpr inline int getScreenWidth(){
-    return 640;
+    return 1920;
 }
 
 // *********************************************
 //  ウィンドウ高さ取得
 constexpr inline int getScreenHeight(){
-    return 480;
+    return 1080;
 }
 
 
@@ -43,11 +43,11 @@ void setClearColor(
 );   
 
 // *********************************************
-//  ウィンドウ高さ取得
+//  バッファスワップ
 void swapBuffers();
 
 // *********************************************
-//  ウィンドウ高さ取得    
+//  ディスプレイクリア
 void clearDisplay( int flag );
 
 }   // namespace glue

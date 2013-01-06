@@ -116,6 +116,8 @@ void DebugMenuFrame::drawFrame(
     const float y
 ) const {
 
+    setDebugFontSize( DEBUG_FONT_POINT );
+    setDebugFontColor( COLOR_BLUE );
     printDisplay( x, y, getLabel() );
 
     int idx = 0;

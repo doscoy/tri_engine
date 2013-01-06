@@ -4,7 +4,7 @@
 #include "tri_texture.hpp"
 #include "tri_image_png.hpp"
 #include "../dbg/tri_dbg.hpp"
-#include <png.h>
+#include "../../otherlib/libpng/png.h"
 
 
 namespace t3 {
