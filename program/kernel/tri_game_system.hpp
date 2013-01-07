@@ -65,7 +65,7 @@ public:
 
 
     const Pad& getPad( const int pad_no = 0 ) const {
-        return pad_[pad_no];
+        return pad_.at(pad_no);
     }
     
     
@@ -83,7 +83,7 @@ private:
     ivec2_t screen_size_;
     
     //  パッド入力
-    Pad pad_[MAX_PAD];
+    std::array<Pad, MAX_PAD> pad_;
 
     
     

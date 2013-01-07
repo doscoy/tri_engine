@@ -4,7 +4,7 @@
 #include "tri_allocation_recorder.hpp"
 #include "tri_types.hpp"
 #include "../dbg/tri_dbg.hpp"
-
+#include "../util/tri_util.hpp"
 
 //==============================================================================
 
@@ -18,7 +18,7 @@ void AllocationRecorder::checkin(
     const char* const filename,
     int line
 ){
-    for ( auto ap = info_.begin(); ap != info_.end(); ++ap ) {
+    for ( auto ap = allocate_info_.begin(); ap != allocate_info_.end(); ++ap ) {
         if ( !ap->isEnable() ){
             //  アロケーション情報を保存
             ap->setAddress( address );
@@ -41,7 +41,7 @@ void AllocationRecorder::checkin(
 void AllocationRecorder::checkout(
     void* address
 ){
-    for ( auto ap = info_.begin(); ap != info_.end(); ++ap ) {
+    for ( auto ap = allocate_info_.begin(); ap != allocate_info_.end(); ++ap ) {
         //  開放対象のアドレスを見つけて無効化
         if ( ap->getAddress() == address ){
             ap->setEnable( false );
@@ -52,10 +52,17 @@ void AllocationRecorder::checkout(
 }
 
 
-void AllocationRecorder::dump()
-{
-    for ( auto ap = info_.begin(); ap != info_.end(); ++ap ) {
-        ap->dump();
+void AllocationRecorder::dump(
+    const u_int start_filter_frame,
+    const u_int end_filter_frame
+){
+    for ( auto ap = allocate_info_.begin(); ap != allocate_info_.end(); ++ap ) {
+        if ( !ap->isEnable() ){
+            continue;
+        }
+        if ( inRange( ap->getFrame(), start_filter_frame, end_filter_frame ) ){
+            ap->dump();
+        }
     }
     
 }

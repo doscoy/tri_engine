@@ -53,7 +53,7 @@ void* MemoryBlock::allocate(
         }
         free_chain_item = free_chain_item->next_;
     }
-    
+    return nullptr;
 }
 
 void MemoryBlock::deallocate(

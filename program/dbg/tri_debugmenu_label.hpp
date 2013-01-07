@@ -35,10 +35,18 @@ public:
     DebugMenuFrame* getParent() {
         return parent_;
     }
+    
+    void setParent( DebugMenuFrame* parent ){
+        parent_ = parent;
+    }
 
     virtual bool hasChild() const {
         return false;
     }
+    
+    void attachSelf( DebugMenuFrame& frame );
+    
+    void dettachSelf();
     
     void setEnable( const bool enable ){
         enable_ = enable;

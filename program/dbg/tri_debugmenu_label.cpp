@@ -14,15 +14,25 @@ DebugMenuLabel::DebugMenuLabel(
 {
     label_length_ = std::strlen( label_ );
     if ( parent ) {
-        parent->attachItem( this );
+        attachSelf( *parent );
     }
 }
 
 DebugMenuLabel::~DebugMenuLabel()
 {
     if ( parent_ ){
-        parent_->dettachItem( this );
+        dettachSelf();
     }
+}
+
+void DebugMenuLabel::attachSelf( DebugMenuFrame& frame ){
+    
+    parent_ = &frame;
+    frame.attachItem( *this );
+}
+    
+void DebugMenuLabel::dettachSelf(){
+    parent_->dettachItem( *this );
 }
 
 }   // namespace t3

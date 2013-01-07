@@ -70,7 +70,7 @@ const Color& GameSystem::getDisplayClearColor() const
     
 void GameSystem::registryDebugMenu( DebugMenuFrame& parent_frame )
 {
-    parent_frame.attachItem( &dmf_color_idx_ );
+    dmf_color_idx_.attachSelf( parent_frame );
 }
 
   

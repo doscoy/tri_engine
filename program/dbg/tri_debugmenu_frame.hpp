@@ -13,7 +13,9 @@ typedef std::list<DebugMenuLabel*> DebugMenuList;
 class DebugMenuFrame 
     : public DebugMenuLabel
 {
-
+    friend void DebugMenuLabel::attachSelf(t3::DebugMenuFrame &frame);
+    friend void DebugMenuLabel::dettachSelf();
+    
 public:
     DebugMenuFrame(
         DebugMenuFrame* parent,
@@ -26,23 +28,6 @@ public:
     void show();
     
     void hide();
-    
-    
-    void attachItem( DebugMenuLabel* const item );
-    
-    void dettachItem( DebugMenuLabel* const item );
-    
-    void attachSelf( DebugMenuFrame& frame ){
-        T3_ASSERT( parent_ == nullptr );
-        parent_ = &frame;
-        frame.attachItem( this );
-    }
-    
-    void dettachSelf(){
-        parent_->dettachItem( this );
-    }
-    
-    
     
     bool hasChild() const {
         return items_.size() > 0;
@@ -74,6 +59,14 @@ public:
         const float x,
         const float y
     ) const;
+    
+    
+private:
+    void attachItem( DebugMenuLabel& item );
+    
+    void dettachItem( DebugMenuLabel& item );
+    
+    
     
 private:
     DebugMenuList items_;

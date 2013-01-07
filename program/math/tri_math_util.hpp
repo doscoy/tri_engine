@@ -71,6 +71,22 @@ inline const void clampMaximum(
 	
 }
 
+//  範囲判定
+template <class T>
+bool inRange(
+    const T& value,
+    const T& low,
+    const T& high
+){
+    if(low <= value && value <= high){
+        
+        return true;
+    }
+    
+    return false;
+}
+
+
 //  絶対値取得
 template <class T>
 inline const T absolute( const T& val )

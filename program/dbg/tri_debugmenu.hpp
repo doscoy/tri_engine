@@ -49,7 +49,7 @@ public:
     void attachFrame(
         DebugMenuFrame& frame
     ){
-        menu_root_.attachItem( &frame );
+        frame.attachSelf( menu_root_ );
     }
     
             

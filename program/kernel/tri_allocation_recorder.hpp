@@ -58,6 +58,18 @@ public:
     }
     
     // *********************************************
+    //  登録フレームを保持
+    void setFrame( const u_int frame ){
+        frame_ = frame;
+    }
+    
+    // *********************************************
+    //  登録フレームを取得
+    u_int getFrame() const {
+        return frame_;
+    }
+    
+    // *********************************************
     //  有効かどうか設定
     void setEnable( bool e ){
         enable_ = e;
@@ -72,7 +84,19 @@ public:
     // *********************************************
     //  情報をダンプ
     void dump() const {
-        std::cout << address_ << ":" << size_ << "  " << filename_ << "(" << line_ << ")" << std::endl; 
+        std::cout
+            << "["
+            << frame_
+            << "]"
+            << address_
+            << ":"
+            << size_
+            << "  "
+            << filename_
+            << "("
+            << line_
+            << ")"
+            << std::endl;
     }
     
 private:
@@ -80,6 +104,7 @@ private:
     std::size_t size_;
     const char* filename_;
     int line_;
+    u_int frame_;
     bool enable_;
 };
 
@@ -115,7 +140,10 @@ public:
     
     // *********************************************
     //  一覧をダンプ
-    void dump();
+    void dump(
+        const u_int start_filter_frame = 0,
+        const u_int end_filter_frame = std::numeric_limits<u_int>::max()
+    );
     
     
 private:
@@ -123,7 +151,7 @@ private:
         MAX_ALLOCATION_INFO = 10000
     };
     
-    std::array<AllocationPointInfomation, MAX_ALLOCATION_INFO> info_;
+    std::array<AllocationPointInfomation, MAX_ALLOCATION_INFO> allocate_info_;
     
 };
     

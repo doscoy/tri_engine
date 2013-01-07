@@ -51,16 +51,35 @@ void DebugMenuFrame::hide()
 
 
 void DebugMenuFrame::attachItem(
-    DebugMenuLabel* const item
+    DebugMenuLabel& item
 ){
-    items_.push_back( item );
+    if ( item.getParent() ){
+        //  既にどこかのFrameに付いている
+        //  ので外す
+        item.dettachSelf();
+        
+    }
+    //  自分を親フレームにする
+    item.setParent( this );
+    
+    //  子リストに追加
+    items_.push_back( &item );
 }
 
 
 void DebugMenuFrame::dettachItem(
-    DebugMenuLabel* const item
+    DebugMenuLabel& item
 ){
-    items_.remove( item );
+    //  自分の管理アイテムか判定
+    T3_ASSERT( item.getParent() == this );
+
+    //  親を無効化
+    item.setParent( nullptr );
+
+    //  子リストから外す
+    items_.remove( &item );
+    
+
 }
 
 

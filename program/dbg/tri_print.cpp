@@ -25,8 +25,8 @@ constexpr int BUFFER_LENGTH = 256;
 
 const t3::Texture* debugfont_ = nullptr;
 
-//const char* DEBUG_FONT_PATH = "/Users/doscoy_t/project/dev_t3/dev_t3/resource/font1.png";
-const char* DEBUG_FONT_PATH = "/Users/kani/project/tri_sandbox/dev_t3/resource/font1.png";
+const char* DEBUG_FONT_PATH = "/Users/doscoy_t/project/dev_t3/dev_t3/resource/font1.png";
+//const char* DEBUG_FONT_PATH = "/Users/kani/project/tri_sandbox/dev_t3/resource/font1.png";
 
 t3::color_t font_color_( t3::COLOR_WHITE );
 int font_size_ = t3::DEBUG_FONT_POINT;
