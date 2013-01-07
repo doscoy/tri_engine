@@ -1,7 +1,7 @@
 #ifndef TRI_CAMERA_HPP_INCLUDED
 #define TRI_CAMERA_HPP_INCLUDED
 
-#include "math/tri_vector.hpp"
+#include "math/tri_math_types.hpp"
 #include "math/tri_interpolation.hpp"
 #include "math/tri_matrix.hpp"
 

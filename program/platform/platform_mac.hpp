@@ -5,6 +5,7 @@
 
 namespace t3 {
 class Application;
+class Color;
 };
 namespace glue {
 
@@ -35,11 +36,9 @@ constexpr inline int getScreenHeight(){
 
 
 // *********************************************
-//  ウィンドウ高さ取得
+//  クリアカラー設定
 void setClearColor(
-    float r,
-    float g,
-    float b
+    const t3::Color& color
 );   
 
 // *********************************************

@@ -2,8 +2,7 @@
 #include "tri_develop_base.hpp"
 #include "tri_debugmenu_frame.hpp"
 #include "tri_print.hpp"
-#include "../kernel/tri_game_system.hpp"
-
+#include "tri_debugpad.hpp"
 
 
 namespace t3 {
@@ -75,8 +74,8 @@ void DebugMenuFrame::update()
         focus->update();
     }
     else {
-        const Pad& pad = GameSystem::getInstance().getPad();
-        int items_size = items_.size();
+        const Pad& pad = debugPad();
+        u_int items_size = items_.size();
         
         if ( pad.isTrigger( t3::PAD_BUTTON_UP ) ){
             select_idx_ -= 1;
@@ -117,12 +116,11 @@ void DebugMenuFrame::drawFrame(
 ) const {
 
     setDebugFontSize( DEBUG_FONT_POINT );
-    setDebugFontColor( COLOR_BLUE );
+    setDebugFontColor( COLOR_RED );
     printDisplay( x, y, getLabel() );
 
     int idx = 0;
     for ( auto item: items_ ) {
-        color_t color;
         if ( idx == select_idx_ ) {
             setDebugFontSize( DEBUG_FONT_POINT );
             setDebugFontColor( COLOR_RED );
@@ -134,16 +132,22 @@ void DebugMenuFrame::drawFrame(
         }
         
         
-        if ( item->hasChild() ) {
-            if ( focus_item_ == item ){
+        if ( focus_item_ == item ){
+            //  フォーカスがあるアイテムなので強調する
+            if ( item->hasChild() ) {
+                //  フレームなのでさらにフレームの内容を描画
                 DebugMenuFrame* dmf = static_cast<DebugMenuFrame*>( item );
                 dmf->drawFrame( x + getLabelWidth()*DEBUG_FONT_POINT, y+(idx*DEBUG_FONT_POINT)+DEBUG_FONT_POINT/2 );
             }
             else {
+                //  アイテムを描画
+                setDebugFontSize( DEBUG_FONT_POINT );
+                setDebugFontColor( COLOR_YELLOW );
                 item->draw( x + getLabelWidth()*DEBUG_FONT_POINT, y+(DEBUG_FONT_POINT*idx)+DEBUG_FONT_POINT/2 );
             }
         }
-        else {            
+        else {
+            //  フォーカスの無いものは普通に描画
             item->draw( x + getLabelWidth()*DEBUG_FONT_POINT, y+(DEBUG_FONT_POINT*idx)+DEBUG_FONT_POINT/2 );
         }
         idx += 1;

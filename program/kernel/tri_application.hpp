@@ -4,6 +4,10 @@
 
 #include "../util/tri_uncopyable.hpp"
 #include "tri_develop_base.hpp"
+#include <memory>
+
+
+class ApplicationDebugMenu;
 
 namespace t3 {
 inline namespace core{
@@ -26,6 +30,9 @@ public:
 private:
     bool isDebugMenuOpenRequest();
     bool isSuspend() const;
+
+private:
+    std::unique_ptr<ApplicationDebugMenu> system_menu_;
 };
 
 

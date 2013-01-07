@@ -15,7 +15,7 @@ class DebugMenuFrame
 {
 
 public:
-    explicit DebugMenuFrame(
+    DebugMenuFrame(
         DebugMenuFrame* parent,
         const char* const label
     );

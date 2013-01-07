@@ -4,7 +4,7 @@
 
 
 #include "../tri_develop_base.hpp"
-#include "../math/tri_vector.hpp"
+#include "../math/tri_math_types.hpp"
 #include "../util/tri_uncopyable.hpp"
 #include "tri_gfx_types.hpp"
 

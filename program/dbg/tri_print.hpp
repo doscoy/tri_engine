@@ -20,7 +20,7 @@ void setDebugFontSize(
 );
 
 
-constexpr int DEBUG_FONT_POINT = 15;
+constexpr int DEBUG_FONT_POINT = 24;
 
 } // inline namespace debug
 } // namespace t3

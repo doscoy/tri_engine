@@ -4,6 +4,9 @@
 #include "../util/tri_counter.hpp"
 #include "../io/tri_pad.hpp"
 #include "../platform/platform.hpp"
+#include "../dbg/tri_debugpad.hpp"
+
+
 
 namespace t3 {
 
@@ -13,13 +16,17 @@ extern Counter frame_counter_;
 //  コンストラクタ
 GameSystem::GameSystem()
     : random_number_generator_( 1 )
+    , dmf_color_idx_( nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3 )
+    , use_clear_color_index_( 0 )
+    , clear_colors_{{
+        COLOR_DARKGRAY,
+        COLOR_BLACK,
+        COLOR_WHITE,
+        COLOR_BLUE}}
     , suspend_( false )
 {
     //  テクスチャマネージャ生成
     TextureManager::createInstance();
-    
-    
-    
     
     
     //  デバッグ文字描画の初期化
@@ -49,12 +56,22 @@ void GameSystem::update( tick_t tick )
     for ( int pad_idx = 0; pad_idx < MAX_PAD; ++pad_idx ){
         pad_[pad_idx].updatePad( glue::getPlatformPadData( pad_idx ) );
     }
-    debug_pad_.updatePad( glue::getPlatformDebugPadData() );
+    updateDebugPad( glue::getPlatformDebugPadData() );
     
     
 }
 
-
+const Color& GameSystem::getDisplayClearColor() const
+{
+        
+    return clear_colors_[use_clear_color_index_];
+}
+    
+    
+void GameSystem::registryDebugMenu( DebugMenuFrame& parent_frame )
+{
+    parent_frame.attachItem( &dmf_color_idx_ );
+}
 
   
 }   // namespace t3

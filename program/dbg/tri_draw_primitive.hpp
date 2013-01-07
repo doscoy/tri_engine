@@ -1,7 +1,7 @@
 #ifndef TRI_DRAW_PRIMITIVE_HPP_INCLUDED
 #define TRI_DRAW_PRIMITIVE_HPP_INCLUDED
 
-#include "../math/tri_vector.hpp"
+#include "../math/tri_math_types.hpp"
 #include "../gfx/tri_color.hpp"
 
 

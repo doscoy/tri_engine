@@ -66,7 +66,6 @@ void timer( int value ) {
 
     glutTimerFunc(18 , timer , 0);
 	glutPostRedisplay();
-    glClearColor( 0, 0.0, 1.0, 1.0 );
     app_->update(0.0166f);
     key_data_ = 0;
     //glFlush();
@@ -142,11 +141,14 @@ pad_data_t getPlatformDebugPadData()
 }
 
 void setClearColor(
-    float r,
-    float g,
-    float b
+    const t3::Color& color
 ){
-    glClearColor( r, g, b, 1 );
+    glClearColor(
+        color.redf(),
+        color.greenf(),
+        color.bluef(),
+        color.alphaf()
+    );
 }
 
 void swapBuffers()

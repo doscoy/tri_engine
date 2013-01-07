@@ -3,6 +3,7 @@
 #include "tri_debugmenu.hpp"
 #include "tri_print.hpp"
 #include "../gfx/tri_color.hpp"
+#include "tri_debugpad.hpp"
 
 namespace t3 {
 
@@ -56,7 +57,7 @@ void DebugMenu::update( tick_t tick )
         return;
     }
     if ( menu_root_.getFocusItem() == nullptr ){
-        const Pad& pad = GameSystem::getInstance().getPad();
+        const Pad& pad = debugPad();
         if ( pad.isTrigger( PAD_BUTTON_LEFT ) ){
             closeMenu();
         }

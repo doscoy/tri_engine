@@ -20,7 +20,7 @@ Workbar::Workbar(
     , limit_width_pixel_( limit_width_pixel )
 {
     std::fill( bar_params_.begin(), bar_params_.end(), 0 );
-    std::fill( bar_colors_.begin(), bar_colors_.end(), color_t(255,255,255,255) );
+    std::fill( bar_colors_.begin(), bar_colors_.end(), Color(255,255,255,255) );
 }
 
 

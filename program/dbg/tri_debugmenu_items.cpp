@@ -2,7 +2,7 @@
 
 #include "tri_develop_base.hpp"
 #include "tri_debugmenu_items.hpp"
-#include "../kernel/tri_game_system.hpp"
+#include "tri_debugpad.hpp"
 #include "../io/tri_pad.hpp"
 
 namespace t3 {
@@ -43,7 +43,7 @@ void makeTargetValueString(
 
 void DebugMenuButtonBase::update()
 {
-    const Pad& pad = GameSystem::getInstance().getPad();
+    const Pad& pad = debugPad();
     if ( pad.isTrigger( PAD_BUTTON_RIGHT ) ){
         invoke();
     }

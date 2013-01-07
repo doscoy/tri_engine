@@ -2,11 +2,14 @@
 #define TRI_GAME_SYSTEM_HPP_INCLUDED
 
 #include "../tri_develop_base.hpp"
-
+#include "../dbg/tri_debugmenu.hpp"
 #include "../io/tri_pad.hpp"
 #include "../io/tri_pointing.hpp"
 #include "../util/random/tri_random.hpp"
 #include "../util/tri_singleton.hpp"
+#include "../gfx/tri_color.hpp"
+#include <array>
+
 
 #define MAX_PAD 4
 
@@ -65,10 +68,13 @@ public:
         return pad_[pad_no];
     }
     
-    const Pad& getDebugPad() const {
-        return debug_pad_;
-    }
+    
+    const Color& getDisplayClearColor() const;
 
+    
+    void registryDebugMenu(DebugMenuFrame& parent_frame);
+    
+    
 private:
     //  乱数
     random_t random_number_generator_;
@@ -78,7 +84,14 @@ private:
     
     //  パッド入力
     Pad pad_[MAX_PAD];
-    Pad debug_pad_;
+
+    
+    
+    //  クリアカラー
+    DebugMenuItem<int> dmf_color_idx_;
+    int use_clear_color_index_;
+    std::array<Color, 4> clear_colors_;
+    
     
     bool suspend_;
 };

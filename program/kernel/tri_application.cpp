@@ -6,7 +6,7 @@
 #include "../dbg/tri_stopwatch.hpp"
 #include "../dbg/tri_workbar.hpp"
 #include "../dbg/tri_draw_primitive.hpp"
-
+#include "../dbg/tri_debugpad.hpp"
 
 namespace {
 
@@ -26,34 +26,33 @@ public:
     }
 };
 
-class ApplicationDebugMenu
-{
-public:
-    ApplicationDebugMenu()
-        : dmf_system_( nullptr, "system" )
-        , dmb_step_( &dmf_system_, "step", 0 )
-        , dmi_workbar_visible_( &dmf_system_, "workbar visible", workbar_visible_, 1 )
-    {
-    }
 
-
-    t3::DebugMenuFrame& getSystemDebugMenuRoot() {
-        return dmf_system_;
-    };
-
-
-private:    
-    t3::DebugMenuFrame dmf_system_;
-    t3::DebugMenuButtonFunctor<Step> dmb_step_;
-    t3::DebugMenuItem<bool> dmi_workbar_visible_;
-};
-
-ApplicationDebugMenu*  system_debug_menu_;
 
 
 }   // unname namespace
 
-
+class ApplicationDebugMenu
+{
+public:
+    ApplicationDebugMenu()
+    : dmf_system_( nullptr, "SYSTEM" )
+    , dmb_step_( &dmf_system_, "STEP", 0 )
+    , dmi_workbar_visible_( &dmf_system_, "WORKBAR VISIBLE", workbar_visible_, 1 )
+    {
+        t3::GameSystem::getInstance().registryDebugMenu( dmf_system_ );
+    }
+    
+    
+    t3::DebugMenuFrame& getSystemDebugMenuRoot() {
+        return dmf_system_;
+    };
+    
+    
+private:
+    t3::DebugMenuFrame dmf_system_;
+    t3::DebugMenuButtonFunctor<Step> dmb_step_;
+    t3::DebugMenuItem<bool> dmi_workbar_visible_;
+};
 
 
 namespace t3 {
@@ -61,14 +60,12 @@ namespace t3 {
 Application::Application(
     SceneGenerator* root_scene_generator
 )   : root_scene_generator_( root_scene_generator )
+    , system_menu_(nullptr)
 {
-    system_debug_menu_ = new ApplicationDebugMenu;
-
 }
 
 Application::~Application()
 {
-    delete system_debug_menu_;
 }
 
 void Application::initializeApplication()
@@ -96,8 +93,12 @@ void Application::initializeApplication()
 
 
     //  システムデバッグメニュー登録
+    system_menu_.reset( new ApplicationDebugMenu );
+
     DebugMenu& debug_menu_root = DebugMenu::getInstance();
-    system_debug_menu_->getSystemDebugMenuRoot().attachSelf( debug_menu_root.getMenuRoot() );
+    system_menu_->getSystemDebugMenuRoot().attachSelf(
+        debug_menu_root.getMenuRoot()
+    );
 }
 
 
@@ -161,8 +162,7 @@ void Application::update( tick_t tick )
 }
 
 bool Application::isDebugMenuOpenRequest(){
-    GameSystem& gs = GameSystem::getInstance();
-    const Pad& pad = gs.getDebugPad();
+    const Pad& pad = debugPad();
     
     bool result = false;
     if ( pad.isPress( PAD_BUTTON_3 ) ){
@@ -202,7 +202,8 @@ void Application::beginRender()
 
 void Application::endRender()
 {
-    glue::setClearColor( 0.1, 0.1, 0.5 );
+    GameSystem& gs = GameSystem::getInstance();
+    glue::setClearColor( gs.getDisplayClearColor() );
     glue::swapBuffers();
     glue::clearDisplay( GL_COLOR_BUFFER_BIT |GL_DEPTH_BUFFER_BIT );    
 }

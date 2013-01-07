@@ -8,7 +8,7 @@
 #define TRI_BEZIER_CURVE_HPP_INCLUDED
 
 
-#include "../math/tri_vector.hpp"
+#include "../math/tri_math_types.hpp"
 
 
 namespace t3 {

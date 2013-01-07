@@ -4,10 +4,13 @@
 
 #include "tri_develop_base.hpp"
 #include "tri_debugmenu_label.hpp"
-#include "../io/tri_pad.hpp"
-#include "../kernel/tri_game_system.hpp"
+#include "tri_debugpad.hpp"
 #include "tri_debugmenu_frame.hpp"
 #include "../kernel/tri_scene.hpp"
+#include "../math/tri_math_types.hpp"
+#include <limits.h>
+
+
 
 namespace t3 {
 
@@ -46,10 +49,14 @@ public:
         DebugMenuFrame* const parent,
         const char* const label,
         T& target,
-        const T step
+        const T step,
+        const T low_limit = std::numeric_limits<T>::min(),
+        const T high_limit = std::numeric_limits<T>::max()
     )   : DebugMenuLabel( parent, label )
         , target_( target )
         , step_( step )
+        , l_limit_( low_limit )
+        , h_limit_( high_limit )
     {
     
     }
@@ -58,7 +65,7 @@ public:
 public:
     virtual void update() override 
     {
-        const Pad& pad = GameSystem::getInstance().getPad();
+        const Pad& pad = debugPad();
         if ( pad.isTrigger( t3::PAD_BUTTON_LEFT ) ){
             if ( parent_ ){
                 parent_->setFocusItem( nullptr );
@@ -70,6 +77,7 @@ public:
         else if ( pad.isTrigger( t3::PAD_BUTTON_DOWN ) ){
             target_ += step_;
         }
+        t3::util::clampLimitation( target_, l_limit_, h_limit_ );
     }
     
     
@@ -87,6 +95,8 @@ public:
 private:
     T& target_;
     T step_;
+    T l_limit_;
+    T h_limit_;
 };
 
 
@@ -225,8 +235,7 @@ public:
 public:
     virtual void update() override{
 
-        GameSystem& gs = GameSystem::getInstance();
-        const Pad& pad = gs.getPad();
+        const Pad& pad = debugPad();
         if ( pad.isTrigger( PAD_BUTTON_RIGHT ) ){
             SceneManager& sm = SceneManager::getInstance();
             sm.forceChangeScene( gen_.getInstancePtr() );
