@@ -32,8 +32,12 @@ public:
         limit_param_ = limit;
     }
     
-    void setWidthPixel( int width ){
+    void setLimitWidthPixel( int width ){
         limit_width_pixel_ = width;
+    }
+    
+    void setTickness( int thickness ){
+        thickness_ = thickness;
     }
     
     void draw();
@@ -46,6 +50,7 @@ private:
     int limit_width_pixel_;
     int keep_frame_;
     int limit_bar_pos_x_;
+    int thickness_;
     vec2_t position_;
 };
 

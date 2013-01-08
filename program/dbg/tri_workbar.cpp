@@ -16,8 +16,14 @@ inline namespace dbg {
 Workbar::Workbar(
     float limit_param,
     int limit_width_pixel
-)   : limit_param_( limit_param )
+)   : bar_params_()
+    , bar_colors_()
+    , limit_param_( limit_param )
     , limit_width_pixel_( limit_width_pixel )
+    , keep_frame_(0)
+    , limit_bar_pos_x_(0)
+    , thickness_(2)
+    , position_()
 {
     std::fill( bar_params_.begin(), bar_params_.end(), 0 );
     std::fill( bar_colors_.begin(), bar_colors_.end(), Color(255,255,255,255) );
@@ -58,7 +64,7 @@ void Workbar::draw()
         double param = bar_params_[idx];
         double pixel_width = ( param / limit_param_ ) * limit_width_pixel_;
         
-        drawRectangle( vec2_t( start_x, y ), vec2_t( pixel_width, 1 ), bar_colors_[idx] );
+        drawRectangle( vec2_t( start_x, y ), vec2_t( pixel_width, thickness_ ), bar_colors_[idx] );
         start_x += pixel_width;
     }
     
@@ -83,7 +89,7 @@ void Workbar::draw()
     }
     
     //  上限バー描画
-    drawRectangle( vec2_t( limit_bar_pos_x_, y-1 ), vec2_t( 1, 2 ), COLOR_LIME );
+    drawRectangle( vec2_t( limit_bar_pos_x_, y-1 ), vec2_t( 1, thickness_+2 ), COLOR_LIME );
     
 }
 

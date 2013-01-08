@@ -9,7 +9,7 @@
 #include "../kernel/tri_scene.hpp"
 #include "../math/tri_math_types.hpp"
 #include <limits.h>
-
+#include <functional>
 
 
 namespace t3 {
@@ -196,7 +196,7 @@ public:
     virtual void update() override;
     
 };
-    
+
 template <typename T, typename ArgType = int>
 class DebugMenuButtonFunctor
     : public DebugMenuButtonBase
@@ -211,7 +211,7 @@ public:
     {
     }
     
-    virtual void invoke() override{
+    virtual void invoke() override {
         functor_(param_);
     }
     
@@ -219,6 +219,33 @@ private:
     T functor_;
     ArgType  param_;
 };
+
+
+template <typename T>
+class DebugMenuButtonMethod
+    : public DebugMenuButtonBase
+{
+public:
+    DebugMenuButtonMethod(
+        DebugMenuFrame* parent,
+        const char* const label,
+        T* owner,
+        std::function<void(T&)> f
+    )   : DebugMenuButtonBase( parent, label )
+        , func_(f)
+        , owner_(owner)
+    {}
+    
+    virtual void invoke() override {
+        T3_NULL_ASSERT(owner_);
+        func_(*owner_);
+    }
+    
+private:
+    std::function<void(T&)> func_;
+    T* owner_;
+};
+
 
 template <class T>
 class DebugMenuSceneLouncher

@@ -13,7 +13,7 @@ namespace t3 {
 inline namespace core{
 class SceneGenerator;
 }
-class Application
+class Application final
     : private Uncopyable
 {
 public:
@@ -31,6 +31,10 @@ private:
     bool isDebugMenuOpenRequest();
     bool isSuspend() const;
 
+public:
+    void gotoRootMenuScene();
+    
+    
 private:
     std::unique_ptr<ApplicationDebugMenu> system_menu_;
 };

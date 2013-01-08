@@ -12,30 +12,43 @@ namespace {
 
 bool workbar_visible_ = true;
 t3::Workbar cpu_bar_( 0.0166, 475 );
-t3::Workbar test_( 100, 3 );
 t3::Stopwatch system_cost_timer_;
 t3::Stopwatch game_cost_timer_;
 t3::Stopwatch rendering_cost_timer_;
 
 bool step_update_ = false;
-class Step
+
+struct Step
 {
-public:
-    void operator ()( int arg ){
+    void operator ()( int ){
         step_update_ = true;
     }
 };
 
 
 
+bool isSuspending()
+{
+    t3::GameSystem& gs = t3::GameSystem::getInstance();
+    t3::DebugMenu& dm = t3::DebugMenu::getInstance();
+    
+    if( gs.isSuspend() || dm.isOpened() ){
+        return true;
+    }
+   
+    return false;
+}
+
 
 }   // unname namespace
+
 
 class ApplicationDebugMenu
 {
 public:
-    ApplicationDebugMenu()
+    ApplicationDebugMenu(t3::Application* app)
     : dmf_system_( nullptr, "SYSTEM" )
+    , dmb_root_menu_( &dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootMenuScene )
     , dmb_step_( &dmf_system_, "STEP", 0 )
     , dmi_workbar_visible_( &dmf_system_, "WORKBAR VISIBLE", workbar_visible_, 1 )
     {
@@ -50,6 +63,7 @@ public:
     
 private:
     t3::DebugMenuFrame dmf_system_;
+    t3::DebugMenuButtonMethod<t3::Application> dmb_root_menu_;
     t3::DebugMenuButtonFunctor<Step> dmb_step_;
     t3::DebugMenuItem<bool> dmi_workbar_visible_;
 };
@@ -85,7 +99,7 @@ void Application::initializeApplication()
     SceneManager::getInstance().forceChangeScene( root_scene_generator_ );
 
     //  ワークバーのカラーリング設定
-    cpu_bar_.setWidthPixel( glue::getScreenWidth() );
+    cpu_bar_.setLimitWidthPixel( glue::getScreenWidth() );
     cpu_bar_.setColor( 0, COLOR_VIOLET );
     cpu_bar_.setColor( 1, COLOR_YELLOW );
     cpu_bar_.setColor( 2, COLOR_GREEN );
@@ -93,7 +107,7 @@ void Application::initializeApplication()
 
 
     //  システムデバッグメニュー登録
-    system_menu_.reset( new ApplicationDebugMenu );
+    system_menu_.reset( new ApplicationDebugMenu(this) );
 
     DebugMenu& debug_menu_root = DebugMenu::getInstance();
     system_menu_->getSystemDebugMenuRoot().attachSelf(
@@ -142,6 +156,7 @@ void Application::update( tick_t tick )
     //  シーン描画
     beginRender();
     
+    //  デバッグメニュー描画
     dm.render();
     
     rendering_cost_timer_.end();           // rendering cost 計算終了
@@ -151,9 +166,11 @@ void Application::update( tick_t tick )
         cpu_bar_.setParam( 0, system_cost_timer_.interval() );
         cpu_bar_.setParam( 1, game_cost_timer_.interval() );
         cpu_bar_.setParam( 2, rendering_cost_timer_.interval() );
-//        t3::printDisplay( 0, 100, "%f", system_cost_timer_.interval() );
-//        t3::printDisplay( 0, 120, "%f", game_cost_timer_.interval() );
-//        t3::printDisplay( 0, 140, "%f", rendering_cost_timer_.interval() );
+/*
+        t3::printDisplay( 0, 100, "%f", system_cost_timer_.interval() );
+        t3::printDisplay( 0, 120, "%f", game_cost_timer_.interval() );
+        t3::printDisplay( 0, 140, "%f", rendering_cost_timer_.interval() );
+*/
         cpu_bar_.draw();
     }
     
@@ -185,10 +202,12 @@ bool Application::isSuspend() const {
     }
 
     //  サスペンド中か判定
-    GameSystem& gs = GameSystem::getInstance();
-    DebugMenu& dm = DebugMenu::getInstance();
+   if ( isSuspending() ){
+       return true;
+   }
 
-    return ( gs.isSuspend() || dm.isOpened() );
+
+    return false;
     
 }
 
@@ -208,7 +227,10 @@ void Application::endRender()
     glue::clearDisplay( GL_COLOR_BUFFER_BIT |GL_DEPTH_BUFFER_BIT );    
 }
 
-
+void Application::gotoRootMenuScene()
+{
+    t3::SceneManager::getInstance().forceChangeScene( root_scene_generator_ );
+}
 
 
 
