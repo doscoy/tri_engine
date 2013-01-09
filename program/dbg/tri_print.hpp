@@ -5,7 +5,7 @@
 #include "../gfx/tri_color.hpp"
 
 namespace t3 {
-inline namespace debug {
+inline namespace dbg {
 
 void initializeDebugPrint();
 
@@ -22,7 +22,7 @@ void setDebugFontSize(
 
 constexpr int DEBUG_FONT_POINT = 24;
 
-} // inline namespace debug
+} // inline namespace dbg
 } // namespace t3
 
 #endif // TRI_DBG_HPP_INCLUDED

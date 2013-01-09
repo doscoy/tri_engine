@@ -5,6 +5,8 @@
 #include "tri_debugmenu_frame.hpp"
 
 namespace t3 {
+inline namespace dbg {
+    
 
 DebugMenuLabel::DebugMenuLabel(
     DebugMenuFrame* parent,
@@ -35,5 +37,6 @@ void DebugMenuLabel::dettachSelf(){
     parent_->dettachItem( *this );
 }
 
+}   // inline namespace dbg
 }   // namespace t3
 

@@ -11,7 +11,8 @@
 
 
 namespace t3 {
-    
+inline namespace dbg {
+
 void trace( const char* const format, ... ){
     va_list msg;
     
@@ -62,6 +63,6 @@ void traceValue(
 
    
 
-
+}   // inline namespace dbg
 }   // namespace t3
 

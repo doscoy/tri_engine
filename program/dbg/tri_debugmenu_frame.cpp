@@ -6,6 +6,8 @@
 
 
 namespace t3 {
+inline namespace dbg {
+    
 
 DebugMenuFrame::DebugMenuFrame(
     DebugMenuFrame* parent,
@@ -176,5 +178,5 @@ void DebugMenuFrame::drawFrame(
     
 }
 
-
+}   // inline namespace dbg
 }   // namespace t3

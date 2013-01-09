@@ -13,7 +13,9 @@
 
 
 namespace t3 {
-
+inline namespace dbg {
+    
+    
 void makeTargetValueString(
     const int target,
     char* buf,
@@ -281,7 +283,7 @@ public:
 
 
 
-
+}   // inline namespace dbg
 }   // namespace t3
 
 #endif // TRI_DEBUGMENU_ITEMS_HPP_INCLUDED

@@ -7,7 +7,9 @@
 #include <list>
 
 namespace t3 {
-
+inline namespace dbg {
+    
+    
 typedef std::list<DebugMenuLabel*> DebugMenuList;
 
 class DebugMenuFrame 
@@ -75,7 +77,7 @@ private:
 };
 
 
-
+}   // inline namespace dbg
 }   // namespace t3
 
 #endif // TRI_DEBUGMENU_FRAME_HPP_INCLUDED

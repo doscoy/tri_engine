@@ -133,7 +133,7 @@ void debugFontPrint(const char c, const int x, const int y, const t3::color_t& c
 }   //  unname namespace
 
 namespace t3 {
-inline namespace debug {
+inline namespace dbg {
 
 void initializeDebugPrint()
 {
@@ -180,6 +180,6 @@ void setDebugFontSize(
     font_size_ = size;
 }
 
-}   // inline namespace debug
+}   // inline namespace dbg
 }   // namespace t3
 

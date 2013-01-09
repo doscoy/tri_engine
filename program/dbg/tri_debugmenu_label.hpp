@@ -8,6 +8,9 @@
 #include <string.h>
 
 namespace t3 {
+inline namespace dbg {
+    
+    
 
 class DebugMenuFrame;
 class DebugMenuLabel
@@ -73,7 +76,7 @@ protected:
 };
 
 
-
+}   // inline namespace dbg
 }   // namespace t3
 
 #endif // TRI_DEBUGMENU_LABEL_HPP_INCLUDED
