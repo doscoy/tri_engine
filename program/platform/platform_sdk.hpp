@@ -3,7 +3,7 @@
 
 
 #include <OpenGL/gl.h>
-#include <GLUT/glut.h>
+#include <OpenGL/glu.h>
 
 
 #endif // PLATFORM_SDK_HPP_INCLUDED

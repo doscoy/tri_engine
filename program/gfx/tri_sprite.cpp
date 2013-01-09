@@ -1,6 +1,5 @@
 
 #include "tri_sprite.hpp"
-#include <OpenGL/gl.h>
 #include "../kernel/tri_game_system.hpp"
 #include "../gfx/tri_resource_manager.hpp"
 

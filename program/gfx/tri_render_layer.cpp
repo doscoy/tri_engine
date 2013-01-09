@@ -1,7 +1,7 @@
 
 
 #include "tri_render_layer.hpp"
-#include <OpenGL/gl.h>
+
 
 
 

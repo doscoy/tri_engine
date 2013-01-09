@@ -17,6 +17,7 @@
 #include "dbg/tri_assert.hpp"
 #include "dbg/tri_trace.hpp"
 #include "platform.hpp"
+#include "platform_sdk.hpp"
 
 #endif // TRI_ENGINE_HPP_INCLUDED
 

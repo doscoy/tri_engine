@@ -4,12 +4,14 @@
 #include "platform_types.hpp"
 
 namespace t3 {
-class Application;
 class Color;
 };
 namespace glue {
 
-void applicationExecuter( t3::Application& app );
+void initializePlatform();
+void prepareMainLoop();
+void beginMainLoop();
+void endMainLoop();
 
 
 // *********************************************
@@ -25,13 +27,13 @@ const pointing_data_t& getPlatformPointingData();
 // *********************************************
 //  ウィンドウ幅取得
 constexpr inline int getScreenWidth(){
-    return 1920;
+    return 1280;
 }
 
 // *********************************************
 //  ウィンドウ高さ取得
 constexpr inline int getScreenHeight(){
-    return 1080;
+    return 720;
 }
 
 
