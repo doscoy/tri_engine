@@ -71,6 +71,29 @@ private:
 
 namespace t3 {
 
+int Application::run( t3::SceneGenerator* root_scene_generator )
+{
+    t3::Application app( root_scene_generator );
+    
+    //  プラットフォームの初期化
+    glue::initializePlatform();
+    
+    //  アプリの初期化
+    app.initializeApplication();
+    
+    
+    glue::prepareMainLoop();
+    while (1) {
+        t3::tick_t tick = 0.0166;
+        glue::beginMainLoop();
+        app.update(tick);
+        glue::endMainLoop();
+    }
+    
+    return 0;
+}
+
+
 Application::Application(
     SceneGenerator* root_scene_generator
 )   : root_scene_generator_( root_scene_generator )

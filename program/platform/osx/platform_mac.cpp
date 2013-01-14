@@ -29,12 +29,14 @@ void prepareMainLoop()
 {
     glDisable(GL_DEPTH_TEST);
     glDepthFunc(GL_ALWAYS);
-    key_data_ = 0;    
+
 }
 
 void beginMainLoop()
 {
+
     FsPollDevice();
+    key_data_ = 0;
     int k = FsInkey();
     switch (k) {
         
@@ -69,6 +71,7 @@ void beginMainLoop()
         default:
             break;
     }
+    
 }
 
 void endMainLoop()

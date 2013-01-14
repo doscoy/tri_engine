@@ -1,27 +1,7 @@
 #ifndef FSSIMPLEWINDOW_IS_INCLUDED
 #define FSSIMPLEWINDOW_IS_INCLUDED
-/* { */
 
 
-#ifndef FS_MOUSEEVENT_TYPE_IS_DEFINED
-#define FS_MOUSEEVENT_TYPE_IS_DEFINED
-enum
-{
-	FSMOUSEEVENT_NONE,
-	FSMOUSEEVENT_LBUTTONDOWN,
-	FSMOUSEEVENT_LBUTTONUP,
-	FSMOUSEEVENT_MBUTTONDOWN,
-	FSMOUSEEVENT_MBUTTONUP,
-	FSMOUSEEVENT_RBUTTONDOWN,
-	FSMOUSEEVENT_RBUTTONUP,
-	FSMOUSEEVENT_MOVE
-};
-#endif
-
-
-
-#ifndef FS_KEYCODE_TYPE_IS_DEFINED
-#define FS_KEYCODE_TYPE_IS_DEFINED
 enum
 {
 	FSKEY_NULL,
@@ -125,57 +105,22 @@ enum
 	FSKEY_TENENTER,
 	FSKEY_WHEELUP,
 	FSKEY_WHEELDOWN,
-
-FSKEY_NUM_KEYCODE
+    
+    FSKEY_NUM_KEYCODE
 };
-#endif
-
-
-
-#ifndef FSSIMPLEWINDOW_MACRO_ONLY
-
-	#ifndef FSSIMPLEWINDOW_DONT_INCLUDE_OPENGL_HEADERS
-		#if defined(_WIN32) || defined(WIN32)
-			#include <windows.h>
-			#include <GL/gl.h>
-			#include <GL/glu.h>
-		#elif defined(__linux) || defined(__linux__)
-			#include <GL/gl.h>
-			#include <GL/glu.h>
-		#elif defined(__APPLE__)
-			#include <OpenGL/gl.h>
-			#include <OpenGL/glu.h>
-		#else // Unknown operating system
-			#include <GL/gl.h>
-			#include <GL/glu.h>
-		#endif
-	#endif // << #ifndef FSSIMPLEWINDOW_DONT_INCLUDE_OPENGL_HEADERS
-
-
 
 #ifdef __cplusplus
 // This needs to be included from Objective-C code for mouse-event enums.
 // C++ specific declaration must be enclosed by #ifdef __cplucplus and #endif
 
 void FsOpenWindow(int x0,int y0,int wid,int hei,int useDoubleBuffer);
-void FsGetWindowSize(int &wid,int &hei);
-void FsPollDevice(void);
-void FsSleep(int ms);
-int FsPassedTime(void);
-void FsGetMouseState(int &lb,int &mb,int &rb,int &mx,int &my);
-int FsGetMouseEvent(int &lb,int &mb,int &rb,int &mx,int &my);
 void FsSwapBuffers(void);
+void FsSleep(int ms);
+void FsPollDevice(void);
 int FsInkey(void);
-int FsInkeyChar(void);
-int FsGetKeyState(int fsKeyCode);
-int FsCheckWindowExposure(void);
+int FsGetKeyState(int key_code);
 
-void FsChangeToProgramDir(void); // Mainly for Mac OS X
 #endif // << #ifdef __cplusplus
 
-#endif // << #ifndef FSSIMPLEWINDOW_MACRO_ONLY
 
-
-
-/* } */
 #endif

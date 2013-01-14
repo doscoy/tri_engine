@@ -3,10 +3,6 @@
 
 #include "fssimplewindow.h"
 
-
-static int mouseLb=0,mouseMb=0,mouseRb=0;
-
-
 static int FsNormalKeyCode[256]=
 {
 	0,                 // 0
@@ -527,28 +523,6 @@ static int FsSpecialKeyCode[256]=
 	0                   // 255
 };
 
-static int YsMacUnicodeToFsKeyCode(int uni)
-{
-	if(0<=uni && uni<256)
-	{
-		return FsNormalKeyCode[uni];
-	}
-	else if(0xf700<=uni && uni<0xf800)
-	{
-		return FsSpecialKeyCode[uni-0xf700];
-	}
-	return 0;
-}
-
-
-struct FsMouseEventLog
-{
-	int eventType;
-	int lb,mb,rb;
-	int mx,my;
-};
-
-
 static int fsKeyIsDown[FSKEY_NUM_KEYCODE]={0};
 
 #define NKEYBUF 256
@@ -559,10 +533,18 @@ static int nCharBufUsed=0;
 static int charBuffer[NKEYBUF];
 
 static int nMosBufUsed=0;
-static struct FsMouseEventLog mosBuffer[NKEYBUF];
-
-static int exposure=0;
-
+static int YsMacUnicodeToFsKeyCode(int uni)
+{
+	if(0<=uni && uni<256)
+        {
+		return FsNormalKeyCode[uni];
+        }
+	else if(0xf700<=uni && uni<0xf800)
+        {
+		return FsSpecialKeyCode[uni-0xf700];
+        }
+	return 0;
+}
 
 @interface YsMacDelegate : NSObject /* < NSApplicationDelegate > */
 /* Example: Fire has the same problem no explanation */
@@ -590,38 +572,18 @@ static int exposure=0;
 - (id) initWithContentRect: (NSRect)rect styleMask:(NSUInteger)wndStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferFlg
 {
 	[super initWithContentRect:rect styleMask:wndStyle backing:bufferingType defer:deferFlg];
-
-	[[NSNotificationCenter defaultCenter] 
-		addObserver:self
-		selector:@selector(windowDidResize:)
-		name:NSWindowDidResizeNotification
-		object:self];
-
-	[[NSNotificationCenter defaultCenter]
-	  addObserver:self
-	  selector:@selector(windowWillClose:)
-	  name:NSWindowWillCloseNotification
-	  object:self];
-
+    
 	[self setAcceptsMouseMovedEvents:YES];
-
+    
 	printf("%s\n",__FUNCTION__);
 	return self;
 }
 
-- (void) windowDidResize: (NSNotification *)notification
-{
-}
-
-- (void) windowWillClose: (NSNotification *)notification
-{
-	[NSApp terminate:nil];	// This can also be exit(0);
-}
 
 @end
 
 
-@interface YsOpenGLView : NSOpenGLView 
+@interface YsOpenGLView : NSOpenGLView
 {
 }
 - (void) drawRect: (NSRect) bounds;
@@ -631,7 +593,6 @@ static int exposure=0;
 -(void) drawRect: (NSRect) bounds
 {
 	printf("%s\n",__FUNCTION__);
-	exposure=1;
 }
 
 -(void) prepareOpenGL
@@ -639,69 +600,64 @@ static int exposure=0;
 	printf("%s\n",__FUNCTION__);
 }
 
--(NSMenu *)menuForEvent: (NSEvent *)theEvent
-{
-	printf("%s\n",__FUNCTION__);
-	return [NSView defaultMenu];
-}
 
-- (void) flagsChanged: (NSEvent *)theEvent
+-(void) flagsChanged: (NSEvent *)theEvent
 {
 	unsigned int flags;
 	flags=[theEvent modifierFlags];
-
+    
 	if(flags&NSAlphaShiftKeyMask) // Caps
-	{
+        {
 		if(fsKeyIsDown[FSKEY_CAPSLOCK]==0 && nKeyBufUsed<NKEYBUF)
-		{
+            {
 			keyBuffer[nKeyBufUsed++]=FSKEY_CAPSLOCK;
-		}
+            }
 		fsKeyIsDown[FSKEY_CAPSLOCK]=1;
-	}
+        }
 	else
-	{
+        {
 		fsKeyIsDown[FSKEY_CAPSLOCK]=0;
-	}
-
+        }
+    
 	if(flags&NSShiftKeyMask)
-	{
+        {
 		if(fsKeyIsDown[FSKEY_SHIFT]==0 && nKeyBufUsed<NKEYBUF)
-		{
+            {
 			keyBuffer[nKeyBufUsed++]=FSKEY_SHIFT;
-		}
+            }
 		fsKeyIsDown[FSKEY_SHIFT]=1;
-	}
+        }
 	else
-	{
+        {
 		fsKeyIsDown[FSKEY_SHIFT]=0;
-	}
-
+        }
+    
 	if(flags&NSControlKeyMask)
-	{
+        {
 		if(fsKeyIsDown[FSKEY_CTRL]==0 && nKeyBufUsed<NKEYBUF)
-		{
+            {
 			keyBuffer[nKeyBufUsed++]=FSKEY_CTRL;
-		}
+            }
 		fsKeyIsDown[FSKEY_CTRL]=1;
-	}
+        }
 	else
-	{
+        {
 		fsKeyIsDown[FSKEY_CTRL]=0;
-	}
-
+        }
+    
 	if((flags&NSAlternateKeyMask) || (flags&NSCommandKeyMask))
-	{
+        {
 		if(fsKeyIsDown[FSKEY_ALT]==0 && nKeyBufUsed<NKEYBUF)
-		{
+            {
 			keyBuffer[nKeyBufUsed++]=FSKEY_ALT;
-		}
+            }
 		fsKeyIsDown[FSKEY_ALT]=1;
-	}
+        }
 	else
-	{
+        {
 		fsKeyIsDown[FSKEY_ALT]=0;
-	}
-
+        }
+    
 	// Other possible key masks
 	// NSNumericPadKeyMask
 	// NSHelpKeyMask
@@ -713,37 +669,37 @@ static int exposure=0;
 {
 	unsigned int flags;
 	flags=[theEvent modifierFlags];
-
+    
 	NSString *chrs,*chrsNoMod;
 	chrs=[theEvent characters];
 	if(0==(flags & NSCommandKeyMask) && [chrs length]>0)
-	{
+        {
 		int unicode;
 		unicode=[chrs characterAtIndex:0];
-
+        
 		if(32<=unicode && unicode<128 && nCharBufUsed<NKEYBUF)
-		{
+            {
 			charBuffer[nCharBufUsed++]=unicode;
-		}
-	}
-
+            }
+        }
+    
 	chrsNoMod=[theEvent charactersIgnoringModifiers];
 	if([chrsNoMod length]>0)
-	{
+        {
 		int unicode,fskey;
 		unicode=[chrsNoMod characterAtIndex:0];
 		fskey=YsMacUnicodeToFsKeyCode(unicode);
-
+        
 		if(fskey!=0)
-		{
+            {
 			fsKeyIsDown[fskey]=1;
-
+            
 			if(nKeyBufUsed<NKEYBUF)
-			{
+                {
 				keyBuffer[nKeyBufUsed++]=fskey;
-			}
-		}
-	}
+                }
+            }
+        }
 }
 
 - (void) keyUp:(NSEvent *)theEvent
@@ -751,197 +707,62 @@ static int exposure=0;
 	NSString *chrs,*chrsNoMod;
 	chrs=[theEvent characters];
 	if([chrs length]>0)
-	{
+        {
 		int unicode;
 		unicode=[chrs characterAtIndex:0];
-	}
-
+        }
+    
 	chrsNoMod=[theEvent charactersIgnoringModifiers];
 	if([chrsNoMod length]>0)
-	{
-	  int unicode,fskey;
+        {
+        int unicode,fskey;
 		unicode=[chrsNoMod characterAtIndex:0];
 		fskey=YsMacUnicodeToFsKeyCode(unicode);
-
+        
 		if(fskey!=0)
-		{
+            {
 			fsKeyIsDown[fskey]=0;
-		}
-	}
+            }
+        }
 }
 
-- (void) mouseMoved:(NSEvent *)theEvent
-{
-	if(0<nMosBufUsed &&
-	   FSMOUSEEVENT_MOVE==mosBuffer[nMosBufUsed-1].eventType)
-	{
-	  NSRect rect;
-	  rect=[self frame];
-
-		mosBuffer[nMosBufUsed-1].mx=(int)[theEvent locationInWindow].x;
-		mosBuffer[nMosBufUsed-1].my=rect.size.height-1-(int)[theEvent locationInWindow].y;
-	}
-	else if(NKEYBUF>nMosBufUsed)
-	{
-	  NSRect rect;
-	  rect=[self frame];
-
-		mosBuffer[nMosBufUsed].eventType=FSMOUSEEVENT_MOVE;
-		mosBuffer[nMosBufUsed].mx=(int)[theEvent locationInWindow].x;
-		mosBuffer[nMosBufUsed].my=rect.size.height-1-(int)[theEvent locationInWindow].y;
-		mosBuffer[nMosBufUsed].lb=mouseLb;
-		mosBuffer[nMosBufUsed].mb=mouseMb;
-		mosBuffer[nMosBufUsed].rb=mouseRb;
-		nMosBufUsed++;
-	}
-}
-
-- (void) mouseDragged:(NSEvent *)theEvent
-{
-  [self mouseMoved:theEvent];
-}
-
-- (void) rightMouseDragged:(NSEvent *)theEvent
-{
-  [self mouseMoved:theEvent];
-}
-
-- (void) otherMouseDragged:(NSEvent *)theEvent
-{
-  [self mouseMoved:theEvent];
-}
-
-- (void) mouseDown:(NSEvent *)theEvent
-{
-	mouseLb=1;	
-
-	if(NKEYBUF>nMosBufUsed)
-	{
-	  NSRect rect;
-	  rect=[self frame];
-
-		mosBuffer[nMosBufUsed].eventType=FSMOUSEEVENT_LBUTTONDOWN;
-		mosBuffer[nMosBufUsed].mx=(int)[theEvent locationInWindow].x;
-		mosBuffer[nMosBufUsed].my=rect.size.height-1-(int)[theEvent locationInWindow].y;
-		mosBuffer[nMosBufUsed].lb=mouseLb;
-		mosBuffer[nMosBufUsed].mb=mouseMb;
-		mosBuffer[nMosBufUsed].rb=mouseRb;
-		nMosBufUsed++;
-	}
-}
-
-- (void) mouseUp:(NSEvent *)theEvent
-{
-	mouseLb=0;
-
-	if(NKEYBUF>nMosBufUsed)
-	{
-	  NSRect rect;
-	  rect=[self frame];
-
-		mosBuffer[nMosBufUsed].eventType=FSMOUSEEVENT_LBUTTONUP;
-		mosBuffer[nMosBufUsed].mx=(int)[theEvent locationInWindow].x;
-		mosBuffer[nMosBufUsed].my=rect.size.height-1-(int)[theEvent locationInWindow].y;
-		mosBuffer[nMosBufUsed].lb=mouseLb;
-		mosBuffer[nMosBufUsed].mb=mouseMb;
-		mosBuffer[nMosBufUsed].rb=mouseRb;
-		nMosBufUsed++;
-	}
-}
-
-- (void) rightMouseDown:(NSEvent *)theEvent
-{
-	mouseRb=1;
-
-	if(NKEYBUF>nMosBufUsed)
-	{
-	  NSRect rect;
-	  rect=[self frame];
-
-		mosBuffer[nMosBufUsed].eventType=FSMOUSEEVENT_RBUTTONDOWN;
-		mosBuffer[nMosBufUsed].mx=(int)[theEvent locationInWindow].x;
-		mosBuffer[nMosBufUsed].my=rect.size.height-1-(int)[theEvent locationInWindow].y;
-		mosBuffer[nMosBufUsed].lb=mouseLb;
-		mosBuffer[nMosBufUsed].mb=mouseMb;
-		mosBuffer[nMosBufUsed].rb=mouseRb;
-		nMosBufUsed++;
-	}
-}
-
-- (void) rightMouseUp:(NSEvent *)theEvent
-{
-	mouseRb=0;
-
-	if(NKEYBUF>nMosBufUsed)
-	{
-	  NSRect rect;
-	  rect=[self frame];
-
-		mosBuffer[nMosBufUsed].eventType=FSMOUSEEVENT_RBUTTONUP;
-		mosBuffer[nMosBufUsed].mx=(int)[theEvent locationInWindow].x;
-		mosBuffer[nMosBufUsed].my=rect.size.height-1-(int)[theEvent locationInWindow].y;
-		mosBuffer[nMosBufUsed].lb=mouseLb;
-		mosBuffer[nMosBufUsed].mb=mouseMb;
-		mosBuffer[nMosBufUsed].rb=mouseRb;
-		nMosBufUsed++;
-	}
-}
-
-- (void) otherMouseDown:(NSEvent *)theEvent
-{
-	mouseMb=1;
-
-	if(NKEYBUF>nMosBufUsed)
-	{
-	  NSRect rect;
-	  rect=[self frame];
-
-		mosBuffer[nMosBufUsed].eventType=FSMOUSEEVENT_MBUTTONDOWN;
-		mosBuffer[nMosBufUsed].mx=(int)[theEvent locationInWindow].x;
-		mosBuffer[nMosBufUsed].my=rect.size.height-1-(int)[theEvent locationInWindow].y;
-		mosBuffer[nMosBufUsed].lb=mouseLb;
-		mosBuffer[nMosBufUsed].mb=mouseMb;
-		mosBuffer[nMosBufUsed].rb=mouseRb;
-		nMosBufUsed++;
-	}
-}
-
-- (void) otherMouseUp:(NSEvent *)theEvent
-{
-	mouseMb=0;
-
-	if(NKEYBUF>nMosBufUsed)
-	{
-	  NSRect rect;
-	  rect=[self frame];
-
-		mosBuffer[nMosBufUsed].eventType=FSMOUSEEVENT_MBUTTONUP;
-		mosBuffer[nMosBufUsed].mx=(int)[theEvent locationInWindow].x;
-		mosBuffer[nMosBufUsed].my=rect.size.height-1-(int)[theEvent locationInWindow].y;
-		mosBuffer[nMosBufUsed].lb=mouseLb;
-		mosBuffer[nMosBufUsed].mb=mouseMb;
-		mosBuffer[nMosBufUsed].rb=mouseRb;
-		nMosBufUsed++;
-	}
-}
 
 @end
 
 
+static YsOpenGLWindow *ysWnd=nil;
+static YsOpenGLView *ysView=nil;
+
+int FsInkeyC(void)
+{
+	if(nKeyBufUsed>0)
+        {
+		int i,fskey;
+		fskey=keyBuffer[0];
+		nKeyBufUsed--;
+		for(i=0; i<nKeyBufUsed; i++)
+            {
+			keyBuffer[i]=keyBuffer[i+1];
+            }
+		return fskey;
+        }
+	return 0;
+}
 
 void YsAddMenu(void)
 {
  	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 
 	NSMenu *mainMenu;
-
+    
 	mainMenu=[NSMenu alloc];
 	[mainMenu initWithTitle:@"Minimum"];
+
 
 	NSMenuItem *fileMenu;
 	fileMenu=[[NSMenuItem alloc] initWithTitle:@"File" action:NULL keyEquivalent:[NSString string]];
 	[mainMenu addItem:fileMenu];
-
+    
 	NSMenu *fileSubMenu;
 	fileSubMenu=[[NSMenu alloc] initWithTitle:@"File"];
 	[fileMenu setSubmenu:fileSubMenu];
@@ -950,45 +771,19 @@ void YsAddMenu(void)
 	fileMenu_Quit=[[NSMenuItem alloc] initWithTitle:@"Quit"  action:@selector(terminate:) keyEquivalent:@"q"];
 	[fileMenu_Quit setTarget:NSApp];
 	[fileSubMenu addItem:fileMenu_Quit];
-
+    
 	[NSApp setMainMenu:mainMenu];
-
+    
 	[pool release];
 }
 
-void YsTestApplicationPath(void)
-{
- 	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
-
-	char cwd[256];
-	getcwd(cwd,255);
-	printf("CWD(Initial): %s\n",cwd);
-
-	NSString *path;
-	path=[[NSBundle mainBundle] bundlePath];
-	printf("BundlePath:%s\n",[path UTF8String]);
-
-	[[NSFileManager defaultManager] changeCurrentDirectoryPath:path];
-
-	getcwd(cwd,255);
-	printf("CWD(Changed): %s\n",cwd);
-
-	[pool release];
-}
-
-
-
-
-static YsOpenGLWindow *ysWnd=nil;
-static YsOpenGLView *ysView=nil;
 
 void FsOpenWindowC(int x0,int y0,int wid,int hei,int useDoubleBuffer)
 {
- 	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
+    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 
-
-	[NSApplication sharedApplication];
-	[NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
+    [NSApplication sharedApplication];
+    [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
 
 	YsMacDelegate *delegate;
 	delegate=[YsMacDelegate alloc];
@@ -996,104 +791,104 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei,int useDoubleBuffer)
 	[NSApp setDelegate: delegate];
 	
 	[NSApp finishLaunching];
-
-
-
+    
+    
+    
 	NSRect contRect;
 	contRect=NSMakeRect(x0,y0,wid,hei);
 	
 	unsigned int winStyle=
-	  NSTitledWindowMask|
-	  NSClosableWindowMask|
-	  NSMiniaturizableWindowMask|
-	  NSResizableWindowMask;
+    NSTitledWindowMask|
+    NSClosableWindowMask|
+    NSMiniaturizableWindowMask;
 	
 	ysWnd=[YsOpenGLWindow alloc];
 	[ysWnd
-		initWithContentRect:contRect
-		styleMask:winStyle
-		backing:NSBackingStoreBuffered 
-		defer:NO];
-
+     initWithContentRect:contRect
+     styleMask:winStyle
+     backing:NSBackingStoreBuffered
+     defer:NO];
+    
 	NSOpenGLPixelFormat *format;
 	NSOpenGLPixelFormatAttribute formatAttrib[]=
 	{
-		NSOpenGLPFAWindow,
-		NSOpenGLPFADepthSize,(NSOpenGLPixelFormatAttribute)32,
-		NSOpenGLPFADoubleBuffer,
-		0
+    NSOpenGLPFAWindow,
+    NSOpenGLPFADepthSize,(NSOpenGLPixelFormatAttribute)32,
+    NSOpenGLPFADoubleBuffer,
+    0
 	};
-
+    
 	if(useDoubleBuffer==0)
-	{
+        {
 		formatAttrib[3]=0;
-	}
-
+        }
+    
 	format=[NSOpenGLPixelFormat alloc];
 	[format initWithAttributes: formatAttrib];
 	
 	ysView=[YsOpenGLView alloc];
-	contRect=NSMakeRect(0,0,800,600);
+	contRect=NSMakeRect(0,0,wid,hei);
 	[ysView
-		initWithFrame:contRect
-		pixelFormat:format];
+     initWithFrame:contRect
+     pixelFormat:format];
 	
 	[ysWnd setContentView:ysView];
 	[ysWnd makeFirstResponder:ysView];
-
+    
 	[ysWnd makeKeyAndOrderFront:nil];
 	[ysWnd makeMainWindow];
-
+    
 	[NSApp activateIgnoringOtherApps:YES];
-
-	YsAddMenu();
-
-	[pool release];
-
-
-	int i;
-	for(i=0; i<FSKEY_NUM_KEYCODE; i++)
-	{
-		fsKeyIsDown[i]=0;
-	}
-
-
+    YsAddMenu();
+//    [pool releaes];
+    
+    
+    
     glClearColor(1.0F,1.0F,1.0F,0.0F);
     glClearDepth(1.0F);
 	glDisable(GL_DEPTH_TEST);
-
+    
 	glViewport(0,0,wid,hei);
-
+    
     glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0,(float)wid-1,(float)hei-1,0,-1,1);
-
+    
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
+    
 	glShadeModel(GL_FLAT);
 	glPointSize(1);
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	glColor3ub(0,0,0);
 }
 
-void FsGetWindowSizeC(int *wid,int *hei)
+void FsSleepC(int ms)
 {
-	NSRect rect;
-	rect=[ysView frame];
-	*wid=rect.size.width;
-	*hei=rect.size.height;
+	if(ms>0)
+        {
+		double sec;
+		sec=(double)ms/1000.0;
+		[NSThread sleepForTimeInterval:sec];
+        }
 }
+
+
+void FsSwapBufferC(void)
+{
+	[[ysView openGLContext] flushBuffer];
+}
+
 
 void FsPollDeviceC(void)
 {
  	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
-
+    
 	while(1)
-	{
+        {
 	 	[pool release];
 	 	pool=[[NSAutoreleasePool alloc] init];
-	
+        
 		NSEvent *event;
 		event=[NSApp
 			   nextEventMatchingMask:NSAnyEventMask
@@ -1101,185 +896,21 @@ void FsPollDeviceC(void)
 			   inMode: NSDefaultRunLoopMode
 			   dequeue:YES];
 		if([event type]==NSRightMouseDown)
-		  {
+            {
 		    printf("R mouse down event\n");
-		  }
+            }
 		if(event!=nil)
-		{
+            {
 			[NSApp sendEvent:event];
 			[NSApp updateWindows];
-		}
+            }
 		else
-		{
+            {
 			break;
-		}
-	}
-
+            }
+        }
+    
 	[pool release];	
 }
 
-void FsSleepC(int ms)
-{
-	if(ms>0)
-	{
-		double sec;
-		sec=(double)ms/1000.0;
-		[NSThread sleepForTimeInterval:sec];
-	}
-}
 
-int FsPassedTimeC(void)
-{
-	int ms;
-
- 	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
-
-	static NSTimeInterval last=0.0;
-	NSTimeInterval now;
-
-	now=[[NSDate date] timeIntervalSince1970];
-
-	NSTimeInterval passed;
-	passed=now-last;
-	ms=(int)(1000.0*passed);
-
-	if(ms<0)
-	{
-		ms=1;
-	}
-	last=now;
-
-	[pool release];	
-
-	return ms;
-}
-
-void FsMouseC(int *lb,int *mb,int *rb,int *mx,int *my)
-{
-	*lb=mouseLb;
-	*mb=mouseMb;
-	*rb=mouseRb;
-
-	NSPoint loc;
-	loc=[NSEvent mouseLocation];
-	loc=[ysWnd convertScreenToBase:loc];
-	loc=[ysView convertPointFromBase:loc];
-
-	NSRect rect;
-	rect=[ysView frame];
-	*mx=loc.x;
-	*my=rect.size.height-1-loc.y;
-}
-
-int FsGetMouseEventC(int *lb,int *mb,int *rb,int *mx,int *my)
-{
-	if(0<nMosBufUsed)
-	{
-		const int eventType=mosBuffer[0].eventType;
-		*lb=mosBuffer[0].lb;
-		*mb=mosBuffer[0].mb;
-		*rb=mosBuffer[0].rb;
-		*mx=mosBuffer[0].mx;
-		*my=mosBuffer[0].my;
-
-		int i;
-		for(i=0; i<nMosBufUsed-1; i++)
-		{
-			mosBuffer[i]=mosBuffer[i+1];
-		}
-
-		nMosBufUsed--;
-		return eventType;
-	}
-	else
-	{
-		FsMouseC(lb,mb,rb,mx,my);
-		return FSMOUSEEVENT_NONE;
-	}
-}
-
-void FsSwapBufferC(void)
-{
-	[[ysView openGLContext] flushBuffer];
-}
-
-int FsInkeyC(void)
-{
-	if(nKeyBufUsed>0)
-	{
-		int i,fskey;
-		fskey=keyBuffer[0];
-		nKeyBufUsed--;
-		for(i=0; i<nKeyBufUsed; i++)
-		{
-			keyBuffer[i]=keyBuffer[i+1];
-		}
-		return fskey;
-	}
-	return 0;
-}
-
-int FsInkeyCharC(void)
-{
-	if(nCharBufUsed>0)
-	{
-		int i,c;
-		c=charBuffer[0];
-		nCharBufUsed--;
-		for(i=0; i<nCharBufUsed; i++)
-		{
-			charBuffer[i]=charBuffer[i+1];
-		}
-		return c;
-	}
-	return 0;
-}
-
-int FsKeyStateC(int fsKeyCode)
-{
-	if(0<=fsKeyCode && fsKeyCode<FSKEY_NUM_KEYCODE)
-	{
-		return fsKeyIsDown[fsKeyCode];
-	}
-	return 0;
-}
-
-void FsChangeToProgramDirC(void)
-{
-	NSString *path;
-	path=[[NSBundle mainBundle] bundlePath];
-	printf("BundlePath:%s\n",[path UTF8String]);
-
-	[[NSFileManager defaultManager] changeCurrentDirectoryPath:path];
-}
-
-int FsCheckExposureC(void)
-{
-	int ret;
-	ret=exposure;
-	exposure=0;
-	return ret;
-}
-
-/* int main(int argc, char *argv[])
-{
-	YsTestApplicationPath();
-
-	YsOpenWindow();
-
-	printf("Going into the event loop\n");
-
-	double angle;
-	angle=0.0;
-	while(1)
-	{
-		YsPollEvent();
-
-		DrawTriangle(angle);
-		angle=angle+0.05;
-
-		YsSleep(20);
-	}
-
-	return 0;
-	} */

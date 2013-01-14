@@ -13,21 +13,21 @@ namespace t3 {
 inline namespace core{
 class SceneGenerator;
 }
-class Application final
-    : private Uncopyable
+class Application
 {
 public:
+    static int run( SceneGenerator* root_scene_generator );
+    
+private:
     explicit Application( SceneGenerator* root_scene_generator );
     ~Application();
 
-public:
+private:
     void initializeApplication();
     void update(tick_t tick);
     void beginRender();
     void endRender();
     SceneGenerator* root_scene_generator_;
-    
-private:
     bool isDebugMenuOpenRequest();
     bool isSuspend() const;
 
