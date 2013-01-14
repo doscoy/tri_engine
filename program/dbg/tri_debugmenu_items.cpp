@@ -44,10 +44,10 @@ void makeTargetValueString(
 void DebugMenuButtonBase::update()
 {
     const Pad& pad = debugPad();
-    if ( pad.isTrigger( PAD_BUTTON_RIGHT ) ){
+    if ( pad.isRepeat( Pad::BUTTON_RIGHT ) ){
         invoke();
     }
-    else if ( pad.isTrigger( PAD_BUTTON_LEFT ) ){
+    else if ( pad.isRepeat( Pad::BUTTON_LEFT ) ){
         parent_->setFocusItem( nullptr );
     }
 }

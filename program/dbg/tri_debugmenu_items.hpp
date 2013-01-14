@@ -68,15 +68,15 @@ public:
     virtual void update() override 
     {
         const Pad& pad = debugPad();
-        if ( pad.isTrigger( t3::PAD_BUTTON_LEFT ) ){
+        if ( pad.isTrigger( t3::Pad::BUTTON_LEFT ) ){
             if ( parent_ ){
                 parent_->setFocusItem( nullptr );
             }      
         }
-        else if ( pad.isTrigger( t3::PAD_BUTTON_UP ) ){
+        else if ( pad.isTrigger( t3::Pad::BUTTON_UP ) ){
             target_ -= step_;
         }
-        else if ( pad.isTrigger( t3::PAD_BUTTON_DOWN ) ){
+        else if ( pad.isTrigger( t3::Pad::BUTTON_DOWN ) ){
             target_ += step_;
         }
         t3::util::clampLimitation( target_, l_limit_, h_limit_ );
@@ -265,11 +265,11 @@ public:
     virtual void update() override{
 
         const Pad& pad = debugPad();
-        if ( pad.isTrigger( PAD_BUTTON_RIGHT ) ){
+        if ( pad.isTrigger( Pad::BUTTON_RIGHT ) ){
             SceneManager& sm = SceneManager::getInstance();
             sm.forceChangeScene( gen_.getInstancePtr() );
         }
-        else if ( pad.isTrigger( PAD_BUTTON_LEFT ) ){
+        else if ( pad.isTrigger( Pad::BUTTON_LEFT ) ){
             parent_->setFocusItem( nullptr );
         }
 

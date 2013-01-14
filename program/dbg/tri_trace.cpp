@@ -28,14 +28,14 @@ void traceValue(
     const char* const name,
     int value
 ){
-    printf( "[%d] %s is %d\n", frame_counter_.now(), name, value );    
+    printf( "[%d] %s=%d\n", frame_counter_.now(), name, value );
 }
 
 void traceValue(
     const char* const name,
     u_int value
 ){
-    printf( "[%d] %s is %d\n", frame_counter_.now(), name, value );    
+    printf( "[%d] %s=%d\n", frame_counter_.now(), name, value );
 }
 
 
@@ -44,21 +44,21 @@ void traceValue(
     const char* const name,
     float value
 ){
-    printf( "[%d] %s is %f\n", frame_counter_.now(), name, value );
+    printf( "[%d] %s=%f\n", frame_counter_.now(), name, value );
 }
     
 void traceValue(
     const char* const name,
     void* value
 ){
-    printf( "[%d] %s is %p\n", frame_counter_.now(), name, value );
+    printf( "[%d] %s=%p\n", frame_counter_.now(), name, value );
 }
     
 void traceValue(
     const char* const name,
     const char* value
 ){
-    printf( "[%d] %s is %s\n", frame_counter_.now(), name, value );
+    printf( "[%d] %s=%s\n", frame_counter_.now(), name, value );
 }
 
    

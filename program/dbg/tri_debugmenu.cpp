@@ -58,7 +58,7 @@ void DebugMenu::update( tick_t tick )
     }
     if ( menu_root_.getFocusItem() == nullptr ){
         const Pad& pad = debugPad();
-        if ( pad.isTrigger( PAD_BUTTON_LEFT ) ){
+        if ( pad.isTrigger( Pad::BUTTON_LEFT ) ){
             closeMenu();
         }
     }

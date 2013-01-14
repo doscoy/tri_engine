@@ -16,7 +16,8 @@ namespace {
         
 pad_data_t key_data_;
 pointing_data_t mouse_data_;
-        
+float tick_;
+
 }   // unname namespace
 
 void initializePlatform()
@@ -27,6 +28,7 @@ void initializePlatform()
 
 void prepareMainLoop()
 {
+    tick_ = 0.0166f;
     glDisable(GL_DEPTH_TEST);
     glDepthFunc(GL_ALWAYS);
 
@@ -37,48 +39,42 @@ void beginMainLoop()
 
     FsPollDevice();
     key_data_ = 0;
-    int k = FsInkey();
-    switch (k) {
-        
-        case FSKEY_Z:
-            key_data_ |= t3::PAD_BUTTON_1;
-            break;
-        
-        case FSKEY_X:
-            key_data_ |= t3::PAD_BUTTON_2;
-            break;
-        
-        case FSKEY_C:
-            key_data_ |= t3::PAD_BUTTON_3;
-            break;
-        
-        case FSKEY_LEFT:
-            key_data_ |= t3::PAD_BUTTON_LEFT;
-            break;
-        
-        case FSKEY_RIGHT:
-            key_data_ |= t3::PAD_BUTTON_RIGHT;
-            break;
-            
-        case FSKEY_UP:
-            key_data_ |= t3::PAD_BUTTON_UP;
-            break;
-            
-        case FSKEY_DOWN:
-            key_data_ |= t3::PAD_BUTTON_DOWN;
-            break;
-            
-        default:
-            break;
+ 
+    if(FsIsKey(FSKEY_Z)){
+        key_data_ |= t3::Pad::BUTTON_1;
     }
-    
+    if(FsIsKey(FSKEY_X)){
+        key_data_ |= t3::Pad::BUTTON_2;
+    }
+    if(FsIsKey(FSKEY_C)){
+        key_data_ |= t3::Pad::BUTTON_3;
+    }
+    if(FsIsKey(FSKEY_RIGHT)){
+        key_data_ |= t3::Pad::BUTTON_RIGHT;
+    }
+    if(FsIsKey(FSKEY_LEFT)){
+        key_data_ |= t3::Pad::BUTTON_LEFT;
+    }
+    if(FsIsKey(FSKEY_UP)){
+        key_data_ |= t3::Pad::BUTTON_UP;
+    }
+    if(FsIsKey(FSKEY_DOWN)){
+        key_data_ |= t3::Pad::BUTTON_DOWN;
+    }
 }
 
 void endMainLoop()
 {
-    FsSleep(10);
+    float ms = FsPassedTime();
+    T3_TRACE_VALUE(ms);
+    FsSleep(16.0f - ms);
+    tick_ = ms * 0.001f;
 }
 
+float oneFrameSec()
+{
+    return tick_;
+}
 
 pad_data_t getPlatformPadData( int pad_no )
 {

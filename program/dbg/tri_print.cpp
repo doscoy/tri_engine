@@ -146,12 +146,12 @@ void printDisplay(
     const float y,
     const char* fmt, ... 
 ){
-    va_list argptr;
-    va_start( argptr, fmt );
+    va_list arg;
+    va_start( arg, fmt );
     
     char buf[BUFFER_LENGTH];
-    vsnprintf( buf, BUFFER_LENGTH, fmt, argptr );
-    va_end( argptr );
+    vsnprintf( buf, BUFFER_LENGTH, fmt, arg );
+    va_end( arg );
     
     
     beginPrint();
@@ -167,6 +167,35 @@ void printDisplay(
     
     endPrint();
 }
+
+void printDisplay(
+    const float x,
+    const float y,
+    const color_t& color,
+    const char* fmt, ...
+){
+    va_list arg;
+    va_start( arg, fmt );
+    
+    char buf[BUFFER_LENGTH];
+    vsnprintf( buf, BUFFER_LENGTH, fmt, arg );
+    va_end( arg );
+    
+    
+    beginPrint();
+    
+    int pitch = font_size_ - 3;
+    int idx = 0;
+    char* c = buf;
+    while(*c){
+        debugFontPrint( *c, x + idx * pitch, y, color, font_size_ );
+        ++c;
+        ++idx;
+    }
+    
+    endPrint();
+}
+
 
 void setDebugFontColor(
     const color_t& color

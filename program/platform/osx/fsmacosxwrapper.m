@@ -526,13 +526,8 @@ static int FsSpecialKeyCode[256]=
 static int fsKeyIsDown[FSKEY_NUM_KEYCODE]={0};
 
 #define NKEYBUF 256
-static int nKeyBufUsed=0;
-static int keyBuffer[NKEYBUF];
 
-static int nCharBufUsed=0;
-static int charBuffer[NKEYBUF];
 
-static int nMosBufUsed=0;
 static int YsMacUnicodeToFsKeyCode(int uni)
 {
 	if(0<=uni && uni<256)
@@ -601,129 +596,45 @@ static int YsMacUnicodeToFsKeyCode(int uni)
 }
 
 
--(void) flagsChanged: (NSEvent *)theEvent
-{
-	unsigned int flags;
-	flags=[theEvent modifierFlags];
-    
-	if(flags&NSAlphaShiftKeyMask) // Caps
-        {
-		if(fsKeyIsDown[FSKEY_CAPSLOCK]==0 && nKeyBufUsed<NKEYBUF)
-            {
-			keyBuffer[nKeyBufUsed++]=FSKEY_CAPSLOCK;
-            }
-		fsKeyIsDown[FSKEY_CAPSLOCK]=1;
-        }
-	else
-        {
-		fsKeyIsDown[FSKEY_CAPSLOCK]=0;
-        }
-    
-	if(flags&NSShiftKeyMask)
-        {
-		if(fsKeyIsDown[FSKEY_SHIFT]==0 && nKeyBufUsed<NKEYBUF)
-            {
-			keyBuffer[nKeyBufUsed++]=FSKEY_SHIFT;
-            }
-		fsKeyIsDown[FSKEY_SHIFT]=1;
-        }
-	else
-        {
-		fsKeyIsDown[FSKEY_SHIFT]=0;
-        }
-    
-	if(flags&NSControlKeyMask)
-        {
-		if(fsKeyIsDown[FSKEY_CTRL]==0 && nKeyBufUsed<NKEYBUF)
-            {
-			keyBuffer[nKeyBufUsed++]=FSKEY_CTRL;
-            }
-		fsKeyIsDown[FSKEY_CTRL]=1;
-        }
-	else
-        {
-		fsKeyIsDown[FSKEY_CTRL]=0;
-        }
-    
-	if((flags&NSAlternateKeyMask) || (flags&NSCommandKeyMask))
-        {
-		if(fsKeyIsDown[FSKEY_ALT]==0 && nKeyBufUsed<NKEYBUF)
-            {
-			keyBuffer[nKeyBufUsed++]=FSKEY_ALT;
-            }
-		fsKeyIsDown[FSKEY_ALT]=1;
-        }
-	else
-        {
-		fsKeyIsDown[FSKEY_ALT]=0;
-        }
-    
-	// Other possible key masks
-	// NSNumericPadKeyMask
-	// NSHelpKeyMask
-	// NSFunctionKeyMask
-	// NSDeviceIndependentModifierFlagsMask
-}
 
 - (void) keyDown:(NSEvent *)theEvent
 {
 	unsigned int flags;
 	flags=[theEvent modifierFlags];
-    
 	NSString *chrs,*chrsNoMod;
 	chrs=[theEvent characters];
-	if(0==(flags & NSCommandKeyMask) && [chrs length]>0)
-        {
-		int unicode;
-		unicode=[chrs characterAtIndex:0];
-        
-		if(32<=unicode && unicode<128 && nCharBufUsed<NKEYBUF)
-            {
-			charBuffer[nCharBufUsed++]=unicode;
-            }
-        }
     
 	chrsNoMod=[theEvent charactersIgnoringModifiers];
 	if([chrsNoMod length]>0)
-        {
+    {
 		int unicode,fskey;
 		unicode=[chrsNoMod characterAtIndex:0];
 		fskey=YsMacUnicodeToFsKeyCode(unicode);
         
-		if(fskey!=0)
-            {
-			fsKeyIsDown[fskey]=1;
-            
-			if(nKeyBufUsed<NKEYBUF)
-                {
-				keyBuffer[nKeyBufUsed++]=fskey;
-                }
-            }
+        if(fskey!=0)
+        {
+            fsKeyIsDown[fskey]=1;
         }
+    }
 }
 
 - (void) keyUp:(NSEvent *)theEvent
 {
 	NSString *chrs,*chrsNoMod;
 	chrs=[theEvent characters];
-	if([chrs length]>0)
-        {
-		int unicode;
-		unicode=[chrs characterAtIndex:0];
-        }
     
 	chrsNoMod=[theEvent charactersIgnoringModifiers];
 	if([chrsNoMod length]>0)
-        {
+    {
         int unicode,fskey;
 		unicode=[chrsNoMod characterAtIndex:0];
 		fskey=YsMacUnicodeToFsKeyCode(unicode);
         
 		if(fskey!=0)
-            {
+        {
 			fsKeyIsDown[fskey]=0;
-            }
         }
+    }
 }
 
 
@@ -735,18 +646,13 @@ static YsOpenGLView *ysView=nil;
 
 int FsInkeyC(void)
 {
-	if(nKeyBufUsed>0)
-        {
-		int i,fskey;
-		fskey=keyBuffer[0];
-		nKeyBufUsed--;
-		for(i=0; i<nKeyBufUsed; i++)
-            {
-			keyBuffer[i]=keyBuffer[i+1];
-            }
-		return fskey;
-        }
+	
 	return 0;
+}
+
+int FsIsKeyC(int code)
+{
+    return fsKeyIsDown[code];
 }
 
 void YsAddMenu(void)
@@ -913,4 +819,31 @@ void FsPollDeviceC(void)
 	[pool release];	
 }
 
+
+
+int FsPassedTimeC(void)
+{
+	int ms;
+    
+ 	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
+    
+	static NSTimeInterval last=0.0;
+	NSTimeInterval now;
+    
+	now=[[NSDate date] timeIntervalSince1970];
+    
+	NSTimeInterval passed;
+	passed=now-last;
+	ms=(int)(1000.0*passed);
+    
+	if(ms<0)
+        {
+		ms=1;
+        }
+	last=now;
+    
+	[pool release];	
+    
+	return ms;
+}
 

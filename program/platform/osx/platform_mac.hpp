@@ -37,6 +37,8 @@ constexpr inline int getScreenHeight(){
 }
 
 
+float oneFrameSec();
+
 // *********************************************
 //  クリアカラー設定
 void setClearColor(

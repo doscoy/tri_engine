@@ -9,40 +9,43 @@
 namespace t3 {
     
 
-enum PadButtonID{
-    PAD_BUTTON_1     = 1 << 0,
-    PAD_BUTTON_2     = 1 << 1,
-    PAD_BUTTON_3     = 1 << 2,
-    
-    PAD_BUTTON_UP    = 1 << 5,
-    PAD_BUTTON_DOWN  = 1 << 6,
-    PAD_BUTTON_RIGHT = 1 << 7,
-    PAD_BUTTON_LEFT  = 1 << 8,
-};
-
 class Pad 
-    : private Uncopyable{
-
+    : private Uncopyable
+{
+public:
+    enum ButtonID{
+        BUTTON_1     = 1 << 0,
+        BUTTON_2     = 1 << 1,
+        BUTTON_3     = 1 << 2,
+        
+        BUTTON_UP    = 1 << 5,
+        BUTTON_DOWN  = 1 << 6,
+        BUTTON_RIGHT = 1 << 7,
+        BUTTON_LEFT  = 1 << 8,
+        
+        MAX_BUTTON_ID = 7,
+    };
+    
 public:
     Pad();
     ~Pad();
 
 public:
-    void updatePad( u_int current_frame_data );
+    void updatePad( u_int current_frame_data, tick_t tick );
     
-    bool isTrigger( u_int button ) const{
+    bool isTrigger( u_int button ) const {
         return ( trigger_ & button );
     }
     
-    bool isPress( u_int button ) const{
+    bool isPress( u_int button ) const {
         return ( (last_frame_data_ & button) == button );
     }
     
-    bool isRelease( u_int button ) const{
+    bool isRelease( u_int button ) const {
         return ( release_ & button );
     }
 
-    bool isRepeat( u_int button ) const{
+    bool isRepeat( u_int button ) const {
         return ( repeat_ & button );
     }
     
@@ -62,13 +65,18 @@ public:
     u_int getRepeatBits() const {
         return repeat_;
     }
+
+private:
+    void updateRepeat( tick_t tick );
     
 private:
     u_int last_frame_data_;
     u_int trigger_;
     u_int release_;
     u_int repeat_;
-    float repeat_time_;
+    float repeat_start_time_;
+    float repeat_interval_;
+    float pressed_time_;
 };
     
 }   // namespace t3

@@ -8,7 +8,7 @@ inline namespace dbg {
 
     
 const Pad& debugPad();
-void updateDebugPad( const u_int pad_data );
+void updateDebugPad( const u_int pad_data, tick_t tick );
     
 }   // inline namespace dbg
 }   // namespace t3

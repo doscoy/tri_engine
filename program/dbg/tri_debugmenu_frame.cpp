@@ -98,19 +98,19 @@ void DebugMenuFrame::update()
         const Pad& pad = debugPad();
         u_int items_size = items_.size();
         
-        if ( pad.isTrigger( t3::PAD_BUTTON_UP ) ){
+        if ( pad.isRepeat( t3::Pad::BUTTON_UP ) ){
             select_idx_ -= 1;
             if ( select_idx_ < 0 ){
                 select_idx_ = items_size -1;
             }
         }
-        else if ( pad.isTrigger( t3::PAD_BUTTON_DOWN ) ){
+        else if ( pad.isRepeat( t3::Pad::BUTTON_DOWN ) ){
             select_idx_ += 1;
             if ( select_idx_ >= items_size ){
                 select_idx_ = 0;
             }
         }
-        else if ( pad.isTrigger( t3::PAD_BUTTON_RIGHT ) ){
+        else if ( pad.isRepeat( t3::Pad::BUTTON_RIGHT ) ){
             int idx = 0;
             for ( auto item: items_ ){
                 if ( select_idx_ == idx ){
@@ -120,7 +120,7 @@ void DebugMenuFrame::update()
                 ++idx;
             }
         }
-        else if ( pad.isTrigger( t3::PAD_BUTTON_LEFT ) ){
+        else if ( pad.isRepeat( t3::Pad::BUTTON_LEFT ) ){
             if ( parent_ ){
                 parent_->focus_item_ = nullptr;
             }

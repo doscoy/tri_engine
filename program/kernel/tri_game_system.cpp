@@ -54,9 +54,9 @@ void GameSystem::update( tick_t tick )
     frame_counter_.up();
     
     for ( int pad_idx = 0; pad_idx < MAX_PAD; ++pad_idx ){
-        pad_[pad_idx].updatePad( glue::getPlatformPadData( pad_idx ) );
+        pad_[pad_idx].updatePad( glue::getPlatformPadData( pad_idx ), tick );
     }
-    updateDebugPad( glue::getPlatformDebugPadData() );
+    updateDebugPad( glue::getPlatformDebugPadData(), tick );
     
     
 }

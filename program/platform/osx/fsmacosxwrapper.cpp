@@ -10,8 +10,8 @@ extern "C" void FsSwapBufferC(void);
 extern "C" void FsSleepC(int ms);
 extern "C" void FsPollDeviceC(void);
 extern "C" int FsInkeyC(void);
-
-
+extern "C" int FsIsKeyC(int code);
+extern "C" int FsPassedTimeC();
 
 void FsOpenWindow(int x0,int y0,int wid,int hei,int useDoubleBuffer)
 {
@@ -39,3 +39,12 @@ int FsInkey()
     return FsInkeyC();
 }
 
+int FsIsKey(int code)
+{
+    return FsIsKeyC(code);
+}
+
+int FsPassedTime()
+{
+    return FsPassedTimeC();
+}

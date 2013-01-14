@@ -118,7 +118,9 @@ void FsSwapBuffers(void);
 void FsSleep(int ms);
 void FsPollDevice(void);
 int FsInkey(void);
-int FsGetKeyState(int key_code);
+int FsIsKey(int code);
+int FsPassedTime();
+
 
 #endif // << #ifdef __cplusplus
 

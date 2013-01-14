@@ -83,10 +83,14 @@ int Application::run( t3::SceneGenerator* root_scene_generator )
     
     
     glue::prepareMainLoop();
+    
+    //  main loop
     while (1) {
-        t3::tick_t tick = 0.0166;
         glue::beginMainLoop();
-        app.update(tick);
+        
+        //  アプリケーションの更新
+        app.update( glue::oneFrameSec() );
+        
         glue::endMainLoop();
     }
     
@@ -205,7 +209,7 @@ bool Application::isDebugMenuOpenRequest(){
     const Pad& pad = debugPad();
     
     bool result = false;
-    if ( pad.isPress( PAD_BUTTON_3 ) ){
+    if ( pad.isPress( Pad::BUTTON_3 ) ){
         result = true;
     }
     return result;

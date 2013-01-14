@@ -13,9 +13,9 @@ const Pad& debugPad(){
     return debug_pad_;
 }
     
-void updateDebugPad( const u_int pad_data )
+void updateDebugPad( const u_int pad_data, tick_t tick )
 {
-    debug_pad_.updatePad( pad_data );
+    debug_pad_.updatePad( pad_data, tick );
 }
 
 }   // inline namespace dbg
