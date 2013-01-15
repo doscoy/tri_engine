@@ -42,7 +42,7 @@ public:
         T3_NULL_ASSERT( res );
         resources_.push_back( res );
         
-        return res->getID();
+        return res->getResourceID();
     }
     
     
@@ -71,7 +71,7 @@ public:
       
         for ( auto res: resources_ ) {
             
-            if ( res->getID() == id ){
+            if ( res->getResourceID() == id ){
                 return static_cast<ResourceType*>( res );
             }
         }

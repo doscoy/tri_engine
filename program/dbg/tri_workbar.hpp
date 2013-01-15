@@ -8,7 +8,7 @@
 
 namespace t3 {
 inline namespace dbg {
-constexpr int MAX_WORKBAR_ITEM = 7;
+constexpr int MAX_WORKBAR_ITEM = 15;
 
 class Workbar
     : Uncopyable

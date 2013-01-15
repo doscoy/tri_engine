@@ -599,7 +599,7 @@ static int YsMacUnicodeToFsKeyCode(int uni)
 
 - (void) keyDown:(NSEvent *)theEvent
 {
-	unsigned int flags;
+	unsigned long flags;
 	flags=[theEvent modifierFlags];
 	NSString *chrs,*chrsNoMod;
 	chrs=[theEvent characters];
@@ -686,7 +686,6 @@ void YsAddMenu(void)
 
 void FsOpenWindowC(int x0,int y0,int wid,int hei,int useDoubleBuffer)
 {
-    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 
     [NSApplication sharedApplication];
     [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];

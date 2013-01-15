@@ -1,5 +1,6 @@
 #include "tri_workbar.hpp"
 #include "tri_assert.hpp"
+#include "tri_print.hpp"
 #include "tri_draw_primitive.hpp"
 
 #include <algorithm>
@@ -53,17 +54,17 @@ void Workbar::setParam(
 
 
 
-
 void Workbar::draw()
 {
     float start_x = position_.x;
     float y = position_.y;
     
-    
     for ( int idx = 0; idx < MAX_WORKBAR_ITEM; ++idx ){
         double param = bar_params_[idx];
         double pixel_width = ( param / limit_param_ ) * limit_width_pixel_;
-        
+        if ( pixel_width < 1){
+            continue;
+        }
         drawRectangle( vec2_t( start_x, y ), vec2_t( pixel_width, thickness_ ), bar_colors_[idx] );
         start_x += pixel_width;
     }

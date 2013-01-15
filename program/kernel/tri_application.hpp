@@ -32,7 +32,7 @@ private:
     bool isSuspend() const;
 
 public:
-    void gotoRootMenuScene();
+    void gotoRootScene();
     
     
 private:

@@ -55,7 +55,7 @@ public:
 
     void update( tick_t tick );
     
-    bool isSuspend() {
+    bool isSuspend() const {
         return suspend_;
     }
 

@@ -66,7 +66,6 @@ void beginMainLoop()
 void endMainLoop()
 {
     float ms = FsPassedTime();
-    T3_TRACE_VALUE(ms);
     FsSleep(16.0f - ms);
     tick_ = ms * 0.001f;
 }

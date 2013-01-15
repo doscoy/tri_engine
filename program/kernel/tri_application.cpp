@@ -7,14 +7,21 @@
 #include "../dbg/tri_workbar.hpp"
 #include "../dbg/tri_draw_primitive.hpp"
 #include "../dbg/tri_debugpad.hpp"
+#include "../util/tri_framerate.hpp"
+#include "../util/tri_counter.hpp"
+
 
 namespace {
 
-bool workbar_visible_ = true;
-t3::Workbar cpu_bar_( 0.0166, 475 );
+bool show_work_bar_ = true;
+bool show_work_time_ = false;
+t3::Workbar cpu_bar_( t3::util::frameSec<60>(), glue::getScreenWidth() );
 t3::Stopwatch system_cost_timer_;
-t3::Stopwatch game_cost_timer_;
+t3::Stopwatch app_cost_timer_;
 t3::Stopwatch rendering_cost_timer_;
+double last_system_cost_;
+double last_app_cost_;
+double last_rendering_cost_;
 
 bool step_update_ = false;
 
@@ -48,9 +55,10 @@ class ApplicationDebugMenu
 public:
     ApplicationDebugMenu(t3::Application* app)
     : dmf_system_( nullptr, "SYSTEM" )
-    , dmb_root_menu_( &dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootMenuScene )
+    , dmb_root_menu_( &dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootScene )
     , dmb_step_( &dmf_system_, "STEP", 0 )
-    , dmi_workbar_visible_( &dmf_system_, "WORKBAR VISIBLE", workbar_visible_, 1 )
+    , dmi_show_work_time_( &dmf_system_, "SHOW WORKTIME", show_work_time_, 1 )
+    , dmi_show_work_bar_( &dmf_system_, "SHOW WORKBAR", show_work_bar_, 1 )
     {
         t3::GameSystem::getInstance().registryDebugMenu( dmf_system_ );
     }
@@ -65,7 +73,8 @@ private:
     t3::DebugMenuFrame dmf_system_;
     t3::DebugMenuButtonMethod<t3::Application> dmb_root_menu_;
     t3::DebugMenuButtonFunctor<Step> dmb_step_;
-    t3::DebugMenuItem<bool> dmi_workbar_visible_;
+    t3::DebugMenuItem<bool> dmi_show_work_time_;
+    t3::DebugMenuItem<bool> dmi_show_work_bar_;
 };
 
 
@@ -126,11 +135,10 @@ void Application::initializeApplication()
     SceneManager::getInstance().forceChangeScene( root_scene_generator_ );
 
     //  ワークバーのカラーリング設定
-    cpu_bar_.setLimitWidthPixel( glue::getScreenWidth() );
     cpu_bar_.setColor( 0, COLOR_VIOLET );
     cpu_bar_.setColor( 1, COLOR_YELLOW );
     cpu_bar_.setColor( 2, COLOR_GREEN );
-    cpu_bar_.setPosition( vec2_t( 1, glue::getScreenHeight() -5 ) );
+    cpu_bar_.setPosition( vec2_t( 1, glue::getScreenHeight() -135 ) );
 
 
     //  システムデバッグメニュー登録
@@ -156,7 +164,7 @@ void Application::update( tick_t tick )
     gs.update( tick );
     
     system_cost_timer_.end();       // system cost 計測終了
-    game_cost_timer_.start();       // game cost 計測開始
+    app_cost_timer_.start();       // app cost 計測開始
     //  シーンの更新
     if ( isSuspend() ){
         //  サスペンド中
@@ -171,14 +179,16 @@ void Application::update( tick_t tick )
             dm.openMenu();
         }
     }
-    game_cost_timer_.end();         // game cost 計測終了
-    rendering_cost_timer_.start();         // rendering cost 計算開始
     
     //  シーン切り替わり判定
     if ( sm.isSceneChenged() ){
         //  シーンが切り替わったのでデバッグメニューを閉じる
         dm.closeMenu();
     }
+    
+    app_cost_timer_.end();              // app cost 計測終了
+    rendering_cost_timer_.start();      // rendering cost 計算開始
+    
     
     //  シーン描画
     beginRender();
@@ -189,17 +199,25 @@ void Application::update( tick_t tick )
     rendering_cost_timer_.end();           // rendering cost 計算終了
     
     //  CPU負荷可視化
-    if ( workbar_visible_ ){
+    if ( show_work_bar_ ){
         cpu_bar_.setParam( 0, system_cost_timer_.interval() );
-        cpu_bar_.setParam( 1, game_cost_timer_.interval() );
+        cpu_bar_.setParam( 1, app_cost_timer_.interval() );
         cpu_bar_.setParam( 2, rendering_cost_timer_.interval() );
-/*
-        t3::printDisplay( 0, 100, "%f", system_cost_timer_.interval() );
-        t3::printDisplay( 0, 120, "%f", game_cost_timer_.interval() );
-        t3::printDisplay( 0, 140, "%f", rendering_cost_timer_.interval() );
-*/
         cpu_bar_.draw();
     }
+    
+    if ( ( frame_counter_.now() % 10 ) == 0 ) {
+        last_system_cost_ = system_cost_timer_.interval();
+        last_app_cost_ = app_cost_timer_.interval();
+        last_rendering_cost_ = rendering_cost_timer_.interval();
+    }
+    
+    if ( show_work_time_ ) {
+        t3::printDisplay( 900, 600, "sys %f", last_system_cost_ );
+        t3::printDisplay( 900, 616, "app %f", last_app_cost_ );
+        t3::printDisplay( 900, 632, "ren %f", last_rendering_cost_ );
+    }
+    
     
     endRender();
    
@@ -254,7 +272,7 @@ void Application::endRender()
     glue::clearDisplay( GL_COLOR_BUFFER_BIT |GL_DEPTH_BUFFER_BIT );    
 }
 
-void Application::gotoRootMenuScene()
+void Application::gotoRootScene()
 {
     t3::SceneManager::getInstance().forceChangeScene( root_scene_generator_ );
 }
