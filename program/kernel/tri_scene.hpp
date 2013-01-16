@@ -16,7 +16,7 @@ class SceneGenerator
 {
 public:
     virtual ~SceneGenerator(){}
-    virtual Scene* createScene() = 0;
+    virtual std::shared_ptr<Scene> createScene() = 0;
 };
 
 
@@ -37,8 +37,8 @@ public:
     
     // *********************************************
     //  シーン生成
-    Scene* createScene() override {
-        return new T;
+    std::shared_ptr<Scene> createScene() override {
+        return std::shared_ptr<Scene>( T3_NEW T );
     }
 
 };
@@ -123,12 +123,14 @@ public:
     bool isForceChangeRequested() const {
         return force_change_;
     }
+    
+    void directScene();
 
 private:
     void sceneChange();
 
 private:
-    std::unique_ptr<Scene> current_scene_;
+    std::shared_ptr<Scene> current_scene_;
     SceneGenerator* next_scene_generator_;
     bool force_change_;
     bool scene_changed_;

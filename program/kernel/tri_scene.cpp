@@ -13,7 +13,7 @@ SceneManager::SceneManager()
     , scene_changed_( false )
 {
     SceneGenerator* sg = getSceneGenerator<NullScene>();
-    current_scene_.reset( sg->createScene() );
+    current_scene_ = sg->createScene();
 }
 
 
@@ -28,7 +28,11 @@ void SceneManager::updateScene(
     tick_t tick
 ){
     current_scene_->updateScene( tick );
-    
+}
+
+
+void SceneManager::directScene()
+{
     if ( current_scene_->isFinished() || force_change_ ){
         force_change_ = false;
         sceneChange();
@@ -37,7 +41,6 @@ void SceneManager::updateScene(
         scene_changed_ = false;
     }
 }
-
 
 void SceneManager::suspendScene(
     tick_t tick
@@ -55,7 +58,8 @@ void SceneManager::sceneChange()
     current_scene_->terminateScene();
 
     //  次のシーンに遷移
-    current_scene_.reset( next_scene_generator_->createScene() );
+    T3_TRACE_VALUE(current_scene_.use_count());
+    current_scene_ = next_scene_generator_->createScene();
     next_scene_generator_ = getSceneGenerator<NullScene>();
     
     

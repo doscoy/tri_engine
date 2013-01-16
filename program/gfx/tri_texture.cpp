@@ -23,7 +23,7 @@ Texture::Texture(
         
 }
 
-Texture* Texture::create( const char* const path )
+std::shared_ptr<Texture> Texture::create( const char* const path )
 {
     return TextureFactory::createFromFile( path );
 }

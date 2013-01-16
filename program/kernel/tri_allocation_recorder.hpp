@@ -22,6 +22,7 @@ public:
         , size_( 0 )
         , filename_( nullptr )
         , line_( -1 )
+        , frame_( 0 )
         , enable_( false )
     {}
     
@@ -84,19 +85,7 @@ public:
     // *********************************************
     //  情報をダンプ
     void dump() const {
-        std::cout
-            << "["
-            << frame_
-            << "]"
-            << address_
-            << ":"
-            << size_
-            << "  "
-            << filename_
-            << "("
-            << line_
-            << ")"
-            << std::endl;
+        std::printf( "[%d]%3dbyte %s(%d)\n", frame_, size_, filename_, line_ );
     }
     
 private:
@@ -126,10 +115,11 @@ public:
     // *********************************************
     //  アロケーションポイントを登録
     void checkin(
-        void* address,
-        std::size_t size,
+        void* const address,
+        const std::size_t size,
         const char* const filename,
-        int line
+        const int line,
+        const u_int frame
     );
     
     // *********************************************
@@ -143,7 +133,7 @@ public:
     void dump(
         const u_int start_filter_frame = 0,
         const u_int end_filter_frame = std::numeric_limits<u_int>::max()
-    );
+    ) const;
     
     
 private:

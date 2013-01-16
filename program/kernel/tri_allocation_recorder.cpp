@@ -13,10 +13,11 @@ namespace t3 {
 // *********************************************
 //  アロケーションポイントの登録
 void AllocationRecorder::checkin(
-    void* address,
-    std::size_t size,
+    void* const address,
+    const std::size_t size,
     const char* const filename,
-    int line
+    const int line,
+    const u_int frame
 ){
     for ( auto ap = allocate_info_.begin(); ap != allocate_info_.end(); ++ap ) {
         if ( !ap->isEnable() ){
@@ -25,6 +26,8 @@ void AllocationRecorder::checkin(
             ap->setSize( size );
             ap->setFilename( filename );
             ap->setLine( line );
+            ap->setFrame( frame );
+            
             
             //  ここはもう使ってますよ
             ap->setEnable( true );
@@ -39,28 +42,33 @@ void AllocationRecorder::checkin(
 // *********************************************
 //  アロケーションポイントを削除
 void AllocationRecorder::checkout(
-    void* address
+    void* const address
 ){
     for ( auto ap = allocate_info_.begin(); ap != allocate_info_.end(); ++ap ) {
         //  開放対象のアドレスを見つけて無効化
         if ( ap->getAddress() == address ){
             ap->setEnable( false );
+            return;
         }
     }
     
-    T3_PANIC( "Allocation point is not found." );
+    T3_PANIC( "Allocation point is not found. (%p)", address );
 }
 
 
-void AllocationRecorder::dump(
+void AllocationRecorder::dump (
     const u_int start_filter_frame,
     const u_int end_filter_frame
-){
+) const {
+    int no = 0;
+    T3_TRACE("AllocationRecorder::dump() %d --> %d\n", start_filter_frame, end_filter_frame );
     for ( auto ap = allocate_info_.begin(); ap != allocate_info_.end(); ++ap ) {
         if ( !ap->isEnable() ){
             continue;
         }
         if ( inRange( ap->getFrame(), start_filter_frame, end_filter_frame ) ){
+            no += 1;
+            std::printf("%4d ", no);
             ap->dump();
         }
     }

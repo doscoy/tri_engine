@@ -21,7 +21,7 @@ void trace( const char* const format, ... ){
 	vsnprintf(buf, 256, format, msg);
 	va_end(msg);
     
-    printf( "[%d] %s\n", frame_counter_.now(), buf );
+    printf( "[%d] %s", frame_counter_.now(), buf );
 }
 
 void traceValue(
@@ -38,7 +38,19 @@ void traceValue(
     printf( "[%d] %s=%d\n", frame_counter_.now(), name, value );
 }
 
+void traceValue(
+    const char* const name,
+    long value
+){
+    printf( "[%d] %s=%ld\n", frame_counter_.now(), name, value );
+}
 
+void traceValue(
+    const char* const name,
+    u_long value
+){
+    printf( "[%d] %s=%ld\n", frame_counter_.now(), name, value );
+}
 
 void traceValue(
     const char* const name,

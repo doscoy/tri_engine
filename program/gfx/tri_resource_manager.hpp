@@ -24,7 +24,7 @@ class ResourceManager
     friend class Singleton< ResourceManager<ResourceType> >;
 
 public:
-    typedef std::list<Resource*> Resources;
+    typedef std::list<std::shared_ptr<ResourceType> > Resources;
 
     
 protected:
@@ -38,7 +38,7 @@ public:
     uid_t load(
         const char* const path 
     ){
-        ResourceType* res = ResourceType::create( path );
+        std::shared_ptr<ResourceType> res = ResourceType::create( path );
         T3_NULL_ASSERT( res );
         resources_.push_back( res );
         
@@ -53,10 +53,10 @@ public:
     ){
         
       
-        Resources::iterator end = resources_.end();
-        for ( Resources::iterator it = resources_.begin(); it != end; ++it ){
+        typename Resources::iterator end = resources_.end();
+        for ( typename Resources::iterator it = resources_.begin(); it != end; ++it ){
             if ( strcmp((*it)->getName(), name ) ){
-                return *it;
+                return (*it).get();
             }
         }
       
@@ -68,15 +68,15 @@ public:
     const ResourceType* getResource(
         const uid_t id
     ){
-      
-        for ( auto res: resources_ ) {
+        typename Resources::iterator end = resources_.end();
+        for( typename Resources::iterator it = resources_.begin(); it != end; ++it){
             
-            if ( res->getResourceID() == id ){
-                return static_cast<ResourceType*>( res );
+            if ( (*it)->getResourceID() == id ){
+                return (*it).get();
             }
         }
         
-        return nullptr;
+        return 0;
     }
 
 private:

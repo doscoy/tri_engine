@@ -13,6 +13,9 @@ class Texture final
     : public Resource
 {
     friend class TextureFactory;
+
+public:
+    ~Texture(){}
     
 private:
     Texture(
@@ -22,7 +25,6 @@ private:
         const ColorFormat color_format,
         const byte* data
     );    
-    ~Texture(){}
     
     
 public:
@@ -60,7 +62,7 @@ public:
     
     // *********************************************
     //  テクスチャ生成
-    static Texture* create(
+    static std::shared_ptr<Texture> create(
         const char* const filepath
     );
     

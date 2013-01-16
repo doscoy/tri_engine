@@ -45,8 +45,8 @@ SpriteRenderer::SpriteRenderer()
         0, 1, 2, 3,
     };
 
-    vertex_buffer_.reset( new VertexBuffer<VertexP2CT>( 4, v ) );
-    index_buffer_.reset( new IndexBuffer( 4, i ) );
+    vertex_buffer_.reset( T3_NEW VertexBuffer<VertexP2CT>( 4, v ) );
+    index_buffer_.reset( T3_NEW IndexBuffer( 4, i ) );
 }
 
 
@@ -149,7 +149,7 @@ void SpriteRenderer::render()
         mtx4_t modelview = scale_mtx * trans_mtx;
         glLoadMatrixf( modelview.pointer() );
         
-        
+
         //  テクスチャの割り当て
         const Texture& texture = sprite->getTexture();        
         glTexImage2D(

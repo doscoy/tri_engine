@@ -10,7 +10,7 @@ namespace t3 {
 
 constexpr int HEAP_SIGNATURE = 0xDEADC0DE;
 //constexpr int HEAP_ENDMARKER = 0x19830125;
-    constexpr int NAME_LENGTH = 32;
+constexpr int NAME_LENGTH = 32;
 
 
 struct AllocHeader;

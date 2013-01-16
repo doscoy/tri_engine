@@ -18,6 +18,7 @@
 #include "dbg/tri_trace.hpp"
 #include "platform.hpp"
 #include "platform_sdk.hpp"
+#include "kernel/tri_new.hpp"
 
 #endif // TRI_ENGINE_HPP_INCLUDED
 

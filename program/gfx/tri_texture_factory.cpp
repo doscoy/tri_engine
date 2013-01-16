@@ -12,12 +12,12 @@ namespace t3 {
 
 // *********************************************
 //  ファイルからテクスチャ生成
-Texture* TextureFactory::createFromFile(
+std::shared_ptr<Texture> TextureFactory::createFromFile(
     const char *const filename
 ){
     T3_TRACE( "Create texture from %s", filename );
 
-    Texture* tex = nullptr;
+    std::shared_ptr<Texture> tex = nullptr;
     int i = 1;
     while( filename[i] ){
         if ( filename[i] == '.' ){
@@ -39,7 +39,7 @@ Texture* TextureFactory::createFromFile(
 
 // *********************************************
 //  pngからテクスチャ生成
-Texture* TextureFactory::createFromPng(
+std::shared_ptr<Texture> TextureFactory::createFromPng(
     const char* const filename
 ){
     PngImage png( filename );
@@ -56,13 +56,13 @@ Texture* TextureFactory::createFromPng(
             break;
     }
     
-    Texture* tex = new ::t3::Texture(
+    std::shared_ptr<Texture> tex( T3_NEW ::t3::Texture(
         filename,
         png.width_,
         png.height_,
         color_format,
         (const byte*)png.data_
-    );
+    ));
     return tex;
 }
 

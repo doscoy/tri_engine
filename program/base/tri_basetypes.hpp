@@ -6,13 +6,10 @@
 namespace t3 {
     
 //  typedef
-typedef char                        s_char;
 typedef unsigned char               u_char;
-typedef short                       s_short;
 typedef unsigned short              u_short;
-typedef int                         s_int;
 typedef unsigned int                u_int;
-
+typedef unsigned long               u_long;
 
 
 }   // namespace t3

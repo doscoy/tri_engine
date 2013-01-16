@@ -14,5 +14,9 @@
 #include "tri_scene.hpp"
 #include "tri_game_system.hpp"
 #include "tri_application.hpp"
+#include "tri_memory.hpp"
+#include "tri_new.hpp"
+
+
 
 #endif // TRI_CORE_HPP_INCLUDED

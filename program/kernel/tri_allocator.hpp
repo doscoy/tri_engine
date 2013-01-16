@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include "../util/tri_uncopyable.hpp"
 #include "tri_allocation_recorder.hpp"
+#include "../util/tri_counter.hpp"
+
 
 //==============================================================================
 namespace t3 {
@@ -24,7 +26,7 @@ public:
         int line
     ){
         void* address = std::malloc( size );
-        allocation_recorder_.checkin( address, size, filename, line );
+        allocation_recorder_.checkin( address, size, filename, line, frame_counter_.now() );
         return reinterpret_cast<T*>( address );
     }
     

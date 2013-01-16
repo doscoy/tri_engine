@@ -2,6 +2,9 @@
 #include "tri_image_png.hpp"
 #include <iostream>
 #include "../dbg/tri_dbg.hpp"
+#include "../kernel/tri_new.hpp"
+
+
 
 namespace libpng {
 

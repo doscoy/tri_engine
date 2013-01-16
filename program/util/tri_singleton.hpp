@@ -4,6 +4,7 @@
 
 
 #include "../dbg/tri_assert.hpp"
+#include "../kernel/tri_new.hpp"
 
 namespace t3{
 
@@ -21,7 +22,7 @@ protected:
     
 public:
     static void createInstance(){
-        instance_ = new T;
+        instance_ = T3_NEW T;
     }
     
     // *********************************************

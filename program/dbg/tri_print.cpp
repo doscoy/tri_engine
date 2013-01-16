@@ -23,7 +23,7 @@ namespace {
 
 constexpr int BUFFER_LENGTH = 256;
 
-const t3::Texture* debugfont_ = nullptr;
+std::shared_ptr<t3::Texture> debugfont_ = nullptr;
 
 const char* DEBUG_FONT_PATH = "/Users/doscoy_t/project/tri_sandbox_osx/tri_sandbox_osx/resource/font2.png";
 //const char* DEBUG_FONT_PATH = "/Users/kani/project/tri_sandbox/dev_t3/resource/font1.png";

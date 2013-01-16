@@ -4,6 +4,8 @@
 #ifndef TRI_TEXTURE_FACTORY_HPP_INCLUDED
 #define TRI_TEXTURE_FACTORY_HPP_INCLUDED
 
+#include <memory>
+
 
 namespace t3 {
     
@@ -12,12 +14,12 @@ class Texture;
 class TextureFactory
 {
 public:
-    static Texture* createFromFile(
+    static std::shared_ptr<Texture> createFromFile(
         const char* const filename
     );
     
 private:
-    static Texture* createFromPng(
+    static std::shared_ptr<Texture> createFromPng(
         const char* const png
     );
 };

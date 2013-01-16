@@ -9,9 +9,13 @@
 #include "../dbg/tri_debugpad.hpp"
 #include "../util/tri_framerate.hpp"
 #include "../util/tri_counter.hpp"
+#include "tri_memory.hpp"
+
+
 
 
 namespace {
+
 
 bool show_work_bar_ = true;
 bool show_work_time_ = false;
@@ -29,6 +33,13 @@ struct Step
 {
     void operator ()( int ){
         step_update_ = true;
+    }
+};
+
+struct DumpAllocatorLog
+{
+    void operator ()( int ){
+        t3::default_allocator_.getAllocationRecorder().dump();
     }
 };
 
@@ -57,6 +68,7 @@ public:
     : dmf_system_( nullptr, "SYSTEM" )
     , dmb_root_menu_( &dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootScene )
     , dmb_step_( &dmf_system_, "STEP", 0 )
+    , dmb_dump_allocater_log_( &dmf_system_, "DUMP ALLOCATE LOG", 0 )
     , dmi_show_work_time_( &dmf_system_, "SHOW WORKTIME", show_work_time_, 1 )
     , dmi_show_work_bar_( &dmf_system_, "SHOW WORKBAR", show_work_bar_, 1 )
     {
@@ -73,6 +85,7 @@ private:
     t3::DebugMenuFrame dmf_system_;
     t3::DebugMenuButtonMethod<t3::Application> dmb_root_menu_;
     t3::DebugMenuButtonFunctor<Step> dmb_step_;
+    t3::DebugMenuButtonFunctor<DumpAllocatorLog> dmb_dump_allocater_log_;
     t3::DebugMenuItem<bool> dmi_show_work_time_;
     t3::DebugMenuItem<bool> dmi_show_work_bar_;
 };
@@ -110,7 +123,8 @@ int Application::run( t3::SceneGenerator* root_scene_generator )
 Application::Application(
     SceneGenerator* root_scene_generator
 )   : root_scene_generator_( root_scene_generator )
-    , system_menu_(nullptr)
+    , system_menu_( nullptr )
+    , last_scene_change_frame_( 0 )
 {
 }
 
@@ -142,7 +156,7 @@ void Application::initializeApplication()
 
 
     //  システムデバッグメニュー登録
-    system_menu_.reset( new ApplicationDebugMenu(this) );
+    system_menu_.reset( T3_NEW ApplicationDebugMenu(this) );
 
     DebugMenu& debug_menu_root = DebugMenu::getInstance();
     system_menu_->getSystemDebugMenuRoot().attachSelf(
@@ -180,12 +194,6 @@ void Application::update( tick_t tick )
         }
     }
     
-    //  シーン切り替わり判定
-    if ( sm.isSceneChenged() ){
-        //  シーンが切り替わったのでデバッグメニューを閉じる
-        dm.closeMenu();
-    }
-    
     app_cost_timer_.end();              // app cost 計測終了
     rendering_cost_timer_.start();      // rendering cost 計算開始
     
@@ -218,9 +226,28 @@ void Application::update( tick_t tick )
         t3::printDisplay( 900, 632, "ren %f", last_rendering_cost_ );
     }
     
-    
+    //  描画終了
     endRender();
-   
+
+
+    //  最後にシーンチェンジ処理
+    sm.directScene();
+    //  シーン切り替わり判定
+    if ( sm.isSceneChenged() ){
+        //  シーンが切り替わったのでデバッグメニューを閉じる
+        dm.closeMenu();
+
+        //  メモリリークを検出
+        default_allocator_.getAllocationRecorder().dump(
+            last_scene_change_frame_,
+            frame_counter_.now()-1
+        );
+
+        //  シーンが切り替わったタイミングを保存
+        last_scene_change_frame_ = frame_counter_.now();
+        
+    }
+    
 }
 
 bool Application::isDebugMenuOpenRequest(){
