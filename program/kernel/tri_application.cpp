@@ -18,14 +18,18 @@ namespace {
 
 
 bool show_work_bar_ = true;
-bool show_work_time_ = false;
+bool show_work_time_ = true;
 t3::Workbar cpu_bar_( t3::util::frameSec<60>(), glue::getScreenWidth() );
+
 t3::Stopwatch system_cost_timer_;
 t3::Stopwatch app_cost_timer_;
 t3::Stopwatch rendering_cost_timer_;
+t3::Stopwatch other_cost_timer_;
+
 double last_system_cost_;
 double last_app_cost_;
 double last_rendering_cost_;
+double last_other_cost_;
 
 bool step_update_ = false;
 
@@ -148,11 +152,8 @@ void Application::initializeApplication()
     );
     SceneManager::getInstance().forceChangeScene( root_scene_generator_ );
 
-    //  ワークバーのカラーリング設定
-    cpu_bar_.setColor( 0, COLOR_VIOLET );
-    cpu_bar_.setColor( 1, COLOR_YELLOW );
-    cpu_bar_.setColor( 2, COLOR_GREEN );
-    cpu_bar_.setPosition( vec2_t( 1, glue::getScreenHeight() -135 ) );
+    //  ワークバーの配置
+    cpu_bar_.setPosition( vec2_t( 1, glue::getScreenHeight() -5 ) );
 
 
     //  システムデバッグメニュー登録
@@ -162,11 +163,16 @@ void Application::initializeApplication()
     system_menu_->getSystemDebugMenuRoot().attachSelf(
         debug_menu_root.getMenuRoot()
     );
+    
+    //  デバッグ文字描画の初期化
+    initializeDebugPrint();
 }
 
 
 void Application::update( tick_t tick )
 {
+    
+    other_cost_timer_.end();
     system_cost_timer_.start();     // system cost 計測開始
     
     SceneManager& sm = SceneManager::getInstance();
@@ -176,6 +182,10 @@ void Application::update( tick_t tick )
     
     dm.update( tick );
     gs.update( tick );
+
+    //  レイヤーの更新
+    gfx::updateLayers( gs.getLaysers(), tick );
+
     
     system_cost_timer_.end();       // system cost 計測終了
     app_cost_timer_.start();       // app cost 計測開始
@@ -204,30 +214,68 @@ void Application::update( tick_t tick )
     //  デバッグメニュー描画
     dm.render();
     
-    rendering_cost_timer_.end();           // rendering cost 計算終了
+    //  レイヤーの描画
+    gfx::drawLayers( gs.getLaysers() );
+    
     
     //  CPU負荷可視化
     if ( show_work_bar_ ){
         cpu_bar_.setParam( 0, system_cost_timer_.interval() );
         cpu_bar_.setParam( 1, app_cost_timer_.interval() );
         cpu_bar_.setParam( 2, rendering_cost_timer_.interval() );
+        cpu_bar_.setParam( 3, other_cost_timer_.interval() );
         cpu_bar_.draw();
     }
+    rendering_cost_timer_.end();           // rendering cost 計算終了
+
+    //  描画終了
+    endRender();
+    other_cost_timer_.start();
     
-    if ( ( frame_counter_.now() % 10 ) == 0 ) {
+    //  コスト表示は数フレームに1回書き換える
+    //  毎フレだと速すぎて読めないからね
+    if ( ( frame_counter_.now() % 15 ) == 0 ) {
         last_system_cost_ = system_cost_timer_.interval();
         last_app_cost_ = app_cost_timer_.interval();
         last_rendering_cost_ = rendering_cost_timer_.interval();
+        last_other_cost_ = other_cost_timer_.interval();
     }
     
     if ( show_work_time_ ) {
-        t3::printDisplay( 900, 600, "sys %f", last_system_cost_ );
-        t3::printDisplay( 900, 616, "app %f", last_app_cost_ );
-        t3::printDisplay( 900, 632, "ren %f", last_rendering_cost_ );
+        t3::printDisplay(
+            940,
+            640,
+            COLOR_WHITE,
+            "sys %2.1fms(%3.1f%%)",
+            last_system_cost_ * 1000,
+            last_system_cost_ / frameSec<60>() * 100
+        );
+        t3::printDisplay(
+            940,
+            656,
+            COLOR_WHITE,
+            "app %2.1fms(%3.1f%%)",
+            last_app_cost_ * 1000,
+            last_app_cost_ / frameSec<60>() * 100
+        );
+        t3::printDisplay(
+            940,
+            672,
+            COLOR_WHITE,
+            "ren %2.1fms(%3.1f%%)",
+            last_rendering_cost_ * 1000,
+            last_rendering_cost_ / frameSec<60>() * 100
+        );
+        t3::printDisplay(
+            940,
+            688,
+            COLOR_WHITE,
+            "oth %2.1fms(%3.1f%%)",
+            last_other_cost_ * 1000,
+            last_other_cost_ / frameSec<60>() * 100
+        );
     }
     
-    //  描画終了
-    endRender();
 
 
     //  最後にシーンチェンジ処理
@@ -287,6 +335,7 @@ bool Application::isSuspend() const {
 
 void Application::beginRender()
 {
+    glue::clearDisplay( GL_COLOR_BUFFER_BIT |GL_DEPTH_BUFFER_BIT );
   
 }
 
@@ -296,7 +345,6 @@ void Application::endRender()
     GameSystem& gs = GameSystem::getInstance();
     glue::setClearColor( gs.getDisplayClearColor() );
     glue::swapBuffers();
-    glue::clearDisplay( GL_COLOR_BUFFER_BIT |GL_DEPTH_BUFFER_BIT );    
 }
 
 void Application::gotoRootScene()

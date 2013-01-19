@@ -9,7 +9,7 @@ namespace t3 {
     
     
 class BufferObject
-    : Uncopyable
+    : private Uncopyable
 {
 public:
     BufferObject(

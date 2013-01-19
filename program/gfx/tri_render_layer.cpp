@@ -5,13 +5,23 @@
 
 
 namespace t3{
-
-RenderLayer::RenderLayer()
-    : pause_( false )
-    , priority_( PRIORITY_NORMAL )
-{
+inline namespace gfx {
     
+
+RenderLayer::RenderLayer(const char* const name, const int priority )
+    : pause_( false )
+    , visible_( true )
+    , priority_( priority )
+{
+    setLayerName( name );
 }
+    
+RenderLayer::RenderLayer(const char* const name)
+    : RenderLayer( name, PRIORITY_NORMAL )
+{
+}
+
+
 
 RenderLayer::~RenderLayer()
 {
@@ -20,7 +30,7 @@ RenderLayer::~RenderLayer()
 
 void RenderLayer::setPriority( const int priority )
 {
-    T3_ASSERT( priority >= PRIORITY_LOWEST && priority <= PRIORITY_HIGHEST  );
+    T3_ASSERT( PRIORITY_LOWEST <= priority && priority <= PRIORITY_HIGHEST  );
     priority_ = priority;
 }
 
@@ -30,6 +40,31 @@ void RenderLayer::setLayerName( const char* const name )
 }
 
 
+    
+    
+    
+//  レイヤー更新
+void updateLayers(
+    RenderLayers& layers,
+    tick_t tick
+){
+    for ( auto layer : layers ){
+        layer->updateLayer( tick );
+    }
+}
+    
+void drawLayers(
+    RenderLayers& layers
+){
+    for ( auto layer : layers ){
+        layer->drawLayer();
+    }
+}
+    
+    
 
+
+
+}   // inline namespace gfx
 }   // namespace t3
 

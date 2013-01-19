@@ -19,25 +19,20 @@ class Stopwatch
 {
 public:
     void start(){
-//        gettimeofday( &time_start_, nullptr );
         start_time_ = getSystemTime();
     }
 
     void end(){
-//        gettimeofday( &time_end_, nullptr );
         end_time_ = getSystemTime();
+        last_start_time_ = start_time_;
     }
 
     double interval() const {
-//        double startTime = time_start_.tv_sec + time_start_.tv_usec * 1e-6;
-//        double endTime = time_end_.tv_sec + time_end_.tv_usec * 1e-6;
-//        return endTime - startTime;
-        return end_time_ - start_time_;
+        return end_time_ - last_start_time_;
     }
-private:    
-//    timeval time_start_;
-//    timeval time_end_;
+private:
     double start_time_;
+    double last_start_time_;
     double end_time_;
 };
 

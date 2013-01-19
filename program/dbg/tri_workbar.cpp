@@ -18,7 +18,12 @@ Workbar::Workbar(
     float limit_param,
     int limit_width_pixel
 )   : bar_params_()
-    , bar_colors_()
+    , bar_colors_{{
+        COLOR_ORANGE,
+        COLOR_LIME,
+        COLOR_AQUA,
+        COLOR_GREEN,
+        COLOR_ORANGE}}
     , limit_param_( limit_param )
     , limit_width_pixel_( limit_width_pixel )
     , keep_frame_(0)
@@ -27,7 +32,6 @@ Workbar::Workbar(
     , position_()
 {
     std::fill( bar_params_.begin(), bar_params_.end(), 0 );
-    std::fill( bar_colors_.begin(), bar_colors_.end(), Color(255,255,255,255) );
 }
 
 

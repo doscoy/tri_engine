@@ -59,7 +59,8 @@ public:
     
     virtual void drawFrame( 
         const float x,
-        const float y
+        const float y,
+        const Color& color
     ) const;
     
     

@@ -2,6 +2,8 @@
 #ifndef TRI_ASSERT_HPP_INCLUDED
 #define TRI_ASSERT_HPP_INCLUDED
 
+#include <cmath>
+
 namespace t3 {
 
 bool panic( 
@@ -12,7 +14,9 @@ bool panic(
     const char* const fmt,
     ... 
 );
-    
+
+bool isInvalidFloat(const float f);
+
 } // namespace t3
 
 #define ENABLE_ASSERT
@@ -23,7 +27,7 @@ bool panic(
 #define T3_ASSERT(exp)          (void)( (exp) || (t3::panic( #exp, __FILE__, __LINE__, __FUNCTION__, "assert" )),0)
 #define T3_ASSERT_MSG(exp,...)  (void)( (exp) || (t3::panic( #exp, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__ )),0)
 #define T3_NULL_ASSERT(p)       T3_ASSERT_MSG( p != 0, "pointer must not be null." )
-
+#define T3_FLOAT_ASSERT(f)      T3_ASSERT_MSG( t3::isInvalidFloat(f), "invalid float." )
 
 
 #else // ENABLE_ASSERT
@@ -33,7 +37,7 @@ bool panic(
 #define T3_ASSERT(exp)          (void)0
 #define T3_ASSERT_MSG(exp)      (void)0
 #define T3_NULL_ASSERT(p)       (void)0
-
+#define T3_FLOAT_ASSERT(f)      (void)0
 
 #endif // ENABLE_ASSERT
 

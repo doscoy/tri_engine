@@ -29,8 +29,7 @@ GameSystem::GameSystem()
     TextureManager::createInstance();
     
     
-    //  デバッグ文字描画の初期化
-    initializeDebugPrint();
+
 
 
 
@@ -73,7 +72,30 @@ void GameSystem::registryDebugMenu( DebugMenuFrame& parent_frame )
     dmf_color_idx_.attachSelf( parent_frame );
 }
 
-  
+
+void GameSystem::attachLayer( t3::RenderLayer& layer )
+{
+    layers_.push_back( &layer );
+    layers_.sort( RenderLayerLineupper() );
+}
+
+void GameSystem::detachLayer( t3::RenderLayer& layer )
+{
+    layers_.remove( &layer );
+    layers_.sort( RenderLayerLineupper() );
+}
+
+
+
+
+
+
+
+
+
+
+
+
 }   // namespace t3
 
 

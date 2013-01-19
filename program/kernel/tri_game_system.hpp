@@ -8,13 +8,15 @@
 #include "../util/random/tri_random.hpp"
 #include "../util/tri_singleton.hpp"
 #include "../gfx/tri_color.hpp"
+#include "../gfx/tri_render_layer.hpp"
 #include <array>
 
 
-#define MAX_PAD 4
 
 //==============================================================================
 namespace t3 {
+
+constexpr int MAX_PAD = 4;
 
 class GameSystem 
     : public Singleton<GameSystem>
@@ -75,6 +77,18 @@ public:
     void registryDebugMenu(DebugMenuFrame& parent_frame);
     
     
+    void attachLayer( RenderLayer& layer );
+
+    void detachLayer( RenderLayer& layer );
+
+    RenderLayers& getLaysers() {
+        return layers_;
+    }
+    
+    const RenderLayers& getLayers() const {
+        return layers_;
+    }
+    
 private:
     //  乱数
     random_t random_number_generator_;
@@ -85,7 +99,8 @@ private:
     //  パッド入力
     std::array<Pad, MAX_PAD> pad_;
 
-    
+    //  描画レイヤー
+    RenderLayers layers_;
     
     //  クリアカラー
     DebugMenuItem<int> dmf_color_idx_;

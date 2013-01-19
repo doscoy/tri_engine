@@ -8,7 +8,7 @@
 #include "tri_develop_base.hpp"
 #include "cstring"
 
-#define RESOURCE_NAME_SIZE  (32)
+constexpr int RESOURCE_NAME_SIZE = 32;
 
 namespace t3 {
 

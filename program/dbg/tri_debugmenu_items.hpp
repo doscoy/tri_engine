@@ -85,12 +85,13 @@ public:
     
     virtual void draw(
         const float x,
-        const float y
+        const float y,
+        const Color& color
     ) const override {
         char buf[32];
         makeTargetValueString( target_, buf, 32 );
-        printDisplay( x, y, getLabel() );
-        printDisplay( x + (DEBUG_FONT_POINT*13), y, "%s", buf );
+        printDisplay( x, y, color, getLabel() );
+        printDisplay( x + (DEBUG_FONT_POINT*13), y, color, "%s", buf );
     }
     
     

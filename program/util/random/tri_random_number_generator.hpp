@@ -13,7 +13,7 @@ namespace t3 {
 
 template<typename RandomAlgorithm>
 class RandomNumberGenerator
-    : Uncopyable
+    : private Uncopyable
 {
 
 public:

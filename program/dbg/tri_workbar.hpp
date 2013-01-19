@@ -8,10 +8,10 @@
 
 namespace t3 {
 inline namespace dbg {
-constexpr int MAX_WORKBAR_ITEM = 15;
+constexpr int MAX_WORKBAR_ITEM = 5;
 
 class Workbar
-    : Uncopyable
+    : private Uncopyable
 {
 public:
     Workbar(

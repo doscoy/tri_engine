@@ -133,44 +133,46 @@ void DebugMenuFrame::update()
 
 void DebugMenuFrame::drawFrame(
     const float x,
-    const float y
+    const float y,
+    const Color& color
 ) const {
 
-    setDebugFontSize( DEBUG_FONT_POINT );
-    setDebugFontColor( COLOR_RED );
-    printDisplay( x, y, getLabel() );
+    
+    printDisplay( x, y, color, getLabel() );
 
     int idx = 0;
+    const Color* font_color;
     for ( auto item: items_ ) {
-        if ( idx == select_idx_ ) {
-            setDebugFontSize( DEBUG_FONT_POINT );
-            setDebugFontColor( COLOR_RED );
-            
-        }
-        else {
-            setDebugFontSize( DEBUG_FONT_POINT );
-            setDebugFontColor( COLOR_WHITE );
-        }
-        
-        
         if ( focus_item_ == item ){
-            //  フォーカスがあるアイテムなので強調する
-            if ( item->hasChild() ) {
-                //  フレームなのでさらにフレームの内容を描画
-                DebugMenuFrame* dmf = static_cast<DebugMenuFrame*>( item );
-                dmf->drawFrame( x + getLabelWidth()*DEBUG_FONT_POINT, y+(idx*DEBUG_FONT_POINT)+DEBUG_FONT_POINT/2 );
-            }
-            else {
-                //  アイテムを描画
-                setDebugFontSize( DEBUG_FONT_POINT );
-                setDebugFontColor( COLOR_YELLOW );
-                item->draw( x + getLabelWidth()*DEBUG_FONT_POINT, y+(DEBUG_FONT_POINT*idx)+DEBUG_FONT_POINT/2 );
-            }
+            font_color = &COLOR_ORANGE;
+        }
+        else if ( idx == select_idx_ ) {
+            font_color = &COLOR_AQUA;
         }
         else {
-            //  フォーカスの無いものは普通に描画
-            item->draw( x + getLabelWidth()*DEBUG_FONT_POINT, y+(DEBUG_FONT_POINT*idx)+DEBUG_FONT_POINT/2 );
+            font_color = &COLOR_WHITE;
         }
+        
+        //
+        if ( focus_item_ == item && item->hasChild() ) {
+            //  フレームなのでさらにフレームの内容を描画
+            DebugMenuFrame* dmf = static_cast<DebugMenuFrame*>( item );
+            dmf->drawFrame(
+                x + getLabelWidth() * DEBUG_FONT_POINT,
+                y + ( idx * DEBUG_FONT_POINT ) + DEBUG_FONT_POINT / 2,
+                *font_color
+            );
+        }
+        else {
+            //  アイテムを描画
+            item->draw(
+                x + getLabelWidth() * DEBUG_FONT_POINT,
+                y + (DEBUG_FONT_POINT*idx) + DEBUG_FONT_POINT / 2,
+                *font_color
+            );
+        }
+        
+        
         idx += 1;
     }
     

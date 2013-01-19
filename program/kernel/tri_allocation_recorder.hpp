@@ -85,7 +85,7 @@ public:
     // *********************************************
     //  情報をダンプ
     void dump() const {
-        std::printf( "[%d]%3dbyte %s(%d)\n", frame_, size_, filename_, line_ );
+        std::printf( "[%d]%3dbyte %s(%d)\n", frame_, static_cast<int>(size_), filename_, line_ );
     }
     
 private:

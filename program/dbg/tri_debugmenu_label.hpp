@@ -62,9 +62,10 @@ public:
     virtual void update(){};
     virtual void draw(
         const float x,
-        const float y
+        const float y,
+        const Color& color
     ) const {
-        printDisplay( x, y, getLabel() );
+        printDisplay( x, y, color, getLabel() );
     }
     
 protected:

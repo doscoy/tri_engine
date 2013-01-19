@@ -52,6 +52,10 @@ public:
         return a;
     }
     
+    u_int getRGBA() const {
+        return (r << 24 | g << 16 | b << 8 | a);
+    }
+    
     float redf() const {
         return static_cast<float>(r) / 255.0f;
     }

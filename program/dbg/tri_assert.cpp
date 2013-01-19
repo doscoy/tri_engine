@@ -6,12 +6,26 @@
 //  Copyright 2011年 __MyCompanyName__. All rights reserved.
 //
 
-
+#include <cmath>
 #include <iostream>
 #include "tri_assert.hpp"
 
 namespace t3 {
+
+
+bool isInvalidFloat(const float f)
+{
+    //  浮動少数の無効値チェック
+    if ( std::isnan(f) ){
+        return true;
+    }
+    if ( std::isinf(f) ){
+        return true;
+    }
     
+    //  正常な浮動少数
+    return false;
+}
 
 
 bool panic(
