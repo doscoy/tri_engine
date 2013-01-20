@@ -48,7 +48,7 @@ public:
     
     // *********************************************
     //  リソースを取得
-    const ResourceType* getResource(
+    const std::shared_ptr<ResourceType> getResource(
         const char* const name
     ){
         
@@ -56,7 +56,7 @@ public:
         typename Resources::iterator end = resources_.end();
         for ( typename Resources::iterator it = resources_.begin(); it != end; ++it ){
             if ( strcmp((*it)->getName(), name ) ){
-                return (*it).get();
+                return (*it);
             }
         }
       
@@ -65,14 +65,14 @@ public:
     
     // *********************************************
     //  リソースを取得
-    const ResourceType* getResource(
+    const std::shared_ptr<ResourceType> getResource(
         const uid_t id
     ){
         typename Resources::iterator end = resources_.end();
         for( typename Resources::iterator it = resources_.begin(); it != end; ++it){
             
             if ( (*it)->getResourceID() == id ){
-                return (*it).get();
+                return (*it);
             }
         }
         

@@ -7,6 +7,8 @@
 #include "tri_buffer_object.hpp"
 #include "tri_vertex_types.hpp"
 namespace t3 {
+inline namespace gfx {
+    
 
 template <typename Vertex>
 class VertexBuffer
@@ -34,7 +36,7 @@ public:
     
 };
 
-
+}   // inline namespace gfx
 }   // namespace t3
 
 

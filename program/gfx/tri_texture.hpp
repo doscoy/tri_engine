@@ -8,7 +8,9 @@
 #include "../gfx/tri_color.hpp"
 
 namespace t3 {
+inline namespace gfx {
     
+
 class Texture final
     : public Resource
 {
@@ -82,9 +84,8 @@ private:
     
     
     
-    
-    
 
+}   // inline namespace gfx
 }   // namespace t3
 
 #endif // TRI_TEXTURE_HPP_INCLUDED

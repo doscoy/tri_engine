@@ -5,7 +5,7 @@
 
 
 namespace t3 {
-    
+inline namespace gfx {
     
 // *********************************************
 //  コンストラクタ
@@ -28,5 +28,5 @@ std::shared_ptr<Texture> Texture::create( const char* const path )
     return TextureFactory::createFromFile( path );
 }
     
-    
+}   // inline namespace gfx
 }   // namespace t3

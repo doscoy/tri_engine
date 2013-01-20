@@ -26,7 +26,7 @@ public:
 }
 
 namespace t3 {
-
+inline namespace gfx {
 
 SpriteRenderer::SpriteRenderer()
     : vertex_buffer_( nullptr )
@@ -47,6 +47,9 @@ SpriteRenderer::SpriteRenderer()
 
     vertex_buffer_.reset( T3_NEW VertexBuffer<VertexP2CT>( 4, v ) );
     index_buffer_.reset( T3_NEW IndexBuffer( 4, i ) );
+    
+    //  スプライトコンテナのメモリを事前に確保
+    sprites_.reserve( 256 );
 }
 
 
@@ -151,17 +154,17 @@ void SpriteRenderer::render()
         
 
         //  テクスチャの割り当て
-        const Texture& texture = sprite->getTexture();        
+        const Texture* texture = sprite->getTexture();
         glTexImage2D(
             GL_TEXTURE_2D, 
             0, 
-            texture.getColorFormat(),
-            texture.getWidth(),
-            texture.getHeight(),
+            texture->getColorFormat(),
+            texture->getWidth(),
+            texture->getHeight(),
             0,
-            texture.getColorFormat(),
+            texture->getColorFormat(),
             GL_UNSIGNED_BYTE,
-            texture.getData() 
+            texture->getData()
         );
  
         // 描画
@@ -196,7 +199,7 @@ void SpriteRenderer::endRender()
 
 
 
-
+}   // inline namespace gfx
 }   // namespace t3
 
 

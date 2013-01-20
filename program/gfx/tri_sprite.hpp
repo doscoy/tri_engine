@@ -13,30 +13,43 @@
 
 
 namespace t3 {
+inline namespace gfx {
 
-constexpr u_char SPRITE_RENDER_PRIORITY_LOW     = 8;
-constexpr u_char SPRITE_RENDER_PRIORITY_DEFAULT = 16;
-constexpr u_char SPRITE_RENDER_PRIORITY_HIGH    = 24;
 
 class Texture;
+class SpriteLayer;
 class Sprite final
     : private Uncopyable 
-{    
+{
+    enum Priority {
+        PRIORITY_LOWEST  = 10,
+        PRIORITY_LOW     = 30,
+        PRIORITY_NORMAL  = 50,
+        PRIORITY_HIGH    = 80,
+        PRIORITY_HIGHEST = 100
+    };
+
+
+    friend class SpriteLayer;
+
 public:
-    Sprite();
     ~Sprite();
+    
+private:
+    //  スプライトの直接生成禁止
+    Sprite();
     
 public:
     
     // *********************************************
     //  テクスチャを設定
-    void setTexture( const Texture& tex );
+    void setTexture( std::shared_ptr<Texture> tex );
     
     
     // *********************************************
     //  テクスチャ取得
-    const Texture& getTexture() const {
-        return *texture_;
+    const Texture* getTexture() const {
+        return texture_.get();
     }
     
 
@@ -224,9 +237,14 @@ public:
         return enable_;
     }
 
+    void attachLayer( SpriteLayer* const layer );
+    void detachLayer();
+    void destroy();
+    
+    bool isValid() const;
     
 private:
-    const Texture* texture_;
+    std::shared_ptr<Texture> texture_;
     vec2_t position_;
     vec2_t size_;
     vec2_t pivot_;
@@ -235,12 +253,12 @@ private:
     vec2_t scale_;
     u_char priority_;
     bool enable_;
-
+    SpriteLayer* owner_;
 };
 
 
-    
-} // namespace t3
+}   // inline namespace gfx
+}   // namespace t3
 
 
 #endif // TRI_SPRITE_HPP_INCLUDED

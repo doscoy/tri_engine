@@ -7,6 +7,7 @@
 #include <memory.h>
 
 namespace t3 {
+inline namespace gfx {
 
 class IndexBuffer;
 class Sprite;
@@ -41,6 +42,7 @@ private:
 
 extern SpriteRenderer* renderer_;
 
+}   // inline namespace gfx
 }   // namespace t3
 
 

@@ -88,52 +88,6 @@ void endPrint()
     glDisable(GL_BLEND);
 }
 
-void debugFontPrint(const char c, const int x, const int y, const t3::color_t& color, const int font_pixel_size)
-{
-    constexpr int font_size = 32;
-    int width_num = debugfont_->getWidth() / font_size;
-    int tex_x = (c % width_num) * font_size;
-    int tex_y = (c / width_num) * font_size;
-    
-    float u0 = static_cast<float>(tex_x) / static_cast<float>(debugfont_->getWidth() );
-    float v0 = static_cast<float>(tex_y) / static_cast<float>(debugfont_->getHeight() );
-    
-    float u1 = static_cast<float>(tex_x + font_size) / static_cast<float>( debugfont_->getWidth() );
-    float v1 = static_cast<float>(tex_y + font_size) / static_cast<float>( debugfont_->getHeight() );
-    
-    float x0 = (x);
-    float x1 = (x+font_pixel_size);
-    float y0 = (y);
-    float y1 = (y+font_pixel_size);
-    
-    
-    glBegin( GL_QUADS );
-    
-    //  左上
-    glColor3ub( color.r, color.g, color.b );
-    glTexCoord2d( u0, v0 );
-    glVertex3d(x0, y0, 0);
-    
-    //  左下w
-    glColor3ub( color.r, color.g, color.b );
-    glTexCoord2d(u0, v1);
-    glVertex3d(x0, y1, 0);
-    
-    //  右下
-    glColor3ub( color.r, color.g, color.b );
-    glTexCoord2d(u1, v1);
-    glVertex3d(x1, y1, 0);
-    
-    //  右上
-    glColor3ub( color.r, color.g, color.b );
-    glTexCoord2d(u1, v0);
-    glVertex3d(x1, y0, 0);
-    
-    
-    
-    glEnd();
-    
-}
 
 void debugFontPrint(
     const char c,

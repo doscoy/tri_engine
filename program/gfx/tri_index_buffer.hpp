@@ -7,7 +7,7 @@
 
 
 namespace t3 {
-
+inline namespace gfx {
 
 class IndexBuffer
     : public BufferObject
@@ -27,6 +27,8 @@ public:
     }
 };
 
+
+}   // inline namespace gfx
 }   // namespace t3
 
 

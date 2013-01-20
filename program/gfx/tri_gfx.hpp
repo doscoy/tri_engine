@@ -6,6 +6,7 @@
 #include "tri_render_layer.hpp"
 #include "tri_sprite.hpp"
 #include "tri_sprite_renderer.hpp"
+#include "tri_sprite_layer.hpp"
 #include "tri_texture.hpp"
 #include "tri_resource_manager.hpp"
 #include "tri_color.hpp"

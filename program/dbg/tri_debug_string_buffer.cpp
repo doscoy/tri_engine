@@ -76,6 +76,7 @@ void DebugStringBuffer::clearBuffer()
 void DebugStringBuffer::drawStrings()
 {
     beginPrint( glue::getScreenWidth(), glue::getScreenHeight() );
+    
     for (int item_idx = 0; item_idx < size_; ++item_idx ) {
         const debug_string_item_t& str_item = buffer_[item_idx];
         drawString(
@@ -85,6 +86,7 @@ void DebugStringBuffer::drawStrings()
             str_item.str
         );
     }
+    
     endPrint();
 }
 

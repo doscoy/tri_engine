@@ -6,7 +6,7 @@
 #include "../platform/platform_sdk.hpp"
 
 namespace t3 {
-    
+inline namespace gfx {
     
 class BufferObject
     : private Uncopyable
@@ -75,9 +75,8 @@ private:
 
 };
     
-    
-    
-    
+
+}   // inline namespace gfx
 }   // namespace t3
 
 
