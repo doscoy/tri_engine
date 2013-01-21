@@ -9,12 +9,12 @@
 namespace t3 {
 inline namespace dbg {
 
-class DebugScreenLayer
+class DebugStringLayer
     : public RenderLayer
 {
 public:
-    DebugScreenLayer();
-    virtual ~DebugScreenLayer();
+    DebugStringLayer();
+    virtual ~DebugStringLayer();
 
 public:
     void writeString(

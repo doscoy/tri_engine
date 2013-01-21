@@ -1,22 +1,63 @@
+//
+//  tri_draw_layer.h
+//  tri_sandbox_osx
+//
+//  Created by KANI Tetsuro on 2013/01/21.
+//  Copyright (c) 2013年 KANI Tetsuro. All rights reserved.
+//
 
+#ifndef __tri_sandbox_osx__tri_draw_layer__
+#define __tri_sandbox_osx__tri_draw_layer__
 
-#ifndef TRI_DRAW_LAYER_HPP_INCLUDED
-#define TRI_DRAW_LAYER_HPP_INCLUDED
-
+#include <iostream>
+#include <functional>
 #include "tri_render_layer.hpp"
+#include "../util/tri_method_callback.hpp"
 
 
 namespace t3 {
 inline namespace gfx {
 
 
+
 class DrawLayer
     : public RenderLayer
 {
+    typedef DrawLayer self_t;
+    typedef MethodCallback2<self_t, self_t* const, tick_t> UpdateCallback;
+    typedef MethodCallback1<self_t, self_t* const> RenderCallback;
 
-
-
-
+public:
+    DrawLayer();
+    virtual ~DrawLayer();
+    
+    template <typename T>
+    void setUpdateCallback(
+        T* instance,
+        void (T::*update_func)(self_t*, tick_t)
+    ){
+        MethodCallback2<T, self_t*, tick_t> callback( instance, update_func);
+        update_func_ = (UpdateCallback&)callback;
+    }
+    
+    template <typename T>
+    void setRenderCallback(
+        T* instance,
+        void (T::*render_func)(self_t*)
+    ){
+        MethodCallback1<T, self_t*> callback( instance, render_func );
+        render_func_ = (RenderCallback&)callback;
+    }
+    
+private:
+    virtual void updateLayer( tick_t tick ) override;
+    virtual void drawLayer() override;
+    void nullUpdate( self_t* const, tick_t ){}
+    void nullRender( self_t* const ){}
+    
+private:
+    UpdateCallback update_func_;
+    RenderCallback render_func_;
 };
 
 
@@ -27,6 +68,4 @@ class DrawLayer
 
 
 
-
-#endif //   TRI_DRAW_LAYER_HPP_INCLUDED
-
+#endif /* defined(__tri_sandbox_osx__tri_draw_layer__) */

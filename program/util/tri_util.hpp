@@ -15,5 +15,9 @@
 #include "tri_array_size.hpp"
 #include "tri_counter.hpp"
 #include "random/tri_random.hpp"
+#include "tri_method_callback.hpp"
+
+
+
 
 #endif // TRI_UTIL_HPP_INCLUDED

@@ -18,7 +18,7 @@
 #include "../gfx/tri_texture.hpp"
 #include "../gfx/tri_texture_factory.hpp"
 #include "../kernel/tri_game_system.hpp"
-#include "tri_debug_screen_layer.hpp"
+#include "tri_debug_string_layer.hpp"
 
 
 namespace {
@@ -32,7 +32,7 @@ const char* DEBUG_FONT_PATH = "/Users/doscoy_t/project/tri_sandbox_osx/tri_sandb
 
 t3::color_t font_color_( t3::COLOR_WHITE );
 int font_size_ = t3::DEBUG_FONT_POINT;
-t3::DebugScreenLayer dbg_screen_layer_;
+t3::DebugStringLayer dbg_screen_layer_;
 
 
 

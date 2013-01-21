@@ -1,27 +1,27 @@
 
-#include "tri_debug_screen_layer.hpp"
+#include "tri_debug_string_layer.hpp"
 
 namespace t3 {
 inline namespace dbg {
  
 
-DebugScreenLayer::DebugScreenLayer()
+DebugStringLayer::DebugStringLayer()
     : RenderLayer( "DEBUG SCREEN", RenderLayer::PRIORITY_DEBUG )
 {
 
 }
 
-DebugScreenLayer::~DebugScreenLayer()
+DebugStringLayer::~DebugStringLayer()
 {
     
 }
 
-void DebugScreenLayer::updateLayer( tick_t tick )
+void DebugStringLayer::updateLayer( tick_t tick )
 {
     
 }
 
-void DebugScreenLayer::writeString(
+void DebugStringLayer::writeString(
     const int x,
     const int y,
     const u_int color,
@@ -30,7 +30,7 @@ void DebugScreenLayer::writeString(
     debug_string_buffer_.addString( x, y, color, str );
 }
 
-void DebugScreenLayer::drawLayer()
+void DebugStringLayer::drawLayer()
 {
     debug_string_buffer_.drawStrings();
     debug_string_buffer_.clearBuffer();

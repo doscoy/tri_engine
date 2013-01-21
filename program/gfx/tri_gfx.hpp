@@ -15,7 +15,7 @@
 #include "tri_index_buffer.hpp"
 #include "tri_frame_buffer.hpp"
 #include "tri_render_buffer.hpp"
-
+#include "tri_draw_layer.hpp"
 
 #endif // TRI_GFX_HPP_INCLUDED
 

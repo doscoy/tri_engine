@@ -97,7 +97,7 @@ struct RenderLayerLineupper
 {
     bool operator()( RenderLayer* lhs, RenderLayer* rhs )
     {
-        return lhs->getPriority() > rhs->getPriority();
+        return lhs->getPriority() < rhs->getPriority();
     }
 };
 
