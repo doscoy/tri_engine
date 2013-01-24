@@ -27,11 +27,9 @@ constexpr int BUFFER_LENGTH = 256;
 
 std::shared_ptr<t3::Texture> debugfont_ = nullptr;
 
-const char* DEBUG_FONT_PATH = "/Users/doscoy_t/project/tri_sandbox_osx/tri_sandbox_osx/resource/font2.png";
+const char* DEBUG_FONT_PATH = "/Users/doscoy_t/project/tri_sandbox/resource/font2.png";
 //const char* DEBUG_FONT_PATH = "/Users/kani/project/tri_sandbox/dev_t3/resource/font1.png";
 
-t3::color_t font_color_( t3::COLOR_WHITE );
-int font_size_ = t3::DEBUG_FONT_POINT;
 t3::DebugStringLayer dbg_screen_layer_;
 
 

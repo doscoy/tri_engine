@@ -76,13 +76,21 @@ void GameSystem::registryDebugMenu( DebugMenuFrame& parent_frame )
 void GameSystem::attachLayer( t3::RenderLayer& layer )
 {
     layers_.push_back( &layer );
-    layers_.sort( RenderLayerLineupper() );
+    layers_.sort(
+        []( RenderLayer*lhs, RenderLayer* rhs ){
+            return lhs->getPriority() < rhs->getPriority();
+        }
+    );
 }
 
 void GameSystem::detachLayer( t3::RenderLayer& layer )
 {
     layers_.remove( &layer );
-    layers_.sort( RenderLayerLineupper() );
+    layers_.sort(
+        []( RenderLayer*lhs, RenderLayer* rhs ){
+            return lhs->getPriority() < rhs->getPriority();
+        }
+    );
 }
 
 

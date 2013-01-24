@@ -92,19 +92,6 @@ private:
 };
 
 
-
-struct RenderLayerLineupper
-{
-    bool operator()( RenderLayer* lhs, RenderLayer* rhs )
-    {
-        return lhs->getPriority() < rhs->getPriority();
-    }
-};
-
-
-
-
-
 //  レイヤー更新
 void updateLayers(
     RenderLayers& layers,
