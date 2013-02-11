@@ -1,12 +1,10 @@
 #import <Cocoa/Cocoa.h>
 #include <OpenGL/OpenGL.h>
-#include "cocoa_keycode.h"
-//#include "fssimplewindow.h"
-#include "MyView.h"
-#include "YsView.h"
 
-extern MyView* view_;
-int FsNormalKeyCode[256]={
+#include "fssimplewindow.h"
+
+static int FsNormalKeyCode[256]=
+{
 	0,                 // 0
 	0,                 // 1
 	0,                 // 2
@@ -265,7 +263,7 @@ int FsNormalKeyCode[256]={
 	0                  // 255
 };
 
-int FsSpecialKeyCode[256]=
+static int FsSpecialKeyCode[256]=
 {
 	FSKEY_UP,           // 0
 	FSKEY_DOWN,         // 1
@@ -525,8 +523,23 @@ int FsSpecialKeyCode[256]=
 	0                   // 255
 };
 
-int fsKeyIsDown[FSKEY_NUM_KEYCODE];
+static int fsKeyIsDown[FSKEY_NUM_KEYCODE]={0};
 
+#define NKEYBUF 256
+
+
+static int YsMacUnicodeToFsKeyCode(int uni)
+{
+	if(0<=uni && uni<256)
+        {
+		return FsNormalKeyCode[uni];
+        }
+	else if(0xf700<=uni && uni<0xf800)
+        {
+		return FsSpecialKeyCode[uni-0xf700];
+        }
+	return 0;
+}
 
 @interface YsMacDelegate : NSObject /* < NSApplicationDelegate > */
 /* Example: Fire has the same problem no explanation */
@@ -543,7 +556,6 @@ int fsKeyIsDown[FSKEY_NUM_KEYCODE];
 @end
 
 
-/**/
 
 @interface YsOpenGLWindow : NSWindow
 {
@@ -566,14 +578,71 @@ int fsKeyIsDown[FSKEY_NUM_KEYCODE];
 @end
 
 
+@interface YsOpenGLView : NSOpenGLView
+{
+}
+- (void) drawRect: (NSRect) bounds;
+@end
+
+@implementation YsOpenGLView
+-(void) drawRect: (NSRect) bounds
+{
+	printf("%s\n",__FUNCTION__);
+}
+
+-(void) prepareOpenGL
+{
+	printf("%s\n",__FUNCTION__);
+}
 
 
-//static YsOpenGLWindow *ysWnd=nil;
-//static YsView* ysView=nil;
+
+- (void) keyDown:(NSEvent *)theEvent
+{
+	unsigned long flags;
+	flags=[theEvent modifierFlags];
+	NSString *chrs,*chrsNoMod;
+	chrs=[theEvent characters];
+    
+	chrsNoMod=[theEvent charactersIgnoringModifiers];
+	if([chrsNoMod length]>0)
+    {
+		int unicode,fskey;
+		unicode=[chrsNoMod characterAtIndex:0];
+		fskey=YsMacUnicodeToFsKeyCode(unicode);
+        
+        if(fskey!=0)
+        {
+            fsKeyIsDown[fskey]=1;
+        }
+    }
+}
+
+- (void) keyUp:(NSEvent *)theEvent
+{
+	NSString *chrs,*chrsNoMod;
+	chrs=[theEvent characters];
+    
+	chrsNoMod=[theEvent charactersIgnoringModifiers];
+	if([chrsNoMod length]>0)
+    {
+        int unicode,fskey;
+		unicode=[chrsNoMod characterAtIndex:0];
+		fskey=YsMacUnicodeToFsKeyCode(unicode);
+        
+		if(fskey!=0)
+        {
+			fsKeyIsDown[fskey]=0;
+        }
+    }
+}
 
 
+@end
 
 
+static YsOpenGLWindow *ysWnd=nil;
+static YsOpenGLView *ysView=nil;
 
 
 int FsIsKeyC(int code)
@@ -595,8 +664,8 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
 	
 	[NSApp finishLaunching];
     
- 
- /*
+    
+    
 	NSRect contRect;
 	contRect=NSMakeRect(x0,y0,wid,hei);
 	
@@ -604,7 +673,7 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
         NSTitledWindowMask|
         NSClosableWindowMask|
         NSMiniaturizableWindowMask;
-
+	
 	ysWnd=[YsOpenGLWindow alloc];
 	[ysWnd
      initWithContentRect:contRect
@@ -612,9 +681,6 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
      backing:NSBackingStoreBuffered
      defer:NO];
     
-*/
-     
-/*
 	NSOpenGLPixelFormat *format;
 	NSOpenGLPixelFormatAttribute formatAttrib[]= {
      //   NSOpenGLPFAWindow,
@@ -629,15 +695,12 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
 	format=[NSOpenGLPixelFormat alloc];
 	[format initWithAttributes: formatAttrib];
 	
-	ysView=[YsView alloc];
-	NSRect contRect2=NSMakeRect(0,0,wid,hei);
+	ysView=[YsOpenGLView alloc];
+	contRect=NSMakeRect(0,0,wid,hei);
 	[ysView
-     initWithFrame:contRect2
+     initWithFrame:contRect
      pixelFormat:format];
-    
-*/
-
-/*
+	
 	[ysWnd setContentView:ysView];
 	[ysWnd makeFirstResponder:ysView];
     
@@ -645,7 +708,7 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
 	[ysWnd makeMainWindow];
     
 	[NSApp activateIgnoringOtherApps:YES];
-*/    
+    
     glClearDepth(0.0F);
     glEnable(GL_DEPTH_TEST);
     
@@ -654,18 +717,17 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
 void FsSleepC(int ms)
 {
 	if(ms>0)
-    {
+        {
 		double sec;
 		sec=(double)ms/1000.0;
 		[NSThread sleepForTimeInterval:sec];
-    }
+        }
 }
 
 
 void FsSwapBufferC(void)
 {
-    [[view_ openGLContext] flushBuffer];
-    glFinish();
+	[[ysView openGLContext] flushBuffer];
 }
 
 
@@ -673,7 +735,8 @@ void FsPollDeviceC(void)
 {
  	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
     
-	while(1){
+	while(1)
+        {
 	 	[pool release];
 	 	pool=[[NSAutoreleasePool alloc] init];
         
@@ -683,20 +746,20 @@ void FsPollDeviceC(void)
 			   untilDate: [NSDate distantPast]
 			   inMode: NSDefaultRunLoopMode
 			   dequeue:YES];
-        if([event type]==NSRightMouseDown)
-        {
-            printf("R mouse down event\n");
-        }
+		if([event type]==NSRightMouseDown)
+            {
+		    printf("R mouse down event\n");
+            }
 		if(event!=nil)
-        {
+            {
 			[NSApp sendEvent:event];
 			[NSApp updateWindows];
-        }
+            }
 		else
-        {
-            break;
+            {
+			break;
+            }
         }
-    }
     
 	[pool release];	
 }
@@ -718,9 +781,10 @@ int FsPassedTimeC(void)
 	passed=now-last;
 	ms=(int)(1000.0*passed);
     
-	if(ms<0){
+	if(ms<0)
+        {
 		ms=1;
-    }
+        }
 	last=now;
     
 	[pool release];	

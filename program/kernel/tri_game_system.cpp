@@ -28,7 +28,7 @@ GameSystem::GameSystem()
     //  テクスチャマネージャ生成
     TextureManager::createInstance();
     
-    
+    registryClearColor();
 
 
 
@@ -60,10 +60,14 @@ void GameSystem::update( tick_t tick )
     
 }
 
-const Color& GameSystem::getDisplayClearColor() const
+void GameSystem::suspend( tick_t tick )
 {
-        
-    return clear_colors_[use_clear_color_index_];
+    registryClearColor();
+}
+
+void GameSystem::registryClearColor()
+{
+    glue::setClearColor( clear_colors_[use_clear_color_index_] );
 }
     
     

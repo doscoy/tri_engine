@@ -76,6 +76,7 @@ void beginPrint(
     GLfloat env_color[] = { 1, 1, 0, 1 };
     glMaterialfv( GL_FRONT, GL_AMBIENT_AND_DIFFUSE, env_color );
     glEnable( GL_TEXTURE_2D );
+    glDisable(GL_CULL_FACE);
     
     glNormal3d( 0, 0, 1 );
     
@@ -166,6 +167,7 @@ void printDisplay(
     const float y,
     const char* fmt, ...
 ){
+return;
     va_list arg;
     va_start( arg, fmt );
     
@@ -182,6 +184,7 @@ void printDisplay(
     const Color& color,
     const char* fmt, ...
 ){
+return;
     va_list arg;
     va_start( arg, fmt );
     

@@ -56,7 +56,7 @@ public:
     
 
     void update( tick_t tick );
-    
+    void suspend( tick_t tick );
     bool isSuspend() const {
         return suspend_;
     }
@@ -71,7 +71,7 @@ public:
     }
     
     
-    const Color& getDisplayClearColor() const;
+    void registryClearColor();
 
     
     void registryDebugMenu(DebugMenuFrame& parent_frame);

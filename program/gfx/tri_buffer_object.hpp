@@ -24,7 +24,7 @@ public:
         , element_count_( element_count )
     {
         glGenBuffers( 1, &buffer_ );
-        bind( true );
+        bindBuffer();
         glBufferData( target_, buffer_size_, data, GL_STATIC_DRAW_ARB );
     }
     
@@ -36,8 +36,17 @@ public:
 public:
     // *********************************************
     //  バッファのバインド
-    void bind( bool enable ) {
-        glBindBuffer( target_, enable ? buffer_ : 0 );
+    void bindBuffer() {
+        if (!binded_){
+            glBindBuffer( target_, buffer_ );
+            binded_ = true;
+        }
+    }
+    
+    void unbindBuffer() {
+        if (binded_){
+            glBindBuffer( target_, 0 );
+        }
     }
     
     // *********************************************
@@ -46,9 +55,9 @@ public:
         int offset,
         const void* data
     ){
-        bind( true );
+        bindBuffer();
         glBufferSubData( target_, offset, stride_ * element_count_, data );
-        bind( false );
+        unbindBuffer();
     }
     
     
@@ -71,6 +80,7 @@ private:
     int buffer_size_;
     int stride_;
     int element_count_;
+    bool binded_;
 
 
 };

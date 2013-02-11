@@ -96,7 +96,7 @@ void DebugMenuFrame::update()
     }
     else {
         const Pad& pad = debugPad();
-        u_int items_size = items_.size();
+        u_int items_size = static_cast<u_int>(items_.size());
         
         if ( pad.isRepeat( t3::Pad::BUTTON_UP ) ){
             select_idx_ -= 1;

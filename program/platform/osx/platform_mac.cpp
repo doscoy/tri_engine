@@ -7,7 +7,7 @@
 #include "../../kernel/tri_application.hpp"
 #include "tri_game_system.hpp"
 #include "fssimplewindow.h"
-
+#include "cocoa_keycode.h"
 
 
 namespace glue {
@@ -22,7 +22,7 @@ float tick_;
 
 void initializePlatform()
 {
-    FsOpenWindow(40, 90, getScreenWidth(), getScreenHeight(), 1);
+    FsOpenWindow(40, 90, getScreenWidth(), getScreenHeight());
 }
 
 

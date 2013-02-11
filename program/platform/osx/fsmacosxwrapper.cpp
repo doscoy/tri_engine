@@ -5,17 +5,16 @@
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 
-extern "C" void FsOpenWindowC(int x0,int y0,int wid,int hei,int useDoubleBuffer);
+extern "C" void FsOpenWindowC(int x0,int y0,int wid,int hei);
 extern "C" void FsSwapBufferC(void);
 extern "C" void FsSleepC(int ms);
 extern "C" void FsPollDeviceC(void);
-extern "C" int FsInkeyC(void);
 extern "C" int FsIsKeyC(int code);
 extern "C" int FsPassedTimeC();
 
-void FsOpenWindow(int x0,int y0,int wid,int hei,int useDoubleBuffer)
+void FsOpenWindow(int x0,int y0,int wid,int hei)
 {
-	FsOpenWindowC(x0,y0,wid,hei,useDoubleBuffer);
+	FsOpenWindowC(x0,y0,wid,hei);
 }
 
 void FsSwapBuffers(void)
@@ -31,12 +30,6 @@ void FsSleep(int ms)
 void FsPollDevice(void)
 {
     FsPollDeviceC();
-}
-
-
-int FsInkey()
-{
-    return FsInkeyC();
 }
 
 int FsIsKey(int code)

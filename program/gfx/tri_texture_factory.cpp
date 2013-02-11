@@ -45,15 +45,18 @@ std::shared_ptr<Texture> TextureFactory::createFromPng(
     PngImage png( filename );
     ColorFormat color_format;
     switch (png.color_type_) {
-        case PNG_COLOR_TYPE_RGB:
-            color_format = RGB;
-            break;
-        case PNG_COLOR_TYPE_RGBA:
-            color_format = RGBA;
-            break;
-        default:
-            T3_PANIC( "unknown color format." );
-            break;
+        
+    case PNG_COLOR_TYPE_RGB:
+        color_format = RGB;
+        break;
+    
+    case PNG_COLOR_TYPE_RGBA:
+        color_format = RGBA;
+        break;
+    
+    default:
+        T3_PANIC( "unknown color format." );
+        break;
     }
     
     std::shared_ptr<Texture> tex( T3_NEW ::t3::Texture(

@@ -165,13 +165,13 @@ void Application::initializeApplication()
     );
     
     //  デバッグ文字描画の初期化
-    initializeDebugPrint();
+//    initializeDebugPrint();
 }
 
 
 void Application::update( tick_t tick )
 {
-    
+
     other_cost_timer_.end();
     system_cost_timer_.start();     // system cost 計測開始
     
@@ -189,9 +189,11 @@ void Application::update( tick_t tick )
     
     system_cost_timer_.end();       // system cost 計測終了
     app_cost_timer_.start();       // app cost 計測開始
+
     //  シーンの更新
     if ( isSuspend() ){
         //  サスペンド中
+        gs.suspend( tick );
         sm.suspendScene( tick );
     }
     else {
@@ -212,7 +214,7 @@ void Application::update( tick_t tick )
     beginRender();
     
     //  デバッグメニュー描画
-    dm.render();
+//    dm.render();
     
     //  レイヤーの描画
     gfx::drawLayers( gs.getLaysers() );
@@ -224,7 +226,7 @@ void Application::update( tick_t tick )
         cpu_bar_.setParam( 1, app_cost_timer_.interval() );
         cpu_bar_.setParam( 2, rendering_cost_timer_.interval() );
         cpu_bar_.setParam( 3, other_cost_timer_.interval() );
-        cpu_bar_.draw();
+//        cpu_bar_.draw();
     }
     rendering_cost_timer_.end();           // rendering cost 計算終了
 
@@ -342,8 +344,6 @@ void Application::beginRender()
 
 void Application::endRender()
 {
-    GameSystem& gs = GameSystem::getInstance();
-    glue::setClearColor( gs.getDisplayClearColor() );
     glue::swapBuffers();
 }
 

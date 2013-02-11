@@ -19,12 +19,11 @@ namespace t3 {
     
 template <typename ResourceType>
 class ResourceManager
-    : public Singleton< ResourceManager<ResourceType> >
+    : public Singleton<ResourceManager<ResourceType>>
 {
-    friend class Singleton< ResourceManager<ResourceType> >;
+    friend class Singleton<ResourceManager<ResourceType>>;
 
-public:
-    typedef std::list<std::shared_ptr<ResourceType> > Resources;
+    typedef std::list<std::shared_ptr<ResourceType>> Resources;
 
     
 protected:

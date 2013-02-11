@@ -85,8 +85,8 @@ void SpriteRenderer::beginRender()
     glEnableClientState( GL_COLOR_ARRAY );
     glEnableClientState( GL_TEXTURE_COORD_ARRAY );
 
-    vertex_buffer_->bind( true );
-    index_buffer_->bind( true );
+    vertex_buffer_->bindBuffer();
+    index_buffer_->bindBuffer();
     
     //頂点構造体内の頂点座標、頂点色のオフセットを指定
     glVertexPointer( 
@@ -181,8 +181,8 @@ void SpriteRenderer::endRender()
 {
     //  設定の後片付け
     //バッファオブジェクトのバインド解除
-    vertex_buffer_->bind( false );
-    index_buffer_->bind( false );
+    vertex_buffer_->unbindBuffer();
+    index_buffer_->unbindBuffer();
     
     //頂点配列を無効化
     glDisableClientState( GL_VERTEX_ARRAY );

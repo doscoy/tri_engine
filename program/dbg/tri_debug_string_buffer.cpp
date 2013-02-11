@@ -57,7 +57,7 @@ void DebugStringBuffer::addString(
     const u_int color,
     const char* const str
 ){
-    debug_string_item_t& item = buffer_[size_];
+    debug_string_item_t& item = buffer_.at(size_);
 
     item.color = color;
     item.x = x;

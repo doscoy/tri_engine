@@ -206,19 +206,23 @@ struct Matrix4 {
     }
     
     
+    static Matrix4<T> getRotateMatrix( T degrees )
+    {
+        Matrix4 m;
+        return makeRotateMatrix(m, degrees);
+    }
     
-    static Matrix4<T> rotate(T degrees)
+    static Matrix4<T>& makeRotateMatrix( Matrix4<T>& m, T degrees )
     {
         T radians = t3::toRadian( degrees );
         T s = t3::sinf(radians);
         T c = t3::cosf(radians);
         
-        Matrix4 m;
         m.x.x =  c; m.x.y = s; m.x.z = 0; m.x.w = 0;
         m.y.x = -s; m.y.y = c; m.y.z = 0; m.y.w = 0;
         m.z.x =  0; m.z.y = 0; m.z.z = 1; m.z.w = 0;
         m.w.x =  0; m.w.y = 0; m.w.z = 0; m.w.w = 1;
-        
+    
         return m;
     }
     
