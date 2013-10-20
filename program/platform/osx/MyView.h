@@ -9,5 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MyView : NSOpenGLView
-
+//- (id)initWithFrame:(NSRect)frameRect pixelFormat:(NSOpenGLPixelFormat*)format;
 @end

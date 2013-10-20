@@ -10,16 +10,17 @@
 MyView* view_;
 @implementation MyView
 
-- (id)initWithFrame:(NSRect)frame
+//- (id)initWithFrame:(NSRect)frame
+- (id)initWithFrame:(NSRect)frame pixelFormat:(NSOpenGLPixelFormat*)format
 {
     printf("MYVVVVVVVVEEEEEEEEEEEEEWWWWWWWWW");
-    
+
     NSOpenGLPixelFormatAttribute attr[] = {
         NSOpenGLPFADoubleBuffer, // ダブルバッファを使う
         NSOpenGLPFAAccelerated , // ハードウェアアクセラレーションを使う
-        NSOpenGLPFAStencilSize , 32, // ステンシルバッファのビット数を32bitにする
+        NSOpenGLPFAStencilSize , 8, // ステンシルバッファのビット数を32bitにする
         NSOpenGLPFAColorSize , 32, // 画像用バッファのビット数を32bitにする
-        NSOpenGLPFADepthSize , 32, // デプスバッファのビット数を32bitにする
+        NSOpenGLPFADepthSize , 8, // デプスバッファのビット数を32bitにする
         0 // ターミネータ
     };
     NSOpenGLPixelFormat* pFormat;
@@ -33,15 +34,25 @@ MyView* view_;
         [ [ self openGLContext ] makeCurrentContext ]; // カレントコンテキストを変更
         glClearColor( 1.0, 0.0, 1.0, 1.0 ); // 背景色を紫にする
     }
+    
     view_ = self;
     return self;
 }
+
+- (void)awakeFromNib
+{
+    printf("AAAAAWWWWAAAAAAKKKKKKKKKKKEEEEEEEEEE");
+    
+    view_ = self;
+    
+}
+
 
 - (void)drawRect:(NSRect)dirtyRect
 {
 //    printf("DDDRRRAAAAWWWW");
 //    [[self openGLContext] flushBuffer];
-  //  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 //    glFinish();
 
 }

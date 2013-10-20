@@ -540,38 +540,8 @@ int fsKeyIsDown[FSKEY_NUM_KEYCODE];
 {
 	return YES;
 }
-@end
-
-
-/**/
-
-@interface YsOpenGLWindow : NSWindow
-{
-}
 
 @end
-
-@implementation YsOpenGLWindow
-- (id) initWithContentRect: (NSRect)rect styleMask:(NSUInteger)wndStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferFlg
-{
-	[super initWithContentRect:rect styleMask:wndStyle backing:bufferingType defer:deferFlg];
-    
-	[self setAcceptsMouseMovedEvents:YES];
-    
-	printf("%s\n",__FUNCTION__);
-	return self;
-}
-
-
-@end
-
-
-
-
-//static YsOpenGLWindow *ysWnd=nil;
-//static YsView* ysView=nil;
-
-
 
 
 
@@ -595,58 +565,8 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
 	
 	[NSApp finishLaunching];
     
- 
- /*
-	NSRect contRect;
-	contRect=NSMakeRect(x0,y0,wid,hei);
-	
-	unsigned int winStyle=
-        NSTitledWindowMask|
-        NSClosableWindowMask|
-        NSMiniaturizableWindowMask;
 
-	ysWnd=[YsOpenGLWindow alloc];
-	[ysWnd
-     initWithContentRect:contRect
-     styleMask:winStyle
-     backing:NSBackingStoreBuffered
-     defer:NO];
-    
-*/
-     
-/*
-	NSOpenGLPixelFormat *format;
-	NSOpenGLPixelFormatAttribute formatAttrib[]= {
-     //   NSOpenGLPFAWindow,
-        NSOpenGLPFADepthSize, 32,
-        NSOpenGLPFAAccelerated,
-     //   NSOpenGLPFAStencilSize, 32,
-        NSOpenGLPFADoubleBuffer,
-        NSOpenGLPFAColorSize, 32,
-        0
-	};
-    
-	format=[NSOpenGLPixelFormat alloc];
-	[format initWithAttributes: formatAttrib];
-	
-	ysView=[YsView alloc];
-	NSRect contRect2=NSMakeRect(0,0,wid,hei);
-	[ysView
-     initWithFrame:contRect2
-     pixelFormat:format];
-    
-*/
-
-/*
-	[ysWnd setContentView:ysView];
-	[ysWnd makeFirstResponder:ysView];
-    
-	[ysWnd makeKeyAndOrderFront:nil];
-	[ysWnd makeMainWindow];
-    
-	[NSApp activateIgnoringOtherApps:YES];
-*/    
-    glClearDepth(0.0F);
+    glClearDepth(1.0F);
     glEnable(GL_DEPTH_TEST);
     
 }
