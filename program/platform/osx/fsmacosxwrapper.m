@@ -554,7 +554,7 @@ int FsIsKeyC(int code)
 
 void FsOpenWindowC(int x0,int y0,int wid,int hei)
 {
-
+/*
     [NSApplication sharedApplication];
     [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
 
@@ -568,6 +568,72 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
 
     glClearDepth(1.0F);
     glEnable(GL_DEPTH_TEST);
+    
+  */
+ 
+ 
+    [NSApplication sharedApplication];
+    [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
+
+	YsMacDelegate *delegate;
+	delegate=[YsMacDelegate alloc];
+	[delegate init];
+	[NSApp setDelegate: delegate];
+	
+	[NSApp finishLaunching];
+    
+    
+	NSRect contRect;
+
+	contRect=NSMakeRect(x0,y0,wid,hei);
+
+ /*
+	
+	unsigned int winStyle=
+        NSTitledWindowMask|
+        NSClosableWindowMask|
+        NSMiniaturizableWindowMask;
+	
+	ysWnd=[YsOpenGLWindow alloc];
+	[ysWnd
+     initWithContentRect:contRect
+     styleMask:winStyle
+     backing:NSBackingStoreBuffered
+     defer:NO];
+ */
+	NSOpenGLPixelFormat *format;
+	NSOpenGLPixelFormatAttribute formatAttrib[]= {
+     //   NSOpenGLPFAWindow,
+        NSOpenGLPFADepthSize, 32,
+        NSOpenGLPFAAccelerated,
+     //   NSOpenGLPFAStencilSize, 32,
+        NSOpenGLPFADoubleBuffer,
+        NSOpenGLPFAColorSize, 32,
+        0
+	};
+    
+	format=[NSOpenGLPixelFormat alloc];
+	[format initWithAttributes: formatAttrib];
+	
+	view_ =[MyView alloc];
+	contRect=NSMakeRect(0,0,wid,hei);
+	[view_
+     initWithFrame:contRect
+     pixelFormat:format];
+	
+//	[ysWnd setContentView:ysView];
+//	[ysWnd makeFirstResponder:ysView];
+    
+//	[ysWnd makeKeyAndOrderFront:nil];
+//	[ysWnd makeMainWindow];
+    
+	[NSApp activateIgnoringOtherApps:YES];
+    
+    glClearDepth(0.0F);
+    glEnable(GL_DEPTH_TEST);
+
+ //*/
+    
     
 }
 
