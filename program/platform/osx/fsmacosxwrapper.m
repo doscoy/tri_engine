@@ -1,5 +1,6 @@
 #import <Cocoa/Cocoa.h>
-#include <OpenGL/OpenGL.h>
+//#include <OpenGL/OpenGL.h>
+#include "../platform_sdk.hpp"
 #include "cocoa_keycode.h"
 //#include "fssimplewindow.h"
 #include "MyView.h"

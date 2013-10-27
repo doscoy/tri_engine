@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 KANI Tetsuro. All rights reserved.
 //
 
+#include "../platform_sdk.hpp"
+
 #import "MyView.h"
 MyView* view_;
 @implementation MyView
@@ -13,7 +15,7 @@ MyView* view_;
 //- (id)initWithFrame:(NSRect)frame
 - (id)initWithFrame:(NSRect)frame pixelFormat:(NSOpenGLPixelFormat*)format
 {
-    printf("MYVVVVVVVVEEEEEEEEEEEEEWWWWWWWWW");
+    printf("MYVVVVVVVVEEEEEEEEEEEEEWWWWWWWWW\n");
 
     NSOpenGLPixelFormatAttribute attr[] = {
         NSOpenGLPFADoubleBuffer, // ダブルバッファを使う
@@ -41,7 +43,7 @@ MyView* view_;
 
 - (void)awakeFromNib
 {
-    printf("AAAAAWWWWAAAAAAKKKKKKKKKKKEEEEEEEEEE");
+    printf("AAAAAWWWWAAAAAAKKKKKKKKKKKEEEEEEEEEE\n");
     
     view_ = self;
     

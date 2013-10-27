@@ -165,7 +165,7 @@ void Application::initializeApplication()
     );
     
     //  デバッグ文字描画の初期化
-//    initializeDebugPrint();
+    initializeDebugPrint();
 }
 
 

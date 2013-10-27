@@ -27,8 +27,8 @@ constexpr int BUFFER_LENGTH = 256;
 
 std::shared_ptr<t3::Texture> debugfont_ = nullptr;
 
-const char* DEBUG_FONT_PATH = "/Users/doscoy_t/project/tri_sandbox/resource/font2.png";
-//const char* DEBUG_FONT_PATH = "/Users/kani/project/tri_sandbox/dev_t3/resource/font1.png";
+//const char* DEBUG_FONT_PATH = "/Users/doscoy_t/project/tri_sandbox/resource/font2.png";
+const char* DEBUG_FONT_PATH = "/Users/kani/project/tri_sandbox/resource/font1.png";
 
 t3::DebugStringLayer dbg_screen_layer_;
 
@@ -167,7 +167,7 @@ void printDisplay(
     const float y,
     const char* fmt, ...
 ){
-return;
+
     va_list arg;
     va_start( arg, fmt );
     
@@ -184,7 +184,7 @@ void printDisplay(
     const Color& color,
     const char* fmt, ...
 ){
-return;
+
     va_list arg;
     va_start( arg, fmt );
     
