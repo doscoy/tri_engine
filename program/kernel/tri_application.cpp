@@ -214,7 +214,7 @@ void Application::update( tick_t tick )
     beginRender();
     
     //  デバッグメニュー描画
-//    dm.render();
+    dm.render();
     
     //  レイヤーの描画
     gfx::drawLayers( gs.getLaysers() );
@@ -226,7 +226,7 @@ void Application::update( tick_t tick )
         cpu_bar_.setParam( 1, app_cost_timer_.interval() );
         cpu_bar_.setParam( 2, rendering_cost_timer_.interval() );
         cpu_bar_.setParam( 3, other_cost_timer_.interval() );
-//        cpu_bar_.draw();
+        cpu_bar_.draw();
     }
     rendering_cost_timer_.end();           // rendering cost 計算終了
 

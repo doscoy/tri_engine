@@ -39,7 +39,7 @@ Heap::Heap()
     , prev_sibling_( nullptr )
 {
     strcpy( heap_name_, "NonActiveHeap" );    
-    T3_TRACE("heap ctor.");
+    T3_TRACE("heap ctor.\n");
 }
 
 

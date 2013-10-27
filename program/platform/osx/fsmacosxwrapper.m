@@ -529,22 +529,47 @@ int FsSpecialKeyCode[256]=
 int fsKeyIsDown[FSKEY_NUM_KEYCODE];
 
 
-@interface YsMacDelegate : NSObject /* < NSApplicationDelegate > */
-/* Example: Fire has the same problem no explanation */
+@interface YsMacDelegate : NSObject< NSApplicationDelegate >
 {
 }
-/* - (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication; */
 @end
 
 @implementation YsMacDelegate
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
 {
+    printf("YsMacDelegate applicationShouldTerminateAfterLastWindowClosed...\n");
+
 	return YES;
 }
 
 @end
 
 
+
+
+
+@interface YsOpenGLWindow : NSWindow
+{
+}
+
+@end
+
+@implementation YsOpenGLWindow
+- (id) initWithContentRect: (NSRect)rect styleMask:(NSUInteger)wndStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferFlg
+{
+	[super initWithContentRect:rect styleMask:wndStyle backing:bufferingType defer:deferFlg];
+    
+	[self setAcceptsMouseMovedEvents:YES];
+    
+	printf("%s\n",__FUNCTION__);
+	return self;
+}
+
+
+@end
+
+
+YsOpenGLWindow* ysWnd;
 
 
 int FsIsKeyC(int code)
@@ -555,28 +580,9 @@ int FsIsKeyC(int code)
 
 void FsOpenWindowC(int x0,int y0,int wid,int hei)
 {
-/*
     [NSApplication sharedApplication];
-    [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
 
-	YsMacDelegate *delegate;
-	delegate=[YsMacDelegate alloc];
-	[delegate init];
-	[NSApp setDelegate: delegate];
-	
-	[NSApp finishLaunching];
-    
-
-    glClearDepth(1.0F);
-    glEnable(GL_DEPTH_TEST);
-    
-  */
- 
- 
-    [NSApplication sharedApplication];
-    [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
-
-	YsMacDelegate *delegate;
+	YsMacDelegate* delegate;
 	delegate=[YsMacDelegate alloc];
 	[delegate init];
 	[NSApp setDelegate: delegate];
@@ -588,7 +594,7 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
 
 	contRect=NSMakeRect(x0,y0,wid,hei);
 
- /*
+ 
 	
 	unsigned int winStyle=
         NSTitledWindowMask|
@@ -601,7 +607,7 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
      styleMask:winStyle
      backing:NSBackingStoreBuffered
      defer:NO];
- */
+ 
 	NSOpenGLPixelFormat *format;
 	NSOpenGLPixelFormatAttribute formatAttrib[]= {
      //   NSOpenGLPFAWindow,
@@ -621,19 +627,21 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
 	[view_
      initWithFrame:contRect
      pixelFormat:format];
-	
-//	[ysWnd setContentView:ysView];
-//	[ysWnd makeFirstResponder:ysView];
+
+
     
-//	[ysWnd makeKeyAndOrderFront:nil];
-//	[ysWnd makeMainWindow];
+	[ysWnd setContentView:view_];
+	[ysWnd makeFirstResponder:view_];
+    
+	[ysWnd makeKeyAndOrderFront:nil];
+	[ysWnd makeMainWindow];
     
 	[NSApp activateIgnoringOtherApps:YES];
     
     glClearDepth(0.0F);
     glEnable(GL_DEPTH_TEST);
 
- //*/
+ 
     
     
 }

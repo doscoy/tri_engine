@@ -7,6 +7,8 @@
 #include "../util/tri_singleton.hpp"
 #include "base/tri_types.hpp"
 #include <memory>
+#include "../dbg/tri_trace.hpp"
+
 
 namespace t3 {
 inline namespace core {
