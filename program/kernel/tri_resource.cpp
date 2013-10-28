@@ -7,7 +7,7 @@ namespace t3 {
 
 Resource::Resource()
     : id_(0)
-    , name_{{0}}
+    , name_{"\0"}
 {
     id_ = uniqueID();
 }

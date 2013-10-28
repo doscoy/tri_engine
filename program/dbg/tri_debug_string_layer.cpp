@@ -32,6 +32,11 @@ void DebugStringLayer::writeString(
 
 void DebugStringLayer::drawLayer()
 {
+    //  デバッグフォント描画用の設定
+    glDepthFunc(GL_ALWAYS);
+    glDisable(GL_LIGHTING);
+    
+    //  描画
     debug_string_buffer_.drawStrings();
     debug_string_buffer_.clearBuffer();
 }

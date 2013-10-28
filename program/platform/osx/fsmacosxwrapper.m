@@ -1,10 +1,7 @@
 #import <Cocoa/Cocoa.h>
-//#include <OpenGL/OpenGL.h>
 #include "../platform_sdk.hpp"
 #include "cocoa_keycode.h"
-//#include "fssimplewindow.h"
 #include "MyView.h"
-#include "YsView.h"
 
 extern MyView* view_;
 int FsNormalKeyCode[256]={

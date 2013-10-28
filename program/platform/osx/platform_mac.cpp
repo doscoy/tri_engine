@@ -29,8 +29,6 @@ void initializePlatform()
 void prepareMainLoop()
 {
     tick_ = 0.0166f;
-    glDisable(GL_DEPTH_TEST);
-    glDepthFunc(GL_ALWAYS);
 
 }
 

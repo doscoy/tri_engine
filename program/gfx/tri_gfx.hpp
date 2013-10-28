@@ -17,7 +17,7 @@
 #include "tri_render_buffer.hpp"
 #include "tri_draw_layer.hpp"
 #include "tri_camera.hpp"
-
+#include "tri_mesh.hpp"
 
 
 #endif // TRI_GFX_HPP_INCLUDED

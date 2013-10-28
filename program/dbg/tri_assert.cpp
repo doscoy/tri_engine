@@ -48,7 +48,8 @@ bool panic(
     std::cout << " msg :" << buf << std::endl;
     std::cout << " file:" << filename << "(" << line << ")" << std::endl;
     std::cout << " func:" << funcname << std::endl;
-    while(1){;}
+    abort();
+//    while(1){;}
     return 1;
 }
 

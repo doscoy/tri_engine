@@ -138,7 +138,7 @@ public:
     
 private:
     enum{
-        MAX_ALLOCATION_INFO = 10000
+        MAX_ALLOCATION_INFO = 200000
     };
     
     std::array<AllocationPointInfomation, MAX_ALLOCATION_INFO> allocate_info_;
