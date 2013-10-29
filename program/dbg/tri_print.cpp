@@ -42,19 +42,19 @@ void beginPrint(
     const float w,
     const float h
 ){
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
-    glLoadIdentity();
-    glOrtho(0, w, h, 0, -1.0, 1.0);
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glLoadIdentity();
+    ogl::matrixMode(GL_PROJECTION);
+    ogl::pushMatrix();
+    ogl::loadIdentity();
+    ogl::ortho(0, w, h, 0, -1.0, 1.0);
+    ogl::matrixMode(GL_MODELVIEW);
+    ogl::pushMatrix();
+    ogl::loadIdentity();
     
     //  テクスチャ画像はバイト単位に詰め込まれている
-    glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+    ogl::pixelStorei( GL_UNPACK_ALIGNMENT, 1 );
     
     //  テクスチャの割り当て
-    glTexImage2D(
+    ogl::texImage2d(
                  GL_TEXTURE_2D,
                  0,
                  debugfont_->getColorFormat(),
@@ -66,10 +66,10 @@ void beginPrint(
                  debugfont_->getData()
                  );
     
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    ogl::texParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    ogl::texParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    ogl::blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     ogl::enable(GL_BLEND);
     
     GLfloat env_color[] = { 1, 1, 0, 1 };
@@ -116,32 +116,32 @@ void debugFontPrint(
     unsigned char cb = (color & 0x0000FF00) >> 8;
     unsigned char ca = (color & 0x000000FF) >> 0;
 
-    glBegin( GL_QUADS );
+    ogl::begin( GL_QUADS );
     
     //  左上
     
-    glColor4ub( cr, cg, cb, ca );
+    ogl::color4ub( cr, cg, cb, ca );
     glTexCoord2d( u0, v0 );
     glVertex3d(x0, y0, 0);
     
     //  左下w
-    glColor4ub( cr, cg, cb, ca );
+    ogl::color4ub( cr, cg, cb, ca );
     glTexCoord2d(u0, v1);
     glVertex3d(x0, y1, 0);
     
     //  右下
-    glColor4ub( cr, cg, cb, ca );
+    ogl::color4ub( cr, cg, cb, ca );
     glTexCoord2d(u1, v1);
     glVertex3d(x1, y1, 0);
     
     //  右上
-    glColor4ub( cr, cg, cb, ca );
+    ogl::color4ub( cr, cg, cb, ca );
     glTexCoord2d(u1, v0);
     glVertex3d(x1, y0, 0);
     
     
     
-    glEnd();
+    ogl::end();
     
 }
 

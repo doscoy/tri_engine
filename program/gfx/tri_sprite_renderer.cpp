@@ -81,29 +81,29 @@ void SpriteRenderer::beginRender()
 
     
     //頂点配列を有効化
-    glEnableClientState( GL_VERTEX_ARRAY );
-    glEnableClientState( GL_COLOR_ARRAY );
-    glEnableClientState( GL_TEXTURE_COORD_ARRAY );
+    ogl::enableClientState( GL_VERTEX_ARRAY );
+    ogl::enableClientState( GL_COLOR_ARRAY );
+    ogl::enableClientState( GL_TEXTURE_COORD_ARRAY );
 
     vertex_buffer_->bindBuffer();
     index_buffer_->bindBuffer();
     
     //頂点構造体内の頂点座標、頂点色のオフセットを指定
-    glVertexPointer( 
+    ogl::vertexPointer( 
         2,
         GL_FLOAT,
         sizeof( VertexP2CT ),
         reinterpret_cast< GLvoid* >( 0 ) 
     );
     
-    glColorPointer( 
+    ogl::vertexPointer( 
         4, 
         GL_UNSIGNED_BYTE, 
         sizeof( VertexP2CT ),
         reinterpret_cast< GLvoid* >( sizeof( VertexP2CT::position_t ) * 2 ) 
     );
     
-    glTexCoordPointer( 
+    ogl::texCoordPointer(
         2, 
         GL_FLOAT, 
         sizeof( VertexP2CT ), 
@@ -111,21 +111,21 @@ void SpriteRenderer::beginRender()
     );
 
     //  正射影行列を設定
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
-    glLoadIdentity();
+    ogl::matrixMode(GL_PROJECTION);
+    ogl::pushMatrix();
+    ogl::loadIdentity();
     mtx4_t projection;
     projection.ortho(0, w, h, 0, -1.0f, 1.0f);
-    glLoadMatrixf( projection.pointer() );
+    ogl::loadMatrixf( projection.pointer() );
 
 
     //  テクスチャ画像はバイト単位に詰め込まれている
-    glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+    ogl::pixelStorei( GL_UNPACK_ALIGNMENT, 1 );
         
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    ogl::texParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    ogl::texParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    ogl::blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     ogl::enable(GL_TEXTURE_2D);
     ogl::enable(GL_BLEND);
 
@@ -148,14 +148,14 @@ void SpriteRenderer::render()
         trans_mtx.translate( pos.x, pos.y, 0 );
         scale_mtx.scale( scale.x, scale.y, 1 );
 
-        glMatrixMode(GL_MODELVIEW);
+        ogl::matrixMode(GL_MODELVIEW);
         mtx4_t modelview = scale_mtx * trans_mtx;
-        glLoadMatrixf( modelview.pointer() );
+        ogl::loadMatrixf( modelview.pointer() );
         
 
         //  テクスチャの割り当て
         const Texture* texture = sprite->getTexture();
-        glTexImage2D(
+        ogl::texImage2d(
             GL_TEXTURE_2D, 
             0, 
             texture->getColorFormat(),
@@ -168,7 +168,7 @@ void SpriteRenderer::render()
         );
  
         // 描画
-        glDrawElements( GL_QUADS, 4, GL_UNSIGNED_SHORT, nullptr );
+        ogl::drawElements( GL_QUADS, 4, GL_UNSIGNED_SHORT, nullptr );
         
         
     }
@@ -185,9 +185,9 @@ void SpriteRenderer::endRender()
     index_buffer_->unbindBuffer();
     
     //頂点配列を無効化
-    glDisableClientState( GL_VERTEX_ARRAY );
-    glDisableClientState( GL_COLOR_ARRAY );
-    glDisableClientState( GL_TEXTURE_COORD_ARRAY );
+    ogl::disableClientState( GL_VERTEX_ARRAY );
+    ogl::disableClientState( GL_COLOR_ARRAY );
+    ogl::disableClientState( GL_TEXTURE_COORD_ARRAY );
     
     //  描画設定解除
     ogl::disable( GL_TEXTURE_2D );

@@ -48,8 +48,277 @@ inline void materialfv(
 inline void clear(
     const int flag
 ) {
-    ogl::clear(flag);
+    glClear(flag);
 }
+
+inline void clearColor(
+    float r,
+    float g,
+    float b,
+    float a
+) {
+    glClearColor(r, g, b, a);
+}
+
+inline void pushMatrix()
+{
+    glPushMatrix();
+}
+
+inline void popMatrix()
+{
+    glPopMatrix();
+}
+
+inline void depthFunc(
+    const int flag
+) {
+    glDepthFunc(flag);
+}
+
+inline void blendFunc(
+    int sfactor,
+    int dfactor
+) {
+    glBlendFunc(sfactor, dfactor);
+}
+
+
+inline void pixelStorei(
+    int pname,
+    int param
+) {
+    glPixelStorei(pname, param);
+}
+
+inline void texParameteri(
+    int target,
+    int pname,
+    int param
+) {
+    glTexParameteri(target, pname, param);
+}
+
+inline void matrixMode(
+    int mode
+) {
+    ogl::matrixMode(mode);
+}
+
+inline void ortho(
+    double left,
+    double right,
+    double bottom,
+    double top,
+    double znear,
+    double zfar
+) {
+
+    glOrtho(left, right, bottom, top, znear, zfar);
+}
+
+
+inline void loadIdentity()
+{
+    glLoadIdentity();
+}
+
+inline void texImage2d(
+    int target,
+    int level,
+    int internalformat,
+    int width,
+    int height,
+    int border,
+    int format,
+    int type,
+    const void* pixels
+){
+    glTexImage2D(
+        target,
+        level,
+        internalformat,
+        width,
+        height,
+        border,
+        format,
+        type,
+        pixels
+    );
+}
+
+inline void begin(
+    int mode
+) {
+    glBegin(mode);
+}
+
+inline void end()
+{
+    glEnd();
+}
+
+inline void vertex2f(
+    float x,
+    float y
+) {
+    glVertex2f(x, y);
+}
+
+
+inline void vertex3f(
+    float x,
+    float y,
+    float z
+) {
+    glVertex3f(x, y, z);
+}
+
+inline void normal3fv(
+    const float* const nv
+) {
+    glNormal3fv(nv);
+}
+
+inline void color4ub(
+    int r,
+    int g,
+    int b,
+    int a
+) {
+    glColor4ub(r, g, b, a);
+}
+
+inline void viewport(
+    int x,
+    int y,
+    int w,
+    int h
+){
+    ogl::viewport(x, y, w, h);
+}
+
+inline void shadeModel(
+    int mode
+) {
+    glShadeModel(mode);
+}
+
+inline void loadMatrixf(
+    const float* const mtx
+) {
+    ogl::loadMatrixf(mtx);
+}
+
+inline void drawElements(
+    int mode,
+    int count,
+    int type,
+    const void* indices
+){
+    glDrawElements(mode, count, type, indices);
+}
+
+inline void bindBuffer(
+    int target,
+    int buffer
+){
+    glBindBuffer(target, buffer);
+}
+
+inline void enableClientState(
+    int array
+){
+    ogl::enableClientState(array);
+}
+
+
+inline void disableClientState(
+    int array
+){
+    glDisableClientState(array);
+}
+
+inline void genFramebuffers(
+    int num,
+    unsigned int* buffer
+){
+    glGenFramebuffers(num, buffer);
+}
+
+inline void bindFramebuffer(
+    int target,
+    unsigned int buffer
+) {
+    glBindFramebuffer(target, buffer);
+}
+
+inline void deleteFramebuffers(
+    const int num,
+    unsigned int* buffer
+) {
+    glDeleteFramebuffers(num, buffer);
+}
+
+inline int checkFramebufferStatus(int target) {
+    return glCheckFramebufferStatusEXT(target);
+}
+
+inline void genBuffers(
+    int num,
+    unsigned int* buffers
+){
+    glGenBuffers(num, buffers);
+}
+
+inline void bufferData(
+    int target,
+    int size,
+    const void* data,
+    int usage
+) {
+
+    glBufferData(target, size, data, usage);
+
+}
+
+inline void vertexPointer(
+    int size,
+    int type,
+    int stride,
+    const GLvoid *pointer
+) {
+    glVertexPointer(size, type, stride, pointer);
+}
+
+
+inline void normalPointer(
+    int type,
+    int stride,
+    const void* pointer
+) {
+    glNormalPointer(type, stride, pointer);
+}
+
+inline void colorPointer(
+    int size,
+    int type,
+    int stride,
+    const void* pointer
+) {
+    glColorPointer(size, type, stride, pointer);
+}
+
+inline void texCoordPointer(
+    int size,
+    int type,
+    int stride,
+    const void* pointer
+) {
+    glTexCoordPointer(size, type, stride, pointer);
+}
+
+
 
 
 

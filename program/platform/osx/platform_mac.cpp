@@ -91,7 +91,7 @@ pad_data_t getPlatformDebugPadData()
 void setClearColor(
     const t3::Color& color
 ){
-    glClearColor(
+    ogl::clearColor(
         color.redf(),
         color.greenf(),
         color.bluef(),

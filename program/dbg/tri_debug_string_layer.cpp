@@ -33,7 +33,7 @@ void DebugStringLayer::writeString(
 void DebugStringLayer::drawLayer()
 {
     //  デバッグフォント描画用の設定
-    glDepthFunc(GL_ALWAYS);
+    ogl::depthFunc(GL_ALWAYS);
     ogl::disable(GL_LIGHTING);
     
     //  描画

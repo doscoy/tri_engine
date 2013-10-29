@@ -8,7 +8,7 @@ namespace  {
 bool checkFramebufferStatus()
 {
     // check FBO status
-    GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
+    GLenum status = ogl::checkFramebufferStatus(GL_FRAMEBUFFER_EXT);
     switch(status)
     {
         case GL_FRAMEBUFFER_COMPLETE_EXT:
@@ -58,25 +58,25 @@ namespace t3 {
 
 FrameBuffer::FrameBuffer()
 {
-    glGenFramebuffers( 1, &id_ );    // FBO作成 
+    ogl::genFramebuffers( 1, &id_ );    // FBO作成 
     checkFramebufferStatus();
 }
 
 
 FrameBuffer::~FrameBuffer()
 {
-    glDeleteFramebuffers( 1, &id_ ); // FBO削除
+    ogl::deleteFramebuffers( 1, &id_ ); // FBO削除
 }
 
 
 void FrameBuffer::bind() const
 {
-    glBindFramebuffer( GL_FRAMEBUFFER, id_ );
+    ogl::bindFramebuffer( GL_FRAMEBUFFER, id_ );
 }
 
 void FrameBuffer::unbind() const
 {
-    glBindFramebuffer( GL_FRAMEBUFFER, 0 );
+    ogl::bindFramebuffer( GL_FRAMEBUFFER, 0 );
 }
 
 }   // namespace t3

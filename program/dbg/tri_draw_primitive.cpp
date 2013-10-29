@@ -13,13 +13,13 @@ void setupOrtho()
     float screen_width = glue::getScreenWidth();
     float screen_height = glue::getScreenHeight();
 
-    glMatrixMode( GL_PROJECTION );
-    glPushMatrix();
-    glLoadIdentity();
-    glOrtho( 0, screen_width, screen_height, 0, -1.0f, 1.0f );
-    glMatrixMode( GL_MODELVIEW );
-    glPushMatrix();
-    glLoadIdentity();
+    ogl::matrixMode( GL_PROJECTION );
+    ogl::pushMatrix();
+    ogl::loadIdentity();
+    ogl::ortho( 0, screen_width, screen_height, 0, -1.0f, 1.0f );
+    ogl::matrixMode( GL_MODELVIEW );
+    ogl::pushMatrix();
+    ogl::loadIdentity();
 }
 
 }   // unname namespace
@@ -54,13 +54,13 @@ void drawLine(
     setupOrtho();
     
     
-    glBegin(GL_LINE_LOOP);
+    ogl::begin(GL_LINE_LOOP);
 
-    glColor4ub( color.red_, color.green_, color.blue_, color.alpha_ );
-    glVertex2f( start_x, start_y );
-    glVertex2f( end_x, end_y );
+    ogl::color4ub( color.red_, color.green_, color.blue_, color.alpha_ );
+    ogl::vertex2f( start_x, start_y );
+    ogl::vertex2f( end_x, end_y );
 
-    glEnd();
+    ogl::end();
 
 }
     
@@ -71,15 +71,15 @@ void drawRectangle(
 ){
     setupOrtho();
     
-    glBegin( GL_QUADS );
+    ogl::begin( GL_QUADS );
     vec2_t end = left_up + size;
-    glColor4ub( color.red_, color.green_, color.blue_, color.alpha_ );
-    glVertex2f( left_up.x, left_up.y );
-    glVertex2f( end.x, left_up.y );
-    glVertex2f( end.x, end.y );
-    glVertex2f( left_up.x, end.y );
+    ogl::color4ub( color.red_, color.green_, color.blue_, color.alpha_ );
+    ogl::vertex2f( left_up.x, left_up.y );
+    ogl::vertex2f( end.x, left_up.y );
+    ogl::vertex2f( end.x, end.y );
+    ogl::vertex2f( left_up.x, end.y );
     
-    glEnd();
+    ogl::end();
 }
 
 
@@ -89,14 +89,14 @@ void drawPlane(
     const vec3_t& size,
     const Color& color
 ){
-    glColor4ub(color.red_, color.green_, color.blue_, color.alpha_);
-	glBegin( GL_QUADS );
-    glNormal3fv( normal.pointer() );
-    glVertex3f( center.x - size.x, center.y, center.z - size.z );
-    glVertex3f( center.x - size.x, center.y, center.z + size.z );
-    glVertex3f( center.x + size.x, center.y, center.z + size.z );
-    glVertex3f( center.x + size.x, center.y, center.z - size.z );   
-    glEnd();    
+    ogl::color4ub(color.red_, color.green_, color.blue_, color.alpha_);
+	ogl::begin( GL_QUADS );
+    ogl::normal3fv( normal.pointer() );
+    ogl::vertex3f( center.x - size.x, center.y, center.z - size.z );
+    ogl::vertex3f( center.x - size.x, center.y, center.z + size.z );
+    ogl::vertex3f( center.x + size.x, center.y, center.z + size.z );
+    ogl::vertex3f( center.x + size.x, center.y, center.z - size.z );   
+    ogl::end();
 }
 
 

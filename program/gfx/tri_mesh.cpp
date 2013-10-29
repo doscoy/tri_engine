@@ -125,16 +125,16 @@ Mesh::Mesh(char *name)
         }
     }
     
-    glGenBuffers(3, buffers_);
+    ogl::genBuffers(3, buffers_);
     
-    glBindBuffer(GL_ARRAY_BUFFER, buffers_[0]);
-    glBufferData(GL_ARRAY_BUFFER, vertex_count_ * sizeof(vec), vert_, GL_STATIC_DRAW);
+    ogl::bindBuffer(GL_ARRAY_BUFFER, buffers_[0]);
+    ogl::bufferData(GL_ARRAY_BUFFER, vertex_count_ * sizeof(vec), vert_, GL_STATIC_DRAW);
     
-    glBindBuffer(GL_ARRAY_BUFFER, buffers_[1]);
-    glBufferData(GL_ARRAY_BUFFER, vertex_count_ * sizeof(vec), normal_, GL_STATIC_DRAW);
+    ogl::bindBuffer(GL_ARRAY_BUFFER, buffers_[1]);
+    ogl::bufferData(GL_ARRAY_BUFFER, vertex_count_ * sizeof(vec), normal_, GL_STATIC_DRAW);
     
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers_[2]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, face_count_ * sizeof(idx), face_, GL_STATIC_DRAW);
+    ogl::bindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers_[2]);
+    ogl::bufferData(GL_ELEMENT_ARRAY_BUFFER, face_count_ * sizeof(idx), face_, GL_STATIC_DRAW);
 }
 
 
@@ -152,24 +152,24 @@ Mesh::~Mesh()
 void Mesh::draw(void)
 {
 
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_NORMAL_ARRAY);
+    ogl::enableClientState(GL_VERTEX_ARRAY);
+    ogl::enableClientState(GL_NORMAL_ARRAY);
     
 
-    glBindBuffer(GL_ARRAY_BUFFER, buffers_[0]);
-    glVertexPointer(3, GL_FLOAT, 0, BUFFER_OFFSET(0));
+    ogl::bindBuffer(GL_ARRAY_BUFFER, buffers_[0]);
+    ogl::vertexPointer(3, GL_FLOAT, 0, BUFFER_OFFSET(0));
     
 
-    glBindBuffer(GL_ARRAY_BUFFER, buffers_[1]);
-    glNormalPointer(GL_FLOAT, 0, BUFFER_OFFSET(0));
+    ogl::bindBuffer(GL_ARRAY_BUFFER, buffers_[1]);
+    ogl::normalPointer(GL_FLOAT, 0, BUFFER_OFFSET(0));
     
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers_[2]);
-    glDrawElements(GL_TRIANGLES, face_count_ * 3, GL_UNSIGNED_INT, BUFFER_OFFSET(0));
+    ogl::bindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers_[2]);
+    ogl::drawElements(GL_TRIANGLES, face_count_ * 3, GL_UNSIGNED_INT, BUFFER_OFFSET(0));
     
 
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_NORMAL_ARRAY);
+    ogl::disableClientState(GL_VERTEX_ARRAY);
+    ogl::disableClientState(GL_NORMAL_ARRAY);
 }
 
 } // inline namespace gfx

@@ -23,9 +23,9 @@ public:
         , stride_( stride )
         , element_count_( element_count )
     {
-        glGenBuffers( 1, &buffer_ );
+        ogl::genBuffers( 1, &buffer_ );
         bindBuffer();
-        glBufferData( target_, buffer_size_, data, GL_STATIC_DRAW_ARB );
+        ogl::bufferData( target_, buffer_size_, data, GL_STATIC_DRAW_ARB );
     }
     
     ~BufferObject(){
@@ -38,14 +38,14 @@ public:
     //  バッファのバインド
     void bindBuffer() {
         if (!binded_){
-            glBindBuffer( target_, buffer_ );
+            ogl::bindBuffer( target_, buffer_ );
             binded_ = true;
         }
     }
     
     void unbindBuffer() {
         if (binded_){
-            glBindBuffer( target_, 0 );
+            ogl::bindBuffer( target_, 0 );
         }
     }
     

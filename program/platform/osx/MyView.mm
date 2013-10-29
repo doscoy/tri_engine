@@ -33,7 +33,7 @@ MyView* view_;
     if (self) {
         
         [ [ self openGLContext ] makeCurrentContext ]; // カレントコンテキストを変更
-        glClearColor( 1.0, 0.0, 1.0, 1.0 ); // 背景色を紫にする
+        ogl::clearColor( 1.0, 0.0, 1.0, 1.0 ); // 背景色を紫にする
     }
     
     view_ = self;
