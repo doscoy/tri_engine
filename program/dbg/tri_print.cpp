@@ -121,23 +121,23 @@ void debugFontPrint(
     //  左上
     
     ogl::color4ub( cr, cg, cb, ca );
-    glTexCoord2d( u0, v0 );
-    glVertex3d(x0, y0, 0);
+    ogl::texCoord2f( u0, v0 );
+    ogl::vertex3f(x0, y0, 0);
     
     //  左下w
     ogl::color4ub( cr, cg, cb, ca );
-    glTexCoord2d(u0, v1);
-    glVertex3d(x0, y1, 0);
+    ogl::texCoord2f(u0, v1);
+    ogl::vertex3f(x0, y1, 0);
     
     //  右下
     ogl::color4ub( cr, cg, cb, ca );
-    glTexCoord2d(u1, v1);
-    glVertex3d(x1, y1, 0);
+    ogl::texCoord2f(u1, v1);
+    ogl::vertex3f(x1, y1, 0);
     
     //  右上
     ogl::color4ub( cr, cg, cb, ca );
-    glTexCoord2d(u1, v0);
-    glVertex3d(x1, y0, 0);
+    ogl::texCoord2f(u1, v0);
+    ogl::vertex3f(x1, y0, 0);
     
     
     

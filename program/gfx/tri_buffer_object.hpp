@@ -29,7 +29,7 @@ public:
     }
     
     ~BufferObject(){
-        glDeleteBuffers( 1, &buffer_ );
+        ogl::deleteBuffers( 1, &buffer_ );
     }
 
 
@@ -56,7 +56,12 @@ public:
         const void* data
     ){
         bindBuffer();
-        glBufferSubData( target_, offset, stride_ * element_count_, data );
+        ogl::bufferSubData(
+            target_,
+            offset,
+            stride_ * element_count_,
+            data
+        );
         unbindBuffer();
     }
     

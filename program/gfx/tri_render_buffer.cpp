@@ -11,26 +11,26 @@ RenderBuffer::RenderBuffer(
     const int width,
     const int height
 ){
-    glGenRenderbuffers( 1, &id_ );
+    ogl::genRenderbuffers( 1, &id_ );
     bind();
-    glRenderbufferStorage( GL_RENDERBUFFER, color_format, width, height );
+    ogl::renderbufferStorage( GL_RENDERBUFFER, color_format, width, height );
 }
 
 
 RenderBuffer::~RenderBuffer()
 {
-    glDeleteRenderbuffers( 1, &id_ );
+    ogl::deleteRenderbuffers( 1, &id_ );
 }
 
 
 void RenderBuffer::bind()
 {
-    glBindRenderbuffer( GL_RENDERBUFFER, id_ );
+    ogl::bindRenderbuffer( GL_RENDERBUFFER, id_ );
 }
 
 void RenderBuffer::unbind()
 {
-    glBindRenderbuffer( GL_RENDERBUFFER, 0 );
+    ogl::bindRenderbuffer( GL_RENDERBUFFER, 0 );
 }
 
 
@@ -40,7 +40,12 @@ void RenderBuffer::attachFrameBuffer(
     int attachment_point
 ){
     frame_buffer.bind();
-    glFramebufferRenderbuffer( GL_FRAMEBUFFER, attachment_point, GL_RENDERBUFFER, id_ );
+    ogl::framebufferRenderbuffer(
+        GL_FRAMEBUFFER,
+        attachment_point,
+        GL_RENDERBUFFER,
+        id_
+    );
 }
 
 

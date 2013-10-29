@@ -145,7 +145,7 @@ Mesh::~Mesh()
     delete[] fnormal_;
     delete[] face_;
     
-    glDeleteBuffers(3, buffers_);
+    ogl::deleteBuffers(3, buffers_);
 }
 
 

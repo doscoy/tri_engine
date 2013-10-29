@@ -102,7 +102,7 @@ inline void texParameteri(
 inline void matrixMode(
     int mode
 ) {
-    ogl::matrixMode(mode);
+    glMatrixMode(mode);
 }
 
 inline void ortho(
@@ -195,7 +195,7 @@ inline void viewport(
     int w,
     int h
 ){
-    ogl::viewport(x, y, w, h);
+    glViewport(x, y, w, h);
 }
 
 inline void shadeModel(
@@ -207,7 +207,7 @@ inline void shadeModel(
 inline void loadMatrixf(
     const float* const mtx
 ) {
-    ogl::loadMatrixf(mtx);
+    glLoadMatrixf(mtx);
 }
 
 inline void drawElements(
@@ -229,7 +229,7 @@ inline void bindBuffer(
 inline void enableClientState(
     int array
 ){
-    ogl::enableClientState(array);
+    glEnableClientState(array);
 }
 
 
@@ -264,11 +264,71 @@ inline int checkFramebufferStatus(int target) {
     return glCheckFramebufferStatusEXT(target);
 }
 
+
+inline void genRenderbuffers(
+    int num,
+    unsigned int* buffer
+) {
+    glGenRenderbuffers(num, buffer);
+}
+
+
+inline void bindRenderbuffer(
+    int target,
+    unsigned int buffer
+) {
+    glBindRenderbuffer(target, buffer);
+}
+
+
+inline void deleteRenderbuffers(
+    const int num,
+    unsigned int* buffer
+) {
+    glDeleteRenderbuffers(num, buffer);
+}
+
+
+inline void framebufferRenderbuffer(
+    int target,
+    int attachment,
+    int renderbuffertarget,
+    int renderbuffer
+) {
+    glFramebufferRenderbuffer(
+        target,
+        attachment,
+        renderbuffertarget,
+        renderbuffer
+    );
+}
+
+inline void renderbufferStorage(
+    int target,
+    int internalformat,
+    int width,
+    int height
+) {
+    glRenderbufferStorage(
+        target,
+        internalformat,
+        width,
+        height
+    );
+}
+
 inline void genBuffers(
     int num,
     unsigned int* buffers
 ){
     glGenBuffers(num, buffers);
+}
+
+inline void deleteBuffers(
+    int num,
+    unsigned int* buffers
+) {
+    glDeleteBuffers(num, buffers);
 }
 
 inline void bufferData(
@@ -277,9 +337,21 @@ inline void bufferData(
     const void* data,
     int usage
 ) {
-
     glBufferData(target, size, data, usage);
+}
 
+inline void bufferSubData(
+    int target,
+    int offset,
+    int size,
+    const void* data
+) {
+    glBufferSubData(
+        target,
+        offset,
+        size,
+        data
+    );
 }
 
 inline void vertexPointer(
@@ -318,7 +390,12 @@ inline void texCoordPointer(
     glTexCoordPointer(size, type, stride, pointer);
 }
 
-
+inline void texCoord2f(
+    float u,
+    float v
+) {
+    glTexCoord2f(u, v);
+}
 
 
 
