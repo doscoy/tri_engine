@@ -8,15 +8,13 @@
 
 
 namespace t3 {
-    
-class Color;
 
 
 inline namespace dbg {
 
-constexpr int DEBUG_STRING_ITEM_STR_SIZE = 54;
+constexpr int DEBUG_STRING_ITEM_STR_SIZE = 100;
 
-struct debug_string_item_t
+struct DebugStringItem
 {
     u_int color;
     short x;
@@ -45,7 +43,7 @@ public:
     void drawStrings();
     
 private:
-    std::array<debug_string_item_t, 2512> buffer_;
+    std::array<DebugStringItem, 100> buffer_;
     int size_;
 
 };

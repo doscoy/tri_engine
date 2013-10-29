@@ -2,8 +2,7 @@
 #define PLATFORM_SDK_HPP_INCLUDED
 
 
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
+#include "platform_opengl_wrapper.hpp"
 
 
 #endif // PLATFORM_SDK_HPP_INCLUDED

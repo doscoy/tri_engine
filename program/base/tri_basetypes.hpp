@@ -15,6 +15,5 @@ typedef unsigned long               u_long;
 }   // namespace t3
 
 
-
 #endif // TRI_BASETYPES_HPP_INCLUDED
 

@@ -141,16 +141,16 @@ void DebugMenuFrame::drawFrame(
     printDisplay( x, y, color, getLabel() );
 
     int idx = 0;
-    const Color* font_color;
+    Color font_color;
     for ( auto item: items_ ) {
         if ( focus_item_ == item ){
-            font_color = &COLOR_ORANGE;
+            font_color = Color::orange();
         }
         else if ( idx == select_idx_ ) {
-            font_color = &COLOR_AQUA;
+            font_color = Color::aqua();
         }
         else {
-            font_color = &COLOR_WHITE;
+            font_color = Color::white();
         }
         
         //
@@ -160,7 +160,7 @@ void DebugMenuFrame::drawFrame(
             dmf->drawFrame(
                 x + getLabelWidth() * DEBUG_FONT_POINT,
                 y + ( idx * DEBUG_FONT_POINT ) + DEBUG_FONT_POINT / 2,
-                *font_color
+                font_color
             );
         }
         else {
@@ -168,7 +168,7 @@ void DebugMenuFrame::drawFrame(
             item->draw(
                 x + getLabelWidth() * DEBUG_FONT_POINT,
                 y + (DEBUG_FONT_POINT*idx) + DEBUG_FONT_POINT / 2,
-                *font_color
+                font_color
             );
         }
         

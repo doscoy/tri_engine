@@ -107,7 +107,7 @@ void SpriteRenderer::beginRender()
         2, 
         GL_FLOAT, 
         sizeof( VertexP2CT ), 
-        reinterpret_cast< GLvoid* >( (sizeof( VertexP2CT::position_t ) * 2)+(sizeof( VertexP2CT::color_t ) * 4) )
+        reinterpret_cast< GLvoid* >( (sizeof( VertexP2CT::position_t ) * 2)+(sizeof( VertexP2CT::Color ) * 4) )
     );
 
     //  正射影行列を設定
@@ -126,8 +126,8 @@ void SpriteRenderer::beginRender()
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
+    ogl::enable(GL_TEXTURE_2D);
+    ogl::enable(GL_BLEND);
 
 }
 
@@ -190,8 +190,8 @@ void SpriteRenderer::endRender()
     glDisableClientState( GL_TEXTURE_COORD_ARRAY );
     
     //  描画設定解除
-    glDisable( GL_TEXTURE_2D );
-    glDisable( GL_BLEND );
+    ogl::disable( GL_TEXTURE_2D );
+    ogl::disable( GL_BLEND );
     
     //  描画コンテナのクリア
     sprites_.clear();

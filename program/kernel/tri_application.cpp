@@ -247,7 +247,7 @@ void Application::update( tick_t tick )
         t3::printDisplay(
             940,
             640,
-            COLOR_WHITE,
+            Color::white(),
             "sys %2.1fms(%3.1f%%)",
             last_system_cost_ * 1000,
             last_system_cost_ / frameSec<60>() * 100
@@ -255,7 +255,7 @@ void Application::update( tick_t tick )
         t3::printDisplay(
             940,
             656,
-            COLOR_WHITE,
+            Color::white(),
             "app %2.1fms(%3.1f%%)",
             last_app_cost_ * 1000,
             last_app_cost_ / frameSec<60>() * 100
@@ -263,7 +263,7 @@ void Application::update( tick_t tick )
         t3::printDisplay(
             940,
             672,
-            COLOR_WHITE,
+            Color::white(),
             "ren %2.1fms(%3.1f%%)",
             last_rendering_cost_ * 1000,
             last_rendering_cost_ / frameSec<60>() * 100
@@ -271,7 +271,7 @@ void Application::update( tick_t tick )
         t3::printDisplay(
             940,
             688,
-            COLOR_WHITE,
+            Color::white(),
             "oth %2.1fms(%3.1f%%)",
             last_other_cost_ * 1000,
             last_other_cost_ / frameSec<60>() * 100

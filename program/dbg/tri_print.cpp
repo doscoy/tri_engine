@@ -8,7 +8,6 @@
 
 #include "tri_print.hpp"
 
-#include <GLUT/glut.h>
 #include <stdio.h>
 #include <stdarg.h>
 
@@ -71,20 +70,20 @@ void beginPrint(
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
+    ogl::enable(GL_BLEND);
     
     GLfloat env_color[] = { 1, 1, 0, 1 };
-    glMaterialfv( GL_FRONT, GL_AMBIENT_AND_DIFFUSE, env_color );
-    glEnable( GL_TEXTURE_2D );
-    glDisable(GL_CULL_FACE);
+    ogl::materialfv( GL_FRONT, GL_AMBIENT_AND_DIFFUSE, env_color );
+    ogl::enable( GL_TEXTURE_2D );
+    ogl::disable(GL_CULL_FACE);
     
-    glNormal3d( 0, 0, 1 );
+    ogl::normal3d( 0, 0, 1 );
     
 }
 void endPrint()
 {
-    glDisable(GL_TEXTURE_2D);
-    glDisable(GL_BLEND);
+    ogl::disable(GL_TEXTURE_2D);
+    ogl::disable(GL_BLEND);
 }
 
 
@@ -175,7 +174,7 @@ void printDisplay(
     vsnprintf( buf, BUFFER_LENGTH, fmt, arg );
     va_end( arg );
     
-    dbg_screen_layer_.writeString( x, y, COLOR_MAGENTA.getRGBA(), buf );
+    dbg_screen_layer_.writeString( x, y, Color::magenta().getRGBA(), buf );
 }
   
 void printDisplay(

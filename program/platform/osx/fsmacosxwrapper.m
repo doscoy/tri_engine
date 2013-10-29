@@ -1,5 +1,4 @@
 #import <Cocoa/Cocoa.h>
-#include "../platform_sdk.hpp"
 #include "cocoa_keycode.h"
 #include "MyView.h"
 
@@ -635,8 +634,8 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
     
 	[NSApp activateIgnoringOtherApps:YES];
     
-    glClearDepth(0.0F);
-    glEnable(GL_DEPTH_TEST);
+//    ogl::clearDepth(0.0F);
+//    ogl::enable(GL_DEPTH_TEST);
 
  
     
@@ -657,7 +656,7 @@ void FsSleepC(int ms)
 void FsSwapBufferC(void)
 {
     [[view_ openGLContext] flushBuffer];
-    glFinish();
+//    glFinish();
 }
 
 

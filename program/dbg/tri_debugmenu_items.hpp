@@ -106,9 +106,9 @@ private:
     
     
 template<>
-class DebugMenuItem<color_t>
+class DebugMenuItem<Color>
 {
-    typedef color_t item_t;
+    typedef Color item_t;
     typedef u_char  step_type_t;
 public:
     DebugMenuItem(
@@ -117,10 +117,10 @@ public:
         item_t& target,
         const step_type_t step
     )   : dmf_( parent, label )
-        , r_( &dmf_, "r", target.r, step )
-        , g_( &dmf_, "g", target.g, step )
-        , b_( &dmf_, "b", target.b, step )
-        , a_( &dmf_, "a", target.a, step )
+        , r_( &dmf_, "r", target.red_, step )
+        , g_( &dmf_, "g", target.green_, step )
+        , b_( &dmf_, "b", target.blue_, step )
+        , a_( &dmf_, "a", target.alpha_, step )
     {
     }
     

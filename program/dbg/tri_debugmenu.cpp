@@ -72,7 +72,7 @@ void DebugMenu::render()
     if ( !isOpened() ){
         return;
     }
-    menu_root_.drawFrame( 3, 3, COLOR_WHITE );
+    menu_root_.drawFrame( 3, 3, Color::white() );
 }
 
 

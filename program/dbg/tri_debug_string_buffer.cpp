@@ -57,7 +57,7 @@ void DebugStringBuffer::addString(
     const u_int color,
     const char* const str
 ){
-    debug_string_item_t& item = buffer_.at(size_);
+    DebugStringItem& item = buffer_.at(size_);
 
     item.color = color;
     item.x = x;
@@ -78,7 +78,7 @@ void DebugStringBuffer::drawStrings()
     beginPrint( glue::getScreenWidth(), glue::getScreenHeight() );
     
     for (int item_idx = 0; item_idx < size_; ++item_idx ) {
-        const debug_string_item_t& str_item = buffer_[item_idx];
+        const DebugStringItem& str_item = buffer_[item_idx];
         drawString(
             str_item.x,
             str_item.y,

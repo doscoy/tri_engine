@@ -22,7 +22,7 @@ public:
 
 
 public:
-    void setColor( int index, const color_t& color );
+    void setColor( int index, const Color& color );
     void setParam( int index, float param );
     void setPosition( const vec2_t& pos ){
         position_ = pos;
@@ -45,7 +45,7 @@ public:
     
 private:
     std::array<float, MAX_WORKBAR_ITEM> bar_params_;
-    std::array<color_t, MAX_WORKBAR_ITEM> bar_colors_;
+    std::array<Color, MAX_WORKBAR_ITEM> bar_colors_;
     float limit_param_;
     int limit_width_pixel_;
     int keep_frame_;

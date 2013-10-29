@@ -19,10 +19,10 @@ GameSystem::GameSystem()
     , dmf_color_idx_( nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3 )
     , use_clear_color_index_( 0 )
     , clear_colors_{{
-        COLOR_DARKGRAY,
-        COLOR_BLACK,
-        COLOR_WHITE,
-        COLOR_BLUE}}
+        Color::darkgray(),
+        Color::black(),
+        Color::white(),
+        Color::blue()}}
     , suspend_( false )
 {
     //  テクスチャマネージャ生成

@@ -106,7 +106,7 @@ void swapBuffers()
 
 void clearDisplay( int flag )
 {
-    glClear( flag );
+    ogl::clear( flag );
 }
 
 

@@ -19,11 +19,11 @@ Workbar::Workbar(
     int limit_width_pixel
 )   : bar_params_()
     , bar_colors_{{
-        COLOR_ORANGE,
-        COLOR_LIME,
-        COLOR_AQUA,
-        COLOR_GREEN,
-        COLOR_ORANGE}}
+        Color::orange(),
+        Color::lime(),
+        Color::aqua(),
+        Color::green(),
+        Color::orange()}}
     , limit_param_( limit_param )
     , limit_width_pixel_( limit_width_pixel )
     , keep_frame_(0)
@@ -42,7 +42,7 @@ Workbar::~Workbar()
 
 void Workbar::setColor(
     int index,
-    const color_t& color
+    const Color& color
 ){
     T3_ASSERT( MAX_WORKBAR_ITEM > index );
     bar_colors_[index] = color;
@@ -94,7 +94,7 @@ void Workbar::draw()
     }
     
     //  上限バー描画
-    drawRectangle( vec2_t( limit_bar_pos_x_, y-1 ), vec2_t( 1, thickness_+2 ), COLOR_LIME );
+    drawRectangle( vec2_t( limit_bar_pos_x_, y-1 ), vec2_t( 1, thickness_+2 ), Color::lime() );
     
 }
 
