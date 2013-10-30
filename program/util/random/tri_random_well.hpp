@@ -12,19 +12,19 @@ class RandomWell {
 
 public:
     //  コンストラクタ
-	explicit RandomWell( const u_int seed );
+	explicit RandomWell( const uint32_t seed );
 
     //  デストラクタ
 	~RandomWell();
 
 public:
     //  乱数取得
-	u_int getUInt();
+	uint32_t getUInt();
 
 
 private:
-	u_int state_[16];
-	u_int index_;
+	uint32_t state_[16];
+	uint32_t index_;
 
 };
 

@@ -4,7 +4,7 @@
 namespace t3 {
 
 //  コンストラクタ
-RandomXorShift::RandomXorShift( const u_int seed )
+RandomXorShift::RandomXorShift( const uint32_t seed )
     : x_( 123456789 )
     , y_( 362436069 )
     , z_( 521288629 )
@@ -23,13 +23,13 @@ RandomXorShift::~RandomXorShift()
 }
 
 //  32bit乱数取得
-u_int RandomXorShift::getUInt()
+uint32_t RandomXorShift::getUInt()
 {
 	unsigned long t = x_ ^ ( x_ << 11 );
 	x_ = y_;
 	y_ = z_;
 	z_ = w_;
-	w_ = static_cast<u_int>(( w_ ^ ( w_ >> 19 ) )  ^  ( t ^ ( t >> 8 ) ));
+	w_ = static_cast<uint32_t>(( w_ ^ ( w_ >> 19 ) )  ^  ( t ^ ( t >> 8 ) ));
 	
 	return ( w_ );
 }	

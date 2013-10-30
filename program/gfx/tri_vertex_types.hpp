@@ -8,15 +8,15 @@ namespace t3 {
 struct VertexP2CT
 {
     typedef float   position_t;
-    typedef u_char  Color;
+    typedef uint8_t color8_t;
     typedef float   tex_coord_t;
     
     position_t x;
     position_t y;
-    Color r;
-    Color g;
-    Color b;
-    Color a;
+    color8_t r;
+    color8_t g;
+    color8_t b;
+    color8_t a;
     position_t tu;
     position_t tv;
 };

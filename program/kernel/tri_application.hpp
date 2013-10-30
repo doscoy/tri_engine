@@ -37,7 +37,7 @@ public:
     
 private:
     std::unique_ptr<ApplicationDebugMenu> system_menu_;
-    u_int last_scene_change_frame_;
+    uint32_t last_scene_change_frame_;
 };
 
 

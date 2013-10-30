@@ -16,7 +16,7 @@ constexpr int DEBUG_STRING_ITEM_STR_SIZE = 100;
 
 struct DebugStringItem
 {
-    u_int color;
+    uint32_t color;
     short x;
     short y;
     char str[DEBUG_STRING_ITEM_STR_SIZE];
@@ -35,7 +35,7 @@ public:
     void addString(
         int x,
         int y,
-        const u_int color,
+        const uint32_t color,
         const char* const str
     );
     

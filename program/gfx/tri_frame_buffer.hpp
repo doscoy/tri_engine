@@ -19,11 +19,11 @@ public:
 public:
     void bind() const;
     void unbind() const;
-    u_int getID() const {
+    uint32_t getID() const {
         return id_;
     }
 private:
-    u_int id_;
+    uint32_t id_;
     
 };
 

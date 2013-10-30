@@ -60,13 +60,13 @@ public:
     
     // *********************************************
     //  登録フレームを保持
-    void setFrame( const u_int frame ){
+    void setFrame( const uint32_t frame ){
         frame_ = frame;
     }
     
     // *********************************************
     //  登録フレームを取得
-    u_int getFrame() const {
+    uint32_t getFrame() const {
         return frame_;
     }
     
@@ -93,7 +93,7 @@ private:
     std::size_t size_;
     const char* filename_;
     int line_;
-    u_int frame_;
+    uint32_t frame_;
     bool enable_;
 };
 
@@ -119,7 +119,7 @@ public:
         const std::size_t size,
         const char* const filename,
         const int line,
-        const u_int frame
+        const uint32_t frame
     );
     
     // *********************************************
@@ -131,8 +131,8 @@ public:
     // *********************************************
     //  一覧をダンプ
     void dump(
-        const u_int start_filter_frame = 0,
-        const u_int end_filter_frame = std::numeric_limits<u_int>::max()
+        const uint32_t start_filter_frame = 0,
+        const uint32_t end_filter_frame = std::numeric_limits<uint32_t>::max()
     ) const;
     
     

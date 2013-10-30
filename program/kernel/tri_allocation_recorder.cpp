@@ -17,7 +17,7 @@ void AllocationRecorder::checkin(
     const std::size_t size,
     const char* const filename,
     const int line,
-    const u_int frame
+    const uint32_t frame
 ){
     for ( auto ap = allocate_info_.begin(); ap != allocate_info_.end(); ++ap ) {
         if ( !ap->isEnable() ){
@@ -57,8 +57,8 @@ void AllocationRecorder::checkout(
 
 
 void AllocationRecorder::dump (
-    const u_int start_filter_frame,
-    const u_int end_filter_frame
+    const uint32_t start_filter_frame,
+    const uint32_t end_filter_frame
 ) const {
     int no = 0;
     T3_TRACE("AllocationRecorder::dump() %d --> %d\n", start_filter_frame, end_filter_frame );

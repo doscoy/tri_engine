@@ -18,7 +18,7 @@ class RandomNumberGenerator
 
 public:
 
-	explicit RandomNumberGenerator( const u_int seed )
+	explicit RandomNumberGenerator( const uint32_t seed )
         : algorithm_( seed )
     {
 		// none
@@ -32,13 +32,13 @@ public:
 	
 
 public:
-    //  unsigned int
-    u_int getUInt() {
+    //  uint32_t
+    uint32_t getUInt() {
         return ( algorithm_.getUInt() );
     }
 	
-    //  unsigned int limit
-    u_int getUInt( const u_int limit ) {
+    //  uint32_t limit
+    uint32_t getUInt( const uint32_t limit ) {
         return ( algorithm_.getUInt() % limit );	
     }
 

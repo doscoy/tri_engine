@@ -13,7 +13,7 @@ class RandomXorShift {
 
 public:
     //  コンストラクタ
-	RandomXorShift( const u_int seed );
+	RandomXorShift( const uint32_t seed );
 	
     //  デストラクタ
 	~RandomXorShift();
@@ -22,14 +22,14 @@ public:
 
 public:
     //  32bit乱数取得
-	u_int getUInt();
+	uint32_t getUInt();
 
 	
 private:
-	u_int x_;
-    u_int y_;
-	u_int z_;
-	u_int w_;
+	uint32_t x_;
+    uint32_t y_;
+	uint32_t z_;
+	uint32_t w_;
 };
 
 

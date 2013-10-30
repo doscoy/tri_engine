@@ -13,8 +13,8 @@ class IndexBuffer
     : public BufferObject
 {
 public:
-    IndexBuffer( int index_count, const u_short* index = nullptr )
-        : BufferObject( GL_ELEMENT_ARRAY_BUFFER, sizeof( u_short ), index_count, (void*)index )
+    IndexBuffer( int index_count, const uint16_t* index = nullptr )
+        : BufferObject( GL_ELEMENT_ARRAY_BUFFER, sizeof( uint16_t ), index_count, (void*)index )
     {
     }
 

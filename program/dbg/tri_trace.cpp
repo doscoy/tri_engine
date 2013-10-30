@@ -33,21 +33,14 @@ void traceValue(
 
 void traceValue(
     const char* const name,
-    u_int value
+    uint32_t value
 ){
-    printf( "[%d] %s=%d\n", frame_counter_.now(), name, value );
+    printf( "[%d] %s=%u\n", frame_counter_.now(), name, value );
 }
 
 void traceValue(
     const char* const name,
     long value
-){
-    printf( "[%d] %s=%ld\n", frame_counter_.now(), name, value );
-}
-
-void traceValue(
-    const char* const name,
-    u_long value
 ){
     printf( "[%d] %s=%ld\n", frame_counter_.now(), name, value );
 }

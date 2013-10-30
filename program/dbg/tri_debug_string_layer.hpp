@@ -20,7 +20,7 @@ public:
     void writeString(
         const int x,
         const int y,
-        const u_int color,
+        const uint32_t color,
         const char* const str
     );
 

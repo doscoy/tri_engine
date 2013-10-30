@@ -10,8 +10,6 @@
 #ifndef TRI_VEC4_HPP_INCLUDED
 #define TRI_VEC4_HPP_INCLUDED
 
-
-#include "tri_basetypes.hpp"
 #include <iostream>
 
 #include "tri_vec3.hpp"

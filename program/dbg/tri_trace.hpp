@@ -9,9 +9,9 @@ inline namespace dbg {
 void trace( const char* const format, ... );
 
 void traceValue( const char* const name, int value );
-void traceValue( const char* const name, u_int value );
+void traceValue( const char* const name, uint32_t value );
 void traceValue( const char* const name, long value );
-void traceValue( const char* const name, u_long value );
+void traceValue( const char* const name, uint32_t value );
 void traceValue( const char* const name, float value );
 void traceValue( const char* const name, void* value );
 void traceValue( const char* const name, const char* value );

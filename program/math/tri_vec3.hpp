@@ -11,7 +11,6 @@
 #define TRI_VEC3_HPP_INCLUDED
 
 #include "../math/tri_math_util.hpp"
-#include "tri_basetypes.hpp"
 #include <iostream>
 
 

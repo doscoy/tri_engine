@@ -13,38 +13,38 @@
 namespace t3 {
 
 // 指定bitを立てる
-inline void bitOn( u_int& v, const u_int bit ) {
+inline void bitOn( uint32_t& v, const uint32_t bit ) {
     v |= bit;
 }
 
 // 指定ビットを落とす
-inline void bitOff( u_int& v, const u_int bit ) {
+inline void bitOff( uint32_t& v, const uint32_t bit ) {
     v &= ~bit;
 }
 
 // 指定ビットがセットされた状態にする
-inline void bitSet( u_int& v, const u_int bit ) {
+inline void bitSet( uint32_t& v, const uint32_t bit ) {
     v = bit;
 }
 
 // ビット列をクリア
-inline void bitClear( u_int& v ) {
+inline void bitClear( uint32_t& v ) {
     v = 0;
 }
 
 // 指定ビットが立っているか判定
-inline bool bitCheck( const u_int v, const u_int bit ) {
+inline bool bitCheck( const uint32_t v, const uint32_t bit ) {
     return (v & bit) == bit;
 }
 
 // ビット可視化用文字列作成
 const char* bitToString(
-    const u_int v,          ///< 表示したいビット列
+    const uint32_t v,          ///< 表示したいビット列
     const int bit_num =  32 ///< 下位何ビットを表示するか
 );
 
 //  1のビットを数える
-u_int bitPopulation( const u_int bits );
+uint32_t bitPopulation( const uint32_t bits );
 
 
 } // namespace t3

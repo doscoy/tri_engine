@@ -50,7 +50,7 @@ void* Heap::allocate( size_t size )
     size_t request_bytes = size + alloc_header_size;
 
     //  メモリ確保
-    byte* mem = reinterpret_cast<byte*>( malloc( request_bytes ) );
+    int8_t* mem = reinterpret_cast<int8_t*>( malloc( request_bytes ) );
     AllocHeader* header = reinterpret_cast< AllocHeader* >( mem );
 
     //  ヘッダ情報書き込み
@@ -84,7 +84,7 @@ void* Heap::allocate( size_t size )
 
 void Heap::deallocate( void* mem )
 {
-    t3::AllocHeader* header = reinterpret_cast<t3::AllocHeader*>(( reinterpret_cast<t3::byte*>(mem) - sizeof( t3::AllocHeader )));
+    t3::AllocHeader* header = reinterpret_cast<t3::AllocHeader*>(( reinterpret_cast<char*>(mem) - sizeof( t3::AllocHeader )));
     T3_ASSERT( header->signature_ == t3::HEAP_SIGNATURE );
   
     header->heap_->deallocate( header );

@@ -86,7 +86,7 @@ private:
 private:
     bool pause_;
     bool visible_;
-    u_char priority_;
+    uint8_t priority_;
     char layer_name_[LAYER_NAME_SIZE];
 
 };

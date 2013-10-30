@@ -15,7 +15,7 @@ class RandomLcgs {
 
 public:
     //  コンストラクタ
-	explicit RandomLcgs( const u_int seed );
+	explicit RandomLcgs( const uint32_t seed );
 	
     //  デストラクタ
 	~RandomLcgs();
@@ -23,11 +23,11 @@ public:
 
 public:
     //  乱数取得
-	u_int getUInt();
-	u_short getUShort();	
+	uint32_t getUInt();
+	uint16_t getUShort();	
 	
 private:
-	u_int seed_;
+	uint32_t seed_;
 };
 
 

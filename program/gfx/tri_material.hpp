@@ -22,7 +22,7 @@ public:
         return opacity_ <= 255;
     }
     
-    u_char getOpacity() const {
+    uint8_t getOpacity() const {
         return opacity_;
     }
     
@@ -37,7 +37,7 @@ public:
 private:
     Color diffuse_;
     Color ambient_;
-    u_char opacity_;
+    uint8_t opacity_;
 
 };
 

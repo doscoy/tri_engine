@@ -1,12 +1,11 @@
 #ifndef TRI_COLOR_HPP_INCLUDED
 #define TRI_COLOR_HPP_INCLUDED
 
-#include "tri_basetypes.hpp"
 #include "../platform/platform_sdk.hpp"
 
 namespace t3 {
 
-typedef u_int rgba32;
+typedef uint32_t rgba32;
 
 enum ColorFormat
 {
@@ -18,19 +17,19 @@ enum ColorFormat
 class Color
 {
 public:
-    u_char red_;
-    u_char blue_;
-    u_char green_;
-    u_char alpha_;
+    uint8_t red_;
+    uint8_t blue_;
+    uint8_t green_;
+    uint8_t alpha_;
 
 public:
     Color() = default;
     ~Color() = default;
     Color(
-        const u_char red,
-        const u_char green,
-        const u_char blue,
-        const u_char alpha = 255
+        const uint8_t red,
+        const uint8_t green,
+        const uint8_t blue,
+        const uint8_t alpha = 255
     ){
         red_ = red;
         green_ = green;

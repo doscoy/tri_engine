@@ -9,7 +9,7 @@
 
 extern void beginPrint( const float w, const float h );
 extern void endPrint();
-extern void debugFontPrint(const char c, const int x, const int y, const t3::u_int color, const int font_pixel_size);
+extern void debugFontPrint(const char c, const int x, const int y, const uint32_t color, const int font_pixel_size);
 
 
 namespace  {
@@ -17,7 +17,7 @@ namespace  {
 void drawString(
     int x,
     int y,
-    t3::u_int color,
+    uint32_t color,
     const char* const str
 ){
     int font_size = 16;
@@ -54,7 +54,7 @@ DebugStringBuffer::~DebugStringBuffer()
 void DebugStringBuffer::addString(
     const int x,
     const int y,
-    const u_int color,
+    const uint32_t color,
     const char* const str
 ){
     DebugStringItem& item = buffer_.at(size_);

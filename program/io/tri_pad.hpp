@@ -31,38 +31,38 @@ public:
     ~Pad();
 
 public:
-    void updatePad( u_int current_frame_data, tick_t tick );
+    void updatePad( uint32_t current_frame_data, tick_t tick );
     
-    bool isTrigger( u_int button ) const {
+    bool isTrigger( uint32_t button ) const {
         return ( trigger_ & button );
     }
     
-    bool isPress( u_int button ) const {
+    bool isPress( uint32_t button ) const {
         return ( (last_frame_data_ & button) == button );
     }
     
-    bool isRelease( u_int button ) const {
+    bool isRelease( uint32_t button ) const {
         return ( release_ & button );
     }
 
-    bool isRepeat( u_int button ) const {
+    bool isRepeat( uint32_t button ) const {
         return ( repeat_ & button );
     }
     
     
-    u_int getTriggerBits() const {
+    uint32_t getTriggerBits() const {
         return trigger_;
     }
     
-    u_int getPressBits() const {
+    uint32_t getPressBits() const {
         return last_frame_data_;
     }
     
-    u_int getReleaseBits() const {
+    uint32_t getReleaseBits() const {
         return release_;
     }
     
-    u_int getRepeatBits() const {
+    uint32_t getRepeatBits() const {
         return repeat_;
     }
 
@@ -70,10 +70,10 @@ private:
     void updateRepeat( tick_t tick );
     
 private:
-    u_int last_frame_data_;
-    u_int trigger_;
-    u_int release_;
-    u_int repeat_;
+    uint32_t last_frame_data_;
+    uint32_t trigger_;
+    uint32_t release_;
+    uint32_t repeat_;
     float repeat_start_time_;
     float repeat_interval_;
     float pressed_time_;

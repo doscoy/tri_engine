@@ -25,7 +25,7 @@ public:
 
     // *********************************************
     //  データ取得
-    const byte* getData() const {
+    const char* getData() const {
         return data_;
     }
     
@@ -48,7 +48,7 @@ public:
     
 private:
     //  データ
-    byte* data_;
+    char* data_;
     
     //  データサイズ
     std::size_t size_;

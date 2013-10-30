@@ -109,7 +109,7 @@ template<>
 class DebugMenuItem<Color>
 {
     typedef Color item_t;
-    typedef u_char  step_type_t;
+    typedef uint8_t  step_type_t;
 public:
     DebugMenuItem(
         DebugMenuFrame* const parent,

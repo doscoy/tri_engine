@@ -21,7 +21,7 @@ public:
     
     void unbind();
     
-    u_int getID() const {
+    uint32_t getID() const {
         return id_;
     }
     
@@ -31,7 +31,7 @@ public:
     );
     
 private:
-    u_int id_;
+    uint32_t id_;
 };
 
 }   // namespace t3

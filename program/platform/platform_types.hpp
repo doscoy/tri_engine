@@ -2,10 +2,12 @@
 #define PLATFORM_TYPES_HPP_INCLUDED
 
 
+#include <cstdint>
+
 namespace glue {
 
 //  プラットフォームから取得するキーデータ
-typedef unsigned int pad_data_t;
+typedef uint32_t pad_data_t;
 
 //  プラットフォームから取得するポインティングデータ
 struct pointing_data_t {

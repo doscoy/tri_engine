@@ -107,7 +107,7 @@ void SpriteRenderer::beginRender()
         2, 
         GL_FLOAT, 
         sizeof( VertexP2CT ), 
-        reinterpret_cast< GLvoid* >( (sizeof( VertexP2CT::position_t ) * 2)+(sizeof( VertexP2CT::Color ) * 4) )
+        reinterpret_cast< GLvoid* >( (sizeof( VertexP2CT::position_t ) * 2)+(sizeof( VertexP2CT::color8_t ) * 4) )
     );
 
     //  正射影行列を設定

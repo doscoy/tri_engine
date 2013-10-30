@@ -52,9 +52,9 @@ PngImage::PngImage( const char* const path )
     // メモリ領域確保
     int rb = (int)png_get_rowbytes(png_ptr, info_ptr);
     size_ = height_ * rb;
-    data_ = new unsigned char[size_];
+    data_ = new uint8_t[size_];
     
-    unsigned char** rec = new unsigned char*[height_];
+    uint8_t** rec = new uint8_t*[height_];
     
     for ( int i = 0; i < height_; ++i ){
         rec[i] = &data_[i*rb];

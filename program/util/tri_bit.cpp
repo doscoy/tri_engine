@@ -11,13 +11,13 @@ namespace t3 {
 
 
 const char* bitToString(
-    const u_int v,          // 表示したいビット列
+    const uint32_t v,          // 表示したいビット列
     const int bit_num       // 下位何ビットを表示するか
 ){
 
     static char str[33];
 
-    u_int check_bit = 0x1 << (bit_num-1);
+    uint32_t check_bit = 0x1 << (bit_num-1);
 
     for ( int idx = 0; idx < bit_num; ++idx ){
         if ( bitCheck(v, check_bit) ){
@@ -36,10 +36,10 @@ const char* bitToString(
 }
 
 
-u_int bitPopulation(
-    const u_int   bits
+uint32_t bitPopulation(
+    const uint32_t   bits
 ){
-    u_int   n = (bits & 0x55555555u) + ((bits >> 1) & 0x55555555u);
+    uint32_t   n = (bits & 0x55555555u) + ((bits >> 1) & 0x55555555u);
     n = (n & 0x33333333u) + ((n >> 2) & 0x33333333u);
     n = (n + (n >> 4)) & 0x0F0F0F0Fu;
     n = (n + (n >> 8)) & 0x00FF00FFu;

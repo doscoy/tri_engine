@@ -121,7 +121,7 @@ void SceneNode::renderChildren(t3::SceneGraph *scene_graph)
             //  prerenderでfalseだったらレンダリングは省略できる
             
             if (node->isVisible(scene_graph)) {
-                u_char opacity = node->getProperties()->material_.getOpacity();
+                uint8_t opacity = node->getProperties()->material_.getOpacity();
                 if (opacity == 255) {
                     //  完全な不透明
                     node->render(scene_graph);

@@ -2600,11 +2600,11 @@ PNG_EXPORT(206, void, png_save_int_32, (png_bytep buf, png_int_32 i));
 #endif
 
 /* Place a 16-bit number into a buffer in PNG byte order.
- * The parameter is declared unsigned int, not png_uint_16,
+ * The parameter is declared uint32_t, not png_uint_16,
  * just to avoid potential problems on pre-ANSI C compilers.
  */
 #ifdef PNG_WRITE_INT_FUNCTIONS_SUPPORTED
-PNG_EXPORT(207, void, png_save_uint_16, (png_bytep buf, unsigned int i));
+PNG_EXPORT(207, void, png_save_uint_16, (png_bytep buf, uint32_t i));
 /* No png_save_int_16 -- may be added if there's a real need for it. */
 #endif
 
@@ -2624,8 +2624,8 @@ PNG_EXPORT(207, void, png_save_uint_16, (png_bytep buf, unsigned int i));
     */
 #  define png_get_uint_16(buf) \
      ((png_uint_16) \
-      (((unsigned int)(*(buf)) << 8) + \
-       ((unsigned int)(*((buf) + 1)))))
+      (((uint32_t)(*(buf)) << 8) + \
+       ((uint32_t)(*((buf) + 1)))))
 
 #  define png_get_int_32(buf) \
      ((png_int_32)((*(buf) & 0x80) \

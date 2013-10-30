@@ -5,7 +5,7 @@ namespace t3 {
 
 
 //  コンストラクタ
-RandomWell::RandomWell( const u_int seed )
+RandomWell::RandomWell( const uint32_t seed )
     : index_( 0 )
 {
 
@@ -33,17 +33,17 @@ RandomWell::~RandomWell()
 }
 
 //  乱数取得
-u_int RandomWell::getUInt()
+uint32_t RandomWell::getUInt()
 {
-	u_int idx = index_;
+	uint32_t idx = index_;
 
-	u_int a = state_[idx];
-	u_int c = state_[(idx+13) & 15];
-	u_int b = a ^ c ^ (a<<16) ^ (c<<15);
+	uint32_t a = state_[idx];
+	uint32_t c = state_[(idx+13) & 15];
+	uint32_t b = a ^ c ^ (a<<16) ^ (c<<15);
 	c = state_[( idx + 9 ) & 15];
 	c ^= ( c >> 11 );
 	a = state_[idx] = b ^ c;
-	u_int d = a ^ ( (a << 5 ) & 0xDA442D20UL );
+	uint32_t d = a ^ ( (a << 5 ) & 0xDA442D20UL );
 	idx = ( idx + 15 ) & 15;
 	a = state_[idx];
 	state_[idx] = a ^ b ^ d ^ ( a << 2 ) ^ ( b << 18 ) ^ ( c << 28 );

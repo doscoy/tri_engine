@@ -14,7 +14,7 @@ Texture::Texture(
     const int width,
     const int height,
     const ColorFormat color_format,
-    const byte* data
+    const int8_t* data
 )   : size_( width, height )
     , color_format_( color_format )
     , data_( data )

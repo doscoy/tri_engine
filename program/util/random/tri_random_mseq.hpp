@@ -12,18 +12,18 @@ class RandomMseq {
 
 public:
     //  コンストラクタ
-	explicit RandomMseq( const u_int seed );
+	explicit RandomMseq( const uint32_t seed );
 
     //  デストラクタ
 	~RandomMseq();
 
 public:
     //  乱数取得
-    u_int getUInt();
+    uint32_t getUInt();
 
 
 private:
-    u_int seed_;
+    uint32_t seed_;
 };
 
 

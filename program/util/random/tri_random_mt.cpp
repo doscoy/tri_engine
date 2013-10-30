@@ -9,16 +9,16 @@ static const int MATRIX_A = 0x9908b0dfUL;
 static const int UMASK = 0x80000000UL;
 static const int LMASK = 0x7fffffffUL;
 
-inline t3::u_int mixBits( 
-	const t3::u_int u,
-	const t3::u_int v
+inline uint32_t mixBits(
+	const uint32_t u,
+	const uint32_t v
 ){	
     return ( ( u & UMASK ) | ( v & LMASK ));
 }
 
-inline t3::u_int twistBits(
-	const t3::u_int u,
-	const t3::u_int v
+inline uint32_t twistBits(
+	const uint32_t u,
+	const uint32_t v
 ){
     return ( ( mixBits( u, v ) >> 1 )  ^ ( v & 1 ? MATRIX_A : 0) );
 }
@@ -32,7 +32,7 @@ inline t3::u_int twistBits(
 namespace t3 {
 
 //  コンストラクタ
-RandomMT::RandomMT( const u_int seed )
+RandomMT::RandomMT( const uint32_t seed )
 	: left_( 1 )
 	, next_( 0 )
 {
@@ -52,7 +52,7 @@ void RandomMT::nextState()
 	left_ = MAX_WORK;
 	next_ = state_;
 	
-	u_int* p = state_;
+	uint32_t* p = state_;
 	for ( int i = MAX_WORK - FIX_M + 1; --i; p++ ){
 		*p = p[FIX_M] ^ twistBits( p[0], p[1] );
 	}
@@ -64,13 +64,13 @@ void RandomMT::nextState()
 	*p = p[FIX_M - MAX_WORK] ^ twistBits( p[0], state_[0] );
 }
 
-u_int RandomMT::getUInt()
+uint32_t RandomMT::getUInt()
 {
 	if ( --left_ == 0 ){
 		nextState();
 	}
 	
-	u_int rand_num = *next_;
+	uint32_t rand_num = *next_;
 	next_++;
 	
 	rand_num ^= ( rand_num >> 11 );

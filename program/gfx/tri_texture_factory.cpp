@@ -64,7 +64,7 @@ std::shared_ptr<Texture> TextureFactory::createFromPng(
         png.width_,
         png.height_,
         color_format,
-        (const byte*)png.data_
+        (const int8_t*)png.data_
     ));
     return tex;
 }

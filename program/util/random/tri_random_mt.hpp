@@ -10,12 +10,12 @@ namespace t3 {
 class RandomMT {
 
 public:
-	explicit RandomMT( const u_int seed );
+	explicit RandomMT( const uint32_t seed );
 	
 	~RandomMT();
 	
 public:
-	u_int getUInt();
+	uint32_t getUInt();
 	
 private:
 	void nextState();
@@ -25,9 +25,9 @@ private:
 	enum {
 		MAX_WORK = 624,
 	};
-	u_int state_[MAX_WORK];
+	uint32_t state_[MAX_WORK];
 	int left_;
-	u_int* next_;
+	uint32_t* next_;
 
 };
 

@@ -241,21 +241,21 @@ inline void disableClientState(
 
 inline void genFramebuffers(
     int num,
-    unsigned int* buffer
+    uint32_t* buffer
 ){
     glGenFramebuffers(num, buffer);
 }
 
 inline void bindFramebuffer(
     int target,
-    unsigned int buffer
+    uint32_t buffer
 ) {
     glBindFramebuffer(target, buffer);
 }
 
 inline void deleteFramebuffers(
     const int num,
-    unsigned int* buffer
+    uint32_t* buffer
 ) {
     glDeleteFramebuffers(num, buffer);
 }
@@ -267,7 +267,7 @@ inline int checkFramebufferStatus(int target) {
 
 inline void genRenderbuffers(
     int num,
-    unsigned int* buffer
+    uint32_t* buffer
 ) {
     glGenRenderbuffers(num, buffer);
 }
@@ -275,7 +275,7 @@ inline void genRenderbuffers(
 
 inline void bindRenderbuffer(
     int target,
-    unsigned int buffer
+    uint32_t buffer
 ) {
     glBindRenderbuffer(target, buffer);
 }
@@ -283,7 +283,7 @@ inline void bindRenderbuffer(
 
 inline void deleteRenderbuffers(
     const int num,
-    unsigned int* buffer
+    uint32_t* buffer
 ) {
     glDeleteRenderbuffers(num, buffer);
 }
@@ -319,14 +319,14 @@ inline void renderbufferStorage(
 
 inline void genBuffers(
     int num,
-    unsigned int* buffers
+    uint32_t* buffers
 ){
     glGenBuffers(num, buffers);
 }
 
 inline void deleteBuffers(
     int num,
-    unsigned int* buffers
+    uint32_t* buffers
 ) {
     glDeleteBuffers(num, buffers);
 }

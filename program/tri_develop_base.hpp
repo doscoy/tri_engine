@@ -12,7 +12,6 @@
 
 
 #include <memory.h>
-#include "base/tri_basetypes.hpp"
 #include "base/tri_types.hpp"
 #include "dbg/tri_assert.hpp"
 #include "dbg/tri_trace.hpp"

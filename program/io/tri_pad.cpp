@@ -22,7 +22,7 @@ Pad::~Pad()
 
 }
 
-void Pad::updatePad( const u_int current_frame_data, tick_t tick )
+void Pad::updatePad( const uint32_t current_frame_data, tick_t tick )
 {
         
     trigger_ = current_frame_data & ( current_frame_data ^ last_frame_data_);

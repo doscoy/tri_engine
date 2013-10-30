@@ -11,15 +11,13 @@
 #define TRI_TYPES_HPP_INCLUDED
 
 //  include
-#include "tri_basetypes.hpp"
-
+#include <cstdint>
 
 
 namespace t3 {
     
 typedef float           tick_t;
-typedef u_int           uid_t;
-typedef char            byte;
+typedef uint32_t           uid_t;
 typedef long long       filesize_t;
     
 }   // namespace t3

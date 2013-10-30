@@ -13,7 +13,7 @@
 void* operator new( size_t size )
 {
 //    return operator new( size, t3::HeapFactory::getDefaultHeap() );
-    return t3::default_allocator_.alloc<t3::byte>( size, "unknown.", 0 );
+    return t3::default_allocator_.alloc<int8_t>( size, "unknown.", 0 );
 } 
 
 
@@ -25,7 +25,7 @@ void* operator new( size_t size, t3::Heap* heap )
 
 void* operator new( size_t size, const char* const filename, int line )
 {
-    void* p = t3::default_allocator_.alloc<t3::byte>( size, filename, line );
+    void* p = t3::default_allocator_.alloc<int8_t>( size, filename, line );
     return p;
 }
 

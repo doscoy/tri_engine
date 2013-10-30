@@ -208,7 +208,7 @@ public:
     
     // *********************************************
     //  描画プライオリティ取得
-    u_char getPriority() const {
+    uint8_t getPriority() const {
         return priority_;
     }
     
@@ -216,7 +216,7 @@ public:
     // *********************************************
     //  描画プライオリティ設定
     void setPriority(
-        const u_char priority
+        const uint8_t priority
     ){
         priority_ = priority;
     }
@@ -251,7 +251,7 @@ private:
     float rotation_;
     texture_coord_t texture_coord_;
     vec2_t scale_;
-    u_char priority_;
+    uint8_t priority_;
     bool enable_;
     SpriteLayer* owner_;
 };

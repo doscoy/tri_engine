@@ -24,7 +24,7 @@ void DebugStringLayer::updateLayer( tick_t tick )
 void DebugStringLayer::writeString(
     const int x,
     const int y,
-    const u_int color,
+    const uint32_t color,
     const char *const str
 ){
     debug_string_buffer_.addString( x, y, color, str );

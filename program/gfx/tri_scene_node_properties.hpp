@@ -16,7 +16,7 @@
 namespace t3 {
 inline namespace gfx {
 
-typedef unsigned int actor_id_t;
+typedef uint32_t actor_id_t;
 
 enum RenderPass {
     RENDER_PASS_0,          // 開始パス

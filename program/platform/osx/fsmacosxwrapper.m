@@ -592,7 +592,7 @@ void FsOpenWindowC(int x0,int y0,int wid,int hei)
 
  
 	
-	unsigned int winStyle=
+	uint32_t winStyle=
         NSTitledWindowMask|
         NSClosableWindowMask|
         NSMiniaturizableWindowMask;

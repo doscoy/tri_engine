@@ -25,7 +25,7 @@ private:
         const int width,
         const int height,
         const ColorFormat color_format,
-        const byte* data
+        const int8_t* data
     );    
     
     
@@ -57,7 +57,7 @@ public:
     
     // *********************************************
     //  イメージデータ取得
-    const byte* getData() const override {
+    const int8_t* getData() const override {
         return data_;
     }
 
@@ -78,7 +78,7 @@ private:
     //  カラーフォーマット
     ColorFormat color_format_;
     
-    const byte* data_;
+    const int8_t* data_;
 };
     
     

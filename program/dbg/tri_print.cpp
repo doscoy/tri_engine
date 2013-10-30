@@ -91,7 +91,7 @@ void debugFontPrint(
     const char c,
     const int x,
     const int y,
-    const t3::u_int color,
+    const uint32_t color,
     const int font_pixel_size
 ){
     constexpr int font_size = 32;
@@ -111,10 +111,10 @@ void debugFontPrint(
     float y1 = (y+font_pixel_size);
     
     
-    unsigned char cr = (color & 0xFF000000) >> 24;
-    unsigned char cg = (color & 0x00FF0000) >> 16;
-    unsigned char cb = (color & 0x0000FF00) >> 8;
-    unsigned char ca = (color & 0x000000FF) >> 0;
+    uint8_t cr = (color & 0xFF000000) >> 24;
+    uint8_t cg = (color & 0x00FF0000) >> 16;
+    uint8_t cb = (color & 0x0000FF00) >> 8;
+    uint8_t ca = (color & 0x000000FF) >> 0;
 
     ogl::begin( GL_QUADS );
     

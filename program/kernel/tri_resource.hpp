@@ -20,7 +20,7 @@ public:
     virtual ~Resource(){}
     
 public:
-    virtual const byte* getData() const = 0;
+    virtual const int8_t* getData() const = 0;
 
 
     void setName( const char* const name ){
@@ -30,12 +30,12 @@ public:
         return name_;
     }
     
-    u_int getResourceID() const {
+    uint32_t getResourceID() const {
         return id_;
     }
     
 private:
-    u_int id_;
+    uint32_t id_;
     char name_[RESOURCE_NAME_SIZE];
 };
 
