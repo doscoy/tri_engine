@@ -14,6 +14,7 @@
 #include "tri_basetypes.hpp"
 #include <iostream>
 
+#include "tri_vec3.hpp"
 
 namespace t3 {
     
@@ -34,6 +35,14 @@ struct Vec4 {
         , w(w)
     {}
     
+    Vec4(Vec3<T> v)
+        : x(v.x)
+        , y(v.y)
+        , z(v.z)
+        , w(1.0f)
+    {
+    }
+    
     
     const T* pointer() const {
         return &x;
@@ -43,13 +52,6 @@ struct Vec4 {
     void dump() const {
         std::cout << "x:" << x << " y:" << y << " z:" << z << " w:" << w << std::endl;
     }
-/*
-    friend std::ostream& operator<<( std::ostream& os, const Vec4& v ){
-        os << v.x << v.y << v.z;
-        return os;
-    }
-*/
-
 };
 
 

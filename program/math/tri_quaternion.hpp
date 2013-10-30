@@ -9,6 +9,7 @@
 #include "../util/tri_equal_comparable.hpp"
 
 namespace t3 {
+inline namespace math {
 
 template <typename T>
 struct Quaternion
@@ -188,6 +189,8 @@ struct Quaternion
 //  typedef
 typedef Quaternion<float> quat_t;
 
+
+} // namespace math
 } // namespace t3
 
 #endif // TRI_QUATERNION_HPP_INCLUDED

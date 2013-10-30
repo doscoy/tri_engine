@@ -109,8 +109,12 @@ struct Matrix4 {
         return m;
     }
 
-    Vec4<T> operator * (const Vec4<T>& b) const // 検証未了
+    Vec4<T> operator * (const Vec4<T>& b) const
     {
+        return xform(b);
+    }
+    
+    Vec4<T> xform(const Vec4<T>& b) const {
         Vec4<T> v;
         v.x = x.x * b.x + x.y * b.y + x.z * b.z + x.w * b.w;
         v.y = y.x * b.x + y.y * b.y + y.z * b.z + y.w * b.w;
@@ -118,6 +122,7 @@ struct Matrix4 {
         v.w = w.x * b.x + w.y * b.y + w.z * b.z + w.w * b.w;
         return v;
     }
+    
  
     Matrix4& operator *= (const Matrix4& b)
     {
@@ -133,6 +138,14 @@ struct Matrix4 {
         m.w.x = x.w; m.w.y = y.w; m.w.z = z.w; m.w.w = w.w;
         return m;
     }
+    
+    static Matrix4 makeInverseMatrix(
+        const Matrix4& mtx
+    ) {
+        Matrix4 m;
+        return m;
+    }
+    
     Matrix3<T> toMat3() const
     {
         Matrix3<T> m;
@@ -167,13 +180,33 @@ struct Matrix4 {
         return m;
     }
     
-    static void makeTranslateMatrix( Matrix4<T>& mtx, T x, T y, T z)
-    {
+    static void makeTranslateMatrix(
+        Matrix4<T>& mtx,
+        T x,
+        T y,
+        T z
+    ) {
         mtx.x.x = 1; mtx.x.y = 0; mtx.x.z = 0; mtx.x.w = 0;
         mtx.y.x = 0; mtx.y.y = 1; mtx.y.z = 0; mtx.y.w = 0;
         mtx.z.x = 0; mtx.z.y = 0; mtx.z.z = 1; mtx.z.w = 0;
         mtx.w.x = x; mtx.w.y = y; mtx.w.z = z; mtx.w.w = 1;
     }
+    
+    void setPosition(
+        T x,
+        T y,
+        T z
+    ) {
+        w.x = x;
+        w.y = y;
+        w.z = z;
+    }
+    
+    Vec3<T> getPosition() const {
+        return Vec3<T>(w.x, w.y, w.z);
+    }
+    
+    
     
     void scale( T s )
     {
