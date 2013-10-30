@@ -16,7 +16,7 @@ public:
 public:
     void updatePointing(
         const bool hit,
-        const ivec2_t& position
+        const Point2& position
     );
     
     bool isHold() const {
@@ -31,7 +31,7 @@ public:
         return release_;
     }
 
-    const ivec2_t& getPosition() const {
+    const Point2& getPosition() const {
         return position_;
     }
 
@@ -39,7 +39,7 @@ private:
     bool hold_;
     bool trigger_;
     bool release_;
-    ivec2_t position_;
+    Point2 position_;
     
 };
 

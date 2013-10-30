@@ -69,7 +69,7 @@ void Workbar::draw()
         if ( pixel_width < 1){
             continue;
         }
-        drawRectangle( vec2_t( start_x, y ), vec2_t( pixel_width, thickness_ ), bar_colors_[idx] );
+        drawRectangle( Vec2( start_x, y ), Vec2( pixel_width, thickness_ ), bar_colors_[idx] );
         start_x += pixel_width;
     }
     
@@ -94,7 +94,7 @@ void Workbar::draw()
     }
     
     //  上限バー描画
-    drawRectangle( vec2_t( limit_bar_pos_x_, y-1 ), vec2_t( 1, thickness_+2 ), Color::lime() );
+    drawRectangle( Vec2( limit_bar_pos_x_, y-1 ), Vec2( 1, thickness_+2 ), Color::lime() );
     
 }
 

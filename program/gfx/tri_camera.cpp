@@ -37,8 +37,8 @@ Camera::Camera()
 
 //-----------------------------------------------------------------------------
 Camera::Camera(
-    const vec3_t& pos,
-    const vec3_t& target,
+    const Vec3& pos,
+    const Vec3& target,
     const float fov
 )   : position_( pos )
     , target_( target )
@@ -93,7 +93,7 @@ Camera::setPosition(
 //-----------------------------------------------------------------------------
 void
 Camera::setPosition(
-    const vec3_t& pos
+    const Vec3& pos
 ){
     position_ = pos;
     recalculation_request_ = true;
@@ -127,7 +127,7 @@ Camera::setPositionZ(
 }
 
 //-----------------------------------------------------------------------------
-const vec3_t&
+const Vec3&
 Camera::getPosition() const {
     return position_;
 }
@@ -150,20 +150,20 @@ Camera::setTargetPosition(
 //-----------------------------------------------------------------------------
 void
 Camera::setTargetPosition(
-    const vec3_t& pos
+    const Vec3& pos
 ){
     target_ = pos;
     recalculation_request_ = true;
 }
 
 //-----------------------------------------------------------------------------
-const vec3_t&
+const Vec3&
 Camera::getTargetPosition() const {
     return target_;
 }
 
 //-----------------------------------------------------------------------------
-const vec3_t&
+const Vec3&
 Camera::getUpVector() {
     recalculateDirection();
     return up_;
@@ -171,14 +171,14 @@ Camera::getUpVector() {
 
 
 //-----------------------------------------------------------------------------
-const vec3_t&
+const Vec3&
 Camera::getRightVector() {
     recalculateDirection();
     return right_;
 }
 
 //-----------------------------------------------------------------------------
-const vec3_t&
+const Vec3&
 Camera::getFrontVector() {
     recalculateDirection();
     return front_;
@@ -224,12 +224,12 @@ Camera::calculateDirection()
     //  右方向ベクトル計算
     front_ = target_ - position_;
     if ( !isZeroFloat( front_.x ) || !isZeroFloat( front_.z ) ){
-        const vec3_t axis_y( 0, 1, 0 );
-        vec3_t::getCrossProduct( right_, front_, axis_y );
+        const Vec3 axis_y( 0, 1, 0 );
+        Vec3::getCrossProduct( right_, front_, axis_y );
     }
     else {
-        const vec3_t axis_z( 0, 0, 1 );
-        vec3_t::getCrossProduct( right_, front_, axis_z );
+        const Vec3 axis_z( 0, 0, 1 );
+        Vec3::getCrossProduct( right_, front_, axis_z );
     }
 
     //  回転を反映
@@ -241,7 +241,7 @@ Camera::calculateDirection()
     right_.normalize();
 
     //  上方向ベクトル計算
-    vec3_t::getCrossProduct( up_, right_, front_ );
+    Vec3::getCrossProduct( up_, right_, front_ );
     up_.normalize();
 
     //  前方向ベクトル計算
@@ -295,7 +295,7 @@ Camera::dollyZ(
 //-----------------------------------------------------------------------------
 void
 Camera::dolly(
-    const vec3_t& dir,
+    const Vec3& dir,
     const float speed
 ){
     position_ += (dir * speed);
@@ -328,10 +328,10 @@ Camera::panH(
 //-----------------------------------------------------------------------------
 void
 Camera::pan(
-    const vec3_t& axis,
+    const Vec3& axis,
     const float speed
 ){
-    vec3_t dir = target_ - position_;
+    Vec3 dir = target_ - position_;
 /*
     mtx44_t mtx;
     nn::math::MTX34RotAxisRad(
@@ -353,7 +353,7 @@ Camera::pan(
 //-----------------------------------------------------------------------------
 void
 Camera::moveToPosition(
-    const vec3_t& goal,
+    const Vec3& goal,
     const float sec,
     const InterpolationType type
 ){
@@ -363,7 +363,7 @@ Camera::moveToPosition(
 //-----------------------------------------------------------------------------
 void
 Camera::moveToTargetPosition(
-    const vec3_t& goal,
+    const Vec3& goal,
     const float sec,
     const InterpolationType type
 ){
@@ -421,22 +421,22 @@ Camera::isShaking() const {
 //-----------------------------------------------------------------------------
 void
 Camera::blendPosition(
-    const vec3_t& pos,
+    const Vec3& pos,
     const float ratio
 ){
     //  座標をブレンド
-    vec3_t diff_pos = pos - position_;
+    Vec3 diff_pos = pos - position_;
     setPosition( position_ + (diff_pos * ratio) );
 }
 
 //-----------------------------------------------------------------------------
 void
 Camera::blendTargetPosition(
-    const vec3_t& target,
+    const Vec3& target,
     const float ratio
 ){
     //  注視点をブレンド
-    vec3_t diff_target = target - target_;
+    Vec3 diff_target = target - target_;
     setTargetPosition( target_ + (diff_target * ratio) );
 }
 
@@ -462,7 +462,7 @@ Camera::blendCamera(
     blendFieldOfView( cam.fov_, ratio );
 }
 
-void Camera::getViewMatrix( mtx4_t& mtx ) const
+void Camera::getViewMatrix( Mtx4& mtx ) const
 {
     mtx.lookat( position_, target_, up_ );
 }

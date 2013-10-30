@@ -21,7 +21,7 @@ Pointing::~Pointing()
 
 void Pointing::updatePointing(
     const bool hit,
-    const ivec2_t& position
+    const Point2& position
 ){
 
     trigger_ = hit & ( hit ^ hold_);

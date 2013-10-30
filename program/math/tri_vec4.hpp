@@ -17,23 +17,23 @@
 namespace t3 {
     
 template <typename T>
-struct Vec4 {
+struct Vec4Template {
     T x;
     T y;
     T z;
     T w;
         
-    Vec4()
+    Vec4Template()
     {}
         
-    Vec4( T x, T y, T z, T w )
+    Vec4Template( T x, T y, T z, T w )
         : x(x)
         , y(y)
         , z(z)
         , w(w)
     {}
     
-    Vec4(Vec3<T> v)
+    Vec4Template(Vec3Template<T> v)
         : x(v.x)
         , y(v.y)
         , z(v.z)
@@ -54,8 +54,8 @@ struct Vec4 {
 
 
 //  typedef
-typedef Vec4<float>   vec4_t;
-typedef Vec4<int>     ivec4_t;
+typedef Vec4Template<float>   Vec4;
+typedef Vec4Template<int>     Point4;
     
     
 }   // namespace t3

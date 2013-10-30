@@ -24,7 +24,7 @@ public:
 public:
     void setColor( int index, const Color& color );
     void setParam( int index, float param );
-    void setPosition( const vec2_t& pos ){
+    void setPosition( const Vec2& pos ){
         position_ = pos;
     }
     
@@ -51,7 +51,7 @@ private:
     int keep_frame_;
     int limit_bar_pos_x_;
     int thickness_;
-    vec2_t position_;
+    Vec2 position_;
 };
 
 

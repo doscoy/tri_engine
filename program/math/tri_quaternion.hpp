@@ -12,8 +12,8 @@ namespace t3 {
 inline namespace math {
 
 template <typename T>
-struct Quaternion
-    : public EqalComparable< Quaternion<T> >
+struct QuaternionTemplate
+    : public EqalComparable< QuaternionTemplate<T> >
 {
     
     T x;
@@ -22,21 +22,21 @@ struct Quaternion
     T w;
     
     //  ctor
-    Quaternion()
+    QuaternionTemplate()
         : x(0)
         , y(0)
         , z(0)
         , w(1)
     {}
         
-    Quaternion( T x, T y, T z, T w )
+    QuaternionTemplate( T x, T y, T z, T w )
         : x(x)
         , y(y)
         , z(z)
         , w(w)
     {}
     
-    Quaternion( const Quaternion<T>& q )
+    QuaternionTemplate( const QuaternionTemplate<T>& q )
         : x(q.x)
         , y(q.y)
         , z(q.z)
@@ -44,10 +44,10 @@ struct Quaternion
     {}
     
     //  slerp
-    Quaternion<T> slerp( T t, const Quaternion<T>& v1 ) const{
+    QuaternionTemplate<T> slerp( T t, const QuaternionTemplate<T>& v1 ) const{
         T dot = dotProduct( v1 );
         if ( dot > 1 - EPSILON ){
-            Quaternion<T> result = v1 + (*this - v1).getScaledQuaternion(t);
+            QuaternionTemplate<T> result = v1 + (*this - v1).getScaledQuaternion(t);
         }
         
         t3::clampLimitation( dot, 0.0f, 1.0f );
@@ -55,18 +55,18 @@ struct Quaternion
         T theta0 = acosf( dot );
         T theta = theta0 * t;
         
-        Quaternion<T> v2 = (v1 - getScaledQuaternion(dot));
+        QuaternionTemplate<T> v2 = (v1 - getScaledQuaternion(dot));
         v2.normalize();
         
-        Quaternion<T> q = getScaledQuaternion( cosf(theta) ) + v2.getScaledQuaternion( sin(theta) );
+        QuaternionTemplate<T> q = getScaledQuaternion( cosf(theta) ) + v2.getScaledQuaternion( sin(theta) );
         q.normalize();
         
         return q;
     };
     
     //  回転させる
-    Quaternion<T> getRotatedQuaternion( const Quaternion<T>& b ) const{
-        Quaternion<T> q;
+    QuaternionTemplate<T> getRotatedQuaternion( const QuaternionTemplate<T>& b ) const{
+        QuaternionTemplate<T> q;
         q.w = w * b.w - x * b.x - y * b.y - z * b.z;
         q.x = w * b.x + x * b.w + y * b.z - z * b.y;
         q.y = w * b.y + y * b.w + z * b.x - x * b.z;
@@ -76,17 +76,17 @@ struct Quaternion
     }
     
     //  拡縮させる
-    Quaternion<T> getScaledQuaternion( T s ) const {
-        return Quaternion<T>( x * s, y * s, z * s, w * s );
+    QuaternionTemplate<T> getScaledQuaternion( T s ) const {
+        return QuaternionTemplate<T>( x * s, y * s, z * s, w * s );
     }
     
     //  内積
-    T dotProduct( const Quaternion<T>& q ) const {
+    T dotProduct( const QuaternionTemplate<T>& q ) const {
         return x * q.x + y * q.y + z * q.z + w * q.w;
     }
     
     //  行列に変換
-    Matrix3<T> toMatrix() const {
+    Mtx3Template<T> toMatrix() const {
         const T s = 2;
         T xs, ys, zs;
         T wx, wy, wz;
@@ -97,7 +97,7 @@ struct Quaternion
         xx = x * xs; xy = x * ys; xz = x * zs;
         yy = y * ys; yz = y * zs; zz = z * zs;
         
-        Matrix3<T> m;
+        Mtx3Template<T> m;
         m.x.x = 1 - (yy + zz); m.y.x = xy - wz;  m.z.x = xz + wy;
         m.x.y = xy + wz; m.y.y = 1 - (xx + zz); m.z.y = yz - wx;
         m.x.z = xz - wy; m.y.z = yz + wx;  m.z.z = 1 - (xx + yy);
@@ -105,22 +105,22 @@ struct Quaternion
     }
 
     //  ベクトルに変換
-    Vec4<T> toVec4() const {
-        return Vec4<T>( x, y, z, w );
+    Vec4Template<T> toVec4() const {
+        return Vec4Template<T>( x, y, z, w );
     }
     
-    //  Quaternion - Quaternion
-    Quaternion<T> operator-( const Quaternion<T>& q ) const {
-        return Quaternion<T>( x - q.x, y - q.y, z - q.z, w - q.w );
+    //  QuaternionTemplate - QuaternionTemplate
+    QuaternionTemplate<T> operator-( const QuaternionTemplate<T>& q ) const {
+        return QuaternionTemplate<T>( x - q.x, y - q.y, z - q.z, w - q.w );
     }
     
-    //  Quaternion + Quaternion
-    Quaternion<T> operator+( const Quaternion<T>& q ) const {
-        return Quaternion<T>( x + q.x, y + q.y, z + q.z, w + q.w );
+    //  QuaternionTemplate + QuaternionTemplate
+    QuaternionTemplate<T> operator+( const QuaternionTemplate<T>& q ) const {
+        return QuaternionTemplate<T>( x + q.x, y + q.y, z + q.z, w + q.w );
     }
     
-    //  Quaternion == Quaternion
-    bool operator==( const Quaternion<T>& q ) const {
+    //  QuaternionTemplate == QuaternionTemplate
+    bool operator==( const QuaternionTemplate<T>& q ) const {
         return x == q.x 
             && y == q.y 
             && z == q.z 
@@ -133,8 +133,8 @@ struct Quaternion
     }
     
     //  回転
-    void rotate( const Quaternion<T>& q2 ){
-        Quaternion<T> q;
+    void rotate( const QuaternionTemplate<T>& q2 ){
+        QuaternionTemplate<T> q;
     
         q.w = w * q2.w - x * q2.x - y * q2.y - z * q2.z;
         q.x = w * q2.x + x * q2.w + y * q2.z - z * q2.y;
@@ -150,19 +150,19 @@ struct Quaternion
         std::cout << "x:" << x << " y:" << y << " z:" << z << " w:" << w << std::endl;
     }
     
-    static Quaternion<T> createFromVectors( 
-        const Vec3<T>& v0,
-        const Vec3<T>& v1
+    static QuaternionTemplate<T> createFromVectors( 
+        const Vec3Template<T>& v0,
+        const Vec3Template<T>& v1
     ){
     
         if ( v0 == -v1 ){
-            return Quaternion<T>::createFromAxisAngle( vec3_t(1, 0, 0), PI );
+            return QuaternionTemplate<T>::createFromAxisAngle( Vec3(1, 0, 0), PI );
         }
-        Vec3<T> c = v0.crossProduct( v1 );
+        Vec3Template<T> c = v0.crossProduct( v1 );
         T d = v0.dotProduct( v1 );
         T s = sqrtf((1 + d) * 2);
 
-        Quaternion<T> q;
+        QuaternionTemplate<T> q;
         q.x = c.x / s;
         q.y = c.y / s;
         q.z = c.z / s;
@@ -171,11 +171,11 @@ struct Quaternion
     }
     
     //  軸回転値からクォータニオンを生成
-    static Quaternion<T> createFromAxisAngle(
-        const Vec3<T>& axis, 
+    static QuaternionTemplate<T> createFromAxisAngle(
+        const Vec3Template<T>& axis, 
         float radians
     ){
-        Quaternion<T> q;
+        QuaternionTemplate<T> q;
         q.w = cosf( radians / 2.0f );
         q.x = q.y = q.z = sinf( radians / 2.0f );
         q.x *= axis.x;
@@ -187,7 +187,7 @@ struct Quaternion
 };
 
 //  typedef
-typedef Quaternion<float> quat_t;
+typedef QuaternionTemplate<float> Quaternion;
 
 
 } // namespace math

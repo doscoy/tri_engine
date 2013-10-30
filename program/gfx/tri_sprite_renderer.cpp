@@ -75,7 +75,7 @@ void SpriteRenderer::beginRender()
     
     //  レンダリング設定
     const t3::GameSystem* gs = t3::GameSystem::getInstancePointer();
-    const t3::ivec2_t& screen_size = gs->getScreenSize();
+    const t3::Point2& screen_size = gs->getScreenSize();
     float w = screen_size.x;
     float h = screen_size.y;
 
@@ -114,7 +114,7 @@ void SpriteRenderer::beginRender()
     ogl::matrixMode(GL_PROJECTION);
     ogl::pushMatrix();
     ogl::loadIdentity();
-    mtx4_t projection;
+    Mtx4 projection;
     projection.ortho(0, w, h, 0, -1.0f, 1.0f);
     ogl::loadMatrixf( projection.pointer() );
 
@@ -140,16 +140,16 @@ void SpriteRenderer::render()
     for ( auto sprite : sprites_ ){
         //  座標情報など設定
         // モデルビュー変換行列を設定する
-        const vec2_t& pos = sprite->getPosition();
-        const vec2_t& scale = sprite->getSize();
+        const Vec2& pos = sprite->getPosition();
+        const Vec2& scale = sprite->getSize();
         
-        mtx4_t trans_mtx;
-        mtx4_t scale_mtx;
+        Mtx4 trans_mtx;
+        Mtx4 scale_mtx;
         trans_mtx.translate( pos.x, pos.y, 0 );
         scale_mtx.scale( scale.x, scale.y, 1 );
 
         ogl::matrixMode(GL_MODELVIEW);
-        mtx4_t modelview = scale_mtx * trans_mtx;
+        Mtx4 modelview = scale_mtx * trans_mtx;
         ogl::loadMatrixf( modelview.pointer() );
         
 

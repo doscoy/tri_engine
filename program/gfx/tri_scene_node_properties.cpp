@@ -25,8 +25,8 @@ SceneNodeProperties::SceneNodeProperties(
 
 
 void SceneNodeProperties::getTransformMatrix(
-    mtx4_t* to_world,
-    mtx4_t* from_world
+    Mtx4* to_world,
+    Mtx4* from_world
 ) const {
     if (to_world) {
         *to_world = to_world_;

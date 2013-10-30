@@ -134,9 +134,9 @@ private:
     
 
 template<>
-class DebugMenuItem<vec2_t>
+class DebugMenuItem<Vec2>
 {
-    typedef vec2_t item_t;
+    typedef Vec2 item_t;
     typedef float  step_type_t;
 public:
     DebugMenuItem(
@@ -157,9 +157,9 @@ private:
 };
 
 template<>
-class DebugMenuItem<vec3_t>
+class DebugMenuItem<Vec3>
 {
-    typedef vec3_t item_t;
+    typedef Vec3 item_t;
     typedef float  step_type_t;
 public:
     DebugMenuItem(

@@ -28,13 +28,13 @@ void MatrixStack::popMatrix()
 }
 
 void MatrixStack::multMatrixLocal(
-    const mtx4_t& mtx
+    const Mtx4& mtx
 ) {
     top_ = top_ * mtx;
 }
 
 
-const mtx4_t* MatrixStack::getTopMatrix() const
+const Mtx4* MatrixStack::getTopMatrix() const
 {
     return &top_;
 }

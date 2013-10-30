@@ -12,22 +12,22 @@ class Camera
 {
 private:
     //  基本パラメータ
-    vec3_t position_;   // カメラ座標
-    vec3_t target_;     // 注視点
+    Vec3 position_;   // カメラ座標
+    Vec3 target_;     // 注視点
     float fov_;         // 視野角
     float twist_;       // 注視点方向ひねり角
 
-    vec3_t up_;         // 上方向ベクトル
-    vec3_t front_;      // 前方向ベクトル
-    vec3_t right_;      // 右方向ベクトル
+    Vec3 up_;         // 上方向ベクトル
+    Vec3 front_;      // 前方向ベクトル
+    Vec3 right_;      // 右方向ベクトル
 
     //  補間移動パラメータ
-    Interpolation<vec3_t> position_updater_;    // 座標移動
-    Interpolation<vec3_t> target_updater_;      // 注視点移動
+    Interpolation<Vec3> position_updater_;    // 座標移動
+    Interpolation<Vec3> target_updater_;      // 注視点移動
     Interpolation<float> fov_updater_;          // 注視点移動
 
 
-    mtx4_t view_matrix_;
+    Mtx4 view_matrix_;
 
     //  画面揺らしパラメータ
     float shake_time_;
@@ -40,11 +40,11 @@ private:
 
 public:
     Camera();
-    Camera( const vec3_t& pos, const vec3_t& target, const float fov );
+    Camera( const Vec3& pos, const Vec3& target, const float fov );
     virtual ~Camera();
 
 public:
-    void getViewMatrix( mtx4_t& mtx ) const;
+    void getViewMatrix( Mtx4& mtx ) const;
 
 
     void updateCamera(
@@ -58,7 +58,7 @@ public:
     );
 
     void setPosition(
-        const vec3_t& pos
+        const Vec3& pos
     );
 
     void setPositionX(
@@ -71,7 +71,7 @@ public:
         const float val
     );
 
-    const vec3_t& getPosition() const;
+    const Vec3& getPosition() const;
 
     void setTargetPosition(
         const float x,
@@ -80,18 +80,18 @@ public:
     );
 
     void setTargetPosition(
-        const vec3_t& pos
+        const Vec3& pos
     );
 
-    const vec3_t& getTargetPosition() const;
+    const Vec3& getTargetPosition() const;
 
-    const vec3_t& getUpVector();
+    const Vec3& getUpVector();
 
-    vec3_t getShakedUpVector();
+    Vec3 getShakedUpVector();
 
-    const vec3_t& getRightVector();
+    const Vec3& getRightVector();
 
-    const vec3_t& getFrontVector();
+    const Vec3& getFrontVector();
 
 
     void    setFieldOfView( const float fov );
@@ -108,25 +108,25 @@ public:
     void    dollyY( const float speed );
     void    dollyZ( const float speed );
     void    dolly(
-        const vec3_t& dir,
+        const Vec3& dir,
         const float speed
     );
 
     void    panV( const float speed );
     void    panH( const float speed );
     void    pan(
-        const vec3_t& axis,
+        const Vec3& axis,
         const float speed
     );
     
     void    moveToPosition(
-        const vec3_t& goal,
+        const Vec3& goal,
         const float sec,
         const InterpolationType type = INTERPOLATION_LINER
     );
 
     void    moveToTargetPosition(
-        const vec3_t& goal,
+        const Vec3& goal,
         const float sec,
         const InterpolationType type = INTERPOLATION_LINER
     );
@@ -155,12 +155,12 @@ public:
 
 
     void    blendPosition(
-        const vec3_t& pos,          ///< 座標
+        const Vec3& pos,          ///< 座標
         const float ratio           ///< ブレンド比率
     );
 
     void    blendTargetPosition(
-        const vec3_t& target,       ///< 注視点
+        const Vec3& target,       ///< 注視点
         const float ratio           ///< ブレンド比率
     );
 

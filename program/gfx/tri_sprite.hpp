@@ -55,14 +55,14 @@ public:
 
     // *********************************************
     //  座標を取得
-    vec2_t& getPosition() {
+    Vec2& getPosition() {
         return position_;
     }
     
     
     // *********************************************
     //  座標を取得
-    const vec2_t& getPosition() const {
+    const Vec2& getPosition() const {
         return position_;
     }
     
@@ -70,7 +70,7 @@ public:
     // *********************************************
     //  座標を設定
     void setPosition(
-        const vec2_t& pos
+        const Vec2& pos
     ){
         position_ = pos;
     }
@@ -105,7 +105,7 @@ public:
 
     // *********************************************
     //  回転中心を取得
-    const vec2_t& getPivot() const {
+    const Vec2& getPivot() const {
         return pivot_;
     }
 
@@ -113,7 +113,7 @@ public:
     // *********************************************
     //  回転中心を設定
     void setPivot(
-        const vec2_t& pivot
+        const Vec2& pivot
     ){
         pivot_ = pivot;
     }
@@ -163,14 +163,14 @@ public:
     
     // *********************************************
     //  サイズを取得
-    vec2_t& getSize() {
+    Vec2& getSize() {
         return size_;
     }
     
     
     // *********************************************
     //  サイズを取得
-    const vec2_t& getSize() const {
+    const Vec2& getSize() const {
         return size_;
     }
     
@@ -178,21 +178,21 @@ public:
     // *********************************************
     //  サイズを設定
     void setSize(
-        const vec2_t& size
+        const Vec2& size
     ){
         size_ = size;
     }
     
     // *********************************************
     //  スケールを取得
-    vec2_t& getScale() {
+    Vec2& getScale() {
         return scale_;
     }
 
 
     // *********************************************
     //  スケールを取得
-    const vec2_t& getScale() const {
+    const Vec2& getScale() const {
         return scale_;
     }
     
@@ -200,7 +200,7 @@ public:
     // *********************************************
     //  スケールを設定
     void setScale(
-        const vec2_t& scale
+        const Vec2& scale
     ){
         scale_ = scale;
     }
@@ -245,12 +245,12 @@ public:
     
 private:
     std::shared_ptr<Texture> texture_;
-    vec2_t position_;
-    vec2_t size_;
-    vec2_t pivot_;
+    Vec2 position_;
+    Vec2 size_;
+    Vec2 pivot_;
     float rotation_;
     texture_coord_t texture_coord_;
-    vec2_t scale_;
+    Vec2 scale_;
     uint8_t priority_;
     bool enable_;
     SpriteLayer* owner_;

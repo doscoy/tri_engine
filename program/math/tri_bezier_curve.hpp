@@ -15,19 +15,19 @@ namespace t3 {
 
 
 //  2次ベジェ曲線計算
-vec3_t& calcBezierCurve2(
-	vec3_t& ans,
-	const vec3_t& p0,
-	const vec3_t& p1,
-	const vec3_t& p2,
+Vec3& calcBezierCurve2(
+	Vec3& ans,
+	const Vec3& p0,
+	const Vec3& p1,
+	const Vec3& p2,
 	const float t
 );
 
 
 //  2次ベジェ曲線計算　配列版
-vec3_t& calcBezierCurve2(
-	vec3_t& ans,
-	const vec3_t pa[3],
+Vec3& calcBezierCurve2(
+	Vec3& ans,
+	const Vec3 pa[3],
 	const float t
 );
 

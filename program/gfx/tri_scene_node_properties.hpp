@@ -48,8 +48,8 @@ public:
 protected:
     actor_id_t actor_id_;
     std::string name_;
-    mtx4_t to_world_;
-    mtx4_t from_world_;
+    Mtx4 to_world_;
+    Mtx4 from_world_;
     float radius_;
     RenderPass render_pass_;
     Material material_;
@@ -68,17 +68,17 @@ public:
         return actor_id_;
     }
     
-    const mtx4_t& getToWorld() const {
+    const Mtx4& getToWorld() const {
         return to_world_;
     }
     
-    const mtx4_t& getFromWorld() const {
+    const Mtx4& getFromWorld() const {
         return from_world_;
     }
     
     void getTransformMatrix(
-        mtx4_t* to_world,
-        mtx4_t* from_world
+        Mtx4* to_world,
+        Mtx4* from_world
     ) const;
     
     const char* getName() const {
@@ -101,19 +101,19 @@ public:
         return radius_;
     }
     
-    mtx4_t& getToWorldMatrix() {
+    Mtx4& getToWorldMatrix() {
         return to_world_;
     }
     
-    const mtx4_t& getToWorldMatrix() const {
+    const Mtx4& getToWorldMatrix() const {
         return to_world_;
     }
     
-    mtx4_t& getFromWorldMatrix() {
+    Mtx4& getFromWorldMatrix() {
         return from_world_;
     }
     
-    const mtx4_t& getFromWorldMatrix() const {
+    const Mtx4& getFromWorldMatrix() const {
         return from_world_;
     }
     

@@ -17,23 +17,23 @@
 namespace t3 {
 
 template <typename T>
-struct Vec2 {
+struct Vec2Template {
     
     //  データ
     T x;
     T y;
     
     //  コンストラクタ
-    Vec2()
+    Vec2Template()
     {}
     
-    Vec2( const T x, const T y )
+    Vec2Template( const T x, const T y )
         : x(x)
         , y(y)
     {}
     
     template<typename O>
-    Vec2<T>( const Vec2<O>& rhs )
+    Vec2Template<T>( const Vec2Template<O>& rhs )
         : x( rhs.x )
         , y( rhs.y )
     {
@@ -41,17 +41,17 @@ struct Vec2 {
 
    
  
-    ~Vec2(){}
+    ~Vec2Template(){}
     
     //  内積
-    T dotProduct( const Vec2& rhs ){
+    T dotProduct( const Vec2Template& rhs ){
         return x * rhs.x + y * rhs.y;
     }
     
     //  ブレンド
-    Vec2& blend( 
+    Vec2Template& blend( 
         const float t,
-        const Vec2& v
+        const Vec2Template& v
     ) {
         x = x * (1 - t) + v.x * t;
         y = y * (1 - t) + v.y * t;
@@ -65,8 +65,8 @@ struct Vec2 {
     }
     
     //  正規化したベクトルを取得
-    Vec2 getNormalized() const {
-        Vec2 rhs = *this;
+    Vec2Template getNormalized() const {
+        Vec2Template rhs = *this;
         rhs.normalize();
         return rhs;
     }
@@ -98,9 +98,9 @@ struct Vec2 {
     }
     
     //  反転ベクトル取得
-    Vec2 getReversed() const {
+    Vec2Template getReversed() const {
         
-        return ivec2_t( -x, -y );
+        return Point2( -x, -y );
     }
     
     //  pointer
@@ -108,8 +108,8 @@ struct Vec2 {
         return &x;
     }
     
-    //  Vec2 = Vec2
-    Vec2& operator =( const Vec2& rhs ){
+    //  Vec2Template = Vec2Template
+    Vec2Template& operator =( const Vec2Template& rhs ){
         x = rhs.x;
         y = rhs.y;
         
@@ -118,51 +118,51 @@ struct Vec2 {
 
         
     //  vec2 + vec2
-    Vec2 operator +( const Vec2& rhs ) const {
-        return Vec2( x + rhs.x, y + rhs.y );
+    Vec2Template operator +( const Vec2Template& rhs ) const {
+        return Vec2Template( x + rhs.x, y + rhs.y );
     }
     
-    //  vec2 - Vec2
-    Vec2 operator -( const Vec2& rhs ) const {
-        return Vec2( x - rhs.x, y - rhs.y );
+    //  vec2 - Vec2Template
+    Vec2Template operator -( const Vec2Template& rhs ) const {
+        return Vec2Template( x - rhs.x, y - rhs.y );
     }
     
-    //  vec2 * Vec2
-    Vec2 operator *( const Vec2& rhs ) const {
-        return Vec2( x * rhs.x, y * rhs.y );
+    //  vec2 * Vec2Template
+    Vec2Template operator *( const Vec2Template& rhs ) const {
+        return Vec2Template( x * rhs.x, y * rhs.y );
     }
-     //  Vec2 / s
-    Vec2 operator /( const float s ) const {
+     //  Vec2Template / s
+    Vec2Template operator /( const float s ) const {
         float tmp = 1.0f / s;
-        return Vec2( x * tmp, y * tmp );
+        return Vec2Template( x * tmp, y * tmp );
     }
     
-    //  Vec2 * s
-    Vec2 operator *( const float s ) const {
-        return Vec2( x * s, y * s );
+    //  Vec2Template * s
+    Vec2Template operator *( const float s ) const {
+        return Vec2Template( x * s, y * s );
     }
     
     
-    //  Vec2 += Vec2
-    void operator +=( const Vec2& rhs ) {
+    //  Vec2Template += Vec2Template
+    void operator +=( const Vec2Template& rhs ) {
         x += rhs.x;
         y += rhs.y;
     }
     
-    //  Vec2 -= Vec2
-    void operator -=( const Vec2& rhs ) {
+    //  Vec2Template -= Vec2Template
+    void operator -=( const Vec2Template& rhs ) {
         x -= rhs.y;
         y -= rhs.y;
     }
     
-    //  Vec2 /= s
+    //  Vec2Template /= s
     void operator /=( const float s ) {
         float tmp = 1.0f / s;
         x *= tmp;
         y *= tmp;
     }
     
-    //  Vec2 *= s
+    //  Vec2Template *= s
     void operator *=( const float s ) {
         x *= s;
         y *= s;
@@ -170,14 +170,14 @@ struct Vec2 {
 
     
     
-    //  +Vec2
-    Vec2 operator +() const {
+    //  +Vec2Template
+    Vec2Template operator +() const {
         return *this;
     }
  
-    //  -Vec2
-    Vec2 operator -() const {
-        return Vec2( -x, -y );
+    //  -Vec2Template
+    Vec2Template operator -() const {
+        return Vec2Template( -x, -y );
     }
     
     //  cast
@@ -190,8 +190,8 @@ struct Vec2 {
         return &x;
     }
     
-    //  Vec2 == Vec2
-    bool operator==(const Vec2& v) const {
+    //  Vec2Template == Vec2Template
+    bool operator==(const Vec2Template& v) const {
         return x == v.x && y == v.y;
     }
     
@@ -202,15 +202,15 @@ struct Vec2 {
 
 public:
     static T dotProduct(
-        const Vec2& v1,
-        const Vec2& v2
+        const Vec2Template& v1,
+        const Vec2Template& v2
     ){
         return v1.x * v2.x + v1.y * v2.y;
     }
     
-    static Vec2& normalize(
-        Vec2& dst,
-        const Vec2& src
+    static Vec2Template& normalize(
+        Vec2Template& dst,
+        const Vec2Template& src
     ){
         float s = 1.0f / src.length();
         dst.x *= s;
@@ -220,25 +220,25 @@ public:
     
     //  ベクトル同士の距離を算出
     static T distance(
-        const Vec2& v1,
-        const Vec2& v2
+        const Vec2Template& v1,
+        const Vec2Template& v2
     ){
         return sqrtf( distanceSquare( v1, v2 ) );
     }
     
     //  ベクトル同士の距離の二乗を算出
     static T distanceSquare(
-        const Vec2& v1,
-        const Vec2& v2
+        const Vec2Template& v1,
+        const Vec2Template& v2
     ){
-        Vec2 tmp = v1 - v2;
+        Vec2Template tmp = v1 - v2;
         return ( tmp.lengthSquare() );
     }
     
     //  同じ方向を向いているベクトルか判定
     static bool isSameDirection(
-        const Vec2& v1,
-        const Vec2& v2,
+        const Vec2Template& v1,
+        const Vec2Template& v2,
         const T score = 0.1f
     ){
         T dotv = dot( v1, v2 );
@@ -246,12 +246,12 @@ public:
     }
 
     //  ベクトル同士のブレンド
-    static Vec2 getBlendVector(
+    static Vec2Template getBlendVector(
         const float t,
-        const Vec2& v1,
-        const Vec2& v2
+        const Vec2Template& v1,
+        const Vec2Template& v2
     ){
-        return Vec2(
+        return Vec2Template(
             v1.x * (1 - t) + v2.x * t,
             v1.y * (1 - t) + v2.y * t
         );
@@ -261,7 +261,7 @@ public:
     template <typename P>
     P* Write(P* pData)
     {
-        Vec2* pVector = (Vec2*) pData;
+        Vec2Template* pVector = (Vec2Template*) pData;
         *pVector++ = *this;
         return (P*) pVector;
     }
@@ -271,9 +271,9 @@ public:
 
 
 //  typedef
-typedef Vec2<bool>      bvec2_t;
-typedef Vec2<float>     vec2_t;
-typedef Vec2<int>       ivec2_t;
+typedef Vec2Template<bool>      Vec2b;
+typedef Vec2Template<float>     Vec2;
+typedef Vec2Template<int>       Point2;
     
 
 } // namespace t3

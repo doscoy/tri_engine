@@ -36,13 +36,13 @@ public:
 //  ビューポート管理
     // *********************************************
     //  ビューポートを取得
-    const ivec2_t& getScreenSize() const {
+    const Point2& getScreenSize() const {
         return screen_size_;
     }
     
     // *********************************************
     //  ビューポートを取得
-    void setScreenSize( const ivec2_t& vp ) {
+    void setScreenSize( const Point2& vp ) {
         screen_size_ = vp;
     }
     
@@ -94,7 +94,7 @@ private:
     random_t random_number_generator_;
 
     //  ビューポート
-    ivec2_t screen_size_;
+    Point2 screen_size_;
     
     //  パッド入力
     std::array<Pad, MAX_PAD> pad_;

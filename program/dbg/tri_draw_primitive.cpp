@@ -30,15 +30,15 @@ namespace t3 {
 inline namespace dbg {
 
 void drawPoint(
-    const vec2_t& pos,
+    const Vec2& pos,
     const Color& color
 ){
-    drawLine( pos, vec2_t( pos.x, pos.y+0.5f ), color );
+    drawLine( pos, Vec2( pos.x, pos.y+0.5f ), color );
 }
 
 void drawLine(
-    const vec2_t& start,
-    const vec2_t& end,
+    const Vec2& start,
+    const Vec2& end,
     const Color& color
 ){
     drawLine( start.x, start.y, end.x, end.y, color );
@@ -65,14 +65,14 @@ void drawLine(
 }
     
 void drawRectangle(
-    const vec2_t& left_up,
-    const vec2_t& size,
+    const Vec2& left_up,
+    const Vec2& size,
     const Color& color
 ){
     setupOrtho();
     
     ogl::begin( GL_QUADS );
-    vec2_t end = left_up + size;
+    Vec2 end = left_up + size;
     ogl::color4ub( color.red_, color.green_, color.blue_, color.alpha_ );
     ogl::vertex2f( left_up.x, left_up.y );
     ogl::vertex2f( end.x, left_up.y );
@@ -84,9 +84,9 @@ void drawRectangle(
 
 
 void drawPlane(
-    const vec3_t& center,
-    const vec3_t& normal,
-    const vec3_t& size,
+    const Vec3& center,
+    const Vec3& normal,
+    const Vec3& size,
     const Color& color
 ){
     ogl::color4ub(color.red_, color.green_, color.blue_, color.alpha_);

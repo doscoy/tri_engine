@@ -12,8 +12,8 @@ SceneNode::SceneNode(
     actor_id_t actor_id,
     std::string name,
     RenderPass render_pass,
-    const mtx4_t* to,
-    const mtx4_t* from
+    const Mtx4* to,
+    const Mtx4* from
 )   : children_()
     , parent_(nullptr)
     , properties_(
@@ -34,21 +34,21 @@ SceneNode::~SceneNode()
 
 
 void SceneNode::setTransformMatrix(
-    const mtx4_t* to_world,
-    const mtx4_t* from_world
+    const Mtx4* to_world,
+    const Mtx4* from_world
 ){
 
     if (to_world) {
         properties_.to_world_ = *to_world;
     }
     else {
-        properties_.to_world_ = mtx4_t::identity();
+        properties_.to_world_ = Mtx4::identity();
     }
     
     
     if (!from_world) {
         //  from_worldは設定されてない
-        properties_.from_world_ = mtx4_t::makeInverseMatrix(properties_.from_world_);
+        properties_.from_world_ = Mtx4::makeInverseMatrix(properties_.from_world_);
     }
     else {
         properties_.from_world_ = *from_world;
@@ -134,9 +134,9 @@ void SceneNode::renderChildren(t3::SceneGraph *scene_graph)
                     asn->node_ = node;
                     asn->concat_ = *scene_graph->getTopMatrix();
                     
-                    vec4_t world_pos(asn->concat_.getPosition());
-                    mtx4_t from_world = scene_graph->getCamera()->getProperties()->getFromWorldMatrix();
-                    vec4_t screen_pos = from_world.xform(world_pos);
+                    Vec4 world_pos(asn->concat_.getPosition());
+                    Mtx4 from_world = scene_graph->getCamera()->getProperties()->getFromWorldMatrix();
+                    Vec4 screen_pos = from_world.xform(world_pos);
                     scene_graph->addAlphaSceneNode(asn);
                 }
             }
@@ -152,8 +152,8 @@ bool SceneNode::addChild(
 ) {
     children_.push_back(kid);
     
-    vec3_t kid_pos = kid->getProperties()->getToWorldMatrix().getPosition();
-    vec3_t dir = kid_pos - properties_.getToWorldMatrix().getPosition();
+    Vec3 kid_pos = kid->getProperties()->getToWorldMatrix().getPosition();
+    Vec3 dir = kid_pos - properties_.getToWorldMatrix().getPosition();
     
     float new_radius = dir.length() + kid->getProperties()->getRadius();
     

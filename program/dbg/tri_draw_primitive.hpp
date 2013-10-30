@@ -11,13 +11,13 @@ inline namespace dbg {
 
 
 void drawPoint(
-    const vec2_t& pos,
+    const Vec2& pos,
     const Color& color
 );
 
 void drawLine(
-    const vec2_t& start,
-    const vec2_t& end,
+    const Vec2& start,
+    const Vec2& end,
     const Color& color
 );
 
@@ -30,17 +30,17 @@ void drawLine(
 );
 
 void drawRectangle(
-     const vec2_t& left_up,
-     const vec2_t& size,
+     const Vec2& left_up,
+     const Vec2& size,
      const Color& color
 );
 
 
 
 void drawPlane(
-    const vec3_t& center,
-    const vec3_t& normal,
-    const vec3_t& size,
+    const Vec3& center,
+    const Vec3& normal,
+    const Vec3& size,
     const Color& color
 );
 

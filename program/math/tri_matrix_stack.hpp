@@ -21,12 +21,12 @@ public:
 public:
     void pushMatrix();
     void popMatrix();
-    void multMatrixLocal(const mtx4_t& mtx);
-    const mtx4_t* getTopMatrix() const;
+    void multMatrixLocal(const Mtx4& mtx);
+    const Mtx4* getTopMatrix() const;
     
 private:
-    std::stack<mtx4_t> stack_;
-    mtx4_t top_;
+    std::stack<Mtx4> stack_;
+    Mtx4 top_;
 
 };
 

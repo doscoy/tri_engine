@@ -79,12 +79,12 @@ public:
     }
     
     void pushAndSetMatrix(
-        const mtx4_t& to_world
+        const Mtx4& to_world
     );
     
     void popMatrix();
     
-    const mtx4_t* getTopMatrix();
+    const Mtx4* getTopMatrix();
     
     void addAlphaSceneNode(
         AlphaSceneNode* asn

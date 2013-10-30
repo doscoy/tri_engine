@@ -32,7 +32,7 @@ private:
 public:
     // *********************************************
     // サイズ取得
-    const ivec2_t& getSize() const {
+    const Point2& getSize() const {
         return size_;
     };
     
@@ -73,7 +73,7 @@ public:
 private:
     
     //  サイズ
-    ivec2_t size_;
+    Point2 size_;
 
     //  カラーフォーマット
     ColorFormat color_format_;

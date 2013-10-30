@@ -23,8 +23,8 @@ public:
     virtual const SceneNodeProperties* const getProperties() const = 0;
 
     virtual void setTransformMatrix(
-        const mtx4_t* toWorld,
-        const mtx4_t* fromWorld = nullptr
+        const Mtx4* toWorld,
+        const Mtx4* fromWorld = nullptr
     ) = 0;
 
     virtual void onUpdate(
@@ -82,8 +82,8 @@ public:
         actor_id_t actor_id,
         std::string name,
         RenderPass render_pass,
-        const mtx4_t* to,
-        const mtx4_t* from = nullptr
+        const Mtx4* to,
+        const Mtx4* from = nullptr
     );
     
     virtual ~SceneNode();
@@ -94,8 +94,8 @@ public:
     }
     
     virtual void setTransformMatrix(
-        const mtx4_t* to_world,
-        const mtx4_t* from_world = nullptr
+        const Mtx4* to_world,
+        const Mtx4* from_world = nullptr
     ) override;
     
     virtual void onRestore(
@@ -142,11 +142,11 @@ public:
         properties_.setOpacity(opacity);
     }
 
-    vec3_t getPosition() const {
+    Vec3 getPosition() const {
         return properties_.getToWorldMatrix().getPosition();
     }
 
-    void setPosition(vec3_t& pos) {
+    void setPosition(Vec3& pos) {
         properties_.getToWorldMatrix().setPosition(
             pos.x,
             pos.y,
@@ -175,7 +175,7 @@ class AlphaSceneNode
 {
 public:
     std::shared_ptr<ISceneNode> node_;
-    mtx4_t concat_;
+    Mtx4 concat_;
     float screen_z_;
     
     bool const operator < (const AlphaSceneNode& other) {

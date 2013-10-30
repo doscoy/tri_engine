@@ -145,7 +145,7 @@ void Application::initializeApplication()
     
     t3::GameSystem* game_system = t3::GameSystem::getInstancePointer();
     game_system->setScreenSize( 
-        ivec2_t( 
+        Point2( 
             glue::getScreenWidth(),
             glue::getScreenHeight() 
         )
@@ -153,7 +153,7 @@ void Application::initializeApplication()
     SceneManager::getInstance().forceChangeScene( root_scene_generator_ );
 
     //  ワークバーの配置
-    cpu_bar_.setPosition( vec2_t( 1, glue::getScreenHeight() -5 ) );
+    cpu_bar_.setPosition( Vec2( 1, glue::getScreenHeight() -5 ) );
 
 
     //  システムデバッグメニュー登録

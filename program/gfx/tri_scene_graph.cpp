@@ -64,7 +64,7 @@ void SceneGraph::onUpdate(tick_t tick)
 
 
 void SceneGraph::pushAndSetMatrix(
-    const mtx4_t& to_world
+    const Mtx4& to_world
 ) {
     matrix_stack_.pushMatrix();
     matrix_stack_.multMatrixLocal(to_world);
@@ -80,9 +80,9 @@ void SceneGraph::popMatrix()
 }
 
 
-const mtx4_t* SceneGraph::getTopMatrix()
+const Mtx4* SceneGraph::getTopMatrix()
 {
-    return static_cast<const mtx4_t*>(matrix_stack_.getTopMatrix());
+    return static_cast<const Mtx4*>(matrix_stack_.getTopMatrix());
 }
 
 
