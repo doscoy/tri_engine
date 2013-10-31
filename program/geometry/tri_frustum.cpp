@@ -6,4 +6,30 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#include <iostream>
+#include "tri_frustum.hpp"
+
+namespace t3 {
+inline namespace geometry {
+
+Frustum::Frustum()
+{
+
+}
+
+
+Frustum::~Frustum()
+{
+
+}
+
+
+bool Frustum::isInside(
+    const Vec3 &pos
+) const {
+    return true;
+}
+
+}   // namespace geometry
+}   // namespace t3
+
+

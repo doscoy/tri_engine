@@ -10,5 +10,19 @@
 #define dev_t3_tri_plane_hpp
 
 
+namespace t3 {
+inline namespace geometry {
+
+
+
+class Plane
+{
+
+
+};
+
+
+}   // namespace geometry
+}   // namespace t3
 
 #endif

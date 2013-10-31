@@ -4,6 +4,9 @@
 #include "math/tri_math_types.hpp"
 #include "math/tri_interpolation.hpp"
 #include "math/tri_matrix.hpp"
+#include "../geometry/tri_frustum.hpp"
+
+
 
 namespace t3
 {
@@ -28,6 +31,7 @@ private:
 
 
     Mtx4 view_matrix_;
+    Frustum frustum_;
 
     //  画面揺らしパラメータ
     float shake_time_;
@@ -175,7 +179,12 @@ public:
         const float ratio           ///< ブレンド比率
     );
 
+    const Frustum* getFrustom() const {
+        return &frustum_;
+    }
+
 private:
+    void    calculateFrustum();
 
     void    calculateDirection();
 
