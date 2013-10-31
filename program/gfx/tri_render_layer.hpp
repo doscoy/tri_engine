@@ -76,7 +76,9 @@ public:
     }
     
     void setLayerName( const char* const name );
-
+    const char* getLayerName() const {
+        return layer_name_;
+    }
 
 private:
     virtual void updateLayer( tick_t tick ) = 0;

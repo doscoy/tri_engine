@@ -20,7 +20,7 @@ Sprite* SpriteLayer::createSprite( std::shared_ptr<Texture> tex )
 {
     Sprite* spr( new Sprite );
     spr->setTexture( tex );
-    spr->attachLayer( this );
+    spr->attachToLayer( this );
     
     return spr;
 }

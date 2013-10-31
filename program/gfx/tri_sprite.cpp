@@ -47,13 +47,13 @@ void Sprite::setTexture(
     pivot_.y = size_.y * 0.5f;
 }
 
-void Sprite::attachLayer( SpriteLayer* const layer )
+void Sprite::attachToLayer( SpriteLayer* const layer )
 {
     owner_ = layer;
     owner_->attachSprite( this );
 }
 
-void Sprite::detachLayer()
+void Sprite::detachToLayer()
 {
     T3_NULL_ASSERT( owner_ );
     owner_->detachSprite( this );
@@ -63,7 +63,7 @@ void Sprite::detachLayer()
 
 void Sprite::destroy()
 {
-    detachLayer();
+    detachToLayer();
     delete this;
 }
 

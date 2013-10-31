@@ -237,8 +237,8 @@ public:
         return enable_;
     }
 
-    void attachLayer( SpriteLayer* const layer );
-    void detachLayer();
+    void attachToLayer( SpriteLayer* const layer );
+    void detachToLayer();
     void destroy();
     
     bool isValid() const;

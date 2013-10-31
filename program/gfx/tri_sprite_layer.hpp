@@ -16,8 +16,8 @@ class SpriteLayer
     : public RenderLayer
 {
     typedef std::list<Sprite*> container_t;
-    friend void Sprite::attachLayer( SpriteLayer* const layer );
-    friend void Sprite::detachLayer();
+    friend void Sprite::attachToLayer( SpriteLayer* const layer );
+    friend void Sprite::detachToLayer();
     
 public:
     SpriteLayer();
