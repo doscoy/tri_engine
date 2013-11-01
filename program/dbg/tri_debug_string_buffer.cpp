@@ -3,7 +3,7 @@
 #include "tri_print.hpp"
 #include <GLUT/glut.h>
 #include <stdio.h>
-#include <stdarg.h>
+#include <cstdarg>
 #include "../platform/platform.hpp"
 
 
@@ -54,15 +54,15 @@ DebugStringBuffer::~DebugStringBuffer()
 void DebugStringBuffer::addString(
     const int x,
     const int y,
-    const uint32_t color,
+    const rgba32_t color,
     const char* const str
 ){
     DebugStringItem& item = buffer_.at(size_);
 
-    item.color = color;
-    item.x = x;
-    item.y = y;
-    std::strncpy( item.str, str, DEBUG_STRING_ITEM_STR_SIZE );
+    item.color_ = color;
+    item.x_ = x;
+    item.y_ = y;
+    std::strncpy( item.str_, str, DEBUG_STRING_ITEM_STR_SIZE );
     
     ++size_;
 }
@@ -80,10 +80,10 @@ void DebugStringBuffer::drawStrings()
     for (int item_idx = 0; item_idx < size_; ++item_idx ) {
         const DebugStringItem& str_item = buffer_[item_idx];
         drawString(
-            str_item.x,
-            str_item.y,
-            str_item.color,
-            str_item.str
+            str_item.x_,
+            str_item.y_,
+            str_item.color_,
+            str_item.str_
         );
     }
     

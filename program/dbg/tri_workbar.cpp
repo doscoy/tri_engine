@@ -60,8 +60,8 @@ void Workbar::setParam(
 
 void Workbar::draw()
 {
-    float start_x = position_.x;
-    float y = position_.y;
+    float start_x = position_.x_;
+    float y = position_.y_;
     
     for ( int idx = 0; idx < MAX_WORKBAR_ITEM; ++idx ){
         double param = bar_params_[idx];

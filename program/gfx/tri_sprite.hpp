@@ -82,8 +82,8 @@ public:
         const float x,
         const float y
     ){
-        position_.x = x;
-        position_.y = y;
+        position_.x_ = x;
+        position_.y_ = y;
     }
     
     
@@ -125,8 +125,8 @@ public:
         const float x,
         const float y
     ){
-        pivot_.x = x;
-        pivot_.y = y;
+        pivot_.x_ = x;
+        pivot_.y_ = y;
     }
 
     

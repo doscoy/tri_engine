@@ -24,8 +24,9 @@ SceneGraph::~SceneGraph()
 }
 
 
-void SceneGraph::onRender()
+void SceneGraph::renderScene()
 {
+    T3_TRACE("SceneGraph::renderScene()\n");
     if (root_ && camera_node_) {
         camera_node_->setViewTransform(this);
         
@@ -41,7 +42,7 @@ void SceneGraph::onRender()
 }
 
 
-void SceneGraph::onRestore()
+void SceneGraph::restoreScene()
 {
     if (!root_) {
         return;
@@ -53,8 +54,10 @@ void SceneGraph::onRestore()
 
 
 
-void SceneGraph::onUpdate(tick_t tick)
+void SceneGraph::updateScene(tick_t tick)
 {
+    T3_TRACE("SceneGraph::updateScene()\n");
+
     if (!root_) {
         return;
     }

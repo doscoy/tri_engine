@@ -5,7 +5,7 @@
 
 namespace t3 {
 
-typedef uint32_t rgba32;
+typedef uint32_t rgba32_t;
 
 enum ColorFormat
 {
@@ -39,7 +39,7 @@ public:
     
 public:
     
-    rgba32 getRGBA() const {
+    rgba32_t getRGBA() const {
         return (red_ << 24 | green_ << 16 | blue_ << 8 | alpha_);
     }
     

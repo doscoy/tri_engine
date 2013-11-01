@@ -2,16 +2,43 @@
 
 
 
-#include <stdarg.h>
-#include <stdio.h>
+#include <cstdarg>
+#include <cstdio>
 #include "tri_trace.hpp"
 #include "../kernel/tri_game_system.hpp"
 #include "../util/tri_counter.hpp"
+#include "tri_debug_log_layer.hpp"
 
 
 
 namespace t3 {
 inline namespace dbg {
+
+
+namespace {
+
+DebugLogLayer dbg_log_layer_;
+
+}   // unname namespace
+
+
+void initializeTrace()
+{
+    //  デバッグレイヤーを登録
+    GameSystem& gs = GameSystem::getInstance();
+    gs.attachLayer( dbg_log_layer_ );
+
+}
+
+void traceTerminal(const char* const str)
+{
+    std::printf("%s", str);
+}
+
+void traceDisplay(const char* const str)
+{
+    dbg_log_layer_.writeString(str);
+}
 
 void trace( const char* const format, ... ){
     va_list msg;
@@ -21,42 +48,43 @@ void trace( const char* const format, ... ){
 	vsnprintf(buf, 256, format, msg);
 	va_end(msg);
     
-    printf( "[%d] %s", frame_counter_.now(), buf );
+    traceTerminal( buf );
+    
 }
 
 void traceValue(
     const char* const name,
     int value
 ){
-    printf( "[%d] %s=%d\n", frame_counter_.now(), name, value );
+    trace( "[%d] %s=%d\n", frame_counter_.now(), name, value );
 }
 
 void traceValue(
     const char* const name,
     uint32_t value
 ){
-    printf( "[%d] %s=%u\n", frame_counter_.now(), name, value );
+    trace( "[%d] %s=%u\n", frame_counter_.now(), name, value );
 }
 
 void traceValue(
     const char* const name,
     long value
 ){
-    printf( "[%d] %s=%ld\n", frame_counter_.now(), name, value );
+    trace( "[%d] %s=%ld\n", frame_counter_.now(), name, value );
 }
 
 void traceValue(
     const char* const name,
     float value
 ){
-    printf( "[%d] %s=%f\n", frame_counter_.now(), name, value );
+    trace( "[%d] %s=%f\n", frame_counter_.now(), name, value );
 }
     
 void traceValue(
     const char* const name,
     void* value
 ){
-    printf( "[%d] %s=%p\n", frame_counter_.now(), name, value );
+    trace( "[%d] %s=%p\n", frame_counter_.now(), name, value );
 }
     
 void traceValue(

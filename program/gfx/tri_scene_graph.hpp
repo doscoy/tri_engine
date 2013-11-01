@@ -29,27 +29,16 @@ class SkyNode;
 
 class SceneGraph
 {
-protected:
-    std::shared_ptr<SceneNode> root_;
-    std::shared_ptr<CameraNode> camera_node_;
-    
-    MatrixStack matrix_stack_;
-    AlphaSceneNodes alpha_scene_nodes_;
-    SceneActorMap actor_map_;
-    
-    void renderAlphaPass();
-
-
 public:
 
     SceneGraph();
     virtual ~SceneGraph();
     
-    void onRender();
+    void renderScene();
     
-    void onRestore();
+    void restoreScene();
     
-    void onUpdate(tick_t tick);
+    void updateScene(tick_t tick);
     
     std::shared_ptr<ISceneNode> findActor( actor_id_t id );
     
@@ -92,7 +81,19 @@ public:
         alpha_scene_nodes_.push_back(asn);
     }
     
+
+
+private:
+    void renderAlphaPass();
+
+
+protected:
+    std::shared_ptr<SceneNode> root_;
+    std::shared_ptr<CameraNode> camera_node_;
     
+    MatrixStack matrix_stack_;
+    AlphaSceneNodes alpha_scene_nodes_;
+    SceneActorMap actor_map_;
 };
 
 

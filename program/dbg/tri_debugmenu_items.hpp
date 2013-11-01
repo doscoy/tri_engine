@@ -145,8 +145,8 @@ public:
         item_t& target,
         const step_type_t step
     )   : dmf_( parent, label )
-        , x_( &dmf_, "x", target.x, step )
-        , y_( &dmf_, "y", target.y, step )
+        , x_( &dmf_, "x", target.x_, step )
+        , y_( &dmf_, "y", target.y_, step )
     {
     }
     

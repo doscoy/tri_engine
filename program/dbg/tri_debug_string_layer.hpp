@@ -4,7 +4,7 @@
 
 #include "../gfx/tri_render_layer.hpp"
 #include "tri_debug_string_buffer.hpp"
-
+#include "../gfx/tri_color.hpp"
 
 namespace t3 {
 inline namespace dbg {

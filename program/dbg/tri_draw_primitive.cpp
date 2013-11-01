@@ -33,7 +33,7 @@ void drawPoint(
     const Vec2& pos,
     const Color& color
 ){
-    drawLine( pos, Vec2( pos.x, pos.y+0.5f ), color );
+    drawLine( pos, Vec2( pos.x_, pos.y_ + 0.5f ), color );
 }
 
 void drawLine(
@@ -41,7 +41,7 @@ void drawLine(
     const Vec2& end,
     const Color& color
 ){
-    drawLine( start.x, start.y, end.x, end.y, color );
+    drawLine( start.x_, start.y_, end.x_, end.y_, color );
 }
     
 void drawLine(
@@ -74,10 +74,10 @@ void drawRectangle(
     ogl::begin( GL_QUADS );
     Vec2 end = left_up + size;
     ogl::color4ub( color.red_, color.green_, color.blue_, color.alpha_ );
-    ogl::vertex2f( left_up.x, left_up.y );
-    ogl::vertex2f( end.x, left_up.y );
-    ogl::vertex2f( end.x, end.y );
-    ogl::vertex2f( left_up.x, end.y );
+    ogl::vertex2f( left_up.x_, left_up.y_ );
+    ogl::vertex2f( end.x_, left_up.y_ );
+    ogl::vertex2f( end.x_, end.y_ );
+    ogl::vertex2f( left_up.x_, end.y_ );
     
     ogl::end();
 }

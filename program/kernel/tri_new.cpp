@@ -10,28 +10,37 @@
 #include "tri_memory.hpp"
 
 
+
+//#define NEW_TRACE(...) T3_TRACE(__VA_ARGS__)
+#define NEW_TRACE(...)  ((void)0)
+
+
 void* operator new( size_t size )
 {
-//    return operator new( size, t3::HeapFactory::getDefaultHeap() );
-    return t3::default_allocator_.alloc<int8_t>( size, "unknown.", 0 );
+    void* p = t3::default_allocator_.alloc<int8_t>( size, "unknown.", 0 );
+    NEW_TRACE("new 0x%x\n", p);
+    return p;
 } 
 
 
 
 void* operator new( size_t size, t3::Heap* heap )
 {
-    return heap->allocate( size );
+    void* p = heap->allocate( size );
+    NEW_TRACE("heap new 0x%x\n", p);
+    return p;
 }
 
 void* operator new( size_t size, const char* const filename, int line )
 {
     void* p = t3::default_allocator_.alloc<int8_t>( size, filename, line );
+    NEW_TRACE("rec new 0x%x\n", p);
     return p;
 }
 
 void operator delete( void* mem )
 {
-//    t3::Heap::deallocate( mem );
+    NEW_TRACE("delete 0x%x\n", mem);
     t3::default_allocator_.free( mem );
 }
 

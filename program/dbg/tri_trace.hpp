@@ -6,6 +6,10 @@
 
 namespace t3 {
 inline namespace dbg {
+
+void initializeTrace();
+void traceTerminal( const char* const str );
+void traceDisplay( const char* const str );
 void trace( const char* const format, ... );
 
 void traceValue( const char* const name, int value );
@@ -15,6 +19,9 @@ void traceValue( const char* const name, uint32_t value );
 void traceValue( const char* const name, float value );
 void traceValue( const char* const name, void* value );
 void traceValue( const char* const name, const char* value );
+
+
+
 
 }   // inline namespace dbg
 }   // namespace t3

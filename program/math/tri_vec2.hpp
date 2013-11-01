@@ -20,22 +20,22 @@ template <typename T>
 struct Vec2Template {
     
     //  データ
-    T x;
-    T y;
+    T x_;
+    T y_;
     
     //  コンストラクタ
     Vec2Template()
     {}
     
-    Vec2Template( const T x, const T y )
-        : x(x)
-        , y(y)
+    Vec2Template( const T x_, const T y_ )
+        : x_(x_)
+        , y_(y_)
     {}
     
     template<typename O>
     Vec2Template<T>( const Vec2Template<O>& rhs )
-        : x( rhs.x )
-        , y( rhs.y )
+        : x_( rhs.x_ )
+        , y_( rhs.y_ )
     {
     }
 
@@ -45,7 +45,7 @@ struct Vec2Template {
     
     //  内積
     T dotProduct( const Vec2Template& rhs ){
-        return x * rhs.x + y * rhs.y;
+        return x_ * rhs.x_ + y_ * rhs.y_;
     }
     
     //  ブレンド
@@ -53,8 +53,8 @@ struct Vec2Template {
         const float t,
         const Vec2Template& v
     ) {
-        x = x * (1 - t) + v.x * t;
-        y = y * (1 - t) + v.y * t;
+        x_ = x_ * (1 - t) + v.x_ * t;
+        y_ = y_ * (1 - t) + v.y_ * t;
         return *this;
     }
     
@@ -73,7 +73,7 @@ struct Vec2Template {
     
     //  長さの二乗
     T lengthSquare() const {
-        return ( x*x + y*y );
+        return ( x_*x_ + y_*y_ );
     }
     
     //  長さ
@@ -83,35 +83,35 @@ struct Vec2Template {
     
     //  反転
     void reverse() {
-        x = -x;
-        y = -y;
+        x_ = -x_;
+        y_ = -y_;
     }
     
-    //  x軸反転
+    //  x_軸反転
     void reverseX() {
-        x = -x;
+        x_ = -x_;
     }
     
-    //  y軸反転
+    //  y_軸反転
     void reverseY() {
-        y = -y;
+        y_ = -y_;
     }
     
     //  反転ベクトル取得
     Vec2Template getReversed() const {
         
-        return Point2( -x, -y );
+        return Point2( -x_, -y_ );
     }
     
     //  pointer
     const T* pointer() const {
-        return &x;
+        return &x_;
     }
     
     //  Vec2Template = Vec2Template
     Vec2Template& operator =( const Vec2Template& rhs ){
-        x = rhs.x;
-        y = rhs.y;
+        x_ = rhs.x_;
+        y_ = rhs.y_;
         
         return *this;
     }
@@ -119,53 +119,53 @@ struct Vec2Template {
         
     //  vec2 + vec2
     Vec2Template operator +( const Vec2Template& rhs ) const {
-        return Vec2Template( x + rhs.x, y + rhs.y );
+        return Vec2Template( x_ + rhs.x_, y_ + rhs.y_ );
     }
     
     //  vec2 - Vec2Template
     Vec2Template operator -( const Vec2Template& rhs ) const {
-        return Vec2Template( x - rhs.x, y - rhs.y );
+        return Vec2Template( x_ - rhs.x_, y_ - rhs.y_ );
     }
     
     //  vec2 * Vec2Template
     Vec2Template operator *( const Vec2Template& rhs ) const {
-        return Vec2Template( x * rhs.x, y * rhs.y );
+        return Vec2Template( x_ * rhs.x_, y_ * rhs.y_ );
     }
      //  Vec2Template / s
     Vec2Template operator /( const float s ) const {
         float tmp = 1.0f / s;
-        return Vec2Template( x * tmp, y * tmp );
+        return Vec2Template( x_ * tmp, y_ * tmp );
     }
     
     //  Vec2Template * s
     Vec2Template operator *( const float s ) const {
-        return Vec2Template( x * s, y * s );
+        return Vec2Template( x_ * s, y_ * s );
     }
     
     
     //  Vec2Template += Vec2Template
     void operator +=( const Vec2Template& rhs ) {
-        x += rhs.x;
-        y += rhs.y;
+        x_ += rhs.x_;
+        y_ += rhs.y_;
     }
     
     //  Vec2Template -= Vec2Template
     void operator -=( const Vec2Template& rhs ) {
-        x -= rhs.y;
-        y -= rhs.y;
+        x_ -= rhs.y_;
+        y_ -= rhs.y_;
     }
     
     //  Vec2Template /= s
     void operator /=( const float s ) {
         float tmp = 1.0f / s;
-        x *= tmp;
-        y *= tmp;
+        x_ *= tmp;
+        y_ *= tmp;
     }
     
     //  Vec2Template *= s
     void operator *=( const float s ) {
-        x *= s;
-        y *= s;
+        x_ *= s;
+        y_ *= s;
     }
 
     
@@ -177,27 +177,27 @@ struct Vec2Template {
  
     //  -Vec2Template
     Vec2Template operator -() const {
-        return Vec2Template( -x, -y );
+        return Vec2Template( -x_, -y_ );
     }
     
     //  cast
     operator T*() {
-        return &x;
+        return &x_;
     }
     
     //  cast const
     operator const T*() const {
-        return &x;
+        return &x_;
     }
     
     //  Vec2Template == Vec2Template
     bool operator==(const Vec2Template& v) const {
-        return x == v.x && y == v.y;
+        return x_ == v.x_ && y_ == v.y_;
     }
     
     //  dump
     void dump() const {
-        std::cout << "x:" << x << " y:" << y << std::endl;
+        std::cout << "x_:" << x_ << " y_:" << y_ << std::endl;
     }
 
 public:
@@ -205,7 +205,7 @@ public:
         const Vec2Template& v1,
         const Vec2Template& v2
     ){
-        return v1.x * v2.x + v1.y * v2.y;
+        return v1.x_ * v2.x_ + v1.y_ * v2.y_;
     }
     
     static Vec2Template& normalize(
@@ -213,8 +213,8 @@ public:
         const Vec2Template& src
     ){
         float s = 1.0f / src.length();
-        dst.x *= s;
-        dst.y *= s;
+        dst.x_ *= s;
+        dst.y_ *= s;
         return dst;
     }
     
@@ -252,8 +252,8 @@ public:
         const Vec2Template& v2
     ){
         return Vec2Template(
-            v1.x * (1 - t) + v2.x * t,
-            v1.y * (1 - t) + v2.y * t
+            v1.x_ * (1 - t) + v2.x_ * t,
+            v1.y_ * (1 - t) + v2.y_ * t
         );
     }
 

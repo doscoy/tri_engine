@@ -39,13 +39,13 @@ public:
     // *********************************************
     //  横幅取得
     float getWidth() const {
-        return size_.x;
+        return size_.x_;
     }
     
     // *********************************************
     //  縦幅取得
     float getHeight() const {
-        return size_.y;
+        return size_.y_;
     }
     
     // *********************************************

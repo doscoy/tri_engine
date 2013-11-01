@@ -16,10 +16,10 @@ constexpr int DEBUG_STRING_ITEM_STR_SIZE = 100;
 
 struct DebugStringItem
 {
-    uint32_t color;
-    short x;
-    short y;
-    char str[DEBUG_STRING_ITEM_STR_SIZE];
+    uint32_t color_;
+    short x_;
+    short y_;
+    char str_[DEBUG_STRING_ITEM_STR_SIZE];
 };
 
 

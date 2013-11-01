@@ -57,6 +57,8 @@ public:
         actor_id_t id
     ) = 0;
     
+    
+    
     virtual ~ISceneNode(){}
     
 };
@@ -164,6 +166,10 @@ public:
         const Material& material
     ) {
         properties_.material_ = material;
+    }
+
+    const char* getNodeName() const {
+        return properties_.name_.c_str();
     }
 
 };

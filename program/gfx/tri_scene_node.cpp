@@ -48,7 +48,10 @@ void SceneNode::setTransformMatrix(
     
     if (!from_world) {
         //  from_worldは設定されてない
-        properties_.from_world_ = Mtx4::makeInverseMatrix(properties_.from_world_);
+        Mtx4::makeInverseMatrix(
+            properties_.from_world_,
+            properties_.to_world_
+        );
     }
     else {
         properties_.from_world_ = *from_world;
@@ -73,6 +76,7 @@ void SceneNode::onUpdate(
     t3::SceneGraph* scene_graph,
     tick_t tick
 ) {
+    T3_TRACE("SceneNode::onUpdate - %s\n", getNodeName());
     SceneNodeList::iterator it = children_.begin();
     SceneNodeList::iterator end = children_.end();
     
@@ -86,11 +90,13 @@ void SceneNode::onUpdate(
 bool SceneNode::preRender(
     t3::SceneGraph* scene_graph
 ) {
+    T3_TRACE("SceneNode::preRender() - %s\n", getNodeName());
     scene_graph->pushAndSetMatrix(properties_.to_world_);
     return true;
 }
 
 void SceneNode::postRender(t3::SceneGraph *scene_graph) {
+    T3_TRACE("SceneNode::postRender() - %s\n", getNodeName());
     scene_graph->popMatrix();
 }
 
@@ -105,6 +111,8 @@ bool SceneNode::isVisible(t3::SceneGraph *scene_graph) const
 
 void SceneNode::render(t3::SceneGraph *scene_graph)
 {
+    T3_TRACE("SceneNode::render() - %s\n", getNodeName());
+
     properties_.material_.use();
 
     
@@ -112,6 +120,8 @@ void SceneNode::render(t3::SceneGraph *scene_graph)
 
 void SceneNode::renderChildren(t3::SceneGraph *scene_graph)
 {
+    T3_TRACE("SceneNode::renderChildren() - %s\n", getNodeName());
+
     SceneNodeList::iterator it = children_.begin();
     SceneNodeList::iterator end = children_.end();
     

@@ -139,13 +139,6 @@ struct Mtx4Template {
         return m;
     }
     
-    static Mtx4Template makeInverseMatrix(
-        const Mtx4Template& mtx
-    ) {
-        Mtx4Template m;
-        return m;
-    }
-    
     Mtx3Template<T> toMat3() const
     {
         Mtx3Template<T> m;
@@ -154,6 +147,11 @@ struct Mtx4Template {
         m.x.z = x.z; m.y.z = y.z; m.z.z = z.z;
         return m;
     }
+    
+    T* pointer() {
+        return &x.x;
+    }
+    
     const T* pointer() const
     {
         return &x.x;
@@ -350,6 +348,93 @@ struct Mtx4Template {
         makeLookAtMatrix( m, eye, target, up );
         return m;
     }
+    
+    
+
+    static bool makeInverseMatrix(
+        Mtx4Template<T>& dest,
+        const Mtx4Template<T> src
+    ) {
+        const T* m1 = src.pointer();
+        T* m2 = dest.pointer();
+    
+        int i;
+        int j;
+        int k;
+        double lu[20];
+        double* plu[4];
+        double det;
+  
+        
+        for (j = 0; j < 4; ++j) {
+            double max = fabs(*(plu[j] = lu + 5 * j) = *(m1++));
+            for (i = 0; ++i < 4;) {
+                double a = fabs(plu[j][i] = *(m1++));
+
+                if (a > max) max = a;
+
+            }
+
+            if (max == 0.0) return false;
+
+            plu[j][4] = 1.0 / max;
+        }
+  
+        det = 1.0;
+  
+        
+        for (j = 0; j < 4; ++j) {
+            double max = fabs(plu[j][j] * plu[j][4]);
+            i = j;
+            for (k = j; ++k < 4;) {
+                double a = fabs(plu[k][j] * plu[k][4]);
+                if (a > max) {
+                    max = a;
+                    i = k;
+                }
+            }
+    
+            if (i > j) {
+                double *t = plu[j];
+                plu[j] = plu[i];
+                plu[i] = t;
+                det = -det;
+            }
+            if (plu[j][j] == 0.0) return false;
+            det *= plu[j][j];
+    
+            for (k = j; ++k < 4;) {
+                plu[k][j] /= plu[j][j];
+                for (i = j; ++i < 4;) {
+                    plu[k][i] -= plu[j][i] * plu[k][j];
+                }
+            }
+        }
+  
+        
+        for (k = 0; k < 4; ++k) {
+        
+            for (i = 0; i < 4; ++i) {
+                m2[i * 4 + k] = (plu[i] == lu + k * 5) ? 1.0 : 0.0;
+            }
+            
+            for (i = 0; i < 4; ++i) {
+                for (j = i; ++j < 4;) {
+                    m2[j * 4 + k] -= m2[i * 4 + k] * plu[j][i];
+                }
+            }
+            for (i = 4; --i >= 0;){
+                for (j = i; ++j < 4;) {
+                    m2[i * 4 + k] -= plu[i][j] * m2[j * 4 + k];
+                }
+                m2[i * 4 + k] /= plu[i][i];
+            }
+        }
+  
+        return true;
+    }
+    
+public:
     
     Vec4Template<T> x;
     Vec4Template<T> y;

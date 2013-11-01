@@ -76,8 +76,8 @@ void SpriteRenderer::beginRender()
     //  レンダリング設定
     const t3::GameSystem* gs = t3::GameSystem::getInstancePointer();
     const t3::Point2& screen_size = gs->getScreenSize();
-    float w = screen_size.x;
-    float h = screen_size.y;
+    float w = screen_size.x_;
+    float h = screen_size.y_;
 
     
     //頂点配列を有効化
@@ -145,8 +145,8 @@ void SpriteRenderer::render()
         
         Mtx4 trans_mtx;
         Mtx4 scale_mtx;
-        trans_mtx.translate( pos.x, pos.y, 0 );
-        scale_mtx.scale( scale.x, scale.y, 1 );
+        trans_mtx.translate( pos.x_, pos.y_, 0 );
+        scale_mtx.scale( scale.x_, scale.y_, 1 );
 
         ogl::matrixMode(GL_MODELVIEW);
         Mtx4 modelview = scale_mtx * trans_mtx;
