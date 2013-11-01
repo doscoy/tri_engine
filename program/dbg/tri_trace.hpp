@@ -8,8 +8,8 @@ namespace t3 {
 inline namespace dbg {
 
 void initializeTrace();
-void traceTerminal( const char* const str );
-void traceDisplay( const char* const str );
+void traceTerminal( const char* const format, ... );
+void traceDisplay( const char* const format, ... );
 void trace( const char* const format, ... );
 
 void traceValue( const char* const name, int value );

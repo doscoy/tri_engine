@@ -30,17 +30,32 @@ void initializeTrace()
 
 }
 
-void traceTerminal(const char* const str)
+void traceTerminal( const char* const format, ... )
 {
-    std::printf("%s", str);
+    va_list msg;
+    
+	char buf[256];    
+	va_start( msg, format );
+	vsnprintf(buf, 256, format, msg);
+	va_end(msg);
+
+    std::printf("%s", buf);
 }
 
-void traceDisplay(const char* const str)
+void traceDisplay( const char* const format, ... )
 {
-    dbg_log_layer_.writeString(str);
+    va_list msg;
+    
+	char buf[256];    
+	va_start( msg, format );
+	vsnprintf(buf, 256, format, msg);
+	va_end(msg);
+
+    dbg_log_layer_.writeString(buf);
 }
 
-void trace( const char* const format, ... ){
+void trace( const char* const format, ... )
+{
     va_list msg;
     
 	char buf[256];    
@@ -48,8 +63,8 @@ void trace( const char* const format, ... ){
 	vsnprintf(buf, 256, format, msg);
 	va_end(msg);
     
-    traceTerminal( buf );
-    
+    traceTerminal( "%s", buf );
+    traceDisplay( "%s", buf );
 }
 
 void traceValue(

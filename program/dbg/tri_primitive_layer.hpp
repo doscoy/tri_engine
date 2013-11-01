@@ -19,7 +19,7 @@ public:
     PrimitiveLayer();
     virtual ~PrimitiveLayer();
     
-private:
+protected:
     virtual void updateLayer( tick_t tick ) override;
     virtual void drawLayer() override;
     

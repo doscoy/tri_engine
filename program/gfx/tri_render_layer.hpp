@@ -63,6 +63,10 @@ public:
         }
     }
     
+    bool isVisibleLayer() const {
+        return visible_;
+    }
+    
     void pauseLayer(){
         if ( !pause_ ){
             pause_ = true;
@@ -75,17 +79,21 @@ public:
         }
     }
     
+    bool isPauseLayer() const {
+        return pause_;
+    }
+    
     void setLayerName( const char* const name );
     const char* getLayerName() const {
         return layer_name_;
     }
 
-private:
+protected:
     virtual void updateLayer( tick_t tick ) = 0;
     virtual void drawLayer() = 0;
 
     
-private:
+protected:
     bool pause_;
     bool visible_;
     uint8_t priority_;

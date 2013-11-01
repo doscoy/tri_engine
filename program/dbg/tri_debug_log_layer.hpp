@@ -29,12 +29,17 @@ public:
         const char* const str
     );
     
-    virtual void updateLayer( tick_t tick ) override;
+    void slideUp();
+    void slideDown();
     
-private:
+    
+protected:
+    virtual void updateLayer( tick_t tick ) override;
+    virtual void drawLayer() override;
+    
     int getLogShowLineIndex() const;
 
-private:
+protected:
     DebugLogBuffer debug_log_buffer_;
     int log_show_offset_;
 };

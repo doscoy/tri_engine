@@ -49,7 +49,7 @@ public:
         render_func_ = (RenderCallback&)callback;
     }
     
-private:
+protected:
     virtual void updateLayer( tick_t tick ) override;
     virtual void drawLayer() override;
     void nullUpdate( self_t* const, tick_t ){}
