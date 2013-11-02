@@ -4,11 +4,32 @@
 #include "../util/tri_counter.hpp"
 #include "../io/tri_pad.hpp"
 #include "../platform/platform.hpp"
-#include "../dbg/tri_debugpad.hpp"
+#include "../dbg/tri_dbg.hpp"
 
 
 
 namespace t3 {
+
+
+
+namespace {
+
+
+
+}   // unname namespace
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 extern Counter frame_counter_;
 
@@ -16,21 +37,30 @@ extern Counter frame_counter_;
 //  コンストラクタ
 GameSystem::GameSystem()
     : random_number_generator_( 1 )
-    , dmf_color_idx_( nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3 )
+    , dmi_color_idx_( nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3 )
     , use_clear_color_index_( 0 )
     , clear_colors_{{
         Color::darkgray(),
         Color::black(),
         Color::white(),
         Color::blue()}}
+    , dmf_layers_( nullptr, "LAYERS" )
+    , layer_list_()
     , suspend_( false )
 {
     //  テクスチャマネージャ生成
     TextureManager::createInstance();
     
-    registryClearColor();
+    setClearColor();
 
-
+    dmf_layers_.setFocusCallback(
+        this,
+        &GameSystem::registryLayersToDebugMenu
+    );
+    dmf_layers_.setUnfocusCallback(
+        this,
+        &GameSystem::unregistryLayersToDebugMenu
+    );
 
 
 
@@ -62,18 +92,22 @@ void GameSystem::update( tick_t tick )
 
 void GameSystem::suspend( tick_t tick )
 {
-    registryClearColor();
+    setClearColor();
 }
 
-void GameSystem::registryClearColor()
+void GameSystem::setClearColor()
 {
     glue::setClearColor( clear_colors_[use_clear_color_index_] );
 }
     
     
-void GameSystem::registryDebugMenu( DebugMenuFrame& parent_frame )
+void GameSystem::registryToDebugMenu( DebugMenuFrame& parent_frame )
 {
-    dmf_color_idx_.attachSelf( parent_frame );
+    //  塗りつぶしカラーの登録
+    dmi_color_idx_.attachSelf( parent_frame );
+    
+    //  レイヤーのメニューフレーム登録
+    dmf_layers_.attachSelf( parent_frame );
 }
 
 
@@ -100,6 +134,17 @@ void GameSystem::detachLayer( t3::RenderLayer& layer )
     );
 }
 
+
+void GameSystem::registryLayersToDebugMenu()
+{
+    T3_TRACE("zesm\n");
+
+}
+
+void GameSystem::unregistryLayersToDebugMenu()
+{
+    T3_TRACE("pokom\n");
+}
 
 
 

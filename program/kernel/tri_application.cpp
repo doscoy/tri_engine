@@ -76,7 +76,7 @@ public:
     , dmi_show_work_time_( &dmf_system_, "SHOW WORKTIME", show_work_time_, 1 )
     , dmi_show_work_bar_( &dmf_system_, "SHOW WORKBAR", show_work_bar_, 1 )
     {
-        t3::GameSystem::getInstance().registryDebugMenu( dmf_system_ );
+        t3::GameSystem::getInstance().registryToDebugMenu( dmf_system_ );
     }
     
     

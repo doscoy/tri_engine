@@ -13,6 +13,9 @@ DebugMenuLabel::DebugMenuLabel(
     const char* const label
 )   : parent_( parent )
     , label_( label )
+    , focus_callback_(this, &DebugMenuLabel::nullCallback)
+    , unfocus_callback_(this, &DebugMenuLabel::nullCallback)
+
 {
     label_length_ = std::strlen( label_ );
     if ( parent ) {

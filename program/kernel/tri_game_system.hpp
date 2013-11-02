@@ -71,10 +71,7 @@ public:
     }
     
     
-    void registryClearColor();
-
-    
-    void registryDebugMenu(DebugMenuFrame& parent_frame);
+    void registryToDebugMenu(DebugMenuFrame& parent_frame);
     
     
     void attachLayer( RenderLayer& layer );
@@ -90,6 +87,13 @@ public:
     }
     
 private:
+    void setClearColor();
+
+    //  デバッグメニューにレイヤー登録するコールバック
+    void registryLayersToDebugMenu();
+    void unregistryLayersToDebugMenu();
+    
+private:
     //  乱数
     random_t random_number_generator_;
 
@@ -103,10 +107,14 @@ private:
     RenderLayers layers_;
     
     //  クリアカラー
-    DebugMenuItem<int> dmf_color_idx_;
+    DebugMenuItem<int> dmi_color_idx_;
     int use_clear_color_index_;
     std::array<Color, 4> clear_colors_;
     
+    //  レイヤーのデバッグメニュー
+    t3::DebugMenuFrame  dmf_layers_;
+    std::array<t3::DebugMenuLabel*, 24> layer_list_;
+
     
     bool suspend_;
 };

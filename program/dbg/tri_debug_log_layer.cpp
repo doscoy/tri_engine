@@ -87,7 +87,7 @@ void DebugLogLayer::drawLayer()
     Color bg_color = Color(0, 0, 0, 80);
     drawRectangle(
         Vec2(0, 0),
-        Vec2(glue::getScreenWidth(), glue::getScreenHeight(c)),
+        Vec2(glue::getScreenWidth(), glue::getScreenHeight()),
         bg_color
     );
     

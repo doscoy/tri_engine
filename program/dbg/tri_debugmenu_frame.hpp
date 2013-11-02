@@ -6,6 +6,7 @@
 #include "tri_debugmenu_label.hpp"
 #include <list>
 
+
 namespace t3 {
 inline namespace dbg {
     
@@ -27,9 +28,9 @@ public:
     ~DebugMenuFrame();
 
 public:
-    void show();
+    void openFrame();
     
-    void hide();
+    void closeFrame();
     
     bool hasChild() const {
         return items_.size() > 0;
@@ -38,6 +39,7 @@ public:
     DebugMenuLabel* getFocusItem() {
         return focus_item_;
     }
+    
     const DebugMenuLabel* getFocusItem() const {
         return focus_item_;
     }
@@ -45,9 +47,16 @@ public:
     void setFocusItem(
         DebugMenuLabel* const item
     ){
+        if (focus_item_) {
+            focus_item_->unfocusCallback();
+        }
+        if (item) {
+            item->focusCallback();
+        }
         focus_item_ = item;
     }
-        DebugMenuList& getItems() {
+    
+    DebugMenuList& getItems() {
         return items_;
     }
     
@@ -69,12 +78,12 @@ private:
     
     void dettachItem( DebugMenuLabel& item );
     
-    
-    
 private:
     DebugMenuList items_;
     DebugMenuLabel* focus_item_;
     int select_idx_;
+
+
 };
 
 

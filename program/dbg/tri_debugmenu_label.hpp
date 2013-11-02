@@ -4,7 +4,8 @@
 
 #include "tri_develop_base.hpp"
 #include "tri_print.hpp"
-#include "../util/tri_uncopyable.hpp"
+#include "../util/tri_util.hpp"
+
 #include <string.h>
 
 namespace t3 {
@@ -16,6 +17,8 @@ class DebugMenuFrame;
 class DebugMenuLabel
     : private Uncopyable
 {
+    typedef MethodCallback<DebugMenuLabel> callback_t;
+
 public:
     DebugMenuLabel(
         DebugMenuFrame* parent,
@@ -68,11 +71,45 @@ public:
         printDisplay( x, y, color, getLabel() );
     }
     
+    template <typename T>
+    void setFocusCallback(
+        T* owner,
+        void (T::*callback)()
+    ) {
+        MethodCallback<T> cb(owner, callback);
+        focus_callback_ = (callback_t&)cb;
+    }
+
+    
+    template <typename T>
+    void setUnfocusCallback(
+        T* owner,
+        void (T::*callback)()
+    ) {
+        MethodCallback<T> cb(owner, callback);
+        unfocus_callback_ = (callback_t&)cb;
+    }
+
+    void focusCallback() {
+        focus_callback_.invoke();
+    }
+    
+    void unfocusCallback() {
+        unfocus_callback_.invoke();
+    }
+
+private:
+    void nullCallback() {}
+    
 protected:
     DebugMenuFrame* parent_;
     const char* label_;
     short label_length_;
     bool enable_;
+    
+    //  開閉コールバック
+    callback_t focus_callback_;
+    callback_t unfocus_callback_;
 
 };
 

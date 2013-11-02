@@ -29,10 +29,10 @@ class MethodCallback
 public:
     MethodCallback(){}
     MethodCallback(
-        T* inst,
+        T* instance,
         callback_t func
     ){
-        MethodCallbackBase::instance_ = inst;
+        MethodCallbackBase::instance_ = instance;
         (callback_t&)(MethodCallbackBase::func_) = func;
     }
     

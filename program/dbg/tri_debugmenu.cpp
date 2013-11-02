@@ -33,7 +33,7 @@ void DebugMenu::openMenu()
     }
     
     
-    menu_root_.show();
+    menu_root_.openFrame();
     open_ = true;
     
 }
@@ -47,7 +47,7 @@ void DebugMenu::closeMenu()
         return;
     }
     
-    menu_root_.hide();
+    menu_root_.closeFrame();
     open_ = false;
 }
 

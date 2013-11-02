@@ -12,9 +12,9 @@ inline namespace dbg {
 DebugMenuFrame::DebugMenuFrame(
     DebugMenuFrame* parent,
     const char* const label
-)   : DebugMenuLabel( parent, label )
-    , focus_item_( nullptr )
-    , select_idx_( 0 )
+)   : DebugMenuLabel(parent, label)
+    , focus_item_(nullptr)
+    , select_idx_(0)
 {
     
 }
@@ -27,28 +27,28 @@ DebugMenuFrame::~DebugMenuFrame()
 }
 
 
-void DebugMenuFrame::show()
+void DebugMenuFrame::openFrame()
 {
-    for ( auto item: items_ ) {
-        item->setEnable( true );
+    for (auto item: items_) {
+        item->setEnable(true);
     }
     
     DebugMenuLabel* focus_item = getFocusItem();
-    if ( focus_item ){
-        if ( focus_item_->hasChild() ){
-            DebugMenuFrame* dmf = static_cast<DebugMenuFrame*>( focus_item_ );
-            dmf->show();
+    if (focus_item){
+        if (focus_item_->hasChild()){
+            DebugMenuFrame* dmf = static_cast<DebugMenuFrame*>(focus_item_);
+            dmf->openFrame();
         }
     }
 }
 
 
-void DebugMenuFrame::hide()
+void DebugMenuFrame::closeFrame()
 {
     for ( auto item: items_ ) {
         item->setEnable( false );
     }
-    focus_item_ = nullptr;
+    setFocusItem(nullptr);
 }
 
 
@@ -110,19 +110,19 @@ void DebugMenuFrame::update()
                 select_idx_ = 0;
             }
         }
-        else if ( pad.isRepeat( t3::Pad::BUTTON_RIGHT ) ){
+        else if (pad.isTrigger( t3::Pad::BUTTON_RIGHT)){
             int idx = 0;
-            for ( auto item: items_ ){
-                if ( select_idx_ == idx ){
-                    focus_item_ = item;
+            for (auto item: items_){
+                if (select_idx_ == idx){
+                    setFocusItem(item);
                     break;
                 }
                 ++idx;
             }
         }
-        else if ( pad.isRepeat( t3::Pad::BUTTON_LEFT ) ){
-            if ( parent_ ){
-                parent_->focus_item_ = nullptr;
+        else if (pad.isTrigger( t3::Pad::BUTTON_LEFT)){
+            if (parent_){
+                parent_->setFocusItem(nullptr);
             }
         }
         
