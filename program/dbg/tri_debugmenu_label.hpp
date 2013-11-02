@@ -52,7 +52,7 @@ public:
     
     void attachSelf( DebugMenuFrame& frame );
     
-    void dettachSelf();
+    void detachSelf();
     
     void setEnable( const bool enable ){
         enable_ = enable;

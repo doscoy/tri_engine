@@ -22,8 +22,11 @@ DebugMenuFrame::DebugMenuFrame(
 
 DebugMenuFrame::~DebugMenuFrame()
 {
-    
-    
+    //  管理している子との接続を全て解除
+    for ( auto item: items_ ) {
+        item->detachSelf();
+    }
+
 }
 
 
@@ -58,7 +61,7 @@ void DebugMenuFrame::attachItem(
     if ( item.getParent() ){
         //  既にどこかのFrameに付いている
         //  ので外す
-        item.dettachSelf();
+        item.detachSelf();
         
     }
     //  自分を親フレームにする
@@ -69,7 +72,7 @@ void DebugMenuFrame::attachItem(
 }
 
 
-void DebugMenuFrame::dettachItem(
+void DebugMenuFrame::detachItem(
     DebugMenuLabel& item
 ){
     //  自分の管理アイテムか判定

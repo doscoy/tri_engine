@@ -137,13 +137,16 @@ void GameSystem::detachLayer( t3::RenderLayer& layer )
 
 void GameSystem::registryLayersToDebugMenu()
 {
-    T3_TRACE("zesm\n");
-
+    for (auto layer: layers_) {
+        layer->registryToDebugMenu(dmf_layers_);
+    }
 }
 
 void GameSystem::unregistryLayersToDebugMenu()
 {
-    T3_TRACE("pokom\n");
+    for (auto layer: layers_) {
+        layer->unregistryToDebugMenu();
+    }
 }
 
 

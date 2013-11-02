@@ -17,7 +17,7 @@ class DebugMenuFrame
     : public DebugMenuLabel
 {
     friend void DebugMenuLabel::attachSelf(t3::DebugMenuFrame &frame);
-    friend void DebugMenuLabel::dettachSelf();
+    friend void DebugMenuLabel::detachSelf();
     
 public:
     DebugMenuFrame(
@@ -76,7 +76,7 @@ public:
 private:
     void attachItem( DebugMenuLabel& item );
     
-    void dettachItem( DebugMenuLabel& item );
+    void detachItem( DebugMenuLabel& item );
     
 private:
     DebugMenuList items_;

@@ -5,6 +5,7 @@
 
 #include "tri_develop_base.hpp"
 #include "../util/tri_uncopyable.hpp"
+#include "tri_debugmenu_items.hpp"
 #include <list>
 
 constexpr int LAYER_NAME_SIZE = 20;
@@ -84,10 +85,17 @@ public:
     }
     
     void setLayerName( const char* const name );
+    
     const char* getLayerName() const {
         return layer_name_;
     }
-
+    
+    virtual void registryToDebugMenu(
+        DebugMenuFrame& parent
+    );
+    
+    virtual void unregistryToDebugMenu();
+    
 protected:
     virtual void updateLayer( tick_t tick ) = 0;
     virtual void drawLayer() = 0;
@@ -99,6 +107,10 @@ protected:
     uint8_t priority_;
     char layer_name_[LAYER_NAME_SIZE];
 
+    //  デバッグメニュー登録
+    DebugMenuFrame dmf_me_;
+    DebugMenuItem<bool> dmi_visible_;
+    DebugMenuItem<bool> dmi_pause_;
 };
 
 

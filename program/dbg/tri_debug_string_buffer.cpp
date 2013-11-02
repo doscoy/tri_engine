@@ -57,6 +57,10 @@ void DebugStringBuffer::addString(
     const rgba32_t color,
     const char* const str
 ){
+    if (size_ >= buffer_.size()) {
+        return;
+    }
+
     DebugStringItem& item = buffer_.at(size_);
 
     item.color_ = color;
