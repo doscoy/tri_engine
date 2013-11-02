@@ -100,7 +100,7 @@ void DebugLogLayer::drawLayer()
 
 int DebugLogLayer::getLogShowLineIndex() const {
 
-    int index = debug_log_buffer_.getStringCount() -1 - log_show_offset_;
+    int index = static_cast<int>(debug_log_buffer_.getStringCount() -1 - log_show_offset_);
     
     return index;
 }

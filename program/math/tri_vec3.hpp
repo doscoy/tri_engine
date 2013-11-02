@@ -138,15 +138,16 @@ struct Vec3Template {
     }
     
     //  Vec * s
-    Vec3Template operator *( const T s ) const {
-        return Vec3Template( x * s, y * s, z * s );
-    }
+//    Vec3Template operator *( const T s ) const {
+//        return Vec3Template( x * s, y * s, z * s );
+//    }
+    
     
     //  Vec / s
-    Vec3Template operator /( const T s ) const {
-        float tmp = 1.0f / s;
-        return Vec3Template( x * tmp, y * tmp, z * tmp );
-    }
+//    Vec3Template operator /( const T s ) const {
+//        float tmp = 1.0f / s;
+//        return Vec3Template( x * tmp, y * tmp, z * tmp );
+//    }
     
     //  +Vec
     Vec3Template operator +() const {
@@ -279,6 +280,28 @@ public:
     }
 
 };
+
+
+template <class T>
+Vec3Template<T> operator *(const Vec3Template<T>& v, T s) {
+    return Vec3Template<T>(v.x * s, v.y * s, v.z * s);
+}
+
+template <class T>
+Vec3Template<T> operator *(T s, const Vec3Template<T>& v) {
+    return Vec3Template<T>(v.x * s, v.y * s, v.z * s);
+}
+template <class T>
+Vec3Template<T> operator /(const Vec3Template<T>& v, T s) {
+    return Vec3Template<T>(v.x / s, v.y / s, v.z / s);
+}
+
+template <class T>
+Vec3Template<T> operator /(T s, const Vec3Template<T>& v) {
+    return Vec3Template<T>(v.x / s, v.y / s, v.z / s);
+}
+
+
 
 
 //  typedef

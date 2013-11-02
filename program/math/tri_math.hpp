@@ -9,6 +9,9 @@
 #include "tri_bezier_curve.hpp"
 #include "tri_interpolation.hpp"
 #include "tri_math_types.hpp"
+#include "tri_vec2.hpp"
+#include "tri_vec3.hpp"
+#include "tri_vec4.hpp"
 #include "tri_quaternion.hpp"
 #include "tri_matrix.hpp"
 
