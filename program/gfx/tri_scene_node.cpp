@@ -42,7 +42,7 @@ void SceneNode::setTransformMatrix(
         properties_.to_world_ = *to_world;
     }
     else {
-        properties_.to_world_ = Mtx4::identity();
+        properties_.to_world_ = Mtx4::getIdentity();
     }
     
     

@@ -62,6 +62,16 @@ public:
 		Vec3 p = pos - d;
 		return isInside(p);
     }
+    
+    const Vec3& getPoint() const {
+        return point_;
+    }
+    
+    const Vec3& getNormal() const {
+        return normal_;
+    }
+    
+    
 
 
 public:

@@ -5,8 +5,8 @@ namespace t3 {
 inline namespace dbg {
  
 
-DebugStringLayer::DebugStringLayer()
-    : RenderLayer( "DEBUG SCREEN", RenderLayer::PRIORITY_DEBUG )
+DebugStringLayer::DebugStringLayer(const char* const name)
+    : RenderLayer(name, RenderLayer::PRIORITY_DEBUG)
 {
 
 }

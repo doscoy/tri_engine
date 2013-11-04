@@ -72,12 +72,6 @@ typedef std::vector<std::shared_ptr<ISceneNode>> SceneNodeList;
 class SceneNode : public ISceneNode
 {
     friend class SceneGraph;
-    
-protected:
-    SceneNodeList children_;
-    SceneNode* parent_;
-    SceneNodeProperties properties_;
-
 
 public:
     SceneNode(
@@ -90,6 +84,12 @@ public:
     
     virtual ~SceneNode();
     
+protected:
+    SceneNodeList children_;
+    SceneNode* parent_;
+    SceneNodeProperties properties_;
+
+
 public:
     virtual const SceneNodeProperties* const getProperties() const override {
         return &properties_;

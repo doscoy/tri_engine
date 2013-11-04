@@ -11,11 +11,11 @@ inline namespace dbg {
 
 constexpr int DEBUG_LOG_LINE = 43;
 
-DebugLogLayer::DebugLogLayer()
-    : debug_log_buffer_()
+DebugLogLayer::DebugLogLayer(const char* const name)
+    : DebugStringLayer(name)
+    , debug_log_buffer_()
     , log_show_offset_(0)
 {
-
 }
 
 

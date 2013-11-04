@@ -8,8 +8,10 @@ namespace t3{
 inline namespace gfx {
     
 
-RenderLayer::RenderLayer(const char* const name, const int priority )
-    : pause_(false)
+RenderLayer::RenderLayer(
+    const char* const name,
+    const int priority
+)   : pause_(false)
     , visible_(true)
     , priority_(priority)
     , dmf_me_(nullptr, name)

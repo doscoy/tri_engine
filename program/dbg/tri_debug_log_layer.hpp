@@ -21,7 +21,7 @@ class DebugLogLayer
     : public DebugStringLayer
 {
 public:
-    DebugLogLayer();
+    DebugLogLayer(const char* const name = "DISPLAY LOG");
     virtual ~DebugLogLayer();
 
 public:

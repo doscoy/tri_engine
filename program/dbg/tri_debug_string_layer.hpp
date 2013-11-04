@@ -13,7 +13,7 @@ class DebugStringLayer
     : public RenderLayer
 {
 public:
-    DebugStringLayer();
+    DebugStringLayer(const char* const name = "DEBUG SCREEN");
     virtual ~DebugStringLayer();
 
 public:

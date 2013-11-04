@@ -165,7 +165,12 @@ void Mesh::draw(void)
     
 
     ogl::bindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers_[2]);
-    ogl::drawElements(GL_TRIANGLES, face_count_ * 3, GL_UNSIGNED_INT, BUFFER_OFFSET(0));
+    ogl::drawElements(
+        GL_TRIANGLES,
+        face_count_ * 3,
+        GL_UNSIGNED_INT,
+        BUFFER_OFFSET(0)
+    );
     
 
     ogl::disableClientState(GL_VERTEX_ARRAY);

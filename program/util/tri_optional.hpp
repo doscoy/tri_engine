@@ -41,29 +41,6 @@ public:
 
 
 public:
-/* Tを返すパターン
-	const T& operator =(const T& t ) {
-
-		content_ = t;
-		valid_ = true;
-
-		return content_;
-	}
-
-	const T& operator =( const optional& rhs ) {
-		
-		if ( this != &rhs ){
-			if ( rhs.isValid() ){
-				content_ = rhs.content_;
-				valid_ = true;
-			}
-			else {
-				valid_ = false;
-			}
-		}
-		return content_;
-	}
-*/
 
 	const optional& operator =(const T& t ) {
 		content_ = t;
@@ -142,21 +119,7 @@ public:
 		return content_ / rhs.content_;
     }
     
-    
-    
-/*
-	optional& operator ++() {
-		T3_ASSERT_MSG( valid_, "It's no initialized value." );
-		++content_;
-		return ( *this );
-	}
 
-	optional& operator ++(int) {
-		T3_ASSERT_MSG( valid_, "It's no initialized value." );
-		content_++;
-		return ( *this );
-	}
-*/
     T operator ++() {
 		T3_ASSERT_MSG( valid_, "It's no initialized value." );
 		return ( ++content_ );

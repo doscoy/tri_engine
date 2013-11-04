@@ -68,10 +68,7 @@ template <typename T>
 struct Mtx4Template {
     Mtx4Template()
     {
-        x.x = 1; x.y = 0; x.z = 0; x.w = 0;
-        y.x = 0; y.y = 1; y.z = 0; y.w = 0;
-        z.x = 0; z.y = 0; z.z = 1; z.w = 0;
-        w.x = 0; w.y = 0; w.z = 0; w.w = 1;
+        identity();
     }
     Mtx4Template(const Mtx3Template<T>& m)
     {
@@ -156,7 +153,16 @@ struct Mtx4Template {
     {
         return &x.x;
     }
-    static Mtx4Template<T> identity()
+    
+    void identity()
+    {
+        x.x = 1; x.y = 0; x.z = 0; x.w = 0;
+        y.x = 0; y.y = 1; y.z = 0; y.w = 0;
+        z.x = 0; z.y = 0; z.z = 1; z.w = 0;
+        w.x = 0; w.y = 0; w.z = 0; w.w = 1;
+    }
+    
+    static Mtx4Template<T> getIdentity()
     {
         return Mtx4Template();
     }
@@ -236,26 +242,98 @@ struct Mtx4Template {
         m.w.x = 0; m.w.y = 0; m.w.z = 0; m.w.w = 1;
     }
     
-    
-    static Mtx4Template<T> getRotateMatrix( T degrees )
-    {
-        Mtx4Template m;
-        return makeRotateMatrix(m, degrees);
+    void rotateX(T r) {
+        makeRotateMatrixX(*this, r);
     }
     
-    static Mtx4Template<T>& makeRotateMatrix( Mtx4Template<T>& m, T degrees )
-    {
+    void rotateY(T r) {
+        makeRotateMatrixY(*this, r);
+    }
+    
+    void rotateZ(T r) {
+        makeRotateMatrixZ(*this, r);
+    }
+    
+    void rotate(Vec3Template<T> v) {
+        makeRotateYawPitchRoll(*this, v.y, v.x, v.z);
+    }
+    
+    
+    static Mtx4Template<T> getRotateMatrixZ(
+        T degrees
+    ) {
+        Mtx4Template m;
+        return makeRotateMatrixZ(m, degrees);
+    }
+    
+    static Mtx4Template<T>& makeRotateMatrixX(
+        Mtx4Template<T>& m,
+        T degrees
+    ) {
         T radians = t3::toRadian( degrees );
-        T s = t3::sinf(radians);
-        T c = t3::cosf(radians);
+        T sin = std::sinf(radians);
+        T cos = std::cosf(radians);
+
+        m.x.x = 1.0f;  m.x.y = 0.0f;  m.x.z = 0.0f;  m.x.w = 0.0f;
+        m.y.x = 0.0f;  m.y.y = cos;   m.y.z = -sin;  m.y.w = 0.0f;
+		m.z.x = 0.0f;  m.z.y = sin;   m.z.z =  cos;  m.z.w = 0.0f;
+		m.w.x = 0.0f;  m.w.y = 0.0f;  m.w.z = 0.0f;  m.w.w = 1.0f;
+        return m;
+    }
+    
+			 
+	static Mtx4Template<T>& makeRotateMatrixY(
+        Mtx4Template<T>& m,
+        T degrees
+    ) {
+        T radians = t3::toRadian( degrees );
+        T sin = std::sinf(radians);
+        T cos = std::cosf(radians);
+    
+        m.x.x =  cos;  m.x.y = 0.0f;  m.x.z =  sin;  m.x.w = 0.0f;
+        m.y.x = 0.0f;  m.y.y = 1.0f;  m.y.z = 0.0f;  m.y.w = 0.0f;
+        m.z.x = -sin;  m.z.y = 0.0f;  m.z.z =  cos;  m.z.w = 0.0f;
+		m.w.x = 0.0f;  m.w.y = 0.0f;  m.w.z = 0.0f;  m.w.w = 1.0f;
+	
+        return m;
+    }
+	
+    static Mtx4Template<T>& makeRotateMatrixZ(
+        Mtx4Template<T>& m,
+        T degrees
+    ) {
+        T radians = t3::toRadian( degrees );
+        T sin = std::sinf(radians);
+        T cos = std::cosf(radians);
         
-        m.x.x =  c; m.x.y = s; m.x.z = 0; m.x.w = 0;
-        m.y.x = -s; m.y.y = c; m.y.z = 0; m.y.w = 0;
-        m.z.x =  0; m.z.y = 0; m.z.z = 1; m.z.w = 0;
-        m.w.x =  0; m.w.y = 0; m.w.z = 0; m.w.w = 1;
+        m.x.x =  cos;  m.x.y =  sin;  m.x.z = 0.0f;  m.x.w = 0.0f;
+        m.y.x = -sin;  m.y.y =  cos;  m.y.z = 0.0f;  m.y.w = 0.0f;
+        m.z.x = 0.0f;  m.z.y = 0.0f;  m.z.z = 1.0f;  m.z.w = 0.0f;
+        m.w.x = 0.0f;  m.w.y = 0.0f;  m.w.z = 0.0f;  m.w.w = 1.0f;
     
         return m;
     }
+    
+    static Mtx4Template<T>& makeRotateYawPitchRoll(
+        Mtx4Template<T>& m,
+        T yaw,
+        T pitch,
+        T roll
+    ) {
+        Mtx4Template yaw_mtx;
+        makeRotateMatrixY(yaw_mtx, yaw);
+        
+        Mtx4Template pitch_mtx;
+        makeRotateMatrixY(pitch_mtx, pitch);
+        
+        Mtx4Template roll_mtx;
+        makeRotateMatrixY(roll_mtx, roll);
+        
+        m = yaw_mtx * pitch_mtx * roll_mtx;
+        
+    }
+    
+    
     
     void ortho( T left, T right, T bottom, T top, T near, T far ){
         makeOrthoMatrix( *this, left, right, bottom, top, near, far );

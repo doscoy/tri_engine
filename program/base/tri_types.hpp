@@ -17,7 +17,7 @@
 namespace t3 {
     
 typedef float           tick_t;
-typedef uint32_t           uid_t;
+typedef uint32_t        uid_t;
 typedef long long       filesize_t;
     
 }   // namespace t3
