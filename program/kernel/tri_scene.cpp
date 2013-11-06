@@ -1,10 +1,39 @@
 
 #include "tri_scene.hpp"
 #include "tri_develop_base.hpp"
-
+#include "../dbg/tri_debugmenu.hpp"
 
 namespace t3{
-    
+
+
+Scene::Scene(
+    const char* const scene_name
+)   : finish_(false)
+    , scene_name_( scene_name )
+    , scene_debug_menu_frame_(nullptr, scene_name)
+{
+    DebugMenu& debug_menu_root = DebugMenu::getInstance();
+
+    scene_debug_menu_frame_.attachSelf(
+        debug_menu_root.getMenuRoot()
+    );
+}
+
+Scene::~Scene()
+{
+    scene_debug_menu_frame_.detachSelf();
+}
+
+
+
+
+
+
+
+
+
+
+
     
 SceneManager::SceneManager()
     : current_scene_( nullptr )

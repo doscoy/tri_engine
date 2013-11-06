@@ -2,20 +2,22 @@
 #include "tri_scene_graph.hpp"
 #include "tri_root_node.hpp"
 #include "tri_camera_node.hpp"
+#include "tri_test_object_node.hpp"
+
 
 namespace t3 {
 inline namespace gfx {
 
-
+node_id_t SceneGraph::next_actor_id_ = 1;
 
 SceneGraph::SceneGraph()
     : root_()
     , camera_node_()
     , matrix_stack_()
     , alpha_scene_nodes_()
-    , actor_map_()
+    , node_map_()
 {
-    root_.reset(new RootNode);
+    root_ = RootNode::create(issueNodeID());
 }
 
 SceneGraph::~SceneGraph()
@@ -89,11 +91,11 @@ const Mtx4* SceneGraph::getTopMatrix()
 }
 
 
-std::shared_ptr<ISceneNode> SceneGraph::findActor(actor_id_t id)
+std::shared_ptr<ISceneNode> SceneGraph::findActor(node_id_t id)
 {
-    SceneActorMap::iterator it = actor_map_.find(id);
+    SceneActorMap::iterator it = node_map_.find(id);
     
-    if (it == actor_map_.end()) {
+    if (it == node_map_.end()) {
         std::shared_ptr<ISceneNode> null;
         return null;
     }
@@ -128,6 +130,22 @@ void SceneGraph::renderAlphaPass()
 
     //  最初に保存した行列と設定をもとに戻す
 }
+
+
+std::shared_ptr<CameraNode> SceneGraph::createCamera()
+{
+    return CameraNode::create(issueNodeID());
+}
+
+std::shared_ptr<TestObjectNode> SceneGraph::createTestObject()
+{
+    return TestObjectNode::create(issueNodeID());
+}
+
+
+
+
+
 
 }   // namespace gfx
 }   // namespace t3

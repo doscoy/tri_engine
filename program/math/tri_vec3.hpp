@@ -253,11 +253,8 @@ public:
         return tmp.lengthSquare();
     }
     
-    //  dump
-    void dump() const {
-        std::cout << "x:" << x << " y:" << y << " z:" << z << std::endl;
-    }
     
+/*
     template <typename P>
     P* Write(P* pData)
     {
@@ -265,7 +262,7 @@ public:
         *pVector++ = *this;
         return (P*) pVector;
     }
-    
+*/    
     //  ベクトル同士のブレンド
     static Vec3Template getBlendVector(
         const float t,
@@ -278,6 +275,7 @@ public:
             v1.z * (1 - t) + v2.z * t
         );
     }
+ 
 
 };
 

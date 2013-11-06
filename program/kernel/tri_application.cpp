@@ -138,9 +138,9 @@ Application::~Application()
 
 void Application::initializeApplication()
 {
+    DebugMenu::createInstance();
     GameSystem::createInstance();
     SceneManager::createInstance();
-    DebugMenu::createInstance();
     
     
     t3::GameSystem* game_system = t3::GameSystem::getInstancePointer();

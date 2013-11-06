@@ -9,7 +9,7 @@ inline namespace gfx {
 
 
 SceneNode::SceneNode(
-    actor_id_t actor_id,
+    node_id_t actor_id,
     std::string name,
     RenderPass render_pass,
     const Mtx4* to,
@@ -176,7 +176,7 @@ bool SceneNode::addChild(
 
 
 bool SceneNode::removeChild(
-    actor_id_t id
+    node_id_t id
 ) {
 
 	for (SceneNodeList::iterator it = children_.begin(); it != children_.end(); ++it) {

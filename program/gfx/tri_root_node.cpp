@@ -3,9 +3,9 @@
 namespace t3 {
 inline namespace gfx {
 
-RootNode::RootNode()
+RootNode::RootNode(node_id_t id)
     : SceneNode(
-        0,
+        id,
         "Root",
         RENDER_PASS_0,
         nullptr
@@ -26,8 +26,8 @@ RootNode::RootNode()
     std::shared_ptr<SceneNode> actor_group(
         new SceneNode(
             0,
-            "ActorGroup",
-            RENDER_PASS_ACTOR,
+            "DynamicGroup",
+            RENDER_PASS_DYNAMIC,
             nullptr
         )
     );
@@ -64,7 +64,7 @@ void RootNode::renderChildren(
     for (int pass = RENDER_PASS_0; pass < RENDER_PASS_LAST; ++pass) {
         switch (pass) {
             case RENDER_PASS_STATIC:
-            case RENDER_PASS_ACTOR:
+            case RENDER_PASS_DYNAMIC:
                 children_[pass]->renderChildren(scene_graph);
                 break;
             
@@ -76,6 +76,15 @@ void RootNode::renderChildren(
         }
     }
 }
+
+std::shared_ptr<RootNode> RootNode::create(
+    node_id_t id
+) {
+    std::shared_ptr<RootNode> node;
+    node.reset(new RootNode(id));
+    return node;
+}
+
 
 
 

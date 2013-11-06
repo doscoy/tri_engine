@@ -6,12 +6,11 @@ inline namespace gfx {
 
 
 TestObjectNode::TestObjectNode(
-    actor_id_t id,
-    std::string name
+    node_id_t id
 )   : SceneNode(
         id,
-        name,
-        RENDER_PASS_ACTOR,
+        "TestObj",
+        RENDER_PASS_DYNAMIC,
         nullptr
       )
 {
@@ -28,6 +27,16 @@ void TestObjectNode::render(
 ) {
 
 }
+
+
+std::shared_ptr<TestObjectNode> TestObjectNode::create(
+    node_id_t id
+) {
+    std::shared_ptr<TestObjectNode> node;
+    node.reset(new TestObjectNode(id));
+    return node;
+}
+
 
 }   // namespace gfx
 }   // namespace t3

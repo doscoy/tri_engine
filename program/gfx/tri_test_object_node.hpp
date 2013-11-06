@@ -15,14 +15,16 @@ class TestObjectNode
 {
 public:
     TestObjectNode(
-        actor_id_t id,
-        std::string name
+        node_id_t id
     );
     virtual ~TestObjectNode();
     
     
 public:
     virtual void render(SceneGraph* scene_graph);
+
+
+static std::shared_ptr<TestObjectNode> create(node_id_t id);
 
 private:
     Box box_;

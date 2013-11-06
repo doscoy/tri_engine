@@ -194,11 +194,6 @@ struct Vec2Template {
     bool operator==(const Vec2Template& v) const {
         return x_ == v.x_ && y_ == v.y_;
     }
-    
-    //  dump
-    void dump() const {
-        std::cout << "x_:" << x_ << " y_:" << y_ << std::endl;
-    }
 
 public:
     static T dotProduct(
@@ -257,7 +252,7 @@ public:
         );
     }
 
-    
+/*
     template <typename P>
     P* Write(P* pData)
     {
@@ -265,7 +260,7 @@ public:
         *pVector++ = *this;
         return (P*) pVector;
     }
-    
+*/    
     
 };
 

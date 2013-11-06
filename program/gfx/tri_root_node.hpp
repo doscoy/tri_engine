@@ -10,8 +10,10 @@ inline namespace gfx {
 class RootNode
     : public SceneNode
 {
-public:
+private:
     RootNode();
+    explicit RootNode(node_id_t id);
+    
     
 public:
     virtual bool addChild(std::shared_ptr<ISceneNode> kid) override;
@@ -22,6 +24,9 @@ public:
         return true;
     }
     
+    static std::shared_ptr<RootNode> create(
+        node_id_t id
+    );
 
 };
 

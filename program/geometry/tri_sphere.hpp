@@ -1,13 +1,7 @@
-//
-//  tri_sphere.hpp
-//  tri_sandbox_osx
-//
-//  Created by KANI Tetsuro on 2013/11/03.
-//  Copyright (c) 2013年 KANI Tetsuro. All rights reserved.
-//
+#ifndef TRI_SPHERE_HPP_INCLUDED
+#define TRI_SPHERE_HPP_INCLUDED
 
-#ifndef tri_sandbox_osx_tri_sphere_hpp
-#define tri_sandbox_osx_tri_sphere_hpp
+#include "../math/tri_vec3.hpp"
 
 namespace t3 {
 inline namespace geometry {
@@ -17,7 +11,7 @@ class Sphere
     Sphere() = default;
     Sphere(
         const Vec3& position,
-        const flaot radius
+        const float radius
     )   : position_(position)
         , radius_(radius)
     
@@ -49,7 +43,7 @@ public:
     
 private:
 
-    Vec3& position_;
+    Vec3 position_;
     float radius_;
 
 };
@@ -57,4 +51,4 @@ private:
 }   // geometry
 }   // t3
 
-#endif
+#endif  // TRI_SPHERE_HPP_INCLUDED

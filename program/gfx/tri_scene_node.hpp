@@ -54,7 +54,7 @@ public:
     ) = 0;
     
     virtual bool removeChild(
-        actor_id_t id
+        node_id_t id
     ) = 0;
     
     
@@ -75,7 +75,7 @@ class SceneNode : public ISceneNode
 
 public:
     SceneNode(
-        actor_id_t actor_id,
+        node_id_t actor_id,
         std::string name,
         RenderPass render_pass,
         const Mtx4* to,
@@ -134,7 +134,7 @@ public:
     ) override;
     
     virtual bool removeChild(
-        actor_id_t id
+        node_id_t id
     ) override;
     
     

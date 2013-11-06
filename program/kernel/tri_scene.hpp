@@ -8,7 +8,7 @@
 #include "base/tri_types.hpp"
 #include <memory>
 #include "../dbg/tri_trace.hpp"
-
+#include "../dbg/tri_debugmenu_frame.hpp"
 
 namespace t3 {
 inline namespace core {
@@ -59,17 +59,11 @@ class Scene
     friend class SceneGenerator;
     typedef Scene self_t;
     
-protected:
-    bool finish_;
-    const char* scene_name_;
-    
 public:
     explicit Scene(
         const char* const scene_name 
-    )   : finish_(false)
-        , scene_name_( scene_name )
-    {}
-    virtual ~Scene(){}
+    );
+    virtual ~Scene();
 
 public:
     virtual void initializeScene(){};
@@ -84,7 +78,15 @@ public:
     const char* getSceneName() const {
         return scene_name_;
     }
-    
+
+    DebugMenuFrame& getSceneDebugMenuFrame() {
+        return scene_debug_menu_frame_;
+    }
+
+protected:
+    bool finish_;
+    const char* scene_name_;
+    DebugMenuFrame scene_debug_menu_frame_;
 };
 
 class NullScene

@@ -18,7 +18,6 @@ RenderLayer::RenderLayer(
     , dmi_visible_(&dmf_me_, "VISIBLE", visible_, 1)
     , dmi_pause_(&dmf_me_, "PAUSE", pause_, 1)
 {
-    setLayerName(name);
 }
     
 RenderLayer::RenderLayer(const char* const name)

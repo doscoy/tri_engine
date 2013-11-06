@@ -6,8 +6,8 @@
 //  Copyright (c) 2013年 KANI Tetsuro. All rights reserved.
 //
 
-#ifndef __tri_sandbox_osx__tri_draw_layer__
-#define __tri_sandbox_osx__tri_draw_layer__
+#ifndef TRI_DRAW_LAYER_HPP_INCLUDED
+#define TRI_DRAW_LAYER_HPP_INCLUDED
 
 #include <iostream>
 #include <functional>
@@ -68,4 +68,4 @@ private:
 
 
 
-#endif /* defined(__tri_sandbox_osx__tri_draw_layer__) */
+#endif // TRI_DRAW_LAYER_HPP_INCLUDED

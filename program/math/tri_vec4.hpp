@@ -10,8 +10,6 @@
 #ifndef TRI_VEC4_HPP_INCLUDED
 #define TRI_VEC4_HPP_INCLUDED
 
-#include <iostream>
-
 #include "tri_vec3.hpp"
 
 namespace t3 {
@@ -46,10 +44,6 @@ struct Vec4Template {
         return &x;
     }
   
-    //  dump
-    void dump() const {
-        std::cout << "x:" << x << " y:" << y << " z:" << z << " w:" << w << std::endl;
-    }
 };
 
 

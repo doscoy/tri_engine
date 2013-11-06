@@ -7,7 +7,7 @@ inline namespace gfx {
 
 
 SceneNodeProperties::SceneNodeProperties(
-    actor_id_t id,
+    node_id_t id,
     std::string name,
     RenderPass render_pass,
     AlphaType alpha_type

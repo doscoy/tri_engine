@@ -15,8 +15,10 @@ class SceneGraph;
 class CameraNode
     : public SceneNode
 {
-public:
+private:
     CameraNode();
+    explicit CameraNode(node_id_t id);
+public:
     virtual ~CameraNode();
 
 public:
@@ -27,6 +29,10 @@ public:
     }
     
     virtual void render(SceneGraph* scene_graph);
+    
+    static std::shared_ptr<CameraNode> create(
+        node_id_t id
+    );
     
 protected:
     Camera camera_;

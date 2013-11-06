@@ -6,6 +6,15 @@
 
 
 namespace t3 {
+
+inline namespace geometry {
+
+class Plane;
+
+}   // namespace geometry
+
+
+
 inline namespace dbg {
 
 
@@ -40,6 +49,12 @@ void drawRectangle(
 void drawPlane(
     const Vec3& center,
     const Vec3& normal,
+    const Vec3& size,
+    const Color& color
+);
+
+inline void drawPlane(
+    const Plane& plane,
     const Vec3& size,
     const Color& color
 );

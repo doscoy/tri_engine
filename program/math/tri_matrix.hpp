@@ -330,7 +330,8 @@ struct Mtx4Template {
         makeRotateMatrixY(roll_mtx, roll);
         
         m = yaw_mtx * pitch_mtx * roll_mtx;
-        
+
+        return m;
     }
     
     

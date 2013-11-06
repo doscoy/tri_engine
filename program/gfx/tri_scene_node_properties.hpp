@@ -16,12 +16,12 @@
 namespace t3 {
 inline namespace gfx {
 
-typedef uint32_t actor_id_t;
+typedef uint32_t node_id_t;
 
 enum RenderPass {
     RENDER_PASS_0,          // 開始パス
     RENDER_PASS_STATIC,     // 環境とレベルジオメトリ
-    RENDER_PASS_ACTOR,      // 移動可能オブジェクト
+    RENDER_PASS_DYNAMIC,    // 移動可能オブジェクト
     RENDER_PASS_SKY,        // 遠景
     RENDER_PASS_LAST,       // ループカウンタ
 };
@@ -39,14 +39,14 @@ class SceneNodeProperties
     
 public:
     SceneNodeProperties(
-        actor_id_t id,
+        node_id_t id,
         std::string name,
         RenderPass render_pass,
         AlphaType alpha_type
     );
     
 protected:
-    actor_id_t actor_id_;
+    node_id_t actor_id_;
     std::string name_;
     Mtx4 to_world_;
     Mtx4 from_world_;
@@ -64,7 +64,7 @@ protected:
     }
     
 public:
-    const actor_id_t getActorId() const {
+    const node_id_t getActorId() const {
         return actor_id_;
     }
     
@@ -121,6 +121,8 @@ public:
     const Material& getMaterial() const {
         return material_;
     }
+    
+    
     
 };
 

@@ -7,12 +7,11 @@ inline namespace theater {
 
 void Box::render()
 {
-    glMatrixMode(GL_MODELVIEW);
-    Mtx4 view;
-    Camera cam;
-    cam.getViewMatrix( view );
-    glLoadMatrixf( view.pointer() );
-
+    ogl::matrixMode(GL_MODELVIEW);
+    const Mtx4* transform = getTransformMatrix();
+    ogl::loadMatrixf(transform->pointer());
+    
+    
 
 }
 

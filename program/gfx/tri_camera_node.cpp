@@ -5,9 +5,9 @@
 namespace t3 {
 inline namespace gfx {
 
-CameraNode::CameraNode()
+CameraNode::CameraNode(node_id_t id)
     : SceneNode(
-        0,
+        id,
         "Camera",
         RENDER_PASS_0,
         nullptr
@@ -35,6 +35,14 @@ void CameraNode::render(SceneGraph* scene_graph)
     }
 }
 
+
+std::shared_ptr<CameraNode> CameraNode::create(
+    node_id_t id
+) {
+    std::shared_ptr<CameraNode> node;
+    node.reset(new CameraNode(id));
+    return node;
+}
 
 
 
