@@ -32,9 +32,9 @@ struct Vec4Template {
     {}
     
     Vec4Template(Vec3Template<T> v)
-        : x(v.x)
-        , y(v.y)
-        , z(v.z)
+        : x(v.x_)
+        , y(v.y_)
+        , z(v.z_)
         , w(1.0f)
     {
     }

@@ -32,9 +32,9 @@ public:
         const float y,
         const float z
     ) {
-        size_.x = x;
-        size_.y = y;
-        size_.z = z;
+        size_.x_ = x;
+        size_.y_ = y;
+        size_.z_ = z;
     }
 
     const Vec3& getSize() const {

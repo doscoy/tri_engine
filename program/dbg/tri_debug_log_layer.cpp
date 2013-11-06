@@ -16,6 +16,7 @@ DebugLogLayer::DebugLogLayer(const char* const name)
     , debug_log_buffer_()
     , log_show_offset_(0)
 {
+    hideLayer();
 }
 
 

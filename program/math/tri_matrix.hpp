@@ -169,7 +169,7 @@ struct Mtx4Template {
     
     void translate(const Vec3Template<T>& v)
     {
-        makeTranslateMatrix( *this, v.x, v.y, v.z );
+        makeTranslateMatrix( *this, v.x_, v.y_, v.z_ );
     }
     
     void translate( T x, T y, T z )
@@ -219,7 +219,7 @@ struct Mtx4Template {
     
     void scale( const Vec3Template<T> v )
     {
-        makeScaleMatrix( *this, v.x, v.y, v.z );
+        makeScaleMatrix( *this, v.x_, v.y_, v.z_ );
     }
     
     void scale( T x, T y, T z )
@@ -255,7 +255,7 @@ struct Mtx4Template {
     }
     
     void rotate(Vec3Template<T> v) {
-        makeRotateYawPitchRoll(*this, v.y, v.x, v.z);
+        makeRotateYawPitchRoll(*this, v.y_, v.x_, v.z_);
     }
     
     
@@ -408,12 +408,17 @@ struct Mtx4Template {
         Vec3Template<T> y = z.crossProduct(x).getNormalized();
         
         
-        mtx.x = Vec4Template<T>(x.x, x.y, x.z, 0);
-        mtx.y = Vec4Template<T>(y.x, y.y, y.z, 0);
-        mtx.z = Vec4Template<T>(z.x, z.y, z.z, 0);
+        mtx.x = Vec4Template<T>(x.x_, x.y_, x.z_, 0);
+        mtx.y = Vec4Template<T>(y.x_, y.y_, y.z_, 0);
+        mtx.z = Vec4Template<T>(z.x_, z.y_, z.z_, 0);
         mtx.w = Vec4Template<T>(0, 0, 0, 1);
         
-        Vec4Template<T> eyePrime = mtx * Vec4Template<T>(-eye.x, -eye.y, -eye.z, 1);
+        Vec4Template<T> eyePrime = mtx * Vec4Template<T>(
+            -eye.x_,
+            -eye.y_,
+            -eye.z_,
+            1
+        );
         mtx = mtx.transposed();
         mtx.w = eyePrime;        
     }

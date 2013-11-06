@@ -23,9 +23,9 @@ public:
         float z
     ) {
         calc_request_ = true;
-        position_.x = x;
-        position_.y = y;
-        position_.z = z;
+        position_.x_ = x;
+        position_.y_ = y;
+        position_.z_ = z;
     }
     
     void setPosition(
@@ -46,9 +46,9 @@ public:
         float z
     ) {
         calc_request_ = true;
-        rotation_.x = x;
-        rotation_.y = y;
-        rotation_.z = z;
+        rotation_.x_ = x;
+        rotation_.y_ = y;
+        rotation_.z_ = z;
     }
     
     void setRotation(
@@ -70,9 +70,9 @@ public:
         float z
     ) {
         calc_request_ = true;
-        scale_.x = x;
-        scale_.y = y;
-        scale_.z = z;
+        scale_.x_ = x;
+        scale_.y_ = y;
+        scale_.z_ = z;
     }
     
     void setScale(

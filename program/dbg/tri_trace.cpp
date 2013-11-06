@@ -124,9 +124,9 @@ void traceValue(
         "[%d] %s=x:%f y:%f z:%f\n",
         frame_counter_.now(),
         name,
-        value.x,
-        value.y,
-        value.z
+        value.x_,
+        value.y_,
+        value.z_
     );
 }
 

@@ -83,9 +83,9 @@ Camera::setPosition(
     const float y,
     const float z
 ){
-    position_.x = x;
-    position_.y = y;
-    position_.z = z;
+    position_.x_ = x;
+    position_.y_ = y;
+    position_.z_ = z;
 
     recalculation_request_ = true;
 }
@@ -104,7 +104,7 @@ void
 Camera::setPositionX(
     const float val
 ){
-    position_.x = val;
+    position_.x_ = val;
     recalculation_request_ = true;
 }
 
@@ -113,7 +113,7 @@ void
 Camera::setPositionY(
     const float val
 ){
-    position_.y = val;
+    position_.y_ = val;
     recalculation_request_ = true;
 }
 
@@ -122,7 +122,7 @@ void
 Camera::setPositionZ(
     const float val
 ){
-    position_.z = val;
+    position_.z_ = val;
     recalculation_request_ = true;
 }
 
@@ -140,9 +140,9 @@ Camera::setTargetPosition(
     const float y,
     const float z
 ){
-    target_.x = x;
-    target_.y = y;
-    target_.z = z;
+    target_.x_ = x;
+    target_.y_ = y;
+    target_.z_ = z;
 
     recalculation_request_ = true;
 }
@@ -223,7 +223,7 @@ Camera::calculateDirection()
 
     //  右方向ベクトル計算
     front_ = target_ - position_;
-    if ( !isZeroFloat( front_.x ) || !isZeroFloat( front_.z ) ){
+    if ( !isZeroFloat( front_.x_ ) || !isZeroFloat( front_.z_ ) ){
         const Vec3 axis_y( 0, 1, 0 );
         Vec3::getCrossProduct( right_, front_, axis_y );
     }

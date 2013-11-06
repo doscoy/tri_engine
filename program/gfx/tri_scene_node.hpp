@@ -150,9 +150,9 @@ public:
 
     void setPosition(Vec3& pos) {
         properties_.getToWorldMatrix().setPosition(
-            pos.x,
-            pos.y,
-            pos.z
+            pos.x_,
+            pos.y_,
+            pos.z_
         );
     }
     

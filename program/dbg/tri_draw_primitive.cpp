@@ -92,10 +92,10 @@ void drawPlane(
     ogl::color4ub(color.red_, color.green_, color.blue_, color.alpha_);
 	ogl::begin( GL_QUADS );
     ogl::normal3fv( normal.pointer() );
-    ogl::vertex3f( center.x - size.x, center.y, center.z - size.z );
-    ogl::vertex3f( center.x - size.x, center.y, center.z + size.z );
-    ogl::vertex3f( center.x + size.x, center.y, center.z + size.z );
-    ogl::vertex3f( center.x + size.x, center.y, center.z - size.z );   
+    ogl::vertex3f( center.x_ - size.x_, center.y_, center.z_ - size.z_ );
+    ogl::vertex3f( center.x_ - size.x_, center.y_, center.z_ + size.z_ );
+    ogl::vertex3f( center.x_ + size.x_, center.y_, center.z_ + size.z_ );
+    ogl::vertex3f( center.x_ + size.x_, center.y_, center.z_ - size.z_ );
     ogl::end();
 }
 

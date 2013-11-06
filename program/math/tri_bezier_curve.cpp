@@ -36,9 +36,9 @@ Vec3& calcBezierCurve2(
 	const float t
 ){
 
-	ans.x = calcBezier2Curve( p0.x, p1.x, p2.x, t );
-	ans.y = calcBezier2Curve( p0.y, p1.y, p2.y, t );
-	ans.z = calcBezier2Curve( p0.z, p1.z, p2.z, t );
+	ans.x_ = calcBezier2Curve( p0.x_, p1.x_, p2.x_, t );
+	ans.y_ = calcBezier2Curve( p0.y_, p1.y_, p2.y_, t );
+	ans.z_ = calcBezier2Curve( p0.z_, p1.z_, p2.z_, t );
 	
 	return ans;
 }
