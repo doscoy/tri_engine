@@ -16,32 +16,32 @@ namespace t3 {
     
 template <typename T>
 struct Vec4Template {
-    T x;
-    T y;
-    T z;
-    T w;
+    T x_;
+    T y_;
+    T z_;
+    T w_;
         
     Vec4Template()
     {}
         
     Vec4Template( T x, T y, T z, T w )
-        : x(x)
-        , y(y)
-        , z(z)
-        , w(w)
+        : x_(x)
+        , y_(y)
+        , z_(z)
+        , w_(w)
     {}
     
     Vec4Template(Vec3Template<T> v)
-        : x(v.x_)
-        , y(v.y_)
-        , z(v.z_)
-        , w(1.0f)
+        : x_(v.x_)
+        , y_(v.y_)
+        , z_(v.z_)
+        , w_(1.0f)
     {
     }
     
     
     const T* pointer() const {
-        return &x;
+        return &x_;
     }
   
 };

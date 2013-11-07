@@ -17,16 +17,16 @@ template <typename T>
 struct Mtx2Template {
     Mtx2Template()
     {
-        x.x = 1; x.y = 0;
-        y.x = 0; y.y = 1;
+        x_.x_ = 1; x_.y_ = 0;
+        y_.x_ = 0; y_.y_ = 1;
     }
     Mtx2Template(const T* m)
     {
-        x.x = m[0]; x.y = m[1];
-        y.x = m[2]; y.y = m[3];
+        x_.x_ = m[0]; x_.y_ = m[1];
+        y_.x_ = m[2]; y_.y_ = m[3];
     }
-    Vec2Template<T> x;
-    Vec2Template<T> y;
+    Vec2Template<T> x_;
+    Vec2Template<T> y_;
 };
 
 
@@ -34,34 +34,35 @@ template <typename T>
 struct Mtx3Template {
     Mtx3Template()
     {
-        x.x = 1; x.y = 0; x.z = 0;
-        y.x = 0; y.y = 1; y.z = 0;
-        z.x = 0; z.y = 0; z.z = 1;
+        x_.x_ = 1; x_.y_ = 0; x_.z_ = 0;
+        y_.x_ = 0; y_.y_ = 1; y_.z_ = 0;
+        z_.x_ = 0; z_.y_ = 0; z_.z_ = 1;
     }
     Mtx3Template(const T* m)
     {
-        x.x = m[0]; x.y = m[1]; x.z = m[2];
-        y.x = m[3]; y.y = m[4]; y.z = m[5];
-        z.x = m[6]; z.y = m[7]; z.z = m[8];
+        x_.x_ = m[0]; x_.y_ = m[1]; x_.z_ = m[2];
+        y_.x_ = m[3]; y_.y_ = m[4]; y_.z_ = m[5];
+        z_.x_ = m[6]; z_.y_ = m[7]; z_.z_ = m[8];
     }
-    Mtx3Template(Vec3 x, Vec3 y, Vec3 z) : x(x), y(y), z(z)
+    Mtx3Template(Vec3 x, Vec3 y, Vec3 z)
+        : x_(x), y_(y), z_(z)
     {
     }
     Mtx3Template transposed() const
     {
         Mtx3Template m;
-        m.x.x = x.x; m.x.y = y.x; m.x.z = z.x;
-        m.y.x = x.y; m.y.y = y.y; m.y.z = z.y;
-        m.z.x = x.z; m.z.y = y.z; m.z.z = z.z;
+        m.x_.x_ = x_.x_; m.x_.y_ = y_.x_; m.x_.z_ = z_.x_;
+        m.y_.x_ = x_.y_; m.y_.y_ = y_.y_; m.y_.z_ = z_.y_;
+        m.z_.x_ = x_.z_; m.z_.y_ = y_.z_; m.z_.z_ = z_.z_;
         return m;
     }
     const T* Pointer() const
     {
-        return &x.x;
+        return &x_.x_;
     }
-    Vec3Template<T> x;
-    Vec3Template<T> y;
-    Vec3Template<T> z;
+    Vec3Template<T> x_;
+    Vec3Template<T> y_;
+    Vec3Template<T> z_;
 };
 
 template <typename T>
@@ -72,37 +73,37 @@ struct Mtx4Template {
     }
     Mtx4Template(const Mtx3Template<T>& m)
     {
-        x.x = m.x.x; x.y = m.x.y; x.z = m.x.z; x.w = 0;
-        y.x = m.y.x; y.y = m.y.y; y.z = m.y.z; y.w = 0;
-        z.x = m.z.x; z.y = m.z.y; z.z = m.z.z; z.w = 0;
-        w.x = 0; w.y = 0; w.z = 0; w.w = 1;
+        x_.x_ = m.x_.x_; x_.y_ = m.x_.y_; x_.z_ = m.x_.z_; x_.w_ = 0;
+        y_.x_ = m.y_.x_; y_.y_ = m.y_.y_; y_.z_ = m.y_.z_; y_.w_ = 0;
+        z_.x_ = m.z_.x_; z_.y_ = m.z_.y_; z_.z_ = m.z_.z_; z_.w_ = 0;
+        w_.x_ = 0; w_.y_ = 0; w_.z_ = 0; w_.w_ = 1;
     }
     Mtx4Template(const T* m)
     {
-        x.x = m[0];  x.y = m[1];  x.z = m[2];  x.w = m[3];
-        y.x = m[4];  y.y = m[5];  y.z = m[6];  y.w = m[7];
-        z.x = m[8];  z.y = m[9];  z.z = m[10]; z.w = m[11];
-        w.x = m[12]; w.y = m[13]; w.z = m[14]; w.w = m[15];
+        x_.x_ = m[0];  x_.y_ = m[1];  x_.z_ = m[2];  x_.w_ = m[3];
+        y_.x_ = m[4];  y_.y_ = m[5];  y_.z_ = m[6];  y_.w_ = m[7];
+        z_.x_ = m[8];  z_.y_ = m[9];  z_.z_ = m[10]; z_.w_ = m[11];
+        w_.x_ = m[12]; w_.y_ = m[13]; w_.z_ = m[14]; w_.w_ = m[15];
     }
     Mtx4Template operator * (const Mtx4Template& b) const
     {
         Mtx4Template m;
-        m.x.x = x.x * b.x.x + x.y * b.y.x + x.z * b.z.x + x.w * b.w.x;
-        m.x.y = x.x * b.x.y + x.y * b.y.y + x.z * b.z.y + x.w * b.w.y;
-        m.x.z = x.x * b.x.z + x.y * b.y.z + x.z * b.z.z + x.w * b.w.z;
-        m.x.w = x.x * b.x.w + x.y * b.y.w + x.z * b.z.w + x.w * b.w.w;
-        m.y.x = y.x * b.x.x + y.y * b.y.x + y.z * b.z.x + y.w * b.w.x;
-        m.y.y = y.x * b.x.y + y.y * b.y.y + y.z * b.z.y + y.w * b.w.y;
-        m.y.z = y.x * b.x.z + y.y * b.y.z + y.z * b.z.z + y.w * b.w.z;
-        m.y.w = y.x * b.x.w + y.y * b.y.w + y.z * b.z.w + y.w * b.w.w;
-        m.z.x = z.x * b.x.x + z.y * b.y.x + z.z * b.z.x + z.w * b.w.x;
-        m.z.y = z.x * b.x.y + z.y * b.y.y + z.z * b.z.y + z.w * b.w.y;
-        m.z.z = z.x * b.x.z + z.y * b.y.z + z.z * b.z.z + z.w * b.w.z;
-        m.z.w = z.x * b.x.w + z.y * b.y.w + z.z * b.z.w + z.w * b.w.w;
-        m.w.x = w.x * b.x.x + w.y * b.y.x + w.z * b.z.x + w.w * b.w.x;
-        m.w.y = w.x * b.x.y + w.y * b.y.y + w.z * b.z.y + w.w * b.w.y;
-        m.w.z = w.x * b.x.z + w.y * b.y.z + w.z * b.z.z + w.w * b.w.z;
-        m.w.w = w.x * b.x.w + w.y * b.y.w + w.z * b.z.w + w.w * b.w.w;
+        m.x_.x_ = x_.x_ * b.x_.x_ + x_.y_ * b.y_.x_ + x_.z_ * b.z_.x_ + x_.w_ * b.w_.x_;
+        m.x_.y_ = x_.x_ * b.x_.y_ + x_.y_ * b.y_.y_ + x_.z_ * b.z_.y_ + x_.w_ * b.w_.y_;
+        m.x_.z_ = x_.x_ * b.x_.z_ + x_.y_ * b.y_.z_ + x_.z_ * b.z_.z_ + x_.w_ * b.w_.z_;
+        m.x_.w_ = x_.x_ * b.x_.w_ + x_.y_ * b.y_.w_ + x_.z_ * b.z_.w_ + x_.w_ * b.w_.w_;
+        m.y_.x_ = y_.x_ * b.x_.x_ + y_.y_ * b.y_.x_ + y_.z_ * b.z_.x_ + y_.w_ * b.w_.x_;
+        m.y_.y_ = y_.x_ * b.x_.y_ + y_.y_ * b.y_.y_ + y_.z_ * b.z_.y_ + y_.w_ * b.w_.y_;
+        m.y_.z_ = y_.x_ * b.x_.z_ + y_.y_ * b.y_.z_ + y_.z_ * b.z_.z_ + y_.w_ * b.w_.z_;
+        m.y_.w_ = y_.x_ * b.x_.w_ + y_.y_ * b.y_.w_ + y_.z_ * b.z_.w_ + y_.w_ * b.w_.w_;
+        m.z_.x_ = z_.x_ * b.x_.x_ + z_.y_ * b.y_.x_ + z_.z_ * b.z_.x_ + z_.w_ * b.w_.x_;
+        m.z_.y_ = z_.x_ * b.x_.y_ + z_.y_ * b.y_.y_ + z_.z_ * b.z_.y_ + z_.w_ * b.w_.y_;
+        m.z_.z_ = z_.x_ * b.x_.z_ + z_.y_ * b.y_.z_ + z_.z_ * b.z_.z_ + z_.w_ * b.w_.z_;
+        m.z_.w_ = z_.x_ * b.x_.w_ + z_.y_ * b.y_.w_ + z_.z_ * b.z_.w_ + z_.w_ * b.w_.w_;
+        m.w_.x_ = w_.x_ * b.x_.x_ + w_.y_ * b.y_.x_ + w_.z_ * b.z_.x_ + w_.w_ * b.w_.x_;
+        m.w_.y_ = w_.x_ * b.x_.y_ + w_.y_ * b.y_.y_ + w_.z_ * b.z_.y_ + w_.w_ * b.w_.y_;
+        m.w_.z_ = w_.x_ * b.x_.z_ + w_.y_ * b.y_.z_ + w_.z_ * b.z_.z_ + w_.w_ * b.w_.z_;
+        m.w_.w_ = w_.x_ * b.x_.w_ + w_.y_ * b.y_.w_ + w_.z_ * b.z_.w_ + w_.w_ * b.w_.w_;
         return m;
     }
 
@@ -113,10 +114,10 @@ struct Mtx4Template {
     
     Vec4Template<T> xform(const Vec4Template<T>& b) const {
         Vec4Template<T> v;
-        v.x = x.x * b.x + x.y * b.y + x.z * b.z + x.w * b.w;
-        v.y = y.x * b.x + y.y * b.y + y.z * b.z + y.w * b.w;
-        v.z = z.x * b.x + z.y * b.y + z.z * b.z + z.w * b.w;
-        v.w = w.x * b.x + w.y * b.y + w.z * b.z + w.w * b.w;
+        v.x_ = x_.x_ * b.x_ + x_.y_ * b.y_ + x_.z_ * b.z_ + x_.w_ * b.w_;
+        v.y_ = y_.x_ * b.x_ + y_.y_ * b.y_ + y_.z_ * b.z_ + y_.w_ * b.w_;
+        v.z_ = z_.x_ * b.x_ + z_.y_ * b.y_ + z_.z_ * b.z_ + z_.w_ * b.w_;
+        v.w_ = w_.x_ * b.x_ + w_.y_ * b.y_ + w_.z_ * b.z_ + w_.w_ * b.w_;
         return v;
     }
     
@@ -129,37 +130,37 @@ struct Mtx4Template {
     Mtx4Template transposed() const
     {
         Mtx4Template m;
-        m.x.x = x.x; m.x.y = y.x; m.x.z = z.x; m.x.w = w.x;
-        m.y.x = x.y; m.y.y = y.y; m.y.z = z.y; m.y.w = w.y;
-        m.z.x = x.z; m.z.y = y.z; m.z.z = z.z; m.z.w = w.z;
-        m.w.x = x.w; m.w.y = y.w; m.w.z = z.w; m.w.w = w.w;
+        m.x_.x_ = x_.x_; m.x_.y_ = y_.x_; m.x_.z_ = z_.x_; m.x_.w_ = w_.x_;
+        m.y_.x_ = x_.y_; m.y_.y_ = y_.y_; m.y_.z_ = z_.y_; m.y_.w_ = w_.y_;
+        m.z_.x_ = x_.z_; m.z_.y_ = y_.z_; m.z_.z_ = z_.z_; m.z_.w_ = w_.z_;
+        m.w_.x_ = x_.w_; m.w_.y_ = y_.w_; m.w_.z_ = z_.w_; m.w_.w_ = w_.w_;
         return m;
     }
     
     Mtx3Template<T> toMat3() const
     {
         Mtx3Template<T> m;
-        m.x.x = x.x; m.y.x = y.x; m.z.x = z.x;
-        m.x.y = x.y; m.y.y = y.y; m.z.y = z.y;
-        m.x.z = x.z; m.y.z = y.z; m.z.z = z.z;
+        m.x_.x_ = x_.x_; m.y_.x_ = y_.x_; m.z_.x_ = z_.x_;
+        m.x_.y_ = x_.y_; m.y_.y_ = y_.y_; m.z_.y_ = z_.y_;
+        m.x_.z_ = x_.z_; m.y_.z_ = y_.z_; m.z_.z_ = z_.z_;
         return m;
     }
     
     T* pointer() {
-        return &x.x;
+        return &x_.x_;
     }
     
     const T* pointer() const
     {
-        return &x.x;
+        return &x_.x_;
     }
     
     void identity()
     {
-        x.x = 1; x.y = 0; x.z = 0; x.w = 0;
-        y.x = 0; y.y = 1; y.z = 0; y.w = 0;
-        z.x = 0; z.y = 0; z.z = 1; z.w = 0;
-        w.x = 0; w.y = 0; w.z = 0; w.w = 1;
+        x_.x_ = 1; x_.y_ = 0; x_.z_ = 0; x_.w_ = 0;
+        y_.x_ = 0; y_.y_ = 1; y_.z_ = 0; y_.w_ = 0;
+        z_.x_ = 0; z_.y_ = 0; z_.z_ = 1; z_.w_ = 0;
+        w_.x_ = 0; w_.y_ = 0; w_.z_ = 0; w_.w_ = 1;
     }
     
     static Mtx4Template<T> getIdentity()
@@ -190,10 +191,10 @@ struct Mtx4Template {
         T y,
         T z
     ) {
-        mtx.x.x = 1; mtx.x.y = 0; mtx.x.z = 0; mtx.x.w = 0;
-        mtx.y.x = 0; mtx.y.y = 1; mtx.y.z = 0; mtx.y.w = 0;
-        mtx.z.x = 0; mtx.z.y = 0; mtx.z.z = 1; mtx.z.w = 0;
-        mtx.w.x = x; mtx.w.y = y; mtx.w.z = z; mtx.w.w = 1;
+        mtx.x_.x_ = 1; mtx.x_.y_ = 0; mtx.x_.z_ = 0; mtx.x_.w_ = 0;
+        mtx.y_.x_ = 0; mtx.y_.y_ = 1; mtx.y_.z_ = 0; mtx.y_.w_ = 0;
+        mtx.z_.x_ = 0; mtx.z_.y_ = 0; mtx.z_.z_ = 1; mtx.z_.w_ = 0;
+        mtx.w_.x_ = x; mtx.w_.y_ = y; mtx.w_.z_ = z; mtx.w_.w_ = 1;
     }
     
     void setPosition(
@@ -201,13 +202,13 @@ struct Mtx4Template {
         T y,
         T z
     ) {
-        w.x = x;
-        w.y = y;
-        w.z = z;
+        w_.x_ = x;
+        w_.y_ = y;
+        w_.z_ = z;
     }
     
     Vec3Template<T> getPosition() const {
-        return Vec3Template<T>(w.x, w.y, w.z);
+        return Vec3Template<T>(w_.x_, w_.y_, w_.z_);
     }
     
     
@@ -236,10 +237,10 @@ struct Mtx4Template {
     
     static void makeScaleMatrix( Mtx4Template<T>& m, T x, T y, T z)
     {
-        m.x.x = x; m.x.y = 0; m.x.z = 0; m.x.w = 0;
-        m.y.x = 0; m.y.y = y; m.y.z = 0; m.y.w = 0;
-        m.z.x = 0; m.z.y = 0; m.z.z = z; m.z.w = 0;
-        m.w.x = 0; m.w.y = 0; m.w.z = 0; m.w.w = 1;
+        m.x_.x_ = x; m.x_.y_ = 0; m.x_.z_ = 0; m.x_.w_ = 0;
+        m.y_.x_ = 0; m.y_.y_ = y; m.y_.z_ = 0; m.y_.w_ = 0;
+        m.z_.x_ = 0; m.z_.y_ = 0; m.z_.z_ = z; m.z_.w_ = 0;
+        m.w_.x_ = 0; m.w_.y_ = 0; m.w_.z_ = 0; m.w_.w_ = 1;
     }
     
     void rotateX(T r) {
@@ -274,10 +275,10 @@ struct Mtx4Template {
         T sin = std::sinf(radians);
         T cos = std::cosf(radians);
 
-        m.x.x = 1.0f;  m.x.y = 0.0f;  m.x.z = 0.0f;  m.x.w = 0.0f;
-        m.y.x = 0.0f;  m.y.y = cos;   m.y.z = -sin;  m.y.w = 0.0f;
-		m.z.x = 0.0f;  m.z.y = sin;   m.z.z =  cos;  m.z.w = 0.0f;
-		m.w.x = 0.0f;  m.w.y = 0.0f;  m.w.z = 0.0f;  m.w.w = 1.0f;
+        m.x_.x_ = 1.0f;  m.x_.y_ = 0.0f;  m.x_.z_ = 0.0f;  m.x_.w_ = 0.0f;
+        m.y_.x_ = 0.0f;  m.y_.y_ = cos;   m.y_.z_ = -sin;  m.y_.w_ = 0.0f;
+		m.z_.x_ = 0.0f;  m.z_.y_ = sin;   m.z_.z_ =  cos;  m.z_.w_ = 0.0f;
+		m.w_.x_ = 0.0f;  m.w_.y_ = 0.0f;  m.w_.z_ = 0.0f;  m.w_.w_ = 1.0f;
         return m;
     }
     
@@ -290,10 +291,10 @@ struct Mtx4Template {
         T sin = std::sinf(radians);
         T cos = std::cosf(radians);
     
-        m.x.x =  cos;  m.x.y = 0.0f;  m.x.z =  sin;  m.x.w = 0.0f;
-        m.y.x = 0.0f;  m.y.y = 1.0f;  m.y.z = 0.0f;  m.y.w = 0.0f;
-        m.z.x = -sin;  m.z.y = 0.0f;  m.z.z =  cos;  m.z.w = 0.0f;
-		m.w.x = 0.0f;  m.w.y = 0.0f;  m.w.z = 0.0f;  m.w.w = 1.0f;
+        m.x_.x_ =  cos;  m.x_.y_ = 0.0f;  m.x_.z_ =  sin;  m.x_.w_ = 0.0f;
+        m.y_.x_ = 0.0f;  m.y_.y_ = 1.0f;  m.y_.z_ = 0.0f;  m.y_.w_ = 0.0f;
+        m.z_.x_ = -sin;  m.z_.y_ = 0.0f;  m.z_.z_ =  cos;  m.z_.w_ = 0.0f;
+		m.w_.x_ = 0.0f;  m.w_.y_ = 0.0f;  m.w_.z_ = 0.0f;  m.w_.w_ = 1.0f;
 	
         return m;
     }
@@ -306,10 +307,10 @@ struct Mtx4Template {
         T sin = std::sinf(radians);
         T cos = std::cosf(radians);
         
-        m.x.x =  cos;  m.x.y =  sin;  m.x.z = 0.0f;  m.x.w = 0.0f;
-        m.y.x = -sin;  m.y.y =  cos;  m.y.z = 0.0f;  m.y.w = 0.0f;
-        m.z.x = 0.0f;  m.z.y = 0.0f;  m.z.z = 1.0f;  m.z.w = 0.0f;
-        m.w.x = 0.0f;  m.w.y = 0.0f;  m.w.z = 0.0f;  m.w.w = 1.0f;
+        m.x_.x_ =  cos;  m.x_.y_ =  sin;  m.x_.z_ = 0.0f;  m.x_.w_ = 0.0f;
+        m.y_.x_ = -sin;  m.y_.y_ =  cos;  m.y_.z_ = 0.0f;  m.y_.w_ = 0.0f;
+        m.z_.x_ = 0.0f;  m.z_.y_ = 0.0f;  m.z_.z_ = 1.0f;  m.z_.w_ = 0.0f;
+        m.w_.x_ = 0.0f;  m.w_.y_ = 0.0f;  m.w_.z_ = 0.0f;  m.w_.w_ = 1.0f;
     
         return m;
     }
@@ -349,10 +350,10 @@ struct Mtx4Template {
         T ty = -(top + bottom) / (top - bottom);
         T tz = -(far + near) / (far - near);
         
-        mtx.x.x = a; mtx.x.y = 0; mtx.x.z = 0; mtx.x.w = 0;
-        mtx.y.x = 0; mtx.y.y = b; mtx.y.z = 0; mtx.y.w = 0;
-        mtx.z.x = 0; mtx.z.y = 0; mtx.z.z = c; mtx.z.w = 0;
-        mtx.w.x = tx; mtx.w.y = ty; mtx.w.z = tz; mtx.w.w = 1;
+        mtx.x_.x_ = a; mtx.x_.y_ = 0; mtx.x_.z_ = 0; mtx.x_.w_ = 0;
+        mtx.y_.x_ = 0; mtx.y_.y_ = b; mtx.y_.z_ = 0; mtx.y_.w_ = 0;
+        mtx.z_.x_ = 0; mtx.z_.y_ = 0; mtx.z_.z_ = c; mtx.z_.w_ = 0;
+        mtx.w_.x_ = tx; mtx.w_.y_ = ty; mtx.w_.z_ = tz; mtx.w_.w_ = 1;
     }
     static Mtx4Template<T> getOrthoMatrix(T left, T right, T bottom, T top, T near, T far)
     {
@@ -375,10 +376,10 @@ struct Mtx4Template {
         T e = - (far + near) / (far - near);
         T f = -2 * far * near / (far - near);
       
-        mtx.x.x = a; mtx.x.y = 0; mtx.x.z = 0; mtx.x.w = 0;
-        mtx.y.x = 0; mtx.y.y = b; mtx.y.z = 0; mtx.y.w = 0;
-        mtx.z.x = c; mtx.z.y = d; mtx.z.z = e; mtx.z.w = -1;
-        mtx.w.x = 0; mtx.w.y = 0; mtx.w.z = f; mtx.w.w = 0;
+        mtx.x_.x_ = a; mtx.x_.y_ = 0; mtx.x_.z_ = 0; mtx.x_.w_ = 0;
+        mtx.y_.x_ = 0; mtx.y_.y_ = b; mtx.y_.z_ = 0; mtx.y_.w_ = 0;
+        mtx.z_.x_ = c; mtx.z_.y_ = d; mtx.z_.z_ = e; mtx.z_.w_ = -1;
+        mtx.w_.x_ = 0; mtx.w_.y_ = 0; mtx.w_.z_ = f; mtx.w_.w_ = 0;
     }
     
     static Mtx4Template<T> getFrustumMatrix( T left, T right, T bottom, T top, T near, T far )
@@ -408,10 +409,10 @@ struct Mtx4Template {
         Vec3Template<T> y = z.crossProduct(x).getNormalized();
         
         
-        mtx.x = Vec4Template<T>(x.x_, x.y_, x.z_, 0);
-        mtx.y = Vec4Template<T>(y.x_, y.y_, y.z_, 0);
-        mtx.z = Vec4Template<T>(z.x_, z.y_, z.z_, 0);
-        mtx.w = Vec4Template<T>(0, 0, 0, 1);
+        mtx.x_ = Vec4Template<T>(x.x_, x.y_, x.z_, 0);
+        mtx.y_ = Vec4Template<T>(y.x_, y.y_, y.z_, 0);
+        mtx.z_ = Vec4Template<T>(z.x_, z.y_, z.z_, 0);
+        mtx.w_ = Vec4Template<T>(0, 0, 0, 1);
         
         Vec4Template<T> eyePrime = mtx * Vec4Template<T>(
             -eye.x_,
@@ -420,7 +421,7 @@ struct Mtx4Template {
             1
         );
         mtx = mtx.transposed();
-        mtx.w = eyePrime;        
+        mtx.w_ = eyePrime;        
     }
     
     static Mtx4Template<T> getLookAtMatrix( 
@@ -520,10 +521,10 @@ struct Mtx4Template {
     
 public:
     
-    Vec4Template<T> x;
-    Vec4Template<T> y;
-    Vec4Template<T> z;
-    Vec4Template<T> w;
+    Vec4Template<T> x_;
+    Vec4Template<T> y_;
+    Vec4Template<T> z_;
+    Vec4Template<T> w_;
 };
 
 

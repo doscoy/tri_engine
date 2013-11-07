@@ -31,7 +31,7 @@ void CameraNode::setViewTransform(
 void CameraNode::render(SceneGraph* scene_graph)
 {
     if (debug_camera_) {
-        camera_.getFrustom();
+//        camera_.getFrustom();
     }
 }
 
@@ -39,7 +39,7 @@ void CameraNode::render(SceneGraph* scene_graph)
 
 //-----------------------------------------------------------------------------
 void
-Camera::calculateDirection()
+CameraNode::calculateDirection()
 {
 
     //  右方向ベクトル計算
@@ -71,7 +71,7 @@ Camera::calculateDirection()
 
 //-----------------------------------------------------------------------------
 void
-Camera::recalculateDirection()
+CameraNode::recalculateDirection()
 {
     if ( recalculation_request_ ){
         //  各方向ベクトルを再計算

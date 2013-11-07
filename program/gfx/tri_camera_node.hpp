@@ -66,6 +66,7 @@ protected:
 
     Mtx4 view_matrix_;
     Frustum frustum_;
+    bool recalculation_request_;
 
 };
 
