@@ -118,6 +118,10 @@ int Application::run( t3::SceneGenerator* root_scene_generator )
         app.update( glue::oneFrameSec() );
         
         glue::endMainLoop();
+        
+        if (glue::isExitRequest()) {
+            break;
+        }
     }
     
     return 0;

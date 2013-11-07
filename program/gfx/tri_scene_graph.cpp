@@ -20,6 +20,7 @@ SceneGraph::SceneGraph()
     root_ = RootNode::create(issueNodeID());
 }
 
+
 SceneGraph::~SceneGraph()
 {
 

@@ -9,6 +9,8 @@
 #include <cmath>
 #include <iostream>
 #include "tri_assert.hpp"
+#include "tri_trace.hpp"
+
 
 namespace t3 {
 
@@ -43,11 +45,10 @@ bool panic(
 	vsnprintf(buf, 256, fmt, msg);
 	va_end(msg);
     
-    
-    std::cout << "Assertion " << exp << std::endl;
-    std::cout << " msg :" << buf << std::endl;
-    std::cout << " file:" << filename << "(" << line << ")" << std::endl;
-    std::cout << " func:" << funcname << std::endl;
+    trace("Assertion %s\n", exp);
+    trace(" msg :%s", buf);
+    trace(" file:%s(%d)", filename, line);
+    trace(" func:%s", funcname);
     abort();
 //    while(1){;}
     return 1;

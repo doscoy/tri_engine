@@ -53,6 +53,9 @@ void swapBuffers();
 //  ディスプレイクリア
 void clearDisplay( int flag );
 
+
+bool isExitRequest();
+
 }   // namespace glue
 
 

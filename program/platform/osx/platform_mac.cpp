@@ -110,7 +110,17 @@ void clearDisplay( int flag )
 }
 
 
-
+bool isExitRequest()
+{
+    if (FsIsKey(FSKEY_ESC)) {
+        return true;
+    }
+    else if (FsIsKey(FSKEY_Q)) {
+        return true;
+    }
+    
+    return false;
+}
 
 
 

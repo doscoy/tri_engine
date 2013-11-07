@@ -24,14 +24,15 @@ private:
     Vec3 front_;      // 前方向ベクトル
     Vec3 right_;      // 右方向ベクトル
 
+    Mtx4 view_matrix_;
+    Frustum frustum_;
+
     //  補間移動パラメータ
     Interpolation<Vec3> position_updater_;    // 座標移動
     Interpolation<Vec3> target_updater_;      // 注視点移動
     Interpolation<float> fov_updater_;          // 注視点移動
 
 
-    Mtx4 view_matrix_;
-    Frustum frustum_;
 
     //  画面揺らしパラメータ
     float shake_time_;
