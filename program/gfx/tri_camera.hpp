@@ -185,8 +185,6 @@ public:
     }
 
 private:
-    void    calculateFrustum();
-
     void    calculateDirection();
 
     void    recalculateDirection();

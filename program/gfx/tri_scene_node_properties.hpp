@@ -19,11 +19,11 @@ inline namespace gfx {
 typedef uint32_t node_id_t;
 
 enum RenderPass {
-    RENDER_PASS_0,          // 開始パス
-    RENDER_PASS_STATIC,     // 環境とレベルジオメトリ
-    RENDER_PASS_DYNAMIC,    // 移動可能オブジェクト
-    RENDER_PASS_SKY,        // 遠景
-    RENDER_PASS_LAST,       // ループカウンタ
+    RENDER_PASS_0,                          // 開始パス
+    RENDER_PASS_STATIC = RENDER_PASS_0,     // 環境とレベルジオメトリ
+    RENDER_PASS_DYNAMIC,                    // 移動可能オブジェクト
+    RENDER_PASS_SKY,                        // 遠景
+    RENDER_PASS_LAST,                       // ループカウンタ
 };
 
 

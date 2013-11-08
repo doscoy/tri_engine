@@ -135,12 +135,17 @@ void SceneGraph::renderAlphaPass()
 
 std::shared_ptr<CameraNode> SceneGraph::createCamera()
 {
-    return CameraNode::create(issueNodeID());
+    std::shared_ptr<CameraNode> new_node = CameraNode::create(issueNodeID());
+    root_->addChild(new_node);
+    return new_node;
 }
 
 std::shared_ptr<TestObjectNode> SceneGraph::createTestObject()
 {
-    return TestObjectNode::create(issueNodeID());
+    std::shared_ptr<TestObjectNode> new_node =TestObjectNode::create(issueNodeID());
+    root_->addChild(new_node);
+    return new_node;
+
 }
 
 

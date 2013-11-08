@@ -18,6 +18,17 @@ inline namespace gfx {
 class Material
 {
 public:
+
+    Material()
+        : diffuse_()
+        , ambient_()
+        , opacity_(255)
+    {}
+    
+    ~Material()
+    {}
+
+public:
     bool hasAlpha() const {
         return opacity_ <= 255;
     }

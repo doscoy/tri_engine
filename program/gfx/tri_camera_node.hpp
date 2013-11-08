@@ -39,15 +39,15 @@ public:
         return &frustum_;
     }
 
+    const Mtx4* getViewMatrix();
+    const Frustum* getFrustum();
+
 private:
-    void    calculateFrustum();
+    void calculateDirection();
 
-    void    calculateDirection();
-
-    void    recalculateDirection();
+    void recalculateDirection();
 
 
-    
     
 protected:
     
@@ -58,6 +58,9 @@ protected:
     Vec3 position_;   // カメラ座標
     Vec3 target_;     // 注視点
     float fov_;         // 視野角
+    float aspect_;
+    float near_;
+    float far_;
     float twist_;       // 注視点方向ひねり角
 
     Vec3 up_;         // 上方向ベクトル
@@ -67,7 +70,8 @@ protected:
     Mtx4 view_matrix_;
     Frustum frustum_;
     bool recalculation_request_;
-
+    bool re_frustum_;
+    bool re_matrix_;
 };
 
 }   // gfx

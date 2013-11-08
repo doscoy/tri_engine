@@ -18,7 +18,8 @@ void* operator new(
 );
 
 
-#define T3_NEW      ::new(::std::nothrow, __FILE__, __LINE__)
+//#define T3_NEW      ::new(::std::nothrow, __FILE__, __LINE__)
+#define T3_NEW      ::new
 #define T3_DELETE   ::delete
 
 #endif // TRI_NEW_HPP_INCLUDED

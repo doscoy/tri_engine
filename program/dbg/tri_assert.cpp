@@ -46,9 +46,9 @@ bool panic(
 	va_end(msg);
     
     trace("Assertion %s\n", exp);
-    trace(" msg :%s", buf);
-    trace(" file:%s(%d)", filename, line);
-    trace(" func:%s", funcname);
+    trace(" msg :%s\n", buf);
+    trace(" file:%s(%d)\n", filename, line);
+    trace(" func:%s\n", funcname);
     abort();
 //    while(1){;}
     return 1;

@@ -10,7 +10,7 @@
 #include "tri_memory.hpp"
 
 
-
+/*
 #define NEW_TRACE(...) t3::traceTerminal(__VA_ARGS__)
 //#define NEW_TRACE(...)  ((void)0)
 
@@ -77,3 +77,8 @@ void operator delete(
     int line
 ) {
 }
+
+
+
+*/
+

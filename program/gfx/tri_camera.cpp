@@ -127,8 +127,7 @@ Camera::setPositionZ(
 }
 
 //-----------------------------------------------------------------------------
-const Vec3&
-Camera::getPosition() const {
+const Vec3& Camera::getPosition() const {
     return position_;
 }
 
@@ -148,8 +147,7 @@ Camera::setTargetPosition(
 }
 
 //-----------------------------------------------------------------------------
-void
-Camera::setTargetPosition(
+void Camera::setTargetPosition(
     const Vec3& pos
 ){
     target_ = pos;
