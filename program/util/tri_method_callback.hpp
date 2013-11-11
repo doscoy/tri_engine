@@ -2,6 +2,8 @@
 #ifndef tri_sandbox_osx_tri_method_callback_hpp
 #define tri_sandbox_osx_tri_method_callback_hpp
 
+#include "../dbg/tri_assert.hpp"
+
 namespace t3 {
 inline namespace util {
 
@@ -35,8 +37,20 @@ public:
         MethodCallbackBase::instance_ = instance;
         (callback_t&)(MethodCallbackBase::func_) = func;
     }
+
+    bool canInvoke() const {
+        if (instance_ == nullptr) {
+            return false;
+        }
+        else if (func_ == nullptr) {
+            return false;
+        }
+        
+        return true;
+    }
     
     ReturnType invoke() {
+        T3_ASSERT(canInvoke());
         return (((T*)MethodCallbackBase::instance_)->*((callback_t)func_))();
     }
 };

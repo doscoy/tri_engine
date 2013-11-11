@@ -25,10 +25,10 @@ DebugMenu::~DebugMenu()
 
 void DebugMenu::openMenu()
 {
-    T3_TRACE( "debug menu open" );
+    T3_TRACE( "debug menu open\n" );
 
     if ( isOpened() ) {
-        T3_TRACE( "debug menu is already opened." );
+        T3_TRACE( "debug menu is already opened.\n" );
         return;
     }
     
@@ -41,7 +41,7 @@ void DebugMenu::openMenu()
 
 void DebugMenu::closeMenu()
 {
-    T3_TRACE( "debug menu close" );
+    T3_TRACE( "debug menu close\n" );
 
     if ( !isOpened() ){
         return;

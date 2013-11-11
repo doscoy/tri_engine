@@ -99,7 +99,7 @@ void SceneManager::sceneChange()
     //  シーンが切り替わったフラグON
     scene_changed_ = true;
     
-    T3_TRACE( "scene change. %s --> %s", prev_scene_name, next_scene_name );
+    T3_TRACE( "scene change. %s --> %s\n", prev_scene_name, next_scene_name );
 
 }
 

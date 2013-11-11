@@ -19,6 +19,7 @@ class DebugMenuLabel
 {
     typedef MethodCallback<DebugMenuLabel> callback_t;
 
+    DebugMenuLabel();
 public:
     DebugMenuLabel(
         DebugMenuFrame* parent,
@@ -91,10 +92,12 @@ public:
     }
 
     void focusCallback() {
+        T3_ASSERT(focus_callback_.canInvoke());
         focus_callback_.invoke();
     }
     
     void unfocusCallback() {
+        T3_ASSERT(unfocus_callback_.canInvoke());
         unfocus_callback_.invoke();
     }
 

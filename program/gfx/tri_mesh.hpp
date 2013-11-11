@@ -22,7 +22,7 @@ class Mesh
     uint32_t buffers_[3];
 
 public:
-    Mesh(char *);
+    Mesh(const char* const name);
     virtual ~Mesh();
     
 public:

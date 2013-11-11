@@ -22,14 +22,15 @@ public:
         , buffer_size_( stride * element_count )
         , stride_( stride )
         , element_count_( element_count )
+        , binded_(false)
     {
-        ogl::genBuffers( 1, &buffer_ );
+        ogl::genBuffers(1, &buffer_);
         bindBuffer();
-        ogl::bufferData( target_, buffer_size_, data, GL_STATIC_DRAW_ARB );
+        ogl::bufferData(target_, buffer_size_, data, GL_STATIC_DRAW_ARB);
     }
     
     ~BufferObject(){
-        ogl::deleteBuffers( 1, &buffer_ );
+        ogl::deleteBuffers(1, &buffer_);
     }
 
 
@@ -38,14 +39,14 @@ public:
     //  バッファのバインド
     void bindBuffer() {
         if (!binded_){
-            ogl::bindBuffer( target_, buffer_ );
+            ogl::bindBuffer(target_, buffer_);
             binded_ = true;
         }
     }
     
     void unbindBuffer() {
         if (binded_){
-            ogl::bindBuffer( target_, 0 );
+            ogl::bindBuffer(target_, 0);
         }
     }
     

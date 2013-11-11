@@ -18,7 +18,7 @@ inline namespace gfx {
 
 
 
-Mesh::Mesh(char *name)
+Mesh::Mesh(const char* const name)
 {
     std::ifstream file(name, std::ios::in | std::ios::binary);
     char buf[1024];

@@ -44,8 +44,8 @@ void DebugMenuFrame::openFrame()
 
 void DebugMenuFrame::closeFrame()
 {
-    for ( auto item: items_ ) {
-        item->setEnable( false );
+    for (auto item: items_) {
+        item->setEnable(false);
     }
     setFocusItem(nullptr);
 }
@@ -54,17 +54,17 @@ void DebugMenuFrame::closeFrame()
 void DebugMenuFrame::attachItem(
     DebugMenuLabel& item
 ){
-    if ( item.getParent() ){
+    if (item.getParent()){
         //  既にどこかのFrameに付いている
         //  ので外す
         item.detachSelf();
         
     }
     //  自分を親フレームにする
-    item.setParent( this );
+    item.setParent(this);
     
     //  子リストに追加
-    items_.push_back( &item );
+    items_.push_back(&item);
 }
 
 
@@ -72,13 +72,19 @@ void DebugMenuFrame::detachItem(
     DebugMenuLabel& item
 ){
     //  自分の管理アイテムか判定
-    T3_ASSERT( item.getParent() == this );
-
+    T3_ASSERT(item.getParent() == this);
+    if (&item == focus_item_) {
+        setFocusItem(nullptr);
+        T3_TRACE("focus_item_detaching......\n\n");
+    }
     //  親を無効化
     item.setParent( nullptr );
 
+    int size = items_.size();
     //  子リストから外す
-    items_.remove( &item );
+    items_.remove(&item);
+    
+    T3_TRACE("item %d->%d\n", size, items_.size());
     
 
 }
@@ -142,6 +148,8 @@ void DebugMenuFrame::drawFrame(
     int idx = 0;
     Color font_color;
     for ( auto item: items_ ) {
+        T3_NULL_ASSERT(item);
+
         if ( focus_item_ == item ){
             font_color = Color::orange();
         }

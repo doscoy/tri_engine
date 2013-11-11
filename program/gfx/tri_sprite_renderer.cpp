@@ -34,11 +34,11 @@ SpriteRenderer::SpriteRenderer()
 {
 
     VertexP2CT v[4] =
-    {   //     x,      y,   r,   g,   b,   a,   tu,   tv
-        { 0, 0, 255, 255, 255, 255, 0.0f, 0.0f },
-        { 1, 0, 255, 255, 255, 255, 1.0f, 0.0f },
-        { 1, 1, 255, 255, 255, 255, 1.0f, 1.0f },
-        { 0, 1, 255, 255, 255, 255, 0.0f, 1.0f },
+    {   // x,   y,   r,   g,   b,   a,   tu,   tv
+        {  0, 0, 255, 255, 255, 255, 0.0f, 0.0f },
+        {  1, 0, 255, 255, 255, 255, 1.0f, 0.0f },
+        {  1, 1, 255, 255, 255, 255, 1.0f, 1.0f },
+        {  0, 1, 255, 255, 255, 255, 0.0f, 1.0f },
     };
     
     GLushort i[4] = {
@@ -168,8 +168,14 @@ void SpriteRenderer::render()
         );
  
         // 描画
-        ogl::drawElements( GL_QUADS, 4, GL_UNSIGNED_SHORT, nullptr );
-        
+        /*
+        ogl::drawElements(
+            GL_QUADS,
+            4,
+            GL_UNSIGNED_SHORT,
+            nullptr
+        );
+        */
         
     }
     

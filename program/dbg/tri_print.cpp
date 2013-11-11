@@ -18,7 +18,7 @@
 #include "../gfx/tri_texture_factory.hpp"
 #include "../kernel/tri_game_system.hpp"
 #include "tri_debug_string_layer.hpp"
-
+#include "../io/tri_filepath.hpp"
 
 namespace {
 
@@ -26,8 +26,7 @@ constexpr int BUFFER_LENGTH = 256;
 
 std::shared_ptr<t3::Texture> debugfont_ = nullptr;
 
-//const char* DEBUG_FONT_PATH = "/Users/doscoy_t/project/tri_sandbox/resource/font2.png";
-const char* DEBUG_FONT_PATH = "/Users/kani/project/tri_sandbox/resource/font1.png";
+const char* DEBUG_FONT_PATH = "font1.png";
 
 t3::DebugStringLayer dbg_screen_layer_;
 
@@ -151,7 +150,8 @@ inline namespace dbg {
 void initializeDebugPrint()
 {
     //  デバッグフォントのテクスチャを読み込み
-    debugfont_ = TextureFactory::createFromFile( DEBUG_FONT_PATH );
+    FilePath font_path(DEBUG_FONT_PATH);
+    debugfont_ = TextureFactory::createFromFile(font_path.getFullPath());
     T3_NULL_ASSERT( debugfont_ );
     
     //  デバッグレイヤーを登録
@@ -168,13 +168,13 @@ void printDisplay(
 ){
 
     va_list arg;
-    va_start( arg, fmt );
+    va_start(arg, fmt);
     
     char buf[BUFFER_LENGTH];
-    vsnprintf( buf, BUFFER_LENGTH, fmt, arg );
-    va_end( arg );
+    vsnprintf(buf, BUFFER_LENGTH, fmt, arg);
+    va_end(arg);
     
-    dbg_screen_layer_.writeString( x, y, Color::magenta().getRGBA(), buf );
+    dbg_screen_layer_.writeString(x, y, Color::magenta().getRGBA(), buf);
 }
   
 void printDisplay(
@@ -185,13 +185,13 @@ void printDisplay(
 ){
 
     va_list arg;
-    va_start( arg, fmt );
+    va_start(arg, fmt);
     
     char buf[BUFFER_LENGTH];
-    vsnprintf( buf, BUFFER_LENGTH, fmt, arg );
-    va_end( arg );
+    vsnprintf(buf, BUFFER_LENGTH, fmt, arg);
+    va_end(arg);
     
-    dbg_screen_layer_.writeString( x, y, color.getRGBA(), buf );
+    dbg_screen_layer_.writeString(x, y, color.getRGBA(), buf);
 }
 
 

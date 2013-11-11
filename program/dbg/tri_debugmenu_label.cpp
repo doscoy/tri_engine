@@ -11,8 +11,8 @@ inline namespace dbg {
 DebugMenuLabel::DebugMenuLabel(
     DebugMenuFrame* parent,
     const char* const label
-)   : parent_( parent )
-    , label_( label )
+)   : parent_(nullptr)
+    , label_(label)
     , focus_callback_(this, &DebugMenuLabel::nullCallback)
     , unfocus_callback_(this, &DebugMenuLabel::nullCallback)
 
@@ -31,14 +31,12 @@ DebugMenuLabel::~DebugMenuLabel()
 void DebugMenuLabel::attachSelf(
     DebugMenuFrame& frame
 ) {
-    parent_ = &frame;
     frame.attachItem(*this);
 }
     
 void DebugMenuLabel::detachSelf(){
     T3_NULL_ASSERT(parent_);
     parent_->detachItem(*this);
-    parent_ = nullptr;
 }
 
 }   // inline namespace dbg
