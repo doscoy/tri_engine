@@ -59,6 +59,16 @@ void beginMainLoop()
     if(FsIsKey(FSKEY_DOWN)){
         key_data_ |= t3::Pad::BUTTON_DOWN;
     }
+    //  debug button
+    if(FsIsKey(FSKEY_1)){
+        key_data_ |= t3::Pad::DEBUG_BUTTON_1;
+    }
+    if(FsIsKey(FSKEY_2)){
+        key_data_ |= t3::Pad::DEBUG_BUTTON_2;
+    }
+    if(FsIsKey(FSKEY_3)){
+        key_data_ |= t3::Pad::DEBUG_BUTTON_3;
+    }
 }
 
 void endMainLoop()

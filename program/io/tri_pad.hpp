@@ -23,7 +23,15 @@ public:
         BUTTON_RIGHT = 1 << 7,
         BUTTON_LEFT  = 1 << 8,
         
-        MAX_BUTTON_ID = 7,
+        MAX_NORMAL_BUTTON_ID = 7,
+        
+        DEBUG_BUTTON_1 = 1 << 16,
+        DEBUG_BUTTON_2 = 1 << 17,
+        DEBUG_BUTTON_3 = 1 << 18,
+        
+        MAX_DEBUG_BUTTON_ID = 3,
+        
+        MAX_BUTTON_ID = MAX_NORMAL_BUTTON_ID + MAX_DEBUG_BUTTON_ID,
     };
     
 public:

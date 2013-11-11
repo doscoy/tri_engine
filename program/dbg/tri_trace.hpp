@@ -9,16 +9,16 @@ inline namespace math {
 
 //  前方宣言
 template <class T>
-class Vec2Template;
+struct Vec2Template;
 
 template <class T>
-class Vec3Template;
+struct Vec3Template;
 
 template <class T>
-class Vec4Template;
+struct Vec4Template;
 
 template <class T>
-class Mtx4Template;
+struct Mtx4Template;
 
 }   // namespace math
 
@@ -26,21 +26,22 @@ class Mtx4Template;
 inline namespace dbg {
 
 void initializeTrace();
-void traceTerminal( const char* const format, ... );
-void traceDisplay( const char* const format, ... );
-void trace( const char* const format, ... );
+void traceTerminal(const char* const format, ...);
+void traceDisplay(const char* const format, ...);
+void trace(const char* const format, ...);
 
-void traceValue( const char* const name, int value );
-void traceValue( const char* const name, uint32_t value );
-void traceValue( const char* const name, long value );
-void traceValue( const char* const name, uint32_t value );
-void traceValue( const char* const name, float value );
-void traceValue( const char* const name, void* value );
-void traceValue( const char* const name, const char* value );
-void traceValue( const char* const name, const Vec2Template<float>& value);
-void traceValue( const char* const name, const Vec3Template<float>& value);
-void traceValue( const char* const name, const Vec4Template<float>& value);
-void traceValue( const char* const name, const Mtx4Template<float>& value);
+void traceValue(const char* const name, ::std::size_t value);
+void traceValue(const char* const name, int value);
+void traceValue(const char* const name, uint32_t value);
+void traceValue(const char* const name, long value);
+void traceValue(const char* const name, uint32_t value);
+void traceValue(const char* const name, float value);
+void traceValue(const char* const name, void* value);
+void traceValue(const char* const name, const char* value);
+void traceValue(const char* const name, const Vec2Template<float>& value);
+void traceValue(const char* const name, const Vec3Template<float>& value);
+void traceValue(const char* const name, const Vec4Template<float>& value);
+void traceValue(const char* const name, const Mtx4Template<float>& value);
 
 
 

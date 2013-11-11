@@ -13,6 +13,7 @@ TestObjectNode::TestObjectNode(
         RENDER_PASS_DYNAMIC,
         nullptr
       )
+    , color_(t3::Color::orange())
 {
     box_.setSize(2,2,2);
 }
@@ -29,7 +30,7 @@ void TestObjectNode::render(
         t3::Vec3(0,0,0),
         t3::Vec3(0,1,0),
         t3::Vec3(2,2,2),
-        t3::Color::orange()
+        color_
     );
 }
 

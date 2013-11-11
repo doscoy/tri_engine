@@ -11,6 +11,8 @@
 
 
 namespace t3 {
+inline namespace math {
+
 
 // Mtx2Template
 template <typename T>
@@ -66,7 +68,8 @@ struct Mtx3Template {
 };
 
 template <typename T>
-struct Mtx4Template {
+struct Mtx4Template
+{
     Mtx4Template()
     {
         identity();
@@ -85,27 +88,40 @@ struct Mtx4Template {
         z_.x_ = m[8];  z_.y_ = m[9];  z_.z_ = m[10]; z_.w_ = m[11];
         w_.x_ = m[12]; w_.y_ = m[13]; w_.z_ = m[14]; w_.w_ = m[15];
     }
-    Mtx4Template operator * (const Mtx4Template& b) const
+    
+    
+    
+    
+    Mtx4Template operator * (const Mtx4Template& rhs) const
     {
-        Mtx4Template m;
-        m.x_.x_ = x_.x_ * b.x_.x_ + x_.y_ * b.y_.x_ + x_.z_ * b.z_.x_ + x_.w_ * b.w_.x_;
-        m.x_.y_ = x_.x_ * b.x_.y_ + x_.y_ * b.y_.y_ + x_.z_ * b.z_.y_ + x_.w_ * b.w_.y_;
-        m.x_.z_ = x_.x_ * b.x_.z_ + x_.y_ * b.y_.z_ + x_.z_ * b.z_.z_ + x_.w_ * b.w_.z_;
-        m.x_.w_ = x_.x_ * b.x_.w_ + x_.y_ * b.y_.w_ + x_.z_ * b.z_.w_ + x_.w_ * b.w_.w_;
-        m.y_.x_ = y_.x_ * b.x_.x_ + y_.y_ * b.y_.x_ + y_.z_ * b.z_.x_ + y_.w_ * b.w_.x_;
-        m.y_.y_ = y_.x_ * b.x_.y_ + y_.y_ * b.y_.y_ + y_.z_ * b.z_.y_ + y_.w_ * b.w_.y_;
-        m.y_.z_ = y_.x_ * b.x_.z_ + y_.y_ * b.y_.z_ + y_.z_ * b.z_.z_ + y_.w_ * b.w_.z_;
-        m.y_.w_ = y_.x_ * b.x_.w_ + y_.y_ * b.y_.w_ + y_.z_ * b.z_.w_ + y_.w_ * b.w_.w_;
-        m.z_.x_ = z_.x_ * b.x_.x_ + z_.y_ * b.y_.x_ + z_.z_ * b.z_.x_ + z_.w_ * b.w_.x_;
-        m.z_.y_ = z_.x_ * b.x_.y_ + z_.y_ * b.y_.y_ + z_.z_ * b.z_.y_ + z_.w_ * b.w_.y_;
-        m.z_.z_ = z_.x_ * b.x_.z_ + z_.y_ * b.y_.z_ + z_.z_ * b.z_.z_ + z_.w_ * b.w_.z_;
-        m.z_.w_ = z_.x_ * b.x_.w_ + z_.y_ * b.y_.w_ + z_.z_ * b.z_.w_ + z_.w_ * b.w_.w_;
-        m.w_.x_ = w_.x_ * b.x_.x_ + w_.y_ * b.y_.x_ + w_.z_ * b.z_.x_ + w_.w_ * b.w_.x_;
-        m.w_.y_ = w_.x_ * b.x_.y_ + w_.y_ * b.y_.y_ + w_.z_ * b.z_.y_ + w_.w_ * b.w_.y_;
-        m.w_.z_ = w_.x_ * b.x_.z_ + w_.y_ * b.y_.z_ + w_.z_ * b.z_.z_ + w_.w_ * b.w_.z_;
-        m.w_.w_ = w_.x_ * b.x_.w_ + w_.y_ * b.y_.w_ + w_.z_ * b.z_.w_ + w_.w_ * b.w_.w_;
-        return m;
+        return multiply(*this, rhs);
     }
+
+    static Mtx4Template multiply(
+        const Mtx4Template& lhs,
+        const Mtx4Template& rhs
+    ) {
+        Mtx4Template m;
+        m.x_.x_ = lhs.x_.x_ * rhs.x_.x_ + lhs.x_.y_ * rhs.y_.x_ + lhs.x_.z_ * rhs.z_.x_ + lhs.x_.w_ * rhs.w_.x_;
+        m.x_.y_ = lhs.x_.x_ * rhs.x_.y_ + lhs.x_.y_ * rhs.y_.y_ + lhs.x_.z_ * rhs.z_.y_ + lhs.x_.w_ * rhs.w_.y_;
+        m.x_.z_ = lhs.x_.x_ * rhs.x_.z_ + lhs.x_.y_ * rhs.y_.z_ + lhs.x_.z_ * rhs.z_.z_ + lhs.x_.w_ * rhs.w_.z_;
+        m.x_.w_ = lhs.x_.x_ * rhs.x_.w_ + lhs.x_.y_ * rhs.y_.w_ + lhs.x_.z_ * rhs.z_.w_ + lhs.x_.w_ * rhs.w_.w_;
+        m.y_.x_ = lhs.y_.x_ * rhs.x_.x_ + lhs.y_.y_ * rhs.y_.x_ + lhs.y_.z_ * rhs.z_.x_ + lhs.y_.w_ * rhs.w_.x_;
+        m.y_.y_ = lhs.y_.x_ * rhs.x_.y_ + lhs.y_.y_ * rhs.y_.y_ + lhs.y_.z_ * rhs.z_.y_ + lhs.y_.w_ * rhs.w_.y_;
+        m.y_.z_ = lhs.y_.x_ * rhs.x_.z_ + lhs.y_.y_ * rhs.y_.z_ + lhs.y_.z_ * rhs.z_.z_ + lhs.y_.w_ * rhs.w_.z_;
+        m.y_.w_ = lhs.y_.x_ * rhs.x_.w_ + lhs.y_.y_ * rhs.y_.w_ + lhs.y_.z_ * rhs.z_.w_ + lhs.y_.w_ * rhs.w_.w_;
+        m.z_.x_ = lhs.z_.x_ * rhs.x_.x_ + lhs.z_.y_ * rhs.y_.x_ + lhs.z_.z_ * rhs.z_.x_ + lhs.z_.w_ * rhs.w_.x_;
+        m.z_.y_ = lhs.z_.x_ * rhs.x_.y_ + lhs.z_.y_ * rhs.y_.y_ + lhs.z_.z_ * rhs.z_.y_ + lhs.z_.w_ * rhs.w_.y_;
+        m.z_.z_ = lhs.z_.x_ * rhs.x_.z_ + lhs.z_.y_ * rhs.y_.z_ + lhs.z_.z_ * rhs.z_.z_ + lhs.z_.w_ * rhs.w_.z_;
+        m.z_.w_ = lhs.z_.x_ * rhs.x_.w_ + lhs.z_.y_ * rhs.y_.w_ + lhs.z_.z_ * rhs.z_.w_ + lhs.z_.w_ * rhs.w_.w_;
+        m.w_.x_ = lhs.w_.x_ * rhs.x_.x_ + lhs.w_.y_ * rhs.y_.x_ + lhs.w_.z_ * rhs.z_.x_ + lhs.w_.w_ * rhs.w_.x_;
+        m.w_.y_ = lhs.w_.x_ * rhs.x_.y_ + lhs.w_.y_ * rhs.y_.y_ + lhs.w_.z_ * rhs.z_.y_ + lhs.w_.w_ * rhs.w_.y_;
+        m.w_.z_ = lhs.w_.x_ * rhs.x_.z_ + lhs.w_.y_ * rhs.y_.z_ + lhs.w_.z_ * rhs.z_.z_ + lhs.w_.w_ * rhs.w_.z_;
+        m.w_.w_ = lhs.w_.x_ * rhs.x_.w_ + lhs.w_.y_ * rhs.y_.w_ + lhs.w_.z_ * rhs.z_.w_ + lhs.w_.w_ * rhs.w_.w_;
+        return m;
+
+    }
+
 
     Vec4Template<T> operator * (const Vec4Template<T>& b) const
     {
@@ -121,7 +137,7 @@ struct Mtx4Template {
         return v;
     }
     
- 
+
     Mtx4Template& operator *= (const Mtx4Template& b)
     {
         Mtx4Template m = *this * b;
@@ -325,10 +341,10 @@ struct Mtx4Template {
         makeRotateMatrixY(yaw_mtx, yaw);
         
         Mtx4Template pitch_mtx;
-        makeRotateMatrixY(pitch_mtx, pitch);
+        makeRotateMatrixX(pitch_mtx, pitch);
         
         Mtx4Template roll_mtx;
-        makeRotateMatrixY(roll_mtx, roll);
+        makeRotateMatrixZ(roll_mtx, roll);
         
         m = yaw_mtx * pitch_mtx * roll_mtx;
 
@@ -533,7 +549,7 @@ typedef Mtx2Template<float> Mtx2;
 typedef Mtx3Template<float> Mtx3;
 typedef Mtx4Template<float> Mtx4;
     
-
+}   // namespace math
 }   // namespace t3
 
 #endif // TRI_MATRIX_HPP_INCLUDED

@@ -15,6 +15,7 @@
 
 
 namespace t3 {
+inline namespace math {
 
 template <typename T>
 struct Vec3Template {
@@ -285,6 +286,8 @@ Vec3Template<T> operator /(T s, const Vec3Template<T>& v) {
 typedef Vec3Template<float>   Vec3;
 typedef Vec3Template<int>     Point3;
 
+
+}   // namespace math
 }   // namespace t3
 
 

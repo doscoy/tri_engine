@@ -14,8 +14,6 @@ MyView* view_;
 
 - (id)initWithFrame:(NSRect)frame pixelFormat:(NSOpenGLPixelFormat*)format
 {
-    printf("MYVVVVVVVVEEEEEEEEEEEEEWWWWWWWWW\n");
-
     NSOpenGLPixelFormatAttribute attr[] = {
         NSOpenGLPFADoubleBuffer, // ダブルバッファを使う
         NSOpenGLPFAAccelerated , // ハードウェアアクセラレーションを使う

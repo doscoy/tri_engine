@@ -11,7 +11,7 @@ SceneNodeProperties::SceneNodeProperties(
     std::string name,
     RenderPass render_pass,
     AlphaType alpha_type
-)   : actor_id_(id)
+)   : node_id_(id)
     , name_(name)
     , to_world_()
     , from_world_()

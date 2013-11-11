@@ -21,13 +21,19 @@ public:
     
     
 public:
-    virtual void render(SceneGraph* scene_graph);
+    virtual void render(
+        SceneGraph* scene_graph
+    );
+    
+    void setColor(const Color& c) {
+        color_ = c;
+    }
 
-
-static std::shared_ptr<TestObjectNode> create(node_id_t id);
+    static std::shared_ptr<TestObjectNode> create(node_id_t id);
 
 private:
     Box box_;
+    t3::Color color_;
 };
 
 }   // namespace gfx

@@ -57,7 +57,9 @@ public:
         node_id_t id
     ) = 0;
     
-    
+    virtual ISceneNode* getParent() = 0;
+    virtual const ISceneNode* getParent() const = 0;
+    virtual void setParent(ISceneNode* p) = 0;
     
     virtual ~ISceneNode(){}
     
@@ -75,7 +77,7 @@ class SceneNode : public ISceneNode
 
 public:
     SceneNode(
-        node_id_t actor_id,
+        node_id_t node_id,
         std::string name,
         RenderPass render_pass,
         const Mtx4* to,
@@ -86,13 +88,28 @@ public:
     
 protected:
     SceneNodeList children_;
-    SceneNode* parent_;
+    ISceneNode* parent_;
     SceneNodeProperties properties_;
 
 
 public:
+    
+    virtual ISceneNode* getParent() {
+        return parent_;
+    }
+    
+    virtual const ISceneNode* getParent() const {
+        return parent_;
+    }
+    
     virtual const SceneNodeProperties* const getProperties() const override {
         return &properties_;
+    }
+    
+    virtual void setParent(
+        ISceneNode* p
+    ) {
+        parent_ = p;
     }
     
     virtual void setTransformMatrix(
@@ -155,6 +172,10 @@ public:
             pos.z_
         );
     }
+    
+    void detachParent(
+        std::shared_ptr<ISceneNode> kid
+    );
     
     void setRadius(
         const float radius

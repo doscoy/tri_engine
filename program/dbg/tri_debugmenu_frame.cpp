@@ -22,10 +22,6 @@ DebugMenuFrame::DebugMenuFrame(
 
 DebugMenuFrame::~DebugMenuFrame()
 {
-    //  管理している子との接続を全て解除
-    for ( auto item: items_ ) {
-        item->detachSelf();
-    }
 
 }
 

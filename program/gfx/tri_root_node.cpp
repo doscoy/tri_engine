@@ -48,11 +48,17 @@ RootNode::RootNode(node_id_t id)
 bool RootNode::addChild(
     std::shared_ptr<ISceneNode> kid
 ) {
+    if (kid->getParent() == this) {
+        return true;
+    }
+    
     //  子はシーングラフをレンダリングパスで分ける
     //  シーンノードはレンダリングパスの値に基づき子のどれかに追加
     int kid_render_pass = kid->getProperties()->getRenderPass();
     T3_ASSERT(children_[kid_render_pass]);
     
+    detachParent(kid);
+    kid->setParent(this);
     
     return children_[kid_render_pass]->addChild(kid);
 }
@@ -70,7 +76,6 @@ void RootNode::renderChildren(
             
             case RENDER_PASS_SKY:
                 // 最後に書くからzバッファへの書き込みは必要無い
-                
                 children_[pass]->renderChildren(scene_graph);
                 break;
         }

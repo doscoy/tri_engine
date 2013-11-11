@@ -17,29 +17,27 @@ DebugMenuLabel::DebugMenuLabel(
     , unfocus_callback_(this, &DebugMenuLabel::nullCallback)
 
 {
-    label_length_ = std::strlen( label_ );
-    if ( parent ) {
-        attachSelf( *parent );
+    label_length_ = std::strlen(label_);
+    if (parent) {
+        attachSelf(*parent);
     }
 }
 
 DebugMenuLabel::~DebugMenuLabel()
 {
-    if (parent_) {
-        detachSelf();
-    }
+
 }
 
 void DebugMenuLabel::attachSelf(
     DebugMenuFrame& frame
 ) {
     parent_ = &frame;
-    frame.attachItem( *this );
+    frame.attachItem(*this);
 }
     
 void DebugMenuLabel::detachSelf(){
     T3_NULL_ASSERT(parent_);
-    parent_->detachItem( *this );
+    parent_->detachItem(*this);
     parent_ = nullptr;
 }
 

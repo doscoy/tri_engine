@@ -42,6 +42,28 @@ public:
     const Mtx4* getViewMatrix();
     const Frustum* getFrustum();
 
+
+public:
+    void setPosition(
+        const Vec3& v
+    ) {
+        position_ = v;
+    }
+    
+    const Vec3* getPosition() const {
+        return &position_;
+    }
+    
+    void setTargetPosition(
+        const Vec3& v
+    ) {
+        target_ = v;
+    }
+    
+    const Vec3* getTargetPosition() const {
+        return &target_;
+    }
+
 private:
     void calculateDirection();
 

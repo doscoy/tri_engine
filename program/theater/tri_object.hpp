@@ -12,8 +12,8 @@ inline namespace theater {
 class Object
 {
 public:
-    Object() = default;
-    virtual ~Object() = default;
+    Object();
+    virtual ~Object();
 
 
 public:
@@ -39,6 +39,32 @@ public:
         return position_;
     }
     
+    void addPosition(
+        const Vec3& v
+    ) {
+        calc_request_ = true;
+        position_ += v;
+    }
+    
+    void addPositionX(
+        const float v
+    ) {
+        calc_request_ = true;
+        position_.x_ += v;
+    }
+    
+    void addPositionY(
+        const float v
+    ) {
+        calc_request_ = true;
+        position_.y_ += v;
+    }
+    void addPositionZ(
+        const float v
+    ) {
+        calc_request_ = true;
+        position_.z_ += v;
+    }
     
     void setRotation(
         float x,
@@ -49,6 +75,28 @@ public:
         rotation_.x_ = x;
         rotation_.y_ = y;
         rotation_.z_ = z;
+    }
+    
+    
+    void setRotationX(
+        const float r
+    ) {
+        calc_request_ = true;
+        rotation_.x_ = r;
+    }
+    
+    void setRotationY(
+        const float r
+    ) {
+        calc_request_ = true;
+        rotation_.y_ = r;
+    }
+    
+    void setRotationZ(
+        const float r
+    ) {
+        calc_request_ = true;
+        rotation_.z_ = r;
     }
     
     void setRotation(
@@ -62,7 +110,26 @@ public:
         return rotation_;
     }
     
+    void addRotationX(
+        const float r
+    ) {
+        calc_request_ = true;
+        rotation_.x_ += r;
+    }
     
+    void addRotationY(
+        const float r
+    ) {
+        calc_request_ = true;
+        rotation_.y_ += r;
+    }
+    
+    void addRotationZ(
+        const float r
+    ) {
+        calc_request_ = true;
+        rotation_.z_ += r;
+    }
     
     void setScale(
         float x,

@@ -25,6 +25,7 @@
 #include "tri_sprite.hpp"
 #include "tri_sprite_layer.hpp"
 #include "tri_sprite_renderer.hpp"
+#include "tri_test_object_node.hpp"
 #include "tri_texture.hpp"
 #include "tri_texture_factory.hpp"
 #include "tri_vertex_buffer.hpp"

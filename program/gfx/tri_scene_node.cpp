@@ -76,7 +76,6 @@ void SceneNode::onUpdate(
     t3::SceneGraph* scene_graph,
     tick_t tick
 ) {
-    T3_TRACE("SceneNode::onUpdate - %s\n", getNodeName());
     SceneNodeList::iterator it = children_.begin();
     SceneNodeList::iterator end = children_.end();
     
@@ -92,11 +91,11 @@ bool SceneNode::preRender(
 ) {
     T3_TRACE("SceneNode::preRender() - %s\n", getNodeName());
     scene_graph->pushAndSetMatrix(properties_.to_world_);
+    
     return true;
 }
 
 void SceneNode::postRender(t3::SceneGraph *scene_graph) {
-    T3_TRACE("SceneNode::postRender() - %s\n", getNodeName());
     scene_graph->popMatrix();
 }
 
@@ -111,7 +110,6 @@ bool SceneNode::isVisible(t3::SceneGraph *scene_graph) const
 
 void SceneNode::render(t3::SceneGraph *scene_graph)
 {
-    T3_TRACE("SceneNode::render() - %s\n", getNodeName());
 
     properties_.material_.use();
 
@@ -120,8 +118,6 @@ void SceneNode::render(t3::SceneGraph *scene_graph)
 
 void SceneNode::renderChildren(t3::SceneGraph *scene_graph)
 {
-    T3_TRACE("SceneNode::renderChildren() - %s\n", getNodeName());
-
     SceneNodeList::iterator it = children_.begin();
     SceneNodeList::iterator end = children_.end();
     
@@ -157,10 +153,27 @@ void SceneNode::renderChildren(t3::SceneGraph *scene_graph)
     }
 }
 
+void SceneNode::detachParent(
+    std::shared_ptr<ISceneNode> kid
+) {
+    ISceneNode* kid_parent = kid->getParent();
+    if (kid_parent) {
+        node_id_t kid_id = kid->getProperties()->getNodeID();
+        kid_parent->removeChild(kid_id);
+    }
+}
+
 bool SceneNode::addChild(
     std::shared_ptr<ISceneNode> kid
 ) {
+    if (kid->getParent() == this) {
+        return true;
+    }
+    
+    detachParent(kid);
+    
     children_.push_back(kid);
+    kid->setParent(this);
     
     Vec3 kid_pos = kid->getProperties()->getToWorldMatrix().getPosition();
     Vec3 dir = kid_pos - properties_.getToWorldMatrix().getPosition();
@@ -182,7 +195,7 @@ bool SceneNode::removeChild(
 	for (SceneNodeList::iterator it = children_.begin(); it != children_.end(); ++it) {
 	
 		const SceneNodeProperties* prop = (*it)->getProperties();
-		if (id == prop->getActorId()) {
+		if (id == prop->getNodeID()) {
 			it = children_.erase(it);
 			return true;
 		}

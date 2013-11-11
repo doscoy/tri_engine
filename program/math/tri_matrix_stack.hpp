@@ -23,6 +23,10 @@ public:
     void popMatrix();
     void multMatrixLocal(const Mtx4& mtx);
     const Mtx4* getTopMatrix() const;
+    void clearStack();
+    size_t getStackSize() const {
+        return stack_.size();
+    }
     
 private:
     std::stack<Mtx4> stack_;

@@ -55,6 +55,10 @@ public:
         return camera_node_;
     }
     
+    const std::shared_ptr<ISceneNode> getRootNode() const {
+        return root_;
+    }
+    
     void pushAndSetMatrix(
         const Mtx4& to_world
     );

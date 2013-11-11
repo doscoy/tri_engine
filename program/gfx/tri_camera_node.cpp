@@ -16,7 +16,7 @@ CameraNode::CameraNode(node_id_t id)
     )
     , debug_camera_(false)
     , active_(true)
-    , position_(1, 10, 10)
+    , position_(0, 20, 20)
     , target_(0, 0, 0)
     , fov_(toRadian(35.0f))
     , aspect_(800/600)
@@ -44,14 +44,14 @@ void CameraNode::setViewTransform(
     const t3::Vec2& screen = game_sys.getScreenSize();
     
 
-    glViewport(
+    ogl::viewport(
         0,
         0,
         screen.x_,
         screen.y_
     );  //ビューポートの設定
     
-    glMatrixMode(
+    ogl::matrixMode(
         GL_PROJECTION
     );
     t3::Mtx4 projection;
@@ -63,11 +63,10 @@ void CameraNode::setViewTransform(
         1,
         100
     );
-    glLoadMatrixf( projection.pointer() );
+    ogl::loadMatrixf( projection.pointer() );
   
     const Mtx4* view_mtx = getViewMatrix();
-    glMatrixMode(GL_MODELVIEW);    
-    glLoadMatrixf(view_mtx->pointer());
+    scene_graph->pushAndSetMatrix(*view_mtx);
 }
 
 void CameraNode::render(SceneGraph* scene_graph)

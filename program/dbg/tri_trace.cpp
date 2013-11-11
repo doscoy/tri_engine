@@ -69,57 +69,64 @@ void trace( const char* const format, ... )
 
 void traceValue(
     const char* const name,
+    ::std::size_t value
+) {
+    trace("[%d] %s=%u\n", frame_counter_.now(), name, value);
+}
+
+void traceValue(
+    const char* const name,
     int value
-){
+) {
     trace("[%d] %s=%d\n", frame_counter_.now(), name, value);
 }
 
 void traceValue(
     const char* const name,
     uint32_t value
-){
+) {
     trace("[%d] %s=%u\n", frame_counter_.now(), name, value);
 }
 
 void traceValue(
     const char* const name,
     long value
-){
+) {
     trace("[%d] %s=%ld\n", frame_counter_.now(), name, value);
 }
 
 void traceValue(
     const char* const name,
     float value
-){
+) {
     trace("[%d] %s=%f\n", frame_counter_.now(), name, value);
 }
     
 void traceValue(
     const char* const name,
     void* value
-){
+) {
     trace("[%d] %s=%p\n", frame_counter_.now(), name, value);
 }
     
 void traceValue(
     const char* const name,
     const char* value
-){
+) {
     trace("[%d] %s=%s\n", frame_counter_.now(), name, value);
 }
 
 void traceValue(
     const char* const name,
     const Vec2& value
-){
+) {
     trace("[%d] %s=x:%f y:%f\n", frame_counter_.now(), name, value.x_, value.y_);
 }
 
 void traceValue(
     const char* const name,
     const Vec3& value
-){
+) {
     trace(
         "[%d] %s=x:%f y:%f z:%f\n",
         frame_counter_.now(),
@@ -133,7 +140,7 @@ void traceValue(
 void traceValue(
     const char* const name,
     const Vec4& value
-){
+) {
     trace(
         "[%d] %s=x:%f y:%f z:%f w:%f\n",
         frame_counter_.now(),
@@ -149,7 +156,7 @@ void traceValue(
 void traceValue(
     const char* const name,
     const Mtx4& value
-){
+) {
     trace("[%d] %s\n", frame_counter_.now(), name);
     trace(
         "   %05.4f %05.4f %05.4f %05.4f\n",
@@ -169,7 +176,6 @@ void traceValue(
     );
     
 }
-
 
 
 }   // inline namespace dbg

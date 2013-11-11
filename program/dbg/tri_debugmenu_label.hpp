@@ -42,7 +42,7 @@ public:
         return parent_;
     }
     
-    void setParent( DebugMenuFrame* parent ){
+    void setParent(DebugMenuFrame* parent){
         parent_ = parent;
     }
 
@@ -50,11 +50,11 @@ public:
         return false;
     }
     
-    void attachSelf( DebugMenuFrame& frame );
+    void attachSelf(DebugMenuFrame& frame);
     
     void detachSelf();
     
-    void setEnable( const bool enable ){
+    void setEnable(const bool enable) {
         enable_ = enable;
     }
     
@@ -68,7 +68,7 @@ public:
         const float y,
         const Color& color
     ) const {
-        printDisplay( x, y, color, getLabel() );
+        printDisplay(x, y, color, getLabel());
     }
     
     template <typename T>

@@ -46,7 +46,7 @@ public:
     );
     
 protected:
-    node_id_t actor_id_;
+    node_id_t node_id_;
     std::string name_;
     Mtx4 to_world_;
     Mtx4 from_world_;
@@ -64,8 +64,8 @@ protected:
     }
     
 public:
-    const node_id_t getActorId() const {
-        return actor_id_;
+    const node_id_t getNodeID() const {
+        return node_id_;
     }
     
     const Mtx4& getToWorld() const {

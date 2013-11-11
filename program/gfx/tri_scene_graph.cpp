@@ -3,7 +3,7 @@
 #include "tri_root_node.hpp"
 #include "tri_camera_node.hpp"
 #include "tri_test_object_node.hpp"
-
+#include "../dbg/tri_trace.hpp"
 
 namespace t3 {
 inline namespace gfx {
@@ -29,8 +29,9 @@ SceneGraph::~SceneGraph()
 
 void SceneGraph::renderScene()
 {
-    T3_TRACE("SceneGraph::renderScene()\n");
+
     if (root_ && camera_node_) {
+        matrix_stack_.clearStack();
         camera_node_->setViewTransform(this);
         
         if (root_->preRender(this)) {
@@ -59,7 +60,6 @@ void SceneGraph::restoreScene()
 
 void SceneGraph::updateScene(tick_t tick)
 {
-    T3_TRACE("SceneGraph::updateScene()\n");
 
     if (!root_) {
         return;
@@ -76,6 +76,10 @@ void SceneGraph::pushAndSetMatrix(
     matrix_stack_.multMatrixLocal(to_world);
     
     //  変換行列をmatrix_stack.getTopで設定する
+    const Mtx4* world = matrix_stack_.getTopMatrix();
+    
+    ogl::matrixMode(GL_MODELVIEW);
+    ogl::loadMatrixf(world->pointer());
 }
 
 void SceneGraph::popMatrix()

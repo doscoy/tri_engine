@@ -14,6 +14,23 @@ namespace t3 {
 inline namespace theater {
 
 
+
+Object::Object()
+    : position_(0, 0, 0)
+    , rotation_(0, 0, 0)
+    , scale_(1.0f, 1.0f, 1.0f)
+    , visible_(true)
+    , transform_()
+    , calc_request_(true)
+{
+}
+
+Object::~Object()
+{
+}
+
+
+
 const Mtx4* Object::getTransformMatrix() {
 
     if (calc_request_) {
