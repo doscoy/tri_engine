@@ -66,7 +66,6 @@ void SpriteRenderer::collectSprite(
 }
 
 
-
 void SpriteRenderer::beginRender()
 {
     //  スプライトのソート
@@ -96,7 +95,7 @@ void SpriteRenderer::beginRender()
         reinterpret_cast< GLvoid* >( 0 ) 
     );
     
-    ogl::vertexPointer( 
+    ogl::colorPointer(
         4, 
         GL_UNSIGNED_BYTE, 
         sizeof( VertexP2CT ),
@@ -168,15 +167,60 @@ void SpriteRenderer::render()
         );
  
         // 描画
-        /*
+        
         ogl::drawElements(
             GL_QUADS,
             4,
             GL_UNSIGNED_SHORT,
-            nullptr
+            0
         );
-        */
         
+        /*
+        uint32_t color = t3::Color::aqua().getRGBA();
+        
+        float x = 40;
+        float y = 20;
+        float font_pixel_size = 16;
+        
+        float x0 = x;
+        float x1 = x+font_pixel_size;
+        float y0 = y;
+        float y1 = y+font_pixel_size;
+    
+    
+        uint8_t cr = (color & 0xFF000000) >> 24;
+        uint8_t cg = (color & 0x00FF0000) >> 16;
+        uint8_t cb = (color & 0x0000FF00) >> 8;
+        uint8_t ca = (color & 0x000000FF) >> 0;
+
+
+
+
+        ogl::begin( GL_QUADS );
+
+        //  左上
+        ogl::color4ub( cr, cg, cb, ca );
+        ogl::texCoord2f( 0, 0 );
+        ogl::vertex3f(x0, y0, 0);
+    
+        //  左下
+        ogl::color4ub( cr, cg, cb, ca );
+        ogl::texCoord2f(0, 1);
+        ogl::vertex3f(x0, y1, 0);
+    
+        //  右下
+        ogl::color4ub( cr, cg, cb, ca );
+        ogl::texCoord2f(1, 1);
+        ogl::vertex3f(x1, y1, 0);
+    
+        //  右上
+        ogl::color4ub( cr, cg, cb, ca );
+        ogl::texCoord2f(1, 0);
+        ogl::vertex3f(x1, y0, 0);
+    
+        ogl::end();
+
+        */
     }
     
     endRender();

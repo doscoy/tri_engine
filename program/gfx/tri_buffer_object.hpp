@@ -27,6 +27,7 @@ public:
         ogl::genBuffers(1, &buffer_);
         bindBuffer();
         ogl::bufferData(target_, buffer_size_, data, GL_STATIC_DRAW_ARB);
+        unbindBuffer();
     }
     
     ~BufferObject(){
@@ -48,6 +49,7 @@ public:
         if (binded_){
             ogl::bindBuffer(target_, 0);
         }
+        binded_ = false;
     }
     
     // *********************************************
