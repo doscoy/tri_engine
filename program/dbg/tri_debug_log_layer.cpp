@@ -59,8 +59,9 @@ void DebugLogLayer::updateLayer(tick_t tick)
     for (; line >= 0; --line) {
         DebugStringLayer::writeString(
             30,
-            line * 16,
+            line * DEBUG_FONT_POINT,
             Color::white().getRGBA(),
+            DEBUG_FONT_POINT,
             debug_log_buffer_.getString(str_idx)
         );
         --str_idx;

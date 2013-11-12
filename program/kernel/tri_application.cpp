@@ -342,8 +342,7 @@ bool Application::isSuspend() const {
 
 void Application::beginRender()
 {
-    glue::clearDisplay( GL_COLOR_BUFFER_BIT |GL_DEPTH_BUFFER_BIT );
-  
+    glue::clearDisplay(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  
 }
 
 

@@ -8,6 +8,8 @@
 
 #include <string.h>
 
+#define DEBUG_MENU_FONT_SIZE    ::t3::dbg::DEBUG_FONT_POINT
+
 namespace t3 {
 inline namespace dbg {
     
@@ -69,7 +71,7 @@ public:
         const float y,
         const Color& color
     ) const {
-        printDisplay(x, y, color, getLabel());
+        printDisplay(x, y, color, DEBUG_MENU_FONT_SIZE, getLabel());
     }
     
     template <typename T>

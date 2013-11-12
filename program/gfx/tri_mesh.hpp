@@ -2,24 +2,17 @@
 #define TRI_MESH_HPP_INCLUDED
 
 #include "../base/tri_types.hpp"
-
+#include "../geometry/tri_sphere.hpp"
 
 namespace t3 {
 inline namespace gfx {
 
 
-typedef float vec[3];
-typedef uint32_t idx[3];
 
 class Mesh
 {
-    uint32_t vertex_count_;
-    uint32_t face_count_;
-    vec* vert_;
-    vec* normal_;
-    vec* fnormal_;
-    idx* face_;
-    uint32_t buffers_[3];
+    typedef float vertex_t[3];
+    typedef uint32_t index_t[3];
 
 public:
     Mesh(const char* const name);
@@ -27,6 +20,21 @@ public:
     
 public:
     void draw(void);
+    
+    const Sphere* getBoundingSphere() const {
+        return &sphere_;
+    }
+
+private:
+    uint32_t vertex_count_;
+    uint32_t face_count_;
+    vertex_t* vert_;
+    vertex_t* normal_;
+    vertex_t* fnormal_;
+    index_t* face_;
+    uint32_t buffers_[3];
+
+    Sphere sphere_;
 };
 
 } // inline namespace gfx

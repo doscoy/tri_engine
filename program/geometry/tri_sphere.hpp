@@ -8,6 +8,7 @@ inline namespace geometry {
 
 class Sphere
 {
+public:
     Sphere() = default;
     Sphere(
         const Vec3& position,
@@ -33,8 +34,8 @@ public:
         position_ = position;
     }
     
-    const Vec3& getPosition() const {
-        return position_;
+    const Vec3* getPosition() const {
+        return &position_;
     }
     
     float getRadius() const {

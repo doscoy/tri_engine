@@ -88,10 +88,27 @@ public:
         const float y,
         const Color& color
     ) const override {
+        
         char buf[32];
+        
         makeTargetValueString( target_, buf, 32 );
-        printDisplay( x, y, color, getLabel() );
-        printDisplay( x + (DEBUG_FONT_POINT*13), y, color, "%s", buf );
+        
+        printDisplay(
+            x,
+            y,
+            color,
+            DEBUG_MENU_FONT_SIZE,
+            getLabel()
+        );
+        
+        printDisplay(
+            x + (DEBUG_MENU_FONT_SIZE*13),
+            y,
+            color,
+            DEBUG_MENU_FONT_SIZE,
+            "%s",
+            buf
+        );
     }
     
     

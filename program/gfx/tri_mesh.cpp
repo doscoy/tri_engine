@@ -10,6 +10,8 @@
 #include "../dbg/tri_assert.hpp"
 #include <fstream>
 #include "../platform/platform_sdk.hpp"
+#include "../geometry/tri_aabb.hpp"
+
 
 namespace t3 {
 inline namespace gfx {
@@ -18,7 +20,16 @@ inline namespace gfx {
 
 
 
-Mesh::Mesh(const char* const name)
+Mesh::Mesh(
+    const char* const name
+)   : vertex_count_(0)
+    , face_count_(0)
+    , vert_(nullptr)
+    , normal_(nullptr)
+    , fnormal_(nullptr)
+    , face_(nullptr)
+    , buffers_()
+    , sphere_()
 {
     std::ifstream file(name, std::ios::in | std::ios::binary);
     char buf[1024];
@@ -46,13 +57,13 @@ Mesh::Mesh(const char* const name)
     face_count_ = f;
     
 
-    vert_ = new vec[v];
+    vert_ = new vertex_t[v];
     T3_NULL_ASSERT(vert_);
-    normal_ = new vec[v];
+    normal_ = new vertex_t[v];
     T3_NULL_ASSERT(normal_);
-    fnormal_ = new vec[f];
+    fnormal_ = new vertex_t[f];
     T3_NULL_ASSERT(fnormal_);
-    face_ = new idx[f];
+    face_ = new index_t[f];
     T3_NULL_ASSERT(face_);
 
     
@@ -62,9 +73,17 @@ Mesh::Mesh(const char* const name)
     
     
     v = f = 0;
+    AABB aabb;
     while (file.getline(buf, sizeof buf)) {
         if (buf[0] == 'v' && buf[1] == ' ') {
             sscanf(buf, "%*s %f %f %f", vert_[v], vert_[v] + 1, vert_[v] + 2);
+
+            Vec3 new_point;
+            new_point.x_ = vert_[v][0];
+            new_point.y_ = vert_[v][1];
+            new_point.z_ = vert_[v][2];
+
+            aabb.addPoint(new_point);
             ++v;
         }
         else if (buf[0] == 'f' && buf[1] == ' ') {
@@ -80,6 +99,22 @@ Mesh::Mesh(const char* const name)
         }
     }
     
+    //  aabbをもとに境界球作成
+    Vec3 radius;
+    Vec3 center;
+    aabb.getCenter(&center);
+    aabb.getRadius(&radius);
+    
+    float sphere_radius = radius.x_;
+    if (sphere_radius < radius.y_) {
+        sphere_radius = radius.y_;
+    }
+    if (sphere_radius < radius.z_) {
+        sphere_radius = radius.z_;
+    }
+    
+    sphere_.setPosition(center);
+    sphere_.setRadius(sphere_radius);
 
     for (i = 0; i < f; ++i) {
         float dx1 = vert_[face_[i][1]][0] - vert_[face_[i][0]][0];
@@ -125,16 +160,43 @@ Mesh::Mesh(const char* const name)
         }
     }
     
-    ogl::genBuffers(3, buffers_);
+    ogl::genBuffers(
+        3,
+        buffers_
+    );
     
-    ogl::bindBuffer(GL_ARRAY_BUFFER, buffers_[0]);
-    ogl::bufferData(GL_ARRAY_BUFFER, vertex_count_ * sizeof(vec), vert_, GL_STATIC_DRAW);
+    ogl::bindBuffer(
+        GL_ARRAY_BUFFER,
+        buffers_[0]
+    );
+    ogl::bufferData(
+        GL_ARRAY_BUFFER,
+        vertex_count_ * sizeof(vertex_t),
+        vert_,
+        GL_STATIC_DRAW
+    );
     
-    ogl::bindBuffer(GL_ARRAY_BUFFER, buffers_[1]);
-    ogl::bufferData(GL_ARRAY_BUFFER, vertex_count_ * sizeof(vec), normal_, GL_STATIC_DRAW);
+    ogl::bindBuffer(
+        GL_ARRAY_BUFFER,
+        buffers_[1]
+    );
+    ogl::bufferData(
+        GL_ARRAY_BUFFER,
+        vertex_count_ * sizeof(vertex_t),
+        normal_,
+        GL_STATIC_DRAW
+    );
     
-    ogl::bindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers_[2]);
-    ogl::bufferData(GL_ELEMENT_ARRAY_BUFFER, face_count_ * sizeof(idx), face_, GL_STATIC_DRAW);
+    ogl::bindBuffer(
+        GL_ELEMENT_ARRAY_BUFFER,
+        buffers_[2]
+    );
+    ogl::bufferData(
+        GL_ELEMENT_ARRAY_BUFFER,
+        face_count_ * sizeof(index_t),
+        face_,
+        GL_STATIC_DRAW
+    );
 }
 
 

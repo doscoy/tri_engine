@@ -10,7 +10,17 @@
 
 namespace ogl {
 
+inline void cullFace(
+    int mode
+) {
+    glCullFace(mode);
+}
 
+inline void depthMask(
+    bool flag
+) {
+    glDepthMask(flag);
+}
 inline void clearDepth(
     const float val
 ) {

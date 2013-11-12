@@ -25,9 +25,10 @@ void DebugStringLayer::writeString(
     const int x,
     const int y,
     const rgba32_t color,
+    const int size,
     const char *const str
 ){
-    debug_string_buffer_.addString( x, y, color, str );
+    debug_string_buffer_.addString(x, y, color, size, str);
 }
 
 void DebugStringLayer::drawLayer()

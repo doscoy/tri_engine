@@ -126,11 +126,6 @@ Camera::setPositionZ(
     recalculation_request_ = true;
 }
 
-//-----------------------------------------------------------------------------
-const Vec3& Camera::getPosition() const {
-    return position_;
-}
-
 
 //-----------------------------------------------------------------------------
 void
@@ -154,33 +149,6 @@ void Camera::setTargetPosition(
     recalculation_request_ = true;
 }
 
-//-----------------------------------------------------------------------------
-const Vec3&
-Camera::getTargetPosition() const {
-    return target_;
-}
-
-//-----------------------------------------------------------------------------
-const Vec3&
-Camera::getUpVector() {
-    recalculateDirection();
-    return up_;
-}
-
-
-//-----------------------------------------------------------------------------
-const Vec3&
-Camera::getRightVector() {
-    recalculateDirection();
-    return right_;
-}
-
-//-----------------------------------------------------------------------------
-const Vec3&
-Camera::getFrontVector() {
-    recalculateDirection();
-    return front_;
-}
 
 
 //-----------------------------------------------------------------------------

@@ -21,6 +21,7 @@ public:
         const int x,
         const int y,
         const uint32_t color,
+        const int size,
         const char* const str
     );
 

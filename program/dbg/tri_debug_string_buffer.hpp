@@ -12,7 +12,7 @@ namespace t3 {
 
 inline namespace dbg {
 
-constexpr int DEBUG_STRING_ITEM_STR_SIZE = 100;
+constexpr int DEBUG_STRING_ITEM_STR_SIZE = 95;
 
 struct DebugStringItem
 {
@@ -20,6 +20,7 @@ struct DebugStringItem
     short x_;
     short y_;
     char str_[DEBUG_STRING_ITEM_STR_SIZE];
+    char size_;
 };
 
 
@@ -33,9 +34,10 @@ public:
     
 public:
     void addString(
-        int x,
-        int y,
+        const int x,
+        const int y,
         const uint32_t color,
+        const int size,
         const char* const str
     );
     

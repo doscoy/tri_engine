@@ -9,8 +9,29 @@ inline namespace dbg {
 
 void initializeDebugPrint();
 
-void printDisplay( const float x, const float y, const char* fmt, ... );
-void printDisplay( const float x, const float y, const Color& color, const char* fmt, ... );
+void printDisplay(
+    const float x,
+    const float y,
+    const char* fmt,
+    ...
+);
+
+void printDisplay(
+    const float x,
+    const float y,
+    const Color& color,
+    const char* fmt,
+    ...
+);
+
+void printDisplay(
+    const float x,
+    const float y,
+    const Color& color,
+    const int size,
+    const char* fmt,
+    ...
+);
 
 
 

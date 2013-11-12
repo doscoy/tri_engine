@@ -18,10 +18,11 @@ void drawString(
     int x,
     int y,
     uint32_t color,
+    int size,
     const char* const str
 ){
-    int font_size = 16;
-    int pitch = font_size - 3;
+    int font_size = size;
+    int pitch = font_size - 2;
     int idx = 0;
     const char* c = str;
     while(*c){
@@ -55,6 +56,7 @@ void DebugStringBuffer::addString(
     const int x,
     const int y,
     const rgba32_t color,
+    const int size,
     const char* const str
 ){
     if (size_ >= buffer_.size()) {
@@ -66,6 +68,7 @@ void DebugStringBuffer::addString(
     item.color_ = color;
     item.x_ = x;
     item.y_ = y;
+    item.size_ = size;
     std::strncpy( item.str_, str, DEBUG_STRING_ITEM_STR_SIZE );
     
     ++size_;
@@ -87,6 +90,7 @@ void DebugStringBuffer::drawStrings()
             str_item.x_,
             str_item.y_,
             str_item.color_,
+            str_item.size_,
             str_item.str_
         );
     }

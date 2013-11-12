@@ -143,7 +143,7 @@ void DebugMenuFrame::drawFrame(
 ) const {
 
     
-    printDisplay( x, y, color, getLabel() );
+    printDisplay( x, y, color, DEBUG_MENU_FONT_SIZE, getLabel() );
 
     int idx = 0;
     Color font_color;

@@ -76,7 +76,9 @@ public:
         const float val
     );
 
-    const Vec3& getPosition() const;
+    const Vec3* getPosition() const {
+        return &position_;
+    }
 
     void setTargetPosition(
         const float x,
@@ -88,15 +90,26 @@ public:
         const Vec3& pos
     );
 
-    const Vec3& getTargetPosition() const;
+    const Vec3* getTargetPosition() const {
+        return &target_;
+    }
 
-    const Vec3& getUpVector();
+    const Vec3* getUpVector() {
+        recalculateDirection();
+        return &up_;
+    }
 
     Vec3 getShakedUpVector();
 
-    const Vec3& getRightVector();
+    const Vec3* getRightVector() {
+        recalculateDirection();
+        return &right_;
+    }
 
-    const Vec3& getFrontVector();
+    const Vec3* getFrontVector() {
+        recalculateDirection();
+        return &front_;
+    }
 
 
     void    setFieldOfView( const float fov );

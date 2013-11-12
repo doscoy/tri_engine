@@ -174,9 +174,15 @@ void printDisplay(
     vsnprintf(buf, BUFFER_LENGTH, fmt, arg);
     va_end(arg);
     
-    dbg_screen_layer_.writeString(x, y, Color::magenta().getRGBA(), buf);
+    dbg_screen_layer_.writeString(
+        x,
+        y,
+        Color::magenta().getRGBA(),
+        DEBUG_FONT_POINT,
+        buf
+    );
 }
-  
+
 void printDisplay(
     const float x,
     const float y,
@@ -191,7 +197,37 @@ void printDisplay(
     vsnprintf(buf, BUFFER_LENGTH, fmt, arg);
     va_end(arg);
     
-    dbg_screen_layer_.writeString(x, y, color.getRGBA(), buf);
+    dbg_screen_layer_.writeString(
+        x,
+        y,
+        color.getRGBA(),
+        DEBUG_FONT_POINT,
+        buf
+    );
+}
+  
+void printDisplay(
+    const float x,
+    const float y,
+    const Color& color,
+    const int size,
+    const char* fmt, ...
+){
+
+    va_list arg;
+    va_start(arg, fmt);
+    
+    char buf[BUFFER_LENGTH];
+    vsnprintf(buf, BUFFER_LENGTH, fmt, arg);
+    va_end(arg);
+    
+    dbg_screen_layer_.writeString(
+        x,
+        y,
+        color.getRGBA(),
+        size,
+        buf
+    );
 }
 
 
