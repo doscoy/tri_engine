@@ -1,7 +1,7 @@
 
 #include "tri_camera_node.hpp"
 #include "tri_scene_graph.hpp"
-#include "../kernel/tri_game_system.hpp"
+#include "../base/tri_game_system.hpp"
 
 
 namespace t3 {

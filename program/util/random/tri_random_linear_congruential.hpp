@@ -3,7 +3,7 @@
 #define TRI_RANDOM_LINEAR_CONGRUENTIAL_HPP_INCLUDED
 
 
-#include "../../tri_develop_base.hpp"
+#include <cstdint>
 
 
 namespace t3 {

@@ -3,7 +3,6 @@
 #define TRI_RENDER_LAYER_HPP_INCLUDED
 
 
-#include "tri_develop_base.hpp"
 #include "../util/tri_uncopyable.hpp"
 #include "tri_debugmenu_items.hpp"
 #include <list>

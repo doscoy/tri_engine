@@ -2,8 +2,8 @@
 #include <fstream>
 #include <iostream>
 #include "tri_file.hpp"
-#include "base/tri_types.hpp"
-#include "kernel/tri_memory.hpp"
+#include "../../base/tri_types.hpp"
+#include "../memory/tri_memory.hpp"
 
 
 //==============================================================================

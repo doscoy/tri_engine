@@ -1,6 +1,6 @@
 
 #include "tri_sprite.hpp"
-#include "../kernel/tri_game_system.hpp"
+#include "../base/tri_game_system.hpp"
 #include "../gfx/tri_resource_manager.hpp"
 #include "tri_sprite_layer.hpp"
 

@@ -11,7 +11,7 @@
 #include "../dbg/tri_debugmenu_frame.hpp"
 
 namespace t3 {
-inline namespace core {
+inline namespace base {
 
 class Scene;
 class SceneGenerator
@@ -141,7 +141,7 @@ private:
 };
 
 
-}   // inline namespace t3
+}   // namespace base
 
 }   // namespace t3
 

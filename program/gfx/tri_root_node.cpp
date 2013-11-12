@@ -1,4 +1,6 @@
 #include "tri_root_node.hpp"
+#include "../dbg/tri_assert.hpp"
+
 
 namespace t3 {
 inline namespace gfx {

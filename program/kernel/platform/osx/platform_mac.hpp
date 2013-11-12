@@ -6,6 +6,8 @@
 namespace t3 {
 class Color;
 };
+
+
 namespace glue {
 
 void initializePlatform();

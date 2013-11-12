@@ -1,10 +1,9 @@
 #include "tri_debug_string_buffer.hpp"
 #include "../gfx/tri_color.hpp"
 #include "tri_print.hpp"
-#include <GLUT/glut.h>
 #include <stdio.h>
 #include <cstdarg>
-#include "../platform/platform.hpp"
+#include "../kernel/tri_kernel.hpp"
 
 
 extern void beginPrint( const float w, const float h );

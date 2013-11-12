@@ -1,7 +1,7 @@
 #ifndef TRI_DEBUGPAD_HPP_INCLUDED
 #define TRI_DEBUGPAD_HPP_INCLUDED
 
-#include "../io/tri_pad.hpp"
+#include "../kernel/tri_kernel.hpp"
 
 namespace t3 {
 inline namespace dbg {

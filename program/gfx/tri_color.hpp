@@ -1,18 +1,11 @@
 #ifndef TRI_COLOR_HPP_INCLUDED
 #define TRI_COLOR_HPP_INCLUDED
 
-#include "../platform/platform_sdk.hpp"
+#include <cstdint>
 
 namespace t3 {
 
 typedef uint32_t rgba32_t;
-
-enum ColorFormat
-{
-    RGBA = GL_RGBA,
-    RGB  = GL_RGB,
-};
-
 
 class Color
 {

@@ -11,14 +11,14 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#include "../kernel/tri_screen.hpp"
+#include "../base/tri_screen.hpp"
 #include "../dbg/tri_assert.hpp"
 #include "../gfx/tri_resource_manager.hpp"
 #include "../gfx/tri_texture.hpp"
 #include "../gfx/tri_texture_factory.hpp"
-#include "../kernel/tri_game_system.hpp"
+#include "../base/tri_game_system.hpp"
 #include "tri_debug_string_layer.hpp"
-#include "../io/tri_filepath.hpp"
+#include "../kernel/tri_kernel.hpp"
 
 namespace {
 

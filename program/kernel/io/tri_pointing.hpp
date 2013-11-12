@@ -3,8 +3,7 @@
 #ifndef TRI_POINTING_HPP_INCLUDED
 #define TRI_POINTING_HPP_INCLUDED
 
-#include "../tri_develop_base.hpp"
-#include "../math/tri_math_types.hpp"
+#include "../../math/tri_math_types.hpp"
 
 namespace t3 {
     

@@ -1,10 +1,9 @@
 
 #include "tri_scene.hpp"
-#include "tri_develop_base.hpp"
 #include "../dbg/tri_debugmenu.hpp"
 
-namespace t3{
-
+namespace t3 {
+inline namespace base {
 
 Scene::Scene(
     const char* const scene_name
@@ -105,5 +104,6 @@ void SceneManager::sceneChange()
 
 
 
-
+}   // namespace base
 }   // namespace t3
+

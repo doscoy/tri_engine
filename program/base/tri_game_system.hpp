@@ -1,10 +1,10 @@
 #ifndef TRI_GAME_SYSTEM_HPP_INCLUDED
 #define TRI_GAME_SYSTEM_HPP_INCLUDED
 
-#include "../tri_develop_base.hpp"
+
 #include "../dbg/tri_debugmenu.hpp"
-#include "../io/tri_pad.hpp"
-#include "../io/tri_pointing.hpp"
+#include "../kernel/tri_kernel.hpp"
+
 #include "../util/random/tri_random.hpp"
 #include "../util/tri_singleton.hpp"
 #include "../gfx/tri_color.hpp"
@@ -15,6 +15,8 @@
 
 //==============================================================================
 namespace t3 {
+inline namespace base {
+
 
 constexpr int MAX_PAD = 4;
 
@@ -120,7 +122,7 @@ private:
 };
 
 
-  
+}   // namespace base
 }   // namespace t3
 
 

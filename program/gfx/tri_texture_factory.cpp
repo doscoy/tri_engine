@@ -1,4 +1,3 @@
-#include "../tri_develop_base.hpp"
 
 #include "tri_texture_factory.hpp"
 #include "tri_texture.hpp"
@@ -43,15 +42,15 @@ std::shared_ptr<Texture> TextureFactory::createFromPng(
     const char* const filename
 ){
     PngImage png( filename );
-    ColorFormat color_format = RGB;
+    ogl::ColorFormat color_format = ogl::RGB;
     switch (png.color_type_) {
         
     case PNG_COLOR_TYPE_RGB:
-        color_format = RGB;
+        color_format = ogl::RGB;
         break;
     
     case PNG_COLOR_TYPE_RGBA:
-        color_format = RGBA;
+        color_format = ogl::RGBA;
         break;
     
     default:

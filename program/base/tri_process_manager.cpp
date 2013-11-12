@@ -2,7 +2,7 @@
 #include "tri_process_manager.hpp"
 
 namespace t3 {
-
+inline namespace base {
 
 ProcessManager::~ProcessManager()
 {
@@ -38,5 +38,5 @@ void ProcessManager::updateProcess( const tick_t tick )
     
 }
 
-
+}   // namespace base
 }   // namespace t3

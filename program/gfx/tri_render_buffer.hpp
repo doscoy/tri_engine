@@ -1,7 +1,7 @@
 #ifndef TRI_RENDER_BUFFER_HPP_INCLUDED
 #define TRI_RENDER_BUFFER_HPP_INCLUDED
 
-#include "tri_develop_base.hpp"
+#include <cstdint>
 
 namespace t3 {
     

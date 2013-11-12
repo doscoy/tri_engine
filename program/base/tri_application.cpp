@@ -9,7 +9,7 @@
 #include "../dbg/tri_debugpad.hpp"
 #include "../util/tri_framerate.hpp"
 #include "../util/tri_counter.hpp"
-#include "tri_memory.hpp"
+#include "../kernel/tri_kernel.hpp"
 
 
 
@@ -96,6 +96,7 @@ private:
 
 
 namespace t3 {
+inline namespace base {
 
 int Application::run( t3::SceneGenerator* root_scene_generator )
 {
@@ -360,9 +361,7 @@ void Application::gotoRootScene()
 
 
 
-
-
-
+}   // namespace base
 }   // namespace t3
 
 

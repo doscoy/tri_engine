@@ -4,6 +4,7 @@
 
 
 namespace t3 {
+inline namespace base {
 
 Resource::Resource()
     : id_(0)
@@ -12,5 +13,6 @@ Resource::Resource()
     id_ = uniqueID();
 }
 
-
+}   //  namespace base
 }   //  namespace t3
+

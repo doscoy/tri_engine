@@ -5,7 +5,7 @@
 #include "../util/tri_singleton.hpp"
 #include "../util/tri_unique_id.hpp"
 #include "../dbg/tri_dbg.hpp"
-#include "../kernel/tri_resource.hpp"
+#include "../base/tri_resource.hpp"
 #include "../gfx/tri_texture_factory.hpp"
 #include "../gfx/tri_texture.hpp"
 

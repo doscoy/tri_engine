@@ -4,6 +4,7 @@
 #include "tri_camera_node.hpp"
 #include "tri_test_object_node.hpp"
 #include "../dbg/tri_trace.hpp"
+#include "../kernel/tri_kernel.hpp"
 
 namespace t3 {
 inline namespace gfx {

@@ -297,7 +297,7 @@ Camera::pan(
     const Vec3& axis,
     const float speed
 ){
-    Vec3 dir = target_ - position_;
+//    Vec3 dir = target_ - position_;
 /*
     mtx44_t mtx;
     nn::math::MTX34RotAxisRad(

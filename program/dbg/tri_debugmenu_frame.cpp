@@ -1,9 +1,8 @@
 
-#include "tri_develop_base.hpp"
 #include "tri_debugmenu_frame.hpp"
 #include "tri_print.hpp"
 #include "tri_debugpad.hpp"
-
+#include "tri_trace.hpp"
 
 namespace t3 {
 inline namespace dbg {
@@ -80,7 +79,7 @@ void DebugMenuFrame::detachItem(
     //  親を無効化
     item.setParent( nullptr );
 
-    int size = items_.size();
+    size_t size = items_.size();
     //  子リストから外す
     items_.remove(&item);
     

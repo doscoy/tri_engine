@@ -10,7 +10,7 @@
 
 
 namespace t3 {
-
+inline namespace base {
 
 
 class Process
@@ -141,7 +141,7 @@ private:
 
 };
 
-
+}   // namespace base
 }   // namespace t3
 
 

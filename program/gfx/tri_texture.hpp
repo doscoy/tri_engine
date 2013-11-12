@@ -4,7 +4,7 @@
 #include "../util/tri_unique_id.hpp"
 #include "../math/tri_vec2.hpp"
 #include "../dbg/tri_dbg.hpp"
-#include "../kernel/tri_resource.hpp"
+#include "../base/tri_resource.hpp"
 #include "../gfx/tri_color.hpp"
 
 namespace t3 {
@@ -24,7 +24,7 @@ private:
         const char* const name,
         const int width,
         const int height,
-        const ColorFormat color_format,
+        const ogl::ColorFormat color_format,
         const int8_t* data
     );    
     
@@ -50,7 +50,7 @@ public:
     
     // *********************************************
     //  カラーフォーマット取得
-    ColorFormat getColorFormat() const {
+    ogl::ColorFormat getColorFormat() const {
         return color_format_;
     }
     
@@ -76,7 +76,7 @@ private:
     Point2 size_;
 
     //  カラーフォーマット
-    ColorFormat color_format_;
+    ogl::ColorFormat color_format_;
     
     const int8_t* data_;
 };

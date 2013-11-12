@@ -2,11 +2,10 @@
 #ifndef TRI_DEBUGMENU_ITEMS_HPP_INCLUDED
 #define TRI_DEBUGMENU_ITEMS_HPP_INCLUDED
 
-#include "tri_develop_base.hpp"
 #include "tri_debugmenu_label.hpp"
 #include "tri_debugpad.hpp"
 #include "tri_debugmenu_frame.hpp"
-#include "../kernel/tri_scene.hpp"
+#include "../base/tri_scene.hpp"
 #include "../math/tri_math_types.hpp"
 #include <limits.h>
 #include <functional>

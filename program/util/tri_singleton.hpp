@@ -4,7 +4,7 @@
 
 
 #include "../dbg/tri_assert.hpp"
-#include "../kernel/tri_new.hpp"
+#include "../kernel/tri_kernel.hpp"
 
 namespace t3{
 

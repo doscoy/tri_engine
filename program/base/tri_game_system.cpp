@@ -2,36 +2,17 @@
 #include "tri_resource_manager.hpp"
 #include "tri_scene.hpp"
 #include "../util/tri_counter.hpp"
-#include "../io/tri_pad.hpp"
-#include "../platform/platform.hpp"
+#include "../kernel/tri_kernel.hpp"
 #include "../dbg/tri_dbg.hpp"
 
 
 
 namespace t3 {
 
-
-
-namespace {
-
-
-
-}   // unname namespace
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 extern Counter frame_counter_;
+
+inline namespace base {
+
 
 // *********************************************
 //  コンストラクタ
@@ -153,12 +134,7 @@ void GameSystem::unregistryLayersToDebugMenu()
 
 
 
-
-
-
-
-
-
+}   // inline namespace base
 }   // namespace t3
 
 

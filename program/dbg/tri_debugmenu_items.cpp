@@ -1,9 +1,8 @@
 
 
-#include "tri_develop_base.hpp"
 #include "tri_debugmenu_items.hpp"
 #include "tri_debugpad.hpp"
-#include "../io/tri_pad.hpp"
+#include "../kernel/io/tri_pad.hpp"
 
 namespace t3 {
 inline namespace dbg {

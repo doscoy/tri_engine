@@ -4,13 +4,15 @@
 
 
 #include "../util/tri_uncopyable.hpp"
-#include "../io/tri_file.hpp"
-#include "tri_develop_base.hpp"
-#include "cstring"
+#include "../kernel/tri_kernel.hpp"
+
+#include <cstring>
 
 constexpr int RESOURCE_NAME_SIZE = 32;
 
 namespace t3 {
+inline namespace base {
+
 
 class Resource
     : private Uncopyable
@@ -39,7 +41,7 @@ private:
     char name_[RESOURCE_NAME_SIZE];
 };
 
-
+}   // namespace base
 }   // namespace t3
 
 #endif // TRI_RESOURCE_HPP_INCLUDED

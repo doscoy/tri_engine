@@ -1,5 +1,5 @@
-#ifndef PLATFORM_MAC_HPP_INCLUDED
-#define PLATFORM_MAC_HPP_INCLUDED
+#ifndef PLATFORM_WIN_HPP_INCLUDED
+#define PLATFORM_WIN_HPP_INCLUDED
 
 #include "platform_types.hpp"
 
@@ -58,4 +58,4 @@ void clearDisplay( int flag );
 
 
 
-#endif // PLATFORM_MAC_HPP_INCLUDED
+#endif // PLATFORM_WIN_HPP_INCLUDED

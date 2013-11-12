@@ -3,16 +3,16 @@
 
 
 #include "../util/tri_uncopyable.hpp"
-#include "tri_develop_base.hpp"
 #include <memory>
-
+#include "tri_types.hpp"
 
 class ApplicationDebugMenu;
 
 namespace t3 {
-inline namespace core{
+inline namespace base{
+
 class SceneGenerator;
-}
+
 class Application
 {
 public:
@@ -41,7 +41,7 @@ private:
 };
 
 
-
+}   // namespace base
 }   // namespace t3
 
 #endif // TRI_APPLICATION_HPP_INCLUDED

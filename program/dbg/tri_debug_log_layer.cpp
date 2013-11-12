@@ -1,7 +1,7 @@
 #include "tri_debug_log_layer.hpp"
 #include "../gfx/tri_color.hpp"
 #include "tri_print.hpp"
-#include "../kernel/tri_game_system.hpp"
+#include "../base/tri_game_system.hpp"
 #include "tri_draw_primitive.hpp"
 
 

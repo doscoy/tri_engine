@@ -9,7 +9,7 @@
 #include "tri_mesh.hpp"
 #include "../dbg/tri_assert.hpp"
 #include <fstream>
-#include "../platform/platform_sdk.hpp"
+#include "../kernel/platform/platform_sdk.hpp"
 #include "../geometry/tri_aabb.hpp"
 
 

@@ -4,7 +4,6 @@
 #define TRI_RANDOM_NUMBER_GENERATOR_HPP_INCLUDED
 
 
-#include "../../tri_develop_base.hpp"
 #include "../../util/tri_uncopyable.hpp"
 
 

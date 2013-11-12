@@ -5,7 +5,7 @@
 #include <cstdarg>
 #include <cstdio>
 #include "tri_trace.hpp"
-#include "../kernel/tri_game_system.hpp"
+#include "../base/tri_game_system.hpp"
 #include "../util/tri_counter.hpp"
 #include "tri_debug_log_layer.hpp"
 #include "../math/tri_math.hpp"

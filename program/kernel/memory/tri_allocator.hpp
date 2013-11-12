@@ -4,9 +4,9 @@
 
 
 #include <cstdlib>
-#include "../util/tri_uncopyable.hpp"
+#include "../../util/tri_uncopyable.hpp"
 #include "tri_allocation_recorder.hpp"
-#include "../util/tri_counter.hpp"
+#include "../../util/tri_counter.hpp"
 
 
 //==============================================================================

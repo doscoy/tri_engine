@@ -1,7 +1,8 @@
 #include "tri_scene_node.hpp"
 #include "tri_scene_graph.hpp"
 #include "tri_camera_node.hpp"
-
+#include "../dbg/tri_trace.hpp"
+#include "../dbg/tri_assert.hpp"
 
 namespace t3 {
 inline namespace gfx {
@@ -140,9 +141,9 @@ void SceneNode::renderChildren(t3::SceneGraph *scene_graph)
                     asn->node_ = node;
                     asn->concat_ = *scene_graph->getTopMatrix();
                     
-                    Vec4 world_pos(asn->concat_.getPosition());
-                    Mtx4 from_world = scene_graph->getCamera()->getProperties()->getFromWorldMatrix();
-                    Vec4 screen_pos = from_world.xform(world_pos);
+//                    Vec4 world_pos(asn->concat_.getPosition());
+//                    Mtx4 from_world = scene_graph->getCamera()->getProperties()->getFromWorldMatrix();
+//                    Vec4 screen_pos = from_world.xform(world_pos);
                     scene_graph->addAlphaSceneNode(asn);
                 }
             }

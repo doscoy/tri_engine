@@ -10,6 +10,15 @@
 
 namespace ogl {
 
+
+enum ColorFormat
+{
+    RGBA = GL_RGBA,
+    RGB  = GL_RGB,
+};
+
+
+
 inline void cullFace(
     int mode
 ) {

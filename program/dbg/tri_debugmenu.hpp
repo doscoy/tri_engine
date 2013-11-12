@@ -2,7 +2,6 @@
 #ifndef TRI_DEBUGMENU_HPP_INCLUDED
 #define TRI_DEBUGMENU_HPP_INCLUDED
 
-#include "tri_develop_base.hpp"
 #include "tri_debugmenu_frame.hpp"
 #include "tri_debugmenu_items.hpp"
 

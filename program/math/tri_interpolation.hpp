@@ -7,7 +7,7 @@
 #ifndef TRI_INTERPOLATION_HPP_INCLUDED
 #define TRI_INTERPOLATION_HPP_INCLUDED
 
-
+#include "../base/tri_types.hpp"
 
 namespace t3 {
 

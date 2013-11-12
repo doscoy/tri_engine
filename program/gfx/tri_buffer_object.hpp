@@ -3,7 +3,7 @@
 
 
 #include "../util/tri_uncopyable.hpp"
-#include "../platform/platform_sdk.hpp"
+#include "../kernel/tri_kernel.hpp"
 
 namespace t3 {
 inline namespace gfx {
@@ -13,7 +13,7 @@ class BufferObject
 {
 public:
     BufferObject(
-        GLenum target,
+        int target,
         int stride,
         int element_count,
         void* data

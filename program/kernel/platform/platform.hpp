@@ -12,4 +12,6 @@
     #endif
 #endif  // PLATFORM_MAC
 
+#include "platform_sdk.hpp"
+
 #endif // PLATFORM_HPP_INCLUDED

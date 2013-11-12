@@ -2,7 +2,7 @@
 #ifndef TRI_FRAMEBUFFER_HPP_INCLUDED
 #define TRI_FRAMEBUFFER_HPP_INCLUDED
 
-#include "tri_develop_base.hpp"
+#include <cstdint>
 
 
 namespace t3 {

@@ -3,11 +3,11 @@
 #ifndef TRI_PAD_HPP_INCLUDED
 #define TRI_PAD_HPP_INCLUDED
 
-#include "../tri_develop_base.hpp"
-#include "../util/tri_uncopyable.hpp"
+#include "../../util/tri_uncopyable.hpp"
+#include "../../base/tri_types.hpp"
 
 namespace t3 {
-    
+inline namespace kernel {
 
 class Pad 
     : private Uncopyable
@@ -86,7 +86,8 @@ private:
     float repeat_interval_;
     float pressed_time_;
 };
-    
+  
+}   // namespace kernel
 }   // namespace t3
 
 #endif // TRI_PAD_HPP_INCLUDED

@@ -2,7 +2,6 @@
 #ifndef TRI_DEBUGMENU_LABEL_HPP_INCLUDED
 #define TRI_DEBUGMENU_LABEL_HPP_INCLUDED
 
-#include "tri_develop_base.hpp"
 #include "tri_print.hpp"
 #include "../util/tri_util.hpp"
 

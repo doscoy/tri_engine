@@ -1,10 +1,11 @@
+/*
 #include "platform_types.hpp"
 #include "platform_sdk.hpp"
 #include "platform_win.hpp"
 #include "../../io/tri_pad.hpp"
 
-#include "../../dbg/tri_dbg.hpp"
-#include "../../kernel/tri_application.hpp"
+#include "../../../dbg/tri_dbg.hpp"
+#include "../../../base/tri_application.hpp"
 
 
 namespace glue {
@@ -12,7 +13,7 @@ namespace glue {
 namespace {
         
 pad_data_t key_data_;
-pointing_data_t mouse_data_;
+//pointing_data_t mouse_data_;
 float tick_;
 
 }   // unname namespace
@@ -43,7 +44,7 @@ void endMainLoop()
 
 float oneFrameSec()
 {
-
+    return 0.1666f;
 }
 
 pad_data_t getPlatformPadData( int pad_no )
@@ -74,7 +75,7 @@ void setClearColor(
 
 void swapBuffers()
 {
-    FsSwapBuffers();
+//    FsSwapBuffers();
 }
 
 void clearDisplay( int flag )
@@ -89,3 +90,4 @@ void clearDisplay( int flag )
 
 }   // namespace glue
 
+*/

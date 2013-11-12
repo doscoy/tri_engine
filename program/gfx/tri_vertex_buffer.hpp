@@ -3,9 +3,12 @@
 #define TRI_VERTEX_BUFFER_HPP_INCLUDED
 
 
-#include "../tri_develop_base.hpp"
+
 #include "tri_buffer_object.hpp"
 #include "tri_vertex_types.hpp"
+
+
+
 namespace t3 {
 inline namespace gfx {
     

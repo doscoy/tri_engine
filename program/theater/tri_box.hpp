@@ -3,7 +3,7 @@
 
 
 #include "../util/tri_uncopyable.hpp"
-#include "../platform/platform_sdk.hpp"
+
 #include "tri_object.hpp"
 
 namespace t3 {

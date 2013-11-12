@@ -4,7 +4,7 @@
 #include "tri_vertex_buffer.hpp"
 #include "tri_index_buffer.hpp"
 #include "tri_vertex_types.hpp"
-#include "../kernel/tri_game_system.hpp"
+#include "../base/tri_game_system.hpp"
 #include "tri_texture.hpp"
 #include "../math/tri_matrix.hpp"
 #include <algorithm>

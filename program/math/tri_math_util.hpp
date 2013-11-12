@@ -3,7 +3,6 @@
 #define TRI_MATH_UTIL_HPP_INCLUDED
 
 #include "tri_math_define.hpp"
-#include "../tri_develop_base.hpp"
 #include <cmath>
 
 

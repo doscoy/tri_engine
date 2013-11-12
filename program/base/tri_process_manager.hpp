@@ -9,6 +9,8 @@
 #include <list>
 
 namespace t3 {
+inline namespace base {
+
 
 typedef std::list<std::shared_ptr<Process>> ProcessList;
 
@@ -41,7 +43,7 @@ private:
     }
 };
 
-
+}   // namespace base
 }   // namespace t3
 
 #endif // TRI_PROCESS_MANAGER_HPP_INCLUDED

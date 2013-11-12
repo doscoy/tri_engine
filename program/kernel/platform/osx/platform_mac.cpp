@@ -3,8 +3,8 @@
 #include "platform_mac.hpp"
 #include "../../io/tri_pad.hpp"
 
-#include "../../dbg/tri_dbg.hpp"
-#include "../../kernel/tri_application.hpp"
+#include "../../../dbg/tri_dbg.hpp"
+#include "../../../base/tri_application.hpp"
 #include "tri_game_system.hpp"
 #include "fssimplewindow.h"
 #include "cocoa_keycode.h"
@@ -15,7 +15,7 @@ namespace glue {
 namespace {
         
 pad_data_t key_data_;
-pointing_data_t mouse_data_;
+//pointing_data_t mouse_data_;
 float tick_;
 
 }   // unname namespace

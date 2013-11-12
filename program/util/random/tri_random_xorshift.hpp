@@ -3,7 +3,7 @@
 #ifndef TRI_RANDOM_XORSHIFT_HPP_INCLUDED
 #define TRI_RANDOM_XORSHIFT_HPP_INCLUDED
 
-#include "../../tri_develop_base.hpp"
+#include <cstdint>
 
 namespace t3 {
 
