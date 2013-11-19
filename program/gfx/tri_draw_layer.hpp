@@ -1,10 +1,3 @@
-//
-//  tri_draw_layer.h
-//  tri_sandbox_osx
-//
-//  Created by KANI Tetsuro on 2013/01/21.
-//  Copyright (c) 2013年 KANI Tetsuro. All rights reserved.
-//
 
 #ifndef TRI_DRAW_LAYER_HPP_INCLUDED
 #define TRI_DRAW_LAYER_HPP_INCLUDED

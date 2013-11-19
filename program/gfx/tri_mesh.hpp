@@ -3,6 +3,9 @@
 
 #include "../base/tri_types.hpp"
 #include "../geometry/tri_sphere.hpp"
+#include "tri_entity.hpp"
+#include "tri_renderable.hpp"
+
 
 namespace t3 {
 inline namespace gfx {

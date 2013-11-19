@@ -1,24 +1,21 @@
 
 #include "tri_scene_graph.hpp"
-#include "tri_root_node.hpp"
-#include "tri_camera_node.hpp"
-#include "tri_test_object_node.hpp"
+#include "tri_scene_node.hpp"
 #include "../dbg/tri_trace.hpp"
 #include "../kernel/tri_kernel.hpp"
+#include "../base/tri_game_system.hpp"
 
 namespace t3 {
 inline namespace gfx {
 
-node_id_t SceneGraph::next_actor_id_ = 1;
 
 SceneGraph::SceneGraph()
     : root_()
-    , camera_node_()
+    , camera_()
     , matrix_stack_()
-    , alpha_scene_nodes_()
     , node_map_()
 {
-    root_ = RootNode::create(issueNodeID());
+    root_ = TransformNode::create();
 }
 
 
@@ -31,9 +28,9 @@ SceneGraph::~SceneGraph()
 void SceneGraph::renderScene()
 {
 
-    if (root_ && camera_node_) {
+    if (root_ && camera_) {
         matrix_stack_.clearStack();
-        camera_node_->setViewTransform(this);
+//        setupView();
         
         if (root_->preRender(this)) {
             root_->render(this);
@@ -43,21 +40,41 @@ void SceneGraph::renderScene()
     
     }
     
-    renderAlphaPass();
+//    renderAlphaPass();
 }
 
-
-void SceneGraph::restoreScene()
+void SceneGraph::setupView()
 {
-    if (!root_) {
-        return;
-    }
+    const t3::GameSystem& game_sys = t3::GameSystem::getInstance();
+    const t3::Vec2& screen = game_sys.getScreenSize();
     
-    root_->onRestore(this);
+
+    ogl::viewport(
+        0,
+        0,
+        screen.x_,
+        screen.y_
+    );  //ビューポートの設定
+    
+    ogl::matrixMode(
+        GL_PROJECTION
+    );
+    t3::Mtx4 projection;
+    projection.frustum(
+        -1,
+        1,
+        -(float)screen.y_ /screen.x_,
+        (float)screen.y_/screen.x_,
+        1,
+        100
+    );
+    ogl::loadMatrixf( projection.pointer() );
+  
+    const Mtx4* view_mtx = camera_->getViewMatrix();
+    pushAndSetMatrix(*view_mtx);
+
 
 }
-
-
 
 void SceneGraph::updateScene(tick_t tick)
 {
@@ -97,9 +114,9 @@ const Mtx4* SceneGraph::getTopMatrix()
 }
 
 
-std::shared_ptr<ISceneNode> SceneGraph::findActor(node_id_t id)
+std::shared_ptr<ISceneNode> SceneGraph::findNode(node_id_t id)
 {
-    SceneActorMap::iterator it = node_map_.find(id);
+    SceneNodeMap::iterator it = node_map_.find(id);
     
     if (it == node_map_.end()) {
         std::shared_ptr<ISceneNode> null;
@@ -110,48 +127,16 @@ std::shared_ptr<ISceneNode> SceneGraph::findActor(node_id_t id)
 }
 
 
-
-void SceneGraph::renderAlphaPass()
+std::shared_ptr<TransformNode> SceneGraph::createNode()
 {
-    //  現在のワールド変換行列とz write設定を保存
-    
-    //  アルファ描画用設定
-    
-    //  アルファノードのソート
-    alpha_scene_nodes_.sort();
-    
-    while (!alpha_scene_nodes_.empty()) {
-        AlphaSceneNodes::reverse_iterator it = alpha_scene_nodes_.rbegin();
-        
-        //  ワールド変換行列設定
-        
-        //
-        (*it)->node_->render(this);
-        
-        delete (*it);
-        alpha_scene_nodes_.pop_back();
-  
-    }
-
-
-    //  最初に保存した行列と設定をもとに戻す
-}
-
-
-std::shared_ptr<CameraNode> SceneGraph::createCamera()
-{
-    std::shared_ptr<CameraNode> new_node = CameraNode::create(issueNodeID());
+    std::shared_ptr<TransformNode> new_node;
+    new_node.reset(new TransformNode(getNewNodeID(), "trans"));
     root_->addChild(new_node);
     return new_node;
 }
 
-std::shared_ptr<TestObjectNode> SceneGraph::createTestObject()
-{
-    std::shared_ptr<TestObjectNode> new_node =TestObjectNode::create(issueNodeID());
-    root_->addChild(new_node);
-    return new_node;
 
-}
+
 
 
 

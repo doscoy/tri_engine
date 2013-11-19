@@ -13,16 +13,15 @@
 #include <memory.h>
 
 #include "../math/tri_matrix_stack.hpp"
+#include "tri_transform_node.hpp"
 #include "tri_scene_node.hpp"
-
-
-
+#include "tri_camera.hpp"
 namespace t3 {
 inline namespace gfx {
 
 
 
-typedef std::map<node_id_t, std::shared_ptr<ISceneNode>> SceneActorMap;
+typedef std::map<node_id_t, std::shared_ptr<ISceneNode>> SceneNodeMap;
 
 
 class TestObjectNode;
@@ -36,23 +35,24 @@ public:
     SceneGraph();
     virtual ~SceneGraph();
     
-    void renderScene();
     
-    void restoreScene();
+public:
+    void setupView();
+    void renderScene();
     
     void updateScene(tick_t tick);
     
-    std::shared_ptr<ISceneNode> findActor( node_id_t id );
+    std::shared_ptr<ISceneNode> findNode( node_id_t id );
     
     
     void setCamera(
-        std::shared_ptr<CameraNode> camera
+        std::shared_ptr<Camera> cam
     ) {
-        camera_node_ = camera;
+        camera_ = cam;
     }
     
-    const std::shared_ptr<CameraNode> getCamera() const {
-        return camera_node_;
+    const std::shared_ptr<Camera> getCamera() const {
+        return camera_;
     }
     
     const std::shared_ptr<ISceneNode> getRootNode() const {
@@ -67,21 +67,13 @@ public:
     
     const Mtx4* getTopMatrix();
     
-    void addAlphaSceneNode(
-        AlphaSceneNode* asn
-    ) {
-        alpha_scene_nodes_.push_back(asn);
-    }
+    std::shared_ptr<TransformNode> createNode();
     
-    std::shared_ptr<CameraNode> createCamera();
-    std::shared_ptr<TestObjectNode> createTestObject();
-
 private:
-    void renderAlphaPass();
 
     bool addChild(
         node_id_t id,
-        std::shared_ptr<ISceneNode> kid
+        std::shared_ptr<TransformNode> kid
     ) {
         node_map_[id] = kid;
         return root_->addChild(kid);
@@ -94,21 +86,14 @@ private:
         return root_->removeChild(id);
     }
 
-    node_id_t issueNodeID() const {
-        next_actor_id_ += 1;
-        return next_actor_id_;
-    }
-
 
 protected:
-    std::shared_ptr<SceneNode> root_;
-    std::shared_ptr<CameraNode> camera_node_;
+    std::shared_ptr<ISceneNode> root_;
+    std::shared_ptr<Camera> camera_;
     
     MatrixStack matrix_stack_;
-    AlphaSceneNodes alpha_scene_nodes_;
-    SceneActorMap node_map_;
+    SceneNodeMap node_map_;
     
-    static node_id_t next_actor_id_;
 };
 
 
