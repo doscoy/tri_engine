@@ -128,6 +128,13 @@ struct Mtx4Template
         return xform(b);
     }
     
+    Vec3Template<T> xform(const Vec3Template<T>& b) const {
+        Vec4Template<T> a(b);
+        Vec4Template<T> a2 = xform(a);
+        Vec3Template<T> a3(a2.x_, a2.y_, a2.z_);
+        return a3;
+    }
+    
     Vec4Template<T> xform(const Vec4Template<T>& b) const {
         Vec4Template<T> v;
         v.x_ = x_.x_ * b.x_ + x_.y_ * b.y_ + x_.z_ * b.z_ + x_.w_ * b.w_;
@@ -331,7 +338,7 @@ struct Mtx4Template
         return m;
     }
     
-    static Mtx4Template<T>& makeRotateYawPitchRoll(
+    static void makeRotateYawPitchRoll(
         Mtx4Template<T>& m,
         T yaw,
         T pitch,
@@ -347,10 +354,57 @@ struct Mtx4Template
         makeRotateMatrixZ(roll_mtx, roll);
         
         m = yaw_mtx * pitch_mtx * roll_mtx;
-
-        return m;
     }
     
+    
+    static void makeRotateAxis(
+        Mtx4Template<T>& pOut,
+        const Vec3Template<T>& pAxis,
+        T fRad
+    ){
+    
+        Vec3Template<T> vN;
+        float s, c;             // sinTheta, cosTheta
+        float t;                // ( 1 - cosTheta )
+        float x, y, z;          // x, y, z components of normalized axis
+        float xSq, ySq, zSq;    // x, y, z squared
+
+
+
+        s = ::std::sinf(fRad);
+        c = ::std::cosf(fRad);
+        t = 1.0f - c;
+
+        vN = pAxis.getNormalized();
+
+        x = vN.x_;
+        y = vN.y_;
+        z = vN.z_;
+
+        xSq = x * x;
+        ySq = y * y;
+        zSq = z * z;
+
+        pOut.x_.x_ = ( t * xSq )   + ( c );
+        pOut.x_.y_ = ( t * x * y ) - ( s * z );
+        pOut.x_.z_ = ( t * x * z ) + ( s * y );
+        pOut.x_.w_ = 0.0f;
+
+        pOut.y_.x_ = ( t * x * y ) + ( s * z );
+        pOut.y_.y_ = ( t * ySq )   + ( c );
+        pOut.y_.z_ = ( t * y * z ) - ( s * x );
+        pOut.y_.w_ = 0.0f;
+
+        pOut.z_.x_ = ( t * x * z ) - ( s * y );
+        pOut.z_.y_ = ( t * y * z ) + ( s * x );
+        pOut.z_.z_ = ( t * zSq )   + ( c );
+        pOut.z_.w_ = 0.0f;
+    
+        pOut.w_.x_ = 0.0f;
+        pOut.w_.y_ = 0.0f;
+        pOut.w_.z_ = 0.0f;
+        pOut.w_.w_ = 1.0f;
+    }
     
     
     void ortho( T left, T right, T bottom, T top, T near, T far ){

@@ -10,6 +10,8 @@ namespace t3 {
 inline namespace geometry {
 
 class Plane;
+class Segment;
+
 
 }   // namespace geometry
 
@@ -21,6 +23,11 @@ inline namespace dbg {
 
 void drawPoint(
     const Vec2& pos,
+    const Color& color
+);
+
+void drawPoint(
+    const Vec3& pos,
     const Color& color
 );
 
@@ -38,6 +45,14 @@ void drawLine(
     const Color& color
 );
 
+void drawSegment(
+    const Segment& segment,
+    const Color& color,
+    const float width
+);
+
+void drawAxis(const Vec3& pos);
+
 void drawRectangle(
      const Vec2& left_up,
      const Vec2& size,
@@ -53,16 +68,11 @@ void drawPlane(
     const Color& color
 );
 
-inline void drawPlane(
-    const Plane& plane,
-    const Vec3& size,
-    const Color& color
-);
+
+
 
 }   // inline namespace dbg
 }   // namespace t3
-
-
 
 
 

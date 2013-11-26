@@ -5,6 +5,7 @@
 
 #include "tri_buffer_object.hpp"
 #include "tri_camera.hpp"
+#include "tri_camera_updater.hpp"
 #include "tri_color.hpp"
 #include "tri_draw_layer.hpp"
 #include "tri_entity.hpp"

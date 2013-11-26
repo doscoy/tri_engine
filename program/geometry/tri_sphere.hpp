@@ -42,6 +42,10 @@ public:
         return radius_;
     }
     
+    float getRadiusSq() const {
+        return radius_ * radius_;
+    }
+    
 private:
 
     Vec3 position_;

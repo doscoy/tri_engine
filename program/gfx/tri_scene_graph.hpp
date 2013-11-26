@@ -55,7 +55,7 @@ public:
         return camera_;
     }
     
-    const std::shared_ptr<ISceneNode> getRootNode() const {
+    const std::shared_ptr<TransformNode> getRootNode() const {
         return root_;
     }
     
@@ -88,7 +88,7 @@ private:
 
 
 protected:
-    std::shared_ptr<ISceneNode> root_;
+    std::shared_ptr<TransformNode> root_;
     std::shared_ptr<Camera> camera_;
     
     MatrixStack matrix_stack_;

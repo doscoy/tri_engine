@@ -7,6 +7,7 @@
 #include "math/tri_math.hpp"
 #include "dbg/tri_dbg.hpp"
 #include "gfx/tri_gfx.hpp"
+#include "geometry/tri_geometry.hpp"
 #include "base/tri_base.hpp"
 #include "util/tri_util.hpp"
 #include "theater/tri_theater.hpp"

@@ -30,7 +30,7 @@ void SceneGraph::renderScene()
 
     if (root_ && camera_) {
         matrix_stack_.clearStack();
-//        setupView();
+        setupView();
         
         if (root_->preRender(this)) {
             root_->render(this);
@@ -129,10 +129,7 @@ std::shared_ptr<ISceneNode> SceneGraph::findNode(node_id_t id)
 
 std::shared_ptr<TransformNode> SceneGraph::createNode()
 {
-    std::shared_ptr<TransformNode> new_node;
-    new_node.reset(new TransformNode(getNewNodeID(), "trans"));
-    root_->addChild(new_node);
-    return new_node;
+    return root_->createNode();
 }
 
 

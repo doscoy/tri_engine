@@ -17,18 +17,18 @@ public:
 
 public:
     void setCamera(
-        Camera* camera
+        std::shared_ptr<Camera> camera
     ) {
         camera_ = camera;
     }
     
 protected:
-    Camera* getManagedCamera() {
+    std::shared_ptr<Camera> getManagedCamera() {
         return camera_;
     }
     
 private:
-    Camera* camera_;
+    std::shared_ptr<Camera> camera_;
 };
 
 

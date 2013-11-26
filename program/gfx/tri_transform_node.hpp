@@ -105,7 +105,7 @@ public:
     }
 
     std::shared_ptr<TransformNode> createNode(
-        const char* const name
+        const char* const name = nullptr
     );
 
 

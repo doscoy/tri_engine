@@ -179,8 +179,6 @@ std::shared_ptr<TransformNode> TransformNode::createNode(
     const char* const name
 ) {
     std::shared_ptr<TransformNode> new_node = create(name);
-    
-    new_node.reset(new TransformNode(getNewNodeID(), "trans"));
     addChild(new_node);
     return new_node;
 }
