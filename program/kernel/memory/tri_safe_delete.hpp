@@ -1,11 +1,11 @@
 
 
-#ifndef TRI_STD_HPP_INCLUDED
-#define TRI_STD_HPP_INCLUDED
+#ifndef TRI_SAFE_DELETE_HPP_INCLUDED
+#define TRI_SAFE_DELETE_HPP_INCLUDED
 
 // ---------------------------------------------
 //  include
-#include "tri_types.hpp"
+#include "base/tri_types.hpp"
 #include "tri_memory.hpp"
 
 //==============================================================================
@@ -43,5 +43,5 @@ inline void safeDeleteArray(T*& p) {
     
 } // namespace t3
 
-#endif // TRI_ENGINE_HPP_INCLUDED
+#endif // TRI_SAFE_DELETE_HPP_INCLUDED
 

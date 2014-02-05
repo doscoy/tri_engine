@@ -1,9 +1,15 @@
 #ifndef PLATFORM_OPENGL_WRAPPER_HPP_INCLUDED
 #define PLATFORM_OPENGL_WRAPPER_HPP_INCLUDED
 
+#ifdef WIN32
 
+#include <gl/GL.h>
+#include <gl/GLU.h>
+
+#else
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
+#endif
 
 
 

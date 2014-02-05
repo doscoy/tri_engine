@@ -1,7 +1,7 @@
 
 #include "tri_draw_primitive.hpp"
-#include "platform_sdk.hpp"
-#include "platform.hpp"
+#include "kernel/platform/platform_sdk.hpp"
+#include "kernel/platform/platform.hpp"
 #include "../geometry/tri_geometry.hpp"
 
 

@@ -6,7 +6,7 @@
 #include "dbg/tri_assert.hpp"
 #include <stdlib.h>
 #include "tri_new.hpp"
-#include "tri_trace.hpp"
+#include "dbg/tri_trace.hpp"
 #include "tri_memory.hpp"
 
 

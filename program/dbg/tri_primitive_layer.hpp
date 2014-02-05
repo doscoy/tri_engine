@@ -3,7 +3,7 @@
 #ifndef TRI_PRIMITIVE_LAYER_HPP_INCLUDED
 #define TRI_PRIMITIVE_LAYER_HPP_INCLUDED
 
-#include "tri_render_layer.hpp"
+#include "gfx/tri_render_layer.hpp"
 #include <functional>
 
 

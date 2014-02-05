@@ -4,7 +4,7 @@
 
 
 #include "../util/tri_uncopyable.hpp"
-#include "tri_debugmenu_items.hpp"
+#include "dbg/tri_debugmenu_items.hpp"
 #include <list>
 
 constexpr int LAYER_NAME_SIZE = 20;

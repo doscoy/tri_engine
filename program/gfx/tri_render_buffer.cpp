@@ -1,7 +1,7 @@
 
 
 #include "tri_render_buffer.hpp"
-#include "platform_sdk.hpp"
+#include "kernel/platform/platform_sdk.hpp"
 #include "tri_frame_buffer.hpp"
 
 namespace t3 {
