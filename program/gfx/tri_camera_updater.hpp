@@ -3,6 +3,7 @@
 
 
 #include "../math/tri_math.hpp"
+#include <memory>
 
 namespace t3 {
 inline namespace gfx {

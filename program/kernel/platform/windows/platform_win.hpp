@@ -1,7 +1,7 @@
 #ifndef PLATFORM_WIN_HPP_INCLUDED
 #define PLATFORM_WIN_HPP_INCLUDED
 
-#include "platform_types.hpp"
+#include "../platform_types.hpp"
 
 namespace t3 {
 class Color;

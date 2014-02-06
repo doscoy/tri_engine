@@ -7,8 +7,8 @@
 #include "../math/tri_math_types.hpp"
 #include "../util/tri_uncopyable.hpp"
 #include "tri_gfx_types.hpp"
-
-
+#include <memory>
+#include <cstdint>
 
 
 

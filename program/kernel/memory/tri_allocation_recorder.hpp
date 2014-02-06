@@ -5,6 +5,7 @@
 //  include
 #include <iostream>
 #include <array>
+#include <cstdint>
 
 //==============================================================================
 

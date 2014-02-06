@@ -77,7 +77,7 @@ Heap* HeapFactory::createNewHeap(
     for( ; itr != end; ++itr ){
         if ( !itr->isActive() ){
             itr->activate( name );
-            return itr;
+            return static_cast<Heap*>(&(*itr));
         }
     }
     
