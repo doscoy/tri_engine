@@ -2,14 +2,27 @@
 #define PLATFORM_HPP_INCLUDED
 
 
-
-#if WIN32
+//  WINDOWS
+#ifdef WIN32
     #define PLATFORM_WINDOWS    1
-#endif //   WIN32
+#endif //   WINDOWS
 
-#if 0
+//  MAC
+#ifdef __APPLE__
     #define PLATFORM_MAC        1
-#endif
+#endif // MAC
+
+//  iPhone
+#ifdef TARGET_OS_IPHONE
+    #define PLATFORM_IPHONE
+#endif // iPhone
+
+
+//  Android
+
+//  Android
+
+
 
 #if PLATFORM_MAC
     #include "osx/platform_mac.hpp"
