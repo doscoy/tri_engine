@@ -34,4 +34,18 @@
 
 #include "platform_sdk.hpp"
 
+
+
+
+namespace t3 {
+namespace platform {
+
+
+void initializePlatform();
+void createWindow();
+void terminatePlatform();
+
+}   // namespace platform
+}   // namespace t3
+
 #endif // PLATFORM_HPP_INCLUDED

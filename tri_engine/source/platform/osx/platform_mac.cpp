@@ -10,6 +10,31 @@
 #include "cocoa_keycode.h"
 
 
+
+
+
+
+namespace t3 {
+namespace platform {
+
+void initializePlatform() {
+
+}
+
+void createWindow() {
+
+}
+void terminatePlatform() {
+    glfwTerminate();
+}
+
+
+}   // namespace platform
+}   // namespace t3
+
+
+
+
 namespace glue {
 
 namespace {

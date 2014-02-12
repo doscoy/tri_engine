@@ -3,10 +3,10 @@
 
 #include "platform_types.hpp"
 
+
 namespace t3 {
 class Color;
 };
-
 
 namespace glue {
 

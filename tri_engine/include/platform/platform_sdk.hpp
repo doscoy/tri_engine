@@ -8,6 +8,7 @@
 
 #elif defined(__APPLE__)
 #include "../../third_party_lib/osx/png.h"
+#include "../../third_party_lib/osx/GLFW/glfw3.h"
 #endif
 
 
