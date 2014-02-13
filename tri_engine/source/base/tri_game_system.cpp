@@ -17,17 +17,18 @@ inline namespace base {
 // *********************************************
 //  コンストラクタ
 GameSystem::GameSystem()
-    : random_number_generator_( 1 )
-    , dmi_color_idx_( nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3 )
-    , use_clear_color_index_( 0 )
+    : random_number_generator_(1)
+    , dmi_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
+    , use_clear_color_index_(0)
     , clear_colors_{{
         Color::darkgray(),
         Color::black(),
         Color::white(),
         Color::blue()}}
-    , dmf_layers_( nullptr, "LAYERS" )
+    , dmf_layers_(nullptr, "LAYERS")
     , layer_list_()
-    , suspend_( false )
+    , exit_request_(false)
+    , suspend_(false)
 {
     //  テクスチャマネージャ生成
     TextureManager::createInstance();
@@ -64,21 +65,31 @@ void GameSystem::update( tick_t tick )
     frame_counter_.up();
     
     for ( int pad_idx = 0; pad_idx < MAX_PAD; ++pad_idx ){
-        pad_[pad_idx].updatePad( glue::getPlatformPadData( pad_idx ), tick );
+        platform::GamePadData pad_data;
+        platform::getPlatformPadData(pad_idx, &pad_data);
+        pad_[pad_idx].updatePad(pad_data.getButtonData(), tick );
     }
-    updateDebugPad( glue::getPlatformDebugPadData(), tick );
+    
+    //  debug pad
+    platform::GamePadData dbg_pad_data;
+    platform::getPlatformPadData(0, &dbg_pad_data);
+    updateDebugPad(dbg_pad_data.getButtonData(), tick);
     
     
+    //  終了リクエストチェック
+    if (platform::isExitRequest()) {
+        exit_request_ =  true;
+    }
 }
 
 void GameSystem::suspend( tick_t tick )
 {
-    setClearColor();
+//    setClearColor();
 }
 
 void GameSystem::setClearColor()
 {
-    glue::setClearColor( clear_colors_[use_clear_color_index_] );
+//    glue::setClearColor( clear_colors_[use_clear_color_index_] );
 }
     
     

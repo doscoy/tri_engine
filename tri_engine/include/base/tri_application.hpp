@@ -8,7 +8,15 @@
 
 class ApplicationDebugMenu;
 
+
+
 namespace t3 {
+void initializeTriEngine(
+    const int width,
+    const int height,
+    const char* const title
+);
+
 inline namespace base{
 
 class SceneGenerator;

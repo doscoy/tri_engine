@@ -4,26 +4,22 @@
 
 #include <cstdint>
 
-namespace glue {
+namespace t3 {
+namespace platform {
 
-//  プラットフォームから取得するキーデータ
-typedef uint32_t pad_data_t;
-
-//  プラットフォームから取得するポインティングデータ
-struct pointing_data_t {
-    int x;
-    int y;
-    bool hit;
+//  プラットフォームから取得するパッドデータ
+struct GamePadData {
+    
+    uint32_t getButtonData() const {
+        return button_data_;
+    }
+    
+    uint32_t button_data_;
+    
 };
 
-//  プラットフォームから取得する加速度センサデータ
-struct accele_data_t {
-    float x;
-    float y;
-    float z;
-};
 
-}   // namespace glue
-
+}   // namespace platform
+}   // namespace t3
 
 #endif // PLATFORM_TYPES_HPP_INCLUDED

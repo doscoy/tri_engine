@@ -10,7 +10,7 @@
 #include "util/tri_framerate.hpp"
 #include "util/tri_counter.hpp"
 #include "kernel/tri_kernel.hpp"
-
+#include "gfx/tri_render_system.hpp"
 
 
 
@@ -19,7 +19,7 @@ namespace {
 
 bool show_work_bar_ = true;
 bool show_work_time_ = true;
-t3::Workbar cpu_bar_( t3::util::frameSec<60>(), glue::getScreenWidth() );
+t3::Workbar cpu_bar_;
 
 t3::Stopwatch system_cost_timer_;
 t3::Stopwatch app_cost_timer_;
@@ -96,34 +96,54 @@ private:
 
 
 namespace t3 {
-inline namespace base {
 
-int Application::run( t3::SceneGenerator* root_scene_generator )
-{
-    t3::Application app( root_scene_generator );
+
+void initializeTriEngine(int width, int height, const char* title) {
     
     //  プラットフォームの初期化
-    glue::initializePlatform();
+    platform::initializePlatform();
+    platform::createWindow(width, height, title);
+    
+    DebugMenu::createInstance();
+    GameSystem::createInstance();
+    SceneManager::createInstance();
+    
+    
+    t3::GameSystem* game_system = t3::GameSystem::getInstancePointer();
+    game_system->setScreenSize(
+        Point2(
+            width,
+            height
+        )
+    );
+}
+
+inline namespace base {
+
+int Application::run(t3::SceneGenerator* root_scene_generator) {
+
+    t3::Application app(root_scene_generator);
+    
     
     //  アプリの初期化
     app.initializeApplication();
     
-    
-    glue::prepareMainLoop();
-    
+    //  ゲームシステム
+    GameSystem& gs = GameSystem::getInstance();
+
+    float default_delta_time = frameSec<60>();
     //  main loop
-    while (1) {
-        glue::beginMainLoop();
+    while (!gs.isExitRequest()) {
+        platform::beginMainLoop();
         
         //  アプリケーションの更新
-        app.update( glue::oneFrameSec() );
+        app.update(default_delta_time);
         
-        glue::endMainLoop();
-        
-        if (glue::isExitRequest()) {
-            break;
-        }
+        platform::endMainLoop();
+
     }
+    
+    
     
     return 0;
 }
@@ -143,22 +163,16 @@ Application::~Application()
 
 void Application::initializeApplication()
 {
-    DebugMenu::createInstance();
-    GameSystem::createInstance();
-    SceneManager::createInstance();
+    SceneManager::getInstance().forceChangeScene( root_scene_generator_ );
+    GameSystem& game_system = GameSystem::getInstance();
     
-    
-    t3::GameSystem* game_system = t3::GameSystem::getInstancePointer();
-    game_system->setScreenSize( 
-        Point2( 
-            glue::getScreenWidth(),
-            glue::getScreenHeight() 
+    //  ワークバーの配置
+    cpu_bar_.setPosition(
+        Vec2(
+             1,
+             game_system.getScreenSize().y_ -5
         )
     );
-    SceneManager::getInstance().forceChangeScene( root_scene_generator_ );
-
-    //  ワークバーの配置
-    cpu_bar_.setPosition( Vec2( 1, glue::getScreenHeight() -5 ) );
 
 
     //  システムデバッグメニュー登録
@@ -172,10 +186,11 @@ void Application::initializeApplication()
     //  デバッグ文字描画の初期化
     initializeDebugPrint();
     initializeTrace();
+
 }
 
 
-void Application::update( tick_t tick )
+void Application::update(tick_t tick)
 {
 
     other_cost_timer_.end();
@@ -186,35 +201,34 @@ void Application::update( tick_t tick )
     DebugMenu& dm = DebugMenu::getInstance();
     
     
-    dm.update( tick );
-    gs.update( tick );
+    dm.update(tick);
+    gs.update(tick);
 
     //  レイヤーの更新
-    gfx::updateLayers( gs.getLaysers(), tick );
+    gfx::updateLayers(gs.getLaysers(), tick);
 
     
     system_cost_timer_.end();       // system cost 計測終了
     app_cost_timer_.start();       // app cost 計測開始
 
     //  シーンの更新
-    if ( isSuspend() ){
+    if (isSuspend()) {
         //  サスペンド中
-        gs.suspend( tick );
-        sm.suspendScene( tick );
+        gs.suspend(tick);
+        sm.suspendScene(tick);
     }
     else {
         //  更新中
-        sm.updateScene( tick );
+        sm.updateScene(tick);
         
         //  デバッグメニュー開く
-        if ( isDebugMenuOpenRequest() ){
+        if (isDebugMenuOpenRequest()) {
             dm.openMenu();
         }
     }
     
     app_cost_timer_.end();              // app cost 計測終了
     rendering_cost_timer_.start();      // rendering cost 計算開始
-    
     
     //  シーン描画
     beginRender();
@@ -223,15 +237,15 @@ void Application::update( tick_t tick )
     dm.render();
     
     //  レイヤーの描画
-    gfx::drawLayers( gs.getLaysers() );
+    gfx::drawLayers(gs.getLaysers());
     
     
     //  CPU負荷可視化
     if ( show_work_bar_ ){
-        cpu_bar_.setParam( 0, system_cost_timer_.interval() );
-        cpu_bar_.setParam( 1, app_cost_timer_.interval() );
-        cpu_bar_.setParam( 2, rendering_cost_timer_.interval() );
-        cpu_bar_.setParam( 3, other_cost_timer_.interval() );
+        cpu_bar_.setParam(0, system_cost_timer_.interval());
+        cpu_bar_.setParam(1, app_cost_timer_.interval());
+        cpu_bar_.setParam(2, rendering_cost_timer_.interval());
+        cpu_bar_.setParam(3, other_cost_timer_.interval());
         cpu_bar_.draw();
     }
     rendering_cost_timer_.end();           // rendering cost 計算終了
@@ -242,14 +256,14 @@ void Application::update( tick_t tick )
     
     //  コスト表示は数フレームに1回書き換える
     //  毎フレだと速すぎて読めないからね
-    if ( ( frame_counter_.now() % 15 ) == 0 ) {
+    if ((frame_counter_.now() % 15) == 0) {
         last_system_cost_ = system_cost_timer_.interval();
         last_app_cost_ = app_cost_timer_.interval();
         last_rendering_cost_ = rendering_cost_timer_.interval();
         last_other_cost_ = other_cost_timer_.interval();
     }
     
-    if ( show_work_time_ ) {
+    if (show_work_time_) {
         t3::printDisplay(
             940,
             640,
@@ -283,13 +297,12 @@ void Application::update( tick_t tick )
             last_other_cost_ / frameSec<60>() * 100
         );
     }
-    
-
 
     //  最後にシーンチェンジ処理
     sm.directScene();
+    
     //  シーン切り替わり判定
-    if ( sm.isSceneChenged() ){
+    if (sm.isSceneChenged()) {
         //  シーンが切り替わったのでデバッグメニューを閉じる
         dm.closeMenu();
 
@@ -301,60 +314,55 @@ void Application::update( tick_t tick )
 
         //  シーンが切り替わったタイミングを保存
         last_scene_change_frame_ = frame_counter_.now();
-        
     }
-    
 }
 
-bool Application::isDebugMenuOpenRequest(){
+bool Application::isDebugMenuOpenRequest() {
     const Pad& pad = debugPad();
     
     bool result = false;
-    if ( pad.isPress( Pad::BUTTON_3 ) ){
+    if (pad.isPress(Pad::BUTTON_3)) {
         result = true;
     }
+    
     return result;
 }
 
 bool Application::isSuspend() const {
     //  ステップ実行フック
-    if ( step_update_ ){
+    if (step_update_) {
         step_update_ = false;
         return false;
     }
     
     //  強制シーンチェンジ時もサスペンドを解く
     SceneManager& sm = SceneManager::getInstance();
-    if ( sm.isForceChangeRequested() ){
+    if (sm.isForceChangeRequested()) {
         return false;
     }
 
     //  サスペンド中か判定
-   if ( isSuspending() ){
+   if (isSuspending()) {
        return true;
    }
 
 
     return false;
-    
 }
 
 
 
-void Application::beginRender()
-{
-    glue::clearDisplay(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  
+void Application::beginRender() {
+    RenderSystem::clearBuffer(true, true, false);
 }
 
 
-void Application::endRender()
-{
-    glue::swapBuffers();
+void Application::endRender() {
+    RenderSystem::swapBuffers();
 }
 
-void Application::gotoRootScene()
-{
-    t3::SceneManager::getInstance().forceChangeScene( root_scene_generator_ );
+void Application::gotoRootScene() {
+    t3::SceneManager::getInstance().forceChangeScene(root_scene_generator_);
 }
 
 

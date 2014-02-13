@@ -88,6 +88,10 @@ public:
         return layers_;
     }
     
+    bool isExitRequest() const {
+        return exit_request_;
+    }
+    
 private:
     void setClearColor();
 
@@ -117,6 +121,7 @@ private:
     t3::DebugMenuFrame  dmf_layers_;
     std::array<t3::DebugMenuLabel*, 24> layer_list_;
 
+    bool exit_request_;
     
     bool suspend_;
 };

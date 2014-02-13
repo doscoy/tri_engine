@@ -14,10 +14,7 @@ class Workbar
     : private Uncopyable
 {
 public:
-    Workbar(
-        float limit_param,
-        int limit_width_pixel
-    );
+    Workbar();
     ~Workbar();
 
 

@@ -3,15 +3,17 @@
 #include "platform/platform_sdk.hpp"
 #include "platform/platform.hpp"
 #include "geometry/tri_geometry.hpp"
-
+#include "base/tri_game_system.hpp"
 
 namespace {
 
 
 void setupOrtho()
 {
-    float screen_width = glue::getScreenWidth();
-    float screen_height = glue::getScreenHeight();
+    t3::GameSystem& gs = t3::GameSystem::getInstance();
+
+    float screen_width = gs.getScreenSize().x_;
+    float screen_height = gs.getScreenSize().y_;
 
     ogl::matrixMode( GL_PROJECTION );
     ogl::pushMatrix();

@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <cstdarg>
 #include "kernel/tri_kernel.hpp"
-
+#include "base/tri_game_system.hpp"
 
 extern void beginPrint( const float w, const float h );
 extern void endPrint();
@@ -81,7 +81,8 @@ void DebugStringBuffer::clearBuffer()
 
 void DebugStringBuffer::drawStrings()
 {
-    beginPrint( glue::getScreenWidth(), glue::getScreenHeight() );
+    GameSystem& gs = GameSystem::getInstance();
+    beginPrint(gs.getScreenSize().x_, gs.getScreenSize().y_);
     
     for (int item_idx = 0; item_idx < size_; ++item_idx ) {
         const DebugStringItem& str_item = buffer_[item_idx];

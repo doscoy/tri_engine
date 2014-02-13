@@ -2,7 +2,7 @@
 #include "tri_assert.hpp"
 #include "tri_print.hpp"
 #include "tri_draw_primitive.hpp"
-
+#include "util/tri_util.hpp"
 #include <algorithm>
 
 namespace  {
@@ -14,18 +14,16 @@ constexpr int RETURN_LIMIT_TIME = 140;
 namespace t3 {
 inline namespace dbg {
 
-Workbar::Workbar(
-    float limit_param,
-    int limit_width_pixel
-)   : bar_params_()
+Workbar::Workbar()
+    : bar_params_()
     , bar_colors_{{
         Color::orange(),
         Color::lime(),
         Color::aqua(),
         Color::green(),
         Color::orange()}}
-    , limit_param_( limit_param )
-    , limit_width_pixel_( limit_width_pixel )
+    , limit_param_(util::frameSec<60>())
+    , limit_width_pixel_(100)
     , keep_frame_(0)
     , limit_bar_pos_x_(0)
     , thickness_(2)

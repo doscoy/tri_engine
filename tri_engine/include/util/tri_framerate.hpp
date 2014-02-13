@@ -8,10 +8,10 @@ inline namespace util {
 // *********************************************
 //  framerate N の時の1フレームあたりの秒取得
 
-template <int N>
+template <int FRAMERATE>
 constexpr float frameSec()
 {
-    return 1.0f / N;
+    return 1.0f / FRAMERATE;
 }
 
 

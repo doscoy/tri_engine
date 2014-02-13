@@ -81,7 +81,8 @@ void DebugLogLayer::updateLayer(tick_t tick)
 
 void DebugLogLayer::drawLayer()
 {
-
+    GameSystem& gs = t3::GameSystem::getInstance();
+    
     //  文字列が見やすいように背景に半透明の板を描画
     ogl::depthFunc(GL_ALWAYS);
     ogl::disable(GL_LIGHTING);
@@ -89,7 +90,7 @@ void DebugLogLayer::drawLayer()
     Color bg_color = Color(0, 0, 0, 80);
     drawRectangle(
         Vec2(0, 0),
-        Vec2(glue::getScreenWidth(), glue::getScreenHeight()),
+        Vec2(gs.getScreenSize().x_, gs.getScreenSize().y_),
         bg_color
     );
     
