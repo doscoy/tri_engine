@@ -1,7 +1,7 @@
 
-#include "tri_application.hpp"
-#include "tri_game_system.hpp"
-#include "tri_scene.hpp"
+#include "base/tri_application.hpp"
+#include "base/tri_game_system.hpp"
+#include "base/tri_scene.hpp"
 #include "dbg/tri_debugmenu.hpp"
 #include "dbg/tri_stopwatch.hpp"
 #include "dbg/tri_workbar.hpp"
