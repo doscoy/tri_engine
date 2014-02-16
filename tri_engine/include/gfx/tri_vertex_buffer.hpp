@@ -11,7 +11,8 @@
 
 namespace t3 {
 inline namespace gfx {
-    
+
+
 
 template <typename Vertex>
 class VertexBuffer
@@ -21,7 +22,12 @@ public:
     VertexBuffer(
         int vertex_count,
         Vertex* vertex = nullptr
-    )   : BufferObject(GL_ARRAY_BUFFER, sizeof(Vertex), vertex_count, vertex )
+    )   : BufferObject(
+            RenderSystem::BufferType::TYPE_VERTEX,
+            sizeof(Vertex),
+            vertex_count,
+            vertex
+           )
     {
     }
     
@@ -38,6 +44,7 @@ public:
     }
     
 };
+
 
 }   // inline namespace gfx
 }   // namespace t3

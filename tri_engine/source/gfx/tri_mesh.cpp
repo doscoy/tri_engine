@@ -160,42 +160,47 @@ Mesh::Mesh(
         }
     }
     
-    ogl::genBuffers(
-        3,
-        buffers_
+    RenderSystem::createBuffer(
+        &buffers_[0]
+    );
+    RenderSystem::createBuffer(
+        &buffers_[1]
+    );
+    RenderSystem::createBuffer(
+        &buffers_[2]
     );
     
-    ogl::bindBuffer(
-        GL_ARRAY_BUFFER,
+    RenderSystem::bindBuffer(
+        RenderSystem::BufferType::TYPE_VERTEX,
         buffers_[0]
     );
-    ogl::bufferData(
-        GL_ARRAY_BUFFER,
+    RenderSystem::setupBufferData(
+        RenderSystem::BufferType::TYPE_VERTEX,
         vertex_count_ * sizeof(vertex_t),
         vert_,
-        GL_STATIC_DRAW
+        RenderSystem::BufferUsage::STATIC_DRAW
     );
     
-    ogl::bindBuffer(
-        GL_ARRAY_BUFFER,
+    RenderSystem::bindBuffer(
+        RenderSystem::BufferType::TYPE_VERTEX,
         buffers_[1]
     );
-    ogl::bufferData(
-        GL_ARRAY_BUFFER,
+    RenderSystem::setupBufferData(
+        RenderSystem::BufferType::TYPE_VERTEX,
         vertex_count_ * sizeof(vertex_t),
         normal_,
-        GL_STATIC_DRAW
+        RenderSystem::BufferUsage::STATIC_DRAW
     );
     
-    ogl::bindBuffer(
-        GL_ELEMENT_ARRAY_BUFFER,
+    RenderSystem::bindBuffer(
+        RenderSystem::BufferType::TYPE_INDEX,
         buffers_[2]
     );
-    ogl::bufferData(
-        GL_ELEMENT_ARRAY_BUFFER,
+    RenderSystem::setupBufferData(
+        RenderSystem::BufferType::TYPE_INDEX,
         face_count_ * sizeof(index_t),
         face_,
-        GL_STATIC_DRAW
+        RenderSystem::BufferUsage::STATIC_DRAW
     );
 }
 
@@ -207,7 +212,9 @@ Mesh::~Mesh()
     delete[] fnormal_;
     delete[] face_;
     
-    ogl::deleteBuffers(3, buffers_);
+    RenderSystem::deleteBuffer(&buffers_[2]);
+    RenderSystem::deleteBuffer(&buffers_[1]);
+    RenderSystem::deleteBuffer(&buffers_[0]);
 }
 
 
@@ -219,13 +226,13 @@ void Mesh::draw(void)
 
     
 
-    ogl::bindBuffer(GL_ARRAY_BUFFER, buffers_[0]);
+    RenderSystem::bindBuffer(RenderSystem::BufferType::TYPE_VERTEX, buffers_[0]);
     t3::RenderSystem::setVertexPointer(3, 0, 0);
 
-    ogl::bindBuffer(GL_ARRAY_BUFFER, buffers_[1]);
+    RenderSystem::bindBuffer(RenderSystem::BufferType::TYPE_VERTEX, buffers_[1]);
     t3::RenderSystem::setNormalPointer(0, 0);
 
-    ogl::bindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers_[2]);
+    RenderSystem::bindBuffer(RenderSystem::BufferType::TYPE_INDEX, buffers_[2]);
     RenderSystem::drawElements(
         RenderSystem::DrawMode::MODE_TRIANGLES,
         face_count_ * 3,

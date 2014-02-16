@@ -14,7 +14,7 @@ class IndexBuffer
 {
 public:
     IndexBuffer( int index_count, const uint16_t* index = nullptr )
-        : BufferObject( GL_ELEMENT_ARRAY_BUFFER, sizeof( uint16_t ), index_count, (void*)index )
+        : BufferObject( RenderSystem::BufferType::TYPE_INDEX, sizeof( uint16_t ), index_count, (void*)index )
     {
     }
 

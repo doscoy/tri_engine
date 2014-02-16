@@ -237,6 +237,38 @@ public:
     static void setNormalArrayUse(
         bool use
     );
+    
+    
+    enum class BufferType {
+        TYPE_VERTEX,
+        TYPE_INDEX,
+    };
+    enum class BufferUsage {
+        STATIC_DRAW
+    };
+    static void bindBuffer(
+        BufferType target_type,
+        int buffer_id
+    );
+    
+    static void createBuffer(uint32_t* buffer);
+    
+    static void deleteBuffer(uint32_t* buffer);
+    
+    static void setupBufferData(
+        BufferType type,
+        int size,
+        const void* data,
+        BufferUsage usage
+    );
+
+    static void setupBufferSubData(
+        BufferType type,
+        int offset,
+        int size,
+        const void* data
+    );
+    
 };
 
 
@@ -255,19 +287,10 @@ public:
 
 
 
-
+/*
 
 namespace ogl {
     
-    
-
-    
-    inline void bindBuffer(
-        int target,
-        int buffer
-    ){
-        glBindBuffer(target, buffer);
-    }
     
     inline void genBuffers(
         int num,
@@ -310,6 +333,6 @@ namespace ogl {
     
 }   // namespace ogl;
 
-
+*/
 
 #endif // TRI_RENDER_SYSTEM_HPP

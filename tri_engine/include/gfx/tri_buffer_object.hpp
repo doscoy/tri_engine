@@ -15,25 +15,30 @@ class BufferObject
 {
 public:
     BufferObject(
-        int target,
+        RenderSystem::BufferType type,
         int stride,
         int element_count,
         void* data
-    )   : target_( target )
+    )   : buffer_type_(type)
         , buffer_( 0 )
         , buffer_size_( stride * element_count )
         , stride_( stride )
         , element_count_( element_count )
         , binded_(false)
     {
-        ogl::genBuffers(1, &buffer_);
+        RenderSystem::createBuffer(&buffer_);
         bindBuffer();
-        ogl::bufferData(target_, buffer_size_, data, GL_STATIC_DRAW);
+        RenderSystem::setupBufferData(
+            buffer_type_,
+            buffer_size_,
+            data,
+            RenderSystem::BufferUsage::STATIC_DRAW
+        );
         unbindBuffer();
     }
     
     ~BufferObject(){
-        ogl::deleteBuffers(1, &buffer_);
+        RenderSystem::deleteBuffer(&buffer_);
     }
 
 
@@ -42,14 +47,14 @@ public:
     //  バッファのバインド
     void bindBuffer() {
         if (!binded_){
-            ogl::bindBuffer(target_, buffer_);
+            RenderSystem::bindBuffer(buffer_type_, buffer_);
             binded_ = true;
         }
     }
     
     void unbindBuffer() {
         if (binded_){
-            ogl::bindBuffer(target_, 0);
+            RenderSystem::bindBuffer(buffer_type_, 0);
         }
         binded_ = false;
     }
@@ -61,8 +66,8 @@ public:
         const void* data
     ){
         bindBuffer();
-        ogl::bufferSubData(
-            target_,
+        RenderSystem::setupBufferSubData(
+            buffer_type_,
             offset,
             stride_ * element_count_,
             data
@@ -85,8 +90,8 @@ public:
 
 
 private:
-    GLuint buffer_;
-    GLenum target_;
+    uint32_t buffer_;
+    RenderSystem::BufferType buffer_type_;
     int buffer_size_;
     int stride_;
     int element_count_;

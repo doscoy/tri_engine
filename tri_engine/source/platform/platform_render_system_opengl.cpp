@@ -555,9 +555,58 @@ void RenderSystem::setNormalArrayUse(bool use) {
     }
 }
 
+void RenderSystem::bindBuffer(
+    t3::RenderSystem::BufferType target_type,
+    int buffer_id
+) {
+    int target = GL_ARRAY_BUFFER;
+    if (target_type == RenderSystem::BufferType::TYPE_INDEX) {
+        target = GL_ELEMENT_ARRAY_BUFFER;
+    }
+
+    glBindBuffer(target, buffer_id);
+}
 
 
+void RenderSystem::createBuffer(uint32_t* buffer) {
+    glGenBuffers(1, buffer);
+}
 
+void RenderSystem::deleteBuffer(uint32_t* buffer) {
+    glDeleteBuffers(1, buffer);
+}
+
+void RenderSystem::setupBufferData(
+    RenderSystem::BufferType type,
+    int size,
+    const void* data,
+    RenderSystem::BufferUsage usage
+) {
+    int target = GL_ARRAY_BUFFER;
+    if (type == RenderSystem::BufferType::TYPE_INDEX) {
+        target = GL_ELEMENT_ARRAY_BUFFER;
+    }
+    int gl_usage;
+    if (usage == RenderSystem::BufferUsage::STATIC_DRAW) {
+        gl_usage = GL_STATIC_DRAW;
+    }
+
+    glBufferData(target, size, data, gl_usage);
+}
+
+void RenderSystem::setupBufferSubData(
+    RenderSystem::BufferType type,
+    int offset,
+    int size,
+    const void *data
+) {
+    int target = GL_ARRAY_BUFFER;
+    if (type == RenderSystem::BufferType::TYPE_INDEX) {
+        target = GL_ELEMENT_ARRAY_BUFFER;
+    }
+
+    glBufferSubData(target, offset, size, data);
+}
 
 
 
