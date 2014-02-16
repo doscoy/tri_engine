@@ -2,6 +2,7 @@
 #include "tri_scene_graph.hpp"
 #include "tri_scene_node.hpp"
 #include "dbg/tri_trace.hpp"
+#include "gfx/tri_render_system.hpp"
 #include "kernel/tri_kernel.hpp"
 #include "base/tri_game_system.hpp"
 
@@ -48,17 +49,8 @@ void SceneGraph::setupView()
     const t3::GameSystem& game_sys = t3::GameSystem::getInstance();
     const t3::Vec2& screen = game_sys.getScreenSize();
     
+    t3::RenderSystem::setViewport(0, 0, screen.x_, screen.y_);
 
-    ogl::viewport(
-        0,
-        0,
-        screen.x_,
-        screen.y_
-    );  //ビューポートの設定
-    
-    ogl::matrixMode(
-        GL_PROJECTION
-    );
     t3::Mtx4 projection;
     projection.frustum(
         -1,
@@ -68,8 +60,9 @@ void SceneGraph::setupView()
         1,
         100
     );
-    ogl::loadMatrixf( projection.pointer() );
-  
+
+    t3::RenderSystem::setProjectionMatrix(projection);
+    
     const Mtx4* view_mtx = camera_->getViewMatrix();
     pushAndSetMatrix(*view_mtx);
 
@@ -94,10 +87,8 @@ void SceneGraph::pushAndSetMatrix(
     matrix_stack_.multMatrixLocal(to_world);
     
     //  変換行列をmatrix_stack.getTopで設定する
-    const Mtx4* world = matrix_stack_.getTopMatrix();
-    
-    ogl::matrixMode(GL_MODELVIEW);
-    ogl::loadMatrixf(world->pointer());
+    const Mtx4* world = matrix_stack_.getTopMatrix();    
+    t3::RenderSystem::setWorldTransformMatrix(*world);
 }
 
 void SceneGraph::popMatrix()

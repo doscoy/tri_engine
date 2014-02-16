@@ -45,7 +45,7 @@ public:
     void drawStrings();
     
 private:
-    std::array<DebugStringItem, 100> buffer_;
+    std::array<DebugStringItem, 300> buffer_;
     int size_;
 
 };

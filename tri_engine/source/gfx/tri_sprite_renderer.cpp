@@ -7,6 +7,7 @@
 #include "base/tri_game_system.hpp"
 #include "tri_texture.hpp"
 #include "math/tri_matrix.hpp"
+#include "gfx/tri_render_system.hpp"
 #include <algorithm>
 
 
@@ -80,53 +81,47 @@ void SpriteRenderer::beginRender()
 
     
     //頂点配列を有効化
-    ogl::enableClientState( GL_VERTEX_ARRAY );
-    ogl::enableClientState( GL_COLOR_ARRAY );
-    ogl::enableClientState( GL_TEXTURE_COORD_ARRAY );
+    RenderSystem::setVertexArrayUse(true);
+    RenderSystem::setColorArrayUse(true);
+    RenderSystem::setTexCoordArrayUse(true);
 
     vertex_buffer_->bindBuffer();
     index_buffer_->bindBuffer();
     
     //頂点構造体内の頂点座標、頂点色のオフセットを指定
-    ogl::vertexPointer( 
-        2,
-        GL_FLOAT,
-        sizeof( VertexP2CT ),
-        reinterpret_cast< GLvoid* >( 0 ) 
-    );
     
-    ogl::colorPointer(
+    
+    t3::RenderSystem::setVertexPointer(2, sizeof(VertexP2CT), 0);
+    
+    
+    t3::RenderSystem::setColorPointer(
         4, 
-        GL_UNSIGNED_BYTE, 
-        sizeof( VertexP2CT ),
-        reinterpret_cast< GLvoid* >( sizeof( VertexP2CT::position_t ) * 2 ) 
+        sizeof(VertexP2CT),
+        reinterpret_cast<GLvoid*>(sizeof(VertexP2CT::position_t) * 2)
     );
     
-    ogl::texCoordPointer(
+    t3::RenderSystem::setTexCoordPointer(
         2, 
-        GL_FLOAT, 
-        sizeof( VertexP2CT ), 
-        reinterpret_cast< GLvoid* >( (sizeof( VertexP2CT::position_t ) * 2)+(sizeof( VertexP2CT::color8_t ) * 4) )
+        sizeof(VertexP2CT),
+        reinterpret_cast<GLvoid*>((sizeof(VertexP2CT::position_t) * 2) + (sizeof( VertexP2CT::color8_t ) * 4))
     );
 
     //  正射影行列を設定
-    ogl::matrixMode(GL_PROJECTION);
-    ogl::pushMatrix();
-    ogl::loadIdentity();
     Mtx4 projection;
     projection.ortho(0, w, h, 0, -1.0f, 1.0f);
-    ogl::loadMatrixf( projection.pointer() );
+    t3::RenderSystem::setProjectionMatrix(projection);
 
-
-    //  テクスチャ画像はバイト単位に詰め込まれている
-    ogl::pixelStorei( GL_UNPACK_ALIGNMENT, 1 );
         
-    ogl::texParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    ogl::texParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    t3::RenderSystem::setTextureMinFilter(t3::RenderSystem::TextureFilterType::TYPE_NEAREST);
+    t3::RenderSystem::setTextureMagFilter(t3::RenderSystem::TextureFilterType::TYPE_NEAREST);
+    t3::RenderSystem::setBlendFunctionType(
+        t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
+        t3::RenderSystem::BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
+    );
     
-    ogl::blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    ogl::enable(GL_TEXTURE_2D);
-    ogl::enable(GL_BLEND);
+    t3::RenderSystem::setTextureMapping(true);
+    t3::RenderSystem::setBlend(true);
+
 
 }
 
@@ -147,32 +142,18 @@ void SpriteRenderer::render()
         trans_mtx.translate( pos.x_, pos.y_, 0 );
         scale_mtx.scale( scale.x_, scale.y_, 1 );
 
-        ogl::matrixMode(GL_MODELVIEW);
         Mtx4 modelview = scale_mtx * trans_mtx;
-        ogl::loadMatrixf( modelview.pointer() );
-        
+        t3::RenderSystem::setWorldTransformMatrix(modelview);
 
         //  テクスチャの割り当て
-        const Texture* texture = sprite->getTexture();
-        ogl::texImage2d(
-            GL_TEXTURE_2D, 
-            0, 
-            texture->getColorFormat(),
-            texture->getWidth(),
-            texture->getHeight(),
-            0,
-            texture->getColorFormat(),
-            GL_UNSIGNED_BYTE,
-            texture->getData()
-        );
+        const std::shared_ptr<Texture>& texture = sprite->getTexture();
+        t3::RenderSystem::setTexture(texture);
  
         // 描画
-        
-        ogl::drawElements(
-            GL_QUADS,
+        RenderSystem::drawElements(
+            RenderSystem::DrawMode::MODE_QUADS,
             4,
-            GL_UNSIGNED_SHORT,
-            0
+            sizeof(short)
         );
     }
     
@@ -187,15 +168,17 @@ void SpriteRenderer::endRender()
     vertex_buffer_->unbindBuffer();
     index_buffer_->unbindBuffer();
     
-    //頂点配列を無効化
-    ogl::disableClientState( GL_VERTEX_ARRAY );
-    ogl::disableClientState( GL_COLOR_ARRAY );
-    ogl::disableClientState( GL_TEXTURE_COORD_ARRAY );
+
+    //頂点配列を有効化
+    RenderSystem::setVertexArrayUse(false);
+    RenderSystem::setColorArrayUse(false);
+    RenderSystem::setTexCoordArrayUse(false);
+
     
     //  描画設定解除
-    ogl::disable( GL_TEXTURE_2D );
-    ogl::disable( GL_BLEND );
-    
+    t3::RenderSystem::setTextureMapping(false);
+    t3::RenderSystem::setBlend(false);
+
     //  描画コンテナのクリア
     sprites_.clear();
 }

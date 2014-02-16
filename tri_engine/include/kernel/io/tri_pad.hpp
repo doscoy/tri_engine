@@ -14,20 +14,28 @@ class Pad
 {
 public:
     enum ButtonID{
-        BUTTON_1     = 1 << 0,
-        BUTTON_2     = 1 << 1,
-        BUTTON_3     = 1 << 2,
+        BUTTON_A        = 1 << 0,
+        BUTTON_B        = 1 << 1,
+        BUTTON_X        = 1 << 2,
+        BUTTON_Y        = 1 << 3,
         
-        BUTTON_UP    = 1 << 5,
-        BUTTON_DOWN  = 1 << 6,
-        BUTTON_RIGHT = 1 << 7,
-        BUTTON_LEFT  = 1 << 8,
+        BUTTON_L        = 1 << 5,
+        BUTTON_R        = 1 << 6,
         
-        MAX_NORMAL_BUTTON_ID = 7,
+        BUTTON_UP       = 1 << 10,
+        BUTTON_DOWN     = 1 << 11,
+        BUTTON_RIGHT    = 1 << 12,
+        BUTTON_LEFT     = 1 << 13,
         
-        DEBUG_BUTTON_1 = 1 << 16,
-        DEBUG_BUTTON_2 = 1 << 17,
-        DEBUG_BUTTON_3 = 1 << 18,
+        BUTTON_OPTION1  = 1 << 15,
+        BUTTON_OPTION2  = 1 << 16,
+        BUTTON_HOME     = 1 << 17,
+        
+        MAX_NORMAL_BUTTON_ID = 13,
+        
+        DEBUG_BUTTON_1  = 1 << 22,
+        DEBUG_BUTTON_2  = 1 << 23,
+        DEBUG_BUTTON_3  = 1 << 24,
         
         MAX_DEBUG_BUTTON_ID = 3,
         

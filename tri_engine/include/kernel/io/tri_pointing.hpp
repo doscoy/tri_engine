@@ -6,7 +6,9 @@
 #include "../../math/tri_math_types.hpp"
 
 namespace t3 {
+inline namespace kernel {
     
+
 class Pointing{
 public:
     Pointing();
@@ -43,7 +45,7 @@ private:
 };
 
 
-
+}   // namespace kernel
 }   // namespace t3
 
 #endif // TRI_POINTING_HPP_INCLUDED

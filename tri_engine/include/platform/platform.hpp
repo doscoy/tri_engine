@@ -35,8 +35,13 @@ void terminatePlatform();
 void beginMainLoop();
 void endMainLoop();
 void getPlatformPadData(
-    int pad_num,
+    int no,
     GamePadData* data
+);
+
+void getPlatformPointingData(
+    int no,
+    PointingData* data
 );
 
 bool isExitRequest();

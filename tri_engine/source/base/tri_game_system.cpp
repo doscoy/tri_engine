@@ -64,10 +64,30 @@ void GameSystem::update( tick_t tick )
     //  起動からのフレーム数カウント
     frame_counter_.up();
     
-    for ( int pad_idx = 0; pad_idx < MAX_PAD; ++pad_idx ){
+    for (int pad_idx = 0; pad_idx < MAX_PAD; ++pad_idx){
+        Input& input = input_[pad_idx];
+    
+        //  パッド情報更新
+        Pad& pad = input.getPad();
         platform::GamePadData pad_data;
         platform::getPlatformPadData(pad_idx, &pad_data);
-        pad_[pad_idx].updatePad(pad_data.getButtonData(), tick );
+        pad.updatePad(pad_data.getButtonData(), tick);
+        
+        
+        //  ポインティング情報更新
+        Pointing& pointing = input.getPointing();
+        platform::PointingData point_data;
+        platform::getPlatformPointingData(
+            pad_idx,
+            &point_data
+        );
+        pointing.updatePointing(
+            point_data.hit_,
+            Point2(
+                point_data.x_,
+                point_data.y_
+            )
+        );
     }
     
     //  debug pad

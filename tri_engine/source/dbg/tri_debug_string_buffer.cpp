@@ -6,18 +6,18 @@
 #include "kernel/tri_kernel.hpp"
 #include "base/tri_game_system.hpp"
 
-extern void beginPrint( const float w, const float h );
+extern void beginPrint(const float w, const float h);
 extern void endPrint();
-extern void debugFontPrint(const char c, const int x, const int y, const uint32_t color, const int font_pixel_size);
+extern void debugFontPrint(const char c, const int x, const int y, const t3::rgba32_t color, const int font_pixel_size);
 
 
 namespace  {
 
 void drawString(
-    int x,
-    int y,
-    uint32_t color,
-    int size,
+    const int x,
+    const int y,
+    const t3::rgba32_t color,
+    const int size,
     const char* const str
 ){
     int font_size = size;

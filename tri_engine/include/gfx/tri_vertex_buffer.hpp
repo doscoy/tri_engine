@@ -21,7 +21,7 @@ public:
     VertexBuffer(
         int vertex_count,
         Vertex* vertex = nullptr
-    )   : BufferObject( GL_ARRAY_BUFFER_ARB, sizeof(Vertex), vertex_count, vertex )
+    )   : BufferObject(GL_ARRAY_BUFFER, sizeof(Vertex), vertex_count, vertex )
     {
     }
     

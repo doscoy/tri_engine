@@ -1,5 +1,6 @@
 #include "tri_debug_log_layer.hpp"
 #include "gfx/tri_color.hpp"
+#include "gfx/tri_render_system.hpp"
 #include "tri_print.hpp"
 #include "base/tri_game_system.hpp"
 #include "tri_draw_primitive.hpp"
@@ -68,7 +69,7 @@ void DebugLogLayer::updateLayer(tick_t tick)
     }
     
     GameSystem& gs = t3::GameSystem::getInstance();
-    const t3::Pad& pad = gs.getPad();
+    const t3::Pad& pad = gs.getInput().getPad();
 
     if (pad.isPress(t3::Pad::BUTTON_DOWN)) {
         slideDown();
@@ -84,9 +85,10 @@ void DebugLogLayer::drawLayer()
     GameSystem& gs = t3::GameSystem::getInstance();
     
     //  文字列が見やすいように背景に半透明の板を描画
-    ogl::depthFunc(GL_ALWAYS);
-    ogl::disable(GL_LIGHTING);
-    ogl::enable(GL_BLEND);
+    t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_ALWAYS);
+    t3::RenderSystem::setLighting(false);
+    t3::RenderSystem::setBlend(true);
+
     Color bg_color = Color(0, 0, 0, 80);
     drawRectangle(
         Vec2(0, 0),

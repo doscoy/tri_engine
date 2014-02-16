@@ -11,7 +11,7 @@
 #include <fstream>
 #include "platform/platform_sdk.hpp"
 #include "geometry/tri_aabb.hpp"
-
+#include "gfx/tri_render_system.hpp"
 
 namespace t3 {
 inline namespace gfx {
@@ -213,31 +213,29 @@ Mesh::~Mesh()
 
 void Mesh::draw(void)
 {
+    //頂点配列を有効化
+    RenderSystem::setVertexArrayUse(true);
+    RenderSystem::setNormalArrayUse(true);
 
-    ogl::enableClientState(GL_VERTEX_ARRAY);
-    ogl::enableClientState(GL_NORMAL_ARRAY);
     
 
     ogl::bindBuffer(GL_ARRAY_BUFFER, buffers_[0]);
-    ogl::vertexPointer(3, GL_FLOAT, 0, BUFFER_OFFSET(0));
-    
+    t3::RenderSystem::setVertexPointer(3, 0, 0);
 
     ogl::bindBuffer(GL_ARRAY_BUFFER, buffers_[1]);
-    ogl::normalPointer(GL_FLOAT, 0, BUFFER_OFFSET(0));
-    
+    t3::RenderSystem::setNormalPointer(0, 0);
 
     ogl::bindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers_[2]);
-    ogl::drawElements(
-        GL_TRIANGLES,
+    RenderSystem::drawElements(
+        RenderSystem::DrawMode::MODE_TRIANGLES,
         face_count_ * 3,
-        GL_UNSIGNED_INT,
-        BUFFER_OFFSET(0)
+        sizeof(index_t)
     );
+    RenderSystem::setVertexArrayUse(false);
+    RenderSystem::setNormalArrayUse(false);
     
-
-    ogl::disableClientState(GL_VERTEX_ARRAY);
-    ogl::disableClientState(GL_NORMAL_ARRAY);
 }
 
 } // inline namespace gfx
 } // namespace t3
+

@@ -20,30 +20,11 @@ class Segment;
 inline namespace dbg {
 
 
-
-void drawPoint(
-    const Vec2& pos,
-    const Color& color
-);
-
 void drawPoint(
     const Vec3& pos,
     const Color& color
 );
 
-void drawLine(
-    const Vec2& start,
-    const Vec2& end,
-    const Color& color
-);
-
-void drawLine(
-    float start_x,
-    float start_y,
-    float end_x,
-    float end_y,
-    const Color& color
-);
 
 void drawSegment(
     const Segment& segment,

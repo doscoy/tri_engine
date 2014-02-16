@@ -111,11 +111,12 @@ public:
     
 };
 
+/*
 inline Color& toColorClass( Color& color )
 {
     return static_cast<Color&>(color);
 }
-
+*/
 
 
 

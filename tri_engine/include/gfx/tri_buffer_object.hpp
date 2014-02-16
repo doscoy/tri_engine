@@ -4,6 +4,8 @@
 
 #include "../util/tri_uncopyable.hpp"
 #include "../kernel/tri_kernel.hpp"
+#include "gfx/tri_render_system.hpp"
+
 
 namespace t3 {
 inline namespace gfx {
@@ -26,7 +28,7 @@ public:
     {
         ogl::genBuffers(1, &buffer_);
         bindBuffer();
-        ogl::bufferData(target_, buffer_size_, data, GL_STATIC_DRAW_ARB);
+        ogl::bufferData(target_, buffer_size_, data, GL_STATIC_DRAW);
         unbindBuffer();
     }
     

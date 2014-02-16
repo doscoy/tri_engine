@@ -48,8 +48,8 @@ public:
     
     // *********************************************
     //  テクスチャ取得
-    const Texture* getTexture() const {
-        return texture_.get();
+    const std::shared_ptr<Texture>& getTexture() const {
+        return texture_;
     }
     
 

@@ -599,9 +599,13 @@ public:
 
 
 //  typedef
-typedef Mtx2Template<float> Mtx2;
-typedef Mtx3Template<float> Mtx3;
-typedef Mtx4Template<float> Mtx4;
+using Mtx2 = Mtx2Template<float>;
+using Mtx3 = Mtx3Template<float>;
+using Mtx4 = Mtx4Template<float>;
+
+//typedef Mtx2Template<float> Mtx2;
+//typedef Mtx3Template<float> Mtx3;
+//typedef Mtx4Template<float> Mtx4;
     
 }   // namespace math
 }   // namespace t3

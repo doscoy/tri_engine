@@ -69,12 +69,12 @@ class ApplicationDebugMenu
 {
 public:
     ApplicationDebugMenu(t3::Application* app)
-    : dmf_system_( nullptr, "SYSTEM" )
-    , dmb_root_menu_( &dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootScene )
-    , dmb_step_( &dmf_system_, "STEP", 0 )
-    , dmb_dump_allocater_log_( &dmf_system_, "DUMP ALLOCATE LOG", 0 )
-    , dmi_show_work_time_( &dmf_system_, "SHOW WORKTIME", show_work_time_, 1 )
-    , dmi_show_work_bar_( &dmf_system_, "SHOW WORKBAR", show_work_bar_, 1 )
+        : dmf_system_( nullptr, "SYSTEM" )
+        , dmb_root_menu_( &dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootScene )
+        , dmb_step_( &dmf_system_, "STEP", 0 )
+        , dmb_dump_allocater_log_( &dmf_system_, "DUMP ALLOCATE LOG", 0 )
+        , dmi_show_work_time_( &dmf_system_, "SHOW WORKTIME", show_work_time_, 1 )
+        , dmi_show_work_bar_( &dmf_system_, "SHOW WORKBAR", show_work_bar_, 1 )
     {
         t3::GameSystem::getInstance().registryToDebugMenu( dmf_system_ );
     }
@@ -182,6 +182,9 @@ void Application::initializeApplication()
     system_menu_->getSystemDebugMenuRoot().attachSelf(
         debug_menu_root.getMenuRoot()
     );
+    
+    //  レンダリングシステムの初期化
+    t3::RenderSystem::initializeRenderSystem();
     
     //  デバッグ文字描画の初期化
     initializeDebugPrint();
@@ -321,7 +324,7 @@ bool Application::isDebugMenuOpenRequest() {
     const Pad& pad = debugPad();
     
     bool result = false;
-    if (pad.isPress(Pad::BUTTON_3)) {
+    if (pad.isPress(Pad::BUTTON_X)) {
         result = true;
     }
     

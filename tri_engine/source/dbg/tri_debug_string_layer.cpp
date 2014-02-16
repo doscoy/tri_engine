@@ -1,5 +1,8 @@
 
 #include "tri_debug_string_layer.hpp"
+#include "gfx/tri_render_system.hpp"
+
+
 
 namespace t3 {
 inline namespace dbg {
@@ -34,8 +37,8 @@ void DebugStringLayer::writeString(
 void DebugStringLayer::drawLayer()
 {
     //  デバッグフォント描画用の設定
-    ogl::depthFunc(GL_ALWAYS);
-    ogl::disable(GL_LIGHTING);
+    t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_ALWAYS);
+    t3::RenderSystem::setLighting(false);
     
     //  描画
     debug_string_buffer_.drawStrings();

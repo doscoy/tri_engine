@@ -11,29 +11,45 @@
 
 
 namespace t3 {
+inline namespace util {
+
 
 // 指定bitを立てる
-inline void bitOn( uint32_t& v, const uint32_t bit ) {
+inline void bitOn(
+    uint32_t& v,
+    const uint32_t bit
+) {
     v |= bit;
 }
 
 // 指定ビットを落とす
-inline void bitOff( uint32_t& v, const uint32_t bit ) {
+inline void bitOff(
+    uint32_t& v,
+    const uint32_t bit
+) {
     v &= ~bit;
 }
 
-// 指定ビットがセットされた状態にする
-inline void bitSet( uint32_t& v, const uint32_t bit ) {
+// 指定ビット列がセットされた状態にする
+inline void bitSet(
+    uint32_t& v,
+    const uint32_t bit
+) {
     v = bit;
 }
 
 // ビット列をクリア
-inline void bitClear( uint32_t& v ) {
+inline void bitClear(
+    uint32_t& v
+) {
     v = 0;
 }
 
 // 指定ビットが立っているか判定
-inline bool bitCheck( const uint32_t v, const uint32_t bit ) {
+inline bool bitCheck(
+    const uint32_t v,
+    const uint32_t bit
+) {
     return (v & bit) == bit;
 }
 
@@ -44,9 +60,10 @@ const char* bitToString(
 );
 
 //  1のビットを数える
-uint32_t bitPopulation( const uint32_t bits );
+uint32_t bitPopulation(const uint32_t bits);
 
 
+} // namespace util
 } // namespace t3
 
 

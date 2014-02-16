@@ -2,13 +2,12 @@
 #define TRI_GAME_SYSTEM_HPP_INCLUDED
 
 
-#include "../dbg/tri_debugmenu.hpp"
-#include "../kernel/tri_kernel.hpp"
-
-#include "../util/random/tri_random.hpp"
-#include "../util/tri_singleton.hpp"
-#include "../gfx/tri_color.hpp"
-#include "../gfx/tri_render_layer.hpp"
+#include "dbg/tri_debugmenu.hpp"
+#include "kernel/tri_kernel.hpp"
+#include "util/random/tri_random.hpp"
+#include "util/tri_singleton.hpp"
+#include "gfx/tri_color.hpp"
+#include "gfx/tri_render_layer.hpp"
 #include <array>
 
 
@@ -68,8 +67,8 @@ public:
     }
 
 
-    const Pad& getPad( const int pad_no = 0 ) const {
-        return pad_.at(pad_no);
+    const Input& getInput(const int pad_no = 0) const {
+        return input_.at(pad_no);
     }
     
     
@@ -106,8 +105,8 @@ private:
     //  ビューポート
     Point2 screen_size_;
     
-    //  パッド入力
-    std::array<Pad, MAX_PAD> pad_;
+    //  インプットデータ
+    std::array<Input, MAX_PAD> input_;
 
     //  描画レイヤー
     RenderLayers layers_;

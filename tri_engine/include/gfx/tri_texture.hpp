@@ -6,6 +6,10 @@
 #include "../dbg/tri_dbg.hpp"
 #include "../base/tri_resource.hpp"
 #include "../gfx/tri_color.hpp"
+#include "gfx/tri_render_system.hpp"
+
+
+
 
 namespace t3 {
 inline namespace gfx {
@@ -24,7 +28,7 @@ private:
         const char* const name,
         const int width,
         const int height,
-        const ogl::ColorFormat color_format,
+        const RenderSystem::ColorFormat color_format,
         const int8_t* data
     );    
     
@@ -50,7 +54,7 @@ public:
     
     // *********************************************
     //  カラーフォーマット取得
-    ogl::ColorFormat getColorFormat() const {
+    RenderSystem::ColorFormat getColorFormat() const {
         return color_format_;
     }
     
@@ -76,7 +80,7 @@ private:
     Point2 size_;
 
     //  カラーフォーマット
-    ogl::ColorFormat color_format_;
+    RenderSystem::ColorFormat color_format_;
     
     const int8_t* data_;
 };

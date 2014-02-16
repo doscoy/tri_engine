@@ -41,15 +41,15 @@ std::shared_ptr<Texture> TextureFactory::createFromPng(
     const char* const filename
 ){
     PngImage png( filename );
-    ogl::ColorFormat color_format = ogl::RGB;
+    RenderSystem::ColorFormat color_format = RenderSystem::ColorFormat::RGB;
     switch (png.color_type_) {
         
     case PNG_COLOR_TYPE_RGB:
-        color_format = ogl::RGB;
+        color_format = RenderSystem::ColorFormat::RGB;
         break;
     
     case PNG_COLOR_TYPE_RGBA:
-        color_format = ogl::RGBA;
+        color_format = RenderSystem::ColorFormat::RGBA;
         break;
     
     default:

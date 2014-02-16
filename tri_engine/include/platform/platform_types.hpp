@@ -15,7 +15,21 @@ struct GamePadData {
     }
     
     uint32_t button_data_;
-    
+    float stick1x_;
+    float stick1y_;
+    float stick2x_;
+    float stick2y_;
+    float trigger_l_;
+    float trigger_r_;
+};
+
+
+//  プラットフォームから取得するポインティングデータ
+// マウス、タッチパネル等
+struct PointingData {
+    float x_;
+    float y_;
+    bool hit_;
 };
 
 

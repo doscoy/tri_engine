@@ -13,7 +13,7 @@ Texture::Texture(
     const char* const name,
     const int width,
     const int height,
-    const ogl::ColorFormat color_format,
+    const RenderSystem::ColorFormat color_format,
     const int8_t* data
 )   : size_( width, height )
     , color_format_( color_format )
