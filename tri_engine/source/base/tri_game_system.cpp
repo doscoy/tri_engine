@@ -104,12 +104,12 @@ void GameSystem::update( tick_t tick )
 
 void GameSystem::suspend( tick_t tick )
 {
-//    setClearColor();
+    setClearColor();
 }
 
 void GameSystem::setClearColor()
-{
-//    glue::setClearColor( clear_colors_[use_clear_color_index_] );
+{    
+    RenderSystem::setClearColor(clear_colors_[use_clear_color_index_]);
 }
     
     

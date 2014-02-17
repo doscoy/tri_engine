@@ -11,11 +11,12 @@ inline namespace gfx {
 //  コンストラクタ
 Texture::Texture(
     const char* const name,
-    const int width,
-    const int height,
+    const uint32_t width,
+    const uint32_t height,
     const RenderSystem::ColorFormat color_format,
-    const int8_t* data
-)   : size_( width, height )
+    const uint8_t* data
+)   : width_(width)
+    , height_(height)
     , color_format_( color_format )
     , data_( data )
 {

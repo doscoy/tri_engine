@@ -42,9 +42,10 @@ void Sprite::setTexture(
 ){
     texture_ = tex;
     T3_NULL_ASSERT( texture_ );
-    size_ = tex->getSize();
-    pivot_.x_ = size_.x_ * 0.5f;
-    pivot_.y_ = size_.y_ * 0.5f;
+    
+    
+    pivot_.x_ = tex->getWidth() * 0.5f;
+    pivot_.y_ = tex->getHeight() * 0.5f;
 }
 
 void Sprite::attachToLayer( SpriteLayer* const layer )

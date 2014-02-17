@@ -6,6 +6,26 @@
 
 
 namespace t3 {
+inline namespace gfx {
+
+
+std::shared_ptr<Texture> TextureFactory::createFromData(
+    const char* const name,
+    const uint32_t width,
+    const uint32_t height,
+    const RenderSystem::ColorFormat color_format,
+    const void* data
+) {
+    T3_NULL_ASSERT(data);
+    std::shared_ptr<Texture> tex( T3_NEW ::t3::Texture(
+        name,
+        width,
+        height,
+        color_format,
+        reinterpret_cast<const uint8_t*>(data)
+    ));
+    return tex;
+}
 
 
 // *********************************************
@@ -57,17 +77,18 @@ std::shared_ptr<Texture> TextureFactory::createFromPng(
         break;
     }
     
-    std::shared_ptr<Texture> tex( T3_NEW ::t3::Texture(
+    std::shared_ptr<Texture> tex = createFromData(
         filename,
         png.width_,
         png.height_,
         color_format,
-        (const int8_t*)png.data_
-    ));
+        png.data_
+    );
+    
     return tex;
 }
 
 
-
+}   // namespace gfx
 }   // namespace t3
 

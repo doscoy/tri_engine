@@ -4,7 +4,6 @@
 
 #include "math/tri_matrix.hpp"
 #include "gfx/tri_color.hpp"
-//#include "gfx/tri_texture.hpp"
 #include "platform/platform_sdk.hpp"
 #include <memory>
 
@@ -58,10 +57,7 @@ public:
     );
     
     static void setClearColor(
-        float r,
-        float g,
-        float b,
-        float a
+       const Color& clear_color
     );
     
     
@@ -275,64 +271,5 @@ public:
 }   // namespace gfx
 }   // namespace t3
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-namespace ogl {
-    
-    
-    inline void genBuffers(
-        int num,
-        uint32_t* buffers
-    ){
-        glGenBuffers(num, buffers);
-    }
-    
-    inline void deleteBuffers(
-        int num,
-        uint32_t* buffers
-    ) {
-        glDeleteBuffers(num, buffers);
-    }
-    
-    inline void bufferData(
-        int target,
-        int size,
-        const void* data,
-        int usage
-    ) {
-        glBufferData(target, size, data, usage);
-    }
-    
-    
-    inline void bufferSubData(
-        int target,
-        int offset,
-        int size,
-        const void* data
-    ) {
-        glBufferSubData(
-            target,
-            offset,
-            size,
-            data
-        );
-    }
-    
-    
-}   // namespace ogl;
-
-*/
 
 #endif // TRI_RENDER_SYSTEM_HPP

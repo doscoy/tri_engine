@@ -4,7 +4,7 @@
 #include "tri_file.hpp"
 #include "base/tri_types.hpp"
 #include "kernel/memory/tri_memory.hpp"
-
+#include "dbg/tri_assert.hpp"
 
 //==============================================================================
 namespace t3 {
@@ -35,6 +35,8 @@ bool File::loadFile(
 ){
 
     std::ifstream fs(path);                 //ファイルオープン。読み込み形式は指定なしのときはテキストモードになる。
+
+    T3_ASSERT(!fs.fail());
     fs.seekg( 0, std::fstream::end );       //ファイル末尾を探す
     filesize_t eof_pos = fs.tellg();        //ファイル末尾インデクスを取得
     fs.clear();

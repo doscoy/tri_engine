@@ -26,30 +26,25 @@ public:
 private:
     Texture(
         const char* const name,
-        const int width,
-        const int height,
+        const uint32_t width,
+        const uint32_t height,
         const RenderSystem::ColorFormat color_format,
-        const int8_t* data
+        const uint8_t* data
     );    
     
     
 public:
-    // *********************************************
-    // サイズ取得
-    const Point2& getSize() const {
-        return size_;
-    };
     
     // *********************************************
     //  横幅取得
-    float getWidth() const {
-        return size_.x_;
+    uint32_t getWidth() const {
+        return width_;
     }
     
     // *********************************************
     //  縦幅取得
-    float getHeight() const {
-        return size_.y_;
+    uint32_t getHeight() const {
+        return height_;
     }
     
     // *********************************************
@@ -61,7 +56,7 @@ public:
     
     // *********************************************
     //  イメージデータ取得
-    const int8_t* getData() const override {
+    const uint8_t* getData() const override {
         return data_;
     }
 
@@ -77,12 +72,13 @@ public:
 private:
     
     //  サイズ
-    Point2 size_;
+    uint32_t width_;
+    uint32_t height_;
 
     //  カラーフォーマット
     RenderSystem::ColorFormat color_format_;
     
-    const int8_t* data_;
+    const uint8_t* data_;
 };
     
     

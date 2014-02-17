@@ -22,7 +22,7 @@ public:
     virtual ~Resource(){}
     
 public:
-    virtual const int8_t* getData() const = 0;
+    virtual const uint8_t* getData() const = 0;
 
 
     void setName( const char* const name ){

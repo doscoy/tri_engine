@@ -70,15 +70,13 @@ void SpriteRenderer::collectSprite(
 void SpriteRenderer::beginRender()
 {
     //  スプライトのソート
-    std::sort( sprites_.begin(), sprites_.end(), PriorityCompare() );
+    std::sort(sprites_.begin(), sprites_.end(), PriorityCompare());
     
     
     //  レンダリング設定
     const t3::GameSystem* gs = t3::GameSystem::getInstancePointer();
     const t3::Point2& screen_size = gs->getScreenSize();
-    float w = screen_size.x_;
-    float h = screen_size.y_;
-
+    
     
     //頂点配列を有効化
     RenderSystem::setVertexArrayUse(true);
@@ -108,12 +106,18 @@ void SpriteRenderer::beginRender()
 
     //  正射影行列を設定
     Mtx4 projection;
+    float w = screen_size.x_;
+    float h = screen_size.y_;
     projection.ortho(0, w, h, 0, -1.0f, 1.0f);
     t3::RenderSystem::setProjectionMatrix(projection);
 
         
-    t3::RenderSystem::setTextureMinFilter(t3::RenderSystem::TextureFilterType::TYPE_NEAREST);
-    t3::RenderSystem::setTextureMagFilter(t3::RenderSystem::TextureFilterType::TYPE_NEAREST);
+    t3::RenderSystem::setTextureMinFilter(
+        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
+    );
+    t3::RenderSystem::setTextureMagFilter(
+        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
+    );
     t3::RenderSystem::setBlendFunctionType(
         t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
         t3::RenderSystem::BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
@@ -131,7 +135,7 @@ void SpriteRenderer::render()
     //  レンダリング設定
     beginRender();
 
-    for ( auto sprite : sprites_ ){
+    for (auto& sprite : sprites_){
         //  座標情報など設定
         // モデルビュー変換行列を設定する
         const Vec2& pos = sprite->getPosition();

@@ -27,7 +27,7 @@ constexpr int BUFFER_LENGTH = 256;
 
 std::shared_ptr<t3::Texture> debugfont_ = nullptr;
 
-const char* DEBUG_FONT_PATH = "font1.png";
+const char* DEBUG_FONT_PATH = "debugfont3.raw";
 
 t3::DebugStringLayer dbg_screen_layer_;
 
@@ -123,7 +123,19 @@ void initializeDebugPrint()
 {
     //  デバッグフォントのテクスチャを読み込み
     FilePath font_path(DEBUG_FONT_PATH);
-    debugfont_ = TextureFactory::createFromFile(font_path.getFullPath());
+    
+    File tex_data;
+    tex_data.loadFile(font_path.getFullPath());
+    
+    debugfont_ = TextureFactory::createFromData(
+        "debugfont",
+        512,
+        512,
+        RenderSystem::ColorFormat::RGB,
+        tex_data.getData()
+    );
+
+//    debugfont_ = TextureFactory::createFromFile(font_path.getFullPath());
     T3_NULL_ASSERT( debugfont_ );
     
     //  デバッグレイヤーを登録

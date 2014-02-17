@@ -79,13 +79,17 @@ void RenderSystem::setClearDepthValue(
     glClearDepth(value);
 }
 
+
+
 void RenderSystem::setClearColor(
-    float r,
-    float g,
-    float b,
-    float a
+    const Color& clear_color
 ) {
-    glClearColor(r, g, b, a);
+    glClearColor(
+        clear_color.redf(),
+        clear_color.greenf(),
+        clear_color.bluef(),
+        clear_color.alphaf()
+    );
 }
 
 
@@ -586,7 +590,7 @@ void RenderSystem::setupBufferData(
     if (type == RenderSystem::BufferType::TYPE_INDEX) {
         target = GL_ELEMENT_ARRAY_BUFFER;
     }
-    int gl_usage;
+    int gl_usage = GL_STATIC_DRAW;
     if (usage == RenderSystem::BufferUsage::STATIC_DRAW) {
         gl_usage = GL_STATIC_DRAW;
     }
