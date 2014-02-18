@@ -21,6 +21,10 @@
 #include "tri_debug_string_layer.hpp"
 #include "kernel/tri_kernel.hpp"
 
+
+extern const unsigned char dbg_font_ascii[786432];
+
+
 namespace {
 
 constexpr int BUFFER_LENGTH = 256;
@@ -73,7 +77,7 @@ void endPrint()
     t3::RenderSystem::setTextureMapping(false);
     t3::RenderSystem::setBlend(false);
 }
-
+#include "tri_debug_font_data.cpp"
 
 void debugFontPrint(
     const char c,
@@ -132,7 +136,7 @@ void initializeDebugPrint()
         512,
         512,
         RenderSystem::ColorFormat::RGB,
-        tex_data.getData()
+        dbg_font_ascii
     );
 
 //    debugfont_ = TextureFactory::createFromFile(font_path.getFullPath());
