@@ -21,21 +21,15 @@
 #include "tri_debug_string_layer.hpp"
 #include "kernel/tri_kernel.hpp"
 
-
-extern const unsigned char dbg_font_ascii[786432];
+// .cpp
+#include "tri_debug_font_data.cpp"
 
 
 namespace {
 
 constexpr int BUFFER_LENGTH = 256;
-
 std::shared_ptr<t3::Texture> debugfont_ = nullptr;
-
-const char* DEBUG_FONT_PATH = "debugfont3.raw";
-
 t3::DebugStringLayer dbg_screen_layer_;
-
-
 
 
 }   //  unname namespace
@@ -77,7 +71,6 @@ void endPrint()
     t3::RenderSystem::setTextureMapping(false);
     t3::RenderSystem::setBlend(false);
 }
-#include "tri_debug_font_data.cpp"
 
 void debugFontPrint(
     const char c,
@@ -86,16 +79,22 @@ void debugFontPrint(
     const t3::rgba32_t color,
     const int font_pixel_size
 ){
-    constexpr int font_size = 32;
+    char char_idx = c - '!' + 1;
+
+
+    constexpr int font_size = 16;
     int width_num = debugfont_->getWidth() / font_size;
-    int tex_x = (c % width_num) * font_size;
-    int tex_y = (c / width_num) * font_size;
+    int tex_x = (char_idx % width_num) * font_size;
+    int tex_y = (char_idx / width_num) * font_size;
     
-    float u0 = static_cast<float>(tex_x) / static_cast<float>(debugfont_->getWidth() );
-    float v0 = static_cast<float>(tex_y) / static_cast<float>(debugfont_->getHeight() );
+    float dbg_font_tex_width = static_cast<float>(debugfont_->getWidth());
+    float dbg_font_tex_height = static_cast<float>(debugfont_->getHeight());
     
-    float u1 = static_cast<float>(tex_x + font_size) / static_cast<float>( debugfont_->getWidth() );
-    float v1 = static_cast<float>(tex_y + font_size) / static_cast<float>( debugfont_->getHeight() );
+    float u0 = static_cast<float>(tex_x) / dbg_font_tex_width;
+    float v0 = static_cast<float>(tex_y) / dbg_font_tex_height;
+    
+    float u1 = static_cast<float>(tex_x + font_size) / dbg_font_tex_width;
+    float v1 = static_cast<float>(tex_y + font_size) / dbg_font_tex_height;
     
     float x0 = (x);
     float x1 = (x+font_pixel_size);
@@ -125,26 +124,21 @@ inline namespace dbg {
 
 void initializeDebugPrint()
 {
-    //  デバッグフォントのテクスチャを読み込み
-    FilePath font_path(DEBUG_FONT_PATH);
-    
-    File tex_data;
-    tex_data.loadFile(font_path.getFullPath());
+
     
     debugfont_ = TextureFactory::createFromData(
         "debugfont",
-        512,
-        512,
-        RenderSystem::ColorFormat::RGB,
-        dbg_font_ascii
+        dbg_font_.width_,
+        dbg_font_.height_,
+        RenderSystem::ColorFormat::RGBA,
+        dbg_font_.pixel_data_
     );
 
-//    debugfont_ = TextureFactory::createFromFile(font_path.getFullPath());
-    T3_NULL_ASSERT( debugfont_ );
+    T3_NULL_ASSERT(debugfont_);
     
     //  デバッグレイヤーを登録
     GameSystem& gs = GameSystem::getInstance();
-    gs.attachLayer( dbg_screen_layer_ );
+    gs.attachLayer(dbg_screen_layer_);
     
 }
 
