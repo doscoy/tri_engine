@@ -5,18 +5,48 @@
 #include "math/tri_matrix.hpp"
 #include "gfx/tri_color.hpp"
 #include "platform/platform_sdk.hpp"
+
 #include <memory>
+#include <vector>
+
+
+#define STRINGIFY(A)  #A
+
+
 
 namespace t3 {
 
 
 inline namespace gfx {
 
+using buffer_id_t = unsigned int;
+using program_id_t = unsigned int;
+using shader_variable_t = unsigned int;
+
 
 class Texture;
 
 class RenderSystem {
 public:
+
+
+
+    static program_id_t buildProgram(
+        const char* vs,
+        const char* fs
+    );
+
+    static shader_variable_t getUniformLocation(
+        program_id_t program,
+        const char* const name
+    );
+
+    static shader_variable_t getAttributeLocation(
+        program_id_t program,
+        const char* const name
+    );
+
+
 
     static void initializeRenderSystem();
 
@@ -265,6 +295,22 @@ public:
         const void* data
     );
     
+    
+    static buffer_id_t createVertexBuffer(
+        std::vector<float>& vertices
+    );
+    
+    static buffer_id_t createIndexBuffer(
+        std::vector<uint32_t>& indices
+    );
+  
+    
+    static void setVertexAttribute(
+        int attribute_id,
+        int size,
+        int stride,
+        int offset
+    );
 };
 
 

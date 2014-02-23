@@ -68,7 +68,7 @@ void AllocationRecorder::dump (
         }
         if ( inRange( ap->getFrame(), start_filter_frame, end_filter_frame ) ){
             no += 1;
-            std::printf("%4d ", no);
+            traceTerminal("%4d ", no);
             ap->dump();
         }
     }

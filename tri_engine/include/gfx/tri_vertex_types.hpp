@@ -21,7 +21,13 @@ struct VertexP2CT
     position_t tv;
 };
 
-
+struct VertexP2T
+{
+    float x;
+    float y;
+    float u;
+    float v;
+};
 
 }   // namespace t3
 

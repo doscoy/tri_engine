@@ -5,9 +5,27 @@
 
 #if defined(_WIN32)
 
+    #warning "target win32"
+    #define PLATFORM_WIN32
+
+
 #elif defined(__APPLE__)
-#include "../../third_party_lib/osx/png.h"
-#include "../../third_party_lib/osx/GLFW/glfw3.h"
+    //  iOS device
+    #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
+        #warning "target ios"
+        #include "png.h"
+        #include <OpenGLES/ES3/gl.h>
+        #define PLATFORM_IOS
+
+    //  MAC
+    #else
+        #warning "target mac"
+        #include "png.h"
+        #include "GLFW/glfw3.h"
+        #define PLATFORM_MAC
+        
+    #endif
+
 #endif
 
 

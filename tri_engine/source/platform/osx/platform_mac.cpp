@@ -1,7 +1,7 @@
 #include "platform.hpp"
 #include "kernel/io/tri_pad.hpp"
 #include "util/tri_bit.hpp"
-
+#include <cstdio>
 
 GLFWwindow* window_ = nullptr;
 
@@ -212,6 +212,14 @@ void getPlatformPointingData(
 bool isExitRequest() {
     return glfwWindowShouldClose(window_);
 }
+
+
+void printConsole(
+    const char* const str
+) {
+    std::printf("%s", str);
+}
+
 
 }   // namespace platform
 }   // namespace t3

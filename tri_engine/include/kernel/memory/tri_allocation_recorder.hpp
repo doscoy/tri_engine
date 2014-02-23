@@ -6,6 +6,9 @@
 #include <iostream>
 #include <array>
 #include <cstdint>
+#include "dbg/tri_trace.hpp"
+
+
 
 //==============================================================================
 
@@ -86,7 +89,7 @@ public:
     // *********************************************
     //  情報をダンプ
     void dump() const {
-        std::printf( "[%d]%3dbyte %s(%d)\n", frame_, static_cast<int>(size_), filename_, line_ );
+        traceTerminal( "[%d]%3dbyte %s(%d)\n", frame_, static_cast<int>(size_), filename_, line_ );
     }
     
 private:

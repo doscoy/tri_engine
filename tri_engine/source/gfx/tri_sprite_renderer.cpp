@@ -1,8 +1,6 @@
 
 #include "tri_sprite_renderer.hpp"
 #include "tri_sprite.hpp"
-#include "tri_vertex_buffer.hpp"
-#include "tri_index_buffer.hpp"
 #include "tri_vertex_types.hpp"
 #include "base/tri_game_system.hpp"
 #include "tri_texture.hpp"
@@ -10,6 +8,9 @@
 #include "gfx/tri_render_system.hpp"
 #include <algorithm>
 
+
+#include "../shader/tri_sprite.vsh"
+#include "../shader/tri_sprite.fsh"
 
 
 namespace {
@@ -30,27 +31,43 @@ namespace t3 {
 inline namespace gfx {
 
 SpriteRenderer::SpriteRenderer()
-    : vertex_buffer_( nullptr )
-    , index_buffer_( nullptr )
+    : vertex_buffer_()
+    , index_buffer_()
 {
 
-    VertexP2CT v[4] =
-    {   // x,   y,   r,   g,   b,   a,   tu,   tv
-        {  0, 0, 255, 255, 255, 255, 0.0f, 0.0f },
-        {  1, 0, 255, 255, 255, 255, 1.0f, 0.0f },
-        {  1, 1, 255, 255, 255, 255, 1.0f, 1.0f },
-        {  0, 1, 255, 255, 255, 255, 0.0f, 1.0f },
+    VertexP2T v[4] =
+    {  // x, y,  tu,   tv
+        {  0, 0, 0.0f, 0.0f },
+        {  1, 0, 1.0f, 0.0f },
+        {  1, 1, 1.0f, 1.0f },
+        {  0, 1, 0.0f, 1.0f },
     };
     
-    GLushort i[4] = {
-        0, 1, 2, 3,
-    };
 
-    vertex_buffer_.reset( T3_NEW VertexBuffer<VertexP2CT>( 4, v ) );
-    index_buffer_.reset( T3_NEW IndexBuffer( 4, i ) );
+    std::vector<float> vertices;
+    for (int i = 0; i < 4; ++i) {
+        vertices.push_back(v[i].x);
+        vertices.push_back(v[i].y);
+        vertices.push_back(v[i].u);
+        vertices.push_back(v[i].v);
+    }
+    
+    std::vector<uint32_t> indices;
+    indices.push_back(0);
+    indices.push_back(1);
+    indices.push_back(2);
+    indices.push_back(3);
+    
+    vertex_buffer_ = RenderSystem::createVertexBuffer(vertices);
+    index_buffer_ = RenderSystem::createIndexBuffer(indices);
+    
+    
+    sprite_render_shader_ = RenderSystem::buildProgram(sprite_vsh, sprite_fsh);
+    sv_pos_ = RenderSystem::getUniformLocation(sprite_render_shader_, "Position");
+    sv_uv_ = RenderSystem::getUniformLocation(sprite_render_shader_, "TextureCoord");
     
     //  スプライトコンテナのメモリを事前に確保
-    sprites_.reserve( 256 );
+    sprites_.reserve(256);
 }
 
 
@@ -79,30 +96,26 @@ void SpriteRenderer::beginRender()
     
     
     //頂点配列を有効化
-    RenderSystem::setVertexArrayUse(true);
-    RenderSystem::setColorArrayUse(true);
-    RenderSystem::setTexCoordArrayUse(true);
+    RenderSystem::bindBuffer(
+        RenderSystem::BufferType::TYPE_VERTEX,
+        vertex_buffer_
+    );
+    RenderSystem::setVertexAttribute(
+        sv_pos_,
+        2,
+        sizeof(VertexP2T),
+        0
+    );
+    RenderSystem::setVertexAttribute(
+        sv_uv_,
+        2,
+        sizeof(VertexP2T),
+        2
+    );
+    RenderSystem::bindBuffer(RenderSystem::BufferType::TYPE_INDEX, index_buffer_);
 
-    vertex_buffer_->bindBuffer();
-    index_buffer_->bindBuffer();
     
     //頂点構造体内の頂点座標、頂点色のオフセットを指定
-    
-    
-    t3::RenderSystem::setVertexPointer(2, sizeof(VertexP2CT), 0);
-    
-    
-    t3::RenderSystem::setColorPointer(
-        4, 
-        sizeof(VertexP2CT),
-        reinterpret_cast<GLvoid*>(sizeof(VertexP2CT::position_t) * 2)
-    );
-    
-    t3::RenderSystem::setTexCoordPointer(
-        2, 
-        sizeof(VertexP2CT),
-        reinterpret_cast<GLvoid*>((sizeof(VertexP2CT::position_t) * 2) + (sizeof( VertexP2CT::color8_t ) * 4))
-    );
 
     //  正射影行列を設定
     Mtx4 projection;
@@ -168,9 +181,6 @@ void SpriteRenderer::render()
 void SpriteRenderer::endRender()
 {
     //  設定の後片付け
-    //バッファオブジェクトのバインド解除
-    vertex_buffer_->unbindBuffer();
-    index_buffer_->unbindBuffer();
     
 
     //頂点配列を有効化

@@ -2,9 +2,12 @@
 #define TRI_SPRITE_RENDERER_HPP_INCLUDED
 
 #include "../util/tri_uncopyable.hpp"
-#include "tri_vertex_buffer.hpp"
+#include "tri_render_system.hpp"
 #include <vector>
 #include <memory.h>
+
+
+
 
 namespace t3 {
 inline namespace gfx {
@@ -14,11 +17,10 @@ class Sprite;
 class SpriteRenderer
     : private Uncopyable
 {
-    typedef std::vector<const Sprite*>      container_t;
+    using container_t = std::vector<const Sprite*>;
 
 public:
     SpriteRenderer();
-    
     ~SpriteRenderer();
     
     
@@ -34,9 +36,13 @@ private:
 private:
     container_t sprites_;
     
-    std::unique_ptr<VertexBuffer<VertexP2CT>> vertex_buffer_;
-    std::unique_ptr<IndexBuffer> index_buffer_;
-
+    buffer_id_t vertex_buffer_;
+    buffer_id_t index_buffer_;
+    
+    program_id_t sprite_render_shader_;
+    shader_variable_t sv_pos_;
+    shader_variable_t sv_uv_;
+    
 };
 
 
