@@ -2,8 +2,6 @@
 #ifndef TRI_GFX_HPP_INCLUDED
 #define TRI_GFX_HPP_INCLUDED
 
-
-#include "tri_buffer_object.hpp"
 #include "tri_camera.hpp"
 #include "tri_camera_updater.hpp"
 #include "tri_color.hpp"
@@ -12,7 +10,6 @@
 #include "tri_gfx.hpp"
 #include "tri_gfx_types.hpp"
 #include "tri_image_png.hpp"
-#include "tri_index_buffer.hpp"
 #include "tri_material.hpp"
 #include "tri_mesh.hpp"
 #include "tri_render_system.hpp"
@@ -26,7 +23,6 @@
 #include "tri_texture_factory.hpp"
 #include "tri_test_entity.hpp"
 #include "tri_transform_node.hpp"
-#include "tri_vertex_buffer.hpp"
 #include "tri_vertex_types.hpp"
 
 

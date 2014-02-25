@@ -118,6 +118,14 @@ void initializeTriEngine(int width, int height, const char* title) {
     );
 }
 
+
+
+
+
+
+
+
+
 inline namespace base {
 
 int Application::run(t3::SceneGenerator* root_scene_generator) {
