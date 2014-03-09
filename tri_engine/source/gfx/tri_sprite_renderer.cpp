@@ -62,7 +62,7 @@ SpriteRenderer::SpriteRenderer()
     index_buffer_ = RenderSystem::createIndexBuffer(indices);
     
     
-    sprite_render_shader_ = RenderSystem::buildProgram(sprite_vsh, sprite_fsh);
+//    sprite_render_shader_ = RenderSystem::buildProgram(sprite_vsh, sprite_fsh);
     sv_pos_ = RenderSystem::getUniformLocation(sprite_render_shader_, "Position");
     sv_uv_ = RenderSystem::getUniformLocation(sprite_render_shader_, "TextureCoord");
     

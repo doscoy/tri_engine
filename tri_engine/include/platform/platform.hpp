@@ -17,8 +17,8 @@ void createWindow(
     const char* const title
 );
 void terminatePlatform();
-void beginMainLoop();
-void endMainLoop();
+void beginUpdate();
+void endUpdate();
 void getPlatformPadData(
     int no,
     GamePadData* data

@@ -2,7 +2,7 @@
 #ifndef TRI_FILE_HPP_INCLUDED
 #define TRI_FILE_HPP_INCLUDED
 
-#include "../../util/tri_uncopyable.hpp"
+#include "util/tri_uncopyable.hpp"
 #include "base/tri_types.hpp"
 #include <cstddef>
 

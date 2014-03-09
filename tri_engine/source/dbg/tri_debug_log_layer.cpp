@@ -86,7 +86,6 @@ void DebugLogLayer::drawLayer()
     
     //  文字列が見やすいように背景に半透明の板を描画
     t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_ALWAYS);
-    t3::RenderSystem::setLighting(false);
     t3::RenderSystem::setBlend(true);
 
     Color bg_color = Color(0, 0, 0, 80);

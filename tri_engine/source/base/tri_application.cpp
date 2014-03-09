@@ -119,7 +119,10 @@ void initializeTriEngine(int width, int height, const char* title) {
 }
 
 
-
+void updateTriEngine() {
+    
+    
+}
 
 
 
@@ -127,34 +130,6 @@ void initializeTriEngine(int width, int height, const char* title) {
 
 
 inline namespace base {
-
-int Application::run(t3::SceneGenerator* root_scene_generator) {
-
-    t3::Application app(root_scene_generator);
-    
-    
-    //  アプリの初期化
-    app.initializeApplication();
-    
-    //  ゲームシステム
-    GameSystem& gs = GameSystem::getInstance();
-
-    float default_delta_time = frameSec<60>();
-    //  main loop
-    while (!gs.isExitRequest()) {
-        platform::beginMainLoop();
-        
-        //  アプリケーションの更新
-        app.update(default_delta_time);
-        
-        platform::endMainLoop();
-
-    }
-    
-    
-    
-    return 0;
-}
 
 
 Application::Application(
@@ -167,6 +142,10 @@ Application::Application(
 
 Application::~Application()
 {
+}
+
+bool Application::isActive() const {
+    return !GameSystem::getInstance().isExitRequest();
 }
 
 void Application::initializeApplication()
@@ -201,9 +180,13 @@ void Application::initializeApplication()
 }
 
 
-void Application::update(tick_t tick)
+void Application::updateApplication()
 {
 
+    platform::beginUpdate();
+
+    float tick = frameSec<60>();
+    
     other_cost_timer_.end();
     system_cost_timer_.start();     // system cost 計測開始
     
@@ -238,13 +221,23 @@ void Application::update(tick_t tick)
         }
     }
     
+    platform::endUpdate();
+
+}
+
+void Application::renderApplication()
+{
+
     app_cost_timer_.end();              // app cost 計測終了
     rendering_cost_timer_.start();      // rendering cost 計算開始
     
     //  シーン描画
     beginRender();
-    
+
+ 
     //  デバッグメニュー描画
+    GameSystem& gs = GameSystem::getInstance();
+    DebugMenu& dm = DebugMenu::getInstance();
     dm.render();
     
     //  レイヤーの描画
@@ -263,8 +256,9 @@ void Application::update(tick_t tick)
 
     //  描画終了
     endRender();
+
     other_cost_timer_.start();
-    
+
     //  コスト表示は数フレームに1回書き換える
     //  毎フレだと速すぎて読めないからね
     if ((frame_counter_.now() % 15) == 0) {
@@ -276,38 +270,42 @@ void Application::update(tick_t tick)
     
     if (show_work_time_) {
         t3::printDisplay(
-            940,
-            640,
-            Color::white(),
-            "sys %2.1fms(%3.1f%%)",
-            last_system_cost_ * 1000,
-            last_system_cost_ / frameSec<60>() * 100
-        );
+                         940,
+                         640,
+                         Color::white(),
+                         "sys %2.1fms(%3.1f%%)",
+                         last_system_cost_ * 1000,
+                         last_system_cost_ / frameSec<60>() * 100
+                         );
         t3::printDisplay(
-            940,
-            656,
-            Color::white(),
-            "app %2.1fms(%3.1f%%)",
-            last_app_cost_ * 1000,
-            last_app_cost_ / frameSec<60>() * 100
-        );
+                         940,
+                         656,
+                         Color::white(),
+                         "app %2.1fms(%3.1f%%)",
+                         last_app_cost_ * 1000,
+                         last_app_cost_ / frameSec<60>() * 100
+                         );
         t3::printDisplay(
-            940,
-            672,
-            Color::white(),
-            "ren %2.1fms(%3.1f%%)",
-            last_rendering_cost_ * 1000,
-            last_rendering_cost_ / frameSec<60>() * 100
-        );
+                         940,
+                         672,
+                         Color::white(),
+                         "ren %2.1fms(%3.1f%%)",
+                         last_rendering_cost_ * 1000,
+                         last_rendering_cost_ / frameSec<60>() * 100
+                         );
         t3::printDisplay(
-            940,
-            688,
-            Color::white(),
-            "oth %2.1fms(%3.1f%%)",
-            last_other_cost_ * 1000,
-            last_other_cost_ / frameSec<60>() * 100
-        );
+                         940,
+                         688,
+                         Color::white(),
+                         "oth %2.1fms(%3.1f%%)",
+                         last_other_cost_ * 1000,
+                         last_other_cost_ / frameSec<60>() * 100
+                         );
     }
+
+
+
+    SceneManager& sm = SceneManager::getInstance();
 
     //  最後にシーンチェンジ処理
     sm.directScene();
@@ -316,17 +314,25 @@ void Application::update(tick_t tick)
     if (sm.isSceneChenged()) {
         //  シーンが切り替わったのでデバッグメニューを閉じる
         dm.closeMenu();
-
+        
         //  メモリリークを検出
         default_allocator_.getAllocationRecorder().dump(
-            last_scene_change_frame_,
-            frame_counter_.now()-1
-        );
-
+                                                        last_scene_change_frame_,
+                                                        frame_counter_.now()-1
+                                                        );
+        
         //  シーンが切り替わったタイミングを保存
         last_scene_change_frame_ = frame_counter_.now();
     }
+
+
 }
+
+
+void Application::terminateApplication() {
+    platform::terminatePlatform();
+}
+
 
 bool Application::isDebugMenuOpenRequest() {
     const Pad& pad = debugPad();

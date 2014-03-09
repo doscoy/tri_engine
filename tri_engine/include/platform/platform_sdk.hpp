@@ -21,6 +21,7 @@
     #else
         #warning "target mac"
         #include "png.h"
+        #include <OpenGL/OpenGL.h>
         #include "GLFW/glfw3.h"
         #define PLATFORM_MAC
         

@@ -45,10 +45,12 @@ bool panic(
 	vsnprintf(buf, 256, fmt, msg);
 	va_end(msg);
     
-    trace("Assertion %s\n", exp);
+    trace("\n--[ASSERTION]----------------------------\n");
+    trace(" exp :%s\n", exp);
     trace(" msg :%s\n", buf);
     trace(" file:%s(%d)\n", filename, line);
     trace(" func:%s\n", funcname);
+    trace("-----------------------------------------\n");
     abort();
 //    while(1){;}
     return 1;

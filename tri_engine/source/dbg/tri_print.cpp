@@ -20,6 +20,10 @@
 #include "base/tri_game_system.hpp"
 #include "tri_debug_string_layer.hpp"
 #include "kernel/tri_kernel.hpp"
+#include "gfx/tri_shader.hpp"
+
+#include "../shader/tri_font.fsh"
+#include "../shader/tri_font.vsh"
 
 // .cpp
 #include "tri_debug_font_data.cpp"
@@ -30,7 +34,10 @@ namespace {
 constexpr int BUFFER_LENGTH = 256;
 std::shared_ptr<t3::Texture> debugfont_ = nullptr;
 t3::DebugStringLayer dbg_screen_layer_;
+float width_;
+float height_;
 
+t3::Shader font_shader_;
 
 }   //  unname namespace
 
@@ -40,15 +47,15 @@ void beginPrint(
     const float w,
     const float h
 ){
-    t3::Mtx4 projection_mtx;
-    projection_mtx.ortho(0, w, h, 0, 0, 1);
-    t3::RenderSystem::setProjectionMatrix(projection_mtx);
-    
-    t3::Mtx4 world_mtx;
-    world_mtx.identity();
-    t3::RenderSystem::setWorldTransformMatrix(world_mtx);
+    width_ = w;
+    height_ = h;
+
+    //  シェーダ切り替え
+    bool shader_setup_result = font_shader_.use();
+    T3_ASSERT(shader_setup_result);
     
     //  テクスチャの割り当て
+    t3::RenderSystem::setActiveTextureUnit(t3::RenderSystem::TextureUnit::UNIT0);
     t3::RenderSystem::setTexture(debugfont_);
     
     t3::RenderSystem::setTextureMinFilter(t3::RenderSystem::TextureFilterType::TYPE_NEAREST);
@@ -60,12 +67,20 @@ void beginPrint(
     );
     
     t3::RenderSystem::setBlend(true);
-
+    t3::RenderSystem::setActiveTextureUnit(
+        t3::RenderSystem::TextureUnit::UNIT0
+    );
     
     t3::RenderSystem::setTextureMapping(true);
     t3::RenderSystem::setCulling(false);
+ 
     
+    //  アクティブなサンプラーをステージ０に設定
+    font_shader_.setUniform("SAMPLER", 0);
+   
 }
+
+
 void endPrint()
 {
     t3::RenderSystem::setTextureMapping(false);
@@ -96,10 +111,16 @@ void debugFontPrint(
     float u1 = static_cast<float>(tex_x + font_size) / dbg_font_tex_width;
     float v1 = static_cast<float>(tex_y + font_size) / dbg_font_tex_height;
     
-    float x0 = (x);
-    float x1 = (x+font_pixel_size);
-    float y0 = (y);
-    float y1 = (y+font_pixel_size);
+    
+    float half_width = width_ / 2;
+    float half_height = height_ / 2;
+    
+    float x0 = x / half_width;
+    float x1 = (x + font_pixel_size) / half_width;
+    float y0 = 1.0f - (y / half_height);
+    float y1 = 1.0f - ((y + font_pixel_size) / half_height);
+    x0 -= 1.0f;
+    x1 -= 1.0f;
     
     
     uint8_t cr = (color & 0xFF000000) >> 24;
@@ -108,15 +129,43 @@ void debugFontPrint(
     uint8_t ca = (color & 0x000000FF) >> 0;
 
 
-    t3::Color drawcolor(cr, cg, cb, ca);
-    t3::RenderSystem::drawQuad(
-        t3::Vec3(x0, y0, 0),
-        t3::Vec3(x0, y1, 0),
-        t3::Vec3(x1, y1, 0),
-        t3::Vec3(x1, y0, 0),
-        drawcolor,
-        u0, v0, u1, v1
+    // シェーダで描画
+    GLuint position_slot = font_shader_.getAttributeLocation("in_position");
+    GLuint color_slot = font_shader_.getAttributeLocation("in_color");
+    GLuint uv_slot = font_shader_.getAttributeLocation("in_uv");
+    
+    
+    
+    float varray[] = {
+        x0, y0,
+        x0, y1,
+        x1, y0,
+        x1, y1
+    };
+    float vuv[] = {
+        u0, v0,
+        u0, v1,
+        u1, v0,
+        u1, v1
+    };
+    glEnableVertexAttribArray(position_slot);
+    glEnableVertexAttribArray(uv_slot);
+
+    glVertexAttribPointer(position_slot, 2, GL_FLOAT, GL_FALSE, 0, varray);
+    glVertexAttribPointer(uv_slot, 2, GL_FLOAT, GL_FALSE, 0, vuv);
+
+    glVertexAttrib4f(
+        color_slot,
+        (float)cr / 255.0f,
+        (float)cg / 255.0f,
+        (float)cb / 255.0f,
+        (float)ca / 255.0f
     );
+
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+
+
 }
 
 namespace t3 {
@@ -125,7 +174,7 @@ inline namespace dbg {
 void initializeDebugPrint()
 {
 
-    
+    //  フォント作成
     debugfont_ = TextureFactory::createFromData(
         "debugfont",
         dbg_font_.width_,
@@ -133,8 +182,13 @@ void initializeDebugPrint()
         RenderSystem::ColorFormat::RGBA,
         dbg_font_.pixel_data_
     );
-
     T3_NULL_ASSERT(debugfont_);
+    
+
+    font_shader_.compileShaderFromString(font_vsh, RenderSystem::ShaderType::VERTEX_SHADER);
+    font_shader_.compileShaderFromString(font_fsh, RenderSystem::ShaderType::FRAGMENT_SHADER);
+    bool shader_link_result = font_shader_.link();
+    T3_ASSERT(shader_link_result);
     
     //  デバッグレイヤーを登録
     GameSystem& gs = GameSystem::getInstance();

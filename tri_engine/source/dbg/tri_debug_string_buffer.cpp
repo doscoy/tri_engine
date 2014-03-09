@@ -8,7 +8,13 @@
 
 extern void beginPrint(const float w, const float h);
 extern void endPrint();
-extern void debugFontPrint(const char c, const int x, const int y, const t3::rgba32_t color, const int font_pixel_size);
+extern void debugFontPrint(
+    const char c,
+    const int x,
+    const int y,
+    const t3::rgba32_t color,
+    const int font_pixel_size
+);
 
 
 namespace  {

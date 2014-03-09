@@ -283,8 +283,8 @@ Vec3Template<T> operator /(T s, const Vec3Template<T>& v) {
 
 
 //  typedef
-typedef Vec3Template<float>   Vec3;
-typedef Vec3Template<int>     Point3;
+using Vec3 = Vec3Template<float>;
+using Point3 = Vec3Template<int>;
 
 
 }   // namespace math

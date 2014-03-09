@@ -13,7 +13,6 @@
 #include "tri_debugmenu_label.hpp"
 #include "tri_debugpad.hpp"
 #include "tri_draw_primitive.hpp"
-#include "tri_primitive_layer.hpp"
 #include "tri_print.hpp"
 #include "tri_stopwatch.hpp"
 #include "tri_trace.hpp"

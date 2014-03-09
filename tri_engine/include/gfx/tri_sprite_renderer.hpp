@@ -39,7 +39,7 @@ private:
     buffer_id_t vertex_buffer_;
     buffer_id_t index_buffer_;
     
-    program_id_t sprite_render_shader_;
+    shader_program_t sprite_render_shader_;
     shader_variable_t sv_pos_;
     shader_variable_t sv_uv_;
     

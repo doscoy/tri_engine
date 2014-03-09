@@ -17,25 +17,32 @@ void initializeTriEngine(
     const char* const title
 );
 
+void updateTriEngine();
+void renderTriEngine();
+
+void terminateTriEngine();
+
 inline namespace base{
 
 class SceneGenerator;
 
 class Application
 {
+
 public:
-    static int run( SceneGenerator* root_scene_generator );
-    
-private:
     explicit Application( SceneGenerator* root_scene_generator );
     ~Application();
 
-private:
+public:
     void initializeApplication();
-    void update(tick_t tick);
+    void updateApplication();
+    void renderApplication();
+    void terminateApplication();
+    bool isActive() const;
+    
+private:
     void beginRender();
     void endRender();
-    SceneGenerator* root_scene_generator_;
     bool isDebugMenuOpenRequest();
     bool isSuspend() const;
 
@@ -45,6 +52,7 @@ public:
     
 private:
     std::unique_ptr<ApplicationDebugMenu> system_menu_;
+    SceneGenerator* root_scene_generator_;
     uint32_t last_scene_change_frame_;
 };
 

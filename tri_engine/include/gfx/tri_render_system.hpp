@@ -20,7 +20,7 @@ namespace t3 {
 inline namespace gfx {
 
 using buffer_id_t = unsigned int;
-using program_id_t = unsigned int;
+using shader_program_t = unsigned int;
 using shader_variable_t = unsigned int;
 
 
@@ -29,24 +29,88 @@ class Texture;
 class RenderSystem {
 public:
 
-
-
-    static program_id_t buildProgram(
-        const char* vs,
-        const char* fs
+    enum TextureUnit {
+        UNIT0 = 0,
+        UNIT1 = 1,
+        UNIT2 = 2,
+        UNIT3 = 3,
+        UNIT4 = 4
+    };
+    
+    static void setActiveTextureUnit(
+        int unit
     );
 
+
+
+    enum class ShaderType {
+        VERTEX_SHADER,
+        FRAGMENT_SHADER,
+        GEOMETRY_SHADER
+    };
+
+    static int buildShader(
+        const char* const source,
+        ShaderType shader_type
+    );
+    
+    static void attachShader(
+        shader_program_t program_handle,
+        int shader_handle
+    );
+
+    static void linkShader(
+        shader_program_t
+    );
+    
     static shader_variable_t getUniformLocation(
-        program_id_t program,
+        shader_program_t program,
         const char* const name
     );
 
     static shader_variable_t getAttributeLocation(
-        program_id_t program,
+        shader_program_t program,
         const char* const name
     );
 
+    static void bindAttributeLocation(
+        shader_program_t handle,
+        shader_variable_t location,
+        const char* const name
+    );
 
+    static void bindFragmentDataLocation(
+        shader_program_t handle,
+        shader_variable_t location,
+        const char* const name
+    );
+
+    static void setUniformValue(
+        shader_variable_t location,
+        float val
+    );
+    
+    static void setUniformValue(
+        shader_variable_t location,
+        int val
+    );
+
+
+    static void setShader(
+        shader_program_t shader
+    );
+
+    static void setUniformValue(
+        shader_variable_t,
+        float x,
+        float y,
+        float z
+    );
+
+    static void setUniformMatrix(
+        shader_variable_t location,
+        t3::Mtx4 mtx
+    );
 
     static void initializeRenderSystem();
 
@@ -150,22 +214,6 @@ public:
     
     static void setCulling(
         bool enable
-    );
-    
-    static void setLighting(
-        bool enable
-    );
-    
-    static void setLight0Use(
-        bool use
-    );
-    
-    static void setLight1Use(
-        bool use
-    );
-    
-    static void setLight2Use(
-        bool use
     );
     
     static void setTextureMapping(

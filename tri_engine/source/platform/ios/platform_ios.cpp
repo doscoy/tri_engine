@@ -34,12 +34,12 @@ void terminatePlatform() {
 }
 
 
-void beginMainLoop() {
+void beginUpdate() {
     
     
 }
 
-void endMainLoop() {
+void endUpdate() {
     
 
 }

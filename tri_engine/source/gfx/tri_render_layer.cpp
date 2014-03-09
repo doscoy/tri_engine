@@ -72,7 +72,7 @@ void updateLayers(
 void drawLayers(
     RenderLayers& layers
 ){
-    for ( auto layer : layers ){
+    for (RenderLayer* layer : layers){
         if (layer->isVisibleLayer()) {
             layer->drawLayer();
         }
