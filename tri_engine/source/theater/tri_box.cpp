@@ -9,8 +9,8 @@ inline namespace theater {
 
 void Box::render()
 {
-    const Mtx4* transform = getTransformMatrix();
-    t3::RenderSystem::setWorldTransformMatrix(*transform);
+//    const Mtx4* transform = getTransformMatrix();
+//    t3::RenderSystem::setWorldTransformMatrix(*transform);
 }
 
 

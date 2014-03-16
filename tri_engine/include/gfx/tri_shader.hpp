@@ -27,7 +27,7 @@ public:
     );
     
     bool compileShaderFromString(
-        const std::string& source,
+        const char* const source,
         RenderSystem::ShaderType type
     );
     
@@ -64,6 +64,16 @@ public:
     void setUniform(const char* const name, int val);
     void setUniform(const char* const name, bool val);
     
+    void setAttribute(const char* const name, float a, float b, float c, float d);
+    
+    void setAttributePointer(
+        const char* const name,
+        int element_num,
+        int stride,
+        void* pointer
+    );
+    
+    void setEnableAttributeArray(const char* const name, bool flag);
     
     int getUniformLocation(
         const char* name

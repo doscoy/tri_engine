@@ -50,16 +50,16 @@ void beginPrint(
     width_ = w;
     height_ = h;
 
+    t3::RenderSystem::resetBufferBind();
+    debugfont_->setupTexture();
+
     //  シェーダ切り替え
     bool shader_setup_result = font_shader_.use();
     T3_ASSERT(shader_setup_result);
     
     //  テクスチャの割り当て
     t3::RenderSystem::setActiveTextureUnit(t3::RenderSystem::TextureUnit::UNIT0);
-    t3::RenderSystem::setTexture(debugfont_);
     
-    t3::RenderSystem::setTextureMinFilter(t3::RenderSystem::TextureFilterType::TYPE_NEAREST);
-    t3::RenderSystem::setTextureMagFilter(t3::RenderSystem::TextureFilterType::TYPE_NEAREST);
 
     t3::RenderSystem::setBlendFunctionType(
         t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
@@ -72,7 +72,6 @@ void beginPrint(
     );
     
     t3::RenderSystem::setTextureMapping(true);
-    t3::RenderSystem::setCulling(false);
  
     
     //  アクティブなサンプラーをステージ０に設定
@@ -131,7 +130,6 @@ void debugFontPrint(
 
     // シェーダで描画
     GLuint position_slot = font_shader_.getAttributeLocation("in_position");
-    GLuint color_slot = font_shader_.getAttributeLocation("in_color");
     GLuint uv_slot = font_shader_.getAttributeLocation("in_uv");
     
     
@@ -148,14 +146,24 @@ void debugFontPrint(
         u1, v0,
         u1, v1
     };
-    glEnableVertexAttribArray(position_slot);
-    glEnableVertexAttribArray(uv_slot);
+    t3::RenderSystem::setEnableVertexAttribute(position_slot);
+    t3::RenderSystem::setEnableVertexAttribute(uv_slot);
 
-    glVertexAttribPointer(position_slot, 2, GL_FLOAT, GL_FALSE, 0, varray);
-    glVertexAttribPointer(uv_slot, 2, GL_FLOAT, GL_FALSE, 0, vuv);
+    t3::RenderSystem::setVertexAttributePointer(
+        position_slot,
+        2,
+        0,
+        varray
+    );
+    t3::RenderSystem::setVertexAttributePointer(
+        uv_slot,
+        2,
+        0,
+        vuv
+    );
 
-    glVertexAttrib4f(
-        color_slot,
+    font_shader_.setAttribute(
+        "in_color",
         (float)cr / 255.0f,
         (float)cg / 255.0f,
         (float)cb / 255.0f,

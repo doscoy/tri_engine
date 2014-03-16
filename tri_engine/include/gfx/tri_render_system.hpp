@@ -22,7 +22,7 @@ inline namespace gfx {
 using buffer_id_t = unsigned int;
 using shader_program_t = unsigned int;
 using shader_variable_t = unsigned int;
-
+using texture_handle_t = unsigned int;
 
 class Texture;
 
@@ -119,6 +119,13 @@ public:
         RGBA,
         BGR
     };
+    
+    static void setupTextureData(
+        int width,
+        int height,
+        RenderSystem::ColorFormat color_format,
+        const void* data
+    );
 
     enum class CullingMode {
         MODE_FRONT,     ///< 前面カリング
@@ -194,16 +201,8 @@ public:
         const int w,
         const int h
     );
-    
-    enum class ShadingType {
-        TYPE_FLAT,
-        TYPE_SMOOTH
-    };
-    
-    static void setShadingType(
-        ShadingType type
-    );
-    
+
+
     static void setDepthTest(
         bool enable
     );
@@ -230,14 +229,6 @@ public:
     
     static void setTextureMinFilter(
         TextureFilterType type
-    );
-    
-    static void setProjectionMatrix(
-        const Mtx4& mtx
-    );
-    
-    static void setWorldTransformMatrix(
-        const Mtx4& mtx
     );
 
     enum class DrawMode{
@@ -270,49 +261,6 @@ public:
         float v1
     );
 
-
-    static void setVertexPointer(
-        int size,
-        int stride,
-        const void* pointer
-    );
-    
-    static void setNormalPointer(
-        int stride,
-        const void* normals
-    );
-
-    static void setColorPointer(
-        int size,
-        int stride,
-        const void* pointer
-    );
-    
-    static void setTexCoordPointer(
-        int size,
-        int stride,
-        const void* pointer
-    );
-
-    static void setTexture(
-        const std::shared_ptr<Texture>& texture
-    );
-    
-    
-    static void setVertexArrayUse(
-        bool use
-    );
-    static void setColorArrayUse(
-        bool use
-    );
-    static void setTexCoordArrayUse(
-        bool use
-    );
-    static void setNormalArrayUse(
-        bool use
-    );
-    
-    
     enum class BufferType {
         TYPE_VERTEX,
         TYPE_INDEX,
@@ -324,6 +272,10 @@ public:
         BufferType target_type,
         int buffer_id
     );
+    
+    static void resetBufferBind() {
+        bindBuffer(BufferType::TYPE_VERTEX, 0);
+    }
     
     static void createBuffer(uint32_t* buffer);
     
@@ -353,11 +305,27 @@ public:
     );
   
     
-    static void setVertexAttribute(
-        int attribute_id,
-        int size,
+    static void setEnableVertexAttribute(
+        int slot
+    );
+    
+    static void setDisableVertexAttribute(
+        int slot
+    );
+    
+    static void setVertexAttributePointer(
+        int slot,
+        int element_num,
         int stride,
-        int offset
+        void* ptr
+    );
+    
+    static void setAttributeValue(
+        int slot,
+        float a,
+        float b,
+        float c,
+        float d
     );
 };
 

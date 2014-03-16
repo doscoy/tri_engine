@@ -1,16 +1,16 @@
 static const char* sprite_vsh = STRINGIFY(
 
-attribute vec4 Position;
-attribute vec2 TextureCoord;
+attribute vec4 position;
+attribute vec2 uv;
 
-uniform mat4 Projection;
-uniform mat4 Modelview;
+uniform mat4 projection;
+uniform mat4 transform;
 
-varying vec2 TextureCoordOut;
+varying vec2 texture_uv;
 
 void main(void)
 {
-    gl_Position = Projection * Modelview * Position;
-    TextureCoordOut = TextureCoord;
+    gl_Position = projection * transform * position;
+    texture_uv = uv;
 }
 );

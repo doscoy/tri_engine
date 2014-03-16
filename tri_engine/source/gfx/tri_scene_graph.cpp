@@ -61,7 +61,7 @@ void SceneGraph::setupView()
         100
     );
 
-    t3::RenderSystem::setProjectionMatrix(projection);
+//    t3::RenderSystem::setProjectionMatrix(projection);
     
     const Mtx4* view_mtx = camera_->getViewMatrix();
     pushAndSetMatrix(*view_mtx);
@@ -87,8 +87,8 @@ void SceneGraph::pushAndSetMatrix(
     matrix_stack_.multMatrixLocal(to_world);
     
     //  変換行列をmatrix_stack.getTopで設定する
-    const Mtx4* world = matrix_stack_.getTopMatrix();    
-    t3::RenderSystem::setWorldTransformMatrix(*world);
+    const Mtx4* world = matrix_stack_.getTopMatrix();
+//    t3::RenderSystem::setWorldTransformMatrix(*world);
 }
 
 void SceneGraph::popMatrix()

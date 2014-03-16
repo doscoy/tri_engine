@@ -18,8 +18,8 @@ namespace {
 class PriorityCompare
 {
 public:
-    bool operator()(const t3::Sprite* x, const t3::Sprite* y) const {
-        return x->getPriority() > y->getPriority();
+    bool operator()(const t3::Sprite* lhs, const t3::Sprite* rhs) const {
+        return lhs->getSortScore() > rhs->getSortScore();
     }
 };
 
@@ -31,45 +31,25 @@ namespace t3 {
 inline namespace gfx {
 
 SpriteRenderer::SpriteRenderer()
-    : vertex_buffer_()
-    , index_buffer_()
+    : sprites_()
+    , sprite_shader_()
 {
 
-    VertexP2T v[4] =
-    {  // x, y,  tu,   tv
-        {  0, 0, 0.0f, 0.0f },
-        {  1, 0, 1.0f, 0.0f },
-        {  1, 1, 1.0f, 1.0f },
-        {  0, 1, 0.0f, 1.0f },
-    };
-    
-
-    std::vector<float> vertices;
-    for (int i = 0; i < 4; ++i) {
-        vertices.push_back(v[i].x);
-        vertices.push_back(v[i].y);
-        vertices.push_back(v[i].u);
-        vertices.push_back(v[i].v);
-    }
-    
-    std::vector<uint32_t> indices;
-    indices.push_back(0);
-    indices.push_back(1);
-    indices.push_back(2);
-    indices.push_back(3);
-    
-    vertex_buffer_ = RenderSystem::createVertexBuffer(vertices);
-    index_buffer_ = RenderSystem::createIndexBuffer(indices);
-    
-    
-//    sprite_render_shader_ = RenderSystem::buildProgram(sprite_vsh, sprite_fsh);
-    sv_pos_ = RenderSystem::getUniformLocation(sprite_render_shader_, "Position");
-    sv_uv_ = RenderSystem::getUniformLocation(sprite_render_shader_, "TextureCoord");
+    sprite_shader_.compileShaderFromString(
+        sprite_vsh,
+        RenderSystem::ShaderType::VERTEX_SHADER
+    );
+    sprite_shader_.compileShaderFromString(
+        sprite_fsh,
+        RenderSystem::ShaderType::FRAGMENT_SHADER
+    );
+    bool link_result = sprite_shader_.link();
+    T3_ASSERT(link_result);
     
     //  スプライトコンテナのメモリを事前に確保
     sprites_.reserve(256);
 }
-
+    
 
 SpriteRenderer::~SpriteRenderer()
 {
@@ -78,16 +58,41 @@ SpriteRenderer::~SpriteRenderer()
 
 
 void SpriteRenderer::collectSprite(
-    const t3::Sprite& sprite 
+    t3::Sprite& sprite 
 ){
     sprites_.push_back( &sprite );
 }
 
 
+
+
+
+void SpriteRenderer::render()
+{
+    if (sprites_.empty()) {
+        //  描画すべきスプライトが無い場合は即終了
+        return;
+    }
+
+    //  レンダリング設定
+    beginRender();
+
+    for (Sprite* sprite : sprites_){
+        renderSprite(*sprite);
+    }
+    
+    endRender();
+}
+
 void SpriteRenderer::beginRender()
 {
+    bool use_result = sprite_shader_.use();
+    T3_ASSERT(use_result);
     //  スプライトのソート
     std::sort(sprites_.begin(), sprites_.end(), PriorityCompare());
+
+    sprite_shader_.setEnableAttributeArray("position", true);
+    sprite_shader_.setEnableAttributeArray("uv", true );
     
     
     //  レンダリング設定
@@ -96,85 +101,69 @@ void SpriteRenderer::beginRender()
     
     
     //頂点配列を有効化
-    RenderSystem::bindBuffer(
-        RenderSystem::BufferType::TYPE_VERTEX,
-        vertex_buffer_
-    );
-    RenderSystem::setVertexAttribute(
-        sv_pos_,
-        2,
-        sizeof(VertexP2T),
-        0
-    );
-    RenderSystem::setVertexAttribute(
-        sv_uv_,
-        2,
-        sizeof(VertexP2T),
-        2
-    );
-    RenderSystem::bindBuffer(RenderSystem::BufferType::TYPE_INDEX, index_buffer_);
-
+    sprite_shader_.setUniform("sampler", 0);
     
-    //頂点構造体内の頂点座標、頂点色のオフセットを指定
-
     //  正射影行列を設定
     Mtx4 projection;
     float w = screen_size.x_;
     float h = screen_size.y_;
     projection.ortho(0, w, h, 0, -1.0f, 1.0f);
-    t3::RenderSystem::setProjectionMatrix(projection);
+    sprite_shader_.setUniform("projection", projection);
 
-        
-    t3::RenderSystem::setTextureMinFilter(
-        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
-    );
-    t3::RenderSystem::setTextureMagFilter(
-        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
-    );
+    RenderSystem::setActiveTextureUnit(RenderSystem::TextureUnit::UNIT0);
+
     t3::RenderSystem::setBlendFunctionType(
         t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
         t3::RenderSystem::BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
     );
-    
+
     t3::RenderSystem::setTextureMapping(true);
     t3::RenderSystem::setBlend(true);
+    t3::RenderSystem::setCulling(false);
 
 
 }
 
-
-void SpriteRenderer::render()
-{
-    //  レンダリング設定
-    beginRender();
-
-    for (auto& sprite : sprites_){
-        //  座標情報など設定
-        // モデルビュー変換行列を設定する
-        const Vec2& pos = sprite->getPosition();
-        const Vec2& scale = sprite->getSize();
-        
-        Mtx4 trans_mtx;
-        Mtx4 scale_mtx;
-        trans_mtx.translate( pos.x_, pos.y_, 0 );
-        scale_mtx.scale( scale.x_, scale.y_, 1 );
-
-        Mtx4 modelview = scale_mtx * trans_mtx;
-        t3::RenderSystem::setWorldTransformMatrix(modelview);
-
-        //  テクスチャの割り当て
-        const std::shared_ptr<Texture>& texture = sprite->getTexture();
-        t3::RenderSystem::setTexture(texture);
- 
-        // 描画
-        RenderSystem::drawElements(
-            RenderSystem::DrawMode::MODE_QUADS,
-            4,
-            sizeof(short)
-        );
-    }
+void SpriteRenderer::renderSprite(
+    Sprite& sprite
+) {
+    //  座標情報など設定
+    // モデルビュー変換行列を設定する
+    const Mtx4* mtx = sprite.getMatrix();
+    sprite_shader_.setUniform("transform", *mtx);
+    //  テクスチャの割り当て
+    const std::shared_ptr<Texture>& texture = sprite.getTexture();
+    texture->setupTexture();
     
-    endRender();
+    
+    //  頂点バッファ設定
+    RenderSystem::bindBuffer(
+        RenderSystem::BufferType::TYPE_VERTEX,
+        sprite.getVertexBuffer()
+    );
+    sprite_shader_.setAttributePointer(
+        "position",
+        2,
+        sizeof(VertexP2T),
+        0
+    );
+    sprite_shader_.setAttributePointer(
+        "uv",
+        2,
+        sizeof(VertexP2T),
+        (void*)(sizeof(float) * 2)
+    );
+    RenderSystem::bindBuffer(
+        RenderSystem::BufferType::TYPE_INDEX,
+        sprite.getIndexBuffer()
+    );
+    // 描画
+    RenderSystem::drawElements(
+        RenderSystem::DrawMode::MODE_QUADS,
+        4,
+        sizeof(uint32_t)
+    );
+    
 }
 
 
@@ -182,11 +171,6 @@ void SpriteRenderer::endRender()
 {
     //  設定の後片付け
     
-
-    //頂点配列を有効化
-    RenderSystem::setVertexArrayUse(false);
-    RenderSystem::setColorArrayUse(false);
-    RenderSystem::setTexCoordArrayUse(false);
 
     
     //  描画設定解除

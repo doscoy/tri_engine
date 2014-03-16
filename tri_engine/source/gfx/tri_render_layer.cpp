@@ -58,7 +58,7 @@ void RenderLayer::unregistryToDebugMenu()
     
     
 //  レイヤー更新
-void updateLayers(
+void RenderLayer::updateLayers(
     RenderLayers& layers,
     tick_t tick
 ){
@@ -69,7 +69,7 @@ void updateLayers(
     }
 }
     
-void drawLayers(
+void RenderLayer::drawLayers(
     RenderLayers& layers
 ){
     for (RenderLayer* layer : layers){

@@ -221,16 +221,16 @@ Mesh::~Mesh()
 void Mesh::draw(void)
 {
     //頂点配列を有効化
-    RenderSystem::setVertexArrayUse(true);
-    RenderSystem::setNormalArrayUse(true);
+//    RenderSystem::setVertexArrayUse(true);
+//    RenderSystem::setNormalArrayUse(true);
 
     
 
     RenderSystem::bindBuffer(RenderSystem::BufferType::TYPE_VERTEX, buffers_[0]);
-    t3::RenderSystem::setVertexPointer(3, 0, 0);
+//    t3::RenderSystem::setVertexPointer(3, 0, 0);
 
     RenderSystem::bindBuffer(RenderSystem::BufferType::TYPE_VERTEX, buffers_[1]);
-    t3::RenderSystem::setNormalPointer(0, 0);
+//    t3::RenderSystem::setNormalPointer(0, 0);
 
     RenderSystem::bindBuffer(RenderSystem::BufferType::TYPE_INDEX, buffers_[2]);
     RenderSystem::drawElements(
@@ -238,8 +238,8 @@ void Mesh::draw(void)
         face_count_ * 3,
         sizeof(index_t)
     );
-    RenderSystem::setVertexArrayUse(false);
-    RenderSystem::setNormalArrayUse(false);
+//    RenderSystem::setVertexArrayUse(false);
+//    RenderSystem::setNormalArrayUse(false);
     
 }
 

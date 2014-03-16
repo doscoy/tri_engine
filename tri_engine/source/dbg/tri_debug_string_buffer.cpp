@@ -89,6 +89,7 @@ void DebugStringBuffer::drawStrings()
 {
     GameSystem& gs = GameSystem::getInstance();
     beginPrint(gs.getScreenSize().x_, gs.getScreenSize().y_);
+ 
     
     for (int item_idx = 0; item_idx < size_; ++item_idx ) {
         const DebugStringItem& str_item = buffer_[item_idx];

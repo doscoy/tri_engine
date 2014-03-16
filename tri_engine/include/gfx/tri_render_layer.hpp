@@ -95,6 +95,18 @@ public:
     
     virtual void unregistryToDebugMenu();
     
+    
+public:
+    //  レイヤー更新
+    static void updateLayers(
+        RenderLayers& layers,
+        tick_t tick
+    );
+    
+    static void drawLayers(
+        RenderLayers& layers
+    );
+    
 protected:
     virtual void updateLayer( tick_t tick ) = 0;
     virtual void drawLayer() = 0;
@@ -113,15 +125,7 @@ protected:
 };
 
 
-//  レイヤー更新
-void updateLayers(
-    RenderLayers& layers,
-    tick_t tick
-);
 
-void drawLayers(
-    RenderLayers& layers
-);
 
 
 

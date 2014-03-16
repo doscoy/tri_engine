@@ -199,7 +199,7 @@ void Application::updateApplication()
     gs.update(tick);
 
     //  レイヤーの更新
-    gfx::updateLayers(gs.getLaysers(), tick);
+    RenderLayer::updateLayers(gs.getLaysers(), tick);
 
     
     system_cost_timer_.end();       // system cost 計測終了
@@ -227,23 +227,20 @@ void Application::updateApplication()
 
 void Application::renderApplication()
 {
+    GameSystem& gs = GameSystem::getInstance();
+    DebugMenu& dm = DebugMenu::getInstance();
 
     app_cost_timer_.end();              // app cost 計測終了
-    rendering_cost_timer_.start();      // rendering cost 計算開始
     
     //  シーン描画
     beginRender();
 
- 
+
     //  デバッグメニュー描画
-    GameSystem& gs = GameSystem::getInstance();
-    DebugMenu& dm = DebugMenu::getInstance();
     dm.render();
     
-    //  レイヤーの描画
-    gfx::drawLayers(gs.getLaysers());
     
-    
+
     //  CPU負荷可視化
     if ( show_work_bar_ ){
         cpu_bar_.setParam(0, system_cost_timer_.interval());
@@ -252,6 +249,10 @@ void Application::renderApplication()
         cpu_bar_.setParam(3, other_cost_timer_.interval());
         cpu_bar_.draw();
     }
+
+    rendering_cost_timer_.start();      // rendering cost 計算開始
+    //  レイヤーの描画
+    RenderLayer::drawLayers(gs.getLaysers());
     rendering_cost_timer_.end();           // rendering cost 計算終了
 
     //  描画終了
@@ -261,7 +262,7 @@ void Application::renderApplication()
 
     //  コスト表示は数フレームに1回書き換える
     //  毎フレだと速すぎて読めないからね
-    if ((frame_counter_.now() % 15) == 0) {
+    if ((frame_counter_.now() % 10) == 0) {
         last_system_cost_ = system_cost_timer_.interval();
         last_app_cost_ = app_cost_timer_.interval();
         last_rendering_cost_ = rendering_cost_timer_.interval();
@@ -270,37 +271,38 @@ void Application::renderApplication()
     
     if (show_work_time_) {
         t3::printDisplay(
-                         940,
-                         640,
-                         Color::white(),
-                         "sys %2.1fms(%3.1f%%)",
-                         last_system_cost_ * 1000,
-                         last_system_cost_ / frameSec<60>() * 100
-                         );
+            940,
+            640,
+            Color::white(),
+            "sys %2.2fms(%3.2f%%)",
+            last_system_cost_ * 1000,
+            last_system_cost_ / frameSec<60>() * 100
+        );
         t3::printDisplay(
-                         940,
-                         656,
-                         Color::white(),
-                         "app %2.1fms(%3.1f%%)",
-                         last_app_cost_ * 1000,
-                         last_app_cost_ / frameSec<60>() * 100
-                         );
+            940,
+            656,
+            Color::white(),
+            "app %2.2fms(%3.2f%%)",
+            last_app_cost_ * 1000,
+            last_app_cost_ / frameSec<60>() * 100
+        );
         t3::printDisplay(
-                         940,
-                         672,
-                         Color::white(),
-                         "ren %2.1fms(%3.1f%%)",
-                         last_rendering_cost_ * 1000,
-                         last_rendering_cost_ / frameSec<60>() * 100
-                         );
+            940,
+            672,
+            Color::white(),
+            "ren %2.2fms(%3.2f%%)",
+            last_rendering_cost_ * 1000,
+            last_rendering_cost_ / frameSec<60>() * 100
+        );
         t3::printDisplay(
-                         940,
-                         688,
-                         Color::white(),
-                         "oth %2.1fms(%3.1f%%)",
-                         last_other_cost_ * 1000,
-                         last_other_cost_ / frameSec<60>() * 100
-                         );
+            940,
+            688,
+            Color::white(),
+            "oth %2.2fms(%3.2f%%)",
+            last_other_cost_ * 1000,
+            last_other_cost_ / frameSec<60>() * 100
+        );
+        
     }
 
 

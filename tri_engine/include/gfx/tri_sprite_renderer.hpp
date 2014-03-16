@@ -5,7 +5,7 @@
 #include "tri_render_system.hpp"
 #include <vector>
 #include <memory.h>
-
+#include "tri_shader.hpp"
 
 
 
@@ -17,7 +17,7 @@ class Sprite;
 class SpriteRenderer
     : private Uncopyable
 {
-    using container_t = std::vector<const Sprite*>;
+    using Container = std::vector<Sprite*>;
 
 public:
     SpriteRenderer();
@@ -25,24 +25,20 @@ public:
     
     
 public:
-    void collectSprite( const Sprite& sprite );    
+    void collectSprite(Sprite& sprite);
     void render();
     
 
 private:
     void beginRender();
+    void renderSprite(Sprite& sprite);
     void endRender();
 
 private:
-    container_t sprites_;
-    
-    buffer_id_t vertex_buffer_;
-    buffer_id_t index_buffer_;
-    
-    shader_program_t sprite_render_shader_;
-    shader_variable_t sv_pos_;
-    shader_variable_t sv_uv_;
-    
+    Container sprites_;
+
+
+    Shader sprite_shader_;
 };
 
 

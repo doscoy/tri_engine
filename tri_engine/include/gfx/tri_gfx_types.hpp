@@ -7,10 +7,10 @@
 
 struct texture_coord_t
 {
-    float u0;
-    float v0;
-    float u1;
-    float v1;
+    float u0_;
+    float v0_;
+    float u1_;
+    float v1_;
 };
 
 

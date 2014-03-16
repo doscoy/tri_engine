@@ -20,11 +20,11 @@ void setupOrtho()
  
     t3::Mtx4 projection;
     projection.ortho(0, screen_width, screen_height, 0, -1, 1);
-    t3::RenderSystem::setProjectionMatrix(projection);
+//    t3::RenderSystem::setProjectionMatrix(projection);
 
     t3::Mtx4 world;
     world.identity();
-    t3::RenderSystem::setWorldTransformMatrix(world);
+//    t3::RenderSystem::setWorldTransformMatrix(world);
     
 }
 

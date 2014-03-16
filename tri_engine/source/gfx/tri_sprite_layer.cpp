@@ -27,6 +27,11 @@ Sprite* SpriteLayer::createSprite( std::shared_ptr<Texture> tex )
 
 void SpriteLayer::updateLayer( tick_t tick )
 {
+    if (sprites_.empty()) {
+        //  スプライト無ければ処理スキップ
+        return;
+    }
+
     for ( auto sp : sprites_ ){
         if ( !sp->isEnable() ) {
             continue;
@@ -36,12 +41,18 @@ void SpriteLayer::updateLayer( tick_t tick )
 
 void SpriteLayer::drawLayer()
 {
+    if (sprites_.empty()) {
+        //  スプライト無ければ処理スキップ
+        return;
+    }
+
     for ( auto sp : sprites_ ){
         if ( !sp->isEnable() ) {
             continue;
         }
         renderer_.collectSprite( *sp );
     }
+
     renderer_.render();
 }
 

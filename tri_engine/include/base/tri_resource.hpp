@@ -22,9 +22,6 @@ public:
     virtual ~Resource(){}
     
 public:
-    virtual const uint8_t* getData() const = 0;
-
-
     void setName( const char* const name ){
         std::strncpy( name_, name, RESOURCE_NAME_SIZE );
     }

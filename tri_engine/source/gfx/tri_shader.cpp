@@ -27,7 +27,7 @@ bool Shader::compileShaderFromFile(
 }
 
 bool Shader::compileShaderFromString(
-    const std::string& source,
+    const char* const source,
     RenderSystem::ShaderType type
 ) {
     if (handle_ <= 0) {
@@ -36,7 +36,7 @@ bool Shader::compileShaderFromString(
             log_ = "create shader failed.";
         }
     }
-    int shader_handle = RenderSystem::buildShader(source.c_str(), type);
+    int shader_handle = RenderSystem::buildShader(source, type);
     if (shader_handle < 0) {
         return false;
     }
@@ -101,7 +101,6 @@ void Shader::setUniform(
     float z
 ) {
     int location = getUniformLocation(name);
-    T3_ASSERT(location >= 0);
     RenderSystem::setUniformValue(location, x, y, z);
 }
 
@@ -117,7 +116,6 @@ void Shader::setUniform(
     const Mtx4& m
 ) {
     int location = getUniformLocation(name);
-    T3_ASSERT(location >= 0);
     RenderSystem::setUniformMatrix(location, m);
 }
 
@@ -126,7 +124,6 @@ void Shader::setUniform(
     float val
 ) {
     int location = getUniformLocation(name);
-    T3_ASSERT(location >= 0);
     RenderSystem::setUniformValue(location, val);
 }
 
@@ -135,7 +132,6 @@ void Shader::setUniform(
     int val
 ) {
     int location = getUniformLocation(name);
-    T3_ASSERT(location >= 0);
     RenderSystem::setUniformValue(location, val);
 }
 
@@ -144,19 +140,57 @@ void Shader::setUniform(
     bool val
 ) {
     int location = getUniformLocation(name);
-    T3_ASSERT(location >= 0);
     RenderSystem::setUniformValue(location, val);
+}
+
+void Shader::setAttribute(
+    const char* const name,
+    float a,
+    float b,
+    float c,
+    float d
+) {
+    int location = getAttributeLocation(name);
+    RenderSystem::setAttributeValue(location, a, b, c, d);
 }
 
 
 int Shader::getUniformLocation(const char* const name) const {
-    return RenderSystem::getUniformLocation(handle_, name);
+    int location = RenderSystem::getUniformLocation(handle_, name);
+    T3_ASSERT_MSG(location >= 0, "name = %s", name);
+    return location;
 }
 
 int Shader::getAttributeLocation(const char* const name) const {
-    return RenderSystem::getAttributeLocation(handle_, name);
+    int location = RenderSystem::getAttributeLocation(handle_, name);
+    T3_ASSERT_MSG(location >= 0, "name = %s", name);
+    return location;
 }
 
+
+void Shader::setAttributePointer(
+    const char* const name,
+    int element_num,
+    int stride,
+    void* pointer
+) {
+    int location = getAttributeLocation(name);
+    RenderSystem::setVertexAttributePointer(location, element_num, stride, pointer);
+}
+
+void Shader::setEnableAttributeArray(
+    const char* const name,
+    bool flag
+) {
+    int location = getAttributeLocation(name);
+    
+    if (flag) {
+        RenderSystem::setEnableVertexAttribute(location);
+    }
+    else {
+        RenderSystem::setDisableVertexAttribute(location);
+    }
+}
 
 
 

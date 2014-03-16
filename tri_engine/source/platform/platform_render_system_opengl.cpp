@@ -16,7 +16,15 @@
 namespace {
     
 
-
+inline void setGLState(GLenum e, bool f) {
+    if (f) {
+        glEnable(e);
+    }
+    else {
+        glDisable(e);
+    }
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
+}
     
     
 }   // unname namespace
@@ -157,31 +165,8 @@ void RenderSystem::setUniformMatrix(
 void RenderSystem::initializeRenderSystem() {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     
-    
-//    shader_program_t program = buildProgram(SimpleVertexShader, SimpleFragmentShader);
-//    glUseProgram(program);
-    
-    
-    // attribute変数とuniform変数のハンドルを取り出す
-//    attributes_.position_ = glGetAttribLocation(program, "Position");
-//    attributes_.normal_ = glGetAttribLocation(program, "Normal");
-//    attributes_.diffuse_ = glGetAttribLocation(program, "DiffuseMaterial");
-    
-    /*
-     uniforms_.Projection = glGetUniformLocation(program, "Projection");
-     uniforms_.Modelview = glGetUniformLocation(program, "Modelview");
-     uniforms_.NormalMatrix = glGetUniformLocation(program, "NormalMatrix");
-     uniforms_.LightPosition = glGetUniformLocation(program, "LightPosition");
-     uniforms_.AmbientMaterial = glGetUniformLocation(program, "AmbientMaterial");
-     uniforms_.SpecularMaterial = glGetUniformLocation(program, "SpecularMaterial");
-     uniforms_.Shininess = glGetUniformLocation(program, "Shininess");
-     
-     // マテリアルのデフォルトパラメータを設定する
-     glUniform3f(uniforms_.AmbientMaterial, 0.04f, 0.04f, 0.04f);
-     glUniform3f(uniforms_.SpecularMaterial, 0.5, 0.5, 0.5);
-     glUniform1f(uniforms_.Shininess, 50);
-     */
-    
+    t3::RenderSystem::setCulling(true);
+
     
 }
 
@@ -375,60 +360,29 @@ void RenderSystem::setViewport(
     glViewport(x, y, w, h);
 }
 
-void RenderSystem::setShadingType(
-    t3::RenderSystem::ShadingType type
-) {
-    if (type == RenderSystem::ShadingType::TYPE_FLAT) {
-        glShadeModel(GL_FLAT);
-    }
-    else {
-        glShadeModel(GL_SMOOTH);
-    }
-}
-
 
 void RenderSystem::setDepthTest(
     bool enable
 ) {
-    if (enable) {
-        glEnable(GL_DEPTH_TEST);
-    }
-    else {
-        glDisable(GL_DEPTH_TEST);
-    }
+    setGLState(GL_DEPTH_TEST, enable);
 }
 
 void RenderSystem::setBlend(
     bool enable
 ) {
-    if (enable) {
-        glEnable(GL_BLEND);
-    }
-    else {
-        glDisable(GL_BLEND);
-    }
+    setGLState(GL_BLEND, enable);
 }
 
 void RenderSystem::setCulling(
     bool enable
 ) {
-    if (enable) {
-        glEnable(GL_CULL_FACE);
-    }
-    else {
-        glDisable(GL_CULL_FACE);
-    }
+    setGLState(GL_CULL_FACE, enable);
 }
 
 void RenderSystem::setTextureMapping(
     bool enable
 ) {
-    if (enable) {
-        glEnable(GL_TEXTURE_2D);
-    }
-    else {
-        glDisable(GL_TEXTURE_2D);
-    }
+    setGLState(GL_TEXTURE_2D, enable);
 }
 
 void RenderSystem::setTextureMagFilter(
@@ -440,6 +394,7 @@ void RenderSystem::setTextureMagFilter(
     else {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     }
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
 void RenderSystem::setTextureMinFilter(
@@ -451,24 +406,9 @@ void RenderSystem::setTextureMinFilter(
     else {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     }
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
-
-
-void RenderSystem::setProjectionMatrix(
-    const Mtx4& mtx
-) {
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadMatrixf(mtx.pointer());
-}
-
-void RenderSystem::setWorldTransformMatrix(
-    const Mtx4& mtx
-) {
-    glMatrixMode(GL_MODELVIEW);
-    glLoadMatrixf(mtx.pointer());
-}
 
 void RenderSystem::drawElements(
     RenderSystem::DrawMode mode,
@@ -489,6 +429,9 @@ void RenderSystem::drawElements(
         case 4:
             index_type = GL_UNSIGNED_INT;
             break;
+            
+        default:
+            T3_PANIC("error");
     }
     
     //  モード判定
@@ -507,10 +450,12 @@ void RenderSystem::drawElements(
             break;
             
         default:
+            T3_PANIC("error");
             break;
     }
     
     glDrawElements(draw_mode, count, index_type, 0);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
 void RenderSystem::drawQuad(
@@ -582,163 +527,98 @@ void RenderSystem::drawQuad(
 
     
     
-    buffer_id_t RenderSystem::createVertexBuffer(
-                                                 std::vector<float>& vertices
-                                                 ) {
-        
-        buffer_id_t buffer_id;
-        glGenBuffers(1, &buffer_id);
-        glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
-        glBufferData(
-                     GL_ARRAY_BUFFER,
-                     vertices.size() * sizeof(vertices[0]),
-                     &vertices[0],
-                     GL_STATIC_DRAW
-                     );
-        
-        return buffer_id;
-    }
-    
-    buffer_id_t RenderSystem::createIndexBuffer(
-                                                std::vector<uint32_t>& indices
-                                                ) {
-        buffer_id_t buffer_id;
-        
-        glGenBuffers(1, &buffer_id);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer_id);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-                     indices.size() * sizeof(uint32_t),
-                     &indices[0],
-                     GL_STATIC_DRAW
-                     );
-        
-        return buffer_id;
-    }
-    
-    
-    void RenderSystem::setVertexAttribute(
-                                          int attribute_id,
-                                          int size,
-                                          int stride,
-                                          int offset
-                                          ) {
-        glVertexAttribPointer(
-                              attribute_id,
-                              size,
-                              GL_FLOAT,
-                              GL_FALSE,
-                              stride,
-                              reinterpret_cast<const GLvoid*>(offset)
-                              );
-    }
-
-
-
-
-void RenderSystem::setVertexPointer(
-    int size,
-    int stride,
-    const void* pointer
+buffer_id_t RenderSystem::createVertexBuffer(
+    std::vector<float>& vertices
 ) {
-    glVertexPointer(size, GL_FLOAT, stride, pointer);
+        
+    buffer_id_t buffer_id;
+    glGenBuffers(1, &buffer_id);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
+    glBufferData(
+        GL_ARRAY_BUFFER,
+        vertices.size() * sizeof(float),
+        vertices.data(),
+        GL_STATIC_DRAW
+    );
+    return buffer_id;
+}
+    
+buffer_id_t RenderSystem::createIndexBuffer(
+    std::vector<uint32_t>& indices
+) {
+    buffer_id_t buffer_id;
+        
+    glGenBuffers(1, &buffer_id);
+    glBindBuffer(
+        GL_ELEMENT_ARRAY_BUFFER,
+        buffer_id
+    );
+    glBufferData(
+        GL_ELEMENT_ARRAY_BUFFER,
+        indices.size() * sizeof(uint32_t),
+        indices.data(),
+        GL_STATIC_DRAW
+    );
+        
+    return buffer_id;
+}
+    
+    
+void RenderSystem::setVertexAttributePointer(
+    int slot,
+    int element_num,
+    int stride,
+    void* ptr
+) {
+    glVertexAttribPointer(
+        slot,
+        element_num,
+        GL_FLOAT,
+        GL_FALSE,
+        stride,
+        ptr
+    );
 }
 
-void RenderSystem::setNormalPointer(
-    int stride,
-    const void* pointer
+void RenderSystem::setupTextureData(
+    int width,
+    int height,
+    RenderSystem::ColorFormat color_format,
+    const void* data
 ) {
-    glNormalPointer(GL_FLOAT, stride, pointer);
-}
-
-void RenderSystem::setTexCoordPointer(
-    int size,
-    int stride,
-    const void* pointer
-) {
-    glTexCoordPointer(size, GL_FLOAT, stride, pointer);
-}
-
-void RenderSystem::setColorPointer(
-    int size,
-    int stride,
-    const void* pointer
-) {
-    glColorPointer(size, GL_UNSIGNED_BYTE, stride, pointer);
-}
-
-
-void RenderSystem::setTexture(
-    const std::shared_ptr<Texture>& texture
-) {
-
-    int color_format = GL_RGB;
+    int glcolor_format = GL_RGB;
     
-    switch (texture->getColorFormat()) {
+    switch (color_format) {
         case RenderSystem::ColorFormat::RGBA:
-            color_format = GL_RGBA;
+            glcolor_format = GL_RGBA;
             break;
             
         case RenderSystem::ColorFormat::RGB:
-            color_format = GL_RGB;
+            glcolor_format = GL_RGB;
             break;
-        
+            
         case RenderSystem::ColorFormat::BGR:
-            color_format = GL_BGR;
+            glcolor_format = GL_BGR;
             break;
             
         default:
             break;
     }
-
-
+    
+    
     glTexImage2D(
         GL_TEXTURE_2D,
         0,
-        color_format,
-        texture->getWidth(),
-        texture->getHeight(),
+        glcolor_format,
+        width,
+        height,
         0,
-        color_format,
+        glcolor_format,
         GL_UNSIGNED_BYTE,
-        texture->getData()
+        data
     );
-
-}
-
-void RenderSystem::setVertexArrayUse(bool use) {
-    if (use) {
-        glEnableClientState(GL_VERTEX_ARRAY);
-    }
-    else {
-        glDisableClientState(GL_VERTEX_ARRAY);
-    }
-}
-
-void RenderSystem::setColorArrayUse(bool use) {
-    if (use) {
-        glEnableClientState(GL_COLOR_ARRAY);
-    }
-    else {
-        glDisableClientState(GL_COLOR_ARRAY);
-    }
-}
-
-void RenderSystem::setTexCoordArrayUse(bool use) {
-    if (use) {
-        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    }
-    else {
-        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    }
-}
-
-void RenderSystem::setNormalArrayUse(bool use) {
-    if (use) {
-        glEnableClientState(GL_NORMAL_ARRAY);
-    }
-    else {
-        glDisableClientState(GL_NORMAL_ARRAY);
-    }
+    
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
 void RenderSystem::bindBuffer(
@@ -749,17 +629,20 @@ void RenderSystem::bindBuffer(
     if (target_type == RenderSystem::BufferType::TYPE_INDEX) {
         target = GL_ELEMENT_ARRAY_BUFFER;
     }
-
     glBindBuffer(target, buffer_id);
+
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
 
 void RenderSystem::createBuffer(uint32_t* buffer) {
     glGenBuffers(1, buffer);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
 void RenderSystem::deleteBuffer(uint32_t* buffer) {
     glDeleteBuffers(1, buffer);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
 void RenderSystem::setupBufferData(
@@ -778,6 +661,7 @@ void RenderSystem::setupBufferData(
     }
 
     glBufferData(target, size, data, gl_usage);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
 void RenderSystem::setupBufferSubData(
@@ -792,18 +676,43 @@ void RenderSystem::setupBufferSubData(
     }
 
     glBufferSubData(target, offset, size, data);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
-
-
-
 
 void RenderSystem::setActiveTextureUnit(
     int unit
 ) {
     unit += GL_TEXTURE0;
     glActiveTexture(unit);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
-
+    
+void RenderSystem::setEnableVertexAttribute(
+    int slot
+) {
+    glEnableVertexAttribArray(slot);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
+}
+    
+void RenderSystem::setDisableVertexAttribute(
+    int slot
+) {
+    glDisableVertexAttribArray(slot);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
+}
+    
+void RenderSystem::setAttributeValue(
+    int slot,
+    float a,
+    float b,
+    float c,
+    float d
+) {
+    glVertexAttrib4f(
+        slot, a, b, c, d
+    );
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
+}
 
 
 

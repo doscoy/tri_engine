@@ -3,7 +3,7 @@
 #include "tri_texture.hpp"
 #include "tri_image_png.hpp"
 #include "dbg/tri_dbg.hpp"
-
+#include "platform/platform_sdk.hpp"
 
 namespace t3 {
 inline namespace gfx {
@@ -16,13 +16,30 @@ std::shared_ptr<Texture> TextureFactory::createFromData(
     const RenderSystem::ColorFormat color_format,
     const void* data
 ) {
-    T3_NULL_ASSERT(data);
+    
+    texture_handle_t tex_handle;
+    glGenTextures(1, &tex_handle);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    glBindTexture(GL_TEXTURE_2D, tex_handle);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
+
+
+    RenderSystem::setupTextureData(width, height, color_format, data);
+    t3::RenderSystem::setTextureMinFilter(
+        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
+    );
+    t3::RenderSystem::setTextureMagFilter(
+        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
+    );
+
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
+
     std::shared_ptr<Texture> tex( T3_NEW ::t3::Texture(
         name,
         width,
         height,
         color_format,
-        reinterpret_cast<const uint8_t*>(data)
+        tex_handle
     ));
     return tex;
 }

@@ -29,8 +29,8 @@ private:
         const uint32_t width,
         const uint32_t height,
         const RenderSystem::ColorFormat color_format,
-        const uint8_t* data
-    );    
+        const texture_handle_t tex_handle
+    );
     
     
 public:
@@ -53,21 +53,13 @@ public:
         return color_format_;
     }
     
-    
-    // *********************************************
-    //  イメージデータ取得
-    const uint8_t* getData() const override {
-        return data_;
-    }
-
-    
     // *********************************************
     //  テクスチャ生成
     static std::shared_ptr<Texture> create(
         const char* const filepath
     );
     
-    
+    void setupTexture();
     
 private:
     
@@ -77,8 +69,7 @@ private:
 
     //  カラーフォーマット
     RenderSystem::ColorFormat color_format_;
-    
-    const uint8_t* data_;
+    texture_handle_t texture_handle_;
 };
     
     

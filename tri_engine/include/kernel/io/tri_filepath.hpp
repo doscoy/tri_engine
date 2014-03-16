@@ -25,7 +25,7 @@ public:
     }
 
 public:
-    static void setBaseFilePath(
+    static void setResourceDirectory(
         const char* const base
     );
 

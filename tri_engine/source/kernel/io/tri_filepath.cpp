@@ -29,7 +29,7 @@ FilePath::~FilePath()
 }
 
 
-void FilePath::setBaseFilePath(
+void FilePath::setResourceDirectory(
     const char *const base
 ) {
     std::strncpy(base_filepath_, base, 64);

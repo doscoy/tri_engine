@@ -14,11 +14,11 @@ Texture::Texture(
     const uint32_t width,
     const uint32_t height,
     const RenderSystem::ColorFormat color_format,
-    const uint8_t* data
+    const texture_handle_t tex_handle
 )   : width_(width)
     , height_(height)
     , color_format_( color_format )
-    , data_( data )
+    , texture_handle_(tex_handle)
 {
     
         
@@ -28,6 +28,14 @@ std::shared_ptr<Texture> Texture::create( const char* const path )
 {
     return TextureFactory::createFromFile( path );
 }
-    
+
+
+void Texture::setupTexture()
+{
+    glBindTexture(GL_TEXTURE_2D, texture_handle_);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
+}
+
+
 }   // inline namespace gfx
 }   // namespace t3

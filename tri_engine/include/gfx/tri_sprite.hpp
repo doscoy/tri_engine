@@ -7,6 +7,7 @@
 #include "../math/tri_math_types.hpp"
 #include "../util/tri_uncopyable.hpp"
 #include "tri_gfx_types.hpp"
+#include "tri_render_system.hpp"
 #include <memory>
 #include <cstdint>
 
@@ -18,6 +19,7 @@ inline namespace gfx {
 
 class Texture;
 class SpriteLayer;
+
 class Sprite final
     : private Uncopyable 
 {
@@ -73,6 +75,7 @@ public:
         const Vec2& pos
     ){
         position_ = pos;
+        calc_matrix_request_ = true;
     }
     
     
@@ -84,21 +87,23 @@ public:
     ){
         position_.x_ = x;
         position_.y_ = y;
+        calc_matrix_request_ = true;
     }
     
     
     // *********************************************
-    //  z軸回転を取得
-    float getRotation() const {
-        return rotation_;
+    //  回転を取得
+    const Vec3* getRotation() const {
+        return &rotation_;
     }
     
 
     // *********************************************
-    //  z軸回転を設定
+    //  回転を設定
     void setRotation(
-        const float rot
+        const Vec3& rot
     ){
+        calc_matrix_request_ = true;
         rotation_ = rot;
     }
 
@@ -115,6 +120,7 @@ public:
     void setPivot(
         const Vec2& pivot
     ){
+        calc_matrix_request_ = true;
         pivot_ = pivot;
     }
 
@@ -125,6 +131,7 @@ public:
         const float x,
         const float y
     ){
+        calc_matrix_request_ = true;
         pivot_.x_ = x;
         pivot_.y_ = y;
     }
@@ -143,6 +150,7 @@ public:
         const texture_coord_t& tex_coord
     ){
         texture_coord_ = tex_coord;
+        setupVertexBuffer();
     }
 
     
@@ -154,10 +162,11 @@ public:
         const float u1,
         const float v1
     ){
-        texture_coord_.u0 = u0;
-        texture_coord_.v0 = v0;
-        texture_coord_.u1 = u1;
-        texture_coord_.v1 = v1;
+        texture_coord_.u0_ = u0;
+        texture_coord_.v0_ = v0;
+        texture_coord_.u1_ = u1;
+        texture_coord_.v1_ = v1;
+        setupVertexBuffer();
     }
 
     
@@ -181,6 +190,7 @@ public:
         const Vec2& size
     ){
         size_ = size;
+        setupVertexBuffer();
     }
     
     // *********************************************
@@ -202,6 +212,7 @@ public:
     void setScale(
         const Vec2& scale
     ){
+        calc_matrix_request_ = true;
         scale_ = scale;
     }
     
@@ -236,24 +247,50 @@ public:
     bool isEnable() const {
         return enable_;
     }
+    
+    
+    const Mtx4* getMatrix();
+    
+    
+    int getSortScore() const;
+    
+    buffer_id_t getVertexBuffer() const {
+        return vertex_buffer_;
+    }
+    
+    buffer_id_t getIndexBuffer() const {
+        return index_buffer_;
+    }
+    
 
     void attachToLayer( SpriteLayer* const layer );
     void detachToLayer();
     void destroy();
     
     bool isValid() const;
-    
+
+
+private:
+    void calcMatrix();
+    void setupVertexBuffer();
 private:
     std::shared_ptr<Texture> texture_;
     Vec2 position_;
     Vec2 size_;
     Vec2 pivot_;
-    float rotation_;
+    Vec3 rotation_;
     texture_coord_t texture_coord_;
     Vec2 scale_;
     uint8_t priority_;
     bool enable_;
     SpriteLayer* owner_;
+    bool calc_matrix_request_;
+    Mtx4 matrix_;
+    
+    
+    buffer_id_t vertex_buffer_;
+    buffer_id_t index_buffer_;
+    
 };
 
 
