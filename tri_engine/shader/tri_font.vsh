@@ -4,8 +4,8 @@ attribute vec2 in_position;
 attribute vec2 in_uv;
 attribute vec4 in_color;
 
-varying vec2 out_uv;
-varying vec4 out_color;
+varying lowp vec2 out_uv;
+varying lowp vec4 out_color;
 
 void main(void)
 {

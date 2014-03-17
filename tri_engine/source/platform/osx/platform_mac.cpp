@@ -1,6 +1,7 @@
 #include "platform.hpp"
 #include "kernel/io/tri_pad.hpp"
 #include "util/tri_bit.hpp"
+#include "dbg/tri_assert.hpp"
 #include <cstdio>
 
 GLFWwindow* window_ = nullptr;
@@ -167,7 +168,13 @@ void createWindow(
     const int height,
     const char* const title
 ) {
+
+//    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+//    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+//    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+    
     window_ = glfwCreateWindow(width, height, title, nullptr, nullptr);
+    T3_NULL_ASSERT(window_);
     glfwSwapInterval(1);
     glfwMakeContextCurrent(window_);
     

@@ -6,7 +6,7 @@ attribute vec2 uv;
 uniform mat4 projection;
 uniform mat4 transform;
 
-varying vec2 texture_uv;
+varying lowp vec2 texture_uv;
 
 void main(void)
 {

@@ -14,7 +14,7 @@
     #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
         #warning "target ios"
         #include "png.h"
-        #include <OpenGLES/ES3/gl.h>
+        #include <OpenGLES/ES2/gl.h>
         #define PLATFORM_IOS
 
     //  MAC

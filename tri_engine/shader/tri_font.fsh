@@ -1,7 +1,7 @@
 static const char* font_fsh = STRINGIFY(
 
-varying vec2 out_uv;
-varying vec4 out_color;
+varying lowp vec2 out_uv;
+varying lowp vec4 out_color;
 
 uniform sampler2D SAMPLER;
 

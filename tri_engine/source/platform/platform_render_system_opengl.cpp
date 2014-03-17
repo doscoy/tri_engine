@@ -7,6 +7,8 @@
 
 #include "../shader/tri_simple.vsh"
 #include "../shader/tri_simple.fsh"
+#include <regex>
+
 
 #if defined(PLATFORM_MAC)
     extern GLFWwindow* window_;
@@ -58,7 +60,22 @@ int RenderSystem::buildShader(
             return -1;
     }
 
-    glShaderSource(shader_handle, 1, &source, 0);
+
+    //  es2.0向けシェーダを通常のopengl向けシェーダに変換
+    std::regex target_word("lowp");
+    std::string replaced = std::regex_replace(
+        source, target_word,
+        "",
+        std::regex_constants::match_default
+    );
+    const char* new_source = replaced.c_str();
+    
+    
+    
+    T3_TRACE(source);
+    T3_TRACE("\n-----\n");
+    T3_TRACE(new_source);
+    glShaderSource(shader_handle, 1, &new_source, 0);
     glCompileShader(shader_handle);
     
     GLint compile_success;

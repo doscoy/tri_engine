@@ -1,6 +1,6 @@
 static const char* sprite_fsh = STRINGIFY(
 
-varying vec2 texture_uv;
+varying lowp vec2 texture_uv;
 
 uniform sampler2D sampler;
 
