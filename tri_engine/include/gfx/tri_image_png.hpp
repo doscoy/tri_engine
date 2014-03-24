@@ -3,13 +3,13 @@
 #define TRI_PNG_HPP_INCLUDED
 
 #include "../base/tri_types.hpp"
-
+#include <string>
 
 namespace t3 {
     
 struct PngImage {
     
-    explicit PngImage( const char* const path );
+    explicit PngImage(std::string path);
     ~PngImage();
     uint32_t width_;
     uint32_t height_;

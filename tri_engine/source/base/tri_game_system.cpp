@@ -33,18 +33,6 @@ GameSystem::GameSystem()
     //  テクスチャマネージャ生成
     TextureManager::createInstance();
     
-    setClearColor();
-
-    dmf_layers_.setFocusCallback(
-        this,
-        &GameSystem::registryLayersToDebugMenu
-    );
-    dmf_layers_.setUnfocusCallback(
-        this,
-        &GameSystem::unregistryLayersToDebugMenu
-    );
-
-
 
 }
 
@@ -55,6 +43,21 @@ GameSystem::~GameSystem()
     TextureManager::destroyInstance();
     SceneManager::destroyInstance();
 }
+
+void GameSystem::initializeGameSystem() {
+    setClearColor();
+    
+    dmf_layers_.setFocusCallback(
+        this,
+        &GameSystem::registryLayersToDebugMenu
+    );
+    dmf_layers_.setUnfocusCallback(
+        this,
+        &GameSystem::unregistryLayersToDebugMenu
+    );
+}
+
+
 
 
 // *********************************************
@@ -82,18 +85,22 @@ void GameSystem::update( tick_t tick )
             &point_data
         );
         pointing.updatePointing(
-            point_data.hit_,
-            Point2(
-                point_data.x_,
-                point_data.y_
-            )
+            point_data,
+            tick
         );
     }
     
     //  debug pad
     platform::GamePadData dbg_pad_data;
     platform::getPlatformPadData(0, &dbg_pad_data);
-    updateDebugPad(dbg_pad_data.getButtonData(), tick);
+    uint32_t dpad_buttons = dbg_pad_data.getButtonData();
+
+    t3::DebugMenu& debug_menu = t3::DebugMenu::getInstance();
+    const VirtualPad* vpad = debug_menu.getVirtualPad();
+    if (vpad) {
+        dpad_buttons |= vpad->getPadData()->getButtonData();
+    }
+    updateDebugPad(dpad_buttons, tick);
     
     
     //  終了リクエストチェック
@@ -123,10 +130,11 @@ void GameSystem::registryToDebugMenu( DebugMenuFrame& parent_frame )
 }
 
 
-void GameSystem::attachLayer( t3::RenderLayer& layer )
+void GameSystem::attachLayer(t3::RenderLayer* layer)
 {
-    T3_TRACE("Attach Layer %s\n", layer.getLayerName());
-    layers_.push_back( &layer );
+    T3_NULL_ASSERT(layer);
+    T3_TRACE("Attach Layer %s\n", layer->getLayerName());
+    layers_.push_back(layer);
     layers_.sort(
         []( RenderLayer*lhs, RenderLayer* rhs ){
             return lhs->getPriority() < rhs->getPriority();
@@ -134,11 +142,11 @@ void GameSystem::attachLayer( t3::RenderLayer& layer )
     );
 }
 
-void GameSystem::detachLayer( t3::RenderLayer& layer )
+void GameSystem::detachLayer(t3::RenderLayer* layer)
 {
-    T3_TRACE("Detach Layer %s\n", layer.getLayerName());
+    T3_TRACE("Detach Layer %s\n", layer->getLayerName());
 
-    layers_.remove( &layer );
+    layers_.remove(layer);
     layers_.sort(
         []( RenderLayer*lhs, RenderLayer* rhs ){
             return lhs->getPriority() < rhs->getPriority();

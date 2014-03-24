@@ -104,10 +104,13 @@ void initializeTriEngine(int width, int height, const char* title) {
     platform::initializePlatform();
     platform::createWindow(width, height, title);
     
-    DebugMenu::createInstance();
+    //  マネージャインスタンス生成
     GameSystem::createInstance();
+    DebugMenu::createInstance();
     SceneManager::createInstance();
     
+    //  初期化
+    GameSystem::getInstance().initializeGameSystem();
     
     t3::GameSystem* game_system = t3::GameSystem::getInstancePointer();
     game_system->setScreenSize(
@@ -117,15 +120,6 @@ void initializeTriEngine(int width, int height, const char* title) {
         )
     );
 }
-
-
-void updateTriEngine() {
-    
-    
-}
-
-
-
 
 
 
@@ -148,33 +142,47 @@ bool Application::isActive() const {
     return !GameSystem::getInstance().isExitRequest();
 }
 
+
+void Application::initializeWorkBar() {
+    
+    GameSystem& game_system = GameSystem::getInstance();
+    const Point2& screen_size = game_system.getScreenSize();
+    
+    //  ワークバーの配置
+    cpu_bar_.setPosition(Vec2(1, screen_size.y_ - 10));
+    cpu_bar_.setLimitWidthPixel(screen_size.x_ - 10);
+    
+    //  ワークバーの色
+    cpu_bar_.setColor(0, Color::blue());
+    cpu_bar_.setColor(1, Color::red());
+    cpu_bar_.setColor(2, Color::green());
+    cpu_bar_.setColor(3, Color::magenta());
+    
+}
+
+
 void Application::initializeApplication()
 {
     SceneManager::getInstance().forceChangeScene( root_scene_generator_ );
-    GameSystem& game_system = GameSystem::getInstance();
-    
-    //  ワークバーの配置
-    cpu_bar_.setPosition(
-        Vec2(
-             1,
-             game_system.getScreenSize().y_ -5
-        )
-    );
 
+    //  レンダリングシステムの初期化
+    t3::RenderSystem::initializeRenderSystem();
 
     //  システムデバッグメニュー登録
     system_menu_.reset( T3_NEW ApplicationDebugMenu(this) );
-
+    
     DebugMenu& debug_menu_root = DebugMenu::getInstance();
     system_menu_->getSystemDebugMenuRoot().attachSelf(
         debug_menu_root.getMenuRoot()
     );
     
-    //  レンダリングシステムの初期化
-    t3::RenderSystem::initializeRenderSystem();
+    //  ワークバー初期化
+    initializeWorkBar();
+
     
     //  デバッグ文字描画の初期化
     initializeDebugPrint();
+    initializeDrawPrimitive();
     initializeTrace();
 
 }
@@ -182,13 +190,12 @@ void Application::initializeApplication()
 
 void Application::updateApplication()
 {
+    system_cost_timer_.start();     // system cost 計測開始
 
     platform::beginUpdate();
 
     float tick = frameSec<60>();
     
-    other_cost_timer_.end();
-    system_cost_timer_.start();     // system cost 計測開始
     
     SceneManager& sm = SceneManager::getInstance();
     GameSystem& gs = GameSystem::getInstance();
@@ -257,8 +264,8 @@ void Application::renderApplication()
 
     //  描画終了
     endRender();
-
     other_cost_timer_.start();
+
 
     //  コスト表示は数フレームに1回書き換える
     //  毎フレだと速すぎて読めないからね
@@ -270,33 +277,35 @@ void Application::renderApplication()
     }
     
     if (show_work_time_) {
+        int cost_pos_x = 0;
+        int cost_pos_y = 20;
         t3::printDisplay(
-            940,
-            640,
+            cost_pos_x,
+            cost_pos_y,
             Color::white(),
             "sys %2.2fms(%3.2f%%)",
             last_system_cost_ * 1000,
             last_system_cost_ / frameSec<60>() * 100
         );
         t3::printDisplay(
-            940,
-            656,
+            cost_pos_x,
+            cost_pos_y + 16,
             Color::white(),
             "app %2.2fms(%3.2f%%)",
             last_app_cost_ * 1000,
             last_app_cost_ / frameSec<60>() * 100
         );
         t3::printDisplay(
-            940,
-            672,
+            cost_pos_x,
+            cost_pos_y + 32,
             Color::white(),
             "ren %2.2fms(%3.2f%%)",
             last_rendering_cost_ * 1000,
             last_rendering_cost_ / frameSec<60>() * 100
         );
         t3::printDisplay(
-            940,
-            688,
+            cost_pos_x,
+            cost_pos_y + 48,
             Color::white(),
             "oth %2.2fms(%3.2f%%)",
             last_other_cost_ * 1000,
@@ -319,14 +328,15 @@ void Application::renderApplication()
         
         //  メモリリークを検出
         default_allocator_.getAllocationRecorder().dump(
-                                                        last_scene_change_frame_,
-                                                        frame_counter_.now()-1
-                                                        );
+            last_scene_change_frame_,
+            frame_counter_.now()-1
+        );
         
         //  シーンが切り替わったタイミングを保存
         last_scene_change_frame_ = frame_counter_.now();
     }
 
+    other_cost_timer_.end();
 
 }
 
@@ -340,7 +350,7 @@ bool Application::isDebugMenuOpenRequest() {
     const Pad& pad = debugPad();
     
     bool result = false;
-    if (pad.isPress(Pad::BUTTON_X)) {
+    if (pad.isPress(Pad::BUTTON_A)) {
         result = true;
     }
     

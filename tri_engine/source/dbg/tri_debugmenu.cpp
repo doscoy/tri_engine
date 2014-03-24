@@ -7,12 +7,12 @@
 namespace t3 {
 
 DebugMenu::DebugMenu()
-    : menu_root_( nullptr, "" )
-    , enable_( false )
-    , open_( false )
+    : vpad_()
+    , menu_root_(nullptr, "")
+    , enable_(false)
+    , open_(false)
+    , left_offset_(0)
 {
-    
-    
 }
 
 

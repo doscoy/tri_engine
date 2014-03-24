@@ -10,13 +10,13 @@ namespace t3 {
 
 // *********************************************
 //  コンストラクタ
-PngImage::PngImage( const char* const path )
+PngImage::PngImage(std::string path)
 {
     FILE* fp;
     
     png_structp png_ptr;
     png_infop info_ptr;
-    fp = fopen( path, "rb" );
+    fp = fopen( path.c_str(), "rb" );
     png_ptr = png_create_read_struct(
         PNG_LIBPNG_VER_STRING,
         nullptr,

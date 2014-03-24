@@ -70,11 +70,7 @@ int RenderSystem::buildShader(
     );
     const char* new_source = replaced.c_str();
     
-    
-    
-    T3_TRACE(source);
-    T3_TRACE("\n-----\n");
-    T3_TRACE(new_source);
+
     glShaderSource(shader_handle, 1, &new_source, 0);
     glCompileShader(shader_handle);
     

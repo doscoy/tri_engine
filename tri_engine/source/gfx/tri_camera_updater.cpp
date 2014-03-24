@@ -4,9 +4,6 @@
 #include "math/tri_math_util.hpp"
 #include "tri_camera.hpp"
 
-namespace {
-const float SHAKE_TIMING = 0.02f;
-}
 
 
 namespace t3 {

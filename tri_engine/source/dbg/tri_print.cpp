@@ -199,9 +199,7 @@ void initializeDebugPrint()
     T3_ASSERT(shader_link_result);
     
     //  デバッグレイヤーを登録
-    GameSystem& gs = GameSystem::getInstance();
-    gs.attachLayer(dbg_screen_layer_);
-    
+    dbg_screen_layer_.attachSystem();
 }
 
 

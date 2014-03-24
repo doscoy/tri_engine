@@ -46,6 +46,8 @@ private:
     bool isDebugMenuOpenRequest();
     bool isSuspend() const;
 
+    void initializeWorkBar();
+
 public:
     void gotoRootScene();
     

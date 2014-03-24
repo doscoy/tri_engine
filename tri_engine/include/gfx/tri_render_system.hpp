@@ -106,6 +106,14 @@ public:
         float y,
         float z
     );
+    
+    static void setUniformValue(
+        shader_variable_t location,
+        float x,
+        float y,
+        float z,
+        float w
+    );
 
     static void setUniformMatrix(
         shader_variable_t location,
@@ -240,25 +248,6 @@ public:
         DrawMode mode,
         int count,
         size_t indices_type_size
-    );
-    static void drawQuad(
-        const Vec3& p1,
-        const Vec3& p2,
-        const Vec3& p3,
-        const Vec3& p4,
-        const Color& color
-    );
-    
-    static void drawQuad(
-        const Vec3& p1,
-        const Vec3& p2,
-        const Vec3& p3,
-        const Vec3& p4,
-        const Color& color,
-        float u0,
-        float v0,
-        float u1,
-        float v1
     );
 
     enum class BufferType {

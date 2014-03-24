@@ -5,7 +5,7 @@
 #include <cstdint>
 
 namespace t3 {
-namespace platform {
+inline namespace platform {
 
 //  プラットフォームから取得するパッドデータ
 struct GamePadData {
@@ -21,6 +21,17 @@ struct GamePadData {
     float stick2y_;
     float trigger_l_;
     float trigger_r_;
+    
+    void clearData() {
+        button_data_ = 0;
+        stick1x_ = 0;
+        stick1y_ = 0;
+        stick2x_ = 0;
+        stick2y_ = 0;
+        trigger_l_ = 0;
+        trigger_r_ = 0;
+    }
+    
 };
 
 
@@ -30,6 +41,13 @@ struct PointingData {
     float x_;
     float y_;
     bool hit_;
+    
+    void clearData() {
+        x_ = 0;
+        y_ = 0;
+        hit_ = false;
+    }
+    
 };
 
 

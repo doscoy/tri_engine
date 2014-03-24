@@ -5,28 +5,16 @@
 #include "geometry/tri_geometry.hpp"
 #include "base/tri_game_system.hpp"
 #include "gfx/tri_render_system.hpp"
+#include "gfx/tri_shader.hpp"
 
-
+#include "../shader/tri_simple2d.vsh"
+#include "../shader/tri_simple2d.fsh"
 
 namespace {
 
 
-void setupOrtho()
-{
-    t3::GameSystem& gs = t3::GameSystem::getInstance();
+t3::Shader simple2d_;
 
-    float screen_width = gs.getScreenSize().x_;
-    float screen_height = gs.getScreenSize().y_;
- 
-    t3::Mtx4 projection;
-    projection.ortho(0, screen_width, screen_height, 0, -1, 1);
-//    t3::RenderSystem::setProjectionMatrix(projection);
-
-    t3::Mtx4 world;
-    world.identity();
-//    t3::RenderSystem::setWorldTransformMatrix(world);
-    
-}
 
 }   // unname namespace
 
@@ -34,6 +22,19 @@ void setupOrtho()
 
 namespace t3 {
 inline namespace dbg {
+
+
+void initializeDrawPrimitive()
+{
+    simple2d_.compileShaderFromString(simple2d_vsh, RenderSystem::ShaderType::VERTEX_SHADER);
+    simple2d_.compileShaderFromString(simple2d_fsh, RenderSystem::ShaderType::FRAGMENT_SHADER);
+    bool shader_link_result = simple2d_.link();
+    T3_ASSERT(shader_link_result);
+
+}
+
+
+
 
 void drawPoint(
     const Vec3& pos,
@@ -52,14 +53,73 @@ void drawRectangle(
     const Vec2& size,
     const Color& color
 ){
-    setupOrtho();
-    RenderSystem::drawQuad(
-        Vec3(left_up.x_, left_up.y_, 0),
-        Vec3(left_up.x_ + size.x_, left_up.y_, 0),
-        Vec3(left_up.x_ + size.x_, left_up.y_ + size.y_, 0),
-        Vec3(left_up.x_, left_up.y_ + size.y_, 0),
-        color
+
+    //  状態設定
+    t3::RenderSystem::resetBufferBind();
+
+    //  頂点配列を作る
+    float x0 = left_up.x_;
+    float x1 = left_up.x_ + size.x_;
+    float y0 = left_up.y_;
+    float y1 = left_up.y_ + size.y_;
+    
+    t3::GameSystem& gs = t3::GameSystem::getInstance();
+    
+    float screen_width = gs.getScreenSize().x_ * 0.5f;
+    float screen_height = gs.getScreenSize().y_ * 0.5f;
+    
+    x0 /= screen_width;
+    x1 /= screen_width;
+    y0 /= screen_height;
+    y1 /= screen_height;
+    
+    x0 -= 1;
+    x1 -= 1;
+    y0 -= 1;
+    y1 -= 1;
+    
+    y0 *= -1;
+    y1 *= -1;
+    
+    
+    float varray[] = {
+        x0, y0,
+        x0, y1,
+        x1, y0,
+        x1, y1
+    };
+
+
+    //  シェーダ設定
+    bool result = simple2d_.use();
+    T3_ASSERT(result);
+    
+    //  描画
+    // シェーダで描画
+    shader_variable_t position_slot = simple2d_.getAttributeLocation("in_position");
+    t3::RenderSystem::setEnableVertexAttribute(position_slot);
+    
+    t3::RenderSystem::setVertexAttributePointer(
+        position_slot,
+        2,
+        0,
+        varray
     );
+    
+    
+    simple2d_.setUniform(
+        "in_color",
+        color.redf(),
+        color.greenf(),
+        color.bluef(),
+        color.alphaf()
+    );
+    //  シェーダ設定
+//    result = simple2d_.use();
+//    T3_ASSERT(result);
+    
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
 }
 
 void drawSegment(
@@ -84,16 +144,6 @@ void drawSegment(
     offset *= width;
     Vec3 c = *a + offset;
     Vec3 d = *b + offset;
-    
-    
-    
-    RenderSystem::drawQuad(
-        *a,
-        *b,
-        c,
-        d,
-        color
-    );
     
 }
 

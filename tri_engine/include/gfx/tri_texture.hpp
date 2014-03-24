@@ -25,7 +25,7 @@ public:
     
 private:
     Texture(
-        const char* const name,
+        std::string name,
         const uint32_t width,
         const uint32_t height,
         const RenderSystem::ColorFormat color_format,
@@ -56,7 +56,7 @@ public:
     // *********************************************
     //  テクスチャ生成
     static std::shared_ptr<Texture> create(
-        const char* const filepath
+        FilePath& filepath
     );
     
     void setupTexture();

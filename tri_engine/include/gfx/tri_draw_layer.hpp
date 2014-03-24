@@ -29,7 +29,7 @@ public:
         T* instance,
         void (T::*update_func)(self_t*, tick_t)
     ){
-        MethodCallback2<T, self_t*, tick_t> callback( instance, update_func);
+        MethodCallback2<T, self_t*, tick_t> callback(instance, update_func);
         update_func_ = (UpdateCallback&)callback;
     }
     
@@ -38,7 +38,7 @@ public:
         T* instance,
         void (T::*render_func)(self_t*)
     ){
-        MethodCallback1<T, self_t*> callback( instance, render_func );
+        MethodCallback1<T, self_t*> callback(instance, render_func);
         render_func_ = (RenderCallback&)callback;
     }
     

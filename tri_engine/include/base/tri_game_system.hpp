@@ -23,7 +23,7 @@ class GameSystem
     : public Singleton<GameSystem>
 {
     friend class Singleton;
-    
+
 public:
     typedef RandomNumberGenerator<RandomWell> random_t;
     
@@ -33,6 +33,8 @@ private:
     ~GameSystem();
 
 public:
+    void initializeGameSystem();
+
 // ---------------------------------------------
 //  ビューポート管理
     // *********************************************
@@ -75,9 +77,6 @@ public:
     void registryToDebugMenu(DebugMenuFrame& parent_frame);
     
     
-    void attachLayer( RenderLayer& layer );
-
-    void detachLayer( RenderLayer& layer );
 
     RenderLayers& getLaysers() {
         return layers_;
@@ -90,9 +89,15 @@ public:
     bool isExitRequest() const {
         return exit_request_;
     }
+    //  レイヤーの登録
+    void attachLayer(RenderLayer* layer);
+    
+    //  レイヤーの削除
+    void detachLayer(RenderLayer* layer);
     
 private:
     void setClearColor();
+
 
     //  デバッグメニューにレイヤー登録するコールバック
     void registryLayersToDebugMenu();

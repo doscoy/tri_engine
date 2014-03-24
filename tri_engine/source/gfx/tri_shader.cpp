@@ -1,6 +1,7 @@
 #include "tri_shader.hpp"
 #include "platform/platform_sdk.hpp"
 #include "dbg/tri_assert.hpp"
+#include "dbg/tri_trace.hpp"
 
 
 namespace t3 {
@@ -37,9 +38,7 @@ bool Shader::compileShaderFromString(
         }
     }
     int shader_handle = RenderSystem::buildShader(source, type);
-    if (shader_handle < 0) {
-        return false;
-    }
+    T3_ASSERT(shader_handle >= 0);
 
     RenderSystem::attachShader(
         handle_,
@@ -102,6 +101,17 @@ void Shader::setUniform(
 ) {
     int location = getUniformLocation(name);
     RenderSystem::setUniformValue(location, x, y, z);
+}
+
+void Shader::setUniform(
+    const char* const name,
+    float x,
+    float y,
+    float z,
+    float w
+) {
+    int location = getUniformLocation(name);
+    RenderSystem::setUniformValue(location, x, y, z, w);
 }
 
 void Shader::setUniform(

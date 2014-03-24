@@ -19,21 +19,21 @@ public:
 
 
 public:
-    void setColor( int index, const Color& color );
-    void setParam( int index, float param );
-    void setPosition( const Vec2& pos ){
+    void setColor(int index, const Color& color);
+    void setParam(int index, float param);
+    void setPosition(const Vec2& pos) {
         position_ = pos;
     }
     
-    void setLimitParam( float limit ){
+    void setLimitParam(float limit) {
         limit_param_ = limit;
     }
     
-    void setLimitWidthPixel( int width ){
+    void setLimitWidthPixel(int width) {
         limit_width_pixel_ = width;
     }
     
-    void setTickness( int thickness ){
+    void setTickness(int thickness) {
         thickness_ = thickness;
     }
     

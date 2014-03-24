@@ -25,8 +25,7 @@ DebugLogLayer dbg_log_layer_;
 void initializeTrace()
 {
     //  デバッグレイヤーを登録
-    GameSystem& gs = GameSystem::getInstance();
-    gs.attachLayer( dbg_log_layer_ );
+    dbg_log_layer_.attachSystem();
 
 }
 

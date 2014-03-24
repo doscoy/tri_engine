@@ -227,6 +227,27 @@ void printConsole(
     std::printf("%s", str);
 }
 
+void loadFile(
+    const FilePath& file_path,
+    void** data,
+    size_t* size
+) {
+
+    std::ifstream fs(path);                 //ファイルオープン。読み込み形式は指定なしのときはテキストモードになる。
+
+    T3_ASSERT(!fs.fail());
+    fs.seekg( 0, std::fstream::end );       //ファイル末尾を探す
+    filesize_t eof_pos = fs.tellg();        //ファイル末尾インデクスを取得
+    fs.clear();
+    fs.seekg( 0, std::fstream::beg );       //ファイル先頭に戻る
+    filesize_t beg_pos = fs.tellg();        //ファイル先頭インデクスを取得
+    size_ = eof_pos - beg_pos;              //末尾-先頭でファイルサイズを計算
+    
+    data_ = T3_ALLOC( size_ );
+    
+    fs.read( data_, size_ );                //ファイル先頭からバッファへコピー
+
+}
 
 }   // namespace platform
 }   // namespace t3

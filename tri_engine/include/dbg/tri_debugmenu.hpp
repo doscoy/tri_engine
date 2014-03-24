@@ -4,7 +4,7 @@
 
 #include "tri_debugmenu_frame.hpp"
 #include "tri_debugmenu_items.hpp"
-
+#include "tri_virtual_pad.hpp"
 namespace t3 {
 
 
@@ -51,14 +51,17 @@ public:
         frame.attachSelf( menu_root_ );
     }
     
+    const VirtualPad* getVirtualPad() const {
+        return &vpad_;
+    }
             
 private:
-
+    VirtualPad vpad_;
     DebugMenuFrame menu_root_;
     bool enable_;
     bool open_;
     
-    short leftOffset_;
+    short left_offset_;
     
 };
 

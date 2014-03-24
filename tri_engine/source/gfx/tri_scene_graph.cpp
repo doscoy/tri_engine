@@ -16,7 +16,7 @@ SceneGraph::SceneGraph()
     , matrix_stack_()
     , node_map_()
 {
-    root_ = TransformNode::create();
+    root_ = TransformNode::create("root");
 }
 
 
@@ -87,7 +87,7 @@ void SceneGraph::pushAndSetMatrix(
     matrix_stack_.multMatrixLocal(to_world);
     
     //  変換行列をmatrix_stack.getTopで設定する
-    const Mtx4* world = matrix_stack_.getTopMatrix();
+//    const Mtx4* world = matrix_stack_.getTopMatrix();
 //    t3::RenderSystem::setWorldTransformMatrix(*world);
 }
 
@@ -120,7 +120,7 @@ std::shared_ptr<ISceneNode> SceneGraph::findNode(node_id_t id)
 
 std::shared_ptr<TransformNode> SceneGraph::createNode()
 {
-    return root_->createNode();
+    return root_->createNode("node");
 }
 
 

@@ -40,7 +40,7 @@ SceneManager::SceneManager()
     , force_change_( false )
     , scene_changed_( false )
 {
-    SceneGenerator* sg = getSceneGenerator<NullScene>();
+    SceneGenerator* sg = Scene::getSceneGenerator<NullScene>();
     current_scene_ = sg->createScene();
 }
 
@@ -88,7 +88,7 @@ void SceneManager::sceneChange()
     //  次のシーンに遷移
     T3_TRACE_VALUE(current_scene_.use_count());
     current_scene_ = next_scene_generator_->createScene();
-    next_scene_generator_ = getSceneGenerator<NullScene>();
+    next_scene_generator_ = Scene::getSceneGenerator<NullScene>();
     
     
     //  初期化

@@ -24,7 +24,6 @@ bool isInvalidFloat(const float f)
     if ( std::isinf(f) ){
         return true;
     }
-    
     //  正常な浮動少数
     return false;
 }
@@ -38,6 +37,8 @@ bool panic(
     const char* const fmt,
     ...
 ){
+
+
     va_list msg;
     
 	char buf[256];    
@@ -52,8 +53,6 @@ bool panic(
     trace(" func:%s\n", funcname);
     trace("-----------------------------------------\n");
     abort();
-//    while(1){;}
-    return 1;
 }
 
 

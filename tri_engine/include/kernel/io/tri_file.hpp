@@ -5,7 +5,7 @@
 #include "util/tri_uncopyable.hpp"
 #include "base/tri_types.hpp"
 #include <cstddef>
-
+#include "tri_filepath.hpp"
 
 
 namespace t3 {
@@ -21,11 +21,11 @@ public:
 
     // *********************************************
     //  ファイル読み込み
-    bool loadFile( const char* const path );
+    bool loadFile(const FilePath& filepath);
 
     // *********************************************
     //  データ取得
-    const char* getData() const {
+    const uint8_t* getData() const {
         return data_;
     }
     
@@ -42,13 +42,9 @@ public:
     }
 
     
-    // *********************************************
-    //  内容をダンプ
-    void dump() const;
-    
 private:
     //  データ
-    char* data_;
+    uint8_t* data_;
     
     //  データサイズ
     std::size_t size_;

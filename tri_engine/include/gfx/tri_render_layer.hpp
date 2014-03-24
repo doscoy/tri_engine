@@ -21,13 +21,6 @@ typedef std::list<RenderLayer*>   RenderLayers;
 class RenderLayer
     : private Uncopyable
 {
-    friend void updateLayers(
-                             RenderLayers& layers,
-                             tick_t tick
-                             );
-    friend void drawLayers( RenderLayers& );
-    
-    
 public:
     enum LayerPriority {
         PRIORITY_LOWEST     =  30,
@@ -96,6 +89,9 @@ public:
     virtual void unregistryToDebugMenu();
     
     
+    void attachSystem();
+    void detachSystem();
+    
 public:
     //  レイヤー更新
     static void updateLayers(
@@ -108,8 +104,8 @@ public:
     );
     
 protected:
-    virtual void updateLayer( tick_t tick ) = 0;
-    virtual void drawLayer() = 0;
+    virtual void updateLayer(tick_t tick){};
+    virtual void drawLayer(){};
 
     
 protected:

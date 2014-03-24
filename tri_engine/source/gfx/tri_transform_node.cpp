@@ -156,7 +156,7 @@ bool TransformNode::removeChild(
 bool TransformNode::preRender(
     t3::SceneGraph* scene_graph
 ) {
-    T3_TRACE("TransformNode::preRender() - %s\n", getNodeName());
+    T3_TRACE("TransformNode::preRender() - %s\n", getNodeName().c_str());
     scene_graph->pushAndSetMatrix(*getTransformMatrix());
     
     return true;
@@ -176,7 +176,7 @@ bool TransformNode::isVisible(t3::SceneGraph *scene_graph) const
 }
 
 std::shared_ptr<TransformNode> TransformNode::createNode(
-    const char* const name
+    std::string name
 ) {
     std::shared_ptr<TransformNode> new_node = create(name);
     addChild(new_node);
@@ -184,20 +184,10 @@ std::shared_ptr<TransformNode> TransformNode::createNode(
 }
 
 std::shared_ptr<TransformNode> TransformNode::create(
-    const char* const name
+    std::string name
 ) {
-    const char* node_name;
-    char tmp_name[12];
-    if (name == nullptr) {
-        //  名前を作る
-        node_name = tmp_name;
-    }
-    else {
-        node_name = name;
-    }
-
     std::shared_ptr<TransformNode> new_node;
-    new_node.reset(new TransformNode(getNewNodeID(), node_name));
+    new_node.reset(new TransformNode(getNewNodeID(), name));
     
     return new_node;
 }

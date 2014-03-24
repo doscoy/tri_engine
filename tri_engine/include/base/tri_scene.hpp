@@ -46,18 +46,10 @@ public:
 };
 
 
-    
-template <typename SceneType>
-static SceneGenerator* getSceneGenerator(){
-    return TypedSceneGenerator<SceneType>::getInstancePtr();
-}
-
-
 class Scene
     : private Uncopyable
 {
     friend class SceneGenerator;
-    typedef Scene self_t;
     
 public:
     explicit Scene(
@@ -81,6 +73,11 @@ public:
 
     DebugMenuFrame& getSceneDebugMenuFrame() {
         return scene_debug_menu_frame_;
+    }
+    
+    template <typename SceneType>
+    static SceneGenerator* getSceneGenerator(){
+        return TypedSceneGenerator<SceneType>::getInstancePtr();
     }
 
 protected:

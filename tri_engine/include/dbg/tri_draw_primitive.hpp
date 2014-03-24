@@ -19,6 +19,8 @@ class Segment;
 
 inline namespace dbg {
 
+void initializeDrawPrimitive();
+
 
 void drawPoint(
     const Vec3& pos,

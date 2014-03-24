@@ -6,7 +6,7 @@
 
 namespace t3 {
 
-bool panic( 
+bool panic(
     const char* const exp,
     const char* const filename,
     const int line,
@@ -23,11 +23,11 @@ bool isInvalidFloat(const float f);
 
 #ifdef ENABLE_ASSERT
 
-#define T3_PANIC(...)           t3::panic( "panic", __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__ )
-#define T3_ASSERT(exp)          (void)( (exp) || (t3::panic( #exp, __FILE__, __LINE__, __FUNCTION__, "assert" )),0)
+#define T3_PANIC(...)           t3::panic("panic", __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #define T3_ASSERT_MSG(exp,...)  (void)( (exp) || (t3::panic( #exp, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__ )),0)
-#define T3_NULL_ASSERT(p)       T3_ASSERT_MSG( p != nullptr, "pointer must not be null." )
-#define T3_FLOAT_ASSERT(f)      T3_ASSERT_MSG( t3::isInvalidFloat(f), "invalid float." )
+#define T3_ASSERT(exp)          T3_ASSERT_MSG(exp, "assertion.")
+#define T3_NULL_ASSERT(p)       T3_ASSERT_MSG(p != nullptr, "pointer must not be null.")
+#define T3_FLOAT_ASSERT(f)      T3_ASSERT_MSG(t3::isInvalidFloat(f), "invalid float.")
 
 
 #else // ENABLE_ASSERT

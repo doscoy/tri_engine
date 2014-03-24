@@ -22,7 +22,7 @@ public:
     
 public:
     static std::shared_ptr<TransformNode> create(
-        const char* const name = nullptr
+        std::string name
     );
     
 public:
@@ -100,12 +100,12 @@ public:
     
     
 
-    const char* getNodeName() const {
-        return nullptr;
+    std::string getNodeName() const {
+        return std::string();
     }
 
     std::shared_ptr<TransformNode> createNode(
-        const char* const name = nullptr
+        std::string name
     );
 
 

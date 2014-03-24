@@ -1,42 +1,42 @@
-//
-//  tri_filepath.cpp
-//  tri_sandbox_osx
-//
-//  Created by KANI Tetsuro on 2013/11/11.
-//  Copyright (c) 2013年 KANI Tetsuro. All rights reserved.
-//
 
-#include <cstring>
+
 #include "tri_filepath.hpp"
 
 namespace t3 {
 inline namespace io {
 
 
-char FilePath::base_filepath_[64];
+std::string FilePath::base_filepath_;
 
 FilePath::FilePath(
-    const char* const filepath
+    std::string filepath
 )   : filepath_{""}
 {
-    std::strncpy(filepath_, base_filepath_, 64);
-    std::strncat(filepath_, filepath, 128);
+    filepath_ = base_filepath_ + filepath;
 }
 
-FilePath::~FilePath()
-{
+FilePath::~FilePath() {
 
 }
 
 
 void FilePath::setResourceDirectory(
-    const char *const base
+    std::string base
 ) {
-    std::strncpy(base_filepath_, base, 64);
+    base_filepath_ = base;
 }
 
 
+std::string FilePath::getExt() const {
+    std::string::size_type pos(filepath_.rfind('.'));
+    return (pos != std::string::npos) ? filepath_.substr(pos, filepath_.length()) : std::string();
+    
+}
 
+std::string FilePath::getFileNameNotExt() const {
+    std::string::size_type pos(filepath_.rfind('.'));
+	return filepath_.substr(0, pos);
+}
 
 
 }   // namespace io

@@ -1,6 +1,7 @@
 
 
 #include "tri_render_layer.hpp"
+#include "base/tri_game_system.hpp"
 #include <cstring>
 
 
@@ -62,9 +63,9 @@ void RenderLayer::updateLayers(
     RenderLayers& layers,
     tick_t tick
 ){
-    for ( auto layer : layers ){
+    for (auto layer : layers){
         if (!layer->isPauseLayer()) {
-            layer->updateLayer( tick );
+            layer->updateLayer(tick);
         }
     }
 }
@@ -78,9 +79,17 @@ void RenderLayer::drawLayers(
         }
     }
 }
-    
-    
 
+
+    
+    
+void RenderLayer::attachSystem() {
+    t3::GameSystem::getInstance().attachLayer(this);
+}
+
+void RenderLayer::detachSystem() {
+    t3::GameSystem::getInstance().detachLayer(this);
+}
 
 
 }   // inline namespace gfx

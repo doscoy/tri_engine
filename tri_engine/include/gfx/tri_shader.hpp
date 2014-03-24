@@ -58,6 +58,7 @@ public:
     );
     
     void setUniform(const char* const name, float x, float y, float z);
+    void setUniform(const char* const name, float x, float y, float z, float w);
     void setUniform(const char* const name, const Vec3& v);
     void setUniform(const char* const name, const Mtx4& m);
     void setUniform(const char* const name, float val);

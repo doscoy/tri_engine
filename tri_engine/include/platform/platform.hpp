@@ -4,13 +4,23 @@
 
 #include "platform_sdk.hpp"
 #include "platform_types.hpp"
-
+#include "kernel/io/tri_filepath.hpp"
 
 
 namespace t3 {
-namespace platform {
+inline namespace base {
+class Application;
+}   // inline namespace
+inline namespace platform {
 
 void initializePlatform();
+
+void run(
+    int argc,
+    char** argv,
+    Application* app
+);
+
 void createWindow(
     const int width,
     const int height,
@@ -35,6 +45,12 @@ void printConsole(
     const char* const str
 );
 
+void loadFile(
+    const FilePath& file_path,
+    uint8_t** data,
+    size_t* size
+);
+    
 }   // namespace platform
 }   // namespace t3
 

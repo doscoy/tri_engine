@@ -22,8 +22,8 @@ Workbar::Workbar()
         Color::aqua(),
         Color::green(),
         Color::orange()}}
-    , limit_param_(util::frameSec<60>())
-    , limit_width_pixel_(100)
+    , limit_param_(util::frameSec<30>())
+    , limit_width_pixel_(200)
     , keep_frame_(0)
     , limit_bar_pos_x_(0)
     , thickness_(2)
@@ -55,21 +55,30 @@ void Workbar::setParam(
 }
 
 
-
 void Workbar::draw()
 {
     float start_x = position_.x_;
     float y = position_.y_;
     
-    for ( int idx = 0; idx < MAX_WORKBAR_ITEM; ++idx ){
+    for (int idx = 0; idx < MAX_WORKBAR_ITEM; ++idx){
         double param = bar_params_[idx];
-        double pixel_width = ( param / limit_param_ ) * limit_width_pixel_;
-        if ( pixel_width < 1){
+        double pixel_width = (param / limit_param_) * limit_width_pixel_;
+        if (pixel_width < 1.0){
             continue;
         }
-        drawRectangle( Vec2( start_x, y ), Vec2( pixel_width, thickness_ ), bar_colors_[idx] );
+        drawRectangle(
+            Vec2(start_x, y),
+            Vec2(pixel_width, thickness_),
+            bar_colors_[idx]
+        );
         start_x += pixel_width;
+        y += 1;
     }
+    
+    
+    
+    dbg::printDisplay(125, 16, "%d", limit_bar_pos_x_);
+    
     
     //  上限バーの更新
     if ( start_x > limit_bar_pos_x_ ){

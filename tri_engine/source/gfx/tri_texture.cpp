@@ -10,7 +10,7 @@ inline namespace gfx {
 // *********************************************
 //  コンストラクタ
 Texture::Texture(
-    const char* const name,
+    std::string name,
     const uint32_t width,
     const uint32_t height,
     const RenderSystem::ColorFormat color_format,
@@ -24,9 +24,9 @@ Texture::Texture(
         
 }
 
-std::shared_ptr<Texture> Texture::create( const char* const path )
+std::shared_ptr<Texture> Texture::create(FilePath& path)
 {
-    return TextureFactory::createFromFile( path );
+    return TextureFactory::createFromFile(path);
 }
 
 

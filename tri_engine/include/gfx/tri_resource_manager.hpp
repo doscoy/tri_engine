@@ -35,11 +35,11 @@ public:
     // *********************************************
     //  ロード
     uid_t load(
-        const char* const path 
+        FilePath& path
     ){
-        std::shared_ptr<ResourceType> res = ResourceType::create( path );
-        T3_NULL_ASSERT( res );
-        resources_.push_back( res );
+        std::shared_ptr<ResourceType> res = ResourceType::create(path);
+        T3_NULL_ASSERT(res);
+        resources_.push_back(res);
         
         return res->getResourceID();
     }
@@ -48,13 +48,13 @@ public:
     // *********************************************
     //  リソースを取得
     const std::shared_ptr<ResourceType> getResource(
-        const char* const name
+        std::string name
     ){
         
       
         typename Resources::iterator end = resources_.end();
-        for ( typename Resources::iterator it = resources_.begin(); it != end; ++it ){
-            if ( strcmp((*it)->getName(), name ) ){
+        for (typename Resources::iterator it = resources_.begin(); it != end; ++it) {
+            if (strcmp((*it)->getName(), name.c_str())) {
                 return (*it);
             }
         }

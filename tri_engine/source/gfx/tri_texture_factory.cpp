@@ -10,7 +10,7 @@ inline namespace gfx {
 
 
 std::shared_ptr<Texture> TextureFactory::createFromData(
-    const char* const name,
+    std::string name,
     const uint32_t width,
     const uint32_t height,
     const RenderSystem::ColorFormat color_format,
@@ -35,7 +35,7 @@ std::shared_ptr<Texture> TextureFactory::createFromData(
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 
     std::shared_ptr<Texture> tex( T3_NEW ::t3::Texture(
-        name,
+        name.c_str(),
         width,
         height,
         color_format,
@@ -48,36 +48,27 @@ std::shared_ptr<Texture> TextureFactory::createFromData(
 // *********************************************
 //  ファイルからテクスチャ生成
 std::shared_ptr<Texture> TextureFactory::createFromFile(
-    const char *const filename
+    FilePath& filename
 ){
-    T3_TRACE( "Create texture from %s", filename );
+    T3_TRACE("Create texture from %s", filename.getFullPath().c_str());
 
     std::shared_ptr<Texture> tex = nullptr;
-    int i = 1;
-    while( filename[i] ){
-        if ( filename[i] == '.' ){
-            switch (filename[i+1]) {
-                case 'p':
-                    tex = createFromPng(filename);
-                    break;
-                    
-                default:
-                    T3_TRACE(" unknown texture type.");
-                    break;
-            }
-        }
-        ++i;
+    if (filename.getExt() == "png") {
+        tex = createFromPng(filename);
     }
-    
+    else {
+        T3_TRACE(" unknown texture type.");
+    }
+
     return tex;
 }
 
 // *********************************************
 //  pngからテクスチャ生成
 std::shared_ptr<Texture> TextureFactory::createFromPng(
-    const char* const filename
+    FilePath& filename
 ){
-    PngImage png( filename );
+    PngImage png(filename.getFullPath());
     RenderSystem::ColorFormat color_format = RenderSystem::ColorFormat::RGB;
     switch (png.color_type_) {
         
@@ -95,7 +86,7 @@ std::shared_ptr<Texture> TextureFactory::createFromPng(
     }
     
     std::shared_ptr<Texture> tex = createFromData(
-        filename,
+        filename.getFullPath(),
         png.width_,
         png.height_,
         color_format,
