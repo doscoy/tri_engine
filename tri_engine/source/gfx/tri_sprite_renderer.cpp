@@ -159,7 +159,7 @@ void SpriteRenderer::renderSprite(
     );
     // 描画
     RenderSystem::drawElements(
-        RenderSystem::DrawMode::MODE_QUADS,
+        RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
         4,
         sizeof(uint32_t)
     );

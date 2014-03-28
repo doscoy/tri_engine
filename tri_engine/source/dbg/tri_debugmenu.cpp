@@ -13,6 +13,7 @@ DebugMenu::DebugMenu()
     , open_(false)
     , left_offset_(0)
 {
+    vpad_.close();
 }
 
 
@@ -31,6 +32,7 @@ void DebugMenu::openMenu()
         return;
     }
     
+    vpad_.open();
     
     menu_root_.openFrame();
     open_ = true;
@@ -45,6 +47,8 @@ void DebugMenu::closeMenu()
     if ( !isOpened() ){
         return;
     }
+    
+    vpad_.close();
     
     menu_root_.closeFrame();
     open_ = false;
@@ -71,7 +75,7 @@ void DebugMenu::render()
     if ( !isOpened() ){
         return;
     }
-    menu_root_.drawFrame( 3, 3, Color::white() );
+    menu_root_.drawFrame( 3, 30, Color::white() );
 }
 
 

@@ -20,6 +20,7 @@ public:
     static std::shared_ptr<Texture> createFromFile(
         FilePath& filename
     );
+
     
     static std::shared_ptr<Texture> createFromData(
         std::string name,
@@ -30,8 +31,8 @@ public:
     );
     
 private:
-    static std::shared_ptr<Texture> createFromPng(
-        FilePath& png
+    static std::shared_ptr<Texture> createFromPngFile(
+        FilePath& filepath
     );
 };
 

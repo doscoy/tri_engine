@@ -278,7 +278,7 @@ void Application::renderApplication()
     
     if (show_work_time_) {
         int cost_pos_x = 0;
-        int cost_pos_y = 20;
+        int cost_pos_y = 380;
         t3::printDisplay(
             cost_pos_x,
             cost_pos_y,
@@ -347,10 +347,19 @@ void Application::terminateApplication() {
 
 
 bool Application::isDebugMenuOpenRequest() {
+
+    //  パッド操作でのオープンリクエスト
     const Pad& pad = debugPad();
     
     bool result = false;
     if (pad.isPress(Pad::BUTTON_A)) {
+        result = true;
+    }
+    
+    
+    //  ポインティングでのオープンリクエスト
+    const Pointing& pointing = GameSystem::getInstance().getInput().getPointing();
+    if (pointing.isDoubleClick()) {
         result = true;
     }
     

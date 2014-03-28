@@ -45,7 +45,6 @@ std::shared_ptr<Texture> TextureFactory::createFromData(
 }
 
 
-// *********************************************
 //  ファイルからテクスチャ生成
 std::shared_ptr<Texture> TextureFactory::createFromFile(
     FilePath& filename
@@ -53,22 +52,30 @@ std::shared_ptr<Texture> TextureFactory::createFromFile(
     T3_TRACE("Create texture from %s", filename.getFullPath().c_str());
 
     std::shared_ptr<Texture> tex = nullptr;
-    if (filename.getExt() == "png") {
-        tex = createFromPng(filename);
+    std::string file_ext = filename.getExt();
+    if (file_ext == ".png") {
+        tex = createFromPngFile(filename);
     }
     else {
-        T3_TRACE(" unknown texture type.");
+        T3_TRACE("unknown texture type.");
     }
 
     return tex;
 }
 
-// *********************************************
+
+
+
 //  pngからテクスチャ生成
-std::shared_ptr<Texture> TextureFactory::createFromPng(
-    FilePath& filename
+std::shared_ptr<Texture> TextureFactory::createFromPngFile(
+    FilePath& filepath
 ){
-    PngImage png(filename.getFullPath());
+    File png_file;
+    png_file.loadFile(filepath);
+
+
+    PngImage png(png_file);
+    
     RenderSystem::ColorFormat color_format = RenderSystem::ColorFormat::RGB;
     switch (png.color_type_) {
         
@@ -86,7 +93,7 @@ std::shared_ptr<Texture> TextureFactory::createFromPng(
     }
     
     std::shared_ptr<Texture> tex = createFromData(
-        filename.getFullPath(),
+        filepath.getFullPath(),
         png.width_,
         png.height_,
         color_format,

@@ -4,7 +4,7 @@
 #include <cstdio>
 #include "base/tri_application.hpp"
 #include "dbg/tri_assert.hpp"
-
+#include "kernel/memory/tri_memory.hpp"
 
 t3::platform::GamePadData pad_data_[4];
 t3::platform::PointingData point_data_[4];
@@ -96,8 +96,11 @@ void loadFile(
     NSString* path = [bundle pathForResource:nsfilename ofType:nsextname];
     NSData* nsdata = [[NSData alloc] initWithContentsOfFile:path];
     T3_NULL_ASSERT(nsdata);
-    *data = (uint8_t*)[nsdata bytes];
     *size = [nsdata length];
+    
+    *data = (uint8_t*)T3_ALLOC(*size);
+    const void* nsbytes = [nsdata bytes];
+    std::memcpy(*data, nsbytes, *size);
 }
 
 }   // namespace platform

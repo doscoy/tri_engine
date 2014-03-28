@@ -75,11 +75,6 @@ void Workbar::draw()
         y += 1;
     }
     
-    
-    
-    dbg::printDisplay(125, 16, "%d", limit_bar_pos_x_);
-    
-    
     //  上限バーの更新
     if ( start_x > limit_bar_pos_x_ ){
         //  最大値が更新された

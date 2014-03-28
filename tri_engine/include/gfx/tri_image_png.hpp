@@ -3,6 +3,9 @@
 #define TRI_PNG_HPP_INCLUDED
 
 #include "../base/tri_types.hpp"
+#include "kernel/io/tri_file.hpp"
+
+
 #include <string>
 
 namespace t3 {
@@ -10,6 +13,8 @@ namespace t3 {
 struct PngImage {
     
     explicit PngImage(std::string path);
+    explicit PngImage(File& file);
+
     ~PngImage();
     uint32_t width_;
     uint32_t height_;

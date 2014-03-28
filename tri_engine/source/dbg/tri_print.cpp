@@ -28,11 +28,9 @@
 // .cpp
 #include "tri_debug_font_data.cpp"
 
-
 namespace {
 
 constexpr int BUFFER_LENGTH = 256;
-std::shared_ptr<t3::Texture> debugfont_ = nullptr;
 t3::DebugStringLayer dbg_screen_layer_;
 float width_;
 float height_;
@@ -41,6 +39,7 @@ t3::Shader font_shader_;
 
 }   //  unname namespace
 
+std::shared_ptr<t3::Texture> debugfont_ = nullptr;
 
 
 void beginPrint(

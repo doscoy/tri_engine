@@ -33,25 +33,25 @@ public:
     };
 
 public:
-    RenderLayer( const char* const name, const int priority );
+    RenderLayer(const char* const name, const int priority);
     explicit RenderLayer(const char* const name);
     virtual ~RenderLayer();
 
 public:
-    void setPriority( const int priority );
+    void setPriority(const int priority);
     
     int getPriority() const {
         return priority_;
     }
     
     void showLayer(){
-        if ( !visible_ ){
+        if (!visible_){
             visible_ = true;
         }
     }
     
     void hideLayer() {
-        if ( visible_ ){
+        if (visible_) {
             visible_ = false;
         }
     }
@@ -60,17 +60,29 @@ public:
         return visible_;
     }
     
-    void pauseLayer(){
-        if ( !pause_ ){
+    void pauseLayer() {
+        if (!pause_) {
             pause_ = true;
         }
     }
     
-    void resumeLayer(){
-        if( pause_ ){
+    void resumeLayer() {
+        if (pause_){
             pause_ = false;
         }
     }
+    
+    
+    void enableLayer() {
+        showLayer();
+        resumeLayer();
+    }
+    
+    void disableLayer() {
+        hideLayer();
+        pauseLayer();
+    }
+    
     
     bool isPauseLayer() const {
         return pause_;

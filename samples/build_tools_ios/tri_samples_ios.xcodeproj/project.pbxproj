@@ -12,7 +12,7 @@
 		0493526318DB5BA40059B390 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0493526218DB5BA40059B390 /* main.cpp */; };
 		0493526618DC7A410059B390 /* tri_virtual_pad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0493526518DC7A410059B390 /* tri_virtual_pad.cpp */; };
 		04CE6F7618DF365300CA40F9 /* tri_collision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE6F7518DF365300CA40F9 /* tri_collision.cpp */; };
-		04CE6F7A18E06C1900CA40F9 /* kani.png in Resources */ = {isa = PBXBuildFile; fileRef = 04CE6F7918E06C1900CA40F9 /* kani.png */; };
+		04E7F13618E5E2B400004E00 /* stamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E7F13518E5E2B400004E00 /* stamp.png */; };
 		04FB946918D9D133006BB512 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FB946818D9D133006BB512 /* Foundation.framework */; };
 		04FB946B18D9D133006BB512 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FB946A18D9D133006BB512 /* CoreGraphics.framework */; };
 		04FB946D18D9D133006BB512 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FB946C18D9D133006BB512 /* UIKit.framework */; };
@@ -106,7 +106,7 @@
 		0493526518DC7A410059B390 /* tri_virtual_pad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_virtual_pad.cpp; sourceTree = "<group>"; };
 		04CE6F7518DF365300CA40F9 /* tri_collision.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_collision.cpp; sourceTree = "<group>"; };
 		04CE6F7718DF369700CA40F9 /* tri_collision.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_collision.hpp; sourceTree = "<group>"; };
-		04CE6F7918E06C1900CA40F9 /* kani.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kani.png; path = ../../resources/kani.png; sourceTree = "<group>"; };
+		04E7F13518E5E2B400004E00 /* stamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stamp.png; path = ../../resources/stamp.png; sourceTree = "<group>"; };
 		04FB946518D9D133006BB512 /* tri_samples_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tri_samples_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04FB946818D9D133006BB512 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04FB946A18D9D133006BB512 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -340,7 +340,7 @@
 		04CE6F7818E06BF500CA40F9 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				04CE6F7918E06C1900CA40F9 /* kani.png */,
+				04E7F13518E5E2B400004E00 /* stamp.png */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -904,6 +904,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "KANI Tetsuro";
+				TargetAttributes = {
+					04FB946418D9D133006BB512 = {
+						DevelopmentTeam = JYBB56LB23;
+					};
+				};
 			};
 			buildConfigurationList = 04FB946018D9D133006BB512 /* Build configuration list for PBXProject "tri_samples_ios" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -935,11 +940,11 @@
 				04FB958518D9D2AC006BB512 /* tri_font.fsh in Resources */,
 				04FB958618D9D2AC006BB512 /* tri_font.vsh in Resources */,
 				04FB958B18D9D2AC006BB512 /* tri_sprite.fsh in Resources */,
-				04CE6F7A18E06C1900CA40F9 /* kani.png in Resources */,
 				04FB958818D9D2AC006BB512 /* tri_simple.vsh in Resources */,
 				04FB947718D9D133006BB512 /* InfoPlist.strings in Resources */,
 				04FB958718D9D2AC006BB512 /* tri_simple.fsh in Resources */,
 				04FB958918D9D2AC006BB512 /* tri_simple2d.fsh in Resources */,
+				04E7F13618E5E2B400004E00 /* stamp.png in Resources */,
 				04FB958A18D9D2AC006BB512 /* tri_simple2d.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1128,6 +1133,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "tri_samples_ios/tri_samples_ios-Prefix.pch";
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
@@ -1136,6 +1143,7 @@
 					/Users/doscoy_t/project/tri_engine/third_party_lib/ios,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "../../third_party_lib/ios ../../tri_engine/include";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1146,6 +1154,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "tri_samples_ios/tri_samples_ios-Prefix.pch";
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
@@ -1154,6 +1164,7 @@
 					/Users/doscoy_t/project/tri_engine/third_party_lib/ios,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "../../third_party_lib/ios ../../tri_engine/include";
 				WRAPPER_EXTENSION = app;
 			};

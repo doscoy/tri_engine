@@ -241,7 +241,6 @@ public:
 
     enum class DrawMode{
         MODE_TRIANGLES,
-        MODE_QUADS,
         MODE_TRIANGLE_STRIP
     };
     static void drawElements(

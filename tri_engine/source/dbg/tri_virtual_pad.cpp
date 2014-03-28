@@ -43,11 +43,11 @@ VirtualPad::~VirtualPad() {
 
 
 void VirtualPad::open() {
-    pad_layer_.showLayer();
+    pad_layer_.enableLayer();
 }
 
 void VirtualPad::close() {
-    pad_layer_.hideLayer();
+    pad_layer_.disableLayer();
 }
 
 void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t tick) {
@@ -74,8 +74,6 @@ void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t tick) {
         BUTTON_SIZE)) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_UP);
-        T3_TRACE("up\n");
-
     }
 
 
@@ -85,7 +83,6 @@ void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t tick) {
         BUTTON_SIZE)) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_DOWN);
-        T3_TRACE("down\n");
     }
 
 
@@ -95,7 +92,6 @@ void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t tick) {
         BUTTON_SIZE)) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_RIGHT);
-        T3_TRACE("right\n");
     }
 
     if (isHitPointAABB(
@@ -104,7 +100,6 @@ void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t tick) {
         BUTTON_SIZE)) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_LEFT);
-        T3_TRACE("left\n");
     }
 
 
@@ -114,7 +109,6 @@ void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t tick) {
         BUTTON_SIZE)) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_A);
-        T3_TRACE("a\n");
     }
     if (isHitPointAABB(
         pointing_pos,
@@ -122,7 +116,6 @@ void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t tick) {
         BUTTON_SIZE)) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_B);
-        T3_TRACE("b\n");
     }
 
 

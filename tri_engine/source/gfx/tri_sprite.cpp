@@ -77,9 +77,9 @@ void Sprite::setupVertexBuffer() {
     VertexP2T v[4] =
     { //      x,      y, tu, tv
         {  0.0f,   0.0f, u0, v0},
+        {  0.0f, size_y, u0, v1},
         {size_x,   0.0f, u1, v0},
         {size_x, size_y, u1, v1},
-        {  0.0f, size_y, u0, v1},
     };
     
     

@@ -452,9 +452,6 @@ void RenderSystem::drawElements(
             draw_mode = GL_TRIANGLE_STRIP;
             break;
             
-        case RenderSystem::DrawMode::MODE_QUADS:
-//                    draw_mode = GL_QUADS;
-            break;
             
         default:
             T3_PANIC("error");

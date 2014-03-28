@@ -16,7 +16,7 @@ public:
 public:
     void initializeScene() override;
     void terminateScene() override;
-    void updateScene( t3::tick_t tick ) override;
+    void updateScene(t3::tick_t tick) override;
 
 private:
     class SceneContext;
