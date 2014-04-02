@@ -7,10 +7,10 @@ namespace t3 {
 inline namespace base {
 
 Resource::Resource()
-    : id_(0)
-    , name_{"\0"}
+    : resource_id_(0)
+    , resource_name_{"\0"}
 {
-    id_ = uniqueID();
+    resource_id_ = uniqueID();
 }
 
 }   //  namespace base

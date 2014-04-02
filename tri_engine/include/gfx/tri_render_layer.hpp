@@ -108,7 +108,7 @@ public:
     //  レイヤー更新
     static void updateLayers(
         RenderLayers& layers,
-        tick_t tick
+        tick_t delta_time
     );
     
     static void drawLayers(
@@ -116,7 +116,7 @@ public:
     );
     
 protected:
-    virtual void updateLayer(tick_t tick){};
+    virtual void updateLayer(tick_t delta_time){};
     virtual void drawLayer(){};
 
     

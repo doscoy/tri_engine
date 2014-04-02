@@ -54,7 +54,7 @@ void DebugMenu::closeMenu()
     open_ = false;
 }
 
-void DebugMenu::update( tick_t tick )
+void DebugMenu::update( tick_t delta_time )
 {
     if ( !isOpened() ){
         return;

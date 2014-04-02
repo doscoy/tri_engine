@@ -16,8 +16,8 @@ public:
 public:
     void initializeScene() override;
     void terminateScene() override;
-    void updateScene(t3::tick_t tick) override;
-
+    void updateScene(t3::tick_t delta_time) override;
+    void suspendScene(t3::tick_t delta_time) override;
 private:
     class SceneContext;
     std::unique_ptr<SceneContext> context_;

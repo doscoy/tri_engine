@@ -19,7 +19,7 @@ DebugStringLayer::~DebugStringLayer()
     
 }
 
-void DebugStringLayer::updateLayer( tick_t tick )
+void DebugStringLayer::updateLayer( tick_t delta_time )
 {
     
 }

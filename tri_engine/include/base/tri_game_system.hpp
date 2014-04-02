@@ -58,8 +58,8 @@ public:
     }
     
 
-    void update( tick_t tick );
-    void suspend( tick_t tick );
+    void update( tick_t delta_time );
+    void suspend( tick_t delta_time );
     bool isSuspend() const {
         return suspend_;
     }

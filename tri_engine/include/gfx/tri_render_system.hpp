@@ -19,15 +19,17 @@ namespace t3 {
 
 inline namespace gfx {
 
-using buffer_id_t = unsigned int;
-using shader_program_t = unsigned int;
-using shader_variable_t = unsigned int;
-using texture_handle_t = unsigned int;
 
 class Texture;
 
 class RenderSystem {
 public:
+
+    using buffer_id_t = unsigned int;
+    using shader_program_t = unsigned int;
+    using shader_variable_t = unsigned int;
+    using texture_handle_t = unsigned int;
+
 
     enum TextureUnit {
         UNIT0 = 0,

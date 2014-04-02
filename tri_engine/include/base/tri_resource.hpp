@@ -23,19 +23,23 @@ public:
     
 public:
     void setName( const char* const name ){
-        std::strncpy( name_, name, RESOURCE_NAME_SIZE );
+        std::strncpy(
+            resource_name_,
+            name,
+            RESOURCE_NAME_SIZE
+        );
     }
     const char* getName() const {
-        return name_;
+        return resource_name_;
     }
     
     uint32_t getResourceID() const {
-        return id_;
+        return resource_id_;
     }
     
 private:
-    uint32_t id_;
-    char name_[RESOURCE_NAME_SIZE];
+    uint32_t resource_id_;
+    char resource_name_[RESOURCE_NAME_SIZE];
 };
 
 }   // namespace base

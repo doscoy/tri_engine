@@ -31,7 +31,7 @@ public:
 
     virtual void onUpdate(
         SceneGraph* scene,
-        tick_t tick
+        tick_t delta_time
     ) = 0;
 
     virtual bool preRender(

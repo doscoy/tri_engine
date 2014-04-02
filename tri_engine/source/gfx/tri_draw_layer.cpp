@@ -29,9 +29,9 @@ DrawLayer::~DrawLayer()
 }
 
 
-void DrawLayer::updateLayer( tick_t tick )
+void DrawLayer::updateLayer( tick_t delta_time )
 {
-    update_func_.invoke( this, tick );
+    update_func_.invoke( this, delta_time );
 }
 
 void DrawLayer::drawLayer()

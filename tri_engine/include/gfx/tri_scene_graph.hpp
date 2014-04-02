@@ -40,7 +40,7 @@ public:
     void setupView();
     void renderScene();
     
-    void updateScene(tick_t tick);
+    void updateScene(tick_t delta_time);
     
     std::shared_ptr<ISceneNode> findNode( node_id_t id );
     

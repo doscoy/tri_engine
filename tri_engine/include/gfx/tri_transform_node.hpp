@@ -44,15 +44,15 @@ public:
         return entity_ != nullptr;
     }
     
-    virtual void render(
+    void render(
         SceneGraph* scene_graph
     ) override;
     
-    virtual bool preRender(
+    bool preRender(
         t3::SceneGraph* scene_graph
     ) override;
     
-    virtual void postRender(
+    void postRender(
         t3::SceneGraph* scene_graph
     ) override;
     
@@ -72,24 +72,24 @@ public:
     }
     
     
-    virtual void onUpdate(
+    void onUpdate(
         SceneGraph* scene_graph,
-        tick_t tick
+        tick_t delta_time
     ) override;
     
     
-    virtual bool isVisible(SceneGraph* scene_graph) const override;
+    bool isVisible(SceneGraph* scene_graph) const override;
     
     
     virtual void renderChildren(
         SceneGraph* scene_graph
     );
     
-    virtual bool addChild(
+    bool addChild(
         std::shared_ptr<ISceneNode> kid
     ) override;
     
-    virtual bool removeChild(
+    bool removeChild(
         node_id_t id
     ) override;
     

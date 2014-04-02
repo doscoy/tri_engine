@@ -19,7 +19,7 @@ public:
 public:
     void updatePointing(
         const PointingData& data,
-        tick_t tick
+        tick_t delta_time
     );
     
     bool isHold() const {
@@ -28,6 +28,10 @@ public:
     
     bool isTrigger() const {
         return trigger_;
+    }
+    
+    bool isRepeat() const {
+        return repeat_;
     }
     
     bool isDoubleClick() const {
@@ -49,6 +53,8 @@ public:
 private:
     void clearPositionList();
 
+    void updateRepeat(tick_t delta_time);
+
 private:
     enum {
         MAX_POSITION_SIZE = 60,
@@ -57,11 +63,14 @@ private:
     bool hold_;
     bool trigger_;
     bool release_;
+    bool repeat_;
     bool double_click_;
     Point2 position_[MAX_POSITION_SIZE];
     Point2 moving_;
     float double_click_timer_;
     int double_click_release_count_;
+    float repeat_interval_;
+    float pressed_time_;
 };
 
 

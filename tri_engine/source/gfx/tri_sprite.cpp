@@ -1,9 +1,9 @@
 
 #include "tri_sprite.hpp"
 #include "base/tri_game_system.hpp"
-#include "gfx/tri_resource_manager.hpp"
-#include "tri_sprite_layer.hpp"
-#include "tri_vertex_types.hpp"
+#include "gfx/tri_texture.hpp"
+#include "gfx/tri_sprite_layer.hpp"
+#include "gfx/tri_vertex_types.hpp"
 
 
 
@@ -96,27 +96,6 @@ void Sprite::setupVertexBuffer() {
     }
     vertex_buffer_ = RenderSystem::createVertexBuffer(vertices);
 
-}
-
-
-void Sprite::attachToLayer( SpriteLayer* const layer )
-{
-    owner_ = layer;
-    owner_->attachSprite( this );
-}
-
-void Sprite::detachToLayer()
-{
-    T3_NULL_ASSERT( owner_ );
-    owner_->detachSprite( this );
-    owner_ = nullptr;
-}
-
-
-void Sprite::destroy()
-{
-    detachToLayer();
-    delete this;
 }
 
 

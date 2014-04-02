@@ -60,8 +60,8 @@ public:
 public:
     virtual void initializeScene(){};
     virtual void terminateScene(){};
-    virtual void updateScene( tick_t ){};
-    virtual void suspendScene( tick_t ){};
+    virtual void updateScene(tick_t){};
+    virtual void suspendScene(tick_t){};
     
     bool isFinished() const {
         return finish_;
@@ -105,8 +105,8 @@ private:
     ~SceneManager();
     
 public:
-    void updateScene( tick_t tick );
-    void suspendScene( tick_t tick );
+    void updateScene( tick_t delta_time );
+    void suspendScene( tick_t delta_time );
     
     void requestNextScene( SceneGenerator* const next_scene_generator ){
         next_scene_generator_ = next_scene_generator;

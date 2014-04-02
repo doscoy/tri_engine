@@ -33,7 +33,7 @@ public:
     
 private:
     //  バーチャルパッド更新
-    void updateVirtualPad(t3::DrawLayer* const layer, tick_t tick);
+    void updateVirtualPad(t3::DrawLayer* const layer, tick_t delta_time);
 
     //  バーチャルパッド描画
     void renderVirtualPad(t3::DrawLayer* const layer);

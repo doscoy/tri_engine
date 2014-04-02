@@ -17,7 +17,7 @@ std::shared_ptr<Texture> TextureFactory::createFromData(
     const void* data
 ) {
     
-    texture_handle_t tex_handle;
+    RenderSystem::texture_handle_t tex_handle;
     glGenTextures(1, &tex_handle);
     T3_ASSERT(glGetError() == GL_NO_ERROR);
     glBindTexture(GL_TEXTURE_2D, tex_handle);

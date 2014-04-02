@@ -80,6 +80,22 @@ void printConsole(
 
 
 
+std::string getDeviceFilePath(
+    std::string filename,
+    std::string extname
+) {
+    NSString* nsfilename = [NSString stringWithCString: filename.c_str() encoding:NSUTF8StringEncoding];
+    NSString* nsextname = [NSString stringWithCString: extname.c_str() encoding:NSUTF8StringEncoding];
+    
+    
+    NSBundle* bundle = [NSBundle mainBundle];
+    NSString* path = [bundle pathForResource:nsfilename ofType:nsextname];
+    
+    std::string str = [path UTF8String];
+    return str;
+}
+
+
 void loadFile(
     const FilePath& file_path,
     uint8_t** data,

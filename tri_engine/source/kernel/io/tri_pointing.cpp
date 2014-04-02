@@ -14,6 +14,8 @@ Pointing::Pointing()
     , moving_(0, 0)
     , double_click_timer_(0.0f)
     , double_click_release_count_(0)
+    , repeat_interval_(0.1f)
+    , pressed_time_(0.0f)
 {
     clearPositionList();
 }
@@ -27,7 +29,7 @@ Pointing::~Pointing()
 
 void Pointing::updatePointing(
     const PointingData& data,
-    tick_t tick
+    tick_t delta_time
 ){
     bool hit = data.hit_;
 
@@ -36,6 +38,7 @@ void Pointing::updatePointing(
     release_ = hold_ & (hit ^ hold_);
     hold_ = hit;
     
+    updateRepeat(delta_time);
     
     //  座標設定
     for (int pos_idx = MAX_POSITION_SIZE-1; pos_idx > 0; --pos_idx) {
@@ -53,7 +56,7 @@ void Pointing::updatePointing(
     //  ダブルクリック判定
     double_click_ = false;
     if (double_click_timer_ > 0) {
-        double_click_timer_ -= tick;
+        double_click_timer_ -= delta_time;
         if (release_) {
             double_click_release_count_ += 1;
             if (double_click_release_count_ == 2) {
@@ -78,6 +81,22 @@ void Pointing::clearPositionList() {
         position_[pos_idx].y_ = 0;
     }
 }
+
+
+void Pointing::updateRepeat(tick_t delta_time) {
+    repeat_ = trigger_;
+    if (hold_) {
+        pressed_time_ += delta_time;
+        if (pressed_time_ > repeat_interval_) {
+            pressed_time_ = 0;
+            repeat_ = true;
+        }
+    }
+    else {
+        pressed_time_ = 0;
+    }
+}
+
 
 }   // namespace platform
 }   // namespace t3

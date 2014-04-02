@@ -61,11 +61,11 @@ void RenderLayer::unregistryToDebugMenu()
 //  レイヤー更新
 void RenderLayer::updateLayers(
     RenderLayers& layers,
-    tick_t tick
+    tick_t delta_time
 ){
     for (auto layer : layers){
         if (!layer->isPauseLayer()) {
-            layer->updateLayer(tick);
+            layer->updateLayer(delta_time);
         }
     }
 }

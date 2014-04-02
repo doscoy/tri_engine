@@ -63,9 +63,9 @@ public:
         return items_;
     }
     
-    virtual void update() override;
+    void update() override;
     
-    virtual void drawFrame( 
+    void drawFrame( 
         const float x,
         const float y,
         const Color& color

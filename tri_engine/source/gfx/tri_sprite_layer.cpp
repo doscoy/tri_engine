@@ -12,20 +12,20 @@ SpriteLayer::SpriteLayer()
 
 SpriteLayer::~SpriteLayer()
 {
-    
+    sprites_.clear();
 }
 
 
-Sprite* SpriteLayer::createSprite( std::shared_ptr<Texture> tex )
-{
-    Sprite* spr( new Sprite );
-    spr->setTexture( tex );
-    spr->attachToLayer( this );
+std::shared_ptr<Sprite> SpriteLayer::createSprite(std::shared_ptr<Texture> tex) {
+    std::shared_ptr<Sprite> spr;
+    spr.reset(new Sprite);
+    spr->setTexture(tex);
+    attachSprite(spr);
     
     return spr;
 }
 
-void SpriteLayer::updateLayer( tick_t tick )
+void SpriteLayer::updateLayer( tick_t delta_time )
 {
     if (sprites_.empty()) {
         //  スプライト無ければ処理スキップ
@@ -57,15 +57,12 @@ void SpriteLayer::drawLayer()
 }
 
 
-void SpriteLayer::attachSprite( Sprite* const sprite )
-{
-    sprites_.push_back( sprite );
+void SpriteLayer::attachSprite(std::shared_ptr<Sprite> const sprite) {
+    sprites_.push_back(sprite);
 }
 
-void SpriteLayer::detachSprite( Sprite* const sprite )
-{
-    sprites_.remove( sprite );
-    
+void SpriteLayer::detachSprite(std::shared_ptr<Sprite> const sprite) {
+    sprites_.remove(sprite);
 }
 
 

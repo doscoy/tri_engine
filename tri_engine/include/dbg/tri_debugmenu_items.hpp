@@ -64,7 +64,7 @@ public:
     
         
 public:
-    virtual void update() override 
+    void update() override
     {
         const Pad& pad = debugPad();
         if ( pad.isTrigger( t3::Pad::BUTTON_LEFT ) ){
@@ -82,7 +82,7 @@ public:
     }
     
     
-    virtual void draw(
+    void draw(
         const float x,
         const float y,
         const Color& color
@@ -212,7 +212,7 @@ public:
     
     virtual void invoke() = 0;
     
-    virtual void update() override;
+    void update() override;
     
 };
 
@@ -230,7 +230,7 @@ public:
     {
     }
     
-    virtual void invoke() override {
+    void invoke() override {
         functor_(param_);
     }
     
@@ -255,7 +255,7 @@ public:
         , owner_(owner)
     {}
     
-    virtual void invoke() override {
+    void invoke() override {
         T3_NULL_ASSERT(owner_);
         func_(*owner_);
     }
@@ -279,7 +279,7 @@ public:
     }
 
 public:
-    virtual void update() override{
+    void update() override {
 
         const Pad& pad = debugPad();
         if ( pad.isTrigger( Pad::BUTTON_RIGHT ) ){

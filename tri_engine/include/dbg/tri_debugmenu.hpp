@@ -40,7 +40,7 @@ public:
         return menu_root_;
     }
         
-    void update( tick_t tick );
+    void update( tick_t delta_time );
     
     void render();
     

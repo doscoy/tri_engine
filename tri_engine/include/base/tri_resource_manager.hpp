@@ -6,9 +6,6 @@
 #include "../util/tri_unique_id.hpp"
 #include "../dbg/tri_dbg.hpp"
 #include "../base/tri_resource.hpp"
-#include "../gfx/tri_texture_factory.hpp"
-#include "../gfx/tri_texture.hpp"
-
 
 
 
@@ -84,7 +81,6 @@ private:
 };
 
     
-typedef ResourceManager<Texture> TextureManager;
 
     
     

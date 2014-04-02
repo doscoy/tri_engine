@@ -43,10 +43,10 @@ public:
     }
     
 protected:
-    virtual void updateLayer( tick_t tick ) override;
-    virtual void drawLayer() override;
-    void nullUpdate( self_t* const, tick_t ){}
-    void nullRender( self_t* const ){}
+    void updateLayer(tick_t delta_time) override;
+    void drawLayer() override;
+    void nullUpdate(self_t* const, tick_t) {}
+    void nullRender(self_t* const) {}
     
 private:
     UpdateCallback update_func_;

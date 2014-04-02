@@ -117,7 +117,7 @@ public:
     }
 
     //  更新処理
-    void updateInterpolation( const tick_t tick )
+    void updateInterpolation( const tick_t delta_time )
     {
         if ( !active_ ){
             //  startされていないのですぐ終了
@@ -125,7 +125,7 @@ public:
         }
 
         //  時間更新
-        now_time_ += tick;
+        now_time_ += delta_time;
 
         float t = 0;
         if ( interpolation_time_ < now_time_ ){

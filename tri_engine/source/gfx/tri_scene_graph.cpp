@@ -69,14 +69,14 @@ void SceneGraph::setupView()
 
 }
 
-void SceneGraph::updateScene(tick_t tick)
+void SceneGraph::updateScene(tick_t delta_time)
 {
 
     if (!root_) {
         return;
     }
     
-    root_->onUpdate(this, tick);
+    root_->onUpdate(this, delta_time);
 }
 
 

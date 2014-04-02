@@ -39,6 +39,9 @@ extern t3::platform::PointingData point_data_[4];
 {
     [super viewDidLoad];
     
+    
+    setupAdView();
+    
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 
     if (!self.context) {
@@ -67,8 +70,13 @@ extern t3::platform::PointingData point_data_[4];
 }
 
 - (void)dealloc
-{    
+{
+    
     app_->terminateApplication();
+    
+    
+    cleanupAdView();
+    
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
     }
@@ -123,6 +131,28 @@ extern t3::platform::PointingData point_data_[4];
     point_data_[0].hit_ = false;
 }
 
+
+- (void)setupAdView
+{
+    //  画面上部に標準サイズのビューを作成
+    banner_view_ = [[[GADBannerView] alloc] initWithAdSize: kGADAdSizeSmartBannerPortrait];
+    
+    //  広告ユニットIDを指定
+    banner_view_.adUnitID = MY_BANNER_UNIT_ID;
+    
+    //  ユーザーに広告を表示した場所にあとで復元するUIViewControllerをランタイムに知らせて
+    // ビュー階層に追加する
+    banner_view_.rootViewController = self;
+    [self.view addSubview:banner_view_];
+    
+    [banner_view_ loadRequest:[GADRequest request]];
+}
+
+
+-(void) cleanupAdView
+{
+    [banner_view_ release];
+}
 
 #pragma mark - GLKView and GLKViewController delegate methods
 

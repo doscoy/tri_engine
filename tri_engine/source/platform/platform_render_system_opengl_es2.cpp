@@ -108,14 +108,14 @@ void RenderSystem::bindFragmentDataLocation(
     //    glBindFragDataLocation();
 }
 
-shader_variable_t RenderSystem::getAttributeLocation(
+RenderSystem::shader_variable_t RenderSystem::getAttributeLocation(
                                                      shader_program_t program,
                                                      const char* const name
                                                      ) {
     return glGetAttribLocation(program, name);
 }
 
-shader_variable_t RenderSystem::getUniformLocation(
+RenderSystem::shader_variable_t RenderSystem::getUniformLocation(
                                                    shader_program_t program,
                                                    const char* const name
                                                    ) {
@@ -466,9 +466,9 @@ void RenderSystem::drawElements(
 
 
 
-buffer_id_t RenderSystem::createVertexBuffer(
-                                             std::vector<float>& vertices
-                                             ) {
+RenderSystem::buffer_id_t RenderSystem::createVertexBuffer(
+    std::vector<float>& vertices
+) {
     
     buffer_id_t buffer_id;
     glGenBuffers(1, &buffer_id);
@@ -482,9 +482,9 @@ buffer_id_t RenderSystem::createVertexBuffer(
     return buffer_id;
 }
 
-buffer_id_t RenderSystem::createIndexBuffer(
-                                            std::vector<uint32_t>& indices
-                                            ) {
+RenderSystem::buffer_id_t RenderSystem::createIndexBuffer(
+    std::vector<uint32_t>& indices
+) {
     buffer_id_t buffer_id;
     
     glGenBuffers(1, &buffer_id);
@@ -504,27 +504,27 @@ buffer_id_t RenderSystem::createIndexBuffer(
 
 
 void RenderSystem::setVertexAttributePointer(
-                                             int slot,
-                                             int element_num,
-                                             int stride,
-                                             void* ptr
-                                             ) {
+    int slot,
+    int element_num,
+    int stride,
+    void* ptr
+) {
     glVertexAttribPointer(
-                          slot,
-                          element_num,
-                          GL_FLOAT,
-                          GL_FALSE,
-                          stride,
-                          ptr
-                          );
+        slot,
+        element_num,
+        GL_FLOAT,
+        GL_FALSE,
+        stride,
+        ptr
+    );
 }
 
 void RenderSystem::setupTextureData(
-                                    int width,
-                                    int height,
-                                    RenderSystem::ColorFormat color_format,
-                                    const void* data
-                                    ) {
+    int width,
+    int height,
+    RenderSystem::ColorFormat color_format,
+    const void* data
+) {
     int glcolor_format = GL_RGB;
     
     switch (color_format) {
@@ -546,24 +546,24 @@ void RenderSystem::setupTextureData(
     
     
     glTexImage2D(
-                 GL_TEXTURE_2D,
-                 0,
-                 glcolor_format,
-                 width,
-                 height,
-                 0,
-                 glcolor_format,
-                 GL_UNSIGNED_BYTE,
-                 data
-                 );
+        GL_TEXTURE_2D,
+        0,
+        glcolor_format,
+        width,
+        height,
+        0,
+        glcolor_format,
+        GL_UNSIGNED_BYTE,
+        data
+    );
     
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
 void RenderSystem::bindBuffer(
-                              t3::RenderSystem::BufferType target_type,
-                              int buffer_id
-                              ) {
+    t3::RenderSystem::BufferType target_type,
+    int buffer_id
+) {
     int target = GL_ARRAY_BUFFER;
     if (target_type == RenderSystem::BufferType::TYPE_INDEX) {
         target = GL_ELEMENT_ARRAY_BUFFER;
@@ -585,11 +585,11 @@ void RenderSystem::deleteBuffer(uint32_t* buffer) {
 }
 
 void RenderSystem::setupBufferData(
-                                   RenderSystem::BufferType type,
-                                   int size,
-                                   const void* data,
-                                   RenderSystem::BufferUsage usage
-                                   ) {
+    RenderSystem::BufferType type,
+    int size,
+    const void* data,
+    RenderSystem::BufferUsage usage
+) {
     int target = GL_ARRAY_BUFFER;
     if (type == RenderSystem::BufferType::TYPE_INDEX) {
         target = GL_ELEMENT_ARRAY_BUFFER;
@@ -619,8 +619,8 @@ void RenderSystem::setupBufferSubData(
 }
 
 void RenderSystem::setActiveTextureUnit(
-                                        int unit
-                                        ) {
+    int unit
+) {
     unit += GL_TEXTURE0;
     glActiveTexture(unit);
     T3_ASSERT(glGetError() == GL_NO_ERROR);

@@ -88,7 +88,7 @@ public:
     
     
 public:
-    virtual void onUpdate( tick_t tick ) {
+    virtual void onUpdate( tick_t delta_time ) {
         if ( inital_update_ ){
             onInitialize();
             inital_update_ = false;
@@ -124,10 +124,10 @@ public:
     {}
     
 public:
-    virtual void onUpdate( const tick_t tick ) override {
-        Process::onUpdate( tick );
+    void onUpdate(const tick_t delta_time) override {
+        Process::onUpdate( delta_time );
         if ( active_ ){
-            now_ += tick;
+            now_ += delta_time;
             if ( now_ >= end_time_ ){
                 kill();
             }

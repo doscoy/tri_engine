@@ -23,25 +23,25 @@ Workbar::Workbar()
         Color::green(),
         Color::orange()}}
     , limit_param_(util::frameSec<30>())
+    , caution_param_(limit_param_ / 2)
     , limit_width_pixel_(200)
     , keep_frame_(0)
     , limit_bar_pos_x_(0)
     , thickness_(2)
     , position_()
 {
-    std::fill( bar_params_.begin(), bar_params_.end(), 0 );
+    std::fill(bar_params_.begin(), bar_params_.end(), 0);
 }
 
 
-Workbar::~Workbar()
-{
+Workbar::~Workbar() {
     
 }
 
 void Workbar::setColor(
     int index,
     const Color& color
-){
+) {
     T3_ASSERT( MAX_WORKBAR_ITEM > index );
     bar_colors_[index] = color;
 }
@@ -49,20 +49,19 @@ void Workbar::setColor(
 void Workbar::setParam(
     int index,
     float param
-){
+) {
     T3_ASSERT( MAX_WORKBAR_ITEM > index );
     bar_params_[index] = param;
 }
 
 
-void Workbar::draw()
-{
+void Workbar::draw() {
     float start_x = position_.x_;
     float y = position_.y_;
-    
+    float total_param = 0;
     for (int idx = 0; idx < MAX_WORKBAR_ITEM; ++idx){
-        double param = bar_params_[idx];
-        double pixel_width = (param / limit_param_) * limit_width_pixel_;
+        float param = bar_params_[idx];
+        float pixel_width = (param / limit_param_) * limit_width_pixel_;
         if (pixel_width < 1.0){
             continue;
         }
@@ -72,21 +71,21 @@ void Workbar::draw()
             bar_colors_[idx]
         );
         start_x += pixel_width;
-        y += 1;
+        total_param += param;
     }
     
     //  上限バーの更新
-    if ( start_x > limit_bar_pos_x_ ){
+    if (start_x > limit_bar_pos_x_) {
         //  最大値が更新された
         limit_bar_pos_x_ = start_x;
         keep_frame_ = 0;
     }
     
-    if ( keep_frame_ < KEEP_TIME ){
+    if (keep_frame_ < KEEP_TIME) {
         //  しばらく上限をキープ
         keep_frame_ += 1;
     }
-    else if ( keep_frame_ < RETURN_LIMIT_TIME ){
+    else if (keep_frame_ < RETURN_LIMIT_TIME) {
         // ちょっとずつ戻ってくる
         limit_bar_pos_x_ -= 1;
         keep_frame_ += 1;
@@ -96,7 +95,13 @@ void Workbar::draw()
     }
     
     //  上限バー描画
-    drawRectangle( Vec2( limit_bar_pos_x_, y-1 ), Vec2( 1, thickness_+2 ), Color::lime() );
+    float caution_ratio = caution_param_ / limit_param_;
+    float caution_pos = limit_width_pixel_ * caution_ratio;
+    Color limit_bar_color = Color::lime();
+    if (limit_bar_pos_x_ > caution_pos) {
+        limit_bar_color = Color::red();
+    }
+    drawRectangle(Vec2(limit_bar_pos_x_, y-1), Vec2(3, thickness_+2), limit_bar_color);
     
 }
 

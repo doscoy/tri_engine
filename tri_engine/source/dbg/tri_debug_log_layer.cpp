@@ -33,7 +33,7 @@ void DebugLogLayer::writeString(
 }
 
 
-void DebugLogLayer::updateLayer(tick_t tick)
+void DebugLogLayer::updateLayer(tick_t delta_time)
 {
     //  表示予定が無ければ処理しない
     if (!isVisibleLayer()) {
@@ -46,7 +46,7 @@ void DebugLogLayer::updateLayer(tick_t tick)
     }
 
 
-    DebugStringLayer::updateLayer(tick);
+    DebugStringLayer::updateLayer(delta_time);
     
 
     int str_idx = getLogShowLineIndex();

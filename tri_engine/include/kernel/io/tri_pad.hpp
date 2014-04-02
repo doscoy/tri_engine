@@ -47,7 +47,7 @@ public:
     ~Pad();
 
 public:
-    void updatePad( uint32_t current_frame_data, tick_t tick );
+    void updatePad( uint32_t current_frame_data, tick_t delta_time );
     
     bool isTrigger( uint32_t button ) const {
         return ( trigger_ & button );
@@ -83,7 +83,7 @@ public:
     }
 
 private:
-    void updateRepeat( tick_t tick );
+    void updateRepeat( tick_t delta_time );
     
 private:
     uint32_t last_frame_data_;

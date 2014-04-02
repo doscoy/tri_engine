@@ -53,9 +53,9 @@ SceneManager::~SceneManager()
 
 
 void SceneManager::updateScene(
-    tick_t tick
+    tick_t delta_time
 ){
-    current_scene_->updateScene( tick );
+    current_scene_->updateScene( delta_time );
 }
 
 
@@ -71,9 +71,9 @@ void SceneManager::directScene()
 }
 
 void SceneManager::suspendScene(
-    tick_t tick
+    tick_t delta_time
 ){
-    current_scene_->suspendScene( tick );
+    current_scene_->suspendScene( delta_time );
 }
 
 

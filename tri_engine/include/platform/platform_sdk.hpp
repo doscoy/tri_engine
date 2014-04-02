@@ -15,6 +15,8 @@
         #warning "target ios"
         #include "png.h"
         #include <OpenGLES/ES2/gl.h>
+        #include <OpenAL/al.h>
+        #include <OpenAL/alc.h>
         #define PLATFORM_IOS
 
     //  MAC

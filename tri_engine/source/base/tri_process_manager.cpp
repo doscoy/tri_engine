@@ -12,7 +12,7 @@ ProcessManager::~ProcessManager()
 }
 
 
-void ProcessManager::updateProcess( const tick_t tick )
+void ProcessManager::updateProcess( const tick_t delta_time )
 {
     ProcessList::iterator itr = processes_.begin();
     ProcessList::iterator end = processes_.end();
@@ -32,7 +32,7 @@ void ProcessManager::updateProcess( const tick_t tick )
             detach( p );
         }
         else if ( p->isActive() && !p->isPaused() ){
-            p->onUpdate( tick );
+            p->onUpdate( delta_time );
         }
     }
     

@@ -1,11 +1,11 @@
 #include "tri_game_system.hpp"
-#include "tri_resource_manager.hpp"
 #include "tri_scene.hpp"
 #include "util/tri_counter.hpp"
 #include "kernel/tri_kernel.hpp"
 #include "dbg/tri_dbg.hpp"
 
-
+#include "gfx/tri_texture.hpp"
+#include "audio/tri_audio_resource.hpp"
 
 namespace t3 {
 
@@ -33,6 +33,8 @@ GameSystem::GameSystem()
     //  テクスチャマネージャ生成
     TextureManager::createInstance();
     
+    //  オーディオマネージャ生成
+    AudioManager::createInstance();
 
 }
 
@@ -40,6 +42,7 @@ GameSystem::GameSystem()
 //  デストラクタ
 GameSystem::~GameSystem()
 {
+    AudioManager::destroyInstance();
     TextureManager::destroyInstance();
     SceneManager::destroyInstance();
 }
@@ -62,7 +65,7 @@ void GameSystem::initializeGameSystem() {
 
 // *********************************************
 //  アップデート
-void GameSystem::update( tick_t tick )
+void GameSystem::update( tick_t delta_time )
 {
     //  起動からのフレーム数カウント
     frame_counter_.up();
@@ -74,7 +77,7 @@ void GameSystem::update( tick_t tick )
         Pad& pad = input.getPad();
         platform::GamePadData pad_data;
         platform::getPlatformPadData(pad_idx, &pad_data);
-        pad.updatePad(pad_data.getButtonData(), tick);
+        pad.updatePad(pad_data.getButtonData(), delta_time);
         
         
         //  ポインティング情報更新
@@ -86,7 +89,7 @@ void GameSystem::update( tick_t tick )
         );
         pointing.updatePointing(
             point_data,
-            tick
+            delta_time
         );
     }
     
@@ -100,7 +103,7 @@ void GameSystem::update( tick_t tick )
     if (vpad) {
         dpad_buttons |= vpad->getPadData()->getButtonData();
     }
-    updateDebugPad(dpad_buttons, tick);
+    updateDebugPad(dpad_buttons, delta_time);
     
     
     //  終了リクエストチェック
@@ -109,7 +112,7 @@ void GameSystem::update( tick_t tick )
     }
 }
 
-void GameSystem::suspend( tick_t tick )
+void GameSystem::suspend( tick_t delta_time )
 {
     setClearColor();
 }

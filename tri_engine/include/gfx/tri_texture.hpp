@@ -7,8 +7,7 @@
 #include "../base/tri_resource.hpp"
 #include "../gfx/tri_color.hpp"
 #include "gfx/tri_render_system.hpp"
-
-
+#include "base/tri_resource_manager.hpp"
 
 
 namespace t3 {
@@ -29,7 +28,7 @@ private:
         const uint32_t width,
         const uint32_t height,
         const RenderSystem::ColorFormat color_format,
-        const texture_handle_t tex_handle
+        const RenderSystem::texture_handle_t tex_handle
     );
     
     
@@ -69,11 +68,12 @@ private:
 
     //  カラーフォーマット
     RenderSystem::ColorFormat color_format_;
-    texture_handle_t texture_handle_;
+    RenderSystem::texture_handle_t texture_handle_;
 };
     
     
-    
+typedef ResourceManager<Texture> TextureManager;
+
     
 
 }   // inline namespace gfx

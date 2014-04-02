@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
+#import "GADBannerView.h"
+@interface ViewController : GLKViewController {
 
-@interface ViewController : GLKViewController
-
+    GADBannerView* banner_view_;
+}
 @end

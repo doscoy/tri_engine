@@ -106,7 +106,22 @@ public:
         calc_matrix_request_ = true;
         rotation_ = rot;
     }
+    
+    void addRotationX(float r) {
+        calc_matrix_request_ = true;
+        rotation_.x_ += r;
+    }
 
+    void addRotationY(float r) {
+        calc_matrix_request_ = true;
+        rotation_.y_ += r;
+    }
+    
+    void addRotationZ(float r) {
+        calc_matrix_request_ = true;
+        rotation_.z_ += r;
+    }
+    
 
     // *********************************************
     //  回転中心を取得
@@ -254,19 +269,15 @@ public:
     
     int getSortScore() const;
     
-    buffer_id_t getVertexBuffer() const {
+    RenderSystem::buffer_id_t getVertexBuffer() const {
         return vertex_buffer_;
     }
     
-    buffer_id_t getIndexBuffer() const {
+    RenderSystem::buffer_id_t getIndexBuffer() const {
         return index_buffer_;
     }
     
 
-    void attachToLayer( SpriteLayer* const layer );
-    void detachToLayer();
-    void destroy();
-    
     bool isValid() const;
 
 
@@ -288,8 +299,8 @@ private:
     Mtx4 matrix_;
     
     
-    buffer_id_t vertex_buffer_;
-    buffer_id_t index_buffer_;
+    RenderSystem::buffer_id_t vertex_buffer_;
+    RenderSystem::buffer_id_t index_buffer_;
     
 };
 

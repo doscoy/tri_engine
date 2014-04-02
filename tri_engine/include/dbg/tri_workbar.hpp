@@ -44,6 +44,7 @@ private:
     std::array<float, MAX_WORKBAR_ITEM> bar_params_;
     std::array<Color, MAX_WORKBAR_ITEM> bar_colors_;
     float limit_param_;
+    float caution_param_;
     int limit_width_pixel_;
     int keep_frame_;
     int limit_bar_pos_x_;

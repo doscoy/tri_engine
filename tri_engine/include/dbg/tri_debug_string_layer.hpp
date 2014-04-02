@@ -26,8 +26,8 @@ public:
     );
 
 protected:
-    virtual void updateLayer( tick_t tick ) override;
-    virtual void drawLayer() override;
+    void updateLayer(tick_t delta_time) override;
+    void drawLayer() override;
 
 
 protected:

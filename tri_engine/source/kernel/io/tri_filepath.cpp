@@ -1,6 +1,8 @@
 
 
 #include "tri_filepath.hpp"
+#include "platform/platform.hpp"
+
 
 namespace t3 {
 inline namespace io {
@@ -36,6 +38,16 @@ std::string FilePath::getExt() const {
 std::string FilePath::getFileNameNotExt() const {
     std::string::size_type pos(filepath_.rfind('.'));
 	return filepath_.substr(0, pos);
+}
+
+
+std::string FilePath::getFullPath() const {
+    
+    std::string str = platform::getDeviceFilePath(
+        getFileNameNotExt(),
+        getExt()
+    );
+    return str;
 }
 
 

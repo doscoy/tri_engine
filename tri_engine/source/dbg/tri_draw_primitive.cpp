@@ -96,7 +96,7 @@ void drawRectangle(
     
     //  描画
     // シェーダで描画
-    shader_variable_t position_slot = simple2d_.getAttributeLocation("in_position");
+    RenderSystem::shader_variable_t position_slot = simple2d_.getAttributeLocation("in_position");
     t3::RenderSystem::setEnableVertexAttribute(position_slot);
     
     t3::RenderSystem::setVertexAttributePointer(

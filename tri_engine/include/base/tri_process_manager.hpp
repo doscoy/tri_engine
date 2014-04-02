@@ -29,7 +29,7 @@ public:
         return !processes_.empty();
     }
         
-    void updateProcess( const tick_t tick );
+    void updateProcess( const tick_t delta_time );
     
     ~ProcessManager();
     

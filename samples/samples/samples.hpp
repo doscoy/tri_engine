@@ -25,12 +25,12 @@ public:
     {}
     
 public:
-    virtual void initializeScene() override {
+    void initializeScene() override {
         t3::DebugMenu& dm = t3::DebugMenu::getInstance();
         sandbox_.attachSelf(dm.getMenuRoot());
     }
     
-    virtual void updateScene(t3::tick_t tick) override {
+    void updateScene(t3::tick_t delta_time) override {
         t3::printDisplay(
             0,
             100,
@@ -47,7 +47,7 @@ public:
         }
     }
     
-    virtual void terminateScene() override {
+    void terminateScene() override {
         sandbox_.detachSelf();
     }
     

@@ -14,34 +14,30 @@ Pad::Pad()
     , repeat_interval_(0.125f)
     , pressed_time_(0.0)
 {
+}
+
+Pad::~Pad() {
 
 }
 
-Pad::~Pad()
-{
-
-}
-
-void Pad::updatePad( const uint32_t current_frame_data, tick_t tick )
-{
+void Pad::updatePad(const uint32_t current_frame_data, tick_t delta_time) {
         
-    trigger_ = current_frame_data & ( current_frame_data ^ last_frame_data_);
-    release_ = last_frame_data_ & ( current_frame_data ^ last_frame_data_);
+    trigger_ = current_frame_data & (current_frame_data ^ last_frame_data_);
+    release_ = last_frame_data_ & (current_frame_data ^ last_frame_data_);
     
     last_frame_data_ = current_frame_data;
     
-    updateRepeat(tick);
+    updateRepeat(delta_time);
 }
 
 
-void Pad::updateRepeat( tick_t tick )
-{
+void Pad::updateRepeat(tick_t delta_time) {
     
-    if ( last_frame_data_ > 0 ){
+    if (last_frame_data_ > 0) {
         //  何か一つでもボタンが押され続けている時間を計測
-        pressed_time_ += tick;
+        pressed_time_ += delta_time;
     }
-    else{
+    else {
         //  何も押されてないフレーム
         pressed_time_ = 0;
     }
@@ -49,7 +45,7 @@ void Pad::updateRepeat( tick_t tick )
     
     
     //  リピート判定タイミングになったらリピートデータに反映
-    if ( pressed_time_ > repeat_start_time_ + repeat_interval_ ){
+    if (pressed_time_ > repeat_start_time_ + repeat_interval_) {
         pressed_time_ = repeat_start_time_;
         repeat_ = last_frame_data_;
     }

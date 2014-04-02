@@ -13,7 +13,7 @@
 
 #include "base/tri_screen.hpp"
 #include "dbg/tri_assert.hpp"
-#include "gfx/tri_resource_manager.hpp"
+
 #include "gfx/tri_texture.hpp"
 #include "gfx/tri_texture_factory.hpp"
 #include "gfx/tri_render_system.hpp"

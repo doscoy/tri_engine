@@ -45,6 +45,11 @@ void printConsole(
     const char* const str
 );
 
+std::string getDeviceFilePath(
+    std::string filename,
+    std::string extname
+);
+
 void loadFile(
     const FilePath& file_path,
     uint8_t** data,

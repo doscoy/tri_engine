@@ -15,22 +15,23 @@ inline namespace gfx {
 class SpriteLayer
     : public RenderLayer
 {
-    typedef std::list<Sprite*> container_t;
-    friend void Sprite::attachToLayer( SpriteLayer* const layer );
-    friend void Sprite::detachToLayer();
-    
+    typedef std::list<std::shared_ptr<Sprite>> container_t;
+
 public:
     SpriteLayer();
     virtual ~SpriteLayer();
 
 public:
-    Sprite* createSprite( std::shared_ptr<Texture> tex );
+    std::shared_ptr<Sprite> createSprite(std::shared_ptr<Texture> tex);
 
+    std::list<std::shared_ptr<Sprite>>* getManagementSprites() {
+        return &sprites_;
+    }
 private:
-    virtual void updateLayer( tick_t tick ) override;
-    virtual void drawLayer() override;
-    void attachSprite( Sprite* const sprite );
-    void detachSprite( Sprite* const sprite );
+    void updateLayer( tick_t delta_time ) override;
+    void drawLayer() override;
+    void attachSprite(std::shared_ptr<Sprite> const sprite );
+    void detachSprite(std::shared_ptr<Sprite> const sprite );
 
 private:
     SpriteRenderer renderer_;

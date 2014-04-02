@@ -19,13 +19,7 @@ public:
     ~FilePath();
 
 public:
-    std::string getFullPath() const {
-        return filepath_;
-    }
-    
-    std::string getBasePath() const {
-        return base_filepath_;
-    }
+    std::string getFullPath() const;
     
     std::string getExt() const;
     

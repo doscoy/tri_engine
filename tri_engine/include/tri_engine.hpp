@@ -3,6 +3,8 @@
 #ifndef TRI_ENGINE_HPP_INCLUDED
 #define TRI_ENGINE_HPP_INCLUDED
 
+
+#include "audio/tri_audio.hpp"
 #include "kernel/tri_kernel.hpp"
 #include "math/tri_math.hpp"
 #include "dbg/tri_dbg.hpp"

@@ -194,7 +194,7 @@ void Application::updateApplication()
 
     platform::beginUpdate();
 
-    float tick = frameSec<60>();
+    float delta_time = frameSec<60>();
     
     
     SceneManager& sm = SceneManager::getInstance();
@@ -202,11 +202,11 @@ void Application::updateApplication()
     DebugMenu& dm = DebugMenu::getInstance();
     
     
-    dm.update(tick);
-    gs.update(tick);
+    dm.update(delta_time);
+    gs.update(delta_time);
 
     //  レイヤーの更新
-    RenderLayer::updateLayers(gs.getLaysers(), tick);
+    RenderLayer::updateLayers(gs.getLaysers(), delta_time);
 
     
     system_cost_timer_.end();       // system cost 計測終了
@@ -215,12 +215,12 @@ void Application::updateApplication()
     //  シーンの更新
     if (isSuspend()) {
         //  サスペンド中
-        gs.suspend(tick);
-        sm.suspendScene(tick);
+        gs.suspend(delta_time);
+        sm.suspendScene(delta_time);
     }
     else {
         //  更新中
-        sm.updateScene(tick);
+        sm.updateScene(delta_time);
         
         //  デバッグメニュー開く
         if (isDebugMenuOpenRequest()) {
@@ -278,7 +278,7 @@ void Application::renderApplication()
     
     if (show_work_time_) {
         int cost_pos_x = 0;
-        int cost_pos_y = 380;
+        int cost_pos_y = 1030;
         t3::printDisplay(
             cost_pos_x,
             cost_pos_y,
@@ -299,7 +299,7 @@ void Application::renderApplication()
             cost_pos_x,
             cost_pos_y + 32,
             Color::white(),
-            "ren %2.2fms(%3.2f%%)",
+            "ren %2.2fms(% 3.2f%%)",
             last_rendering_cost_ * 1000,
             last_rendering_cost_ / frameSec<60>() * 100
         );
