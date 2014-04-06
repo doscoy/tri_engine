@@ -11,8 +11,8 @@
 
 int main(int argc, char * argv[])
 {
-//    t3::Application app(t3::Scene::getSceneGenerator<RootTest>());
-    t3::Application app(t3::Scene::getSceneGenerator<SimpleSpriteScene>());
+    t3::Application app(t3::Scene::getSceneGenerator<RootTest>());
+//    t3::Application app(t3::Scene::getSceneGenerator<SimpleSpriteScene>());
     t3::platform::run(argc, argv, &app);
 
     return 0;

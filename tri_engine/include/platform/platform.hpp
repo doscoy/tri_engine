@@ -55,6 +55,10 @@ void loadFile(
     uint8_t** data,
     size_t* size
 );
+
+
+void showAd();
+void hideAd();
     
 }   // namespace platform
 }   // namespace t3

@@ -12,7 +12,7 @@
 #include "platform/platform.hpp"
 #include "AppDelegate.hpp"
 #include "dbg/tri_trace.hpp"
-
+#import "GADBannerView.h"
 
 int iosMain(int argc, char** argv) {
     
@@ -25,6 +25,7 @@ int iosMain(int argc, char** argv) {
 float screen_scale_ = 1.0f;
 extern t3::Application* app_;
 extern t3::platform::PointingData point_data_[4];
+GADBannerView* banner_view_ = nullptr;
 
 @interface ViewController () {
 
@@ -35,12 +36,42 @@ extern t3::platform::PointingData point_data_[4];
 
 @implementation ViewController
 
+#define MY_BANNER_UNIT_ID  @"ca-app-pub-3998377149074428/6255650398"
+
+- (void)setupAdView
+{
+    //  画面上部に標準サイズのビューを作成
+    banner_view_ = [[GADBannerView alloc] initWithAdSize: kGADAdSizeSmartBannerPortrait];
+    
+    //  広告ユニットIDを指定
+    banner_view_.adUnitID = MY_BANNER_UNIT_ID;
+    
+    //  ユーザーに広告を表示した場所にあとで復元するUIViewControllerをランタイムに知らせて
+    // ビュー階層に追加する
+    banner_view_.rootViewController = self;
+    [self.view addSubview:banner_view_];
+    
+    GADRequest* ad_req = [GADRequest request];
+    ad_req.testDevices = [NSArray arrayWithObjects:
+        GAD_SIMULATOR_ID,
+        @"6777c2466ac06c61cf44cc1b3fd9a7648713844d",  // test iphone
+        nil
+    ];
+    [banner_view_ loadRequest:ad_req];
+    
+    banner_view_.hidden = YES;
+}
+
+
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     
-    setupAdView();
+    [self setupAdView];
     
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 
@@ -69,13 +100,15 @@ extern t3::platform::PointingData point_data_[4];
     app_->initializeApplication();
 }
 
+
+
+
+
 - (void)dealloc
 {
     
     app_->terminateApplication();
     
-    
-    cleanupAdView();
     
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
@@ -131,28 +164,6 @@ extern t3::platform::PointingData point_data_[4];
     point_data_[0].hit_ = false;
 }
 
-
-- (void)setupAdView
-{
-    //  画面上部に標準サイズのビューを作成
-    banner_view_ = [[[GADBannerView] alloc] initWithAdSize: kGADAdSizeSmartBannerPortrait];
-    
-    //  広告ユニットIDを指定
-    banner_view_.adUnitID = MY_BANNER_UNIT_ID;
-    
-    //  ユーザーに広告を表示した場所にあとで復元するUIViewControllerをランタイムに知らせて
-    // ビュー階層に追加する
-    banner_view_.rootViewController = self;
-    [self.view addSubview:banner_view_];
-    
-    [banner_view_ loadRequest:[GADRequest request]];
-}
-
-
--(void) cleanupAdView
-{
-    [banner_view_ release];
-}
 
 #pragma mark - GLKView and GLKViewController delegate methods
 

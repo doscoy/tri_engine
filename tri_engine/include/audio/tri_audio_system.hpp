@@ -20,7 +20,20 @@ public:
     using buffer_id_t = unsigned int;
     using source_id_t = unsigned int;
     
+    enum class AudioFormat {
+        MONO_8,
+        MONO_16,
+        STEREO_8,
+        STEREO_16
+    };
     
+    static void setBufferData(
+        const buffer_id_t id,
+        const AudioFormat format,
+        const uint8_t* data,
+        const size_t size,
+        const int sampling_rate
+    );
     static buffer_id_t generateBuffer();
     static void deleteBuffer(buffer_id_t buffer);
 

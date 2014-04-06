@@ -1,6 +1,6 @@
 
-#ifndef SIMPLE_SPRITE_HPP_INCLUDED
-#define SIMPLE_SPRITE_HPP_INCLUDED
+#ifndef AUDIO_TEST_HPP_INCLUDED
+#define AUDIO_TEST_HPP_INCLUDED
 
 
 #include "tri_engine.hpp"
@@ -25,4 +25,4 @@ private:
 
 };
 
-#endif // SIMPLE_SPRITE_HPP_INCLUDED
+#endif // AUDIO_TEST_HPP_INCLUDED

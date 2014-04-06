@@ -11,7 +11,7 @@
 #include "util/tri_counter.hpp"
 #include "kernel/tri_kernel.hpp"
 #include "gfx/tri_render_system.hpp"
-
+#include "audio/tri_audio_system.hpp"
 
 
 namespace {
@@ -167,6 +167,9 @@ void Application::initializeApplication()
 
     //  レンダリングシステムの初期化
     t3::RenderSystem::initializeRenderSystem();
+
+    //  オーディオシステムの初期化
+    t3::AudioSystem::initializeAudioSystem();
 
     //  システムデバッグメニュー登録
     system_menu_.reset( T3_NEW ApplicationDebugMenu(this) );

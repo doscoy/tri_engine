@@ -11,7 +11,9 @@ class AudioResource;
 class AudioHandle {
     friend class AudioResource;
 private:
-    AudioHandle();
+    explicit AudioHandle(
+        AudioSystem::buffer_id_t buffer_id
+    );
 
 public:
     ~AudioHandle();

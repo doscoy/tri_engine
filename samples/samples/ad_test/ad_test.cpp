@@ -8,6 +8,7 @@ class AdScene::SceneContext {
 
 public:
     SceneContext()
+        : show_ad_(false)
     {}
     
     ~SceneContext()
@@ -23,8 +24,19 @@ public:
     }
     
     void update(t3::tick_t delta_time){
-
-
+        const t3::Input& input = t3::GameSystem::getInstance().getInput();
+        const t3::Pointing& ptng = input.getPointing();
+        
+        if (ptng.isRelease()) {
+            if (show_ad_) {
+                show_ad_ = false;
+                t3::platform::hideAd();
+            }
+            else {
+                show_ad_ = true;
+                t3::platform::showAd();
+            }
+        }
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -33,10 +45,7 @@ public:
 
     
 private:
-
-
-private:
-
+    bool show_ad_;
 };
 
 

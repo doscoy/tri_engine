@@ -10,6 +10,7 @@
 namespace t3 {
 inline namespace audio {
 
+class Wav;
 
 class AudioResource final
     : Resource
@@ -24,6 +25,11 @@ public:
 
 public:
     static std::shared_ptr<AudioResource> create(FilePath& filepath);
+
+
+
+private:
+    void setupBuffer(const Wav& wav);
 
 private:
     AudioSystem::buffer_id_t id_;

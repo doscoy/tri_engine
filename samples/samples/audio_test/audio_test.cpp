@@ -10,6 +10,8 @@ class AudioTestScene::SceneContext {
 
 public:
     SceneContext()
+        : res_(nullptr)
+        , handle_(nullptr)
     {}
     
     ~SceneContext()
@@ -17,7 +19,9 @@ public:
   
 public:
     void initialize(){
-
+        t3::FilePath wav_path("sample.wav");
+        res_ = t3::AudioResource::create(wav_path);
+        handle_ = res_->createSound();
     }
     
     void terminate(){
@@ -25,8 +29,12 @@ public:
     }
     
     void update(t3::tick_t delta_time){
-
-
+        const t3::Input& input = t3::GameSystem::getInstance().getInput();
+        const t3::Pointing& ptng = input.getPointing();
+        
+        if (ptng.isRelease()) {
+            handle_->play();
+        }
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -38,7 +46,8 @@ private:
 
 
 private:
-
+    std::shared_ptr<t3::AudioResource> res_;
+    std::shared_ptr<t3::AudioHandle> handle_;
 };
 
 

@@ -12,7 +12,8 @@
 #include "tri_engine.hpp"
 
 #include "simple_sprite/simple_sprite.hpp"
-
+#include "audio_test/audio_test.hpp"
+#include "ad_test/ad_test.hpp"
 
 class RootTest
     : public t3::Scene
@@ -22,6 +23,8 @@ public:
     : Scene("RootTest")
     , sandbox_(0, "SANDBOX")
     , dmsl_simple_sprite_(&sandbox_, "SIMPLE SPRITE")
+    , dmsl_audio_test_(&sandbox_, "AUDIO TEST")
+    , dmsl_ad_test_(&sandbox_, "AD TEST")
     {}
     
 public:
@@ -55,6 +58,8 @@ public:
 private:
     t3::DebugMenuFrame sandbox_;
     t3::DebugMenuSceneLouncher<SimpleSpriteScene> dmsl_simple_sprite_;
+    t3::DebugMenuSceneLouncher<AudioTestScene> dmsl_audio_test_;
+    t3::DebugMenuSceneLouncher<AdScene> dmsl_ad_test_;
     
 };
 

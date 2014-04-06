@@ -62,8 +62,9 @@ void trace( const char* const format, ... )
 	vsnprintf(buf, 256, format, msg);
 	va_end(msg);
     
-    traceTerminal("%s", buf);
-    traceDisplay("%s", buf);
+    uint32_t count = frame_counter_.now();
+    traceTerminal("[%u]%s", count, buf);
+    traceDisplay("[%u]%s", count, buf);
 }
 
 void traceValue(
