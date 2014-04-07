@@ -51,6 +51,13 @@ struct PointingData {
 };
 
 
+struct AccelerometerData {
+    float x_;
+    float y_;
+    float z_;
+};
+
+
 }   // namespace platform
 }   // namespace t3
 

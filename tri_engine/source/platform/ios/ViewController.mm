@@ -12,6 +12,9 @@
 #include "platform/platform.hpp"
 #include "AppDelegate.hpp"
 #include "dbg/tri_trace.hpp"
+
+#import <CoreMotion/CoreMotion.h>
+
 #import "GADBannerView.h"
 
 int iosMain(int argc, char** argv) {
@@ -25,6 +28,11 @@ int iosMain(int argc, char** argv) {
 float screen_scale_ = 1.0f;
 extern t3::Application* app_;
 extern t3::platform::PointingData point_data_[4];
+extern t3::platform::AccelerometerData acc_data_[4];
+
+CMMotionManager* motion_manager_ = nullptr;
+
+
 GADBannerView* banner_view_ = nullptr;
 
 @interface ViewController () {
@@ -89,6 +97,19 @@ GADBannerView* banner_view_ = nullptr;
     [EAGLContext setCurrentContext:self.context];
     
     
+    //  加速度センサー
+    motion_manager_ = [[CMMotionManager alloc] init];
+    
+    if (motion_manager_.accelerometerAvailable) {
+        //  加速度センサー更新タイミング
+        motion_manager_.accelerometerUpdateInterval = 1.0f / 30.0f;
+    
+        // プル型の更新で取得
+        [motion_manager_ startAccelerometerUpdates];
+    
+    }
+    
+    
     // 各機種で内部の座標系を統一する
     screen_scale_ = [UIScreen mainScreen].scale;
 
@@ -106,6 +127,9 @@ GADBannerView* banner_view_ = nullptr;
 
 - (void)dealloc
 {
+    if (motion_manager_.accelerometerActive) {
+        [motion_manager_ stopAccelerometerUpdates];
+    }
     
     app_->terminateApplication();
     
@@ -165,10 +189,21 @@ GADBannerView* banner_view_ = nullptr;
 }
 
 
+- (void)updateAccele
+{
+    CMAccelerometerData* newest_accel = motion_manager_.accelerometerData;
+
+    acc_data_[0].x_ = newest_accel.acceleration.x;
+    acc_data_[0].y_ = newest_accel.acceleration.y;
+    acc_data_[0].z_ = newest_accel.acceleration.z;
+
+}
+
 #pragma mark - GLKView and GLKViewController delegate methods
 
 - (void)update
 {
+    [self updateAccele];
 
     app_->updateApplication();
 }

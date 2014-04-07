@@ -11,6 +11,7 @@
 
 t3::platform::GamePadData pad_data_[4];
 t3::platform::PointingData point_data_[4];
+t3::platform::AccelerometerData acc_data_[4];
 
 t3::Application* app_ = nullptr;
 extern GADBannerView* banner_view_;
@@ -68,7 +69,12 @@ void getPlatformPointingData(
     *data = point_data_[no];
 }
 
-
+void getPlatformAcceleData(
+    int no,
+    AccelerometerData* data
+) {
+    *data = acc_data_[no];
+}
 
 bool isExitRequest() {
     return false;

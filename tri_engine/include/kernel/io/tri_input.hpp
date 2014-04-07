@@ -29,11 +29,14 @@ public:
         return pointing_;
     }
     
-    
+    const AccelerometerData& getAccelerometer() const {
+        return accele_;
+    }
     
 private:
     Pad pad_;
     Pointing pointing_;
+    AccelerometerData accele_;
 };
   
 }   // namespace kernel

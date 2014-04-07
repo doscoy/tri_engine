@@ -112,6 +112,7 @@
 		04FB95CC18D9D2AC006BB512 /* tri_unique_id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04FB958418D9D2AC006BB512 /* tri_unique_id.cpp */; };
 		04FB95D518D9D6FB006BB512 /* simple_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04FB95D318D9D6FB006BB512 /* simple_sprite.cpp */; };
 		3A57569F18F29B010011B944 /* tri_task_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A57569E18F29B010011B944 /* tri_task_manager.cpp */; };
+		3A5756A118F2A4530011B944 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5756A018F2A4530011B944 /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -352,6 +353,7 @@
 		3A57569C18F29AEC0011B944 /* tri_task.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_task.hpp; sourceTree = "<group>"; };
 		3A57569D18F29AEC0011B944 /* tri_task_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_task_manager.hpp; sourceTree = "<group>"; };
 		3A57569E18F29B010011B944 /* tri_task_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_task_manager.cpp; sourceTree = "<group>"; };
+		3A5756A018F2A4530011B944 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +361,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A5756A118F2A4530011B944 /* CoreMotion.framework in Frameworks */,
 				04B3A11B18E9CD6900B03C69 /* CoreTelephony.framework in Frameworks */,
 				04B3A11918E9C48000B03C69 /* libGoogleAdMobAds.a in Frameworks */,
 				04B3A11718E9C44900B03C69 /* SystemConfiguration.framework in Frameworks */,
@@ -475,6 +478,7 @@
 		04FB946718D9D133006BB512 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A5756A018F2A4530011B944 /* CoreMotion.framework */,
 				04B3A11A18E9CD6900B03C69 /* CoreTelephony.framework */,
 				04B3A11818E9C48000B03C69 /* libGoogleAdMobAds.a */,
 				04B3A11618E9C44900B03C69 /* SystemConfiguration.framework */,

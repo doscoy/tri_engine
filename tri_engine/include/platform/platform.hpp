@@ -6,11 +6,15 @@
 #include "platform_types.hpp"
 #include "kernel/io/tri_filepath.hpp"
 
-
 namespace t3 {
+
 inline namespace base {
 class Application;
-}   // inline namespace
+}   // namespace base
+
+
+
+
 inline namespace platform {
 
 void initializePlatform();
@@ -37,6 +41,12 @@ void getPlatformPadData(
 void getPlatformPointingData(
     int no,
     PointingData* data
+);
+
+
+void getPlatformAcceleData(
+    int no,
+    AccelerometerData* data
 );
 
 bool isExitRequest();
