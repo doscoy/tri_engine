@@ -12,7 +12,7 @@
 namespace t3 {
 inline namespace base {
 
-
+class TaskManager;
 class Task
     : private Uncopyable
 {
@@ -36,6 +36,7 @@ public:
         , paused_(false)
         , inital_update_(true)
         , attached_(false)
+        , manager_(nullptr)
     {}
         
     virtual ~Task()
@@ -95,6 +96,13 @@ public:
         paused_ = !paused_;
     }
 
+    TaskManager* getAttachedManager() {
+        return manager_;
+    }
+
+    void setAttachedManager(TaskManager* mgr) {
+        manager_ = mgr;
+    }
     
 public:
     virtual void taskFrame(tick_t delta_time) {
@@ -133,7 +141,7 @@ private:
     bool inital_update_;
     bool attached_;
     std::shared_ptr<Task> next_;
-
+    TaskManager* manager_;
 };
 
 

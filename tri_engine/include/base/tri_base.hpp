@@ -3,6 +3,7 @@
 
 
 #include "tri_application.hpp"
+#include "tri_event.hpp"
 #include "tri_game_system.hpp"
 #include "tri_task_manager.hpp"
 #include "tri_task.hpp"

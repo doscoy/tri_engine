@@ -8,14 +8,14 @@
 #include <memory>
 #include <list>
 
+
 namespace t3 {
 inline namespace base {
 
 
 typedef std::list<std::shared_ptr<Task>> TaskList;
 
-class TaskManager
-{
+class TaskManager {
 public:
     TaskManager() = default;
     
@@ -23,9 +23,10 @@ public:
     void attach(std::shared_ptr<Task> task) {
         taskes_.push_back(task);
         task->setAttachedTask(true);
+        task->setAttachedManager(this);
     }
     
-    bool hasTask(){
+    bool hasTask() {
         return !taskes_.empty();
     }
         
@@ -40,6 +41,7 @@ private:
     void detach(std::shared_ptr<Task> task) {
         taskes_.remove(task);
         task->setAttachedTask(false);
+        task->setAttachedManager(nullptr);
     }
 };
 

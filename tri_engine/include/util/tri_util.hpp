@@ -9,6 +9,7 @@
 #include "tri_equal_comparable.hpp"
 #include "tri_optional.hpp"
 #include "tri_bit.hpp"
+#include "tri_hash_string.hpp"
 #include "tri_framerate.hpp"
 #include "tri_singleton.hpp"
 #include "tri_unique_id.hpp"

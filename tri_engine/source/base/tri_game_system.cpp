@@ -74,21 +74,27 @@ void GameSystem::update( tick_t delta_time )
         Input& input = input_[pad_idx];
     
         //  パッド情報更新
-        Pad& pad = input.getPad();
         platform::GamePadData pad_data;
         platform::getPlatformPadData(pad_idx, &pad_data);
-        pad.updatePad(pad_data.getButtonData(), delta_time);
+        input.updatePad(pad_data, delta_time);
         
         
         //  ポインティング情報更新
-        Pointing& pointing = input.getPointing();
         platform::PointingData point_data;
         platform::getPlatformPointingData(
             pad_idx,
             &point_data
         );
-        pointing.updatePointing(
+        input.updatePointing(
             point_data,
+            delta_time
+        );
+        
+        //  加速度センサー更新
+        platform::AccelerometerData acc_data;
+        platform::getPlatformAcceleData(pad_idx, &acc_data);
+        input.updateAccelermeter(
+            acc_data,
             delta_time
         );
     }

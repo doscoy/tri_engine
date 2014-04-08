@@ -105,9 +105,9 @@ void SpriteRenderer::beginRender()
     
     //  正射影行列を設定
     Mtx4 projection;
-    float w = screen_size.x_;
-    float h = screen_size.y_;
-    projection.ortho(0, w, h, 0, -1.0f, 1.0f);
+    float w = screen_size.x_ / 2;
+    float h = screen_size.y_ / 2;
+    projection.ortho(-w, w, -h, h, -1.0f, 1.0f);
     sprite_shader_.setUniform("projection", projection);
 
     RenderSystem::setActiveTextureUnit(RenderSystem::TextureUnit::UNIT0);

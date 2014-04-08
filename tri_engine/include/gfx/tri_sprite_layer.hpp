@@ -28,7 +28,7 @@ public:
         return &sprites_;
     }
 private:
-    void updateLayer( tick_t delta_time ) override;
+    void updateLayer(tick_t delta_time) override;
     void drawLayer() override;
     void attachSprite(std::shared_ptr<Sprite> const sprite );
     void detachSprite(std::shared_ptr<Sprite> const sprite );
