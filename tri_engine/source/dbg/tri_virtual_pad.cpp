@@ -57,7 +57,7 @@ void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t delta_time)
 
 
     //  ポインティング情報取得
-    const Input& input = GameSystem::getInstance().getInput();
+    const Input& input = GameSystem::getInput();
     const Pointing& pointing = input.getPointing();
 
     if (!pointing.isHold()) {

@@ -36,7 +36,6 @@ public:
         , paused_(false)
         , inital_update_(true)
         , attached_(false)
-        , manager_(nullptr)
     {}
         
     virtual ~Task()
@@ -96,14 +95,15 @@ public:
         paused_ = !paused_;
     }
 
-    TaskManager* getAttachedManager() {
-        return manager_;
+
+public:
+    bool operator <(const Task& rhs) {
+        return priority_ < rhs.priority_;
+    }
+    bool operator >(const Task& rhs) {
+        return priority_ > rhs.priority_;
     }
 
-    void setAttachedManager(TaskManager* mgr) {
-        manager_ = mgr;
-    }
-    
 public:
     virtual void taskFrame(tick_t delta_time) {
         if (inital_update_){
@@ -141,7 +141,6 @@ private:
     bool inital_update_;
     bool attached_;
     std::shared_ptr<Task> next_;
-    TaskManager* manager_;
 };
 
 

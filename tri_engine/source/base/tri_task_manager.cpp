@@ -1,5 +1,6 @@
 
 #include "tri_task_manager.hpp"
+#include <functional>
 
 namespace t3 {
 inline namespace base {
@@ -11,6 +12,15 @@ TaskManager::~TaskManager() {
 }
 
 
+void TaskManager::attach(
+    std::shared_ptr<Task> task)
+{
+    taskes_.push_back(task);
+    task->setAttachedTask(true);
+    
+    taskes_.sort(std::greater<std::shared_ptr<Task>>());
+}
+
 void TaskManager::updateTask(const tick_t delta_time) {
     TaskList::iterator itr = taskes_.begin();
     TaskList::iterator end = taskes_.end();
@@ -18,7 +28,7 @@ void TaskManager::updateTask(const tick_t delta_time) {
     std::shared_ptr<Task> next;
     
     while (itr != end) {
-        std::shared_ptr<Task> t( *itr );
+        std::shared_ptr<Task> t(*itr);
         ++itr;
         
         if (t->isDead()) {

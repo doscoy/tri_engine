@@ -1,7 +1,8 @@
 #ifndef TRI_GAME_SYSTEM_HPP_INCLUDED
 #define TRI_GAME_SYSTEM_HPP_INCLUDED
 
-
+#include "tri_event_manager.hpp"
+#include "tri_task_manager.hpp"
 #include "dbg/tri_debugmenu.hpp"
 #include "kernel/tri_kernel.hpp"
 #include "util/random/tri_random.hpp"
@@ -67,12 +68,6 @@ public:
     void setSuspend( const bool suspend ){
         suspend_ = suspend;
     }
-
-
-    const Input& getInput(const int pad_no = 0) const {
-        return input_.at(pad_no);
-    }
-    
     
     void registryToDebugMenu(DebugMenuFrame& parent_frame);
     
@@ -95,6 +90,12 @@ public:
     //  レイヤーの削除
     void detachLayer(RenderLayer* layer);
     
+    
+public:
+    static void addTask(std::shared_ptr<Task> task);
+    
+    static const Input& getInput(const int player_no = 0);
+    
 private:
     void setClearColor();
 
@@ -115,6 +116,14 @@ private:
 
     //  描画レイヤー
     RenderLayers layers_;
+    
+    
+    //  イベントマネージャ
+    EventManager event_manager_;
+    
+    //  タスクマネージャ
+    TaskManager task_manager_;
+    
     
     //  クリアカラー
     DebugMenuItem<int> dmi_color_idx_;

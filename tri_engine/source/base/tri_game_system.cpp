@@ -12,12 +12,29 @@ namespace t3 {
 extern Counter frame_counter_;
 
 inline namespace base {
-
+    
+const Input& GameSystem::getInput(
+    const int player_no
+)  {
+    return t3::GameSystem::getInstance().input_.at(player_no);
+}
+    
+void GameSystem::addTask(
+    std::shared_ptr<Task> task
+) {
+    t3::GameSystem::getInstance().task_manager_.attach(task);
+}
+    
 
 // *********************************************
 //  コンストラクタ
 GameSystem::GameSystem()
     : random_number_generator_(1)
+    , screen_size_()
+    , input_()
+    , layers_()
+    , event_manager_("ev_man", true)
+    , task_manager_()
     , dmi_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
     , use_clear_color_index_(0)
     , clear_colors_{{
@@ -111,6 +128,12 @@ void GameSystem::update( tick_t delta_time )
     }
     updateDebugPad(dpad_buttons, delta_time);
     
+    
+    //  イベントのブロードキャスト
+    safeTickEventManager();
+    
+    //  タスク更新
+    task_manager_.updateTask(delta_time);
     
     //  終了リクエストチェック
     if (platform::isExitRequest()) {

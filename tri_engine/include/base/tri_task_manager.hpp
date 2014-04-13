@@ -20,11 +20,7 @@ public:
     TaskManager() = default;
     
 public:
-    void attach(std::shared_ptr<Task> task) {
-        taskes_.push_back(task);
-        task->setAttachedTask(true);
-        task->setAttachedManager(this);
-    }
+    void attach(std::shared_ptr<Task> task);
     
     bool hasTask() {
         return !taskes_.empty();
@@ -41,7 +37,6 @@ private:
     void detach(std::shared_ptr<Task> task) {
         taskes_.remove(task);
         task->setAttachedTask(false);
-        task->setAttachedManager(nullptr);
     }
 };
 

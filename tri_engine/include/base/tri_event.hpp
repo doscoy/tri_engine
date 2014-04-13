@@ -1,15 +1,12 @@
-//
-//  tri_event.hpp
-//  star
-//
-//  Created by KANI Tetsuro on 2014/04/08.
-//  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
-//
 
-#ifndef star_tri_event_hpp
-#define star_tri_event_hpp
+#ifndef TRI_EVENT_HPP_INCLUDED
+#define TRI_EVENT_HPP_INCLUDED
+
 
 #include "util/tri_hash_string.hpp"
+#include "base/tri_types.hpp"
+#include <memory>
+
 
 
 namespace t3 {
@@ -25,21 +22,22 @@ public:
     virtual tick_t getTimeStamp() const = 0;
 };
 
+using EventInterfacePtr = std::shared_ptr<EventInterface>;
 
-class BaseEventData
+class Event
     : public EventInterface
 {
 public:
-    explicit BaseEventData(
+    explicit Event(
         const float time_stamp = 0.0f
     )   : time_stamp_(time_stamp)
     {
     }
     
-    ~BaseEventData() {}
+    ~Event() {}
     
 public:
-
+    virtual const EventType& getEventType() const = 0;
     
 
 public:
@@ -55,4 +53,4 @@ private:
 }   // namespace t3
 
 
-#endif
+#endif  // TRI_EVENT_HPP_INCLUDED

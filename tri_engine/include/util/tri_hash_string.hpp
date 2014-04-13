@@ -25,14 +25,24 @@ public:
     
     
 public:
-    std::string string() {
+    std::string string() const {
         return str_;
     }
     
-    key_t key() {
+    key_t key() const {
         return key_;
     }
     
+
+public:
+    bool operator <(const HashString& rhs) const {
+        return key_ < rhs.key_;
+    }
+    
+    
+    bool operator ==(const HashString& rhs) const {
+        return key_ == rhs.key_;
+    }
     
 private:
     

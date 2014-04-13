@@ -361,7 +361,7 @@ bool Application::isDebugMenuOpenRequest() {
     
     
     //  ポインティングでのオープンリクエスト
-    const Pointing& pointing = GameSystem::getInstance().getInput().getPointing();
+    const Pointing& pointing = GameSystem::getInput().getPointing();
     if (pointing.isDoubleClick()) {
         result = true;
     }

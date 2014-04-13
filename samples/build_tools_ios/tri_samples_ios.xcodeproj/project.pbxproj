@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		045C402118F99EF6009B9359 /* event_handling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 045C401F18F99EF6009B9359 /* event_handling.cpp */; };
+		048D69D918F56D6300C898DB /* tri_event_listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 048D69D818F56D6300C898DB /* tri_event_listener.cpp */; };
+		048D69DC18F592FE00C898DB /* tri_event_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 048D69DB18F592FE00C898DB /* tri_event_manager.cpp */; };
 		0493526018DB48850059B390 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0493525E18DB48850059B390 /* AppDelegate.mm */; };
 		0493526118DB48850059B390 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0493525F18DB48850059B390 /* ViewController.mm */; };
 		0493526318DB5BA40059B390 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0493526218DB5BA40059B390 /* main.cpp */; };
@@ -116,6 +119,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		045C401D18F90E79009B9359 /* tri_hash_string.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_hash_string.hpp; sourceTree = "<group>"; };
+		045C401F18F99EF6009B9359 /* event_handling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event_handling.cpp; sourceTree = "<group>"; };
+		045C402018F99EF6009B9359 /* event_handling.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = event_handling.hpp; sourceTree = "<group>"; };
+		048D69D618F5692600C898DB /* tri_event.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_event.hpp; sourceTree = "<group>"; };
+		048D69D718F569DA00C898DB /* tri_event_listener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_event_listener.hpp; sourceTree = "<group>"; };
+		048D69D818F56D6300C898DB /* tri_event_listener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_event_listener.cpp; sourceTree = "<group>"; };
+		048D69DA18F5711D00C898DB /* tri_event_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_event_manager.hpp; sourceTree = "<group>"; };
+		048D69DB18F592FE00C898DB /* tri_event_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_event_manager.cpp; sourceTree = "<group>"; };
 		0493525C18DB48520059B390 /* AppDelegate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AppDelegate.hpp; path = ios/AppDelegate.hpp; sourceTree = "<group>"; };
 		0493525D18DB48520059B390 /* ViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ViewController.hpp; path = ios/ViewController.hpp; sourceTree = "<group>"; };
 		0493525E18DB48850059B390 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -384,6 +395,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		045C401E18F99EF6009B9359 /* event_handling */ = {
+			isa = PBXGroup;
+			children = (
+				045C401F18F99EF6009B9359 /* event_handling.cpp */,
+				045C402018F99EF6009B9359 /* event_handling.hpp */,
+			);
+			path = event_handling;
+			sourceTree = "<group>";
+		};
 		0493525B18DB48400059B390 /* ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,16 +574,19 @@
 		04FB94AE18D9D2AC006BB512 /* base */ = {
 			isa = PBXGroup;
 			children = (
-				3A57569C18F29AEC0011B944 /* tri_task.hpp */,
-				3A57569D18F29AEC0011B944 /* tri_task_manager.hpp */,
-				04B3A0F718E7E08400B03C69 /* tri_resource_manager.hpp */,
 				04FB94AF18D9D2AC006BB512 /* tri_application.hpp */,
 				04FB94B018D9D2AC006BB512 /* tri_base.hpp */,
+				048D69D618F5692600C898DB /* tri_event.hpp */,
+				048D69D718F569DA00C898DB /* tri_event_listener.hpp */,
+				048D69DA18F5711D00C898DB /* tri_event_manager.hpp */,
 				04FB94B118D9D2AC006BB512 /* tri_game_system.hpp */,
 				04FB94B418D9D2AC006BB512 /* tri_resource.hpp */,
+				04B3A0F718E7E08400B03C69 /* tri_resource_manager.hpp */,
 				04FB94B518D9D2AC006BB512 /* tri_rtti.hpp */,
 				04FB94B618D9D2AC006BB512 /* tri_scene.hpp */,
 				04FB94B718D9D2AC006BB512 /* tri_screen.hpp */,
+				3A57569C18F29AEC0011B944 /* tri_task.hpp */,
+				3A57569D18F29AEC0011B944 /* tri_task_manager.hpp */,
 				04FB94B818D9D2AC006BB512 /* tri_types.hpp */,
 			);
 			path = base;
@@ -736,6 +759,7 @@
 		04FB951718D9D2AC006BB512 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				045C401D18F90E79009B9359 /* tri_hash_string.hpp */,
 				04FB951818D9D2AC006BB512 /* random */,
 				04FB952018D9D2AC006BB512 /* tri_array_size.hpp */,
 				04FB952118D9D2AC006BB512 /* tri_bit.hpp */,
@@ -807,6 +831,8 @@
 				04FB953818D9D2AC006BB512 /* tri_game_system.cpp */,
 				04FB953A18D9D2AC006BB512 /* tri_resource.cpp */,
 				04FB953B18D9D2AC006BB512 /* tri_scene.cpp */,
+				048D69D818F56D6300C898DB /* tri_event_listener.cpp */,
+				048D69DB18F592FE00C898DB /* tri_event_manager.cpp */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -980,6 +1006,7 @@
 		04FB95D018D9D6C4006BB512 /* tri_samples */ = {
 			isa = PBXGroup;
 			children = (
+				045C401E18F99EF6009B9359 /* event_handling */,
 				04B3A12018EAE09900B03C69 /* ad_test */,
 				04B3A11C18E9CEAD00B03C69 /* sandbox_template */,
 				0493526218DB5BA40059B390 /* main.cpp */,
@@ -1084,6 +1111,7 @@
 				04FB95BC18D9D2AC006BB512 /* tri_bezier_curve.cpp in Sources */,
 				04B3A10218E7E0D300B03C69 /* tri_audio_resource.cpp in Sources */,
 				04FB959318D9D2AC006BB512 /* tri_debug_font_data.cpp in Sources */,
+				045C402118F99EF6009B9359 /* event_handling.cpp in Sources */,
 				04FB959618D9D2AC006BB512 /* tri_debug_string_buffer.cpp in Sources */,
 				04FB959818D9D2AC006BB512 /* tri_debugmenu.cpp in Sources */,
 				04FB959018D9D2AC006BB512 /* tri_resource.cpp in Sources */,
@@ -1113,6 +1141,7 @@
 				04FB95AB18D9D2AC006BB512 /* tri_shader.cpp in Sources */,
 				04FB95AE18D9D2AC006BB512 /* tri_sprite_renderer.cpp in Sources */,
 				04B3A10418E7E0D300B03C69 /* tri_audio_handle.cpp in Sources */,
+				048D69D918F56D6300C898DB /* tri_event_listener.cpp in Sources */,
 				04FB95AA18D9D2AC006BB512 /* tri_scene_node.cpp in Sources */,
 				04FB95C418D9D2AC006BB512 /* tri_object.cpp in Sources */,
 				04FB959B18D9D2AC006BB512 /* tri_debugmenu_label.cpp in Sources */,
@@ -1146,6 +1175,7 @@
 				04FB95BB18D9D2AC006BB512 /* tri_new.cpp in Sources */,
 				04FB958E18D9D2AC006BB512 /* tri_game_system.cpp in Sources */,
 				04FB95A018D9D2AC006BB512 /* tri_workbar.cpp in Sources */,
+				048D69DC18F592FE00C898DB /* tri_event_manager.cpp in Sources */,
 				04FB95BA18D9D2AC006BB512 /* tri_memory_block.cpp in Sources */,
 				04FB95B618D9D2AC006BB512 /* tri_allocation_recorder.cpp in Sources */,
 				04FB959A18D9D2AC006BB512 /* tri_debugmenu_items.cpp in Sources */,

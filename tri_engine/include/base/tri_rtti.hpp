@@ -29,15 +29,15 @@ public:
     }
     
     //  指定のクラスか判定
-    bool isExactly( const RTTI& rtti ) const {
+    bool isExactly(const RTTI& rtti) const {
         return this == &rtti;
     }
     
     //  継承元か判定
-    bool isDerivesFrom( const RTTI& rtti ) const {
+    bool isDerivesFrom(const RTTI& rtti) const {
         const RTTI* compare = this;
-        while ( compare ) {
-            if ( compare == &rtti ){
+        while (compare) {
+            if (compare == &rtti){
                 return true;
             }
             compare = compare->base_rtti_;
