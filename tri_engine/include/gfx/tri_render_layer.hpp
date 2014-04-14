@@ -7,7 +7,6 @@
 #include "dbg/tri_debugmenu_items.hpp"
 #include <list>
 
-constexpr int LAYER_NAME_SIZE = 20;
 
 
 namespace t3 {
@@ -31,7 +30,9 @@ public:
         PRIORITY_DEBUG      = 180,
         PRIORITY_HIGHEST    = 210,
     };
-
+    enum {
+        NAME_SIZE = 16
+    };
 public:
     RenderLayer(const char* const name, const int priority);
     explicit RenderLayer(const char* const name);
@@ -124,7 +125,7 @@ protected:
     bool pause_;
     bool visible_;
     uint8_t priority_;
-    char layer_name_[LAYER_NAME_SIZE];
+    char layer_name_[NAME_SIZE];
 
     //  デバッグメニュー登録
     DebugMenuFrame dmf_me_;

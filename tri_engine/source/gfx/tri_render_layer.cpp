@@ -41,7 +41,7 @@ void RenderLayer::setPriority( const int priority )
 
 void RenderLayer::setLayerName( const char* const name )
 {
-    std::strncpy( layer_name_, name, LAYER_NAME_SIZE );
+    std::strncpy( layer_name_, name, NAME_SIZE );
 }
 
 

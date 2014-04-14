@@ -56,7 +56,7 @@ bool safeRemoveListener(
 }
 
 bool safeTriggerEvent(
-    const EventInterface& in_event
+    const Event& in_event
 ) {
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->triggerEvent(in_event);
@@ -64,7 +64,7 @@ bool safeTriggerEvent(
 }
 
 bool safeQueEvent(
-    const EventInterfacePtr& in_event
+    const EventHandle& in_event
 ) {
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->queueEvent(in_event);
@@ -217,7 +217,7 @@ bool EventManager::removeListener(
 
 
 bool EventManager::triggerEvent(
-    const t3::EventInterface& in_event
+    const t3::Event& in_event
 ) {
     if (!isValidateEventType(in_event.getEventType())) {
         return false;
@@ -263,7 +263,7 @@ bool EventManager::triggerEvent(
 
 
 bool EventManager::queueEvent(
-    const EventInterfacePtr& in_event
+    const EventHandle& in_event
 ) {
 
     T3_ASSERT(inRange(active_queue_, (int)0, (int)NUM_QUEUES));
@@ -349,7 +349,7 @@ bool EventManager::tick(
     //  リミットまでイベントを処理
     int process_count = 0;
     while (process_queue.size() > 0) {
-        EventInterfacePtr event = process_queue.front();
+        EventHandle event = process_queue.front();
         process_queue.pop_front();
         
         const EventType& event_type = event->getEventType();
@@ -397,7 +397,7 @@ bool EventManager::tick(
     
     if (!queue_flushed) {
         while (process_queue.size() > 0) {
-            EventInterfacePtr event = process_queue.back();
+            EventHandle event = process_queue.back();
             process_queue.pop_back();
             active_queue.push_front(event);
         }

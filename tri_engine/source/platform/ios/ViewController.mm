@@ -26,6 +26,8 @@ int iosMain(int argc, char** argv) {
 }
 
 float screen_scale_ = 1.0f;
+float screen_x_ = 0;
+float screen_y_ = 0;
 extern t3::Application* app_;
 extern t3::platform::PointingData point_data_[4];
 extern t3::platform::AccelerometerData acc_data_[4];
@@ -114,10 +116,10 @@ GADBannerView* banner_view_ = nullptr;
     screen_scale_ = [UIScreen mainScreen].scale;
 
     CGRect bounds = view.bounds;
-    float w = bounds.size.width * screen_scale_;
-    float h = bounds.size.height * screen_scale_;
+    screen_x_ = bounds.size.width * screen_scale_;
+    screen_y_ = bounds.size.height * screen_scale_;
     
-    t3::initializeTriEngine(w, h, "sandbox");
+    t3::initializeTriEngine(screen_x_, screen_y_, "ios");
     app_->initializeApplication();
 }
 
@@ -162,8 +164,12 @@ GADBannerView* banner_view_ = nullptr;
     point_data_[0].hit_ = true;
     UITouch* touch = [touches anyObject];
     CGPoint location = [touch locationInView:self.view];
-    point_data_[0].x_ = location.x * screen_scale_;
-    point_data_[0].y_ = location.y * screen_scale_;
+    float touch_x = location.x * screen_scale_;
+    float touch_y = location.y * screen_scale_;
+    float pos_x = touch_x - (screen_x_ / 2);
+    float pos_y = -touch_y + (screen_y_ / 2);
+    point_data_[0].x_ = pos_x;
+    point_data_[0].y_ = pos_y;
 }
 
 // 画面に触れている指が一本以上移動したときに実行されるメソッド
@@ -172,8 +178,13 @@ GADBannerView* banner_view_ = nullptr;
     point_data_[0].hit_ = true;
     UITouch* touch = [touches anyObject];
     CGPoint location = [touch locationInView:self.view];
-    point_data_[0].x_ = location.x * screen_scale_;
-    point_data_[0].y_ = location.y * screen_scale_;
+    float touch_x = location.x * screen_scale_;
+    float touch_y = location.y * screen_scale_;
+    float pos_x = touch_x - (screen_x_ / 2);
+    float pos_y = -touch_y + (screen_y_ / 2);
+    point_data_[0].x_ = pos_x;
+    point_data_[0].y_ = pos_y;
+
 }
 
 // 指を一本以上画面から離したときに実行されるメソッド

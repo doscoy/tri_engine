@@ -26,6 +26,28 @@ void GameSystem::addTask(
 }
     
 
+
+RenderLayer* GameSystem::getLayer(
+    const char* const layer_name
+) {
+    t3::RenderLayers layers = t3::GameSystem::getInstance().getLaysers();
+    
+    for (auto layer : layers) {
+        if (std::strncmp(layer_name, layer->getLayerName(), RenderLayer::NAME_SIZE) == 0) {
+            return layer;
+        }
+    }
+    
+    return nullptr;
+}
+
+Vec2 GameSystem::screenToViewport(
+    const Vec2 &screen_pos
+) {
+    return screen_pos / t3::GameSystem::getInstance().getScreenSize() * 2.0f;
+}
+
+
 // *********************************************
 //  コンストラクタ
 GameSystem::GameSystem()
@@ -35,14 +57,16 @@ GameSystem::GameSystem()
     , layers_()
     , event_manager_("ev_man", true)
     , task_manager_()
-    , dmi_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
+    , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
     , use_clear_color_index_(0)
     , clear_colors_{{
         Color::darkgray(),
         Color::black(),
         Color::white(),
         Color::blue()}}
-    , dmf_layers_(nullptr, "LAYERS")
+    , dm_game_speed_(nullptr, "GAME SPEED", game_speed_, 0.1f, 0.0f, 4.0f)
+    , game_speed_(1.0f)
+    , dm_layers_(nullptr, "LAYERS")
     , layer_list_()
     , exit_request_(false)
     , suspend_(false)
@@ -67,11 +91,11 @@ GameSystem::~GameSystem()
 void GameSystem::initializeGameSystem() {
     setClearColor();
     
-    dmf_layers_.setFocusCallback(
+    dm_layers_.setFocusCallback(
         this,
         &GameSystem::registryLayersToDebugMenu
     );
-    dmf_layers_.setUnfocusCallback(
+    dm_layers_.setUnfocusCallback(
         this,
         &GameSystem::unregistryLayersToDebugMenu
     );
@@ -155,10 +179,14 @@ void GameSystem::setClearColor()
 void GameSystem::registryToDebugMenu( DebugMenuFrame& parent_frame )
 {
     //  塗りつぶしカラーの登録
-    dmi_color_idx_.attachSelf( parent_frame );
+    dm_color_idx_.attachSelf(parent_frame);
     
     //  レイヤーのメニューフレーム登録
-    dmf_layers_.attachSelf( parent_frame );
+    dm_layers_.attachSelf(parent_frame);
+
+
+    //  ゲームスピード登録
+    dm_game_speed_.attachSelf(parent_frame);
 }
 
 
@@ -190,7 +218,7 @@ void GameSystem::detachLayer(t3::RenderLayer* layer)
 void GameSystem::registryLayersToDebugMenu()
 {
     for (auto layer: layers_) {
-        layer->registryToDebugMenu(dmf_layers_);
+        layer->registryToDebugMenu(dm_layers_);
     }
 }
 

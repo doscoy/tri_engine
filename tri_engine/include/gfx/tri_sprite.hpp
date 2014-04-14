@@ -90,6 +90,12 @@ public:
         calc_matrix_request_ = true;
     }
     
+    void addPosition(
+        const Vec2& add
+    ) {
+        position_ += add;
+        calc_matrix_request_;
+    }
     
     // *********************************************
     //  回転を取得
@@ -280,6 +286,13 @@ public:
 
     bool isValid() const;
 
+    void setAttachedLayer(SpriteLayer* layer) {
+        owner_ = layer;
+    }
+
+    SpriteLayer* getAttachedLayer() const {
+        return owner_;
+    }
 
 private:
     void calcMatrix();

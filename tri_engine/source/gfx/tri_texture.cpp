@@ -24,7 +24,7 @@ Texture::Texture(
         
 }
 
-std::shared_ptr<Texture> Texture::create(FilePath& path)
+std::shared_ptr<Texture> Texture::create(const FilePath& path)
 {
     return TextureFactory::createFromFile(path);
 }

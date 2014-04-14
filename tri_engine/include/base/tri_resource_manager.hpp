@@ -32,8 +32,18 @@ public:
     // *********************************************
     //  ロード
     uid_t load(
-        FilePath& path
+        const FilePath& path
     ){
+        for (auto res : resources_) {
+            if (std::strncmp(res->getResourceName(), path.getFullPath().c_str(), RESOURCE_NAME_SIZE) == 0) {
+                //  既に読み込み済
+                return res->getResourceID();
+            }
+        }
+    
+    
+    
+    
         std::shared_ptr<ResourceType> res = ResourceType::create(path);
         T3_NULL_ASSERT(res);
         resources_.push_back(res);

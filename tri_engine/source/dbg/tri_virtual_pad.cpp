@@ -6,17 +6,17 @@
 
 
 namespace {
-    
+const float PAD_Y = -310;
 const t3::Vec2 BUTTON_SIZE(64, 64);
 
 const float offset = 64;
-const t3::Vec2 CROSS_BASE_POS(100, 800);
+const t3::Vec2 CROSS_BASE_POS(-200, PAD_Y);
 const t3::Vec2 POS_UP = CROSS_BASE_POS + t3::Vec2(0, -offset);
 const t3::Vec2 POS_DOWN = CROSS_BASE_POS + t3::Vec2(0, offset);
 const t3::Vec2 POS_LEFT = CROSS_BASE_POS + t3::Vec2(-offset, 0);
 const t3::Vec2 POS_RIGHT = CROSS_BASE_POS + t3::Vec2(offset, 0);
 
-const t3::Vec2 AB_BASE = t3::Vec2(400, 800);
+const t3::Vec2 AB_BASE = t3::Vec2(100, PAD_Y);
 const t3::Vec2 POS_A = AB_BASE + t3::Vec2(0, 0);
 const t3::Vec2 POS_B = AB_BASE + t3::Vec2(offset + 32, 0);
 

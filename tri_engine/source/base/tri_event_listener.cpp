@@ -19,10 +19,10 @@ EventSnooper::~EventSnooper()
 
 
 bool EventSnooper::handleEvent(
-    const EventInterface& event
+    const Event& event
 ) {
     T3_TRACE(
-        "Event snoop: event %08x time %f type %8x[%s]\n",
+        "EventBase snoop: event %08x time %f type %8x[%s]\n",
         &event,
         event.getTimeStamp(),
         event.getEventType().key(),

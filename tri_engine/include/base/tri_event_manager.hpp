@@ -38,11 +38,11 @@ public:
     
     
     virtual bool triggerEvent(
-        const EventInterface& in_event
+        const Event& in_event
     ) = 0;
     
     virtual bool queueEvent(
-        const EventInterfacePtr& in_event
+        const EventHandle& in_event
     ) = 0;
     
     virtual bool abortEvent(
@@ -73,11 +73,11 @@ private:
     );
 
     friend bool safeTriggerEvent(
-        const EventInterface& in_event
+        const Event& in_event
     );
     
     friend bool safeQueEvent(
-        const EventInterfacePtr& in_event
+        const EventHandle& in_event
     );
     
     
@@ -111,11 +111,11 @@ bool safeRemoveListener(
 );
     
 bool safeTriggerEvent(
-    const EventInterface& in_event
+    const Event& in_event
 );
     
 bool safeQueEvent(
-    const EventInterfacePtr& in_event
+    const EventHandle& in_event
 );
     
     
@@ -162,7 +162,7 @@ private:
     using EventListenerMapInsertResult = std::pair<EventListenerMap::iterator, bool>;
     
     //  イベントキュー
-    using EventQueue = std::list<EventInterfacePtr>;
+    using EventQueue = std::list<EventHandle>;
 
 public:
     explicit EventManager(
@@ -186,11 +186,11 @@ public:
     
     
     bool triggerEvent(
-        const EventInterface& in_event
+        const Event& in_event
     ) override;
     
     bool queueEvent(
-        const EventInterfacePtr& in_event
+        const EventHandle& in_event
     ) override;
     
     bool abortEvent(

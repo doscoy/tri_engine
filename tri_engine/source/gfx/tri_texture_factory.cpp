@@ -41,13 +41,14 @@ std::shared_ptr<Texture> TextureFactory::createFromData(
         color_format,
         tex_handle
     ));
+    tex->setResourceName(name.c_str());
     return tex;
 }
 
 
 //  ファイルからテクスチャ生成
 std::shared_ptr<Texture> TextureFactory::createFromFile(
-    FilePath& filename
+    const FilePath& filename
 ){
     T3_TRACE("Create texture from %s", filename.getFullPath().c_str());
 
@@ -68,7 +69,7 @@ std::shared_ptr<Texture> TextureFactory::createFromFile(
 
 //  pngからテクスチャ生成
 std::shared_ptr<Texture> TextureFactory::createFromPngFile(
-    FilePath& filepath
+    const FilePath& filepath
 ){
     File png_file;
     png_file.loadFile(filepath);

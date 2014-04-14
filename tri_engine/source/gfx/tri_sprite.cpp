@@ -14,16 +14,16 @@ inline namespace gfx {
 // *********************************************
 //  コンストラクタ
 Sprite::Sprite()
-    : texture_( nullptr )
-    , position_( 0, 0 )
-    , size_( 0, 0 )
-    , pivot_( 0, 0 )
-    , rotation_( 0, 0, 0 )
-    , texture_coord_{ 0, 0, 1, 1 }
-    , scale_( 1.0f, 1.0f )
-    , priority_( PRIORITY_NORMAL )
-    , enable_( true )
-    , owner_( nullptr )
+    : texture_(nullptr)
+    , position_(0, 0)
+    , size_(0, 0)
+    , pivot_(0, 0)
+    , rotation_(0, 0, 0)
+    , texture_coord_{0, 0, 1, 1}
+    , scale_(1.0f, 1.0f)
+    , priority_(PRIORITY_NORMAL)
+    , enable_(true)
+    , owner_(nullptr)
     , calc_matrix_request_(true)
     , matrix_()
     , vertex_buffer_(0)
@@ -101,7 +101,7 @@ void Sprite::setupVertexBuffer() {
 
 bool Sprite::isValid() const
 {
-    if ( !owner_ ){
+    if (!owner_) {
         return false;
     }
     

@@ -18,7 +18,7 @@ class TextureFactory
 {
 public:
     static std::shared_ptr<Texture> createFromFile(
-        FilePath& filename
+        const FilePath& filename
     );
 
     
@@ -32,7 +32,7 @@ public:
     
 private:
     static std::shared_ptr<Texture> createFromPngFile(
-        FilePath& filepath
+        const FilePath& filepath
     );
 };
 

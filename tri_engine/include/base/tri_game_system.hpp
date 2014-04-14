@@ -38,21 +38,20 @@ public:
 
 // ---------------------------------------------
 //  ビューポート管理
-    // *********************************************
     //  スクリーンサイズを取得
-    const Point2& getScreenSize() const {
+    const Vec2& getScreenSize() const {
         return screen_size_;
     }
     
-    // *********************************************
     //  スクリーンサイズを設定
-    void setScreenSize( const Point2& vp ) {
+    void setScreenSize(const Vec2& vp) {
         screen_size_ = vp;
     }
     
+    
 // ---------------------------------------------
 //  乱数管理    
-    // *********************************************
+    
     //  乱数ジェネレータを取得
     random_t& getRandomNumberGenerator(){
         return random_number_generator_;
@@ -90,11 +89,21 @@ public:
     //  レイヤーの削除
     void detachLayer(RenderLayer* layer);
     
+    float getGameSpeed() const {
+        return game_speed_;
+    }
+    
     
 public:
     static void addTask(std::shared_ptr<Task> task);
     
     static const Input& getInput(const int player_no = 0);
+    
+    static RenderLayer* getLayer(const char* const layer_name);
+    
+    static Vec2 screenToViewport(const Vec2& screen_pos);
+    
+    
     
 private:
     void setClearColor();
@@ -109,7 +118,7 @@ private:
     random_t random_number_generator_;
 
     //  ビューポート
-    Point2 screen_size_;
+    Vec2 screen_size_;
     
     //  インプットデータ
     std::array<Input, MAX_PAD> input_;
@@ -126,12 +135,16 @@ private:
     
     
     //  クリアカラー
-    DebugMenuItem<int> dmi_color_idx_;
+    DebugMenuItem<int> dm_color_idx_;
     int use_clear_color_index_;
     std::array<Color, 4> clear_colors_;
     
+    //  ゲームスピード
+    t3::DebugMenuItem<float> dm_game_speed_;
+    float game_speed_;
+    
     //  レイヤーのデバッグメニュー
-    t3::DebugMenuFrame  dmf_layers_;
+    t3::DebugMenuFrame  dm_layers_;
     std::array<t3::DebugMenuLabel*, 24> layer_list_;
 
     bool exit_request_;

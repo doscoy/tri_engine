@@ -147,9 +147,10 @@ void Application::initializeWorkBar() {
     
     GameSystem& game_system = GameSystem::getInstance();
     const Point2& screen_size = game_system.getScreenSize();
+    Point2 half_screen_size = screen_size / 2;
     
     //  ワークバーの配置
-    cpu_bar_.setPosition(Vec2(1, screen_size.y_ - 10));
+    cpu_bar_.setPosition(Vec2(-half_screen_size.x_ + 10, -half_screen_size.y_ + 10));
     cpu_bar_.setLimitWidthPixel(screen_size.x_ - 10);
     
     //  ワークバーの色
@@ -203,7 +204,10 @@ void Application::updateApplication()
     SceneManager& sm = SceneManager::getInstance();
     GameSystem& gs = GameSystem::getInstance();
     DebugMenu& dm = DebugMenu::getInstance();
-    
+
+    //  ゲームスピード変更
+    float game_speed = gs.getGameSpeed();
+    delta_time *= game_speed;
     
     dm.update(delta_time);
     gs.update(delta_time);

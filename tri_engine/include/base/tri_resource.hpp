@@ -8,7 +8,7 @@
 
 #include <cstring>
 
-constexpr int RESOURCE_NAME_SIZE = 32;
+constexpr int RESOURCE_NAME_SIZE = 36;
 
 namespace t3 {
 inline namespace base {
@@ -22,14 +22,14 @@ public:
     virtual ~Resource(){}
     
 public:
-    void setName( const char* const name ){
+    void setResourceName(const char* const name){
         std::strncpy(
             resource_name_,
             name,
             RESOURCE_NAME_SIZE
         );
     }
-    const char* getName() const {
+    const char* getResourceName() const {
         return resource_name_;
     }
     

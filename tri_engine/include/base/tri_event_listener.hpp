@@ -23,7 +23,7 @@ public:
     
     //  イベントを受けたか伝える
     //  伝播させたい（受けてない）時はfalseを返す
-    virtual bool handleEvent(const EventInterface& event) = 0;
+    virtual bool handleEvent(const Event& event) = 0;
 
 };
 
@@ -42,7 +42,7 @@ public:
         return "Snooper";
     }
 
-    bool handleEvent(const EventInterface& event) override;
+    bool handleEvent(const Event& event) override;
     
 private:
     char msg_buffer_[4090];

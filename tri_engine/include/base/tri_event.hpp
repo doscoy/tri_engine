@@ -15,26 +15,25 @@ inline namespace base {
 //  ハッシュ文字列をイベントタイプとして使用
 using EventType = HashString;
 
-
-class EventInterface {
+class Event {
 public:
     virtual const EventType& getEventType() const = 0;
     virtual tick_t getTimeStamp() const = 0;
 };
+using EventHandle = std::shared_ptr<Event>;
 
-using EventInterfacePtr = std::shared_ptr<EventInterface>;
 
-class Event
-    : public EventInterface
+class EventBase
+    : public Event
 {
 public:
-    explicit Event(
+    explicit EventBase(
         const float time_stamp = 0.0f
     )   : time_stamp_(time_stamp)
     {
     }
     
-    ~Event() {}
+    ~EventBase() {}
     
 public:
     virtual const EventType& getEventType() const = 0;

@@ -1,5 +1,7 @@
 
 #include "tri_sprite_layer.hpp"
+#include "tri_texture.hpp"
+
 
 namespace t3 {
 inline namespace gfx {
@@ -24,6 +26,15 @@ std::shared_ptr<Sprite> SpriteLayer::createSprite(std::shared_ptr<Texture> tex) 
     
     return spr;
 }
+
+
+std::shared_ptr<Sprite> SpriteLayer::createSprite(const t3::FilePath& path) {
+    t3::TextureManager& tex_mgr = t3::TextureManager::getInstance();
+    int tex_id = tex_mgr.load(path);
+    std::shared_ptr<t3::Texture> tex = tex_mgr.getResource(tex_id);
+    return createSprite(tex);
+}
+
 
 void SpriteLayer::updateLayer( tick_t delta_time )
 {
@@ -59,10 +70,12 @@ void SpriteLayer::drawLayer()
 
 void SpriteLayer::attachSprite(std::shared_ptr<Sprite> const sprite) {
     sprites_.push_back(sprite);
+    sprite->setAttachedLayer(this);
 }
 
 void SpriteLayer::detachSprite(std::shared_ptr<Sprite> const sprite) {
     sprites_.remove(sprite);
+    sprite->setAttachedLayer(nullptr);
 }
 
 

@@ -118,19 +118,26 @@ struct Vec2Template {
 
         
     //  vec2 + vec2
-    Vec2Template operator +( const Vec2Template& rhs ) const {
-        return Vec2Template( x_ + rhs.x_, y_ + rhs.y_ );
+    Vec2Template operator +(const Vec2Template& rhs) const {
+        return Vec2Template(x_ + rhs.x_, y_ + rhs.y_);
     }
     
-    //  vec2 - Vec2Template
-    Vec2Template operator -( const Vec2Template& rhs ) const {
-        return Vec2Template( x_ - rhs.x_, y_ - rhs.y_ );
+    //  vec2 - vec2
+    Vec2Template operator -(const Vec2Template& rhs) const {
+        return Vec2Template(x_ - rhs.x_, y_ - rhs.y_);
     }
     
-    //  vec2 * Vec2Template
-    Vec2Template operator *( const Vec2Template& rhs ) const {
-        return Vec2Template( x_ * rhs.x_, y_ * rhs.y_ );
+    //  vec2 * vec2
+    Vec2Template operator *(const Vec2Template& rhs) const {
+        return Vec2Template(x_ * rhs.x_, y_ * rhs.y_);
     }
+    
+    //  vec2 / vec2
+    Vec2Template operator /(const Vec2Template& rhs) const {
+        return Vec2Template(x_ / rhs.x_, y_ / rhs.y_);
+    }
+    
+    
      //  Vec2Template / s
     Vec2Template operator /( const float s ) const {
         float tmp = 1.0f / s;

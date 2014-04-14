@@ -26,6 +26,10 @@ inline int secToFrame(float sec)
     return sec * 60;
 }
 
+
+inline float deltaRate(float delta_time) {
+    return delta_time / frameSec<60>();
+}
     
     
 }   // inline namespace util

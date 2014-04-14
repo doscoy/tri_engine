@@ -117,21 +117,6 @@ public:
     virtual void taskUpdate(const tick_t delta_time) {}
     virtual void taskTerminate() {}
     
-public:
-    template <typename T>
-    static std::shared_ptr<T> createTask() {
-        std::shared_ptr<T> task;
-        task.reset(new T);
-        return task;
-    }
-
-    template <typename T, typename Arg>
-    static std::shared_ptr<T> createTask(Arg arg) {
-        std::shared_ptr<T> task;
-        task.reset(new T(arg));
-        return task;
-    }
-
 
 private:
     int priority_;

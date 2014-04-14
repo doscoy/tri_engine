@@ -23,15 +23,18 @@ public:
 
 public:
     std::shared_ptr<Sprite> createSprite(std::shared_ptr<Texture> tex);
+    std::shared_ptr<Sprite> createSprite(const FilePath& path);
 
     std::list<std::shared_ptr<Sprite>>* getManagementSprites() {
         return &sprites_;
     }
+
+    void detachSprite(std::shared_ptr<Sprite> const sprite );
+
 private:
     void updateLayer(tick_t delta_time) override;
     void drawLayer() override;
     void attachSprite(std::shared_ptr<Sprite> const sprite );
-    void detachSprite(std::shared_ptr<Sprite> const sprite );
 
 private:
     SpriteRenderer renderer_;

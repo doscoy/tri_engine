@@ -55,7 +55,7 @@ public:
     // *********************************************
     //  テクスチャ生成
     static std::shared_ptr<Texture> create(
-        FilePath& filepath
+        const FilePath& filepath
     );
     
     void setupTexture();
@@ -72,7 +72,7 @@ private:
 };
     
     
-typedef ResourceManager<Texture> TextureManager;
+using TextureManager = ResourceManager<Texture>;
 
     
 

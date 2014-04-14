@@ -73,14 +73,6 @@ void drawRectangle(
     y0 /= screen_height;
     y1 /= screen_height;
     
-    x0 -= 1;
-    x1 -= 1;
-    y0 -= 1;
-    y1 -= 1;
-    
-    y0 *= -1;
-    y1 *= -1;
-    
     
     float varray[] = {
         x0, y0,
@@ -114,9 +106,6 @@ void drawRectangle(
         color.bluef(),
         color.alphaf()
     );
-    //  シェーダ設定
-//    result = simple2d_.use();
-//    T3_ASSERT(result);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 

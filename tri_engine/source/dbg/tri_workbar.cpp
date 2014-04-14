@@ -4,6 +4,7 @@
 #include "tri_draw_primitive.hpp"
 #include "util/tri_util.hpp"
 #include <algorithm>
+#include <limits>
 
 namespace  {
 constexpr int KEEP_TIME = 45;
@@ -26,7 +27,7 @@ Workbar::Workbar()
     , caution_param_(limit_param_ / 2)
     , limit_width_pixel_(200)
     , keep_frame_(0)
-    , limit_bar_pos_x_(0)
+    , limit_bar_pos_x_(std::numeric_limits<int>::min())
     , thickness_(2)
     , position_()
 {
@@ -91,7 +92,7 @@ void Workbar::draw() {
         keep_frame_ += 1;
     }
     else {
-        limit_bar_pos_x_ = 0;
+        limit_bar_pos_x_ = std::numeric_limits<int>::min();
     }
     
     //  上限バー描画
