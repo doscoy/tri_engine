@@ -10,7 +10,7 @@ varying lowp vec2 texture_uv;
 
 void main(void)
 {
-    gl_Position = projection * transform * position;
+    gl_Position = position;
     texture_uv = uv;
 }
 );

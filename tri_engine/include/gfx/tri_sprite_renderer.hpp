@@ -34,11 +34,17 @@ private:
     void renderSprite(Sprite& sprite);
     void endRender();
 
+
+    void margeSprites();
+    void renderSprites();
+
 private:
     Container sprites_;
-
-
     Shader sprite_shader_;
+
+    RenderSystem::buffer_id_t vertex_buffer_;
+    RenderSystem::buffer_id_t index_buffer_;
+    int draw_count_;
 };
 
 

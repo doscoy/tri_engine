@@ -26,15 +26,15 @@ Sprite::Sprite()
     , owner_(nullptr)
     , calc_matrix_request_(true)
     , matrix_()
-    , vertex_buffer_(0)
-    , index_buffer_(0)
+//    , vertex_buffer_(0)
+//    , index_buffer_(0)
 {
-    std::vector<uint32_t> indices;
-    indices.push_back(0);
-    indices.push_back(1);
-    indices.push_back(2);
-    indices.push_back(3);
-    index_buffer_ = RenderSystem::createIndexBuffer(indices);
+//    std::vector<uint32_t> indices;
+//    indices.push_back(0);
+//    indices.push_back(1);
+//    indices.push_back(2);
+//    indices.push_back(3);
+//    index_buffer_ = RenderSystem::createIndexBuffer(indices);
 
 }
 
@@ -63,9 +63,10 @@ void Sprite::setTexture(
     setSize(Vec2(tex_width, tex_height));
     
 }
-
+  
+/*
 void Sprite::setupVertexBuffer() {
-    
+  
     float size_x = size_.x_;
     float size_y = size_.y_;
     
@@ -97,7 +98,7 @@ void Sprite::setupVertexBuffer() {
     vertex_buffer_ = RenderSystem::createVertexBuffer(vertices);
 
 }
-
+*/
 
 bool Sprite::isValid() const
 {
@@ -142,9 +143,7 @@ void Sprite::calcMatrix() {
     Mtx4 scale_mtx;
     scale_mtx.scale(scale_.x_, scale_.y_, 1);
     
-     matrix_ = pivot_mtx * scale_mtx * rot_mtx * trans_mtx;
-    
-    
+    matrix_ = pivot_mtx * scale_mtx * rot_mtx * trans_mtx;
     
 }
 

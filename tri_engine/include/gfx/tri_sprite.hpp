@@ -171,7 +171,7 @@ public:
         const texture_coord_t& tex_coord
     ){
         texture_coord_ = tex_coord;
-        setupVertexBuffer();
+//        setupVertexBuffer();
     }
 
     
@@ -187,7 +187,7 @@ public:
         texture_coord_.v0_ = v0;
         texture_coord_.u1_ = u1;
         texture_coord_.v1_ = v1;
-        setupVertexBuffer();
+//        setupVertexBuffer();
     }
 
     
@@ -211,7 +211,7 @@ public:
         const Vec2& size
     ){
         size_ = size;
-        setupVertexBuffer();
+//        setupVertexBuffer();
     }
     
     // *********************************************
@@ -275,6 +275,7 @@ public:
     
     int getSortScore() const;
     
+/*
     RenderSystem::buffer_id_t getVertexBuffer() const {
         return vertex_buffer_;
     }
@@ -282,7 +283,7 @@ public:
     RenderSystem::buffer_id_t getIndexBuffer() const {
         return index_buffer_;
     }
-    
+*/    
 
     bool isValid() const;
 
@@ -296,7 +297,8 @@ public:
 
 private:
     void calcMatrix();
-    void setupVertexBuffer();
+//    void setupVertexBuffer();
+
 private:
     std::shared_ptr<Texture> texture_;
     Vec2 position_;
@@ -312,8 +314,8 @@ private:
     Mtx4 matrix_;
     
     
-    RenderSystem::buffer_id_t vertex_buffer_;
-    RenderSystem::buffer_id_t index_buffer_;
+//    RenderSystem::buffer_id_t vertex_buffer_;
+//    RenderSystem::buffer_id_t index_buffer_;
     
 };
 

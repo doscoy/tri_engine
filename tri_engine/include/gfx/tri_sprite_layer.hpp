@@ -39,6 +39,7 @@ private:
 private:
     SpriteRenderer renderer_;
     container_t sprites_;
+    
 };
 
 }   // namespace gfx

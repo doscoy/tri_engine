@@ -42,7 +42,7 @@ public:
         if (pointing.isHold()) {
         
             const t3::Point2& pointing_pos = pointing.getPosition();
-            if (pointing_pos.x_ < t3::GameSystem::getInstance().getScreenSize().x_ / 2) {
+            if (pointing_pos.x_ < 0) {
                 addSprite();
             }
             else {
@@ -80,16 +80,16 @@ private:
         }
         
         auto& size = sprites->front()->getSize();
-        t3::Vec2 offset(32, 32);
-        int x_count = t3::GameSystem::getInstance().getScreenSize().x_ / size.x_ -1;
-        int y = 0;
+        t3::Vec2 offset(20, 32);
+        int x_count = t3::GameSystem::getInstance().getScreenSize().x_ / offset.x_ -1;
+        int y = 15;
         int i = 0;
         for (auto spr : *sprites) {
             if (i % x_count == 0) {
-                y += 1;
+                y -= 1;
             }
 
-            float pos_x = (i % x_count) * size.x_ + offset.x_;
+            float pos_x = ((i % x_count) * offset.x_) - 300;
             float pos_y = y * size.y_ + offset.y_;
             spr->setPosition(pos_x, pos_y);
             i += 1;

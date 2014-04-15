@@ -465,7 +465,6 @@ void RenderSystem::drawElements(
 
 
 
-
 RenderSystem::buffer_id_t RenderSystem::createVertexBuffer(
     std::vector<float>& vertices
 ) {

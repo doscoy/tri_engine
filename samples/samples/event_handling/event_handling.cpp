@@ -5,7 +5,7 @@
 
 
 class EventAAA
-    : public t3::Event
+    : public t3::EventBase
 {
 public:
     static const t3::EventType ev_;
@@ -28,7 +28,7 @@ public:
 
 
 class EventBBB
-    : public t3::Event
+    : public t3::EventBase
 {
 public:
     static const t3::EventType ev_;
@@ -70,7 +70,7 @@ public:
         return "HpText";
     }
     
-    bool handleEvent(const t3::EventInterface& event) override {
+    bool handleEvent(const t3::Event& event) override {
     
         const EventAAA& aaa = static_cast<const EventAAA&>(event);
     
@@ -111,11 +111,11 @@ public:
             //  画面をタッチした
             if (game_system.getRandomNumberGenerator().getBool()){
             
-                t3::EventInterfacePtr new_event(new EventAAA);
+                t3::EventHandle new_event(new EventAAA);
                 t3::safeQueEvent(new_event);
             }
             else {
-                t3::EventInterfacePtr new_event(new EventBBB);
+                t3::EventHandle new_event(new EventBBB);
                 t3::safeQueEvent(new_event);
                 
             }
