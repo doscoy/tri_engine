@@ -597,6 +597,9 @@ void RenderSystem::setupBufferData(
     if (usage == RenderSystem::BufferUsage::STATIC_DRAW) {
         gl_usage = GL_STATIC_DRAW;
     }
+    else if (usage == RenderSystem::BufferUsage::DYNAMIC_DRAW) {
+        gl_usage = GL_DYNAMIC_DRAW;
+    }
     
     glBufferData(target, size, data, gl_usage);
     T3_ASSERT(glGetError() == GL_NO_ERROR);

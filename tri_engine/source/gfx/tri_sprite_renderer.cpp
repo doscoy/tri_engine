@@ -48,11 +48,20 @@ SpriteRenderer::SpriteRenderer()
     
     //  スプライトコンテナのメモリを事前に確保
     sprites_.reserve(2000);
+    
+    
+    RenderSystem::createBuffer(&index_buffer_);
+    RenderSystem::createBuffer(&vertex_buffer_);
+
 }
     
 
 SpriteRenderer::~SpriteRenderer()
 {
+
+    RenderSystem::deleteBuffer(&index_buffer_);
+    RenderSystem::deleteBuffer(&vertex_buffer_);
+
 }
 
 
@@ -243,9 +252,29 @@ void SpriteRenderer::margeSprites() {
     }
     draw_count_ = indices.size();
     
-    //  バッファ作成
-    index_buffer_ = RenderSystem::createIndexBuffer(indices);
-    vertex_buffer_ = RenderSystem::createVertexBuffer(vertices);
+    //  バッファ更新
+    RenderSystem::bindBuffer(
+        t3::RenderSystem::BufferType::TYPE_VERTEX,
+        vertex_buffer_
+    );
+    RenderSystem::setupBufferData(
+        t3::RenderSystem::BufferType::TYPE_VERTEX,
+        vertices.size() * sizeof(float),
+        vertices.data(),
+        t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+    );
+    
+    RenderSystem::bindBuffer(
+        t3::RenderSystem::BufferType::TYPE_INDEX,
+        index_buffer_
+    );
+    RenderSystem::setupBufferData(
+        t3::RenderSystem::BufferType::TYPE_INDEX,
+        indices.size() * sizeof(uint32_t),
+        indices.data(),
+        t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+    );
+    
 
 }
 
@@ -255,12 +284,6 @@ void SpriteRenderer::renderSprites() {
     texture->setupTexture();
 
 
-
-    //  頂点バッファ設定
-    RenderSystem::bindBuffer(
-        RenderSystem::BufferType::TYPE_VERTEX,
-        vertex_buffer_
-    );
     sprite_shader_.setAttributePointer(
         "position",
         2,
@@ -273,11 +296,7 @@ void SpriteRenderer::renderSprites() {
         sizeof(VertexP2T),
         (void*)(sizeof(float) * 2)
     );
-    RenderSystem::bindBuffer(
-        RenderSystem::BufferType::TYPE_INDEX,
-        index_buffer_
-    );
-    
+
     // 描画
     RenderSystem::drawElements(
         RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
@@ -285,9 +304,6 @@ void SpriteRenderer::renderSprites() {
         sizeof(uint32_t)
     );
 
-
-    RenderSystem::deleteBuffer(&index_buffer_);
-    RenderSystem::deleteBuffer(&vertex_buffer_);
 }
 
 

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../tri_engine/source/gfx/tri_sprite_renderer.cpp"
-            timestampString = "419243240.633157"
+            timestampString = "419248011.294078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "SpriteRenderer::margeSprites()"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../tri_engine/source/gfx/tri_sprite_renderer.cpp"
-            timestampString = "419243240.633157"
+            timestampString = "419248011.294078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "SpriteRenderer::margeSprites()"
             landmarkType = "5">
          </BreakpointContent>

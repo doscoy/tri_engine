@@ -256,7 +256,8 @@ public:
         TYPE_INDEX,
     };
     enum class BufferUsage {
-        STATIC_DRAW
+        STATIC_DRAW,
+        DYNAMIC_DRAW
     };
     static void bindBuffer(
         BufferType target_type,
