@@ -24,6 +24,38 @@ bool isHitPointAABB(
 }
 
 
+
+bool isHitCircleCircle(
+    const Circle& a,
+    const Circle& b
+) {
+    Vec2 diff = a.getPosition() - b.getPosition();
+    float distance_sq = (diff.x_ * diff.x_) + (diff.y_ * diff.y_);
+    float radius_sum = a.getRadius() + b.getRadius();
+    float radius_sq = radius_sum * radius_sum;
+    
+    if (distance_sq < radius_sq) {
+        return true;
+    }
+    return false;
+}
+
+bool isHitCirclePoint(
+    const Circle& circle,
+    const Vec2& point
+) {
+    Vec2 diff = circle.getPosition() - point;
+    float distance_sq = (diff.x_ * diff.x_) + (diff.y_ * diff.y_);
+    float radius_sq = circle.getRadius() * circle.getRadius();
+
+    if (distance_sq < radius_sq) {
+        return true;
+    }
+    return false;
+}
+
+
+
 }   // namespace geometry
 }   // namespace t3
 

@@ -63,8 +63,8 @@ void SpriteLayer::drawLayer()
         }
         renderer_.collectSprite( *sp );
     }
-
     renderer_.render();
+    
 }
 
 

@@ -85,14 +85,8 @@ void SpriteRenderer::render()
 
     //  レンダリング設定
     beginRender();
-
-//    for (Sprite* sprite : sprites_){
-//        renderSprite(*sprite);
-//    }
-    
     margeSprites();
     renderSprites();
-    
     endRender();
 }
 
@@ -185,6 +179,14 @@ void SpriteRenderer::margeSprites() {
     std::vector<float> vertices;
     std::vector<uint32_t> indices;
     
+    vertices.reserve(sprites_.size() * 16);
+    indices.reserve(sprites_.size() * 6);
+
+
+    Vec2 screen_size = GameSystem::getInstance().getScreenSize();
+    Vec2 half = screen_size / 2;
+    half.x_ = 1.0f / half.x_;
+    half.y_ = 1.0f / half.y_;
     
     for (int i = 0; i < sprites_.size(); ++i) {
         auto spr = sprites_[i];
@@ -192,24 +194,34 @@ void SpriteRenderer::margeSprites() {
         const Vec2& pos =spr->getPosition();
         const Vec2& pivot = spr->getPivot();
         const Vec2& size = spr->getSize();
+        const Vec2& scale = spr->getScale();
         const texture_coord_t& uv = spr->getTextureCoord();
 
-        Vec2 lt = Vec2(pos.x_ - pivot.x_, pos.y_ + pivot.y_);
-        Vec2 lb = Vec2(pos.x_ - pivot.x_, pos.y_ - pivot.y_);
-        Vec2 rt = Vec2(pos.x_ + pivot.x_, pos.y_ + pivot.y_);
-        Vec2 rb = Vec2(pos.x_ + pivot.x_, pos.y_ - pivot.y_);
+        //  初期配置
+        Vec2 lt = Vec2(size.x_ - pivot.x_, size.y_ + pivot.y_);
+        Vec2 lb = Vec2(size.x_ - pivot.x_, size.y_ - pivot.y_);
+        Vec2 rt = Vec2(size.x_ + pivot.x_, size.y_ + pivot.y_);
+        Vec2 rb = Vec2(size.x_ + pivot.x_, size.y_ - pivot.y_);
         
+        //  スケーリング
+        lt *= scale;
+        lb *= scale;
+        rt *= scale;
+        rb *= scale;
 
-        Vec2 screen_size = GameSystem::getInstance().getScreenSize();
-        Vec2 half = screen_size / 2;
+
+        //  位置移動
+        lt += pos;
+        lb += pos;
+        rt += pos;
+        rb += pos;
         
-        lt /= half;
-        lb /= half;
-        rt /= half;
-        rb /= half;
+        lt *= half;
+        lb *= half;
+        rt *= half;
+        rb *= half;
 
         //  頂点バッファは普通に並べる
-        vertices.size();
         vertices.push_back(lt.x_);
         vertices.push_back(lt.y_);
         vertices.push_back(uv.u0_);
@@ -283,13 +295,15 @@ void SpriteRenderer::renderSprites() {
     const std::shared_ptr<Texture>& texture = sprites_[0]->getTexture();
     texture->setupTexture();
 
-
     sprite_shader_.setAttributePointer(
         "position",
         2,
         sizeof(VertexP2T),
         0
     );
+
+
+
     sprite_shader_.setAttributePointer(
         "uv",
         2,

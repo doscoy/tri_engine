@@ -418,10 +418,10 @@ void RenderSystem::setTextureMinFilter(
 
 
 void RenderSystem::drawElements(
-                                RenderSystem::DrawMode mode,
-                                int count,
-                                size_t indices_type_size
-                                ) {
+    RenderSystem::DrawMode mode,
+    int count,
+    size_t indices_type_size
+) {
     //  index_type判定
     int index_type = GL_UNSIGNED_INT;
     switch (indices_type_size) {

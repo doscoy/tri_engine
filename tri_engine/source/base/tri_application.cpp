@@ -285,7 +285,7 @@ void Application::renderApplication()
     
     if (show_work_time_) {
         int cost_pos_x = 0;
-        int cost_pos_y = 1030;
+        int cost_pos_y = 0;
         t3::printDisplay(
             cost_pos_x,
             cost_pos_y,
@@ -306,7 +306,7 @@ void Application::renderApplication()
             cost_pos_x,
             cost_pos_y + 32,
             Color::white(),
-            "ren %2.2fms(% 3.2f%%)",
+            "ren %2.2fms(%3.2f%%)",
             last_rendering_cost_ * 1000,
             last_rendering_cost_ / frameSec<60>() * 100
         );

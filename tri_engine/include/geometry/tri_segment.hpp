@@ -1,6 +1,6 @@
 
-#ifndef TRI_AABB_HPP_INCLUDED
-#define TRI_AABB_HPP_INCLUDED
+#ifndef TRI_SEGMENT_HPP_INCLUDED
+#define TRI_SEGMENT_HPP_INCLUDED
 
 
 #include "../math/tri_vec3.hpp"
@@ -47,5 +47,5 @@ private:
 }   // namespace t3
 
 
-#endif // TRI_AABB_HPP_INCLUDED
+#endif // TRI_SEGMENT_HPP_INCLUDED
 

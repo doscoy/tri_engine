@@ -75,7 +75,6 @@ public:
         const Vec2& pos
     ){
         position_ = pos;
-        calc_matrix_request_ = true;
     }
     
     
@@ -87,14 +86,12 @@ public:
     ){
         position_.x_ = x;
         position_.y_ = y;
-        calc_matrix_request_ = true;
     }
     
     void addPosition(
         const Vec2& add
     ) {
         position_ += add;
-        calc_matrix_request_;
     }
     
     // *********************************************
@@ -109,22 +106,18 @@ public:
     void setRotation(
         const Vec3& rot
     ){
-        calc_matrix_request_ = true;
         rotation_ = rot;
     }
     
     void addRotationX(float r) {
-        calc_matrix_request_ = true;
         rotation_.x_ += r;
     }
 
     void addRotationY(float r) {
-        calc_matrix_request_ = true;
         rotation_.y_ += r;
     }
     
     void addRotationZ(float r) {
-        calc_matrix_request_ = true;
         rotation_.z_ += r;
     }
     
@@ -141,7 +134,6 @@ public:
     void setPivot(
         const Vec2& pivot
     ){
-        calc_matrix_request_ = true;
         pivot_ = pivot;
     }
 
@@ -152,7 +144,6 @@ public:
         const float x,
         const float y
     ){
-        calc_matrix_request_ = true;
         pivot_.x_ = x;
         pivot_.y_ = y;
     }
@@ -171,7 +162,6 @@ public:
         const texture_coord_t& tex_coord
     ){
         texture_coord_ = tex_coord;
-//        setupVertexBuffer();
     }
 
     
@@ -187,7 +177,6 @@ public:
         texture_coord_.v0_ = v0;
         texture_coord_.u1_ = u1;
         texture_coord_.v1_ = v1;
-//        setupVertexBuffer();
     }
 
     
@@ -211,7 +200,6 @@ public:
         const Vec2& size
     ){
         size_ = size;
-//        setupVertexBuffer();
     }
     
     // *********************************************
@@ -233,8 +221,13 @@ public:
     void setScale(
         const Vec2& scale
     ){
-        calc_matrix_request_ = true;
         scale_ = scale;
+    }
+    
+    void setScale(
+        const float scale
+    ) {
+        scale_.x_ = scale_.y_ = scale;
     }
     
     
@@ -269,21 +262,9 @@ public:
         return enable_;
     }
     
-    
-    const Mtx4* getMatrix();
-    
-    
     int getSortScore() const;
     
-/*
-    RenderSystem::buffer_id_t getVertexBuffer() const {
-        return vertex_buffer_;
-    }
-    
-    RenderSystem::buffer_id_t getIndexBuffer() const {
-        return index_buffer_;
-    }
-*/    
+
 
     bool isValid() const;
 
@@ -295,9 +276,6 @@ public:
         return owner_;
     }
 
-private:
-    void calcMatrix();
-//    void setupVertexBuffer();
 
 private:
     std::shared_ptr<Texture> texture_;
@@ -310,12 +288,6 @@ private:
     uint8_t priority_;
     bool enable_;
     SpriteLayer* owner_;
-    bool calc_matrix_request_;
-    Mtx4 matrix_;
-    
-    
-//    RenderSystem::buffer_id_t vertex_buffer_;
-//    RenderSystem::buffer_id_t index_buffer_;
     
 };
 

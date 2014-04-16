@@ -6,6 +6,7 @@
 
 #include "gfx/tri_texture.hpp"
 #include "audio/tri_audio_resource.hpp"
+#include "geometry/tri_geometry.hpp"
 
 namespace t3 {
 
@@ -77,12 +78,15 @@ GameSystem::GameSystem()
     //  オーディオマネージャ生成
     AudioManager::createInstance();
 
+    //  コリジョンマネージャ生成
+    CollisionManager::createInstance();
 }
 
 // *********************************************
 //  デストラクタ
 GameSystem::~GameSystem()
 {
+    CollisionManager::destroyInstance();
     AudioManager::destroyInstance();
     TextureManager::destroyInstance();
     SceneManager::destroyInstance();
@@ -152,12 +156,16 @@ void GameSystem::update( tick_t delta_time )
     }
     updateDebugPad(dpad_buttons, delta_time);
     
+    //  タスク更新
+    task_manager_.updateTask(delta_time);
+
+    //  コリジョン判定
+    CollisionManager& col_manager = CollisionManager::getInstance();
+    col_manager.collisionDetection();
     
     //  イベントのブロードキャスト
     safeTickEventManager();
     
-    //  タスク更新
-    task_manager_.updateTask(delta_time);
     
     //  終了リクエストチェック
     if (platform::isExitRequest()) {

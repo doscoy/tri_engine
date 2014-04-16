@@ -24,7 +24,6 @@ Workbar::Workbar()
         Color::green(),
         Color::orange()}}
     , limit_param_(util::frameSec<30>())
-    , caution_param_(limit_param_ / 2)
     , limit_width_pixel_(200)
     , keep_frame_(0)
     , limit_bar_pos_x_(std::numeric_limits<int>::min())
@@ -96,10 +95,8 @@ void Workbar::draw() {
     }
     
     //  上限バー描画
-    float caution_ratio = caution_param_ / limit_param_;
-    float caution_pos = limit_width_pixel_ * caution_ratio;
     Color limit_bar_color = Color::lime();
-    if (limit_bar_pos_x_ > caution_pos) {
+    if (limit_bar_pos_x_ > 0) {
         limit_bar_color = Color::red();
     }
     drawRectangle(Vec2(limit_bar_pos_x_, y-1), Vec2(3, thickness_+2), limit_bar_color);

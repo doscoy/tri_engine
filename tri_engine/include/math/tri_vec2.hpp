@@ -162,6 +162,12 @@ struct Vec2Template {
         y_ -= rhs.y_;
     }
     
+    //  Vec2Template *= Vec2Template
+    void operator *=( const Vec2Template& rhs ) {
+        x_ *= rhs.x_;
+        y_ *= rhs.y_;
+    }
+    
     //  Vec2Template /= Vec2Template
     void operator /=( const Vec2Template& rhs ) {
         x_ /= rhs.x_;

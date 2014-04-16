@@ -1,8 +1,8 @@
 #include "tri_unique_id.hpp"
 
 namespace t3 {
+inline namespace util {
 
-// *********************************************
 //  ユニークIDを取得
 uid_t uniqueID()
 {
@@ -10,4 +10,5 @@ uid_t uniqueID()
     return ++n;
 }
 
+}   // namespace util
 }   // namespace t3

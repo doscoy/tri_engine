@@ -53,15 +53,15 @@ void Frustum::initializeFrustum(
     Vec3 near_up = (near * tan_fov_over2 ) * up;
     Vec3 far_up = (far * tan_fov_over2)  * up;
 
-    near_clip_[0] = ((near * front) - near_right + near_up ) + pos;
-    near_clip_[1] = ((near * front) + near_right + near_up ) + pos;
-    near_clip_[2] = ((near * front) + near_right - near_up ) + pos;
-    near_clip_[3] = ((near * front) - near_right - near_up ) + pos;
+    near_clip_[0] = ((near * front) - near_right + near_up) + pos;
+    near_clip_[1] = ((near * front) + near_right + near_up) + pos;
+    near_clip_[2] = ((near * front) + near_right - near_up) + pos;
+    near_clip_[3] = ((near * front) - near_right - near_up) + pos;
 
-    far_clip_[0] = ((far * front) - far_right + far_up ) + pos;
-    far_clip_[1] = ((far * front) + far_right + far_up ) + pos;
-    far_clip_[2] = ((far * front) + far_right - far_up ) + pos;
-    far_clip_[3] = ((far * front) - far_right - far_up ) + pos;
+    far_clip_[0] = ((far * front) - far_right + far_up) + pos;
+    far_clip_[1] = ((far * front) + far_right + far_up) + pos;
+    far_clip_[2] = ((far * front) + far_right - far_up) + pos;
+    far_clip_[3] = ((far * front) - far_right - far_up) + pos;
 
     plane_[SIDE_NEAR] = Plane(near_clip_[2], near_clip_[1], near_clip_[0]);
     plane_[SIDE_FAR] = Plane(far_clip_[0], far_clip_[1], far_clip_[2]);
