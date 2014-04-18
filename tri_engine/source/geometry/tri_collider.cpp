@@ -8,7 +8,7 @@ namespace t3 {
 inline namespace geometry {
 
 Collider::Collider()
-    : collider_id_(uniqueID())
+    : collider_id_()
     , judged_(false) {
         
 }

@@ -31,7 +31,7 @@ public:
     virtual const HashString& getType() const = 0;
     
 public:
-    uint32_t getColliderID() const {
+    const UniqueID& getColliderID() const {
         return collider_id_;
     }
     
@@ -47,7 +47,7 @@ public:
     
     
 private:
-    uid_t collider_id_;
+    UniqueID collider_id_;
     bool judged_;
 };
 

@@ -31,7 +31,6 @@ public:
 
 private:
     void beginRender();
-    void renderSprite(Sprite& sprite);
     void endRender();
 
 

@@ -109,12 +109,6 @@ void SpriteRenderer::beginRender()
     //頂点配列を有効化
     sprite_shader_.setUniform("sampler", 0);
     
-    //  正射影行列を設定
-    Mtx4 projection;
-    float w = screen_size.x_ / 2;
-    float h = screen_size.y_ / 2;
-//    projection.ortho(-w, w, -h, h, -1.0f, 1.0f);
-//    sprite_shader_.setUniform("projection", projection);
 
     RenderSystem::setActiveTextureUnit(RenderSystem::TextureUnit::UNIT0);
 
@@ -128,49 +122,6 @@ void SpriteRenderer::beginRender()
     t3::RenderSystem::setCulling(false);
 
 
-}
-
-void SpriteRenderer::renderSprite(
-    Sprite& sprite
-) {
-/*
-    //  座標情報など設定
-    // モデルビュー変換行列を設定する
-    const Mtx4* mtx = sprite.getMatrix();
-    sprite_shader_.setUniform("transform", *mtx);
-    //  テクスチャの割り当て
-    const std::shared_ptr<Texture>& texture = sprite.getTexture();
-    texture->setupTexture();
-    
-    
-    //  頂点バッファ設定
-    RenderSystem::bindBuffer(
-        RenderSystem::BufferType::TYPE_VERTEX,
-        sprite.getVertexBuffer()
-    );
-    sprite_shader_.setAttributePointer(
-        "position",
-        2,
-        sizeof(VertexP2T),
-        0
-    );
-    sprite_shader_.setAttributePointer(
-        "uv",
-        2,
-        sizeof(VertexP2T),
-        (void*)(sizeof(float) * 2)
-    );
-    RenderSystem::bindBuffer(
-        RenderSystem::BufferType::TYPE_INDEX,
-        sprite.getIndexBuffer()
-    );
-    // 描画
-    RenderSystem::drawElements(
-        RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
-        4,
-        sizeof(uint32_t)
-    );
-*/
 }
 
 
@@ -244,7 +195,7 @@ void SpriteRenderer::margeSprites() {
 
         int first_vertex_index = i * 4;
 
-        //  インデックスはバッファ
+        //  インデックスバッファ
         if (i > 0) {
             //  ２スプライト目からは縮退ポリゴンを仕込む
             indices.push_back(first_vertex_index);

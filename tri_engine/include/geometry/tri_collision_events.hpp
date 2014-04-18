@@ -4,7 +4,7 @@
 
 #include "base/tri_event.hpp"
 #include "math/tri_vec2.hpp"
-
+#include "util/tri_unique_id.hpp"
 
 namespace t3 {
 inline namespace geometry {
@@ -18,7 +18,7 @@ public:
     }
         
     Vec2 pos_;
-    std::pair<uid_t, uid_t> collision_pair_;
+    std::pair<UniqueID, UniqueID> collision_pair_;
         
 };
 

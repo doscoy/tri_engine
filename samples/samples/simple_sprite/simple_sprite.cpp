@@ -115,7 +115,7 @@ private:
 
 
 private:
-    t3::uid_t tex3_handle_;
+    t3::UniqueID tex3_handle_;
     
     t3::SpriteLayer sprite_layer_;
 };

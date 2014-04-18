@@ -31,7 +31,7 @@ public:
     
     // *********************************************
     //  ロード
-    uid_t load(
+    UniqueID load(
         const FilePath& path
     ){
         for (auto res : resources_) {
@@ -40,9 +40,6 @@ public:
                 return res->getResourceID();
             }
         }
-    
-    
-    
     
         std::shared_ptr<ResourceType> res = ResourceType::create(path);
         T3_NULL_ASSERT(res);
@@ -72,12 +69,12 @@ public:
     // *********************************************
     //  リソースを取得
     const std::shared_ptr<ResourceType> getResource(
-        const uid_t id
+        const UniqueID id
     ){
         typename Resources::iterator end = resources_.end();
         for( typename Resources::iterator it = resources_.begin(); it != end; ++it){
             
-            if ( (*it)->getResourceID() == id ){
+            if ((*it)->getResourceID() == id) {
                 return (*it);
             }
         }

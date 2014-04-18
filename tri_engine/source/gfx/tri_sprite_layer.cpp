@@ -30,7 +30,7 @@ std::shared_ptr<Sprite> SpriteLayer::createSprite(std::shared_ptr<Texture> tex) 
 
 std::shared_ptr<Sprite> SpriteLayer::createSprite(const t3::FilePath& path) {
     t3::TextureManager& tex_mgr = t3::TextureManager::getInstance();
-    int tex_id = tex_mgr.load(path);
+    UniqueID tex_id = tex_mgr.load(path);
     std::shared_ptr<t3::Texture> tex = tex_mgr.getResource(tex_id);
     return createSprite(tex);
 }

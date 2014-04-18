@@ -3,12 +3,19 @@
 namespace t3 {
 inline namespace util {
 
-//  ユニークIDを取得
-uid_t uniqueID()
+
+uint32_t UniqueID::uid_generator_ = 0;
+
+
+UniqueID::UniqueID()
+    : uid_(uid_generator_)
 {
-    static uid_t n = 1; // 0は無効値
-    return ++n;
+    uid_generator_ += 1;
 }
+
+
+
+
 
 }   // namespace util
 }   // namespace t3

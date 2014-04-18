@@ -3,8 +3,9 @@
 #define TRI_RESOURCE_HPP_INCLUDED
 
 
-#include "../util/tri_uncopyable.hpp"
-#include "../kernel/tri_kernel.hpp"
+#include "util/tri_uncopyable.hpp"
+#include "util/tri_unique_id.hpp"
+#include "kernel/tri_kernel.hpp"
 
 #include <cstring>
 
@@ -33,12 +34,12 @@ public:
         return resource_name_;
     }
     
-    uint32_t getResourceID() const {
+    UniqueID getResourceID() const {
         return resource_id_;
     }
     
 private:
-    uint32_t resource_id_;
+    UniqueID resource_id_;
     char resource_name_[RESOURCE_NAME_SIZE];
 };
 
