@@ -14,7 +14,7 @@
 #include "tri_point_collider.hpp"
 #include "tri_segment.hpp"
 #include "tri_sphere.hpp"
-
+#include "tri_transform.hpp"
 
 #endif  // TRI_GEOMETRY_HPP_INCLUDED
 

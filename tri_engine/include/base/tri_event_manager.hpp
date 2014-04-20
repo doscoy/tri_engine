@@ -11,7 +11,7 @@
 namespace t3 {
 inline namespace base {
 
-using EventListenerPtr = std::shared_ptr<EventListener>;
+using EventListenerPtr = EventListener*;
 
 
 class EventManagerBase
@@ -36,6 +36,9 @@ public:
         const EventType& in_type
     ) = 0;
     
+    virtual bool removeListener(
+        const EventListenerPtr& listener
+    ) = 0;
     
     virtual bool triggerEvent(
         const Event& in_event
@@ -70,6 +73,10 @@ private:
     friend bool safeRemoveListener(
         const EventListenerPtr& in_handler,
         const EventType& in_type
+    );
+    
+    friend bool safeRemoveListener(
+        const EventListenerPtr& listener
     );
 
     friend bool safeTriggerEvent(
@@ -108,6 +115,10 @@ bool safeAddListener(
 bool safeRemoveListener(
     const EventListenerPtr& in_handler,
     const EventType& in_type
+);
+
+bool safeRemoveListener(
+    const EventListenerPtr& listener
 );
     
 bool safeTriggerEvent(
@@ -184,6 +195,9 @@ public:
         const EventType& in_type
     ) override;
     
+    bool removeListener(
+        const EventListenerPtr& listener
+    ) override;
     
     bool triggerEvent(
         const Event& in_event

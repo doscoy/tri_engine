@@ -21,7 +21,7 @@ public:
 public:
     bool isHit(const CircleCollider& col) const override;
     bool isHit(const PointCollider& col) const override;
-    const HashString& getType() const override;
+    const HashString& getCollisionType() const override;
     static const HashString TYPE;
 
 public:

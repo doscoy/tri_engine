@@ -22,7 +22,7 @@ bool PointCollider::isHit(
     return false;
 }
 
-const HashString& PointCollider::getType() const {
+const HashString& PointCollider::getCollisionType() const {
     return TYPE;
 }
 

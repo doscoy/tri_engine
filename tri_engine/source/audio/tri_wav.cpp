@@ -22,7 +22,7 @@ int readHeaderWav(
     short channelCnt,bitParSample,blockSize;
     int samplingRate,byteParSec;
     
-    int dataPos;
+    int dataPos = 0;
     int flag = 0;
     
     fread(&res32, 4, 1,fp);

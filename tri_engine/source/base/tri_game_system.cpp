@@ -61,10 +61,11 @@ GameSystem::GameSystem()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
     , use_clear_color_index_(0)
     , clear_colors_{{
-        Color::darkgray(),
         Color::black(),
+        Color::darkgray(),
         Color::white(),
-        Color::blue()}}
+        Color::blue()
+      }}
     , dm_game_speed_(nullptr, "GAME SPEED", game_speed_, 0.1f, 0.0f, 4.0f)
     , game_speed_(1.0f)
     , dm_layers_(nullptr, "LAYERS")

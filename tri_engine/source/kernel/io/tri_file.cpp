@@ -38,10 +38,10 @@ bool File::loadFile(
     
     T3_ASSERT(!fs.fail());
     fs.seekg( 0, std::fstream::end );       //ファイル末尾を探す
-    filesize_t eof_pos = fs.tellg();        //ファイル末尾インデクスを取得
+    std::size_t eof_pos = static_cast<std::size_t>(fs.tellg());        //ファイル末尾インデクスを取得
     fs.clear();
     fs.seekg( 0, std::fstream::beg );       //ファイル先頭に戻る
-    filesize_t beg_pos = fs.tellg();        //ファイル先頭インデクスを取得
+    std::size_t beg_pos = static_cast<std::size_t>(fs.tellg());        //ファイル先頭インデクスを取得
     size_ = eof_pos - beg_pos;              //末尾-先頭でファイルサイズを計算
     
     data_ = (uint8_t*)T3_ALLOC(size_);

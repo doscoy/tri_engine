@@ -6,6 +6,8 @@
 #include "tri_event.hpp"
 #include <memory>
 #include <list>
+#include <vector>
+#include <map>
 #include "math/tri_vec2.hpp"
 #include "util/tri_singleton.hpp"
 
@@ -14,12 +16,18 @@
 namespace t3 {
 inline namespace geometry {
 
+using Colliders = std::list<std::shared_ptr<Collider>>;
+using CollidersPtr = std::shared_ptr<Colliders>;
+
+
 
 class CollisionManager
     : public Singleton<CollisionManager>
 {
     friend class Singleton<CollisionManager>;
 
+private:
+    using JudgedPairs = std::vector<CollisionPair>;
 public:
     void addCollider(
         std::shared_ptr<Collider> collider,
@@ -38,8 +46,16 @@ private:
         std::shared_ptr<Collider>& b
     );
     
+    bool isJudgedPair(
+        const CollisionPair& pair
+    );
+    
 private:
-    std::list<std::shared_ptr<Collider>> colliders_;
+//    Colliders colliders_;
+    using CollidersMap = std::map<HashString, CollidersPtr>;
+    CollidersMap colliders_;
+    CollidersMap same_target_group_;
+    JudgedPairs judged_pairs_;
 };
 
 

@@ -14,7 +14,7 @@ inline namespace base {
 class EventListener {
 public:
     explicit EventListener() {}
-    virtual ~EventListener() {}
+    virtual ~EventListener();
     
 public:
     
@@ -26,8 +26,6 @@ public:
     virtual bool handleEvent(const Event& event) = 0;
 
 };
-
-using EventListenerPtr = std::shared_ptr<EventListener>;
 
 //  全てのイベントを受けるクラス
 class EventSnooper

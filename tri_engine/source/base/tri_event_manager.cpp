@@ -55,6 +55,13 @@ bool safeRemoveListener(
 
 }
 
+bool safeRemoveListener(
+    const EventListenerPtr& listener
+) {
+    T3_ASSERT(EventManagerBase::get());
+    return EventManagerBase::get()->removeListener(listener);
+}
+
 bool safeTriggerEvent(
     const Event& in_event
 ) {
@@ -128,7 +135,7 @@ bool EventManager::addListener(
     }
     
     //  型のリストをチェックし、更新
-    EventTypeSet::iterator ev_it = type_list_.find(in_type);
+//    EventTypeSet::iterator ev_it = type_list_.find(in_type);
     
     //  リスナーマップのエントリを探しこのエントリに対応するテーブルが
     //  まだ存在しなければエントリを作成
@@ -186,7 +193,10 @@ bool EventManager::removeListener(
         return false;
     }
     
-    
+    return removeListener(in_listener);
+}
+
+bool EventManager::removeListener(const EventListenerPtr &listener) {
     bool result = false;
     
     //  総当り
@@ -200,7 +210,7 @@ bool EventManager::removeListener(
         EventListenerTable::iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-            if (*table_it == in_listener) {
+            if (*table_it == listener) {
                 table.erase(table_it);
                 result = true;
                 
@@ -213,6 +223,7 @@ bool EventManager::removeListener(
         
     }
     return result;
+
 }
 
 
@@ -359,7 +370,7 @@ bool EventManager::tick(
         if (it_wc != registry_.end()) {
             
             const EventListenerTable& table = it_wc->second;
-            bool processed = false;
+//            bool processed = false;
             
             EventListenerTable::const_iterator table_it = table.begin();
             EventListenerTable::const_iterator table_end = table.end();

@@ -1,10 +1,16 @@
 
 #include "base/tri_event_listener.hpp"
+#include "base/tri_event_manager.hpp"
 #include "dbg/tri_trace.hpp"
 
 
 namespace t3 {
 inline namespace base {
+
+
+EventListener::~EventListener() {
+    safeRemoveListener(this);
+}
 
 
 

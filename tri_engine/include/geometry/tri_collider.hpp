@@ -16,7 +16,9 @@ class CircleCollider;
 class Collider {
 
 public:
-    Collider();
+    Collider(
+        const HashString& name
+    );
     virtual ~Collider(){};
     
 public:
@@ -28,29 +30,22 @@ public:
         return false;
     }
 
-    virtual const HashString& getType() const = 0;
-    
+    virtual const HashString& getCollisionType() const = 0;
+
 public:
     const UniqueID& getColliderID() const {
         return collider_id_;
     }
     
-    bool isJudged() const {
-        return judged_;
+    const HashString& getColliderName() const {
+        return collider_name_;
     }
-    
-    void setJudged(
-        const bool judged
-    ) {
-        judged_ = judged;
-    }
-    
     
 private:
     UniqueID collider_id_;
-    bool judged_;
+    HashString collider_name_;
 };
-
+using CollisionPair = std::pair<UniqueID, UniqueID>;
 
         
 }   // namaespace geometry

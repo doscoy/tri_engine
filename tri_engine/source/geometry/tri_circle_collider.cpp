@@ -8,6 +8,16 @@ inline namespace geometry {
 
 const HashString CircleCollider::TYPE("CircleCollider");
 
+
+CircleCollider::CircleCollider(
+    const HashString& name
+)   : Collider(name)
+{
+}
+
+
+
+
 bool CircleCollider::isHit(
     const CircleCollider &col
 ) const {
@@ -22,7 +32,7 @@ bool CircleCollider::isHit(
 }
 
 
-const HashString& CircleCollider::getType() const {
+const HashString& CircleCollider::getCollisionType() const {
     return TYPE;
 }
 

@@ -131,8 +131,8 @@ void drawSegment(
     offset.normalize();
     
     offset *= width;
-    Vec3 c = *a + offset;
-    Vec3 d = *b + offset;
+//    Vec3 c = *a + offset;
+//    Vec3 d = *b + offset;
     
 }
 

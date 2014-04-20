@@ -100,12 +100,6 @@ void SpriteRenderer::beginRender()
     sprite_shader_.setEnableAttributeArray("position", true);
     sprite_shader_.setEnableAttributeArray("uv", true );
     
-    
-    //  レンダリング設定
-    const t3::GameSystem* gs = t3::GameSystem::getInstancePointer();
-    const t3::Point2& screen_size = gs->getScreenSize();
-    
-    
     //頂点配列を有効化
     sprite_shader_.setUniform("sampler", 0);
     
@@ -146,13 +140,14 @@ void SpriteRenderer::margeSprites() {
         const Vec2& pivot = spr->getPivot();
         const Vec2& size = spr->getSize();
         const Vec2& scale = spr->getScale();
+        float angle = -toRadian(spr->getRotation());
         const texture_coord_t& uv = spr->getTextureCoord();
 
         //  初期配置
-        Vec2 lt = Vec2(size.x_ - pivot.x_, size.y_ + pivot.y_);
-        Vec2 lb = Vec2(size.x_ - pivot.x_, size.y_ - pivot.y_);
-        Vec2 rt = Vec2(size.x_ + pivot.x_, size.y_ + pivot.y_);
-        Vec2 rb = Vec2(size.x_ + pivot.x_, size.y_ - pivot.y_);
+        Vec2 lt = Vec2(      0 - pivot.x_, size.y_ - pivot.y_);
+        Vec2 lb = Vec2(      0 - pivot.x_, 0 - pivot.y_);
+        Vec2 rt = Vec2(size.x_ - pivot.x_, size.y_ - pivot.y_);
+        Vec2 rb = Vec2(size.x_ - pivot.x_, 0 - pivot.y_);
         
         //  スケーリング
         lt *= scale;
@@ -161,6 +156,37 @@ void SpriteRenderer::margeSprites() {
         rb *= scale;
 
 
+        //  回転
+        float cos_angle = std::cos(angle);
+        float sin_angle = std::sin(angle);
+        {
+            float ltx = lt.x_;
+            float lty = lt.y_;
+            lt.x_ = (ltx * cos_angle) - (lty * sin_angle);
+            lt.y_ = (ltx * sin_angle) + (lty * cos_angle);
+        }
+        
+        {
+            float lbx = lb.x_;
+            float lby = lb.y_;
+            lb.x_ = (lbx * cos_angle) - (lby * sin_angle);
+            lb.y_ = (lbx * sin_angle) + (lby * cos_angle);
+        }
+        {
+            float rtx = rt.x_;
+            float rty = rt.y_;
+            rt.x_ = (rtx * cos_angle) - (rty * sin_angle);
+            rt.y_ = (rtx * sin_angle) + (rty * cos_angle);
+        }
+        
+        {
+            float rbx = rb.x_;
+            float rby = rb.y_;
+            rb.x_ = (rbx * cos_angle) - (rby * sin_angle);
+            rb.y_ = (rbx * sin_angle) + (rby * cos_angle);
+        }
+        
+        
         //  位置移動
         lt += pos;
         lb += pos;

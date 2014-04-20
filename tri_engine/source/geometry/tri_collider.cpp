@@ -7,9 +7,12 @@
 namespace t3 {
 inline namespace geometry {
 
-Collider::Collider()
+Collider::Collider(
+    const HashString& name
+)
     : collider_id_()
-    , judged_(false) {
+    , collider_name_(name)
+{
         
 }
 

@@ -4,8 +4,9 @@
 
 
 
-#include "../math/tri_math_types.hpp"
-#include "../util/tri_uncopyable.hpp"
+#include "math/tri_math_types.hpp"
+#include "geometry/tri_transform.hpp"
+#include "util/tri_uncopyable.hpp"
 #include "tri_gfx_types.hpp"
 #include "tri_render_system.hpp"
 #include <memory>
@@ -43,33 +44,36 @@ private:
     
 public:
     
-    // *********************************************
     //  テクスチャを設定
     void setTexture( std::shared_ptr<Texture> tex );
     
     
-    // *********************************************
     //  テクスチャ取得
     const std::shared_ptr<Texture>& getTexture() const {
         return texture_;
     }
     
+    void setTransform(
+        const Transform2D& transform
+    ) {
+        setPosition(transform.getPosition());
+        setRotation(transform.getRotation());
+        setScale(transform.getScale());
+    }
 
-    // *********************************************
+
     //  座標を取得
     Vec2& getPosition() {
         return position_;
     }
     
     
-    // *********************************************
     //  座標を取得
     const Vec2& getPosition() const {
         return position_;
     }
     
     
-    // *********************************************
     //  座標を設定
     void setPosition(
         const Vec2& pos
@@ -78,7 +82,6 @@ public:
     }
     
     
-    // *********************************************
     //  座標を設定
     void setPosition(
         const float x,
@@ -88,48 +91,35 @@ public:
         position_.y_ = y;
     }
     
-    void addPosition(
-        const Vec2& add
+    //  向きを設定
+    void setDirection(
+        const Vec2& dir
     ) {
-        position_ += add;
+        float angle = std::atan2(dir.x_, dir.y_);
+        setRotation(t3::toDegree(angle));
     }
+
+
     
-    // *********************************************
     //  回転を取得
-    const Vec3* getRotation() const {
-        return &rotation_;
+    float getRotation() const {
+        return rotation_;
     }
     
 
-    // *********************************************
     //  回転を設定
     void setRotation(
-        const Vec3& rot
+        const float rot
     ){
         rotation_ = rot;
     }
-    
-    void addRotationX(float r) {
-        rotation_.x_ += r;
-    }
 
-    void addRotationY(float r) {
-        rotation_.y_ += r;
-    }
-    
-    void addRotationZ(float r) {
-        rotation_.z_ += r;
-    }
-    
-
-    // *********************************************
     //  回転中心を取得
     const Vec2& getPivot() const {
         return pivot_;
     }
 
     
-    // *********************************************
     //  回転中心を設定
     void setPivot(
         const Vec2& pivot
@@ -138,7 +128,6 @@ public:
     }
 
     
-    // *********************************************
     //  回転中心を設定
     void setPivot(
         const float x,
@@ -147,16 +136,15 @@ public:
         pivot_.x_ = x;
         pivot_.y_ = y;
     }
+    
+    void setPivotByCenter();
 
     
-    // *********************************************
     //  テクスチャ座標を取得
     const texture_coord_t& getTextureCoord() const {
         return texture_coord_;
     }
 
-
-    // *********************************************
     //  テクスチャ座標を設定
     void setTextureCoord(
         const texture_coord_t& tex_coord
@@ -165,7 +153,6 @@ public:
     }
 
     
-    // *********************************************
     //  テクスチャ座標を設定
     void setTextureCoord(
         const float u0,
@@ -178,23 +165,24 @@ public:
         texture_coord_.u1_ = u1;
         texture_coord_.v1_ = v1;
     }
+    
+    void setTextureCoordAndSizeByST(
+        const Vec2& left_top,
+        const Vec2& size
+    );
 
     
-    // *********************************************
     //  サイズを取得
     Vec2& getSize() {
         return size_;
     }
     
-    
-    // *********************************************
     //  サイズを取得
     const Vec2& getSize() const {
         return size_;
     }
     
     
-    // *********************************************
     //  サイズを設定
     void setSize(
         const Vec2& size
@@ -202,21 +190,18 @@ public:
         size_ = size;
     }
     
-    // *********************************************
     //  スケールを取得
     Vec2& getScale() {
         return scale_;
     }
 
 
-    // *********************************************
     //  スケールを取得
     const Vec2& getScale() const {
         return scale_;
     }
     
     
-    // *********************************************
     //  スケールを設定
     void setScale(
         const Vec2& scale
@@ -230,15 +215,21 @@ public:
         scale_.x_ = scale_.y_ = scale;
     }
     
+    void setScale(
+        const float x,
+        const float y
+    ) {
+        scale_.x_ = x;
+        scale_.y_ = y;
+    }
     
-    // *********************************************
+    
     //  描画プライオリティ取得
     uint8_t getPriority() const {
         return priority_;
     }
     
     
-    // *********************************************
     //  描画プライオリティ設定
     void setPriority(
         const uint8_t priority
@@ -247,7 +238,6 @@ public:
     }
     
 
-    // *********************************************
     //  有効フラグ設定
     void setEnable(
         const bool enable
@@ -256,7 +246,6 @@ public:
     }
     
     
-    // *********************************************
     //  有効判定
     bool isEnable() const {
         return enable_;
@@ -282,10 +271,12 @@ private:
     Vec2 position_;
     Vec2 size_;
     Vec2 pivot_;
-    Vec3 rotation_;
-    texture_coord_t texture_coord_;
     Vec2 scale_;
+    float rotation_;
+    
     uint8_t priority_;
+    texture_coord_t texture_coord_;
+    
     bool enable_;
     SpriteLayer* owner_;
     
