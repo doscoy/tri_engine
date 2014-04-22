@@ -36,17 +36,77 @@ public:
         return (red_ << 24 | green_ << 16 | blue_ << 8 | alpha_);
     }
     
-    float redf() const {
+    float getRedf() const {
         return static_cast<float>(red_) / 255.0f;
     }
-    float greenf() const {
+    float getGreenf() const {
         return static_cast<float>(green_) / 255.0f;
     }
-    float bluef() const {
+    float getBluef() const {
         return static_cast<float>(blue_) / 255.0f;
     }
-    float alphaf() const {
+    float getAlphaf() const {
         return static_cast<float>(alpha_) / 255.0f;
+    }
+    
+    void setAlphaf(const float a) {
+        alpha_ = 255.0f * a;
+        if (alpha_ > 255) {
+            alpha_ = 255;
+        }
+        else if (alpha_ < 0) {
+            alpha_ = 0;
+        }
+    }
+    
+    void setRedf(const float r) {
+        red_ = 255.0f * r;
+        if (red_ > 255) {
+            red_ = 255;
+        }
+        else if (red_ < 0) {
+            red_ = 0;
+        }
+    }
+    
+    void setGreenf(const float g) {
+        green_ = 255.0f * g;
+        if (green_ > 255) {
+            green_ = 255;
+        }
+        else if (green_ < 0) {
+            green_ = 0;
+        }
+    }
+    
+    void setBluef(const float b) {
+        blue_ = 255.0f * b;
+        if (blue_ > 255) {
+            blue_ = 255;
+        }
+        else if (blue_ < 0) {
+            blue_ = 0;
+        }
+    }
+    
+    void setColorf(
+        float r,
+        float g,
+        float b
+    ) {
+        setRedf(r);
+        setGreenf(g);
+        setBluef(b);
+    }
+    
+    void setColor(
+        int r,
+        int g,
+        int b
+    ) {
+        red_ = r;
+        green_ = g;
+        blue_ = b;
     }
     
     

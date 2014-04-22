@@ -70,7 +70,7 @@ bool safeTriggerEvent(
 
 }
 
-bool safeQueEvent(
+bool safeQueueEvent(
     const EventHandle& in_event
 ) {
     T3_ASSERT(EventManagerBase::get());

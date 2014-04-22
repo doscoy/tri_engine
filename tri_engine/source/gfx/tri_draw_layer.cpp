@@ -13,30 +13,33 @@ namespace t3 {
 inline namespace gfx {
 
 DrawLayer::DrawLayer()
-    : RenderLayer( "Draw" )
-    , update_func_( this, &self_t::nullUpdate )
-    , render_func_( this, &self_t::nullRender )
+    : DrawLayer("Draw")
 {
-    
-    
 }
 
+
+DrawLayer::DrawLayer(
+    const char* const name
+)   : RenderLayer(name)
+    , update_func_(this, &self_t::nullUpdate)
+    , render_func_(this, &self_t::nullRender)
+{
+}
 
 DrawLayer::~DrawLayer()
 {
-    
-    
+
 }
 
 
-void DrawLayer::updateLayer( tick_t delta_time )
-{
-    update_func_.invoke( this, delta_time );
+void DrawLayer::updateLayer(
+    tick_t delta_time
+) {
+    update_func_.invoke(this, delta_time);
 }
 
-void DrawLayer::drawLayer()
-{
-    render_func_.invoke( this );
+void DrawLayer::drawLayer() {
+    render_func_.invoke(this);
 }
 
 

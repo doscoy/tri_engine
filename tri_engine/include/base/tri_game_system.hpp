@@ -9,6 +9,7 @@
 #include "util/tri_singleton.hpp"
 #include "gfx/tri_color.hpp"
 #include "gfx/tri_render_layer.hpp"
+#include "gfx/tri_fade_layer.hpp"
 #include <array>
 
 
@@ -35,7 +36,8 @@ private:
 
 public:
     void initializeGameSystem();
-
+    void terminategameSystem();
+    
 // ---------------------------------------------
 //  ビューポート管理
     //  スクリーンサイズを取得
@@ -103,7 +105,11 @@ public:
     
     static Vec2 screenToViewport(const Vec2& screen_pos);
     
+    static void fadeOut();
     
+    static void fadeIn();
+    
+    static bool isFadeEnd();
     
 private:
     void setClearColor();
@@ -126,6 +132,8 @@ private:
     //  描画レイヤー
     RenderLayers layers_;
     
+    //  システムフェード
+    FadeLayer fade_layer_;
     
     //  イベントマネージャ
     EventManager event_manager_;

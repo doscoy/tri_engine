@@ -22,7 +22,7 @@ RenderLayer::RenderLayer(
 }
     
 RenderLayer::RenderLayer(const char* const name)
-    : RenderLayer( name, PRIORITY_NORMAL )
+    : RenderLayer(name, PRIORITY_APP_NORMAL)
 {
 }
 

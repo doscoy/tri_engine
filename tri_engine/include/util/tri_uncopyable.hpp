@@ -11,6 +11,10 @@
 #ifndef TRI_UNCOPYABLE_HPP_INCLUDED
 #define TRI_UNCOPYABLE_HPP_INCLUDED
 
+namespace t3 {
+inline namespace util {
+
+
 //  コピー禁止ミックスイン
 class Uncopyable
 {
@@ -20,5 +24,10 @@ public:
     Uncopyable( const Uncopyable& ) = delete;
     Uncopyable& operator= ( const Uncopyable& ) = delete;
 };
+
+
+}   // namespace util
+}   // namespace t3
+
 
 #endif // TRI_UNCOPYABLE_HPP_INCLUDED

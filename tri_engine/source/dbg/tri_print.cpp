@@ -198,6 +198,7 @@ void initializeDebugPrint()
     T3_ASSERT(shader_link_result);
     
     //  デバッグレイヤーを登録
+    dbg_screen_layer_.setPriority(RenderLayer::PRIORITY_DEBUG);
     dbg_screen_layer_.attachSystem();
 }
 

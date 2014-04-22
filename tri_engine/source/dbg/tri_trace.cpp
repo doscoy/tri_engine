@@ -25,6 +25,7 @@ DebugLogLayer dbg_log_layer_;
 void initializeTrace()
 {
     //  デバッグレイヤーを登録
+    dbg_log_layer_.setPriority(RenderLayer::PRIORITY_DEBUG);
     dbg_log_layer_.attachSystem();
 
 }

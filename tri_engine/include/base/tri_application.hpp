@@ -17,8 +17,6 @@ void initializeTriEngine(
     const char* const title
 );
 
-void updateTriEngine();
-void renderTriEngine();
 
 void terminateTriEngine();
 
@@ -30,8 +28,13 @@ class Application
 {
 
 public:
-    explicit Application( SceneGenerator* root_scene_generator );
-    ~Application();
+    Application();
+    virtual ~Application();
+
+
+private:
+    virtual void initializeGame() = 0;
+    virtual void terminateGame() = 0;
 
 public:
     void initializeApplication();
@@ -39,6 +42,10 @@ public:
     void renderApplication();
     void terminateApplication();
     bool isActive() const;
+
+    void setRootScene(SceneGenerator* root) {
+        root_scene_generator_ = root;
+    }
     
 private:
     void beginRender();

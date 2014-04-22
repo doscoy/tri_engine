@@ -239,22 +239,22 @@ void RenderSystem::setCullingMode(
 
 
 void RenderSystem::setClearDepthValue(
-                                      const float value
-                                      ) {
+    const float value
+) {
     glClearDepthf(value);
 }
 
 
 
 void RenderSystem::setClearColor(
-                                 const Color& clear_color
-                                 ) {
+    const Color& clear_color
+) {
     glClearColor(
-                 clear_color.redf(),
-                 clear_color.greenf(),
-                 clear_color.bluef(),
-                 clear_color.alphaf()
-                 );
+        clear_color.getRedf(),
+        clear_color.getGreenf(),
+        clear_color.getBluef(),
+        clear_color.getAlphaf()
+    );
 }
 
 

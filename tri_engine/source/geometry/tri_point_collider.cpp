@@ -10,6 +10,13 @@ inline namespace geometry {
 
 const HashString PointCollider::TYPE("PointCollider");
 
+PointCollider::PointCollider(
+    const HashString& name
+)   : Collider(name)
+{
+}
+
+
 bool PointCollider::isHit(
     const CircleCollider &col
 ) const {

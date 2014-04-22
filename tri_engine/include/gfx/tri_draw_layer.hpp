@@ -17,11 +17,13 @@ class DrawLayer
     : public RenderLayer
 {
     typedef DrawLayer self_t;
+protected:
     typedef MethodCallback2<self_t, self_t* const, tick_t> UpdateCallback;
     typedef MethodCallback1<self_t, self_t* const> RenderCallback;
 
 public:
     DrawLayer();
+    explicit DrawLayer(const char* const name);
     virtual ~DrawLayer();
     
     template <typename T>

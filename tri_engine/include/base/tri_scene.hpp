@@ -86,6 +86,8 @@ protected:
     DebugMenuFrame scene_debug_menu_frame_;
 };
 
+
+
 class NullScene
     : public Scene
 {
@@ -94,6 +96,8 @@ public:
         : Scene( "NullScene" )
     {}
 };
+
+
 
 class SceneManager
     : public Singleton<SceneManager>
@@ -108,8 +112,8 @@ public:
     void updateScene( tick_t delta_time );
     void suspendScene( tick_t delta_time );
     
-    void requestNextScene( SceneGenerator* const next_scene_generator ){
-        next_scene_generator_ = next_scene_generator;
+    static void requestNextScene( SceneGenerator* const next_scene_generator ){
+        getInstance().next_scene_generator_ = next_scene_generator;
     }
     
     void forceChangeScene( SceneGenerator* const next_scene_generator ){
@@ -126,6 +130,8 @@ public:
     }
     
     void directScene();
+
+
 
 private:
     void sceneChange();

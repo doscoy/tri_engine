@@ -33,7 +33,7 @@ VirtualPad::VirtualPad()
     pad_layer_.setLayerName("virtual pad");
     pad_layer_.setUpdateCallback(this, &VirtualPad::updateVirtualPad);
     pad_layer_.setRenderCallback(this, &VirtualPad::renderVirtualPad);
-
+    pad_layer_.setPriority(RenderLayer::PRIORITY_DEBUG);
     pad_layer_.attachSystem();
 }
 

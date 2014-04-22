@@ -1,0 +1,89 @@
+
+#ifndef TRI_FADE_LAYER_HPP_INCLUDED
+#define TRI_FADE_LAYER_HPP_INCLUDED
+
+
+#include "tri_draw_layer.hpp"
+#include "tri_color.hpp"
+
+
+namespace t3 {
+inline namespace gfx {
+
+
+class FadeLayer
+    : public DrawLayer
+{
+public:
+    FadeLayer();
+    ~FadeLayer();
+
+
+public:
+    void setFadeSpeed(
+        const int speed
+    ) {
+        fade_speed_ = speed;
+    }
+    
+    void fadeIn(
+        const t3::tick_t sec
+    ) {
+        alpha_ = fade_color_.getAlphaf();
+        fading_ = true;
+        fade_in_ = true;
+        fade_speed_ = t3::frameSec<60>() / sec * -1;
+    }
+    
+    void fadeOut(
+        const tick_t sec
+    ) {
+        alpha_ = fade_color_.getAlphaf();
+        fading_ = true;
+        fade_in_ = false;
+        fade_speed_ = t3::frameSec<60>() / sec;
+    }
+    
+    
+    bool isFadeEnd() {
+        return fading_ == false;
+    }
+
+    void setFadeColor(
+        int r,
+        int g,
+        int b
+    ) {
+        fade_color_.setColor(r, g, b);
+    }
+    
+    void setFadeColor(
+        const Color& c
+    ) {
+        fade_color_ = c;
+    }
+
+
+private:
+    void fadeUpdate(DrawLayer* const, tick_t);
+    void fadeRender(DrawLayer* const);
+
+
+
+private:
+    bool fading_;
+    bool fade_in_;
+    float fade_speed_;
+    Color fade_color_;
+    float alpha_;
+};
+
+
+
+}   // namespace gfx
+}   // namesapce t3
+
+
+
+
+#endif  // TRI_FADE_LAYER_HPP_INCLUDED

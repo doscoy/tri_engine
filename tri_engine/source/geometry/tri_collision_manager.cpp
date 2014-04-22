@@ -106,7 +106,7 @@ void CollisionManager::judgeColliderPairs(
             auto event = std::make_shared<CollisionEvent>();
             event->pos_ = circle_coll->getCircle().getPosition();
             event->collision_pair_ = std::make_pair(a->getColliderID(), b->getColliderID());
-            t3::safeQueEvent(event);
+            t3::safeQueueEvent(event);
         }
     }
     //  PointCollider
@@ -117,7 +117,7 @@ void CollisionManager::judgeColliderPairs(
             auto event = std::make_shared<CollisionEvent>();
             event->pos_ = point_coll->getPosition();
             event->collision_pair_ = std::make_pair(a->getColliderID(), b->getColliderID());
-            t3::safeQueEvent(event);
+            t3::safeQueueEvent(event);
         }
     }
 

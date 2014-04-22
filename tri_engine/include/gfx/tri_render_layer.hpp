@@ -22,13 +22,15 @@ class RenderLayer
 {
 public:
     enum LayerPriority {
-        PRIORITY_LOWEST     =  30,
-        PRIORITY_BACK       =  60,
-        PRIORITY_NORMAL     =  90,
-        PRIORITY_FRONT      = 120,
-        PRIORITY_CURTAIN    = 150,
+        PRIORITY_LOWEST     =  20, // 奥
+        PRIORITY_SYS_BACK   =  60,
+        PRIORITY_APP_BACK   =  60,
+        PRIORITY_APP_NORMAL =  90,
+        PRIORITY_APP_FRONT  = 120,
+        PRIORITY_SYS_FRONT  = 150,
+        PRIORITY_SYS_FADE   = 170,
         PRIORITY_DEBUG      = 180,
-        PRIORITY_HIGHEST    = 210,
+        PRIORITY_HIGHEST    = 240, // 手前
     };
     enum {
         NAME_SIZE = 16

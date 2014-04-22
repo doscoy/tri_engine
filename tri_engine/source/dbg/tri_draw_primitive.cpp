@@ -49,31 +49,52 @@ void drawPoint(
 
     
 void drawRectangle(
-    const Vec2& left_up,
+    const Vec2& left_top,
     const Vec2& size,
     const Color& color
 ){
 
-    //  状態設定
-    t3::RenderSystem::resetBufferBind();
 
-    //  頂点配列を作る
-    float x0 = left_up.x_;
-    float x1 = left_up.x_ + size.x_;
-    float y0 = left_up.y_;
-    float y1 = left_up.y_ + size.y_;
     
     t3::GameSystem& gs = t3::GameSystem::getInstance();
     
     float screen_width = gs.getScreenSize().x_ * 0.5f;
     float screen_height = gs.getScreenSize().y_ * 0.5f;
     
-    x0 /= screen_width;
-    x1 /= screen_width;
-    y0 /= screen_height;
-    y1 /= screen_height;
+    Vec2 view_left_top(
+        left_top.x_ / screen_width,
+        left_top.y_ / screen_height
+    );
     
+    Vec2 view_right_bottom(
+        (left_top.x_ + size.x_) / screen_width,
+        (left_top.y_ + size.y_) / screen_height
+    );
     
+    drawRectangleViewport(
+        view_left_top,
+        view_right_bottom,
+        color
+    );
+
+}
+
+void drawRectangleViewport(
+    const Vec2& left_top,
+    const Vec2& right_bottom,
+    const Color& color
+) {
+
+    //  状態設定
+    t3::RenderSystem::resetBufferBind();
+
+    //  頂点配列を作る
+    float x0 = left_top.x_;
+    float x1 = right_bottom.x_;
+    float y0 = left_top.y_;
+    float y1 = right_bottom.y_;
+    
+
     float varray[] = {
         x0, y0,
         x0, y1,
@@ -101,14 +122,13 @@ void drawRectangle(
     
     simple2d_.setUniform(
         "in_color",
-        color.redf(),
-        color.greenf(),
-        color.bluef(),
-        color.alphaf()
+        color.getRedf(),
+        color.getGreenf(),
+        color.getBluef(),
+        color.getAlphaf()
     );
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
 }
 
 void drawSegment(

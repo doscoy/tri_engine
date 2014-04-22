@@ -5,6 +5,7 @@
 #include "dbg/tri_dbg.hpp"
 
 #include "gfx/tri_texture.hpp"
+
 #include "audio/tri_audio_resource.hpp"
 #include "geometry/tri_geometry.hpp"
 
@@ -25,7 +26,6 @@ void GameSystem::addTask(
 ) {
     t3::GameSystem::getInstance().task_manager_.attach(task);
 }
-    
 
 
 RenderLayer* GameSystem::getLayer(
@@ -49,6 +49,19 @@ Vec2 GameSystem::screenToViewport(
 }
 
 
+void GameSystem::fadeOut() {
+    t3::GameSystem::getInstance().fade_layer_.fadeOut(1.0f);
+}
+
+void GameSystem::fadeIn() {
+    t3::GameSystem::getInstance().fade_layer_.fadeIn(1.0f);
+}
+
+bool GameSystem::isFadeEnd() {
+    return t3::GameSystem::getInstance().fade_layer_.isFadeEnd();
+}
+
+
 // *********************************************
 //  コンストラクタ
 GameSystem::GameSystem()
@@ -56,6 +69,7 @@ GameSystem::GameSystem()
     , screen_size_()
     , input_()
     , layers_()
+    , fade_layer_()
     , event_manager_("ev_man", true)
     , task_manager_()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
@@ -104,10 +118,18 @@ void GameSystem::initializeGameSystem() {
         this,
         &GameSystem::unregistryLayersToDebugMenu
     );
+    
+    //  フェードレイヤー登録
+    fade_layer_.setPriority(RenderLayer::PRIORITY_SYS_FADE);
+    fade_layer_.setLayerName("sys-fade");
+    fade_layer_.attachSystem();
 }
 
 
-
+void GameSystem::terminategameSystem() {
+    //  フェードレイヤー登録解除
+    fade_layer_.detachSystem();
+}
 
 // *********************************************
 //  アップデート

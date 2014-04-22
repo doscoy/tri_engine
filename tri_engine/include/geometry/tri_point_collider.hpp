@@ -16,7 +16,8 @@ class CircleCollider;
 class PointCollider
     : public Collider {
 public:
-    ~PointCollider() = default;
+    PointCollider(const HashString& name);
+    ~PointCollider(){}
             
 public:
     bool isHit(const CircleCollider& col) const override;
@@ -27,6 +28,10 @@ public:
 public:
     const Vec2& getPosition() const {
         return position_;
+    }
+    
+    void setPosition(const Vec2& pos) {
+        position_ = pos;
     }
 
 private:

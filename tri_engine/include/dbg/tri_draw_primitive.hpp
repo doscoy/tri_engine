@@ -42,6 +42,11 @@ void drawRectangle(
      const Color& color
 );
 
+void drawRectangleViewport(
+    const Vec2& left_top,
+    const Vec2& right_bottom,
+    const Color& color
+);
 
 
 void drawPlane(

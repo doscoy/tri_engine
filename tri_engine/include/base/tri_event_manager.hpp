@@ -83,7 +83,7 @@ private:
         const Event& in_event
     );
     
-    friend bool safeQueEvent(
+    friend bool safeQueueEvent(
         const EventHandle& in_event
     );
     
@@ -125,7 +125,7 @@ bool safeTriggerEvent(
     const Event& in_event
 );
     
-bool safeQueEvent(
+bool safeQueueEvent(
     const EventHandle& in_event
 );
     

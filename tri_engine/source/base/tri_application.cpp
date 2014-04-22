@@ -126,9 +126,8 @@ void initializeTriEngine(int width, int height, const char* title) {
 inline namespace base {
 
 
-Application::Application(
-    SceneGenerator* root_scene_generator
-)   : root_scene_generator_( root_scene_generator )
+Application::Application()
+    : root_scene_generator_(nullptr)
     , system_menu_( nullptr )
     , last_scene_change_frame_( 0 )
 {
@@ -164,7 +163,8 @@ void Application::initializeWorkBar() {
 
 void Application::initializeApplication()
 {
-    SceneManager::getInstance().forceChangeScene( root_scene_generator_ );
+    T3_NULL_ASSERT(root_scene_generator_);
+    SceneManager::getInstance().forceChangeScene(root_scene_generator_);
 
     //  レンダリングシステムの初期化
     t3::RenderSystem::initializeRenderSystem();
@@ -188,6 +188,9 @@ void Application::initializeApplication()
     initializeDebugPrint();
     initializeDrawPrimitive();
     initializeTrace();
+
+    //  ゲームの初期化
+    initializeGame();
 
 }
 
@@ -349,6 +352,10 @@ void Application::renderApplication()
 
 
 void Application::terminateApplication() {
+    //  ゲームの終了処理
+    terminateGame();
+    
+    //  プラットフォームの後片付け
     platform::terminatePlatform();
 }
 
