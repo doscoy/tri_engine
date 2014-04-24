@@ -14,6 +14,8 @@ SpriteLayer::SpriteLayer()
 
 SpriteLayer::~SpriteLayer()
 {
+    detachAllSprite();
+
     sprites_.clear();
 }
 
@@ -77,6 +79,18 @@ void SpriteLayer::detachSprite(std::shared_ptr<Sprite> const sprite) {
     sprites_.remove(sprite);
     sprite->setAttachedLayer(nullptr);
 }
+
+
+void SpriteLayer::detachAllSprite() {
+    container_t::iterator it = sprites_.begin();
+    container_t::iterator end = sprites_.end();
+    
+    while (it != end) {
+        (*it)->setAttachedLayer(nullptr);
+        it = sprites_.erase(it);
+    }
+}
+
 
 
 }   // inline namespace gfx

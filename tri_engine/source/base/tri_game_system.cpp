@@ -61,6 +61,15 @@ bool GameSystem::isFadeEnd() {
     return t3::GameSystem::getInstance().fade_layer_.isFadeEnd();
 }
 
+bool GameSystem::isFadeInEnd() {
+    return t3::GameSystem::getInstance().fade_layer_.isFadeInEnd();
+}
+
+bool GameSystem::isFadeOutEnd() {
+    return t3::GameSystem::getInstance().fade_layer_.isFadeOutEnd();
+}
+
+
 
 // *********************************************
 //  コンストラクタ
@@ -133,11 +142,45 @@ void GameSystem::terminategameSystem() {
 
 // *********************************************
 //  アップデート
-void GameSystem::update( tick_t delta_time )
-{
+void GameSystem::update(
+    const tick_t delta_time
+) {
     //  起動からのフレーム数カウント
     frame_counter_.up();
+
+    //  入力更新
+    updateInput(delta_time);
     
+    //  タスク更新
+    task_manager_.updateTask(delta_time);
+
+    //  コリジョン判定
+    CollisionManager& col_manager = CollisionManager::getInstance();
+    col_manager.collisionDetection();
+    
+    //  イベントのブロードキャスト
+    safeTickEventManager();
+    
+    
+    //  終了リクエストチェック
+    if (platform::isExitRequest()) {
+        exit_request_ =  true;
+    }
+}
+
+void GameSystem::suspend(
+    const tick_t delta_time
+) {
+    setClearColor();
+    
+    //  入力更新
+    updateInput(delta_time);
+}
+
+
+void GameSystem::updateInput(
+    const tick_t delta_time
+) {
     for (int pad_idx = 0; pad_idx < MAX_PAD; ++pad_idx){
         Input& input = input_[pad_idx];
     
@@ -178,28 +221,9 @@ void GameSystem::update( tick_t delta_time )
         dpad_buttons |= vpad->getPadData()->getButtonData();
     }
     updateDebugPad(dpad_buttons, delta_time);
-    
-    //  タスク更新
-    task_manager_.updateTask(delta_time);
 
-    //  コリジョン判定
-    CollisionManager& col_manager = CollisionManager::getInstance();
-    col_manager.collisionDetection();
-    
-    //  イベントのブロードキャスト
-    safeTickEventManager();
-    
-    
-    //  終了リクエストチェック
-    if (platform::isExitRequest()) {
-        exit_request_ =  true;
-    }
 }
 
-void GameSystem::suspend( tick_t delta_time )
-{
-    setClearColor();
-}
 
 void GameSystem::setClearColor()
 {    
@@ -258,6 +282,11 @@ void GameSystem::unregistryLayersToDebugMenu()
     for (auto layer: layers_) {
         layer->unregistryToDebugMenu();
     }
+}
+
+void GameSystem::showTask() const {
+
+    task_manager_.printTask();
 }
 
 

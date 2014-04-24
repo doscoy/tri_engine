@@ -4,17 +4,16 @@
 
 #include "math/tri_math_types.hpp"
 #include "tri_circle.hpp"
-
+#include "tri_rectangle.hpp"
 
 
 namespace t3 {
 inline namespace geometry {
 
 
-bool isHitPointAABB(
+bool isHitPointRectangle(
     const Vec2& point,
-    const Vec2& aabb_refttop,
-    const Vec2& aabb_size
+    const Rectangle& rect
 );
 
 bool isHitCircleCircle(

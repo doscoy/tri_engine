@@ -18,7 +18,8 @@ namespace {
 
 
 bool show_work_bar_ = true;
-bool show_work_time_ = true;
+bool show_work_time_ = false;
+bool show_task_ = false;
 t3::Workbar cpu_bar_;
 
 t3::Stopwatch system_cost_timer_;
@@ -75,6 +76,7 @@ public:
         , dmb_dump_allocater_log_( &dmf_system_, "DUMP ALLOCATE LOG", 0 )
         , dmi_show_work_time_( &dmf_system_, "SHOW WORKTIME", show_work_time_, 1 )
         , dmi_show_work_bar_( &dmf_system_, "SHOW WORKBAR", show_work_bar_, 1 )
+        , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_, 1)
     {
         t3::GameSystem::getInstance().registryToDebugMenu( dmf_system_ );
     }
@@ -92,6 +94,7 @@ private:
     t3::DebugMenuButtonFunctor<DumpAllocatorLog> dmb_dump_allocater_log_;
     t3::DebugMenuItem<bool> dmi_show_work_time_;
     t3::DebugMenuItem<bool> dmi_show_work_bar_;
+    t3::DebugMenuItem<bool> dm_show_task_;
 };
 
 
@@ -213,8 +216,10 @@ void Application::updateApplication()
     delta_time *= game_speed;
     
     dm.update(delta_time);
-    gs.update(delta_time);
-
+    
+    if (!isSuspend()) {
+        gs.update(delta_time);
+    }
     //  レイヤーの更新
     RenderLayer::updateLayers(gs.getLaysers(), delta_time);
 
@@ -287,8 +292,8 @@ void Application::renderApplication()
     }
     
     if (show_work_time_) {
-        int cost_pos_x = 0;
-        int cost_pos_y = 0;
+        int cost_pos_x = 5;
+        int cost_pos_y = 880;
         t3::printDisplay(
             cost_pos_x,
             cost_pos_y,
@@ -322,6 +327,11 @@ void Application::renderApplication()
             last_other_cost_ / frameSec<60>() * 100
         );
         
+    }
+    
+    
+    if (show_task_) {
+        gs.showTask();
     }
 
 

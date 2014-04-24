@@ -13,6 +13,7 @@
 #include "tri_plane.hpp"
 #include "tri_point_collider.hpp"
 #include "tri_segment.hpp"
+#include "tri_rectangle.hpp"
 #include "tri_sphere.hpp"
 #include "tri_transform.hpp"
 

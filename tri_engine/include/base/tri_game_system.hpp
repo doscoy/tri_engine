@@ -60,8 +60,14 @@ public:
     }
     
 
-    void update( tick_t delta_time );
-    void suspend( tick_t delta_time );
+    void update(
+        const tick_t delta_time
+    );
+    
+    void suspend(
+        const tick_t delta_time
+    );
+    
     bool isSuspend() const {
         return suspend_;
     }
@@ -69,6 +75,11 @@ public:
     void setSuspend( const bool suspend ){
         suspend_ = suspend;
     }
+    
+    void updateInput(
+        const tick_t delta_time
+    );
+    
     
     void registryToDebugMenu(DebugMenuFrame& parent_frame);
     
@@ -96,6 +107,8 @@ public:
     }
     
     
+    void showTask() const;
+    
 public:
     static void addTask(std::shared_ptr<Task> task);
     
@@ -110,6 +123,10 @@ public:
     static void fadeIn();
     
     static bool isFadeEnd();
+    
+    static bool isFadeInEnd();
+    
+    static bool isFadeOutEnd();
     
 private:
     void setClearColor();

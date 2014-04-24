@@ -41,7 +41,7 @@ public:
     ) = 0;
     
     virtual bool triggerEvent(
-        const Event& in_event
+        const EventHandle& in_event
     ) = 0;
     
     virtual bool queueEvent(
@@ -80,7 +80,7 @@ private:
     );
 
     friend bool safeTriggerEvent(
-        const Event& in_event
+        const EventHandle& in_event
     );
     
     friend bool safeQueueEvent(
@@ -122,7 +122,7 @@ bool safeRemoveListener(
 );
     
 bool safeTriggerEvent(
-    const Event& in_event
+    const EventHandle& in_event
 );
     
 bool safeQueueEvent(
@@ -200,7 +200,7 @@ public:
     ) override;
     
     bool triggerEvent(
-        const Event& in_event
+        const EventHandle& in_event
     ) override;
     
     bool queueEvent(

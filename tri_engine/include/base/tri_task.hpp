@@ -30,13 +30,22 @@ public:
 
 public:
     Task(int priority = PRIORITY_APP_DEFAULT)
-        : priority_(priority)
+        : Task("????", priority)
+    {
+    }
+    
+    Task(
+        const char* const name,
+        int priority = PRIORITY_APP_DEFAULT
+    )   : priority_(priority)
         , kill_(false)
         , active_(true)
         , paused_(false)
         , inital_update_(true)
         , attached_(false)
-    {}
+    {
+        setTaskName(name);
+    }
         
     virtual ~Task()
     {}
@@ -95,6 +104,13 @@ public:
         paused_ = !paused_;
     }
 
+    void setTaskName(const char* const name) {
+        std::strncpy(task_name_, name, 16);
+    }
+    
+    const char* getTaskName() const {
+        return task_name_;
+    }
 
 public:
     bool operator <(const Task& rhs) {
@@ -126,6 +142,8 @@ private:
     bool inital_update_;
     bool attached_;
     std::shared_ptr<Task> next_;
+    char task_name_[16];
+
 };
 
 

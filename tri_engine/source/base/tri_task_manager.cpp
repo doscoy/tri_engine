@@ -1,6 +1,8 @@
 
 #include "tri_task_manager.hpp"
 #include <functional>
+#include "dbg/tri_print.hpp"
+
 
 namespace t3 {
 inline namespace base {
@@ -45,6 +47,21 @@ void TaskManager::updateTask(const tick_t delta_time) {
         }
     }
     
+}
+
+void TaskManager::printTask() const {
+    
+    TaskList::const_iterator itr = taskes_.begin();
+    TaskList::const_iterator end = taskes_.end();
+    
+    int task_num = 0;
+    for (; itr != end; ++itr) {
+        int show_x = task_num / 61;
+        int show_y = task_num % 61;
+        std::shared_ptr<Task> t(*itr);
+        t3::printDisplay(show_x * 120, show_y * 15, "%s", t->getTaskName());
+        task_num += 1;
+    }
 }
 
 }   // namespace base

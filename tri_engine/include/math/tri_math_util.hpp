@@ -129,14 +129,25 @@ inline float atan2f( float y, float x ){
     return std::atan2( y, x );
 }
 
-//  浮動小数０判定
-inline bool isZeroFloat( float f ){
-    if ( f > -EPSILON && f < EPSILON ){
-        return true;
-    }
-    
-    return false;
+
+//  浮動小数判定
+inline bool isEqualFloat(
+    float val,
+    float f
+) {
+    return inRange(val, f-EPSILON, f+EPSILON);
 }
+
+
+//  浮動小数０判定
+inline bool isZeroFloat(float f){
+    
+    return isEqualFloat(f, 0.0f);
+}
+
+
+
+
 
 } // inline namespace util
 } // namespace t3

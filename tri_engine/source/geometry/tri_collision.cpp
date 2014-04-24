@@ -7,16 +7,18 @@
 namespace t3 {
 inline namespace geometry {
 
-bool isHitPointAABB(
+bool isHitPointRectangle(
     const Vec2& point,
-    const Vec2& aabb_refttop,
-    const Vec2& aabb_size
+    const Rectangle& rect
 ) {
-    Vec2 aabb_rightdown = aabb_refttop + aabb_size;
-    if (point.x_ < aabb_refttop.x_ || point.x_ > aabb_rightdown.x_) {
+
+    const Vec2& min = rect.getMin();
+    const Vec2& max = rect.getMax();
+
+    if (point.x_ < min.x_ || point.x_ > max.x_) {
         return false;
     }
-    else if (point.y_ < aabb_refttop.y_ || point.y_ > aabb_rightdown.y_) {
+    else if (point.y_ < min.y_ || point.y_ > max.y_) {
         return false;
     }
     

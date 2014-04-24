@@ -30,6 +30,8 @@ public:
     
     ~TaskManager();
     
+    void printTask() const;
+    
 protected:
     TaskList taskes_;
     

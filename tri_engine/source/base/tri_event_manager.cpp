@@ -63,7 +63,7 @@ bool safeRemoveListener(
 }
 
 bool safeTriggerEvent(
-    const Event& in_event
+    const EventHandle& in_event
 ) {
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->triggerEvent(in_event);
@@ -228,9 +228,9 @@ bool EventManager::removeListener(const EventListenerPtr &listener) {
 
 
 bool EventManager::triggerEvent(
-    const t3::Event& in_event
+    const t3::EventHandle& in_event
 ) {
-    if (!isValidateEventType(in_event.getEventType())) {
+    if (!isValidateEventType(in_event->getEventType())) {
         return false;
     }
 
@@ -242,11 +242,11 @@ bool EventManager::triggerEvent(
         EventListenerTable::const_iterator table_it = table.begin();
         EventListenerTable::const_iterator table_end = table.end();
         for (; table_it != table_end; ++table_it) {
-            (*table_it)->handleEvent(in_event);
+            (*table_it)->handleEvent(*in_event);
         }
     }
     
-    EventListenerMap::const_iterator it = registry_.find((in_event.getEventType().key()));
+    EventListenerMap::const_iterator it = registry_.find((in_event->getEventType().key()));
     
     if (it == registry_.end()) {
         return false;
@@ -262,7 +262,7 @@ bool EventManager::triggerEvent(
     
     for (; table_it != table_end; ++table_it) {
         EventListenerPtr listener = *table_it;
-        if (listener->handleEvent(in_event)) {
+        if (listener->handleEvent(*in_event)) {
             processed = true;
         }
     }

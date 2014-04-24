@@ -49,12 +49,10 @@ void drawPoint(
 
     
 void drawRectangle(
-    const Vec2& left_top,
+    const Vec2& min_pos,
     const Vec2& size,
     const Color& color
 ){
-
-
     
     t3::GameSystem& gs = t3::GameSystem::getInstance();
     
@@ -62,13 +60,13 @@ void drawRectangle(
     float screen_height = gs.getScreenSize().y_ * 0.5f;
     
     Vec2 view_left_top(
-        left_top.x_ / screen_width,
-        left_top.y_ / screen_height
+        min_pos.x_ / screen_width,
+        min_pos.y_ / screen_height
     );
     
     Vec2 view_right_bottom(
-        (left_top.x_ + size.x_) / screen_width,
-        (left_top.y_ + size.y_) / screen_height
+        (min_pos.x_ + size.x_) / screen_width,
+        (min_pos.y_ + size.y_) / screen_height
     );
     
     drawRectangleViewport(

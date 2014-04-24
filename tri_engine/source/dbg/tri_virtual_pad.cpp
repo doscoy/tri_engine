@@ -2,10 +2,11 @@
 #include "tri_draw_primitive.hpp"
 #include "base/tri_game_system.hpp"
 #include "geometry/tri_collision.hpp"
-
+#include "geometry/tri_rectangle.hpp"
 
 
 namespace {
+
 const float PAD_Y = -310;
 const t3::Vec2 BUTTON_SIZE(64, 64);
 
@@ -19,6 +20,14 @@ const t3::Vec2 POS_RIGHT = CROSS_BASE_POS + t3::Vec2(offset, 0);
 const t3::Vec2 AB_BASE = t3::Vec2(100, PAD_Y);
 const t3::Vec2 POS_A = AB_BASE + t3::Vec2(0, 0);
 const t3::Vec2 POS_B = AB_BASE + t3::Vec2(offset + 32, 0);
+
+
+const t3::Rectangle UP_BUTTON(POS_UP, POS_UP + BUTTON_SIZE);
+const t3::Rectangle DOWN_BUTTON(POS_DOWN, POS_DOWN + BUTTON_SIZE);
+const t3::Rectangle LEFT_BUTTON(POS_LEFT, POS_LEFT + BUTTON_SIZE);
+const t3::Rectangle RIGHT_BUTTON(POS_RIGHT, POS_RIGHT + BUTTON_SIZE);
+const t3::Rectangle A_BUTTON(POS_A, POS_A + BUTTON_SIZE);
+const t3::Rectangle B_BUTTON(POS_B, POS_B + BUTTON_SIZE);
 
 }
 
@@ -68,52 +77,47 @@ void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t delta_time)
     const Vec2& pointing_pos = pointing.getPosition();
 
 
-    if (isHitPointAABB(
+    if (isHitPointRectangle(
         pointing_pos,
-        POS_UP,
-        BUTTON_SIZE)) {
+        UP_BUTTON
+    )) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_UP);
     }
 
 
-    if (isHitPointAABB(
+    if (isHitPointRectangle(
         pointing_pos,
-        POS_DOWN,
-        BUTTON_SIZE)) {
+        DOWN_BUTTON)) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_DOWN);
     }
 
 
-    if (isHitPointAABB(
+    if (isHitPointRectangle(
         pointing_pos,
-        POS_RIGHT,
-        BUTTON_SIZE)) {
+        RIGHT_BUTTON)) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_RIGHT);
     }
 
-    if (isHitPointAABB(
+    if (isHitPointRectangle(
         pointing_pos,
-        POS_LEFT,
-        BUTTON_SIZE)) {
+        LEFT_BUTTON)) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_LEFT);
     }
 
 
-    if (isHitPointAABB(
+    if (isHitPointRectangle(
         pointing_pos,
-        POS_A,
-        BUTTON_SIZE)) {
+        A_BUTTON)) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_A);
     }
-    if (isHitPointAABB(
+    if (isHitPointRectangle(
         pointing_pos,
-        POS_B,
-        BUTTON_SIZE)) {
+        B_BUTTON)) {
         //  押してる
         t3::bitOn(pad_data_.button_data_, t3::Pad::BUTTON_B);
     }

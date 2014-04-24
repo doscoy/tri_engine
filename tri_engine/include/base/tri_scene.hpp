@@ -80,7 +80,13 @@ public:
         return TypedSceneGenerator<SceneType>::getInstancePtr();
     }
 
+
 protected:
+    void setFinish(bool f) {
+        finish_ = f;
+    }
+
+private:
     bool finish_;
     const char* scene_name_;
     DebugMenuFrame scene_debug_menu_frame_;

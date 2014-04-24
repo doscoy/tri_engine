@@ -37,7 +37,7 @@ void drawSegment(
 void drawAxis(const Vec3& pos);
 
 void drawRectangle(
-     const Vec2& left_up,
+     const Vec2& min,
      const Vec2& size,
      const Color& color
 );

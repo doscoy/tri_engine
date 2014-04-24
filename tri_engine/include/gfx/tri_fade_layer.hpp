@@ -45,9 +45,29 @@ public:
     }
     
     
-    bool isFadeEnd() {
+    bool isFadeEnd() const {
         return fading_ == false;
     }
+    
+    bool isFadeInEnd() const {
+        if (fade_in_) {
+            if (fading_ == false) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    bool isFadeOutEnd() const {
+        if (!fade_in_) {
+            if (fading_ == false) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 
     void setFadeColor(
         int r,

@@ -29,13 +29,15 @@ public:
         return &sprites_;
     }
 
-    void detachSprite(std::shared_ptr<Sprite> const sprite );
-
+    void detachSprite(std::shared_ptr<Sprite> const sprite);
+    void detachAllSprite();
+    
+    
 private:
     void updateLayer(tick_t delta_time) override;
     void drawLayer() override;
-    void attachSprite(std::shared_ptr<Sprite> const sprite );
-
+    void attachSprite(std::shared_ptr<Sprite> const sprite);
+    
 private:
     SpriteRenderer renderer_;
     container_t sprites_;
