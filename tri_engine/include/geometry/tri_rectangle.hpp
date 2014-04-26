@@ -39,7 +39,25 @@ public:
     
 public:
 
+    void setupFromCenterSize(
+        const Vec2& center,
+        const Vec2& size
+    ) {
+        //  下限上限を計算
+        Vec2 half_size = size / 2;
+        min_ = center - half_size;
+        max_ = center + half_size;
+        
+        //  中心
+        center_ = center;
+        
+        //  サイズ
+        size_ = size;
+    }
     
+    
+
+public:
     void setMin(const Vec2& min) {
         min_ = min;
         calcCenterFromMinMax();
