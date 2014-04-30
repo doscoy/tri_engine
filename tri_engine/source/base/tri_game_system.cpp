@@ -43,11 +43,16 @@ RenderLayer* GameSystem::getLayer(
 }
 
 Vec2 GameSystem::screenToViewport(
-    const Vec2 &screen_pos
+    const Vec2& screen_pos
 ) {
     return screen_pos / t3::GameSystem::getInstance().getScreenSize() * 2.0f;
 }
 
+Vec2 GameSystem::viewportToScreen(
+    const Vec2& viewport_pos
+) {
+    return viewport_pos * t3::GameSystem::getInstance().getScreenSize() * 0.5f;
+}
 
 void GameSystem::fadeOut() {
     t3::GameSystem::getInstance().fade_layer_.fadeOut(1.0f);

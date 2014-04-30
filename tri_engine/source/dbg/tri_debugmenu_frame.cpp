@@ -102,19 +102,19 @@ void DebugMenuFrame::update()
         const Pad& pad = debugPad();
         uint32_t items_size = static_cast<uint32_t>(items_.size());
         
-        if ( pad.isRepeat( t3::Pad::BUTTON_UP ) ){
+        if (pad.isRepeat(t3::Pad::BUTTON_UP)) {
             select_idx_ -= 1;
-            if ( select_idx_ < 0 ){
+            if (select_idx_ < 0) {
                 select_idx_ = items_size -1;
             }
         }
-        else if ( pad.isRepeat( t3::Pad::BUTTON_DOWN ) ){
+        else if (pad.isRepeat(t3::Pad::BUTTON_DOWN)) {
             select_idx_ += 1;
-            if ( select_idx_ >= items_size ){
+            if (select_idx_ >= items_size) {
                 select_idx_ = 0;
             }
         }
-        else if (pad.isTrigger( t3::Pad::BUTTON_RIGHT)){
+        else if (pad.isTrigger(t3::Pad::BUTTON_A)) {
             int idx = 0;
             for (auto item: items_){
                 if (select_idx_ == idx){
@@ -124,8 +124,8 @@ void DebugMenuFrame::update()
                 ++idx;
             }
         }
-        else if (pad.isTrigger( t3::Pad::BUTTON_LEFT)){
-            if (parent_){
+        else if (pad.isTrigger(t3::Pad::BUTTON_B)) {
+            if (parent_) {
                 parent_->setFocusItem(nullptr);
             }
         }
@@ -146,13 +146,13 @@ void DebugMenuFrame::drawFrame(
 
     int idx = 0;
     Color font_color;
-    for ( auto item: items_ ) {
+    for (auto item: items_) {
         T3_NULL_ASSERT(item);
 
-        if ( focus_item_ == item ){
+        if (focus_item_ == item) {
             font_color = Color::orange();
         }
-        else if ( idx == select_idx_ ) {
+        else if (idx == select_idx_) {
             font_color = Color::aqua();
         }
         else {
@@ -160,12 +160,12 @@ void DebugMenuFrame::drawFrame(
         }
         
         //
-        if ( focus_item_ == item && item->hasChild() ) {
+        if (focus_item_ == item && item->hasChild()) {
             //  フレームなのでさらにフレームの内容を描画
-            DebugMenuFrame* dmf = static_cast<DebugMenuFrame*>( item );
+            DebugMenuFrame* dmf = static_cast<DebugMenuFrame*>(item);
             dmf->drawFrame(
                 x + getLabelWidth() * DEBUG_FONT_POINT,
-                y + ( idx * DEBUG_FONT_POINT ) + DEBUG_FONT_POINT / 2,
+                y + (idx * DEBUG_FONT_POINT) + DEBUG_FONT_POINT / 2,
                 font_color
             );
         }

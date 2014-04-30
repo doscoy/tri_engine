@@ -118,6 +118,8 @@ public:
     
     static Vec2 screenToViewport(const Vec2& screen_pos);
     
+    static Vec2 viewportToScreen(const Vec2& viewport_pos);
+    
     static void fadeOut();
     
     static void fadeIn();

@@ -73,9 +73,9 @@ public:
     
     
 private:
-    void attachItem( DebugMenuLabel& item );
+    void attachItem(DebugMenuLabel& item);
     
-    void detachItem( DebugMenuLabel& item );
+    void detachItem(DebugMenuLabel& item);
     
 private:
     DebugMenuList items_;

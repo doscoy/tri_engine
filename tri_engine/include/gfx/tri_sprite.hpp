@@ -190,6 +190,23 @@ public:
         size_ = size;
     }
     
+    //  サイズを設定
+    void setSize(
+        const float w,
+        const float h
+    ) {
+        size_.x_ = w;
+        size_.y_ = h;
+    }
+    
+    //  サイズを設定
+    void setSize(
+        const float s
+    ) {
+        size_.x_ = s;
+        size_.y_ = s;
+    }
+    
     //  スケールを取得
     Vec2& getScale() {
         return scale_;
