@@ -122,10 +122,6 @@ public:
 
 public:
     virtual void taskFrame(tick_t delta_time) {
-        if (inital_update_){
-            taskInitialize();
-            inital_update_ = false;
-        }
         taskUpdate(delta_time);
     }
 

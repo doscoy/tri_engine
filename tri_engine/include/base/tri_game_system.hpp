@@ -110,7 +110,7 @@ public:
     void showTask() const;
     
 public:
-    static void addTask(std::shared_ptr<Task> task);
+    static void addSystemTask(std::shared_ptr<Task> task);
     
     static const Input& getInput(const int player_no = 0);
     

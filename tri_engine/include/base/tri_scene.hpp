@@ -9,6 +9,9 @@
 #include <memory>
 #include "dbg/tri_trace.hpp"
 #include "dbg/tri_debugmenu_frame.hpp"
+#include "tri_task_manager.hpp"
+
+
 
 namespace t3 {
 inline namespace base {
@@ -29,7 +32,7 @@ class TypedSceneGenerator
     typedef TypedSceneGenerator<T>  self_t;
     typedef T                       scene_t;
 public:
-    // *********************************************
+    
     //  インスタンス取得
     static self_t* getInstancePtr() {
         static self_t instance_;
@@ -37,10 +40,9 @@ public:
     }
     
     
-    // *********************************************
     //  シーン生成
     std::shared_ptr<Scene> createScene() override {
-        return std::shared_ptr<Scene>( T3_NEW T );
+        return std::shared_ptr<Scene>( T3_NEW scene_t );
     }
 
 };
@@ -63,6 +65,10 @@ public:
     virtual void updateScene(tick_t){};
     virtual void suspendScene(tick_t){};
     
+public:
+    void update(tick_t delta_time);
+    void suspend(tick_t delta_time);
+    
     bool isFinished() const {
         return finish_;
     };
@@ -80,6 +86,9 @@ public:
         return TypedSceneGenerator<SceneType>::getInstancePtr();
     }
 
+    void addSceneTask(std::shared_ptr<Task> task) {
+        task_manager_.attach(task);
+    }
 
 protected:
     void setFinish(bool f) {
@@ -90,6 +99,7 @@ private:
     bool finish_;
     const char* scene_name_;
     DebugMenuFrame scene_debug_menu_frame_;
+    TaskManager task_manager_;
 };
 
 
@@ -137,7 +147,10 @@ public:
     
     void directScene();
 
-
+public:
+    static void addSceneTask(
+        std::shared_ptr<Task> task
+    );
 
 private:
     void sceneChange();

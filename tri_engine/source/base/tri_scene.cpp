@@ -24,7 +24,18 @@ Scene::~Scene()
 }
 
 
+void Scene::update(
+    tick_t delta_time
+) {
+    task_manager_.updateTask(delta_time);
+    updateScene(delta_time);
+}
 
+void Scene::suspend(
+    tick_t delta_time
+) {
+    suspendScene(delta_time);
+}
 
 
 
@@ -55,13 +66,13 @@ SceneManager::~SceneManager()
 void SceneManager::updateScene(
     tick_t delta_time
 ){
-    current_scene_->updateScene( delta_time );
+    current_scene_->update(delta_time);
 }
 
 
 void SceneManager::directScene()
 {
-    if ( current_scene_->isFinished() || force_change_ ){
+    if (current_scene_->isFinished() || force_change_) {
         force_change_ = false;
         sceneChange();
     }
@@ -73,7 +84,7 @@ void SceneManager::directScene()
 void SceneManager::suspendScene(
     tick_t delta_time
 ){
-    current_scene_->suspendScene( delta_time );
+    current_scene_->suspend(delta_time);
 }
 
 
@@ -98,11 +109,17 @@ void SceneManager::sceneChange()
     //  シーンが切り替わったフラグON
     scene_changed_ = true;
     
-    T3_TRACE( "scene change. %s --> %s\n", prev_scene_name, next_scene_name );
+    T3_TRACE("scene change. %s --> %s\n", prev_scene_name, next_scene_name);
 
 }
 
 
+
+void SceneManager::addSceneTask(
+    std::shared_ptr<Task> task
+) {
+    getInstance().current_scene_->addSceneTask(task);
+}
 
 }   // namespace base
 }   // namespace t3

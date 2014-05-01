@@ -8,9 +8,12 @@ namespace t3 {
 inline namespace base {
 
 TaskManager::~TaskManager() {
-    for (auto it : taskes_) {
-        detach( it );
+    //  残ってるタスク全部にkillを立ててから
+    for (auto task : taskes_) {
+        task->killTask();
     }
+    //  アップデートで全消しする
+    updateTask(0);
 }
 
 
@@ -21,6 +24,9 @@ void TaskManager::attach(
     task->setAttachedTask(true);
     
     taskes_.sort(std::greater<std::shared_ptr<Task>>());
+    
+    //  タスク初期化
+    task->taskInitialize();
 }
 
 void TaskManager::updateTask(const tick_t delta_time) {
@@ -35,11 +41,15 @@ void TaskManager::updateTask(const tick_t delta_time) {
         
         if (t->isDead()) {
             next = t->getNextTask();
+            //  次のタスクが存在しているなら登録
             if (next) {
                 t->setNextTask(std::shared_ptr<Task>(nullptr));
                 attach(next);
             }
+            //  タスク後片付け
             t->taskTerminate();
+            
+            //  登録解除
             detach(t);
         }
         else if (t->isActiveTask() && !t->isPausedTask()) {

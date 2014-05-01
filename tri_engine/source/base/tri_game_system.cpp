@@ -21,10 +21,10 @@ const Input& GameSystem::getInput(
     return t3::GameSystem::getInstance().input_.at(player_no);
 }
     
-void GameSystem::addTask(
+void GameSystem::addSystemTask(
     std::shared_ptr<Task> task
 ) {
-    t3::GameSystem::getInstance().task_manager_.attach(task);
+    getInstance().task_manager_.attach(task);
 }
 
 
