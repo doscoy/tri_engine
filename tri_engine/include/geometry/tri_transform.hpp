@@ -21,17 +21,17 @@ public:
 
 public:
     //  位置
-    const Vec2& getPosition() const {
+    const Vec2& getLocalPosition() const {
         return position_;
     }
     
-    void setPosition(
+    void setLocalPosition(
         const Vec2& pos
     ) {
         position_ = pos;
     }
     
-    void setPosition(
+    void setLocalPosition(
         const float x,
         const float y
     ) {
@@ -40,10 +40,15 @@ public:
     }
     
     //  回転角
-    const float getRotation() const {
+    float getLocalRotation() const {
         return rotation_;
     }
     
+    void setLocalRotation(
+        const float rot
+    ) {
+        rotation_ = rot;
+    }
     
     //  スケール
     const Vec2& getScale() const {
@@ -64,10 +69,56 @@ public:
         scale_.y_ = y;
     }
 
+    void setParentTransform(
+        const Transform2D* parent
+    ) {
+        parent_ = parent;
+    }
+    
+    bool hasParent() const {
+        return parent_ != nullptr;
+    }
+
+    t3::Vec2 getGlobalPosition() const {
+        if (!hasParent()) {
+            //  親が居ないのでただ座標を返す
+            return position_;
+        }
+        
+        //  親が居る
+        //  親の情報と掛けあわせてグローバル座標を計算
+        
+        //  親の回転の影響を受けた座標
+        float parent_rotate = parent_->getGlobalRotation();
+        float cos_angle = std::cos(parent_rotate);
+        float sin_angle = std::sin(parent_rotate);
+
+        t3::Vec2 rotate_pos(
+            (position_.x_ * cos_angle) - (position_.x_ * sin_angle),
+            (position_.y_ * sin_angle) + (position_.y_ * cos_angle)
+        );
+
+        rotate_pos += parent_->getGlobalPosition();
+        return rotate_pos;
+    }
+    
+    
+    float getGlobalRotation() const {
+        if (!hasParent()) {
+            //  親が居ないのでただ回転情報を返す
+            return rotation_;
+        }
+        
+        //  親がいる
+        return rotation_ + parent_->getGlobalRotation();
+    }
+
+
 private:
     Vec2 position_;
     float rotation_;
     Vec2 scale_;
+    const Transform2D* parent_;
 };
 
 

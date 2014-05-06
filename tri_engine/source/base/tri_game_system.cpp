@@ -45,21 +45,21 @@ RenderLayer* GameSystem::getLayer(
 Vec2 GameSystem::screenToViewport(
     const Vec2& screen_pos
 ) {
-    return screen_pos / t3::GameSystem::getInstance().getScreenSize() * 2.0f;
+    return screen_pos / getInstance().getScreenSize() * 2.0f;
 }
 
 Vec2 GameSystem::viewportToScreen(
     const Vec2& viewport_pos
 ) {
-    return viewport_pos * t3::GameSystem::getInstance().getScreenSize() * 0.5f;
+    return viewport_pos * getInstance().getScreenSize() * 0.5f;
 }
 
 void GameSystem::fadeOut() {
-    t3::GameSystem::getInstance().fade_layer_.fadeOut(1.0f);
+    getInstance().fade_layer_.fadeOut(1.0f);
 }
 
 void GameSystem::fadeIn() {
-    t3::GameSystem::getInstance().fade_layer_.fadeIn(1.0f);
+    getInstance().fade_layer_.fadeIn(1.0f);
 }
 
 bool GameSystem::isFadeEnd() {
@@ -71,7 +71,11 @@ bool GameSystem::isFadeInEnd() {
 }
 
 bool GameSystem::isFadeOutEnd() {
-    return t3::GameSystem::getInstance().fade_layer_.isFadeOutEnd();
+    return getInstance().fade_layer_.isFadeOutEnd();
+}
+
+const Vec2& GameSystem::getScreenSize() {
+    return getInstance().screen_size_;
 }
 
 

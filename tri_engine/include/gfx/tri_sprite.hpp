@@ -24,16 +24,17 @@ class SpriteLayer;
 class Sprite final
     : private Uncopyable 
 {
+    friend class SpriteLayer;
+
+public:
     enum Priority {
         PRIORITY_LOWEST  = 10,
-        PRIORITY_LOW     = 30,
-        PRIORITY_NORMAL  = 50,
-        PRIORITY_HIGH    = 80,
-        PRIORITY_HIGHEST = 100
+        PRIORITY_LOW     = 130,
+        PRIORITY_NORMAL  = 150,
+        PRIORITY_HIGH    = 180,
+        PRIORITY_HIGHEST = 200
     };
 
-
-    friend class SpriteLayer;
 
 public:
     ~Sprite();
@@ -56,8 +57,8 @@ public:
     void setTransform(
         const Transform2D& transform
     ) {
-        setPosition(transform.getPosition());
-        setRotation(transform.getRotation());
+        setPosition(transform.getGlobalPosition());
+        setRotation(transform.getGlobalRotation());
         setScale(transform.getScale());
     }
 

@@ -122,6 +122,8 @@ void initializeTriEngine(int width, int height, const char* title) {
             height
         )
     );
+    
+    T3_TRACE("screen width %d  height %d", width, height);
 }
 
 
@@ -264,18 +266,21 @@ void Application::renderApplication()
     
 
     //  CPU負荷可視化
-    if ( show_work_bar_ ){
+    if (show_work_bar_){
         cpu_bar_.setParam(0, system_cost_timer_.interval());
         cpu_bar_.setParam(1, app_cost_timer_.interval());
         cpu_bar_.setParam(2, rendering_cost_timer_.interval());
         cpu_bar_.setParam(3, other_cost_timer_.interval());
-        cpu_bar_.draw();
     }
 
     rendering_cost_timer_.start();      // rendering cost 計算開始
     //  レイヤーの描画
     RenderLayer::drawLayers(gs.getLaysers());
     rendering_cost_timer_.end();           // rendering cost 計算終了
+
+    if (show_work_bar_) {
+        cpu_bar_.draw();
+    }
 
     //  描画終了
     endRender();

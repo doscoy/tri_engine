@@ -9,11 +9,7 @@ inline namespace base {
 
 TaskManager::~TaskManager() {
     //  残ってるタスク全部にkillを立ててから
-    for (auto task : taskes_) {
-        task->killTask();
-    }
-    //  アップデートで全消しする
-    updateTask(0);
+    killAllTask();
 }
 
 
@@ -73,6 +69,19 @@ void TaskManager::printTask() const {
         task_num += 1;
     }
 }
+
+void TaskManager::killAllTask() {
+    TaskList::iterator itr = taskes_.begin();
+    TaskList::iterator end = taskes_.end();
+    
+    while (itr != end) {
+        std::shared_ptr<Task> t(*itr);
+        ++itr;
+        t->taskTerminate();
+        detach(t);
+    }
+}
+
 
 }   // namespace base
 }   // namespace t3

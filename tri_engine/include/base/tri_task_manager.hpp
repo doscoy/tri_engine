@@ -40,6 +40,8 @@ private:
         taskes_.remove(task);
         task->setAttachedTask(false);
     }
+    
+    void killAllTask();
 };
 
 }   // namespace base

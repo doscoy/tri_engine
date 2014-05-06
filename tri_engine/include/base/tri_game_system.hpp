@@ -40,10 +40,6 @@ public:
     
 // ---------------------------------------------
 //  ビューポート管理
-    //  スクリーンサイズを取得
-    const Vec2& getScreenSize() const {
-        return screen_size_;
-    }
     
     //  スクリーンサイズを設定
     void setScreenSize(const Vec2& vp) {
@@ -129,6 +125,8 @@ public:
     static bool isFadeInEnd();
     
     static bool isFadeOutEnd();
+    
+    static const Vec2& getScreenSize();
     
 private:
     void setClearColor();

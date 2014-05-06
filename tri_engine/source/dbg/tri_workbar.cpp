@@ -23,7 +23,7 @@ Workbar::Workbar()
         Color::aqua(),
         Color::green(),
         Color::orange()}}
-    , limit_param_(util::frameSec<30>())
+    , limit_param_(util::frameSec<60>())
     , limit_width_pixel_(200)
     , keep_frame_(0)
     , limit_bar_pos_x_(std::numeric_limits<int>::min())

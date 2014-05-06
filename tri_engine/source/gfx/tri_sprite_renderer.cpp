@@ -19,7 +19,7 @@ class PriorityCompare
 {
 public:
     bool operator()(const t3::Sprite* lhs, const t3::Sprite* rhs) const {
-        return lhs->getSortScore() > rhs->getSortScore();
+        return lhs->getSortScore() < rhs->getSortScore();
     }
 };
 

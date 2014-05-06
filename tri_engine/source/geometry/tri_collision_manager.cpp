@@ -101,7 +101,6 @@ void CollisionManager::judgeColliderPairs(
     if (b->getCollisionType() == CircleCollider::TYPE) {
         CircleCollider* circle_coll = static_cast<CircleCollider*>(b.get());
         if (a->isHit(*circle_coll)) {
-            T3_TRACE("hit\n");
             //  当たった
             auto event = std::make_shared<CollisionEvent>();
             event->pos_ = circle_coll->getCircle().getPosition();

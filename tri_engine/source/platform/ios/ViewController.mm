@@ -115,7 +115,7 @@ GADBannerView* banner_view_ = nullptr;
     // 各機種で内部の座標系を統一する
     screen_scale_ = [UIScreen mainScreen].scale;
 
-    CGRect bounds = view.bounds;
+    CGRect bounds = [UIScreen mainScreen].bounds;
     screen_x_ = bounds.size.width * screen_scale_;
     screen_y_ = bounds.size.height * screen_scale_;
     
