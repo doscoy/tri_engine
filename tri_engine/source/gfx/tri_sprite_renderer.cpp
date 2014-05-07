@@ -140,7 +140,7 @@ void SpriteRenderer::margeSprites() {
         const Vec2& pivot = spr->getPivot();
         const Vec2& size = spr->getSize();
         const Vec2& scale = spr->getScale();
-        float angle = -toRadian(spr->getRotation());
+        float angle = toRadian(spr->getRotation());
         const texture_coord_t& uv = spr->getTextureCoord();
 
         //  初期配置

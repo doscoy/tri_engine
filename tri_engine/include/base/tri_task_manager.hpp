@@ -32,6 +32,10 @@ public:
     
     void printTask() const;
     
+    int getTaskCount() const {
+        return taskes_.size();
+    }
+    
 protected:
     TaskList taskes_;
     
