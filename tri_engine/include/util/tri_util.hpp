@@ -17,7 +17,7 @@
 #include "tri_counter.hpp"
 #include "random/tri_random.hpp"
 #include "tri_method_callback.hpp"
-
+#include "tri_stopwatch.hpp"
 
 
 

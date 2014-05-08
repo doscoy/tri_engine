@@ -55,12 +55,17 @@ void Workbar::setParam(
 }
 
 
+
+//  描画
 void Workbar::draw() {
+    //
     float start_x = position_.x_;
     float y = position_.y_;
     float total_param = 0;
-    for (int idx = 0; idx < MAX_WORKBAR_ITEM; ++idx){
-        float param = bar_params_[idx];
+    
+    //  計測済の項目それぞれを描画
+    for (float param : bar_params_) {
+
         float pixel_width = (param / limit_param_) * limit_width_pixel_;
         if (pixel_width < 1.0){
             continue;

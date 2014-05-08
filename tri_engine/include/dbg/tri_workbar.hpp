@@ -41,8 +41,11 @@ public:
     
     
 private:
-    std::array<float, MAX_WORKBAR_ITEM> bar_params_;
-    std::array<Color, MAX_WORKBAR_ITEM> bar_colors_;
+    struct Param {
+        float value_;
+        Color color_;
+    };
+    std::array<Param, MAX_WORKBAR_ITEM> bar_params_;
     float limit_param_;
     int limit_width_pixel_;
     int keep_frame_;

@@ -2,9 +2,11 @@
 #define TRI_APPLICATION_HPP_INCLUDED
 
 
-#include "../util/tri_uncopyable.hpp"
+#include "util/tri_uncopyable.hpp"
 #include <memory>
 #include "tri_types.hpp"
+#include "util/tri_stopwatch.hpp"
+
 
 class ApplicationDebugMenu;
 
@@ -63,6 +65,7 @@ private:
     std::unique_ptr<ApplicationDebugMenu> system_menu_;
     SceneGenerator* root_scene_generator_;
     uint32_t last_scene_change_frame_;
+    Stopwatch fps_timer_;
 };
 
 

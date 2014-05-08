@@ -3,7 +3,6 @@
 #include "base/tri_game_system.hpp"
 #include "base/tri_scene.hpp"
 #include "dbg/tri_debugmenu.hpp"
-#include "dbg/tri_stopwatch.hpp"
 #include "dbg/tri_workbar.hpp"
 #include "dbg/tri_draw_primitive.hpp"
 #include "dbg/tri_debugpad.hpp"
@@ -12,6 +11,7 @@
 #include "kernel/tri_kernel.hpp"
 #include "gfx/tri_render_system.hpp"
 #include "audio/tri_audio_system.hpp"
+#include "util/tri_stopwatch.hpp"
 
 
 namespace {
@@ -34,28 +34,25 @@ double last_other_cost_;
 
 bool step_update_ = false;
 
-struct Step
-{
-    void operator ()( int ){
+struct Step {
+    void operator ()(int){
         step_update_ = true;
     }
 };
 
-struct DumpAllocatorLog
-{
-    void operator ()( int ){
+struct DumpAllocatorLog {
+    void operator ()(int){
         t3::default_allocator_.getAllocationRecorder().dump();
     }
 };
 
 
 
-bool isSuspending()
-{
+bool isSuspending() {
     t3::GameSystem& gs = t3::GameSystem::getInstance();
     t3::DebugMenu& dm = t3::DebugMenu::getInstance();
     
-    if( gs.isSuspend() || dm.isOpened() ){
+    if (gs.isSuspend() || dm.isOpened()) {
         return true;
     }
    
@@ -66,19 +63,18 @@ bool isSuspending()
 }   // unname namespace
 
 
-class ApplicationDebugMenu
-{
+class ApplicationDebugMenu {
 public:
     ApplicationDebugMenu(t3::Application* app)
-        : dmf_system_( nullptr, "SYSTEM" )
-        , dmb_root_menu_( &dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootScene )
-        , dmb_step_( &dmf_system_, "STEP", 0 )
-        , dmb_dump_allocater_log_( &dmf_system_, "DUMP ALLOCATE LOG", 0 )
-        , dmi_show_work_time_( &dmf_system_, "SHOW WORKTIME", show_work_time_, 1 )
-        , dmi_show_work_bar_( &dmf_system_, "SHOW WORKBAR", show_work_bar_, 1 )
+        : dmf_system_(nullptr, "SYSTEM")
+        , dmb_root_menu_(&dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootScene)
+        , dmb_step_(&dmf_system_, "STEP", 0)
+        , dmb_dump_allocater_log_(&dmf_system_, "DUMP ALLOCATE LOG", 0)
+        , dmi_show_work_time_(&dmf_system_, "SHOW WORKTIME", show_work_time_, 1)
+        , dmi_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_, 1)
         , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_, 1)
     {
-        t3::GameSystem::getInstance().registryToDebugMenu( dmf_system_ );
+        t3::GameSystem::getInstance().registryToDebugMenu(dmf_system_);
     }
     
     
@@ -101,7 +97,11 @@ private:
 namespace t3 {
 
 
-void initializeTriEngine(int width, int height, const char* title) {
+void initializeTriEngine(
+    int width,
+    int height,
+    const char* const title
+) {
     
     //  プラットフォームの初期化
     platform::initializePlatform();
@@ -133,8 +133,9 @@ inline namespace base {
 
 Application::Application()
     : root_scene_generator_(nullptr)
-    , system_menu_( nullptr )
-    , last_scene_change_frame_( 0 )
+    , system_menu_(nullptr)
+    , last_scene_change_frame_(0)
+    , fps_timer_()
 {
 }
 
@@ -155,7 +156,7 @@ void Application::initializeWorkBar() {
     
     //  ワークバーの配置
     cpu_bar_.setPosition(Vec2(-half_screen_size.x_ + 10, -half_screen_size.y_ + 10));
-    cpu_bar_.setLimitWidthPixel(screen_size.x_ - 10);
+    cpu_bar_.setLimitWidthPixel(screen_size.x_ - 20);
     
     //  ワークバーの色
     cpu_bar_.setColor(0, Color::blue());
@@ -178,7 +179,7 @@ void Application::initializeApplication()
     t3::AudioSystem::initializeAudioSystem();
 
     //  システムデバッグメニュー登録
-    system_menu_.reset( T3_NEW ApplicationDebugMenu(this) );
+    system_menu_.reset(T3_NEW ApplicationDebugMenu(this));
     
     DebugMenu& debug_menu_root = DebugMenu::getInstance();
     system_menu_->getSystemDebugMenuRoot().attachSelf(
@@ -206,7 +207,11 @@ void Application::updateApplication()
 
     platform::beginUpdate();
 
-    float delta_time = frameSec<60>();
+
+    fps_timer_.end();
+    fps_timer_.start();
+    float delta_time = fps_timer_.interval();
+    t3::printDisplay(0, 100, "fps %f", delta_time);
     
     
     SceneManager& sm = SceneManager::getInstance();
