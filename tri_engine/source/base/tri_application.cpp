@@ -155,8 +155,9 @@ void Application::initializeWorkBar() {
     Point2 half_screen_size = screen_size / 2;
     
     //  ワークバーの配置
-    cpu_bar_.setPosition(Vec2(-half_screen_size.x_ + 10, -half_screen_size.y_ + 10));
-    cpu_bar_.setLimitWidthPixel(screen_size.x_ - 20);
+    int cpu_bar_margin = 70;
+    cpu_bar_.setPosition(Vec2(-half_screen_size.x_ + (cpu_bar_margin / 2), -half_screen_size.y_ + 10));
+    cpu_bar_.setLimitWidthPixel(screen_size.x_ - cpu_bar_margin);
     
     //  ワークバーの色
     cpu_bar_.setColor(0, Color::blue());

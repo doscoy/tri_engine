@@ -96,7 +96,7 @@ public:
     void setDirection(
         const Vec2& dir
     ) {
-        float angle = std::atan2(dir.x_, dir.y_);
+        float angle = std::atan2(dir.y_, dir.x_);
         setRotation(t3::toDegree(angle));
     }
 

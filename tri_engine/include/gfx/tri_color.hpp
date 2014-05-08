@@ -118,55 +118,93 @@ public:
         return Color(0x00, 0x00, 0xFF);
     }
     
+    static Color blueivy() {
+        return Color(0x30, 0x90, 0xc7);
+    }
+    
+    static Color oceanblue() {
+        return Color(0x2b, 0x65, 0xec);
+    }
+    
+    static Color skyblue() {
+        return Color(0x66, 0x98, 0xff);
+    }
+    
+    static Color azure() {
+        return Color(0xf0, 0xff, 0xff);
+    }
+    
     static Color darkgray() {
-        return Color( 0xA9, 0xA9, 0xA9 );
+        return Color(0xA9, 0xA9, 0xA9);
     }
     
     static Color gray() {
-        return Color( 0x80, 0x80, 0x80 );
+        return Color(0x80, 0x80, 0x80);
     }
 
     static Color lightgray() {
-        return Color( 0xD3, 0xD3, 0xD3 );
+        return Color(0xD3, 0xD3, 0xD3);
     }
     
     static Color white() {
-        return Color( 0xFF, 0xFF, 0xFF );
+        return Color(0xFF, 0xFF, 0xFF);
     }
     
     static Color red() {
-        return Color( 0xFF, 0x00, 0x00 );
+        return Color(0xFF, 0x00, 0x00);
     }
     
     static Color lime() {
-        return Color( 0x00, 0xFF, 0x00 );
+        return Color(0x00, 0xFF, 0x00 );
     }
 
     static Color magenta() {
-        return Color( 0xFF, 0x00, 0xFF );
+        return Color(0xFF, 0x00, 0xFF );
     }
     
     static Color orange() {
-        return Color(     0xFF, 0xA5, 0x00 );
+        return Color(0xFF, 0xA5, 0x00);
     }
     
     static Color green() {
-        return Color( 0x00, 0x80, 0x00 );
+        return Color(0x00, 0x80, 0x00);
     }
 
-
-    static Color aqua() {
-        return Color( 0x00, 0xFF, 0xFF );
+    static Color cyan() {
+        return Color(0x00, 0xFF, 0xFF);
     }
 
     static Color violet() {
-        return Color( 0xEE, 0x82, 0xEE );
+        return Color(0xEE, 0x82, 0xEE);
     }
     
     static Color yellow() {
-        return Color( 0xFF, 0xFF, 0x00 );
+        return Color(0xFF, 0xFF, 0x00);
     }
     
+    static Color pinc() {
+        return Color(0xFA, 0xAF, 0xBE);
+    }
+    
+    static Color lightpink() {
+        return Color(0xFA, 0xAF, 0xBA);
+    }
+    
+    static Color olive() {
+        return Color(0x80, 0x80, 0x00);
+    }
+    
+    static Color brown() {
+        return Color(0xa5, 0x2a, 0x2a);
+    }
+    
+    static Color silver() {
+        return Color(0xc0, 0xc0, 0xc0);
+    }
+    
+    static Color yellowgreen() {
+        return Color(0x52, 0xd0, 0x17);
+    }
     
     
 };

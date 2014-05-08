@@ -17,12 +17,6 @@ inline namespace dbg {
 
 Workbar::Workbar()
     : bar_params_()
-    , bar_colors_{{
-        Color::orange(),
-        Color::lime(),
-        Color::aqua(),
-        Color::green(),
-        Color::orange()}}
     , limit_param_(util::frameSec<60>())
     , limit_width_pixel_(200)
     , keep_frame_(0)
@@ -30,7 +24,10 @@ Workbar::Workbar()
     , thickness_(2)
     , position_()
 {
-    std::fill(bar_params_.begin(), bar_params_.end(), 0);
+    bar_params_[0] = {0, Color::magenta()};
+    bar_params_[1] = {0, Color::yellow()};
+    bar_params_[2] = {0, Color::green()};
+    bar_params_[3] = {0, Color::cyan()};
 }
 
 
@@ -43,7 +40,7 @@ void Workbar::setColor(
     const Color& color
 ) {
     T3_ASSERT( MAX_WORKBAR_ITEM > index );
-    bar_colors_[index] = color;
+    bar_params_[index].color_ = color;
 }
 
 void Workbar::setParam(
@@ -51,7 +48,7 @@ void Workbar::setParam(
     float param
 ) {
     T3_ASSERT( MAX_WORKBAR_ITEM > index );
-    bar_params_[index] = param;
+    bar_params_[index].value_ = param;
 }
 
 
@@ -63,21 +60,63 @@ void Workbar::draw() {
     float y = position_.y_;
     float total_param = 0;
     
+    
+    
     //  計測済の項目それぞれを描画
-    for (float param : bar_params_) {
+    for (Param param : bar_params_) {
 
-        float pixel_width = (param / limit_param_) * limit_width_pixel_;
+        float pixel_width = (param.value_ / limit_param_) * limit_width_pixel_;
         if (pixel_width < 1.0){
             continue;
         }
         drawRectangle(
             Vec2(start_x, y),
             Vec2(pixel_width, thickness_),
-            bar_colors_[idx]
+            param.color_
         );
         start_x += pixel_width;
-        total_param += param;
+        total_param += param.value_;
     }
+    
+    
+    //  目安の縦棒を描画
+    //  0%
+    drawRectangle(
+        Vec2(position_.x_, y-5),
+        Vec2(1, 10),
+        Color::silver()
+    );
+    
+    //  100%
+    drawRectangle(
+        Vec2(position_.x_ + limit_width_pixel_, y-5),
+        Vec2(1, 10),
+        Color::silver()
+    );
+    
+    //  25%区切り
+    int per25pixel = limit_width_pixel_ / 4;
+    
+    //  50%
+    drawRectangle(
+        Vec2(0, y-3),
+        Vec2(1, 6),
+        Color::silver()
+    );
+    
+    //  25%
+    drawRectangle(
+        Vec2(-per25pixel, y-3),
+        Vec2(1, 6),
+        Color::silver()
+    );
+    
+    //  75%
+    drawRectangle(
+        Vec2(per25pixel, y-3),
+        Vec2(1, 6),
+        Color::silver()
+    );
     
     //  上限バーの更新
     if (start_x > limit_bar_pos_x_) {

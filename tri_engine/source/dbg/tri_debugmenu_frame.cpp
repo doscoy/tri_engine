@@ -153,7 +153,7 @@ void DebugMenuFrame::drawFrame(
             font_color = Color::orange();
         }
         else if (idx == select_idx_) {
-            font_color = Color::aqua();
+            font_color = Color::cyan();
         }
         else {
             font_color = Color::white();
