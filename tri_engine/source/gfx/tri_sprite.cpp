@@ -11,7 +11,6 @@
 namespace t3 {
 inline namespace gfx {
 
-// *********************************************
 //  コンストラクタ
 Sprite::Sprite()
     : texture_(nullptr)
@@ -27,15 +26,12 @@ Sprite::Sprite()
 {
 }
 
-
-// *********************************************
 //  デストラクタ
 Sprite::~Sprite()
 {
 }
 
 
-// *********************************************
 //  テクスチャ設定
 void Sprite::setTexture(
     std::shared_ptr<Texture> tex

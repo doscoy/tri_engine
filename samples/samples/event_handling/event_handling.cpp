@@ -112,11 +112,11 @@ public:
             if (game_system.getRandomNumberGenerator().getBool()){
             
                 t3::EventHandle new_event(new EventAAA);
-                t3::safeQueEvent(new_event);
+                t3::safeQueueEvent(new_event);
             }
             else {
                 t3::EventHandle new_event(new EventBBB);
-                t3::safeQueEvent(new_event);
+                t3::safeQueueEvent(new_event);
                 
             }
         }
@@ -166,7 +166,7 @@ void EventHandlingScene::updateScene(t3::tick_t delta_time) {
     t3::GameSystem& gs = t3::GameSystem::getInstance();
     const t3::Pad& pad = gs.getInput().getPad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
-        finish_ = true;
+        setFinish(true);
     }
 }
 

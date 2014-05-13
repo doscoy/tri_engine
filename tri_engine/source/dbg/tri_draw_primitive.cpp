@@ -101,6 +101,12 @@ void drawRectangleViewport(
     };
 
 
+    RenderSystem::setTextureMapping(true);
+    RenderSystem::setBlend(true);
+    RenderSystem::setCulling(false);
+
+
+
     //  シェーダ設定
     bool result = simple2d_.use();
     T3_ASSERT(result);

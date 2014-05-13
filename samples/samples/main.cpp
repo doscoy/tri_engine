@@ -9,10 +9,26 @@
 #include "tri_engine.hpp"
 #include "samples.hpp"
 
+
+
+class SampleApp
+    : public t3::Application
+{
+    //  ゲームの初期化
+    void initializeGame() override {
+    }
+    
+    
+    //  ゲームの後片付け
+    void terminateGame() override {
+    }
+};
+
 int main(int argc, char * argv[])
 {
-    t3::Application app(t3::Scene::getSceneGenerator<RootTest>());
-//    t3::Application app(t3::Scene::getSceneGenerator<SimpleSpriteScene>());
+    SampleApp app;
+    
+    app.setRootScene(t3::Scene::getSceneGenerator<SimpleSpriteScene>());
     t3::platform::run(argc, argv, &app);
 
     return 0;

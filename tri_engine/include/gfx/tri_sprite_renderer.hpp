@@ -1,23 +1,22 @@
 #ifndef TRI_SPRITE_RENDERER_HPP_INCLUDED
 #define TRI_SPRITE_RENDERER_HPP_INCLUDED
 
-#include "../util/tri_uncopyable.hpp"
+#include "util/tri_uncopyable.hpp"
 #include "tri_render_system.hpp"
 #include <vector>
 #include <memory.h>
 #include "tri_shader.hpp"
-
+#include "tri_sprite.hpp"
 
 
 namespace t3 {
 inline namespace gfx {
 
 class IndexBuffer;
-class Sprite;
 class SpriteRenderer
     : private Uncopyable
 {
-    using Container = std::vector<Sprite*>;
+    using Container = std::vector<SpritePtr>;
 
 public:
     SpriteRenderer();
@@ -25,7 +24,7 @@ public:
     
     
 public:
-    void collectSprite(Sprite& sprite);
+    void collectSprite(SpritePtr sprite);
     void render();
     
 

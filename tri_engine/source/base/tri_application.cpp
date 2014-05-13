@@ -16,6 +16,9 @@
 
 namespace {
 
+#define LIMIT_AVG_SUM   3600
+std::vector<float> render_avg;
+
 
 bool show_work_bar_ = true;
 bool show_work_time_ = false;
@@ -75,6 +78,7 @@ public:
         , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_, 1)
     {
         t3::GameSystem::getInstance().registryToDebugMenu(dmf_system_);
+        render_avg.reserve(LIMIT_AVG_SUM);
     }
     
     
@@ -213,6 +217,22 @@ void Application::updateApplication()
     fps_timer_.start();
     float delta_time = fps_timer_.interval();
     t3::printDisplay(0, 100, "fps %f", delta_time);
+    float sum_render = 0;
+    for (float a : render_avg) {
+        sum_render += a;
+    }
+    t3::printDisplay(0, 70, "%d render avg %f",
+        render_avg.size(),
+        sum_render / render_avg.size()
+    );
+    
+    //  レンダーコール数
+    t3::printDisplay(0, 50, "render call %d",
+        t3::RenderSystem::getRenderCallCount()
+    );
+    t3::RenderSystem::resetRenderCallCount();
+    
+    
     
     
     SceneManager& sm = SceneManager::getInstance();
@@ -278,6 +298,10 @@ void Application::renderApplication()
         cpu_bar_.setParam(2, rendering_cost_timer_.interval());
         cpu_bar_.setParam(3, other_cost_timer_.interval());
     }
+    
+    if (render_avg.size() < LIMIT_AVG_SUM) {
+        render_avg.push_back(rendering_cost_timer_.interval());
+    }
 
     rendering_cost_timer_.start();      // rendering cost 計算開始
     //  レイヤーの描画
@@ -342,7 +366,7 @@ void Application::renderApplication()
     
     
     if (show_task_) {
-        gs.showTask();
+//        gs.showTask();
     }
 
 

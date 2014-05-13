@@ -34,25 +34,21 @@ private:
     
 public:
     
-    // *********************************************
     //  横幅取得
     uint32_t getWidth() const {
         return width_;
     }
     
-    // *********************************************
     //  縦幅取得
     uint32_t getHeight() const {
         return height_;
     }
     
-    // *********************************************
     //  カラーフォーマット取得
     RenderSystem::ColorFormat getColorFormat() const {
         return color_format_;
     }
     
-    // *********************************************
     //  テクスチャ生成
     static std::shared_ptr<Texture> create(
         const FilePath& filepath
@@ -70,7 +66,6 @@ private:
     RenderSystem::ColorFormat color_format_;
     RenderSystem::texture_handle_t texture_handle_;
 };
-    
     
 using TextureManager = ResourceManager<Texture>;
 

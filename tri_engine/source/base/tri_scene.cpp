@@ -27,7 +27,7 @@ Scene::~Scene()
 void Scene::update(
     tick_t delta_time
 ) {
-    t3::printDisplay(0, 0, "task %d", task_manager_.getTaskCount());
+//    t3::printDisplay(0, 0, "task %d", task_manager_.getTaskCount());
     task_manager_.updateTask(delta_time);
     updateScene(delta_time);
 }

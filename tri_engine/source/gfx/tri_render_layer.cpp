@@ -33,14 +33,16 @@ RenderLayer::~RenderLayer()
 
 }
 
-void RenderLayer::setPriority( const int priority )
-{
+void RenderLayer::setPriority(
+    const int priority
+) {
     T3_ASSERT( PRIORITY_LOWEST <= priority && priority <= PRIORITY_HIGHEST  );
     priority_ = priority;
 }
 
-void RenderLayer::setLayerName( const char* const name )
-{
+void RenderLayer::setLayerName(
+    const char* const name
+) {
     std::strncpy( layer_name_, name, NAME_SIZE );
 }
 
@@ -63,7 +65,7 @@ void RenderLayer::updateLayers(
     RenderLayers& layers,
     tick_t delta_time
 ){
-    for (auto layer : layers){
+    for (auto layer : layers) {
         if (!layer->isPauseLayer()) {
             layer->updateLayer(delta_time);
         }
@@ -73,7 +75,7 @@ void RenderLayer::updateLayers(
 void RenderLayer::drawLayers(
     RenderLayers& layers
 ){
-    for (RenderLayer* layer : layers){
+    for (auto layer : layers) {
         if (layer->isVisibleLayer()) {
             layer->drawLayer();
         }

@@ -1,8 +1,6 @@
-#include "gfx/tri_render_system.hpp"
+#include "platform/platform_core_render_system.hpp"
 #include "platform/platform_sdk.hpp"
 #include "gfx/tri_texture.hpp"
-
-
 
 
 #include "../shader/tri_simple.vsh"
@@ -29,10 +27,10 @@ inline void setGLState(GLenum e, bool f) {
 
 
 namespace t3 {
-inline namespace gfx {
+inline namespace platform {
 
 
-int RenderSystem::buildShader(
+int CoreRenderSystem::buildShader(
     const char* const source,
     RenderSystem::ShaderType shader_type
 ) {
@@ -72,59 +70,59 @@ int RenderSystem::buildShader(
     return shader_handle;
 }
 
-void RenderSystem::attachShader(
-                                shader_program_t program_handle,
-                                int shader_handle
-                                ) {
+void CoreRenderSystem::attachShader(
+    RenderSystem::shader_program_t program_handle,
+    int shader_handle
+) {
     glAttachShader(program_handle, shader_handle);
 }
 
-void RenderSystem::linkShader(
-                              shader_program_t program_handle
-                              ) {
+void CoreRenderSystem::linkShader(
+    RenderSystem::shader_program_t program_handle
+) {
     glLinkProgram(program_handle);
 }
 
-void RenderSystem::setShader(
-                             shader_program_t shader
-                             ) {
+void CoreRenderSystem::setShader(
+    RenderSystem::shader_program_t shader
+) {
     glUseProgram(shader);
 }
 
-void RenderSystem::bindAttributeLocation(
-                                         shader_program_t handle,
-                                         shader_variable_t location,
-                                         const char* const name
-                                         ) {
+void CoreRenderSystem::bindAttributeLocation(
+    RenderSystem::shader_program_t handle,
+    RenderSystem::shader_variable_t location,
+    const char* const name
+) {
     glBindAttribLocation(handle, location, name);
 }
 
 
-void RenderSystem::bindFragmentDataLocation(
-                                            shader_program_t handle,
-                                            shader_variable_t location,
-                                            const char* const name
-                                            ) {
+void CoreRenderSystem::bindFragmentDataLocation(
+    RenderSystem::shader_program_t handle,
+    RenderSystem::shader_variable_t location,
+    const char* const name
+) {
     //    glBindFragDataLocation();
 }
 
-RenderSystem::shader_variable_t RenderSystem::getAttributeLocation(
-                                                     shader_program_t program,
-                                                     const char* const name
-                                                     ) {
+RenderSystem::shader_variable_t CoreRenderSystem::getAttributeLocation(
+    RenderSystem::shader_program_t program,
+    const char* const name
+) {
     return glGetAttribLocation(program, name);
 }
 
-RenderSystem::shader_variable_t RenderSystem::getUniformLocation(
-                                                   shader_program_t program,
-                                                   const char* const name
-                                                   ) {
+RenderSystem::shader_variable_t CoreRenderSystem::getUniformLocation(
+    RenderSystem::shader_program_t program,
+    const char* const name
+) {
     return glGetUniformLocation(program, name);
 }
 
 
-void RenderSystem::setUniformValue(
-    shader_variable_t location,
+void CoreRenderSystem::setUniformValue(
+    RenderSystem::shader_variable_t location,
     float x,
     float y,
     float z
@@ -132,8 +130,8 @@ void RenderSystem::setUniformValue(
     glUniform3f(location, x, y, z);
 }
 
-void RenderSystem::setUniformValue(
-    shader_variable_t location,
+void CoreRenderSystem::setUniformValue(
+    RenderSystem::shader_variable_t location,
     float x,
     float y,
     float z,
@@ -142,23 +140,23 @@ void RenderSystem::setUniformValue(
     glUniform4f(location, x, y, z, w);
 }
 
-void RenderSystem::setUniformValue(
-                                   shader_variable_t location,
-                                   float val
-                                   ) {
+void CoreRenderSystem::setUniformValue(
+    RenderSystem::shader_variable_t location,
+    float val
+) {
     glUniform1f(location, val);
 }
 
-void RenderSystem::setUniformValue(
-                                   shader_variable_t location,
-                                   int val
-                                   ) {
+void CoreRenderSystem::setUniformValue(
+    RenderSystem::shader_variable_t location,
+    int val
+) {
     glUniform1i(location, val);
 }
 
 
-void RenderSystem::setUniformMatrix(
-    shader_variable_t location,
+void CoreRenderSystem::setUniformMatrix(
+    RenderSystem::shader_variable_t location,
     t3::Mtx4 mtx
 ) {
     glUniformMatrix4fv(
@@ -169,10 +167,10 @@ void RenderSystem::setUniformMatrix(
     );
 }
 
-void RenderSystem::initializeRenderSystem() {
+void CoreRenderSystem::initializeRenderSystem() {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     
-    t3::RenderSystem::setCulling(true);
+    t3::CoreRenderSystem::setCulling(true);
     
     
 }
@@ -182,7 +180,7 @@ void RenderSystem::initializeRenderSystem() {
 
 
 
-void RenderSystem::swapBuffers() {
+void CoreRenderSystem::swapBuffers() {
     
 #if defined(PLATFORM_MAC)
     glfwSwapBuffers(window_);
@@ -190,18 +188,18 @@ void RenderSystem::swapBuffers() {
 }
 
 
-void RenderSystem::setDepthWrite(
-                                 bool enable
-                                 ) {
+void CoreRenderSystem::setDepthWrite(
+    bool enable
+) {
     glDepthMask(enable);
 }
 
 
-void RenderSystem::clearBuffer(
-                               bool color_clear,
-                               bool depth_clear,
-                               bool stencil_clear
-                               ) {
+void CoreRenderSystem::clearBuffer(
+    bool color_clear,
+    bool depth_clear,
+    bool stencil_clear
+) {
     int clear_flag = 0;
     
     if (color_clear) {
@@ -217,16 +215,16 @@ void RenderSystem::clearBuffer(
     glClear(clear_flag);
 }
 
-void RenderSystem::setCullingMode(
-                                  RenderSystem::CullingMode mode
-                                  ) {
+void CoreRenderSystem::setCullingMode(
+    RenderSystem::CullingMode mode
+) {
     int cull_flag = 0;
     switch (mode) {
-        case CullingMode::MODE_BACK:
+        case RenderSystem::CullingMode::MODE_BACK:
             cull_flag = GL_BACK;
             break;
             
-        case CullingMode::MODE_FRONT:
+        case RenderSystem::CullingMode::MODE_FRONT:
             cull_flag = GL_FRONT;
             break;
             
@@ -238,7 +236,7 @@ void RenderSystem::setCullingMode(
 }
 
 
-void RenderSystem::setClearDepthValue(
+void CoreRenderSystem::setClearDepthValue(
     const float value
 ) {
     glClearDepthf(value);
@@ -246,7 +244,7 @@ void RenderSystem::setClearDepthValue(
 
 
 
-void RenderSystem::setClearColor(
+void CoreRenderSystem::setClearColor(
     const Color& clear_color
 ) {
     glClearColor(
@@ -258,21 +256,21 @@ void RenderSystem::setClearColor(
 }
 
 
-void RenderSystem::setDepthTestMode(
-                                    RenderSystem::DepthTestMode mode
-                                    ) {
+void CoreRenderSystem::setDepthTestMode(
+    RenderSystem::DepthTestMode mode
+) {
     int depth_func = GL_LESS;
     
     switch (mode) {
-        case DepthTestMode::MODE_NEVER:
+        case RenderSystem::DepthTestMode::MODE_NEVER:
             depth_func = GL_NEVER;
             break;
             
-        case DepthTestMode::MODE_LESS:
+        case RenderSystem::DepthTestMode::MODE_LESS:
             depth_func = GL_LESS;
             break;
             
-        case DepthTestMode::MODE_ALWAYS:
+        case RenderSystem::DepthTestMode::MODE_ALWAYS:
             depth_func = GL_ALWAYS;
             break;
             
@@ -283,8 +281,8 @@ void RenderSystem::setDepthTestMode(
 
 
 int blendFuncTypeToGLEnum(
-                          RenderSystem::BlendFunctionType type
-                          ) {
+    RenderSystem::BlendFunctionType type
+) {
     switch (type) {
         case RenderSystem::BlendFunctionType::TYPE_ZERO:
             return GL_ZERO;
@@ -349,52 +347,52 @@ int blendFuncTypeToGLEnum(
     
 }
 
-void RenderSystem::setBlendFunctionType(
-                                        RenderSystem::BlendFunctionType sfactor,
-                                        RenderSystem::BlendFunctionType dfactor
-                                        ) {
+void CoreRenderSystem::setBlendFunctionType(
+    RenderSystem::BlendFunctionType sfactor,
+    RenderSystem::BlendFunctionType dfactor
+) {
     int s = blendFuncTypeToGLEnum(sfactor);
     int d = blendFuncTypeToGLEnum(dfactor);
     glBlendFunc(s, d);
 }
 
-void RenderSystem::setViewport(
-                               const int x,
-                               const int y,
-                               const int w,
-                               const int h
-                               ) {
+void CoreRenderSystem::setViewport(
+    const int x,
+    const int y,
+    const int w,
+    const int h
+) {
     glViewport(x, y, w, h);
 }
 
 
-void RenderSystem::setDepthTest(
-                                bool enable
-                                ) {
+void CoreRenderSystem::setDepthTest(
+    bool enable
+) {
     setGLState(GL_DEPTH_TEST, enable);
 }
 
-void RenderSystem::setBlend(
-                            bool enable
-                            ) {
+void CoreRenderSystem::setBlend(
+    bool enable
+) {
     setGLState(GL_BLEND, enable);
 }
 
-void RenderSystem::setCulling(
-                              bool enable
-                              ) {
+void CoreRenderSystem::setCulling(
+    bool enable
+) {
     setGLState(GL_CULL_FACE, enable);
 }
 
-void RenderSystem::setTextureMapping(
-                                     bool enable
-                                     ) {
+void CoreRenderSystem::setTextureMapping(
+    bool enable
+) {
 //     setGLState(GL_TEXTURE_2D, enable);
 }
 
-void RenderSystem::setTextureMagFilter(
-                                       t3::RenderSystem::TextureFilterType type
-                                       ) {
+void CoreRenderSystem::setTextureMagFilter(
+    RenderSystem::TextureFilterType type
+) {
     if (type == RenderSystem::TextureFilterType::TYPE_LINEAR) {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     }
@@ -404,9 +402,9 @@ void RenderSystem::setTextureMagFilter(
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
-void RenderSystem::setTextureMinFilter(
-                                       t3::RenderSystem::TextureFilterType type
-                                       ) {
+void CoreRenderSystem::setTextureMinFilter(
+    RenderSystem::TextureFilterType type
+) {
     if (type == RenderSystem::TextureFilterType::TYPE_LINEAR) {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     }
@@ -417,7 +415,7 @@ void RenderSystem::setTextureMinFilter(
 }
 
 
-void RenderSystem::drawElements(
+void CoreRenderSystem::drawElements(
     RenderSystem::DrawMode mode,
     int count,
     size_t indices_type_size
@@ -465,11 +463,11 @@ void RenderSystem::drawElements(
 
 
 
-RenderSystem::buffer_id_t RenderSystem::createVertexBuffer(
+RenderSystem::buffer_id_t CoreRenderSystem::createVertexBuffer(
     std::vector<float>& vertices
 ) {
     
-    buffer_id_t buffer_id;
+    RenderSystem::buffer_id_t buffer_id;
     glGenBuffers(1, &buffer_id);
     glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
     glBufferData(
@@ -481,10 +479,10 @@ RenderSystem::buffer_id_t RenderSystem::createVertexBuffer(
     return buffer_id;
 }
 
-RenderSystem::buffer_id_t RenderSystem::createIndexBuffer(
+RenderSystem::buffer_id_t CoreRenderSystem::createIndexBuffer(
     std::vector<uint32_t>& indices
 ) {
-    buffer_id_t buffer_id;
+    RenderSystem::buffer_id_t buffer_id;
     
     glGenBuffers(1, &buffer_id);
     glBindBuffer(
@@ -502,7 +500,7 @@ RenderSystem::buffer_id_t RenderSystem::createIndexBuffer(
 }
 
 
-void RenderSystem::setVertexAttributePointer(
+void CoreRenderSystem::setVertexAttributePointer(
     int slot,
     int element_num,
     int stride,
@@ -518,7 +516,7 @@ void RenderSystem::setVertexAttributePointer(
     );
 }
 
-void RenderSystem::setupTextureData(
+void CoreRenderSystem::setupTextureData(
     int width,
     int height,
     RenderSystem::ColorFormat color_format,
@@ -559,8 +557,8 @@ void RenderSystem::setupTextureData(
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
-void RenderSystem::bindBuffer(
-    t3::RenderSystem::BufferType target_type,
+void CoreRenderSystem::bindBuffer(
+    RenderSystem::BufferType target_type,
     int buffer_id
 ) {
     int target = GL_ARRAY_BUFFER;
@@ -573,17 +571,17 @@ void RenderSystem::bindBuffer(
 }
 
 
-void RenderSystem::createBuffer(uint32_t* buffer) {
+void CoreRenderSystem::createBuffer(uint32_t* buffer) {
     glGenBuffers(1, buffer);
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
-void RenderSystem::deleteBuffer(uint32_t* buffer) {
+void CoreRenderSystem::deleteBuffer(uint32_t* buffer) {
     glDeleteBuffers(1, buffer);
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
-void RenderSystem::setupBufferData(
+void CoreRenderSystem::setupBufferData(
     RenderSystem::BufferType type,
     int size,
     const void* data,
@@ -605,12 +603,12 @@ void RenderSystem::setupBufferData(
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
-void RenderSystem::setupBufferSubData(
-                                      RenderSystem::BufferType type,
-                                      int offset,
-                                      int size,
-                                      const void *data
-                                      ) {
+void CoreRenderSystem::setupBufferSubData(
+    RenderSystem::BufferType type,
+    int offset,
+    int size,
+    const void *data
+) {
     int target = GL_ARRAY_BUFFER;
     if (type == RenderSystem::BufferType::TYPE_INDEX) {
         target = GL_ELEMENT_ARRAY_BUFFER;
@@ -620,7 +618,7 @@ void RenderSystem::setupBufferSubData(
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
-void RenderSystem::setActiveTextureUnit(
+void CoreRenderSystem::setActiveTextureUnit(
     int unit
 ) {
     unit += GL_TEXTURE0;
@@ -628,21 +626,21 @@ void RenderSystem::setActiveTextureUnit(
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
-void RenderSystem::setEnableVertexAttribute(
-                                            int slot
-                                            ) {
+void CoreRenderSystem::setEnableVertexAttribute(
+    int slot
+) {
     glEnableVertexAttribArray(slot);
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
-void RenderSystem::setDisableVertexAttribute(
-                                             int slot
-                                             ) {
+void CoreRenderSystem::setDisableVertexAttribute(
+    int slot
+) {
     glDisableVertexAttribArray(slot);
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
 
-void RenderSystem::setAttributeValue(
+void CoreRenderSystem::setAttributeValue(
     int slot,
     float a,
     float b,

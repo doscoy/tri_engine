@@ -79,7 +79,7 @@ void AdScene::updateScene(t3::tick_t delta_time) {
     t3::GameSystem& gs = t3::GameSystem::getInstance();
     const t3::Pad& pad = gs.getInput().getPad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
-        finish_ = true;
+        setFinish(true);
     }
 }
 

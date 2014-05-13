@@ -10,6 +10,18 @@ inline namespace platform {
 //  プラットフォームから取得するパッドデータ
 struct GamePadData {
     
+    GamePadData()
+        : button_data_(0)
+        , stick1x_(0)
+        , stick1y_(0)
+        , stick2x_(0)
+        , stick2y_(0)
+        , trigger_l_(0)
+        , trigger_r_(0)
+    {
+    }
+    
+    
     uint32_t getButtonData() const {
         return button_data_;
     }
@@ -38,6 +50,14 @@ struct GamePadData {
 //  プラットフォームから取得するポインティングデータ
 // マウス、タッチパネル等
 struct PointingData {
+
+    PointingData()
+        : x_(0.0f)
+        , y_(0.0f)
+        , hit_(false)
+    {
+    }
+    
     float x_;
     float y_;
     bool hit_;
@@ -52,6 +72,14 @@ struct PointingData {
 
 
 struct AccelerometerData {
+    AccelerometerData()
+        : x_(0)
+        , y_(0)
+        , z_(0)
+    {
+    }
+
+
     float x_;
     float y_;
     float z_;

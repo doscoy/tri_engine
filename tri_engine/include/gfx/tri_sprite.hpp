@@ -282,6 +282,41 @@ public:
     SpriteLayer* getAttachedLayer() const {
         return owner_;
     }
+    
+    bool isTransratedSprite() const {
+        
+        if (!isEqualFloat(position_.x_, 0.0f)) {
+            return true;
+        }
+        if (!isEqualFloat(position_.y_, 0.0f)) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    bool isRotatedSprite() const {
+        
+        if (isEqualFloat(rotation_, 0.0f)) {
+            return false;
+        }
+        return true;
+    }
+
+    bool isScaledSprite() const {
+       // return true;
+        
+        if (!isEqualFloat(scale_.x_, 1.0f)) {
+            return true;
+        }
+        if (!isEqualFloat(scale_.y_, 1.0f)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
 
 
 private:
@@ -299,6 +334,9 @@ private:
     SpriteLayer* owner_;
     
 };
+
+//  ポインタ型定義
+using SpritePtr = std::shared_ptr<Sprite>;
 
 
 }   // inline namespace gfx

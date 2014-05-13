@@ -31,6 +31,24 @@ public:
     }
     
 public:
+    bool operator ==(const Color& rhs) const {
+        if (red_ != rhs.red_) {
+            return false;
+        }
+        if (green_ != rhs.green_) {
+            return false;
+        }
+        if (blue_ != rhs.blue_) {
+            return false;
+        }
+        if (alpha_ != rhs.alpha_) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+public:
     
     rgba32_t getRGBA() const {
         return (red_ << 24 | green_ << 16 | blue_ << 8 | alpha_);

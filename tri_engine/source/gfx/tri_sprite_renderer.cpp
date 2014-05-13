@@ -18,7 +18,7 @@ namespace {
 class PriorityCompare
 {
 public:
-    bool operator()(const t3::Sprite* lhs, const t3::Sprite* rhs) const {
+    bool operator()(const t3::SpritePtr lhs, const t3::SpritePtr rhs) const {
         return lhs->getSortScore() < rhs->getSortScore();
     }
 };
@@ -67,9 +67,9 @@ SpriteRenderer::~SpriteRenderer()
 
 
 void SpriteRenderer::collectSprite(
-    t3::Sprite& sprite 
+    SpritePtr sprite
 ){
-    sprites_.push_back( &sprite );
+    sprites_.push_back(sprite);
 }
 
 
@@ -88,6 +88,7 @@ void SpriteRenderer::render()
     margeSprites();
     renderSprites();
     endRender();
+    
 }
 
 void SpriteRenderer::beginRender()
@@ -136,11 +137,8 @@ void SpriteRenderer::margeSprites() {
     for (int i = 0; i < sprites_.size(); ++i) {
         auto spr = sprites_[i];
     
-        const Vec2& pos =spr->getPosition();
         const Vec2& pivot = spr->getPivot();
         const Vec2& size = spr->getSize();
-        const Vec2& scale = spr->getScale();
-        float angle = toRadian(spr->getRotation());
         const texture_coord_t& uv = spr->getTextureCoord();
 
         //  初期配置
@@ -150,48 +148,57 @@ void SpriteRenderer::margeSprites() {
         Vec2 rb = Vec2(size.x_ - pivot.x_, 0 - pivot.y_);
         
         //  スケーリング
-        lt *= scale;
-        lb *= scale;
-        rt *= scale;
-        rb *= scale;
-
+        if (spr->isScaledSprite()) {
+            const Vec2& scale = spr->getScale();
+            lt *= scale;
+            lb *= scale;
+            rt *= scale;
+            rb *= scale;
+        }
 
         //  回転
-        float cos_angle = std::cos(angle);
-        float sin_angle = std::sin(angle);
-        {
-            float ltx = lt.x_;
-            float lty = lt.y_;
-            lt.x_ = (ltx * cos_angle) - (lty * sin_angle);
-            lt.y_ = (ltx * sin_angle) + (lty * cos_angle);
-        }
+        if (spr->isRotatedSprite()) {
+            float angle = toRadian(spr->getRotation());
+
+            float cos_angle = std::cos(angle);
+            float sin_angle = std::sin(angle);
+            {
+                float ltx = lt.x_;
+                float lty = lt.y_;
+                lt.x_ = (ltx * cos_angle) - (lty * sin_angle);
+                lt.y_ = (ltx * sin_angle) + (lty * cos_angle);
+            }
         
-        {
-            float lbx = lb.x_;
-            float lby = lb.y_;
-            lb.x_ = (lbx * cos_angle) - (lby * sin_angle);
-            lb.y_ = (lbx * sin_angle) + (lby * cos_angle);
-        }
-        {
-            float rtx = rt.x_;
-            float rty = rt.y_;
-            rt.x_ = (rtx * cos_angle) - (rty * sin_angle);
-            rt.y_ = (rtx * sin_angle) + (rty * cos_angle);
-        }
+            {
+                float lbx = lb.x_;
+                float lby = lb.y_;
+                lb.x_ = (lbx * cos_angle) - (lby * sin_angle);
+                lb.y_ = (lbx * sin_angle) + (lby * cos_angle);
+            }
+            {
+                float rtx = rt.x_;
+                float rty = rt.y_;
+                rt.x_ = (rtx * cos_angle) - (rty * sin_angle);
+                rt.y_ = (rtx * sin_angle) + (rty * cos_angle);
+            }
         
-        {
-            float rbx = rb.x_;
-            float rby = rb.y_;
-            rb.x_ = (rbx * cos_angle) - (rby * sin_angle);
-            rb.y_ = (rbx * sin_angle) + (rby * cos_angle);
+            {
+                float rbx = rb.x_;
+                float rby = rb.y_;
+                rb.x_ = (rbx * cos_angle) - (rby * sin_angle);
+                rb.y_ = (rbx * sin_angle) + (rby * cos_angle);
+            }
         }
-        
         
         //  位置移動
-        lt += pos;
-        lb += pos;
-        rt += pos;
-        rb += pos;
+        if (spr->isTransratedSprite()) {
+            const Vec2& pos =spr->getPosition();
+
+            lt += pos;
+            lb += pos;
+            rt += pos;
+            rb += pos;
+        }
         
         lt *= half;
         lb *= half;
@@ -268,6 +275,7 @@ void SpriteRenderer::margeSprites() {
 }
 
 void SpriteRenderer::renderSprites() {
+
     //  テクスチャの割り当て
     const std::shared_ptr<Texture>& texture = sprites_[0]->getTexture();
     texture->setupTexture();
@@ -279,21 +287,20 @@ void SpriteRenderer::renderSprites() {
         0
     );
 
-
-
     sprite_shader_.setAttributePointer(
         "uv",
         2,
         sizeof(VertexP2T),
         (void*)(sizeof(float) * 2)
     );
-
+    
     // 描画
     RenderSystem::drawElements(
         RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
         draw_count_,
         sizeof(uint32_t)
     );
+
 
 }
 

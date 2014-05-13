@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../tri_engine/source/base/tri_application.cpp"
-            timestampString = "418233368.511251"
+            timestampString = "421477562.460063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "Application::renderApplication()"
             landmarkType = "5">
          </BreakpointContent>
@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "72"
             endingLineNumber = "72"
-            landmarkName = "SpriteRenderer::render()"
+            landmarkName = "SpriteRenderer::collectSprite( t3::Sprite&amp; sprite )"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

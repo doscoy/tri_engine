@@ -24,6 +24,11 @@ public:
     
         //  ハンドルをとっておく
         tex3_handle_ = texture_manager.load(kani_path);
+        
+        
+        for (int i = 0; i < 744; ++i) {
+            addSprite();
+        }
     }
     
     void terminate(){
@@ -67,8 +72,14 @@ private:
             return;
         }
         
+        int spr_idx = 0;
         for (auto spr : *sprites) {
-            spr->addRotationZ(1.5f);
+            
+            float angle = spr->getRotation();
+            if (spr_idx % 2) {
+                spr->setRotation(angle + 1);
+            }
+            spr_idx += 1;
         }
     }
 
@@ -80,7 +91,7 @@ private:
         }
         
         auto& size = sprites->front()->getSize();
-        t3::Vec2 offset(20, 32);
+        t3::Vec2 offset(20, 20);
         int x_count = t3::GameSystem::getInstance().getScreenSize().x_ / offset.x_ -1;
         int y = 15;
         int i = 0;
@@ -90,7 +101,7 @@ private:
             }
 
             float pos_x = ((i % x_count) * offset.x_) - 300;
-            float pos_y = y * size.y_ + offset.y_;
+            float pos_y = y * offset.y_;
             spr->setPosition(pos_x, pos_y);
             i += 1;
         }
@@ -151,7 +162,7 @@ void SimpleSpriteScene::updateScene(t3::tick_t delta_time) {
     t3::GameSystem& gs = t3::GameSystem::getInstance();
     const t3::Pad& pad = gs.getInput().getPad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
-        finish_ = true;
+        setFinish(true);
     }
 }
 
