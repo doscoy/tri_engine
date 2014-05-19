@@ -25,6 +25,10 @@ DebugMenu::~DebugMenu()
 
 void DebugMenu::openMenu()
 {
+#ifdef NDEBUG
+    return;
+#endif
+
     T3_TRACE( "debug menu open\n" );
 
     if ( isOpened() ) {

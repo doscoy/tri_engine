@@ -55,6 +55,12 @@ void Workbar::setParam(
 
 //  描画
 void Workbar::draw() {
+
+
+#ifdef NDEBUG
+    return;
+#endif  // NDEBUG
+
     //
     float start_x = position_.x_;
     float y = position_.y_;

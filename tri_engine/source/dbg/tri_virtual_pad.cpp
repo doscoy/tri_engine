@@ -52,6 +52,11 @@ VirtualPad::~VirtualPad() {
 
 
 void VirtualPad::open() {
+#ifdef NDEBUG
+    return;
+#endif // NDEBUG
+
+
     pad_layer_.enableLayer();
 }
 

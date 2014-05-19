@@ -19,6 +19,16 @@
         #include <OpenAL/alc.h>
         #define PLATFORM_IOS
 
+        #ifdef __i386__
+            #warning "ios sim 32bit"
+            #define IOS_SIMULATER
+        #endif // __i386__
+
+        #ifdef __x86_64
+            #warning "ios sim 64bit"
+            #define IOS_SIMULATOR
+        #endif
+
     //  MAC
     #else
         #warning "target mac"

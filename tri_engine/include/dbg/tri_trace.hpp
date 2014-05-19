@@ -48,9 +48,21 @@ void traceValue(const char* const name, const Mtx4Template<float>& value);
 }   // inline namespace dbg
 }   // namespace t3
 
+
+#ifndef NDEBUG
+    #define TRI_DEVELOPMENT_ENABLE_TRACE
+#endif // NDEBUG
+
+#ifdef TRI_DEVELOPMENT_ENABLE_TRACE
+
 #define T3_TRACE(...)       ::t3::trace(__VA_ARGS__)
 #define T3_TRACE_VALUE(x)   ::t3::traceValue(#x, x)
 
+#else // TRI_DEVELOPMENT_ENABLE_TRACE
 
+#define T3_TRACE(...)       (void)0
+#define T3_TRACE_VALUE(x)   (void)0
+
+#endif // TRI_DEVELOPMENT_ENABLE_TRACE
 
 #endif // TRI_TRACE_HPP_INCLUDED
