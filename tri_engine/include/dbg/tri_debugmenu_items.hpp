@@ -67,18 +67,18 @@ public:
     void update() override
     {
         const Pad& pad = debugPad();
-        if ( pad.isTrigger( t3::Pad::BUTTON_LEFT ) ){
-            if ( parent_ ){
-                parent_->setFocusItem( nullptr );
-            }      
+        if ( pad.isTrigger(t3::Pad::BUTTON_B)) {
+            if (parent_) {
+                parent_->setFocusItem(nullptr);
+            }
         }
-        else if ( pad.isTrigger( t3::Pad::BUTTON_UP ) ){
+        else if ( pad.isTrigger(t3::Pad::BUTTON_UP)) {
             target_ -= step_;
         }
-        else if ( pad.isTrigger( t3::Pad::BUTTON_DOWN ) ){
+        else if ( pad.isTrigger(t3::Pad::BUTTON_DOWN)) {
             target_ += step_;
         }
-        t3::util::clampLimitation( target_, l_limit_, h_limit_ );
+        t3::util::clampLimitation(target_, l_limit_, h_limit_);
     }
     
     
@@ -90,7 +90,7 @@ public:
         
         char buf[32];
         
-        makeTargetValueString( target_, buf, 32 );
+        makeTargetValueString(target_, buf, 32);
         
         printDisplay(
             x,
@@ -282,12 +282,12 @@ public:
     void update() override {
 
         const Pad& pad = debugPad();
-        if ( pad.isTrigger( Pad::BUTTON_RIGHT ) ){
+        if (pad.isTrigger(Pad::BUTTON_A)) {
             SceneManager& sm = SceneManager::getInstance();
             sm.forceChangeScene( gen_.getInstancePtr() );
         }
-        else if ( pad.isTrigger( Pad::BUTTON_LEFT ) ){
-            parent_->setFocusItem( nullptr );
+        else if (pad.isTrigger(Pad::BUTTON_B)) {
+            parent_->setFocusItem(nullptr);
         }
 
     }

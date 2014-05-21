@@ -208,6 +208,12 @@ public:
         size_.y_ = s;
     }
     
+    //  スケール済サイズを取得
+    Vec2 getScaledSize() const {
+        Vec2 scaled = getSize() * getScale();
+        return scaled;
+    }
+    
     //  スケールを取得
     Vec2& getScale() {
         return scale_;

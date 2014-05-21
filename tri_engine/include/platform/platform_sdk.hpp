@@ -26,7 +26,11 @@
 
         #ifdef __x86_64
             #warning "ios sim 64bit"
-            #define IOS_SIMULATOR
+            #define IOS_SIMULATER
+        #endif
+
+        #ifdef PNG_ARM_NEON
+            #warning "png neon"
         #endif
 
     //  MAC

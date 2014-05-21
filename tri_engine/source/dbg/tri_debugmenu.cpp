@@ -60,12 +60,13 @@ void DebugMenu::closeMenu()
 
 void DebugMenu::update( tick_t delta_time )
 {
-    if ( !isOpened() ){
+    if (!isOpened()) {
         return;
     }
-    if ( menu_root_.getFocusItem() == nullptr ){
+    
+    if (menu_root_.getFocusItem() == nullptr) {
         const Pad& pad = debugPad();
-        if ( pad.isTrigger( Pad::BUTTON_LEFT ) ){
+        if (pad.isTrigger(Pad::BUTTON_B)) {
             closeMenu();
         }
     }
