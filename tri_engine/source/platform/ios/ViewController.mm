@@ -50,6 +50,7 @@ GADBannerView* banner_view_ = nullptr;
 
 - (void)setupAdView
 {
+
     //  画面上部に標準サイズのビューを作成
     banner_view_ = [[GADBannerView alloc] initWithAdSize: kGADAdSizeSmartBannerPortrait];
     
@@ -70,6 +71,7 @@ GADBannerView* banner_view_ = nullptr;
     [banner_view_ loadRequest:ad_req];
     
     banner_view_.hidden = YES;
+
 }
 
 
