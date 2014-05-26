@@ -32,7 +32,7 @@ public:
     
     void printTask() const;
     
-    int getTaskCount() const {
+    std::size_t getTaskCount() const {
         return taskes_.size();
     }
     

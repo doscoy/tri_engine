@@ -111,7 +111,8 @@ void SceneManager::sceneChange()
     scene_changed_ = true;
     
     T3_TRACE("scene change. %s --> %s\n", prev_scene_name, next_scene_name);
-
+    (void)(prev_scene_name);
+    (void)(next_scene_name);
 }
 
 

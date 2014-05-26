@@ -13,7 +13,7 @@ namespace  {
     
 struct my_png_buffer {
     const uint8_t* data_;
-    uint32_t data_len_;
+    std::size_t data_len_;
     uint32_t data_offset_;
 };
 
@@ -102,11 +102,11 @@ PngImage::PngImage(
     File& file
 ) {
     png_structp png_ptr = png_create_read_struct(
-                                                 PNG_LIBPNG_VER_STRING,
-                                                 nullptr,
-                                                 nullptr,
-                                                 nullptr
-                                                 );
+        PNG_LIBPNG_VER_STRING,
+        nullptr,
+        nullptr,
+        nullptr
+    );
     T3_NULL_ASSERT(png_ptr);
 
 

@@ -44,6 +44,8 @@ public:
 
     static void play(source_id_t sid);
     static void stop(source_id_t sid);
+    
+    static void setLoop(source_id_t sid, bool loop);
 
 };
 

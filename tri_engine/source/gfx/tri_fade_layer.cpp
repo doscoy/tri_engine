@@ -15,9 +15,11 @@ FadeLayer::FadeLayer()
     , fade_in_(true)
     , fade_speed_(1.0f)
     , fade_color_(Color::black())
+    , alpha_(0.0f)
 {
     setUpdateCallback(this, &FadeLayer::fadeUpdate);
     setRenderCallback(this, &FadeLayer::fadeRender);
+    fade_color_.setAlphaf(alpha_);
 }
 
 FadeLayer::~FadeLayer() {

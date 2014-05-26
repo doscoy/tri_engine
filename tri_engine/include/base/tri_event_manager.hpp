@@ -164,7 +164,7 @@ private:
     using EventListenerTable = std::list<EventListenerPtr>;
     
     //  リスナーのリストと特定のイベントの関連付け
-    using EventListenerMap = std::map<uint32_t, EventListenerTable>;
+    using EventListenerMap = std::map<HashString::key_t, EventListenerTable>;
     
     //  EventListenerMapの検索結果
     using EventListenerMapEntry = std::pair<uint32_t, EventListenerTable>;

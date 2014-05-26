@@ -18,11 +18,11 @@ int readHeaderWav(
 
     short res16;
     int res32;
-    int dataSize, chunkSize;
-    short channelCnt,bitParSample,blockSize;
-    int samplingRate,byteParSec;
+    int data_size, chunk_size;
+    short channel_count,bit_par_sample,block_size;
+    int sampling_rate,byte_par_sec;
     
-    int dataPos = 0;
+    long dataPos = 0;
     int flag = 0;
     
     fread(&res32, 4, 1,fp);
@@ -31,7 +31,7 @@ int readHeaderWav(
     }
     
     //データサイズ = ファイルサイズ - 8 byte の取得
-    fread(&dataSize, 4, 1, fp);
+    fread(&data_size, 4, 1, fp);
     
     //WAVEヘッダーの読み
     fread(&res32, 4, 1, fp);
@@ -42,7 +42,7 @@ int readHeaderWav(
     while(flag != 3){
         //チャンクの読み
         fread(&res32, 4, 1, fp);
-        fread(&chunkSize, 4, 1, fp);
+        fread(&chunk_size, 4, 1, fp);
         
         switch(res32){
             case 0x20746d66:	//"fmt "
@@ -54,30 +54,30 @@ int readHeaderWav(
                     return 4;
                 }
                 //モノラル(1)orステレオ(2)
-                fread(&channelCnt, 2, 1, fp);
+                fread(&channel_count, 2, 1, fp);
                 if(res16 > 2){
                     //チャンネル数間違い
                     return 5;
                 }
                 //サンプリングレート
-                fread(&samplingRate, 4, 1, fp);
+                fread(&sampling_rate, 4, 1, fp);
                 //データ速度(byte/sec)=サンプリングレート*ブロックサイズ
-                fread(&byteParSec, 4, 1, fp);
+                fread(&byte_par_sec, 4, 1, fp);
                 //ブロックサイズ(byte/sample)=チャンネル数*サンプルあたりのバイト数
-                fread(&blockSize, 2, 1, fp);
+                fread(&block_size, 2, 1, fp);
                 //サンプルあたりのbit数(bit/sample)：8 or 16
-                fread(&bitParSample, 2, 1, fp);
+                fread(&bit_par_sample, 2, 1, fp);
                 
-                *channel = (int)channelCnt;
-                *bit = (int)bitParSample;
-                *freq = samplingRate;
+                *channel = (int)channel_count;
+                *bit = (int)bit_par_sample;
+                *freq = sampling_rate;
                 
                 flag += 1;
                 
                 break;
             case  0x61746164:	//"data"
                 
-                *size = chunkSize;
+                *size = chunk_size;
                 
                 dataPos = ftell(fp);
                 

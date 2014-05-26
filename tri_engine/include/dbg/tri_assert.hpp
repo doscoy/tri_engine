@@ -37,10 +37,10 @@ bool isInvalidFloat(const float f);
 
 
 #define T3_PANIC(...)               (void)0
-#define T3_ASSERT(exp)              (void)0
-#define T3_ASSERT_MSG(exp, ...)     (void)0
-#define T3_NULL_ASSERT(p)           (void)0
-#define T3_FLOAT_ASSERT(f)          (void)0
+#define T3_ASSERT(exp)              (void)(exp)
+#define T3_ASSERT_MSG(exp, ...)     (void)(exp)
+#define T3_NULL_ASSERT(p)           (void)(p)
+#define T3_FLOAT_ASSERT(f)          (void)(f)
 
 #endif // ENABLE_ASSERT
 

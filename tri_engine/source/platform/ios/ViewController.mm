@@ -65,7 +65,6 @@ GADBannerView* banner_view_ = nullptr;
     GADRequest* ad_req = [GADRequest request];
     ad_req.testDevices = [NSArray arrayWithObjects:
         GAD_SIMULATOR_ID,
-        @"6777c2466ac06c61cf44cc1b3fd9a7648713844d",  // test iphone
         nil
     ];
     [banner_view_ loadRequest:ad_req];
@@ -106,7 +105,7 @@ GADBannerView* banner_view_ = nullptr;
     
     if (motion_manager_.accelerometerAvailable) {
         //  加速度センサー更新タイミング
-        motion_manager_.accelerometerUpdateInterval = 1.0f / 30.0f;
+        motion_manager_.accelerometerUpdateInterval = 1.0f / 15.0f;
     
         // プル型の更新で取得
         [motion_manager_ startAccelerometerUpdates];

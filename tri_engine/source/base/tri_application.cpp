@@ -215,8 +215,14 @@ void Application::updateApplication()
 
     fps_timer_.end();
     fps_timer_.start();
+
+    //  delta time取得
     float delta_time = fps_timer_.interval();
+    //  ブレークポイント貼ってる時に異常な数値になる為、最大でも１０フレの遅延に収める
+    clampMaximum(delta_time, frameSec<10>());
     t3::printDisplay(0, 100, "fps %f", delta_time);
+
+
     float sum_render = 0;
     for (float a : render_avg) {
         sum_render += a;

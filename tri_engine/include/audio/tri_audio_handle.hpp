@@ -19,14 +19,22 @@ public:
     ~AudioHandle();
 
 public:
+    void playBGM();
+    void stopBGM();
     
-    void play();
+    void playSE();
+    void stopSE();
+
+private:
     
+    void play(bool loop = false);
+
     void stop();
     
 private:
     
     AudioSystem::source_id_t sid_;
+    bool bgm_;
 };
 
 

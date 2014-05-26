@@ -246,7 +246,7 @@ void SpriteRenderer::margeSprites() {
             indices.push_back(first_vertex_index + 3);
         }
     }
-    draw_count_ = indices.size();
+    draw_count_ = static_cast<int>(indices.size());
     
     //  バッファ更新
     RenderSystem::bindBuffer(
@@ -255,7 +255,7 @@ void SpriteRenderer::margeSprites() {
     );
     RenderSystem::setupBufferData(
         t3::RenderSystem::BufferType::TYPE_VERTEX,
-        vertices.size() * sizeof(float),
+        static_cast<int>(vertices.size() * sizeof(float)),
         vertices.data(),
         t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
     );
@@ -266,7 +266,7 @@ void SpriteRenderer::margeSprites() {
     );
     RenderSystem::setupBufferData(
         t3::RenderSystem::BufferType::TYPE_INDEX,
-        indices.size() * sizeof(uint32_t),
+        static_cast<int>(indices.size() * sizeof(uint32_t)),
         indices.data(),
         t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
     );

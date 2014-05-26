@@ -54,6 +54,14 @@ Vec2 GameSystem::viewportToScreen(
     return viewport_pos * getInstance().getScreenSize() * 0.5f;
 }
 
+void GameSystem::setupBlackOut() {
+    getInstance().fade_layer_.setupFadeParam(1, Color::black());
+}
+
+void GameSystem::setupBlackIn() {
+    getInstance().fade_layer_.setupFadeParam(0, Color::black());
+}
+
 void GameSystem::fadeOut() {
     getInstance().fade_layer_.fadeOut(1.0f);
 }

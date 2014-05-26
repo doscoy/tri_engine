@@ -16,7 +16,14 @@ class Transform2D
     :  Uncopyable
 {
 public:
-    Transform2D() = default;
+    Transform2D()
+        : position_(0, 0)
+        , rotation_(0)
+        , scale_(1.0f, 1.0f)
+        , parent_(nullptr)
+    {
+    }
+    
     ~Transform2D() = default;
 
 public:

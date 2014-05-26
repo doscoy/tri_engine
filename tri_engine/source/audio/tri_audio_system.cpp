@@ -73,6 +73,13 @@ void AudioSystem::stop(AudioSystem::source_id_t sid) {
     alSourceStop(sid);
 }
 
+void AudioSystem::setLoop(
+    source_id_t sid,
+    bool loop
+) {
+    alSourcei(sid, AL_LOOPING, loop);
+}
+
 void AudioSystem::setBufferData(
     const buffer_id_t id,
     const t3::AudioSystem::AudioFormat format,
@@ -101,7 +108,7 @@ void AudioSystem::setBufferData(
         default:
             break;
     }
-    alBufferData(id, al_format, data, size, sampling_rate);
+    alBufferData(id, al_format, data, (ALsizei)size, sampling_rate);
 }
 
 

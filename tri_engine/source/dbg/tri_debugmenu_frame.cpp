@@ -79,11 +79,9 @@ void DebugMenuFrame::detachItem(
     //  親を無効化
     item.setParent( nullptr );
 
-    size_t size = items_.size();
     //  子リストから外す
     items_.remove(&item);
     
-    T3_TRACE("item %d->%d\n", size, items_.size());
     
 
 }

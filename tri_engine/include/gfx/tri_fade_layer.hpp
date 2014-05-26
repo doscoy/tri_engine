@@ -82,6 +82,15 @@ public:
     ) {
         fade_color_ = c;
     }
+    
+    void setupFadeParam(
+        float fade_alpha,
+        const Color& c
+    ) {
+        fading_ = false;
+        alpha_ = fade_alpha;
+        fade_color_ = c;
+    }
 
 
 private:
