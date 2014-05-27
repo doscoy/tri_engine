@@ -54,6 +54,21 @@ Vec2 GameSystem::viewportToScreen(
     return viewport_pos * getInstance().getScreenSize() * 0.5f;
 }
 
+bool GameSystem::isOutOfScreen(
+    const Vec2 &screen_pos
+) {
+    Vec2 vpos = screenToViewport(screen_pos);
+    if (!inRange(vpos.x_, -1.0f, 1.0f)) {
+        return true;
+    }
+    else if (!inRange(vpos.y_, -1.0f, 1.0f)) {
+        return true;
+    }
+    
+    return false;
+}
+
+
 void GameSystem::setupBlackOut() {
     getInstance().fade_layer_.setupFadeParam(1, Color::black());
 }

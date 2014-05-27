@@ -92,7 +92,7 @@ void CollisionManager::judgeColliderPairs(
     std::shared_ptr<Collider>& b
 ) {
     //  既に判定済の組み合わせは省く
-    CollisionPair pair = CollisionPair(a->getColliderID(), b->getColliderID());
+    CollisionPair pair = CollisionPair(a, b);
     if (isJudgedPair(pair)) {
         return;
     }
@@ -104,7 +104,7 @@ void CollisionManager::judgeColliderPairs(
             //  当たった
             auto event = std::make_shared<CollisionEvent>();
             event->pos_ = circle_coll->getCircle().getPosition();
-            event->collision_pair_ = std::make_pair(a->getColliderID(), b->getColliderID());
+            event->collision_pair_ = std::make_pair(a, b);
             t3::safeQueueEvent(event);
         }
     }
@@ -115,7 +115,7 @@ void CollisionManager::judgeColliderPairs(
             //  当たった
             auto event = std::make_shared<CollisionEvent>();
             event->pos_ = point_coll->getPosition();
-            event->collision_pair_ = std::make_pair(a->getColliderID(), b->getColliderID());
+            event->collision_pair_ = std::make_pair(a, b);
             t3::safeQueueEvent(event);
         }
     }
@@ -133,15 +133,15 @@ bool CollisionManager::isJudgedPair(
         judged_pairs_.begin(),
         judged_pairs_.end(),
         [&](const CollisionPair& target){
-            auto f = pair.first;
-            auto s = pair.second;
-            if (f == target.first) {
-                if (s == target.second) {
+            auto f = pair.first->getColliderID();
+            auto s = pair.second->getColliderID();
+            if (f == target.first->getColliderID()) {
+                if (s == target.second->getColliderID()) {
                     return true;
                 }
             }
-            else if (f == target.second) {
-                if (s == target.first) {
+            else if (f == target.second->getColliderID()) {
+                if (s == target.first->getColliderID()) {
                     return true;
                 }
             }
@@ -154,6 +154,8 @@ bool CollisionManager::isJudgedPair(
     
     return false;
 }
+
+
 
 
     

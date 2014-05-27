@@ -116,6 +116,8 @@ public:
     
     static Vec2 viewportToScreen(const Vec2& viewport_pos);
     
+    static bool isOutOfScreen(const Vec2& screen_pos);
+    
     static void setupBlackOut();
     static void setupBlackIn();
     

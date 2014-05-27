@@ -40,12 +40,20 @@ public:
     const HashString& getColliderName() const {
         return collider_name_;
     }
-    
+
+public:
+    bool operator ==(const Collider& rhs) {
+        return getColliderID() == rhs.getColliderID();
+    }
+
 private:
     UniqueID collider_id_;
     HashString collider_name_;
 };
-using CollisionPair = std::pair<UniqueID, UniqueID>;
+
+
+using ColliderPtr = std::shared_ptr<Collider>;
+using CollisionPair = std::pair<ColliderPtr, ColliderPtr>;
 
         
 }   // namaespace geometry

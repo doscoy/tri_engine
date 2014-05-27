@@ -39,7 +39,7 @@ public:
     );
 
     void collisionDetection();
-    
+
 private:
     void judgeColliderPairs(
         std::shared_ptr<Collider>& a,
@@ -51,7 +51,6 @@ private:
     );
     
 private:
-//    Colliders colliders_;
     using CollidersMap = std::map<HashString, CollidersPtr>;
     CollidersMap colliders_;
     CollidersMap same_target_group_;
