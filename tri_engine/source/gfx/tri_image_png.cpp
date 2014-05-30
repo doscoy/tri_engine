@@ -93,7 +93,7 @@ PngImage::PngImage(std::string path)
     png_read_image( png_ptr, rec );
     
     png_destroy_read_struct( &png_ptr, &info_ptr, nullptr );
-  //  delete[] rec;
+ 
     fclose( fp );
 }
 
@@ -155,13 +155,16 @@ PngImage::PngImage(
     png_destroy_read_struct( &png_ptr, &info_ptr, nullptr );
 
 
+    delete[] rec;
 }
     
 // *********************************************
 //  デストラクタ
 PngImage::~PngImage(){
     T3_TRACE( "png data is deleted." );
-//    delete data_;
+
+
+    delete[] data_;
 }
     
     

@@ -5,7 +5,7 @@
 #include "base/tri_application.hpp"
 #include "dbg/tri_assert.hpp"
 #include "kernel/memory/tri_memory.hpp"
-
+#include "platform/ios/ViewController.hpp"
 
 #import "GADBannerView.h"
 
@@ -135,6 +135,42 @@ void showAd() {
 
 void hideAd() {
     banner_view_.hidden = YES;
+}
+
+void showNetworkRanking() {
+ 
+    
+    
+    ViewController* topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    
+    
+    [topController showRanking];
+    
+    
+}
+
+bool isEnableNetworkRanking() {
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void sendRankingScore(
+    int score
+) {
+    GKScore* gkscore = [[GKScore alloc] initWithLeaderboardIdentifier:@"com.aquariuscode.star01.lb"];
+    gkscore.value = score;
+    [GKScore reportScores:@[gkscore] withCompletionHandler:^(NSError *error) {
+        if (error) {
+            // エラーの場合
+        }
+    }];
 }
 
 

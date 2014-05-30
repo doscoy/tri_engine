@@ -69,7 +69,12 @@ void loadFile(
 
 void showAd();
 void hideAd();
-    
+void showNetworkRanking();
+bool isEnableNetworkRanking();
+void sendRankingScore(int score);
+
+
+
 }   // namespace platform
 }   // namespace t3
 

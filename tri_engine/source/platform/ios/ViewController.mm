@@ -8,6 +8,7 @@
 
 #import "ViewController.hpp"
 
+
 #include "base/tri_application.hpp"
 #include "platform/platform.hpp"
 #include "AppDelegate.hpp"
@@ -74,6 +75,15 @@ GADBannerView* banner_view_ = nullptr;
 }
 
 
+- (void)authenticateLocalPlayer {
+
+    GKLocalPlayer* player = [GKLocalPlayer localPlayer];
+    player.authenticateHandler = ^(UIViewController* ui, NSError* err) {
+        if (nil != ui) {
+            [self presentViewController:ui animated:YES completion:nil];
+        }
+    };
+}
 
 
 
@@ -81,8 +91,12 @@ GADBannerView* banner_view_ = nullptr;
 {
     [super viewDidLoad];
     
-    
+    //  広告セットアップ
     [self setupAdView];
+    
+    
+    //  ログインチェック
+    [self authenticateLocalPlayer];
     
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 
@@ -210,6 +224,34 @@ GADBannerView* banner_view_ = nullptr;
     acc_data_[0].z_ = newest_accel.acceleration.z;
 
 }
+
+
+/**
+ * ランキングボタンタップ時の処理
+ * リーダーボードを表示
+ */
+- (void) showRanking {
+    GKGameCenterViewController *gcView = [GKGameCenterViewController new];
+    if (gcView != nil)
+    {
+        gcView.gameCenterDelegate = self;
+        gcView.viewState = GKGameCenterViewControllerStateLeaderboards;
+        [self presentViewController:gcView animated:YES completion:nil];
+    }
+}
+
+/**
+ * リーダーボードで完了タップ時の処理
+ * 前の画面に戻る
+ */
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
