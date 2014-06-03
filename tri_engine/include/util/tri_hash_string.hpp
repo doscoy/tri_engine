@@ -4,7 +4,6 @@
 #include <functional>
 #include <string>
 
-
 namespace t3 {
 inline namespace util {
     
@@ -15,10 +14,17 @@ public:
     using key_t = std::size_t;
 
 public:
+    HashString()
+        : str_()
+        , key_()
+    {
+    }
+
     explicit HashString(const std::string str)
         : str_(str)
         , key_(strToHashKey(str))
-    {}
+    {
+    }
     
     ~HashString() = default;
     
@@ -33,6 +39,10 @@ public:
         return key_;
     }
     
+    void setString(const std::string str) {
+        str_ = str;
+        key_ = strToHashKey(str);
+    }
 
 public:
     bool operator <(const HashString& rhs) const {

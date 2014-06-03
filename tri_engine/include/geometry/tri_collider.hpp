@@ -53,7 +53,6 @@ private:
 
 
 using ColliderPtr = std::shared_ptr<Collider>;
-using CollisionPair = std::pair<ColliderPtr, ColliderPtr>;
 
         
 }   // namaespace geometry

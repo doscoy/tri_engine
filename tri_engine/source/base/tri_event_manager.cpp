@@ -2,9 +2,36 @@
 #include "base/tri_event_manager.hpp"
 #include "dbg/tri_assert.hpp"
 #include "math/tri_math_util.hpp"
+#include "base/tri_task.hpp"
+#include "base/tri_scene.hpp"
 
 namespace t3 {
 inline namespace base {
+
+
+class LounchEventTask
+    : public Task
+{
+public:
+    LounchEventTask(const EventHandle& event)
+        : Task()
+        , event_(event)
+    {
+    }
+    
+    void taskUpdate(
+        const tick_t delta_time
+    ) override {
+        safeQueueEvent(event_);
+        killTask();
+    }
+    
+private:
+    EventHandle event_;
+};
+
+
+
 
 EventManagerBase* event_manager_ = nullptr;
 
@@ -76,6 +103,16 @@ bool safeQueueEvent(
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->queueEvent(in_event);
 
+}
+
+void safeQueueEvent(
+    const EventHandle& in_event,
+    float delay_sec
+) {
+    auto lounch_event = std::make_shared<LounchEventTask>(in_event);
+    auto delay_task = std::make_shared<WaitingTask>(delay_sec);
+    delay_task->setNextTask(lounch_event);
+    t3::SceneManager::addSceneTask(delay_task);
 }
 
 
@@ -262,9 +299,7 @@ bool EventManager::triggerEvent(
     
     for (; table_it != table_end; ++table_it) {
         EventListenerPtr listener = *table_it;
-        if (listener->handleEvent(*in_event)) {
-            processed = true;
-        }
+        listener->handleEvent(*in_event);
     }
 
     return processed;
@@ -390,9 +425,7 @@ bool EventManager::tick(
         EventListenerTable::const_iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-            if ((*table_it)->handleEvent(*event)) {
-                break;
-            }
+            (*table_it)->handleEvent(*event);
         }
         
         process_count += 1;

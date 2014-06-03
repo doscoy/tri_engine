@@ -10,18 +10,20 @@ inline namespace gfx {
     
 
 RenderLayer::RenderLayer(
-    const char* const name,
+    const std::string& name,
     const int priority
-)   : pause_(false)
+)   : Nameable()
+    , pause_(false)
     , visible_(true)
     , priority_(priority)
     , dmf_me_(nullptr, name)
     , dmi_visible_(&dmf_me_, "VISIBLE", visible_, 1)
     , dmi_pause_(&dmf_me_, "PAUSE", pause_, 1)
 {
+    setName(name);
 }
     
-RenderLayer::RenderLayer(const char* const name)
+RenderLayer::RenderLayer(const std::string& name)
     : RenderLayer(name, PRIORITY_APP_NORMAL)
 {
 }
@@ -40,11 +42,6 @@ void RenderLayer::setPriority(
     priority_ = priority;
 }
 
-void RenderLayer::setLayerName(
-    const char* const name
-) {
-    std::strncpy( layer_name_, name, NAME_SIZE );
-}
 
 
 void RenderLayer::registryToDebugMenu(

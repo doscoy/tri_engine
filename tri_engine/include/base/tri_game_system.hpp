@@ -110,7 +110,7 @@ public:
     
     static const Input& getInput(const int player_no = 0);
     
-    static RenderLayer* getLayer(const char* const layer_name);
+    static RenderLayer* getLayer(const std::string& layer_name);
     
     static Vec2 screenToViewport(const Vec2& screen_pos);
     
@@ -170,12 +170,12 @@ private:
     std::array<Color, 4> clear_colors_;
     
     //  ゲームスピード
-    t3::DebugMenuItem<float> dm_game_speed_;
+    DebugMenuItem<float> dm_game_speed_;
     float game_speed_;
     
     //  レイヤーのデバッグメニュー
-    t3::DebugMenuFrame  dm_layers_;
-    std::array<t3::DebugMenuLabel*, 24> layer_list_;
+    DebugMenuFrame  dm_layers_;
+    std::array<DebugMenuLabel*, 24> layer_list_;
 
     bool exit_request_;
     

@@ -7,9 +7,17 @@ namespace t3 {
 inline namespace gfx {
     
 SpriteLayer::SpriteLayer()
-    : RenderLayer("Sprite")
+    : SpriteLayer("Sprite", PRIORITY_APP_NORMAL)
 {
-    
+}
+
+SpriteLayer::SpriteLayer(
+    const std::string& name,
+    const int priority
+)   : RenderLayer(name, priority)
+    , renderer_()
+    , sprites_()
+{
 }
 
 SpriteLayer::~SpriteLayer()

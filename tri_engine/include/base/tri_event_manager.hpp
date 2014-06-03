@@ -128,7 +128,11 @@ bool safeTriggerEvent(
 bool safeQueueEvent(
     const EventHandle& in_event
 );
-    
+
+void safeQueueEvent(
+    const EventHandle& in_event,
+    float delay_sec
+);
     
 bool safeAbortEvent(
     const EventType& in_type,

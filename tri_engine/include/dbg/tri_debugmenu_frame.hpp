@@ -21,7 +21,7 @@ class DebugMenuFrame
 public:
     DebugMenuFrame(
         DebugMenuFrame* parent,
-        const char* const label
+        const std::string& label
     );
     
     ~DebugMenuFrame();

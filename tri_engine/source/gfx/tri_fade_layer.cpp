@@ -10,7 +10,15 @@ namespace t3 {
 inline namespace gfx {
 
 FadeLayer::FadeLayer()
-    : DrawLayer("fade")
+    : FadeLayer("fade", PRIORITY_SYS_FADE)
+{
+}
+
+
+FadeLayer::FadeLayer(
+    const std::string& name,
+    const int priority
+)   : DrawLayer(name, priority)
     , fading_(false)
     , fade_in_(true)
     , fade_speed_(1.0f)

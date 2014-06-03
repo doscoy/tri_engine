@@ -13,14 +13,15 @@ namespace t3 {
 inline namespace gfx {
 
 DrawLayer::DrawLayer()
-    : DrawLayer("Draw")
+    : DrawLayer("Draw", PRIORITY_APP_NORMAL)
 {
 }
 
 
 DrawLayer::DrawLayer(
-    const char* const name
-)   : RenderLayer(name)
+    const std::string name,
+    const int priority
+)   : RenderLayer(name, priority)
     , update_func_(this, &self_t::nullUpdate)
     , render_func_(this, &self_t::nullRender)
 {

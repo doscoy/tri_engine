@@ -65,7 +65,7 @@ void TaskManager::printTask() const {
         int show_x = task_num / 61;
         int show_y = task_num % 61;
         std::shared_ptr<Task> t(*itr);
-        t3::printDisplay(show_x * 120, show_y * 15, "%s", t->getTaskName());
+        t3::printDisplay(show_x * 120, show_y * 15, "%s", t->getName().c_str());
         task_num += 1;
     }
 }

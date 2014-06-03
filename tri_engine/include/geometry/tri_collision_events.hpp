@@ -9,7 +9,10 @@
 
 namespace t3 {
 inline namespace geometry {
-        
+    
+using CollisionPair = std::pair<ColliderPtr, ColliderPtr>;
+    
+
 class CollisionEvent
     : public EventBase {
 public:

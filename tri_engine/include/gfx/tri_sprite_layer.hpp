@@ -19,6 +19,10 @@ class SpriteLayer
 
 public:
     SpriteLayer();
+    SpriteLayer(
+        const std::string& name,
+        const int priority
+    );
     virtual ~SpriteLayer();
 
 public:

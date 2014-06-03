@@ -2,7 +2,7 @@
 #define TRI_COLLISION_MANAGER_HPP_INCLUDED
 
 #include "util/tri_hash_string.hpp"
-#include "tri_collider.hpp"
+#include "tri_collision_events.hpp"
 #include "tri_event.hpp"
 #include <memory>
 #include <list>
@@ -30,20 +30,20 @@ private:
     using JudgedPairs = std::vector<CollisionPair>;
 public:
     void addCollider(
-        std::shared_ptr<Collider> collider,
+        ColliderPtr collider,
         HashString target
     );
 
     void removeCollider(
-        std::shared_ptr<Collider> collider
+        ColliderPtr collider
     );
 
     void collisionDetection();
 
 private:
     void judgeColliderPairs(
-        std::shared_ptr<Collider>& a,
-        std::shared_ptr<Collider>& b
+        ColliderPtr& a,
+        ColliderPtr& b
     );
     
     bool isJudgedPair(

@@ -6,6 +6,7 @@
 
 #include "base/tri_types.hpp"
 #include "util/tri_uncopyable.hpp"
+#include "util/tri_nameable.hpp"
 #include <memory>
 
 
@@ -15,6 +16,7 @@ inline namespace base {
 class TaskManager;
 class Task
     : private Uncopyable
+    , virtual public Nameable
 {
     friend class TaskManager;
 public:
@@ -29,13 +31,8 @@ public:
 
 
 public:
-    Task(int priority = PRIORITY_APP_DEFAULT)
-        : Task("????", priority)
-    {
-    }
-    
-    Task(
-        const char* const name,
+
+    explicit Task(
         int priority = PRIORITY_APP_DEFAULT
     )   : priority_(priority)
         , kill_(false)
@@ -44,7 +41,6 @@ public:
         , inital_update_(true)
         , attached_(false)
     {
-        setTaskName(name);
     }
         
     virtual ~Task()
@@ -104,13 +100,6 @@ public:
         paused_ = !paused_;
     }
 
-    void setTaskName(const char* const name) {
-        std::strncpy(task_name_, name, 16);
-    }
-    
-    const char* getTaskName() const {
-        return task_name_;
-    }
 
 public:
     bool operator <(const Task& rhs) {

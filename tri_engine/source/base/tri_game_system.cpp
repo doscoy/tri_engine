@@ -29,12 +29,12 @@ void GameSystem::addSystemTask(
 
 
 RenderLayer* GameSystem::getLayer(
-    const char* const layer_name
+    const std::string& layer_name
 ) {
     t3::RenderLayers layers = t3::GameSystem::getInstance().getLaysers();
     
     for (auto layer : layers) {
-        if (std::strncmp(layer_name, layer->getLayerName(), RenderLayer::NAME_SIZE) == 0) {
+        if (layer_name == layer->getName()) {
             return layer;
         }
     }
@@ -110,7 +110,7 @@ GameSystem::GameSystem()
     , screen_size_()
     , input_()
     , layers_()
-    , fade_layer_()
+    , fade_layer_("sys-fade", t3::RenderLayer::PRIORITY_SYS_FADE)
     , event_manager_("ev_man", true)
     , task_manager_()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
@@ -161,8 +161,6 @@ void GameSystem::initializeGameSystem() {
     );
     
     //  フェードレイヤー登録
-    fade_layer_.setPriority(RenderLayer::PRIORITY_SYS_FADE);
-    fade_layer_.setLayerName("sys-fade");
     fade_layer_.attachSystem();
 }
 
@@ -280,7 +278,7 @@ void GameSystem::registryToDebugMenu( DebugMenuFrame& parent_frame )
 void GameSystem::attachLayer(t3::RenderLayer* layer)
 {
     T3_NULL_ASSERT(layer);
-    T3_TRACE("Attach Layer %s\n", layer->getLayerName());
+    T3_TRACE("Attach Layer %s\n", layer->getName().c_str());
     layers_.push_back(layer);
     layers_.sort(
         []( RenderLayer*lhs, RenderLayer* rhs ){
@@ -291,7 +289,7 @@ void GameSystem::attachLayer(t3::RenderLayer* layer)
 
 void GameSystem::detachLayer(t3::RenderLayer* layer)
 {
-    T3_TRACE("Detach Layer %s\n", layer->getLayerName());
+    T3_TRACE("Detach Layer %s\n", layer->getName().c_str());
 
     layers_.remove(layer);
     layers_.sort(

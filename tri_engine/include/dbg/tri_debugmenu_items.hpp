@@ -5,8 +5,7 @@
 #include "tri_debugmenu_label.hpp"
 #include "tri_debugpad.hpp"
 #include "tri_debugmenu_frame.hpp"
-#include "../base/tri_scene.hpp"
-#include "../math/tri_math_types.hpp"
+#include "math/tri_math_types.hpp"
 #include <limits.h>
 #include <functional>
 
@@ -97,7 +96,7 @@ public:
             y,
             color,
             DEBUG_MENU_FONT_SIZE,
-            getLabel()
+            getLabel().c_str()
         );
         
         printDisplay(
@@ -264,36 +263,6 @@ private:
     std::function<void(T&)> func_;
     T* owner_;
 };
-
-
-template <class T>
-class DebugMenuSceneLouncher
-    : public DebugMenuLabel
-{
-public:
-    DebugMenuSceneLouncher(
-        DebugMenuFrame* parent,
-        const char* const label
-    )   : DebugMenuLabel( parent, label )
-    {
-    }
-
-public:
-    void update() override {
-
-        const Pad& pad = debugPad();
-        if (pad.isTrigger(Pad::BUTTON_A)) {
-            SceneManager& sm = SceneManager::getInstance();
-            sm.forceChangeScene( gen_.getInstancePtr() );
-        }
-        else if (pad.isTrigger(Pad::BUTTON_B)) {
-            parent_->setFocusItem(nullptr);
-        }
-
-    }
-    TypedSceneGenerator<T> gen_;
-};
-
 
 
 

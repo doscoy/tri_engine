@@ -24,7 +24,7 @@ EventSnooper::~EventSnooper()
 }
 
 
-bool EventSnooper::handleEvent(
+void EventSnooper::handleEvent(
     const Event& event
 ) {
     T3_TRACE(
@@ -35,7 +35,6 @@ bool EventSnooper::handleEvent(
         event.getEventType().string().c_str()
         
     );
-    return false;
 }
 
 }   // namespace base

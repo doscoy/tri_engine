@@ -3,7 +3,8 @@
 #define TRI_RENDER_LAYER_HPP_INCLUDED
 
 
-#include "../util/tri_uncopyable.hpp"
+#include "util/tri_uncopyable.hpp"
+#include "util/tri_nameable.hpp"
 #include "dbg/tri_debugmenu_items.hpp"
 #include <list>
 
@@ -19,6 +20,7 @@ typedef std::list<RenderLayer*>   RenderLayers;
 
 class RenderLayer
     : private Uncopyable
+    , virtual public Nameable
 {
 public:
     enum LayerPriority {
@@ -32,12 +34,10 @@ public:
         PRIORITY_DEBUG      = 180,
         PRIORITY_HIGHEST    = 240, // 手前
     };
-    enum {
-        NAME_SIZE = 16
-    };
+    
 public:
-    RenderLayer(const char* const name, const int priority);
-    explicit RenderLayer(const char* const name);
+    RenderLayer(const std::string& name, const int priority);
+    explicit RenderLayer(const std::string& name);
     virtual ~RenderLayer();
 
 public:
@@ -91,12 +91,6 @@ public:
         return pause_;
     }
     
-    void setLayerName( const char* const name );
-    
-    const char* getLayerName() const {
-        return layer_name_;
-    }
-    
     virtual void registryToDebugMenu(
         DebugMenuFrame& parent
     );
@@ -127,7 +121,6 @@ protected:
     bool pause_;
     bool visible_;
     uint8_t priority_;
-    char layer_name_[NAME_SIZE];
 
     //  デバッグメニュー登録
     DebugMenuFrame dmf_me_;

@@ -10,6 +10,7 @@
 #include "tri_debugmenu.hpp"
 #include "tri_debugmenu_frame.hpp"
 #include "tri_debugmenu_items.hpp"
+#include "tri_debugmenu_scene_louncher.hpp"
 #include "tri_debugmenu_label.hpp"
 #include "tri_debugpad.hpp"
 #include "tri_draw_primitive.hpp"

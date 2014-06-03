@@ -3,12 +3,13 @@
 #ifndef TRI_SCENE_HPP_INCLUDED
 #define TRI_SCENE_HPP_INCLUDED
 
+#include "dbg/tri_debugmenu.hpp"
 #include "util/tri_uncopyable.hpp"
 #include "util/tri_singleton.hpp"
 #include "base/tri_types.hpp"
 #include <memory>
 #include "dbg/tri_trace.hpp"
-#include "dbg/tri_debugmenu_frame.hpp"
+
 #include "tri_task_manager.hpp"
 
 
@@ -42,7 +43,7 @@ public:
     
     //  シーン生成
     std::shared_ptr<Scene> createScene() override {
-        return std::shared_ptr<Scene>( T3_NEW scene_t );
+        return std::shared_ptr<Scene>(T3_NEW scene_t);
     }
 
 };
@@ -90,6 +91,7 @@ public:
         task_manager_.attach(task);
     }
 
+
 protected:
     void setFinish(bool f) {
         finish_ = f;
@@ -97,8 +99,10 @@ protected:
 
 private:
     bool finish_;
+    bool show_task_;
     const char* scene_name_;
     DebugMenuFrame scene_debug_menu_frame_;
+    DebugMenuItem<bool> dmi_show_task_;
     TaskManager task_manager_;
 };
 

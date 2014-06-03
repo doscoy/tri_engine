@@ -16,6 +16,7 @@ class FadeLayer
 {
 public:
     FadeLayer();
+    FadeLayer(const std::string& name, const int priority);
     ~FadeLayer();
 
 

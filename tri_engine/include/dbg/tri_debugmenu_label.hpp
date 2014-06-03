@@ -24,7 +24,7 @@ class DebugMenuLabel
 public:
     DebugMenuLabel(
         DebugMenuFrame* parent,
-        const char* const label
+        const std::string& label
     );
     
     virtual ~DebugMenuLabel();
@@ -32,12 +32,12 @@ public:
 
 public:
 
-    const char* getLabel() const {
+    const std::string& getLabel() const {
         return label_;
     };
     
     short getLabelWidth() const {
-        return label_length_;
+        return label_.size();
     };
     
     DebugMenuFrame* getParent() {
@@ -70,7 +70,7 @@ public:
         const float y,
         const Color& color
     ) const {
-        printDisplay(x, y, color, DEBUG_MENU_FONT_SIZE, getLabel());
+        printDisplay(x, y, color, DEBUG_MENU_FONT_SIZE, getLabel().c_str());
     }
     
     template <typename T>
@@ -107,8 +107,7 @@ private:
     
 protected:
     DebugMenuFrame* parent_;
-    const char* label_;
-    short label_length_;
+    std::string label_;
     bool enable_;
     
     //  開閉コールバック

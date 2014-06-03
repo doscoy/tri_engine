@@ -10,7 +10,7 @@ inline namespace dbg {
 
 DebugMenuFrame::DebugMenuFrame(
     DebugMenuFrame* parent,
-    const char* const label
+    const std::string& label
 )   : DebugMenuLabel(parent, label)
     , focus_item_(nullptr)
     , select_idx_(0)
@@ -140,7 +140,7 @@ void DebugMenuFrame::drawFrame(
 ) const {
 
     
-    printDisplay( x, y, color, DEBUG_MENU_FONT_SIZE, getLabel() );
+    printDisplay(x, y, color, DEBUG_MENU_FONT_SIZE, getLabel().c_str());
 
     int idx = 0;
     Color font_color;

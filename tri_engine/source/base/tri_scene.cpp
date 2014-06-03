@@ -8,8 +8,11 @@ inline namespace base {
 Scene::Scene(
     const char* const scene_name
 )   : finish_(false)
+    , show_task_(false)
     , scene_name_( scene_name )
     , scene_debug_menu_frame_(nullptr, scene_name)
+    , dmi_show_task_(&scene_debug_menu_frame_, "show task", show_task_, 1)
+    , task_manager_()
 {
     DebugMenu& debug_menu_root = DebugMenu::getInstance();
 
@@ -27,15 +30,22 @@ Scene::~Scene()
 void Scene::update(
     tick_t delta_time
 ) {
-//    t3::printDisplay(0, 0, "task %d", task_manager_.getTaskCount());
     task_manager_.updateTask(delta_time);
     updateScene(delta_time);
+    
+    if (show_task_) {
+        task_manager_.printTask();
+    }
 }
 
 void Scene::suspend(
     tick_t delta_time
 ) {
     suspendScene(delta_time);
+
+    if (show_task_) {
+        task_manager_.printTask();
+    }
 }
 
 

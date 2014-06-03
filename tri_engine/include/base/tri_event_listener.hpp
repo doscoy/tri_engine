@@ -17,14 +17,8 @@ public:
     virtual ~EventListener();
     
 public:
-    
-    //  リスナー名を取得
-    virtual const char* getListenerName() const = 0;
-    
-    //  イベントを受けたか伝える
-    //  伝播させたい（受けてない）時はfalseを返す
-    virtual bool handleEvent(const Event& event) = 0;
-
+    //  イベントハンドラ
+    virtual void handleEvent(const Event& event) = 0;
 };
 
 //  全てのイベントを受けるクラス
@@ -36,11 +30,7 @@ public:
     ~EventSnooper();
 
 public:
-    const char* getListenerName() const override {
-        return "Snooper";
-    }
-
-    bool handleEvent(const Event& event) override;
+    void handleEvent(const Event& event) override;
     
 private:
     char msg_buffer_[4090];

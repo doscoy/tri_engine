@@ -3,8 +3,6 @@
 #include "geometry/tri_circle_collider.hpp"
 #include "geometry/tri_point_collider.hpp"
 #include "base/tri_event_manager.hpp"
-#include "geometry/tri_collision_events.hpp"
-
 
 
 
@@ -13,7 +11,7 @@ inline namespace geometry {
 
 
 void CollisionManager::addCollider(
-    std::shared_ptr<Collider> collider,
+    ColliderPtr collider,
     t3::HashString target
 ) {
 
@@ -47,7 +45,7 @@ void CollisionManager::addCollider(
 }
 
 void CollisionManager::removeCollider(
-    std::shared_ptr<Collider> collider
+    ColliderPtr collider
 ) {
     //  自分の属するグループから削除
     const t3::HashString& group_name = collider->getColliderName();
@@ -88,8 +86,8 @@ void CollisionManager::collisionDetection() {
 }
 
 void CollisionManager::judgeColliderPairs(
-    std::shared_ptr<Collider>& a,
-    std::shared_ptr<Collider>& b
+    ColliderPtr& a,
+    ColliderPtr& b
 ) {
     //  既に判定済の組み合わせは省く
     CollisionPair pair = CollisionPair(a, b);

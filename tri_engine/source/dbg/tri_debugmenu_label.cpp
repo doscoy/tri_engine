@@ -9,14 +9,13 @@ inline namespace dbg {
 
 DebugMenuLabel::DebugMenuLabel(
     DebugMenuFrame* parent,
-    const char* const label
+    const std::string& label
 )   : parent_(nullptr)
     , label_(label)
     , focus_callback_(this, &DebugMenuLabel::nullCallback)
     , unfocus_callback_(this, &DebugMenuLabel::nullCallback)
 
 {
-    label_length_ = std::strlen(label_);
     if (parent) {
         attachSelf(*parent);
     }
