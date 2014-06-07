@@ -20,6 +20,8 @@ public:
     {
     }
     
+    virtual ~Nameable(){}
+    
 public:
     std::string getName() const {
         return name_.string();
