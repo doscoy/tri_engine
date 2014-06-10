@@ -171,7 +171,7 @@ private:
     using EventListenerMap = std::map<HashString::key_t, EventListenerTable>;
     
     //  EventListenerMapの検索結果
-    using EventListenerMapEntry = std::pair<uint32_t, EventListenerTable>;
+    using EventListenerMapEntry = std::pair<HashString::key_t, EventListenerTable>;
     
     //  EventListenerMapへの挿入結果
     using EventListenerMapInsertResult = std::pair<EventListenerMap::iterator, bool>;
@@ -229,6 +229,8 @@ public:
 
     EventTypeList getTypeList() const;
     
+    void dumpListeners() const;
+    std::string getEventNameByKey(HashString::key_t key) const;
 private:
     enum {
         NUM_QUEUES = 2

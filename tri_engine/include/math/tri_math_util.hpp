@@ -52,7 +52,7 @@ inline const void clampMinimum(
     T& value,
     const T& l
 ){
-    if ( value < l ){
+    if (value < l){
         value = l;
     }
 	

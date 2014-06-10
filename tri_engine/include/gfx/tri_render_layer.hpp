@@ -98,8 +98,6 @@ public:
     virtual void unregistryToDebugMenu();
     
     
-    void attachSystem();
-    void detachSystem();
     
 public:
     //  レイヤー更新
@@ -115,6 +113,9 @@ public:
 protected:
     virtual void updateLayer(tick_t delta_time){};
     virtual void drawLayer(){};
+
+    void attachSystem();
+    void detachSystem();
 
     
 protected:

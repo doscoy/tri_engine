@@ -4,6 +4,7 @@
 #include "tri_event_manager.hpp"
 #include "tri_task_manager.hpp"
 #include "dbg/tri_debugmenu.hpp"
+#include "dbg/tri_debug_log_layer.hpp"
 #include "kernel/tri_kernel.hpp"
 #include "util/random/tri_random.hpp"
 #include "util/tri_singleton.hpp"
@@ -133,6 +134,16 @@ public:
     
     static const Vec2& getScreenSize();
     
+    static void printLog(const char* const buf);
+    
+    static void printDisplay(
+        int x,
+        int y,
+        const uint32_t color,
+        const int font_size,
+        const char* const buf
+    );
+    
 private:
     void setClearColor();
 
@@ -142,6 +153,13 @@ private:
     void unregistryLayersToDebugMenu();
     
 private:
+    //  デバッグ用レイヤー
+    std::unique_ptr<DebugLogLayer> log_layer_;
+    std::unique_ptr<DebugStringLayer> dbg_screen_layer_;
+
+    //  システムフェード
+    std::unique_ptr<FadeLayer> fade_layer_;
+    
     //  乱数
     random_t random_number_generator_;
 
@@ -154,8 +172,7 @@ private:
     //  描画レイヤー
     RenderLayers layers_;
     
-    //  システムフェード
-    FadeLayer fade_layer_;
+    
     
     //  イベントマネージャ
     EventManager event_manager_;

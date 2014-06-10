@@ -25,7 +25,7 @@ struct Mtx4Template;
 
 inline namespace dbg {
 
-void initializeTrace();
+
 void traceTerminal(const char* const format, ...);
 void traceDisplay(const char* const format, ...);
 void trace(const char* const format, ...);

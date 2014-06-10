@@ -198,7 +198,7 @@ void Application::initializeApplication()
     //  デバッグ文字描画の初期化
     initializeDebugPrint();
     initializeDrawPrimitive();
-    initializeTrace();
+   
 
     //  ゲームの初期化
     initializeGame();

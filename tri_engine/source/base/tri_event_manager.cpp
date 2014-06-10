@@ -167,19 +167,18 @@ bool EventManager::addListener(
     const EventListenerPtr& in_listener,
     const EventType& in_type
 ) {
+
     if (!isValidateEventType(in_type)) {
         return false;
     }
-    
-    //  型のリストをチェックし、更新
-//    EventTypeSet::iterator ev_it = type_list_.find(in_type);
+
     
     //  リスナーマップのエントリを探しこのエントリに対応するテーブルが
     //  まだ存在しなければエントリを作成
     EventListenerMap::iterator elm_it = registry_.find(in_type.key());
     
     if (elm_it == registry_.end()) {
-        //  未発見
+        //  未発見なのでエントリを作成
         EventListenerMapInsertResult elm_res = registry_.insert(
             EventListenerMapEntry(in_type.key(), EventListenerTable())
         );
@@ -217,6 +216,8 @@ bool EventManager::addListener(
     table.push_back(in_listener);
     
     
+    T3_TRACE("addListener %s\n", in_listener->getName().c_str());
+    
     return true;
 }
 
@@ -249,6 +250,9 @@ bool EventManager::removeListener(const EventListenerPtr &listener) {
         for (; table_it != table_end; ++table_it) {
             if (*table_it == listener) {
                 table.erase(table_it);
+                
+                T3_TRACE("removeListener %s\n", listener->getName().c_str());
+
                 result = true;
                 
                 //  addListenerにおいてイベントの処理リストにリスナーが
@@ -307,7 +311,6 @@ bool EventManager::triggerEvent(
 
 
 
-
 bool EventManager::queueEvent(
     const EventHandle& in_event
 ) {
@@ -326,6 +329,8 @@ bool EventManager::queueEvent(
         
         if (it_wc == registry_.end()) {
             //  このイベントのリスナはいないのでスキップ
+            T3_TRACE("%s is skip\n", in_event->getEventType().string().c_str());
+            dumpListeners();
             return false;
         }
     }
@@ -405,7 +410,6 @@ bool EventManager::tick(
         if (it_wc != registry_.end()) {
             
             const EventListenerTable& table = it_wc->second;
-//            bool processed = false;
             
             EventListenerTable::const_iterator table_it = table.begin();
             EventListenerTable::const_iterator table_end = table.end();
@@ -523,6 +527,44 @@ EventTypeList EventManager::getTypeList() const {
     return result;
 }
 
+
+void EventManager::dumpListeners() const {
+    
+    //  登録済の全名前出力
+    EventListenerMap::const_iterator map_it = registry_.begin();
+    EventListenerMap::const_iterator map_end = registry_.end();
+    for (; map_it != map_end; ++map_it) {
+        
+        const EventListenerTable& table = map_it->second;
+        
+        EventListenerTable::const_iterator table_it = table.begin();
+        EventListenerTable::const_iterator table_end = table.end();
+        
+        for (; table_it != table_end; ++table_it) {
+            const EventListenerPtr listener = *table_it;
+            T3_TRACE("%s -- %s\n",
+                listener->getName().c_str(),
+                getEventNameByKey(map_it->first).c_str()
+            );
+        }
+        
+    }
+}
+
+
+std::string EventManager::getEventNameByKey(
+    HashString::key_t key
+) const {
+
+    for (auto type:type_list_) {
+    
+        if (type.key() == key) {
+            return type.string();
+        }
+    }
+    
+    return "not found.";
+}
 
 
 

@@ -17,6 +17,7 @@ EventListener::~EventListener() {
 EventSnooper::EventSnooper()
     : msg_buffer_()
 {
+    setName("EventSnooper");
 }
 
 EventSnooper::~EventSnooper()

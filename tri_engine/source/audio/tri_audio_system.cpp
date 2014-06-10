@@ -63,13 +63,11 @@ void AudioSystem::deleteSource(source_id_t source) {
 
 
 void AudioSystem::play(AudioSystem::source_id_t sid) {
-    T3_TRACE("alSoundPlay %d\n", sid);
     alSourcePlay(sid);
 }
 
 
 void AudioSystem::stop(AudioSystem::source_id_t sid) {
-    T3_TRACE("alSoundStop %d\n", sid);
     alSourceStop(sid);
 }
 

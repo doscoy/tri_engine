@@ -70,47 +70,69 @@ bool GameSystem::isOutOfScreen(
 
 
 void GameSystem::setupBlackOut() {
-    getInstance().fade_layer_.setupFadeParam(1, Color::black());
+    getInstance().fade_layer_->setupFadeParam(1, Color::black());
 }
 
 void GameSystem::setupBlackIn() {
-    getInstance().fade_layer_.setupFadeParam(0, Color::black());
+    getInstance().fade_layer_->setupFadeParam(0, Color::black());
 }
 
 void GameSystem::fadeOut() {
-    getInstance().fade_layer_.fadeOut(1.0f);
+    getInstance().fade_layer_->fadeOut(1.0f);
 }
 
 void GameSystem::fadeIn() {
-    getInstance().fade_layer_.fadeIn(1.0f);
+    getInstance().fade_layer_->fadeIn(1.0f);
 }
 
 bool GameSystem::isFadeEnd() {
-    return t3::GameSystem::getInstance().fade_layer_.isFadeEnd();
+    return getInstance().fade_layer_->isFadeEnd();
 }
 
 bool GameSystem::isFadeInEnd() {
-    return t3::GameSystem::getInstance().fade_layer_.isFadeInEnd();
+    return getInstance().fade_layer_->isFadeInEnd();
 }
 
 bool GameSystem::isFadeOutEnd() {
-    return getInstance().fade_layer_.isFadeOutEnd();
+    return getInstance().fade_layer_->isFadeOutEnd();
 }
 
 const Vec2& GameSystem::getScreenSize() {
     return getInstance().screen_size_;
 }
 
+void GameSystem::printLog(const char* const buf) {
+    if (!getInstancePointer()) {
+        return;
+    }
+
+    if (!getInstance().log_layer_) {
+        return;
+    }
+    getInstance().log_layer_->writeString(buf);
+}
+
+void GameSystem::printDisplay(
+    int x,
+    int y,
+    const uint32_t color,
+    const int font_size,
+    const char* const buf
+) {
+    getInstance().dbg_screen_layer_->writeString(x, y, color, font_size, buf);
+}
 
 
 // *********************************************
 //  コンストラクタ
 GameSystem::GameSystem()
-    : random_number_generator_(1)
+    : log_layer_(nullptr)
+    , dbg_screen_layer_(nullptr)
+    , random_number_generator_(1)
     , screen_size_()
     , input_()
     , layers_()
-    , fade_layer_("sys-fade", t3::RenderLayer::PRIORITY_SYS_FADE)
+    , fade_layer_(nullptr)
     , event_manager_("ev_man", true)
     , task_manager_()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
@@ -136,6 +158,7 @@ GameSystem::GameSystem()
 
     //  コリジョンマネージャ生成
     CollisionManager::createInstance();
+    
 }
 
 // *********************************************
@@ -148,6 +171,8 @@ GameSystem::~GameSystem()
     SceneManager::destroyInstance();
 }
 
+
+
 void GameSystem::initializeGameSystem() {
     setClearColor();
     
@@ -159,15 +184,20 @@ void GameSystem::initializeGameSystem() {
         this,
         &GameSystem::unregistryLayersToDebugMenu
     );
+ 
     
-    //  フェードレイヤー登録
-    fade_layer_.attachSystem();
+    //  システムフェードレイヤー生成
+    fade_layer_.reset(T3_NEW FadeLayer("sys-fade", RenderLayer::PRIORITY_SYS_FADE));
+    
+    //  デバッグ用レイヤー生成
+    log_layer_.reset(T3_NEW DebugLogLayer("dbg log"));
+    dbg_screen_layer_.reset(T3_NEW DebugStringLayer("dbg print"));
+
 }
 
 
 void GameSystem::terminategameSystem() {
-    //  フェードレイヤー登録解除
-    fade_layer_.detachSystem();
+
 }
 
 // *********************************************

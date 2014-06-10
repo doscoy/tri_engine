@@ -15,21 +15,6 @@ namespace t3 {
 inline namespace dbg {
 
 
-namespace {
-
-DebugLogLayer dbg_log_layer_;
-
-}   // unname namespace
-
-
-void initializeTrace()
-{
-    //  デバッグレイヤーを登録
-    dbg_log_layer_.setPriority(RenderLayer::PRIORITY_DEBUG);
-    dbg_log_layer_.attachSystem();
-
-}
-
 void traceTerminal( const char* const format, ... )
 {
     va_list msg;
@@ -51,7 +36,7 @@ void traceDisplay( const char* const format, ... )
 	vsnprintf(buf, 256, format, msg);
 	va_end(msg);
 
-    dbg_log_layer_.writeString(buf);
+    t3::GameSystem::printLog(buf);
 }
 
 void trace( const char* const format, ... )

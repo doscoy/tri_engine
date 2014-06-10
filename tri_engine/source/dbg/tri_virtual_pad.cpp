@@ -41,11 +41,10 @@ VirtualPad::VirtualPad()
 {
     pad_layer_.setUpdateCallback(this, &VirtualPad::updateVirtualPad);
     pad_layer_.setRenderCallback(this, &VirtualPad::renderVirtualPad);
-    pad_layer_.attachSystem();
 }
 
 VirtualPad::~VirtualPad() {
-    pad_layer_.detachSystem();
+
 }
 
 

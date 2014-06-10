@@ -21,6 +21,7 @@ RenderLayer::RenderLayer(
     , dmi_pause_(&dmf_me_, "PAUSE", pause_, 1)
 {
     setName(name);
+    attachSystem();
 }
     
 RenderLayer::RenderLayer(const std::string& name)
@@ -32,7 +33,7 @@ RenderLayer::RenderLayer(const std::string& name)
 
 RenderLayer::~RenderLayer()
 {
-
+    detachSystem();
 }
 
 void RenderLayer::setPriority(

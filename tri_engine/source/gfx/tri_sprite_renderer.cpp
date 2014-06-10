@@ -96,7 +96,7 @@ void SpriteRenderer::beginRender()
     bool use_result = sprite_shader_.use();
     T3_ASSERT(use_result);
     //  スプライトのソート
-    std::sort(sprites_.begin(), sprites_.end(), PriorityCompare());
+//    std::sort(sprites_.begin(), sprites_.end(), PriorityCompare());
 
     sprite_shader_.setEnableAttributeArray("position", true);
     sprite_shader_.setEnableAttributeArray("uv", true );

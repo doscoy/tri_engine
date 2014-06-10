@@ -4,14 +4,16 @@
 
 #include "tri_event.hpp"
 #include <memory>
-
+#include "util/tri_nameable.hpp"
 
 
 namespace t3 {
 inline namespace base {
 
 //  イベントリスナ
-class EventListener {
+class EventListener
+    : virtual public Nameable {
+    
 public:
     explicit EventListener() {}
     virtual ~EventListener();

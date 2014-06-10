@@ -31,7 +31,6 @@
 namespace {
 
 constexpr int BUFFER_LENGTH = 256;
-t3::DebugStringLayer dbg_screen_layer_;
 float width_;
 float height_;
 
@@ -197,9 +196,6 @@ void initializeDebugPrint()
     bool shader_link_result = font_shader_.link();
     T3_ASSERT(shader_link_result);
     
-    //  デバッグレイヤーを登録
-    dbg_screen_layer_.setPriority(RenderLayer::PRIORITY_DEBUG);
-    dbg_screen_layer_.attachSystem();
 }
 
 
@@ -216,7 +212,7 @@ void printDisplay(
     vsnprintf(buf, BUFFER_LENGTH, fmt, arg);
     va_end(arg);
     
-    dbg_screen_layer_.writeString(
+    t3::GameSystem::printDisplay(
         x,
         y,
         Color::magenta().getRGBA(),
@@ -239,7 +235,7 @@ void printDisplay(
     vsnprintf(buf, BUFFER_LENGTH, fmt, arg);
     va_end(arg);
     
-    dbg_screen_layer_.writeString(
+    t3::GameSystem::printDisplay(
         x,
         y,
         color.getRGBA(),
@@ -252,7 +248,7 @@ void printDisplay(
     const float x,
     const float y,
     const Color& color,
-    const int size,
+    const int font_size,
     const char* fmt, ...
 ){
 
@@ -263,11 +259,11 @@ void printDisplay(
     vsnprintf(buf, BUFFER_LENGTH, fmt, arg);
     va_end(arg);
     
-    dbg_screen_layer_.writeString(
+    t3::GameSystem::printDisplay(
         x,
         y,
         color.getRGBA(),
-        size,
+        font_size,
         buf
     );
 }
