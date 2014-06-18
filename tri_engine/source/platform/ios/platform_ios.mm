@@ -6,6 +6,7 @@
 #include "dbg/tri_assert.hpp"
 #include "kernel/memory/tri_memory.hpp"
 #include "platform/ios/ViewController.hpp"
+#include "Flurry.h"
 
 #import "GADBannerView.h"
 
@@ -17,6 +18,19 @@ t3::Application* app_ = nullptr;
 extern GADBannerView* banner_view_;
 
 extern int iosMain(int argc, char** argv);
+
+int local_player_rank_ = -1;
+int total_player_count_ = -1;
+
+namespace  {
+
+
+
+}   //  unname namespace
+
+
+
+
 
 namespace t3 {
 inline namespace platform {
@@ -129,6 +143,13 @@ void loadFile(
 }
 
 
+
+void setupAd(const char* const ad_id) {
+
+}
+
+
+
 void showAd() {
     banner_view_.hidden = NO;
 }
@@ -170,8 +191,51 @@ void sendRankingScore(
         if (error) {
             // エラーの場合
         }
+        else {
+        }
     }];
 }
+
+int getNetworkRankingUserCount() {
+    return total_player_count_;
+}
+
+int getCurrentPlayerNetworkRank() {
+    return local_player_rank_;
+}
+
+void updateCurrentPlayerNetworkRank() {
+    
+    GKLeaderboard* leader_board = [[GKLeaderboard alloc] init];
+    
+    if (leader_board != nil) {
+        leader_board.playerScope = GKLeaderboardPlayerScopeGlobal;
+        leader_board.timeScope = GKLeaderboardTimeScopeAllTime;
+        leader_board.identifier = @"com.aquariuscode.star01.lb";
+        leader_board.range = NSMakeRange(1,2);
+
+        [leader_board loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
+            if (error != nil) {
+                // エラーを処理する。
+            }
+            if (scores != nil) {
+                // スコア情報を処理する。
+            }
+            
+            local_player_rank_ = [[leader_board localPlayerScore] rank];
+            total_player_count_ = [leader_board maxRange];
+        }];
+    }
+}
+
+
+void setupAnalytics(
+    const char* const api_code
+) {
+    NSString* str = [NSString stringWithCString: api_code encoding:NSUTF8StringEncoding];
+    [Flurry startSession:str];
+}
+
 
 
 

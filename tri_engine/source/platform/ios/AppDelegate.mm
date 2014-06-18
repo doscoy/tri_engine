@@ -12,9 +12,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+
     //  スリープに遷移しないようにする
     [UIApplication sharedApplication].idleTimerDisabled = YES;
+
+
+
     return YES;
 }
 							
