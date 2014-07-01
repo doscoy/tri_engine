@@ -129,15 +129,6 @@ private:
 };
 
 
-class Transform2DController {
-public:
-    Transform2DController() = default;
-    ~Transform2DController() = default;
-    
-    virtual void initializeController(Transform2D*) {}
-    virtual void controll(tick_t delta_time, Transform2D* transform) = 0;
-};
-
 
 }   // namespace geometry
 }   // namespace t3

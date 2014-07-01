@@ -216,7 +216,6 @@ bool EventManager::addListener(
     table.push_back(in_listener);
     
     
-    T3_TRACE("addListener %s\n", in_listener->getName().c_str());
     
     return true;
 }
@@ -251,8 +250,7 @@ bool EventManager::removeListener(const EventListenerPtr &listener) {
             if (*table_it == listener) {
                 table.erase(table_it);
                 
-                T3_TRACE("removeListener %s\n", listener->getName().c_str());
-
+               
                 result = true;
                 
                 //  addListenerにおいてイベントの処理リストにリスナーが

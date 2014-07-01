@@ -35,7 +35,7 @@ void TaskManager::updateTask(const tick_t delta_time) {
         std::shared_ptr<Task> t(*itr);
         ++itr;
         
-        if (t->isDead()) {
+        if (t->isTaskDead()) {
             next = t->getNextTask();
             //  次のタスクが存在しているなら登録
             if (next) {

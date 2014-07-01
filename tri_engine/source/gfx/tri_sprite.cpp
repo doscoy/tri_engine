@@ -63,7 +63,7 @@ int Sprite::getSortScore() const {
 }
 
 
-void Sprite::setTextureCoordAndSizeByST(
+void Sprite::setTextureCoord(
     const Vec2& left_top,
     const Vec2& size
 ) {
@@ -78,6 +78,14 @@ void Sprite::setTextureCoordAndSizeByST(
     float v1 = (left_top.y_ + size.y_) / tex_height;
     
     setTextureCoord(u0, v0, u1, v1);
+}
+
+
+void Sprite::setTextureCoordAndSizeByST(
+    const Vec2& left_top,
+    const Vec2& size
+) {
+    setTextureCoord(left_top, size);
     setSize(size);
     setPivotByCenter();
 }

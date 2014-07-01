@@ -35,7 +35,7 @@ void traceValue(const char* const name, int value);
 void traceValue(const char* const name, uint32_t value);
 void traceValue(const char* const name, long value);
 void traceValue(const char* const name, uint32_t value);
-//void traceValue(const char* const name, float value);
+void traceValue(const char* const name, float value);
 void traceValue(const char* const name, void* value);
 void traceValue(const char* const name, const char* value);
 void traceValue(const char* const name, const Vec2Template<float>& value);

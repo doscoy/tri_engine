@@ -56,7 +56,7 @@ public:
         priority_ = priority;
     }
 
-    bool isDead() const {
+    bool isTaskDead() const {
         return kill_;
     }
     
@@ -96,8 +96,12 @@ public:
         kill_ = true;
     };
     
-    void swithPause() {
-        paused_ = !paused_;
+    void pauseTask() {
+        paused_ = true;
+    }
+    
+    void resumeTask() {
+        paused_ = false;
     }
 
 

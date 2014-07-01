@@ -166,6 +166,11 @@ public:
         texture_coord_.u1_ = u1;
         texture_coord_.v1_ = v1;
     }
+
+    void setTextureCoord(
+        const Vec2& left_top,
+        const Vec2& size
+    );
     
     void setTextureCoordAndSizeByST(
         const Vec2& left_top,

@@ -28,7 +28,20 @@ inline float calcBezier2Curve(
 namespace t3 {
 
 
-Vec3& calcBezierCurve2(
+void calcBezierCurve2(
+	Vec2& ans,
+	const Vec2& p0,
+	const Vec2& p1,
+	const Vec2& p2,
+	const float t
+){
+
+	ans.x_ = calcBezier2Curve( p0.x_, p1.x_, p2.x_, t );
+	ans.y_ = calcBezier2Curve( p0.y_, p1.y_, p2.y_, t );
+}
+
+
+void calcBezierCurve2(
 	Vec3& ans,
 	const Vec3& p0,
 	const Vec3& p1,
@@ -39,18 +52,18 @@ Vec3& calcBezierCurve2(
 	ans.x_ = calcBezier2Curve( p0.x_, p1.x_, p2.x_, t );
 	ans.y_ = calcBezier2Curve( p0.y_, p1.y_, p2.y_, t );
 	ans.z_ = calcBezier2Curve( p0.z_, p1.z_, p2.z_, t );
-	
-	return ans;
+
 }
 
 
-Vec3& calcBezierCurve2(
+
+void calcBezierCurve2(
 	Vec3& ans,
 	const Vec3 pa[3],
 	const float t
 ){
 	
-	return calcBezierCurve2( ans, pa[0], pa[1], pa[2], t );
+	calcBezierCurve2( ans, pa[0], pa[1], pa[2], t );
 }
 
 
