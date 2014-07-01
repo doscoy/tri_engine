@@ -15,8 +15,6 @@ public:
   
 public:
     void initialize(){
-        //  スプライトレイヤー登録
-        sprite_layer_.attachSystem();
         
         //  テクスチャ読み込み
         t3::TextureManager& texture_manager = t3::TextureManager::getInstance();
@@ -32,8 +30,6 @@ public:
     }
     
     void terminate(){
-        //  スプライトレイヤー登録解除
-        sprite_layer_.detachSystem();
     }
     
     void update(t3::tick_t delta_time){

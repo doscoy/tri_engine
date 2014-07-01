@@ -16,11 +16,15 @@ class SampleApp
 {
     //  ゲームの初期化
     void initializeGame() override {
+        
+        
     }
     
     
     //  ゲームの後片付け
     void terminateGame() override {
+        
+        
     }
 };
 
@@ -28,7 +32,7 @@ int main(int argc, char * argv[])
 {
     SampleApp app;
     
-    app.setRootScene(t3::Scene::getSceneGenerator<SimpleSpriteScene>());
+    app.setRootScene(t3::Scene::getSceneGenerator<MeshObjScene>());
     t3::platform::run(argc, argv, &app);
 
     return 0;

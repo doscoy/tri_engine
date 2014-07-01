@@ -33,7 +33,7 @@ public:
         const t3::Pointing& ptng = input.getPointing();
         
         if (ptng.isRelease()) {
-            handle_->play();
+            handle_->playSE();
         }
     }
 

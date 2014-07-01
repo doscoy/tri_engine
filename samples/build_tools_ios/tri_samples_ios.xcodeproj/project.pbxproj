@@ -45,8 +45,6 @@
 		04FB948018D9D133006BB512 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04FB947E18D9D133006BB512 /* Main_iPhone.storyboard */; };
 		04FB948318D9D133006BB512 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04FB948118D9D133006BB512 /* Main_iPad.storyboard */; };
 		04FB948C18D9D133006BB512 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04FB948B18D9D133006BB512 /* Images.xcassets */; };
-		04FB94AA18D9D287006BB512 /* zlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FB94A818D9D287006BB512 /* zlib.a */; };
-		04FB94AB18D9D287006BB512 /* lpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FB94A918D9D287006BB512 /* lpng.a */; };
 		04FB958518D9D2AC006BB512 /* tri_font.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 04FB952D18D9D2AC006BB512 /* tri_font.fsh */; };
 		04FB958618D9D2AC006BB512 /* tri_font.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 04FB952E18D9D2AC006BB512 /* tri_font.vsh */; };
 		04FB958718D9D2AC006BB512 /* tri_simple.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 04FB952F18D9D2AC006BB512 /* tri_simple.fsh */; };
@@ -123,6 +121,13 @@
 		3AB0053A1900C26300AADFFE /* tri_circle_collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AB005371900C26200AADFFE /* tri_circle_collider.cpp */; };
 		3AB0053D1900C27400AADFFE /* tri_point_collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0053B1900C27400AADFFE /* tri_point_collider.cpp */; };
 		3AB0053E1900C27400AADFFE /* tri_collision_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0053C1900C27400AADFFE /* tri_collision_manager.cpp */; };
+		3ADD36F7196382F30025E713 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36F6196382F30025E713 /* libz.dylib */; };
+		3ADD36F9196388FE0025E713 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36F8196388FE0025E713 /* libpng.a */; };
+		3ADD36FB19638AF40025E713 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36FA19638AF40025E713 /* libFlurry_5.0.0.a */; };
+		3ADD36FD19638B1E0025E713 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36FC19638B1E0025E713 /* GameKit.framework */; };
+		3ADD36FF19638BB40025E713 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36FE19638BB40025E713 /* Security.framework */; };
+		3ADD370719638DE10025E713 /* mesh_obj_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD370519638DE10025E713 /* mesh_obj_scene.cpp */; };
+		3ADD370F1963975C0025E713 /* teapot.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD370E1963975C0025E713 /* teapot.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -188,7 +193,6 @@
 		04FB947F18D9D133006BB512 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		04FB948218D9D133006BB512 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		04FB948B18D9D133006BB512 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		04FB94A818D9D287006BB512 /* zlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = zlib.a; path = ../../third_party_lib/ios/zlib.a; sourceTree = "<group>"; };
 		04FB94A918D9D287006BB512 /* lpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = lpng.a; path = ../../third_party_lib/ios/lpng.a; sourceTree = "<group>"; };
 		04FB94AF18D9D2AC006BB512 /* tri_application.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_application.hpp; sourceTree = "<group>"; };
 		04FB94B018D9D2AC006BB512 /* tri_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_base.hpp; sourceTree = "<group>"; };
@@ -386,6 +390,20 @@
 		3AB005371900C26200AADFFE /* tri_circle_collider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_circle_collider.cpp; sourceTree = "<group>"; };
 		3AB0053B1900C27400AADFFE /* tri_point_collider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_point_collider.cpp; sourceTree = "<group>"; };
 		3AB0053C1900C27400AADFFE /* tri_collision_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_collision_manager.cpp; sourceTree = "<group>"; };
+		3ADD36F6196382F30025E713 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		3ADD36F8196388FE0025E713 /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = ../../third_party_lib/ios/libpng.a; sourceTree = "<group>"; };
+		3ADD36FA19638AF40025E713 /* libFlurry_5.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_5.0.0.a; path = ../../third_party_lib/ios/libFlurry_5.0.0.a; sourceTree = "<group>"; };
+		3ADD36FC19638B1E0025E713 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		3ADD36FE19638BB40025E713 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		3ADD370519638DE10025E713 /* mesh_obj_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_obj_scene.cpp; sourceTree = "<group>"; };
+		3ADD370619638DE10025E713 /* mesh_obj_scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_obj_scene.hpp; sourceTree = "<group>"; };
+		3ADD3708196395420025E713 /* tri_development_flags.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_development_flags.hpp; sourceTree = "<group>"; };
+		3ADD37091963954C0025E713 /* tri_debugmenu_scene_louncher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_debugmenu_scene_louncher.hpp; sourceTree = "<group>"; };
+		3ADD370A196395570025E713 /* tri_transform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_transform.hpp; sourceTree = "<group>"; };
+		3ADD370B1963955F0025E713 /* tri_rectangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_rectangle.hpp; sourceTree = "<group>"; };
+		3ADD370C1963957F0025E713 /* tri_nameable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_nameable.hpp; sourceTree = "<group>"; };
+		3ADD370D1963957F0025E713 /* tri_stopwatch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_stopwatch.hpp; sourceTree = "<group>"; };
+		3ADD370E1963975C0025E713 /* teapot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = teapot.obj; path = ../resources/teapot.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -393,10 +411,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ADD36FF19638BB40025E713 /* Security.framework in Frameworks */,
+				04B3A11718E9C44900B03C69 /* SystemConfiguration.framework in Frameworks */,
+				3ADD36FD19638B1E0025E713 /* GameKit.framework in Frameworks */,
+				3ADD36FB19638AF40025E713 /* libFlurry_5.0.0.a in Frameworks */,
+				3ADD36F9196388FE0025E713 /* libpng.a in Frameworks */,
+				3ADD36F7196382F30025E713 /* libz.dylib in Frameworks */,
 				3A5756A118F2A4530011B944 /* CoreMotion.framework in Frameworks */,
 				04B3A11B18E9CD6900B03C69 /* CoreTelephony.framework in Frameworks */,
 				04B3A11918E9C48000B03C69 /* libGoogleAdMobAds.a in Frameworks */,
-				04B3A11718E9C44900B03C69 /* SystemConfiguration.framework in Frameworks */,
 				04B3A11518E9C43E00B03C69 /* StoreKit.framework in Frameworks */,
 				04B3A11318E9C43500B03C69 /* MessageUI.framework in Frameworks */,
 				04FB946B18D9D133006BB512 /* CoreGraphics.framework in Frameworks */,
@@ -404,8 +427,6 @@
 				04B3A10F18E9C41500B03C69 /* AudioToolbox.framework in Frameworks */,
 				04B3A10D18E9C40A00B03C69 /* AdSupport.framework in Frameworks */,
 				04B3A0F318E7BEEA00B03C69 /* OpenAL.framework in Frameworks */,
-				04FB94AA18D9D287006BB512 /* zlib.a in Frameworks */,
-				04FB94AB18D9D287006BB512 /* lpng.a in Frameworks */,
 				04FB947118D9D133006BB512 /* OpenGLES.framework in Frameworks */,
 				04FB946D18D9D133006BB512 /* UIKit.framework in Frameworks */,
 				04FB946F18D9D133006BB512 /* GLKit.framework in Frameworks */,
@@ -500,6 +521,7 @@
 		04FB945C18D9D133006BB512 = {
 			isa = PBXGroup;
 			children = (
+				3ADD370E1963975C0025E713 /* teapot.obj */,
 				04FB95D018D9D6C4006BB512 /* tri_samples */,
 				04FB94AC18D9D2AC006BB512 /* tri_engine */,
 				04FB947218D9D133006BB512 /* ios */,
@@ -519,6 +541,11 @@
 		04FB946718D9D133006BB512 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3ADD36FE19638BB40025E713 /* Security.framework */,
+				3ADD36FC19638B1E0025E713 /* GameKit.framework */,
+				3ADD36FA19638AF40025E713 /* libFlurry_5.0.0.a */,
+				3ADD36F8196388FE0025E713 /* libpng.a */,
+				3ADD36F6196382F30025E713 /* libz.dylib */,
 				3A5756A018F2A4530011B944 /* CoreMotion.framework */,
 				04B3A11A18E9CD6900B03C69 /* CoreTelephony.framework */,
 				04B3A11818E9C48000B03C69 /* libGoogleAdMobAds.a */,
@@ -529,7 +556,6 @@
 				04B3A10E18E9C41500B03C69 /* AudioToolbox.framework */,
 				04B3A10C18E9C40A00B03C69 /* AdSupport.framework */,
 				04B3A0F218E7BEEA00B03C69 /* OpenAL.framework */,
-				04FB94A818D9D287006BB512 /* zlib.a */,
 				04FB94A918D9D287006BB512 /* lpng.a */,
 				04FB946818D9D133006BB512 /* Foundation.framework */,
 				04FB946A18D9D133006BB512 /* CoreGraphics.framework */,
@@ -595,6 +621,7 @@
 		04FB94AE18D9D2AC006BB512 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				3ADD3708196395420025E713 /* tri_development_flags.hpp */,
 				04FB94AF18D9D2AC006BB512 /* tri_application.hpp */,
 				04FB94B018D9D2AC006BB512 /* tri_base.hpp */,
 				048D69D618F5692600C898DB /* tri_event.hpp */,
@@ -616,6 +643,7 @@
 		04FB94B918D9D2AC006BB512 /* dbg */ = {
 			isa = PBXGroup;
 			children = (
+				3ADD37091963954C0025E713 /* tri_debugmenu_scene_louncher.hpp */,
 				04FB94BA18D9D2AC006BB512 /* tri_assert.hpp */,
 				04FB94BB18D9D2AC006BB512 /* tri_dbg.hpp */,
 				04FB94BC18D9D2AC006BB512 /* tri_debug_log_buffer.hpp */,
@@ -639,6 +667,8 @@
 		04FB94CA18D9D2AC006BB512 /* geometry */ = {
 			isa = PBXGroup;
 			children = (
+				3ADD370B1963955F0025E713 /* tri_rectangle.hpp */,
+				3ADD370A196395570025E713 /* tri_transform.hpp */,
 				3AB0052F1900C25300AADFFE /* tri_point_collider.hpp */,
 				3AB005301900C25300AADFFE /* tri_collision_manager.hpp */,
 				3AB005311900C25300AADFFE /* tri_collision_events.hpp */,
@@ -787,6 +817,8 @@
 		04FB951718D9D2AC006BB512 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				3ADD370C1963957F0025E713 /* tri_nameable.hpp */,
+				3ADD370D1963957F0025E713 /* tri_stopwatch.hpp */,
 				045C401D18F90E79009B9359 /* tri_hash_string.hpp */,
 				04FB951818D9D2AC006BB512 /* random */,
 				04FB952018D9D2AC006BB512 /* tri_array_size.hpp */,
@@ -1041,6 +1073,7 @@
 		04FB95D018D9D6C4006BB512 /* tri_samples */ = {
 			isa = PBXGroup;
 			children = (
+				3ADD370419638DE10025E713 /* mesh_obj_test */,
 				045C401E18F99EF6009B9359 /* event_handling */,
 				04B3A12018EAE09900B03C69 /* ad_test */,
 				04B3A11C18E9CEAD00B03C69 /* sandbox_template */,
@@ -1060,6 +1093,15 @@
 				04FB95D418D9D6FB006BB512 /* simple_sprite.hpp */,
 			);
 			path = simple_sprite;
+			sourceTree = "<group>";
+		};
+		3ADD370419638DE10025E713 /* mesh_obj_test */ = {
+			isa = PBXGroup;
+			children = (
+				3ADD370519638DE10025E713 /* mesh_obj_scene.cpp */,
+				3ADD370619638DE10025E713 /* mesh_obj_scene.hpp */,
+			);
+			path = mesh_obj_test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1119,6 +1161,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ADD370F1963975C0025E713 /* teapot.obj in Resources */,
 				04FB948318D9D133006BB512 /* Main_iPad.storyboard in Resources */,
 				04FB948018D9D133006BB512 /* Main_iPhone.storyboard in Resources */,
 				04B3A12B18EDAFB600B03C69 /* sample.wav in Resources */,
@@ -1176,6 +1219,7 @@
 				04B3A12318EAE09900B03C69 /* ad_test.cpp in Sources */,
 				04FB95B718D9D2AC006BB512 /* tri_heap.cpp in Sources */,
 				04FB95AC18D9D2AC006BB512 /* tri_sprite.cpp in Sources */,
+				3ADD370719638DE10025E713 /* mesh_obj_scene.cpp in Sources */,
 				0493526318DB5BA40059B390 /* main.cpp in Sources */,
 				04FB95AB18D9D2AC006BB512 /* tri_shader.cpp in Sources */,
 				04FB95AE18D9D2AC006BB512 /* tri_sprite_renderer.cpp in Sources */,
@@ -1347,6 +1391,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../../third_party_lib/ios,
+					/Users/kani/project/tri_engine/third_party_lib/ios,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1370,6 +1415,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../../third_party_lib/ios,
+					/Users/kani/project/tri_engine/third_party_lib/ios,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

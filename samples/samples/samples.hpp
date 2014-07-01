@@ -15,7 +15,7 @@
 #include "audio_test/audio_test.hpp"
 #include "ad_test/ad_test.hpp"
 #include "event_handling/event_handling.hpp"
-
+#include "mesh_obj_test/mesh_obj_scene.hpp"
 
 class RootTest
     : public t3::Scene
@@ -28,6 +28,7 @@ public:
     , dmsl_audio_test_(&sandbox_, "AUDIO TEST")
     , dmsl_ad_test_(&sandbox_, "AD TEST")
     , dmsl_event_handling_(&sandbox_, "EVENT HANDLING")
+    , dmsl_mesh_obj_(&sandbox_, "MESH OBJ")
     {}
     
 public:
@@ -64,6 +65,7 @@ private:
     t3::DebugMenuSceneLouncher<AudioTestScene> dmsl_audio_test_;
     t3::DebugMenuSceneLouncher<AdScene> dmsl_ad_test_;
     t3::DebugMenuSceneLouncher<EventHandlingScene> dmsl_event_handling_;
+    t3::DebugMenuSceneLouncher<MeshObjScene> dmsl_mesh_obj_;
     
 };
 
