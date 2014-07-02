@@ -66,17 +66,13 @@ public:
     }
     
 public:
-    const char* getListenerName() const override {
-        return "HpText";
-    }
     
-    bool handleEvent(const t3::Event& event) override {
+    void handleEvent(const t3::Event& event) override {
     
         const EventAAA& aaa = static_cast<const EventAAA&>(event);
     
         T3_TRACE("aaa hp %d\n", aaa.hp_);
     
-        return false;
     }
 };
 
