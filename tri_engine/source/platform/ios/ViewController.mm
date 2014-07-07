@@ -16,7 +16,6 @@
 
 #import <CoreMotion/CoreMotion.h>
 
-#import "GADBannerView.h"
 
 int iosMain(int argc, char** argv) {
     
@@ -36,8 +35,6 @@ extern t3::platform::AccelerometerData acc_data_[4];
 CMMotionManager* motion_manager_ = nullptr;
 
 
-GADBannerView* banner_view_ = nullptr;
-
 @interface ViewController () {
 
 }
@@ -46,33 +43,6 @@ GADBannerView* banner_view_ = nullptr;
 @end
 
 @implementation ViewController
-
-#define MY_BANNER_UNIT_ID  @"ca-app-pub-3998377149074428/6255650398"
-
-- (void)setupAdView
-{
-
-    //  画面上部に標準サイズのビューを作成
-    banner_view_ = [[GADBannerView alloc] initWithAdSize: kGADAdSizeSmartBannerPortrait];
-    
-    //  広告ユニットIDを指定
-    banner_view_.adUnitID = MY_BANNER_UNIT_ID;
-    
-    //  ユーザーに広告を表示した場所にあとで復元するUIViewControllerをランタイムに知らせて
-    // ビュー階層に追加する
-    banner_view_.rootViewController = self;
-    [self.view addSubview:banner_view_];
-    
-    GADRequest* ad_req = [GADRequest request];
-    ad_req.testDevices = [NSArray arrayWithObjects:
-        GAD_SIMULATOR_ID,
-        nil
-    ];
-    [banner_view_ loadRequest:ad_req];
-    
-    banner_view_.hidden = YES;
-
-}
 
 
 - (void)authenticateLocalPlayer {
@@ -90,10 +60,6 @@ GADBannerView* banner_view_ = nullptr;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //  広告セットアップ
-    [self setupAdView];
-    
     
     //  ログインチェック
     [self authenticateLocalPlayer];

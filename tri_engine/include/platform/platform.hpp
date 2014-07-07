@@ -67,10 +67,6 @@ void loadFile(
 );
 
 
-//  広告
-void showAd();
-void hideAd();
-
 //  ネットワークランキング
 void showNetworkRanking();
 bool isEnableNetworkRanking();
@@ -79,9 +75,6 @@ int getNetworkRankingUserCount();
 int getCurrentPlayerNetworkRank();
 void updateCurrentPlayerNetworkRank();
 
-
-//  解析
-void setupAnalytics(const char* const api_code);
 
 }   // namespace platform
 }   // namespace t3

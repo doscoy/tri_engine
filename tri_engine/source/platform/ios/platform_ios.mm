@@ -6,16 +6,12 @@
 #include "dbg/tri_assert.hpp"
 #include "kernel/memory/tri_memory.hpp"
 #include "platform/ios/ViewController.hpp"
-#include "Flurry.h"
-
-#import "GADBannerView.h"
 
 t3::platform::GamePadData pad_data_[4];
 t3::platform::PointingData point_data_[4];
 t3::platform::AccelerometerData acc_data_[4];
 
 t3::Application* app_ = nullptr;
-extern GADBannerView* banner_view_;
 
 extern int iosMain(int argc, char** argv);
 
@@ -143,21 +139,6 @@ void loadFile(
 }
 
 
-
-void setupAd(const char* const ad_id) {
-
-}
-
-
-
-void showAd() {
-    banner_view_.hidden = NO;
-}
-
-void hideAd() {
-    banner_view_.hidden = YES;
-}
-
 void showNetworkRanking() {
  
     
@@ -228,13 +209,6 @@ void updateCurrentPlayerNetworkRank() {
     }
 }
 
-
-void setupAnalytics(
-    const char* const api_code
-) {
-    NSString* str = [NSString stringWithCString: api_code encoding:NSUTF8StringEncoding];
-    [Flurry startSession:str];
-}
 
 
 
