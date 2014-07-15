@@ -66,6 +66,19 @@ void loadFile(
     size_t* size
 );
 
+void saveInteger(
+    const char* const label,
+    int val
+);
+
+void loadInteger(
+    const char* const label,
+    int* key
+);
+
+
+
+
 
 //  ネットワークランキング
 void showNetworkRanking();

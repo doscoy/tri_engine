@@ -209,6 +209,26 @@ void updateCurrentPlayerNetworkRank() {
     }
 }
 
+void saveInteger(
+    const char* const key,
+    int val
+) {
+    NSString* nskey = [NSString stringWithCString: key encoding:NSUTF8StringEncoding];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:val forKey:nskey];
+}
+
+void loadInteger(
+    const char* const key,
+    int* val
+) {
+    NSString* nskey = [NSString stringWithCString: key encoding:NSUTF8StringEncoding];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger nsval = [defaults integerForKey:nskey];
+
+    *val = nsval;
+}
+
 
 
 
