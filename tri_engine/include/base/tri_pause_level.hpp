@@ -1,14 +1,23 @@
-//
-//  tri_pause_level.hpp
-//  star01
-//
-//  Created by KANI Tetsuro on 2014/07/16.
-//  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
-//
 
-#ifndef star01_tri_pause_level_hpp
-#define star01_tri_pause_level_hpp
+#ifndef TRI_PAUSE_LEVEL_HPP_INCLUDED
+#define TRI_PAUSE_LEVEL_HPP_INCLUDED
 
 
 
-#endif
+enum PauseLevel {
+
+    PAUSE_LV_1 = 1,
+    PAUSE_LV_2,
+    PAUSE_LV_3,
+    PAUSE_LV_4
+
+};
+
+
+
+
+
+
+#endif  // TRI_PAUSE_LEVEL_HPP_INCLUDED
+
+

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		045C402118F99EF6009B9359 /* event_handling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 045C401F18F99EF6009B9359 /* event_handling.cpp */; };
-		048D69D918F56D6300C898DB /* tri_event_listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 048D69D818F56D6300C898DB /* tri_event_listener.cpp */; };
 		048D69DC18F592FE00C898DB /* tri_event_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 048D69DB18F592FE00C898DB /* tri_event_manager.cpp */; };
 		0493526018DB48850059B390 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0493525E18DB48850059B390 /* AppDelegate.mm */; };
 		0493526118DB48850059B390 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0493525F18DB48850059B390 /* ViewController.mm */; };
@@ -125,7 +124,6 @@
 		3ADD36FD19638B1E0025E713 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36FC19638B1E0025E713 /* GameKit.framework */; };
 		3ADD36FF19638BB40025E713 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36FE19638BB40025E713 /* Security.framework */; };
 		3ADD370719638DE10025E713 /* mesh_obj_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD370519638DE10025E713 /* mesh_obj_scene.cpp */; };
-		3ADD370F1963975C0025E713 /* teapot.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD370E1963975C0025E713 /* teapot.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -133,8 +131,6 @@
 		045C401F18F99EF6009B9359 /* event_handling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event_handling.cpp; sourceTree = "<group>"; };
 		045C402018F99EF6009B9359 /* event_handling.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = event_handling.hpp; sourceTree = "<group>"; };
 		048D69D618F5692600C898DB /* tri_event.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_event.hpp; sourceTree = "<group>"; };
-		048D69D718F569DA00C898DB /* tri_event_listener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_event_listener.hpp; sourceTree = "<group>"; };
-		048D69D818F56D6300C898DB /* tri_event_listener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_event_listener.cpp; sourceTree = "<group>"; };
 		048D69DA18F5711D00C898DB /* tri_event_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_event_manager.hpp; sourceTree = "<group>"; };
 		048D69DB18F592FE00C898DB /* tri_event_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_event_manager.cpp; sourceTree = "<group>"; };
 		0493525C18DB48520059B390 /* AppDelegate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AppDelegate.hpp; path = ios/AppDelegate.hpp; sourceTree = "<group>"; };
@@ -399,7 +395,6 @@
 		3ADD370B1963955F0025E713 /* tri_rectangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_rectangle.hpp; sourceTree = "<group>"; };
 		3ADD370C1963957F0025E713 /* tri_nameable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_nameable.hpp; sourceTree = "<group>"; };
 		3ADD370D1963957F0025E713 /* tri_stopwatch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_stopwatch.hpp; sourceTree = "<group>"; };
-		3ADD370E1963975C0025E713 /* teapot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = teapot.obj; path = ../resources/teapot.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -515,7 +510,6 @@
 		04FB945C18D9D133006BB512 = {
 			isa = PBXGroup;
 			children = (
-				3ADD370E1963975C0025E713 /* teapot.obj */,
 				04FB95D018D9D6C4006BB512 /* tri_samples */,
 				04FB94AC18D9D2AC006BB512 /* tri_engine */,
 				04FB947218D9D133006BB512 /* ios */,
@@ -617,7 +611,6 @@
 				04FB94AF18D9D2AC006BB512 /* tri_application.hpp */,
 				04FB94B018D9D2AC006BB512 /* tri_base.hpp */,
 				048D69D618F5692600C898DB /* tri_event.hpp */,
-				048D69D718F569DA00C898DB /* tri_event_listener.hpp */,
 				048D69DA18F5711D00C898DB /* tri_event_manager.hpp */,
 				04FB94B118D9D2AC006BB512 /* tri_game_system.hpp */,
 				04FB94B418D9D2AC006BB512 /* tri_resource.hpp */,
@@ -883,7 +876,6 @@
 				04FB953818D9D2AC006BB512 /* tri_game_system.cpp */,
 				04FB953A18D9D2AC006BB512 /* tri_resource.cpp */,
 				04FB953B18D9D2AC006BB512 /* tri_scene.cpp */,
-				048D69D818F56D6300C898DB /* tri_event_listener.cpp */,
 				048D69DB18F592FE00C898DB /* tri_event_manager.cpp */,
 			);
 			path = base;
@@ -1153,7 +1145,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ADD370F1963975C0025E713 /* teapot.obj in Resources */,
 				04FB948318D9D133006BB512 /* Main_iPad.storyboard in Resources */,
 				04FB948018D9D133006BB512 /* Main_iPhone.storyboard in Resources */,
 				04B3A12B18EDAFB600B03C69 /* sample.wav in Resources */,
@@ -1216,7 +1207,6 @@
 				04FB95AB18D9D2AC006BB512 /* tri_shader.cpp in Sources */,
 				04FB95AE18D9D2AC006BB512 /* tri_sprite_renderer.cpp in Sources */,
 				04B3A10418E7E0D300B03C69 /* tri_audio_handle.cpp in Sources */,
-				048D69D918F56D6300C898DB /* tri_event_listener.cpp in Sources */,
 				04FB95AA18D9D2AC006BB512 /* tri_scene_node.cpp in Sources */,
 				04FB95C418D9D2AC006BB512 /* tri_object.cpp in Sources */,
 				04FB959B18D9D2AC006BB512 /* tri_debugmenu_label.cpp in Sources */,
@@ -1383,7 +1373,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../../third_party_lib/ios,
-					/Users/kani/project/tri_engine/third_party_lib/ios,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1407,7 +1396,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../../third_party_lib/ios,
-					/Users/kani/project/tri_engine/third_party_lib/ios,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -2,7 +2,7 @@
 #ifndef TRI_EVENT_MANAGER_HPP_INCLUDED
 #define TRI_EVENT_MANAGER_HPP_INCLUDED
 
-#include "tri_event_listener.hpp"
+#include "tri_event.hpp"
 #include "util/tri_method_callback.hpp"
 #include <vector>
 #include <set>
@@ -11,11 +11,12 @@
 
 namespace t3 {
 inline namespace base {
+struct EventListen{};
 
-using EventListenerPtr = EventListener*;
-using EventHandlerFunction = MethodCallback1<EventListener, const Event&>;
+using EventListenerPtr = void*;
+using EventHandlerFunction = MethodCallback1<EventListen, const Event&>;
 struct EventHandler {
-    EventListenerPtr listener_;
+    void* listener_;
     EventHandlerFunction func_;
 };
     
@@ -38,18 +39,18 @@ public:
   
     
     virtual bool removeListener(
-        const EventListenerPtr& in_handler,
+        const EventListenerPtr in_handler,
         const EventType& in_type
     ) = 0;
     
     virtual bool removeListener(
-        const EventListenerPtr& listener
+        const EventListenerPtr listener
     ) = 0;
     
     
     
     virtual bool queueEvent(
-        const EventHandle& in_event
+        const EventPtr& in_event
     ) = 0;
     
     virtual bool abortEvent(
@@ -75,7 +76,7 @@ private:
     );
     
     friend bool safeRemoveListener(
-        const EventListenerPtr& in_handler,
+        const EventListenerPtr in_handler,
         const EventType& in_type
     );
     
@@ -86,7 +87,7 @@ private:
 
     
     friend bool safeQueueEvent(
-        const EventHandle& in_event
+        const EventPtr& in_event
     );
     
     
@@ -110,14 +111,14 @@ private:
 
 template <typename T>
 bool safeAddListener(
-    const EventListenerPtr& listener,
+    const T* listener,
     void (T::*func)(const Event&),
     const EventType& in_type
 ) {
     MethodCallback1<T, const Event&> callback((T*)listener, func);
 
     EventHandler handler;
-    handler.listener_ = listener;
+    handler.listener_ = (EventListenerPtr)listener;
     handler.func_ = (EventHandlerFunction&)callback;
 
     T3_ASSERT(EventManagerBase::get());
@@ -125,21 +126,21 @@ bool safeAddListener(
 }
     
 bool safeRemoveListener(
-    const EventListenerPtr& in_handler,
+    const EventListenerPtr in_handler,
     const EventType& in_type
 );
 
 bool safeRemoveListener(
-    const EventListenerPtr& listener
+    const EventListenerPtr listener
 );
     
     
 bool safeQueueEvent(
-    const EventHandle& in_event
+    const EventPtr& in_event
 );
 
 void safeQueueEvent(
-    const EventHandle& in_event,
+    const EventPtr& in_event,
     float delay_sec
 );
     
@@ -160,7 +161,7 @@ bool safeValidateEventType(
 
 
 
-using EventListenerList = std::vector<EventListenerPtr>;
+using EventListenerList = std::vector<void*>;
 using EventTypeList = std::vector<EventType>;
 
 class EventManager
@@ -187,7 +188,7 @@ private:
     using EventListenerMapInsertResult = std::pair<EventListenerMap::iterator, bool>;
     
     //  イベントキュー
-    using EventQueue = std::list<EventHandle>;
+    using EventQueue = std::list<EventPtr>;
 
 public:
     explicit EventManager(
@@ -205,17 +206,17 @@ public:
     
     
     bool removeListener(
-        const EventListenerPtr& in_handler,
+        const EventListenerPtr in_handler,
         const EventType& in_type
     ) override;
     
     bool removeListener(
-        const EventListenerPtr& listener
+        const EventListenerPtr listener
     ) override;
     
     
     bool queueEvent(
-        const EventHandle& in_event
+        const EventPtr& in_event
     ) override;
     
     bool abortEvent(

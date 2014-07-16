@@ -13,7 +13,7 @@ class LounchEventTask
     : public Task
 {
 public:
-    LounchEventTask(const EventHandle& event)
+    LounchEventTask(const EventPtr& event)
         : Task()
         , event_(event)
     {
@@ -27,7 +27,7 @@ public:
     }
     
 private:
-    EventHandle event_;
+    EventPtr event_;
 };
 
 
@@ -66,7 +66,7 @@ EventManagerBase::~EventManagerBase() {
 
 
 bool safeRemoveListener(
-    const EventListenerPtr& in_handler,
+    const EventListenerPtr in_handler,
     const EventType& in_type
 ) {
 
@@ -76,7 +76,7 @@ bool safeRemoveListener(
 }
 
 bool safeRemoveListener(
-    const EventListenerPtr& listener
+    const EventListenerPtr listener
 ) {
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->removeListener(listener);
@@ -85,7 +85,7 @@ bool safeRemoveListener(
 
 
 bool safeQueueEvent(
-    const EventHandle& in_event
+    const EventPtr& in_event
 ) {
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->queueEvent(in_event);
@@ -93,7 +93,7 @@ bool safeQueueEvent(
 }
 
 void safeQueueEvent(
-    const EventHandle& in_event,
+    const EventPtr& in_event,
     float delay_sec
 ) {
     auto lounch_event = std::make_shared<LounchEventTask>(in_event);
@@ -209,7 +209,7 @@ bool EventManager::addListener(
 
 
 bool EventManager::removeListener(
-    const EventListenerPtr& in_listener,
+    const EventListenerPtr in_listener,
     const EventType& in_type
 ) {
     if (!isValidateEventType(in_type)) {
@@ -219,7 +219,7 @@ bool EventManager::removeListener(
     return removeListener(in_listener);
 }
 
-bool EventManager::removeListener(const EventListenerPtr &listener) {
+bool EventManager::removeListener(const EventListenerPtr listener) {
     bool result = false;
     
     //  総当り
@@ -254,7 +254,7 @@ bool EventManager::removeListener(const EventListenerPtr &listener) {
 
 
 bool EventManager::queueEvent(
-    const EventHandle& in_event
+    const EventPtr& in_event
 ) {
 
     T3_ASSERT(inRange(active_queue_, (int)0, (int)NUM_QUEUES));
@@ -272,7 +272,7 @@ bool EventManager::queueEvent(
         if (it_wc == registry_.end()) {
             //  このイベントのリスナはいないのでスキップ
             T3_TRACE("%s is skip\n", in_event->getEventType().string().c_str());
-            dumpListeners();
+//            dumpListeners();
             return false;
         }
     }
@@ -342,7 +342,7 @@ bool EventManager::tick(
     //  リミットまでイベントを処理
     int process_count = 0;
     while (process_queue.size() > 0) {
-        EventHandle event = process_queue.front();
+        EventPtr event = process_queue.front();
         process_queue.pop_front();
         
         const EventType& event_type = event->getEventType();
@@ -390,7 +390,7 @@ bool EventManager::tick(
     
     if (!queue_flushed) {
         while (process_queue.size() > 0) {
-            EventHandle event = process_queue.back();
+            EventPtr event = process_queue.back();
             process_queue.pop_back();
             active_queue.push_front(event);
         }
@@ -487,10 +487,10 @@ void EventManager::dumpListeners() const {
         
         for (; table_it != table_end; ++table_it) {
             const EventListenerPtr listener = table_it->listener_;
-            T3_TRACE("%s -- %s\n",
-                listener->getName().c_str(),
-                getEventNameByKey(map_it->first).c_str()
-            );
+//            T3_TRACE("%s -- %s\n",
+//                listener->getName().c_str(),
+//                getEventNameByKey(map_it->first).c_str()
+//            );
         }
         
     }

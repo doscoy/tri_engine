@@ -20,7 +20,7 @@ public:
     virtual const EventType& getEventType() const = 0;
     virtual tick_t getTimeStamp() const = 0;
 };
-using EventHandle = std::shared_ptr<Event>;
+using EventPtr = std::shared_ptr<Event>;
 
 
 class EventBase

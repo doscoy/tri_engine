@@ -18,7 +18,7 @@ class DebugMenuFrame;
 class DebugMenuLabel
     : private Uncopyable
 {
-    typedef MethodCallback<DebugMenuLabel> callback_t;
+    using callback_t = MethodCallback<DebugMenuLabel>;
 
     DebugMenuLabel();
 public:

@@ -51,7 +51,6 @@ const t3::EventType EventBBB::TYPE("bbb");
 
 
 class HpText
-    : public t3::EventListener
 {
 public:
     HpText(){
@@ -63,7 +62,7 @@ public:
     
 public:
     
-    void handleEvent(const t3::Event& event) override {
+    void handleEvent(const t3::Event& event) {
     
         const EventAAA& aaa = static_cast<const EventAAA&>(event);
     
@@ -81,8 +80,7 @@ class EventHandlingScene::SceneContext {
 
 public:
     SceneContext()
-        : snoop_(new t3::EventSnooper())
-        , hp_text_(new HpText)
+        : hp_text_(new HpText)
     {}
     
     ~SceneContext()
@@ -91,13 +89,10 @@ public:
 public:
     void initialize(){
         t3::safeAddListener(hp_text_, &HpText::krif, EventAAA::TYPE);
-//        t3::safeAddListener(hp_text_, &HpText::handleEvent, t3::EventType("aaa"));
-//        t3::safeAddListener(hp_text_, &HpText::handleEvent, t3::EventType("bbb"));
     }
     
     void terminate(){
-//        t3::safeRemoveListener(snoop_, t3::EventType("aaa"));
-//        t3::safeRemoveListener(hp_text_, t3::EventType("aaa"));
+        t3::safeRemoveListener(hp_text_, EventAAA::TYPE);
     }
     
     void update(t3::tick_t delta_time){
@@ -107,12 +102,12 @@ public:
             //  画面をタッチした
             if (game_system.getRandomNumberGenerator().getBool()){
                 T3_TRACE("A\n");
-                t3::EventHandle new_event(new EventAAA);
+                t3::EventPtr new_event(new EventAAA);
                 t3::safeQueueEvent(new_event);
             }
             else {
                 T3_TRACE("B\n");
-                t3::EventHandle new_event(new EventBBB);
+                t3::EventPtr new_event(new EventBBB);
                 t3::safeQueueEvent(new_event);
                 
             }
@@ -128,8 +123,7 @@ private:
 
 
 private:
-    t3::EventListenerPtr snoop_;
-    t3::EventListenerPtr hp_text_;
+    HpText* hp_text_;
 };
 
 

@@ -7,6 +7,7 @@
 #include "base/tri_types.hpp"
 #include "util/tri_uncopyable.hpp"
 #include "util/tri_nameable.hpp"
+#include "tri_pause_level.hpp"
 #include <memory>
 
 
@@ -33,7 +34,8 @@ public:
 public:
 
     explicit Task(
-        int priority = PRIORITY_APP_DEFAULT
+        int priority = PRIORITY_APP_DEFAULT,
+        PauseLevel = PAUSE_LV_1
     )   : priority_(priority)
         , kill_(false)
         , active_(true)
@@ -130,6 +132,7 @@ private:
     bool paused_;
     bool inital_update_;
     bool attached_;
+    PauseLevel pause_lv_;
     std::shared_ptr<Task> next_;
     char task_name_[16];
 
