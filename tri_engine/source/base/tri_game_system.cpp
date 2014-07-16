@@ -308,7 +308,7 @@ void GameSystem::registryToDebugMenu( DebugMenuFrame& parent_frame )
 void GameSystem::attachLayer(t3::RenderLayer* layer)
 {
     T3_NULL_ASSERT(layer);
-    T3_TRACE("Attach Layer %s\n", layer->getName().c_str());
+//    T3_TRACE("Attach Layer %s\n", layer->getName().c_str());
     layers_.push_back(layer);
     layers_.sort(
         []( RenderLayer*lhs, RenderLayer* rhs ){
@@ -319,7 +319,7 @@ void GameSystem::attachLayer(t3::RenderLayer* layer)
 
 void GameSystem::detachLayer(t3::RenderLayer* layer)
 {
-    T3_TRACE("Detach Layer %s\n", layer->getName().c_str());
+//    T3_TRACE("Detach Layer %s\n", layer->getName().c_str());
 
     layers_.remove(layer);
     layers_.sort(

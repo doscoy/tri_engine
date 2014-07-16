@@ -129,7 +129,12 @@ bool safeValidateEventType(
 
 
 
+void safeTriggerEvent(
+    const EventPtr event
+) {
 
+    EventManagerBase::get()->triggerEvent(event);
+}
 
 
 
@@ -201,8 +206,6 @@ bool EventManager::addListener(
     //  リスナーの有効性確認
     table.push_back(in_listener);
     
-    
-    
     return true;
 }
 
@@ -234,6 +237,7 @@ bool EventManager::removeListener(const EventListenerPtr listener) {
         
         for (; table_it != table_end; ++table_it) {
             if (table_it->listener_ == listener) {
+                
                 table.erase(table_it);
                 
                
@@ -271,8 +275,7 @@ bool EventManager::queueEvent(
         
         if (it_wc == registry_.end()) {
             //  このイベントのリスナはいないのでスキップ
-            T3_TRACE("%s is skip\n", in_event->getEventType().string().c_str());
-//            dumpListeners();
+//            T3_TRACE("%s is skip\n", in_event->getEventType().string().c_str());
             return false;
         }
     }
@@ -478,6 +481,7 @@ void EventManager::dumpListeners() const {
     //  登録済の全名前出力
     EventListenerMap::const_iterator map_it = registry_.begin();
     EventListenerMap::const_iterator map_end = registry_.end();
+    int listener_count = 0;
     for (; map_it != map_end; ++map_it) {
         
         const EventListenerTable& table = map_it->second;
@@ -487,13 +491,12 @@ void EventManager::dumpListeners() const {
         
         for (; table_it != table_end; ++table_it) {
             const EventListenerPtr listener = table_it->listener_;
-//            T3_TRACE("%s -- %s\n",
-//                listener->getName().c_str(),
-//                getEventNameByKey(map_it->first).c_str()
-//            );
+            listener_count += 1;
         }
         
     }
+
+    T3_TRACE("+++Listener %d\n", listener_count);
 }
 
 
@@ -510,6 +513,49 @@ std::string EventManager::getEventNameByKey(
     
     return "not found.";
 }
+
+
+bool EventManager::triggerEvent(
+    const t3::EventPtr in_event
+) {
+    if (!isValidateEventType(in_event->getEventType())) {
+        return false;
+    }
+
+    EventListenerMap::iterator it_wc = registry_.find(0);
+    
+    if (it_wc != registry_.end()) {
+        EventListenerTable& table = it_wc->second;
+        
+        EventListenerTable::iterator table_it = table.begin();
+        EventListenerTable::iterator table_end = table.end();
+        for (; table_it != table_end; ++table_it) {
+            table_it->func_.invoke(*in_event);
+        }
+    }
+    
+    EventListenerMap::iterator it = registry_.find((in_event->getEventType().key()));
+    
+    if (it == registry_.end()) {
+        return false;
+    }
+    
+    EventListenerTable& table = it->second;
+
+
+    bool processed = false;
+
+    EventListenerTable::iterator table_it = table.begin();
+    EventListenerTable::iterator table_end = table.end();
+    
+    for (; table_it != table_end; ++table_it) {
+        table_it->func_.invoke(*in_event);
+    }
+
+    return processed;
+}
+
+
 
 
 

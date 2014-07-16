@@ -32,7 +32,7 @@ int main(int argc, char * argv[])
 {
     SampleApp app;
     
-    app.setRootScene(t3::Scene::getSceneGenerator<EventHandlingScene>());
+    app.setRootScene(t3::Scene::getSceneGenerator<RootTest>());
     t3::platform::run(argc, argv, &app);
 
     return 0;

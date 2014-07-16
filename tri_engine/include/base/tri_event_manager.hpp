@@ -53,6 +53,10 @@ public:
         const EventPtr& in_event
     ) = 0;
     
+    virtual bool triggerEvent(
+        const EventPtr in_event
+    ) = 0;
+    
     virtual bool abortEvent(
         const EventType& in_type,
         bool all_type = false
@@ -62,6 +66,7 @@ public:
         uint32_t max_milli = 999999
     ) = 0;
     
+    virtual void dumpListeners() const = 0;
     
     virtual bool isValidateEventType(const EventType& in_type) const = 0;
 
@@ -143,7 +148,10 @@ void safeQueueEvent(
     const EventPtr& in_event,
     float delay_sec
 );
-    
+
+
+
+
 bool safeAbortEvent(
     const EventType& in_type,
     bool all_type = false
@@ -157,6 +165,10 @@ bool safeValidateEventType(
     const EventType& in_type
 );
 
+
+void safeTriggerEvent(
+    const EventPtr in_event
+);
 
 
 
@@ -226,6 +238,10 @@ public:
     
     bool tick(
         uint32_t proc_limit = 999999
+    ) override;
+    
+    bool triggerEvent(
+        const EventPtr in_event
     ) override;
     
     

@@ -1,6 +1,9 @@
 
 #include "tri_scene.hpp"
 #include "dbg/tri_debugmenu.hpp"
+#include "tri_event_manager.hpp"
+
+
 
 namespace t3 {
 inline namespace base {
@@ -101,7 +104,9 @@ void SceneManager::suspendScene(
 
 void SceneManager::sceneChange()
 {
-
+    EventManagerBase::get()->dumpListeners();
+    
+    
     //  シーン終了
     //  後片付け
     const char* prev_scene_name = current_scene_->getSceneName();
@@ -112,6 +117,7 @@ void SceneManager::sceneChange()
     current_scene_ = next_scene_generator_->createScene();
     next_scene_generator_ = Scene::getSceneGenerator<NullScene>();
     
+    EventManagerBase::get()->dumpListeners();
     
     //  初期化
     current_scene_->initializeScene();
@@ -123,6 +129,8 @@ void SceneManager::sceneChange()
     T3_TRACE("scene change. %s --> %s\n", prev_scene_name, next_scene_name);
     (void)(prev_scene_name);
     (void)(next_scene_name);
+    EventManagerBase::get()->dumpListeners();
+
 }
 
 

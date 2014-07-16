@@ -89,10 +89,11 @@ public:
 public:
     void initialize(){
         t3::safeAddListener(hp_text_, &HpText::krif, EventAAA::TYPE);
+        t3::safeAddListener(hp_text_, &HpText::krif, EventBBB::TYPE);
     }
     
     void terminate(){
-        t3::safeRemoveListener(hp_text_, EventAAA::TYPE);
+        t3::safeRemoveListener(hp_text_);
     }
     
     void update(t3::tick_t delta_time){
