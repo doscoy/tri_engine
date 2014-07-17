@@ -65,18 +65,11 @@ EventManagerBase::~EventManagerBase() {
 
 
 
-bool safeAddListener(
-    const EventListenerPtr& in_handler,
-    const EventType& in_type
-) {
-    T3_ASSERT(EventManagerBase::get());
-    return EventManagerBase::get()->addListener(in_handler, in_type);
-}
-
 bool safeRemoveListener(
     const EventListenerPtr& in_handler,
     const EventType& in_type
 ) {
+
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->removeListener(in_handler, in_type);
 
@@ -89,13 +82,7 @@ bool safeRemoveListener(
     return EventManagerBase::get()->removeListener(listener);
 }
 
-bool safeTriggerEvent(
-    const EventHandle& in_event
-) {
-    T3_ASSERT(EventManagerBase::get());
-    return EventManagerBase::get()->triggerEvent(in_event);
 
-}
 
 bool safeQueueEvent(
     const EventHandle& in_event
@@ -164,7 +151,7 @@ EventManager::~EventManager() {
 
 
 bool EventManager::addListener(
-    const EventListenerPtr& in_listener,
+    const EventHandler& in_listener,
     const EventType& in_type
 ) {
 
@@ -202,13 +189,12 @@ bool EventManager::addListener(
     EventListenerTable& table = (*elm_it).second;
     
     EventListenerTable::iterator end = table.end();
-    for (EventListenerTable::iterator it = table.begin();
-        it != end; ++it) {
-        if (*it == in_listener) {
+//    for (EventListenerTable::iterator it = table.begin(); it != end; ++it) {
+//        if (*it == in_listener) {
             //  追加済だった
-            return false;
-        }
-    }
+//            return false;
+//        }
+//    }
     
     
     //  イベント型の有効性確認
@@ -247,7 +233,7 @@ bool EventManager::removeListener(const EventListenerPtr &listener) {
         EventListenerTable::iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-            if (*table_it == listener) {
+            if (table_it->listener_ == listener) {
                 table.erase(table_it);
                 
                
@@ -263,48 +249,6 @@ bool EventManager::removeListener(const EventListenerPtr &listener) {
     }
     return result;
 
-}
-
-
-bool EventManager::triggerEvent(
-    const t3::EventHandle& in_event
-) {
-    if (!isValidateEventType(in_event->getEventType())) {
-        return false;
-    }
-
-    EventListenerMap::const_iterator it_wc = registry_.find(0);
-    
-    if (it_wc != registry_.end()) {
-        const EventListenerTable& table = it_wc->second;
-        
-        EventListenerTable::const_iterator table_it = table.begin();
-        EventListenerTable::const_iterator table_end = table.end();
-        for (; table_it != table_end; ++table_it) {
-            (*table_it)->handleEvent(*in_event);
-        }
-    }
-    
-    EventListenerMap::const_iterator it = registry_.find((in_event->getEventType().key()));
-    
-    if (it == registry_.end()) {
-        return false;
-    }
-    
-    const EventListenerTable& table = it->second;
-
-
-    bool processed = false;
-
-    EventListenerTable::const_iterator table_it = table.begin();
-    EventListenerTable::const_iterator table_end = table.end();
-    
-    for (; table_it != table_end; ++table_it) {
-        EventListenerPtr listener = *table_it;
-        listener->handleEvent(*in_event);
-    }
-
-    return processed;
 }
 
 
@@ -385,7 +329,7 @@ bool EventManager::tick(
     uint32_t proc_limit
 ) {
 
-    EventListenerMap::const_iterator it_wc = registry_.find(0);
+    EventListenerMap::iterator it_wc = registry_.find(0);
     
     //  アクティブなキューを交換
     int queue_to_process = active_queue_;
@@ -403,31 +347,34 @@ bool EventManager::tick(
         
         const EventType& event_type = event->getEventType();
         
-        EventListenerMap::const_iterator map_it =registry_.find(event_type.key());
         
         if (it_wc != registry_.end()) {
             
-            const EventListenerTable& table = it_wc->second;
+            EventListenerTable& table = it_wc->second;
             
-            EventListenerTable::const_iterator table_it = table.begin();
-            EventListenerTable::const_iterator table_end = table.end();
+            EventListenerTable::iterator table_it = table.begin();
+            EventListenerTable::iterator table_end = table.end();
             
             for (; table_it != table_end; ++table_it) {
-                (*table_it)->handleEvent(*event);
+
+                table_it->func_.invoke(*event);
+//                (*table_it)->handleEvent(*event);
             }
         }
         
         // このイベント型にはリスナーが居ないのでスキップ
+        EventListenerMap::iterator map_it =registry_.find(event_type.key());
         if (map_it == registry_.end()) {
             continue;
         }
         
-        const EventListenerTable& table = map_it->second;
-        EventListenerTable::const_iterator table_it = table.begin();
-        EventListenerTable::const_iterator table_end = table.end();
+        EventListenerTable& table = map_it->second;
+        EventListenerTable::iterator table_it = table.begin();
+        EventListenerTable::iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-            (*table_it)->handleEvent(*event);
+//            (*table_it)->handleEvent(*event);
+            table_it->func_.invoke(*event);
         }
         
         process_count += 1;
@@ -501,7 +448,7 @@ EventListenerList EventManager::getListenerList(
     EventListenerTable::const_iterator table_it = table.begin();
     EventListenerTable::const_iterator table_end = table.end();
     for (; table_it != table_end; ++table_it) {
-        result.push_back(*table_it);
+        result.push_back(table_it->listener_);
     }
     
     return result;
@@ -539,7 +486,7 @@ void EventManager::dumpListeners() const {
         EventListenerTable::const_iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-            const EventListenerPtr listener = *table_it;
+            const EventListenerPtr listener = table_it->listener_;
             T3_TRACE("%s -- %s\n",
                 listener->getName().c_str(),
                 getEventNameByKey(map_it->first).c_str()

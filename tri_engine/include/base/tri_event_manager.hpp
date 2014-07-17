@@ -3,6 +3,7 @@
 #define TRI_EVENT_MANAGER_HPP_INCLUDED
 
 #include "tri_event_listener.hpp"
+#include "util/tri_method_callback.hpp"
 #include <vector>
 #include <set>
 #include <list>
@@ -12,7 +13,12 @@ namespace t3 {
 inline namespace base {
 
 using EventListenerPtr = EventListener*;
-
+using EventHandlerFunction = MethodCallback1<EventListener, const Event&>;
+struct EventHandler {
+    EventListenerPtr listener_;
+    EventHandlerFunction func_;
+};
+    
 
 class EventManagerBase
 {
@@ -26,7 +32,7 @@ public:
     
 public:
     virtual bool addListener(
-        const EventListenerPtr& in_handler,
+        const EventHandler& in_handler,
         const EventType& in_type
     ) = 0;
   
@@ -40,9 +46,7 @@ public:
         const EventListenerPtr& listener
     ) = 0;
     
-    virtual bool triggerEvent(
-        const EventHandle& in_event
-    ) = 0;
+    
     
     virtual bool queueEvent(
         const EventHandle& in_event
@@ -60,10 +64,10 @@ public:
     
     virtual bool isValidateEventType(const EventType& in_type) const = 0;
 
+    static EventManagerBase* get();
 
 private:
 
-    static EventManagerBase* get();
     
     friend bool safeAddListener(
         const EventListenerPtr& in_hander,
@@ -79,9 +83,7 @@ private:
         const EventListenerPtr& listener
     );
 
-    friend bool safeTriggerEvent(
-        const EventHandle& in_event
-    );
+
     
     friend bool safeQueueEvent(
         const EventHandle& in_event
@@ -106,11 +108,21 @@ private:
 };
 
 
-    
+template <typename T>
 bool safeAddListener(
-    const EventListenerPtr& in_hander,
+    const EventListenerPtr& listener,
+    void (T::*func)(const Event&),
     const EventType& in_type
-);
+) {
+    MethodCallback1<T, const Event&> callback((T*)listener, func);
+
+    EventHandler handler;
+    handler.listener_ = listener;
+    handler.func_ = (EventHandlerFunction&)callback;
+
+    T3_ASSERT(EventManagerBase::get());
+    return EventManagerBase::get()->addListener(handler, in_type);
+}
     
 bool safeRemoveListener(
     const EventListenerPtr& in_handler,
@@ -121,9 +133,6 @@ bool safeRemoveListener(
     const EventListenerPtr& listener
 );
     
-bool safeTriggerEvent(
-    const EventHandle& in_event
-);
     
 bool safeQueueEvent(
     const EventHandle& in_event
@@ -164,8 +173,9 @@ private:
     //  EventTypeSetへの挿入結果
     using EventTypeSetInsertResult = std::pair<EventTypeSet::iterator, bool>;
     
-    //  イベントリスナーのテーブル
-    using EventListenerTable = std::list<EventListenerPtr>;
+    
+    //  イベントハンドラのテーブル
+    using EventListenerTable = std::list<EventHandler>;
     
     //  リスナーのリストと特定のイベントの関連付け
     using EventListenerMap = std::map<HashString::key_t, EventListenerTable>;
@@ -189,7 +199,7 @@ public:
     
 public:
     bool addListener(
-        const EventListenerPtr& in_handler,
+        const EventHandler& in_handler,
         const EventType& in_type
     ) override;
     
@@ -203,9 +213,6 @@ public:
         const EventListenerPtr& listener
     ) override;
     
-    bool triggerEvent(
-        const EventHandle& in_event
-    ) override;
     
     bool queueEvent(
         const EventHandle& in_event

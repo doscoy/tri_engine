@@ -8,19 +8,17 @@ class EventAAA
     : public t3::EventBase
 {
 public:
-    static const t3::EventType ev_;
+    static const t3::EventType TYPE;
     const t3::EventType& getEventType() const {
-        return ev_;
+        return TYPE;
     }
     
     explicit EventAAA()
         : hp_(300)
     {
-        T3_TRACE("aaa ctr.\n");
     }
     
     ~EventAAA() {
-        T3_TRACE("aaa dtr\n");
     }
 
     int hp_;
@@ -31,26 +29,24 @@ class EventBBB
     : public t3::EventBase
 {
 public:
-    static const t3::EventType ev_;
+    static const t3::EventType TYPE;
     const t3::EventType& getEventType() const {
-        return ev_;
+        return TYPE;
     }
     
     explicit EventBBB()
     : hp_(234)
     {
-        T3_TRACE("bbb ctr.\n");
     }
     
     ~EventBBB() {
-        T3_TRACE("bbb dtr\n");
     }
     
     int hp_;
 };
 
-const t3::EventType EventAAA::ev_("aaa");
-const t3::EventType EventBBB::ev_("bbb");
+const t3::EventType EventAAA::TYPE("aaa");
+const t3::EventType EventBBB::TYPE("bbb");
 
 
 
@@ -74,6 +70,10 @@ public:
         T3_TRACE("aaa hp %d\n", aaa.hp_);
     
     }
+    
+    void krif(const t3::Event& event) {
+        T3_TRACE("kriffff\n");
+    }
 };
 
 
@@ -90,14 +90,14 @@ public:
   
 public:
     void initialize(){
-        t3::safeAddListener(snoop_, t3::EventType("aaa"));
-        t3::safeAddListener(hp_text_, t3::EventType("aaa"));
-        t3::safeAddListener(hp_text_, t3::EventType("bbb"));
+        t3::safeAddListener(hp_text_, &HpText::krif, EventAAA::TYPE);
+//        t3::safeAddListener(hp_text_, &HpText::handleEvent, t3::EventType("aaa"));
+//        t3::safeAddListener(hp_text_, &HpText::handleEvent, t3::EventType("bbb"));
     }
     
     void terminate(){
-        t3::safeRemoveListener(snoop_, t3::EventType("aaa"));
-        t3::safeRemoveListener(hp_text_, t3::EventType("aaa"));
+//        t3::safeRemoveListener(snoop_, t3::EventType("aaa"));
+//        t3::safeRemoveListener(hp_text_, t3::EventType("aaa"));
     }
     
     void update(t3::tick_t delta_time){
@@ -106,11 +106,12 @@ public:
         if (input.getPointing().isTrigger()) {
             //  画面をタッチした
             if (game_system.getRandomNumberGenerator().getBool()){
-            
+                T3_TRACE("A\n");
                 t3::EventHandle new_event(new EventAAA);
                 t3::safeQueueEvent(new_event);
             }
             else {
+                T3_TRACE("B\n");
                 t3::EventHandle new_event(new EventBBB);
                 t3::safeQueueEvent(new_event);
                 

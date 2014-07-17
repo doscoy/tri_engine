@@ -27,7 +27,6 @@
 		04B3A11318E9C43500B03C69 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B3A11218E9C43500B03C69 /* MessageUI.framework */; };
 		04B3A11518E9C43E00B03C69 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B3A11418E9C43E00B03C69 /* StoreKit.framework */; };
 		04B3A11718E9C44900B03C69 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B3A11618E9C44900B03C69 /* SystemConfiguration.framework */; };
-		04B3A11918E9C48000B03C69 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B3A11818E9C48000B03C69 /* libGoogleAdMobAds.a */; };
 		04B3A11B18E9CD6900B03C69 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B3A11A18E9CD6900B03C69 /* CoreTelephony.framework */; };
 		04B3A11F18E9CEAD00B03C69 /* sandbox_template.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B3A11D18E9CEAD00B03C69 /* sandbox_template.cpp */; };
 		04B3A12318EAE09900B03C69 /* ad_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B3A12118EAE09900B03C69 /* ad_test.cpp */; };
@@ -123,7 +122,6 @@
 		3AB0053E1900C27400AADFFE /* tri_collision_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0053C1900C27400AADFFE /* tri_collision_manager.cpp */; };
 		3ADD36F7196382F30025E713 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36F6196382F30025E713 /* libz.dylib */; };
 		3ADD36F9196388FE0025E713 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36F8196388FE0025E713 /* libpng.a */; };
-		3ADD36FB19638AF40025E713 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36FA19638AF40025E713 /* libFlurry_5.0.0.a */; };
 		3ADD36FD19638B1E0025E713 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36FC19638B1E0025E713 /* GameKit.framework */; };
 		3ADD36FF19638BB40025E713 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD36FE19638BB40025E713 /* Security.framework */; };
 		3ADD370719638DE10025E713 /* mesh_obj_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD370519638DE10025E713 /* mesh_obj_scene.cpp */; };
@@ -167,7 +165,6 @@
 		04B3A11218E9C43500B03C69 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		04B3A11418E9C43E00B03C69 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		04B3A11618E9C44900B03C69 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		04B3A11818E9C48000B03C69 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAdMobAds.a; path = ../../third_party_lib/ios/libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		04B3A11A18E9CD6900B03C69 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		04B3A11D18E9CEAD00B03C69 /* sandbox_template.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sandbox_template.cpp; sourceTree = "<group>"; };
 		04B3A11E18E9CEAD00B03C69 /* sandbox_template.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sandbox_template.hpp; sourceTree = "<group>"; };
@@ -392,7 +389,6 @@
 		3AB0053C1900C27400AADFFE /* tri_collision_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_collision_manager.cpp; sourceTree = "<group>"; };
 		3ADD36F6196382F30025E713 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3ADD36F8196388FE0025E713 /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = ../../third_party_lib/ios/libpng.a; sourceTree = "<group>"; };
-		3ADD36FA19638AF40025E713 /* libFlurry_5.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_5.0.0.a; path = ../../third_party_lib/ios/libFlurry_5.0.0.a; sourceTree = "<group>"; };
 		3ADD36FC19638B1E0025E713 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		3ADD36FE19638BB40025E713 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3ADD370519638DE10025E713 /* mesh_obj_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_obj_scene.cpp; sourceTree = "<group>"; };
@@ -414,12 +410,10 @@
 				3ADD36FF19638BB40025E713 /* Security.framework in Frameworks */,
 				04B3A11718E9C44900B03C69 /* SystemConfiguration.framework in Frameworks */,
 				3ADD36FD19638B1E0025E713 /* GameKit.framework in Frameworks */,
-				3ADD36FB19638AF40025E713 /* libFlurry_5.0.0.a in Frameworks */,
 				3ADD36F9196388FE0025E713 /* libpng.a in Frameworks */,
 				3ADD36F7196382F30025E713 /* libz.dylib in Frameworks */,
 				3A5756A118F2A4530011B944 /* CoreMotion.framework in Frameworks */,
 				04B3A11B18E9CD6900B03C69 /* CoreTelephony.framework in Frameworks */,
-				04B3A11918E9C48000B03C69 /* libGoogleAdMobAds.a in Frameworks */,
 				04B3A11518E9C43E00B03C69 /* StoreKit.framework in Frameworks */,
 				04B3A11318E9C43500B03C69 /* MessageUI.framework in Frameworks */,
 				04FB946B18D9D133006BB512 /* CoreGraphics.framework in Frameworks */,
@@ -543,12 +537,10 @@
 			children = (
 				3ADD36FE19638BB40025E713 /* Security.framework */,
 				3ADD36FC19638B1E0025E713 /* GameKit.framework */,
-				3ADD36FA19638AF40025E713 /* libFlurry_5.0.0.a */,
 				3ADD36F8196388FE0025E713 /* libpng.a */,
 				3ADD36F6196382F30025E713 /* libz.dylib */,
 				3A5756A018F2A4530011B944 /* CoreMotion.framework */,
 				04B3A11A18E9CD6900B03C69 /* CoreTelephony.framework */,
-				04B3A11818E9C48000B03C69 /* libGoogleAdMobAds.a */,
 				04B3A11618E9C44900B03C69 /* SystemConfiguration.framework */,
 				04B3A11418E9C43E00B03C69 /* StoreKit.framework */,
 				04B3A11218E9C43500B03C69 /* MessageUI.framework */,

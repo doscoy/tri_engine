@@ -16,10 +16,10 @@ inline namespace gfx {
 class DrawLayer
     : public RenderLayer
 {
-    typedef DrawLayer self_t;
+    using self_t = DrawLayer;
 protected:
-    typedef MethodCallback2<self_t, self_t* const, tick_t> UpdateCallback;
-    typedef MethodCallback1<self_t, self_t* const> RenderCallback;
+    using UpdateCallback = MethodCallback2<self_t, self_t* const, tick_t>;
+    using RenderCallback = MethodCallback1<self_t, self_t* const>;
 
 public:
     DrawLayer();
