@@ -1,6 +1,6 @@
 
 #include "base/tri_application.hpp"
-#include "base/tri_game_system.hpp"
+#include "base/tri_director.hpp"
 #include "base/tri_scene.hpp"
 #include "dbg/tri_debugmenu.hpp"
 #include "dbg/tri_workbar.hpp"
@@ -34,6 +34,7 @@ double last_system_cost_;
 double last_app_cost_;
 double last_rendering_cost_;
 double last_other_cost_;
+float fps_;
 
 bool step_update_ = false;
 
@@ -52,7 +53,7 @@ struct DumpAllocatorLog {
 
 
 bool isSuspending() {
-    t3::GameSystem& gs = t3::GameSystem::getInstance();
+    t3::Director& gs = t3::Director::getInstance();
     t3::DebugMenu& dm = t3::DebugMenu::getInstance();
     
     if (gs.isSuspend() || dm.isOpened()) {
@@ -77,7 +78,7 @@ public:
         , dmi_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_, 1)
         , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_, 1)
     {
-        t3::GameSystem::getInstance().registryToDebugMenu(dmf_system_);
+        t3::Director::getInstance().registryToDebugMenu(dmf_system_);
         render_avg.reserve(LIMIT_AVG_SUM);
     }
     
@@ -112,14 +113,14 @@ void initializeTriEngine(
     platform::createWindow(width, height, title);
     
     //  マネージャインスタンス生成
-    GameSystem::createInstance();
+    Director::createInstance();
     DebugMenu::createInstance();
     SceneManager::createInstance();
     
     //  初期化
-    GameSystem::getInstance().initializeGameSystem();
+    Director::getInstance().initializeGameSystem();
     
-    t3::GameSystem* game_system = t3::GameSystem::getInstancePointer();
+    t3::Director* game_system = t3::Director::getInstancePointer();
     game_system->setScreenSize(
         Point2(
             width,
@@ -148,13 +149,13 @@ Application::~Application()
 }
 
 bool Application::isActive() const {
-    return !GameSystem::getInstance().isExitRequest();
+    return !Director::getInstance().isExitRequest();
 }
 
 
 void Application::initializeWorkBar() {
     
-    GameSystem& game_system = GameSystem::getInstance();
+    Director& game_system = Director::getInstance();
     const Point2& screen_size = game_system.getScreenSize();
     Point2 half_screen_size = screen_size / 2;
     
@@ -220,7 +221,13 @@ void Application::updateApplication()
     float delta_time = fps_timer_.interval();
     //  ブレークポイント貼ってる時に異常な数値になる為、最大でも１０フレの遅延に収める
     clampMaximum(delta_time, frameSec<10>());
-    t3::printDisplay(0, 100, "fps %f", delta_time);
+
+
+    //  FPS表示
+    if ((frame_counter_.now() % 10) == 0) {
+        fps_ =  60.0f / (delta_time / frameToSec(1));
+    }
+    t3::printDisplay(0, 100, "FPS %.1f",fps_);
 
 
     float sum_render = 0;
@@ -242,7 +249,7 @@ void Application::updateApplication()
     
     
     SceneManager& sm = SceneManager::getInstance();
-    GameSystem& gs = GameSystem::getInstance();
+    Director& gs = Director::getInstance();
     DebugMenu& dm = DebugMenu::getInstance();
 
     //  ゲームスピード変更
@@ -283,7 +290,7 @@ void Application::updateApplication()
 
 void Application::renderApplication()
 {
-    GameSystem& gs = GameSystem::getInstance();
+    Director& gs = Director::getInstance();
     DebugMenu& dm = DebugMenu::getInstance();
 
     app_cost_timer_.end();              // app cost 計測終了
@@ -423,8 +430,8 @@ bool Application::isDebugMenuOpenRequest() {
     
     
     //  ポインティングでのオープンリクエスト
-    const Pointing& pointing = GameSystem::getInput().getPointing();
-    if (pointing.isDoubleClick()) {
+    const Pointing& pointing = Director::getInput().getPointing();
+    if (pointing.isDoubleClick() && pointing.getPointingCount() == 3) {
         result = true;
     }
     

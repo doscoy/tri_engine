@@ -17,6 +17,7 @@ Pointing::Pointing()
     , double_click_release_count_(0)
     , repeat_interval_(0.1f)
     , pressed_time_(0.0f)
+    , pointing_count_(0)
 {
     clearPositionList();
 }
@@ -33,6 +34,9 @@ void Pointing::updatePointing(
     tick_t delta_time
 ){
     bool hit = data.hit_;
+
+
+    pointing_count_ = data.getPointingCount();
 
     //  入力状態設定
     trigger_ = hit & (hit ^ hold_);

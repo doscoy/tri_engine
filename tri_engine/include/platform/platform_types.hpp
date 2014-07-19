@@ -55,13 +55,21 @@ struct PointingData {
         : x_(0.0f)
         , y_(0.0f)
         , hit_(false)
+        , pointing_count_(0)
     {
+    }
+    
+    int getPointingCount() const {
+        return pointing_count_;
     }
     
     float x_;
     float y_;
+
     bool hit_;
-    
+
+    int pointing_count_;
+
     void clearData() {
         x_ = 0;
         y_ = 0;

@@ -1,7 +1,7 @@
 
 
 #include "tri_render_layer.hpp"
-#include "base/tri_game_system.hpp"
+#include "base/tri_director.hpp"
 #include <cstring>
 
 
@@ -84,11 +84,11 @@ void RenderLayer::drawLayers(
     
     
 void RenderLayer::attachSystem() {
-    t3::GameSystem::getInstance().attachLayer(this);
+    t3::Director::getInstance().attachLayer(this);
 }
 
 void RenderLayer::detachSystem() {
-    t3::GameSystem::getInstance().detachLayer(this);
+    t3::Director::getInstance().detachLayer(this);
 }
 
 

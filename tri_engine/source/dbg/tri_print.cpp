@@ -11,13 +11,12 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#include "base/tri_screen.hpp"
 #include "dbg/tri_assert.hpp"
 
 #include "gfx/tri_texture.hpp"
 #include "gfx/tri_texture_factory.hpp"
 #include "gfx/tri_render_system.hpp"
-#include "base/tri_game_system.hpp"
+#include "base/tri_director.hpp"
 #include "tri_debug_string_layer.hpp"
 #include "kernel/tri_kernel.hpp"
 #include "gfx/tri_shader.hpp"
@@ -212,7 +211,7 @@ void printDisplay(
     vsnprintf(buf, BUFFER_LENGTH, fmt, arg);
     va_end(arg);
     
-    t3::GameSystem::printDisplay(
+    t3::Director::printDisplay(
         x,
         y,
         Color::magenta().getRGBA(),
@@ -235,7 +234,7 @@ void printDisplay(
     vsnprintf(buf, BUFFER_LENGTH, fmt, arg);
     va_end(arg);
     
-    t3::GameSystem::printDisplay(
+    t3::Director::printDisplay(
         x,
         y,
         color.getRGBA(),
@@ -259,7 +258,7 @@ void printDisplay(
     vsnprintf(buf, BUFFER_LENGTH, fmt, arg);
     va_end(arg);
     
-    t3::GameSystem::printDisplay(
+    t3::Director::printDisplay(
         x,
         y,
         color.getRGBA(),

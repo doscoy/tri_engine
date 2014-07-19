@@ -1,6 +1,6 @@
 
 #include "tri_sprite.hpp"
-#include "base/tri_game_system.hpp"
+#include "base/tri_director.hpp"
 #include "gfx/tri_texture.hpp"
 #include "gfx/tri_sprite_layer.hpp"
 #include "gfx/tri_vertex_types.hpp"

@@ -2,7 +2,7 @@
 #include "tri_sprite_renderer.hpp"
 #include "tri_sprite.hpp"
 #include "tri_vertex_types.hpp"
-#include "base/tri_game_system.hpp"
+#include "base/tri_director.hpp"
 #include "tri_texture.hpp"
 #include "math/tri_matrix.hpp"
 #include "gfx/tri_render_system.hpp"
@@ -129,7 +129,7 @@ void SpriteRenderer::margeSprites() {
     indices.reserve(sprites_.size() * 6);
 
 
-    Vec2 screen_size = GameSystem::getInstance().getScreenSize();
+    Vec2 screen_size = Director::getInstance().getScreenSize();
     Vec2 half = screen_size / 2;
     half.x_ = 1.0f / half.x_;
     half.y_ = 1.0f / half.y_;

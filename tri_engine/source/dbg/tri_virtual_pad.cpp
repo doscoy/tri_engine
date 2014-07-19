@@ -1,6 +1,6 @@
 #include "tri_virtual_pad.hpp"
 #include "tri_draw_primitive.hpp"
-#include "base/tri_game_system.hpp"
+#include "base/tri_director.hpp"
 #include "geometry/tri_collision.hpp"
 #include "geometry/tri_rectangle.hpp"
 
@@ -68,7 +68,7 @@ void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t delta_time)
 
 
     //  ポインティング情報取得
-    const Input& input = GameSystem::getInput();
+    const Input& input = Director::getInput();
     const Pointing& pointing = input.getPointing();
 
     if (!pointing.isHold()) {

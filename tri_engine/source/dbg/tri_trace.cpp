@@ -5,7 +5,7 @@
 #include <cstdarg>
 #include <cstdio>
 #include "tri_trace.hpp"
-#include "base/tri_game_system.hpp"
+#include "base/tri_director.hpp"
 #include "util/tri_counter.hpp"
 #include "tri_debug_log_layer.hpp"
 #include "math/tri_math.hpp"
@@ -36,7 +36,7 @@ void traceDisplay( const char* const format, ... )
 	vsnprintf(buf, 256, format, msg);
 	va_end(msg);
 
-    t3::GameSystem::printLog(buf);
+    t3::Director::printLog(buf);
 }
 
 void trace( const char* const format, ... )

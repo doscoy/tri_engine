@@ -1,4 +1,4 @@
-#include "tri_game_system.hpp"
+#include "tri_director.hpp"
 #include "tri_scene.hpp"
 #include "util/tri_counter.hpp"
 #include "kernel/tri_kernel.hpp"
@@ -15,23 +15,23 @@ extern Counter frame_counter_;
 
 inline namespace base {
     
-const Input& GameSystem::getInput(
+const Input& Director::getInput(
     const int player_no
 )  {
-    return t3::GameSystem::getInstance().input_.at(player_no);
+    return t3::Director::getInstance().input_.at(player_no);
 }
     
-void GameSystem::addSystemTask(
+void Director::addSystemTask(
     std::shared_ptr<Task> task
 ) {
     getInstance().task_manager_.attach(task);
 }
 
 
-RenderLayer* GameSystem::getLayer(
+RenderLayer* Director::getLayer(
     const std::string& layer_name
 ) {
-    t3::RenderLayers layers = t3::GameSystem::getInstance().getLaysers();
+    t3::RenderLayers layers = t3::Director::getInstance().getLaysers();
     
     for (auto layer : layers) {
         if (layer_name == layer->getName()) {
@@ -42,19 +42,19 @@ RenderLayer* GameSystem::getLayer(
     return nullptr;
 }
 
-Vec2 GameSystem::screenToViewport(
+Vec2 Director::screenToViewport(
     const Vec2& screen_pos
 ) {
     return screen_pos / getInstance().getScreenSize() * 2.0f;
 }
 
-Vec2 GameSystem::viewportToScreen(
+Vec2 Director::viewportToScreen(
     const Vec2& viewport_pos
 ) {
     return viewport_pos * getInstance().getScreenSize() * 0.5f;
 }
 
-bool GameSystem::isOutOfScreen(
+bool Director::isOutOfScreen(
     const Vec2 &screen_pos
 ) {
     Vec2 vpos = screenToViewport(screen_pos);
@@ -69,39 +69,39 @@ bool GameSystem::isOutOfScreen(
 }
 
 
-void GameSystem::setupBlackOut() {
+void Director::setupBlackOut() {
     getInstance().fade_layer_->setupFadeParam(1, Color::black());
 }
 
-void GameSystem::setupBlackIn() {
+void Director::setupBlackIn() {
     getInstance().fade_layer_->setupFadeParam(0, Color::black());
 }
 
-void GameSystem::fadeOut() {
+void Director::fadeOut() {
     getInstance().fade_layer_->fadeOut(1.0f);
 }
 
-void GameSystem::fadeIn() {
+void Director::fadeIn() {
     getInstance().fade_layer_->fadeIn(1.0f);
 }
 
-bool GameSystem::isFadeEnd() {
+bool Director::isFadeEnd() {
     return getInstance().fade_layer_->isFadeEnd();
 }
 
-bool GameSystem::isFadeInEnd() {
+bool Director::isFadeInEnd() {
     return getInstance().fade_layer_->isFadeInEnd();
 }
 
-bool GameSystem::isFadeOutEnd() {
+bool Director::isFadeOutEnd() {
     return getInstance().fade_layer_->isFadeOutEnd();
 }
 
-const Vec2& GameSystem::getScreenSize() {
+const Vec2& Director::getScreenSize() {
     return getInstance().screen_size_;
 }
 
-void GameSystem::printLog(const char* const buf) {
+void Director::printLog(const char* const buf) {
     if (!getInstancePointer()) {
         return;
     }
@@ -112,7 +112,7 @@ void GameSystem::printLog(const char* const buf) {
     getInstance().log_layer_->writeString(buf);
 }
 
-void GameSystem::printDisplay(
+void Director::printDisplay(
     int x,
     int y,
     const uint32_t color,
@@ -125,7 +125,7 @@ void GameSystem::printDisplay(
 
 // *********************************************
 //  コンストラクタ
-GameSystem::GameSystem()
+Director::Director()
     : log_layer_(nullptr)
     , dbg_screen_layer_(nullptr)
     , random_number_generator_(1)
@@ -143,6 +143,8 @@ GameSystem::GameSystem()
         Color::white(),
         Color::blue()
       }}
+    , dm_random_pointing_(nullptr, "RANDOM POINTING", random_pointing_, 1)
+    , random_pointing_(true)
     , dm_game_speed_(nullptr, "GAME SPEED", game_speed_, 0.1f, 0.0f, 4.0f)
     , game_speed_(1.0f)
     , dm_layers_(nullptr, "LAYERS")
@@ -163,7 +165,7 @@ GameSystem::GameSystem()
 
 // *********************************************
 //  デストラクタ
-GameSystem::~GameSystem()
+Director::~Director()
 {
     CollisionManager::destroyInstance();
     AudioManager::destroyInstance();
@@ -173,16 +175,16 @@ GameSystem::~GameSystem()
 
 
 
-void GameSystem::initializeGameSystem() {
+void Director::initializeGameSystem() {
     setClearColor();
     
     dm_layers_.setFocusCallback(
         this,
-        &GameSystem::registryLayersToDebugMenu
+        &Director::registryLayersToDebugMenu
     );
     dm_layers_.setUnfocusCallback(
         this,
-        &GameSystem::unregistryLayersToDebugMenu
+        &Director::unregistryLayersToDebugMenu
     );
  
     
@@ -196,13 +198,13 @@ void GameSystem::initializeGameSystem() {
 }
 
 
-void GameSystem::terminategameSystem() {
+void Director::terminategameSystem() {
 
 }
 
 // *********************************************
 //  アップデート
-void GameSystem::update(
+void Director::update(
     const tick_t delta_time
 ) {
     //  起動からのフレーム数カウント
@@ -228,7 +230,7 @@ void GameSystem::update(
     }
 }
 
-void GameSystem::suspend(
+void Director::suspend(
     const tick_t delta_time
 ) {
     setClearColor();
@@ -238,7 +240,7 @@ void GameSystem::suspend(
 }
 
 
-void GameSystem::updateInput(
+void Director::updateInput(
     const tick_t delta_time
 ) {
     for (int pad_idx = 0; pad_idx < MAX_PAD; ++pad_idx){
@@ -256,6 +258,20 @@ void GameSystem::updateInput(
             pad_idx,
             &point_data
         );
+        
+        if (random_pointing_) {
+            if ((frame_counter_.now() % 4) == 0) {
+                point_data.hit_ = true;
+                const Vec2 half = screen_size_ / 2;
+                point_data.x_ = random_number_generator_.getInt(screen_size_.x_) - half.x_;
+                point_data.y_ = random_number_generator_.getInt(screen_size_.y_) - half.y_;
+        //        T3_TRACE("touch %f  %f\n", point_data.x_, point_data.y_);
+            }
+            else {
+                
+            }
+        }
+        
         input.updatePointing(
             point_data,
             delta_time
@@ -285,13 +301,13 @@ void GameSystem::updateInput(
 }
 
 
-void GameSystem::setClearColor()
+void Director::setClearColor()
 {    
     RenderSystem::setClearColor(clear_colors_[use_clear_color_index_]);
 }
     
     
-void GameSystem::registryToDebugMenu( DebugMenuFrame& parent_frame )
+void Director::registryToDebugMenu( DebugMenuFrame& parent_frame )
 {
     //  塗りつぶしカラーの登録
     dm_color_idx_.attachSelf(parent_frame);
@@ -305,7 +321,7 @@ void GameSystem::registryToDebugMenu( DebugMenuFrame& parent_frame )
 }
 
 
-void GameSystem::attachLayer(t3::RenderLayer* layer)
+void Director::attachLayer(t3::RenderLayer* layer)
 {
     T3_NULL_ASSERT(layer);
 //    T3_TRACE("Attach Layer %s\n", layer->getName().c_str());
@@ -317,7 +333,7 @@ void GameSystem::attachLayer(t3::RenderLayer* layer)
     );
 }
 
-void GameSystem::detachLayer(t3::RenderLayer* layer)
+void Director::detachLayer(t3::RenderLayer* layer)
 {
 //    T3_TRACE("Detach Layer %s\n", layer->getName().c_str());
 
@@ -330,21 +346,21 @@ void GameSystem::detachLayer(t3::RenderLayer* layer)
 }
 
 
-void GameSystem::registryLayersToDebugMenu()
+void Director::registryLayersToDebugMenu()
 {
     for (auto layer: layers_) {
         layer->registryToDebugMenu(dm_layers_);
     }
 }
 
-void GameSystem::unregistryLayersToDebugMenu()
+void Director::unregistryLayersToDebugMenu()
 {
     for (auto layer: layers_) {
         layer->unregistryToDebugMenu();
     }
 }
 
-void GameSystem::showTask() const {
+void Director::showTask() const {
 
     task_manager_.printTask();
 }

@@ -22,8 +22,8 @@ inline namespace base {
 
 constexpr int MAX_PAD = 4;
 
-class GameSystem 
-    : public Singleton<GameSystem>
+class Director 
+    : public Singleton<Director>
 {
     friend class Singleton;
 
@@ -32,8 +32,8 @@ public:
     
 
 private:
-    GameSystem();
-    ~GameSystem();
+    Director();
+    ~Director();
 
 public:
     void initializeGameSystem();
@@ -186,6 +186,12 @@ private:
     int use_clear_color_index_;
     std::array<Color, 4> clear_colors_;
     
+    //  エージング用ランダムタッチ
+    DebugMenuItem<bool> dm_random_pointing_;
+    bool random_pointing_;
+    
+    
+    
     //  ゲームスピード
     DebugMenuItem<float> dm_game_speed_;
     float game_speed_;
@@ -197,6 +203,7 @@ private:
     bool exit_request_;
     
     bool suspend_;
+    
 };
 
 

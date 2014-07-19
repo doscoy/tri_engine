@@ -3,7 +3,7 @@
 #include "platform/platform_sdk.hpp"
 #include "platform/platform.hpp"
 #include "geometry/tri_geometry.hpp"
-#include "base/tri_game_system.hpp"
+#include "base/tri_director.hpp"
 #include "gfx/tri_render_system.hpp"
 #include "gfx/tri_shader.hpp"
 
@@ -54,7 +54,7 @@ void drawRectangle(
     const Color& color
 ){
     
-    t3::GameSystem& gs = t3::GameSystem::getInstance();
+    t3::Director& gs = t3::Director::getInstance();
     
     float screen_width = gs.getScreenSize().x_ * 0.5f;
     float screen_height = gs.getScreenSize().y_ * 0.5f;

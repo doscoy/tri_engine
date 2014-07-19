@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <cstdarg>
 #include "kernel/tri_kernel.hpp"
-#include "base/tri_game_system.hpp"
+#include "base/tri_director.hpp"
 
 extern void beginPrint(const float w, const float h);
 extern void endPrint();
@@ -87,7 +87,7 @@ void DebugStringBuffer::clearBuffer()
 
 void DebugStringBuffer::drawStrings()
 {
-    GameSystem& gs = GameSystem::getInstance();
+    Director& gs = Director::getInstance();
     beginPrint(gs.getScreenSize().x_, gs.getScreenSize().y_);
  
     

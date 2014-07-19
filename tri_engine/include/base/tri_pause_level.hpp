@@ -2,6 +2,10 @@
 #ifndef TRI_PAUSE_LEVEL_HPP_INCLUDED
 #define TRI_PAUSE_LEVEL_HPP_INCLUDED
 
+#include "tri_event.hpp"
+
+namespace t3 {
+inline namespace base {
 
 
 enum PauseLevel {
@@ -14,7 +18,48 @@ enum PauseLevel {
 };
 
 
+class PauseEvent
+    : public EventBase {
+public:
+    PauseEvent(PauseLevel lv)
+        : pause_lv_(lv)
+    {}
 
+    static const EventType TYPE;
+    const EventType& getEventType() const override {
+        return TYPE;
+    }
+
+    PauseLevel getPauseLevel() const {
+        return pause_lv_;
+    }
+
+private:
+    PauseLevel pause_lv_;
+};
+
+class ResumeEvent
+    : public EventBase {
+public:
+    ResumeEvent(PauseLevel lv)
+        : pause_lv_(lv)
+    {}
+    
+    static const EventType TYPE;
+    const EventType& getEventType() const override {
+        return TYPE;
+    }
+
+    PauseLevel getPauseLevel() const {
+        return pause_lv_;
+    }
+    
+private:
+    PauseLevel pause_lv_;
+};
+
+}   // namespace geometry
+}   // namespace t3
 
 
 

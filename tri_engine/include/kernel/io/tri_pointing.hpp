@@ -49,6 +49,10 @@ public:
     const Point2& getMoving() const {
         return moving_;
     }
+    
+    int getPointingCount() const {
+        return pointing_count_;
+    }
 
 private:
     void clearPositionList();
@@ -71,6 +75,7 @@ private:
     int double_click_release_count_;
     float repeat_interval_;
     float pressed_time_;
+    int pointing_count_;
 };
 
 

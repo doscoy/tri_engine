@@ -8,6 +8,7 @@
 #include "util/tri_uncopyable.hpp"
 #include "util/tri_nameable.hpp"
 #include "tri_pause_level.hpp"
+#include "tri_event_manager.hpp"
 #include <memory>
 
 
@@ -20,6 +21,7 @@ class Task
     , virtual public Nameable
 {
     friend class TaskManager;
+    using self_t = Task;
 public:
 
     enum Priority {
@@ -30,23 +32,31 @@ public:
         PRIORITY_SYS_BEFORE_APP = 100000,
     };
 
-
 public:
-
-    explicit Task(
-        int priority = PRIORITY_APP_DEFAULT,
-        PauseLevel = PAUSE_LV_1
+    Task()
+        : Task(PRIORITY_APP_DEFAULT, PAUSE_LV_1)
+    {}
+    
+    Task(
+        int priority,
+        PauseLevel pause_lv
     )   : priority_(priority)
         , kill_(false)
         , active_(true)
         , paused_(false)
         , inital_update_(true)
         , attached_(false)
+        , pause_lv_(pause_lv)
     {
+        safeAddListener(this, &self_t::onPauseTask, PauseEvent::TYPE);
+        safeAddListener(this, &self_t::onResumeTask, ResumeEvent::TYPE);
     }
         
     virtual ~Task()
-    {}
+    {
+        safeRemoveListener(this, PauseEvent::TYPE);
+        safeRemoveListener(this, ResumeEvent::TYPE);
+    }
 
 public:
 
@@ -98,6 +108,11 @@ public:
         kill_ = true;
     };
     
+
+
+private:
+    void onPauseTask(const Event& event);
+    void onResumeTask(const Event& event);
     void pauseTask() {
         paused_ = true;
     }
@@ -105,7 +120,6 @@ public:
     void resumeTask() {
         paused_ = false;
     }
-
 
 public:
     bool operator <(const Task& rhs) {
@@ -149,7 +163,7 @@ class WaitingTask
 {
 public:
     WaitingTask(const tick_t wait_time)
-        : Task(0)
+        : Task()
         , now_(0)
         , end_time_(wait_time)
     {}

@@ -2,7 +2,7 @@
 #include "gfx/tri_color.hpp"
 #include "gfx/tri_render_system.hpp"
 #include "tri_print.hpp"
-#include "base/tri_game_system.hpp"
+#include "base/tri_director.hpp"
 #include "tri_draw_primitive.hpp"
 
 
@@ -68,7 +68,7 @@ void DebugLogLayer::updateLayer(tick_t delta_time)
         --str_idx;
     }
     
-    GameSystem& gs = t3::GameSystem::getInstance();
+    Director& gs = t3::Director::getInstance();
     const t3::Pad& pad = gs.getInput().getPad();
 
     if (pad.isPress(t3::Pad::BUTTON_DOWN)) {
@@ -82,7 +82,7 @@ void DebugLogLayer::updateLayer(tick_t delta_time)
 
 void DebugLogLayer::drawLayer()
 {
-    GameSystem& gs = t3::GameSystem::getInstance();
+    Director& gs = t3::Director::getInstance();
     
     //  文字列が見やすいように背景に半透明の板を描画
     t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_ALWAYS);

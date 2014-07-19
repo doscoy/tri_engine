@@ -4,7 +4,7 @@
 #include "dbg/tri_trace.hpp"
 #include "gfx/tri_render_system.hpp"
 #include "kernel/tri_kernel.hpp"
-#include "base/tri_game_system.hpp"
+#include "base/tri_director.hpp"
 
 namespace t3 {
 inline namespace gfx {
@@ -46,7 +46,7 @@ void SceneGraph::renderScene()
 
 void SceneGraph::setupView()
 {
-    const t3::GameSystem& game_sys = t3::GameSystem::getInstance();
+    const t3::Director& game_sys = t3::Director::getInstance();
     const t3::Vec2& screen = game_sys.getScreenSize();
     
     t3::RenderSystem::setViewport(0, 0, screen.x_, screen.y_);
