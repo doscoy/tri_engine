@@ -35,12 +35,12 @@ private:
 public:
     
     //  横幅取得
-    uint32_t getWidth() const {
+    uint32_t width() const {
         return width_;
     }
     
     //  縦幅取得
-    uint32_t getHeight() const {
+    uint32_t height() const {
         return height_;
     }
     

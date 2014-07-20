@@ -35,7 +35,7 @@ class TypedSceneGenerator
 public:
     
     //  インスタンス取得
-    static self_t* getInstancePtr() {
+    static self_t* instancePtr() {
         static self_t instance_;
         return &instance_;
     }
@@ -84,7 +84,7 @@ public:
     
     template <typename SceneType>
     static SceneGenerator* sceneGenerator(){
-        return TypedSceneGenerator<SceneType>::getInstancePtr();
+        return TypedSceneGenerator<SceneType>::instancePtr();
     }
 
     void addSceneTask(std::shared_ptr<Task> task) {

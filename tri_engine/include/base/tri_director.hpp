@@ -52,7 +52,7 @@ public:
 //  乱数管理    
     
     //  乱数ジェネレータを取得
-    random_t& getRandomNumberGenerator(){
+    random_t& random(){
         return random_number_generator_;
     }
     

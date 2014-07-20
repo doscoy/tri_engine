@@ -27,7 +27,7 @@ public:
         const Pad& pad = debugPad();
         if (pad.isTrigger(Pad::BUTTON_A)) {
             SceneManager& sm = SceneManager::instance();
-            sm.forceChangeScene( gen_.getInstancePtr() );
+            sm.forceChangeScene( gen_.instancePtr() );
         }
         else if (pad.isTrigger(Pad::BUTTON_B)) {
             parent_->setFocusItem(nullptr);

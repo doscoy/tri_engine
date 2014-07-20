@@ -33,7 +33,7 @@ public:
     }
     
     
-    void setRadius(
+    void radius(
         const float radius
     ) {
         radius_ = radius;

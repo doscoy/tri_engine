@@ -34,10 +34,10 @@ public:
         circle_.position(pos);
     }
     
-    void setRadius(
+    void radius(
         const float radius
     ) {
-        circle_.setRadius(radius);
+        circle_.radius(radius);
     }
 
     const Circle& getCircle() const {

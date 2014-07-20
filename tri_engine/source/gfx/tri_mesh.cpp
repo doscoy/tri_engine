@@ -114,7 +114,7 @@ Mesh::Mesh(
     }
     
     sphere_.position(center);
-    sphere_.setRadius(sphere_radius);
+    sphere_.radius(sphere_radius);
 
     for (i = 0; i < f; ++i) {
         float dx1 = vert_[face_[i][1]][0] - vert_[face_[i][0]][0];

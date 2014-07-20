@@ -94,12 +94,12 @@ void debugFontPrint(
 
 
     constexpr int font_size = 16;
-    int width_num = debugfont_->getWidth() / font_size;
+    int width_num = debugfont_->width() / font_size;
     int tex_x = (char_idx % width_num) * font_size;
     int tex_y = (char_idx / width_num) * font_size;
     
-    float dbg_font_tex_width = static_cast<float>(debugfont_->getWidth());
-    float dbg_font_tex_height = static_cast<float>(debugfont_->getHeight());
+    float dbg_font_tex_width = static_cast<float>(debugfont_->width());
+    float dbg_font_tex_height = static_cast<float>(debugfont_->height());
     
     float u0 = static_cast<float>(tex_x) / dbg_font_tex_width;
     float v0 = static_cast<float>(tex_y) / dbg_font_tex_height;
