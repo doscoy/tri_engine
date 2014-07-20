@@ -70,7 +70,7 @@ void TemplateScene::updateScene(t3::tick_t delta_time) {
     t3::Director& gs = t3::Director::instance();
     const t3::Pad& pad = gs.input().pad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
-        setFinish(true);
+        finish(true);
     }
 }
 

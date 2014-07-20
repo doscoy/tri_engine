@@ -74,16 +74,16 @@ public:
         return finish_;
     };
     
-    const char* getSceneName() const {
+    const char* sceneName() const {
         return scene_name_;
     }
 
-    DebugMenuFrame& getSceneDebugMenuFrame() {
+    DebugMenuFrame& sceneDebugMenuFrame() {
         return scene_debug_menu_frame_;
     }
     
     template <typename SceneType>
-    static SceneGenerator* getSceneGenerator(){
+    static SceneGenerator* sceneGenerator(){
         return TypedSceneGenerator<SceneType>::getInstancePtr();
     }
 
@@ -93,7 +93,7 @@ public:
 
 
 protected:
-    void setFinish(bool f) {
+    void finish(bool f) {
         finish_ = f;
     }
 

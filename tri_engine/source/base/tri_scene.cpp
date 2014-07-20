@@ -65,7 +65,7 @@ SceneManager::SceneManager()
     , force_change_( false )
     , scene_changed_( false )
 {
-    SceneGenerator* sg = Scene::getSceneGenerator<NullScene>();
+    SceneGenerator* sg = Scene::sceneGenerator<NullScene>();
     current_scene_ = sg->createScene();
 }
 
@@ -109,19 +109,19 @@ void SceneManager::sceneChange()
     
     //  シーン終了
     //  後片付け
-    const char* prev_scene_name = current_scene_->getSceneName();
+    const char* prev_scene_name = current_scene_->sceneName();
     current_scene_->terminateScene();
 
     //  次のシーンに遷移
     T3_TRACE_VALUE(current_scene_.use_count());
     current_scene_ = next_scene_generator_->createScene();
-    next_scene_generator_ = Scene::getSceneGenerator<NullScene>();
+    next_scene_generator_ = Scene::sceneGenerator<NullScene>();
     
     EventManagerBase::get()->dumpListeners();
     
     //  初期化
     current_scene_->initializeScene();
-    const char* next_scene_name = current_scene_->getSceneName();
+    const char* next_scene_name = current_scene_->sceneName();
 
     //  シーンが切り替わったフラグON
     scene_changed_ = true;
