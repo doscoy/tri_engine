@@ -28,10 +28,10 @@ public:
     static const HashString TYPE;
 
 public:
-    void setPosition(
+    void position(
         const Vec2& pos
     ) {
-        circle_.setPosition(pos);
+        circle_.position(pos);
     }
     
     void setRadius(

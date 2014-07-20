@@ -28,13 +28,13 @@ public:
         radius_ = radius;
     }
     
-    void setPosition(
+    void position(
         const Vec3& position
     ) {
         position_ = position;
     }
     
-    const Vec3* getPosition() const {
+    const Vec3* position() const {
         return &position_;
     }
     

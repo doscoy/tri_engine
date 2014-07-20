@@ -21,7 +21,7 @@ public:
 public:
     void setColor(int index, const Color& color);
     void setParam(int index, float param);
-    void setPosition(const Vec2& pos) {
+    void position(const Vec2& pos) {
         position_ = pos;
     }
     

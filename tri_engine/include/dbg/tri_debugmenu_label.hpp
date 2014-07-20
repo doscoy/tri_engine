@@ -56,7 +56,7 @@ public:
     
     void detachSelf();
     
-    void setEnable(const bool enable) {
+    void enable(const bool enable) {
         enable_ = enable;
     }
     

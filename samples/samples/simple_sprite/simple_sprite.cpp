@@ -17,7 +17,7 @@ public:
     void initialize(){
         
         //  テクスチャ読み込み
-        t3::TextureManager& texture_manager = t3::TextureManager::getInstance();
+        t3::TextureManager& texture_manager = t3::TextureManager::instance();
         t3::FilePath kani_path("stamp.png");
     
         //  ハンドルをとっておく
@@ -39,10 +39,10 @@ public:
         t3::printDisplay(0, 0, "%d", sprites->size());
         
         //  画面タッチで数制御
-        t3::Pointing pointing = t3::GameSystem::getInstance().getInput().getPointing();
+        t3::Pointing pointing = t3::Director::instance().input().pointing();
         if (pointing.isHold()) {
         
-            const t3::Point2& pointing_pos = pointing.getPosition();
+            const t3::Point2& pointing_pos = pointing.position();
             if (pointing_pos.x_ < 0) {
                 addSprite();
             }
@@ -71,9 +71,9 @@ private:
         int spr_idx = 0;
         for (auto spr : *sprites) {
             
-            float angle = spr->getRotation();
+            float angle = spr->rotation();
             if (spr_idx % 2) {
-                spr->setRotation(angle + 1);
+                spr->rotation(angle + 1);
             }
             spr_idx += 1;
         }
@@ -86,9 +86,8 @@ private:
             return;
         }
         
-        auto& size = sprites->front()->getSize();
         t3::Vec2 offset(20, 20);
-        int x_count = t3::GameSystem::getInstance().getScreenSize().x_ / offset.x_ -1;
+        int x_count = t3::Director::instance().getScreenSize().x_ / offset.x_ -1;
         int y = 15;
         int i = 0;
         for (auto spr : *sprites) {
@@ -98,18 +97,18 @@ private:
 
             float pos_x = ((i % x_count) * offset.x_) - 300;
             float pos_y = y * offset.y_;
-            spr->setPosition(pos_x, pos_y);
+            spr->position(pos_x, pos_y);
             i += 1;
         }
     }
     
 private:
     void addSprite() {
-        t3::TextureManager& texture_manager = t3::TextureManager::getInstance();
+        t3::TextureManager& texture_manager = t3::TextureManager::instance();
 
         //  スプライト増やす
         std::shared_ptr<t3::Sprite> sprite = sprite_layer_.createSprite(
-            texture_manager.getResource(tex3_handle_)
+            texture_manager.resource(tex3_handle_)
         );
     }
     
@@ -155,8 +154,8 @@ void SimpleSpriteScene::terminateScene() {
 void SimpleSpriteScene::updateScene(t3::tick_t delta_time) {
     context_->update(delta_time);
     
-    t3::GameSystem& gs = t3::GameSystem::getInstance();
-    const t3::Pad& pad = gs.getInput().getPad();
+    t3::Director& gs = t3::Director::instance();
+    const t3::Pad& pad = gs.input().pad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
         setFinish(true);
     }

@@ -220,7 +220,7 @@ struct Mtx4Template
         mtx.w_.x_ = x; mtx.w_.y_ = y; mtx.w_.z_ = z; mtx.w_.w_ = 1;
     }
     
-    void setPosition(
+    void position(
         T x,
         T y,
         T z
@@ -230,7 +230,7 @@ struct Mtx4Template
         w_.z_ = z;
     }
     
-    Vec3Template<T> getPosition() const {
+    Vec3Template<T> position() const {
         return Vec3Template<T>(w_.x_, w_.y_, w_.z_);
     }
     

@@ -23,14 +23,14 @@ void AllocationRecorder::checkin(
         if ( !ap->isEnable() ){
             //  アロケーション情報を保存
             ap->setAddress( address );
-            ap->setSize( size );
+            ap->size( size );
             ap->setFilename( filename );
             ap->setLine( line );
             ap->setFrame( frame );
             
             
             //  ここはもう使ってますよ
-            ap->setEnable( true );
+            ap->enable( true );
             return;
         }
     }
@@ -47,7 +47,7 @@ void AllocationRecorder::checkout(
     for ( auto ap = allocate_info_.begin(); ap != allocate_info_.end(); ++ap ) {
         //  開放対象のアドレスを見つけて無効化
         if ( ap->getAddress() == address ){
-            ap->setEnable( false );
+            ap->enable( false );
             return;
         }
     }

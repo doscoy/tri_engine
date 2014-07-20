@@ -35,7 +35,7 @@ public:
         const FilePath& path
     ){
         for (auto res : resources_) {
-            if (std::strncmp(res->getResourceName(), path.getFullPath().c_str(), RESOURCE_NAME_SIZE) == 0) {
+            if (std::strncmp(res->resourceName(), path.getFullPath().c_str(), RESOURCE_NAME_SIZE) == 0) {
                 //  既に読み込み済
                 return res->getResourceID();
             }
@@ -51,14 +51,14 @@ public:
     
     // *********************************************
     //  リソースを取得
-    const std::shared_ptr<ResourceType> getResource(
+    const std::shared_ptr<ResourceType> resource(
         std::string name
     ){
         
       
         typename Resources::iterator end = resources_.end();
         for (typename Resources::iterator it = resources_.begin(); it != end; ++it) {
-            if (strcmp((*it)->getName(), name.c_str())) {
+            if (strcmp((*it)->name(), name.c_str())) {
                 return (*it);
             }
         }
@@ -68,7 +68,7 @@ public:
     
     // *********************************************
     //  リソースを取得
-    const std::shared_ptr<ResourceType> getResource(
+    const std::shared_ptr<ResourceType> resource(
         const UniqueID id
     ){
         typename Resources::iterator end = resources_.end();

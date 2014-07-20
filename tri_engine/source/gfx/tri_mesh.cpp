@@ -113,7 +113,7 @@ Mesh::Mesh(
         sphere_radius = radius.z_;
     }
     
-    sphere_.setPosition(center);
+    sphere_.position(center);
     sphere_.setRadius(sphere_radius);
 
     for (i = 0; i < f; ++i) {

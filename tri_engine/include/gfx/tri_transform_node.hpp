@@ -110,7 +110,7 @@ public:
 
 
 public:
-    void setPosition(
+    void position(
         float x,
         float y,
         float z
@@ -121,14 +121,14 @@ public:
         position_.z_ = z;
     }
     
-    void setPosition(
+    void position(
         const Vec3& v
     ) {
         calc_request_ = true;
         position_ = v;
     }
     
-    const Vec3& getPosition() const {
+    const Vec3& position() const {
         return position_;
     }
     
@@ -159,7 +159,7 @@ public:
         position_.z_ += v;
     }
     
-    void setRotation(
+    void rotation(
         float x,
         float y,
         float z
@@ -192,14 +192,14 @@ public:
         rotation_.z_ = r;
     }
     
-    void setRotation(
+    void rotation(
         const Vec3& v
     ) {
         calc_request_ = true;
         rotation_ = v;
     }
     
-    const Vec3& getRotation() const {
+    const Vec3& rotation() const {
         return rotation_;
     }
     
@@ -224,7 +224,7 @@ public:
         rotation_.z_ += r;
     }
     
-    void setScale(
+    void scale(
         float x,
         float y,
         float z
@@ -235,14 +235,14 @@ public:
         scale_.z_ = z;
     }
     
-    void setScale(
+    void scale(
         const Vec3& v
     ) {
         calc_request_ = true;
         scale_ = v;
     }
     
-    const Vec3& getScale() const {
+    const Vec3& scale() const {
         return scale_;
     }
     

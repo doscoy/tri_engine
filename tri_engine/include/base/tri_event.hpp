@@ -17,8 +17,8 @@ using EventType = HashString;
 
 class Event {
 public:
-    virtual const EventType& getEventType() const = 0;
-    virtual tick_t getTimeStamp() const = 0;
+    virtual const EventType& eventType() const = 0;
+    virtual tick_t timeStamp() const = 0;
 };
 using EventPtr = std::shared_ptr<Event>;
 
@@ -36,11 +36,11 @@ public:
     ~EventBase() {}
     
 public:
-    virtual const EventType& getEventType() const = 0;
+    virtual const EventType& eventType() const = 0;
     
 
 public:
-    tick_t getTimeStamp() const override {
+    tick_t timeStamp() const override {
         return time_stamp_;
     }
 

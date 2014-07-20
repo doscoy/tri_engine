@@ -13,11 +13,11 @@ class Input
     : private Uncopyable
 {
 public:
-    const Pad& getPad() const {
+    const Pad& pad() const {
         return pad_;
     }
     
-    const Pointing& getPointing() const {
+    const Pointing& pointing() const {
         return pointing_;
     }
     
@@ -30,7 +30,7 @@ public:
         const platform::GamePadData& paddata,
         tick_t delta_time
     ) {
-        pad_.updatePad(paddata.getButtonData(), delta_time);
+        pad_.updatePad(paddata.buttonData(), delta_time);
     }
     
     void updatePointing(

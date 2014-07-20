@@ -54,7 +54,7 @@ void drawRectangle(
     const Color& color
 ){
     
-    t3::Director& gs = t3::Director::getInstance();
+    t3::Director& gs = t3::Director::instance();
     
     float screen_width = gs.getScreenSize().x_ * 0.5f;
     float screen_height = gs.getScreenSize().y_ * 0.5f;

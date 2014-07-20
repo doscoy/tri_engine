@@ -42,7 +42,7 @@ public:
         return release_;
     }
 
-    const Point2& getPosition() const {
+    const Point2& position() const {
         return position_[0];
     }
 

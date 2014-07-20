@@ -37,14 +37,14 @@ private:
 public:
     const Mtx4* getViewMatrix();
     
-    void setPosition(
+    void position(
         const Vec3& pos
     ) {
         position_ = pos;
         recalculation_request_ = true;
     }
 
-    const Vec3* getPosition() const {
+    const Vec3* position() const {
         return &position_;
     }
 

@@ -133,7 +133,7 @@ public:
     void suspendScene( tick_t delta_time );
     
     static void requestNextScene( SceneGenerator* const next_scene_generator ){
-        getInstance().next_scene_generator_ = next_scene_generator;
+        instance().next_scene_generator_ = next_scene_generator;
     }
     
     void forceChangeScene( SceneGenerator* const next_scene_generator ){

@@ -10,17 +10,17 @@ inline namespace gfx {
     
 
 RenderLayer::RenderLayer(
-    const std::string& name,
+    const std::string& layer_name,
     const int priority
 )   : Nameable()
     , pause_(false)
     , visible_(true)
     , priority_(priority)
-    , dmf_me_(nullptr, name)
+    , dmf_me_(nullptr, layer_name)
     , dmi_visible_(&dmf_me_, "VISIBLE", visible_, 1)
     , dmi_pause_(&dmf_me_, "PAUSE", pause_, 1)
 {
-    setName(name);
+    name(layer_name);
     attachSystem();
 }
     
@@ -36,7 +36,7 @@ RenderLayer::~RenderLayer()
     detachSystem();
 }
 
-void RenderLayer::setPriority(
+void RenderLayer::priority(
     const int priority
 ) {
     T3_ASSERT( PRIORITY_LOWEST <= priority && priority <= PRIORITY_HIGHEST  );
@@ -84,11 +84,11 @@ void RenderLayer::drawLayers(
     
     
 void RenderLayer::attachSystem() {
-    t3::Director::getInstance().attachLayer(this);
+    t3::Director::instance().attachLayer(this);
 }
 
 void RenderLayer::detachSystem() {
-    t3::Director::getInstance().detachLayer(this);
+    t3::Director::instance().detachLayer(this);
 }
 
 

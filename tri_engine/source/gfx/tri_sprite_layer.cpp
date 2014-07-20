@@ -31,7 +31,7 @@ SpriteLayer::~SpriteLayer()
 SpritePtr SpriteLayer::createSprite(std::shared_ptr<Texture> tex) {
     SpritePtr spr;
     spr.reset(new Sprite);
-    spr->setTexture(tex);
+    spr->texture(tex);
     attachSprite(spr);
     
     return spr;
@@ -39,9 +39,9 @@ SpritePtr SpriteLayer::createSprite(std::shared_ptr<Texture> tex) {
 
 
 SpritePtr SpriteLayer::createSprite(const t3::FilePath& path) {
-    t3::TextureManager& tex_mgr = t3::TextureManager::getInstance();
+    t3::TextureManager& tex_mgr = t3::TextureManager::instance();
     UniqueID tex_id = tex_mgr.load(path);
-    std::shared_ptr<t3::Texture> tex = tex_mgr.getResource(tex_id);
+    std::shared_ptr<t3::Texture> tex = tex_mgr.resource(tex_id);
     return createSprite(tex);
 }
 
@@ -81,12 +81,12 @@ void SpriteLayer::drawLayer() {
 
 void SpriteLayer::attachSprite(SpritePtr const sprite) {
     sprites_.push_back(sprite);
-    sprite->setAttachedLayer(this);
+    sprite->ownerLayer(this);
 }
 
 void SpriteLayer::detachSprite(SpritePtr const sprite) {
     sprites_.remove(sprite);
-    sprite->setAttachedLayer(nullptr);
+    sprite->ownerLayer(nullptr);
 }
 
 
@@ -95,7 +95,7 @@ void SpriteLayer::detachAllSprite() {
     container_t::iterator end = sprites_.end();
     
     while (it != end) {
-        (*it)->setAttachedLayer(nullptr);
+        (*it)->ownerLayer(nullptr);
         it = sprites_.erase(it);
     }
 }

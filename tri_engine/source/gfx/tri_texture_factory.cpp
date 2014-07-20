@@ -41,7 +41,7 @@ std::shared_ptr<Texture> TextureFactory::createFromData(
         color_format,
         tex_handle
     ));
-    tex->setResourceName(name.c_str());
+    tex->resourceName(name.c_str());
     return tex;
 }
 

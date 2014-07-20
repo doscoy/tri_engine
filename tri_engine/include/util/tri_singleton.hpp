@@ -39,7 +39,7 @@ public:
     
     // *********************************************
     //  インスタンス取得
-    static T& getInstance(){
+    static T& instance(){
         return *instance_;
     }
     

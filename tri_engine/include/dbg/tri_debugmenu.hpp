@@ -21,7 +21,7 @@ public:
     void closeMenu();
     
     
-    void setEnable( const bool enable ){
+    void enable( const bool enable ){
         enable_ = enable;
     }
     
@@ -52,7 +52,7 @@ public:
         frame.attachSelf( menu_root_ );
     }
     
-    const VirtualPad* getVirtualPad() const {
+    const VirtualPad* virtualPad() const {
         return &vpad_;
     }
             

@@ -126,7 +126,7 @@ bool TransformNode::addChild(
     children_.push_back(kid);
     kid->setParent(this);
     
-//    Vec3 dir = kid_pos - properties_.getToWorldMatrix().getPosition();
+//    Vec3 dir = kid_pos - properties_.getToWorldMatrix().position();
     
 //    float new_radius = dir.length() + kid->getProperties()->getRadius();
     

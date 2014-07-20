@@ -9,7 +9,7 @@ class EventAAA
 {
 public:
     static const t3::EventType TYPE;
-    const t3::EventType& getEventType() const {
+    const t3::EventType& eventType() const {
         return TYPE;
     }
     
@@ -30,7 +30,7 @@ class EventBBB
 {
 public:
     static const t3::EventType TYPE;
-    const t3::EventType& getEventType() const {
+    const t3::EventType& eventType() const {
         return TYPE;
     }
     
@@ -97,11 +97,11 @@ public:
     }
     
     void update(t3::tick_t delta_time){
-        t3::GameSystem& game_system = t3::GameSystem::getInstance();
-        const t3::Input& input = game_system.getInput();
-        if (input.getPointing().isTrigger()) {
+        t3::Director& d = t3::Director::instance();
+        const t3::Input& input = d.input();
+        if (input.pointing().isTrigger()) {
             //  画面をタッチした
-            if (game_system.getRandomNumberGenerator().getBool()){
+            if (d.getRandomNumberGenerator().getBool()){
                 T3_TRACE("A\n");
                 t3::EventPtr new_event(new EventAAA);
                 t3::safeQueueEvent(new_event);
@@ -155,8 +155,8 @@ void EventHandlingScene::terminateScene() {
 void EventHandlingScene::updateScene(t3::tick_t delta_time) {
     context_->update(delta_time);
     
-    t3::GameSystem& gs = t3::GameSystem::getInstance();
-    const t3::Pad& pad = gs.getInput().getPad();
+    t3::Director& gs = t3::Director::instance();
+    const t3::Pad& pad = gs.input().pad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
         setFinish(true);
     }

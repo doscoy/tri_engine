@@ -17,7 +17,7 @@ Scene::Scene(
     , dmi_show_task_(&scene_debug_menu_frame_, "show task", show_task_, 1)
     , task_manager_()
 {
-    DebugMenu& debug_menu_root = DebugMenu::getInstance();
+    DebugMenu& debug_menu_root = DebugMenu::instance();
 
     scene_debug_menu_frame_.attachSelf(
         debug_menu_root.getMenuRoot()
@@ -138,7 +138,7 @@ void SceneManager::sceneChange()
 void SceneManager::addSceneTask(
     std::shared_ptr<Task> task
 ) {
-    getInstance().current_scene_->addSceneTask(task);
+    instance().current_scene_->addSceneTask(task);
 }
 
 }   // namespace base

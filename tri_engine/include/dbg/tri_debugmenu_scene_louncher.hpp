@@ -26,7 +26,7 @@ public:
 
         const Pad& pad = debugPad();
         if (pad.isTrigger(Pad::BUTTON_A)) {
-            SceneManager& sm = SceneManager::getInstance();
+            SceneManager& sm = SceneManager::instance();
             sm.forceChangeScene( gen_.getInstancePtr() );
         }
         else if (pad.isTrigger(Pad::BUTTON_B)) {

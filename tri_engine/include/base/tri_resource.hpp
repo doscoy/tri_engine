@@ -23,14 +23,14 @@ public:
     virtual ~Resource(){}
     
 public:
-    void setResourceName(const char* const name){
+    void resourceName(const char* const name){
         std::strncpy(
             resource_name_,
             name,
             RESOURCE_NAME_SIZE
         );
     }
-    const char* getResourceName() const {
+    const char* resourceName() const {
         return resource_name_;
     }
     

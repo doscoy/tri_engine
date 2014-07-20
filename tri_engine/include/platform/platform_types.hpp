@@ -22,7 +22,7 @@ struct GamePadData {
     }
     
     
-    uint32_t getButtonData() const {
+    uint32_t buttonData() const {
         return button_data_;
     }
     

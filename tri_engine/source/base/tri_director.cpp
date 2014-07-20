@@ -8,6 +8,10 @@
 
 #include "audio/tri_audio_resource.hpp"
 #include "geometry/tri_geometry.hpp"
+#include "base/tri_system_events.hpp"
+
+
+
 
 namespace t3 {
 
@@ -15,26 +19,26 @@ extern Counter frame_counter_;
 
 inline namespace base {
     
-const Input& Director::getInput(
+const Input& Director::input(
     const int player_no
 )  {
-    return t3::Director::getInstance().input_.at(player_no);
+    return t3::Director::instance().input_.at(player_no);
 }
     
 void Director::addSystemTask(
     std::shared_ptr<Task> task
 ) {
-    getInstance().task_manager_.attach(task);
+    instance().task_manager_.attach(task);
 }
 
 
-RenderLayer* Director::getLayer(
+RenderLayer* Director::layer(
     const std::string& layer_name
 ) {
-    t3::RenderLayers layers = t3::Director::getInstance().getLaysers();
+    t3::RenderLayers layers = t3::Director::instance().getLaysers();
     
     for (auto layer : layers) {
-        if (layer_name == layer->getName()) {
+        if (layer_name == layer->name()) {
             return layer;
         }
     }
@@ -45,13 +49,13 @@ RenderLayer* Director::getLayer(
 Vec2 Director::screenToViewport(
     const Vec2& screen_pos
 ) {
-    return screen_pos / getInstance().getScreenSize() * 2.0f;
+    return screen_pos / instance().getScreenSize() * 2.0f;
 }
 
 Vec2 Director::viewportToScreen(
     const Vec2& viewport_pos
 ) {
-    return viewport_pos * getInstance().getScreenSize() * 0.5f;
+    return viewport_pos * instance().getScreenSize() * 0.5f;
 }
 
 bool Director::isOutOfScreen(
@@ -70,35 +74,35 @@ bool Director::isOutOfScreen(
 
 
 void Director::setupBlackOut() {
-    getInstance().fade_layer_->setupFadeParam(1, Color::black());
+    instance().fade_layer_->setupFadeParam(1, Color::black());
 }
 
 void Director::setupBlackIn() {
-    getInstance().fade_layer_->setupFadeParam(0, Color::black());
+    instance().fade_layer_->setupFadeParam(0, Color::black());
 }
 
 void Director::fadeOut() {
-    getInstance().fade_layer_->fadeOut(1.0f);
+    instance().fade_layer_->fadeOut(1.0f);
 }
 
 void Director::fadeIn() {
-    getInstance().fade_layer_->fadeIn(1.0f);
+    instance().fade_layer_->fadeIn(1.0f);
 }
 
 bool Director::isFadeEnd() {
-    return getInstance().fade_layer_->isFadeEnd();
+    return instance().fade_layer_->isFadeEnd();
 }
 
 bool Director::isFadeInEnd() {
-    return getInstance().fade_layer_->isFadeInEnd();
+    return instance().fade_layer_->isFadeInEnd();
 }
 
 bool Director::isFadeOutEnd() {
-    return getInstance().fade_layer_->isFadeOutEnd();
+    return instance().fade_layer_->isFadeOutEnd();
 }
 
 const Vec2& Director::getScreenSize() {
-    return getInstance().screen_size_;
+    return instance().screen_size_;
 }
 
 void Director::printLog(const char* const buf) {
@@ -106,10 +110,10 @@ void Director::printLog(const char* const buf) {
         return;
     }
 
-    if (!getInstance().log_layer_) {
+    if (!instance().log_layer_) {
         return;
     }
-    getInstance().log_layer_->writeString(buf);
+    instance().log_layer_->writeString(buf);
 }
 
 void Director::printDisplay(
@@ -119,7 +123,7 @@ void Director::printDisplay(
     const int font_size,
     const char* const buf
 ) {
-    getInstance().dbg_screen_layer_->writeString(x, y, color, font_size, buf);
+    instance().dbg_screen_layer_->writeString(x, y, color, font_size, buf);
 }
 
 
@@ -176,7 +180,7 @@ Director::~Director()
 
 
 void Director::initializeGameSystem() {
-    setClearColor();
+    clearColor();
     
     dm_layers_.setFocusCallback(
         this,
@@ -217,7 +221,7 @@ void Director::update(
     task_manager_.updateTask(delta_time);
 
     //  コリジョン判定
-    CollisionManager& col_manager = CollisionManager::getInstance();
+    CollisionManager& col_manager = CollisionManager::instance();
     col_manager.collisionDetection();
     
     //  イベントのブロードキャスト
@@ -233,7 +237,7 @@ void Director::update(
 void Director::suspend(
     const tick_t delta_time
 ) {
-    setClearColor();
+    clearColor();
     
     //  入力更新
     updateInput(delta_time);
@@ -248,13 +252,13 @@ void Director::updateInput(
     
         //  パッド情報更新
         platform::GamePadData pad_data;
-        platform::getPlatformPadData(pad_idx, &pad_data);
+        platform::platformPadData(pad_idx, &pad_data);
         input.updatePad(pad_data, delta_time);
         
         
         //  ポインティング情報更新
         platform::PointingData point_data;
-        platform::getPlatformPointingData(
+        platform::platformPointingData(
             pad_idx,
             &point_data
         );
@@ -279,31 +283,45 @@ void Director::updateInput(
         
         //  加速度センサー更新
         platform::AccelerometerData acc_data;
-        platform::getPlatformAcceleData(pad_idx, &acc_data);
+        platform::platformAcceleromator(pad_idx, &acc_data);
         input.updateAccelermeter(
             acc_data,
             delta_time
         );
+        
+        
+        
+        //  入力イベント発行
+        const Pointing& pointing = input.pointing();
+        if (pointing.isTrigger()) {
+            auto eve_point_trg = std::make_shared<PointingTriggeredEvent>();
+            eve_point_trg->inputNo(pad_idx);
+            eve_point_trg->position(pointing.position());
+        }
     }
+    
+    
+    
+    
     
     //  debug pad
     platform::GamePadData dbg_pad_data;
-    platform::getPlatformPadData(0, &dbg_pad_data);
-    uint32_t dpad_buttons = dbg_pad_data.getButtonData();
+    platform::platformPadData(0, &dbg_pad_data);
+    uint32_t dpad_buttons = dbg_pad_data.buttonData();
 
-    t3::DebugMenu& debug_menu = t3::DebugMenu::getInstance();
-    const VirtualPad* vpad = debug_menu.getVirtualPad();
+    t3::DebugMenu& debug_menu = t3::DebugMenu::instance();
+    const VirtualPad* vpad = debug_menu.virtualPad();
     if (vpad) {
-        dpad_buttons |= vpad->getPadData()->getButtonData();
+        dpad_buttons |= vpad->getPadData()->buttonData();
     }
     updateDebugPad(dpad_buttons, delta_time);
 
 }
 
 
-void Director::setClearColor()
+void Director::clearColor()
 {    
-    RenderSystem::setClearColor(clear_colors_[use_clear_color_index_]);
+    RenderSystem::clearColor(clear_colors_[use_clear_color_index_]);
 }
     
     
@@ -324,23 +342,23 @@ void Director::registryToDebugMenu( DebugMenuFrame& parent_frame )
 void Director::attachLayer(t3::RenderLayer* layer)
 {
     T3_NULL_ASSERT(layer);
-//    T3_TRACE("Attach Layer %s\n", layer->getName().c_str());
+//    T3_TRACE("Attach Layer %s\n", layer->name().c_str());
     layers_.push_back(layer);
     layers_.sort(
         []( RenderLayer*lhs, RenderLayer* rhs ){
-            return lhs->getPriority() < rhs->getPriority();
+            return lhs->priority() < rhs->priority();
         }
     );
 }
 
 void Director::detachLayer(t3::RenderLayer* layer)
 {
-//    T3_TRACE("Detach Layer %s\n", layer->getName().c_str());
+//    T3_TRACE("Detach Layer %s\n", layer->name().c_str());
 
     layers_.remove(layer);
     layers_.sort(
         []( RenderLayer*lhs, RenderLayer* rhs ){
-            return lhs->getPriority() < rhs->getPriority();
+            return lhs->priority() < rhs->priority();
         }
     );
 }

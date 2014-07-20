@@ -31,7 +31,7 @@ bool isHitCircleCircle(
     const Circle& a,
     const Circle& b
 ) {
-    Vec2 diff = a.getPosition() - b.getPosition();
+    Vec2 diff = a.position() - b.position();
     float distance_sq = (diff.x_ * diff.x_) + (diff.y_ * diff.y_);
     float radius_sum = a.getRadius() + b.getRadius();
     float radius_sq = radius_sum * radius_sum;
@@ -46,7 +46,7 @@ bool isHitCirclePoint(
     const Circle& circle,
     const Vec2& point
 ) {
-    Vec2 diff = circle.getPosition() - point;
+    Vec2 diff = circle.position() - point;
     float distance_sq = (diff.x_ * diff.x_) + (diff.y_ * diff.y_);
     float radius_sq = circle.getRadius() * circle.getRadius();
 

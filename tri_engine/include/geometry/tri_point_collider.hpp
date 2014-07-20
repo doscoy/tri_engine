@@ -26,11 +26,11 @@ public:
     static const HashString TYPE;
 
 public:
-    const Vec2& getPosition() const {
+    const Vec2& position() const {
         return position_;
     }
     
-    void setPosition(const Vec2& pos) {
+    void position(const Vec2& pos) {
         position_ = pos;
     }
 

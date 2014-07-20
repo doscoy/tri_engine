@@ -65,21 +65,21 @@ void endUpdate() {
 
 }
 
-void getPlatformPadData(
+void platformPadData(
     int no,
     GamePadData* data
 ) {
     *data = pad_data_[no];
 }
 
-void getPlatformPointingData(
+void platformPointingData(
     int no,
     PointingData* data
 ) {
     *data = point_data_[no];
 }
 
-void getPlatformAcceleData(
+void platformAcceleromator(
     int no,
     AccelerometerData* data
 ) {

@@ -33,18 +33,18 @@ void createWindow(
 void terminatePlatform();
 void beginUpdate();
 void endUpdate();
-void getPlatformPadData(
+void platformPadData(
     int no,
     GamePadData* data
 );
 
-void getPlatformPointingData(
+void platformPointingData(
     int no,
     PointingData* data
 );
 
 
-void getPlatformAcceleData(
+void platformAcceleromator(
     int no,
     AccelerometerData* data
 );

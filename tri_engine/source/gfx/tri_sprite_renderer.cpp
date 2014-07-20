@@ -19,7 +19,7 @@ class PriorityCompare
 {
 public:
     bool operator()(const t3::SpritePtr lhs, const t3::SpritePtr rhs) const {
-        return lhs->getSortScore() < rhs->getSortScore();
+        return lhs->sortScore() < rhs->sortScore();
     }
 };
 
@@ -129,7 +129,7 @@ void SpriteRenderer::margeSprites() {
     indices.reserve(sprites_.size() * 6);
 
 
-    Vec2 screen_size = Director::getInstance().getScreenSize();
+    Vec2 screen_size = Director::instance().getScreenSize();
     Vec2 half = screen_size / 2;
     half.x_ = 1.0f / half.x_;
     half.y_ = 1.0f / half.y_;
@@ -137,9 +137,9 @@ void SpriteRenderer::margeSprites() {
     for (int i = 0; i < sprites_.size(); ++i) {
         auto spr = sprites_[i];
     
-        const Vec2& pivot = spr->getPivot();
-        const Vec2& size = spr->getSize();
-        const texture_coord_t& uv = spr->getTextureCoord();
+        const Vec2& pivot = spr->pivot();
+        const Vec2& size = spr->size();
+        const texture_coord_t& uv = spr->textureCoord();
 
         //  初期配置
         Vec2 lt = Vec2(      0 - pivot.x_, size.y_ - pivot.y_);
@@ -149,7 +149,7 @@ void SpriteRenderer::margeSprites() {
         
         //  スケーリング
         if (spr->isScaledSprite()) {
-            const Vec2& scale = spr->getScale();
+            const Vec2& scale = spr->scale();
             lt *= scale;
             lb *= scale;
             rt *= scale;
@@ -158,7 +158,7 @@ void SpriteRenderer::margeSprites() {
 
         //  回転
         if (spr->isRotatedSprite()) {
-            float angle = toRadian(spr->getRotation());
+            float angle = toRadian(spr->rotation());
 
             float cos_angle = std::cos(angle);
             float sin_angle = std::sin(angle);
@@ -192,7 +192,7 @@ void SpriteRenderer::margeSprites() {
         
         //  位置移動
         if (spr->isTransratedSprite()) {
-            const Vec2& pos =spr->getPosition();
+            const Vec2& pos =spr->position();
 
             lt += pos;
             lb += pos;
@@ -277,7 +277,7 @@ void SpriteRenderer::margeSprites() {
 void SpriteRenderer::renderSprites() {
 
     //  テクスチャの割り当て
-    const std::shared_ptr<Texture>& texture = sprites_[0]->getTexture();
+    const std::shared_ptr<Texture>& texture = sprites_[0]->texture();
     texture->setupTexture();
 
     sprite_shader_.setAttributePointer(

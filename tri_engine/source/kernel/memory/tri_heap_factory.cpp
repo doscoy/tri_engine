@@ -92,7 +92,7 @@ Heap* HeapFactory::findHeap(
     std::array<Heap, 10>::iterator end = heaps_.end();
     
     for( ; itr != end; ++itr ){
-        if ( itr->isActive() && !strcmp( name, itr->getName() ) ){
+        if ( itr->isActive() && !strcmp( name, itr->name() ) ){
             return itr;
         }
     }

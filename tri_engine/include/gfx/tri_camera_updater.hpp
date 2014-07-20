@@ -43,8 +43,8 @@ public:
 
 
 public:
-    void setPosition(const Vec3& v);
-    void setPosition(float x, float y, float z);
+    void position(const Vec3& v);
+    void position(float x, float y, float z);
 
     void setTargetPosition(const Vec3& v);
     void setTargetPosition(float x, float y, float z);

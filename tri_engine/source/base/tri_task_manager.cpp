@@ -17,7 +17,7 @@ void TaskManager::attach(
     std::shared_ptr<Task> task)
 {
     taskes_.push_back(task);
-    task->setAttachedTask(true);
+    task->attachTask(true);
     
     taskes_.sort(std::greater<std::shared_ptr<Task>>());
     
@@ -36,10 +36,10 @@ void TaskManager::updateTask(const tick_t delta_time) {
         ++itr;
         
         if (t->isTaskDead()) {
-            next = t->getNextTask();
+            next = t->nextTask();
             //  次のタスクが存在しているなら登録
             if (next) {
-                t->setNextTask(std::shared_ptr<Task>(nullptr));
+                t->nextTask(std::shared_ptr<Task>(nullptr));
                 attach(next);
             }
             //  タスク後片付け
@@ -48,7 +48,7 @@ void TaskManager::updateTask(const tick_t delta_time) {
             //  登録解除
             detach(t);
         }
-        else if (t->isActiveTask() && !t->isPausedTask()) {
+        else if (t->activated() && !t->isPausedTask()) {
             t->taskFrame(delta_time);
         }
     }
@@ -65,7 +65,7 @@ void TaskManager::printTask() const {
         int show_x = task_num / 61;
         int show_y = task_num % 61;
         std::shared_ptr<Task> t(*itr);
-        t3::printDisplay(show_x * 120, show_y * 15, "%s", t->getName().c_str());
+        t3::printDisplay(show_x * 120, show_y * 15, "%s", t->name().c_str());
         task_num += 1;
     }
 }

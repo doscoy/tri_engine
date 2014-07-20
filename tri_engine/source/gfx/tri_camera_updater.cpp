@@ -18,17 +18,17 @@ LookAtCameraUpdater::~LookAtCameraUpdater()
 {
 }
 
-void LookAtCameraUpdater::setPosition(const Vec3 &v)
+void LookAtCameraUpdater::position(const Vec3 &v)
 {
-    getManagedCamera()->setPosition(v);
+    getManagedCamera()->position(v);
 }
 
-void LookAtCameraUpdater::setPosition(
+void LookAtCameraUpdater::position(
     const float x,
     const float y,
     const float z
 ) {
-    setPosition(Vec3(x, y, z));
+    position(Vec3(x, y, z));
 }
 
 
@@ -77,13 +77,13 @@ void LookAtCameraUpdater::dolly(
     const float speed
 ){
     std::shared_ptr<Camera> cam = getManagedCamera();
-    Vec3 pos = *cam->getPosition();
+    Vec3 pos = *cam->position();
     Vec3 tar = *cam->getTargetPosition();
 
     pos += (dir * speed);
     tar += (dir * speed);
     
-    cam->setPosition(pos);
+    cam->position(pos);
     cam->setTargetPosition(tar);
 }
 
@@ -114,13 +114,13 @@ LookAtCameraUpdater::pan(
 ){
     std::shared_ptr<Camera> cam = getManagedCamera();
     
-    Vec3 dir = *cam->getTargetPosition() - *cam->getPosition();
+    Vec3 dir = *cam->getTargetPosition() - *cam->position();
 
     Mtx4 mtx;
     Mtx4::makeRotateAxis(mtx, axis, speed);
 
     Vec3 a = mtx.xform(dir);
-    cam->setTargetPosition( *cam->getPosition() + a );
+    cam->setTargetPosition( *cam->position() + a );
 
 }
 

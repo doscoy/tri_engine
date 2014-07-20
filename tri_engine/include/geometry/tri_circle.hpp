@@ -22,13 +22,13 @@ public:
 
 
 public:
-    void setPosition(
+    void position(
         const Vec2& pos
     ) {
         position_ = pos;
     }
 
-    const Vec2& getPosition() const {
+    const Vec2& position() const {
         return position_;
     }
     

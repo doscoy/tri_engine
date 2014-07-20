@@ -234,7 +234,7 @@ void RenderSystem::setClearDepthValue(
 
 
 
-void RenderSystem::setClearColor(
+void RenderSystem::clearColor(
     const Color& clear_color
 ) {
 #if BEFORE_JUDGE_GL
@@ -248,7 +248,7 @@ void RenderSystem::setClearColor(
 #endif
 
     countRenderCall();
-    CoreRenderSystem::setClearColor(clear_color);
+    CoreRenderSystem::clearColor(clear_color);
 }
 
 

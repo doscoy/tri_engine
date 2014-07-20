@@ -137,7 +137,7 @@ public:
         const float value
     );
     
-    static void setClearColor(
+    static void clearColor(
        const Color& clear_color
     );
     

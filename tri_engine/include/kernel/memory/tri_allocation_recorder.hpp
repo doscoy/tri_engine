@@ -46,7 +46,7 @@ public:
     
     // *********************************************
     //  確保サイズ設定
-    void setSize( std::size_t size ){
+    void size( std::size_t size ){
         size_ = size;
     }
     
@@ -76,7 +76,7 @@ public:
     
     // *********************************************
     //  有効かどうか設定
-    void setEnable( bool e ){
+    void enable( bool e ){
         enable_ = e;
     }
     

@@ -1,13 +1,14 @@
 
 
-#include "sandbox_template.hpp"
+#include "ui_button_test.hpp"
 
 
 
-class TemplateScene::SceneContext {
+class UiButtonScene::SceneContext {
 
 public:
     SceneContext()
+        : show_ad_(false)
     {}
     
     ~SceneContext()
@@ -23,8 +24,9 @@ public:
     }
     
     void update(t3::tick_t delta_time){
-
-
+        const t3::Input& input = t3::Director::instance().input();
+        const t3::Pointing& ptng = input.pointing();
+        
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -33,10 +35,7 @@ public:
 
     
 private:
-
-
-private:
-
+    bool show_ad_;
 };
 
 
@@ -44,27 +43,27 @@ private:
 
 
 
-TemplateScene::TemplateScene()
+UiButtonScene::UiButtonScene()
     : Scene( "AudioTest" ) {
     context_.reset(T3_NEW SceneContext());
 }
 
-TemplateScene::~TemplateScene() {
+UiButtonScene::~UiButtonScene() {
     
 }
 
 
-void TemplateScene::initializeScene() {
+void UiButtonScene::initializeScene() {
     context_->initialize();
 }
 
 
-void TemplateScene::terminateScene() {
+void UiButtonScene::terminateScene() {
     context_->terminate();
 }
 
 
-void TemplateScene::updateScene(t3::tick_t delta_time) {
+void UiButtonScene::updateScene(t3::tick_t delta_time) {
     context_->update(delta_time);
     
     t3::Director& gs = t3::Director::instance();
@@ -74,7 +73,7 @@ void TemplateScene::updateScene(t3::tick_t delta_time) {
     }
 }
 
-void TemplateScene::suspendScene(t3::tick_t delta_time) {
+void UiButtonScene::suspendScene(t3::tick_t delta_time) {
 
     context_->suspend(delta_time);
 }

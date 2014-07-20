@@ -33,7 +33,7 @@ Sprite::~Sprite()
 
 
 //  テクスチャ設定
-void Sprite::setTexture(
+void Sprite::texture(
     std::shared_ptr<Texture> tex
 ){
     texture_ = tex;
@@ -43,8 +43,8 @@ void Sprite::setTexture(
     float tex_width = tex->getWidth();
     float tex_height = tex->getHeight();
     
-    setSize(Vec2(tex_width, tex_height));
-    setPivotByCenter();
+    size(Vec2(tex_width, tex_height));
+    adjustPivotByCenter();
 }
   
 bool Sprite::isValid() const
@@ -57,13 +57,13 @@ bool Sprite::isValid() const
     return true;
 }
 
-int Sprite::getSortScore() const {
-    int score = getPriority();
+int Sprite::sortScore() const {
+    int score = priority();
     return score;
 }
 
 
-void Sprite::setTextureCoord(
+void Sprite::textureCoord(
     const Vec2& left_top,
     const Vec2& size
 ) {
@@ -77,22 +77,22 @@ void Sprite::setTextureCoord(
     float u1 = (left_top.x_ + size.x_) / tex_width;
     float v1 = (left_top.y_ + size.y_) / tex_height;
     
-    setTextureCoord(u0, v0, u1, v1);
+    textureCoord(u0, v0, u1, v1);
 }
 
 
-void Sprite::setTextureCoordAndSizeByST(
+void Sprite::setupTextureCoordAndSize(
     const Vec2& left_top,
-    const Vec2& size
+    const Vec2& st_size
 ) {
-    setTextureCoord(left_top, size);
-    setSize(size);
-    setPivotByCenter();
+    textureCoord(left_top, st_size);
+    size(st_size);
+    adjustPivotByCenter();
 }
 
 
-void Sprite::setPivotByCenter() {
-    setPivot(size_.x_ * 0.5f, size_.y_ * 0.5f);
+void Sprite::adjustPivotByCenter() {
+    pivot(size_.x_ * 0.5f, size_.y_ * 0.5f);
 }
 
 

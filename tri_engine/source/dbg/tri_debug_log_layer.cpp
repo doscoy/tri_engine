@@ -68,8 +68,8 @@ void DebugLogLayer::updateLayer(tick_t delta_time)
         --str_idx;
     }
     
-    Director& gs = t3::Director::getInstance();
-    const t3::Pad& pad = gs.getInput().getPad();
+    Director& gs = t3::Director::instance();
+    const t3::Pad& pad = gs.input().pad();
 
     if (pad.isPress(t3::Pad::BUTTON_DOWN)) {
         slideDown();
@@ -82,7 +82,7 @@ void DebugLogLayer::updateLayer(tick_t delta_time)
 
 void DebugLogLayer::drawLayer()
 {
-    Director& gs = t3::Director::getInstance();
+    Director& gs = t3::Director::instance();
     
     //  文字列が見やすいように背景に半透明の板を描画
     t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_ALWAYS);

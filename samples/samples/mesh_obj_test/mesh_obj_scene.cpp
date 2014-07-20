@@ -79,8 +79,8 @@ void MeshObjScene::terminateScene() {
 void MeshObjScene::updateScene(t3::tick_t delta_time) {
     context_->update(delta_time);
     
-    t3::GameSystem& gs = t3::GameSystem::getInstance();
-    const t3::Pad& pad = gs.getInput().getPad();
+    t3::Director& gs = t3::Director::instance();
+    const t3::Pad& pad = gs.input().pad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
         setFinish(true);
     }

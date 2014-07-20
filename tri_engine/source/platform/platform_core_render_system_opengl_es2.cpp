@@ -244,7 +244,7 @@ void CoreRenderSystem::setClearDepthValue(
 
 
 
-void CoreRenderSystem::setClearColor(
+void CoreRenderSystem::clearColor(
     const Color& clear_color
 ) {
     glClearColor(

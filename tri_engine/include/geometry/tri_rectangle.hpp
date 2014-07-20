@@ -80,7 +80,7 @@ public:
         return center_;
     }
     
-    const Vec2& getSize() const {
+    const Vec2& size() const {
         return size_;
     }
 

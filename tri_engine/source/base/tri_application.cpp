@@ -53,8 +53,8 @@ struct DumpAllocatorLog {
 
 
 bool isSuspending() {
-    t3::Director& gs = t3::Director::getInstance();
-    t3::DebugMenu& dm = t3::DebugMenu::getInstance();
+    t3::Director& gs = t3::Director::instance();
+    t3::DebugMenu& dm = t3::DebugMenu::instance();
     
     if (gs.isSuspend() || dm.isOpened()) {
         return true;
@@ -78,7 +78,7 @@ public:
         , dmi_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_, 1)
         , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_, 1)
     {
-        t3::Director::getInstance().registryToDebugMenu(dmf_system_);
+        t3::Director::instance().registryToDebugMenu(dmf_system_);
         render_avg.reserve(LIMIT_AVG_SUM);
     }
     
@@ -118,10 +118,10 @@ void initializeTriEngine(
     SceneManager::createInstance();
     
     //  初期化
-    Director::getInstance().initializeGameSystem();
+    Director::instance().initializeGameSystem();
     
-    t3::Director* game_system = t3::Director::getInstancePointer();
-    game_system->setScreenSize(
+    t3::Director* d = t3::Director::getInstancePointer();
+    d->setScreenSize(
         Point2(
             width,
             height
@@ -149,19 +149,19 @@ Application::~Application()
 }
 
 bool Application::isActive() const {
-    return !Director::getInstance().isExitRequest();
+    return !Director::instance().isExitRequest();
 }
 
 
 void Application::initializeWorkBar() {
     
-    Director& game_system = Director::getInstance();
-    const Point2& screen_size = game_system.getScreenSize();
+    Director& d = Director::instance();
+    const Point2& screen_size = d.getScreenSize();
     Point2 half_screen_size = screen_size / 2;
     
     //  ワークバーの配置
     int cpu_bar_margin = 70;
-    cpu_bar_.setPosition(Vec2(-half_screen_size.x_ + (cpu_bar_margin / 2), -half_screen_size.y_ + 10));
+    cpu_bar_.position(Vec2(-half_screen_size.x_ + (cpu_bar_margin / 2), -half_screen_size.y_ + 10));
     cpu_bar_.setLimitWidthPixel(screen_size.x_ - cpu_bar_margin);
     
     //  ワークバーの色
@@ -176,7 +176,7 @@ void Application::initializeWorkBar() {
 void Application::initializeApplication()
 {
     T3_NULL_ASSERT(root_scene_generator_);
-    SceneManager::getInstance().forceChangeScene(root_scene_generator_);
+    SceneManager::instance().forceChangeScene(root_scene_generator_);
 
     //  レンダリングシステムの初期化
     t3::RenderSystem::initializeRenderSystem();
@@ -187,7 +187,7 @@ void Application::initializeApplication()
     //  システムデバッグメニュー登録
     system_menu_.reset(T3_NEW ApplicationDebugMenu(this));
     
-    DebugMenu& debug_menu_root = DebugMenu::getInstance();
+    DebugMenu& debug_menu_root = DebugMenu::instance();
     system_menu_->getSystemDebugMenuRoot().attachSelf(
         debug_menu_root.getMenuRoot()
     );
@@ -248,9 +248,9 @@ void Application::updateApplication()
     
     
     
-    SceneManager& sm = SceneManager::getInstance();
-    Director& gs = Director::getInstance();
-    DebugMenu& dm = DebugMenu::getInstance();
+    SceneManager& sm = SceneManager::instance();
+    Director& gs = Director::instance();
+    DebugMenu& dm = DebugMenu::instance();
 
     //  ゲームスピード変更
     float game_speed = gs.getGameSpeed();
@@ -290,8 +290,8 @@ void Application::updateApplication()
 
 void Application::renderApplication()
 {
-    Director& gs = Director::getInstance();
-    DebugMenu& dm = DebugMenu::getInstance();
+    Director& gs = Director::instance();
+    DebugMenu& dm = DebugMenu::instance();
 
     app_cost_timer_.end();              // app cost 計測終了
     
@@ -384,7 +384,7 @@ void Application::renderApplication()
 
 
 
-    SceneManager& sm = SceneManager::getInstance();
+    SceneManager& sm = SceneManager::instance();
 
     //  最後にシーンチェンジ処理
     sm.directScene();
@@ -430,7 +430,7 @@ bool Application::isDebugMenuOpenRequest() {
     
     
     //  ポインティングでのオープンリクエスト
-    const Pointing& pointing = Director::getInput().getPointing();
+    const Pointing& pointing = Director::input().pointing();
     if (pointing.isDoubleClick() && pointing.getPointingCount() == 3) {
         result = true;
     }
@@ -446,7 +446,7 @@ bool Application::isSuspend() const {
     }
     
     //  強制シーンチェンジ時もサスペンドを解く
-    SceneManager& sm = SceneManager::getInstance();
+    SceneManager& sm = SceneManager::instance();
     if (sm.isForceChangeRequested()) {
         return false;
     }
@@ -472,7 +472,7 @@ void Application::endRender() {
 }
 
 void Application::gotoRootScene() {
-    t3::SceneManager::getInstance().forceChangeScene(root_scene_generator_);
+    t3::SceneManager::instance().forceChangeScene(root_scene_generator_);
 }
 
 

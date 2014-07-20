@@ -109,9 +109,9 @@ public:
 public:
     static void addSystemTask(std::shared_ptr<Task> task);
     
-    static const Input& getInput(const int player_no = 0);
+    static const Input& input(const int player_no = 0);
     
-    static RenderLayer* getLayer(const std::string& layer_name);
+    static RenderLayer* layer(const std::string& layer_name);
     
     static Vec2 screenToViewport(const Vec2& screen_pos);
     
@@ -145,7 +145,7 @@ public:
     );
     
 private:
-    void setClearColor();
+    void clearColor();
 
 
     //  デバッグメニューにレイヤー登録するコールバック

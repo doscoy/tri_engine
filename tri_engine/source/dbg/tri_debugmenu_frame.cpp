@@ -28,7 +28,7 @@ DebugMenuFrame::~DebugMenuFrame()
 void DebugMenuFrame::openFrame()
 {
     for (auto item: items_) {
-        item->setEnable(true);
+        item->enable(true);
     }
     
     DebugMenuLabel* focus_item = getFocusItem();
@@ -44,7 +44,7 @@ void DebugMenuFrame::openFrame()
 void DebugMenuFrame::closeFrame()
 {
     for (auto item: items_) {
-        item->setEnable(false);
+        item->enable(false);
     }
     setFocusItem(nullptr);
 }

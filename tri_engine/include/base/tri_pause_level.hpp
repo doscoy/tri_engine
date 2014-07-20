@@ -26,7 +26,7 @@ public:
     {}
 
     static const EventType TYPE;
-    const EventType& getEventType() const override {
+    const EventType& eventType() const override {
         return TYPE;
     }
 
@@ -46,7 +46,7 @@ public:
     {}
     
     static const EventType TYPE;
-    const EventType& getEventType() const override {
+    const EventType& eventType() const override {
         return TYPE;
     }
 

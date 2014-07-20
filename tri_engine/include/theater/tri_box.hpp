@@ -21,13 +21,13 @@ public:
     {}
 
 public:
-    void setSize(
+    void size(
         const Vec3& v
     ) {
         size_ = v;
     }
 
-    void setSize(
+    void size(
         const float x,
         const float y,
         const float z
@@ -37,7 +37,7 @@ public:
         size_.z_ = z;
     }
 
-    const Vec3& getSize() const {
+    const Vec3& size() const {
         return size_;
     }
 

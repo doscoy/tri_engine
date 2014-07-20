@@ -12,6 +12,7 @@
 #include "tri_scene.hpp"
 #include "tri_rtti.hpp"
 #include "tri_types.hpp"
+#include "tri_pause_level.hpp"
 
 
 #endif // TRI_BASE_HPP_INCLUDED

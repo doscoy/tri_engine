@@ -101,7 +101,7 @@ void CollisionManager::judgeColliderPairs(
         if (a->isHit(*circle_coll)) {
             //  当たった
             auto event = std::make_shared<CollisionEvent>();
-            event->pos_ = circle_coll->getCircle().getPosition();
+            event->pos_ = circle_coll->getCircle().position();
             event->collision_pair_ = std::make_pair(a, b);
             t3::safeQueueEvent(event);
         }
@@ -112,7 +112,7 @@ void CollisionManager::judgeColliderPairs(
         if (a->isHit(*point_coll)) {
             //  当たった
             auto event = std::make_shared<CollisionEvent>();
-            event->pos_ = point_coll->getPosition();
+            event->pos_ = point_coll->position();
             event->collision_pair_ = std::make_pair(a, b);
             t3::safeQueueEvent(event);
         }

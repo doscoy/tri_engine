@@ -60,11 +60,11 @@ public:
 
 public:
 
-    int getTaskPriority() const {
+    int taskPriority() const {
         return priority_;
     }
     
-    void setTaskPriority(const int priority){
+    void taskPriority(const int priority){
         priority_ = priority;
     }
 
@@ -72,19 +72,19 @@ public:
         return kill_;
     }
     
-    bool isActiveTask() const {
+    bool activated() const {
         return active_;
     }
     
-    void setActiveTask(const bool active) {
+    void activate(const bool active) {
         active_ = active;
     }
     
-    bool isAttachedTask() const {
+    bool attachedTask() const {
         return attached_;
     }
     
-    void setAttachedTask(const bool attached) {
+    void attachTask(const bool attached) {
         attached_ = attached;
     }
     
@@ -95,11 +95,11 @@ public:
         return !inital_update_;
     }
     
-    const std::shared_ptr<Task> getNextTask() const {
+    const std::shared_ptr<Task> nextTask() const {
         return next_;
     }
     
-    const std::shared_ptr<Task> setNextTask(std::shared_ptr<Task> next) {
+    const std::shared_ptr<Task> nextTask(std::shared_ptr<Task> next) {
         next_ = next;
         return next_;
     }
@@ -172,7 +172,7 @@ public:
     void taskUpdate(
         const tick_t delta_time
     ) override {
-        if (isActiveTask()){
+        if (activated()){
             now_ += delta_time;
             if (now_ >= end_time_) {
                 killTask();

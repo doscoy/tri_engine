@@ -41,9 +41,9 @@ public:
     virtual ~RenderLayer();
 
 public:
-    void setPriority(const int priority);
+    void priority(const int priority);
     
-    int getPriority() const {
+    int priority() const {
         return priority_;
     }
     

@@ -98,7 +98,7 @@ void safeQueueEvent(
 ) {
     auto lounch_event = std::make_shared<LounchEventTask>(in_event);
     auto delay_task = std::make_shared<WaitingTask>(delay_sec);
-    delay_task->setNextTask(lounch_event);
+    delay_task->nextTask(lounch_event);
     t3::SceneManager::addSceneTask(delay_task);
 }
 
@@ -263,11 +263,11 @@ bool EventManager::queueEvent(
 
     T3_ASSERT(inRange(active_queue_, (int)0, (int)NUM_QUEUES));
     
-    if (!isValidateEventType(in_event->getEventType())) {
+    if (!isValidateEventType(in_event->eventType())) {
         return false;
     }
     
-    EventListenerMap::const_iterator map_it = registry_.find(in_event->getEventType().key());
+    EventListenerMap::const_iterator map_it = registry_.find(in_event->eventType().key());
     
     if (map_it == registry_.end()) {
         //  グローバルリスナーがアクティブでなければキューへの追加は中止
@@ -275,7 +275,7 @@ bool EventManager::queueEvent(
         
         if (it_wc == registry_.end()) {
             //  このイベントのリスナはいないのでスキップ
-//            T3_TRACE("%s is skip\n", in_event->getEventType().string().c_str());
+//            T3_TRACE("%s is skip\n", in_event->eventType().string().c_str());
             return false;
         }
     }
@@ -311,7 +311,7 @@ bool EventManager::abortEvent(
     EventQueue::iterator queue_end = queue.end();
     
     for (; queue_it != queue_end; ++queue_it) {
-        if ((*queue_it)->getEventType() == in_type) {
+        if ((*queue_it)->eventType() == in_type) {
             queue_it = queue.erase(queue_it);
             result = true;
             if (!all_of_type) {
@@ -348,7 +348,7 @@ bool EventManager::tick(
         EventPtr event = process_queue.front();
         process_queue.pop_front();
         
-        const EventType& event_type = event->getEventType();
+        const EventType& event_type = event->eventType();
         
         
         if (it_wc != registry_.end()) {
@@ -518,7 +518,7 @@ std::string EventManager::getEventNameByKey(
 bool EventManager::triggerEvent(
     const t3::EventPtr in_event
 ) {
-    if (!isValidateEventType(in_event->getEventType())) {
+    if (!isValidateEventType(in_event->eventType())) {
         return false;
     }
 
@@ -534,7 +534,7 @@ bool EventManager::triggerEvent(
         }
     }
     
-    EventListenerMap::iterator it = registry_.find((in_event->getEventType().key()));
+    EventListenerMap::iterator it = registry_.find((in_event->eventType().key()));
     
     if (it == registry_.end()) {
         return false;

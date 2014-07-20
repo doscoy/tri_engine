@@ -58,17 +58,17 @@ public:
     }
     
     //  スケール
-    const Vec2& getScale() const {
+    const Vec2& scale() const {
         return scale_;
     }
     
-    void setScale(
+    void scale(
         const Vec2& scale
     ) {
         scale_ = scale;
     }
     
-    void setScale(
+    void scale(
        const float x,
        const float y
     ) {

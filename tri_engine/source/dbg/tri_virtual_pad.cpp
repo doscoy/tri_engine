@@ -68,15 +68,15 @@ void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t delta_time)
 
 
     //  ポインティング情報取得
-    const Input& input = Director::getInput();
-    const Pointing& pointing = input.getPointing();
+    const Input& input = Director::input();
+    const Pointing& pointing = input.pointing();
 
     if (!pointing.isHold()) {
         //  触ってない
         return;
     }
 
-    const Vec2& pointing_pos = pointing.getPosition();
+    const Vec2& pointing_pos = pointing.position();
 
 
     if (isHitPointRectangle(

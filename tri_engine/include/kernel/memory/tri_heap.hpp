@@ -21,7 +21,7 @@ public:
     ~Heap() = default;
     
 public:
-    const char* getName() const {
+    const char* name() const {
         return heap_name_;
     }
     

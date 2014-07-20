@@ -200,14 +200,14 @@ void endUpdate() {
     glfwPollEvents();
 }
 
-void getPlatformPadData(
+void platformPadData(
     int no,
     GamePadData* data
 ) {
     *data = pad_data_[no];
 }
 
-void getPlatformPointingData(
+void platformPointingData(
     int no,
     PointingData* data
 ) {

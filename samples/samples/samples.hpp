@@ -33,7 +33,7 @@ public:
     
 public:
     void initializeScene() override {
-        t3::DebugMenu& dm = t3::DebugMenu::getInstance();
+        t3::DebugMenu& dm = t3::DebugMenu::instance();
         sandbox_.attachSelf(dm.getMenuRoot());
     }
     
@@ -46,10 +46,10 @@ public:
             t3::frame_counter_.now()
         );
         
-        t3::GameSystem& game_system = t3::GameSystem::getInstance();
-        const t3::Input& input = game_system.getInput();
+        t3::Director& d = t3::Director::instance();
+        const t3::Input& input = d.input();
         
-        if (input.getPointing().isDoubleClick()) {
+        if (input.pointing().isDoubleClick()) {
             T3_TRACE("Double Click.\n");
         }
     }

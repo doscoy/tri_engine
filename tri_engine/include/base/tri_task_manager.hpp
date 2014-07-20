@@ -42,7 +42,7 @@ protected:
 private:
     void detach(std::shared_ptr<Task> task) {
         taskes_.remove(task);
-        task->setAttachedTask(false);
+        task->attachTask(false);
     }
     
     void killAllTask();

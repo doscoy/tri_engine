@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "283"
             endingLineNumber = "283"
-            landmarkName = "Application::renderApplication()"
+            landmarkName = "Application::updateApplication()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
