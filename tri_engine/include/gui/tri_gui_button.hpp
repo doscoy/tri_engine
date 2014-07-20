@@ -45,6 +45,19 @@ private:
     void onPointingRelease(const Event&);
 
 
+    void hover(bool f) {
+        hover_ = f;
+        if (sprite_) {
+            if (f) {
+                sprite_->scale(1.05f);
+            }
+            else {
+                sprite_->scale(1.0f);
+            }
+        }
+    }
+
+
 private:
     SpritePtr sprite_;
     Rectangle hit_area_;

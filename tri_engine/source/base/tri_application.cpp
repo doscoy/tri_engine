@@ -262,7 +262,7 @@ void Application::updateApplication()
         gs.update(delta_time);
     }
     //  レイヤーの更新
-    RenderLayer::updateLayers(gs.getLaysers(), delta_time);
+    RenderLayer::updateLayers(gs.layers(), delta_time);
 
     
     system_cost_timer_.end();       // system cost 計測終了
@@ -318,7 +318,7 @@ void Application::renderApplication()
 
     rendering_cost_timer_.start();      // rendering cost 計算開始
     //  レイヤーの描画
-    RenderLayer::drawLayers(gs.getLaysers());
+    RenderLayer::drawLayers(gs.layers());
     rendering_cost_timer_.end();           // rendering cost 計算終了
 
     if (show_work_bar_) {

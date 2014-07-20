@@ -10,6 +10,7 @@ Pointing::Pointing()
     , trigger_(false)
     , release_(false)
     , repeat_(false)
+    , moved_(false)
     , double_click_(false)
     , position_()
     , moving_(0, 0)
@@ -57,6 +58,13 @@ void Pointing::updatePointing(
     //  移動量設定
     moving_ = position_[0] - position_[1];
     
+    //  移動判定設定
+    if (isZeroFloat(moving_.x_) && isZeroFloat(moving_.y_)) {
+        moved_ = false;
+    }
+    else {
+        moved_ = true;
+    }
     
     //  ダブルクリック判定
     double_click_ = false;

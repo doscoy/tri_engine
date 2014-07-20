@@ -32,10 +32,10 @@ void Director::addSystemTask(
 }
 
 
-RenderLayer* Director::layer(
+RenderLayer* Director::findLayer(
     const std::string& layer_name
 ) {
-    t3::RenderLayers layers = t3::Director::instance().getLaysers();
+    t3::RenderLayers layers = t3::Director::instance().layers();
     
     for (auto layer : layers) {
         if (layer_name == layer->name()) {
@@ -148,7 +148,7 @@ Director::Director()
         Color::blue()
       }}
     , dm_random_pointing_(nullptr, "RANDOM POINTING", random_pointing_, 1)
-    , random_pointing_(true)
+    , random_pointing_(false)
     , dm_game_speed_(nullptr, "GAME SPEED", game_speed_, 0.1f, 0.0f, 4.0f)
     , game_speed_(1.0f)
     , dm_layers_(nullptr, "LAYERS")
@@ -293,10 +293,27 @@ void Director::updateInput(
         
         //  入力イベント発行
         const Pointing& pointing = input.pointing();
+        //  トリガー
         if (pointing.isTrigger()) {
             auto eve_point_trg = std::make_shared<PointingTriggeredEvent>();
             eve_point_trg->inputNo(pad_idx);
             eve_point_trg->position(pointing.position());
+            safeQueueEvent(eve_point_trg);
+        }
+        //  リリース
+        if (pointing.isRelease()) {
+            auto eve_point_rls = std::make_shared<PointingReleasedEvent>();
+            eve_point_rls->inputNo(pad_idx);
+            eve_point_rls->position(pointing.position());
+            safeQueueEvent(eve_point_rls);
+        }
+        //  ムーブ
+        if (pointing.isMoving()) {
+            auto eve_point_move = std::make_shared<PointingMovingEvent>();
+            eve_point_move->inputNo(pad_idx);
+            eve_point_move->position(pointing.position());
+            eve_point_move->moveDistance(pointing.moveDistance());
+            safeQueueEvent(eve_point_move);
         }
     }
     

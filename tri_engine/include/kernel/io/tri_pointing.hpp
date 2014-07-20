@@ -41,12 +41,16 @@ public:
     bool isRelease() const {
         return release_;
     }
+    
+    bool isMoving() const {
+        return moved_;
+    }
 
     const Point2& position() const {
         return position_[0];
     }
 
-    const Point2& getMoving() const {
+    const Point2& moveDistance() const {
         return moving_;
     }
     
@@ -68,6 +72,7 @@ private:
     bool trigger_;
     bool release_;
     bool repeat_;
+    bool moved_;
     bool double_click_;
     Point2 position_[MAX_POSITION_SIZE];
     Point2 moving_;

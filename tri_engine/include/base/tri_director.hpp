@@ -82,11 +82,11 @@ public:
     
     
 
-    RenderLayers& getLaysers() {
+    RenderLayers& layers() {
         return layers_;
     }
     
-    const RenderLayers& getLayers() const {
+    const RenderLayers& layers() const {
         return layers_;
     }
     
@@ -111,7 +111,7 @@ public:
     
     static const Input& input(const int player_no = 0);
     
-    static RenderLayer* layer(const std::string& layer_name);
+    static RenderLayer* findLayer(const std::string& layer_name);
     
     static Vec2 screenToViewport(const Vec2& screen_pos);
     

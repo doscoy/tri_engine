@@ -52,6 +52,10 @@ void Button::setupSprite(
     SpritePtr source
 ) {
     sprite_ = source;
+    hit_area_.setupFromCenterSize(
+        sprite_->position(),
+        sprite_->size()
+    );
 }
 
 
@@ -82,7 +86,7 @@ void Button::onPointingRelease(
     
     //  画面から離れたら状態リセット
     first_touch_ = false;
-    hover_ = false;
+    hover(false);
 
 }
 
@@ -94,8 +98,14 @@ void Button::onPointingMoving(
         return;
     }
     
-
     auto move_event = static_cast<const t3::PointingMovingEvent&>(eve);
+    if (isHitPointRectangle(move_event.position(), hit_area_)) {
+        hover(true);
+    }
+    else {
+        hover(false);
+    }
+
 
 
 }

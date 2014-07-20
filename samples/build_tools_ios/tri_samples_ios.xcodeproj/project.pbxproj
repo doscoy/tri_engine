@@ -1216,6 +1216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0463E676197A3E9B002DB9E0 /* ui_button_test.cpp in Sources */,
 				04FB95BC18D9D2AC006BB512 /* tri_bezier_curve.cpp in Sources */,
 				04B3A10218E7E0D300B03C69 /* tri_audio_resource.cpp in Sources */,
 				04FB959318D9D2AC006BB512 /* tri_debug_font_data.cpp in Sources */,
@@ -1227,7 +1228,6 @@
 				04FB959018D9D2AC006BB512 /* tri_resource.cpp in Sources */,
 				04FB959718D9D2AC006BB512 /* tri_debug_string_layer.cpp in Sources */,
 				0463E66E197A3E4E002DB9E0 /* tri_task.cpp in Sources */,
-				0463E676197A3E9B002DB9E0 /* ui_button_test.cpp in Sources */,
 				04F13261191E96E6007230DD /* tri_render_system.cpp in Sources */,
 				04FB95B918D9D2AC006BB512 /* tri_memory.cpp in Sources */,
 				04FB95AD18D9D2AC006BB512 /* tri_sprite_layer.cpp in Sources */,

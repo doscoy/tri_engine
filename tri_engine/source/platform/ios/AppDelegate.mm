@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.hpp"
+#import <AVFoundation/AVFoundation.h>
+
 
 @implementation AppDelegate
 
@@ -16,6 +18,11 @@
     //  スリープに遷移しないようにする
     [UIApplication sharedApplication].idleTimerDisabled = YES;
 
+    //  オーディオセッションの設定
+    NSError *setCategoryError = nil;
+    BOOL success = [[AVAudioSession sharedInstance]
+        setCategory: AVAudioSessionCategoryAmbient
+    error: &setCategoryError];
 
 
     return YES;

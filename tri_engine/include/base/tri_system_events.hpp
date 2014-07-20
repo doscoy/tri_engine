@@ -91,6 +91,14 @@ public:
         pos_ = pos;
     }
     
+    const Vec2& moveDistance() const {
+        return distance_;
+    }
+    
+    void moveDistance(const Vec2& distance) {
+        distance_ = distance;
+    }
+    
     int inputNo() const {
         return input_no_;
     }
@@ -101,6 +109,7 @@ public:
 
 private:
     Vec2 pos_;
+    Vec2 distance_;
     int input_no_;
 };
 

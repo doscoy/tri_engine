@@ -2,40 +2,70 @@
 
 #include "ui_button_test.hpp"
 
+namespace {
+class EventAAA
+    : public t3::EventBase
+{
+public:
+    EventAAA(){}
+    ~EventAAA(){}
+    static const t3::EventType TYPE;
+    const t3::EventType& eventType() const override {
+        return TYPE;
+    }
+};
+
+const t3::EventType EventAAA::TYPE("EventAAA123422");
+}
 
 
 class UiButtonScene::SceneContext {
 
 public:
     SceneContext()
-        : show_ad_(false)
+        : layer_()
+        , button_()
+        , sprite_(nullptr)
     {}
     
     ~SceneContext()
     {}
   
 public:
-    void initialize(){
+    void initialize() {
+        t3::FilePath path = t3::FilePath("stamp.png");
+        sprite_ = layer_.createSprite(path);
+        sprite_->size(128.0f);
+        sprite_->adjustPivotByCenter();
+        button_.setupSprite(sprite_);
+        button_.triggerdEvent(
+            std::make_shared<EventAAA>()
+        );
+        
+        t3::safeAddListener(this, &SceneContext::onEventAA, EventAAA::TYPE);
+    }
+    
+    void terminate() {
 
     }
     
-    void terminate(){
-
-    }
-    
-    void update(t3::tick_t delta_time){
-        const t3::Input& input = t3::Director::instance().input();
-        const t3::Pointing& ptng = input.pointing();
+    void update(t3::tick_t delta_time) {
         
     }
 
     void suspend(t3::tick_t delta_time) {
 
     }
+    
+    void onEventAA(const t3::Event& eve) {
+        T3_TRACE("onEventAA\n");
+    }
 
     
 private:
-    bool show_ad_;
+    t3::SpriteLayer layer_;
+    t3::gui::Button button_;
+    t3::gfx::SpritePtr sprite_;
 };
 
 
