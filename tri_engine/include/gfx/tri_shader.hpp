@@ -92,6 +92,7 @@ private:
     
 };
 
+using ShaderPtr = std::shared_ptr<Shader>;
     
     
 }   // namaspace gfx

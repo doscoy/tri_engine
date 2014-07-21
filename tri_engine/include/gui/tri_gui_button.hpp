@@ -16,7 +16,8 @@ namespace t3 {
 inline namespace gui {
 
 
-class Button {
+class Button
+    : Uncopyable {
     using self_t = Button;
 
 public:
@@ -38,13 +39,58 @@ public:
         triggerd_event_ = eve;
     }
     
+    SpritePtr sprite() {
+        return sprite_;
+    }
+    
+    const SpritePtr sprite() const {
+        return sprite_;
+    }
+    
+    void position(const Vec2& pos) {
+        T3_NULL_ASSERT(sprite_);
+        sprite_->position(pos);
+        updateHitArea();
+    }
+    
+    void size(float s) {
+        T3_NULL_ASSERT(sprite_);
+        sprite_->size(s);
+        sprite_->adjustPivotByCenter();
+        updateHitArea();
+    }
+    
+    void size(const Vec2& s) {
+        T3_NULL_ASSERT(sprite_);
+        sprite_->size(s);
+        sprite_->adjustPivotByCenter();
+        updateHitArea();
+    }
+    
+    void hitAreaSize(const float s) {
+        T3_NULL_ASSERT(sprite_);
+        hit_area_.size(t3::Vec2(s, s));
+    }
+    
+    void hitAreaSize(const Vec2& s) {
+        T3_NULL_ASSERT(sprite_);
+        hit_area_.size(s);
+    }
 
 private:
     void onPointingTrigger(const Event&);
     void onPointingMoving(const Event&);
     void onPointingRelease(const Event&);
 
-
+    void updateHitArea() {
+        T3_NULL_ASSERT(sprite_);
+        hit_area_.setupFromCenterSize(
+            sprite_->position(),
+            sprite_->size()
+        );
+    }
+    
+    
     void hover(bool f) {
         hover_ = f;
         if (sprite_) {

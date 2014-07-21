@@ -27,6 +27,13 @@ public:
     void collectSprite(SpritePtr sprite);
     void render();
     
+    void useDefaultShader() {
+        shader_ = default_shader_;
+    }
+    
+    void useCustomShader(ShaderPtr shader) {
+        shader_ = shader;
+    }
 
 private:
     void beginRender();
@@ -38,7 +45,8 @@ private:
 
 private:
     Container sprites_;
-    Shader sprite_shader_;
+    ShaderPtr shader_;
+    ShaderPtr default_shader_;
 
     RenderSystem::buffer_id_t vertex_buffer_;
     RenderSystem::buffer_id_t index_buffer_;

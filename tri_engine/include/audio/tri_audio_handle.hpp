@@ -25,6 +25,9 @@ public:
     void playSE();
     void stopSE();
 
+    void pitch(float speed);
+    void volume(float vol);
+
 private:
     
     void play(bool loop = false);

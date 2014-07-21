@@ -43,19 +43,14 @@ public:
     )   : priority_(priority)
         , kill_(false)
         , active_(true)
-        , paused_(false)
         , inital_update_(true)
         , attached_(false)
         , pause_lv_(pause_lv)
     {
-        safeAddListener(this, &self_t::onPauseTask, PauseEvent::TYPE);
-        safeAddListener(this, &self_t::onResumeTask, ResumeEvent::TYPE);
     }
         
     virtual ~Task()
     {
-        safeRemoveListener(this, PauseEvent::TYPE);
-        safeRemoveListener(this, ResumeEvent::TYPE);
     }
 
 public:
@@ -88,9 +83,6 @@ public:
         attached_ = attached;
     }
     
-    bool isPausedTask() const {
-        return paused_;
-    }
     bool isTaskInitialized() const {
         return !inital_update_;
     }
@@ -108,17 +100,12 @@ public:
         kill_ = true;
     };
     
-
-
-private:
-    void onPauseTask(const Event& event);
-    void onResumeTask(const Event& event);
-    void pauseTask() {
-        paused_ = true;
+    PauseLevel pauseLevel() const {
+        return pause_lv_;
     }
     
-    void resumeTask() {
-        paused_ = false;
+    void pauseLevel(const PauseLevel lv) {
+        pause_lv_ = lv;
     }
 
 public:
@@ -143,7 +130,7 @@ private:
     int priority_;
     bool kill_;
     bool active_;
-    bool paused_;
+//    bool paused_;
     bool inital_update_;
     bool attached_;
     PauseLevel pause_lv_;

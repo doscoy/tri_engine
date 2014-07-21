@@ -28,11 +28,16 @@ class Sprite final
 
 public:
     enum Priority {
-        PRIORITY_LOWEST  = 10,
-        PRIORITY_LOW     = 130,
-        PRIORITY_NORMAL  = 150,
-        PRIORITY_HIGH    = 180,
-        PRIORITY_HIGHEST = 200
+        PRIORITY_LOWEST     = 10,
+        PRIORITY_LOW_1      = 130,
+        PRIORITY_LOW_2      = 135,
+        PRIORITY_LOW_3      = 140,
+        PRIORITY_NORMAL     = 150,
+        PRIORITY_HIGH_1     = 170,
+        PRIORITY_HIGH_2     = 175,
+        PRIORITY_HIGH_3     = 180,
+        PRIORITY_UI_DEFAULT = 200,
+        PRIORITY_HIGHEST    = 220
     };
 
 
@@ -276,7 +281,7 @@ public:
     
     
     //  有効判定
-    bool isEnable() const {
+    bool enable() const {
         return enable_;
     }
     

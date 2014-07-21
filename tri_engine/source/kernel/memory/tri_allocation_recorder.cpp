@@ -20,7 +20,7 @@ void AllocationRecorder::checkin(
     const uint32_t frame
 ){
     for ( auto ap = allocate_info_.begin(); ap != allocate_info_.end(); ++ap ) {
-        if ( !ap->isEnable() ){
+        if ( !ap->enable() ){
             //  アロケーション情報を保存
             ap->setAddress( address );
             ap->size( size );
@@ -63,7 +63,7 @@ void AllocationRecorder::dump (
     int no = 0;
     T3_TRACE("AllocationRecorder::dump() %d --> %d\n", start_filter_frame, end_filter_frame );
     for ( auto ap = allocate_info_.begin(); ap != allocate_info_.end(); ++ap ) {
-        if ( !ap->isEnable() ){
+        if ( !ap->enable() ){
             continue;
         }
         if ( inRange( ap->getFrame(), start_filter_frame, end_filter_frame ) ){

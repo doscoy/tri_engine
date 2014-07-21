@@ -69,6 +69,7 @@ bool Shader::link() {
 }
 
 bool Shader::use() {
+    T3_NULL_ASSERT(this);
     
     if (handle_ <= 0 || (!linked_)) {
         return false;

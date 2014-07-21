@@ -60,7 +60,7 @@ public:
         enable_ = enable;
     }
     
-    bool isEnable() const {
+    bool enable() const {
         return enable_;
     }
     

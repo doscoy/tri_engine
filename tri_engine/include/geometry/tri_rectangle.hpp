@@ -58,30 +58,35 @@ public:
     
 
 public:
-    void setMin(const Vec2& min) {
+    void min(const Vec2& min) {
         min_ = min;
         calcCenterFromMinMax();
     }
 
-    const Vec2& getMin() const {
+    const Vec2& min() const {
         return min_;
     }
     
-    void setMax(const Vec2& max) {
+    void max(const Vec2& max) {
         max_ = max;
         calcCenterFromMinMax();
     }
     
-    const Vec2& getMax() const {
+    const Vec2& max() const {
         return max_;
     }
 
-    const Vec2& getCenter() const {
+    const Vec2& center() const {
         return center_;
     }
     
     const Vec2& size() const {
         return size_;
+    }
+    
+    void size(const Vec2& s) {
+        size_ = s;
+        calcMinMaxFromSize();
     }
 
     
@@ -89,6 +94,12 @@ private:
     void calcCenterFromMinMax() {
         size_ = max_ - min_;
         center_ = min_ + (size_ / 2);
+    }
+    
+    void calcMinMaxFromSize() {
+        Vec2 half = size_ / 2;
+        min_ = center_ - half;
+        max_ = center_ + half;
     }
     
 private:

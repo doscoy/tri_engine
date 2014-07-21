@@ -46,7 +46,17 @@ void AudioHandle::stopSE() {
     stop();
 }
 
+void AudioHandle::pitch(
+    const float speed
+) {
+    AudioSystem::pitch(sid_, speed);
+}
 
+void AudioHandle::volume(
+    const float vol
+) {
+    AudioSystem::volume(sid_, vol);
+}
 
 }   // namespace audio
 }   // namepsace t3

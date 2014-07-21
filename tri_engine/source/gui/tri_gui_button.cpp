@@ -52,10 +52,8 @@ void Button::setupSprite(
     SpritePtr source
 ) {
     sprite_ = source;
-    hit_area_.setupFromCenterSize(
-        sprite_->position(),
-        sprite_->size()
-    );
+    sprite_->priority(Sprite::PRIORITY_UI_DEFAULT);
+    updateHitArea();
 }
 
 
@@ -67,17 +65,24 @@ void Button::onPointingTrigger(
         return;
     }
     
+    
+    //  スプライトがアクティブじゃない場合スキップ
+    if (!sprite_->enable()) {
+        return;
+    }
+    
     auto trg_event = static_cast<const PointingTriggeredEvent&>(eve);
     if (isHitPointRectangle(trg_event.position(), hit_area_)) {
         //  ファーストタッチで触っていた
         first_touch_ = true;
+        hover(true);
     }
 }
 
 void Button::onPointingRelease(
     const Event& eve
 ) {
-    //
+    //  触った状態で離されたか？
     if (hover_) {
         if (triggerd_event_) {
             safeQueueEvent(triggerd_event_);
@@ -97,6 +102,7 @@ void Button::onPointingMoving(
     if (!first_touch_) {
         return;
     }
+
     
     auto move_event = static_cast<const t3::PointingMovingEvent&>(eve);
     if (isHitPointRectangle(move_event.position(), hit_area_)) {

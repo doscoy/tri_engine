@@ -9,12 +9,16 @@ inline namespace base {
 
 
 enum PauseLevel {
-
+    PAUSE_NONE,
+    
     PAUSE_LV_1 = 1,
     PAUSE_LV_2,
     PAUSE_LV_3,
-    PAUSE_LV_4
-
+    PAUSE_LV_4,
+    PAUSE_LV_5,
+    PAUSE_LV_6,
+    PAUSE_LV_7,
+    PAUSE_LV_8
 };
 
 

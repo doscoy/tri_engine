@@ -17,7 +17,8 @@ typedef std::list<std::shared_ptr<Task>> TaskList;
 
 class TaskManager {
 public:
-    TaskManager() = default;
+    TaskManager();
+    ~TaskManager();
     
 public:
     void attach(std::shared_ptr<Task> task);
@@ -28,7 +29,6 @@ public:
         
     void updateTask(const tick_t delta_time);
     
-    ~TaskManager();
     
     void printTask() const;
     
@@ -46,6 +46,12 @@ private:
     }
     
     void killAllTask();
+    
+    void onPause(const Event&);
+    void onResume(const Event&);
+    
+private:
+    PauseLevel pause_level_;
 };
 
 }   // namespace base

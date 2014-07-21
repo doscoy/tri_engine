@@ -82,7 +82,7 @@ public:
     
     // *********************************************
     //  有効判定
-    bool isEnable() const {
+    bool enable() const {
         return enable_;
     }
     

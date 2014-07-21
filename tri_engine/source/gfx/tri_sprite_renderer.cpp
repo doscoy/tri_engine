@@ -32,19 +32,23 @@ inline namespace gfx {
 
 SpriteRenderer::SpriteRenderer()
     : sprites_()
-    , sprite_shader_()
+    , shader_(nullptr)
+    , default_shader_(nullptr)
 {
+    default_shader_ = std::make_shared<Shader>();
 
-    sprite_shader_.compileShaderFromString(
+    default_shader_->compileShaderFromString(
         sprite_vsh,
         RenderSystem::ShaderType::VERTEX_SHADER
     );
-    sprite_shader_.compileShaderFromString(
+    default_shader_->compileShaderFromString(
         sprite_fsh,
         RenderSystem::ShaderType::FRAGMENT_SHADER
     );
-    bool link_result = sprite_shader_.link();
+    bool link_result = default_shader_->link();
     T3_ASSERT(link_result);
+    
+    useDefaultShader();
     
     //  スプライトコンテナのメモリを事前に確保
     sprites_.reserve(2000);
@@ -93,16 +97,17 @@ void SpriteRenderer::render()
 
 void SpriteRenderer::beginRender()
 {
-    bool use_result = sprite_shader_.use();
+    T3_NULL_ASSERT(shader_);
+    bool use_result = shader_->use();
     T3_ASSERT(use_result);
     //  スプライトのソート
-//    std::sort(sprites_.begin(), sprites_.end(), PriorityCompare());
+    std::sort(sprites_.begin(), sprites_.end(), PriorityCompare());
 
-    sprite_shader_.setEnableAttributeArray("position", true);
-    sprite_shader_.setEnableAttributeArray("uv", true );
+    shader_->setEnableAttributeArray("position", true);
+    shader_->setEnableAttributeArray("uv", true );
     
     //頂点配列を有効化
-    sprite_shader_.setUniform("sampler", 0);
+    shader_->setUniform("sampler", 0);
     
 
     RenderSystem::setActiveTextureUnit(RenderSystem::TextureUnit::UNIT0);
@@ -280,14 +285,14 @@ void SpriteRenderer::renderSprites() {
     const std::shared_ptr<Texture>& texture = sprites_[0]->texture();
     texture->setupTexture();
 
-    sprite_shader_.setAttributePointer(
+    shader_->setAttributePointer(
         "position",
         2,
         sizeof(VertexP2T),
         0
     );
 
-    sprite_shader_.setAttributePointer(
+    shader_->setAttributePointer(
         "uv",
         2,
         sizeof(VertexP2T),

@@ -7,9 +7,20 @@
 namespace t3 {
 inline namespace base {
 
+
+TaskManager::TaskManager()
+    : taskes_()
+    , pause_level_(PAUSE_NONE)
+{
+    safeAddListener(this, &TaskManager::onPause, PauseEvent::TYPE);
+    safeAddListener(this, &TaskManager::onResume, ResumeEvent::TYPE);
+}
+
 TaskManager::~TaskManager() {
     //  残ってるタスク全部にkillを立ててから
     killAllTask();
+    
+    safeRemoveListener(this);
 }
 
 
@@ -33,6 +44,7 @@ void TaskManager::updateTask(const tick_t delta_time) {
     
     while (itr != end) {
         std::shared_ptr<Task> t(*itr);
+        T3_NULL_ASSERT(t.get());
         ++itr;
         
         if (t->isTaskDead()) {
@@ -48,8 +60,11 @@ void TaskManager::updateTask(const tick_t delta_time) {
             //  登録解除
             detach(t);
         }
-        else if (t->activated() && !t->isPausedTask()) {
-            t->taskFrame(delta_time);
+        else if (t->activated()) {
+            PauseLevel tlv = t->pauseLevel();
+            if (tlv > pause_level_) {
+                t->taskFrame(delta_time);
+            }
         }
     }
     
@@ -80,6 +95,16 @@ void TaskManager::killAllTask() {
         t->taskTerminate();
         detach(t);
     }
+}
+
+
+void TaskManager::onPause(const t3::Event& eve) {
+    auto pause_eve = static_cast<const PauseEvent&>(eve);
+    pause_level_ = pause_eve.getPauseLevel();
+}
+
+void TaskManager::onResume(const t3::Event&) {
+    pause_level_ = PAUSE_NONE;
 }
 
 

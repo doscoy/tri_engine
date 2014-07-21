@@ -46,7 +46,8 @@ public:
     static void stop(source_id_t sid);
     
     static void setLoop(source_id_t sid, bool loop);
-
+    static void pitch(const source_id_t sid, const float speed);
+    static void volume(const source_id_t sid, const float vol);
 };
 
 

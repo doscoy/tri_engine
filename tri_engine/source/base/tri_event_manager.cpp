@@ -70,6 +70,7 @@ bool safeRemoveListener(
     const EventType& in_type
 ) {
 
+    T3_NULL_ASSERT(in_handler);
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->removeListener(in_handler, in_type);
 
@@ -78,6 +79,7 @@ bool safeRemoveListener(
 bool safeRemoveListener(
     const EventListenerPtr listener
 ) {
+    T3_NULL_ASSERT(listener);
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->removeListener(listener);
 }
@@ -87,6 +89,7 @@ bool safeRemoveListener(
 bool safeQueueEvent(
     const EventPtr& in_event
 ) {
+    T3_NULL_ASSERT(in_event);
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->queueEvent(in_event);
 
@@ -96,6 +99,9 @@ void safeQueueEvent(
     const EventPtr& in_event,
     float delay_sec
 ) {
+    T3_NULL_ASSERT(in_event);
+    T3_ASSERT(EventManagerBase::get());
+
     auto lounch_event = std::make_shared<LounchEventTask>(in_event);
     auto delay_task = std::make_shared<WaitingTask>(delay_sec);
     delay_task->nextTask(lounch_event);
@@ -193,7 +199,7 @@ bool EventManager::addListener(
     //  既存のリストをたどりリスナーを二重に追加することを防ぐ
     EventListenerTable& table = (*elm_it).second;
     
-    EventListenerTable::iterator end = table.end();
+//    EventListenerTable::iterator end = table.end();
 //    for (EventListenerTable::iterator it = table.begin(); it != end; ++it) {
 //        if (*it == in_listener) {
             //  追加済だった
@@ -490,7 +496,6 @@ void EventManager::dumpListeners() const {
         EventListenerTable::const_iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-            const EventListenerPtr listener = table_it->listener_;
             listener_count += 1;
         }
         

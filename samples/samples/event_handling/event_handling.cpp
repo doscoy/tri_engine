@@ -101,7 +101,7 @@ public:
         const t3::Input& input = d.input();
         if (input.pointing().isTrigger()) {
             //  画面をタッチした
-            if (d.getRandomNumberGenerator().getBool()){
+            if (d.random().getBool()){
                 T3_TRACE("A\n");
                 t3::EventPtr new_event(new EventAAA);
                 t3::safeQueueEvent(new_event);

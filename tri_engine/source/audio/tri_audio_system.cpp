@@ -80,7 +80,7 @@ void AudioSystem::setLoop(
 
 void AudioSystem::setBufferData(
     const buffer_id_t id,
-    const t3::AudioSystem::AudioFormat format,
+    const AudioSystem::AudioFormat format,
     const uint8_t *data,
     const size_t size,
     const int sampling_rate
@@ -108,6 +108,23 @@ void AudioSystem::setBufferData(
     }
     alBufferData(id, al_format, data, (ALsizei)size, sampling_rate);
 }
+
+void AudioSystem::pitch(
+    const source_id_t sid,
+    const float speed
+) {
+    T3_ASSERT_RANGE(speed, 0.0f, 1.0f);
+    alSourcef(sid, AL_PITCH, speed);
+}
+
+void AudioSystem::volume(
+    const source_id_t sid,
+    const float vol
+) {
+    T3_ASSERT_RANGE(vol, 0.0f, 1.0f);
+    alSourcef(sid, AL_GAIN, vol);
+}
+
 
 
 }   // namespace audio

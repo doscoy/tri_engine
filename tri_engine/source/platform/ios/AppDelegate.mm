@@ -20,7 +20,7 @@
 
     //  オーディオセッションの設定
     NSError *setCategoryError = nil;
-    BOOL success = [[AVAudioSession sharedInstance]
+    [[AVAudioSession sharedInstance]
         setCategory: AVAudioSessionCategoryAmbient
     error: &setCategoryError];
 

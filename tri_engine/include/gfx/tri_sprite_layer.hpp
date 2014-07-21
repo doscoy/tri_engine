@@ -35,7 +35,9 @@ public:
 
     void detachSprite(SpritePtr const sprite);
     void detachAllSprite();
-    
+    SpriteRenderer& renderer() {
+        return renderer_;
+    }
     
 private:
     void updateLayer(tick_t delta_time) override;

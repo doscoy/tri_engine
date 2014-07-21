@@ -60,19 +60,19 @@ public:
         }
     }
     
-    void setMin(const Vec3& min) {
+    void min(const Vec3& min) {
         min_ = min;
     }
 
-    const Vec3* getMin() const {
+    const Vec3* min() const {
         return &min_;
     }
     
-    void setMax(const Vec3& max) {
+    void max(const Vec3& max) {
         max_ = max;
     }
     
-    const Vec3* getMax() const {
+    const Vec3* max() const {
         return &max_;
     }
     
@@ -103,7 +103,7 @@ public:
         return true;
     }
 
-    void getCenter(
+    void center(
         Vec3* out
     ) {
         *out = (min_ + max_) * 0.5f;

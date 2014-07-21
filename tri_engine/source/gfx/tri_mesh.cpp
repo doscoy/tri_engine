@@ -102,7 +102,7 @@ Mesh::Mesh(
     //  aabbをもとに境界球作成
     Vec3 radius;
     Vec3 center;
-    aabb.getCenter(&center);
+    aabb.center(&center);
     aabb.getRadius(&radius);
     
     float sphere_radius = radius.x_;

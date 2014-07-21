@@ -14,6 +14,8 @@
 		0463E676197A3E9B002DB9E0 /* ui_button_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0463E674197A3E9B002DB9E0 /* ui_button_test.cpp */; };
 		0463E67C197A95F0002DB9E0 /* tri_gui_button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0463E67B197A95F0002DB9E0 /* tri_gui_button.cpp */; };
 		0463E67F197BA7AB002DB9E0 /* tri_system_events.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0463E67E197BA7AB002DB9E0 /* tri_system_events.cpp */; };
+		0463E68D197BE8F1002DB9E0 /* ui_tex.png in Resources */ = {isa = PBXBuildFile; fileRef = 0463E68C197BE8F1002DB9E0 /* ui_tex.png */; };
+		0463E690197BEA1F002DB9E0 /* tri_gui_swap_button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0463E68F197BEA1F002DB9E0 /* tri_gui_swap_button.cpp */; };
 		048D69DC18F592FE00C898DB /* tri_event_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 048D69DB18F592FE00C898DB /* tri_event_manager.cpp */; };
 		0493526018DB48850059B390 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0493525E18DB48850059B390 /* AppDelegate.mm */; };
 		0493526118DB48850059B390 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0493525F18DB48850059B390 /* ViewController.mm */; };
@@ -147,6 +149,9 @@
 		0463E67B197A95F0002DB9E0 /* tri_gui_button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_gui_button.cpp; sourceTree = "<group>"; };
 		0463E67D197BA798002DB9E0 /* tri_system_events.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_system_events.hpp; sourceTree = "<group>"; };
 		0463E67E197BA7AB002DB9E0 /* tri_system_events.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_system_events.cpp; sourceTree = "<group>"; };
+		0463E68C197BE8F1002DB9E0 /* ui_tex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ui_tex.png; sourceTree = "<group>"; };
+		0463E68E197BE9C8002DB9E0 /* tri_gui_swap_button.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_gui_swap_button.hpp; sourceTree = "<group>"; };
+		0463E68F197BEA1F002DB9E0 /* tri_gui_swap_button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_gui_swap_button.cpp; sourceTree = "<group>"; };
 		048D69D618F5692600C898DB /* tri_event.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_event.hpp; sourceTree = "<group>"; };
 		048D69DA18F5711D00C898DB /* tri_event_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_event_manager.hpp; sourceTree = "<group>"; };
 		048D69DB18F592FE00C898DB /* tri_event_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_event_manager.cpp; sourceTree = "<group>"; };
@@ -463,6 +468,7 @@
 			children = (
 				0463E678197A3FCE002DB9E0 /* tri_gui.hpp */,
 				0463E679197A3FCE002DB9E0 /* tri_gui_button.hpp */,
+				0463E68E197BE9C8002DB9E0 /* tri_gui_swap_button.hpp */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -471,6 +477,7 @@
 			isa = PBXGroup;
 			children = (
 				0463E67B197A95F0002DB9E0 /* tri_gui_button.cpp */,
+				0463E68F197BEA1F002DB9E0 /* tri_gui_swap_button.cpp */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -540,6 +547,7 @@
 		04CE6F7818E06BF500CA40F9 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				0463E68C197BE8F1002DB9E0 /* ui_tex.png */,
 				04B3A12818EDAFB600B03C69 /* stamp.png */,
 				04B3A12918EDAFB600B03C69 /* sample.wav */,
 			);
@@ -1196,6 +1204,7 @@
 				04FB948018D9D133006BB512 /* Main_iPhone.storyboard in Resources */,
 				04B3A12B18EDAFB600B03C69 /* sample.wav in Resources */,
 				04FB958C18D9D2AC006BB512 /* tri_sprite.vsh in Resources */,
+				0463E68D197BE8F1002DB9E0 /* ui_tex.png in Resources */,
 				04FB948C18D9D133006BB512 /* Images.xcassets in Resources */,
 				04FB958518D9D2AC006BB512 /* tri_font.fsh in Resources */,
 				04FB958618D9D2AC006BB512 /* tri_font.vsh in Resources */,
@@ -1274,6 +1283,7 @@
 				04FB959F18D9D2AC006BB512 /* tri_trace.cpp in Sources */,
 				04FB95B518D9D2AC006BB512 /* tri_pointing.cpp in Sources */,
 				0493526018DB48850059B390 /* AppDelegate.mm in Sources */,
+				0463E690197BEA1F002DB9E0 /* tri_gui_swap_button.cpp in Sources */,
 				0493526618DC7A410059B390 /* tri_virtual_pad.cpp in Sources */,
 				04FB95A118D9D2AC006BB512 /* tri_frustum.cpp in Sources */,
 				04FB95BD18D9D2AC006BB512 /* tri_matrix_stack.cpp in Sources */,

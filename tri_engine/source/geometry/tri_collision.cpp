@@ -12,8 +12,8 @@ bool isHitPointRectangle(
     const Rectangle& rect
 ) {
 
-    const Vec2& min = rect.getMin();
-    const Vec2& max = rect.getMax();
+    const Vec2& min = rect.min();
+    const Vec2& max = rect.max();
 
     if (point.x_ < min.x_ || point.x_ > max.x_) {
         return false;
