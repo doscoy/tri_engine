@@ -56,8 +56,8 @@ void drawRectangle(
     
     t3::Director& gs = t3::Director::instance();
     
-    float screen_width = gs.getScreenSize().x_ * 0.5f;
-    float screen_height = gs.getScreenSize().y_ * 0.5f;
+    float screen_width = gs.virtualScreenSize().x_ * 0.5f;
+    float screen_height = gs.virtualScreenSize().y_ * 0.5f;
     
     Vec2 view_left_top(
         min_pos.x_ / screen_width,

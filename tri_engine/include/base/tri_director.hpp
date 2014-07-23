@@ -43,10 +43,27 @@ public:
 //  ビューポート管理
     
     //  スクリーンサイズを設定
-    void setScreenSize(const Vec2& vp) {
-        screen_size_ = vp;
+    void realScreenSize(const Vec2& vp) {
+        real_screen_size_ = vp;
+        calcScreenRevise();
     }
     
+    const Vec2& realScreenSize() const {
+        return real_screen_size_;
+    }
+    
+    void virtualScreenSize(const Vec2 screen) {
+        virtual_screen_size_ = screen;
+        calcScreenRevise();
+    }
+    
+    const Vec2& virtualScreenSize() const {
+        return virtual_screen_size_;
+    }
+    
+    const Vec2& screenRevise() const {
+        return screen_revise_;
+    }
     
 // ---------------------------------------------
 //  乱数管理    
@@ -132,7 +149,7 @@ public:
     
     static bool isFadeOutEnd();
     
-    static const Vec2& getScreenSize();
+    static const Vec2& screenSize();
     
     static void printLog(const char* const buf);
     
@@ -146,7 +163,7 @@ public:
     
 private:
     void clearColor();
-
+    void calcScreenRevise();
 
     //  デバッグメニューにレイヤー登録するコールバック
     void registryLayersToDebugMenu();
@@ -163,8 +180,10 @@ private:
     //  乱数
     random_t random_number_generator_;
 
-    //  ビューポート
-    Vec2 screen_size_;
+    //   スクリーンサイズ
+    Vec2 real_screen_size_;
+    Vec2 virtual_screen_size_;
+    Vec2 screen_revise_;
     
     //  インプットデータ
     std::array<Input, MAX_PAD> input_;

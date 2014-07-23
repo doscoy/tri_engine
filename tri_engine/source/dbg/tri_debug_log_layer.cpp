@@ -91,7 +91,7 @@ void DebugLogLayer::drawLayer()
     Color bg_color = Color(0, 0, 0, 80);
     drawRectangle(
         Vec2(0, 0),
-        Vec2(gs.getScreenSize().x_, gs.getScreenSize().y_),
+        Vec2(gs.virtualScreenSize().x_, gs.virtualScreenSize().y_),
         bg_color
     );
     

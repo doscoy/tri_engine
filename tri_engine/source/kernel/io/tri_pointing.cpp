@@ -1,6 +1,6 @@
 
 #include "tri_pointing.hpp"
-
+#include "base/tri_director.hpp"
 
 namespace t3 {
 inline namespace kernel {
@@ -46,14 +46,21 @@ void Pointing::updatePointing(
     
     updateRepeat(delta_time);
     
+    //  座標系補正
+    //  仮想スクリーン座標に変換
+    const Vec2& revise = t3::Director::instance().screenRevise();
+    float new_point_x = data.x_ * revise.x_;
+    float new_point_y = data.y_ * revise.y_;
+    
+    
     //  座標設定
     for (int pos_idx = MAX_POSITION_SIZE-1; pos_idx > 0; --pos_idx) {
         
         position_[pos_idx] = position_[pos_idx-1];
         
     }
-    position_[0].x_ = data.x_;
-    position_[0].y_ = data.y_;
+    position_[0].x_ = new_point_x;
+    position_[0].y_ = new_point_y;
 
     //  移動量設定
     moving_ = position_[0] - position_[1];

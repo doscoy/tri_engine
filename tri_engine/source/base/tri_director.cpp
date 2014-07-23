@@ -49,13 +49,13 @@ RenderLayer* Director::findLayer(
 Vec2 Director::screenToViewport(
     const Vec2& screen_pos
 ) {
-    return screen_pos / instance().getScreenSize() * 2.0f;
+    return screen_pos / instance().virtualScreenSize() * 2.0f;
 }
 
 Vec2 Director::viewportToScreen(
     const Vec2& viewport_pos
 ) {
-    return viewport_pos * instance().getScreenSize() * 0.5f;
+    return viewport_pos * instance().virtualScreenSize() * 0.5f;
 }
 
 bool Director::isOutOfScreen(
@@ -101,8 +101,8 @@ bool Director::isFadeOutEnd() {
     return instance().fade_layer_->isFadeOutEnd();
 }
 
-const Vec2& Director::getScreenSize() {
-    return instance().screen_size_;
+const Vec2& Director::screenSize() {
+    return instance().virtualScreenSize();
 }
 
 void Director::printLog(const char* const buf) {
@@ -133,7 +133,8 @@ Director::Director()
     : log_layer_(nullptr)
     , dbg_screen_layer_(nullptr)
     , random_number_generator_(1)
-    , screen_size_()
+    , virtual_screen_size_(640, 1136)
+    , real_screen_size_(640, 1136)
     , input_()
     , layers_()
     , fade_layer_(nullptr)
@@ -266,9 +267,10 @@ void Director::updateInput(
         if (random_pointing_) {
             if ((frame_counter_.now() % 4) == 0) {
                 point_data.hit_ = true;
-                const Vec2 half = screen_size_ / 2;
-                point_data.x_ = random_number_generator_.getInt(screen_size_.x_) - half.x_;
-                point_data.y_ = random_number_generator_.getInt(screen_size_.y_) - half.y_;
+                const Vec2& screen_size = virtualScreenSize();
+                const Vec2 half = screen_size / 2;
+                point_data.x_ = random_number_generator_.getInt(screen_size.x_) - half.x_;
+                point_data.y_ = random_number_generator_.getInt(screen_size.y_) - half.y_;
         //        T3_TRACE("touch %f  %f\n", point_data.x_, point_data.y_);
             }
             else {
@@ -400,6 +402,10 @@ void Director::showTask() const {
     task_manager_.printTask();
 }
 
+void Director::calcScreenRevise() {
+
+    screen_revise_ = virtual_screen_size_ / real_screen_size_;
+}
 
 
 

@@ -121,8 +121,8 @@ void initializeTriEngine(
     Director::instance().initializeGameSystem();
     
     t3::Director* d = t3::Director::getInstancePointer();
-    d->setScreenSize(
-        Point2(
+    d->realScreenSize(
+        Vec2(
             width,
             height
         )
@@ -156,7 +156,7 @@ bool Application::isActive() const {
 void Application::initializeWorkBar() {
     
     Director& d = Director::instance();
-    const Point2& screen_size = d.getScreenSize();
+    const Point2& screen_size = d.virtualScreenSize();
     Point2 half_screen_size = screen_size / 2;
     
     //  ワークバーの配置

@@ -47,7 +47,7 @@ void SceneGraph::renderScene()
 void SceneGraph::setupView()
 {
     const t3::Director& d = t3::Director::instance();
-    const t3::Vec2& screen = d.getScreenSize();
+    const t3::Vec2& screen = d.virtualScreenSize();
     
     t3::RenderSystem::setViewport(0, 0, screen.x_, screen.y_);
 

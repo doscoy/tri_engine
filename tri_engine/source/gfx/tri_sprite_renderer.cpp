@@ -134,7 +134,7 @@ void SpriteRenderer::margeSprites() {
     indices.reserve(sprites_.size() * 6);
 
 
-    Vec2 screen_size = Director::instance().getScreenSize();
+    Vec2 screen_size = Director::instance().virtualScreenSize();
     Vec2 half = screen_size / 2;
     half.x_ = 1.0f / half.x_;
     half.y_ = 1.0f / half.y_;
