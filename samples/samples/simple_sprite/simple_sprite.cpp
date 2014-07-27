@@ -87,7 +87,7 @@ private:
         }
         
         t3::Vec2 offset(20, 20);
-        int x_count = t3::Director::instance().getScreenSize().x_ / offset.x_ -1;
+        int x_count = t3::Director::instance().virtualScreenSize().x_ / offset.x_ -1;
         int y = 15;
         int i = 0;
         for (auto spr : *sprites) {
