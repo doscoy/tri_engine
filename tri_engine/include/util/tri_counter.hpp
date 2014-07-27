@@ -11,15 +11,16 @@ public:
     {}
     
     
+    
     int now() const {
         return num_;
     }
     
-    void up() {
+    void countup() {
         num_ += 1;
     }
     
-    void down() {
+    void countdown() {
         num_ -= 1;
     }
     

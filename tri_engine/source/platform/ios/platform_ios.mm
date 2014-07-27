@@ -5,18 +5,17 @@
 #include "base/tri_application.hpp"
 #include "dbg/tri_assert.hpp"
 #include "kernel/memory/tri_memory.hpp"
-#include "platform/ios/ViewController.hpp"
+#import <UIKit/UIKit.h>
+
 
 t3::platform::GamePadData pad_data_[4];
 t3::platform::PointingData point_data_[4];
 t3::platform::AccelerometerData acc_data_[4];
 
-t3::Application* app_ = nullptr;
 
-extern int iosMain(int argc, char** argv);
 
-int local_player_rank_ = -1;
-int total_player_count_ = -1;
+extern int iosMain(int argc, char** argv, t3::Application* app);
+
 
 namespace  {
 
@@ -33,8 +32,7 @@ inline namespace platform {
 
 
 void run(int argc, char** argv, t3::Application* app) {
-    app_ = app;
-    iosMain(argc, argv);
+    iosMain(argc, argv, app);
 }
 
 
@@ -136,79 +134,6 @@ void loadFile(
     *data = (uint8_t*)T3_ALLOC(*size);
     const void* nsbytes = [nsdata bytes];
     std::memcpy(*data, nsbytes, *size);
-}
-
-
-void showNetworkRanking() {
- 
-    
-    
-    ViewController* topController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    while (topController.presentedViewController) {
-        topController = topController.presentedViewController;
-    }
-    
-    
-    [topController showRanking];
-    
-    
-}
-
-bool isEnableNetworkRanking() {
-    if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-void sendRankingScore(
-    int score
-) {
-    GKScore* gkscore = [[GKScore alloc] initWithLeaderboardIdentifier:@"com.aquariuscode.star01.lb"];
-    gkscore.value = score;
-    [GKScore reportScores:@[gkscore] withCompletionHandler:^(NSError *error) {
-        if (error) {
-            // エラーの場合
-        }
-        else {
-        }
-    }];
-}
-
-int getNetworkRankingUserCount() {
-    return total_player_count_;
-}
-
-int getCurrentPlayerNetworkRank() {
-    return local_player_rank_;
-}
-
-
-
-void updateCurrentPlayerNetworkRank() {
-    
-    GKLeaderboard* leader_board = [[GKLeaderboard alloc] init];
-    
-    if (leader_board != nil) {
-        leader_board.playerScope = GKLeaderboardPlayerScopeGlobal;
-        leader_board.timeScope = GKLeaderboardTimeScopeAllTime;
-        leader_board.identifier = @"com.aquariuscode.star01.lb";
-        leader_board.range = NSMakeRange(1,2);
-
-        [leader_board loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
-            if (error != nil) {
-                // エラーを処理する。
-            }
-            if (scores != nil) {
-                // スコア情報を処理する。
-            }
-            
-            local_player_rank_ = [[leader_board localPlayerScore] rank];
-            total_player_count_ = [leader_board maxRange];
-        }];
-    }
 }
 
 void saveInteger(

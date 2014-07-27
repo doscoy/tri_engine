@@ -213,7 +213,7 @@ void Director::update(
     const tick_t delta_time
 ) {
     //  起動からのフレーム数カウント
-    frame_counter_.up();
+    frame_counter_.countup();
 
     //  入力更新
     updateInput(delta_time);

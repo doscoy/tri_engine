@@ -80,13 +80,6 @@ void loadInteger(
 
 
 
-//  ネットワークランキング
-void showNetworkRanking();
-bool isEnableNetworkRanking();
-void sendRankingScore(int score);
-int getNetworkRankingUserCount();
-int getCurrentPlayerNetworkRank();
-void updateCurrentPlayerNetworkRank();
 
 
 }   // namespace platform

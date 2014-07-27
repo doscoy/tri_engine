@@ -17,16 +17,16 @@
         #include <OpenGLES/ES2/gl.h>
         #include <OpenAL/al.h>
         #include <OpenAL/alc.h>
-        #define PLATFORM_IOS
+        #define TRI_TARGET_PLATFORM_IOS     1
 
         #ifdef __i386__
             #warning "ios sim 32bit"
-            #define IOS_SIMULATER
+            #define TRI_TARGET_IOS_SIMULATER    1
         #endif // __i386__
 
         #ifdef __x86_64
             #warning "ios sim 64bit"
-            #define IOS_SIMULATER
+            #define TRI_TARGET_IOS_SIMULATER    1
         #endif
 
         #ifdef PNG_ARM_NEON
