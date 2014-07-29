@@ -119,6 +119,8 @@ void drawRectangleViewport(
     t3::RenderSystem::setVertexAttributePointer(
         position_slot,
         2,
+        GL_FLOAT,
+        false,
         0,
         varray
     );

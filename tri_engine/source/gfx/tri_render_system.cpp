@@ -434,11 +434,13 @@ RenderSystem::buffer_id_t RenderSystem::createIndexBuffer(
 void RenderSystem::setVertexAttributePointer(
     int slot,
     int element_num,
+    int type,
+    bool normalized,
     int stride,
     void* ptr
 ) {
     countRenderCall();
-    CoreRenderSystem::setVertexAttributePointer(slot, element_num, stride, ptr);
+    CoreRenderSystem::setVertexAttributePointer(slot, element_num, type, normalized, stride, ptr);
 }
 
 void RenderSystem::setupTextureData(

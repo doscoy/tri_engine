@@ -11,22 +11,22 @@ struct VertexP2CT
     typedef uint8_t color8_t;
     typedef float   tex_coord_t;
     
-    position_t x;
-    position_t y;
-    color8_t r;
-    color8_t g;
-    color8_t b;
-    color8_t a;
-    position_t tu;
-    position_t tv;
+    position_t x_;
+    position_t y_;
+    color8_t r_;
+    color8_t g_;
+    color8_t b_;
+    color8_t a_;
+    position_t tu_;
+    position_t tv_;
 };
 
 struct VertexP2T
 {
-    float x;
-    float y;
-    float u;
-    float v;
+    float x_;
+    float y_;
+    float u_;
+    float v_;
 };
 
 }   // namespace t3

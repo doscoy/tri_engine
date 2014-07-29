@@ -309,6 +309,8 @@ public:
     static void setVertexAttributePointer(
         int slot,
         int element_num,
+        int type,
+        bool normalized,
         int stride,
         void* ptr
     );

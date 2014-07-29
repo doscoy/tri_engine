@@ -334,15 +334,23 @@ public:
     }
 
 
+    const Color& color() const {
+        return color_;
+    }
+    
+    void color(const Color& color) {
+        color_ = color;
+    }
+
     int opacity() const {
-        return opacity_;
+        return color_.alpha_;
     }
     
     void opacity(
         const int opa
     ) {
         T3_ASSERT_RANGE(opa, 0, 255);
-        opacity_ = opa;
+        color_.alpha_ = opa;
     }
 
 
@@ -353,7 +361,7 @@ private:
     Vec2 pivot_;
     Vec2 scale_;
     float rotation_;
-    uint8_t opacity_;
+    Color color_;
     
     uint8_t priority_;
     texture_coord_t texture_coord_;

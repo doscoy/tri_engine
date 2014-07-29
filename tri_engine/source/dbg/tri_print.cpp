@@ -126,8 +126,8 @@ void debugFontPrint(
 
 
     // シェーダで描画
-    GLuint position_slot = font_shader_.getAttributeLocation("in_position");
-    GLuint uv_slot = font_shader_.getAttributeLocation("in_uv");
+    int position_slot = font_shader_.getAttributeLocation("in_position");
+    int uv_slot = font_shader_.getAttributeLocation("in_uv");
     
     
     
@@ -149,12 +149,16 @@ void debugFontPrint(
     t3::RenderSystem::setVertexAttributePointer(
         position_slot,
         2,
+        GL_FLOAT,
+        false,
         0,
         varray
     );
     t3::RenderSystem::setVertexAttributePointer(
         uv_slot,
         2,
+        GL_FLOAT,
+        false,
         0,
         vuv
     );

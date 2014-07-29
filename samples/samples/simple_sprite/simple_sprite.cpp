@@ -8,6 +8,8 @@ class SimpleSpriteScene::SceneContext
 {
 public:
     SceneContext()
+        : total_time_(0)
+        , sprite_opacity_(0)
     {}
     
     ~SceneContext()
@@ -24,7 +26,7 @@ public:
         tex3_handle_ = texture_manager.load(kani_path);
         
         
-        for (int i = 0; i < 20; ++i) {
+        for (int i = 0; i < 28; ++i) {
             addSprite();
         }
         adjustSpritesPosition();
@@ -55,7 +57,10 @@ public:
         }
         
         rollingSprites();
-        
+        fadeSprites();
+        total_time_ += delta_time;
+        float sin = t3::sinf(total_time_);
+        sprite_opacity_ = (sin * 128) + 128;
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -79,6 +84,25 @@ private:
             }
             spr_idx += 1;
         }
+    }
+    
+    
+    void fadeSprites() {
+       auto sprites = sprite_layer_.getManagementSprites();
+        if (sprites->empty()) {
+            //  スプライト無し
+            return;
+        }
+        
+        int spr_idx = 0;
+        for (auto spr : *sprites) {
+            
+            if ((spr_idx % 6) == 0) {
+                spr->opacity(sprite_opacity_);
+            }
+            spr_idx += 1;
+        }
+    
     }
 
     void adjustSpritesPosition() {
@@ -117,6 +141,15 @@ private:
             texture_manager.resource(tex3_handle_)
         );
         sprite->scale(2.0f);
+        
+        
+        t3::Director::random_t& random_gen =  t3::Director::instance().random();
+        if (random_gen.getUInt(5) == 0) {
+            sprite->color(t3::Color::red());
+        }
+        else {
+            sprite->color(t3::Color::white());
+        }
     }
     
     void removeSprite() {
@@ -129,7 +162,8 @@ private:
 
 private:
     t3::UniqueID tex3_handle_;
-    
+    t3::tick_t total_time_;
+    int sprite_opacity_;
     t3::SpriteLayer sprite_layer_;
 };
 

@@ -13,6 +13,11 @@
 #include "../shader/tri_sprite.fsh"
 
 
+#define SHADER_ATTR_POSITION        "a_position"
+#define SHADER_ATTR_UV              "a_uv"
+#define SHADER_ATTR_COLOR           "a_color"
+
+
 namespace {
 
 class PriorityCompare
@@ -103,8 +108,9 @@ void SpriteRenderer::beginRender()
     //  スプライトのソート
     std::sort(sprites_.begin(), sprites_.end(), PriorityCompare());
 
-    shader_->setEnableAttributeArray("a_position", true);
-    shader_->setEnableAttributeArray("a_uv", true );
+    shader_->setEnableAttributeArray(SHADER_ATTR_POSITION, true);
+    shader_->setEnableAttributeArray(SHADER_ATTR_COLOR, true);
+    shader_->setEnableAttributeArray(SHADER_ATTR_UV, true );
     
     //頂点配列を有効化
     shader_->setUniform("sampler", 0);
@@ -127,7 +133,7 @@ void SpriteRenderer::beginRender()
 
 void SpriteRenderer::margeSprites() {
 
-    std::vector<float> vertices;
+    std::vector<VertexP2CT> vertices;
     std::vector<uint32_t> indices;
     
     vertices.reserve(sprites_.size() * 16);
@@ -144,8 +150,7 @@ void SpriteRenderer::margeSprites() {
     
         const Vec2& pivot = spr->pivot();
         const Vec2& size = spr->size();
-        const texture_coord_t& uv = spr->textureCoord();
-
+        
         //  初期配置
         Vec2 lt = Vec2(      0 - pivot.x_, size.y_ - pivot.y_);
         Vec2 lb = Vec2(      0 - pivot.x_, 0 - pivot.y_);
@@ -211,26 +216,62 @@ void SpriteRenderer::margeSprites() {
         rb *= half;
 
         //  頂点バッファは普通に並べる
-        vertices.push_back(lt.x_);
-        vertices.push_back(lt.y_);
-        vertices.push_back(uv.u0_);
-        vertices.push_back(uv.v0_);
+        const texture_coord_t& uv = spr->textureCoord();
+        const Color& color = spr->color();
+        {
+            VertexP2CT v1;
+            v1.x_ = lt.x_;
+            v1.y_ = lt.y_;
+            v1.r_ = color.red_;
+            v1.g_ = color.green_;
+            v1.b_ = color.blue_;
+            v1.a_ = color.alpha_;
+            v1.tu_ = uv.u0_;
+            v1.tv_ = uv.v0_;
+            vertices.push_back(v1);
+        }
+
+        {
+            VertexP2CT v2;
+            v2.x_ = lb.x_;
+            v2.y_ = lb.y_;
+            v2.r_ = color.red_;
+            v2.g_ = color.green_;
+            v2.b_ = color.blue_;
+            v2.a_ = color.alpha_;
+            v2.tu_ = uv.u0_;
+            v2.tv_ = uv.v1_;
+            vertices.push_back(v2);
+        }
+
+
+        {
+            VertexP2CT v3;
+            v3.x_ = rt.x_;
+            v3.y_ = rt.y_;
+            v3.r_ = color.red_;
+            v3.g_ = color.green_;
+            v3.b_ = color.blue_;
+            v3.a_ = color.alpha_;
+            v3.tu_ = uv.u1_;
+            v3.tv_ = uv.v0_;
+            vertices.push_back(v3);
+        }
         
-        vertices.push_back(lb.x_);
-        vertices.push_back(lb.y_);
-        vertices.push_back(uv.u0_);
-        vertices.push_back(uv.v1_);
-
-        vertices.push_back(rt.x_);
-        vertices.push_back(rt.y_);
-        vertices.push_back(uv.u1_);
-        vertices.push_back(uv.v0_);
-
-        vertices.push_back(rb.x_);
-        vertices.push_back(rb.y_);
-        vertices.push_back(uv.u1_);
-        vertices.push_back(uv.v1_);
-
+ 
+       {
+            VertexP2CT v4;
+            v4.x_ = rb.x_;
+            v4.y_ = rb.y_;
+            v4.r_ = color.red_;
+            v4.g_ = color.green_;
+            v4.b_ = color.blue_;
+            v4.a_ = color.alpha_;
+            v4.tu_ = uv.u1_;
+            v4.tv_ = uv.v1_;
+            vertices.push_back(v4);
+        }
+        
         int first_vertex_index = i * 4;
 
         //  インデックスバッファ
@@ -253,18 +294,19 @@ void SpriteRenderer::margeSprites() {
     }
     draw_count_ = static_cast<int>(indices.size());
     
-    //  バッファ更新
+    //  頂点バッファ更新
     RenderSystem::bindBuffer(
         t3::RenderSystem::BufferType::TYPE_VERTEX,
         vertex_buffer_
     );
     RenderSystem::setupBufferData(
         t3::RenderSystem::BufferType::TYPE_VERTEX,
-        static_cast<int>(vertices.size() * sizeof(float)),
+        static_cast<int>(vertices.size() * sizeof(VertexP2CT)),
         vertices.data(),
         t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
     );
     
+    //  インデックスバッファ更新
     RenderSystem::bindBuffer(
         t3::RenderSystem::BufferType::TYPE_INDEX,
         index_buffer_
@@ -286,17 +328,30 @@ void SpriteRenderer::renderSprites() {
     texture->setupTexture();
 
     shader_->setAttributePointer(
-        "a_position",
+        SHADER_ATTR_POSITION,
         2,
-        sizeof(VertexP2T),
+        GL_FLOAT,
+        false,
+        sizeof(VertexP2CT),
         0
     );
 
     shader_->setAttributePointer(
-        "a_uv",
-        2,
-        sizeof(VertexP2T),
+        SHADER_ATTR_COLOR,
+        4,
+        GL_UNSIGNED_BYTE,
+        true,
+        sizeof(VertexP2CT),
         (void*)(sizeof(float) * 2)
+    );
+    
+    shader_->setAttributePointer(
+        SHADER_ATTR_UV,
+        2,
+        GL_FLOAT,
+        false,
+        sizeof(VertexP2CT),
+        (void*)(sizeof(float) * 3)
     );
     
     // 描画

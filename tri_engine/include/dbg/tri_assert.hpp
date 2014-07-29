@@ -31,7 +31,7 @@ bool isInvalidFloat(const float f);
 #define T3_ASSERT(exp)              T3_ASSERT_MSG(exp, "assertion.")
 #define T3_NULL_ASSERT(p)           T3_ASSERT_MSG(p != nullptr, "pointer must not be null.")
 #define T3_FLOAT_ASSERT(f)          T3_ASSERT_MSG(t3::isInvalidFloat(f), "invalid float.")
-#define T3_ASSERT_RANGE(v, l, h)    T3_ASSERT_MSG((v >= l && v <= h), "%s is out of range.", #v)
+#define T3_ASSERT_RANGE(v, l, h)    T3_ASSERT_MSG((v >= l && v <= h), "%s is out of range. (%f <= %s(%f) <= %f)", #v, l, #v, v, h)
 
 #else // ENABLE_ASSERT
 

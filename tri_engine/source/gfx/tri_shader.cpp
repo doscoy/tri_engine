@@ -182,11 +182,13 @@ int Shader::getAttributeLocation(const char* const name) const {
 void Shader::setAttributePointer(
     const char* const name,
     int element_num,
+    int type,
+    bool normalized,
     int stride,
     void* pointer
 ) {
     int location = getAttributeLocation(name);
-    RenderSystem::setVertexAttributePointer(location, element_num, stride, pointer);
+    RenderSystem::setVertexAttributePointer(location, element_num, type, normalized, stride, pointer);
 }
 
 void Shader::setEnableAttributeArray(

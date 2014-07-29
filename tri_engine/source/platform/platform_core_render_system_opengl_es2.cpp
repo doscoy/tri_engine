@@ -503,14 +503,16 @@ RenderSystem::buffer_id_t CoreRenderSystem::createIndexBuffer(
 void CoreRenderSystem::setVertexAttributePointer(
     int slot,
     int element_num,
+    int type,
+    bool normalized,
     int stride,
     void* ptr
 ) {
     glVertexAttribPointer(
         slot,
         element_num,
-        GL_FLOAT,
-        GL_FALSE,
+        type,
+        normalized,
         stride,
         ptr
     );

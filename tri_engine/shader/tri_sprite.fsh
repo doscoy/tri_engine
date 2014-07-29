@@ -2,15 +2,14 @@ static const char* sprite_fsh = STRINGIFY(
 
 
 
-varying lowp vec4 a_color;
 varying lowp vec2 v_texture_uv;
+varying lowp vec4 v_color;
 uniform sampler2D sampler;
 
 
 void main(void)
 {
-    lowp vec4 color = texture2D(sampler, v_texture_uv) * a_color;
-    gl_FragColor = color;
+    gl_FragColor = texture2D(sampler, v_texture_uv) * v_color;
 }
 
 
