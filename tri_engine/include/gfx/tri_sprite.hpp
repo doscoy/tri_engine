@@ -9,6 +9,7 @@
 #include "util/tri_uncopyable.hpp"
 #include "tri_gfx_types.hpp"
 #include "tri_render_system.hpp"
+#include "dbg/tri_assert.hpp"
 #include <memory>
 #include <cstdint>
 
@@ -333,6 +334,16 @@ public:
     }
 
 
+    int opacity() const {
+        return opacity_;
+    }
+    
+    void opacity(
+        const int opa
+    ) {
+        T3_ASSERT_RANGE(opa, 0, 255);
+        opacity_ = opa;
+    }
 
 
 private:
@@ -342,6 +353,7 @@ private:
     Vec2 pivot_;
     Vec2 scale_;
     float rotation_;
+    uint8_t opacity_;
     
     uint8_t priority_;
     texture_coord_t texture_coord_;

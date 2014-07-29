@@ -24,9 +24,11 @@ public:
         tex3_handle_ = texture_manager.load(kani_path);
         
         
-        for (int i = 0; i < 744; ++i) {
+        for (int i = 0; i < 20; ++i) {
             addSprite();
         }
+        adjustSpritesPosition();
+
     }
     
     void terminate(){
@@ -86,9 +88,13 @@ private:
             return;
         }
         
-        t3::Vec2 offset(20, 20);
+        t3::SpritePtr sprite = sprites->front();
+        t3::Vec2 offset = t3::Vec2(
+            sprite->scaledSize().x_,
+            sprite->scaledSize().y_
+        );
         int x_count = t3::Director::instance().virtualScreenSize().x_ / offset.x_ -1;
-        int y = 15;
+        int y = 7;
         int i = 0;
         for (auto spr : *sprites) {
             if (i % x_count == 0) {
@@ -110,6 +116,7 @@ private:
         std::shared_ptr<t3::Sprite> sprite = sprite_layer_.createSprite(
             texture_manager.resource(tex3_handle_)
         );
+        sprite->scale(2.0f);
     }
     
     void removeSprite() {

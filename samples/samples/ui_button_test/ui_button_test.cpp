@@ -70,7 +70,7 @@ public:
         
         
         //  スワップボタン
-        t3::FilePath swap_path = t3::FilePath("ui_tex.png");
+        t3::FilePath swap_path = t3::FilePath("tri_engine_ui_sample.png");
         swap_a_ = layer_.createSprite(swap_path);
         swap_a_->setupTextureCoordAndSize(t3::Vec2(0, 128), t3::Vec2(64, 64));
         swap_b_ = layer_.createSprite(swap_path);

@@ -103,8 +103,8 @@ void SpriteRenderer::beginRender()
     //  スプライトのソート
     std::sort(sprites_.begin(), sprites_.end(), PriorityCompare());
 
-    shader_->setEnableAttributeArray("position", true);
-    shader_->setEnableAttributeArray("uv", true );
+    shader_->setEnableAttributeArray("a_position", true);
+    shader_->setEnableAttributeArray("a_uv", true );
     
     //頂点配列を有効化
     shader_->setUniform("sampler", 0);
@@ -286,14 +286,14 @@ void SpriteRenderer::renderSprites() {
     texture->setupTexture();
 
     shader_->setAttributePointer(
-        "position",
+        "a_position",
         2,
         sizeof(VertexP2T),
         0
     );
 
     shader_->setAttributePointer(
-        "uv",
+        "a_uv",
         2,
         sizeof(VertexP2T),
         (void*)(sizeof(float) * 2)

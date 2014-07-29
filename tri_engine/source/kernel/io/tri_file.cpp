@@ -36,7 +36,7 @@ bool File::loadFile(
     std::string path = filepath.getFullPath();
     std::ifstream fs(path);                 //ファイルオープン。読み込み形式は指定なしのときはテキストモードになる。
     
-    T3_ASSERT(!fs.fail());
+    T3_ASSERT_MSG(!fs.fail(), "filepath = %s", path.c_str());
     fs.seekg( 0, std::fstream::end );       //ファイル末尾を探す
     std::size_t eof_pos = static_cast<std::size_t>(fs.tellg());        //ファイル末尾インデクスを取得
     fs.clear();

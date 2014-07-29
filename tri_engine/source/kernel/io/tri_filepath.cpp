@@ -43,10 +43,8 @@ std::string FilePath::getFileNameNotExt() const {
 
 std::string FilePath::getFullPath() const {
     
-    std::string str = platform::getDeviceFilePath(
-        getFileNameNotExt(),
-        getExt()
-    );
+    std::string device_path = platform::getDeviceFilePath();
+    std::string str = device_path + getFileNameNotExt() + getExt();
     return str;
 }
 

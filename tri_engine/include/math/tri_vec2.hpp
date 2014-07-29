@@ -27,9 +27,9 @@ struct Vec2Template {
     Vec2Template()
     {}
     
-    Vec2Template( const T x_, const T y_ )
-        : x_(x_)
-        , y_(y_)
+    Vec2Template(const T ax, const T ay)
+        : x_(ax)
+        , y_(ay)
     {}
     
     template<typename O>
