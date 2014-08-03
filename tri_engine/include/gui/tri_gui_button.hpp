@@ -76,6 +76,10 @@ public:
         T3_NULL_ASSERT(sprite_);
         hit_area_.size(s);
     }
+    
+    
+    void activate();
+    void deactivate();
 
 private:
     void onPointingTrigger(const Event&);

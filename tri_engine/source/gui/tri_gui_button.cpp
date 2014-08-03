@@ -116,6 +116,15 @@ void Button::onPointingMoving(
 
 }
 
+void Button::activate() {
+    sprite_->color(Color::white());
+}
+
+void Button::deactivate() {
+    sprite_->color(Color::gray());
+
+}
+
 
 
 }   // namespace gui

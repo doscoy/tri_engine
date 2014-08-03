@@ -149,7 +149,7 @@ Director::Director()
         Color::blue()
       }}
     , dm_random_pointing_(nullptr, "RANDOM POINTING", random_pointing_, 1)
-    , random_pointing_(true)
+    , random_pointing_(false)
     , dm_game_speed_(nullptr, "GAME SPEED", game_speed_, 0.1f, 0.0f, 4.0f)
     , game_speed_(1.0f)
     , dm_layers_(nullptr, "LAYERS")
