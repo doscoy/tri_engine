@@ -218,7 +218,7 @@ void printDisplay(
     t3::Director::printDisplay(
         x,
         y,
-        Color::magenta().getRGBA(),
+        Color::magenta().rgba32(),
         DEBUG_FONT_POINT,
         buf
     );
@@ -241,7 +241,7 @@ void printDisplay(
     t3::Director::printDisplay(
         x,
         y,
-        color.getRGBA(),
+        color.rgba32(),
         DEBUG_FONT_POINT,
         buf
     );
@@ -265,7 +265,7 @@ void printDisplay(
     t3::Director::printDisplay(
         x,
         y,
-        color.getRGBA(),
+        color.rgba32(),
         font_size,
         buf
     );

@@ -71,7 +71,7 @@ void Button::onPointingTrigger(
         return;
     }
     
-    auto trg_event = static_cast<const PointingTriggeredEvent&>(eve);
+    auto& trg_event = static_cast<const PointingTriggeredEvent&>(eve);
     if (isHitPointRectangle(trg_event.position(), hit_area_)) {
         //  ファーストタッチで触っていた
         first_touch_ = true;
@@ -104,7 +104,7 @@ void Button::onPointingMoving(
     }
 
     
-    auto move_event = static_cast<const t3::PointingMovingEvent&>(eve);
+    auto& move_event = static_cast<const t3::PointingMovingEvent&>(eve);
     if (isHitPointRectangle(move_event.position(), hit_area_)) {
         hover(true);
     }

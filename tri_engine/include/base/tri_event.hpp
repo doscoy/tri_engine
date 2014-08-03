@@ -5,6 +5,7 @@
 
 #include "util/tri_hash_string.hpp"
 #include "base/tri_types.hpp"
+#include "util/tri_uncopyable.hpp"
 #include <memory>
 
 
@@ -15,7 +16,9 @@ inline namespace base {
 //  ハッシュ文字列をイベントタイプとして使用
 using EventType = HashString;
 
-class Event {
+class Event
+    : private Uncopyable
+{
 public:
     virtual const EventType& eventType() const = 0;
     virtual tick_t timeStamp() const = 0;

@@ -33,14 +33,20 @@ public:
     };
 
 public:
+    Task(int type)
+        : Task(type, PRIORITY_APP_DEFAULT, PAUSE_LV_1)
+    {}
+    
     Task()
-        : Task(PRIORITY_APP_DEFAULT, PAUSE_LV_1)
+        : Task(0, PRIORITY_APP_DEFAULT, PAUSE_LV_1)
     {}
     
     Task(
+        int type,
         int priority,
         PauseLevel pause_lv
     )   : priority_(priority)
+        , type_(type)
         , kill_(false)
         , active_(true)
         , inital_update_(true)
@@ -61,6 +67,14 @@ public:
     
     void taskPriority(const int priority){
         priority_ = priority;
+    }
+    
+    int type() const {
+        return type_;
+    }
+    
+    void type(const int type) {
+        type_ = type;
     }
 
     bool isTaskDead() const {
@@ -128,15 +142,14 @@ public:
 
 private:
     int priority_;
+    int type_;
     bool kill_;
     bool active_;
-//    bool paused_;
     bool inital_update_;
     bool attached_;
     PauseLevel pause_lv_;
     std::shared_ptr<Task> next_;
-    char task_name_[16];
-
+    
 };
 
 
@@ -173,6 +186,8 @@ private:
     float end_time_;
 
 };
+
+using TaskPtr = std::shared_ptr<Task>;
 
 }   // namespace base
 }   // namespace t3

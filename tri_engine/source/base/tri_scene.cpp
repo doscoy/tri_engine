@@ -141,6 +141,12 @@ void SceneManager::addSceneTask(
     instance().current_scene_->addSceneTask(task);
 }
 
+const TaskManager& SceneManager::taskManager() {
+    return instance().current_scene_->taskManager();
+}
+
+
+
 }   // namespace base
 }   // namespace t3
 

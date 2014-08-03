@@ -248,10 +248,10 @@ void CoreRenderSystem::clearColor(
     const Color& clear_color
 ) {
     glClearColor(
-        clear_color.getRedf(),
-        clear_color.getGreenf(),
-        clear_color.getBluef(),
-        clear_color.getAlphaf()
+        clear_color.redFloat(),
+        clear_color.greenFloat(),
+        clear_color.blueFloat(),
+        clear_color.alphaFloat()
     );
 }
 

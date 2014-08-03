@@ -16,18 +16,21 @@ public:
     uint8_t alpha_;
 
 public:
-    Color() = default;
+    Color()
+        : Color(255, 255, 255, 255)
+    {}
+    
     ~Color() = default;
     Color(
         const uint8_t red,
         const uint8_t green,
         const uint8_t blue,
         const uint8_t alpha = 255
-    ){
-        red_ = red;
-        green_ = green;
-        blue_ = blue;
-        alpha_ = alpha;
+    )   : red_(red)
+        , green_(green)
+        , blue_(blue)
+        , alpha_(alpha)
+    {
     }
     
 public:
@@ -50,24 +53,24 @@ public:
     
 public:
     
-    rgba32_t getRGBA() const {
+    rgba32_t rgba32() const {
         return (red_ << 24 | green_ << 16 | blue_ << 8 | alpha_);
     }
     
-    float getRedf() const {
+    float redFloat() const {
         return static_cast<float>(red_) / 255.0f;
     }
-    float getGreenf() const {
+    float greenFloat() const {
         return static_cast<float>(green_) / 255.0f;
     }
-    float getBluef() const {
+    float blueFloat() const {
         return static_cast<float>(blue_) / 255.0f;
     }
-    float getAlphaf() const {
+    float alphaFloat() const {
         return static_cast<float>(alpha_) / 255.0f;
     }
     
-    void setAlphaf(const float a) {
+    void alphaFloat(const float a) {
         alpha_ = 255.0f * a;
         if (alpha_ > 255) {
             alpha_ = 255;
@@ -77,7 +80,7 @@ public:
         }
     }
     
-    void setRedf(const float r) {
+    void redFloat(const float r) {
         red_ = 255.0f * r;
         if (red_ > 255) {
             red_ = 255;
@@ -87,7 +90,7 @@ public:
         }
     }
     
-    void setGreenf(const float g) {
+    void greenFloat(const float g) {
         green_ = 255.0f * g;
         if (green_ > 255) {
             green_ = 255;
@@ -97,7 +100,7 @@ public:
         }
     }
     
-    void setBluef(const float b) {
+    void blueFloat(const float b) {
         blue_ = 255.0f * b;
         if (blue_ > 255) {
             blue_ = 255;
@@ -107,25 +110,7 @@ public:
         }
     }
     
-    void setColorf(
-        float r,
-        float g,
-        float b
-    ) {
-        setRedf(r);
-        setGreenf(g);
-        setBluef(b);
-    }
-    
-    void setColor(
-        int r,
-        int g,
-        int b
-    ) {
-        red_ = r;
-        green_ = g;
-        blue_ = b;
-    }
+
     
     
     static Color black() {
@@ -226,16 +211,6 @@ public:
     
     
 };
-
-/*
-inline Color& toColorClass( Color& color )
-{
-    return static_cast<Color&>(color);
-}
-*/
-
-
-
 
 
 }   // namespace t3

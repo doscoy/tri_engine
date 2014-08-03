@@ -128,10 +128,10 @@ void drawRectangleViewport(
     
     simple2d_.setUniform(
         "in_color",
-        color.getRedf(),
-        color.getGreenf(),
-        color.getBluef(),
-        color.getAlphaf()
+        color.redFloat(),
+        color.greenFloat(),
+        color.blueFloat(),
+        color.alphaFloat()
     );
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

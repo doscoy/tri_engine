@@ -4,6 +4,7 @@
 
 #include "util/tri_hash_string.hpp"
 #include "util/tri_unique_id.hpp"
+#include "util/tri_any.hpp"
 #include <cstdint>
 
 
@@ -41,6 +42,19 @@ public:
         return collider_name_;
     }
 
+    void owner(Any any) {
+        owner_ = any;
+    }
+    
+    Any& owner() {
+        return owner_;
+    }
+    
+    const Any& owner() const {
+        return owner_;
+    }
+
+
 public:
     bool operator ==(const Collider& rhs) {
         return getColliderID() == rhs.getColliderID();
@@ -49,6 +63,7 @@ public:
 private:
     UniqueID collider_id_;
     HashString collider_name_;
+    Any owner_;
 };
 
 

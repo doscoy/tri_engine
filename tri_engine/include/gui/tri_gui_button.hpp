@@ -49,7 +49,7 @@ public:
     
     void position(const Vec2& pos) {
         T3_NULL_ASSERT(sprite_);
-        sprite_->position(pos);
+        sprite_->transform()->position(pos);
         updateHitArea();
     }
     
@@ -85,7 +85,7 @@ private:
     void updateHitArea() {
         T3_NULL_ASSERT(sprite_);
         hit_area_.setupFromCenterSize(
-            sprite_->position(),
+            sprite_->transform()->position(),
             sprite_->size()
         );
     }
@@ -95,10 +95,10 @@ private:
         hover_ = f;
         if (sprite_) {
             if (f) {
-                sprite_->scale(1.05f);
+                sprite_->transform()->scale(1.05f);
             }
             else {
-                sprite_->scale(1.0f);
+                sprite_->transform()->scale(1.0f);
             }
         }
     }

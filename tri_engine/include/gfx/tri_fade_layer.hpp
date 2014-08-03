@@ -30,7 +30,7 @@ public:
     void fadeIn(
         const t3::tick_t sec
     ) {
-        alpha_ = fade_color_.getAlphaf();
+        alpha_ = fade_color_.alphaFloat();
         fading_ = true;
         fade_in_ = true;
         fade_speed_ = t3::frameSec<60>() / sec * -1;
@@ -39,7 +39,7 @@ public:
     void fadeOut(
         const tick_t sec
     ) {
-        alpha_ = fade_color_.getAlphaf();
+        alpha_ = fade_color_.alphaFloat();
         fading_ = true;
         fade_in_ = false;
         fade_speed_ = t3::frameSec<60>() / sec;
@@ -75,7 +75,9 @@ public:
         int g,
         int b
     ) {
-        fade_color_.setColor(r, g, b);
+        fade_color_.red_ = r;
+        fade_color_.green_ = g;
+        fade_color_.blue_ = b;
     }
     
     void setFadeColor(

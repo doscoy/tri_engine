@@ -14,16 +14,17 @@ inline namespace gfx {
 //  コンストラクタ
 Sprite::Sprite()
     : texture_(nullptr)
-    , position_(0, 0)
+    , transform_(nullptr)
     , size_(0, 0)
     , pivot_(0, 0)
-    , rotation_(0.0f)
+    , color_(255,255,255,255)
     , texture_coord_{0, 0, 1, 1}
-    , scale_(1.0f, 1.0f)
     , priority_(PRIORITY_NORMAL)
     , enable_(true)
     , owner_(nullptr)
 {
+
+    transform_ = std::make_shared<Transform2D>();
 }
 
 //  デストラクタ

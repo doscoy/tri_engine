@@ -60,66 +60,36 @@ public:
         return texture_;
     }
     
-    void transform(
-        const Transform2D& transform
+    void setParentTransform(
+        const Transform2DPtr transform
     ) {
-        position(transform.getGlobalPosition());
-        rotation(transform.getGlobalRotation());
-        scale(transform.scale());
+        transform_->setParentTransform(transform);
+    }
+
+    Transform2DPtr transform() {
+        return transform_;
+    }
+    
+    const Transform2DPtr transform() const {
+        return transform_;
+    }
+    
+    void transform(
+        Transform2DPtr t
+    ) {
+        transform_ = t;
     }
 
 
-    //  座標を取得
-    Vec2& position() {
-        return position_;
-    }
-    
-    
-    //  座標を取得
-    const Vec2& position() const {
-        return position_;
-    }
-    
-    
-    //  座標を設定
-    void position(
-        const Vec2& pos
-    ){
-        position_ = pos;
-    }
-    
-    
-    //  座標を設定
-    void position(
-        const float x,
-        const float y
-    ){
-        position_.x_ = x;
-        position_.y_ = y;
-    }
     
     //  向きを設定
     void direction(
         const Vec2& dir
     ) {
         float angle = std::atan2(dir.y_, dir.x_);
-        rotation(t3::toDegree(angle));
+        transform_->rotation(t3::toDegree(angle));
     }
 
-
-    
-    //  回転を取得
-    float rotation() const {
-        return rotation_;
-    }
-    
-
-    //  回転を設定
-    void rotation(
-        const float rot
-    ){
-        rotation_ = rot;
-    }
 
     //  回転中心を取得
     const Vec2& pivot() const {
@@ -221,43 +191,10 @@ public:
     
     //  スケール済サイズを取得
     Vec2 scaledSize() const {
-        Vec2 scaled = size() * scale();
+        Vec2 scaled = size() * transform()->scale();
         return scaled;
     }
-    
-    //  スケールを取得
-    Vec2& scale() {
-        return scale_;
-    }
 
-
-    //  スケールを取得
-    const Vec2& scale() const {
-        return scale_;
-    }
-    
-    
-    //  スケールを設定
-    void scale(
-        const Vec2& scale
-    ){
-        scale_ = scale;
-    }
-    
-    void scale(
-        const float scale
-    ) {
-        scale_.x_ = scale_.y_ = scale;
-    }
-    
-    void scale(
-        const float x,
-        const float y
-    ) {
-        scale_.x_ = x;
-        scale_.y_ = y;
-    }
-    
     
     //  描画プライオリティ取得
     uint8_t priority() const {
@@ -301,11 +238,11 @@ public:
     }
     
     bool isTransratedSprite() const {
-        
-        if (!isEqualFloat(position_.x_, 0.0f)) {
+        Vec2 pos = transform()->globalPosition();
+        if (!isEqualFloat(pos.x_, 0.0f)) {
             return true;
         }
-        if (!isEqualFloat(position_.y_, 0.0f)) {
+        if (!isEqualFloat(pos.y_, 0.0f)) {
             return true;
         }
         
@@ -313,20 +250,20 @@ public:
     }
 
     bool isRotatedSprite() const {
-        
-        if (isEqualFloat(rotation_, 0.0f)) {
+        float rot = transform()->globalRotation();
+        if (isEqualFloat(rot, 0.0f)) {
             return false;
         }
         return true;
     }
 
     bool isScaledSprite() const {
-       // return true;
+        const Vec2& scale = transform()->scale();
         
-        if (!isEqualFloat(scale_.x_, 1.0f)) {
+        if (!isEqualFloat(scale.x_, 1.0f)) {
             return true;
         }
-        if (!isEqualFloat(scale_.y_, 1.0f)) {
+        if (!isEqualFloat(scale.y_, 1.0f)) {
             return true;
         }
 
@@ -356,11 +293,10 @@ public:
 
 private:
     std::shared_ptr<Texture> texture_;
-    Vec2 position_;
+    Transform2DPtr transform_;
     Vec2 size_;
     Vec2 pivot_;
-    Vec2 scale_;
-    float rotation_;
+
     Color color_;
     
     uint8_t priority_;

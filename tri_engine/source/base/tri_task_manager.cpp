@@ -99,7 +99,7 @@ void TaskManager::killAllTask() {
 
 
 void TaskManager::onPause(const t3::Event& eve) {
-    auto pause_eve = static_cast<const PauseEvent&>(eve);
+    auto& pause_eve = static_cast<const PauseEvent&>(eve);
     pause_level_ = pause_eve.getPauseLevel();
 }
 

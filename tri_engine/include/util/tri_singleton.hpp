@@ -13,7 +13,7 @@ class Singleton
 {
 protected:
     Singleton(){
-        T3_ASSERT_MSG( created_ == false, "instance is created." );
+        T3_ASSERT_MSG(created_ == false, "instance is created.");
         created_ = true;
     }
     ~Singleton(){
@@ -40,21 +40,17 @@ public:
     // *********************************************
     //  インスタンス取得
     static T& instance(){
+        T3_ASSERT(created_);
         return *instance_;
     }
-    
-    // *********************************************
-    //  インスタンスのポインタ取得
-    static T* getInstancePointer(){
-        return instance_;
-    }
+
 
 private:
     static T* instance_;
     static bool created_;
 };
 
-template <typename T> T* Singleton<T>::instance_ = 0;
+template <typename T> T* Singleton<T>::instance_ = nullptr;
 template <typename T> bool Singleton<T>::created_ = false;
 
 

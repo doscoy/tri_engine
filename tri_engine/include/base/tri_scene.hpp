@@ -91,7 +91,10 @@ public:
         task_manager_.attach(task);
     }
 
-
+    const TaskManager& taskManager() const {
+        return task_manager_;
+    }
+    
 protected:
     void finish(bool f) {
         finish_ = f;
@@ -155,6 +158,8 @@ public:
     static void addSceneTask(
         std::shared_ptr<Task> task
     );
+
+    static const TaskManager& taskManager();
 
 private:
     void sceneChange();

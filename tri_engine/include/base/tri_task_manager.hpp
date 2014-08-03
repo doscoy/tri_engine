@@ -13,15 +13,16 @@ namespace t3 {
 inline namespace base {
 
 
-typedef std::list<std::shared_ptr<Task>> TaskList;
+typedef std::list<TaskPtr> TaskList;
 
-class TaskManager {
+class TaskManager
+    : Uncopyable {
 public:
     TaskManager();
     ~TaskManager();
     
 public:
-    void attach(std::shared_ptr<Task> task);
+    void attach(TaskPtr task);
     
     bool hasTask() {
         return !taskes_.empty();
@@ -32,15 +33,20 @@ public:
     
     void printTask() const;
     
-    std::size_t getTaskCount() const {
+    std::size_t count() const {
         return taskes_.size();
     }
+    
+    std::size_t count(std::function<bool(const TaskPtr)> func) const {
+        return std::count_if(taskes_.begin(), taskes_.end(), func);
+    }
+    
     
 protected:
     TaskList taskes_;
     
 private:
-    void detach(std::shared_ptr<Task> task) {
+    void detach(TaskPtr task) {
         taskes_.remove(task);
         task->attachTask(false);
     }

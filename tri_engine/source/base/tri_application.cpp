@@ -120,8 +120,8 @@ void initializeTriEngine(
     //  初期化
     Director::instance().initializeGameSystem();
     
-    t3::Director* d = t3::Director::getInstancePointer();
-    d->realScreenSize(
+    t3::Director& d = t3::Director::instance();
+    d.realScreenSize(
         Vec2(
             width,
             height

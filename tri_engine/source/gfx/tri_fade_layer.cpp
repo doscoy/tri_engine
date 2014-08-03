@@ -27,7 +27,7 @@ FadeLayer::FadeLayer(
 {
     setUpdateCallback(this, &FadeLayer::fadeUpdate);
     setRenderCallback(this, &FadeLayer::fadeRender);
-    fade_color_.setAlphaf(alpha_);
+    fade_color_.alphaFloat(alpha_);
 }
 
 FadeLayer::~FadeLayer() {
@@ -60,7 +60,7 @@ void FadeLayer::fadeUpdate(
         }
     }
     
-    fade_color_.setAlphaf(alpha_);
+    fade_color_.alphaFloat(alpha_);
 }
 
 

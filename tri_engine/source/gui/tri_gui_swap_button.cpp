@@ -98,7 +98,7 @@ void SwapButton::triggeredEvent(
 
 
 void SwapButton::onTriggeredA(const t3::Event& eve) {
-    auto event = static_cast<const SwapButtonAEvent&>(eve);
+    auto& event = static_cast<const SwapButtonAEvent&>(eve);
     if (event.ui_id_ != button_id_) {
         //  自分のボタンイベントじゃない
         return;
@@ -113,7 +113,7 @@ void SwapButton::onTriggeredA(const t3::Event& eve) {
 }
 
 void SwapButton::onTriggeredB(const t3::Event& eve) {
-    auto event = static_cast<const SwapButtonBEvent&>(eve);
+    auto& event = static_cast<const SwapButtonBEvent&>(eve);
     if (event.ui_id_ != button_id_) {
         //  自分のボタンイベントじゃない
         return;

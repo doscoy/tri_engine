@@ -159,7 +159,7 @@ void SpriteRenderer::margeSprites() {
         
         //  スケーリング
         if (spr->isScaledSprite()) {
-            const Vec2& scale = spr->scale();
+            const Vec2& scale = spr->transform()->scale();
             lt *= scale;
             lb *= scale;
             rt *= scale;
@@ -168,7 +168,7 @@ void SpriteRenderer::margeSprites() {
 
         //  回転
         if (spr->isRotatedSprite()) {
-            float angle = toRadian(spr->rotation());
+            float angle = toRadian(spr->transform()->globalRotation());
 
             float cos_angle = std::cos(angle);
             float sin_angle = std::sin(angle);
@@ -202,7 +202,7 @@ void SpriteRenderer::margeSprites() {
         
         //  位置移動
         if (spr->isTransratedSprite()) {
-            const Vec2& pos =spr->position();
+            const Vec2& pos =spr->transform()->globalPosition();
 
             lt += pos;
             lb += pos;

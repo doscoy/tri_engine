@@ -61,7 +61,7 @@ void DebugLogLayer::updateLayer(tick_t delta_time)
         DebugStringLayer::writeString(
             30,
             line * DEBUG_FONT_POINT,
-            Color::white().getRGBA(),
+            Color::white().rgba32(),
             DEBUG_FONT_POINT,
             debug_log_buffer_.getString(str_idx)
         );
