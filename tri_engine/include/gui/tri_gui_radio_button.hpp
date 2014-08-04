@@ -20,7 +20,8 @@ public:
         const UniqueID button_id,
         int button_idx
     )   : button_id_(button_id)
-        , group_id_(group_id) {
+        , group_id_(group_id)
+        , button_index_(button_idx) {
     }
     
     static const EventType TYPE;
@@ -68,6 +69,9 @@ public:
         return buttons_[active_button_idx_]->buttonID();
     }
 
+    UniqueID id() {
+        return group_id_;
+    }
 
 private:
     void onRadioButtonTriggered(

@@ -1,4 +1,4 @@
-#include "tri_gui_radio_button.hpp"
+#include "gui/tri_gui_radio_button.hpp"
 
 
 
@@ -13,11 +13,10 @@ const EventType RadioButtonEvent::TYPE("RadioButtonEvent");
 //  コンストラクタ
 RadioButton::RadioButton()
     : buttons_()
-    , group_id_() {
-    
+    , group_id_()
+    , active_button_idx_(0) {
  
     safeAddListener(this, &RadioButton::onRadioButtonTriggered, RadioButtonEvent::TYPE);
-
 }
 
 RadioButton::~RadioButton() {
