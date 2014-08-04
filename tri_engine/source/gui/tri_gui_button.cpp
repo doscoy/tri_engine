@@ -9,12 +9,51 @@ namespace t3 {
 inline namespace gui {
 
 
+//  デフォルトのアクティベート処理
+void ButtonDefaultActivator::activate(t3::Button *b) {
+    
+    if (!b->sprite()) {
+        return;
+    }
+
+    b->sprite()->color(Color::white());
+
+}
+
+//  デフォルトの非アクティベート処理
+void ButtonDefaultActivator::deactivate(t3::Button* b) {
+
+    if (!b->sprite()) {
+        return;
+    }
+
+    b->sprite()->color(Color::gray());
+}
+
+
+void ButtonDefaultHoverEffector::hover(t3::Button* b) {
+    if (!b->sprite()) {
+        return;
+    }
+    b->sprite()->transform()->scale(1.05f);
+}
+
+void ButtonDefaultHoverEffector::unhover(t3::Button* b) {
+    if (!b->sprite()) {
+        return;
+    }
+    b->sprite()->transform()->scale(1.0f);
+}
+
+
 Button::Button()
     : sprite_(nullptr)
     , hit_area_()
     , first_touch_(false)
     , hover_(false)
-    , triggerd_event_(nullptr)
+    , triggerd_events_()
+    , activator_(std::make_shared<ButtonDefaultActivator>())
+    , hover_effector_(std::make_shared<ButtonDefaultHoverEffector>())
 {
     safeAddListener(
         this,
@@ -33,6 +72,7 @@ Button::Button()
         &self_t::onPointingRelease,
         PointingReleasedEvent::TYPE
     );
+
 }
 
 Button::~Button() {
@@ -75,7 +115,7 @@ void Button::onPointingTrigger(
     if (isHitPointRectangle(trg_event.position(), hit_area_)) {
         //  ファーストタッチで触っていた
         first_touch_ = true;
-        hover(true);
+        hover();
     }
 }
 
@@ -84,14 +124,16 @@ void Button::onPointingRelease(
 ) {
     //  触った状態で離されたか？
     if (hover_) {
-        if (triggerd_event_) {
-            safeQueueEvent(triggerd_event_);
+        if (!triggerd_events_.empty()) {
+            for (auto event: triggerd_events_) {
+                safeQueueEvent(event);
+            }
         }
     }
     
     //  画面から離れたら状態リセット
     first_touch_ = false;
-    hover(false);
+    unhover();
 
 }
 
@@ -106,10 +148,10 @@ void Button::onPointingMoving(
     
     auto& move_event = static_cast<const t3::PointingMovingEvent&>(eve);
     if (isHitPointRectangle(move_event.position(), hit_area_)) {
-        hover(true);
+        hover();
     }
     else {
-        hover(false);
+        unhover();
     }
 
 
@@ -117,12 +159,11 @@ void Button::onPointingMoving(
 }
 
 void Button::activate() {
-    sprite_->color(Color::white());
+    activator_->activate(this);
 }
 
 void Button::deactivate() {
-    sprite_->color(Color::gray());
-
+    activator_->deactivate(this);
 }
 
 

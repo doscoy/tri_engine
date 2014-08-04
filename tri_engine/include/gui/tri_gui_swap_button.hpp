@@ -1,10 +1,4 @@
-//
-//  tri_gui_swap_button.hpp
-//  tri_samples_ios
-//
-//  Created by KANI Tetsuro on 2014/07/20.
-//  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
-//
+
 
 #ifndef TRI_GUI_SWAP_BUTTON_HPP_INCLUDED
 #define TRI_GUI_SWAP_BUTTON_HPP_INCLUDED
@@ -68,7 +62,7 @@ private:
 private:
     Button a_;
     Button b_;
-    UniqueID button_id_;
+    UniqueID swap_button_id_;
     EventPtr a_event_;
     EventPtr b_event_;
 };

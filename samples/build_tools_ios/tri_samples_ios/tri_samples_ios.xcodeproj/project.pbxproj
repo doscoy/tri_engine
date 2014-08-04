@@ -122,6 +122,7 @@
 		04F1FFFD198555E600C8D498 /* tri_render_layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FF95198555E600C8D498 /* tri_render_layer.cpp */; };
 		04F1FFFE198555E600C8D498 /* tri_render_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FF96198555E600C8D498 /* tri_render_system.cpp */; };
 		04F1FFFF198555E600C8D498 /* tri_scene_graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FF97198555E600C8D498 /* tri_scene_graph.cpp */; };
+		3A0DC69D198F572D00ADC4BE /* tri_gui_radio_button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DC69C198F572D00ADC4BE /* tri_gui_radio_button.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -394,6 +395,8 @@
 		04F1FFC6198555E600C8D498 /* tri_bit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_bit.cpp; sourceTree = "<group>"; };
 		04F1FFC7198555E600C8D498 /* tri_counter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_counter.cpp; sourceTree = "<group>"; };
 		04F1FFC8198555E600C8D498 /* tri_unique_id.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_unique_id.cpp; sourceTree = "<group>"; };
+		3A0DC69B198F561800ADC4BE /* tri_gui_radio_button.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_gui_radio_button.hpp; sourceTree = "<group>"; };
+		3A0DC69C198F572D00ADC4BE /* tri_gui_radio_button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_gui_radio_button.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -719,6 +722,7 @@
 				04F1FF15198555E600C8D498 /* tri_gui.hpp */,
 				04F1FF16198555E600C8D498 /* tri_gui_button.hpp */,
 				04F1FF17198555E600C8D498 /* tri_gui_swap_button.hpp */,
+				3A0DC69B198F561800ADC4BE /* tri_gui_radio_button.hpp */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -967,6 +971,7 @@
 			children = (
 				04F1FFA1198555E600C8D498 /* tri_gui_button.cpp */,
 				04F1FFA2198555E600C8D498 /* tri_gui_swap_button.cpp */,
+				3A0DC69C198F572D00ADC4BE /* tri_gui_radio_button.cpp */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -1196,6 +1201,7 @@
 				04F1FFD6198555E600C8D498 /* tri_application.cpp in Sources */,
 				04F1FE801985557F00C8D498 /* ViewController.mm in Sources */,
 				04F1FFF6198555E600C8D498 /* tri_camera.cpp in Sources */,
+				3A0DC69D198F572D00ADC4BE /* tri_gui_radio_button.cpp in Sources */,
 				04F10018198555E600C8D498 /* platform_core_render_system_opengl_es2.cpp in Sources */,
 				04F1000D198555E600C8D498 /* tri_pointing.cpp in Sources */,
 				04F1FFDD198555E600C8D498 /* tri_task.cpp in Sources */,

@@ -16,10 +16,101 @@ namespace t3 {
 inline namespace gui {
 
 
+class Button;
+//  ボタンのアクティブ状態変更処理
+class ButtonActivator {
+public:
+    //  コンストラクタ
+    ButtonActivator() {
+    }
+    
+    //  デストラクタ
+    virtual ~ButtonActivator() {
+    }
+
+public:
+    //  アクティベート処理
+    virtual void activate(Button* b) = 0;
+
+    //  非アクティベート処理
+    virtual void deactivate(Button* b) = 0;
+};
+
+//  アクティベータポインタ
+using ButtonActivatorPtr = std::shared_ptr<ButtonActivator>;
+
+
+//  デフォルトのボタンアクティブ状態変更処理
+class ButtonDefaultActivator
+    : public ButtonActivator {
+public:
+    //  コンストラクタ
+    ButtonDefaultActivator() {
+    }
+    
+    //  デストラクタ
+    ~ButtonDefaultActivator() {
+    }
+    
+public:
+    //  デフォルトのアクティベート処理
+    void activate(Button* b) override;
+    
+    //  デフォルトの非アクティベート処理
+    void deactivate(Button* b) override;
+};
+
+
+
+//  ホバー状態のエフェクタ
+class ButtonHoverEffector {
+public:
+    //  コンストラクタ
+    ButtonHoverEffector() {
+    }
+    
+    //  デストラクタ
+    virtual ~ButtonHoverEffector() {
+    }
+    
+public:
+    //  ホバー状態
+    virtual void hover(Button* b) = 0;
+
+    //  非ホバー状態
+    virtual void unhover(Button* b) = 0;
+};
+
+//  ホバーエフェクタのポインタ
+using ButtonHoverEffectorPtr = std::shared_ptr<ButtonHoverEffector>;
+
+
+//  デフォルトのホバーエフェクタ
+class ButtonDefaultHoverEffector
+    : public ButtonHoverEffector {
+
+public:
+    //  コンストラクタ
+    ButtonDefaultHoverEffector() {
+    }
+    
+    //  デストラクタ
+    ~ButtonDefaultHoverEffector() {
+    }
+    
+public:
+    //  ホバー状態
+    void hover(Button* b) override;
+
+    //  非ホバー状態
+    void unhover(Button* b) override;
+};
+
 class Button
     : Uncopyable {
+    //  型定義
     using self_t = Button;
-
+    
 public:
     Button();
     ~Button();
@@ -33,10 +124,10 @@ public:
     void setupSprite(
         SpritePtr source
     );
-    void triggerdEvent(
+    void addTriggeredEvent(
         EventPtr eve
     ) {
-        triggerd_event_ = eve;
+        triggerd_events_.push_back(eve);
     }
     
     SpritePtr sprite() {
@@ -77,6 +168,14 @@ public:
         hit_area_.size(s);
     }
     
+    void activator(ButtonActivatorPtr activator) {
+        activator_ = activator;
+    }
+    
+    
+    UniqueID buttonID() const {
+        return button_id_;
+    }
     
     void activate();
     void deactivate();
@@ -95,16 +194,14 @@ private:
     }
     
     
-    void hover(bool f) {
-        hover_ = f;
-        if (sprite_) {
-            if (f) {
-                sprite_->transform()->scale(1.05f);
-            }
-            else {
-                sprite_->transform()->scale(1.0f);
-            }
-        }
+    void hover() {
+        hover_ = true;
+        hover_effector_->hover(this);
+    }
+    
+    void unhover() {
+        hover_ = false;
+        hover_effector_->unhover(this);
     }
 
 
@@ -113,7 +210,11 @@ private:
     Rectangle hit_area_;
     bool first_touch_;
     bool hover_;
-    EventPtr triggerd_event_;
+    std::vector<EventPtr> triggerd_events_;
+    ButtonActivatorPtr activator_;
+    ButtonHoverEffectorPtr hover_effector_;
+    UniqueID button_id_;
+
 };   // class Button
 
 

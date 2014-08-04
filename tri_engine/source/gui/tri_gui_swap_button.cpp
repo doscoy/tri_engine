@@ -1,10 +1,3 @@
-//
-//  tri_gui_swap_button.cpp
-//  tri_samples_ios
-//
-//  Created by KANI Tetsuro on 2014/07/20.
-//  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
-//
 
 #include "gui/tri_gui_swap_button.hpp"
 
@@ -12,7 +5,7 @@ namespace t3 {
 
 namespace {
 
-
+//  スワップボタンのAが押された時のイベント
 class SwapButtonAEvent
     : public EventBase {
 
@@ -22,16 +15,16 @@ public:
         : ui_id_(id)
     {}
     
-    
-    
-    
     static const EventType TYPE;
     const EventType& eventType() const override {
         return TYPE;
     }
     UniqueID ui_id_;
 };
+const EventType SwapButtonAEvent::TYPE("SwapButtonAEvent");
 
+
+//  スワップボタンのBが押された時のイベント
 class SwapButtonBEvent
     : public EventBase {
     SwapButtonBEvent();
@@ -45,8 +38,6 @@ public:
     }
     UniqueID ui_id_;
 };
-
-const EventType SwapButtonAEvent::TYPE("SwapButtonAEvent");
 const EventType SwapButtonBEvent::TYPE("SwapButtonBEvent");
 
 
@@ -58,6 +49,9 @@ inline namespace gui {
 SwapButton::SwapButton()
     : a_()
     , b_()
+    , swap_button_id_()
+    , a_event_(nullptr)
+    , b_event_(nullptr)
 {
     safeAddListener(this, &SwapButton::onTriggeredA, SwapButtonAEvent::TYPE);
     safeAddListener(this, &SwapButton::onTriggeredB, SwapButtonBEvent::TYPE);
@@ -82,8 +76,8 @@ void SwapButton::setupSprite(
     b_.sprite()->enable(!default_a);
 
     //  イベント登録
-    a_.triggerdEvent(std::make_shared<SwapButtonAEvent>(button_id_));
-    b_.triggerdEvent(std::make_shared<SwapButtonBEvent>(button_id_));
+    a_.addTriggeredEvent(std::make_shared<SwapButtonAEvent>(swap_button_id_));
+    b_.addTriggeredEvent(std::make_shared<SwapButtonBEvent>(swap_button_id_));
 
 
 }
@@ -99,7 +93,7 @@ void SwapButton::triggeredEvent(
 
 void SwapButton::onTriggeredA(const t3::Event& eve) {
     auto& event = static_cast<const SwapButtonAEvent&>(eve);
-    if (event.ui_id_ != button_id_) {
+    if (event.ui_id_ != swap_button_id_) {
         //  自分のボタンイベントじゃない
         return;
     }
@@ -114,7 +108,7 @@ void SwapButton::onTriggeredA(const t3::Event& eve) {
 
 void SwapButton::onTriggeredB(const t3::Event& eve) {
     auto& event = static_cast<const SwapButtonBEvent&>(eve);
-    if (event.ui_id_ != button_id_) {
+    if (event.ui_id_ != swap_button_id_) {
         //  自分のボタンイベントじゃない
         return;
     }

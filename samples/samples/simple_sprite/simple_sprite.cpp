@@ -78,9 +78,9 @@ private:
         int spr_idx = 0;
         for (auto spr : *sprites) {
             
-            float angle = spr->rotation();
+            float angle = spr->transform()->rotation();
             if (spr_idx % 2) {
-                spr->rotation(angle + 1);
+                spr->transform()->rotation(angle + 1);
             }
             spr_idx += 1;
         }
@@ -127,7 +127,7 @@ private:
 
             float pos_x = ((i % x_count) * offset.x_) - 300;
             float pos_y = y * offset.y_;
-            spr->position(pos_x, pos_y);
+            spr->transform()->position(pos_x, pos_y);
             i += 1;
         }
     }
@@ -140,7 +140,7 @@ private:
         std::shared_ptr<t3::Sprite> sprite = sprite_layer_.createSprite(
             texture_manager.resource(tex3_handle_)
         );
-        sprite->scale(2.0f);
+        sprite->transform()->scale(2.0f);
         
         
         t3::Director::random_t& random_gen =  t3::Director::instance().random();

@@ -31,8 +31,9 @@ class SampleApp
 int main(int argc, char * argv[])
 {
     SampleApp app;
+    app.setRootScene(t3::Scene::sceneGenerator<UiButtonScene>());
     
-    app.setRootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
+    //app.setRootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
     t3::platform::run(argc, argv, &app);
 
     return 0;

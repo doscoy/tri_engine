@@ -62,7 +62,7 @@ public:
         sprite_ = layer_.createSprite(path);
         sprite_->setupTextureCoordAndSize(t3::Vec2(0, 0), t3::Vec2(64, 64));
         button_.setupSprite(sprite_);
-        button_.triggerdEvent(
+        button_.addTriggeredEvent(
             std::make_shared<EventAAA>()
         );
         button_.size(128);
@@ -70,10 +70,9 @@ public:
         
         
         //  スワップボタン
-        t3::FilePath swap_path = t3::FilePath("tri_engine_ui_sample.png");
-        swap_a_ = layer_.createSprite(swap_path);
+        swap_a_ = layer_.createSprite(path);
         swap_a_->setupTextureCoordAndSize(t3::Vec2(0, 128), t3::Vec2(64, 64));
-        swap_b_ = layer_.createSprite(swap_path);
+        swap_b_ = layer_.createSprite(path);
         swap_b_->setupTextureCoordAndSize(t3::Vec2(64, 128), t3::Vec2(64, 64));
         
         swap_button_.setupSprite(swap_a_, swap_b_);
@@ -84,6 +83,20 @@ public:
         t3::safeAddListener(this, &SceneContext::onEventAA, EventAAA::TYPE);
         t3::safeAddListener(this, &SceneContext::onSwapA, EventSwapA::TYPE);
         t3::safeAddListener(this, &SceneContext::onSwapB, EventSwapB::TYPE);
+        
+        
+        // ラジオボタン作成
+        for (int i = 0; i < RADIO_BUTTON_NUM; ++i) {
+            auto spr = layer_.createSprite(path);
+            spr->setupTextureCoordAndSize(
+                t3::Vec2(0, 64),
+                t3::Vec2(64, 64)
+            );
+            spr->transform()->position(i * 70, -190);
+            btn_radio_[i].setupSprite(spr);
+            group_.registryButton(&btn_radio_[i]);
+        }
+        
     }
     
     void terminate() {
@@ -117,6 +130,14 @@ private:
     t3::SwapButton swap_button_;
     t3::gfx::SpritePtr swap_a_;
     t3::gfx::SpritePtr swap_b_;
+    
+    
+    static const int RADIO_BUTTON_NUM = 3;
+    t3::Button btn_radio_[RADIO_BUTTON_NUM];
+    t3::RadioButton group_;
+
+    
+
 };
 
 
