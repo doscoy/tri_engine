@@ -48,8 +48,8 @@ private:
     ShaderPtr shader_;
     ShaderPtr default_shader_;
 
-    RenderSystem::buffer_id_t vertex_buffer_;
-    RenderSystem::buffer_id_t index_buffer_;
+    RenderSystem::BufferID vertex_buffer_;
+    RenderSystem::BufferID index_buffer_;
     int draw_count_;
 };
 

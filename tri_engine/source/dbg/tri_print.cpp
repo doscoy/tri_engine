@@ -68,8 +68,7 @@ void beginPrint(
         t3::RenderSystem::TextureUnit::UNIT0
     );
     
-    t3::RenderSystem::setTextureMapping(true);
- 
+
     
     //  アクティブなサンプラーをステージ０に設定
     font_shader_.setUniform("SAMPLER", 0);
@@ -79,7 +78,7 @@ void beginPrint(
 
 void endPrint()
 {
-    t3::RenderSystem::setTextureMapping(false);
+
     t3::RenderSystem::setBlend(false);
 }
 

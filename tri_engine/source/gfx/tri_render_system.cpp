@@ -41,7 +41,7 @@ int RenderSystem::buildShader(
 }
 
 void RenderSystem::attachShader(
-    RenderSystem::shader_program_t program_handle,
+    RenderSystem::ShaderProgramID program_handle,
     int shader_handle
 ) {
     countRenderCall();
@@ -49,18 +49,18 @@ void RenderSystem::attachShader(
 }
 
 void RenderSystem::linkShader(
-    RenderSystem::shader_program_t program_handle
+    RenderSystem::ShaderProgramID program_handle
 ) {
     countRenderCall();
     CoreRenderSystem::linkShader(program_handle);
 }
 
 void RenderSystem::setShader(
-    RenderSystem::shader_program_t shader
+    RenderSystem::ShaderProgramID shader
 ) {
 #if BEFORE_JUDGE_GL
     static bool initialized = false;
-    static RenderSystem::shader_program_t last;
+    static RenderSystem::ShaderProgramID last;
     if (initialized && last == shader) {
         return;
     }
@@ -73,8 +73,8 @@ void RenderSystem::setShader(
 }
 
 void RenderSystem::bindAttributeLocation(
-    RenderSystem::shader_program_t handle,
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderProgramID handle,
+    RenderSystem::ShaderVariableLocation location,
     const char* const name
 ) {
     countRenderCall();
@@ -83,24 +83,24 @@ void RenderSystem::bindAttributeLocation(
 
 
 void RenderSystem::bindFragmentDataLocation(
-    RenderSystem::shader_program_t handle,
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderProgramID handle,
+    RenderSystem::ShaderVariableLocation location,
     const char* const name
 ) {
     countRenderCall();
     CoreRenderSystem::bindFragmentDataLocation(handle, location, name);
 }
 
-RenderSystem::shader_variable_t RenderSystem::getAttributeLocation(
-    RenderSystem::shader_program_t program,
+RenderSystem::ShaderVariableLocation RenderSystem::getAttributeLocation(
+    RenderSystem::ShaderProgramID program,
     const char* const name
 ) {
     countRenderCall();
     return CoreRenderSystem::getAttributeLocation(program, name);
 }
 
-RenderSystem::shader_variable_t RenderSystem::getUniformLocation(
-    RenderSystem::shader_program_t program,
+RenderSystem::ShaderVariableLocation RenderSystem::getUniformLocation(
+    RenderSystem::ShaderProgramID program,
     const char* const name
 ) {
     countRenderCall();
@@ -109,7 +109,7 @@ RenderSystem::shader_variable_t RenderSystem::getUniformLocation(
 
 
 void RenderSystem::setUniformValue(
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderVariableLocation location,
     float x,
     float y,
     float z
@@ -119,7 +119,7 @@ void RenderSystem::setUniformValue(
 }
 
 void RenderSystem::setUniformValue(
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderVariableLocation location,
     float x,
     float y,
     float z,
@@ -130,7 +130,7 @@ void RenderSystem::setUniformValue(
 }
 
 void RenderSystem::setUniformValue(
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderVariableLocation location,
     float val
 ) {
     countRenderCall();
@@ -138,7 +138,7 @@ void RenderSystem::setUniformValue(
 }
 
 void RenderSystem::setUniformValue(
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderVariableLocation location,
     int val
 ) {
     countRenderCall();
@@ -147,7 +147,7 @@ void RenderSystem::setUniformValue(
 
 
 void RenderSystem::setUniformMatrix(
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderVariableLocation location,
     t3::Mtx4 mtx
 ) {
     countRenderCall();
@@ -248,7 +248,12 @@ void RenderSystem::clearColor(
 #endif
 
     countRenderCall();
-    CoreRenderSystem::clearColor(clear_color);
+    CoreRenderSystem::clearColor(
+        clear_color.redFloat(),
+        clear_color.greenFloat(),
+        clear_color.blueFloat(),
+        clear_color.alphaFloat()
+    );
 }
 
 
@@ -372,21 +377,7 @@ void RenderSystem::setCulling(
     CoreRenderSystem::setCulling(enable);
 }
 
-void RenderSystem::setTextureMapping(
-    bool enable
-) {
-#if BEFORE_JUDGE_GL
-    static bool initialized = false;
-    static bool last;
-    if (initialized && last == enable) {
-        return;
-    }
-    initialized = true;
-    last = enable;
-#endif
-    countRenderCall();
-    CoreRenderSystem::setTextureMapping(enable);
-}
+
 
 void RenderSystem::setTextureMagFilter(
     RenderSystem::TextureFilterType type
@@ -416,14 +407,14 @@ void RenderSystem::drawElements(
 
 
 
-RenderSystem::buffer_id_t RenderSystem::createVertexBuffer(
+RenderSystem::BufferID RenderSystem::createVertexBuffer(
     std::vector<float>& vertices
 ) {
     countRenderCall();
     return CoreRenderSystem::createVertexBuffer(vertices);
 }
 
-RenderSystem::buffer_id_t RenderSystem::createIndexBuffer(
+RenderSystem::BufferID RenderSystem::createIndexBuffer(
     std::vector<uint32_t>& indices
 ) {
     countRenderCall();

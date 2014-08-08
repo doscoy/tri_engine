@@ -35,60 +35,60 @@ public:
     );
     
     static void attachShader(
-        RenderSystem::shader_program_t program_handle,
+        RenderSystem::ShaderProgramID program_handle,
         int shader_handle
     );
 
     static void linkShader(
-        RenderSystem::shader_program_t
+        RenderSystem::ShaderProgramID
     );
     
-    static RenderSystem::shader_variable_t getUniformLocation(
-        RenderSystem::shader_program_t program,
+    static RenderSystem::ShaderVariableLocation getUniformLocation(
+        RenderSystem::ShaderProgramID program,
         const char* const name
     );
 
-    static RenderSystem::shader_variable_t getAttributeLocation(
-        RenderSystem::shader_program_t program,
+    static RenderSystem::ShaderVariableLocation getAttributeLocation(
+        RenderSystem::ShaderProgramID program,
         const char* const name
     );
 
     static void bindAttributeLocation(
-        RenderSystem::shader_program_t handle,
-        RenderSystem::shader_variable_t location,
+        RenderSystem::ShaderProgramID handle,
+        RenderSystem::ShaderVariableLocation location,
         const char* const name
     );
 
     static void bindFragmentDataLocation(
-        RenderSystem::shader_program_t handle,
-        RenderSystem::shader_variable_t location,
+        RenderSystem::ShaderProgramID handle,
+        RenderSystem::ShaderVariableLocation location,
         const char* const name
     );
 
     static void setUniformValue(
-        RenderSystem::shader_variable_t location,
+        RenderSystem::ShaderVariableLocation location,
         float val
     );
     
     static void setUniformValue(
-        RenderSystem::shader_variable_t location,
+        RenderSystem::ShaderVariableLocation location,
         int val
     );
 
 
     static void setShader(
-        RenderSystem::shader_program_t shader
+        RenderSystem::ShaderProgramID shader
     );
 
     static void setUniformValue(
-        RenderSystem::shader_variable_t,
+        RenderSystem::ShaderVariableLocation,
         float x,
         float y,
         float z
     );
     
     static void setUniformValue(
-        RenderSystem::shader_variable_t location,
+        RenderSystem::ShaderVariableLocation location,
         float x,
         float y,
         float z,
@@ -96,7 +96,7 @@ public:
     );
 
     static void setUniformMatrix(
-        RenderSystem::shader_variable_t location,
+        RenderSystem::ShaderVariableLocation location,
         t3::Mtx4 mtx
     );
 
@@ -138,7 +138,10 @@ public:
     );
     
     static void clearColor(
-       const Color& clear_color
+        float r,
+        float g,
+        float b,
+        float a
     );
     
 
@@ -175,9 +178,7 @@ public:
         bool enable
     );
     
-    static void setTextureMapping(
-        bool enable
-    );
+
 
     static void setTextureMagFilter(
         RenderSystem::TextureFilterType type
@@ -222,11 +223,11 @@ public:
     );
     
     
-    static RenderSystem::buffer_id_t createVertexBuffer(
+    static RenderSystem::BufferID createVertexBuffer(
         std::vector<float>& vertices
     );
     
-    static RenderSystem::buffer_id_t createIndexBuffer(
+    static RenderSystem::BufferID createIndexBuffer(
         std::vector<uint32_t>& indices
     );
   

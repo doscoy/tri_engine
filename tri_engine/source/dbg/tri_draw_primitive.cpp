@@ -101,7 +101,6 @@ void drawRectangleViewport(
     };
 
 
-    RenderSystem::setTextureMapping(true);
     RenderSystem::setBlend(true);
     RenderSystem::setCulling(false);
 
@@ -113,7 +112,7 @@ void drawRectangleViewport(
     
     //  描画
     // シェーダで描画
-    RenderSystem::shader_variable_t position_slot = simple2d_.getAttributeLocation("in_position");
+    RenderSystem::ShaderVariableLocation position_slot = simple2d_.getAttributeLocation("in_position");
     t3::RenderSystem::setEnableVertexAttribute(position_slot);
     
     t3::RenderSystem::setVertexAttributePointer(

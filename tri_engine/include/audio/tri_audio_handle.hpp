@@ -12,7 +12,7 @@ class AudioHandle {
     friend class AudioResource;
 private:
     explicit AudioHandle(
-        AudioSystem::buffer_id_t buffer_id
+        AudioSystem::BufferID buffer_id
     );
 
 public:

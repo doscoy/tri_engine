@@ -123,10 +123,8 @@ void SpriteRenderer::beginRender()
         t3::RenderSystem::BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
     );
 
-    t3::RenderSystem::setTextureMapping(true);
     t3::RenderSystem::setBlend(true);
     t3::RenderSystem::setCulling(false);
-
 
 }
 
@@ -372,7 +370,6 @@ void SpriteRenderer::endRender()
 
     
     //  描画設定解除
-    t3::RenderSystem::setTextureMapping(false);
     t3::RenderSystem::setBlend(false);
 
     //  描画コンテナのクリア

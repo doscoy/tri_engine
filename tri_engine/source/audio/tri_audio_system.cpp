@@ -36,20 +36,20 @@ void AudioSystem::terminateAudioSystem() {
 }
 
 
-AudioSystem::buffer_id_t AudioSystem::generateBuffer() {
-    buffer_id_t id;
+AudioSystem::BufferID AudioSystem::generateBuffer() {
+    BufferID id;
     alGenBuffers(1, &id);
     return id;
 }
 
 void AudioSystem::deleteBuffer(
-    AudioSystem::buffer_id_t id
+    AudioSystem::BufferID id
 ) {
     alDeleteBuffers(1, &id);
 }
 
 
-AudioSystem::source_id_t AudioSystem::generateSource(buffer_id_t buffer) {
+AudioSystem::source_id_t AudioSystem::generateSource(BufferID buffer) {
     source_id_t source;
     alGenSources(1, &source);
     alSourcei(source, AL_BUFFER, buffer);
@@ -79,7 +79,7 @@ void AudioSystem::setLoop(
 }
 
 void AudioSystem::setBufferData(
-    const buffer_id_t id,
+    const BufferID id,
     const AudioSystem::AudioFormat format,
     const uint8_t *data,
     const size_t size,

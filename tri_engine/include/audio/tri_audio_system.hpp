@@ -17,7 +17,7 @@ public:
     static void terminateAudioSystem();
 
 
-    using buffer_id_t = unsigned int;
+    using BufferID = unsigned int;
     using source_id_t = unsigned int;
     
     enum class AudioFormat {
@@ -28,17 +28,17 @@ public:
     };
     
     static void setBufferData(
-        const buffer_id_t id,
+        const BufferID id,
         const AudioFormat format,
         const uint8_t* data,
         const size_t size,
         const int sampling_rate
     );
-    static buffer_id_t generateBuffer();
-    static void deleteBuffer(buffer_id_t buffer);
+    static BufferID generateBuffer();
+    static void deleteBuffer(BufferID buffer);
 
     static source_id_t generateSource(
-        buffer_id_t buffer
+        BufferID buffer
     );
     static void deleteSource(source_id_t source);
 

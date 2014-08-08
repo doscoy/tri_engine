@@ -27,9 +27,9 @@ public:
     
     static void resetRenderCallCount();
 
-    using buffer_id_t = unsigned int;
-    using shader_program_t = unsigned int;
-    using shader_variable_t = unsigned int;
+    using BufferID = unsigned int;
+    using ShaderProgramID = unsigned int;
+    using ShaderVariableLocation = unsigned int;
     using texture_handle_t = unsigned int;
 
 
@@ -59,60 +59,60 @@ public:
     );
     
     static void attachShader(
-        shader_program_t program_handle,
+        ShaderProgramID program_handle,
         int shader_handle
     );
 
     static void linkShader(
-        shader_program_t
+        ShaderProgramID
     );
     
-    static shader_variable_t getUniformLocation(
-        shader_program_t program,
+    static ShaderVariableLocation getUniformLocation(
+        ShaderProgramID program,
         const char* const name
     );
 
-    static shader_variable_t getAttributeLocation(
-        shader_program_t program,
+    static ShaderVariableLocation getAttributeLocation(
+        ShaderProgramID program,
         const char* const name
     );
 
     static void bindAttributeLocation(
-        shader_program_t handle,
-        shader_variable_t location,
+        ShaderProgramID handle,
+        ShaderVariableLocation location,
         const char* const name
     );
 
     static void bindFragmentDataLocation(
-        shader_program_t handle,
-        shader_variable_t location,
+        ShaderProgramID handle,
+        ShaderVariableLocation location,
         const char* const name
     );
 
     static void setUniformValue(
-        shader_variable_t location,
+        ShaderVariableLocation location,
         float val
     );
     
     static void setUniformValue(
-        shader_variable_t location,
+        ShaderVariableLocation location,
         int val
     );
 
 
     static void setShader(
-        shader_program_t shader
+        ShaderProgramID shader
     );
 
     static void setUniformValue(
-        shader_variable_t,
+        ShaderVariableLocation,
         float x,
         float y,
         float z
     );
     
     static void setUniformValue(
-        shader_variable_t location,
+        ShaderVariableLocation location,
         float x,
         float y,
         float z,
@@ -120,7 +120,7 @@ public:
     );
 
     static void setUniformMatrix(
-        shader_variable_t location,
+        ShaderVariableLocation location,
         t3::Mtx4 mtx
     );
 
@@ -227,9 +227,6 @@ public:
         bool enable
     );
     
-    static void setTextureMapping(
-        bool enable
-    );
 
     enum class TextureFilterType {
         TYPE_NEAREST,
@@ -289,11 +286,11 @@ public:
     );
     
     
-    static buffer_id_t createVertexBuffer(
+    static BufferID createVertexBuffer(
         std::vector<float>& vertices
     );
     
-    static buffer_id_t createIndexBuffer(
+    static BufferID createIndexBuffer(
         std::vector<uint32_t>& indices
     );
   

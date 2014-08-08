@@ -7,7 +7,7 @@ namespace t3 {
 inline namespace audio {
 
 AudioHandle::AudioHandle(
-    const AudioSystem::buffer_id_t buffer_id
+    const AudioSystem::BufferID buffer_id
 )   : sid_(0)
     , bgm_(false)
 {

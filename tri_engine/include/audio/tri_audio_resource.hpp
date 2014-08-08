@@ -32,7 +32,7 @@ private:
     void setupBuffer(const Wav& wav);
 
 private:
-    AudioSystem::buffer_id_t id_;
+    AudioSystem::BufferID id_;
 };
 
 

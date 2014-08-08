@@ -19,7 +19,8 @@ inline void setGLState(GLenum e, bool f) {
     else {
         glDisable(e);
     }
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    int err = glGetError();
+    T3_ASSERT_MSG(err == GL_NO_ERROR, "err = %d: GLenum = %d", err, e);
 }
 
 
@@ -71,27 +72,27 @@ int CoreRenderSystem::buildShader(
 }
 
 void CoreRenderSystem::attachShader(
-    RenderSystem::shader_program_t program_handle,
+    RenderSystem::ShaderProgramID program_handle,
     int shader_handle
 ) {
     glAttachShader(program_handle, shader_handle);
 }
 
 void CoreRenderSystem::linkShader(
-    RenderSystem::shader_program_t program_handle
+    RenderSystem::ShaderProgramID program_handle
 ) {
     glLinkProgram(program_handle);
 }
 
 void CoreRenderSystem::setShader(
-    RenderSystem::shader_program_t shader
+    RenderSystem::ShaderProgramID shader
 ) {
     glUseProgram(shader);
 }
 
 void CoreRenderSystem::bindAttributeLocation(
-    RenderSystem::shader_program_t handle,
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderProgramID handle,
+    RenderSystem::ShaderVariableLocation location,
     const char* const name
 ) {
     glBindAttribLocation(handle, location, name);
@@ -99,22 +100,22 @@ void CoreRenderSystem::bindAttributeLocation(
 
 
 void CoreRenderSystem::bindFragmentDataLocation(
-    RenderSystem::shader_program_t handle,
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderProgramID handle,
+    RenderSystem::ShaderVariableLocation location,
     const char* const name
 ) {
     //    glBindFragDataLocation();
 }
 
-RenderSystem::shader_variable_t CoreRenderSystem::getAttributeLocation(
-    RenderSystem::shader_program_t program,
+RenderSystem::ShaderVariableLocation CoreRenderSystem::getAttributeLocation(
+    RenderSystem::ShaderProgramID program,
     const char* const name
 ) {
     return glGetAttribLocation(program, name);
 }
 
-RenderSystem::shader_variable_t CoreRenderSystem::getUniformLocation(
-    RenderSystem::shader_program_t program,
+RenderSystem::ShaderVariableLocation CoreRenderSystem::getUniformLocation(
+    RenderSystem::ShaderProgramID program,
     const char* const name
 ) {
     return glGetUniformLocation(program, name);
@@ -122,7 +123,7 @@ RenderSystem::shader_variable_t CoreRenderSystem::getUniformLocation(
 
 
 void CoreRenderSystem::setUniformValue(
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderVariableLocation location,
     float x,
     float y,
     float z
@@ -131,7 +132,7 @@ void CoreRenderSystem::setUniformValue(
 }
 
 void CoreRenderSystem::setUniformValue(
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderVariableLocation location,
     float x,
     float y,
     float z,
@@ -141,14 +142,14 @@ void CoreRenderSystem::setUniformValue(
 }
 
 void CoreRenderSystem::setUniformValue(
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderVariableLocation location,
     float val
 ) {
     glUniform1f(location, val);
 }
 
 void CoreRenderSystem::setUniformValue(
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderVariableLocation location,
     int val
 ) {
     glUniform1i(location, val);
@@ -156,7 +157,7 @@ void CoreRenderSystem::setUniformValue(
 
 
 void CoreRenderSystem::setUniformMatrix(
-    RenderSystem::shader_variable_t location,
+    RenderSystem::ShaderVariableLocation location,
     t3::Mtx4 mtx
 ) {
     glUniformMatrix4fv(
@@ -245,13 +246,16 @@ void CoreRenderSystem::setClearDepthValue(
 
 
 void CoreRenderSystem::clearColor(
-    const Color& clear_color
+    float r,
+    float g,
+    float b,
+    float a
 ) {
     glClearColor(
-        clear_color.redFloat(),
-        clear_color.greenFloat(),
-        clear_color.blueFloat(),
-        clear_color.alphaFloat()
+        r,
+        g,
+        b,
+        a
     );
 }
 
@@ -384,11 +388,6 @@ void CoreRenderSystem::setCulling(
     setGLState(GL_CULL_FACE, enable);
 }
 
-void CoreRenderSystem::setTextureMapping(
-    bool enable
-) {
-//     setGLState(GL_TEXTURE_2D, enable);
-}
 
 void CoreRenderSystem::setTextureMagFilter(
     RenderSystem::TextureFilterType type
@@ -463,38 +462,38 @@ void CoreRenderSystem::drawElements(
 
 
 
-RenderSystem::buffer_id_t CoreRenderSystem::createVertexBuffer(
+RenderSystem::BufferID CoreRenderSystem::createVertexBuffer(
     std::vector<float>& vertices
 ) {
     
-    RenderSystem::buffer_id_t buffer_id;
+    RenderSystem::BufferID buffer_id;
     glGenBuffers(1, &buffer_id);
     glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
     glBufferData(
-                 GL_ARRAY_BUFFER,
-                 vertices.size() * sizeof(float),
-                 vertices.data(),
-                 GL_STATIC_DRAW
-                 );
+        GL_ARRAY_BUFFER,
+        vertices.size() * sizeof(float),
+        vertices.data(),
+        GL_STATIC_DRAW
+    );
     return buffer_id;
 }
 
-RenderSystem::buffer_id_t CoreRenderSystem::createIndexBuffer(
+RenderSystem::BufferID CoreRenderSystem::createIndexBuffer(
     std::vector<uint32_t>& indices
 ) {
-    RenderSystem::buffer_id_t buffer_id;
+    RenderSystem::BufferID buffer_id;
     
     glGenBuffers(1, &buffer_id);
     glBindBuffer(
-                 GL_ELEMENT_ARRAY_BUFFER,
-                 buffer_id
-                 );
+        GL_ELEMENT_ARRAY_BUFFER,
+        buffer_id
+    );
     glBufferData(
-                 GL_ELEMENT_ARRAY_BUFFER,
-                 indices.size() * sizeof(uint32_t),
-                 indices.data(),
-                 GL_STATIC_DRAW
-                 );
+        GL_ELEMENT_ARRAY_BUFFER,
+        indices.size() * sizeof(uint32_t),
+        indices.data(),
+        GL_STATIC_DRAW
+    );
     
     return buffer_id;
 }
