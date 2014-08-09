@@ -211,15 +211,17 @@ public:
     
 
     //  有効フラグ設定
-    void enable(
-        const bool enable
-    ){
-        enable_ = enable;
+    void enable() {
+        enable_ = true;
+    }
+    
+    void disable() {
+        enable_ = false;
     }
     
     
     //  有効判定
-    bool enable() const {
+    bool enabled() const {
         return enable_;
     }
     

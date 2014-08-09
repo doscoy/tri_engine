@@ -37,7 +37,7 @@ public:
         for (auto res : resources_) {
             if (std::strncmp(res->resourceName(), path.getFullPath().c_str(), RESOURCE_NAME_SIZE) == 0) {
                 //  既に読み込み済
-                return res->getResourceID();
+                return res->resourceID();
             }
         }
     
@@ -45,7 +45,7 @@ public:
         T3_NULL_ASSERT(res);
         resources_.push_back(res);
         
-        return res->getResourceID();
+        return res->resourceID();
     }
     
     
@@ -74,7 +74,7 @@ public:
         typename Resources::iterator end = resources_.end();
         for( typename Resources::iterator it = resources_.begin(); it != end; ++it){
             
-            if ((*it)->getResourceID() == id) {
+            if ((*it)->resourceID() == id) {
                 return (*it);
             }
         }

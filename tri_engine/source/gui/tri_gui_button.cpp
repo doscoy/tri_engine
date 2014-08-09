@@ -107,7 +107,7 @@ void Button::onPointingTrigger(
     
     
     //  スプライトがアクティブじゃない場合スキップ
-    if (!sprite_->enable()) {
+    if (!sprite_->enabled()) {
         return;
     }
     

@@ -5,11 +5,15 @@
 
 #include "../dbg/tri_assert.hpp"
 #include "../kernel/tri_kernel.hpp"
+#include "util/tri_uncopyable.hpp"
+
+
 
 namespace t3{
 
 template <typename T>
 class Singleton
+    : Uncopyable
 {
 protected:
     Singleton(){

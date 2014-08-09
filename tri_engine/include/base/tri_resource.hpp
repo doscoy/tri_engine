@@ -34,7 +34,7 @@ public:
         return resource_name_;
     }
     
-    UniqueID getResourceID() const {
+    UniqueID resourceID() const {
         return resource_id_;
     }
     

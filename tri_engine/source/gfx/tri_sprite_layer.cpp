@@ -55,7 +55,7 @@ void SpriteLayer::updateLayer(
     }
 
     for (auto sp : sprites_) {
-        if (!sp->enable()) {
+        if (!sp->enabled()) {
             continue;
         }
         renderer_.collectSprite(sp);
@@ -69,7 +69,7 @@ void SpriteLayer::drawLayer() {
     }
     
     for (auto sp : sprites_) {
-        if (!sp->enable()) {
+        if (!sp->enabled()) {
             continue;
         }
     }

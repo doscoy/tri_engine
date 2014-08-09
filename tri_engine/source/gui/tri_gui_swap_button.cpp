@@ -72,8 +72,13 @@ void SwapButton::setupSprite(
     b_.setupSprite(b);
 
     //  初期状態ではAのスプライトだけ表示
-    a_.sprite()->enable(default_a);
-    b_.sprite()->enable(!default_a);
+    if (default_a) {
+        a_.sprite()->enable();
+        b_.sprite()->disable();
+    } else {
+        a_.sprite()->disable();
+        b_.sprite()->enable();
+    }
 
     //  イベント登録
     a_.addTriggeredEvent(std::make_shared<SwapButtonAEvent>(swap_button_id_));
@@ -102,8 +107,8 @@ void SwapButton::onTriggeredA(const t3::Event& eve) {
     if (a_event_) {
         safeQueueEvent(a_event_);
     }
-    a_.sprite()->enable(false);
-    b_.sprite()->enable(true);
+    a_.sprite()->disable();
+    b_.sprite()->enable();
 }
 
 void SwapButton::onTriggeredB(const t3::Event& eve) {
@@ -116,8 +121,8 @@ void SwapButton::onTriggeredB(const t3::Event& eve) {
     if (b_event_) {
         safeQueueEvent(b_event_);
     }
-    a_.sprite()->enable(true);
-    b_.sprite()->enable(false);
+    a_.sprite()->enable();
+    b_.sprite()->disable();
 }
 
 
