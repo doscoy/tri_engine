@@ -228,16 +228,6 @@ public:
     int sortScore() const;
     
 
-
-    bool isValid() const;
-
-    void ownerLayer(SpriteLayer* layer) {
-        owner_ = layer;
-    }
-
-    SpriteLayer* ownerLayer() const {
-        return owner_;
-    }
     
     bool isTransratedSprite() const {
         Vec2 pos = transform()->globalPosition();
@@ -305,12 +295,13 @@ private:
     texture_coord_t texture_coord_;
     
     bool enable_;
-    SpriteLayer* owner_;
     
 };
 
 //  ポインタ型定義
 using SpritePtr = std::shared_ptr<Sprite>;
+using WeakSprite = std::weak_ptr<Sprite>;
+
 
 
 }   // inline namespace gfx

@@ -21,7 +21,6 @@ Sprite::Sprite()
     , texture_coord_{0, 0, 1, 1}
     , priority_(PRIORITY_NORMAL)
     , enable_(true)
-    , owner_(nullptr)
 {
 
     transform_ = std::make_shared<Transform2D>();
@@ -48,15 +47,6 @@ void Sprite::texture(
     adjustPivotByCenter();
 }
   
-bool Sprite::isValid() const
-{
-    if (!owner_) {
-        return false;
-    }
-    
-
-    return true;
-}
 
 int Sprite::sortScore() const {
     int score = priority();

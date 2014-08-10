@@ -54,12 +54,26 @@ void SpriteLayer::updateLayer(
         return;
     }
 
-    for (auto sp : sprites_) {
+    //  無効になった要素の掃除
+    sprites_.remove_if([](WeakSprite& wk){return wk.expired();});
+
+
+    //  レンダリング用にスプライトをマージする
+    for (auto target : sprites_) {
+        //  対象のポインタは無効
+        if (target.expired()) {
+            T3_PANIC("null sprite.");
+            continue;
+        }
+        
+        auto sp = target.lock();
+    
         if (!sp->enabled()) {
             continue;
         }
         renderer_.collectSprite(sp);
     }
+    
 }
 
 void SpriteLayer::drawLayer() {
@@ -67,35 +81,22 @@ void SpriteLayer::drawLayer() {
         //  スプライト無ければ処理スキップ
         return;
     }
-    
-    for (auto sp : sprites_) {
-        if (!sp->enabled()) {
-            continue;
-        }
-    }
 
     renderer_.render();
-    
 }
 
 
-void SpriteLayer::attachSprite(SpritePtr const sprite) {
+void SpriteLayer::attachSprite(WeakSprite sprite) {
     sprites_.push_back(sprite);
-    sprite->ownerLayer(this);
 }
 
-void SpriteLayer::detachSprite(SpritePtr const sprite) {
-    sprites_.remove(sprite);
-    sprite->ownerLayer(nullptr);
-}
 
 
 void SpriteLayer::detachAllSprite() {
-    container_t::iterator it = sprites_.begin();
-    container_t::iterator end = sprites_.end();
+    SpriteContainer::iterator it = sprites_.begin();
+    SpriteContainer::iterator end = sprites_.end();
     
     while (it != end) {
-        (*it)->ownerLayer(nullptr);
         it = sprites_.erase(it);
     }
 }

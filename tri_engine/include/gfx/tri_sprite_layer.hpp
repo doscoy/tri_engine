@@ -15,7 +15,9 @@ inline namespace gfx {
 class SpriteLayer
     : public RenderLayer
 {
-    typedef std::list<SpritePtr> container_t;
+public:
+    
+    using SpriteContainer = std::list<WeakSprite>;
 
 public:
     SpriteLayer();
@@ -29,24 +31,25 @@ public:
     SpritePtr createSprite(std::shared_ptr<Texture> tex);
     SpritePtr createSprite(const FilePath& path);
 
-    std::list<SpritePtr>* getManagementSprites() {
+    SpriteContainer* getManagementSprites() {
         return &sprites_;
     }
 
-    void detachSprite(SpritePtr const sprite);
-    void detachAllSprite();
+
     SpriteRenderer& renderer() {
         return renderer_;
     }
     
 private:
+    void attachSprite(WeakSprite const sprite);
+    void detachAllSprite();
+
     void updateLayer(tick_t delta_time) override;
     void drawLayer() override;
-    void attachSprite(SpritePtr const sprite);
     
 private:
     SpriteRenderer renderer_;
-    container_t sprites_;
+    SpriteContainer sprites_;
     
 };
 
