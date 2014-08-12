@@ -14,15 +14,15 @@ namespace t3 {
 inline namespace math {
 
 
-// Mtx2Template
+// Mtx22Template
 template <typename T>
-struct Mtx2Template {
-    Mtx2Template()
+struct Mtx22Template {
+    Mtx22Template()
     {
         x_.x_ = 1; x_.y_ = 0;
         y_.x_ = 0; y_.y_ = 1;
     }
-    Mtx2Template(const T* m)
+    Mtx22Template(const T* m)
     {
         x_.x_ = m[0]; x_.y_ = m[1];
         y_.x_ = m[2]; y_.y_ = m[3];
@@ -33,26 +33,26 @@ struct Mtx2Template {
 
 
 template <typename T>
-struct Mtx3Template {
-    Mtx3Template()
+struct Mtx33Template {
+    Mtx33Template()
     {
         x_.x_ = 1; x_.y_ = 0; x_.z_ = 0;
         y_.x_ = 0; y_.y_ = 1; y_.z_ = 0;
         z_.x_ = 0; z_.y_ = 0; z_.z_ = 1;
     }
-    Mtx3Template(const T* m)
+    Mtx33Template(const T* m)
     {
         x_.x_ = m[0]; x_.y_ = m[1]; x_.z_ = m[2];
         y_.x_ = m[3]; y_.y_ = m[4]; y_.z_ = m[5];
         z_.x_ = m[6]; z_.y_ = m[7]; z_.z_ = m[8];
     }
-    Mtx3Template(Vec3 x, Vec3 y, Vec3 z)
+    Mtx33Template(Vec3 x, Vec3 y, Vec3 z)
         : x_(x), y_(y), z_(z)
     {
     }
-    Mtx3Template transposed() const
+    Mtx33Template transposed() const
     {
-        Mtx3Template m;
+        Mtx33Template m;
         m.x_.x_ = x_.x_; m.x_.y_ = y_.x_; m.x_.z_ = z_.x_;
         m.y_.x_ = x_.y_; m.y_.y_ = y_.y_; m.y_.z_ = z_.y_;
         m.z_.x_ = x_.z_; m.z_.y_ = y_.z_; m.z_.z_ = z_.z_;
@@ -68,21 +68,20 @@ struct Mtx3Template {
 };
 
 template <typename T>
-struct Mtx4Template
-{
-    Mtx4Template()
-    {
+struct Mtx44Template {
+
+    Mtx44Template() {
         identity();
     }
-    Mtx4Template(const Mtx3Template<T>& m)
-    {
+    
+    Mtx44Template(const Mtx33Template<T>& m) {
         x_.x_ = m.x_.x_; x_.y_ = m.x_.y_; x_.z_ = m.x_.z_; x_.w_ = 0;
         y_.x_ = m.y_.x_; y_.y_ = m.y_.y_; y_.z_ = m.y_.z_; y_.w_ = 0;
         z_.x_ = m.z_.x_; z_.y_ = m.z_.y_; z_.z_ = m.z_.z_; z_.w_ = 0;
         w_.x_ = 0; w_.y_ = 0; w_.z_ = 0; w_.w_ = 1;
     }
-    Mtx4Template(const T* m)
-    {
+    
+    Mtx44Template(const T* m) {
         x_.x_ = m[0];  x_.y_ = m[1];  x_.z_ = m[2];  x_.w_ = m[3];
         y_.x_ = m[4];  y_.y_ = m[5];  y_.z_ = m[6];  y_.w_ = m[7];
         z_.x_ = m[8];  z_.y_ = m[9];  z_.z_ = m[10]; z_.w_ = m[11];
@@ -92,16 +91,15 @@ struct Mtx4Template
     
     
     
-    Mtx4Template operator * (const Mtx4Template& rhs) const
-    {
+    Mtx44Template operator * (const Mtx44Template& rhs) const {
         return multiply(*this, rhs);
     }
 
-    static Mtx4Template multiply(
-        const Mtx4Template& lhs,
-        const Mtx4Template& rhs
+    static Mtx44Template multiply(
+        const Mtx44Template& lhs,
+        const Mtx44Template& rhs
     ) {
-        Mtx4Template m;
+        Mtx44Template m;
         m.x_.x_ = lhs.x_.x_ * rhs.x_.x_ + lhs.x_.y_ * rhs.y_.x_ + lhs.x_.z_ * rhs.z_.x_ + lhs.x_.w_ * rhs.w_.x_;
         m.x_.y_ = lhs.x_.x_ * rhs.x_.y_ + lhs.x_.y_ * rhs.y_.y_ + lhs.x_.z_ * rhs.z_.y_ + lhs.x_.w_ * rhs.w_.y_;
         m.x_.z_ = lhs.x_.x_ * rhs.x_.z_ + lhs.x_.y_ * rhs.y_.z_ + lhs.x_.z_ * rhs.z_.z_ + lhs.x_.w_ * rhs.w_.z_;
@@ -123,8 +121,7 @@ struct Mtx4Template
     }
 
 
-    Vec4Template<T> operator * (const Vec4Template<T>& b) const
-    {
+    Vec4Template<T> operator * (const Vec4Template<T>& b) const {
         return xform(b);
     }
     
@@ -145,14 +142,13 @@ struct Mtx4Template
     }
     
 
-    Mtx4Template& operator *= (const Mtx4Template& b)
-    {
-        Mtx4Template m = *this * b;
+    Mtx44Template& operator *= (const Mtx44Template& b) {
+        Mtx44Template m = *this * b;
         return (*this = m);
     }
-    Mtx4Template transposed() const
-    {
-        Mtx4Template m;
+    
+    Mtx44Template transposed() const {
+        Mtx44Template m;
         m.x_.x_ = x_.x_; m.x_.y_ = y_.x_; m.x_.z_ = z_.x_; m.x_.w_ = w_.x_;
         m.y_.x_ = x_.y_; m.y_.y_ = y_.y_; m.y_.z_ = z_.y_; m.y_.w_ = w_.y_;
         m.z_.x_ = x_.z_; m.z_.y_ = y_.z_; m.z_.z_ = z_.z_; m.z_.w_ = w_.z_;
@@ -160,9 +156,8 @@ struct Mtx4Template
         return m;
     }
     
-    Mtx3Template<T> toMat3() const
-    {
-        Mtx3Template<T> m;
+    Mtx33Template<T> toMat3() const {
+        Mtx33Template<T> m;
         m.x_.x_ = x_.x_; m.y_.x_ = y_.x_; m.z_.x_ = z_.x_;
         m.x_.y_ = x_.y_; m.y_.y_ = y_.y_; m.z_.y_ = z_.y_;
         m.x_.z_ = x_.z_; m.y_.z_ = y_.z_; m.z_.z_ = z_.z_;
@@ -173,43 +168,37 @@ struct Mtx4Template
         return &x_.x_;
     }
     
-    const T* pointer() const
-    {
+    const T* pointer() const {
         return &x_.x_;
     }
     
-    void identity()
-    {
+    void identity() {
         x_.x_ = 1; x_.y_ = 0; x_.z_ = 0; x_.w_ = 0;
         y_.x_ = 0; y_.y_ = 1; y_.z_ = 0; y_.w_ = 0;
         z_.x_ = 0; z_.y_ = 0; z_.z_ = 1; z_.w_ = 0;
         w_.x_ = 0; w_.y_ = 0; w_.z_ = 0; w_.w_ = 1;
     }
     
-    static Mtx4Template<T> getIdentity()
-    {
-        return Mtx4Template();
+    static Mtx44Template<T> getIdentity() {
+        return Mtx44Template();
     }
     
-    void translate(const Vec3Template<T>& v)
-    {
+    void translate(const Vec3Template<T>& v) {
         makeTranslateMatrix( *this, v.x_, v.y_, v.z_ );
     }
     
-    void translate( T x, T y, T z )
-    {
+    void translate( T x, T y, T z ) {
         makeTranslateMatrix( *this, x, y, z );
     }
     
-    static Mtx4Template<T> getTranslateMatrix( T x, T y, T z)
-    {
-        Mtx4Template m;
+    static Mtx44Template<T> getTranslateMatrix( T x, T y, T z) {
+        Mtx44Template m;
         makeTranslateMatrix( m, x, y, z );
         return m;
     }
     
     static void makeTranslateMatrix(
-        Mtx4Template<T>& mtx,
+        Mtx44Template<T>& mtx,
         T x,
         T y,
         T z
@@ -236,30 +225,25 @@ struct Mtx4Template
     
     
     
-    void scale( T s )
-    {
+    void scale( T s ) {
         makeScaleMatrix( *this, s, s, s );
     }
     
-    void scale( const Vec3Template<T> v )
-    {
+    void scale( const Vec3Template<T> v ) {
         makeScaleMatrix( *this, v.x_, v.y_, v.z_ );
     }
     
-    void scale( T x, T y, T z )
-    {
+    void scale( T x, T y, T z ) {
         makeScaleMatrix( *this, x, y, z );
     }
     
-    static Mtx4Template<T> getScaleMatrix( T x, T y, T z )
-    {
-        Mtx4Template m;
+    static Mtx44Template<T> getScaleMatrix( T x, T y, T z ) {
+        Mtx44Template m;
         makeScaleMatrix( m, x, y, z );
         return m;
     }
     
-    static void makeScaleMatrix( Mtx4Template<T>& m, T x, T y, T z)
-    {
+    static void makeScaleMatrix( Mtx44Template<T>& m, T x, T y, T z) {
         m.x_.x_ = x; m.x_.y_ = 0; m.x_.z_ = 0; m.x_.w_ = 0;
         m.y_.x_ = 0; m.y_.y_ = y; m.y_.z_ = 0; m.y_.w_ = 0;
         m.z_.x_ = 0; m.z_.y_ = 0; m.z_.z_ = z; m.z_.w_ = 0;
@@ -283,15 +267,15 @@ struct Mtx4Template
     }
     
     
-    static Mtx4Template<T> getRotateMatrixZ(
+    static Mtx44Template<T> getRotateMatrixZ(
         T degrees
     ) {
-        Mtx4Template m;
+        Mtx44Template m;
         return makeRotateMatrixZ(m, degrees);
     }
     
-    static Mtx4Template<T>& makeRotateMatrixX(
-        Mtx4Template<T>& m,
+    static Mtx44Template<T>& makeRotateMatrixX(
+        Mtx44Template<T>& m,
         T degrees
     ) {
         T radians = t3::toRadian( degrees );
@@ -306,8 +290,8 @@ struct Mtx4Template
     }
     
 			 
-	static Mtx4Template<T>& makeRotateMatrixY(
-        Mtx4Template<T>& m,
+	static Mtx44Template<T>& makeRotateMatrixY(
+        Mtx44Template<T>& m,
         T degrees
     ) {
         T radians = t3::toRadian( degrees );
@@ -322,8 +306,8 @@ struct Mtx4Template
         return m;
     }
 	
-    static Mtx4Template<T>& makeRotateMatrixZ(
-        Mtx4Template<T>& m,
+    static Mtx44Template<T>& makeRotateMatrixZ(
+        Mtx44Template<T>& m,
         T degrees
     ) {
         T radians = t3::toRadian( degrees );
@@ -339,18 +323,18 @@ struct Mtx4Template
     }
     
     static void makeRotateYawPitchRoll(
-        Mtx4Template<T>& m,
+        Mtx44Template<T>& m,
         T yaw,
         T pitch,
         T roll
     ) {
-        Mtx4Template yaw_mtx;
+        Mtx44Template yaw_mtx;
         makeRotateMatrixY(yaw_mtx, yaw);
         
-        Mtx4Template pitch_mtx;
+        Mtx44Template pitch_mtx;
         makeRotateMatrixX(pitch_mtx, pitch);
         
-        Mtx4Template roll_mtx;
+        Mtx44Template roll_mtx;
         makeRotateMatrixZ(roll_mtx, roll);
         
         m = yaw_mtx * pitch_mtx * roll_mtx;
@@ -358,7 +342,7 @@ struct Mtx4Template
     
     
     static void makeRotateAxis(
-        Mtx4Template<T>& pOut,
+        Mtx44Template<T>& pOut,
         const Vec3Template<T>& pAxis,
         T fRad
     ){
@@ -411,7 +395,7 @@ struct Mtx4Template
         makeOrthoMatrix( *this, left, right, bottom, top, near, far );
     }
     
-    static void makeOrthoMatrix( Mtx4Template<T>& mtx, T left, T right, T bottom, T top, T near, T far)
+    static void makeOrthoMatrix( Mtx44Template<T>& mtx, T left, T right, T bottom, T top, T near, T far)
     {
         T a = 2.0f / (right - left);
         T b = 2.0f / (top - bottom);
@@ -425,9 +409,9 @@ struct Mtx4Template
         mtx.z_.x_ = 0; mtx.z_.y_ = 0; mtx.z_.z_ = c; mtx.z_.w_ = 0;
         mtx.w_.x_ = tx; mtx.w_.y_ = ty; mtx.w_.z_ = tz; mtx.w_.w_ = 1;
     }
-    static Mtx4Template<T> getOrthoMatrix(T left, T right, T bottom, T top, T near, T far)
+    static Mtx44Template<T> getOrthoMatrix(T left, T right, T bottom, T top, T near, T far)
     {
-        Mtx4Template m;
+        Mtx44Template m;
         makeOrthoMatrix( m, left, right, bottom, top, near, far );
         return m;
     }
@@ -437,24 +421,36 @@ struct Mtx4Template
     }
     
     
-    static void makeFrustumMatrix( Mtx4Template<T>& mtx, T left, T right, T bottom, T top, T near, T far )
+    static void makeFrustumMatrix( Mtx44Template<T>& mtx, T left, T right, T bottom, T top, T near, T far )
     {
-        T a = 2 * near / (right - left);
-        T b = 2 * near / (top - bottom);
+    
+    /*
+        detail::tmat4x4<valType> Result(0);
+		Result[0][0] = (valType(2) * nearVal) / (right - left);
+		Result[1][1] = (valType(2) * nearVal) / (top - bottom);
+		Result[2][0] = (right + left) / (right - left);
+		Result[2][1] = (top + bottom) / (top - bottom);
+		Result[2][2] = -(farVal + nearVal) / (farVal - nearVal);
+		Result[2][3] = valType(-1);
+		Result[3][2] = -(valType(2) * farVal * nearVal) / (farVal - nearVal);
+
+    */
+        T a = T(2) * near / (right - left);
+        T b = T(2) * near / (top - bottom);
         T c = (right + left) / (right - left);
         T d = (top + bottom) / (top - bottom);
-        T e = - (far + near) / (far - near);
-        T f = -2 * far * near / (far - near);
+        T e = -(far + near) / (far - near);
+        T f = -(T(2) * far * near) / (far - near);
       
         mtx.x_.x_ = a; mtx.x_.y_ = 0; mtx.x_.z_ = 0; mtx.x_.w_ = 0;
         mtx.y_.x_ = 0; mtx.y_.y_ = b; mtx.y_.z_ = 0; mtx.y_.w_ = 0;
-        mtx.z_.x_ = c; mtx.z_.y_ = d; mtx.z_.z_ = e; mtx.z_.w_ = -1;
+        mtx.z_.x_ = c; mtx.z_.y_ = d; mtx.z_.z_ = e; mtx.z_.w_ = T(-1);
         mtx.w_.x_ = 0; mtx.w_.y_ = 0; mtx.w_.z_ = f; mtx.w_.w_ = 0;
     }
     
-    static Mtx4Template<T> getFrustumMatrix( T left, T right, T bottom, T top, T near, T far )
+    static Mtx44Template<T> getFrustumMatrix( T left, T right, T bottom, T top, T near, T far )
     {
-        Mtx4Template m;
+        Mtx44Template m;
         makeFrustumMatrix( m, left, right, bottom, top, near, far );
         return m;
     }
@@ -469,11 +465,12 @@ struct Mtx4Template
     }
     
     static void makeLookAtMatrix(
-        Mtx4Template<T>& mtx,
+        Mtx44Template<T>& mtx,
         const Vec3Template<T>& eye,
         const Vec3Template<T>& target,
         const Vec3Template<T>& up
     ){
+/*  //旧版
         Vec3Template<T> z = (eye - target).getNormalized();
         Vec3Template<T> x = up.crossProduct(z).getNormalized();
         Vec3Template<T> y = z.crossProduct(x).getNormalized();
@@ -491,15 +488,63 @@ struct Mtx4Template
             1
         );
         mtx = mtx.transposed();
-        mtx.w_ = eyePrime;        
+        mtx.w_ = eyePrime;
+*/
+
+    Vec3Template<T> f = (target - eye).getNormalized();
+    Vec3Template<T> u = up;
+    Vec3Template<T> s = f.crossProduct(u).getNormalized();
+        
+    u = f.crossProduct(s);
+
+    mtx.x_.x_ = s.x_;
+    mtx.y_.x_ = s.y_;
+	mtx.z_.x_ = s.z_;
+    
+	mtx.x_.y_ = u.x_;
+	mtx.y_.y_ = u.y_;
+	mtx.z_.y_ = u.z_;
+	
+    mtx.x_.z_ =-f.x_;
+	mtx.y_.z_ =-f.y_;
+    mtx.z_.z_ =-f.z_;
+    
+    mtx.w_.x_ =-Vec3Template<T>::dotProduct(s, eye);
+    mtx.w_.y_ =-Vec3Template<T>::dotProduct(u, eye);
+    mtx.w_.z_ = Vec3Template<T>::dotProduct(f, eye);
+    
+    
+    /*
+        
+        detail::tvec3<T> f = normalize(center - eye);
+		detail::tvec3<T> u = normalize(up);
+		detail::tvec3<T> s = normalize(cross(f, u));
+		u = cross(s, f);
+
+		detail::tmat4x4<T> Result(1);
+		Result[0][0] = s.x;
+		Result[1][0] = s.y;
+		Result[2][0] = s.z;
+		Result[0][1] = u.x;
+		Result[1][1] = u.y;
+		Result[2][1] = u.z;
+		Result[0][2] =-f.x;
+		Result[1][2] =-f.y;
+		Result[2][2] =-f.z;
+		Result[3][0] =-dot(s, eye);
+		Result[3][1] =-dot(u, eye);
+		Result[3][2] = dot(f, eye);
+		return Result;
+*/
+        
     }
     
-    static Mtx4Template<T> getLookAtMatrix( 
+    static Mtx44Template<T> getLookAtMatrix( 
         const Vec3Template<T>& eye,
         const Vec3Template<T>& target,
         const Vec3Template<T>& up
     ){
-        Mtx4Template m;
+        Mtx44Template m;
         makeLookAtMatrix( m, eye, target, up );
         return m;
     }
@@ -507,8 +552,8 @@ struct Mtx4Template
     
 
     static bool makeInverseMatrix(
-        Mtx4Template<T>& dest,
-        const Mtx4Template<T> src
+        Mtx44Template<T>& dest,
+        const Mtx44Template<T> src
     ) {
         const T* m1 = src.pointer();
         T* m2 = dest.pointer();
@@ -599,9 +644,9 @@ public:
 
 
 //  typedef
-using Mtx2 = Mtx2Template<float>;
-using Mtx3 = Mtx3Template<float>;
-using Mtx4 = Mtx4Template<float>;
+using Mtx22 = Mtx22Template<float>;
+using Mtx33 = Mtx33Template<float>;
+using Mtx44 = Mtx44Template<float>;
 
 
     

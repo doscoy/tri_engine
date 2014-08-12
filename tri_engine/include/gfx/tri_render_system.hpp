@@ -121,7 +121,7 @@ public:
 
     static void setUniformMatrix(
         ShaderVariableLocation location,
-        t3::Mtx4 mtx
+        t3::Mtx44 mtx
     );
 
     static void initializeRenderSystem();

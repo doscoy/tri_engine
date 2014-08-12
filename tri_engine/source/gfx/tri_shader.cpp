@@ -124,7 +124,7 @@ void Shader::setUniform(
 
 void Shader::setUniform(
     const char* const name,
-    const Mtx4& m
+    const Mtx44& m
 ) {
     int location = getUniformLocation(name);
     RenderSystem::setUniformMatrix(location, m);

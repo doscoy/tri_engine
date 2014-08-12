@@ -116,8 +116,8 @@ LookAtCameraUpdater::pan(
     
     Vec3 dir = *cam->getTargetPosition() - *cam->position();
 
-    Mtx4 mtx;
-    Mtx4::makeRotateAxis(mtx, axis, speed);
+    Mtx44 mtx;
+    Mtx44::makeRotateAxis(mtx, axis, speed);
 
     Vec3 a = mtx.xform(dir);
     cam->setTargetPosition( *cam->position() + a );

@@ -28,6 +28,12 @@ SceneGraph::~SceneGraph()
 
 void SceneGraph::renderScene()
 {
+    RenderSystem::setCulling(false);
+    RenderSystem::setCullingMode(t3::RenderSystem::CullingMode::MODE_BACK);
+    RenderSystem::setBlend(false);
+    RenderSystem::setDepthTest(true);
+    RenderSystem::setDepthWrite(true);
+    RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
 
     if (root_ && camera_) {
         matrix_stack_.clearStack();
@@ -41,18 +47,16 @@ void SceneGraph::renderScene()
     
     }
     
-//    renderAlphaPass();
 }
 
 void SceneGraph::setupView()
 {
-    const t3::Director& d = t3::Director::instance();
-    const t3::Vec2& screen = d.virtualScreenSize();
+    auto& d = t3::Director::instance();
+    auto& screen = d.virtualScreenSize();
     
     t3::RenderSystem::setViewport(0, 0, screen.x_, screen.y_);
 
-    t3::Mtx4 projection;
-    projection.frustum(
+    t3::Mtx44 projection = t3::Mtx44::getFrustumMatrix(
         -1,
         1,
         -(float)screen.y_ /screen.x_,
@@ -60,13 +64,10 @@ void SceneGraph::setupView()
         1,
         100
     );
-
-//    t3::RenderSystem::setProjectionMatrix(projection);
     
-    const Mtx4* view_mtx = camera_->getViewMatrix();
-    pushAndSetMatrix(*view_mtx);
-
-
+    const Mtx44* view_mtx = camera_->getViewMatrix();
+    Mtx44 view_projection = *view_mtx * projection;
+    pushAndSetMatrix(view_projection);
 }
 
 void SceneGraph::updateScene(tick_t delta_time)
@@ -81,27 +82,22 @@ void SceneGraph::updateScene(tick_t delta_time)
 
 
 void SceneGraph::pushAndSetMatrix(
-    const Mtx4& to_world
+    const Mtx44& to_world
 ) {
     matrix_stack_.pushMatrix();
     matrix_stack_.multMatrixLocal(to_world);
-    
-    //  変換行列をmatrix_stack.getTopで設定する
-//    const Mtx4* world = matrix_stack_.getTopMatrix();
-//    t3::RenderSystem::setWorldTransformMatrix(*world);
 }
 
 void SceneGraph::popMatrix()
 {
     matrix_stack_.popMatrix();
 
-    //  変換行列をmatrix_stack.getTopで設定する
 }
 
 
-const Mtx4* SceneGraph::getTopMatrix()
+const Mtx44* SceneGraph::getTopMatrix()
 {
-    return static_cast<const Mtx4*>(matrix_stack_.getTopMatrix());
+    return static_cast<const Mtx44*>(matrix_stack_.getTopMatrix());
 }
 
 

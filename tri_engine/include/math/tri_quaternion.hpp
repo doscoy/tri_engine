@@ -86,7 +86,7 @@ struct QuaternionTemplate
     }
     
     //  行列に変換
-    Mtx3Template<T> toMatrix() const {
+    Mtx33Template<T> toMatrix() const {
         const T s = 2;
         T xs, ys, zs;
         T wx, wy, wz;
@@ -97,7 +97,7 @@ struct QuaternionTemplate
         xx = x * xs; xy = x * ys; xz = x * zs;
         yy = y * ys; yz = y * zs; zz = z * zs;
         
-        Mtx3Template<T> m;
+        Mtx33Template<T> m;
         m.x.x = 1 - (yy + zz); m.y.x = xy - wz;  m.z.x = xz + wy;
         m.x.y = xy + wz; m.y.y = 1 - (xx + zz); m.z.y = yz - wx;
         m.x.z = xz - wy; m.y.z = yz + wx;  m.z.z = 1 - (xx + yy);

@@ -76,8 +76,8 @@ private:
         }
         
         int spr_idx = 0;
-        for (auto spr : *sprites) {
-            
+        for (auto wspr : *sprites) {
+            auto spr = wspr.lock();
             float angle = spr->transform()->rotation();
             if (spr_idx % 2) {
                 spr->transform()->rotation(angle + 1);
@@ -94,9 +94,11 @@ private:
             return;
         }
         
+        
         int spr_idx = 0;
-        for (auto spr : *sprites) {
+        for (auto wspr : *sprites) {
             
+            auto spr = wspr.lock();
             if ((spr_idx % 6) == 0) {
                 spr->opacity(sprite_opacity_);
             }
@@ -112,7 +114,8 @@ private:
             return;
         }
         
-        t3::SpritePtr sprite = sprites->front();
+        t3::WeakSprite wksprite = sprites->front();
+        auto sprite = wksprite.lock();
         t3::Vec2 offset = t3::Vec2(
             sprite->scaledSize().x_,
             sprite->scaledSize().y_
@@ -120,7 +123,8 @@ private:
         int x_count = t3::Director::instance().virtualScreenSize().x_ / offset.x_ -1;
         int y = 7;
         int i = 0;
-        for (auto spr : *sprites) {
+        for (auto wspr : *sprites) {
+            auto spr = wspr.lock();
             if (i % x_count == 0) {
                 y -= 1;
             }

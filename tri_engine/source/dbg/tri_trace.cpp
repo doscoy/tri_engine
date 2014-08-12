@@ -141,7 +141,7 @@ void traceValue(
 
 void traceValue(
     const char* const name,
-    const Mtx4& value
+    const Mtx44& value
 ) {
     trace("[%d] %s\n", frame_counter_.now(), name);
     trace(

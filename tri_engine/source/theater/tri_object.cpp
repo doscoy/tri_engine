@@ -30,7 +30,7 @@ Object::~Object()
 
 
 
-const Mtx4* Object::getTransformMatrix() {
+const Mtx44* Object::getTransformMatrix() {
 
     if (calc_request_) {
         calc_request_ = false;
@@ -43,13 +43,13 @@ const Mtx4* Object::getTransformMatrix() {
 
 void Object::makeTransformMatrix()
 {
-    Mtx4 s;
+    Mtx44 s;
     s.scale(scale_);
     
-    Mtx4 r;
+    Mtx44 r;
     r.rotate(rotation_);
     
-    Mtx4 t;
+    Mtx44 t;
     t.translate(position_);
 
 

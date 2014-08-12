@@ -1,3 +1,7 @@
+#ifndef SIMPLE_2D_VSH
+#define SIMPLE_2D_VSH
+
+
 const char* simple2d_vsh = STRINGIFY(
 
 attribute vec4 in_position;
@@ -10,3 +14,6 @@ void main(void)
     gl_Position = in_position;
 }
 );
+
+
+#endif // SIMPLE_2D_VSH

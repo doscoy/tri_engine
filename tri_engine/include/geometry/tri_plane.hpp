@@ -33,7 +33,7 @@ public:
         const Vec3& normal
     )   : point_(point)
         , normal_(normal)
-        , dot_np_(Vec3::getDotProduct(point, normal))
+        , dot_np_(Vec3::dotProduct(point, normal))
     {
     }
     

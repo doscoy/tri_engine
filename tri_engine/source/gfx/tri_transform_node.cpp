@@ -50,14 +50,14 @@ void TransformNode::onUpdate(
 void TransformNode::render(
     SceneGraph* scene_graph
 ) {
-    if (hasEntity()) {
-        if (entity_->isRenderable()) {
-            entity_->render();
-        }
+    if (hasEntity()
+        && entity_->isRenderable()) {
+    
+        entity_->render(*scene_graph->getTopMatrix());
     }
 }
 
-const Mtx4* TransformNode::getTransformMatrix() {
+const Mtx44* TransformNode::getTransformMatrix() {
 
     if (calc_request_) {
         calc_request_ = false;
@@ -70,13 +70,13 @@ const Mtx4* TransformNode::getTransformMatrix() {
 
 void TransformNode::makeTransformMatrix()
 {
-    Mtx4 s;
+    Mtx44 s;
     s.scale(scale_);
     
-    Mtx4 r;
+    Mtx44 r;
     r.rotate(rotation_);
     
-    Mtx4 t;
+    Mtx44 t;
     t.translate(position_);
 
 
@@ -126,14 +126,6 @@ bool TransformNode::addChild(
     children_.push_back(kid);
     kid->setParent(this);
     
-//    Vec3 dir = kid_pos - properties_.getToWorldMatrix().position();
-    
-//    float new_radius = dir.length() + kid->getProperties()->getRadius();
-    
-//    if (new_radius > properties_.radius_) {
-//        properties_.radius_ = new_radius;
-    //}
-    
     return true;
 }
 
@@ -156,7 +148,7 @@ bool TransformNode::removeChild(
 bool TransformNode::preRender(
     t3::SceneGraph* scene_graph
 ) {
-    T3_TRACE("TransformNode::preRender() - %s\n", getNodeName().c_str());
+
     scene_graph->pushAndSetMatrix(*getTransformMatrix());
     
     return true;

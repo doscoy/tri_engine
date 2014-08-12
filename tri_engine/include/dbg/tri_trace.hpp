@@ -18,7 +18,7 @@ template <class T>
 struct Vec4Template;
 
 template <class T>
-struct Mtx4Template;
+struct Mtx44Template;
 
 }   // namespace math
 
@@ -41,7 +41,7 @@ void traceValue(const char* const name, const char* value);
 void traceValue(const char* const name, const Vec2Template<float>& value);
 void traceValue(const char* const name, const Vec3Template<float>& value);
 void traceValue(const char* const name, const Vec4Template<float>& value);
-void traceValue(const char* const name, const Mtx4Template<float>& value);
+void traceValue(const char* const name, const Mtx44Template<float>& value);
 
 
 

@@ -148,7 +148,7 @@ void RenderSystem::setUniformValue(
 
 void RenderSystem::setUniformMatrix(
     RenderSystem::ShaderVariableLocation location,
-    t3::Mtx4 mtx
+    t3::Mtx44 mtx
 ) {
     countRenderCall();
     CoreRenderSystem::setUniformMatrix(location, mtx);

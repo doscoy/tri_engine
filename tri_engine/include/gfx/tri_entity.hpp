@@ -1,6 +1,8 @@
 #ifndef TRI_ENTITY_HPP_INCLUDED
 #define TRI_ENTITY_HPP_INCLUDED
 
+#include "math/tri_matrix.hpp"
+
 
 namespace t3 {
 inline namespace gfx {
@@ -17,7 +19,7 @@ public:
         return false;
     }
     
-    virtual void render(){}
+    virtual void render(const Mtx44&){}
 };
 
 

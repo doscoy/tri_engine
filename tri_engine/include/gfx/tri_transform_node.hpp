@@ -256,7 +256,7 @@ public:
         return visible_;
     }
 
-    const Mtx4* getTransformMatrix();
+    const Mtx44* getTransformMatrix();
 
 private:
     void makeTransformMatrix();
@@ -267,7 +267,7 @@ private:
     Vec3 rotation_;
     Vec3 scale_;
     bool visible_;
-    Mtx4 transform_;
+    Mtx44 transform_;
     bool calc_request_;
     Entity* entity_;
     SceneNodeList children_;

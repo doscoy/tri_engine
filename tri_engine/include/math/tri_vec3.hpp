@@ -195,7 +195,7 @@ struct Vec3Template {
     
 public:
     //  外積計算
-    static T getDotProduct(
+    static T dotProduct(
         const Vec3Template& v1,
         const Vec3Template& v2
     ){
@@ -203,7 +203,7 @@ public:
     }
     
     //  外積計算
-    static Vec3Template& getCrossProduct(
+    static Vec3Template& crossProduct(
         Vec3Template& dst,
         const Vec3Template& v1,
         const Vec3Template& v2

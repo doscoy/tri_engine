@@ -32,17 +32,17 @@ void Camera::calculateDirection()
     front_ = target_ - position_;
     if ( !isZeroFloat( front_.x_ ) || !isZeroFloat( front_.z_ ) ){
         const Vec3 axis_y( 0, 1, 0 );
-        Vec3::getCrossProduct( right_, front_, axis_y );
+        Vec3::crossProduct( right_, front_, axis_y );
     }
     else {
         const Vec3 axis_z( 0, 0, 1 );
-        Vec3::getCrossProduct( right_, front_, axis_z );
+        Vec3::crossProduct( right_, front_, axis_z );
     }
 
     right_.normalize();
 
     //  上方向ベクトル計算
-    Vec3::getCrossProduct( up_, right_, front_ );
+    Vec3::crossProduct( up_, right_, front_ );
     up_.normalize();
 
     //  前方向ベクトル計算
@@ -84,7 +84,7 @@ void Camera::calculateMatrix()
 }
 
 
-const Mtx4* Camera::getViewMatrix()
+const Mtx44* Camera::getViewMatrix()
 {
     recalculate();
     return &view_matrix_;

@@ -3,8 +3,6 @@
 #include "gfx/tri_texture.hpp"
 
 
-#include "../shader/tri_simple.vsh"
-#include "../shader/tri_simple.fsh"
 
 #if defined(PLATFORM_MAC)
 extern GLFWwindow* window_;
@@ -65,7 +63,7 @@ int CoreRenderSystem::buildShader(
         GLchar messages[256];
         glGetShaderInfoLog(shader_handle, sizeof(messages), 0, &messages[0]);
         std::cout << messages;
-        exit(1);
+        return -1;
     }
     
     return shader_handle;
@@ -158,7 +156,7 @@ void CoreRenderSystem::setUniformValue(
 
 void CoreRenderSystem::setUniformMatrix(
     RenderSystem::ShaderVariableLocation location,
-    t3::Mtx4 mtx
+    t3::Mtx44 mtx
 ) {
     glUniformMatrix4fv(
         location,

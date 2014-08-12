@@ -16,6 +16,10 @@
 #include "tri_transform_node.hpp"
 #include "tri_scene_node.hpp"
 #include "tri_camera.hpp"
+#include "util/tri_uncopyable.hpp"
+
+
+
 namespace t3 {
 inline namespace gfx {
 
@@ -29,6 +33,7 @@ class CameraNode;
 class SkyNode;
 
 class SceneGraph
+    : Uncopyable
 {
 public:
 
@@ -60,12 +65,12 @@ public:
     }
     
     void pushAndSetMatrix(
-        const Mtx4& to_world
+        const Mtx44& to_world
     );
     
     void popMatrix();
     
-    const Mtx4* getTopMatrix();
+    const Mtx44* getTopMatrix();
     
     std::shared_ptr<TransformNode> createNode();
     

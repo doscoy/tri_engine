@@ -8,6 +8,7 @@
 #include "tri_entity.hpp"
 
 
+
 namespace t3 {
 inline namespace gfx {
 
@@ -28,14 +29,14 @@ private:
     Vec3 front_;      // 前方向ベクトル
     Vec3 right_;      // 右方向ベクトル
 
-    Mtx4 view_matrix_;
+    Mtx44 view_matrix_;
     Frustum frustum_;
 
     //  フラグ
     bool recalculation_request_;    ///< 方向ベクトル再計算フラグ
 
 public:
-    const Mtx4* getViewMatrix();
+    const Mtx44* getViewMatrix();
     
     void position(
         const Vec3& pos
@@ -89,6 +90,7 @@ private:
 
 };  // class Camera
 
+using CameraPtr = std::shared_ptr<Camera>;
 
 
 }   // namespace gfx

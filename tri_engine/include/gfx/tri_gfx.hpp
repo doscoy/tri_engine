@@ -12,6 +12,7 @@
 #include "tri_image_png.hpp"
 #include "tri_material.hpp"
 #include "tri_mesh.hpp"
+#include "tri_model.hpp"
 #include "tri_render_system.hpp"
 #include "tri_resource_manager.hpp"
 #include "tri_scene_graph.hpp"

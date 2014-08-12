@@ -29,6 +29,19 @@ struct VertexP2T
     float v_;
 };
 
+struct VertexP3N {
+
+    float x_;
+    float y_;
+    float z_;
+    float nx_;
+    float ny_;
+    float nz_;
+
+};
+
+
+
 }   // namespace t3
 
 
