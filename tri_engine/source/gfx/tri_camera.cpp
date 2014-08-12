@@ -31,18 +31,16 @@ void Camera::calculateDirection()
     //  右方向ベクトル計算
     front_ = target_ - position_;
     if ( !isZeroFloat( front_.x_ ) || !isZeroFloat( front_.z_ ) ){
-        const Vec3 axis_y( 0, 1, 0 );
-        Vec3::crossProduct( right_, front_, axis_y );
+        right_ = Vec3::crossProduct(front_, Vec3::axisY());
     }
     else {
-        const Vec3 axis_z( 0, 0, 1 );
-        Vec3::crossProduct( right_, front_, axis_z );
+         right_ = Vec3::crossProduct(front_, Vec3::axisZ());
     }
 
     right_.normalize();
 
     //  上方向ベクトル計算
-    Vec3::crossProduct( up_, right_, front_ );
+    up_ = Vec3::crossProduct(right_, front_);
     up_.normalize();
 
     //  前方向ベクトル計算

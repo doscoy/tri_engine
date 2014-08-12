@@ -1,6 +1,7 @@
 #ifndef TRI_VERTEX_TYPES_HPP_INCLUDED
 #define TRI_VERTEX_TYPES_HPP_INCLUDED
 
+#include "math/tri_vec3.hpp"
 
 namespace t3 {
 
@@ -31,12 +32,8 @@ struct VertexP2T
 
 struct VertexP3N {
 
-    float x_;
-    float y_;
-    float z_;
-    float nx_;
-    float ny_;
-    float nz_;
+    Vec3 position_;
+    Vec3 normal_;
 
 };
 

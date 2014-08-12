@@ -194,6 +194,24 @@ struct Vec3Template {
     }
     
 public:
+
+    static Vec3Template zero() {
+        return Vec3Template(0, 0, 0);
+    }
+    
+    static Vec3Template axisX() {
+        return Vec3Template(1, 0, 0);
+    }
+
+    static Vec3Template axisY() {
+        return Vec3Template(0, 1, 0);
+    }
+
+    static Vec3Template axisZ() {
+        return Vec3Template(0, 0, 1);
+    }
+
+
     //  外積計算
     static T dotProduct(
         const Vec3Template& v1,
@@ -203,15 +221,15 @@ public:
     }
     
     //  外積計算
-    static Vec3Template& crossProduct(
-        Vec3Template& dst,
+    static Vec3Template crossProduct(
         const Vec3Template& v1,
         const Vec3Template& v2
     ){
-        dst.x_ = v1.y_ * v2.z_ - v1.z_ * v2.y_;
-        dst.y_ = v1.z_ * v2.x_ - v1.x_ * v2.z_;
-        dst.z_ = v1.x_ * v2.y_ - v1.y_ * v2.x_;
-        return dst;
+        return Vec3Template(
+            v1.y_ * v2.z_ - v1.z_ * v2.y_,
+            v1.z_ * v2.x_ - v1.x_ * v2.z_,
+            v1.x_ * v2.y_ - v1.y_ * v2.x_
+        );
     }
     
     //  正規化

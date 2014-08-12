@@ -49,13 +49,8 @@ Mesh::Mesh(
             );
             
             VertexP3N p3n;
-            p3n.x_ = new_point.x_;
-            p3n.y_ = new_point.y_;
-            p3n.z_ = new_point.z_;
-            p3n.nx_ = 1.0f;
-            p3n.ny_ = 0.0f;
-            p3n.nz_ = 0.0f;
-            
+            p3n.position_ = new_point;
+            p3n.normal_ = Vec3::zero();
             vertices.push_back(p3n);
 
             aabb.addPoint(new_point);
@@ -72,6 +67,7 @@ Mesh::Mesh(
             f3 -= 1;
             f4 -= 1;
             
+            //  頂点インデックス登録
             indices.push_back(f1);
             indices.push_back(f2);
             indices.push_back(f3);
@@ -79,7 +75,34 @@ Mesh::Mesh(
             indices.push_back(f1);
             indices.push_back(f3);
             indices.push_back(f4);
+            
+            
+            //  面法線計算
+            auto& face_vertex1 = vertices.at(f1);
+            auto& face_vertex2 = vertices.at(f2);
+            auto& face_vertex3 = vertices.at(f3);
+            auto& face_vertex4 = vertices.at(f4);
+            
+            
+            Vec3 v12 = face_vertex1.position_ - face_vertex2.position_;
+            Vec3 v13 = face_vertex1.position_ - face_vertex3.position_;
+            Vec3 normal = t3::Vec3::crossProduct(v12, v13).getNormalized();
+            
+            //  面法線を頂点法線に追加
+            //  最終的に正規化するがここでは足すだけ
+            face_vertex1.normal_ += normal;
+            face_vertex2.normal_ += normal;
+            face_vertex3.normal_ += normal;
+            face_vertex4.normal_ += normal;
+            
         }
+    }
+    
+    
+    //  頂点法線を正規化
+    for (auto& v : vertices) {
+    
+        v.normal_.normalize();
     }
     
     //  aabbをもとに境界球作成

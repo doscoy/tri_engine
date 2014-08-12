@@ -9,6 +9,8 @@ namespace  {
 
 
 const char* SHADER_ATTR_POSITION = "a_position";
+const char* SHADER_ATTR_NORMAL = "a_normal";
+
 const char* SHADER_UNIF_PMV = "u_pmv";
 
 }
@@ -49,6 +51,7 @@ void Model::render(const Mtx44& transform) {
     RenderSystem::bindBuffer(t3::RenderSystem::BufferType::TYPE_VERTEX, mesh_->vertexBuffer());
     RenderSystem::bindBuffer(t3::RenderSystem::BufferType::TYPE_INDEX, mesh_->indexBuffer());
 
+    //  頂点座標有効化
     current_shader_->setEnableAttributeArray(SHADER_ATTR_POSITION, true);
     current_shader_->setAttributePointer(
         SHADER_ATTR_POSITION,
@@ -57,6 +60,17 @@ void Model::render(const Mtx44& transform) {
         false,
         sizeof(VertexP3N),
         0
+    );
+
+    //  頂点法線有効化
+    current_shader_->setEnableAttributeArray(SHADER_ATTR_NORMAL, true);
+    current_shader_->setAttributePointer(
+        SHADER_ATTR_NORMAL,
+        3,
+        GL_FLOAT,
+        false,
+        sizeof(VertexP3N),
+        (void*)(sizeof(t3::Vec3))
     );
 
     RenderSystem::drawElements(
