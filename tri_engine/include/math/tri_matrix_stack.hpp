@@ -22,7 +22,7 @@ public:
     void pushMatrix();
     void popMatrix();
     void multMatrixLocal(const Mtx44& mtx);
-    const Mtx44* getTopMatrix() const;
+    const Mtx44* topMatrix() const;
     void clearStack();
     size_t getStackSize() const {
         return stack_.size();

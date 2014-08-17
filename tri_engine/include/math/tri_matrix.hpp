@@ -7,6 +7,7 @@
 #include "tri_vec2.hpp"
 #include "tri_vec3.hpp"
 #include "tri_vec4.hpp"
+#include "tri_quaternion.hpp"
 #include "../math/tri_math_util.hpp"
 
 
@@ -14,58 +15,6 @@ namespace t3 {
 inline namespace math {
 
 
-// Mtx22Template
-template <typename T>
-struct Mtx22Template {
-    Mtx22Template()
-    {
-        x_.x_ = 1; x_.y_ = 0;
-        y_.x_ = 0; y_.y_ = 1;
-    }
-    Mtx22Template(const T* m)
-    {
-        x_.x_ = m[0]; x_.y_ = m[1];
-        y_.x_ = m[2]; y_.y_ = m[3];
-    }
-    Vec2Template<T> x_;
-    Vec2Template<T> y_;
-};
-
-
-template <typename T>
-struct Mtx33Template {
-    Mtx33Template()
-    {
-        x_.x_ = 1; x_.y_ = 0; x_.z_ = 0;
-        y_.x_ = 0; y_.y_ = 1; y_.z_ = 0;
-        z_.x_ = 0; z_.y_ = 0; z_.z_ = 1;
-    }
-    Mtx33Template(const T* m)
-    {
-        x_.x_ = m[0]; x_.y_ = m[1]; x_.z_ = m[2];
-        y_.x_ = m[3]; y_.y_ = m[4]; y_.z_ = m[5];
-        z_.x_ = m[6]; z_.y_ = m[7]; z_.z_ = m[8];
-    }
-    Mtx33Template(Vec3 x, Vec3 y, Vec3 z)
-        : x_(x), y_(y), z_(z)
-    {
-    }
-    Mtx33Template transposed() const
-    {
-        Mtx33Template m;
-        m.x_.x_ = x_.x_; m.x_.y_ = y_.x_; m.x_.z_ = z_.x_;
-        m.y_.x_ = x_.y_; m.y_.y_ = y_.y_; m.y_.z_ = z_.y_;
-        m.z_.x_ = x_.z_; m.z_.y_ = y_.z_; m.z_.z_ = z_.z_;
-        return m;
-    }
-    const T* Pointer() const
-    {
-        return &x_.x_;
-    }
-    Vec3Template<T> x_;
-    Vec3Template<T> y_;
-    Vec3Template<T> z_;
-};
 
 template <typename T>
 struct Mtx44Template {
@@ -74,18 +23,24 @@ struct Mtx44Template {
         identity();
     }
     
-    Mtx44Template(const Mtx33Template<T>& m) {
-        x_.x_ = m.x_.x_; x_.y_ = m.x_.y_; x_.z_ = m.x_.z_; x_.w_ = 0;
-        y_.x_ = m.y_.x_; y_.y_ = m.y_.y_; y_.z_ = m.y_.z_; y_.w_ = 0;
-        z_.x_ = m.z_.x_; z_.y_ = m.z_.y_; z_.z_ = m.z_.z_; z_.w_ = 0;
-        w_.x_ = 0; w_.y_ = 0; w_.z_ = 0; w_.w_ = 1;
-    }
     
     Mtx44Template(const T* m) {
         x_.x_ = m[0];  x_.y_ = m[1];  x_.z_ = m[2];  x_.w_ = m[3];
         y_.x_ = m[4];  y_.y_ = m[5];  y_.z_ = m[6];  y_.w_ = m[7];
         z_.x_ = m[8];  z_.y_ = m[9];  z_.z_ = m[10]; z_.w_ = m[11];
         w_.x_ = m[12]; w_.y_ = m[13]; w_.z_ = m[14]; w_.w_ = m[15];
+    }
+
+    Mtx44Template(
+        const Vec3Template<T> a,
+        const Vec3Template<T> b,
+        const Vec3Template<T> c,
+        const Vec3Template<T> d
+    ) {
+        x_ = a;
+        y_ = b;
+        z_ = c;
+        w_ = d;
     }
     
     
@@ -153,14 +108,6 @@ struct Mtx44Template {
         m.y_.x_ = x_.y_; m.y_.y_ = y_.y_; m.y_.z_ = z_.y_; m.y_.w_ = w_.y_;
         m.z_.x_ = x_.z_; m.z_.y_ = y_.z_; m.z_.z_ = z_.z_; m.z_.w_ = w_.z_;
         m.w_.x_ = x_.w_; m.w_.y_ = y_.w_; m.w_.z_ = z_.w_; m.w_.w_ = w_.w_;
-        return m;
-    }
-    
-    Mtx33Template<T> toMat3() const {
-        Mtx33Template<T> m;
-        m.x_.x_ = x_.x_; m.y_.x_ = y_.x_; m.z_.x_ = z_.x_;
-        m.x_.y_ = x_.y_; m.y_.y_ = y_.y_; m.z_.y_ = z_.y_;
-        m.x_.z_ = x_.z_; m.y_.z_ = y_.z_; m.z_.z_ = z_.z_;
         return m;
     }
     
@@ -267,6 +214,10 @@ struct Mtx44Template {
     }
     
     
+    void rotate(const Quaternion& q) {
+        makeRotateQuaternion(*this, q);
+    }
+    
     static Mtx44Template<T> getRotateMatrixZ(
         T degrees
     ) {
@@ -340,63 +291,107 @@ struct Mtx44Template {
         m = yaw_mtx * pitch_mtx * roll_mtx;
     }
     
+    static void makeRotateQuaternion(
+        Mtx44Template<T>& out,
+        const Quaternion& quat
+    ) {
+    
+        const T s = 2;
+        T xs, ys, zs;
+        T wx, wy, wz;
+        T xx, xy, xz;
+        T yy, yz, zz;
+        xs = quat.x_ * s;  ys = quat.y_ * s;  zs = quat.z_ * s;
+        wx = quat.w_ * xs; wy = quat.w_ * ys; wz = quat.w_ * zs;
+        xx = quat.x_ * xs; xy = quat.x_ * ys; xz = quat.x_ * zs;
+        yy = quat.y_ * ys; yz = quat.y_ * zs; zz = quat.z_ * zs;
+        
+        out.x_.x_ = T(1) - (yy + zz);
+        out.x_.y_ = xy + wz;
+        out.x_.z_ = xz - wy;
+        out.x_.w_ = 0;
+
+        out.y_.x_ = xy - wz;
+        out.y_.y_ = T(1) - (xx + zz);
+        out.y_.z_ = yz + wx;
+        out.y_.w_ = 0;
+
+        out.z_.x_ = xz + wy;
+        out.z_.y_ = yz - wx;
+        out.z_.z_ = T(1) - (xx + yy);
+        out.z_.w_ = 0;
+        
+        out.w_.x_ = 0;
+        out.w_.y_ = 0;
+        out.w_.z_ = 0;
+        out.w_.w_ = T(1);
+    
+
+    }
+    
     
     static void makeRotateAxis(
-        Mtx44Template<T>& pOut,
-        const Vec3Template<T>& pAxis,
-        T fRad
-    ){
+        Mtx44Template<T>& out,
+        const Vec3Template<T>& axis,
+        T radian
+    ) {
+
+        float s = ::std::sinf(radian);
+        float c = ::std::cosf(radian);
+        float t = 1.0f - c;
+
+        Vec3Template<T> vN = axis.getNormalized();
+
+        float x = vN.x_;
+        float y = vN.y_;
+        float z = vN.z_;
+
+        float xSq = x * x;
+        float ySq = y * y;
+        float zSq = z * z;
+
+        out.x_.x_ = ( t * xSq )   + ( c );
+        out.x_.y_ = ( t * x * y ) - ( s * z );
+        out.x_.z_ = ( t * x * z ) + ( s * y );
+        out.x_.w_ = 0.0f;
+
+        out.y_.x_ = ( t * x * y ) + ( s * z );
+        out.y_.y_ = ( t * ySq )   + ( c );
+        out.y_.z_ = ( t * y * z ) - ( s * x );
+        out.y_.w_ = 0.0f;
+
+        out.z_.x_ = ( t * x * z ) - ( s * y );
+        out.z_.y_ = ( t * y * z ) + ( s * x );
+        out.z_.z_ = ( t * zSq )   + ( c );
+        out.z_.w_ = 0.0f;
     
-        Vec3Template<T> vN;
-        float s, c;             // sinTheta, cosTheta
-        float t;                // ( 1 - cosTheta )
-        float x, y, z;          // x, y, z components of normalized axis
-        float xSq, ySq, zSq;    // x, y, z squared
-
-
-
-        s = ::std::sinf(fRad);
-        c = ::std::cosf(fRad);
-        t = 1.0f - c;
-
-        vN = pAxis.getNormalized();
-
-        x = vN.x_;
-        y = vN.y_;
-        z = vN.z_;
-
-        xSq = x * x;
-        ySq = y * y;
-        zSq = z * z;
-
-        pOut.x_.x_ = ( t * xSq )   + ( c );
-        pOut.x_.y_ = ( t * x * y ) - ( s * z );
-        pOut.x_.z_ = ( t * x * z ) + ( s * y );
-        pOut.x_.w_ = 0.0f;
-
-        pOut.y_.x_ = ( t * x * y ) + ( s * z );
-        pOut.y_.y_ = ( t * ySq )   + ( c );
-        pOut.y_.z_ = ( t * y * z ) - ( s * x );
-        pOut.y_.w_ = 0.0f;
-
-        pOut.z_.x_ = ( t * x * z ) - ( s * y );
-        pOut.z_.y_ = ( t * y * z ) + ( s * x );
-        pOut.z_.z_ = ( t * zSq )   + ( c );
-        pOut.z_.w_ = 0.0f;
-    
-        pOut.w_.x_ = 0.0f;
-        pOut.w_.y_ = 0.0f;
-        pOut.w_.z_ = 0.0f;
-        pOut.w_.w_ = 1.0f;
+        out.w_.x_ = 0.0f;
+        out.w_.y_ = 0.0f;
+        out.w_.z_ = 0.0f;
+        out.w_.w_ = 1.0f;
     }
     
     
-    void ortho( T left, T right, T bottom, T top, T near, T far ){
-        makeOrthoMatrix( *this, left, right, bottom, top, near, far );
+    void ortho(
+        T left,
+        T right,
+        T bottom,
+        T top,
+        T near,
+        T far
+    ) {
+        makeOrthoMatrix(*this, left, right, bottom, top, near, far);
     }
     
-    static void makeOrthoMatrix( Mtx44Template<T>& mtx, T left, T right, T bottom, T top, T near, T far)
-    {
+    static void makeOrthoMatrix(
+        Mtx44Template<T>& mtx,
+        T left,
+        T right,
+        T bottom,
+        T top,
+        T near,
+        T far
+    ) {
         T a = 2.0f / (right - left);
         T b = 2.0f / (top - bottom);
         T c = -2.0f / (far - near);
@@ -409,32 +404,71 @@ struct Mtx44Template {
         mtx.z_.x_ = 0; mtx.z_.y_ = 0; mtx.z_.z_ = c; mtx.z_.w_ = 0;
         mtx.w_.x_ = tx; mtx.w_.y_ = ty; mtx.w_.z_ = tz; mtx.w_.w_ = 1;
     }
-    static Mtx44Template<T> getOrthoMatrix(T left, T right, T bottom, T top, T near, T far)
-    {
+    
+    static Mtx44Template<T> getOrthoMatrix(
+        T left,
+        T right,
+        T bottom,
+        T top,
+        T near,
+        T far
+    ) {
         Mtx44Template m;
-        makeOrthoMatrix( m, left, right, bottom, top, near, far );
+        makeOrthoMatrix(m, left, right, bottom, top, near, far);
         return m;
     }
     
-    void frustum( T left, T right, T bottom, T top, T near, T far ){
-        makeFrustumMatrix( *this, left, right, bottom, top, near, far );
+    
+    void perspective(
+        T const & fov,
+		T const & width,
+		T const & height,
+		T const & near,
+		T const & far
+    ) {
+        makePerspective(*this, fov, width, height, near, far);
     }
     
     
-    static void makeFrustumMatrix( Mtx44Template<T>& mtx, T left, T right, T bottom, T top, T near, T far )
-    {
     
-    /*
-        detail::tmat4x4<valType> Result(0);
-		Result[0][0] = (valType(2) * nearVal) / (right - left);
-		Result[1][1] = (valType(2) * nearVal) / (top - bottom);
-		Result[2][0] = (right + left) / (right - left);
-		Result[2][1] = (top + bottom) / (top - bottom);
-		Result[2][2] = -(farVal + nearVal) / (farVal - nearVal);
-		Result[2][3] = valType(-1);
-		Result[3][2] = -(valType(2) * farVal * nearVal) / (farVal - nearVal);
+    
+    
+    static void makePerspective(
+        Mtx44Template<T>& mtx,
+        T const & fov,
+		T const & width,
+		T const & height,
+		T const & zNear,
+		T const & zFar
+	) {
+        mtx.identity();
+		T rad = toRadian(fov);
 
-    */
+		T h = cos(T(0.5) * rad) / sin(T(0.5) * rad);
+		T w = h * height / width;
+
+		mtx.x_.x_ = w;
+		mtx.y_.y_ = h;
+		mtx.z_.z_ = - (far + near) / (far - near);
+		mtx.z_.w_ = - T(1);
+		mtx.w_.z_ = - (T(2) * far * near) / (far - near);
+	}
+    
+    
+    void frustum(T left, T right, T bottom, T top, T near, T far) {
+        makeFrustumMatrix(*this, left, right, bottom, top, near, far);
+    }
+    
+    
+    static void makeFrustumMatrix(
+        Mtx44Template<T>& mtx,
+        T left,
+        T right,
+        T bottom,
+        T top,
+        T near,
+        T far
+    ) {
         T a = T(2) * near / (right - left);
         T b = T(2) * near / (top - bottom);
         T c = (right + left) / (right - left);
@@ -445,13 +479,19 @@ struct Mtx44Template {
         mtx.x_.x_ = a; mtx.x_.y_ = 0; mtx.x_.z_ = 0; mtx.x_.w_ = 0;
         mtx.y_.x_ = 0; mtx.y_.y_ = b; mtx.y_.z_ = 0; mtx.y_.w_ = 0;
         mtx.z_.x_ = c; mtx.z_.y_ = d; mtx.z_.z_ = e; mtx.z_.w_ = T(-1);
-        mtx.w_.x_ = 0; mtx.w_.y_ = 0; mtx.w_.z_ = f; mtx.w_.w_ = 0;
+        mtx.w_.x_ = 0; mtx.w_.y_ = 0; mtx.w_.z_ = f; mtx.w_.w_ = T(1);
     }
     
-    static Mtx44Template<T> getFrustumMatrix( T left, T right, T bottom, T top, T near, T far )
-    {
+    static Mtx44Template<T> getFrustumMatrix(
+        T left,
+        T right,
+        T bottom,
+        T top,
+        T near,
+        T far
+    ) {
         Mtx44Template m;
-        makeFrustumMatrix( m, left, right, bottom, top, near, far );
+        makeFrustumMatrix(m, left, right, bottom, top, near, far);
         return m;
     }
 
@@ -461,8 +501,18 @@ struct Mtx44Template {
         const Vec3Template<T>& target,
         const Vec3Template<T>& up
     ){
-        makeLookAtMatrix( *this, eye, target, up );
+        makeLookAtMatrix(*this, eye, target, up);
     }
+    
+    void lookat(
+        const Vec3Template<T>& eye,
+        const Vec3Template<T>& normalized_front,
+        const Vec3Template<T>& normalized_right,
+        const Vec3Template<T>& normalized_up
+    ) {
+        makeLookAtMatrix(*this, eye, normalized_front, normalized_right, normalized_up);
+    }
+    
     
     static void makeLookAtMatrix(
         Mtx44Template<T>& mtx,
@@ -470,74 +520,60 @@ struct Mtx44Template {
         const Vec3Template<T>& target,
         const Vec3Template<T>& up
     ){
-/*  //旧版
-        Vec3Template<T> z = (eye - target).getNormalized();
-        Vec3Template<T> x = up.crossProduct(z).getNormalized();
-        Vec3Template<T> y = z.crossProduct(x).getNormalized();
-        
-        
-        mtx.x_ = Vec4Template<T>(x.x_, x.y_, x.z_, 0);
-        mtx.y_ = Vec4Template<T>(y.x_, y.y_, y.z_, 0);
-        mtx.z_ = Vec4Template<T>(z.x_, z.y_, z.z_, 0);
-        mtx.w_ = Vec4Template<T>(0, 0, 0, 1);
-        
-        Vec4Template<T> eyePrime = mtx * Vec4Template<T>(
-            -eye.x_,
-            -eye.y_,
-            -eye.z_,
-            1
-        );
-        mtx = mtx.transposed();
-        mtx.w_ = eyePrime;
-*/
 
-    Vec3Template<T> f = (target - eye).getNormalized();
-    Vec3Template<T> u = up;
-    Vec3Template<T> s = f.crossProduct(u).getNormalized();
+        Vec3Template<T> f = (target - eye).getNormalized();
+        Vec3Template<T> u = up;
+        Vec3Template<T> s = f.crossProduct(u).getNormalized();
         
-    u = f.crossProduct(s);
+        u = f.crossProduct(s);
 
-    mtx.x_.x_ = s.x_;
-    mtx.y_.x_ = s.y_;
-	mtx.z_.x_ = s.z_;
+        mtx.x_.x_ = s.x_;
+        mtx.y_.x_ = s.y_;
+        mtx.z_.x_ = s.z_;
     
-	mtx.x_.y_ = u.x_;
-	mtx.y_.y_ = u.y_;
-	mtx.z_.y_ = u.z_;
+        mtx.x_.y_ = u.x_;
+        mtx.y_.y_ = u.y_;
+        mtx.z_.y_ = u.z_;
 	
-    mtx.x_.z_ =-f.x_;
-	mtx.y_.z_ =-f.y_;
-    mtx.z_.z_ =-f.z_;
+        mtx.x_.z_ = f.x_;
+        mtx.y_.z_ = f.y_;
+        mtx.z_.z_ = f.z_;
     
-    mtx.w_.x_ =-Vec3Template<T>::dotProduct(s, eye);
-    mtx.w_.y_ =-Vec3Template<T>::dotProduct(u, eye);
-    mtx.w_.z_ = Vec3Template<T>::dotProduct(f, eye);
+        mtx.w_.x_ =-Vec3Template<T>::dotProduct(s, eye);
+        mtx.w_.y_ =-Vec3Template<T>::dotProduct(u, eye);
+        mtx.w_.z_ = Vec3Template<T>::dotProduct(f, eye);
     
-    
-    /*
-        
-        detail::tvec3<T> f = normalize(center - eye);
-		detail::tvec3<T> u = normalize(up);
-		detail::tvec3<T> s = normalize(cross(f, u));
-		u = cross(s, f);
-
-		detail::tmat4x4<T> Result(1);
-		Result[0][0] = s.x;
-		Result[1][0] = s.y;
-		Result[2][0] = s.z;
-		Result[0][1] = u.x;
-		Result[1][1] = u.y;
-		Result[2][1] = u.z;
-		Result[0][2] =-f.x;
-		Result[1][2] =-f.y;
-		Result[2][2] =-f.z;
-		Result[3][0] =-dot(s, eye);
-		Result[3][1] =-dot(u, eye);
-		Result[3][2] = dot(f, eye);
-		return Result;
-*/
-        
+ 
     }
+
+    static void makeLookAtMatrix(
+        Mtx44Template<T>& mtx,
+        const Vec3Template<T>& eye,
+        const Vec3Template<T>& normalized_front,
+        const Vec3Template<T>& normalized_right,
+        const Vec3Template<T>& normalized_up
+    ){
+
+
+        mtx.x_.x_ = normalized_right.x_;
+        mtx.y_.x_ = normalized_right.y_;
+        mtx.z_.x_ = normalized_right.z_;
+    
+        mtx.x_.y_ = normalized_up.x_;
+        mtx.y_.y_ = normalized_up.y_;
+        mtx.z_.y_ = normalized_up.z_;
+	
+        mtx.x_.z_ = normalized_front.x_;
+        mtx.y_.z_ = normalized_front.y_;
+        mtx.z_.z_ = normalized_front.z_;
+    
+        mtx.w_.x_ =-Vec3Template<T>::dotProduct(normalized_right, eye);
+        mtx.w_.y_ =-Vec3Template<T>::dotProduct(normalized_up, eye);
+        mtx.w_.z_ = Vec3Template<T>::dotProduct(normalized_front, eye);
+    
+ 
+    }
+
     
     static Mtx44Template<T> getLookAtMatrix( 
         const Vec3Template<T>& eye,
@@ -644,8 +680,6 @@ public:
 
 
 //  typedef
-using Mtx22 = Mtx22Template<float>;
-using Mtx33 = Mtx33Template<float>;
 using Mtx44 = Mtx44Template<float>;
 
 

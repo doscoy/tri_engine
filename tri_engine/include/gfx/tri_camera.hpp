@@ -12,12 +12,19 @@
 namespace t3 {
 inline namespace gfx {
 
+class Camera;
+using CameraPtr = std::shared_ptr<Camera>;
+
 class Camera
     : public Entity
 {
 public:
-    Camera();
     ~Camera();
+    
+    static CameraPtr create();
+    
+private:
+    Camera();
     
 private:
     //  基本パラメータ
@@ -36,7 +43,7 @@ private:
     bool recalculation_request_;    ///< 方向ベクトル再計算フラグ
 
 public:
-    const Mtx44* getViewMatrix();
+    const Mtx44* viewMatrix();
     
     void position(
         const Vec3& pos
@@ -49,35 +56,35 @@ public:
         return &position_;
     }
 
-    void setTargetPosition(
+    void targetPosition(
         const Vec3& pos
     ) {
         target_ = pos;
         recalculation_request_ = true;
     }
     
-    const Vec3* getTargetPosition() const {
+    const Vec3* targetPosition() const {
         return &target_;
     }
     
-    const Vec3* getUpVector() const {
+    const Vec3* upVector() const {
         return &up_;
     }
     
-    const Vec3* getRightVector() const {
+    const Vec3* rightVector() const {
         return &right_;
     }
     
-    const Vec3* getFrontVector() const {
+    const Vec3* frontVector() const {
         return &front_;
     }
     
     
-    void    setFieldOfView( const float fov ) {
+    void    fieldOfView( const float fov ) {
         fov_ = fov;
     }
 
-    const Frustum* getFrustom() const {
+    const Frustum* frustum() const {
         return &frustum_;
     }
 
@@ -90,7 +97,6 @@ private:
 
 };  // class Camera
 
-using CameraPtr = std::shared_ptr<Camera>;
 
 
 }   // namespace gfx

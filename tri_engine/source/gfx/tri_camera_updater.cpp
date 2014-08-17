@@ -32,23 +32,23 @@ void LookAtCameraUpdater::position(
 }
 
 
-void LookAtCameraUpdater::setTargetPosition(const Vec3 &v)
+void LookAtCameraUpdater::targetPosition(const Vec3 &v)
 {
-    getManagedCamera()->setTargetPosition(v);
+    getManagedCamera()->targetPosition(v);
 }
 
-void LookAtCameraUpdater::setTargetPosition(
+void LookAtCameraUpdater::targetPosition(
     const float x,
     const float y,
     const float z
 ) {
-    setTargetPosition(Vec3(x, y, z));
+    targetPosition(Vec3(x, y, z));
 }
 
 void LookAtCameraUpdater::dollyX(
     const float speed
 ){
-    const Vec3* right = getManagedCamera()->getRightVector();
+    const Vec3* right = getManagedCamera()->rightVector();
 
     //  左右にドリーする
     dolly(*right, speed);
@@ -57,7 +57,7 @@ void LookAtCameraUpdater::dollyX(
 void LookAtCameraUpdater::dollyY(
     const float speed
 ){
-    const Vec3* up = getManagedCamera()->getUpVector();
+    const Vec3* up = getManagedCamera()->upVector();
 
     //  上下にドリーする
     dolly(*up, speed);
@@ -66,7 +66,7 @@ void LookAtCameraUpdater::dollyY(
 void LookAtCameraUpdater::dollyZ(
     const float speed
 ){
-    const Vec3* front = getManagedCamera()->getFrontVector();
+    const Vec3* front = getManagedCamera()->frontVector();
 
     //  前後にドリーする
     dolly(*front, speed);
@@ -76,22 +76,22 @@ void LookAtCameraUpdater::dolly(
     const Vec3& dir,
     const float speed
 ){
-    std::shared_ptr<Camera> cam = getManagedCamera();
+    CameraPtr cam = getManagedCamera();
     Vec3 pos = *cam->position();
-    Vec3 tar = *cam->getTargetPosition();
+    Vec3 tar = *cam->targetPosition();
 
     pos += (dir * speed);
     tar += (dir * speed);
     
     cam->position(pos);
-    cam->setTargetPosition(tar);
+    cam->targetPosition(tar);
 }
 
 
 void LookAtCameraUpdater::panV(
     const float speed
 ){
-    const Vec3* right = getManagedCamera()->getRightVector();
+    const Vec3* right = getManagedCamera()->rightVector();
 
     //  上下にパン
     pan(*right, toRadian(speed));
@@ -100,7 +100,7 @@ void LookAtCameraUpdater::panV(
 void LookAtCameraUpdater::panH(
     const float speed
 ){
-    const Vec3* up = getManagedCamera()->getUpVector();
+    const Vec3* up = getManagedCamera()->upVector();
 
     //  左右にパン
     pan(*up, toRadian(speed));
@@ -112,15 +112,15 @@ LookAtCameraUpdater::pan(
     const Vec3& axis,
     const float speed
 ){
-    std::shared_ptr<Camera> cam = getManagedCamera();
+    CameraPtr cam = getManagedCamera();
     
-    Vec3 dir = *cam->getTargetPosition() - *cam->position();
+    Vec3 dir = *cam->targetPosition() - *cam->position();
 
     Mtx44 mtx;
     Mtx44::makeRotateAxis(mtx, axis, speed);
 
     Vec3 a = mtx.xform(dir);
-    cam->setTargetPosition( *cam->position() + a );
+    cam->targetPosition( *cam->position() + a );
 
 }
 

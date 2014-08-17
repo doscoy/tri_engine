@@ -10,23 +10,29 @@ inline namespace gfx {
 
 class Entity;
 
+
+class TransformNode;
+using TransformNodePtr = std::shared_ptr<TransformNode>;
+
 class TransformNode
     : public ISceneNode
 {
 public:
-    TransformNode(
-        node_id_t id,
-        std::string name
-    );
     virtual~ TransformNode();
     
-public:
-    static std::shared_ptr<TransformNode> create(
+protected:
+    TransformNode(
+        NodeID id,
         std::string name
     );
     
 public:
-    virtual node_id_t getNodeID() const {
+    static TransformNodePtr create(
+        std::string name
+    );
+    
+public:
+    virtual NodeID getNodeID() const {
         return node_id_;
     }
 
@@ -86,16 +92,16 @@ public:
     );
     
     bool addChild(
-        std::shared_ptr<ISceneNode> kid
+        SceneNodePtr kid
     ) override;
     
     bool removeChild(
-        node_id_t id
+        NodeID id
     ) override;
     
     
     void detachParent(
-        std::shared_ptr<ISceneNode> kid
+        SceneNodePtr kid
     );
     
     
@@ -104,7 +110,7 @@ public:
         return std::string();
     }
 
-    std::shared_ptr<TransformNode> createNode(
+    TransformNodePtr createNode(
         std::string name
     );
 
@@ -272,8 +278,10 @@ private:
     Entity* entity_;
     SceneNodeList children_;
     ISceneNode* parent_;
-    node_id_t node_id_;
+    NodeID node_id_;
 };
+
+
 
 }   // namespace gfx
 }   // namespace t3

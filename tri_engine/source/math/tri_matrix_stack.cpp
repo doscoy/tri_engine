@@ -35,7 +35,7 @@ void MatrixStack::multMatrixLocal(
 }
 
 
-const Mtx44* MatrixStack::getTopMatrix() const
+const Mtx44* MatrixStack::topMatrix() const
 {
     return &top_;
 }

@@ -3,7 +3,6 @@
 #ifndef TRI_QUATERNION_HPP_INCLUDED
 #define TRI_QUATERNION_HPP_INCLUDED
 
-#include "tri_matrix.hpp"
 #include "../math/tri_math_define.hpp"
 #include "../math/tri_math_util.hpp"
 #include "../util/tri_equal_comparable.hpp"
@@ -16,172 +15,232 @@ struct QuaternionTemplate
     : public EqalComparable< QuaternionTemplate<T> >
 {
     
-    T x;
-    T y;
-    T z;
-    T w;
+    T x_;
+    T y_;
+    T z_;
+    T w_;
     
     //  ctor
     QuaternionTemplate()
-        : x(0)
-        , y(0)
-        , z(0)
-        , w(1)
+        : x_(0)
+        , y_(0)
+        , z_(0)
+        , w_(1)
     {}
         
-    QuaternionTemplate( T x, T y, T z, T w )
-        : x(x)
-        , y(y)
-        , z(z)
-        , w(w)
+    QuaternionTemplate(T ax, T ay, T az, T aw)
+        : x_(ax)
+        , y_(ay)
+        , z_(az)
+        , w_(aw)
     {}
     
-    QuaternionTemplate( const QuaternionTemplate<T>& q )
-        : x(q.x)
-        , y(q.y)
-        , z(q.z)
-        , w(q.w)
+    QuaternionTemplate(const QuaternionTemplate<T>& q)
+        : x_(q.x_)
+        , y_(q.y_)
+        , z_(q.z_)
+        , w_(q.w_)
     {}
+    
+    QuaternionTemplate(
+        const Vec3& axis,
+        const float degree
+    ) {
+        set(axis, degree);
+    }
+    
+    
+    void set(
+        const Vec3Template<T>& axis,
+        const float degree
+    ) {
+        makeFromAxisAngle(*this, axis, toRadian(degree));
+    }
+    
+    
+    
     
     //  slerp
-    QuaternionTemplate<T> slerp( T t, const QuaternionTemplate<T>& v1 ) const{
-        T dot = dotProduct( v1 );
-        if ( dot > 1 - EPSILON ){
+    QuaternionTemplate<T> slerp(T t, const QuaternionTemplate<T>& v1) const{
+        T dot = dotProduct(v1);
+        if (dot > 1 - EPSILON) {
             QuaternionTemplate<T> result = v1 + (*this - v1).getScaledQuaternion(t);
         }
         
-        t3::clampLimitation( dot, 0.0f, 1.0f );
+        t3::clampLimitation(dot, 0.0f, 1.0f);
         
-        T theta0 = acosf( dot );
+        T theta0 = acosf(dot);
         T theta = theta0 * t;
         
         QuaternionTemplate<T> v2 = (v1 - getScaledQuaternion(dot));
         v2.normalize();
         
-        QuaternionTemplate<T> q = getScaledQuaternion( cosf(theta) ) + v2.getScaledQuaternion( sin(theta) );
+        QuaternionTemplate<T> q = getScaledQuaternion(cosf(theta)) + v2.getScaledQuaternion(sin(theta));
         q.normalize();
         
         return q;
     };
     
     //  回転させる
-    QuaternionTemplate<T> getRotatedQuaternion( const QuaternionTemplate<T>& b ) const{
+    QuaternionTemplate<T> getRotatedQuaternion(const QuaternionTemplate<T>& b) const{
         QuaternionTemplate<T> q;
-        q.w = w * b.w - x * b.x - y * b.y - z * b.z;
-        q.x = w * b.x + x * b.w + y * b.z - z * b.y;
-        q.y = w * b.y + y * b.w + z * b.x - x * b.z;
-        q.z = w * b.z + z * b.w + x * b.y - y * b.x;
+        q.w_ = w_ * b.w_ - x_ * b.x_ - y_ * b.y_ - z_ * b.z_;
+        q.x_ = w_ * b.x_ + x_ * b.w_ + y_ * b.z_ - z_ * b.y_;
+        q.y_ = w_ * b.y_ + y_ * b.w_ + z_ * b.x_ - x_ * b.z_;
+        q.z_ = w_ * b.z_ + z_ * b.w_ + x_ * b.y_ - y_ * b.x_;
         q.normalize();
         return q;        
     }
     
     //  拡縮させる
-    QuaternionTemplate<T> getScaledQuaternion( T s ) const {
-        return QuaternionTemplate<T>( x * s, y * s, z * s, w * s );
+    QuaternionTemplate<T> getScaledQuaternion(T s) const {
+        return QuaternionTemplate<T>(x_ * s, y_ * s, z_ * s, w_ * s);
     }
     
     //  内積
-    T dotProduct( const QuaternionTemplate<T>& q ) const {
-        return x * q.x + y * q.y + z * q.z + w * q.w;
+    T dotProduct(const QuaternionTemplate<T>& q) const {
+        return x_ * q.x_ + y_ * q.y_ + z_ * q.z_ + w_ * q.w_;
     }
     
-    //  行列に変換
-    Mtx33Template<T> toMatrix() const {
-        const T s = 2;
-        T xs, ys, zs;
-        T wx, wy, wz;
-        T xx, xy, xz;
-        T yy, yz, zz;
-        xs = x * s;  ys = y * s;  zs = z * s;
-        wx = w * xs; wy = w * ys; wz = w * zs;
-        xx = x * xs; xy = x * ys; xz = x * zs;
-        yy = y * ys; yz = y * zs; zz = z * zs;
-        
-        Mtx33Template<T> m;
-        m.x.x = 1 - (yy + zz); m.y.x = xy - wz;  m.z.x = xz + wy;
-        m.x.y = xy + wz; m.y.y = 1 - (xx + zz); m.z.y = yz - wx;
-        m.x.z = xz - wy; m.y.z = yz + wx;  m.z.z = 1 - (xx + yy);
-        return m;
-    }
-
-    //  ベクトルに変換
-    Vec4Template<T> toVec4() const {
-        return Vec4Template<T>( x, y, z, w );
-    }
     
     //  QuaternionTemplate - QuaternionTemplate
-    QuaternionTemplate<T> operator-( const QuaternionTemplate<T>& q ) const {
-        return QuaternionTemplate<T>( x - q.x, y - q.y, z - q.z, w - q.w );
+    QuaternionTemplate<T> operator-(const QuaternionTemplate<T>& q) const {
+        return QuaternionTemplate<T>( x_ - q.x_, y_ - q.y_, z_ - q.z_, w_ - q.w_);
     }
     
     //  QuaternionTemplate + QuaternionTemplate
-    QuaternionTemplate<T> operator+( const QuaternionTemplate<T>& q ) const {
-        return QuaternionTemplate<T>( x + q.x, y + q.y, z + q.z, w + q.w );
+    QuaternionTemplate<T> operator+(const QuaternionTemplate<T>& q) const {
+        return QuaternionTemplate<T>(x_ + q.x_, y_ + q.y_, z_ + q.z_, w_ + q.w_);
+    }
+    
+
+    void makeRotate(
+        QuaternionTemplate<T>& dest,
+        const QuaternionTemplate<T>& lhs,
+        const QuaternionTemplate<T>& rhs
+    ) {
+        dest.w_ = lhs.w_ * rhs.w_ - lhs.x_ * rhs.x_ - lhs.y_ * rhs.y_ - lhs.z_ * rhs.z_;
+        dest.x_ = lhs.w_ * rhs.x_ + lhs.x_ * rhs.w_ + lhs.y_ * rhs.z_ - lhs.z_ * rhs.y_;
+        dest.y_ = lhs.w_ * rhs.y_ - lhs.x_ * rhs.z_ + lhs.y_ * rhs.w_ + lhs.z_ * rhs.x_;
+        dest.z_ = lhs.w_ * rhs.z_ + lhs.x_ * rhs.y_ - lhs.y_ * rhs.x_ + lhs.z_ * rhs.w_;
+        dest.normalize();
+    }
+
+    
+    
+    const QuaternionTemplate<T>& operator +=(
+        const QuaternionTemplate<T>& rhs
+    ) {
+        x_ += rhs.x_;
+        y_ += rhs.y_;
+        z_ += rhs.z_;
+        w_ += rhs.w_;
+        
+        return *this;
     }
     
     //  QuaternionTemplate == QuaternionTemplate
-    bool operator==( const QuaternionTemplate<T>& q ) const {
-        return x == q.x 
-            && y == q.y 
-            && z == q.z 
-            && w == q.w;
+    bool operator==(const QuaternionTemplate<T>& q) const {
+        return x_ == q.x_ 
+            && y_ == q.y_ 
+            && z_ == q.z_ 
+            && w_ == q.w_;
     }
     
     //  正規化
     void normalize(){
-        *this = getScaledQuaternion( 1 / sqrtf( dotProduct( *this ) ) );
+        *this = getScaledQuaternion(1 / sqrtf( dotProduct(*this)));
     }
     
     //  回転
-    void rotate( const QuaternionTemplate<T>& q2 ){
-        QuaternionTemplate<T> q;
-    
-        q.w = w * q2.w - x * q2.x - y * q2.y - z * q2.z;
-        q.x = w * q2.x + x * q2.w + y * q2.z - z * q2.y;
-        q.y = w * q2.y + y * q2.w + z * q2.x - x * q2.z;
-        q.z = w * q2.z + z * q2.w + x * q2.y - y * q2.x;
-    
-        q.normalize();
-        *this = q;
+    void rotate(const QuaternionTemplate<T>& r) {
+
+        makeRotate(*this, r, *this);
     }
     
     //  dump
     void dump() const {
-        std::cout << "x:" << x << " y:" << y << " z:" << z << " w:" << w << std::endl;
+        std::cout << "x:" << x_ << " y:" << y_ << " z:" << z_ << " w:" << w_ << std::endl;
     }
     
-    static QuaternionTemplate<T> createFromVectors( 
-        const Vec3Template<T>& v0,
-        const Vec3Template<T>& v1
+    
+    //  ２つのベクトル間を移動するクォータニオンを生成
+    static QuaternionTemplate<T> makeFromVectors(
+        const Vec3Template<T>& start,
+        const Vec3Template<T>& goal
     ){
     
-        if ( v0 == -v1 ){
-            return QuaternionTemplate<T>::createFromAxisAngle( Vec3(1, 0, 0), PI );
+        QuaternionTemplate<T> q;
+        if (start == -goal) {
+            makeFromAxisAngle(
+                q,
+                Vec3(1, 0, 0),
+                PI
+            );
+            return q;
         }
-        Vec3Template<T> c = v0.crossProduct( v1 );
-        T d = v0.dotProduct( v1 );
+        Vec3Template<T> c = start.crossProduct(goal);
+        T d = start.dotProduct(goal);
         T s = sqrtf((1 + d) * 2);
 
-        QuaternionTemplate<T> q;
-        q.x = c.x / s;
-        q.y = c.y / s;
-        q.z = c.z / s;
-        q.w = s / 2.0f;
+
+        q.x_ = c.x_ / s;
+        q.y_ = c.y_ / s;
+        q.z_ = c.z_ / s;
+        q.w_ = s / 2.0f;
         return q;
     }
     
     //  軸回転値からクォータニオンを生成
-    static QuaternionTemplate<T> createFromAxisAngle(
+    static void makeFromAxisAngle(
+        QuaternionTemplate<T>& q,
         const Vec3Template<T>& axis, 
-        float radians
+        float angle
     ){
-        QuaternionTemplate<T> q;
-        q.w = cosf( radians / 2.0f );
-        q.x = q.y = q.z = sinf( radians / 2.0f );
-        q.x *= axis.x;
-        q.y *= axis.y;
-        q.z *= axis.z;
-        return q;
+        float ang_div_2 = angle * 0.5f;
+        q.w_ = cosf(ang_div_2);
+        q.x_ = q.y_ = q.z_ = sinf(ang_div_2);
+        q.x_ *= axis.x_;
+        q.y_ *= axis.y_;
+        q.z_ *= axis.z_;
+    }
+    
+    static void makeFromEuler(
+        QuaternionTemplate<T>& dest,
+        Vec3Template<T> euler
+    ) {
+        makeQuaternionFromEuler(dest, euler.x_, euler.y_, euler.z_);
+    }
+    
+    
+    static void makeFromEuler(
+        QuaternionTemplate<T>& dest,
+        T x,
+        T y,
+        T z
+    ) {
+
+        float tmpx = x * 0.5f;
+        float tmpy = y * 0.5f;
+        float tmpz = z * 0.5f;
+
+        float cr = std::cosf(tmpx);
+        float cp = std::cosf(tmpy);
+        float cy = std::cosf(tmpz);
+
+        float sr = std::sinf(tmpx);
+        float sp = std::sinf(tmpy);
+        float sy = std::sinf(tmpz);
+
+        float cpcy = cp * cy;
+        float spsy = sp * sy;
+        float cpsy = cp * sy;
+        float spcy = sp * cy;
+
+        dest.w_ = cr * cpcy + sr * spsy;
+        dest.x_ = sr * cpcy - cr * spsy;
+        dest.y_ = cr * spcy + sr * cpsy;
+        dest.z_ = cr * cpsy - sr * spcy;
     }
 
 };

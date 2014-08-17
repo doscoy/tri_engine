@@ -3,12 +3,12 @@
 
 
 #include "../math/tri_math.hpp"
+#include "tri_camera.hpp"
 #include <memory>
 
 namespace t3 {
 inline namespace gfx {
 
-class Camera;
 
 class CameraUpdater
 {
@@ -17,19 +17,19 @@ public:
     virtual ~CameraUpdater(){}
 
 public:
-    void setCamera(
+    void camera(
         std::shared_ptr<Camera> camera
     ) {
         camera_ = camera;
     }
     
 protected:
-    std::shared_ptr<Camera> getManagedCamera() {
+    CameraPtr getManagedCamera() {
         return camera_;
     }
     
 private:
-    std::shared_ptr<Camera> camera_;
+    CameraPtr camera_;
 };
 
 
@@ -46,8 +46,8 @@ public:
     void position(const Vec3& v);
     void position(float x, float y, float z);
 
-    void setTargetPosition(const Vec3& v);
-    void setTargetPosition(float x, float y, float z);
+    void targetPosition(const Vec3& v);
+    void targetPosition(float x, float y, float z);
 
     void    dollyX( const float speed );
     void    dollyY( const float speed );

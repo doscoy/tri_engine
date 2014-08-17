@@ -25,6 +25,13 @@ Camera::~Camera()
 {
 }
 
+CameraPtr Camera::create() {
+
+    std::shared_ptr<Camera> cam(new Camera);
+    return cam;
+}
+
+
 void Camera::calculateDirection()
 {
 
@@ -82,7 +89,7 @@ void Camera::calculateMatrix()
 }
 
 
-const Mtx44* Camera::getViewMatrix()
+const Mtx44* Camera::viewMatrix()
 {
     recalculate();
     return &view_matrix_;

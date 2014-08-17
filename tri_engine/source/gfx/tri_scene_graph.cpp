@@ -55,17 +55,16 @@ void SceneGraph::setupView()
     auto& screen = d.virtualScreenSize();
     
     t3::RenderSystem::setViewport(0, 0, screen.x_, screen.y_);
-
     t3::Mtx44 projection = t3::Mtx44::getFrustumMatrix(
         -1,
         1,
         -(float)screen.y_ /screen.x_,
         (float)screen.y_/screen.x_,
-        1,
-        100
+        0.1f,
+        1000.0f
     );
     
-    const Mtx44* view_mtx = camera_->getViewMatrix();
+    const Mtx44* view_mtx = camera_->viewMatrix();
     Mtx44 view_projection = *view_mtx * projection;
     pushAndSetMatrix(view_projection);
 }
@@ -95,18 +94,18 @@ void SceneGraph::popMatrix()
 }
 
 
-const Mtx44* SceneGraph::getTopMatrix()
+const Mtx44* SceneGraph::topMatrix()
 {
-    return static_cast<const Mtx44*>(matrix_stack_.getTopMatrix());
+    return static_cast<const Mtx44*>(matrix_stack_.topMatrix());
 }
 
 
-std::shared_ptr<ISceneNode> SceneGraph::findNode(node_id_t id)
+SceneNodePtr SceneGraph::findNode(NodeID id)
 {
     SceneNodeMap::iterator it = node_map_.find(id);
     
     if (it == node_map_.end()) {
-        std::shared_ptr<ISceneNode> null;
+        SceneNodePtr null;
         return null;
     }
     
@@ -114,7 +113,7 @@ std::shared_ptr<ISceneNode> SceneGraph::findNode(node_id_t id)
 }
 
 
-std::shared_ptr<TransformNode> SceneGraph::createNode()
+TransformNodePtr SceneGraph::createNode()
 {
     return root_->createNode("node");
 }

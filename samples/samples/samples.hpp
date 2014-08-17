@@ -17,7 +17,7 @@
 #include "event_handling/event_handling.hpp"
 #include "mesh_obj_test/mesh_obj_scene.hpp"
 #include "ui_button_test/ui_button_test.hpp"
-
+#include "quat_test/quat_test_scene.hpp"
 
 class RootTest
     : public t3::Scene

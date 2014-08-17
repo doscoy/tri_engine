@@ -6,13 +6,14 @@
 
 
 
+
 namespace t3 {
 inline namespace gfx {
 
-
+extern NodeID getNewNodeID();
 
 TransformNode::TransformNode(
-    node_id_t id,
+    NodeID id,
     std::string name
 )   : parent_(nullptr)
     , children_()
@@ -53,7 +54,7 @@ void TransformNode::render(
     if (hasEntity()
         && entity_->isRenderable()) {
     
-        entity_->render(*scene_graph->getTopMatrix());
+        entity_->render(*scene_graph->topMatrix());
     }
 }
 
@@ -89,7 +90,7 @@ void TransformNode::renderChildren(t3::SceneGraph *scene_graph)
     SceneNodeList::iterator end = children_.end();
     
     while (it != end) {
-        std::shared_ptr<ISceneNode> node = (*it);
+        SceneNodePtr node = (*it);
         if (node->preRender(scene_graph)) {
         
             //  prerenderでfalseだったらレンダリングは省略できる
@@ -105,17 +106,17 @@ void TransformNode::renderChildren(t3::SceneGraph *scene_graph)
 }
 
 void TransformNode::detachParent(
-    std::shared_ptr<ISceneNode> kid
+    SceneNodePtr kid
 ) {
     ISceneNode* kid_parent = kid->getParent();
     if (kid_parent) {
-        node_id_t kid_id = kid->getNodeID();
+        NodeID kid_id = kid->getNodeID();
         kid_parent->removeChild(kid_id);
     }
 }
 
 bool TransformNode::addChild(
-    std::shared_ptr<ISceneNode> kid
+    SceneNodePtr kid
 ) {
     if (kid->getParent() == this) {
         return true;
@@ -131,7 +132,7 @@ bool TransformNode::addChild(
 
 
 bool TransformNode::removeChild(
-    node_id_t id
+    NodeID id
 ) {
 
 	for (SceneNodeList::iterator it = children_.begin(); it != children_.end(); ++it) {
@@ -167,19 +168,18 @@ bool TransformNode::isVisible(t3::SceneGraph *scene_graph) const
     return true;
 }
 
-std::shared_ptr<TransformNode> TransformNode::createNode(
+TransformNodePtr TransformNode::createNode(
     std::string name
 ) {
-    std::shared_ptr<TransformNode> new_node = create(name);
+    TransformNodePtr new_node = create(name);
     addChild(new_node);
     return new_node;
 }
 
-std::shared_ptr<TransformNode> TransformNode::create(
+TransformNodePtr TransformNode::create(
     std::string name
 ) {
-    std::shared_ptr<TransformNode> new_node;
-    new_node.reset(new TransformNode(getNewNodeID(), name));
+    TransformNodePtr new_node(new TransformNode(getNewNodeID(), name));
     
     return new_node;
 }

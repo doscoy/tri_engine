@@ -27,6 +27,16 @@ public:
     ) {
         radius_ = radius;
     }
+
+    float radius() const {
+        return radius_;
+    }
+    
+    float getRadiusSq() const {
+        return radius_ * radius_;
+    }
+    
+
     
     void position(
         const Vec3& position
@@ -34,16 +44,8 @@ public:
         position_ = position;
     }
     
-    const Vec3* position() const {
-        return &position_;
-    }
-    
-    float getRadius() const {
-        return radius_;
-    }
-    
-    float getRadiusSq() const {
-        return radius_ * radius_;
+    const Vec3& position() const {
+        return position_;
     }
     
 private:

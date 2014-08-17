@@ -14,20 +14,20 @@ inline namespace gfx {
 
 
 
+using NodeID = uint32_t;
 
-typedef uint32_t node_id_t;
-
-extern node_id_t getNewNodeID();
 
 class SceneGraph;
 
+class ISceneNode;
+using SceneNodePtr = std::shared_ptr<ISceneNode>;
 
 class ISceneNode
 {
 protected:
 
 public:
-    virtual node_id_t getNodeID() const = 0;
+    virtual NodeID getNodeID() const = 0;
 
     virtual void onUpdate(
         SceneGraph* scene,
@@ -48,11 +48,11 @@ public:
     virtual void postRender(SceneGraph* scene_graph) = 0;
     
     virtual bool addChild(
-        std::shared_ptr<ISceneNode> kid
+        SceneNodePtr kid
     ) = 0;
     
     virtual bool removeChild(
-        node_id_t id
+        NodeID id
     ) = 0;
     
     virtual ISceneNode* getParent() = 0;
@@ -64,11 +64,9 @@ public:
 };
 
 
+using SceneNodeList = std::vector<SceneNodePtr>;
 
-
-typedef std::vector<std::shared_ptr<ISceneNode>> SceneNodeList;
-
-typedef std::list<ISceneNode*> RenderableSceneNodes;
+using RenderableSceneNodes = std::list<SceneNodePtr>;
 
 
 

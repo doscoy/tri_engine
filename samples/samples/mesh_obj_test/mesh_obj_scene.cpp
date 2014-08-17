@@ -29,18 +29,22 @@ public:
 
         //  モデル作成
         model_.mesh(mesh_);
-    
+
+        
         //  カメラ生成
-        cam_ = std::make_shared<t3::Camera>();
-        cam_update_.setCamera(cam_);
-        cam_update_.position(0, 3, 4);
-        cam_update_.setTargetPosition(0,0,0);
+        cam_ = t3::Camera::create();
+        cam_update_.camera(cam_);
+        cam_update_.position(0, 5, 5);
+        cam_update_.targetPosition(0,0,0);
         
         //  シーングラフ初期化
-        scene_graph_.setCamera(cam_);
-        node_ = scene_graph_.createNode();
-        node_->attachEntity(&model_);
+        scene_graph_.camera(cam_);
+        node1_ = scene_graph_.createNode();
+        node1_->attachEntity(&model_);
         
+        node2_ = node1_->createNode("node2");
+        node2_->attachEntity(&model_);
+        node2_->position(3, 0, 0);
         
         
     }
@@ -52,8 +56,8 @@ public:
     void update(t3::tick_t delta_time){
         static float angle = 0;
         angle += 1;
-        node_->rotation(angle, 0, 0);
-        
+        node1_->rotation(0, angle, 0);
+        node2_->rotation(angle*4, 0, 0);
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -81,8 +85,9 @@ private:
     t3::LookAtCameraUpdater cam_update_;
     t3::SceneGraph scene_graph_;
     
-    std::shared_ptr<t3::TransformNode> node_;
-    
+    t3::TransformNodePtr node1_;
+    t3::TransformNodePtr node2_;
+    t3::Quaternion quat_;
 };
 
 

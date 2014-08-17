@@ -15,6 +15,25 @@ inline namespace gfx {
 #define BUFFER_OFFSET(bytes) ((GLubyte *)nullptr + (bytes))
 
 
+int safeScan(
+    char* buf,
+    int* f1,
+    int* f2,
+    int* f3,
+    int* f4
+) {
+    
+    int scan_count = sscanf(buf + 2, "%d/%*d/%*d %d/%*d/%*d %d/%*d/%*d %d/%*d/%*d", f1, f2, f3, f4);
+    if (scan_count != 4 && scan_count != 3) {
+        scan_count = sscanf(buf + 2, "%d %d %d %d", f1, f2, f3, f4);
+        if (scan_count != 4 && scan_count != 3) {
+            return 0;
+        }
+    }
+
+    return scan_count;
+}
+
 
 Mesh::Mesh(
     const char* const name
@@ -59,29 +78,32 @@ Mesh::Mesh(
             int f1, f2, f3, f4;
             
             //  いろんなフォーマットがある
-            if (sscanf(buf + 2, "%d/%*d/%*d %d/%*d/%*d %d/%*d/%*d %d/%*d/%*d", &f1, &f2, &f3, &f4) != 4) {
-
-            }
+            int scan_num = safeScan(buf, &f1, &f2, &f3, &f4);
+            T3_ASSERT(scan_num >= 3);
             f1 -= 1;
             f2 -= 1;
             f3 -= 1;
             f4 -= 1;
-            
+
+
             //  頂点インデックス登録
             indices.push_back(f1);
             indices.push_back(f2);
             indices.push_back(f3);
+            
+            if (scan_num == 4) {
 
-            indices.push_back(f1);
-            indices.push_back(f3);
-            indices.push_back(f4);
+                indices.push_back(f1);
+                indices.push_back(f3);
+                indices.push_back(f4);
+
+            }
             
             
-            //  面法線計算
+            //  e面法線計算
             auto& face_vertex1 = vertices.at(f1);
             auto& face_vertex2 = vertices.at(f2);
             auto& face_vertex3 = vertices.at(f3);
-            auto& face_vertex4 = vertices.at(f4);
             
             
             Vec3 v12 = face_vertex1.position_ - face_vertex2.position_;
@@ -93,8 +115,11 @@ Mesh::Mesh(
             face_vertex1.normal_ += normal;
             face_vertex2.normal_ += normal;
             face_vertex3.normal_ += normal;
-            face_vertex4.normal_ += normal;
-            
+
+            if (scan_num == 4) {
+                auto& face_vertex4 = vertices.at(f4);
+                face_vertex4.normal_ += normal;
+            }
         }
     }
     

@@ -25,7 +25,7 @@ inline namespace gfx {
 
 
 
-typedef std::map<node_id_t, std::shared_ptr<ISceneNode>> SceneNodeMap;
+typedef std::map<NodeID, SceneNodePtr> SceneNodeMap;
 
 
 class TestObjectNode;
@@ -47,20 +47,20 @@ public:
     
     void updateScene(tick_t delta_time);
     
-    std::shared_ptr<ISceneNode> findNode( node_id_t id );
+    SceneNodePtr findNode( NodeID id );
     
     
-    void setCamera(
-        std::shared_ptr<Camera> cam
+    void camera(
+        CameraPtr cam
     ) {
         camera_ = cam;
     }
     
-    const std::shared_ptr<Camera> getCamera() const {
+    const CameraPtr camera() const {
         return camera_;
     }
     
-    const std::shared_ptr<TransformNode> getRootNode() const {
+    const TransformNodePtr getRootNode() const {
         return root_;
     }
     
@@ -70,22 +70,22 @@ public:
     
     void popMatrix();
     
-    const Mtx44* getTopMatrix();
+    const Mtx44* topMatrix();
     
-    std::shared_ptr<TransformNode> createNode();
+    TransformNodePtr createNode();
     
 private:
 
     bool addChild(
-        node_id_t id,
-        std::shared_ptr<TransformNode> kid
+        NodeID id,
+        TransformNodePtr kid
     ) {
         node_map_[id] = kid;
         return root_->addChild(kid);
     }
 
     bool removeChild(
-        node_id_t id
+        NodeID id
     ) {
         node_map_.erase(id);
         return root_->removeChild(id);
@@ -93,8 +93,8 @@ private:
 
 
 protected:
-    std::shared_ptr<TransformNode> root_;
-    std::shared_ptr<Camera> camera_;
+    TransformNodePtr root_;
+    CameraPtr camera_;
     
     MatrixStack matrix_stack_;
     SceneNodeMap node_map_;
