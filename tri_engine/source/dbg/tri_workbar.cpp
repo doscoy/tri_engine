@@ -1,7 +1,7 @@
-#include "tri_workbar.hpp"
-#include "tri_assert.hpp"
-#include "tri_print.hpp"
-#include "tri_draw_primitive.hpp"
+#include "dbg/tri_workbar.hpp"
+#include "dbg/tri_assert.hpp"
+#include "dbg/tri_print.hpp"
+#include "dbg/tri_draw_primitive.hpp"
 #include "util/tri_util.hpp"
 #include <algorithm>
 #include <limits>

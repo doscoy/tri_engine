@@ -4,10 +4,10 @@
 
 #include <cstdarg>
 #include <cstdio>
-#include "tri_trace.hpp"
+#include "dbg/tri_trace.hpp"
 #include "base/tri_director.hpp"
 #include "util/tri_counter.hpp"
-#include "tri_debug_log_layer.hpp"
+#include "dbg/tri_debug_log_layer.hpp"
 #include "math/tri_math.hpp"
 
 

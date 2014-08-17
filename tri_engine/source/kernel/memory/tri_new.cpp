@@ -1,13 +1,13 @@
 #include <cstddef>
 
 #include "base/tri_types.hpp"
-#include "tri_heap.hpp"
-#include "tri_heap_factory.hpp"
+#include "kernel/memory/tri_heap.hpp"
+#include "kernel/memory/tri_heap_factory.hpp"
 #include "dbg/tri_assert.hpp"
 #include <stdlib.h>
-#include "tri_new.hpp"
+#include "kernel/memory/tri_new.hpp"
 #include "dbg/tri_trace.hpp"
-#include "tri_memory.hpp"
+#include "kernel/memory/tri_memory.hpp"
 
 
 /*

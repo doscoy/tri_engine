@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 KANI Tetsuro. All rights reserved.
 //
 
-#include "tri_draw_layer.hpp"
+#include "gfx/tri_draw_layer.hpp"
 
 
 namespace t3 {

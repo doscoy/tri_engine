@@ -1,9 +1,9 @@
-#include "tri_debug_log_layer.hpp"
+#include "dbg/tri_debug_log_layer.hpp"
 #include "gfx/tri_color.hpp"
 #include "gfx/tri_render_system.hpp"
-#include "tri_print.hpp"
+#include "dbg/tri_print.hpp"
 #include "base/tri_director.hpp"
-#include "tri_draw_primitive.hpp"
+#include "dbg/tri_draw_primitive.hpp"
 
 
 

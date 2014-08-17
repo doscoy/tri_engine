@@ -1,8 +1,8 @@
 // -*- mode:c++; coding:utf-8 -*-
 
-#include "tri_camera_updater.hpp"
+#include "gfx/tri_camera_updater.hpp"
 #include "math/tri_math_util.hpp"
-#include "tri_camera.hpp"
+#include "gfx/tri_camera.hpp"
 
 
 

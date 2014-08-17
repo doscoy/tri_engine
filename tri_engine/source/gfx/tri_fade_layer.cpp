@@ -1,6 +1,6 @@
 
 
-#include "tri_fade_layer.hpp"
+#include "gfx/tri_fade_layer.hpp"
 #include "dbg/tri_draw_primitive.hpp"
 #include "gfx/tri_render_system.hpp"
 

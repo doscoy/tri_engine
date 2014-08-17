@@ -1,3 +1,3 @@
 
-#include "tri_entity.hpp"
+#include "gfx/tri_entity.hpp"
 

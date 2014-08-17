@@ -1,6 +1,6 @@
 
 
-#include "tri_audio_system.hpp"
+#include "audio/tri_audio_system.hpp"
 #include "platform/platform_sdk.hpp"
 #include "dbg/tri_assert.hpp"
 #include "dbg/tri_trace.hpp"

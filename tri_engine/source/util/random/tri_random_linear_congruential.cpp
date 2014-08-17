@@ -1,5 +1,5 @@
 
-#include "tri_random_linear_congruential.hpp"
+#include "util/random/tri_random_linear_congruential.hpp"
 
 namespace {
 

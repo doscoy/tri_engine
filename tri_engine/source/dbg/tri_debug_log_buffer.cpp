@@ -7,9 +7,9 @@
 //
 
 
-#include "tri_debug_log_buffer.hpp"
+#include "dbg/tri_debug_log_buffer.hpp"
 #include <cstdarg>
-#include "tri_trace.hpp"
+#include "dbg/tri_trace.hpp"
 
 namespace t3 {
 inline namespace dbg {

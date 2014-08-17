@@ -1,8 +1,8 @@
 
-#include "tri_transform_node.hpp"
-#include "tri_entity.hpp"
+#include "gfx/tri_transform_node.hpp"
+#include "gfx/tri_entity.hpp"
 #include "dbg/tri_trace.hpp"
-#include "tri_scene_graph.hpp"
+#include "gfx/tri_scene_graph.hpp"
 
 
 

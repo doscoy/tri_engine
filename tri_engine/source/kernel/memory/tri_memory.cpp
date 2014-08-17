@@ -1,4 +1,5 @@
-#include "tri_allocator.hpp"
+#include "kernel/memory/tri_allocator.hpp"
+
 namespace t3 {
     
 Allocator default_allocator_;

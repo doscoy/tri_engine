@@ -4,7 +4,7 @@
  *
  */
 
-#include "tri_bit.hpp"
+#include "util/tri_bit.hpp"
 
 
 namespace t3 {

@@ -1,5 +1,5 @@
 
-#include "tri_pointing.hpp"
+#include "kernel/io/tri_pointing.hpp"
 #include "base/tri_director.hpp"
 
 namespace t3 {

@@ -1,9 +1,9 @@
 
-#include "tri_sprite_renderer.hpp"
-#include "tri_sprite.hpp"
-#include "tri_vertex_types.hpp"
+#include "gfx/tri_sprite_renderer.hpp"
+#include "gfx/tri_sprite.hpp"
+#include "gfx/tri_vertex_types.hpp"
 #include "base/tri_director.hpp"
-#include "tri_texture.hpp"
+#include "gfx/tri_texture.hpp"
 #include "math/tri_matrix.hpp"
 #include "gfx/tri_render_system.hpp"
 #include <algorithm>

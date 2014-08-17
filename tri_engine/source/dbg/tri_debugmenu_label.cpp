@@ -1,7 +1,7 @@
 
 
-#include "tri_debugmenu_label.hpp"
-#include "tri_debugmenu_frame.hpp"
+#include "dbg/tri_debugmenu_label.hpp"
+#include "dbg/tri_debugmenu_frame.hpp"
 
 namespace t3 {
 inline namespace dbg {

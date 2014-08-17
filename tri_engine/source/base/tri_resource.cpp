@@ -1,5 +1,5 @@
 
-#include "tri_resource.hpp"
+#include "base/tri_resource.hpp"
 
 
 namespace t3 {

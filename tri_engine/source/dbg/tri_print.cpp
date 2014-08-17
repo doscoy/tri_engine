@@ -6,7 +6,7 @@
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#include "tri_print.hpp"
+#include "dbg/tri_print.hpp"
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -17,7 +17,7 @@
 #include "gfx/tri_texture_factory.hpp"
 #include "gfx/tri_render_system.hpp"
 #include "base/tri_director.hpp"
-#include "tri_debug_string_layer.hpp"
+#include "dbg/tri_debug_string_layer.hpp"
 #include "kernel/tri_kernel.hpp"
 #include "gfx/tri_shader.hpp"
 

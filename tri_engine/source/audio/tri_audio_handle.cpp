@@ -1,6 +1,6 @@
 
 
-#include "tri_audio_handle.hpp"
+#include "audio/tri_audio_handle.hpp"
 
 
 namespace t3 {

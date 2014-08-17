@@ -1,5 +1,5 @@
 
-#include "tri_random_well.hpp"
+#include "util/random/tri_random_well.hpp"
 
 namespace t3 {
 

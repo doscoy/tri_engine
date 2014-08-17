@@ -1,5 +1,5 @@
-#include "tri_director.hpp"
-#include "tri_scene.hpp"
+#include "base/tri_director.hpp"
+#include "base/tri_scene.hpp"
 #include "util/tri_counter.hpp"
 #include "kernel/tri_kernel.hpp"
 #include "dbg/tri_dbg.hpp"

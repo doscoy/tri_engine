@@ -1,4 +1,4 @@
-#include "tri_scene_node.hpp"
+#include "gfx/tri_scene_node.hpp"
 
 
 namespace t3 {

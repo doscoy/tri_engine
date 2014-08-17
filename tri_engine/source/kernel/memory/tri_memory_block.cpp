@@ -1,4 +1,4 @@
-#include "tri_memory_block.hpp"
+#include "kernel/memory/tri_memory_block.hpp"
 
 
 

@@ -1,6 +1,6 @@
 
-#include "tri_scene_graph.hpp"
-#include "tri_scene_node.hpp"
+#include "gfx/tri_scene_graph.hpp"
+#include "gfx/tri_scene_node.hpp"
 #include "dbg/tri_trace.hpp"
 #include "gfx/tri_render_system.hpp"
 #include "kernel/tri_kernel.hpp"

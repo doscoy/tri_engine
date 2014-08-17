@@ -1,8 +1,8 @@
 
-#include "tri_debugmenu.hpp"
-#include "tri_print.hpp"
+#include "dbg/tri_debugmenu.hpp"
+#include "dbg/tri_print.hpp"
 #include "gfx/tri_color.hpp"
-#include "tri_debugpad.hpp"
+#include "dbg/tri_debugpad.hpp"
 
 namespace t3 {
 

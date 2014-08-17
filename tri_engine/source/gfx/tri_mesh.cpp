@@ -1,6 +1,6 @@
 
 
-#include "tri_mesh.hpp"
+#include "gfx/tri_mesh.hpp"
 #include "dbg/tri_assert.hpp"
 #include <fstream>
 #include "platform/platform_sdk.hpp"

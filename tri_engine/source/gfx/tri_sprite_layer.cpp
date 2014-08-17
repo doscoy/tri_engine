@@ -1,6 +1,6 @@
 
-#include "tri_sprite_layer.hpp"
-#include "tri_texture.hpp"
+#include "gfx/tri_sprite_layer.hpp"
+#include "gfx/tri_texture.hpp"
 
 
 namespace t3 {

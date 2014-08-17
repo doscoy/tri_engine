@@ -1,4 +1,4 @@
-#include "tri_shader.hpp"
+#include "gfx/tri_shader.hpp"
 #include "platform/platform_sdk.hpp"
 #include "dbg/tri_assert.hpp"
 #include "dbg/tri_trace.hpp"

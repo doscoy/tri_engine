@@ -438,8 +438,8 @@ struct Mtx44Template {
         T const & fov,
 		T const & width,
 		T const & height,
-		T const & zNear,
-		T const & zFar
+		T const & near,
+		T const & far
 	) {
         mtx.identity();
 		T rad = toRadian(fov);

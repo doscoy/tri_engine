@@ -1,4 +1,4 @@
-#include "tri_heap_factory.hpp"
+#include "kernel/memory/tri_heap_factory.hpp"
 
 
 namespace t3 {

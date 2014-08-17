@@ -1,4 +1,4 @@
-#include "tri_debugpad.hpp"
+#include "dbg/tri_debugpad.hpp"
 
 namespace  {
 

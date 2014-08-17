@@ -1,7 +1,7 @@
 
 
-#include "tri_audio_manager.hpp"
-#include "tri_audio_system.hpp"
+#include "audio/tri_audio_manager.hpp"
+#include "audio/tri_audio_system.hpp"
 
 namespace t3 {
 inline namespace audio {

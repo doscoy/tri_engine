@@ -1,5 +1,5 @@
 
-#include "tri_random_xorshift.hpp"
+#include "util/random/tri_random_xorshift.hpp"
 
 namespace t3 {
 

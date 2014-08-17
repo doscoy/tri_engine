@@ -5,7 +5,7 @@
  **/
 
 
-#include "tri_bezier_curve.hpp"
+#include "math/tri_bezier_curve.hpp"
 
 
 namespace {

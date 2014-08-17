@@ -1,6 +1,6 @@
 
 
-#include "tri_wav.hpp"
+#include "audio/tri_wav.hpp"
 #include "kernel/memory/tri_memory.hpp"
 
 

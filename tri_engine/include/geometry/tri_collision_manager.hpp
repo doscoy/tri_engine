@@ -2,8 +2,8 @@
 #define TRI_COLLISION_MANAGER_HPP_INCLUDED
 
 #include "util/tri_hash_string.hpp"
-#include "tri_collision_events.hpp"
-#include "tri_event.hpp"
+#include "geometry/tri_collision_events.hpp"
+#include "base/tri_event.hpp"
 #include <memory>
 #include <list>
 #include <vector>

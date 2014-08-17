@@ -1,7 +1,7 @@
 
-#include "tri_scene.hpp"
+#include "base/tri_scene.hpp"
 #include "dbg/tri_debugmenu.hpp"
-#include "tri_event_manager.hpp"
+#include "base/tri_event_manager.hpp"
 
 
 

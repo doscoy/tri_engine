@@ -1,7 +1,7 @@
 
 
-#include "tri_debugmenu_items.hpp"
-#include "tri_debugpad.hpp"
+#include "dbg/tri_debugmenu_items.hpp"
+#include "dbg/tri_debugpad.hpp"
 #include "kernel/io/tri_pad.hpp"
 
 namespace t3 {

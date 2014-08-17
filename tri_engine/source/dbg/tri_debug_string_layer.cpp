@@ -1,5 +1,5 @@
 
-#include "tri_debug_string_layer.hpp"
+#include "dbg/tri_debug_string_layer.hpp"
 #include "gfx/tri_render_system.hpp"
 
 

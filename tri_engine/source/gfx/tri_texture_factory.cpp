@@ -1,7 +1,7 @@
 
-#include "tri_texture_factory.hpp"
-#include "tri_texture.hpp"
-#include "tri_image_png.hpp"
+#include "gfx/tri_texture_factory.hpp"
+#include "gfx/tri_texture.hpp"
+#include "gfx/tri_image_png.hpp"
 #include "dbg/tri_dbg.hpp"
 #include "platform/platform_sdk.hpp"
 

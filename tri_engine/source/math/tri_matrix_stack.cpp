@@ -1,5 +1,5 @@
 
-#include "tri_matrix_stack.hpp"
+#include "math/tri_matrix_stack.hpp"
 
 namespace t3 {
 inline namespace math {

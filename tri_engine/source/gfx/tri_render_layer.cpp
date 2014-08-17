@@ -1,6 +1,6 @@
 
 
-#include "tri_render_layer.hpp"
+#include "gfx/tri_render_layer.hpp"
 #include "base/tri_director.hpp"
 #include <cstring>
 

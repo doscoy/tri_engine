@@ -1,5 +1,5 @@
 
-#include "tri_draw_primitive.hpp"
+#include "dbg/tri_draw_primitive.hpp"
 #include "platform/platform_sdk.hpp"
 #include "platform/platform.hpp"
 #include "geometry/tri_geometry.hpp"

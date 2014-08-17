@@ -1,9 +1,9 @@
 
-#include "tri_image_png.hpp"
+#include "gfx/tri_image_png.hpp"
 #include <iostream>
 #include "dbg/tri_dbg.hpp"
 #include "kernel/tri_kernel.hpp"
-#include "platform_sdk.hpp"
+#include "platform/platform_sdk.hpp"
 
 
 

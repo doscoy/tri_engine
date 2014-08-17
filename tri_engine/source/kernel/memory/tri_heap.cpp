@@ -1,6 +1,6 @@
 
 #include "base/tri_types.hpp"
-#include "tri_heap.hpp"
+#include "kernel/memory/tri_heap.hpp"
 #include <cstddef>
 #include <stdlib.h>
 #include "dbg/tri_assert.hpp"

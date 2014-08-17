@@ -1,5 +1,5 @@
 
-#include "tri_random_mseq.hpp"
+#include "util/random/tri_random_mseq.hpp"
 
 
 namespace {

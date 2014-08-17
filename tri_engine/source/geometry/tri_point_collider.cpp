@@ -1,7 +1,7 @@
 
 #include "geometry/tri_point_collider.hpp"
-#include "tri_collision.hpp"
-#include "tri_circle_collider.hpp"
+#include "geometry/tri_collision.hpp"
+#include "geometry/tri_circle_collider.hpp"
 
 
 

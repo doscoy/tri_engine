@@ -1,5 +1,5 @@
-#include "tri_virtual_pad.hpp"
-#include "tri_draw_primitive.hpp"
+#include "dbg/tri_virtual_pad.hpp"
+#include "dbg/tri_draw_primitive.hpp"
 #include "base/tri_director.hpp"
 #include "geometry/tri_collision.hpp"
 #include "geometry/tri_rectangle.hpp"

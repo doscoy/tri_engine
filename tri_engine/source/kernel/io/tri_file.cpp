@@ -1,5 +1,5 @@
 
-#include "tri_file.hpp"
+#include "kernel/io/tri_file.hpp"
 #include "base/tri_types.hpp"
 #include "kernel/memory/tri_memory.hpp"
 #include "dbg/tri_assert.hpp"

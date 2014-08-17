@@ -1,6 +1,6 @@
 
 
-#include "tri_random_mt.hpp"
+#include "util/random/tri_random_mt.hpp"
 
 namespace {
 

@@ -8,8 +8,8 @@
 
 #include <cmath>
 #include <iostream>
-#include "tri_assert.hpp"
-#include "tri_trace.hpp"
+#include "dbg/tri_assert.hpp"
+#include "dbg/tri_trace.hpp"
 
 
 namespace t3 {

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 KANI Tetsuro. All rights reserved.
 //
 
-#include "tri_object.hpp"
+#include "theater/tri_object.hpp"
 
 
 namespace t3 {

@@ -1,8 +1,8 @@
 
 // ---------------------------------------------
 //  include
-#include "tri_allocation_recorder.hpp"
-#include "tri_types.hpp"
+#include "kernel/memory/tri_allocation_recorder.hpp"
+#include "base/tri_types.hpp"
 #include "dbg/tri_dbg.hpp"
 #include "util/tri_util.hpp"
 

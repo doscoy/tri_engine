@@ -1,8 +1,8 @@
 
-#include "tri_debugmenu_frame.hpp"
-#include "tri_print.hpp"
-#include "tri_debugpad.hpp"
-#include "tri_trace.hpp"
+#include "dbg/tri_debugmenu_frame.hpp"
+#include "dbg/tri_print.hpp"
+#include "dbg/tri_debugpad.hpp"
+#include "dbg/tri_trace.hpp"
 
 namespace t3 {
 inline namespace dbg {
