@@ -13,7 +13,8 @@
 namespace t3 {
     
 
-class Allocator : private Uncopyable
+class Allocator
+    : private Uncopyable
 {
     
 public:

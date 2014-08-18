@@ -1,5 +1,4 @@
-// -*- mode:c++; coding:utf-8 -*-
-
+#include "kernel/memory/tri_new.hpp"
 #include "gfx/tri_camera.hpp"
 #include "math/tri_math_util.hpp"
 
@@ -27,7 +26,8 @@ Camera::~Camera()
 
 CameraPtr Camera::create() {
 
-    std::shared_ptr<Camera> cam(T3_NEW Camera);
+//    std::shared_ptr<Camera> cam(T3_NEW Camera);
+    std::shared_ptr<Camera> cam(new(__FILE__, __LINE__) Camera);
     return cam;
 }
 

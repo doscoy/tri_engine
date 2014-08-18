@@ -1,13 +1,6 @@
-#include <cstddef>
-
-#include "base/tri_types.hpp"
-#include "kernel/memory/tri_heap.hpp"
-#include "kernel/memory/tri_heap_factory.hpp"
-#include "dbg/tri_assert.hpp"
-#include <stdlib.h>
-#include "kernel/memory/tri_new.hpp"
+#include <cstdlib>
+#include <cstring>
 #include "dbg/tri_trace.hpp"
-#include "kernel/memory/tri_memory.hpp"
 
 
 #define DIRTY_ALLOCATE_MEMORY   1
@@ -16,7 +9,7 @@
 void* operator new(
     ::std::size_t size
 ) {
-    NEW_TRACE("new %dbyte.\n",size);
+//    NEW_TRACE("new %dbyte.\n",size);
     void* p = std::malloc(size);
 #if DIRTY_ALLOCATE_MEMORY
     std::memset(p, 0xDEADBEEF, size);
@@ -27,14 +20,14 @@ void* operator new(
 void operator delete(
     void* mem
 ) {
-    NEW_TRACE("delete.\n");
+//    NEW_TRACE("delete.\n");
     std::free(mem);
 }
 
 void* operator new[](
     ::std::size_t size
 ) {
-    NEW_TRACE("new %dbyte.\n",size);
+//    NEW_TRACE("new[] %dbyte.\n",size);
     void* p = std::malloc(size);
 #if DIRTY_ALLOCATE_MEMORY
     std::memset(p, 0xDEADBEEF, size);
@@ -45,7 +38,7 @@ void* operator new[](
 void operator delete[](
     void* mem
 ) {
-    NEW_TRACE("delete.\n");
+//    NEW_TRACE("delete.\n");
     std::free(mem);
 }
 
@@ -56,6 +49,7 @@ void* operator new(
     const char* const filename,
     int line
 ) {
+    NEW_TRACE("new %dbyte %s(%d).\n", size, filename, line);
     void* p = std::malloc(size);
     return p;
 }
@@ -65,6 +59,7 @@ void operator delete(
     const char* const filename,
     int line
 ) {
+    NEW_TRACE("delete %s(%d).\n", filename, line);
     std::free(mem);
 }
 
@@ -73,6 +68,7 @@ void* operator new[](
     const char* const filename,
     int line
 ) {
+    NEW_TRACE("new[] %dbyte %s(%d).\n", size, filename, line);
     void* p = std::malloc(size);
     return p;
 }
@@ -82,6 +78,7 @@ void operator delete[](
     const char* const filename,
     int line
 ) {
+    NEW_TRACE("delete[] %s(%d).\n", filename, line);
     std::free(mem);
 }
 

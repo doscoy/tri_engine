@@ -14,6 +14,7 @@
 // -----------------------------------------------------------------
 //	インクルード
 #include <typeinfo>
+#include "kernel/memory/tri_new.hpp"
 
 
 namespace t3 {

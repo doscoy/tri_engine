@@ -3,6 +3,7 @@
 #include "gfx/tri_entity.hpp"
 #include "dbg/tri_trace.hpp"
 #include "gfx/tri_scene_graph.hpp"
+#include "kernel/memory/tri_new.hpp"
 
 
 

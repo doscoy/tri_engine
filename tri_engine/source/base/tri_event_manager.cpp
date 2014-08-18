@@ -367,7 +367,6 @@ bool EventManager::tick(
             for (; table_it != table_end; ++table_it) {
 
                 table_it->func_.invoke(*event);
-//                (*table_it)->handleEvent(*event);
             }
         }
         
@@ -382,7 +381,6 @@ bool EventManager::tick(
         EventListenerTable::iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-//            (*table_it)->handleEvent(*event);
             table_it->func_.invoke(*event);
         }
         
@@ -501,7 +499,6 @@ void EventManager::dumpListeners() const {
         
     }
 
-    T3_TRACE("+++Listener %d\n", listener_count);
 }
 
 
