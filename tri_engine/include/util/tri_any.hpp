@@ -49,7 +49,7 @@ private:
 		
         //	コピー処理
         virtual HolderBase* clone() const {
-            return ( new holder( value_ ) );
+            return ( T3_NEW holder( value_ ) );
         }
 		
         //	型情報取得
@@ -69,7 +69,7 @@ public:
     //	コンストラクタ
     template <class T>
     Any(const T& value)
-        : content_(new holder<T>(value))
+        : content_(T3_NEW holder<T>(value))
     {}
 
     // *************************************************************************
@@ -82,7 +82,7 @@ public:
     //	デストラクタ
     ~Any(){
         if (content_) {
-            delete content_;
+            T3_DELETE content_;
             content_ = nullptr;
         }
     }
@@ -96,10 +96,10 @@ public:
     template <class T>
     Any& operator =(const T& value) {
         if (content_) {
-            delete content_;
+            T3_DELETE content_;
             content_ = NULL;
         }
-        content_ = new holder<T>(value);
+        content_ = T3_NEW holder<T>(value);
         return ( *this );
     }
 	
@@ -107,7 +107,7 @@ public:
     //	Any同士の代入
     Any& operator =(const Any& other) {
 		if (content_) {
-            delete content_;
+            T3_DELETE content_;
             content_ = NULL;
         }
         content_ = other.content_ ? other.content_->clone() : NULL;

@@ -16,12 +16,12 @@ namespace t3 {
 // オブジェクトをdeleteしポインタを無効にする.
 template < class T >
 inline void safeDelete(T*& p) {
-    //  不完全な型のポインタをdeleteしようとした時にコンパイルエラーにする
+    //  不完全な型のポインタをT3_DELETEしようとした時にコンパイルエラーにする
     typedef char type_must_be_complete[ sizeof(T)? 1: -1 ];
     (void)sizeof(type_must_be_complete);
 
-    //  delete    
-    delete p;
+    //  T3_DELETE    
+    T3_DELETE p;
     p = nullptr;
 }
 
@@ -30,12 +30,12 @@ inline void safeDelete(T*& p) {
 // 配列をdelete後にポインタを無効にする.
 template < class T >
 inline void safeDeleteArray(T*& p) {
-    //  不完全な型のポインタをdeleteしようとした時にコンパイルエラーにする
+    //  不完全な型のポインタをT3_DELETEしようとした時にコンパイルエラーにする
     typedef char type_must_be_complete[ sizeof(T)? 1: -1 ];
     (void)sizeof(type_must_be_complete);
 
-    // delete array
-    delete[] p;
+    // T3_DELETE array
+    T3_DELETE[] p;
     p = nullptr;
 }
 

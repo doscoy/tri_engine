@@ -24,7 +24,7 @@ public:
 
         //  メッシュ読み込み
         t3::FilePath obj_path("o.obj");
-        mesh_ = new t3::Mesh(obj_path.getFullPath().c_str());
+        mesh_ = T3_NEW t3::Mesh(obj_path.getFullPath().c_str());
     
 
         //  モデル作成

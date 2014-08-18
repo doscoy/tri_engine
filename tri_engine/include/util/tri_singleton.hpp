@@ -32,7 +32,7 @@ public:
     // *********************************************
     //  インスタンス破棄
     static void destroyInstance(){
-        delete instance_;
+        T3_DELETE instance_;
     }
     
     // *********************************************

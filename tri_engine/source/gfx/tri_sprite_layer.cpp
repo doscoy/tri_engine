@@ -30,7 +30,7 @@ SpriteLayer::~SpriteLayer()
 
 SpritePtr SpriteLayer::createSprite(std::shared_ptr<Texture> tex) {
     SpritePtr spr;
-    spr.reset(new Sprite);
+    spr.reset(T3_NEW Sprite);
     spr->texture(tex);
     attachSprite(spr);
     

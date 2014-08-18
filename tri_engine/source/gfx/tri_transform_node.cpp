@@ -179,7 +179,7 @@ TransformNodePtr TransformNode::createNode(
 TransformNodePtr TransformNode::create(
     std::string name
 ) {
-    TransformNodePtr new_node(new TransformNode(getNewNodeID(), name));
+    TransformNodePtr new_node(T3_NEW TransformNode(getNewNodeID(), name));
     
     return new_node;
 }

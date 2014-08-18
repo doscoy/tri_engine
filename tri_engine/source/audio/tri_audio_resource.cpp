@@ -29,7 +29,7 @@ std::shared_ptr<AudioResource> AudioResource::create(
     wav.load(filepath);
     
     std::shared_ptr<AudioResource> res;
-    res.reset(new AudioResource);
+    res.reset(T3_NEW AudioResource);
     res->setupBuffer(wav);
     return res;
 }
@@ -39,7 +39,7 @@ std::shared_ptr<AudioHandle> AudioResource::createSound() {
     
     std::shared_ptr<AudioHandle> audio_handle;
     audio_handle.reset(
-        new AudioHandle(id_)
+        T3_NEW AudioHandle(id_)
     );
     
     return audio_handle;
