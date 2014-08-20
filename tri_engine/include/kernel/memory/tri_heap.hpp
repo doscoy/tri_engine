@@ -33,9 +33,12 @@ public:
     }
     
     
-//    void attach( Heap* parent );
-    
-    void* allocate(size_t size);
+    void* allocate(const size_t size);
+    void* allocate(
+        const size_t size,
+        const char* const file_name,
+        const int line
+    );
     static void  deallocate(void* mem);
     
  
@@ -52,14 +55,11 @@ private:
     int instances_;
     AllocHeader* head_alloc_;
 
-
-//    Heap* parent_;
     Heap* first_child_;
     Heap* next_siblind_;
     Heap* prev_sibling_;
 
 
-    static int next_alloc_number_;
 };
 
 
