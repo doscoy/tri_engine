@@ -115,7 +115,7 @@ void Wav::load(FilePath& filepath ) {
     FILE* fp = fopen(filepath.getFullPath().c_str(), "rb");
     readHeaderWav(fp, &channel_, &bit_per_sample_, &size_, &sampling_rate_);
     
-    data_ = T3_ALLOC(size_);
+    data_ = (uint8_t*)T3_ALLOC(size_);
     fread(data_, size_, 1, fp);
 
     fclose(fp);

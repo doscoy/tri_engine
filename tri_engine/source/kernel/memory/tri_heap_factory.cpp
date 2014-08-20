@@ -47,7 +47,7 @@ Heap* HeapFactory::createHeap(
     Heap* parent = findHeap( parent_name );
     if ( parent == nullptr ){
         parent = createNewHeap( parent_name );
-        parent->attach( root_heap_ );
+//        parent->attach( root_heap_ );
     }
     
     Heap* heap = findHeap( name );
@@ -55,7 +55,7 @@ Heap* HeapFactory::createHeap(
         heap = createNewHeap( name );
     }
     
-    heap->attach( parent );
+//    heap->attach( parent );
     return heap;
 }
 

@@ -44,12 +44,6 @@ struct Step {
     }
 };
 
-struct DumpAllocatorLog {
-    void operator ()(int){
-        t3::default_allocator_.getAllocationRecorder().dump();
-    }
-};
-
 
 
 bool isSuspending() {
@@ -73,7 +67,7 @@ public:
         : dmf_system_(nullptr, "SYSTEM")
         , dmb_root_menu_(&dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootScene)
         , dmb_step_(&dmf_system_, "STEP", 0)
-        , dmb_dump_allocater_log_(&dmf_system_, "DUMP ALLOCATE LOG", 0)
+
         , dmi_show_work_time_(&dmf_system_, "SHOW WORKTIME", show_work_time_, 1)
         , dmi_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_, 1)
         , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_, 1)
@@ -92,7 +86,7 @@ private:
     t3::DebugMenuFrame dmf_system_;
     t3::DebugMenuButtonMethod<t3::Application> dmb_root_menu_;
     t3::DebugMenuButtonFunctor<Step> dmb_step_;
-    t3::DebugMenuButtonFunctor<DumpAllocatorLog> dmb_dump_allocater_log_;
+
     t3::DebugMenuItem<bool> dmi_show_work_time_;
     t3::DebugMenuItem<bool> dmi_show_work_bar_;
     t3::DebugMenuItem<bool> dm_show_task_;
@@ -394,12 +388,12 @@ void Application::renderApplication()
         //  シーンが切り替わったのでデバッグメニューを閉じる
         dm.closeMenu();
         
-        //  メモリリークを検出
+/*        //  メモリリークを検出
         default_allocator_.getAllocationRecorder().dump(
             last_scene_change_frame_,
             frame_counter_.now()-1
         );
-        
+*/
         //  シーンが切り替わったタイミングを保存
         last_scene_change_frame_ = frame_counter_.now();
     }

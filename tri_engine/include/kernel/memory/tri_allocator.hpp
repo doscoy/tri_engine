@@ -5,7 +5,6 @@
 
 #include <cstdlib>
 #include "../../util/tri_uncopyable.hpp"
-#include "tri_allocation_recorder.hpp"
 #include "../../util/tri_counter.hpp"
 
 
@@ -27,7 +26,7 @@ public:
         int line
     ){
         void* address = std::malloc( size );
-        allocation_recorder_.checkin( address, size, filename, line, frame_counter_.now() );
+
         return reinterpret_cast<T*>( address );
     }
     
@@ -35,19 +34,14 @@ public:
     //  メモリ解放
     void free( void* address ) {
         
-        allocation_recorder_.checkout( address );
+
         std::free( address );
     }
     
-    // *********************************************
-    //  アロケーションレコーダを取得
-    const AllocationRecorder& getAllocationRecorder() const {
-        return allocation_recorder_;
-    }
+
 
     
-private:
-    AllocationRecorder allocation_recorder_;
+
     
 };
 

@@ -11,15 +11,15 @@ namespace t3 {
 class HeapFactory
 {
 public:
-    static Heap* createHeap( const char* const name );
-    static Heap* createHeap( const char* const name, const char* const parent );
-    static void destroyHeap( Heap* heap );
+    static Heap* createHeap(const char* const name);
+    static Heap* createHeap(const char* const name, const char* const parent_name);
+    static void destroyHeap(Heap* heap);
     static Heap* getDefaultHeap();
 
 private:
     static void initialize();
-    static Heap* findHeap( const char* const name );
-    static Heap* createNewHeap( const char* const name ); 
+    static Heap* findHeap(const char* const name);
+    static Heap* createNewHeap(const char* const name);
     static Heap* getRootHeap();
 
 private:

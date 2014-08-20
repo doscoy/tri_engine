@@ -6,15 +6,15 @@
 #include <cstddef>
 #include "util/tri_uncopyable.hpp"
 
+
 namespace t3 {
 
-constexpr int HEAP_SIGNATURE = 0xDEADC0DE;
-//constexpr int HEAP_ENDMARKER = 0x19830125;
 constexpr int NAME_LENGTH = 32;
 
 
 struct AllocHeader;
-class Heap : private Uncopyable
+class Heap
+    : private Uncopyable
 {
 public:
     Heap();
@@ -25,7 +25,7 @@ public:
         return heap_name_;
     }
     
-    void activate( const char* const name );
+    void activate(const char* const name);
     void deactivate();
     
     bool isActive() const {
@@ -33,10 +33,10 @@ public:
     }
     
     
-    void attach( Heap* parent );
+//    void attach( Heap* parent );
     
-    void* allocate( size_t size );
-    static void  deallocate( void* mem );
+    void* allocate(size_t size);
+    static void  deallocate(void* mem);
     
  
     
@@ -53,7 +53,7 @@ private:
     AllocHeader* head_alloc_;
 
 
-    Heap* parent_;
+//    Heap* parent_;
     Heap* first_child_;
     Heap* next_siblind_;
     Heap* prev_sibling_;

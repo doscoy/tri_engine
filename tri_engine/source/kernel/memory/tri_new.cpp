@@ -1,45 +1,37 @@
 #include <cstdlib>
 #include <cstring>
 #include "dbg/tri_trace.hpp"
+#include "kernel/memory/tri_heap_factory.hpp"
 
 
-#define DIRTY_ALLOCATE_MEMORY   1
+
+
 #define NEW_TRACE(...) t3::traceTerminal(__VA_ARGS__)
 
 void* operator new(
     ::std::size_t size
 ) {
-//    NEW_TRACE("new %dbyte.\n",size);
-    void* p = std::malloc(size);
-#if DIRTY_ALLOCATE_MEMORY
-    std::memset(p, 0xDEADBEEF, size);
-#endif // DIRTY_ALLOCATE_MEMORY
+    void* p = t3::HeapFactory::getDefaultHeap()->allocate(size);
     return p;
 }
 
 void operator delete(
     void* mem
 ) {
-//    NEW_TRACE("delete.\n");
-    std::free(mem);
+    t3::Heap::deallocate(mem);
 }
 
 void* operator new[](
     ::std::size_t size
 ) {
-//    NEW_TRACE("new[] %dbyte.\n",size);
-    void* p = std::malloc(size);
-#if DIRTY_ALLOCATE_MEMORY
-    std::memset(p, 0xDEADBEEF, size);
-#endif // DIRTY_ALLOCATE_MEMORY
+    void* p = t3::HeapFactory::getDefaultHeap()->allocate(size);
     return p;
 }
 
 void operator delete[](
     void* mem
 ) {
-//    NEW_TRACE("delete.\n");
-    std::free(mem);
+    t3::Heap::deallocate(mem);
 }
 
 
@@ -49,8 +41,7 @@ void* operator new(
     const char* const filename,
     int line
 ) {
-    NEW_TRACE("new %dbyte %s(%d).\n", size, filename, line);
-    void* p = std::malloc(size);
+    void* p = t3::HeapFactory::getDefaultHeap()->allocate(size);
     return p;
 }
 
@@ -59,8 +50,7 @@ void operator delete(
     const char* const filename,
     int line
 ) {
-    NEW_TRACE("delete %s(%d).\n", filename, line);
-    std::free(mem);
+    t3::Heap::deallocate(mem);
 }
 
 void* operator new[](
@@ -68,8 +58,7 @@ void* operator new[](
     const char* const filename,
     int line
 ) {
-    NEW_TRACE("new[] %dbyte %s(%d).\n", size, filename, line);
-    void* p = std::malloc(size);
+    void* p = t3::HeapFactory::getDefaultHeap()->allocate(size);
     return p;
 }
 
@@ -78,7 +67,6 @@ void operator delete[](
     const char* const filename,
     int line
 ) {
-    NEW_TRACE("delete[] %s(%d).\n", filename, line);
-    std::free(mem);
+    t3::Heap::deallocate(mem);
 }
 
