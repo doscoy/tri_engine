@@ -18,10 +18,10 @@ namespace t3 {
 bool isInvalidFloat(const float f)
 {
     //  浮動少数の無効値チェック
-    if (std::isnan(f)){
+    if (std::isnan(f)) {
         return true;
     }
-    if (std::isinf(f)){
+    if (std::isinf(f)) {
         return true;
     }
     //  正常な浮動少数

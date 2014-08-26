@@ -1,11 +1,10 @@
 #include <cstdlib>
 #include <cstring>
-#include <mutex>
 #include "dbg/tri_trace.hpp"
 #include "kernel/memory/tri_heap_factory.hpp"
+#include "kernel/process/tri_mutex.hpp"
 
-
-using AutoLock = std::lock_guard<std::recursive_mutex>;
+using AutoLock = std::lock_guard<t3::Mutex>;
 
 
 #define NEW_TRACE(...) t3::traceTerminal(__VA_ARGS__)
@@ -21,7 +20,7 @@ void* operator new(
 void operator delete(
     void* mem
 ) {
-    AutoLock lock(t3::Heap::mutex());
+//    AutoLock lock(t3::Heap::mutex());
     t3::Heap::deallocate(mem);
 }
 

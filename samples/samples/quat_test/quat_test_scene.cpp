@@ -64,9 +64,11 @@ public:
         }
         
         
-        {
+        for (int i = 0; i < 5; ++i){
             auto a = std::make_shared<t3::Transform2D>();
+            a->position();
         }
+        T3_TRACE("bob\n");
 
 
     }

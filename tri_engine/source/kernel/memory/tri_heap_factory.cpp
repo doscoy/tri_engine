@@ -119,7 +119,7 @@ void HeapFactory::ASSERT_HEADER() {
 //    }
 
 
-//    heaps_[3].ASSERT_HEADER();
+    default_heap_->ASSERT_HEADER();
 
 }
 

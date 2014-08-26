@@ -55,13 +55,15 @@ void traceValue(const char* const name, const Mtx44Template<float>& value);
 
 #ifdef TRI_DEVELOPMENT_ENABLE_TRACE
 
-#define T3_TRACE(...)       ::t3::trace(__VA_ARGS__)
-#define T3_TRACE_VALUE(x)   ::t3::traceValue(#x, x)
+#define T3_TRACE(...)           ::t3::trace(__VA_ARGS__)
+#define T3_TRACE_VALUE(x)       ::t3::traceValue(#x, x)
+#define T3_TRACE_TERMINAL(...)  ::t3::traceTerminal(__VA_ARGS__) // ターミナルのみにトレース。意図が無い場合はT3_TRACEを使う
 
 #else // TRI_DEVELOPMENT_ENABLE_TRACE
 
-#define T3_TRACE(...)       (void)0
-#define T3_TRACE_VALUE(x)   (void)0
+#define T3_TRACE(...)           (void)0
+#define T3_TRACE_VALUE(x)       (void)0
+#define T3_TRACE_TERMINAL(...)  (void)0
 
 #endif // TRI_DEVELOPMENT_ENABLE_TRACE
 

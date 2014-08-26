@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A1C1B2919AC3065005A69FA /* tri_mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */; };
 		3AA7EBAB19A0F48800CEB23A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA7EBAA19A0F48800CEB23A /* Foundation.framework */; };
 		3AA7EEA319A101CE00CEB23A /* tri_audio_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3719A0F60600CEB23A /* tri_audio_handle.cpp */; };
 		3AA7EEA419A101CE00CEB23A /* tri_audio_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3819A0F60600CEB23A /* tri_audio_manager.cpp */; };
@@ -104,6 +105,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A1C1B2519AC2BD0005A69FA /* tri_mutex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tri_mutex.hpp; path = process/tri_mutex.hpp; sourceTree = "<group>"; };
+		3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_mutex.cpp; sourceTree = "<group>"; };
 		3AA7EBA719A0F48800CEB23A /* libtri_engine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtri_engine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA7EBAA19A0F48800CEB23A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3AA7EBB819A0F48800CEB23A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -353,6 +356,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A1C1B2619AC2BD8005A69FA /* process */ = {
+			isa = PBXGroup;
+			children = (
+				3A1C1B2519AC2BD0005A69FA /* tri_mutex.hpp */,
+			);
+			name = process;
+			sourceTree = "<group>";
+		};
+		3A1C1B2719AC3065005A69FA /* process */ = {
+			isa = PBXGroup;
+			children = (
+				3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */,
+			);
+			path = process;
+			sourceTree = "<group>";
+		};
 		3AA7EB9E19A0F48800CEB23A = {
 			isa = PBXGroup;
 			children = (
@@ -513,6 +532,7 @@
 		3AA7ED7719A0F60600CEB23A /* kernel */ = {
 			isa = PBXGroup;
 			children = (
+				3A1C1B2719AC3065005A69FA /* process */,
 				3AA7ED7819A0F60600CEB23A /* io */,
 				3AA7ED7D19A0F60600CEB23A /* memory */,
 			);
@@ -747,6 +767,7 @@
 		3AA7EE4E19A0F61700CEB23A /* kernel */ = {
 			isa = PBXGroup;
 			children = (
+				3A1C1B2619AC2BD8005A69FA /* process */,
 				3AA7EE4F19A0F61700CEB23A /* io */,
 				3AA7EE5619A0F61700CEB23A /* memory */,
 				3AA7EE5F19A0F61700CEB23A /* tri_kernel.hpp */,
@@ -971,6 +992,7 @@
 				3AA7EED919A101FE00CEB23A /* tri_texture_factory.cpp in Sources */,
 				3AA7EEDA19A101FE00CEB23A /* tri_transform_node.cpp in Sources */,
 				3AA7EEC119A101F300CEB23A /* tri_circle_collider.cpp in Sources */,
+				3A1C1B2919AC3065005A69FA /* tri_mutex.cpp in Sources */,
 				3AA7EEC219A101F300CEB23A /* tri_collider.cpp in Sources */,
 				3AA7EEC319A101F300CEB23A /* tri_collision.cpp in Sources */,
 				3AA7EEC419A101F300CEB23A /* tri_collision_events.cpp in Sources */,
