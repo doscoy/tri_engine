@@ -10,12 +10,15 @@ namespace t3 {
 
 class HeapFactory
 {
+    using HeapContainer = std::array<Heap, 5>;
 public:
     static Heap* createHeap(const char* const name);
     static Heap* createHeap(const char* const name, const char* const parent_name);
     static void destroyHeap(Heap* heap);
     static Heap* getDefaultHeap();
-
+    static Heap* getHeap(int index);
+    static void dumpAllocateInfo();
+    static void ASSERT_HEADER();
 private:
     static void initialize();
     static Heap* findHeap(const char* const name);
@@ -25,7 +28,7 @@ private:
 private:
     static Heap* root_heap_;
     static Heap* default_heap_;
-    static std::array<Heap, 10> heaps_;
+    static HeapContainer heaps_;
 };
 
 

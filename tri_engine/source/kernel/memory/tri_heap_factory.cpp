@@ -7,7 +7,7 @@ namespace t3 {
 
 Heap* HeapFactory::root_heap_ = nullptr;
 Heap* HeapFactory::default_heap_ = nullptr;
-std::array<Heap, 10> HeapFactory::heaps_;
+HeapFactory::HeapContainer HeapFactory::heaps_;
 
 
 void HeapFactory::initialize()
@@ -47,7 +47,7 @@ Heap* HeapFactory::createHeap(
     Heap* parent = findHeap( parent_name );
     if ( parent == nullptr ){
         parent = createNewHeap( parent_name );
-//        parent->attach( root_heap_ );
+
     }
     
     Heap* heap = findHeap( name );
@@ -55,7 +55,7 @@ Heap* HeapFactory::createHeap(
         heap = createNewHeap( name );
     }
     
-//    heap->attach( parent );
+
     return heap;
 }
 
@@ -71,8 +71,8 @@ Heap* HeapFactory::createHeap(
 Heap* HeapFactory::createNewHeap(
     const char* const name
 ){
-    std::array<Heap, 10>::iterator itr = heaps_.begin();
-    std::array<Heap, 10>::iterator end = heaps_.end();
+    HeapContainer::iterator itr = heaps_.begin();
+    HeapContainer::iterator end = heaps_.end();
     
     for( ; itr != end; ++itr ){
         if ( !itr->isActive() ){
@@ -88,8 +88,8 @@ Heap* HeapFactory::createNewHeap(
 Heap* HeapFactory::findHeap(
     const char* const name
 ){
-    std::array<Heap, 10>::iterator itr = heaps_.begin();
-    std::array<Heap, 10>::iterator end = heaps_.end();
+    HeapContainer::iterator itr = heaps_.begin();
+    HeapContainer::iterator end = heaps_.end();
     
     for( ; itr != end; ++itr ){
         if ( itr->isActive() && !strcmp( name, itr->name() ) ){
@@ -100,7 +100,28 @@ Heap* HeapFactory::findHeap(
     return nullptr;
 }
 
+Heap* HeapFactory::getHeap(int index) {
+    return &heaps_.at(index);
+}
 
+void HeapFactory::dumpAllocateInfo() {
+
+    for (auto& heap : heaps_) {
+        heap.dump();
+    }
+
+}
+
+void HeapFactory::ASSERT_HEADER() {
+
+//    for (auto& heap : heaps_) {
+//        heap.ASSERT_HEADER();
+//    }
+
+
+//    heaps_[3].ASSERT_HEADER();
+
+}
 
 
 }   // namespace t3

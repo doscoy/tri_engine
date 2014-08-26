@@ -36,6 +36,7 @@
 		3AA7EB9B199DC3EB00CEB23A /* quat_test_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7EB99199DC3EB00CEB23A /* quat_test_scene.cpp */; };
 		3AA7EB9D19A0813D00CEB23A /* bunny.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7EB9C19A0813D00CEB23A /* bunny.obj */; };
 		3AA7EEA219A0FF9D00CEB23A /* libtri_engine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA7EE9F19A0FCB600CEB23A /* libtri_engine.a */; };
+		3AA7EEF919A4F85000CEB23A /* ninja.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7EEF819A4F85000CEB23A /* ninja.obj */; };
 		3AAF55D31998AE3600048123 /* o.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3AAF55D21998AE3600048123 /* o.obj */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +102,7 @@
 		3AA7EB9A199DC3EB00CEB23A /* quat_test_scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = quat_test_scene.hpp; sourceTree = "<group>"; };
 		3AA7EB9C19A0813D00CEB23A /* bunny.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bunny.obj; sourceTree = "<group>"; };
 		3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = tri_engine.xcodeproj; path = ../../../build/ios/tri_engine.xcodeproj; sourceTree = "<group>"; };
+		3AA7EEF819A4F85000CEB23A /* ninja.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = ninja.obj; sourceTree = "<group>"; };
 		3AAF55D21998AE3600048123 /* o.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = o.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 		04F1002D19855C5B00C8D498 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				3AA7EEF819A4F85000CEB23A /* ninja.obj */,
 				3AA7EB9C19A0813D00CEB23A /* bunny.obj */,
 				3AAF55D21998AE3600048123 /* o.obj */,
 				04F1003419855C8500C8D498 /* tri_engine_ui_sample.png */,
@@ -367,6 +370,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AA7EEF919A4F85000CEB23A /* ninja.obj in Resources */,
 				04F1003519855C8500C8D498 /* tri_engine_ui_sample.png in Resources */,
 				04F1FE791985557F00C8D498 /* Main_iPad.storyboard in Resources */,
 				04F1FE761985557F00C8D498 /* Main_iPhone.storyboard in Resources */,

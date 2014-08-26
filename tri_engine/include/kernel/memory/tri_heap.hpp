@@ -4,6 +4,8 @@
 #define TRI_HEAP_HPP_INCLUDED
 
 #include <cstddef>
+#include <mutex>
+
 #include "util/tri_uncopyable.hpp"
 
 
@@ -41,8 +43,14 @@ public:
     );
     static void  deallocate(void* mem);
     
- 
-    
+    void dump() const;
+    void ASSERT_HEADER() const;
+    void ASSERT_HEADER(AllocHeader* a) const;
+
+
+    static std::recursive_mutex& mutex() {
+        return mutex_;
+    }
 private:
     void deallocate( AllocHeader* header );
     void getTreeStats( size_t& total_bytes, size_t& total_peak, int& total_instances ) const;
@@ -59,7 +67,7 @@ private:
     Heap* next_siblind_;
     Heap* prev_sibling_;
 
-
+    static std::recursive_mutex mutex_;
 };
 
 

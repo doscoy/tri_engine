@@ -23,7 +23,7 @@ public:
         layer_.setRenderCallback(this, &SceneContext::layerRender);
 
         //  メッシュ読み込み
-        t3::FilePath obj_path("bunny.obj");
+        t3::FilePath obj_path("ninja.obj");
 //        t3::FilePath obj_path("o.obj");
         mesh_ = T3_NEW t3::Mesh(obj_path.getFullPath().c_str());
     
@@ -41,7 +41,7 @@ public:
     }
     
     void terminate(){
-    
+
     }
     
     void update(t3::tick_t delta_time){
@@ -60,11 +60,13 @@ public:
             }
             
             quat_.rotate(move);
-
-        
             
         }
-
+        
+        
+        {
+            auto a = std::make_shared<t3::Transform2D>();
+        }
 
 
     }

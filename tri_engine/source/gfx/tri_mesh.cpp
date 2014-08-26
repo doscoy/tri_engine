@@ -53,6 +53,9 @@ Mesh::Mesh(
     std::vector<VertexP3N> vertices;
     std::vector<uint32_t> indices;
     
+    vertices.reserve(500);
+    indices.reserve(1000);
+    
 
     AABB aabb;
     while (file.getline(buf, sizeof buf)) {

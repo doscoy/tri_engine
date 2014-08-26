@@ -279,6 +279,8 @@ void Application::updateApplication()
     }
     
     platform::endUpdate();
+    
+    HeapFactory::ASSERT_HEADER();
 
 }
 
@@ -388,12 +390,8 @@ void Application::renderApplication()
         //  シーンが切り替わったのでデバッグメニューを閉じる
         dm.closeMenu();
         
-/*        //  メモリリークを検出
-        default_allocator_.getAllocationRecorder().dump(
-            last_scene_change_frame_,
-            frame_counter_.now()-1
-        );
-*/
+        HeapFactory::dumpAllocateInfo();
+
         //  シーンが切り替わったタイミングを保存
         last_scene_change_frame_ = frame_counter_.now();
     }
@@ -425,7 +423,7 @@ bool Application::isDebugMenuOpenRequest() {
     
     //  ポインティングでのオープンリクエスト
     const Pointing& pointing = Director::input().pointing();
-    if (pointing.isDoubleClick() && pointing.getPointingCount() == 3) {
+    if (pointing.isDoubleClick() /*&& pointing.getPointingCount() == 3*/) {
         result = true;
     }
     
