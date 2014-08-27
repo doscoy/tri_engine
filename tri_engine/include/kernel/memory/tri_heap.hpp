@@ -4,7 +4,6 @@
 #define TRI_HEAP_HPP_INCLUDED
 
 #include <cstddef>
-#include <mutex>
 #include "kernel/process/tri_mutex.hpp"
 #include "util/tri_uncopyable.hpp"
 

@@ -3,6 +3,9 @@
 #define TRI_MUTEX_HPP_INCLUDED
 
 #include <pthread.h>
+#include <mutex>
+
+
 
 namespace t3 {
     
@@ -24,6 +27,11 @@ public:
 private:
     NativeHandle handle_;
 };
+
+
+
+using ScopedLock = std::lock_guard<t3::Mutex>;
+
 
 }   // namespace t3
 

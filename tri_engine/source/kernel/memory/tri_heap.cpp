@@ -10,7 +10,6 @@
 #define ALLOC_ENDMARKING    1
 
 
-using AutoLock = std::lock_guard<t3::Mutex>;
 
 
 constexpr uint32_t makeSignature(
@@ -30,17 +29,11 @@ Mutex Heap::mutex_;
 
 namespace {
 const char* UNKNOWEN_FILE_NAME = "????";
-#if 0
-constexpr uint32_t HEAP_SIGNATURE = makeSignature('H','E','A','P');
-constexpr uint32_t ALLOC_END_MARK = 0x99999999;
+
+constexpr uint32_t HEAP_SIGNATURE   = makeSignature('H','E','A','P');
+constexpr uint32_t ALLOC_END_MARK   = 0x99999999;
 constexpr uint32_t DIRTY_ALLOC_MARK = 0xDEADBEEF;
-constexpr uint32_t DIRTY_FREE_MARK = 0xCAFEC0DE;
-#else
-constexpr uint32_t HEAP_SIGNATURE = 0x1;
-constexpr uint32_t ALLOC_END_MARK = 0x0;
-constexpr uint32_t DIRTY_ALLOC_MARK = 0xFFFFFFFF;
-constexpr uint32_t DIRTY_FREE_MARK = 0x0;
-#endif
+constexpr uint32_t DIRTY_FREE_MARK  = 0xCAFEC0DE;
 
 
 uint32_t total_allocate_num_ = 0;
@@ -55,8 +48,7 @@ public:
         AllocHeader* prev,
         const char* file,
         int line
-    )
-    {
+    ) {
 
         signature_ = HEAP_SIGNATURE;
         size_ = size;
@@ -67,24 +59,18 @@ public:
         line_ = line;
         alloc_no_ = total_allocate_num_++;
 
-        ASSERT_HEADER();
     }
 
 
-    void changePreviousNext()
-    {
+    void changePreviousNext() {
         prev_->next_ = next_;
-        ASSERT_HEADER();
     }
 
-    void changeNextPrevious()
-    {
+    void changeNextPrevious() {
         next_->prev_ = prev_;
-        ASSERT_HEADER();
     }
 
-    bool isValid() const
-    {
+    bool isValid() const {
         if (signature_ != HEAP_SIGNATURE) {
             return false;
         }
@@ -95,61 +81,37 @@ public:
         return true;
     }
 
-    AllocHeader* next()
-    {
-        ASSERT_HEADER();
+    AllocHeader* next() {
         return next_;
     }
 
-    void previous(AllocHeader* h)
-    {
+    void previous(AllocHeader* h) {
         prev_ = h;
-        ASSERT_HEADER();
     }
 
-    AllocHeader* previous()
-    {
+    AllocHeader* previous() {
         return prev_;
     }
 
-    Heap* heap()
-    {
+    Heap* heap() {
         return heap_;
     }
 
-    size_t size() const
-    {
+    size_t size() const {
         return size_;
     }
 
-    bool hasPrevious() const
-    {
+    bool hasPrevious() const {
         return prev_ != nullptr;
     }
 
-    bool hasNext() const
-    {
+    bool hasNext() const {
         return next_ != nullptr;
     }
 
-    void dump() const
-    {
+    void dump() const {
         T3_TRACE_TERMINAL("[%u]Size %dbyte :%s(%d)\n",alloc_no_, size_, file_name_, line_);
     }
-
-
-    void ASSERT_HEADER()
-    {
-        T3_ASSERT(isValid());
-        if (next_) {
-            T3_ASSERT(next_->isValid());
-        }
-
-        if (prev_) {
-            T3_ASSERT(prev_->isValid());
-        }
-    }
-
 
 public:
     uint32_t signature_;
@@ -175,12 +137,10 @@ Heap::Heap()
     , prev_sibling_(nullptr)
 {
     strcpy( heap_name_, "NonActiveHeap" );
-    T3_TRACE("heap ctor.\n");
 }
 
 
-void* Heap::allocate(const size_t size)
-{
+void* Heap::allocate(const size_t size) {
     void* p = allocate(size, UNKNOWEN_FILE_NAME, 0);
     return p;
 }
@@ -190,8 +150,7 @@ void* Heap::allocate(
     const size_t size,
     const char* const file_name,
     const int line
-)
-{
+) {
     //  本当に確保するサイズ　リクエストサイズ + ヘッダ情報 + 終端マーク4byte
     size_t alloc_header_size = sizeof(AllocHeader);
     size_t request_bytes = size + alloc_header_size;
@@ -219,7 +178,6 @@ void* Heap::allocate(
     if (head_alloc_) {
         //  headerを新しいhead_alloc_にする為
         //  既存のhead_alloc_の前はheaderになる
-        head_alloc_->ASSERT_HEADER();
         head_alloc_->previous(header);
     }
 
@@ -250,19 +208,19 @@ void* Heap::allocate(
     *end_mark = ALLOC_END_MARK;
 #endif // ALLOC_ENDMARKING
 
+
 #if DIRTY_MEMORY
     size_t alloc_size = size;
     std::memset(start_mem_block, DIRTY_ALLOC_MARK, alloc_size);
 #endif
-    head_alloc_->ASSERT_HEADER();
+
     return start_mem_block;
 }
 
 
 void Heap::deallocate(
     void* mem
-)
-{
+) {
     if (!mem) {
         return;
     }
@@ -271,14 +229,12 @@ void Heap::deallocate(
         (reinterpret_cast<char*>(mem) - sizeof(AllocHeader))
                           );
     T3_ASSERT(header->isValid());
-    header->ASSERT_HEADER();
 
 #if ALLOC_ENDMARKING
     uint32_t* end_mark = reinterpret_cast<uint32_t*>((intptr_t)mem + header->size());
     T3_ASSERT(*end_mark == ALLOC_END_MARK);
 #endif // ALLOC_ENDMARKING
 
-    header->ASSERT_HEADER();
     Heap* owner = header->heap();
     owner->deallocate(header);
 }
@@ -289,15 +245,10 @@ void Heap::deallocate(
 )
 {
 
-    header->ASSERT_HEADER();
-    head_alloc_->ASSERT_HEADER();
-
-
     if (header->hasPrevious()) {
         //  前の要素がある場合は前のリストのつなぎ先を次に変える
         header->changePreviousNext();
-    }
-    else {
+    } else {
         //  前が無い＝ヘッドなので次の要素をヘッドにする
         head_alloc_ = header->next();
     }
@@ -318,28 +269,20 @@ void Heap::deallocate(
         T3_ASSERT(next->prev_ == prev);
     }
 
-
-    //  もう削除予定のメモリはどこからもリンクされていない
-//    ASSERT_HEADER(header);
-
     allocated_ -= header->size();
     instances_ -= 1;
 
 
 #if DIRTY_MEMORY
-    size_t alloc_size = header->size();
-//    void* start_mem_block = reinterpret_cast<void*>((uintptr_t)header + sizeof(AllocHeader));
+    size_t alloc_size = header->size() + sizeof(AllocHeader);
     void* start_mem_block = header;
-
-
     std::memset(start_mem_block, DIRTY_FREE_MARK, alloc_size);
 #endif
 
     std::free(header);
 }
 
-void Heap::activate(const char *const name)
-{
+void Heap::activate(const char *const name) {
     T3_NULL_ASSERT(name);
     T3_ASSERT(strlen(name) < NAME_LENGTH);
 
@@ -350,11 +293,8 @@ void Heap::activate(const char *const name)
     active_ = true;
 }
 
-void Heap::deactivate()
-{
-    head_alloc_->ASSERT_HEADER();
+void Heap::deactivate() {
     strcpy(heap_name_, "");
-    head_alloc_->ASSERT_HEADER();
 
     allocated_ = 0;
     peak_ = 0;
@@ -363,9 +303,8 @@ void Heap::deactivate()
 }
 
 
-void Heap::dump() const
-{
-    AutoLock lock(Heap::mutex());
+void Heap::dump() const {
+    ScopedLock lock(Heap::mutex());
     int i = 0;
     AllocHeader* ah = head_alloc_;
     while (ah) {
@@ -377,8 +316,7 @@ void Heap::dump() const
 
 }
 
-void Heap::ASSERT_HEADER() const
-{
+void Heap::ASSERT_HEADER() const {
     int i = 0;
     AllocHeader* ah = head_alloc_;
     while (ah) {
@@ -391,8 +329,7 @@ void Heap::ASSERT_HEADER() const
 
 void Heap::ASSERT_HEADER(
     AllocHeader* addr
-) const
-{
+) const {
     AllocHeader* ah = head_alloc_;
     while (ah) {
         T3_ASSERT(ah != addr);

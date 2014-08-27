@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../tri_engine/source/kernel/memory/tri_new.cpp"
-            timestampString = "430738614.081431"
+            timestampString = "430752827.584414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
+            startingLineNumber = "9"
+            endingLineNumber = "9"
             landmarkName = "operator new( ::std::size_t size )"
             landmarkType = "7">
          </BreakpointContent>
