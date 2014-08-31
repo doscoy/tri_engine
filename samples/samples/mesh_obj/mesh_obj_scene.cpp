@@ -121,7 +121,7 @@ void MeshObjScene::updateScene(t3::tick_t delta_time) {
     auto& gs = t3::Director::instance();
     auto& pad = gs.input().pad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
-        finish(true);
+        finish();
     }
 }
 

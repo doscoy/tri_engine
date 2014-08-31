@@ -118,17 +118,19 @@ void SceneManager::sceneChange()
     next_scene_generator_ = Scene::sceneGenerator<NullScene>();
     
     EventManagerBase::get()->dumpListeners();
-    
+
+    //  シーン切り替え情報表示
+    const char* next_scene_name = current_scene_->sceneName();
+    T3_TRACE("scene change. %s --> %s\n", prev_scene_name, next_scene_name);
+    (void)(prev_scene_name);
+    (void)(next_scene_name);
+
     //  初期化
     current_scene_->initializeScene();
-    const char* next_scene_name = current_scene_->sceneName();
 
     //  シーンが切り替わったフラグON
     scene_changed_ = true;
     
-    T3_TRACE("scene change. %s --> %s\n", prev_scene_name, next_scene_name);
-    (void)(prev_scene_name);
-    (void)(next_scene_name);
     EventManagerBase::get()->dumpListeners();
 
 }

@@ -11,13 +11,16 @@
 
 #include "tri_engine.hpp"
 
-#include "simple_sprite/simple_sprite.hpp"
-#include "audio_test/audio_test.hpp"
-#include "ad_test/ad_test.hpp"
+#include "sprite/simple_sprite.hpp"
+#include "audio/audio_test.hpp"
+#include "ad/ad_test.hpp"
 #include "event_handling/event_handling.hpp"
-#include "mesh_obj_test/mesh_obj_scene.hpp"
-#include "ui_button_test/ui_button_test.hpp"
-#include "quat_test/quat_test_scene.hpp"
+#include "mesh_obj/mesh_obj_scene.hpp"
+#include "ui_button/ui_button_test.hpp"
+#include "quat/quat_test_scene.hpp"
+
+#include "thread/thread_test.hpp"
+
 
 class RootTest
     : public t3::Scene

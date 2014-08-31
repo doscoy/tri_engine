@@ -1,6 +1,6 @@
 
-#ifndef tri_sandbox_osx_tri_method_callback_hpp
-#define tri_sandbox_osx_tri_method_callback_hpp
+#ifndef TRI_METHOD_CALLBACK_HPP_INCLUDED
+#define TRI_METHOD_CALLBACK_HPP_INCLUDED
 
 #include "../dbg/tri_assert.hpp"
 
@@ -132,4 +132,4 @@ public:
 }   // inline namespace
 }   // namespace t3
 
-#endif
+#endif  // TRI_METHOD_CALLBACK_HPP_INCLUDED

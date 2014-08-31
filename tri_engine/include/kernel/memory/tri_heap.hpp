@@ -6,7 +6,7 @@
 #include <cstddef>
 #include "kernel/process/tri_mutex.hpp"
 #include "util/tri_uncopyable.hpp"
-
+#include "util/tri_bytesize.hpp"
 
 namespace t3 {
 
@@ -22,16 +22,14 @@ public:
     ~Heap() = default;
 
 public:
-    const char* name() const
-    {
+    const char* name() const {
         return heap_name_;
     }
 
     void activate(const char* const name);
     void deactivate();
 
-    bool isActive() const
-    {
+    bool isActive() const {
         return active_;
     }
 
@@ -44,24 +42,40 @@ public:
     );
     static void  deallocate(void* mem);
 
-    void dump() const;
-    void ASSERT_HEADER() const;
-    void ASSERT_HEADER(AllocHeader* a) const;
+    void dump(uint32_t filter_min) const;
+    
+    //  １度のメモリ割り当てピーク
+    ByteSize peak() {
+        return peak_;
+    }
+    
+    //  トータルのメモリ割り当て量
+    ByteSize allocated() {
+        return allocated_;
+    }
+    
+    
 
-
-    static Mutex& mutex()
-    {
+    static Mutex& mutex() {
         return mutex_;
     }
+    
+    static uint32_t allocateCount();
+    
+    
 private:
-    void deallocate( AllocHeader* header );
-    void getTreeStats( size_t& total_bytes, size_t& total_peak, int& total_instances ) const;
+    void deallocate(AllocHeader* header);
+    void getTreeStats(
+        size_t& total_bytes,
+        size_t& total_peak,
+        int& total_instances
+    ) const;
 
 private:
     bool active_;
     char heap_name_[NAME_LENGTH];
-    size_t allocated_;
-    size_t peak_;
+    ByteSize allocated_;
+    ByteSize peak_;
     int instances_;
     AllocHeader* head_alloc_;
 
@@ -70,6 +84,7 @@ private:
     Heap* prev_sibling_;
 
     static Mutex mutex_;
+    static uint32_t alloc_count_;
 };
 
 

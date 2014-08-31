@@ -8,27 +8,26 @@
 
 namespace t3 {
 
-class HeapFactory
-{
-    using HeapContainer = std::array<Heap, 5>;
+using HeapContainer = std::array<Heap, 10>;
+
+class HeapManager
+{    
+
 public:
     static Heap* createHeap(const char* const name);
-    static Heap* createHeap(const char* const name, const char* const parent_name);
     static void destroyHeap(Heap* heap);
     static Heap* getDefaultHeap();
     static Heap* getHeap(int index);
-    static void dumpAllocateInfo();
-    static void ASSERT_HEADER();
+    static void dumpAllocateInfo(uint32_t filter_min);
+    static HeapContainer& heaps();
+    
 private:
     static void initialize();
     static Heap* findHeap(const char* const name);
     static Heap* createNewHeap(const char* const name);
-    static Heap* getRootHeap();
 
 private:
-    static Heap* root_heap_;
     static Heap* default_heap_;
-    static HeapContainer heaps_;
 };
 
 

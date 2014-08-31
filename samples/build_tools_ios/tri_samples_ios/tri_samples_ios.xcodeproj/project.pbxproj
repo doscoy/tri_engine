@@ -25,19 +25,21 @@
 		04F1FE791985557F00C8D498 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F1FE771985557F00C8D498 /* Main_iPad.storyboard */; };
 		04F1FE801985557F00C8D498 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FE7F1985557F00C8D498 /* ViewController.mm */; };
 		04F1FE821985557F00C8D498 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F1FE811985557F00C8D498 /* Images.xcassets */; };
-		04F1FEB6198555D200C8D498 /* ad_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FEA0198555D200C8D498 /* ad_test.cpp */; };
-		04F1FEB7198555D200C8D498 /* audio_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FEA3198555D200C8D498 /* audio_test.cpp */; };
-		04F1FEB8198555D200C8D498 /* event_handling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FEA6198555D200C8D498 /* event_handling.cpp */; };
-		04F1FEB9198555D200C8D498 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FEA8198555D200C8D498 /* main.cpp */; };
-		04F1FEBA198555D200C8D498 /* mesh_obj_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FEAA198555D200C8D498 /* mesh_obj_scene.cpp */; };
-		04F1FEBB198555D200C8D498 /* sandbox_template.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FEAE198555D200C8D498 /* sandbox_template.cpp */; };
-		04F1FEBC198555D200C8D498 /* simple_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FEB1198555D200C8D498 /* simple_sprite.cpp */; };
-		04F1FEBD198555D200C8D498 /* ui_button_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FEB4198555D200C8D498 /* ui_button_test.cpp */; };
-		3AA7EB9B199DC3EB00CEB23A /* quat_test_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7EB99199DC3EB00CEB23A /* quat_test_scene.cpp */; };
 		3AA7EB9D19A0813D00CEB23A /* bunny.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7EB9C19A0813D00CEB23A /* bunny.obj */; };
-		3AA7EEA219A0FF9D00CEB23A /* libtri_engine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA7EE9F19A0FCB600CEB23A /* libtri_engine.a */; };
 		3AA7EEF919A4F85000CEB23A /* ninja.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7EEF819A4F85000CEB23A /* ninja.obj */; };
 		3AAF55D31998AE3600048123 /* o.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3AAF55D21998AE3600048123 /* o.obj */; };
+		3AD4070B19AE257000762711 /* ad_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F219AE257000762711 /* ad_test.cpp */; };
+		3AD4070C19AE257000762711 /* audio_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F519AE257000762711 /* audio_test.cpp */; };
+		3AD4070D19AE257000762711 /* event_handling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F819AE257000762711 /* event_handling.cpp */; };
+		3AD4070E19AE257000762711 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406FA19AE257000762711 /* main.cpp */; };
+		3AD4070F19AE257000762711 /* mesh_obj_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406FC19AE257000762711 /* mesh_obj_scene.cpp */; };
+		3AD4071019AE257000762711 /* quat_test_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406FF19AE257000762711 /* quat_test_scene.cpp */; };
+		3AD4071119AE257000762711 /* sandbox_template.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070319AE257000762711 /* sandbox_template.cpp */; };
+		3AD4071219AE257000762711 /* simple_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070619AE257000762711 /* simple_sprite.cpp */; };
+		3AD4071319AE257000762711 /* ui_button_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070919AE257000762711 /* ui_button_test.cpp */; };
+		3AD4071419AE26C200762711 /* libtri_engine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA7EE9F19A0FCB600CEB23A /* libtri_engine.a */; };
+		3AD4071819AE2B8900762711 /* thread_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071619AE2B8900762711 /* thread_test.cpp */; };
+		3AD4071C19AE2B9200762711 /* offscreen_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071A19AE2B9200762711 /* offscreen_test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,28 +84,32 @@
 		04F1FE7F1985557F00C8D498 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		04F1FE811985557F00C8D498 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		04F1FE881985557F00C8D498 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		04F1FEA0198555D200C8D498 /* ad_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ad_test.cpp; sourceTree = "<group>"; };
-		04F1FEA1198555D200C8D498 /* ad_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ad_test.hpp; sourceTree = "<group>"; };
-		04F1FEA3198555D200C8D498 /* audio_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audio_test.cpp; sourceTree = "<group>"; };
-		04F1FEA4198555D200C8D498 /* audio_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = audio_test.hpp; sourceTree = "<group>"; };
-		04F1FEA6198555D200C8D498 /* event_handling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event_handling.cpp; sourceTree = "<group>"; };
-		04F1FEA7198555D200C8D498 /* event_handling.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = event_handling.hpp; sourceTree = "<group>"; };
-		04F1FEA8198555D200C8D498 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		04F1FEAA198555D200C8D498 /* mesh_obj_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_obj_scene.cpp; sourceTree = "<group>"; };
-		04F1FEAB198555D200C8D498 /* mesh_obj_scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_obj_scene.hpp; sourceTree = "<group>"; };
-		04F1FEAC198555D200C8D498 /* samples.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = samples.hpp; sourceTree = "<group>"; };
-		04F1FEAE198555D200C8D498 /* sandbox_template.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sandbox_template.cpp; sourceTree = "<group>"; };
-		04F1FEAF198555D200C8D498 /* sandbox_template.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sandbox_template.hpp; sourceTree = "<group>"; };
-		04F1FEB1198555D200C8D498 /* simple_sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simple_sprite.cpp; sourceTree = "<group>"; };
-		04F1FEB2198555D200C8D498 /* simple_sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = simple_sprite.hpp; sourceTree = "<group>"; };
-		04F1FEB4198555D200C8D498 /* ui_button_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ui_button_test.cpp; sourceTree = "<group>"; };
-		04F1FEB5198555D200C8D498 /* ui_button_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ui_button_test.hpp; sourceTree = "<group>"; };
-		3AA7EB99199DC3EB00CEB23A /* quat_test_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = quat_test_scene.cpp; sourceTree = "<group>"; };
-		3AA7EB9A199DC3EB00CEB23A /* quat_test_scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = quat_test_scene.hpp; sourceTree = "<group>"; };
 		3AA7EB9C19A0813D00CEB23A /* bunny.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bunny.obj; sourceTree = "<group>"; };
 		3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = tri_engine.xcodeproj; path = ../../../build/ios/tri_engine.xcodeproj; sourceTree = "<group>"; };
 		3AA7EEF819A4F85000CEB23A /* ninja.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = ninja.obj; sourceTree = "<group>"; };
 		3AAF55D21998AE3600048123 /* o.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = o.obj; sourceTree = "<group>"; };
+		3AD406F219AE257000762711 /* ad_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ad_test.cpp; sourceTree = "<group>"; };
+		3AD406F319AE257000762711 /* ad_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ad_test.hpp; sourceTree = "<group>"; };
+		3AD406F519AE257000762711 /* audio_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audio_test.cpp; sourceTree = "<group>"; };
+		3AD406F619AE257000762711 /* audio_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = audio_test.hpp; sourceTree = "<group>"; };
+		3AD406F819AE257000762711 /* event_handling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event_handling.cpp; sourceTree = "<group>"; };
+		3AD406F919AE257000762711 /* event_handling.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = event_handling.hpp; sourceTree = "<group>"; };
+		3AD406FA19AE257000762711 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3AD406FC19AE257000762711 /* mesh_obj_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_obj_scene.cpp; sourceTree = "<group>"; };
+		3AD406FD19AE257000762711 /* mesh_obj_scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_obj_scene.hpp; sourceTree = "<group>"; };
+		3AD406FF19AE257000762711 /* quat_test_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = quat_test_scene.cpp; sourceTree = "<group>"; };
+		3AD4070019AE257000762711 /* quat_test_scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = quat_test_scene.hpp; sourceTree = "<group>"; };
+		3AD4070119AE257000762711 /* samples.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = samples.hpp; sourceTree = "<group>"; };
+		3AD4070319AE257000762711 /* sandbox_template.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sandbox_template.cpp; sourceTree = "<group>"; };
+		3AD4070419AE257000762711 /* sandbox_template.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sandbox_template.hpp; sourceTree = "<group>"; };
+		3AD4070619AE257000762711 /* simple_sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simple_sprite.cpp; sourceTree = "<group>"; };
+		3AD4070719AE257000762711 /* simple_sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = simple_sprite.hpp; sourceTree = "<group>"; };
+		3AD4070919AE257000762711 /* ui_button_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ui_button_test.cpp; sourceTree = "<group>"; };
+		3AD4070A19AE257000762711 /* ui_button_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ui_button_test.hpp; sourceTree = "<group>"; };
+		3AD4071619AE2B8900762711 /* thread_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thread_test.cpp; sourceTree = "<group>"; };
+		3AD4071719AE2B8900762711 /* thread_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thread_test.hpp; sourceTree = "<group>"; };
+		3AD4071A19AE2B9200762711 /* offscreen_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = offscreen_test.cpp; sourceTree = "<group>"; };
+		3AD4071B19AE2B9200762711 /* offscreen_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = offscreen_test.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AA7EEA219A0FF9D00CEB23A /* libtri_engine.a in Frameworks */,
+				3AD4071419AE26C200762711 /* libtri_engine.a in Frameworks */,
 				04F1002C198558BF00C8D498 /* libz.dylib in Frameworks */,
 				04F1002A198558B600C8D498 /* libpng.a in Frameworks */,
 				04F100281985589300C8D498 /* CoreMotion.framework in Frameworks */,
@@ -145,8 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */,
+				3AD406F019AE257000762711 /* samples */,
 				04F1002D19855C5B00C8D498 /* resources */,
-				04F1FE9E198555D200C8D498 /* samples */,
 				04F1FE681985557F00C8D498 /* tri_samples_ios */,
 				04F1FE5D1985557F00C8D498 /* Frameworks */,
 				04F1FE5C1985557F00C8D498 /* Products */,
@@ -203,102 +209,122 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		04F1FE9E198555D200C8D498 /* samples */ = {
-			isa = PBXGroup;
-			children = (
-				3AA7EB98199DC3EB00CEB23A /* quat_test */,
-				04F1FE9F198555D200C8D498 /* ad_test */,
-				04F1FEA2198555D200C8D498 /* audio_test */,
-				04F1FEA5198555D200C8D498 /* event_handling */,
-				04F1FEA8198555D200C8D498 /* main.cpp */,
-				04F1FEA9198555D200C8D498 /* mesh_obj_test */,
-				04F1FEAC198555D200C8D498 /* samples.hpp */,
-				04F1FEAD198555D200C8D498 /* sandbox_template */,
-				04F1FEB0198555D200C8D498 /* simple_sprite */,
-				04F1FEB3198555D200C8D498 /* ui_button_test */,
-			);
-			name = samples;
-			path = ../../samples;
-			sourceTree = "<group>";
-		};
-		04F1FE9F198555D200C8D498 /* ad_test */ = {
-			isa = PBXGroup;
-			children = (
-				04F1FEA0198555D200C8D498 /* ad_test.cpp */,
-				04F1FEA1198555D200C8D498 /* ad_test.hpp */,
-			);
-			path = ad_test;
-			sourceTree = "<group>";
-		};
-		04F1FEA2198555D200C8D498 /* audio_test */ = {
-			isa = PBXGroup;
-			children = (
-				04F1FEA3198555D200C8D498 /* audio_test.cpp */,
-				04F1FEA4198555D200C8D498 /* audio_test.hpp */,
-			);
-			path = audio_test;
-			sourceTree = "<group>";
-		};
-		04F1FEA5198555D200C8D498 /* event_handling */ = {
-			isa = PBXGroup;
-			children = (
-				04F1FEA6198555D200C8D498 /* event_handling.cpp */,
-				04F1FEA7198555D200C8D498 /* event_handling.hpp */,
-			);
-			path = event_handling;
-			sourceTree = "<group>";
-		};
-		04F1FEA9198555D200C8D498 /* mesh_obj_test */ = {
-			isa = PBXGroup;
-			children = (
-				04F1FEAA198555D200C8D498 /* mesh_obj_scene.cpp */,
-				04F1FEAB198555D200C8D498 /* mesh_obj_scene.hpp */,
-			);
-			path = mesh_obj_test;
-			sourceTree = "<group>";
-		};
-		04F1FEAD198555D200C8D498 /* sandbox_template */ = {
-			isa = PBXGroup;
-			children = (
-				04F1FEAE198555D200C8D498 /* sandbox_template.cpp */,
-				04F1FEAF198555D200C8D498 /* sandbox_template.hpp */,
-			);
-			path = sandbox_template;
-			sourceTree = "<group>";
-		};
-		04F1FEB0198555D200C8D498 /* simple_sprite */ = {
-			isa = PBXGroup;
-			children = (
-				04F1FEB1198555D200C8D498 /* simple_sprite.cpp */,
-				04F1FEB2198555D200C8D498 /* simple_sprite.hpp */,
-			);
-			path = simple_sprite;
-			sourceTree = "<group>";
-		};
-		04F1FEB3198555D200C8D498 /* ui_button_test */ = {
-			isa = PBXGroup;
-			children = (
-				04F1FEB4198555D200C8D498 /* ui_button_test.cpp */,
-				04F1FEB5198555D200C8D498 /* ui_button_test.hpp */,
-			);
-			path = ui_button_test;
-			sourceTree = "<group>";
-		};
-		3AA7EB98199DC3EB00CEB23A /* quat_test */ = {
-			isa = PBXGroup;
-			children = (
-				3AA7EB99199DC3EB00CEB23A /* quat_test_scene.cpp */,
-				3AA7EB9A199DC3EB00CEB23A /* quat_test_scene.hpp */,
-			);
-			path = quat_test;
-			sourceTree = "<group>";
-		};
 		3AA7EE9B19A0FCB600CEB23A /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				3AA7EE9F19A0FCB600CEB23A /* libtri_engine.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3AD406F019AE257000762711 /* samples */ = {
+			isa = PBXGroup;
+			children = (
+				3AD406FA19AE257000762711 /* main.cpp */,
+				3AD4070119AE257000762711 /* samples.hpp */,
+				3AD406F119AE257000762711 /* ad */,
+				3AD406F419AE257000762711 /* audio */,
+				3AD406F719AE257000762711 /* event_handling */,
+				3AD406FB19AE257000762711 /* mesh_obj */,
+				3AD4071919AE2B9200762711 /* offscreen */,
+				3AD406FE19AE257000762711 /* quat */,
+				3AD4070219AE257000762711 /* sandbox_template */,
+				3AD4070519AE257000762711 /* sprite */,
+				3AD4071519AE2B8900762711 /* thread */,
+				3AD4070819AE257000762711 /* ui_button */,
+			);
+			name = samples;
+			path = ../../samples;
+			sourceTree = "<group>";
+		};
+		3AD406F119AE257000762711 /* ad */ = {
+			isa = PBXGroup;
+			children = (
+				3AD406F219AE257000762711 /* ad_test.cpp */,
+				3AD406F319AE257000762711 /* ad_test.hpp */,
+			);
+			path = ad;
+			sourceTree = "<group>";
+		};
+		3AD406F419AE257000762711 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				3AD406F519AE257000762711 /* audio_test.cpp */,
+				3AD406F619AE257000762711 /* audio_test.hpp */,
+			);
+			path = audio;
+			sourceTree = "<group>";
+		};
+		3AD406F719AE257000762711 /* event_handling */ = {
+			isa = PBXGroup;
+			children = (
+				3AD406F819AE257000762711 /* event_handling.cpp */,
+				3AD406F919AE257000762711 /* event_handling.hpp */,
+			);
+			path = event_handling;
+			sourceTree = "<group>";
+		};
+		3AD406FB19AE257000762711 /* mesh_obj */ = {
+			isa = PBXGroup;
+			children = (
+				3AD406FC19AE257000762711 /* mesh_obj_scene.cpp */,
+				3AD406FD19AE257000762711 /* mesh_obj_scene.hpp */,
+			);
+			path = mesh_obj;
+			sourceTree = "<group>";
+		};
+		3AD406FE19AE257000762711 /* quat */ = {
+			isa = PBXGroup;
+			children = (
+				3AD406FF19AE257000762711 /* quat_test_scene.cpp */,
+				3AD4070019AE257000762711 /* quat_test_scene.hpp */,
+			);
+			path = quat;
+			sourceTree = "<group>";
+		};
+		3AD4070219AE257000762711 /* sandbox_template */ = {
+			isa = PBXGroup;
+			children = (
+				3AD4070319AE257000762711 /* sandbox_template.cpp */,
+				3AD4070419AE257000762711 /* sandbox_template.hpp */,
+			);
+			path = sandbox_template;
+			sourceTree = "<group>";
+		};
+		3AD4070519AE257000762711 /* sprite */ = {
+			isa = PBXGroup;
+			children = (
+				3AD4070619AE257000762711 /* simple_sprite.cpp */,
+				3AD4070719AE257000762711 /* simple_sprite.hpp */,
+			);
+			path = sprite;
+			sourceTree = "<group>";
+		};
+		3AD4070819AE257000762711 /* ui_button */ = {
+			isa = PBXGroup;
+			children = (
+				3AD4070919AE257000762711 /* ui_button_test.cpp */,
+				3AD4070A19AE257000762711 /* ui_button_test.hpp */,
+			);
+			path = ui_button;
+			sourceTree = "<group>";
+		};
+		3AD4071519AE2B8900762711 /* thread */ = {
+			isa = PBXGroup;
+			children = (
+				3AD4071619AE2B8900762711 /* thread_test.cpp */,
+				3AD4071719AE2B8900762711 /* thread_test.hpp */,
+			);
+			path = thread;
+			sourceTree = "<group>";
+		};
+		3AD4071919AE2B9200762711 /* offscreen */ = {
+			isa = PBXGroup;
+			children = (
+				3AD4071A19AE2B9200762711 /* offscreen_test.cpp */,
+				3AD4071B19AE2B9200762711 /* offscreen_test.hpp */,
+			);
+			path = offscreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,17 +416,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04F1FEBD198555D200C8D498 /* ui_button_test.cpp in Sources */,
-				04F1FEBC198555D200C8D498 /* simple_sprite.cpp in Sources */,
-				04F1FEBB198555D200C8D498 /* sandbox_template.cpp in Sources */,
-				04F1FEB6198555D200C8D498 /* ad_test.cpp in Sources */,
-				04F1FEB7198555D200C8D498 /* audio_test.cpp in Sources */,
-				3AA7EB9B199DC3EB00CEB23A /* quat_test_scene.cpp in Sources */,
+				3AD4071319AE257000762711 /* ui_button_test.cpp in Sources */,
+				3AD4071219AE257000762711 /* simple_sprite.cpp in Sources */,
+				3AD4071119AE257000762711 /* sandbox_template.cpp in Sources */,
+				3AD4070C19AE257000762711 /* audio_test.cpp in Sources */,
+				3AD4070B19AE257000762711 /* ad_test.cpp in Sources */,
+				3AD4070E19AE257000762711 /* main.cpp in Sources */,
+				3AD4071019AE257000762711 /* quat_test_scene.cpp in Sources */,
 				04F1FE801985557F00C8D498 /* ViewController.mm in Sources */,
-				04F1FEB8198555D200C8D498 /* event_handling.cpp in Sources */,
-				04F1FEB9198555D200C8D498 /* main.cpp in Sources */,
+				3AD4071C19AE2B9200762711 /* offscreen_test.cpp in Sources */,
 				04F1FE731985557F00C8D498 /* AppDelegate.mm in Sources */,
-				04F1FEBA198555D200C8D498 /* mesh_obj_scene.cpp in Sources */,
+				3AD4070F19AE257000762711 /* mesh_obj_scene.cpp in Sources */,
+				3AD4070D19AE257000762711 /* event_handling.cpp in Sources */,
+				3AD4071819AE2B8900762711 /* thread_test.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

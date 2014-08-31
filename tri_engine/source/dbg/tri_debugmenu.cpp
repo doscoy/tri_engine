@@ -12,25 +12,20 @@ DebugMenu::DebugMenu()
     , menu_root_(nullptr, "")
     , enable_(false)
     , open_(false)
-    , left_offset_(0)
-{
+    , left_offset_(0) {
     vpad_.close();
 }
 
 
-DebugMenu::~DebugMenu()
-{
+DebugMenu::~DebugMenu() {
     
 }
 
 
-void DebugMenu::openMenu()
-{
+void DebugMenu::openMenu() {
 #ifdef NDEBUG
     return;
 #endif
-
-    T3_TRACE( "debug menu open\n" );
 
     if ( isOpened() ) {
         T3_TRACE( "debug menu is already opened.\n" );
@@ -45,11 +40,9 @@ void DebugMenu::openMenu()
 }
 
 
-void DebugMenu::closeMenu()
-{
-    T3_TRACE( "debug menu close\n" );
+void DebugMenu::closeMenu() {
 
-    if ( !isOpened() ){
+    if (!isOpened()) {
         return;
     }
     
@@ -59,8 +52,7 @@ void DebugMenu::closeMenu()
     open_ = false;
 }
 
-void DebugMenu::update( tick_t delta_time )
-{
+void DebugMenu::update(tick_t delta_time) {
     if (!isOpened()) {
         return;
     }
@@ -76,12 +68,11 @@ void DebugMenu::update( tick_t delta_time )
     
 }
 
-void DebugMenu::render()
-{
-    if ( !isOpened() ){
+void DebugMenu::render() {
+    if (!isOpened()) {
         return;
     }
-    menu_root_.drawFrame( 3, 30, Color::white() );
+    menu_root_.drawFrame(3, 30, Color::white());
 }
 
 

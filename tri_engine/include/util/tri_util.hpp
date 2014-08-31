@@ -3,7 +3,7 @@
 #define TRI_UTIL_HPP_INCLUDED
 
     
-    
+#include "tri_bytesize.hpp"
 #include "tri_uncopyable.hpp"
 #include "tri_less_than_comparable.hpp"
 #include "tri_equal_comparable.hpp"

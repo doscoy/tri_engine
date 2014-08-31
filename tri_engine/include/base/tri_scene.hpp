@@ -96,8 +96,8 @@ public:
     }
     
 protected:
-    void finish(bool f) {
-        finish_ = f;
+    void finish() {
+        finish_ = true;
     }
 
 private:

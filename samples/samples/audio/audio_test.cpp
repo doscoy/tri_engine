@@ -1,14 +1,17 @@
 
 
-#include "ad_test.hpp"
+#include "audio_test.hpp"
+#include <vector>
 
 
 
-class AdScene::SceneContext {
+
+class AudioTestScene::SceneContext {
 
 public:
     SceneContext()
-        : show_ad_(false)
+        : res_(nullptr)
+        , handle_(nullptr)
     {}
     
     ~SceneContext()
@@ -16,7 +19,9 @@ public:
   
 public:
     void initialize(){
-
+        t3::FilePath wav_path("sample.wav");
+        res_ = t3::AudioResource::create(wav_path);
+        handle_ = res_->createSound();
     }
     
     void terminate(){
@@ -28,14 +33,7 @@ public:
         const t3::Pointing& ptng = input.pointing();
         
         if (ptng.isRelease()) {
-            if (show_ad_) {
-                show_ad_ = false;
-//                t3::platform::hideAd();
-            }
-            else {
-                show_ad_ = true;
-//                t3::platform::showAd();
-            }
+            handle_->playSE();
         }
     }
 
@@ -45,7 +43,11 @@ public:
 
     
 private:
-    bool show_ad_;
+
+
+private:
+    std::shared_ptr<t3::AudioResource> res_;
+    std::shared_ptr<t3::AudioHandle> handle_;
 };
 
 
@@ -53,37 +55,37 @@ private:
 
 
 
-AdScene::AdScene()
+AudioTestScene::AudioTestScene()
     : Scene( "AudioTest" ) {
     context_.reset(T3_NEW SceneContext());
 }
 
-AdScene::~AdScene() {
+AudioTestScene::~AudioTestScene() {
     
 }
 
 
-void AdScene::initializeScene() {
+void AudioTestScene::initializeScene() {
     context_->initialize();
 }
 
 
-void AdScene::terminateScene() {
+void AudioTestScene::terminateScene() {
     context_->terminate();
 }
 
 
-void AdScene::updateScene(t3::tick_t delta_time) {
+void AudioTestScene::updateScene(t3::tick_t delta_time) {
     context_->update(delta_time);
     
     t3::Director& gs = t3::Director::instance();
     const t3::Pad& pad = gs.input().pad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
-        finish(true);
+        finish();
     }
 }
 
-void AdScene::suspendScene(t3::tick_t delta_time) {
+void AudioTestScene::suspendScene(t3::tick_t delta_time) {
 
     context_->suspend(delta_time);
 }

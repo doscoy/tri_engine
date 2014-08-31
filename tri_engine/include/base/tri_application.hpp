@@ -65,6 +65,7 @@ private:
     std::unique_ptr<ApplicationDebugMenu> system_menu_;
     SceneGenerator* root_scene_generator_;
     uint32_t last_scene_change_frame_;
+    uint32_t memory_leak_check_filter_;
     Stopwatch fps_timer_;
 };
 

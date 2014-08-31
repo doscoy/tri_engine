@@ -19,7 +19,7 @@ namespace {
 #define LIMIT_AVG_SUM   3600
 std::vector<float> render_avg;
 
-
+bool show_heap_ = false;
 bool show_work_bar_ = true;
 bool show_work_time_ = false;
 bool show_task_ = false;
@@ -68,8 +68,9 @@ public:
         , dmb_root_menu_(&dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootScene)
         , dmb_step_(&dmf_system_, "STEP", 0)
 
-        , dmi_show_work_time_(&dmf_system_, "SHOW WORKTIME", show_work_time_, 1)
-        , dmi_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_, 1)
+        , dm_show_work_time_(&dmf_system_, "SHOW WORKTIME", show_work_time_, 1)
+        , dm_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_, 1)
+        , dm_show_heap_(&dmf_system_, "SHOW HEAP", show_heap_, 1)
         , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_, 1)
     {
         t3::Director::instance().registryToDebugMenu(dmf_system_);
@@ -87,8 +88,9 @@ private:
     t3::DebugMenuButtonMethod<t3::Application> dmb_root_menu_;
     t3::DebugMenuButtonFunctor<Step> dmb_step_;
 
-    t3::DebugMenuItem<bool> dmi_show_work_time_;
-    t3::DebugMenuItem<bool> dmi_show_work_bar_;
+    t3::DebugMenuItem<bool> dm_show_work_time_;
+    t3::DebugMenuItem<bool> dm_show_work_bar_;
+    t3::DebugMenuItem<bool> dm_show_heap_;
     t3::DebugMenuItem<bool> dm_show_task_;
 };
 
@@ -121,8 +123,8 @@ void initializeTriEngine(
             height
         )
     );
-    
-    T3_TRACE("screen width %d  height %d", width, height);
+    T3_TRACE("Initialize TriEngine.\n");
+    T3_TRACE("screen width %d  height %d\n", width, height);
 }
 
 
@@ -134,6 +136,7 @@ Application::Application()
     : root_scene_generator_(nullptr)
     , system_menu_(nullptr)
     , last_scene_change_frame_(0)
+    , memory_leak_check_filter_(0)
     , fps_timer_()
 {
 }
@@ -267,8 +270,7 @@ void Application::updateApplication()
         //  サスペンド中
         gs.suspend(delta_time);
         sm.suspendScene(delta_time);
-    }
-    else {
+    } else {
         //  更新中
         sm.updateScene(delta_time);
         
@@ -279,8 +281,7 @@ void Application::updateApplication()
     }
     
     platform::endUpdate();
-    
-    HeapFactory::ASSERT_HEADER();
+
 
 }
 
@@ -373,9 +374,32 @@ void Application::renderApplication()
         
     }
     
-    
+    //  タスク表示
     if (show_task_) {
-//        gs.showTask();
+        gs.showTask();
+    }
+    
+    //  ヒープ表示
+    if (show_heap_) {
+        auto& heaps = t3::HeapManager::heaps();
+        int heap_pos_x = 0;
+        int heap_pos_y = 110;
+        for (auto& heap : heaps) {
+            if (!heap.isActive()) {
+                continue;
+            }
+        
+            t3::printDisplay(
+                heap_pos_x,
+                heap_pos_y,
+                Color::white(),
+                "%s TOTAL:%uKB PEAK %uByte",
+                heap.name(),
+                heap.allocated().kbyte(),
+                heap.peak().byte()
+            );
+            heap_pos_y += 20;
+        }
     }
 
 
@@ -390,8 +414,9 @@ void Application::renderApplication()
         //  シーンが切り替わったのでデバッグメニューを閉じる
         dm.closeMenu();
         
-        HeapFactory::dumpAllocateInfo();
-
+        HeapManager::dumpAllocateInfo(memory_leak_check_filter_);
+        memory_leak_check_filter_ = Heap::allocateCount();
+        
         //  シーンが切り替わったタイミングを保存
         last_scene_change_frame_ = frame_counter_.now();
     }

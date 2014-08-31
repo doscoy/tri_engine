@@ -21,7 +21,7 @@ inline void safeDelete(T*& p) {
     (void)sizeof(type_must_be_complete);
 
     //  T3_DELETE    
-    T3_DELETE p;
+    delete p;
     p = nullptr;
 }
 
@@ -35,7 +35,7 @@ inline void safeDeleteArray(T*& p) {
     (void)sizeof(type_must_be_complete);
 
     // T3_DELETE array
-    T3_DELETE_A p;
+    delete[] p;
     p = nullptr;
 }
 

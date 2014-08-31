@@ -11,24 +11,19 @@
 
 
 
+namespace {
 
 constexpr uint32_t makeSignature(
     char a,
     char b,
     char c,
     char d
-)
-{
+) {
     return ((a) | (b << 8) | (c << 16) | (d << 24));
 }
 
 
-namespace t3 {
-
-Mutex Heap::mutex_;
-
-namespace {
-const char* UNKNOWEN_FILE_NAME = "????";
+const char* UNKNOWEN_FILE_NAME = "Unknown...";
 
 constexpr uint32_t HEAP_SIGNATURE   = makeSignature('H','E','A','P');
 constexpr uint32_t ALLOC_END_MARK   = 0x99999999;
@@ -36,8 +31,14 @@ constexpr uint32_t DIRTY_ALLOC_MARK = 0xDEADBEEF;
 constexpr uint32_t DIRTY_FREE_MARK  = 0xCAFEC0DE;
 
 
-uint32_t total_allocate_num_ = 0;
-}
+}   // unname namespace
+
+
+namespace t3 {
+
+Mutex Heap::mutex_;
+uint32_t Heap::alloc_count_ = 0;
+
 
 class AllocHeader {
 public:
@@ -57,8 +58,12 @@ public:
         prev_ = prev;
         file_name_ = file;
         line_ = line;
-        alloc_no_ = total_allocate_num_++;
+        alloc_no_ = Heap::allocateCount();
 
+    }
+    
+    uint32_t no() {
+        return alloc_no_;
     }
 
 
@@ -128,15 +133,15 @@ public:
 
 Heap::Heap()
     : active_(false)
-    , allocated_(0)
-    , peak_(0)
+    , allocated_()
+    , peak_()
     , instances_(0)
     , head_alloc_(nullptr)
     , first_child_(nullptr)
     , next_siblind_(nullptr)
     , prev_sibling_(nullptr)
 {
-    strcpy( heap_name_, "NonActiveHeap" );
+    strcpy(heap_name_, "None");
 }
 
 
@@ -192,11 +197,11 @@ void* Heap::allocate(
     T3_ASSERT(head_alloc_->next_ == last_head);
 
     //  トータルの割り当てサイズ
-    allocated_ += size;
+    allocated_.add(size);
 
     //  ピークサイズ判定
-    if (allocated_ > peak_) {
-        peak_ = allocated_;
+    if (allocated_.byte() > peak_.byte()) {
+        peak_.byte(allocated_.byte());
     }
 
     instances_ += 1;
@@ -269,7 +274,7 @@ void Heap::deallocate(
         T3_ASSERT(next->prev_ == prev);
     }
 
-    allocated_ -= header->size();
+    allocated_.sub(header->size());
     instances_ -= 1;
 
 
@@ -287,55 +292,38 @@ void Heap::activate(const char *const name) {
     T3_ASSERT(strlen(name) < NAME_LENGTH);
 
     strcpy(heap_name_, name);
-    allocated_ = 0;
-    peak_ = 0;
-    instances_ = 0;
     active_ = true;
 }
 
 void Heap::deactivate() {
     strcpy(heap_name_, "");
 
-    allocated_ = 0;
-    peak_ = 0;
+    allocated_.byte(0);
+    peak_.byte(0);
     instances_ = 0;
     active_ = false;
 }
 
 
-void Heap::dump() const {
+void Heap::dump(const uint32_t filter_min) const {
     ScopedLock lock(Heap::mutex());
-    int i = 0;
     AllocHeader* ah = head_alloc_;
     while (ah) {
-        ++i;
         T3_ASSERT(ah->isValid());
-        ah->dump();
+        if (ah->no() > filter_min) {
+            ah->dump();
+        }
         ah = ah->next();
     }
 
 }
 
-void Heap::ASSERT_HEADER() const {
-    int i = 0;
-    AllocHeader* ah = head_alloc_;
-    while (ah) {
-        ++i;
-        T3_ASSERT(ah->isValid());
-        ah = ah->next();
-    }
+uint32_t Heap::allocateCount() {
+    return alloc_count_++;
 }
 
 
-void Heap::ASSERT_HEADER(
-    AllocHeader* addr
-) const {
-    AllocHeader* ah = head_alloc_;
-    while (ah) {
-        T3_ASSERT(ah != addr);
-        ah = ah->next();
-    }
-}
+
 
 }   // namespace t3
 

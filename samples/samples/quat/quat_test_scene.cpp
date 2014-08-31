@@ -24,7 +24,6 @@ public:
 
         //  メッシュ読み込み
         t3::FilePath obj_path("ninja.obj");
-//        t3::FilePath obj_path("o.obj");
         mesh_ = T3_NEW t3::Mesh(obj_path.getFullPath().c_str());
     
 
@@ -62,15 +61,6 @@ public:
             quat_.rotate(move);
             
         }
-        
-        
-        for (int i = 0; i < 5; ++i){
-            auto a = std::make_shared<t3::Transform2D>();
-            a->position();
-        }
-        T3_TRACE("bob\n");
-
-
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -151,7 +141,7 @@ void QuatTestScene::updateScene(t3::tick_t delta_time) {
     auto& gs = t3::Director::instance();
     auto& pad = gs.input().pad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
-        finish(true);
+        finish();
     }
 }
 
