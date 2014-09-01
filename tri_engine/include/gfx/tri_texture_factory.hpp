@@ -7,22 +7,22 @@
 #include <memory>
 #include "tri_render_system.hpp"
 #include "kernel/io/tri_filepath.hpp"
-
+#include "tri_texture.hpp"
 
 
 namespace t3 {
 inline namespace gfx {
 
-class Texture;
+
 class TextureFactory
 {
 public:
-    static std::shared_ptr<Texture> createFromFile(
+    static TexturePtr createFromFile(
         const FilePath& filename
     );
 
     
-    static std::shared_ptr<Texture> createFromData(
+    static TexturePtr createFromData(
         std::string name,
         const uint32_t width,
         const uint32_t height,
@@ -31,7 +31,7 @@ public:
     );
     
 private:
-    static std::shared_ptr<Texture> createFromPngFile(
+    static TexturePtr createFromPngFile(
         const FilePath& filepath
     );
 };

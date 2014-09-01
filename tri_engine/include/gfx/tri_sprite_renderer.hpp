@@ -16,6 +16,54 @@ class IndexBuffer;
 class SpriteRenderer
     : private Uncopyable
 {
+    class BatchGroup {
+    public:
+        BatchGroup()
+            : vertex_buffer_()
+            , index_buffer_()
+            , texture_(nullptr)
+        {
+            RenderSystem::createBuffer(&vertex_buffer_);
+            RenderSystem::createBuffer(&index_buffer_);
+        }
+        
+        ~BatchGroup() {
+            RenderSystem::deleteBuffer(&vertex_buffer_);
+            RenderSystem::deleteBuffer(&index_buffer_);
+        }
+        
+    public:
+        const TexturePtr& texture() const {
+            return texture_;
+        }
+        
+        void texture(const TexturePtr& tex) {
+            texture_ = tex;
+        }
+        
+        RenderSystem::BufferID vertexBufferID() const {
+            return vertex_buffer_;
+        }
+        
+        RenderSystem::BufferID indexBufferID() const {
+            return index_buffer_;
+        }
+        
+        uint32_t drawCount() const {
+            return draw_count_;
+        }
+        
+        void drawCount(uint32_t count) {
+            draw_count_ = count;
+        }
+    
+    private:
+        RenderSystem::BufferID vertex_buffer_;
+        RenderSystem::BufferID index_buffer_;
+        TexturePtr texture_;
+        uint32_t draw_count_;
+    };
+    using BatchGroups = std::vector<std::shared_ptr<BatchGroup>>;
     using Container = std::vector<SpritePtr>;
 
 public:
@@ -39,22 +87,22 @@ private:
     void beginRender();
     void endRender();
 
-
+    bool isBatchGroupChange(
+        const SpritePtr sprite,
+        const std::shared_ptr<BatchGroup>& batch
+    );
     void margeSprites();
-    void renderSprites();
+    void renderBatch(std::shared_ptr<BatchGroup>& batch);
 
 private:
     Container sprites_;
     ShaderPtr shader_;
     ShaderPtr default_shader_;
+    BatchGroups batch_groups_;
 
-    RenderSystem::BufferID vertex_buffer_;
-    RenderSystem::BufferID index_buffer_;
-    int draw_count_;
 };
 
 
-extern SpriteRenderer* renderer_;
 
 }   // inline namespace gfx
 }   // namespace t3

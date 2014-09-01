@@ -20,6 +20,7 @@ class Resource
 {
 public:
     Resource();
+    Resource(const char* const name);
     virtual ~Resource(){}
     
 public:

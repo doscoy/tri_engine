@@ -10,6 +10,7 @@
 #include "tri_gfx_types.hpp"
 #include "tri_render_system.hpp"
 #include "dbg/tri_assert.hpp"
+#include "tri_texture.hpp"
 #include <memory>
 #include <cstdint>
 
@@ -52,11 +53,11 @@ private:
 public:
     
     //  テクスチャを設定
-    void texture( std::shared_ptr<Texture> tex );
+    void texture( TexturePtr tex );
     
     
     //  テクスチャ取得
-    const std::shared_ptr<Texture>& texture() const {
+    const TexturePtr& texture() const {
         return texture_;
     }
     
@@ -284,7 +285,7 @@ public:
 
 
 private:
-    std::shared_ptr<Texture> texture_;
+    TexturePtr texture_;
     Transform2DPtr transform_;
     Vec2 size_;
     Vec2 pivot_;

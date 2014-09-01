@@ -39,8 +39,7 @@ public:
     void update(t3::tick_t delta_time){
 
         //  現在のスプライト数表示
-        auto sprites = sprite_layer_.getManagementSprites();
-        t3::printDisplay(0, 0, "%d", sprites->size());
+      //  t3::printDisplay(0, 0, "%d", sprites->size());
         
         //  画面タッチで数制御
         t3::Pointing pointing = t3::Director::instance().input().pointing();
@@ -60,7 +59,7 @@ public:
         fadeSprites();
         total_time_ += delta_time;
         float sin = t3::sinf(total_time_);
-        sprite_opacity_ = (sin * 128) + 128;
+        sprite_opacity_ = (sin * 128) + 127;
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -69,15 +68,13 @@ public:
 
 private:
     void rollingSprites() {
-        auto sprites = sprite_layer_.getManagementSprites();
-        if (sprites->empty()) {
+        if (sprites_.empty()) {
             //  スプライト無し
             return;
         }
         
         int spr_idx = 0;
-        for (auto wspr : *sprites) {
-            auto spr = wspr.lock();
+        for (auto spr : sprites_) {
             float angle = spr->transform()->rotation();
             if (spr_idx % 2) {
                 spr->transform()->rotation(angle + 1);
@@ -88,17 +85,15 @@ private:
     
     
     void fadeSprites() {
-       auto sprites = sprite_layer_.getManagementSprites();
-        if (sprites->empty()) {
+
+        if (sprites_.empty()) {
             //  スプライト無し
             return;
         }
         
         
         int spr_idx = 0;
-        for (auto wspr : *sprites) {
-            
-            auto spr = wspr.lock();
+        for (auto spr : sprites_) {
             if ((spr_idx % 6) == 0) {
                 spr->opacity(sprite_opacity_);
             }
@@ -108,23 +103,21 @@ private:
     }
 
     void adjustSpritesPosition() {
-        auto sprites = sprite_layer_.getManagementSprites();
-        if (sprites->empty()) {
+        if (sprites_.empty()) {
             //  スプライト無し
             return;
         }
         
-        t3::WeakSprite wksprite = sprites->front();
-        auto sprite = wksprite.lock();
+        t3::SpritePtr spr = sprites_.front();
+        
         t3::Vec2 offset = t3::Vec2(
-            sprite->scaledSize().x_,
-            sprite->scaledSize().y_
+            spr->scaledSize().x_,
+            spr->scaledSize().y_
         );
         int x_count = t3::Director::instance().virtualScreenSize().x_ / offset.x_ -1;
         int y = 7;
         int i = 0;
-        for (auto wspr : *sprites) {
-            auto spr = wspr.lock();
+        for (auto spr : sprites_) {
             if (i % x_count == 0) {
                 y -= 1;
             }
@@ -141,7 +134,7 @@ private:
         t3::TextureManager& texture_manager = t3::TextureManager::instance();
 
         //  スプライト増やす
-        std::shared_ptr<t3::Sprite> sprite = sprite_layer_.createSprite(
+        t3::SpritePtr sprite = sprite_layer_.createSprite(
             texture_manager.resource(tex3_handle_)
         );
         sprite->transform()->scale(2.0f);
@@ -154,13 +147,17 @@ private:
         else {
             sprite->color(t3::Color::white());
         }
+        
+        sprites_.push_back(sprite);
     }
     
     void removeSprite() {
-        auto sprites = sprite_layer_.getManagementSprites();
-        if (!sprites->empty()) {
-            sprites->pop_back();
+        if (sprites_.empty()) {
+            return;
         }
+        
+        sprites_.pop_back();
+        
     }
 
 
@@ -169,6 +166,7 @@ private:
     t3::tick_t total_time_;
     int sprite_opacity_;
     t3::SpriteLayer sprite_layer_;
+    std::vector<t3::SpritePtr> sprites_;
 };
 
 

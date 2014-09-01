@@ -9,7 +9,7 @@ namespace t3 {
 inline namespace gfx {
 
 
-std::shared_ptr<Texture> TextureFactory::createFromData(
+TexturePtr TextureFactory::createFromData(
     std::string name,
     const uint32_t width,
     const uint32_t height,
@@ -34,7 +34,7 @@ std::shared_ptr<Texture> TextureFactory::createFromData(
 
     T3_ASSERT(glGetError() == GL_NO_ERROR);
 
-    std::shared_ptr<Texture> tex( T3_NEW ::t3::Texture(
+    TexturePtr tex( T3_NEW ::t3::Texture(
         name.c_str(),
         width,
         height,
@@ -47,12 +47,12 @@ std::shared_ptr<Texture> TextureFactory::createFromData(
 
 
 //  ファイルからテクスチャ生成
-std::shared_ptr<Texture> TextureFactory::createFromFile(
+TexturePtr TextureFactory::createFromFile(
     const FilePath& filename
 ){
     T3_TRACE("Create texture from %s", filename.getFullPath().c_str());
 
-    std::shared_ptr<Texture> tex = nullptr;
+    TexturePtr tex = nullptr;
     std::string file_ext = filename.getExt();
     if (file_ext == ".png") {
         tex = createFromPngFile(filename);
@@ -68,7 +68,7 @@ std::shared_ptr<Texture> TextureFactory::createFromFile(
 
 
 //  pngからテクスチャ生成
-std::shared_ptr<Texture> TextureFactory::createFromPngFile(
+TexturePtr TextureFactory::createFromPngFile(
     const FilePath& filepath
 ){
     File png_file;
@@ -93,7 +93,7 @@ std::shared_ptr<Texture> TextureFactory::createFromPngFile(
         break;
     }
     
-    std::shared_ptr<Texture> tex = createFromData(
+    TexturePtr tex = createFromData(
         filepath.getFullPath(),
         png.width_,
         png.height_,

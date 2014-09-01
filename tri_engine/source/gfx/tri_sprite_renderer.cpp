@@ -58,18 +58,12 @@ SpriteRenderer::SpriteRenderer()
     //  スプライトコンテナのメモリを事前に確保
     sprites_.reserve(2000);
     
-    
-    RenderSystem::createBuffer(&index_buffer_);
-    RenderSystem::createBuffer(&vertex_buffer_);
-
 }
     
 
 SpriteRenderer::~SpriteRenderer()
 {
 
-    RenderSystem::deleteBuffer(&index_buffer_);
-    RenderSystem::deleteBuffer(&vertex_buffer_);
 
 }
 
@@ -95,7 +89,9 @@ void SpriteRenderer::render()
     //  レンダリング設定
     beginRender();
     margeSprites();
-    renderSprites();
+    for (auto& batch : batch_groups_) {
+        renderBatch(batch);
+    }
     endRender();
     
 }
@@ -134,7 +130,7 @@ void SpriteRenderer::margeSprites() {
     std::vector<VertexP2CT> vertices;
     std::vector<uint32_t> indices;
     
-    vertices.reserve(sprites_.size() * 16);
+    vertices.reserve(sprites_.size());
     indices.reserve(sprites_.size() * 6);
 
 
@@ -142,9 +138,64 @@ void SpriteRenderer::margeSprites() {
     Vec2 half = screen_size / 2;
     half.x_ = 1.0f / half.x_;
     half.y_ = 1.0f / half.y_;
-    
+
+
+    bool add_polygon = false;
+    int current_index = 0;
+    //  現在のバッチグループ
+    //  バッチが切れる場合はコンテナにコピーされて新たなバッチグループのインスタンスとして使う
+    std::shared_ptr<BatchGroup> current_batch = std::make_shared<BatchGroup>();
     for (int i = 0; i < sprites_.size(); ++i) {
-        auto spr = sprites_[i];
+        auto& spr = sprites_[i];
+
+        if (i == 0) {
+            current_batch->texture(spr->texture());
+        }
+    
+        //
+        if (isBatchGroupChange(spr, current_batch)) {
+            add_polygon = false;
+            current_index = 0;
+            indices.pop_back();
+        
+            //  頂点バッファ更新
+            RenderSystem::bindBuffer(
+                t3::RenderSystem::BufferType::TYPE_VERTEX,
+                current_batch->vertexBufferID()
+            );
+            RenderSystem::setupBufferData(
+                t3::RenderSystem::BufferType::TYPE_VERTEX,
+                static_cast<int>(vertices.size() * sizeof(VertexP2CT)),
+                vertices.data(),
+                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+            );
+    
+            //  インデックスバッファ更新
+            RenderSystem::bindBuffer(
+                t3::RenderSystem::BufferType::TYPE_INDEX,
+                current_batch->indexBufferID()
+            );
+            RenderSystem::setupBufferData(
+                t3::RenderSystem::BufferType::TYPE_INDEX,
+                static_cast<int>(indices.size() * sizeof(uint32_t)),
+                indices.data(),
+                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+            );
+    
+    
+            //  ドローカウント設定
+            current_batch->drawCount(indices.size());
+    
+            //  バッチグループ保存
+            batch_groups_.push_back(current_batch);
+            current_batch.reset(T3_NEW BatchGroup);
+            
+            
+            //  頂点情報をクリア
+            vertices.clear();
+            indices.clear();
+        }
+
     
         const Vec2& pivot = spr->pivot();
         const Vec2& size = spr->size();
@@ -270,32 +321,31 @@ void SpriteRenderer::margeSprites() {
             vertices.push_back(v4);
         }
         
-        int first_vertex_index = i * 4;
+        int first_vertex_index = current_index * 4;
 
         //  インデックスバッファ
-        if (i > 0) {
+        if (add_polygon) {
             //  ２スプライト目からは縮退ポリゴンを仕込む
             indices.push_back(first_vertex_index);
         }
+        add_polygon = true;
         
         indices.push_back(first_vertex_index);
         indices.push_back(first_vertex_index + 1);
         indices.push_back(first_vertex_index + 2);
         indices.push_back(first_vertex_index + 3);
-   
+        indices.push_back(first_vertex_index + 3);
         
         
-        if (i != sprites_.size() -1) {
-            //  最後のスプライト以外は縮退ポリゴンを仕込む
-            indices.push_back(first_vertex_index + 3);
-        }
+        current_index += 1;
     }
-    draw_count_ = static_cast<int>(indices.size());
+    
+    indices.pop_back();
     
     //  頂点バッファ更新
     RenderSystem::bindBuffer(
         t3::RenderSystem::BufferType::TYPE_VERTEX,
-        vertex_buffer_
+        current_batch->vertexBufferID()
     );
     RenderSystem::setupBufferData(
         t3::RenderSystem::BufferType::TYPE_VERTEX,
@@ -307,7 +357,7 @@ void SpriteRenderer::margeSprites() {
     //  インデックスバッファ更新
     RenderSystem::bindBuffer(
         t3::RenderSystem::BufferType::TYPE_INDEX,
-        index_buffer_
+        current_batch->indexBufferID()
     );
     RenderSystem::setupBufferData(
         t3::RenderSystem::BufferType::TYPE_INDEX,
@@ -316,13 +366,41 @@ void SpriteRenderer::margeSprites() {
         t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
     );
     
+    
+    //  ドローカウント設定
+    current_batch->drawCount(indices.size());
+    
+    //  バッチグループ保存
+    batch_groups_.push_back(current_batch);
+
+            
+
+            
+    //  頂点情報をクリア
+    vertices.clear();
+    indices.clear();
 
 }
 
-void SpriteRenderer::renderSprites() {
+
+bool SpriteRenderer::isBatchGroupChange(
+    const SpritePtr sprite,
+    const std::shared_ptr<BatchGroup>& current_batch
+) {
+
+    if (*sprite->texture() != *current_batch->texture()) {
+        return true;
+    }
+
+
+    return false;
+}
+
+
+void SpriteRenderer::renderBatch(std::shared_ptr<BatchGroup>& batch) {
 
     //  テクスチャの割り当て
-    const std::shared_ptr<Texture>& texture = sprites_[0]->texture();
+    const TexturePtr& texture = batch->texture();
     texture->setupTexture();
 
     shader_->setAttributePointer(
@@ -355,7 +433,7 @@ void SpriteRenderer::renderSprites() {
     // 描画
     RenderSystem::drawElements(
         RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
-        draw_count_,
+        batch->drawCount(),
         sizeof(uint32_t)
     );
 
@@ -366,6 +444,9 @@ void SpriteRenderer::renderSprites() {
 void SpriteRenderer::endRender()
 {
     //  設定の後片付け
+    shader_->setEnableAttributeArray(SHADER_ATTR_POSITION, false);
+    shader_->setEnableAttributeArray(SHADER_ATTR_COLOR, false);
+    shader_->setEnableAttributeArray(SHADER_ATTR_UV, false);
     
 
     
@@ -374,6 +455,8 @@ void SpriteRenderer::endRender()
 
     //  描画コンテナのクリア
     sprites_.clear();
+    
+    batch_groups_.clear();
 }
 
 

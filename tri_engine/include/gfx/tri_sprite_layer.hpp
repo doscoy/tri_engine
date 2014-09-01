@@ -28,7 +28,7 @@ public:
     virtual ~SpriteLayer();
 
 public:
-    SpritePtr createSprite(std::shared_ptr<Texture> tex);
+    SpritePtr createSprite(TexturePtr tex);
     SpritePtr createSprite(const FilePath& path);
 
     SpriteContainer* getManagementSprites() {

@@ -15,16 +15,17 @@ Texture::Texture(
     const uint32_t height,
     const RenderSystem::ColorFormat color_format,
     const RenderSystem::texture_handle_t tex_handle
-)   : width_(width)
+)   : Resource()
+    , width_(width)
     , height_(height)
-    , color_format_( color_format )
+    , color_format_(color_format)
     , texture_handle_(tex_handle)
 {
     
         
 }
 
-std::shared_ptr<Texture> Texture::create(const FilePath& path)
+TexturePtr Texture::create(const FilePath& path)
 {
     return TextureFactory::createFromFile(path);
 }

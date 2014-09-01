@@ -34,7 +34,7 @@ Sprite::~Sprite()
 
 //  テクスチャ設定
 void Sprite::texture(
-    std::shared_ptr<Texture> tex
+    TexturePtr tex
 ){
     texture_ = tex;
     T3_NULL_ASSERT( texture_ );

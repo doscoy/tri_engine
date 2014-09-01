@@ -12,8 +12,9 @@
 
 namespace t3 {
 inline namespace gfx {
-    
 
+class Texture;
+using TexturePtr = std::shared_ptr<Texture>;
 class Texture final
     : public Resource
 {
@@ -50,12 +51,21 @@ public:
     }
     
     //  テクスチャ生成
-    static std::shared_ptr<Texture> create(
+    static TexturePtr create(
         const FilePath& filepath
     );
     
     void setupTexture();
     
+    
+public:
+    bool operator == (const Texture& rhs) {
+        return (resourceID() == rhs.resourceID());
+    }
+    
+    bool operator != (const Texture& rhs) {
+        return !(operator==(rhs));
+    }
 private:
     
     //  サイズ
@@ -67,6 +77,7 @@ private:
     RenderSystem::texture_handle_t texture_handle_;
 };
     
+
 using TextureManager = ResourceManager<Texture>;
 
     
