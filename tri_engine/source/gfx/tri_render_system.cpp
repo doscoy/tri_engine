@@ -13,7 +13,7 @@ int render_call_count_ = 0;
 
 
 
-inline void countRenderCall() {
+inline void countDrawCall() {
 #if COUNT_RENDER_CALL
     render_call_count_ += 1;
 #endif
@@ -23,11 +23,18 @@ namespace t3 {
 inline namespace gfx {
 
 
-int RenderSystem::getRenderCallCount() {
+void RenderSystem::bindTexture(
+    const TextureID texture
+) {
+
+    CoreRenderSystem::bindTexture(texture);
+}
+
+int RenderSystem::getDrawCallCount() {
     return render_call_count_;
 }
 
-void RenderSystem::resetRenderCallCount() {
+void RenderSystem::resetDrawCallCount() {
     render_call_count_ = 0;
 }
 
@@ -36,7 +43,6 @@ int RenderSystem::buildShader(
     const char* const source,
     RenderSystem::ShaderType shader_type
 ) {
-    countRenderCall();
     return CoreRenderSystem::buildShader(source, shader_type);
 }
 
@@ -44,14 +50,12 @@ void RenderSystem::attachShader(
     RenderSystem::ShaderProgramID program_handle,
     int shader_handle
 ) {
-    countRenderCall();
     CoreRenderSystem::attachShader(program_handle, shader_handle);
 }
 
 void RenderSystem::linkShader(
     RenderSystem::ShaderProgramID program_handle
 ) {
-    countRenderCall();
     CoreRenderSystem::linkShader(program_handle);
 }
 
@@ -68,7 +72,6 @@ void RenderSystem::setShader(
     last = shader;
 #endif
     
-    countRenderCall();
     CoreRenderSystem::setShader(shader);
 }
 
@@ -77,7 +80,6 @@ void RenderSystem::bindAttributeLocation(
     RenderSystem::ShaderVariableLocation location,
     const char* const name
 ) {
-    countRenderCall();
     CoreRenderSystem::bindAttributeLocation(handle, location, name);
 }
 
@@ -87,7 +89,6 @@ void RenderSystem::bindFragmentDataLocation(
     RenderSystem::ShaderVariableLocation location,
     const char* const name
 ) {
-    countRenderCall();
     CoreRenderSystem::bindFragmentDataLocation(handle, location, name);
 }
 
@@ -95,7 +96,6 @@ RenderSystem::ShaderVariableLocation RenderSystem::getAttributeLocation(
     RenderSystem::ShaderProgramID program,
     const char* const name
 ) {
-    countRenderCall();
     return CoreRenderSystem::getAttributeLocation(program, name);
 }
 
@@ -103,7 +103,6 @@ RenderSystem::ShaderVariableLocation RenderSystem::getUniformLocation(
     RenderSystem::ShaderProgramID program,
     const char* const name
 ) {
-    countRenderCall();
     return CoreRenderSystem::getUniformLocation(program, name);
 }
 
@@ -114,7 +113,6 @@ void RenderSystem::setUniformValue(
     float y,
     float z
 ) {
-    countRenderCall();
     CoreRenderSystem::setUniformValue(location, x, y, z);
 }
 
@@ -125,7 +123,6 @@ void RenderSystem::setUniformValue(
     float z,
     float w
 ) {
-    countRenderCall();
     CoreRenderSystem::setUniformValue(location, x, y, z, w);
 }
 
@@ -133,7 +130,6 @@ void RenderSystem::setUniformValue(
     RenderSystem::ShaderVariableLocation location,
     float val
 ) {
-    countRenderCall();
     CoreRenderSystem::setUniformValue(location, val);
 }
 
@@ -141,7 +137,6 @@ void RenderSystem::setUniformValue(
     RenderSystem::ShaderVariableLocation location,
     int val
 ) {
-    countRenderCall();
     CoreRenderSystem::setUniformValue(location, val);
 }
 
@@ -150,13 +145,11 @@ void RenderSystem::setUniformMatrix(
     RenderSystem::ShaderVariableLocation location,
     t3::Mtx44 mtx
 ) {
-    countRenderCall();
     CoreRenderSystem::setUniformMatrix(location, mtx);
 
 }
 
 void RenderSystem::initializeRenderSystem() {
-    countRenderCall();
     CoreRenderSystem::initializeRenderSystem();
 }
 
@@ -166,8 +159,6 @@ void RenderSystem::initializeRenderSystem() {
 
 
 void RenderSystem::swapBuffers() {
-    
-    countRenderCall();
     CoreRenderSystem::swapBuffers();
 }
 
@@ -185,7 +176,6 @@ void RenderSystem::setDepthWrite(
     last = enable;
 #endif
 
-    countRenderCall();
     CoreRenderSystem::setDepthWrite(enable);
 }
 
@@ -195,7 +185,6 @@ void RenderSystem::clearBuffer(
     bool depth_clear,
     bool stencil_clear
 ) {
-    countRenderCall();
     CoreRenderSystem::clearBuffer(color_clear, depth_clear, stencil_clear);
 }
 
@@ -211,7 +200,6 @@ void RenderSystem::setCullingMode(
     initialized = true;
     last = mode;
 #endif
-    countRenderCall();
     CoreRenderSystem::setCullingMode(mode);
 }
 
@@ -228,7 +216,6 @@ void RenderSystem::setClearDepthValue(
     initialized = true;
     last = value;
 #endif
-    countRenderCall();
     CoreRenderSystem::setClearDepthValue(value);
 }
 
@@ -247,7 +234,6 @@ void RenderSystem::clearColor(
     last = clear_color;
 #endif
 
-    countRenderCall();
     CoreRenderSystem::clearColor(
         clear_color.redFloat(),
         clear_color.greenFloat(),
@@ -270,7 +256,6 @@ void RenderSystem::setDepthTestMode(
     last = mode;
 #endif
 
-    countRenderCall();
     CoreRenderSystem::setDepthTestMode(mode);
 }
 
@@ -291,7 +276,6 @@ void RenderSystem::setBlendFunctionType(
     last_sf = sfactor;
     last_df = dfactor;
 #endif
-    countRenderCall();
     CoreRenderSystem::setBlendFunctionType(sfactor, dfactor);
 }
 
@@ -324,7 +308,6 @@ void RenderSystem::setViewport(
     last_h = h;
 #endif
 
-    countRenderCall();
     CoreRenderSystem::setViewport(x, y, w, h);
 }
 
@@ -341,7 +324,6 @@ void RenderSystem::setDepthTest(
     initialized = true;
     last = enable;
 #endif
-    countRenderCall();
     CoreRenderSystem::setDepthTest(enable);
 }
 
@@ -357,7 +339,6 @@ void RenderSystem::setBlend(
     initialized = true;
     last = enable;
 #endif
-    countRenderCall();
     CoreRenderSystem::setBlend(enable);
 }
 
@@ -373,7 +354,6 @@ void RenderSystem::setCulling(
     initialized = true;
     last = enable;
 #endif
-    countRenderCall();
     CoreRenderSystem::setCulling(enable);
 }
 
@@ -382,14 +362,12 @@ void RenderSystem::setCulling(
 void RenderSystem::setTextureMagFilter(
     RenderSystem::TextureFilterType type
 ) {
-    countRenderCall();
     CoreRenderSystem::setTextureMagFilter(type);
 }
 
 void RenderSystem::setTextureMinFilter(
     RenderSystem::TextureFilterType type
 ) {
-    countRenderCall();
     CoreRenderSystem::setTextureMinFilter(type);
 }
 
@@ -399,26 +377,8 @@ void RenderSystem::drawElements(
     int count,
     size_t indices_type_size
 ) {
-
-    countRenderCall();
+    countDrawCall();
     CoreRenderSystem::drawElements(mode, count, indices_type_size);
-}
-
-
-
-
-RenderSystem::BufferID RenderSystem::createVertexBuffer(
-    std::vector<float>& vertices
-) {
-    countRenderCall();
-    return CoreRenderSystem::createVertexBuffer(vertices);
-}
-
-RenderSystem::BufferID RenderSystem::createIndexBuffer(
-    std::vector<uint32_t>& indices
-) {
-    countRenderCall();
-    return CoreRenderSystem::createIndexBuffer(indices);
 }
 
 
@@ -430,7 +390,6 @@ void RenderSystem::setVertexAttributePointer(
     int stride,
     void* ptr
 ) {
-    countRenderCall();
     CoreRenderSystem::setVertexAttributePointer(slot, element_num, type, normalized, stride, ptr);
 }
 
@@ -440,7 +399,6 @@ void RenderSystem::setupTextureData(
     RenderSystem::ColorFormat color_format,
     const void* data
 ) {
-    countRenderCall();
     CoreRenderSystem::setupTextureData(width, height, color_format, data);
 }
 
@@ -448,21 +406,19 @@ void RenderSystem::bindBuffer(
     RenderSystem::BufferType target_type,
     int buffer_id
 ) {
-    countRenderCall();
     CoreRenderSystem::bindBuffer(target_type, buffer_id);
 }
 
 
 void RenderSystem::createBuffer(uint32_t* buffer) {
 
-    countRenderCall();
     CoreRenderSystem::createBuffer(buffer);
 }
 
 void RenderSystem::deleteBuffer(uint32_t* buffer) {
 
-    countRenderCall();
     CoreRenderSystem::deleteBuffer(buffer);
+    *buffer = 0;
 }
 
 void RenderSystem::setupBufferData(
@@ -471,7 +427,6 @@ void RenderSystem::setupBufferData(
     const void* data,
     RenderSystem::BufferUsage usage
 ) {
-    countRenderCall();
     CoreRenderSystem::setupBufferData(type, size, data, usage);
 }
 
@@ -481,7 +436,6 @@ void RenderSystem::setupBufferSubData(
     int size,
     const void *data
 ) {
-    countRenderCall();
     CoreRenderSystem::setupBufferSubData(type, offset, size, data);
 }
 
@@ -497,15 +451,12 @@ void RenderSystem::setActiveTextureUnit(
     initialized = true;
     last = unit;
 #endif
-    countRenderCall();
     CoreRenderSystem::setActiveTextureUnit(unit);
 }
 
 void RenderSystem::setEnableVertexAttribute(
     int slot
 ) {
-
-    countRenderCall();
     CoreRenderSystem::setEnableVertexAttribute(slot);
 }
 
@@ -513,7 +464,6 @@ void RenderSystem::setDisableVertexAttribute(
     int slot
 ) {
 
-    countRenderCall();
     CoreRenderSystem::setDisableVertexAttribute(slot);
 }
 
@@ -524,7 +474,7 @@ void RenderSystem::setAttributeValue(
     float c,
     float d
 ) {
-    countRenderCall();
+
     CoreRenderSystem::setAttributeValue(slot, a, b, c, d);
 }
 

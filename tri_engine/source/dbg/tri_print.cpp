@@ -48,7 +48,7 @@ void beginPrint(
     height_ = h;
 
     t3::RenderSystem::resetBufferBind();
-    debugfont_->setupTexture();
+    debugfont_->bind();
 
     //  シェーダ切り替え
     bool shader_setup_result = font_shader_.use();

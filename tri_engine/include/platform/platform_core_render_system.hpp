@@ -25,6 +25,10 @@ inline namespace platform {
 class CoreRenderSystem {
 public:
 
+    static void bindTexture(
+        RenderSystem::TextureID texture
+    );
+
     static void setActiveTextureUnit(
         int unit
     );
@@ -223,14 +227,6 @@ public:
     );
     
     
-    static RenderSystem::BufferID createVertexBuffer(
-        std::vector<float>& vertices
-    );
-    
-    static RenderSystem::BufferID createIndexBuffer(
-        std::vector<uint32_t>& indices
-    );
-  
     
     static void setEnableVertexAttribute(
         int slot

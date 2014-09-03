@@ -7,7 +7,8 @@
 #include "tri_renderable.hpp"
 #include "tri_render_system.hpp"
 #include "util/tri_uncopyable.hpp"
-
+#include "tri_index_buffer.hpp"
+#include "tri_vertex_buffer.hpp"
 
 namespace t3 {
 inline namespace gfx {
@@ -30,11 +31,11 @@ public:
         return index_count_;
     }
     
-    RenderSystem::BufferID vertexBuffer() const {
+    const VertexBuffer& vertexBuffer() const {
         return vb_;
     }
     
-    RenderSystem::BufferID indexBuffer() const {
+    const IndexBuffer& indexBuffer() const {
         return ib_;
     }
     
@@ -45,8 +46,8 @@ public:
 private:
     uint32_t vertex_count_;
     uint32_t index_count_;
-    RenderSystem::BufferID vb_;
-    RenderSystem::BufferID ib_;
+    VertexBuffer vb_;
+    IndexBuffer ib_;
     Sphere sphere_;
 };
 

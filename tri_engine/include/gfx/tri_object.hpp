@@ -1,7 +1,8 @@
 
 
-#ifndef tri_sandbox_osx_tri_object_hpp
-#define tri_sandbox_osx_tri_object_hpp
+#ifndef TRI_OBJECT_HPP_INCLUDED
+#define TRI_OBJECT_HPP_INCLUDED
+
 
 #include "math/tri_math.hpp"
 

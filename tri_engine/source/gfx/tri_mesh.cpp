@@ -39,8 +39,8 @@ Mesh::Mesh(
     const char* const name
 )   : vertex_count_(0)
     , index_count_(0)
-    , vb_(0)
-    , ib_(0)
+    , vb_()
+    , ib_()
     , sphere_()
 {
     std::ifstream file(name, std::ios::in | std::ios::binary);
@@ -151,16 +151,21 @@ Mesh::Mesh(
     sphere_.radius(sphere_radius);
 
 
-    RenderSystem::createBuffer(&vb_);
-    RenderSystem::bindBuffer(RenderSystem::BufferType::TYPE_VERTEX, vb_);
+    vb_.bind();
     RenderSystem::setupBufferData(
         RenderSystem::BufferType::TYPE_VERTEX,
         sizeof(VertexP3N) * vertices.size(),
         vertices.data(),
         RenderSystem::BufferUsage::STATIC_DRAW
     );
-    
-    ib_ = RenderSystem::createIndexBuffer(indices);
+
+    ib_.bind();
+    RenderSystem::setupBufferData(
+        RenderSystem::BufferType::TYPE_INDEX,
+        sizeof(uint32_t) * indices.size(),
+        indices.data(),
+        RenderSystem::BufferUsage::STATIC_DRAW
+    );
     
 
     vertex_count_ = vertices.size();
@@ -170,11 +175,6 @@ Mesh::Mesh(
 
 Mesh::~Mesh()
 {
-    
-    
-    RenderSystem::deleteBuffer(&vb_);
-    RenderSystem::deleteBuffer(&ib_);
-
 }
 
 

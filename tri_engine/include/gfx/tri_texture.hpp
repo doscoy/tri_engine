@@ -29,7 +29,7 @@ private:
         const uint32_t width,
         const uint32_t height,
         const RenderSystem::ColorFormat color_format,
-        const RenderSystem::texture_handle_t tex_handle
+        const RenderSystem::TextureID tex_handle
     );
     
     
@@ -55,7 +55,7 @@ public:
         const FilePath& filepath
     );
     
-    void setupTexture();
+    void bind();
     
     
 public:
@@ -74,7 +74,7 @@ private:
 
     //  カラーフォーマット
     RenderSystem::ColorFormat color_format_;
-    RenderSystem::texture_handle_t texture_handle_;
+    RenderSystem::TextureID texture_handle_;
 };
     
 

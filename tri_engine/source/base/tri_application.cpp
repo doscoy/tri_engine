@@ -224,23 +224,19 @@ void Application::updateApplication()
     if ((frame_counter_.now() % 10) == 0) {
         fps_ =  60.0f / (delta_time / frameToSec(1));
     }
-    t3::printDisplay(0, 100, "FPS %.1f",fps_);
+    t3::printDisplay(0, 10, "FPS %.1f",fps_);
 
 
     float sum_render = 0;
     for (float a : render_avg) {
         sum_render += a;
     }
-    t3::printDisplay(0, 70, "%d render avg %f",
-        render_avg.size(),
-        sum_render / render_avg.size()
-    );
     
-    //  レンダーコール数
-    t3::printDisplay(0, 50, "render call %d",
-        t3::RenderSystem::getRenderCallCount()
+    //  ドローコール数
+    t3::printDisplay(140, 10, "DC:%d",
+        t3::RenderSystem::getDrawCallCount()
     );
-    t3::RenderSystem::resetRenderCallCount();
+    t3::RenderSystem::resetDrawCallCount();
     
     
     

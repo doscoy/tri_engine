@@ -23,14 +23,14 @@ class Texture;
 class RenderSystem {
 public:
 
-    static int getRenderCallCount();
+    static int getDrawCallCount();
     
-    static void resetRenderCallCount();
+    static void resetDrawCallCount();
 
     using BufferID = unsigned int;
     using ShaderProgramID = unsigned int;
     using ShaderVariableLocation = unsigned int;
-    using texture_handle_t = unsigned int;
+    using TextureID = unsigned int;
 
 
     enum TextureUnit {
@@ -46,6 +46,9 @@ public:
     );
 
 
+    static void bindTexture(
+        TextureID texture
+    );
 
     enum class ShaderType {
         VERTEX_SHADER,
@@ -265,6 +268,7 @@ public:
     
     static void resetBufferBind() {
         bindBuffer(BufferType::TYPE_VERTEX, 0);
+        bindBuffer(BufferType::TYPE_INDEX, 0);
     }
     
     static void createBuffer(uint32_t* buffer);

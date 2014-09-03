@@ -7,7 +7,9 @@
 #include <memory.h>
 #include "tri_shader.hpp"
 #include "tri_sprite.hpp"
-
+#include "gfx/tri_vertex_types.hpp"
+#include "tri_vertex_buffer.hpp"
+#include "tri_index_buffer.hpp"
 
 namespace t3 {
 inline namespace gfx {
@@ -22,14 +24,11 @@ class SpriteRenderer
             : vertex_buffer_()
             , index_buffer_()
             , texture_(nullptr)
+            , draw_count_(0)
         {
-            RenderSystem::createBuffer(&vertex_buffer_);
-            RenderSystem::createBuffer(&index_buffer_);
         }
         
         ~BatchGroup() {
-            RenderSystem::deleteBuffer(&vertex_buffer_);
-            RenderSystem::deleteBuffer(&index_buffer_);
         }
         
     public:
@@ -41,11 +40,11 @@ class SpriteRenderer
             texture_ = tex;
         }
         
-        RenderSystem::BufferID vertexBufferID() const {
+        const VertexBuffer& vertexBuffer() const {
             return vertex_buffer_;
         }
         
-        RenderSystem::BufferID indexBufferID() const {
+        const IndexBuffer& indexBuffer() const {
             return index_buffer_;
         }
         
@@ -58,8 +57,8 @@ class SpriteRenderer
         }
     
     private:
-        RenderSystem::BufferID vertex_buffer_;
-        RenderSystem::BufferID index_buffer_;
+        VertexBuffer vertex_buffer_;
+        IndexBuffer index_buffer_;
         TexturePtr texture_;
         uint32_t draw_count_;
     };

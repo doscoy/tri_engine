@@ -29,6 +29,11 @@ namespace t3 {
 inline namespace platform {
 
 
+void CoreRenderSystem::bindTexture(RenderSystem::TextureID texture) {
+
+    glBindTexture(GL_TEXTURE_2D, texture);
+}
+
 int CoreRenderSystem::buildShader(
     const char* const source,
     RenderSystem::ShaderType shader_type
@@ -455,45 +460,6 @@ void CoreRenderSystem::drawElements(
     
     glDrawElements(draw_mode, count, index_type, 0);
     T3_ASSERT(glGetError() == GL_NO_ERROR);
-}
-
-
-
-
-RenderSystem::BufferID CoreRenderSystem::createVertexBuffer(
-    std::vector<float>& vertices
-) {
-    
-    RenderSystem::BufferID buffer_id;
-    glGenBuffers(1, &buffer_id);
-    glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
-    glBufferData(
-        GL_ARRAY_BUFFER,
-        vertices.size() * sizeof(float),
-        vertices.data(),
-        GL_STATIC_DRAW
-    );
-    return buffer_id;
-}
-
-RenderSystem::BufferID CoreRenderSystem::createIndexBuffer(
-    std::vector<uint32_t>& indices
-) {
-    RenderSystem::BufferID buffer_id;
-    
-    glGenBuffers(1, &buffer_id);
-    glBindBuffer(
-        GL_ELEMENT_ARRAY_BUFFER,
-        buffer_id
-    );
-    glBufferData(
-        GL_ELEMENT_ARRAY_BUFFER,
-        indices.size() * sizeof(uint32_t),
-        indices.data(),
-        GL_STATIC_DRAW
-    );
-    
-    return buffer_id;
 }
 
 

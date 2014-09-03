@@ -27,7 +27,7 @@
 #include "tri_test_entity.hpp"
 #include "tri_transform_node.hpp"
 #include "tri_vertex_types.hpp"
-
+#include "tri_vertex_buffer.hpp"
 
 
 

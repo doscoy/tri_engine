@@ -48,8 +48,8 @@ void Model::render(const Mtx44& transform) {
     current_shader_->setUniform(SHADER_UNIF_PMV, transform);
 
 
-    RenderSystem::bindBuffer(t3::RenderSystem::BufferType::TYPE_VERTEX, mesh_->vertexBuffer());
-    RenderSystem::bindBuffer(t3::RenderSystem::BufferType::TYPE_INDEX, mesh_->indexBuffer());
+    mesh_->vertexBuffer().bind();
+    mesh_->indexBuffer().bind();
 
     //  頂点座標有効化
     current_shader_->setEnableAttributeArray(SHADER_ATTR_POSITION, true);

@@ -1,7 +1,6 @@
 
 #include "gfx/tri_sprite_renderer.hpp"
 #include "gfx/tri_sprite.hpp"
-#include "gfx/tri_vertex_types.hpp"
 #include "base/tri_director.hpp"
 #include "gfx/tri_texture.hpp"
 #include "math/tri_matrix.hpp"
@@ -40,6 +39,7 @@ SpriteRenderer::SpriteRenderer()
     , shader_(nullptr)
     , default_shader_(nullptr)
 {
+    //  デフォルトのシェーダ準備
     default_shader_ = std::make_shared<Shader>();
 
     default_shader_->compileShaderFromString(
@@ -53,6 +53,7 @@ SpriteRenderer::SpriteRenderer()
     bool link_result = default_shader_->link();
     T3_ASSERT(link_result);
     
+    //  デフォルトのシェーダを使う
     useDefaultShader();
     
     //  スプライトコンテナのメモリを事前に確保
@@ -71,7 +72,7 @@ SpriteRenderer::~SpriteRenderer()
 
 void SpriteRenderer::collectSprite(
     SpritePtr sprite
-){
+) {
     sprites_.push_back(sprite);
 }
 
@@ -79,8 +80,8 @@ void SpriteRenderer::collectSprite(
 
 
 
-void SpriteRenderer::render()
-{
+void SpriteRenderer::render() {
+
     if (sprites_.empty()) {
         //  描画すべきスプライトが無い場合は即終了
         return;
@@ -89,15 +90,21 @@ void SpriteRenderer::render()
     //  レンダリング設定
     beginRender();
     margeSprites();
+    
     for (auto& batch : batch_groups_) {
         renderBatch(batch);
     }
+    
     endRender();
     
 }
 
-void SpriteRenderer::beginRender()
-{
+void SpriteRenderer::beginRender() {
+
+glBindBuffer(GL_ARRAY_BUFFER, 0);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
     T3_NULL_ASSERT(shader_);
     bool use_result = shader_->use();
     T3_ASSERT(use_result);
@@ -121,11 +128,14 @@ void SpriteRenderer::beginRender()
 
     t3::RenderSystem::setBlend(true);
     t3::RenderSystem::setCulling(false);
-
+    t3::RenderSystem::setDepthTest(false);
+    t3::RenderSystem::setDepthWrite(false);
+//    t3::RenderSystem::setAlphaTest(false);
 }
 
 
 void SpriteRenderer::margeSprites() {
+
 
     std::vector<VertexP2CT> vertices;
     std::vector<uint32_t> indices;
@@ -145,6 +155,7 @@ void SpriteRenderer::margeSprites() {
     //  現在のバッチグループ
     //  バッチが切れる場合はコンテナにコピーされて新たなバッチグループのインスタンスとして使う
     std::shared_ptr<BatchGroup> current_batch = std::make_shared<BatchGroup>();
+    
     for (int i = 0; i < sprites_.size(); ++i) {
         auto& spr = sprites_[i];
 
@@ -159,27 +170,21 @@ void SpriteRenderer::margeSprites() {
             indices.pop_back();
         
             //  頂点バッファ更新
-            RenderSystem::bindBuffer(
-                t3::RenderSystem::BufferType::TYPE_VERTEX,
-                current_batch->vertexBufferID()
-            );
+            current_batch->vertexBuffer().bind();
             RenderSystem::setupBufferData(
                 t3::RenderSystem::BufferType::TYPE_VERTEX,
                 static_cast<int>(vertices.size() * sizeof(VertexP2CT)),
                 vertices.data(),
-                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+                t3::RenderSystem::BufferUsage::STATIC_DRAW
             );
     
             //  インデックスバッファ更新
-            RenderSystem::bindBuffer(
-                t3::RenderSystem::BufferType::TYPE_INDEX,
-                current_batch->indexBufferID()
-            );
+            current_batch->indexBuffer().bind();
             RenderSystem::setupBufferData(
                 t3::RenderSystem::BufferType::TYPE_INDEX,
                 static_cast<int>(indices.size() * sizeof(uint32_t)),
                 indices.data(),
-                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+                t3::RenderSystem::BufferUsage::STATIC_DRAW
             );
     
     
@@ -194,6 +199,9 @@ void SpriteRenderer::margeSprites() {
             //  頂点情報をクリア
             vertices.clear();
             indices.clear();
+            
+            //  次回のバッチグループのテクスチャを設定
+            current_batch->texture(spr->texture());
         }
 
     
@@ -343,27 +351,21 @@ void SpriteRenderer::margeSprites() {
     indices.pop_back();
     
     //  頂点バッファ更新
-    RenderSystem::bindBuffer(
-        t3::RenderSystem::BufferType::TYPE_VERTEX,
-        current_batch->vertexBufferID()
-    );
+    current_batch->vertexBuffer().bind();
     RenderSystem::setupBufferData(
         t3::RenderSystem::BufferType::TYPE_VERTEX,
         static_cast<int>(vertices.size() * sizeof(VertexP2CT)),
         vertices.data(),
-        t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+        t3::RenderSystem::BufferUsage::STATIC_DRAW
     );
     
     //  インデックスバッファ更新
-    RenderSystem::bindBuffer(
-        t3::RenderSystem::BufferType::TYPE_INDEX,
-        current_batch->indexBufferID()
-    );
+    current_batch->indexBuffer().bind();
     RenderSystem::setupBufferData(
         t3::RenderSystem::BufferType::TYPE_INDEX,
         static_cast<int>(indices.size() * sizeof(uint32_t)),
         indices.data(),
-        t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+        t3::RenderSystem::BufferUsage::STATIC_DRAW
     );
     
     
@@ -372,13 +374,6 @@ void SpriteRenderer::margeSprites() {
     
     //  バッチグループ保存
     batch_groups_.push_back(current_batch);
-
-            
-
-            
-    //  頂点情報をクリア
-    vertices.clear();
-    indices.clear();
 
 }
 
@@ -401,7 +396,13 @@ void SpriteRenderer::renderBatch(std::shared_ptr<BatchGroup>& batch) {
 
     //  テクスチャの割り当て
     const TexturePtr& texture = batch->texture();
-    texture->setupTexture();
+    texture->bind();
+
+
+    batch->vertexBuffer().bind();
+    batch->indexBuffer().bind();
+
+
 
     shader_->setAttributePointer(
         SHADER_ATTR_POSITION,

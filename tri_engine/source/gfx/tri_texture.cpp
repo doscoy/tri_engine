@@ -14,7 +14,7 @@ Texture::Texture(
     const uint32_t width,
     const uint32_t height,
     const RenderSystem::ColorFormat color_format,
-    const RenderSystem::texture_handle_t tex_handle
+    const RenderSystem::TextureID tex_handle
 )   : Resource()
     , width_(width)
     , height_(height)
@@ -25,16 +25,14 @@ Texture::Texture(
         
 }
 
-TexturePtr Texture::create(const FilePath& path)
-{
+TexturePtr Texture::create(const FilePath& path) {
     return TextureFactory::createFromFile(path);
 }
 
 
-void Texture::setupTexture()
-{
-    glBindTexture(GL_TEXTURE_2D, texture_handle_);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+void Texture::bind() {
+
+    RenderSystem::bindTexture(texture_handle_);
 }
 
 

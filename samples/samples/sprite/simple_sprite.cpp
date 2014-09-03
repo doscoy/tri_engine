@@ -20,10 +20,12 @@ public:
         
         //  テクスチャ読み込み
         t3::TextureManager& texture_manager = t3::TextureManager::instance();
-        t3::FilePath kani_path("stamp.png");
+        t3::FilePath stamp_path("stamp.png");
+        t3::FilePath ui_path("tri_engine_ui_sample.png");
     
         //  ハンドルをとっておく
-        tex3_handle_ = texture_manager.load(kani_path);
+        stamp_handle_ = texture_manager.load(stamp_path);
+        ui_handle_ = texture_manager.load(ui_path);
         
         
         for (int i = 0; i < 28; ++i) {
@@ -39,7 +41,7 @@ public:
     void update(t3::tick_t delta_time){
 
         //  現在のスプライト数表示
-      //  t3::printDisplay(0, 0, "%d", sprites->size());
+        t3::printDisplay(0, 0, "%d", sprites_.size());
         
         //  画面タッチで数制御
         t3::Pointing pointing = t3::Director::instance().input().pointing();
@@ -58,8 +60,10 @@ public:
         rollingSprites();
         fadeSprites();
         total_time_ += delta_time;
-        float sin = t3::sinf(total_time_);
-        sprite_opacity_ = (sin * 128) + 127;
+        float sin = (t3::sinf(total_time_) + 1.0f) * 0.5f;
+        
+        sprite_opacity_ = (sin * 255);
+        T3_ASSERT_RANGE(sprite_opacity_, 0, 255);
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -111,7 +115,7 @@ private:
         t3::SpritePtr spr = sprites_.front();
         
         t3::Vec2 offset = t3::Vec2(
-            spr->scaledSize().x_,
+            spr->scaledSize().x_ / 2,
             spr->scaledSize().y_
         );
         int x_count = t3::Director::instance().virtualScreenSize().x_ / offset.x_ -1;
@@ -132,15 +136,37 @@ private:
 private:
     void addSprite() {
         t3::TextureManager& texture_manager = t3::TextureManager::instance();
+        t3::Director::random_t& random_gen =  t3::Director::instance().random();
 
         //  スプライト増やす
+        t3::TexturePtr tex;
+//        bool tex_type_ui = random_gen.getInt(5) == 0;
+        
+        bool tex_type_ui = true;
+        
+        if (sprites_.size() > 30 && sprites_.size() < 45) {
+            tex_type_ui = false;
+        }
+        
+        if (tex_type_ui) {
+            tex = texture_manager.resource(ui_handle_);
+        }
+        else {
+            tex = texture_manager.resource(stamp_handle_);
+        }
+        
         t3::SpritePtr sprite = sprite_layer_.createSprite(
-            texture_manager.resource(tex3_handle_)
+            tex
         );
-        sprite->transform()->scale(2.0f);
+        sprite->transform()->scale(1.0f);
         
         
-        t3::Director::random_t& random_gen =  t3::Director::instance().random();
+        if (tex_type_ui) {
+            //  UIテクスチャが使われてる時はUVを設定
+            sprite->setupTextureCoordAndSize(t3::Vec2(0, 0), t3::Vec2(64, 64));
+        }
+        
+        
         if (random_gen.getUInt(5) == 0) {
             sprite->color(t3::Color::red());
         }
@@ -162,7 +188,8 @@ private:
 
 
 private:
-    t3::UniqueID tex3_handle_;
+    t3::UniqueID stamp_handle_;
+    t3::UniqueID ui_handle_;
     t3::tick_t total_time_;
     int sprite_opacity_;
     t3::SpriteLayer sprite_layer_;
