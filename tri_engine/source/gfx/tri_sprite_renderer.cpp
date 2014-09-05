@@ -23,7 +23,17 @@ class PriorityCompare
 {
 public:
     bool operator()(const t3::SpritePtr lhs, const t3::SpritePtr rhs) const {
-        return lhs->sortScore() < rhs->sortScore();
+        int lhs_score = lhs->sortScore();
+        int rhs_score = rhs->sortScore();
+        
+        if (lhs_score != rhs_score) {
+            //  ソートスコアに差がある場合は単純にスコアで比較
+            return lhs_score < rhs_score;
+        }
+        
+        //  ソートスコアが同じ場合はバッチ範囲が広くなるように同じテクスチャが
+        //  連続するようにスコアを出す
+        return lhs->texture()->resourceID() > rhs->texture()->resourceID();
     }
 };
 
@@ -401,7 +411,6 @@ void SpriteRenderer::renderBatch(std::shared_ptr<BatchGroup>& batch) {
 
     batch->vertexBuffer().bind();
     batch->indexBuffer().bind();
-
 
 
     shader_->setAttributePointer(

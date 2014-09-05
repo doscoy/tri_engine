@@ -127,6 +127,11 @@ void Director::printDisplay(
 }
 
 
+const Color& Director::clearColor() {
+    return instance().clear_colors_[instance().use_clear_color_index_];
+}
+
+
 // *********************************************
 //  コンストラクタ
 Director::Director()
@@ -238,8 +243,6 @@ void Director::update(
 void Director::suspend(
     const tick_t delta_time
 ) {
-    clearColor();
-    
     //  入力更新
     updateInput(delta_time);
 }
@@ -338,10 +341,6 @@ void Director::updateInput(
 }
 
 
-void Director::clearColor()
-{    
-    RenderSystem::clearColor(clear_colors_[use_clear_color_index_]);
-}
     
     
 void Director::registryToDebugMenu( DebugMenuFrame& parent_frame )

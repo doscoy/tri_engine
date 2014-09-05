@@ -17,31 +17,27 @@ TexturePtr TextureFactory::createFromData(
     const void* data
 ) {
     
-    RenderSystem::TextureID tex_handle;
-    glGenTextures(1, &tex_handle);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
-    glBindTexture(GL_TEXTURE_2D, tex_handle);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
-
-
-    RenderSystem::setupTextureData(width, height, color_format, data);
-    t3::RenderSystem::setTextureMinFilter(
-        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
-    );
-    t3::RenderSystem::setTextureMagFilter(
-        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
-    );
-
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
-
     TexturePtr tex( T3_NEW ::t3::Texture(
         name.c_str(),
         width,
         height,
-        color_format,
-        tex_handle
+        color_format
     ));
     tex->resourceName(name.c_str());
+    
+    glBindTexture(GL_TEXTURE_2D, tex->id());
+    RenderSystem::setupTextureData(width, height, color_format, data);
+    t3::RenderSystem::setTextureMinFilter(
+        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
+    );
+    
+    t3::RenderSystem::setTextureMagFilter(
+        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
+    );
+
+
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
+
     return tex;
 }
 

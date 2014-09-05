@@ -18,7 +18,7 @@ public:
     {}
   
 public:
-    void initialize(){
+    void initialize() {
         layer_.setUpdateCallback(this, &SceneContext::layerUpdate);
         layer_.setRenderCallback(this, &SceneContext::layerRender);
 
@@ -39,7 +39,7 @@ public:
         cam_update_.targetPosition(sphere->position());
     }
     
-    void terminate(){
+    void terminate() {
 
     }
     
@@ -66,6 +66,7 @@ public:
     void suspend(t3::tick_t delta_time) {
     
     }
+    
     
 private:
     void layerUpdate(t3::DrawLayer* const, t3::tick_t dt) {

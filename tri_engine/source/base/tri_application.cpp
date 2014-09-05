@@ -318,6 +318,9 @@ void Application::renderApplication()
         cpu_bar_.draw();
     }
 
+    SceneManager& sm = SceneManager::instance();
+    sm.debugRender();
+
     //  描画終了
     endRender();
     other_cost_timer_.start();
@@ -400,8 +403,6 @@ void Application::renderApplication()
 
 
 
-    SceneManager& sm = SceneManager::instance();
-
     //  最後にシーンチェンジ処理
     sm.directScene();
     
@@ -476,6 +477,8 @@ bool Application::isSuspend() const {
 
 
 void Application::beginRender() {
+    
+    RenderSystem::clearColor(Color::red());
     RenderSystem::clearBuffer(true, true, false);
 }
 

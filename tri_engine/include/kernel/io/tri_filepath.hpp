@@ -16,6 +16,8 @@ public:
         std::string filepath
     );
     
+    FilePath(const char* const filepath);
+    
     ~FilePath();
 
 public:

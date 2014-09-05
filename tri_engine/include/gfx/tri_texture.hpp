@@ -21,15 +21,14 @@ class Texture final
     friend class TextureFactory;
 
 public:
-    ~Texture(){}
+    ~Texture();
     
 private:
     Texture(
         std::string name,
         const uint32_t width,
         const uint32_t height,
-        const RenderSystem::ColorFormat color_format,
-        const RenderSystem::TextureID tex_handle
+        const RenderSystem::ColorFormat color_format
     );
     
     
@@ -55,8 +54,18 @@ public:
         const FilePath& filepath
     );
     
+    static TexturePtr create(
+        std::string name,
+        const int width,
+        const int height,
+        const RenderSystem::ColorFormat
+    );
+    
     void bind();
     
+    RenderSystem::TextureID id() {
+        return texture_handle_;
+    }
     
 public:
     bool operator == (const Texture& rhs) {
@@ -66,6 +75,7 @@ public:
     bool operator != (const Texture& rhs) {
         return !(operator==(rhs));
     }
+    
 private:
     
     //  サイズ

@@ -18,7 +18,7 @@
 #include "mesh_obj/mesh_obj_scene.hpp"
 #include "ui_button/ui_button_test.hpp"
 #include "quat/quat_test_scene.hpp"
-
+#include "offscreen/offscreen_test.hpp"
 #include "thread/thread_test.hpp"
 
 

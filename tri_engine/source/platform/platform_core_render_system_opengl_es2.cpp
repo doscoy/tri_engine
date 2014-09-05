@@ -532,7 +532,8 @@ void CoreRenderSystem::bindBuffer(
     }
     glBindBuffer(target, buffer_id);
     
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    int gl_error_code =glGetError();
+    T3_ASSERT_MSG(gl_error_code == GL_NO_ERROR, "gl error %d", gl_error_code);
 }
 
 

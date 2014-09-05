@@ -23,6 +23,21 @@ public:
         return uid_ != rhs.uid_;
     }
     
+    bool operator >(const UniqueID& rhs) const {
+        return uid_ > rhs.uid_;
+    }
+
+    bool operator <(const UniqueID& rhs) const {
+        return uid_ < rhs.uid_;
+    }
+
+    bool operator <=(const UniqueID& rhs) const {
+        return uid_ <= rhs.uid_;
+    }
+    
+    bool operator >=(const UniqueID& rhs) const {
+        return uid_ >= rhs.uid_;
+    }
     
 private:
     uint32_t uid_;

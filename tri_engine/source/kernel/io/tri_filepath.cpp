@@ -17,6 +17,14 @@ FilePath::FilePath(
     filepath_ = base_filepath_ + filepath;
 }
 
+FilePath::FilePath(
+    const char* const filepath
+) : filepath_("")
+{
+    filepath_ = base_filepath_ + filepath;
+}
+
+
 FilePath::~FilePath() {
 
 }

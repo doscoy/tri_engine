@@ -49,8 +49,7 @@ void Sprite::texture(
   
 
 int Sprite::sortScore() const {
-    int score = priority();
-    return score;
+    return priority();
 }
 
 

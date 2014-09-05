@@ -61,14 +61,16 @@ public:
     virtual ~Scene();
 
 public:
-    virtual void initializeScene(){};
-    virtual void terminateScene(){};
-    virtual void updateScene(tick_t){};
-    virtual void suspendScene(tick_t){};
-    
+    virtual void initializeScene(){}
+    virtual void terminateScene(){}
+    virtual void updateScene(tick_t){}
+    virtual void suspendScene(tick_t){}
+    virtual void debugRenderScene(){}
+
 public:
     void update(tick_t delta_time);
     void suspend(tick_t delta_time);
+    void debugRender();
     
     bool isFinished() const {
         return finish_;
@@ -134,6 +136,7 @@ private:
 public:
     void updateScene( tick_t delta_time );
     void suspendScene( tick_t delta_time );
+    void debugRender();
     
     static void requestNextScene( SceneGenerator* const next_scene_generator ){
         instance().next_scene_generator_ = next_scene_generator;

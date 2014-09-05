@@ -41,7 +41,7 @@ public:
     void update(t3::tick_t delta_time){
 
         //  現在のスプライト数表示
-        t3::printDisplay(0, 0, "%d", sprites_.size());
+        t3::printDisplay(0, 50, "%d", sprites_.size());
         
         //  画面タッチで数制御
         t3::Pointing pointing = t3::Director::instance().input().pointing();
@@ -129,6 +129,10 @@ private:
             float pos_x = ((i % x_count) * offset.x_) - 300;
             float pos_y = y * offset.y_;
             spr->transform()->position(pos_x, pos_y);
+            if (i == 52) {
+                spr->priority(t3::Sprite::PRIORITY_HIGH_2);
+                spr->transform()->scale(3);
+            }
             i += 1;
         }
     }

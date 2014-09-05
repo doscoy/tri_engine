@@ -124,6 +124,9 @@ public:
     void showTask() const;
     
 public:
+
+    static const Color& clearColor();
+
     static void addSystemTask(std::shared_ptr<Task> task);
     
     static const Input& input(const int player_no = 0);
@@ -162,7 +165,7 @@ public:
     );
     
 private:
-    void clearColor();
+    
     void calcScreenRevise();
 
     //  デバッグメニューにレイヤー登録するコールバック

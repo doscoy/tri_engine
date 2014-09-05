@@ -36,22 +36,20 @@ void Scene::update(
     task_manager_.updateTask(delta_time);
     updateScene(delta_time);
     
-    if (show_task_) {
-        task_manager_.printTask();
-    }
 }
 
 void Scene::suspend(
     tick_t delta_time
 ) {
     suspendScene(delta_time);
+}
 
+void Scene::debugRender() {
     if (show_task_) {
         task_manager_.printTask();
     }
+    debugRenderScene();
 }
-
-
 
 
 
@@ -99,6 +97,10 @@ void SceneManager::suspendScene(
     tick_t delta_time
 ){
     current_scene_->suspend(delta_time);
+}
+
+void SceneManager::debugRender() {
+    current_scene_->debugRender();
 }
 
 

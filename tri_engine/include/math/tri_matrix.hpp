@@ -218,12 +218,21 @@ struct Mtx44Template {
         makeRotateQuaternion(*this, q);
     }
     
+    static Mtx44Template<T> getRotateMatrixY(
+        T degrees
+    ) {
+        Mtx44Template m;
+        return makeRotateMatrixY(m, degrees);
+    }
+    
     static Mtx44Template<T> getRotateMatrixZ(
         T degrees
     ) {
         Mtx44Template m;
         return makeRotateMatrixZ(m, degrees);
     }
+    
+    
     
     static Mtx44Template<T>& makeRotateMatrixX(
         Mtx44Template<T>& m,

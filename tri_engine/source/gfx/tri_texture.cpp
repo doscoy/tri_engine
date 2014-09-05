@@ -13,20 +13,45 @@ Texture::Texture(
     std::string name,
     const uint32_t width,
     const uint32_t height,
-    const RenderSystem::ColorFormat color_format,
-    const RenderSystem::TextureID tex_handle
+    const RenderSystem::ColorFormat color_format
 )   : Resource()
     , width_(width)
     , height_(height)
     , color_format_(color_format)
-    , texture_handle_(tex_handle)
+    , texture_handle_(0)
 {
-    
-        
+    glGenTextures(1, &texture_handle_);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    glBindTexture(GL_TEXTURE_2D, texture_handle_);
+    T3_ASSERT(glGetError() == GL_NO_ERROR);
 }
+
+Texture::~Texture() {
+    glDeleteTextures(1, &texture_handle_);
+}
+
+
 
 TexturePtr Texture::create(const FilePath& path) {
     return TextureFactory::createFromFile(path);
+}
+
+
+TexturePtr Texture::create(
+    std::string name,
+    const int width,
+    const int height,
+    const RenderSystem::ColorFormat color_format
+) {
+    TexturePtr t;
+    t.reset(T3_NEW Texture(
+        name,
+        width,
+        height,
+        color_format
+    ));
+    
+    return t;
 }
 
 
