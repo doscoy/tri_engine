@@ -8,6 +8,7 @@ class OffscreenTestScene::SceneContext {
 
 public:
     SceneContext()
+        : surface_(t3::Director::screenSize().x_, t3::Director::screenSize().y_)
     {}
     
     ~SceneContext()
@@ -15,96 +16,13 @@ public:
   
 public:
     void initialize() {
-        const t3::Vec2& screen = t3::Director::screenSize();
-        offtex_ = t3::Texture::create(
-            "offscreentex",
-            screen.x_,
-            screen.y_,
-            t3::RenderSystem::ColorFormat::RGBA
-        );
-    
-        GLint default_fbo;
-        glGetIntegerv(GL_FRAMEBUFFER_BINDING, &default_fbo);
-
-        glGenFramebuffers(1, &surface_.fb_);
-        glGenRenderbuffers(1, &surface_.rb_);
-            T3_ASSERT(glGetError() == GL_NO_ERROR);
-
-        
-        // -----------------------------------------------------
-        //  テクスチャ初期化
-        glBindTexture(GL_TEXTURE_2D, offtex_->id());
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            T3_ASSERT(glGetError() == GL_NO_ERROR);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexImage2D(
-            GL_TEXTURE_2D,
-            0,
-            GL_RGBA,
-            surface_.width_,
-            surface_.height_,
-            0,
-            GL_RGBA,
-            GL_UNSIGNED_BYTE,
-            0
-        );
-        
-            T3_ASSERT(glGetError() == GL_NO_ERROR);
-
-        // -----------------------------------------------------
-        //  レンダーバッファ初期化
-        glBindRenderbuffer(GL_RENDERBUFFER, render_buffer_);
-            T3_ASSERT(glGetError() == GL_NO_ERROR);
-
-        glRenderbufferStorage(
-            GL_RENDERBUFFER,
-            GL_DEPTH_COMPONENT16,
-            surface_.width_,
-            surface_.height_
-        );
-
-        // -----------------------------------------------------
-        //  フレームバッファ初期化
-            T3_ASSERT(glGetError() == GL_NO_ERROR);
-
-        glBindFramebuffer(
-            GL_FRAMEBUFFER,
-            surface_.fb_
-        );
-
-        //  FBOにテクスチャを関連付け
-        glFramebufferTexture2D(
-            GL_FRAMEBUFFER,
-            GL_COLOR_ATTACHMENT0,   //  カラーバッファとして設定
-            GL_TEXTURE_2D,
-            offtex_->id(),
-            0
-        );
-        
-        glFramebufferRenderbuffer(
-            GL_FRAMEBUFFER,
-            GL_DEPTH_ATTACHMENT,    //  デブスバッファとして設定
-            GL_RENDERBUFFER,
-            render_buffer_
-        );
-        T3_ASSERT(glGetError() == GL_NO_ERROR);
-
-
-      
-//        glBindFramebuffer(GL_FRAMEBUFFER, default_fbo);
-//        glBindRenderbuffer(GL_RENDERBUFFER, 0);
-//        glBindTexture(GL_TEXTURE_2D, 0);
         
         modelInit();
         spriteInit();
     }
     
     void terminate() {
-        glDeleteFramebuffers(1, &surface_.fb_);
-        glDeleteRenderbuffers(1, &surface_.rb_);
+    
     }
     
     void update(t3::tick_t delta_time) {
@@ -124,23 +42,22 @@ public:
     
         GLint default_rb;
         glGetIntegerv(GL_RENDERBUFFER_BINDING, &default_rb);
-    
-        //  自分のフレームバッファに変更
-        glBindFramebuffer(GL_FRAMEBUFFER, surface_.fb_);
-        glBindRenderbuffer(GL_RENDERBUFFER, surface_.rb_);
-        
-        t3::RenderSystem::clearColor(t3::Color::white());
+
+        surface_.bind();
+
+        t3::RenderSystem::clearColor(t3::Color::blue());
         t3::RenderSystem::clearBuffer(true, true, false);
 
         
         modelDraw();
-
+      
         
-    
         //  フレームバッファを戻す
         glBindFramebuffer(GL_FRAMEBUFFER, default_fb);
-        glBindFramebuffer(GL_FRAMEBUFFER, default_rb);
+        glBindRenderbuffer(GL_RENDERBUFFER, default_rb);
         glBindTexture(GL_TEXTURE_2D, 0);
+
+
     }
     
     void modelInit() {
@@ -157,9 +74,8 @@ public:
         const t3::Sphere* sphere = mesh_->getBoundingSphere();;
         cam_ = t3::Camera::create();
         cam_update_.camera(cam_);
-        cam_update_.position(sphere->position() + t3::Vec3(0, 0, sphere->radius() * 2));
+        cam_update_.position(sphere->position() + t3::Vec3(0, 0, sphere->radius() * 22));
         cam_update_.targetPosition(sphere->position());
-
     }
     
     void modelDraw() {
@@ -169,9 +85,9 @@ public:
         auto& d = t3::Director::instance();
         auto& screen = d.virtualScreenSize();
     
-        t3::RenderSystem::setViewport(0, 0, surface_.width_, surface_.height_);
+        t3::RenderSystem::setViewport(0, 0, surface_.width(), surface_.height());
         t3::Mtx44 projection;
-        projection.perspective(60, screen.x_, screen.y_, 0.1f, 100.0f);
+        projection.perspective(60, screen.x_, screen.y_, 0.01f, 1000.0f);
     
         const t3::Mtx44& view_mtx = *cam_->viewMatrix();
 
@@ -182,13 +98,14 @@ public:
         
         
         t3::Mtx44 mtx = transform * view_mtx * projection;
-        
+
         t3::RenderSystem::setBlend(false);
         t3::RenderSystem::setDepthTest(true);
         t3::RenderSystem::setDepthWrite(true);
         t3::RenderSystem::setCulling(true);
         t3::RenderSystem::setCullingMode(t3::RenderSystem::CullingMode::MODE_BACK);
-        
+        t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
+
         model_.render(mtx);
     }
 
@@ -196,7 +113,7 @@ public:
         
         t3::FilePath tex_path = "stamp.png";
         sprite_ = sprite_layer_.createSprite(tex_path);
-        sprite_->texture(offtex_);
+        sprite_->texture(surface_.texture());
         sprite_->size(400, 450);
         sprite_->adjustPivotByCenter();
     }
@@ -207,36 +124,13 @@ public:
     }
 
 private:
-
-    struct Surface {
-        Surface()
-            : width_(512)
-            , height_(512)
-            , fb_(0)
-            , rb_(0)
-            , depth_(0)
-        {
-        }
-        
-        
-        int width_;
-        int height_;
-        GLuint fb_;
-        GLuint rb_;
-        GLuint depth_;
-    };
-
-    Surface surface_;
-    GLuint render_buffer_;
-
-    t3::TexturePtr offtex_;
-
     t3::SpriteLayer sprite_layer_;
     t3::SpritePtr sprite_;
     t3::Model model_;
     t3::Mesh* mesh_;
     t3::CameraPtr cam_;
     t3::LookAtCameraUpdater cam_update_;
+    t3::Surface surface_;
 };
 
 

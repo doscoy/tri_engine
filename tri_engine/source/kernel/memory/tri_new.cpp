@@ -14,7 +14,6 @@ void* operator new(
 void operator delete(
     void* mem
 ) noexcept {
-    t3::ScopedLock lock(t3::Heap::mutex());
     t3::Heap::deallocate(mem);
 }
 
@@ -27,7 +26,6 @@ void* operator new[](
 void operator delete[](
     void* mem
 ) noexcept {
-    t3::ScopedLock lock(t3::Heap::mutex());
     t3::Heap::deallocate(mem);
 }
 
@@ -41,7 +39,6 @@ void* operator new(
     const char* const filename,
     int line
 ) {
-    t3::ScopedLock lock(t3::Heap::mutex());
     return heap->allocate(size, filename, line);
 }
 
@@ -51,7 +48,6 @@ void operator delete(
     const char* const filename,
     int line
 ) {
-    t3::ScopedLock lock(t3::Heap::mutex());
     t3::Heap::deallocate(mem);
 }
 
@@ -61,7 +57,6 @@ void* operator new[](
     const char* const filename,
     int line
 ) {
-    t3::ScopedLock lock(t3::Heap::mutex());
     return heap->allocate(size, filename, line);
 }
 
@@ -71,7 +66,6 @@ void operator delete[](
     const char* const filename,
     int line
 ) {
-    t3::ScopedLock lock(t3::Heap::mutex());
     t3::Heap::deallocate(mem);
 }
 

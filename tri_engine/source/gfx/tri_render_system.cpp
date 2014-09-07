@@ -371,6 +371,13 @@ void RenderSystem::setTextureMinFilter(
     CoreRenderSystem::setTextureMinFilter(type);
 }
 
+void RenderSystem::setTextureWrap(
+    RenderSystem::TextureWrapType type
+) {
+    CoreRenderSystem::setTextureWrapS(type);
+    CoreRenderSystem::setTextureWrapT(type);
+}
+
 
 void RenderSystem::drawElements(
     RenderSystem::DrawMode mode,

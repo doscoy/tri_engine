@@ -9,7 +9,18 @@ extern GLFWwindow* window_;
 #endif
 
 
+#define T3_GL_ASSERT()        checkGLError()
+
 namespace {
+
+
+inline void checkGLError() {
+    int err = glGetError();
+    T3_ASSERT_MSG(err == GL_NO_ERROR, "err = %d", err);
+}
+
+
+
 inline void setGLState(GLenum e, bool f) {
     if (f) {
         glEnable(e);
@@ -17,8 +28,7 @@ inline void setGLState(GLenum e, bool f) {
     else {
         glDisable(e);
     }
-    int err = glGetError();
-    T3_ASSERT_MSG(err == GL_NO_ERROR, "err = %d: GLenum = %d", err, e);
+    T3_GL_ASSERT();
 }
 
 
@@ -79,18 +89,21 @@ void CoreRenderSystem::attachShader(
     int shader_handle
 ) {
     glAttachShader(program_handle, shader_handle);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::linkShader(
     RenderSystem::ShaderProgramID program_handle
 ) {
     glLinkProgram(program_handle);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setShader(
     RenderSystem::ShaderProgramID shader
 ) {
     glUseProgram(shader);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::bindAttributeLocation(
@@ -99,6 +112,7 @@ void CoreRenderSystem::bindAttributeLocation(
     const char* const name
 ) {
     glBindAttribLocation(handle, location, name);
+    T3_GL_ASSERT();
 }
 
 
@@ -132,6 +146,7 @@ void CoreRenderSystem::setUniformValue(
     float z
 ) {
     glUniform3f(location, x, y, z);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setUniformValue(
@@ -142,6 +157,7 @@ void CoreRenderSystem::setUniformValue(
     float w
 ) {
     glUniform4f(location, x, y, z, w);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setUniformValue(
@@ -149,6 +165,7 @@ void CoreRenderSystem::setUniformValue(
     float val
 ) {
     glUniform1f(location, val);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setUniformValue(
@@ -156,6 +173,7 @@ void CoreRenderSystem::setUniformValue(
     int val
 ) {
     glUniform1i(location, val);
+    T3_GL_ASSERT();
 }
 
 
@@ -169,6 +187,7 @@ void CoreRenderSystem::setUniformMatrix(
         0,
         mtx.pointer()
     );
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::initializeRenderSystem() {
@@ -196,6 +215,7 @@ void CoreRenderSystem::setDepthWrite(
     bool enable
 ) {
     glDepthMask(enable);
+    T3_GL_ASSERT();
 }
 
 
@@ -217,6 +237,7 @@ void CoreRenderSystem::clearBuffer(
     }
     
     glClear(clear_flag);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setCullingMode(
@@ -237,6 +258,7 @@ void CoreRenderSystem::setCullingMode(
     }
     
     glCullFace(cull_flag);
+    T3_GL_ASSERT();
 }
 
 
@@ -244,6 +266,7 @@ void CoreRenderSystem::setClearDepthValue(
     const float value
 ) {
     glClearDepthf(value);
+    T3_GL_ASSERT();
 }
 
 
@@ -260,6 +283,7 @@ void CoreRenderSystem::clearColor(
         b,
         a
     );
+    T3_GL_ASSERT();
 }
 
 
@@ -284,6 +308,7 @@ void CoreRenderSystem::setDepthTestMode(
     }
     
     glDepthFunc(depth_func);
+    T3_GL_ASSERT();
 }
 
 
@@ -361,6 +386,7 @@ void CoreRenderSystem::setBlendFunctionType(
     int s = blendFuncTypeToGLEnum(sfactor);
     int d = blendFuncTypeToGLEnum(dfactor);
     glBlendFunc(s, d);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setViewport(
@@ -370,6 +396,8 @@ void CoreRenderSystem::setViewport(
     const int h
 ) {
     glViewport(x, y, w, h);
+    T3_GL_ASSERT();
+
 }
 
 
@@ -401,7 +429,7 @@ void CoreRenderSystem::setTextureMagFilter(
     else {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     }
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setTextureMinFilter(
@@ -413,8 +441,35 @@ void CoreRenderSystem::setTextureMinFilter(
     else {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     }
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
+
+void CoreRenderSystem::setTextureWrapS(
+    RenderSystem::TextureWrapType type
+) {
+    if (type == RenderSystem::TextureWrapType::TYPE_CLAMP_TO_EDGE) {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    }
+    else {
+        T3_PANIC("unknown type");
+    }
+    T3_GL_ASSERT();
+}
+
+void CoreRenderSystem::setTextureWrapT(
+    RenderSystem::TextureWrapType type
+) {
+    if (type == RenderSystem::TextureWrapType::TYPE_CLAMP_TO_EDGE) {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    }
+    else {
+        T3_PANIC("unknown type");
+    }
+    T3_GL_ASSERT();
+}
+
+
+
 
 
 void CoreRenderSystem::drawElements(
@@ -459,7 +514,7 @@ void CoreRenderSystem::drawElements(
     }
     
     glDrawElements(draw_mode, count, index_type, 0);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
 
 
@@ -519,7 +574,7 @@ void CoreRenderSystem::setupTextureData(
         data
     );
     
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::bindBuffer(
@@ -532,19 +587,18 @@ void CoreRenderSystem::bindBuffer(
     }
     glBindBuffer(target, buffer_id);
     
-    int gl_error_code =glGetError();
-    T3_ASSERT_MSG(gl_error_code == GL_NO_ERROR, "gl error %d", gl_error_code);
+    T3_GL_ASSERT();
 }
 
 
 void CoreRenderSystem::createBuffer(uint32_t* buffer) {
     glGenBuffers(1, buffer);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::deleteBuffer(uint32_t* buffer) {
     glDeleteBuffers(1, buffer);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setupBufferData(
@@ -566,7 +620,7 @@ void CoreRenderSystem::setupBufferData(
     }
     
     glBufferData(target, size, data, gl_usage);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setupBufferSubData(
@@ -581,7 +635,7 @@ void CoreRenderSystem::setupBufferSubData(
     }
     
     glBufferSubData(target, offset, size, data);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setActiveTextureUnit(
@@ -589,21 +643,21 @@ void CoreRenderSystem::setActiveTextureUnit(
 ) {
     unit += GL_TEXTURE0;
     glActiveTexture(unit);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setEnableVertexAttribute(
     int slot
 ) {
     glEnableVertexAttribArray(slot);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setDisableVertexAttribute(
     int slot
 ) {
     glDisableVertexAttribArray(slot);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
 
 void CoreRenderSystem::setAttributeValue(
@@ -616,7 +670,7 @@ void CoreRenderSystem::setAttributeValue(
     glVertexAttrib4f(
         slot, a, b, c, d
     );
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    T3_GL_ASSERT();
 }
 
 

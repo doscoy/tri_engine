@@ -192,6 +192,16 @@ public:
         RenderSystem::TextureFilterType type
     );
 
+    static void setTextureWrapS(
+        RenderSystem::TextureWrapType type
+    );
+    
+    static void setTextureWrapT(
+        RenderSystem::TextureWrapType type
+    );
+
+
+
     static void drawElements(
         RenderSystem::DrawMode mode,
         int count,

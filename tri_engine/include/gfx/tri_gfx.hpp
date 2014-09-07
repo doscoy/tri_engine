@@ -28,7 +28,7 @@
 #include "tri_transform_node.hpp"
 #include "tri_vertex_types.hpp"
 #include "tri_vertex_buffer.hpp"
-
+#include "tri_surface.hpp"
 
 
 #endif // TRI_GFX_HPP_INCLUDED

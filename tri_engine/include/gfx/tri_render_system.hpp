@@ -242,6 +242,14 @@ public:
     static void setTextureMinFilter(
         TextureFilterType type
     );
+    
+    enum class TextureWrapType {
+        TYPE_CLAMP_TO_EDGE,
+    };
+    
+    static void setTextureWrap(
+        TextureWrapType s
+    );
 
     enum class DrawMode{
         MODE_TRIANGLES,

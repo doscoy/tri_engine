@@ -70,11 +70,17 @@ public:
     
 private:
     void layerUpdate(t3::DrawLayer* const, t3::tick_t dt) {
-        scene_graph_.updateScene(dt);
+
     }
     
     void layerRender(t3::DrawLayer* const) {
-        scene_graph_.renderScene();
+
+        t3::RenderSystem::setCulling(false);
+        t3::RenderSystem::setCullingMode(t3::RenderSystem::CullingMode::MODE_BACK);
+        t3::RenderSystem::setBlend(false);
+        t3::RenderSystem::setDepthTest(true);
+        t3::RenderSystem::setDepthWrite(true);
+        t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
 
         auto& d = t3::Director::instance();
         auto& screen = d.virtualScreenSize();
@@ -105,9 +111,7 @@ private:
     t3::Mesh* mesh_;
     t3::CameraPtr cam_;
     t3::LookAtCameraUpdater cam_update_;
-    t3::SceneGraph scene_graph_;
     
-    t3::TransformNodePtr node1_;
     t3::Quaternion quat_;
 };
 

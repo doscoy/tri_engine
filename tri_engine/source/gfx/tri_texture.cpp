@@ -20,10 +20,15 @@ Texture::Texture(
     , color_format_(color_format)
     , texture_handle_(0)
 {
+    resourceName(name.c_str());
     glGenTextures(1, &texture_handle_);
     T3_ASSERT(glGetError() == GL_NO_ERROR);
     glBindTexture(GL_TEXTURE_2D, texture_handle_);
     T3_ASSERT(glGetError() == GL_NO_ERROR);
+    
+//    RenderSystem::setTextureMagFilter(RenderSystem::TextureFilterType::TYPE_LINEAR);
+//    RenderSystem::setTextureMinFilter(RenderSystem::TextureFilterType::TYPE_LINEAR);
+//    RenderSystem::setupTextureData(width, height, RenderSystem::ColorFormat::RGBA, 0);
 }
 
 Texture::~Texture() {

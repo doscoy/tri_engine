@@ -156,6 +156,8 @@ void* Heap::allocate(
     const char* const file_name,
     const int line
 ) {
+    ScopedLock lock(Heap::mutex());
+
     //  本当に確保するサイズ　リクエストサイズ + ヘッダ情報 + 終端マーク4byte
     size_t alloc_header_size = sizeof(AllocHeader);
     size_t request_bytes = size + alloc_header_size;
@@ -226,6 +228,8 @@ void* Heap::allocate(
 void Heap::deallocate(
     void* mem
 ) {
+    ScopedLock lock(Heap::mutex());
+
     if (!mem) {
         return;
     }
@@ -307,6 +311,7 @@ void Heap::deactivate() {
 
 void Heap::dump(const uint32_t filter_min) const {
     ScopedLock lock(Heap::mutex());
+
     AllocHeader* ah = head_alloc_;
     while (ah) {
         T3_ASSERT(ah->isValid());
