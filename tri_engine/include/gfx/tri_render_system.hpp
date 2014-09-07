@@ -352,6 +352,35 @@ public:
         float c,
         float d
     );
+    
+    
+    enum class RenderBufferAttachType {
+        DEPTH,
+        COLOR0,
+    };
+    
+    static void attachRenderBuffer(
+        RenderBufferAttachType type,
+        RenderBufferID id
+    );
+    
+    static void attachFrameBufferTexture(
+        RenderBufferAttachType type,
+        TextureID id
+    );
+    
+    enum class RenderBufferUsage {
+        DEPTH,
+        COLOR,
+    };
+    
+    static void setupRenderBufferStorage(
+        RenderBufferUsage usage,
+        int width,
+        int height
+    );
+    
+    
 };
 
 

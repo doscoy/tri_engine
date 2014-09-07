@@ -1,6 +1,7 @@
 
 #include "tri_surface.hpp"
-#include "platform/platform_sdk.hpp"
+#include "gfx/tri_render_system.hpp"
+
 
 
 namespace t3 {
@@ -19,15 +20,16 @@ Surface::Surface(
 )   : width_(width)
     , height_(height)
     , fb_(0)
+    , cb_(0)
     , depth_(0)
+    , last_fb_(0)
+    , last_rb_(0)
     , texture_()
 {
-    GLint default_fb;
-    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &default_fb);
-    
-    GLint default_rb;
-    glGetIntegerv(GL_RENDERBUFFER_BINDING, &default_rb);
 
+    RenderSystem::FrameBufferID default_fb = RenderSystem::getCurrentFrameBufferID();
+    RenderSystem::RenderBufferID default_rb = RenderSystem::getCurrentRenderBufferID();
+    
     //  オフスクリーン用のテクスチャ
     texture_ = t3::Texture::create(
         "sfc",
@@ -40,9 +42,8 @@ Surface::Surface(
     RenderSystem::createRenderBuffer(&cb_);
     RenderSystem::bindRenderBuffer(cb_);
     
-    glRenderbufferStorage(
-        GL_RENDERBUFFER,
-        GL_RGBA4,
+    RenderSystem::setupRenderBufferStorage(
+        RenderSystem::RenderBufferUsage::COLOR,
         width,
         height
     );
@@ -53,42 +54,30 @@ Surface::Surface(
     RenderSystem::createRenderBuffer(&depth_);
     RenderSystem::bindRenderBuffer(depth_);
     
-    glRenderbufferStorage(
-        GL_RENDERBUFFER,
-        GL_DEPTH_COMPONENT16,
+    RenderSystem::setupRenderBufferStorage(
+        RenderSystem::RenderBufferUsage::DEPTH,
         width,
         height
     );
     
     
-    
     //  フレームバッファ作成
     RenderSystem::createFrameBuffer(&fb_);
     RenderSystem::bindFrameBuffer(fb_);
-
-    glFramebufferRenderbuffer(
-        GL_FRAMEBUFFER,
-        GL_COLOR_ATTACHMENT0,    //  デブスバッファとして設定
-        GL_RENDERBUFFER,
+    RenderSystem::attachRenderBuffer(
+        RenderSystem::RenderBufferAttachType::COLOR0,
         cb_
     );
-    
-    glFramebufferRenderbuffer(
-        GL_FRAMEBUFFER,
-        GL_DEPTH_ATTACHMENT,    //  デブスバッファとして設定
-        GL_RENDERBUFFER,
+
+    RenderSystem::attachRenderBuffer(
+        RenderSystem::RenderBufferAttachType::DEPTH,
         depth_
     );
-
-    glFramebufferTexture2D(
-        GL_FRAMEBUFFER,
-        GL_COLOR_ATTACHMENT0,   //  カラーバッファとして設定
-        GL_TEXTURE_2D,
-        texture_->id(),
-        0
-    );
     
-
+    RenderSystem::attachFrameBufferTexture(
+        RenderSystem::RenderBufferAttachType::COLOR0,
+        texture_->id()
+    );
 
     RenderSystem::bindFrameBuffer(default_fb);
     RenderSystem::bindRenderBuffer(default_rb);
@@ -104,9 +93,22 @@ Surface::~Surface() {
 
 
 void Surface::bind() {
+
+    last_fb_ = RenderSystem::getCurrentFrameBufferID();
+    last_rb_ = RenderSystem::getCurrentRenderBufferID();
+
     RenderSystem::bindFrameBuffer(fb_);
     RenderSystem::bindRenderBuffer(cb_);
 }
+
+void Surface::unbind() {
+    T3_ASSERT(last_fb_ != 0);
+    T3_ASSERT(last_rb_ != 0);
+    RenderSystem::bindFrameBuffer(last_fb_);
+    RenderSystem::bindRenderBuffer(last_rb_);
+
+}
+
 
 }   // namespace gfx
 }   // namespace t3

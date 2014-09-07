@@ -531,6 +531,34 @@ void RenderSystem::setAttributeValue(
 }
 
 
+void RenderSystem::attachRenderBuffer(
+    RenderSystem::RenderBufferAttachType type,
+    RenderSystem::RenderBufferID id
+) {
+    CoreRenderSystem::attachRenderBuffer(type, id);
+}
+
+void RenderSystem::attachFrameBufferTexture(
+    RenderBufferAttachType type,
+    TextureID id
+) {
+    CoreRenderSystem::attachFrameBufferTexture(type, id);
+}
+
+
+void RenderSystem::setupRenderBufferStorage(
+    t3::RenderSystem::RenderBufferUsage usage,
+    int width,
+    int height
+) {
+
+    CoreRenderSystem::setupRenderBufferStorage(
+        usage,
+        width,
+        height
+    );
+}
+
 
 
 }   // namespace gfx

@@ -36,10 +36,6 @@ public:
     }
 
     void draw() {
-        //  既存のフレームバッファを保存
-        t3::RenderSystem::FrameBufferID default_fb = t3::RenderSystem::getCurrentFrameBufferID();
-        t3::RenderSystem::RenderBufferID defualt_rb = t3::RenderSystem::getCurrentRenderBufferID();
-
         surface_.bind();
         
         
@@ -54,14 +50,13 @@ public:
       
         
         //  フレームバッファを戻す
-        t3::RenderSystem::bindFrameBuffer(default_fb);
-        t3::RenderSystem::bindRenderBuffer(defualt_rb);
+        surface_.unbind();
 
     }
     
     void modelInit() {
         //  メッシュ読み込み
-        t3::FilePath obj_path("ninja.obj");
+        t3::FilePath obj_path("bunny.obj");
         mesh_ = T3_NEW t3::Mesh(obj_path.getFullPath().c_str());
     
 
@@ -136,7 +131,7 @@ private:
 
 
 OffscreenTestScene::OffscreenTestScene()
-    : Scene( "Template" ) {
+    : Scene( "Offscreen" ) {
     context_.reset(T3_NEW SceneContext());
 }
 

@@ -32,14 +32,16 @@ public:
     }
     
     void bind();
-
+    void unbind();
 
 private:
     int width_;
     int height_;
-    uint32_t fb_;
-    uint32_t cb_;
-    uint32_t depth_;
+    RenderSystem::FrameBufferID fb_;
+    RenderSystem::RenderBufferID cb_;
+    RenderSystem::RenderBufferID depth_;
+    RenderSystem::FrameBufferID last_fb_;
+    RenderSystem::RenderBufferID last_rb_;
     t3::TexturePtr texture_;
 };
 

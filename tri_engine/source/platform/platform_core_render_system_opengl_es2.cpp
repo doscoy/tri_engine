@@ -742,7 +742,83 @@ void CoreRenderSystem::setAttributeValue(
 }
 
 
+void CoreRenderSystem::attachRenderBuffer(
+    RenderSystem::RenderBufferAttachType type,
+    RenderSystem::RenderBufferID id
+) {
 
+    int gltype;
+    
+    if (type == RenderSystem::RenderBufferAttachType::COLOR0) {
+        gltype = GL_COLOR_ATTACHMENT0;
+    
+    }
+    else if (type == RenderSystem::RenderBufferAttachType::DEPTH) {
+        gltype = GL_DEPTH_ATTACHMENT;
+    }
+
+
+    glFramebufferRenderbuffer(
+        GL_FRAMEBUFFER,
+        gltype,
+        GL_RENDERBUFFER,
+        id
+    );
+    
+}
+
+
+void CoreRenderSystem::attachFrameBufferTexture(
+    RenderSystem::RenderBufferAttachType type,
+    RenderSystem::TextureID id
+) {
+    int gltype;
+    
+    if (type == RenderSystem::RenderBufferAttachType::COLOR0) {
+        gltype = GL_COLOR_ATTACHMENT0;
+    
+    }
+    else if (type == RenderSystem::RenderBufferAttachType::DEPTH) {
+        gltype = GL_DEPTH_ATTACHMENT;
+    }
+
+
+    glFramebufferTexture2D(
+        GL_FRAMEBUFFER,
+        gltype,   //  カラーバッファとして設定
+        GL_TEXTURE_2D,
+        id,
+        0
+    );
+    
+}
+
+
+void CoreRenderSystem::setupRenderBufferStorage(
+    RenderSystem::RenderBufferUsage usage,
+    int width,
+    int height
+) {
+    int glusage;
+    
+    if (usage == RenderSystem::RenderBufferUsage::COLOR) {
+        glusage = GL_RGBA4;
+    
+    }
+    else if (usage == RenderSystem::RenderBufferUsage::DEPTH) {
+        glusage = GL_DEPTH_COMPONENT16;
+    }
+
+
+
+
+    glRenderbufferStorage(
+        GL_RENDERBUFFER,
+        glusage,
+        width,
+        height
+    );
+}
 
 
 

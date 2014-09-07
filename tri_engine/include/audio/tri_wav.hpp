@@ -16,9 +16,7 @@ public:
 public:
     void load(FilePath& filepath);
 
-    int getChannel() const {
-        return channel_;
-    }
+    
     
     int getBitPerSamle() const {
         return bit_per_sample_;
@@ -35,6 +33,19 @@ public:
     const uint8_t* getData() const {
         return data_;
     }
+
+    int getChannel() const {
+        return channel_;
+    }
+
+    bool isStereo() const {
+        return channel_ == 2;
+    }
+    
+    bool isMonaural() const {
+        return channel_ == 1;
+    }
+
 
 private:
     uint8_t* data_;

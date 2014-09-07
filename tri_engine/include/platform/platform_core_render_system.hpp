@@ -279,6 +279,24 @@ public:
         float c,
         float d
     );
+
+    static void attachRenderBuffer(
+        RenderSystem::RenderBufferAttachType type,
+        RenderSystem::RenderBufferID id
+    );
+    
+    static void attachFrameBufferTexture(
+        RenderSystem::RenderBufferAttachType type,
+        RenderSystem::TextureID id
+    );
+    
+    
+    static void setupRenderBufferStorage(
+        RenderSystem::RenderBufferUsage usage,
+        int width,
+        int height
+    );
+
 };
 
 
