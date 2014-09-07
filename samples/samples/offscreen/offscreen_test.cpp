@@ -74,7 +74,7 @@ public:
         const t3::Sphere* sphere = mesh_->getBoundingSphere();;
         cam_ = t3::Camera::create();
         cam_update_.camera(cam_);
-        cam_update_.position(sphere->position() + t3::Vec3(0, 0, sphere->radius() * 22));
+        cam_update_.position(sphere->position() + t3::Vec3(0, 0, sphere->radius() * 2));
         cam_update_.targetPosition(sphere->position());
     }
     
@@ -104,7 +104,7 @@ public:
         t3::RenderSystem::setDepthWrite(true);
         t3::RenderSystem::setCulling(true);
         t3::RenderSystem::setCullingMode(t3::RenderSystem::CullingMode::MODE_BACK);
-        t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
+   //     t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
 
         model_.render(mtx);
     }
