@@ -39,6 +39,47 @@ namespace t3 {
 inline namespace platform {
 
 
+
+
+void CoreRenderSystem::createFrameBuffer(RenderSystem::FrameBufferID* id) {
+    glGenFramebuffers(1, id);
+}
+
+void CoreRenderSystem::deleteFrameBuffer(RenderSystem::FrameBufferID* id) {
+    glDeleteFramebuffers(1, id);
+}
+
+void CoreRenderSystem::bindFrameBuffer(RenderSystem::FrameBufferID id) {
+    glBindFramebuffer(GL_FRAMEBUFFER, id);
+}
+
+void CoreRenderSystem::createRenderBuffer(RenderSystem::RenderBufferID* id) {
+    glGenRenderbuffers(1, id);
+}
+
+void CoreRenderSystem::deleteRenderBuffer(RenderSystem::RenderBufferID* id) {
+    glDeleteRenderbuffers(1, id);
+}
+
+void CoreRenderSystem::bindRenderBuffer(RenderSystem::RenderBufferID id) {
+    glBindRenderbuffer(GL_RENDERBUFFER, id);
+}
+
+
+RenderSystem::FrameBufferID CoreRenderSystem::getCurrentFrameBufferID() {
+    int id;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &id);
+    return id;
+}
+
+
+RenderSystem::RenderBufferID CoreRenderSystem::getCurrentRenderBufferID() {
+    int id;
+    glGetIntegerv(GL_RENDERBUFFER_BINDING, &id);
+    return id;
+}
+
+
 void CoreRenderSystem::bindTexture(RenderSystem::TextureID texture) {
 
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -516,6 +557,33 @@ void CoreRenderSystem::drawElements(
     glDrawElements(draw_mode, count, index_type, 0);
     T3_GL_ASSERT();
 }
+
+void CoreRenderSystem::drawArray(
+    RenderSystem::DrawMode mode,
+    int first,
+    int count
+) {
+    //  モード判定
+    int draw_mode = 0;
+    switch (mode) {
+        case RenderSystem::DrawMode::MODE_TRIANGLES:
+            draw_mode = GL_TRIANGLES;
+            break;
+            
+        case RenderSystem::DrawMode::MODE_TRIANGLE_STRIP:
+            draw_mode = GL_TRIANGLE_STRIP;
+            break;
+            
+            
+        default:
+            T3_PANIC("error");
+            break;
+    }
+    
+    glDrawArrays(draw_mode, first, count);
+    T3_GL_ASSERT();
+}
+
 
 
 void CoreRenderSystem::setVertexAttributePointer(

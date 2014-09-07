@@ -22,6 +22,21 @@ class Texture;
 
 class RenderSystem {
 public:
+    
+    using FrameBufferID = unsigned int;
+    static void createFrameBuffer(FrameBufferID* id);
+    static void deleteFrameBuffer(FrameBufferID* id);
+    static void bindFrameBuffer(FrameBufferID id);
+    static FrameBufferID getCurrentFrameBufferID();
+    
+    
+    using RenderBufferID = unsigned int;
+    static void createRenderBuffer(RenderBufferID* id);
+    static void deleteRenderBuffer(RenderBufferID* id);
+    static void bindRenderBuffer(RenderBufferID id);
+    static RenderBufferID getCurrentRenderBufferID();
+
+
 
     static int getDrawCallCount();
     
@@ -259,6 +274,12 @@ public:
         DrawMode mode,
         int count,
         size_t indices_type_size
+    );
+    
+    static void drawArray(
+        DrawMode mode,
+        int first,
+        int count
     );
 
     enum class BufferType {

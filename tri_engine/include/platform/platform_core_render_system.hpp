@@ -25,6 +25,18 @@ inline namespace platform {
 class CoreRenderSystem {
 public:
 
+    static void createFrameBuffer(RenderSystem::FrameBufferID* id);
+    static void deleteFrameBuffer(RenderSystem::FrameBufferID* id);
+    static void bindFrameBuffer(RenderSystem::FrameBufferID id);
+    static RenderSystem::FrameBufferID getCurrentFrameBufferID();
+    
+
+    static void createRenderBuffer(RenderSystem::RenderBufferID* id);
+    static void deleteRenderBuffer(RenderSystem::RenderBufferID* id);
+    static void bindRenderBuffer(RenderSystem::RenderBufferID id);
+    static RenderSystem::RenderBufferID getCurrentRenderBufferID();
+
+
     static void bindTexture(
         RenderSystem::TextureID texture
     );
@@ -208,6 +220,11 @@ public:
         size_t indices_type_size
     );
 
+    static void drawArray(
+        RenderSystem::DrawMode mode,
+        int first,
+        int count
+    );
 
     static void bindBuffer(
         RenderSystem::BufferType target_type,

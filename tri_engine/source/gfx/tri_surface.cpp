@@ -36,61 +36,42 @@ Surface::Surface(
         t3::RenderSystem::ColorFormat::RGBA
     );
     
-        glBindTexture(GL_TEXTURE_2D, texture_->id());
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            T3_ASSERT(glGetError() == GL_NO_ERROR);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexImage2D(
-            GL_TEXTURE_2D,
-            0,
-            GL_RGBA,
-            width,
-            height,
-            0,
-            GL_RGBA,
-            GL_UNSIGNED_BYTE,
-            0
-        );
-        T3_TRACE_VALUE(width);
-        T3_TRACE_VALUE(height);
-
+    //  カラーバッファ作成
+    RenderSystem::createRenderBuffer(&cb_);
+    RenderSystem::bindRenderBuffer(cb_);
+    
+    glRenderbufferStorage(
+        GL_RENDERBUFFER,
+        GL_RGBA4,
+        width,
+        height
+    );
     
     
-    
-    
-    
-    
-    GL_CHECK();
     
     //  デプスバッファ作成
-    glGenRenderbuffers(1, &depth_);
-    GL_CHECK();
-    glBindRenderbuffer(GL_RENDERBUFFER, depth_);
-    GL_CHECK();
+    RenderSystem::createRenderBuffer(&depth_);
+    RenderSystem::bindRenderBuffer(depth_);
+    
     glRenderbufferStorage(
         GL_RENDERBUFFER,
         GL_DEPTH_COMPONENT16,
         width,
         height
     );
-    GL_CHECK();
+    
+    
     
     //  フレームバッファ作成
-    glGenFramebuffers(1, &fb_);
-    GL_CHECK();
-    glBindFramebuffer(GL_FRAMEBUFFER, fb_);
-    GL_CHECK();
-    glFramebufferTexture2D(
+    RenderSystem::createFrameBuffer(&fb_);
+    RenderSystem::bindFrameBuffer(fb_);
+
+    glFramebufferRenderbuffer(
         GL_FRAMEBUFFER,
-        GL_COLOR_ATTACHMENT0,   //  カラーバッファとして設定
-        GL_TEXTURE_2D,
-        texture_->id(),
-        0
+        GL_COLOR_ATTACHMENT0,    //  デブスバッファとして設定
+        GL_RENDERBUFFER,
+        cb_
     );
-    GL_CHECK();
     
     glFramebufferRenderbuffer(
         GL_FRAMEBUFFER,
@@ -98,23 +79,33 @@ Surface::Surface(
         GL_RENDERBUFFER,
         depth_
     );
-    GL_CHECK();
+
+    glFramebufferTexture2D(
+        GL_FRAMEBUFFER,
+        GL_COLOR_ATTACHMENT0,   //  カラーバッファとして設定
+        GL_TEXTURE_2D,
+        texture_->id(),
+        0
+    );
     
-    glBindFramebuffer(GL_FRAMEBUFFER, default_fb);
-    glBindRenderbuffer(GL_RENDERBUFFER, default_rb);
-    GL_CHECK();
+
+
+    RenderSystem::bindFrameBuffer(default_fb);
+    RenderSystem::bindRenderBuffer(default_rb);
+    
     
 }
 
 Surface::~Surface() {
-    glDeleteFramebuffers(1, &fb_);
-    glDeleteRenderbuffers(1, &depth_);
+    RenderSystem::deleteFrameBuffer(&fb_);
+    RenderSystem::deleteRenderBuffer(&depth_);
+    RenderSystem::deleteRenderBuffer(&cb_);
 }
 
 
 void Surface::bind() {
-    glBindFramebuffer(GL_FRAMEBUFFER, fb_);
-    glBindRenderbuffer(GL_RENDERBUFFER, depth_);
+    RenderSystem::bindFrameBuffer(fb_);
+    RenderSystem::bindRenderBuffer(cb_);
 }
 
 }   // namespace gfx

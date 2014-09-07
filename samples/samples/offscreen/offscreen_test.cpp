@@ -37,26 +37,25 @@ public:
 
     void draw() {
         //  既存のフレームバッファを保存
-        GLint default_fb;
-        glGetIntegerv(GL_FRAMEBUFFER_BINDING, &default_fb);
-    
-        GLint default_rb;
-        glGetIntegerv(GL_RENDERBUFFER_BINDING, &default_rb);
+        t3::RenderSystem::FrameBufferID default_fb = t3::RenderSystem::getCurrentFrameBufferID();
+        t3::RenderSystem::RenderBufferID defualt_rb = t3::RenderSystem::getCurrentRenderBufferID();
 
         surface_.bind();
+        
+        
+        t3::RenderSystem::setDepthWrite(true);
 
         t3::RenderSystem::clearColor(t3::Color::blue());
         t3::RenderSystem::clearBuffer(true, true, false);
+        t3::RenderSystem::setDepthTest(true);
 
         
         modelDraw();
       
         
         //  フレームバッファを戻す
-        glBindFramebuffer(GL_FRAMEBUFFER, default_fb);
-        glBindRenderbuffer(GL_RENDERBUFFER, default_rb);
-        glBindTexture(GL_TEXTURE_2D, 0);
-
+        t3::RenderSystem::bindFrameBuffer(default_fb);
+        t3::RenderSystem::bindRenderBuffer(defualt_rb);
 
     }
     
@@ -100,12 +99,10 @@ public:
         t3::Mtx44 mtx = transform * view_mtx * projection;
 
         t3::RenderSystem::setBlend(false);
-        t3::RenderSystem::setDepthTest(true);
-        t3::RenderSystem::setDepthWrite(true);
         t3::RenderSystem::setCulling(true);
         t3::RenderSystem::setCullingMode(t3::RenderSystem::CullingMode::MODE_BACK);
-   //     t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
 
+        t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
         model_.render(mtx);
     }
 

@@ -133,7 +133,7 @@ void drawRectangleViewport(
         color.alphaFloat()
     );
     
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    RenderSystem::drawArray(RenderSystem::DrawMode::MODE_TRIANGLE_STRIP, 0, 4);
 }
 
 void drawSegment(

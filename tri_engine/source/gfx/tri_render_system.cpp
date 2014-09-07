@@ -23,6 +23,42 @@ namespace t3 {
 inline namespace gfx {
 
 
+
+
+void RenderSystem::createFrameBuffer(FrameBufferID* id) {
+    CoreRenderSystem::createFrameBuffer(id);
+}
+
+void RenderSystem::deleteFrameBuffer(FrameBufferID* id) {
+    CoreRenderSystem::deleteFrameBuffer(id);
+}
+
+void RenderSystem::bindFrameBuffer(FrameBufferID id) {
+    CoreRenderSystem::bindFrameBuffer(id);
+}
+
+void RenderSystem::createRenderBuffer(RenderBufferID* id) {
+    CoreRenderSystem::createRenderBuffer(id);
+}
+
+void RenderSystem::deleteRenderBuffer(RenderBufferID* id) {
+    CoreRenderSystem::deleteRenderBuffer(id);
+}
+
+void RenderSystem::bindRenderBuffer(RenderBufferID id) {
+    CoreRenderSystem::bindRenderBuffer(id);
+}
+
+RenderSystem::FrameBufferID RenderSystem::getCurrentFrameBufferID() {
+    return CoreRenderSystem::getCurrentFrameBufferID();
+}
+
+
+RenderSystem::RenderBufferID RenderSystem::getCurrentRenderBufferID() {
+    return CoreRenderSystem::getCurrentRenderBufferID();
+}
+
+
 void RenderSystem::bindTexture(
     const TextureID texture
 ) {
@@ -386,6 +422,15 @@ void RenderSystem::drawElements(
 ) {
     countDrawCall();
     CoreRenderSystem::drawElements(mode, count, indices_type_size);
+}
+
+void RenderSystem::drawArray(
+    RenderSystem::DrawMode mode,
+    int first,
+    int count
+) {
+    countDrawCall();
+    CoreRenderSystem::drawArray(mode, first, count);
 }
 
 

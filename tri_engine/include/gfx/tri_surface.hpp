@@ -38,6 +38,7 @@ private:
     int width_;
     int height_;
     uint32_t fb_;
+    uint32_t cb_;
     uint32_t depth_;
     t3::TexturePtr texture_;
 };
