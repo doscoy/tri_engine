@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		04391BD119BAE2B4006FFF38 /* tri_surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04391BD019BAE2B4006FFF38 /* tri_surface.cpp */; };
+		04391BEB19BCAF9B006FFF38 /* tri_streaming_player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04391BEA19BCAF9B006FFF38 /* tri_streaming_player.cpp */; };
 		3A1C1B2919AC3065005A69FA /* tri_mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */; };
 		3AA7EEA319A101CE00CEB23A /* tri_audio_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3719A0F60600CEB23A /* tri_audio_handle.cpp */; };
-		3AA7EEA419A101CE00CEB23A /* tri_audio_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3819A0F60600CEB23A /* tri_audio_manager.cpp */; };
 		3AA7EEA519A101CE00CEB23A /* tri_audio_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3919A0F60600CEB23A /* tri_audio_resource.cpp */; };
 		3AA7EEA619A101CE00CEB23A /* tri_audio_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3A19A0F60600CEB23A /* tri_audio_system.cpp */; };
 		3AA7EEA719A101CE00CEB23A /* tri_wav.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3B19A0F60600CEB23A /* tri_wav.cpp */; };
@@ -107,6 +107,8 @@
 /* Begin PBXFileReference section */
 		04391BCF19BAE280006FFF38 /* tri_surface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_surface.hpp; sourceTree = "<group>"; };
 		04391BD019BAE2B4006FFF38 /* tri_surface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_surface.cpp; sourceTree = "<group>"; };
+		04391BE919BCAF81006FFF38 /* tri_streaming_player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_streaming_player.hpp; sourceTree = "<group>"; };
+		04391BEA19BCAF9B006FFF38 /* tri_streaming_player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_streaming_player.cpp; sourceTree = "<group>"; };
 		3A1C1B2519AC2BD0005A69FA /* tri_mutex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tri_mutex.hpp; path = process/tri_mutex.hpp; sourceTree = "<group>"; };
 		3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_mutex.cpp; sourceTree = "<group>"; };
 		3A6FC4B319B61E6600970B80 /* tri_vertex_buffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_vertex_buffer.hpp; sourceTree = "<group>"; };
@@ -114,7 +116,6 @@
 		3AA7EBA719A0F48800CEB23A /* libtri_engine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtri_engine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA7EBAA19A0F48800CEB23A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3AA7ED3719A0F60600CEB23A /* tri_audio_handle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_audio_handle.cpp; sourceTree = "<group>"; };
-		3AA7ED3819A0F60600CEB23A /* tri_audio_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_audio_manager.cpp; sourceTree = "<group>"; };
 		3AA7ED3919A0F60600CEB23A /* tri_audio_resource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_audio_resource.cpp; sourceTree = "<group>"; };
 		3AA7ED3A19A0F60600CEB23A /* tri_audio_system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_audio_system.cpp; sourceTree = "<group>"; };
 		3AA7ED3B19A0F60600CEB23A /* tri_wav.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_wav.cpp; sourceTree = "<group>"; };
@@ -196,7 +197,6 @@
 		3AA7ED9C19A0F60600CEB23A /* tri_unique_id.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_unique_id.cpp; sourceTree = "<group>"; };
 		3AA7EDF519A0F61700CEB23A /* tri_audio.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_audio.hpp; sourceTree = "<group>"; };
 		3AA7EDF619A0F61700CEB23A /* tri_audio_handle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_audio_handle.hpp; sourceTree = "<group>"; };
-		3AA7EDF719A0F61700CEB23A /* tri_audio_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_audio_manager.hpp; sourceTree = "<group>"; };
 		3AA7EDF819A0F61700CEB23A /* tri_audio_resource.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_audio_resource.hpp; sourceTree = "<group>"; };
 		3AA7EDF919A0F61700CEB23A /* tri_audio_system.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_audio_system.hpp; sourceTree = "<group>"; };
 		3AA7EDFA19A0F61700CEB23A /* tri_wav.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_wav.hpp; sourceTree = "<group>"; };
@@ -432,10 +432,10 @@
 			isa = PBXGroup;
 			children = (
 				3AA7ED3719A0F60600CEB23A /* tri_audio_handle.cpp */,
-				3AA7ED3819A0F60600CEB23A /* tri_audio_manager.cpp */,
 				3AA7ED3919A0F60600CEB23A /* tri_audio_resource.cpp */,
 				3AA7ED3A19A0F60600CEB23A /* tri_audio_system.cpp */,
 				3AA7ED3B19A0F60600CEB23A /* tri_wav.cpp */,
+				04391BEA19BCAF9B006FFF38 /* tri_streaming_player.cpp */,
 			);
 			path = audio;
 			sourceTree = "<group>";
@@ -644,10 +644,10 @@
 			children = (
 				3AA7EDF519A0F61700CEB23A /* tri_audio.hpp */,
 				3AA7EDF619A0F61700CEB23A /* tri_audio_handle.hpp */,
-				3AA7EDF719A0F61700CEB23A /* tri_audio_manager.hpp */,
 				3AA7EDF819A0F61700CEB23A /* tri_audio_resource.hpp */,
 				3AA7EDF919A0F61700CEB23A /* tri_audio_system.hpp */,
 				3AA7EDFA19A0F61700CEB23A /* tri_wav.hpp */,
+				04391BE919BCAF81006FFF38 /* tri_streaming_player.hpp */,
 			);
 			path = audio;
 			sourceTree = "<group>";
@@ -972,6 +972,7 @@
 				3AA7EEE719A1022000CEB23A /* tri_new.cpp in Sources */,
 				3AA7EEDE19A1021600CEB23A /* tri_file.cpp in Sources */,
 				3AA7EEDF19A1021600CEB23A /* tri_filepath.cpp in Sources */,
+				04391BEB19BCAF9B006FFF38 /* tri_streaming_player.cpp in Sources */,
 				3AA7EEE019A1021600CEB23A /* tri_pad.cpp in Sources */,
 				3AA7EEE119A1021600CEB23A /* tri_pointing.cpp in Sources */,
 				3AA7EEDB19A1020900CEB23A /* tri_gui_button.cpp in Sources */,
@@ -1031,7 +1032,6 @@
 				3AA7EEB619A101DD00CEB23A /* tri_virtual_pad.cpp in Sources */,
 				3AA7EEB719A101DD00CEB23A /* tri_workbar.cpp in Sources */,
 				3AA7EEA319A101CE00CEB23A /* tri_audio_handle.cpp in Sources */,
-				3AA7EEA419A101CE00CEB23A /* tri_audio_manager.cpp in Sources */,
 				3AA7EEA519A101CE00CEB23A /* tri_audio_resource.cpp in Sources */,
 				3AA7EEA619A101CE00CEB23A /* tri_audio_system.cpp in Sources */,
 				3AA7EEA719A101CE00CEB23A /* tri_wav.cpp in Sources */,

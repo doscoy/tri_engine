@@ -18,7 +18,7 @@ public:
 
 
     using BufferID = unsigned int;
-    using source_id_t = unsigned int;
+    using SourceID = unsigned int;
     
     enum class AudioFormat {
         MONO_8,
@@ -34,20 +34,20 @@ public:
         const size_t size,
         const int sampling_rate
     );
-    static BufferID generateBuffer();
+    static BufferID createBuffer();
     static void deleteBuffer(BufferID buffer);
 
-    static source_id_t generateSource(
+    static SourceID createSource(
         BufferID buffer
     );
-    static void deleteSource(source_id_t source);
+    static void deleteSource(SourceID source);
 
-    static void play(source_id_t sid);
-    static void stop(source_id_t sid);
+    static void play(SourceID sid);
+    static void stop(SourceID sid);
     
-    static void setLoop(source_id_t sid, bool loop);
-    static void pitch(const source_id_t sid, const float speed);
-    static void volume(const source_id_t sid, const float vol);
+    static void setLoop(SourceID sid, bool loop);
+    static void pitch(const SourceID sid, const float speed);
+    static void volume(const SourceID sid, const float vol);
 };
 
 

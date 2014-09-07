@@ -22,6 +22,12 @@ public:
         t3::FilePath wav_path("sample.wav");
         res_ = t3::AudioResource::create(wav_path);
         handle_ = res_->createSound();
+
+
+        t3::FilePath stream_path("streaming.wav");
+        stream_res_ = t3::AudioResource::create(stream_path);
+        stream_handle_ = stream_res_->createSound();
+
     }
     
     void terminate(){
@@ -48,6 +54,11 @@ private:
 private:
     std::shared_ptr<t3::AudioResource> res_;
     std::shared_ptr<t3::AudioHandle> handle_;
+
+
+    std::shared_ptr<t3::AudioResource> stream_res_;
+    std::shared_ptr<t3::AudioHandle> stream_handle_;
+
 };
 
 

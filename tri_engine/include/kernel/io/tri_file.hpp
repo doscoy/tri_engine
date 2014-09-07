@@ -31,7 +31,7 @@ public:
     
     // *********************************************
     //  データサイズ取得
-    std::size_t getDataSize() const {
+    std::size_t size() const {
         return size_;
     }
     

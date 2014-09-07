@@ -36,7 +36,7 @@ void AudioSystem::terminateAudioSystem() {
 }
 
 
-AudioSystem::BufferID AudioSystem::generateBuffer() {
+AudioSystem::BufferID AudioSystem::createBuffer() {
     BufferID id;
     alGenBuffers(1, &id);
     return id;
@@ -49,30 +49,30 @@ void AudioSystem::deleteBuffer(
 }
 
 
-AudioSystem::source_id_t AudioSystem::generateSource(BufferID buffer) {
-    source_id_t source;
+AudioSystem::SourceID AudioSystem::createSource(BufferID buffer) {
+    SourceID source;
     alGenSources(1, &source);
     alSourcei(source, AL_BUFFER, buffer);
 
     return source;
 }
 
-void AudioSystem::deleteSource(source_id_t source) {
+void AudioSystem::deleteSource(SourceID source) {
     alDeleteSources(1, &source);
 }
 
 
-void AudioSystem::play(AudioSystem::source_id_t sid) {
+void AudioSystem::play(AudioSystem::SourceID sid) {
     alSourcePlay(sid);
 }
 
 
-void AudioSystem::stop(AudioSystem::source_id_t sid) {
+void AudioSystem::stop(AudioSystem::SourceID sid) {
     alSourceStop(sid);
 }
 
 void AudioSystem::setLoop(
-    source_id_t sid,
+    SourceID sid,
     bool loop
 ) {
     alSourcei(sid, AL_LOOPING, loop);
@@ -110,7 +110,7 @@ void AudioSystem::setBufferData(
 }
 
 void AudioSystem::pitch(
-    const source_id_t sid,
+    const SourceID sid,
     const float speed
 ) {
     T3_ASSERT_RANGE(speed, 0.0f, 1.0f);
@@ -118,7 +118,7 @@ void AudioSystem::pitch(
 }
 
 void AudioSystem::volume(
-    const source_id_t sid,
+    const SourceID sid,
     const float vol
 ) {
     T3_ASSERT_RANGE(vol, 0.0f, 1.0f);

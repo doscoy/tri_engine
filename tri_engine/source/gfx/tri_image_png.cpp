@@ -121,7 +121,7 @@ PngImage::PngImage(
 
     my_png_buffer mybuf;
     mybuf.data_ = file.getData();
-    mybuf.data_len_ = file.getDataSize();
+    mybuf.data_len_ = file.size();
     mybuf.data_offset_ = 0;
     png_data_read(png_ptr, &mybuf);
     png_read_info(png_ptr, info_ptr);

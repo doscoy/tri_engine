@@ -11,7 +11,7 @@ AudioHandle::AudioHandle(
 )   : sid_(0)
     , bgm_(false)
 {
-    sid_ = AudioSystem::generateSource(buffer_id);
+    sid_ = AudioSystem::createSource(buffer_id);
 }
 
 AudioHandle::~AudioHandle() {

@@ -36,7 +36,7 @@ private:
     
 private:
     
-    AudioSystem::source_id_t sid_;
+    AudioSystem::SourceID sid_;
     bool bgm_;
 };
 

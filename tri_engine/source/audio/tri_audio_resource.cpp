@@ -10,7 +10,7 @@ inline namespace audio {
 AudioResource::AudioResource()
     : id_()
 {
-    id_ = AudioSystem::generateBuffer();
+    id_ = AudioSystem::createBuffer();
 }
 
 AudioResource::~AudioResource() {
@@ -50,9 +50,9 @@ void AudioResource::setupBuffer(
 ) {
     AudioSystem::AudioFormat format;
 
-    if (wav.getChannel() == 1) {
+    if (wav.channel() == 1) {
         // モノラル
-        if (wav.getBitPerSamle() == 8) {
+        if (wav.bitPerSample() == 8) {
             format = AudioSystem::AudioFormat::MONO_8;
         }
         else {
@@ -61,7 +61,7 @@ void AudioResource::setupBuffer(
     }
     else {
         // ステレオ
-        if (wav.getBitPerSamle() == 8) {
+        if (wav.bitPerSample() == 8) {
             format = AudioSystem::AudioFormat::STEREO_8;
         }
         else {
@@ -73,15 +73,15 @@ void AudioResource::setupBuffer(
         id_,
         format,
         wav.getData(),
-        wav.getDataSize(),
-        wav.getSamplingRate()
+        wav.size(),
+        wav.samplingRate()
     );
  
     T3_TRACE("create Wav\n");
-    T3_TRACE(" channel %d\n", wav.getChannel());
-    T3_TRACE(" bit sample %d\n", wav.getBitPerSamle());
-    T3_TRACE(" rate %d\n", wav.getSamplingRate());
-    T3_TRACE(" size %d\n", wav.getDataSize());
+    T3_TRACE(" channel %d\n", wav.channel());
+    T3_TRACE(" bit sample %d\n", wav.bitPerSample());
+    T3_TRACE(" rate %d\n", wav.samplingRate());
+    T3_TRACE(" size %d\n", wav.size());
 
 }
 
