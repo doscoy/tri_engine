@@ -3,6 +3,7 @@
 
 #include "kernel/io/tri_filepath.hpp"
 #include <cstdint>
+#include <fstream>
 
 namespace t3 {
 inline namespace audio {
@@ -26,7 +27,7 @@ public:
         short channel_;
         short bit_per_sample_;
         int sampling_rate_;
-        int data_pos_;
+        std::streamoff data_pos_;
     };
 
 public:
@@ -78,7 +79,7 @@ public:
 
 
 private:
-    FILE* file_;
+    std::ifstream file_;
     Info info_;
     size_t readed_size_;
     uint8_t* data_;

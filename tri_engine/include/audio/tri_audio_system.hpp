@@ -26,6 +26,34 @@ public:
         STEREO_8,
         STEREO_16
     };
+    static AudioFormat format(
+    	int channel,
+    	int bps
+    ) {
+    	AudioFormat format;
+	    if (channel == 1) {
+    	    // モノラル
+        	if (bps == 8) {
+       	     	format = AudioSystem::AudioFormat::MONO_8;
+        	}
+        	else {
+            	format = AudioSystem::AudioFormat::MONO_16;
+        	}
+    	}
+    	else {
+        	// ステレオ
+        	if (bps == 8) {
+            	format = AudioSystem::AudioFormat::STEREO_8;
+        	}
+        	else {
+            	format = AudioSystem::AudioFormat::STEREO_16;
+        	}
+    	}
+    
+    	return format;
+    }
+    
+    
     
     static void setBufferData(
         const BufferID id,

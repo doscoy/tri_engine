@@ -25,9 +25,9 @@ public:
 
 
         t3::FilePath stream_path("streaming.wav");
-        stream_res_ = t3::AudioResource::create(stream_path);
-        stream_handle_ = stream_res_->createSound();
-
+        int buffering_size = 1024 * 500;
+        //stream_.initialize(stream_path, buffering_size);
+        //stream_.play();
     }
     
     void terminate(){
@@ -37,7 +37,7 @@ public:
     void update(t3::tick_t delta_time){
         const t3::Input& input = t3::Director::instance().input();
         const t3::Pointing& ptng = input.pointing();
-        
+        //stream_.poling();
         if (ptng.isRelease()) {
             handle_->playSE();
         }
@@ -56,8 +56,7 @@ private:
     std::shared_ptr<t3::AudioHandle> handle_;
 
 
-    std::shared_ptr<t3::AudioResource> stream_res_;
-    std::shared_ptr<t3::AudioHandle> stream_handle_;
+    t3::StreamingPlayer stream_;
 
 };
 
