@@ -19,6 +19,7 @@
 #include "tri_method_callback.hpp"
 #include "tri_nameable.hpp"
 #include "tri_stopwatch.hpp"
+#include "tri_signature.hpp"
 
 
 

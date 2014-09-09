@@ -2,8 +2,8 @@
 
 #include "audio/tri_wav.hpp"
 #include "kernel/memory/tri_memory.hpp"
-#include "dbg/tri_assert.hpp"
-
+#include "dbg/tri_dbg.hpp"
+#include "util/tri_util.hpp"
 
 namespace {
     
@@ -13,66 +13,115 @@ int readWaveHeader(
     t3::Wav::Info& info
 ) {
 
+/*
+    std::streamoff top = file.tellg();
+
+    for (int i = 0; i < 20000; ++i) {
+        uint32_t das;
+        file.read((char*)&das, 4);
+    
+        if (das == t3::makeSignature('R', 'I', 'F', 'F')) {
+            T3_TRACE("RIFF\n");
+        }
+        else if (das == t3::makeSignature('W', 'A', 'V', 'E')) {
+            T3_TRACE("WAVE\n");
+        }
+        else if (das == t3::makeSignature('f', 'm', 't', ' ')) {
+            T3_TRACE("fmt\n");
+        }
+        else if (das == t3::makeSignature('d', 'a', 't', 'a')) {
+            T3_TRACE("data\n");
+        }
+        else if (das == t3::makeSignature('D', 'A', 'T', 'A')) {
+            T3_TRACE("DATA\n");
+        }
+    }
+
+
+    file.seekg(top);
+*/
     // "RIFF" の読み込み
     unsigned int riff;
     file.read((char*)&riff,4);
-    T3_ASSERT(riff == 0x46464952u);
+    T3_ASSERT(riff == t3::makeSignature('R', 'I', 'F', 'F'));
     
     // データサイズを取得
     // データサイズ = ファイルサイズ - 8 byte
     file.read((char*)&info.size_, 4);
 
     // "WAVE" の読み込み
-    unsigned int wave;
+    uint32_t wave;
     file.read((char*)&wave, 4);
-    T3_ASSERT(wave == 0x45564157);
-    
-    
-    // PCM 情報とデータの先頭の取得
-    for(int i = 0; i < 200; ++i){
-        unsigned int res, size;
-        file.read((char*)&res, 4);
-        if( 0x20746d66u == res ){//fmt
-            file.read((char*)&size, 4);
+    T3_ASSERT(wave == t3::makeSignature('W', 'A', 'V', 'E'));
 
-            // PCM 情報の取得
-            unsigned short res16;
-            file.read((char*)&res16,2);
-            if( 1 != res16 ){// 非対応フォーマット
-                return false;
-            }
-            // モノラル(1), ステレオ(2)
-            file.read((char*)&info.channel_, 2);
-            if (2 < info.channel_) {
-                return false;
-            }
-            // サンプリングレート
-            file.read((char*)&info.sampling_rate_, 4);
-            // 1秒あたりのバイト数(byte/sec)
-            int byte_per_sec;
-            file.read((char*)&byte_per_sec, 4);
+    uint32_t fmt;
+    file.read((char*)&fmt, 4);
+    T3_ASSERT(fmt == t3::makeSignature('f', 'm', 't', ' '));
 
-            // ブロックサイズ(byte/sample)
-            int block_size;
-            file.read((char*)&block_size, 2);
+    //  fmtチャンクのバイト数
+    uint32_t chunk_byte;
+    file.read((char*)&chunk_byte, 4);
+
+    // PCM 情報の取得
+    uint16_t format_id;
+    file.read((char*)&format_id,2);
+    if (format_id != 1){
+        //  非対応フォーマット
+        //  リニアPCMじゃない
+        return false;
+    }
             
-            // サンプルあたりのビット数(bit/sample)
-            file.read((char*)&info.bit_per_sample_, 2);
-        }
-        else if( 0x61746164u == res ){//data
-            file.read((char*)&size, 4);
-            // データの開始位置を保存
-            info.data_pos_ = file.tellg();
-            info.size_ = size;
-            // データを読み飛ばす
-            file.seekg(size,std::ios::cur);
-            break;
+    // モノラル(1), ステレオ(2)
+    file.read((char*)&info.channel_, 2);
+    if (info.channel_ > 2) {
+        //  ２チャンネル以上は非対応
+        return false;
+    }
+            
+    // サンプリングレート
+    file.read((char*)&info.sampling_rate_, 4);
+            
+    //  データ速度
+    //  1秒あたりのバイト数(byte/sec)
+    int byte_per_sec;
+    file.read((char*)&byte_per_sec, 4);
+
+    // ブロックサイズ(byte/sample)
+    int block_size;
+    file.read((char*)&block_size, 2);
+            
+    // サンプルあたりのビット数(bit/sample)
+    file.read((char*)&info.bit_per_sample_, 2);
+    
+    //  データの先頭の取得
+    for(int i = 0; i < 200; ++i){
+        uint8_t c;
+        file.read((char*)&c, 1);
+        
+        if (c == 'd') {
+            file.read((char*)&c, 1);
+            if (c == 'a') {
+                file.read((char*)&c, 1);
+                if (c == 't') {
+                    file.read((char*)&c, 1);
+                    if (c == 'a') {
+                        //  データサイズ
+                        uint32_t size;
+                        file.read((char*)&size, 4);
+            
+                        // データの開始位置を保存
+                        info.data_pos_ = file.tellg();
+                        info.size_ = size;
+                        break;
+                    }
+                }
+            }
         }
     }
     // データの開始位置までシーク
     T3_ASSERT(info.data_pos_);
     file.seekg( info.data_pos_ );
-//    LoadedSize = 0;
+
     return true;
 
 
@@ -191,18 +240,24 @@ void Wav::load(const FilePath& filepath ) {
 }
 
 void Wav::open(const t3::FilePath &filepath) {
-    T3_ASSERT(!file_);
+
     file_.open(filepath.getFullPath().c_str(), std::ios::binary);
     readWaveHeader(file_, info_);
 }
 
 size_t Wav::read(void* out, size_t size) {
-    T3_ASSERT(file_);
+
     size_t read_size = size;
+    
+    //  読み込み予定サイズがデータサイズを超えないよう調整
     if (readed_size_ + size > info_.size_) {
         read_size = info_.size_ - readed_size_;
     }
-    file_.read((char*)out, 1);
+    
+    //  指定サイズを読み込む
+    file_.read((char*)out, size);
+    
+    //  トータル読み込みサイズ更新
     readed_size_ += read_size;
     return read_size;
 }

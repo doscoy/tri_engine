@@ -3,6 +3,7 @@
 #include "kernel/memory/tri_heap.hpp"
 #include "dbg/tri_assert.hpp"
 #include "dbg/tri_trace.hpp"
+#include "util/tri_util.hpp"
 #include <cstring>
 #include <cstdlib>
 
@@ -13,19 +14,11 @@
 
 namespace {
 
-constexpr uint32_t makeSignature(
-    char a,
-    char b,
-    char c,
-    char d
-) {
-    return ((a) | (b << 8) | (c << 16) | (d << 24));
-}
 
 
 const char* UNKNOWEN_FILE_NAME = "Unknown...";
 
-constexpr uint32_t HEAP_SIGNATURE   = makeSignature('H','E','A','P');
+constexpr uint32_t HEAP_SIGNATURE   = t3::makeSignature('H','E','A','P');
 constexpr uint32_t ALLOC_END_MARK   = 0x99999999;
 constexpr uint32_t DIRTY_ALLOC_MARK = 0xDEADBEEF;
 constexpr uint32_t DIRTY_FREE_MARK  = 0xCAFEC0DE;

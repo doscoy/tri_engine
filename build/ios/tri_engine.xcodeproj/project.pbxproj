@@ -109,6 +109,7 @@
 		04391BD019BAE2B4006FFF38 /* tri_surface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_surface.cpp; sourceTree = "<group>"; };
 		04391BE919BCAF81006FFF38 /* tri_streaming_player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_streaming_player.hpp; sourceTree = "<group>"; };
 		04391BEA19BCAF9B006FFF38 /* tri_streaming_player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_streaming_player.cpp; sourceTree = "<group>"; };
+		04391BED19BF4975006FFF38 /* tri_signature.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_signature.hpp; sourceTree = "<group>"; };
 		3A1C1B2519AC2BD0005A69FA /* tri_mutex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tri_mutex.hpp; path = process/tri_mutex.hpp; sourceTree = "<group>"; };
 		3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_mutex.cpp; sourceTree = "<group>"; };
 		3A6FC4B319B61E6600970B80 /* tri_vertex_buffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_vertex_buffer.hpp; sourceTree = "<group>"; };
@@ -868,6 +869,7 @@
 				3AA7EE8F19A0F61700CEB23A /* tri_unique_id.hpp */,
 				3AA7EE9019A0F61700CEB23A /* tri_util.hpp */,
 				3AD4071D19AF9F1B00762711 /* tri_bytesize.hpp */,
+				04391BED19BF4975006FFF38 /* tri_signature.hpp */,
 			);
 			path = util;
 			sourceTree = "<group>";
