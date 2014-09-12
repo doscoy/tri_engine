@@ -128,7 +128,7 @@ Heap::Heap()
     : active_(false)
     , allocated_()
     , peak_()
-    , instances_(0)
+    , node_count_(0)
     , head_alloc_(nullptr)
     , first_child_(nullptr)
     , next_siblind_(nullptr)
@@ -199,7 +199,7 @@ void* Heap::allocate(
         peak_.byte(allocated_.byte());
     }
 
-    instances_ += 1;
+    node_count_ += 1;
 
     void* start_mem_block = mem + alloc_header_size;
 
@@ -221,11 +221,11 @@ void* Heap::allocate(
 void Heap::deallocate(
     void* mem
 ) {
-    ScopedLock lock(Heap::mutex());
-
     if (!mem) {
         return;
     }
+
+    ScopedLock lock(Heap::mutex());
 
     AllocHeader* header = reinterpret_cast<AllocHeader*>(
         (reinterpret_cast<char*>(mem) - sizeof(AllocHeader))
@@ -272,7 +272,7 @@ void Heap::deallocate(
     }
 
     allocated_.sub(header->size());
-    instances_ -= 1;
+    node_count_ -= 1;
 
 
 #if DIRTY_MEMORY
@@ -297,7 +297,7 @@ void Heap::deactivate() {
 
     allocated_.byte(0);
     peak_.byte(0);
-    instances_ = 0;
+    node_count_ = 0;
     active_ = false;
 }
 

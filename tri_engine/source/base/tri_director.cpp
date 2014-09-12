@@ -199,11 +199,11 @@ void Director::initializeGameSystem() {
  
     
     //  システムフェードレイヤー生成
-    fade_layer_.reset(T3_NEW FadeLayer("sys-fade", RenderLayer::PRIORITY_SYS_FADE));
+    fade_layer_.reset(T3_SYS_NEW FadeLayer("sys-fade", RenderLayer::PRIORITY_SYS_FADE));
     
     //  デバッグ用レイヤー生成
-    log_layer_.reset(T3_NEW DebugLogLayer("dbg log"));
-    dbg_screen_layer_.reset(T3_NEW DebugStringLayer("dbg print"));
+    log_layer_.reset(T3_SYS_NEW DebugLogLayer("dbg log"));
+    dbg_screen_layer_.reset(T3_SYS_NEW DebugStringLayer("dbg print"));
 
 }
 

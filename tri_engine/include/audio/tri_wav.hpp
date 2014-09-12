@@ -71,6 +71,9 @@ public:
         return info_.time_;
     }
     
+    bool isReadEnd() {
+        return info_.size_ == readed_size_;
+    }
     
     void open(const FilePath& filepath);
     size_t read(void* out, size_t size);

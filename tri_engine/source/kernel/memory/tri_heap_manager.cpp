@@ -4,13 +4,18 @@
 namespace t3 {
 
 
-const char* DEFAULT_HEAP_NAME = "Default";
+const char* DEFAULT_HEAP_NAME = "Def";
 Heap* HeapManager::default_heap_ = nullptr;
 
 
 void HeapManager::initialize() {
 
-    default_heap_ = createNewHeap(DEFAULT_HEAP_NAME);
+    heaps().at(0).activate(DEFAULT_HEAP_NAME);
+    default_heap_ = &heaps().at(0);
+
+    heaps().at(1).activate("Sys");
+    heaps().at(2).activate("App");
+    
 }
 
 

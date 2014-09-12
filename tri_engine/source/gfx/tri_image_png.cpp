@@ -82,9 +82,9 @@ PngImage::PngImage(std::string path)
     // メモリ領域確保
     int rb = (int)png_get_rowbytes(png_ptr, info_ptr);
     size_ = height_ * rb;
-    data_ = T3_NEW uint8_t[size_];
+    data_ = T3_SYS_NEW uint8_t[size_];
     
-    uint8_t** rec = T3_NEW uint8_t*[height_];
+    uint8_t** rec = T3_SYS_NEW uint8_t*[height_];
     
     for ( int i = 0; i < height_; ++i ){
         rec[i] = &data_[i*rb];
@@ -142,9 +142,9 @@ PngImage::PngImage(
     // メモリ領域確保
     int rb = (int)png_get_rowbytes(png_ptr, info_ptr);
     size_ = height_ * rb;
-    data_ = T3_NEW uint8_t[size_];
+    data_ = T3_SYS_NEW uint8_t[size_];
     
-    uint8_t** rec = T3_NEW uint8_t*[height_];
+    uint8_t** rec = T3_SYS_NEW uint8_t*[height_];
     
     for ( int i = 0; i < height_; ++i ){
         rec[i] = &data_[i*rb];

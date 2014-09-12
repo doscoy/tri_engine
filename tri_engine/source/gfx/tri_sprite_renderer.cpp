@@ -203,7 +203,7 @@ void SpriteRenderer::margeSprites() {
     
             //  バッチグループ保存
             batch_groups_.push_back(current_batch);
-            current_batch.reset(T3_NEW BatchGroup);
+            current_batch.reset(T3_SYS_NEW BatchGroup);
             
             
             //  頂点情報をクリア

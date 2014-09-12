@@ -44,7 +44,7 @@ bool File::loadFile(
     std::size_t beg_pos = static_cast<std::size_t>(fs.tellg());        //ファイル先頭インデクスを取得
     size_ = eof_pos - beg_pos;              //末尾-先頭でファイルサイズを計算
     
-    data_ = (uint8_t*)T3_ALLOC(size_);
+    data_ = (uint8_t*)T3_SYS_ALLOC(size_);
     
     fs.read((char*)data_, size_);                //ファイル先頭からバッファへコピー
     

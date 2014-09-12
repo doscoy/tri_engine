@@ -227,13 +227,13 @@ Wav::Wav()
 
 Wav::~Wav() {
     file_.close();
+    T3_FREE(data_);
 }
 
 void Wav::load(const FilePath& filepath ) {
     open(filepath);
     
-    // 再生時間(秒)
-    data_ = (uint8_t*)T3_ALLOC(info_.size_);
+    data_ = (uint8_t*)T3_SYS_ALLOC(info_.size_);
     read(data_, info_.size_);
     
     close();
@@ -254,6 +254,10 @@ size_t Wav::read(void* out, size_t size) {
         read_size = info_.size_ - readed_size_;
     }
     
+    if (read_size <= 0) {
+        return 0;
+    }
+    
     //  指定サイズを読み込む
     file_.read((char*)out, size);
     
@@ -269,7 +273,7 @@ void Wav::close() {
 
 void Wav::readReset() {
     readed_size_ = 0;
-    
+    file_.clear();
     file_.seekg(info_.data_pos_);
 }
 

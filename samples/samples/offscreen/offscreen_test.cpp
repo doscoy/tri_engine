@@ -57,7 +57,7 @@ public:
     void modelInit() {
         //  メッシュ読み込み
         t3::FilePath obj_path("bunny.obj");
-        mesh_ = T3_NEW t3::Mesh(obj_path.getFullPath().c_str());
+        mesh_ = T3_SYS_NEW t3::Mesh(obj_path.getFullPath().c_str());
     
 
         //  モデル作成
@@ -132,7 +132,7 @@ private:
 
 OffscreenTestScene::OffscreenTestScene()
     : Scene( "Offscreen" ) {
-    context_.reset(T3_NEW SceneContext());
+    context_.reset(T3_SYS_NEW SceneContext());
 }
 
 OffscreenTestScene::~OffscreenTestScene() {

@@ -17,7 +17,7 @@ TexturePtr TextureFactory::createFromData(
     const void* data
 ) {
     
-    TexturePtr tex( T3_NEW ::t3::Texture(
+    TexturePtr tex( T3_SYS_NEW ::t3::Texture(
         name.c_str(),
         width,
         height,

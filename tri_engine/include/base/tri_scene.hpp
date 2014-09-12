@@ -43,7 +43,7 @@ public:
     
     //  シーン生成
     std::shared_ptr<Scene> createScene() override {
-        return std::shared_ptr<Scene>(T3_NEW scene_t);
+        return std::shared_ptr<Scene>(T3_SYS_NEW scene_t);
     }
 
 };

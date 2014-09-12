@@ -80,7 +80,7 @@ class EventHandlingScene::SceneContext {
 
 public:
     SceneContext()
-        : hp_text_(T3_NEW HpText)
+        : hp_text_(T3_SYS_NEW HpText)
     {}
     
     ~SceneContext()
@@ -103,12 +103,12 @@ public:
             //  画面をタッチした
             if (d.random().getBool()){
                 T3_TRACE("A\n");
-                t3::EventPtr new_event(T3_NEW EventAAA);
+                t3::EventPtr new_event(T3_SYS_NEW EventAAA);
                 t3::safeQueueEvent(new_event);
             }
             else {
                 T3_TRACE("B\n");
-                t3::EventPtr new_event(T3_NEW EventBBB);
+                t3::EventPtr new_event(T3_SYS_NEW EventBBB);
                 t3::safeQueueEvent(new_event);
                 
             }
@@ -134,7 +134,7 @@ private:
 
 EventHandlingScene::EventHandlingScene()
     : Scene( "EventHandling" ) {
-    context_.reset(T3_NEW SceneContext());
+    context_.reset(T3_SYS_NEW SceneContext());
 }
 
 EventHandlingScene::~EventHandlingScene() {

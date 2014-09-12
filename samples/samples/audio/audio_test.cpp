@@ -24,8 +24,8 @@ public:
         handle_ = res_->createSound();
 
 
-        t3::FilePath stream_path("streaming.wav");
-        int buffering_size = 1024 * 500;
+        t3::FilePath stream_path("akb48.wav");
+        int buffering_size = 1024 * 100;
         stream_.initialize(stream_path, buffering_size);
         stream_.play();
     }
@@ -67,7 +67,7 @@ private:
 
 AudioTestScene::AudioTestScene()
     : Scene( "AudioTest" ) {
-    context_.reset(T3_NEW SceneContext());
+    context_.reset(T3_SYS_NEW SceneContext());
 }
 
 AudioTestScene::~AudioTestScene() {

@@ -207,7 +207,7 @@ private:
 
 SimpleSpriteScene::SimpleSpriteScene()
     : Scene( "SpriteTest" ) {
-    context_.reset(T3_NEW SceneContext());
+    context_.reset(T3_SYS_NEW SceneContext());
 }
 
 SimpleSpriteScene::~SimpleSpriteScene() {

@@ -8,7 +8,17 @@
 
 namespace t3 {
 
-using HeapContainer = std::array<Heap, 10>;
+enum HeapIndex {
+    HEAP_DEFAULT,
+    HEAP_SYS,
+    HEAP_APP,
+    HEAP_APP_EX1,
+    HEAP_APP_EX2,
+    HEAP_APP_EX3,
+    HEAP_SIZE
+};
+
+using HeapContainer = std::array<Heap, HEAP_SIZE>;
 
 class HeapManager
 {    

@@ -11,8 +11,9 @@
 #include "tri_safe_delete.hpp"
 
 
-#define T3_ALLOC(size)    ::t3::HeapManager::getDefaultHeap()->allocate(size, __FILE__, __LINE__)
-#define T3_FREE(addr)     ::t3::Heap::deallocate(addr)
+#define T3_ALLOC(size)      ::t3::HeapManager::getHeap(::t3::HEAP_APP)->allocate(size, __FILE__, __LINE__)
+#define T3_SYS_ALLOC(size)  ::t3::HeapManager::getHeap(::t3::HEAP_SYS)->allocate(size, __FILE__, __LINE__)
+#define T3_FREE(addr)       ::t3::Heap::deallocate(addr)
 
 
 

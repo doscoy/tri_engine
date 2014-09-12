@@ -65,7 +65,7 @@ private:
 
 ThreadTestScene::ThreadTestScene()
     : Scene( "ThreadTest" ) {
-    context_.reset(T3_NEW SceneContext());
+    context_.reset(T3_SYS_NEW SceneContext());
 }
 
 ThreadTestScene::~ThreadTestScene() {

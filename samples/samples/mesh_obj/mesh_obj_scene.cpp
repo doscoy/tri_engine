@@ -24,7 +24,7 @@ public:
 
         //  メッシュ読み込み
         t3::FilePath obj_path("o.obj");
-        mesh_ = T3_NEW t3::Mesh(obj_path.getFullPath().c_str());
+        mesh_ = T3_SYS_NEW t3::Mesh(obj_path.getFullPath().c_str());
     
 
         //  モデル作成
@@ -97,7 +97,7 @@ private:
 
 MeshObjScene::MeshObjScene()
     : Scene( "MeshObjScene" ) {
-    context_.reset(T3_NEW SceneContext());
+    context_.reset(T3_SYS_NEW SceneContext());
 }
 
 MeshObjScene::~MeshObjScene() {

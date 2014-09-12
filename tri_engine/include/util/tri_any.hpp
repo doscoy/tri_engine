@@ -50,7 +50,7 @@ private:
 		
         //	コピー処理
         virtual HolderBase* clone() const {
-            return ( T3_NEW holder( value_ ) );
+            return ( T3_SYS_NEW holder( value_ ) );
         }
 		
         //	型情報取得
@@ -70,7 +70,7 @@ public:
     //	コンストラクタ
     template <class T>
     Any(const T& value)
-        : content_(T3_NEW holder<T>(value))
+        : content_(T3_SYS_NEW holder<T>(value))
     {}
 
     // *************************************************************************
@@ -100,7 +100,7 @@ public:
             T3_DELETE content_;
             content_ = NULL;
         }
-        content_ = T3_NEW holder<T>(value);
+        content_ = T3_SYS_NEW holder<T>(value);
         return ( *this );
     }
 	

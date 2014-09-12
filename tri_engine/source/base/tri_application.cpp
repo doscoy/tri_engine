@@ -19,7 +19,7 @@ namespace {
 #define LIMIT_AVG_SUM   3600
 std::vector<float> render_avg;
 
-bool show_heap_ = false;
+bool show_heap_ = true;
 bool show_work_bar_ = true;
 bool show_work_time_ = false;
 bool show_task_ = false;
@@ -182,7 +182,7 @@ void Application::initializeApplication()
     t3::AudioSystem::initializeAudioSystem();
 
     //  システムデバッグメニュー登録
-    system_menu_.reset(T3_NEW ApplicationDebugMenu(this));
+    system_menu_.reset(T3_SYS_NEW ApplicationDebugMenu(this));
     
     DebugMenu& debug_menu_root = DebugMenu::instance();
     system_menu_->getSystemDebugMenuRoot().attachSelf(
@@ -382,7 +382,7 @@ void Application::renderApplication()
     if (show_heap_) {
         auto& heaps = t3::HeapManager::heaps();
         int heap_pos_x = 0;
-        int heap_pos_y = 110;
+        int heap_pos_y = 28;
         for (auto& heap : heaps) {
             if (!heap.isActive()) {
                 continue;
@@ -392,10 +392,11 @@ void Application::renderApplication()
                 heap_pos_x,
                 heap_pos_y,
                 Color::white(),
-                "%s TOTAL:%uKB PEAK %uByte",
+                "%s:T(%7u) P(%7u) Node(%4u)",
                 heap.name(),
-                heap.allocated().kbyte(),
-                heap.peak().byte()
+                heap.allocated().byte(),
+                heap.peak().byte(),
+                heap.nodeCount()
             );
             heap_pos_y += 20;
         }
@@ -478,7 +479,7 @@ bool Application::isSuspend() const {
 
 void Application::beginRender() {
     
-    RenderSystem::clearColor(Color::red());
+    RenderSystem::clearColor(Color::black());
     RenderSystem::clearBuffer(true, true, false);
 }
 

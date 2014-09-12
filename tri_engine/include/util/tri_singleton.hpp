@@ -26,7 +26,7 @@ protected:
     
 public:
     static void createInstance(){
-        instance_ = T3_NEW T;
+        instance_ = T3_SYS_NEW T;
     }
     
     // *********************************************

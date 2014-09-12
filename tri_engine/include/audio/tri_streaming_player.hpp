@@ -21,7 +21,8 @@ public:
     void initialize(const FilePath& path, int read_byte);
     void poling();
     
-    void play() {
+    void play(bool loop = true) {
+        loop_ = loop;
         AudioSystem::play(source_id_);
     }
 
@@ -34,6 +35,7 @@ private:
     size_t readMore();
     void processBuffer(AudioSystem::BufferID id);
     AudioSystem::BufferID createBuffer();
+    void switchCurrentBuffer();
     
 private:
     t3::Wav wav_;
@@ -43,6 +45,7 @@ private:
     int current_buffer_;
     AudioSystem::SourceID source_id_;
     std::array<AudioSystem::BufferID, 2> buffer_id_;
+    bool loop_;
 };
 
 

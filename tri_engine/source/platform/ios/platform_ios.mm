@@ -123,7 +123,7 @@ void loadFile(
     T3_NULL_ASSERT(nsdata);
     *size = [nsdata length];
     
-    *data = (uint8_t*)T3_ALLOC(*size);
+    *data = (uint8_t*)T3_SYS_ALLOC(*size);
     const void* nsbytes = [nsdata bytes];
     std::memcpy(*data, nsbytes, *size);
 }

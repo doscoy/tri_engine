@@ -7,8 +7,8 @@
 
 
 
-#define T3_NEW          new(t3::HeapManager::getHeap(3) ,__FILE__, (int)__LINE__)
-#define T3_SYS_NEW      new(t3::HeapManager::getHeap(2) ,__FILE__, (int)__LINE__)
+#define T3_NEW          new(t3::HeapManager::getHeap(::t3::HEAP_APP) ,__FILE__, (int)__LINE__)
+#define T3_SYS_NEW      new(t3::HeapManager::getHeap(::t3::HEAP_SYS) ,__FILE__, (int)__LINE__)
 #define T3_DELETE       delete
 #define T3_DELETE_A     delete[]
 

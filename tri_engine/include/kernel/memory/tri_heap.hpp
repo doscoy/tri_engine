@@ -10,7 +10,7 @@
 
 namespace t3 {
 
-constexpr int NAME_LENGTH = 32;
+constexpr int NAME_LENGTH = 6;
 
 
 struct AllocHeader;
@@ -54,7 +54,9 @@ public:
         return allocated_;
     }
     
-    
+    uint32_t nodeCount() {
+        return node_count_;
+    }
 
     static Mutex& mutex() {
         return mutex_;
@@ -65,18 +67,13 @@ public:
     
 private:
     void deallocate(AllocHeader* header);
-    void getTreeStats(
-        size_t& total_bytes,
-        size_t& total_peak,
-        int& total_instances
-    ) const;
 
 private:
     bool active_;
     char heap_name_[NAME_LENGTH];
     ByteSize allocated_;
     ByteSize peak_;
-    int instances_;
+    uint32_t node_count_;
     AllocHeader* head_alloc_;
 
     Heap* first_child_;

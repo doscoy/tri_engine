@@ -42,7 +42,7 @@ private:
 
 TemplateScene::TemplateScene()
     : Scene( "Template" ) {
-    context_.reset(T3_NEW SceneContext());
+    context_.reset(T3_SYS_NEW SceneContext());
 }
 
 TemplateScene::~TemplateScene() {
