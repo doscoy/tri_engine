@@ -1,0 +1,6 @@
+#ifndef TRI_UNIQUE_ID_HPP_INCLUDED
+#define TRI_UNIQUE_ID_HPP_INCLUDED
+
+
+
+#endif
