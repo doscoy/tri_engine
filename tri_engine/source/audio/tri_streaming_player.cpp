@@ -8,13 +8,15 @@
 namespace t3 {
 inline namespace audio {
 
+
 StreamingPlayer::StreamingPlayer()
     : wav_()
     , read_byte_(0)
-    , buffer_{nullptr , nullptr}
-    , next_buffer_(0)
+    , buffer_()
+    , reading_buffer_index_(0)
+    , current_buffer_index_(0)
     , source_id_(0)
-    , current_buffer_(0)
+    , buffer_id_()
     , loop_(false)
 {
     alGenSources(1, &source_id_);
@@ -26,13 +28,12 @@ StreamingPlayer::~StreamingPlayer() {
     wav_.close();
     AudioSystem::deleteSource(source_id_);
     
-    for (auto& buffer_id : buffer_id_) {
-        AudioSystem::deleteBuffer(buffer_id);
-    }
     
-    T3_FREE(buffer_[0]);
-    T3_FREE(buffer_[1]);
-    T3_FREE(buffer_[2]);
+    for (int i = 0; i < BUFFER_SIZE; ++i) {
+        AudioSystem::deleteBuffer(buffer_id_[i]);
+        T3_FREE(buffer_[i].storage_);
+    }
+
 
 }
 
@@ -46,38 +47,41 @@ void StreamingPlayer::initialize(
     
     
     //  バッファリング領域確保
-    buffer_[0] = (uint8_t*)T3_SYS_ALLOC(read_byte);
-    buffer_[1] = (uint8_t*)T3_SYS_ALLOC(read_byte);
+    for (int i = 0; i < BUFFER_SIZE; ++i) {
+
+        buffer_[i].storage_ = (uint8_t*)T3_SYS_ALLOC(read_byte);
+        buffer_id_[i] = createBuffer();
+    }
     
     //  wav 一部読み込み
     wav_.open(path);
-    buffer_id_[0] = createBuffer();
-    buffer_id_[1] = createBuffer();
-    
     
     alSourceQueueBuffers(source_id_, buffer_id_.size(), &buffer_id_[0]);
+    readMore();
 }
 
 //  追加読み込み
-size_t StreamingPlayer::readMore() {
+void StreamingPlayer::readMore() {
 
     //  読み込み
-    size_t read_size = wav_.read(buffer_[next_buffer_], read_byte_);
-    T3_TRACE("Streaming read %d  buf %d.\n", read_size, next_buffer_);
+    size_t read_size = wav_.read(readingBufferStorage(), read_byte_);
+    T3_TRACE("Streaming read %d  buf %d.\n", read_size, reading_buffer_index_);
     
     if (read_size < read_byte_) {
         //  wavの終端まで読んだ
         if (loop_) {
             //  ループなら先頭に戻って続きを読む
             wav_.readReset();
-            wav_.read(buffer_[next_buffer_] + read_size, read_byte_ - read_size);
+            wav_.read(buffer_[reading_buffer_index_].storage_ + read_size, read_byte_ - read_size);
             read_size = read_byte_;
         }
     }
     
-    switchCurrentBuffer();
+    //  読み込み済サイズ設定
+    buffer_[reading_buffer_index_].size_ = read_size;
     
-    return read_size;
+    //  読み込みバッファインデックス更新
+    switchReadingBuffer();
 }
 
 AudioSystem::BufferID StreamingPlayer::createBuffer() {
@@ -106,10 +110,13 @@ void StreamingPlayer::poling() {
 
 }
 
-void StreamingPlayer::processBuffer(AudioSystem::BufferID id) {
-    size_t read_size = readMore();
-    
-    if (read_size == 0) {
+void StreamingPlayer::processBuffer(
+    const AudioSystem::BufferID id
+) {
+    readMore();
+    switchCurrentBuffer();
+
+    if (currentBufferSize() == 0) {
         //  もう読み込みバッファが無い
         return;
     }
@@ -117,16 +124,19 @@ void StreamingPlayer::processBuffer(AudioSystem::BufferID id) {
     AudioSystem::setBufferData(
         id,
         AudioSystem::format(wav_.channel(), wav_.bitPerSample()),
-        buffer_[current_buffer_],
-        read_size,
+        currentBufferStorage(),
+        currentBufferSize(),
         wav_.samplingRate()
     );
 }
 
 
 void StreamingPlayer::switchCurrentBuffer() {
-    next_buffer_ = current_buffer_;
-    current_buffer_ = (next_buffer_ + 1) % 2;
+    current_buffer_index_ = (current_buffer_index_ + 1) % BUFFER_SIZE;
+}
+
+void StreamingPlayer::switchReadingBuffer() {
+    reading_buffer_index_ = (reading_buffer_index_ + 1) % BUFFER_SIZE;
 }
 
 
