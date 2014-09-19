@@ -6,8 +6,7 @@
 #include "util/tri_hash_string.hpp"
 #include "base/tri_types.hpp"
 #include "util/tri_uncopyable.hpp"
-#include <memory>
-
+#include "tri_std.hpp"
 
 
 namespace t3 {
@@ -23,7 +22,7 @@ public:
     virtual const EventType& eventType() const = 0;
     virtual tick_t timeStamp() const = 0;
 };
-using EventPtr = std::shared_ptr<Event>;
+using EventPtr = SharedPtr<Event>;
 
 
 class EventBase

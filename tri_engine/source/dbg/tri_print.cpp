@@ -8,8 +8,6 @@
 
 #include "dbg/tri_print.hpp"
 
-#include <stdio.h>
-#include <stdarg.h>
 
 #include "dbg/tri_assert.hpp"
 
@@ -37,7 +35,7 @@ t3::Shader font_shader_;
 
 }   //  unname namespace
 
-std::shared_ptr<t3::Texture> debugfont_ = nullptr;
+t3::SharedPtr<t3::Texture> debugfont_ = nullptr;
 
 
 void beginPrint(

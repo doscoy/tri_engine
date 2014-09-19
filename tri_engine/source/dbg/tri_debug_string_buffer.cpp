@@ -1,8 +1,6 @@
 #include "dbg/tri_debug_string_buffer.hpp"
 #include "gfx/tri_color.hpp"
 #include "dbg/tri_print.hpp"
-#include <stdio.h>
-#include <cstdarg>
 #include "kernel/tri_kernel.hpp"
 #include "base/tri_director.hpp"
 

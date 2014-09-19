@@ -15,7 +15,7 @@ public:
     {
     }
     
-    Nameable(const std::string& name)
+    Nameable(const String& name)
         : name_(name)
     {
     }
@@ -23,7 +23,7 @@ public:
     virtual ~Nameable(){}
     
 public:
-    std::string name() const {
+    String name() const {
         return name_.string();
     }
     
@@ -31,7 +31,7 @@ public:
         return name_.key();
     }
 
-    void name(const std::string name) {
+    void name(const String name) {
         name_.setString(name);
     }
 

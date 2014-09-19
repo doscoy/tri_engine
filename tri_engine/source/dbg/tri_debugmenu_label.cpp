@@ -9,7 +9,7 @@ inline namespace dbg {
 
 DebugMenuLabel::DebugMenuLabel(
     DebugMenuFrame* parent,
-    const std::string& label
+    const String& label
 )   : parent_(nullptr)
     , label_(label)
     , focus_callback_(this, &DebugMenuLabel::nullCallback)

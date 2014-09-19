@@ -4,8 +4,7 @@
 #include "dbg/tri_assert.hpp"
 #include "dbg/tri_trace.hpp"
 #include "util/tri_util.hpp"
-#include <cstring>
-#include <cstdlib>
+
 
 #define DIRTY_MEMORY        1
 #define ALLOC_ENDMARKING    1

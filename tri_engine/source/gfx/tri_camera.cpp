@@ -26,7 +26,7 @@ Camera::~Camera()
 
 CameraPtr Camera::create() {
 
-    std::shared_ptr<Camera> cam(T3_SYS_NEW Camera);
+    SharedPtr<Camera> cam(T3_SYS_NEW Camera);
     return cam;
 }
 

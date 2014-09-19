@@ -124,7 +124,7 @@ struct ZipFile::TZipDirFileHeader
 
 
 bool ZipFile::initialize(
-    const std::string& resFileName
+    const String& resFileName
 ) {
     terminate();
 
@@ -180,7 +180,7 @@ bool ZipFile::initialize(
         fileName[fh.fnameLen]=0;
         strToLower(fileName, MAX_FILE_PATH);
         
-        std::string spath = fileName;
+        String spath = fileName;
         m_ZipContentsMap[spath] = i;
 
         // Skip name, extra and comment fields.
@@ -196,9 +196,9 @@ bool ZipFile::initialize(
     return success;
 }
 
-int ZipFile::find(const std::string &path) const
+int ZipFile::find(const String &path) const
 {
-	std::string lowerCase = path;
+	String lowerCase = path;
 	std::transform(
         lowerCase.begin(),
         lowerCase.end(),
@@ -222,9 +222,9 @@ void ZipFile::terminate()
 }
 
 
-std::string ZipFile::getFileName(int index) const {
+String ZipFile::getFileName(int index) const {
 
-    std::string fileName = "";
+    String fileName = "";
     if (index >=0 && index < entries_) {
         char pszDest[MAX_FILE_PATH];
         std::memcpy(
@@ -250,7 +250,7 @@ int ZipFile::getFileSize(int index) const {
 
 
 bool ZipFile::readFile(
-    std::string& filename,
+    String& filename,
     void *buffer
 ) {
     return readFile(find(filename), buffer);

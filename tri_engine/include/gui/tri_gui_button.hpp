@@ -37,7 +37,7 @@ public:
 };
 
 //  アクティベータポインタ
-using ButtonActivatorPtr = std::shared_ptr<ButtonActivator>;
+using ButtonActivatorPtr = SharedPtr<ButtonActivator>;
 
 
 //  デフォルトのボタンアクティブ状態変更処理
@@ -82,7 +82,7 @@ public:
 };
 
 //  ホバーエフェクタのポインタ
-using ButtonHoverEffectorPtr = std::shared_ptr<ButtonHoverEffector>;
+using ButtonHoverEffectorPtr = SharedPtr<ButtonHoverEffector>;
 
 
 //  デフォルトのホバーエフェクタ
@@ -210,7 +210,7 @@ private:
     Rectangle hit_area_;
     bool first_touch_;
     bool hover_;
-    std::vector<EventPtr> triggerd_events_;
+    Vector<EventPtr> triggerd_events_;
     ButtonActivatorPtr activator_;
     ButtonHoverEffectorPtr hover_effector_;
     UniqueID button_id_;

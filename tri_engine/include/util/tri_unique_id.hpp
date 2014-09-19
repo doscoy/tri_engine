@@ -1,7 +1,7 @@
 #ifndef TRI_UNIQUE_ID_HPP_INCLUDED
 #define TRI_UNIQUE_ID_HPP_INCLUDED
 
-#include "../base/tri_types.hpp"
+#include "base/tri_std.hpp"
 #include "tri_uncopyable.hpp"
 
 

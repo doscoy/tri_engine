@@ -17,7 +17,7 @@
 namespace {
 
 #define LIMIT_AVG_SUM   3600
-std::vector<float> render_avg;
+t3::Vector<float> render_avg;
 
 bool show_heap_ = true;
 bool show_work_bar_ = true;

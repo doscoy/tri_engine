@@ -19,7 +19,7 @@ DrawLayer::DrawLayer()
 
 
 DrawLayer::DrawLayer(
-    const std::string name,
+    const String name,
     const int priority
 )   : RenderLayer(name, priority)
     , update_func_(this, &self_t::nullUpdate)

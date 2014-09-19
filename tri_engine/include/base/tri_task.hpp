@@ -9,7 +9,7 @@
 #include "util/tri_nameable.hpp"
 #include "tri_pause_level.hpp"
 #include "tri_event_manager.hpp"
-#include <memory>
+#include "base/tri_std.hpp"
 
 
 namespace t3 {
@@ -101,11 +101,11 @@ public:
         return !inital_update_;
     }
     
-    const std::shared_ptr<Task> nextTask() const {
+    const SharedPtr<Task> nextTask() const {
         return next_;
     }
     
-    const std::shared_ptr<Task> nextTask(std::shared_ptr<Task> next) {
+    const SharedPtr<Task> nextTask(SharedPtr<Task> next) {
         next_ = next;
         return next_;
     }
@@ -148,7 +148,7 @@ private:
     bool inital_update_;
     bool attached_;
     PauseLevel pause_lv_;
-    std::shared_ptr<Task> next_;
+    SharedPtr<Task> next_;
     
 };
 
@@ -187,7 +187,7 @@ private:
 
 };
 
-using TaskPtr = std::shared_ptr<Task>;
+using TaskPtr = SharedPtr<Task>;
 
 }   // namespace base
 }   // namespace t3

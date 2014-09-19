@@ -2,9 +2,8 @@
 #ifndef TRI_DEBUG_STRING_BUFFER_HPP_INCLUDED
 #define TRI_DEBUG_STRING_BUFFER_HPP_INCLUDED
 
-#include "../base/tri_types.hpp"
-#include "../util/tri_uncopyable.hpp"
-#include <array>
+#include "base/tri_std.hpp"
+#include "util/tri_uncopyable.hpp"
 
 
 namespace t3 {
@@ -45,7 +44,7 @@ public:
     void drawStrings();
     
 private:
-    std::array<DebugStringItem, 300> buffer_;
+    Array<DebugStringItem, 300> buffer_;
     int size_;
 
 };

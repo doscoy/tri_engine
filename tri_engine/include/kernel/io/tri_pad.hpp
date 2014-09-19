@@ -3,8 +3,9 @@
 #ifndef TRI_PAD_HPP_INCLUDED
 #define TRI_PAD_HPP_INCLUDED
 
-#include "../../util/tri_uncopyable.hpp"
-#include "../../base/tri_types.hpp"
+#include "util/tri_uncopyable.hpp"
+#include "base/tri_std.hpp"
+#include "base/tri_types.hpp"
 
 namespace t3 {
 inline namespace kernel {

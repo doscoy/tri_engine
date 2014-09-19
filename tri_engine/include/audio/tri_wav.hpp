@@ -2,8 +2,7 @@
 #define TRI_WAV3_HPP_INCLUDED
 
 #include "kernel/io/tri_filepath.hpp"
-#include <cstdint>
-#include <fstream>
+
 
 namespace t3 {
 inline namespace audio {
@@ -82,7 +81,7 @@ public:
 
 
 private:
-    std::ifstream file_;
+    FileStream file_;
     Info info_;
     size_t readed_size_;
     uint8_t* data_;

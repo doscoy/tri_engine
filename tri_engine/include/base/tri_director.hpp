@@ -127,11 +127,11 @@ public:
 
     static const Color& clearColor();
 
-    static void addSystemTask(std::shared_ptr<Task> task);
+    static void addSystemTask(SharedPtr<Task> task);
     
     static const Input& input(const int player_no = 0);
     
-    static RenderLayer* findLayer(const std::string& layer_name);
+    static RenderLayer* findLayer(const String& layer_name);
     
     static Vec2 screenToViewport(const Vec2& screen_pos);
     
@@ -174,11 +174,11 @@ private:
     
 private:
     //  デバッグ用レイヤー
-    std::unique_ptr<DebugLogLayer> log_layer_;
-    std::unique_ptr<DebugStringLayer> dbg_screen_layer_;
+    ScopedPtr<DebugLogLayer> log_layer_;
+    ScopedPtr<DebugStringLayer> dbg_screen_layer_;
 
     //  システムフェード
-    std::unique_ptr<FadeLayer> fade_layer_;
+    ScopedPtr<FadeLayer> fade_layer_;
     
     //  乱数
     random_t random_number_generator_;
@@ -189,7 +189,7 @@ private:
     Vec2 screen_revise_;
     
     //  インプットデータ
-    std::array<Input, MAX_PAD> input_;
+    Array<Input, MAX_PAD> input_;
 
     //  描画レイヤー
     RenderLayers layers_;
@@ -206,7 +206,7 @@ private:
     //  クリアカラー
     DebugMenuItem<int> dm_color_idx_;
     int use_clear_color_index_;
-    std::array<Color, 4> clear_colors_;
+    Array<Color, 4> clear_colors_;
     
     //  エージング用ランダムタッチ
     DebugMenuItem<bool> dm_random_pointing_;
@@ -220,7 +220,7 @@ private:
     
     //  レイヤーのデバッグメニュー
     DebugMenuFrame  dm_layers_;
-    std::array<DebugMenuLabel*, 24> layer_list_;
+    Array<DebugMenuLabel*, 24> layer_list_;
 
     bool exit_request_;
     

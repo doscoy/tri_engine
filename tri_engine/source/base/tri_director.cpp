@@ -26,14 +26,14 @@ const Input& Director::input(
 }
     
 void Director::addSystemTask(
-    std::shared_ptr<Task> task
+    SharedPtr<Task> task
 ) {
     instance().task_manager_.attach(task);
 }
 
 
 RenderLayer* Director::findLayer(
-    const std::string& layer_name
+    const String& layer_name
 ) {
     t3::RenderLayers layers = t3::Director::instance().layers();
     

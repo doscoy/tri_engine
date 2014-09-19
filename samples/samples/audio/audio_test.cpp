@@ -1,7 +1,7 @@
 
 
 #include "audio_test.hpp"
-#include <vector>
+#include "base/tri_std.hpp"
 
 
 
@@ -52,8 +52,8 @@ private:
 
 
 private:
-    std::shared_ptr<t3::AudioResource> res_;
-    std::shared_ptr<t3::AudioHandle> handle_;
+    t3::SharedPtr<t3::AudioResource> res_;
+    t3::SharedPtr<t3::AudioHandle> handle_;
 
 
     t3::StreamingPlayer stream_;

@@ -4,10 +4,7 @@
 
 #include "tri_event.hpp"
 #include "util/tri_method_callback.hpp"
-#include <vector>
-#include <set>
-#include <list>
-#include <map>
+#include "base/tri_std.hpp"
 
 namespace t3 {
 inline namespace base {
@@ -173,22 +170,22 @@ void safeTriggerEvent(
 
 
 
-using EventListenerList = std::vector<void*>;
-using EventTypeList = std::vector<EventType>;
+using EventListenerList = Vector<void*>;
+using EventTypeList = Vector<EventType>;
 
 class EventManager
     : public EventManagerBase
 {
 private:
     //  イベントマネージャが処理できる固有のイベント型のセット
-    using EventTypeSet = std::set<EventType>;
+    using EventTypeSet = Set<EventType>;
     
     //  EventTypeSetへの挿入結果
     using EventTypeSetInsertResult = std::pair<EventTypeSet::iterator, bool>;
     
     
     //  イベントハンドラのテーブル
-    using EventListenerTable = std::list<EventHandler>;
+    using EventListenerTable = List<EventHandler>;
     
     //  リスナーのリストと特定のイベントの関連付け
     using EventListenerMap = std::map<HashString::key_t, EventListenerTable>;
@@ -200,7 +197,7 @@ private:
     using EventListenerMapInsertResult = std::pair<EventListenerMap::iterator, bool>;
     
     //  イベントキュー
-    using EventQueue = std::list<EventPtr>;
+    using EventQueue = List<EventPtr>;
 
 public:
     explicit EventManager(
@@ -254,7 +251,7 @@ public:
     EventTypeList getTypeList() const;
     
     void dumpListeners() const;
-    std::string getEventNameByKey(HashString::key_t key) const;
+    String getEventNameByKey(HashString::key_t key) const;
 private:
     enum {
         NUM_QUEUES = 2

@@ -10,7 +10,7 @@ inline namespace gfx {
 
 
 TexturePtr TextureFactory::createFromData(
-    std::string name,
+    String name,
     const uint32_t width,
     const uint32_t height,
     const RenderSystem::ColorFormat color_format,
@@ -49,7 +49,7 @@ TexturePtr TextureFactory::createFromFile(
     T3_TRACE("Create texture from %s", filename.getFullPath().c_str());
 
     TexturePtr tex = nullptr;
-    std::string file_ext = filename.getExt();
+    String file_ext = filename.getExt();
     if (file_ext == ".png") {
         tex = createFromPngFile(filename);
     }

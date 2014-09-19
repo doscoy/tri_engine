@@ -21,10 +21,10 @@ private:
 public:
     ~AudioResource();
 
-    std::shared_ptr<AudioHandle>  createSound();
+    SharedPtr<AudioHandle>  createSound();
 
 public:
-    static std::shared_ptr<AudioResource> create(FilePath& filepath);
+    static SharedPtr<AudioResource> create(FilePath& filepath);
 
 
 

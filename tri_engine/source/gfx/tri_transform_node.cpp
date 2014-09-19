@@ -15,7 +15,7 @@ extern NodeID getNewNodeID();
 
 TransformNode::TransformNode(
     NodeID id,
-    std::string name
+    String name
 )   : parent_(nullptr)
     , children_()
     , position_(0, 0, 0)
@@ -170,7 +170,7 @@ bool TransformNode::isVisible(t3::SceneGraph *scene_graph) const
 }
 
 TransformNodePtr TransformNode::createNode(
-    std::string name
+    String name
 ) {
     TransformNodePtr new_node = create(name);
     addChild(new_node);
@@ -178,7 +178,7 @@ TransformNodePtr TransformNode::createNode(
 }
 
 TransformNodePtr TransformNode::create(
-    std::string name
+    String name
 ) {
     TransformNodePtr new_node(T3_SYS_NEW TransformNode(getNewNodeID(), name));
     

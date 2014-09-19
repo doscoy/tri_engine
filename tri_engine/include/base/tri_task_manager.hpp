@@ -5,15 +5,14 @@
 
 
 #include "tri_task.hpp"
-#include <memory>
-#include <list>
+#include "base/tri_std.hpp"
 
 
 namespace t3 {
 inline namespace base {
 
 
-typedef std::list<TaskPtr> TaskList;
+typedef List<TaskPtr> TaskList;
 
 class TaskManager
     : Uncopyable {

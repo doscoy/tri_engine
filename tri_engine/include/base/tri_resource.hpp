@@ -7,7 +7,7 @@
 #include "util/tri_unique_id.hpp"
 #include "kernel/tri_kernel.hpp"
 
-#include <cstring>
+
 
 constexpr int RESOURCE_NAME_SIZE = 128;
 

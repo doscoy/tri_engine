@@ -9,7 +9,7 @@ namespace {
     
     
 int readWaveHeader(
-    std::ifstream& file,
+    t3::FileStream& file,
     t3::Wav::Info& info
 ) {
 

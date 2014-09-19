@@ -20,7 +20,7 @@ class ResourceManager
 {
     friend class Singleton<ResourceManager<ResourceType>>;
 
-    typedef std::list<std::shared_ptr<ResourceType>> Resources;
+    typedef List<SharedPtr<ResourceType>> Resources;
 
     
 protected:
@@ -41,7 +41,7 @@ public:
             }
         }
     
-        std::shared_ptr<ResourceType> res = ResourceType::create(path);
+        SharedPtr<ResourceType> res = ResourceType::create(path);
         T3_NULL_ASSERT(res);
         resources_.push_back(res);
         
@@ -51,8 +51,8 @@ public:
     
     // *********************************************
     //  リソースを取得
-    const std::shared_ptr<ResourceType> resource(
-        std::string name
+    const SharedPtr<ResourceType> resource(
+        String name
     ){
         
       
@@ -68,7 +68,7 @@ public:
     
     // *********************************************
     //  リソースを取得
-    const std::shared_ptr<ResourceType> resource(
+    const SharedPtr<ResourceType> resource(
         const UniqueID id
     ){
         typename Resources::iterator end = resources_.end();

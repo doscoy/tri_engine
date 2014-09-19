@@ -63,7 +63,7 @@ private:
     int current_buffer_index_;
     AudioSystem::SourceID source_id_;
 
-    std::array<AudioSystem::BufferID, BUFFER_SIZE> buffer_id_;
+    Array<AudioSystem::BufferID, BUFFER_SIZE> buffer_id_;
 
     struct BufferStorage {
         BufferStorage()
@@ -75,7 +75,7 @@ private:
         uint8_t* storage_;
         size_t size_;
     };
-    std::array<BufferStorage, BUFFER_SIZE> buffer_;;
+    Array<BufferStorage, BUFFER_SIZE> buffer_;;
 
     bool loop_;
 };

@@ -97,9 +97,9 @@ void printConsole(
 
 
 
-std::string getDeviceFilePath() {
+String getDeviceFilePath() {
     NSString* readPath = [NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] bundlePath], @"/"];
-    std::string path =[readPath UTF8String];
+    String path =[readPath UTF8String];
 
     return path;
 }

@@ -1,7 +1,8 @@
 #ifndef TRI_COLOR_HPP_INCLUDED
 #define TRI_COLOR_HPP_INCLUDED
 
-#include <cstdint>
+#include "base/tri_std.hpp"
+
 
 namespace t3 {
 

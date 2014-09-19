@@ -4,7 +4,8 @@
 
 #include "../math/tri_math.hpp"
 #include "tri_camera.hpp"
-#include <memory>
+#include "base/tri_std.hpp"
+
 
 namespace t3 {
 inline namespace gfx {
@@ -18,7 +19,7 @@ public:
 
 public:
     void camera(
-        std::shared_ptr<Camera> camera
+        SharedPtr<Camera> camera
     ) {
         camera_ = camera;
     }

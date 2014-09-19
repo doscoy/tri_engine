@@ -7,8 +7,7 @@
 #include "platform/platform_sdk.hpp"
 #include "gfx/tri_render_system.hpp"
 
-#include <memory>
-#include <vector>
+#include "base/tri_std.hpp"
 
 
 #define STRINGIFY(A)  #A

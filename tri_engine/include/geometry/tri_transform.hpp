@@ -7,7 +7,7 @@
 #include "util/tri_uncopyable.hpp"
 #include "math/tri_vec3.hpp"
 #include "base/tri_types.hpp"
-#include <memory>
+#include "base/tri_std.hpp"
 
 namespace t3 {
 inline namespace geopetry {
@@ -89,7 +89,7 @@ public:
     }
 
     void setParentTransform(
-        std::shared_ptr<Transform2D> p
+        SharedPtr<Transform2D> p
     ) {
         parent_ = p;
     }
@@ -137,10 +137,10 @@ private:
     Vec2 position_;
     float rotation_;
     Vec2 scale_;
-    std::shared_ptr<Transform2D> parent_;
+    SharedPtr<Transform2D> parent_;
 };
 
-using Transform2DPtr = std::shared_ptr<Transform2D>;
+using Transform2DPtr = SharedPtr<Transform2D>;
 
 
 

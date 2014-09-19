@@ -140,7 +140,7 @@ void SceneManager::sceneChange()
 
 
 void SceneManager::addSceneTask(
-    std::shared_ptr<Task> task
+    SharedPtr<Task> task
 ) {
     instance().current_scene_->addSceneTask(task);
 }

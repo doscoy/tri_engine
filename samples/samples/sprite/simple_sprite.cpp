@@ -1,7 +1,7 @@
 
 
 #include "simple_sprite.hpp"
-#include <vector>
+#include "base/tri_std.hpp"
 
 
 class SimpleSpriteScene::SceneContext
@@ -197,7 +197,7 @@ private:
     t3::tick_t total_time_;
     int sprite_opacity_;
     t3::SpriteLayer sprite_layer_;
-    std::vector<t3::SpritePtr> sprites_;
+    t3::Vector<t3::SpritePtr> sprites_;
 };
 
 

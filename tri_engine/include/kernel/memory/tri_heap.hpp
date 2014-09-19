@@ -3,7 +3,7 @@
 #ifndef TRI_HEAP_HPP_INCLUDED
 #define TRI_HEAP_HPP_INCLUDED
 
-#include <cstddef>
+#include "base/tri_std.hpp"
 #include "kernel/process/tri_mutex.hpp"
 #include "util/tri_uncopyable.hpp"
 #include "util/tri_bytesize.hpp"

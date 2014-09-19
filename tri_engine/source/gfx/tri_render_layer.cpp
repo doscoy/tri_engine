@@ -2,7 +2,7 @@
 
 #include "gfx/tri_render_layer.hpp"
 #include "base/tri_director.hpp"
-#include <cstring>
+
 
 
 namespace t3{
@@ -10,7 +10,7 @@ inline namespace gfx {
     
 
 RenderLayer::RenderLayer(
-    const std::string& layer_name,
+    const String& layer_name,
     const int priority
 )   : Nameable()
     , pause_(false)
@@ -24,7 +24,7 @@ RenderLayer::RenderLayer(
     attachSystem();
 }
     
-RenderLayer::RenderLayer(const std::string& name)
+RenderLayer::RenderLayer(const String& name)
     : RenderLayer(name, PRIORITY_APP_NORMAL)
 {
 }

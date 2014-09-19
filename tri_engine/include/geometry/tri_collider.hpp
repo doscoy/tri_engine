@@ -5,7 +5,7 @@
 #include "util/tri_hash_string.hpp"
 #include "util/tri_unique_id.hpp"
 #include "util/tri_any.hpp"
-#include <cstdint>
+#include "base/tri_std.hpp"
 
 
 namespace t3 {
@@ -67,7 +67,7 @@ private:
 };
 
 
-using ColliderPtr = std::shared_ptr<Collider>;
+using ColliderPtr = SharedPtr<Collider>;
 
         
 }   // namaespace geometry

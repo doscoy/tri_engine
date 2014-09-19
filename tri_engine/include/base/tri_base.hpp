@@ -13,6 +13,6 @@
 #include "tri_rtti.hpp"
 #include "tri_types.hpp"
 #include "tri_pause_level.hpp"
-
+#include "tri_std.hpp"
 
 #endif // TRI_BASE_HPP_INCLUDED

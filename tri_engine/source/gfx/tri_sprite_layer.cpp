@@ -12,7 +12,7 @@ SpriteLayer::SpriteLayer()
 }
 
 SpriteLayer::SpriteLayer(
-    const std::string& name,
+    const String& name,
     const int priority
 )   : RenderLayer(name, priority)
     , renderer_()
@@ -41,7 +41,7 @@ SpritePtr SpriteLayer::createSprite(TexturePtr tex) {
 SpritePtr SpriteLayer::createSprite(const t3::FilePath& path) {
     t3::TextureManager& tex_mgr = t3::TextureManager::instance();
     UniqueID tex_id = tex_mgr.load(path);
-    std::shared_ptr<t3::Texture> tex = tex_mgr.resource(tex_id);
+    SharedPtr<t3::Texture> tex = tex_mgr.resource(tex_id);
     return createSprite(tex);
 }
 

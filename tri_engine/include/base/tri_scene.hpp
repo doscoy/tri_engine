@@ -7,7 +7,7 @@
 #include "util/tri_uncopyable.hpp"
 #include "util/tri_singleton.hpp"
 #include "base/tri_types.hpp"
-#include <memory>
+#include "base/tri_std.hpp"
 #include "dbg/tri_trace.hpp"
 
 #include "tri_task_manager.hpp"
@@ -22,7 +22,7 @@ class SceneGenerator
 {
 public:
     virtual ~SceneGenerator(){}
-    virtual std::shared_ptr<Scene> createScene() = 0;
+    virtual SharedPtr<Scene> createScene() = 0;
 };
 
 
@@ -42,8 +42,8 @@ public:
     
     
     //  シーン生成
-    std::shared_ptr<Scene> createScene() override {
-        return std::shared_ptr<Scene>(T3_SYS_NEW scene_t);
+    SharedPtr<Scene> createScene() override {
+        return SharedPtr<Scene>(T3_SYS_NEW scene_t);
     }
 
 };
@@ -89,7 +89,7 @@ public:
         return TypedSceneGenerator<SceneType>::instancePtr();
     }
 
-    void addSceneTask(std::shared_ptr<Task> task) {
+    void addSceneTask(SharedPtr<Task> task) {
         task_manager_.attach(task);
     }
 
@@ -159,7 +159,7 @@ public:
 
 public:
     static void addSceneTask(
-        std::shared_ptr<Task> task
+        SharedPtr<Task> task
     );
 
     static const TaskManager& taskManager();
@@ -168,7 +168,7 @@ private:
     void sceneChange();
 
 private:
-    std::shared_ptr<Scene> current_scene_;
+    SharedPtr<Scene> current_scene_;
     SceneGenerator* next_scene_generator_;
     bool force_change_;
     bool scene_changed_;

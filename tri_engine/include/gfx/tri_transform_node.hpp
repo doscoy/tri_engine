@@ -12,7 +12,7 @@ class Entity;
 
 
 class TransformNode;
-using TransformNodePtr = std::shared_ptr<TransformNode>;
+using TransformNodePtr = SharedPtr<TransformNode>;
 
 class TransformNode
     : public ISceneNode
@@ -23,12 +23,12 @@ public:
 protected:
     TransformNode(
         NodeID id,
-        std::string name
+        String name
     );
     
 public:
     static TransformNodePtr create(
-        std::string name
+        String name
     );
     
 public:
@@ -106,12 +106,12 @@ public:
     
     
 
-    std::string getNodeName() const {
-        return std::string();
+    String getNodeName() const {
+        return String();
     }
 
     TransformNodePtr createNode(
-        std::string name
+        String name
     );
 
 

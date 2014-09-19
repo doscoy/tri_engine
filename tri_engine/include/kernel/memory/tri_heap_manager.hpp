@@ -3,7 +3,7 @@
 #define TRI_HEAP_FACTORY_HPP_INCLUDED
 
 #include "tri_heap.hpp"
-#include <array>
+
 
 
 namespace t3 {
@@ -18,7 +18,7 @@ enum HeapIndex {
     HEAP_SIZE
 };
 
-using HeapContainer = std::array<Heap, HEAP_SIZE>;
+using HeapContainer = Array<Heap, HEAP_SIZE>;
 
 class HeapManager
 {    

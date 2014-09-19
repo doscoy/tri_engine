@@ -1,7 +1,6 @@
 
 
 #include "thread_test.hpp"
-#include <thread>
 
 #define CHAR_NUM 20
 void job() {
@@ -31,8 +30,8 @@ public:
 public:
     void initialize() {
         //  スレッド生成
-        std::thread th1(job);
-        std::thread th2(&ThreadTestScene::SceneContext::jo2, this);
+        t3::Thread th1(job);
+        t3::Thread th2(&ThreadTestScene::SceneContext::jo2, this);
         
         
         

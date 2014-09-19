@@ -23,7 +23,7 @@ protected:
 
 public:
     DrawLayer();
-    explicit DrawLayer(const std::string name, const int priority);
+    explicit DrawLayer(const String name, const int priority);
     virtual ~DrawLayer();
     
     template <typename T>

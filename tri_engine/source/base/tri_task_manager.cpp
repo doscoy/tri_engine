@@ -25,12 +25,12 @@ TaskManager::~TaskManager() {
 
 
 void TaskManager::attach(
-    std::shared_ptr<Task> task)
+    SharedPtr<Task> task)
 {
     taskes_.push_back(task);
     task->attachTask(true);
     
-    taskes_.sort(std::greater<std::shared_ptr<Task>>());
+    taskes_.sort(std::greater<SharedPtr<Task>>());
     
     //  タスク初期化
     task->taskInitialize();
@@ -40,10 +40,10 @@ void TaskManager::updateTask(const tick_t delta_time) {
     TaskList::iterator itr = taskes_.begin();
     TaskList::iterator end = taskes_.end();
     
-    std::shared_ptr<Task> next;
+    SharedPtr<Task> next;
     
     while (itr != end) {
-        std::shared_ptr<Task> t(*itr);
+        SharedPtr<Task> t(*itr);
         T3_NULL_ASSERT(t.get());
         ++itr;
         
@@ -51,7 +51,7 @@ void TaskManager::updateTask(const tick_t delta_time) {
             next = t->nextTask();
             //  次のタスクが存在しているなら登録
             if (next) {
-                t->nextTask(std::shared_ptr<Task>(nullptr));
+                t->nextTask(SharedPtr<Task>(nullptr));
                 attach(next);
             }
             //  タスク後片付け
@@ -79,7 +79,7 @@ void TaskManager::printTask() const {
     for (; itr != end; ++itr) {
         int show_x = task_num / 61;
         int show_y = task_num % 61;
-        std::shared_ptr<Task> t(*itr);
+        SharedPtr<Task> t(*itr);
         t3::printDisplay(show_x * 120, show_y * 15, "%s", t->name().c_str());
         task_num += 1;
     }
@@ -90,7 +90,7 @@ void TaskManager::killAllTask() {
     TaskList::iterator end = taskes_.end();
     
     while (itr != end) {
-        std::shared_ptr<Task> t(*itr);
+        SharedPtr<Task> t(*itr);
         ++itr;
         t->taskTerminate();
         detach(t);

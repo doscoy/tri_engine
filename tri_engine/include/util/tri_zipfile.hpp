@@ -1,17 +1,14 @@
 #ifndef TRI_ZIPFILE_HPP_INCLUDED
 #define TRI_ZIPFILE_HPP_INCLUDED
 
-#include <fstream>
-#include <map>
-#include <string>
-
+#include "base/tri_std.hpp"
 
 namespace t3 {
 inline namespace util {
 
 
 
-using ZipContentsMap = std::map<std::string, int>;
+using ZipContentsMap = std::map<String, int>;
 
 class ZipFile {
 
@@ -28,14 +25,14 @@ public:
         file_.close();
     }
 
-    bool initialize(const std::string& resFileName);
+    bool initialize(const String& resFileName);
     void terminate();
 
     int entries() const {
         return entries_;
     }
     
-    std::string getFileName(int index) const;
+    String getFileName(int index) const;
 
     int getFileSize(int index) const;
 
@@ -45,12 +42,12 @@ public:
     );
 
     bool readFile(
-        std::string& filename,
+        String& filename,
         void* buffer
     );
 
 
-	int find(const std::string &path) const;
+	int find(const String &path) const;
 
 	ZipContentsMap m_ZipContentsMap;
 
@@ -59,7 +56,7 @@ private:
     struct TZipDirFileHeader;
     struct TZipLocalHeader;
 
-    std::ifstream file_;
+    FileStream file_;
 
     char* data_buffer_;       // Raw data buffer.
     int entries_;         // エントリー数.

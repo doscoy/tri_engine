@@ -3,7 +3,7 @@
 
 
 #include "util/tri_uncopyable.hpp"
-#include <memory>
+#include "base/tri_std.hpp"
 #include "tri_types.hpp"
 #include "util/tri_stopwatch.hpp"
 
@@ -62,7 +62,7 @@ public:
     
     
 private:
-    std::unique_ptr<ApplicationDebugMenu> system_menu_;
+    ScopedPtr<ApplicationDebugMenu> system_menu_;
     SceneGenerator* root_scene_generator_;
     uint32_t last_scene_change_frame_;
     uint32_t memory_leak_check_filter_;

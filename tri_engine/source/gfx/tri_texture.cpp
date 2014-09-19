@@ -10,7 +10,7 @@ inline namespace gfx {
 // *********************************************
 //  コンストラクタ
 Texture::Texture(
-    std::string name,
+    String name,
     const uint32_t width,
     const uint32_t height,
     const RenderSystem::ColorFormat color_format
@@ -47,7 +47,7 @@ TexturePtr Texture::create(const FilePath& path) {
 
 
 TexturePtr Texture::create(
-    std::string name,
+    String name,
     const int width,
     const int height,
     const RenderSystem::ColorFormat color_format

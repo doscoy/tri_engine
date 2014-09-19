@@ -17,12 +17,12 @@ class SpriteLayer
 {
 public:
     
-    using SpriteContainer = std::list<WeakSprite>;
+    using SpriteContainer = List<WeakSprite>;
 
 public:
     SpriteLayer();
     SpriteLayer(
-        const std::string& name,
+        const String& name,
         const int priority
     );
     virtual ~SpriteLayer();

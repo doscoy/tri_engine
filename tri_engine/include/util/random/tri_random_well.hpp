@@ -3,7 +3,7 @@
 #ifndef TRI_RANDOM_WELL_HPP_INCLUDED
 #define TRI_RANDOM_WELL_HPP_INCLUDED
 
-#include <cstdint>
+#include "base/tri_std.hpp"
 
 namespace t3 {
 

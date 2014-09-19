@@ -33,7 +33,7 @@ public:
         }
         
         char buf[9999];
-        std::string hog("hog/stamp.png");
+        t3::String hog("hog/stamp.png");
         zip.readFile(hog, buf);
         
         

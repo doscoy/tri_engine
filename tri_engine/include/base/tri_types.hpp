@@ -10,8 +10,6 @@
 #ifndef TRI_TYPES_HPP_INCLUDED
 #define TRI_TYPES_HPP_INCLUDED
 
-//  include
-#include <cstdint>
 
 
 namespace t3 {

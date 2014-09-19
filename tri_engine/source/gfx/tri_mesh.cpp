@@ -43,15 +43,15 @@ Mesh::Mesh(
     , ib_()
     , sphere_()
 {
-    std::ifstream file(name, std::ios::in | std::ios::binary);
+    FileStream file(name, std::ios::in | std::ios::binary);
     char buf[1024];
     
     
     T3_ASSERT_MSG(file, "%s is not found.", name);
     
 
-    std::vector<VertexP3N> vertices;
-    std::vector<uint32_t> indices;
+    Vector<VertexP3N> vertices;
+    Vector<uint32_t> indices;
     
     vertices.reserve(500);
     indices.reserve(1000);

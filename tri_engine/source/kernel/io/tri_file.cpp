@@ -40,8 +40,8 @@ File::~File()
 bool File::loadFile(
     const FilePath& filepath
 ) {
-    std::string path = filepath.getFullPath();
-    std::ifstream fs(path);                 //ファイルオープン。読み込み形式は指定なしのときはテキストモードになる。
+    String path = filepath.getFullPath();
+    FileStream fs(path);                 //ファイルオープン。読み込み形式は指定なしのときはテキストモードになる。
     
     T3_ASSERT_MSG(!fs.fail(), "filepath = %s", path.c_str());
     fs.seekg( 0, std::fstream::end );       //ファイル末尾を探す

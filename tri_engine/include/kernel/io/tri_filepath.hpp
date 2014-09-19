@@ -3,8 +3,8 @@
 #ifndef TRI_FILEPATH_HPP_INCLUDED
 #define TRI_FILEPATH_HPP_INCLUDED
 
-#include <string>
 
+#include "base/tri_std.hpp"
 
 
 namespace t3 {
@@ -13,7 +13,7 @@ inline namespace io {
 class FilePath {
 public:
     FilePath(
-        std::string filepath
+        String filepath
     );
     
     FilePath(const char* const filepath);
@@ -21,21 +21,21 @@ public:
     ~FilePath();
 
 public:
-    std::string getFullPath() const;
+    String getFullPath() const;
     
-    std::string getExt() const;
+    String getExt() const;
     
-    std::string getFileNameNotExt() const;
+    String getFileNameNotExt() const;
     
 
 public:
     static void setResourceDirectory(
-        std::string const base
+        String const base
     );
 
 private:
-    std::string filepath_;
-    static std::string base_filepath_;
+    String filepath_;
+    static String base_filepath_;
 };
 
 

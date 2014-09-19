@@ -1,8 +1,9 @@
 #ifndef TRI_HASH_STRING_HPP_INCLUDED
 #define TRI_HASH_STRING_HPP_INCLUDED
 
-#include <functional>
-#include <string>
+
+#include "base/tri_std.hpp"
+
 
 namespace t3 {
 inline namespace util {
@@ -20,7 +21,7 @@ public:
     {
     }
 
-    explicit HashString(const std::string str)
+    explicit HashString(const String str)
         : str_(str)
         , key_(strToHashKey(str))
     {
@@ -31,7 +32,7 @@ public:
     
     
 public:
-    std::string string() const {
+    String string() const {
         return str_;
     }
     
@@ -39,7 +40,7 @@ public:
         return key_;
     }
     
-    void setString(const std::string str) {
+    void setString(const String str) {
         str_ = str;
         key_ = strToHashKey(str);
     }
@@ -57,13 +58,13 @@ public:
 private:
     
     key_t strToHashKey(
-        const std::string str
+        const String str
     ) {
-        return std::hash<std::string>()(str);
+        return std::hash<String>()(str);
     }
     
 private:
-    std::string str_;
+    String str_;
     key_t key_;
 
 };

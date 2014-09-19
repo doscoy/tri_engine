@@ -3,8 +3,7 @@
 
 #include "util/tri_uncopyable.hpp"
 #include "tri_render_system.hpp"
-#include <vector>
-#include <memory.h>
+#include "base/tri_std.hpp"
 #include "tri_shader.hpp"
 #include "tri_sprite.hpp"
 #include "gfx/tri_vertex_types.hpp"
@@ -62,8 +61,8 @@ class SpriteRenderer
         TexturePtr texture_;
         uint32_t draw_count_;
     };
-    using BatchGroups = std::vector<std::shared_ptr<BatchGroup>>;
-    using Container = std::vector<SpritePtr>;
+    using BatchGroups = Vector<SharedPtr<BatchGroup>>;
+    using Container = Vector<SpritePtr>;
 
 public:
     SpriteRenderer();
@@ -88,10 +87,10 @@ private:
 
     bool isBatchGroupChange(
         const SpritePtr sprite,
-        const std::shared_ptr<BatchGroup>& batch
+        const SharedPtr<BatchGroup>& batch
     );
     void margeSprites();
-    void renderBatch(std::shared_ptr<BatchGroup>& batch);
+    void renderBatch(SharedPtr<BatchGroup>& batch);
 
 private:
     Container sprites_;

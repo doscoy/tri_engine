@@ -3,9 +3,7 @@
 #define dev_t3_tri_scene_node_h
 
 #include "../math/tri_math.hpp"
-#include <memory>
-#include <vector>
-#include <list>
+#include "base/tri_std.hpp"
 
 
 
@@ -20,7 +18,7 @@ using NodeID = uint32_t;
 class SceneGraph;
 
 class ISceneNode;
-using SceneNodePtr = std::shared_ptr<ISceneNode>;
+using SceneNodePtr = SharedPtr<ISceneNode>;
 
 class ISceneNode
 {
@@ -64,9 +62,9 @@ public:
 };
 
 
-using SceneNodeList = std::vector<SceneNodePtr>;
+using SceneNodeList = Vector<SceneNodePtr>;
 
-using RenderableSceneNodes = std::list<SceneNodePtr>;
+using RenderableSceneNodes = List<SceneNodePtr>;
 
 
 

@@ -10,7 +10,7 @@ inline namespace dbg {
 
 DebugMenuFrame::DebugMenuFrame(
     DebugMenuFrame* parent,
-    const std::string& label
+    const String& label
 )   : DebugMenuLabel(parent, label)
     , focus_item_(nullptr)
     , select_idx_(0)

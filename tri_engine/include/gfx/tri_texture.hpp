@@ -14,7 +14,7 @@ namespace t3 {
 inline namespace gfx {
 
 class Texture;
-using TexturePtr = std::shared_ptr<Texture>;
+using TexturePtr = SharedPtr<Texture>;
 class Texture final
     : public Resource
 {
@@ -25,7 +25,7 @@ public:
     
 private:
     Texture(
-        std::string name,
+        String name,
         const uint32_t width,
         const uint32_t height,
         const RenderSystem::ColorFormat color_format
@@ -55,7 +55,7 @@ public:
     );
     
     static TexturePtr create(
-        std::string name,
+        String name,
         const int width,
         const int height,
         const RenderSystem::ColorFormat

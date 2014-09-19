@@ -6,14 +6,14 @@
 #include "math/tri_matrix.hpp"
 #include "../geometry/tri_frustum.hpp"
 #include "tri_entity.hpp"
-
+#include "base/tri_std.hpp"
 
 
 namespace t3 {
 inline namespace gfx {
 
 class Camera;
-using CameraPtr = std::shared_ptr<Camera>;
+using CameraPtr = SharedPtr<Camera>;
 
 class Camera
     : public Entity

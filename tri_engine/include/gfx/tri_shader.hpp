@@ -2,7 +2,7 @@
 #define TRI_SHADER_HPP_INCLUDED
 
 
-#include <string>
+
 #include "tri_render_system.hpp"
 #include "math/tri_vec3.hpp"
 #include "math/tri_matrix.hpp"
@@ -35,7 +35,7 @@ public:
     
     bool use();
     
-    const std::string& log() const {
+    const String& log() const {
         return log_;
     }
     
@@ -90,11 +90,11 @@ public:
 private:
     int handle_;
     bool linked_;
-    std::string log_;
+    String log_;
     
 };
 
-using ShaderPtr = std::shared_ptr<Shader>;
+using ShaderPtr = SharedPtr<Shader>;
     
     
 }   // namaspace gfx

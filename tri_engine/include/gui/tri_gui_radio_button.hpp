@@ -79,7 +79,7 @@ private:
     );
 
 private:
-    std::vector<Button*> buttons_;
+    Vector<Button*> buttons_;
     UniqueID group_id_;
     int active_button_idx_;
 };

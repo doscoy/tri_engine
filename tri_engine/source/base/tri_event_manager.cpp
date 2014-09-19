@@ -502,7 +502,7 @@ void EventManager::dumpListeners() const {
 }
 
 
-std::string EventManager::getEventNameByKey(
+String EventManager::getEventNameByKey(
     HashString::key_t key
 ) const {
 

@@ -11,8 +11,7 @@
 #include "tri_render_system.hpp"
 #include "dbg/tri_assert.hpp"
 #include "tri_texture.hpp"
-#include <memory>
-#include <cstdint>
+#include "base/tri_std.hpp"
 
 
 
@@ -300,7 +299,7 @@ private:
 };
 
 //  ポインタ型定義
-using SpritePtr = std::shared_ptr<Sprite>;
+using SpritePtr = SharedPtr<Sprite>;
 using WeakSprite = std::weak_ptr<Sprite>;
 
 

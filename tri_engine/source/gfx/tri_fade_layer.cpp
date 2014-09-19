@@ -16,7 +16,7 @@ FadeLayer::FadeLayer()
 
 
 FadeLayer::FadeLayer(
-    const std::string& name,
+    const String& name,
     const int priority
 )   : DrawLayer(name, priority)
     , fading_(false)

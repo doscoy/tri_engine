@@ -50,7 +50,7 @@ namespace t3 {
 
 // *********************************************
 //  コンストラクタ
-PngImage::PngImage(std::string path)
+PngImage::PngImage(String path)
 {
     FILE* fp;
     

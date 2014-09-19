@@ -15,7 +15,7 @@ inline namespace gfx {
 
     
 class RenderLayer;
-typedef std::list<RenderLayer*>   RenderLayers;
+typedef List<RenderLayer*>   RenderLayers;
 
 
 class RenderLayer
@@ -36,8 +36,8 @@ public:
     };
     
 public:
-    RenderLayer(const std::string& name, const int priority);
-    explicit RenderLayer(const std::string& name);
+    RenderLayer(const String& name, const int priority);
+    explicit RenderLayer(const String& name);
     virtual ~RenderLayer();
 
 public:

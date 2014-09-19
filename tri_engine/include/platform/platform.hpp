@@ -55,7 +55,7 @@ void printConsole(
     const char* const str
 );
 
-std::string getDeviceFilePath();
+String getDeviceFilePath();
 
 void loadFile(
     const FilePath& file_path,

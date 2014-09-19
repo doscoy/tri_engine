@@ -10,7 +10,7 @@ namespace t3 {
 inline namespace dbg {
     
     
-typedef std::list<DebugMenuLabel*> DebugMenuList;
+typedef List<DebugMenuLabel*> DebugMenuList;
 
 class DebugMenuFrame 
     : public DebugMenuLabel
@@ -21,7 +21,7 @@ class DebugMenuFrame
 public:
     DebugMenuFrame(
         DebugMenuFrame* parent,
-        const std::string& label
+        const String& label
     );
     
     ~DebugMenuFrame();

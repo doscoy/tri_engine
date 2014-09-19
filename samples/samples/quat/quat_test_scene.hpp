@@ -21,7 +21,7 @@ public:
 
 private:
     class SceneContext;
-    std::unique_ptr<SceneContext> context_;
+    t3::ScopedPtr<SceneContext> context_;
 
 };
 

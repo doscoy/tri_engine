@@ -7,8 +7,8 @@
 #ifndef TRI_BIT_HPP_INCLUDED
 #define TRI_BIT_HPP_INCLUDED
 
-#include "../base/tri_types.hpp"
 
+#include "base/tri_std.hpp"
 
 namespace t3 {
 inline namespace util {

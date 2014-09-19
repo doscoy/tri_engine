@@ -9,9 +9,6 @@
 #ifndef dev_t3_tri_scene_graph_hpp
 #define dev_t3_tri_scene_graph_hpp
 
-#include <map>
-#include <memory.h>
-
 #include "../math/tri_matrix_stack.hpp"
 #include "tri_transform_node.hpp"
 #include "tri_scene_node.hpp"

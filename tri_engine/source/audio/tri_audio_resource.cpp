@@ -18,7 +18,7 @@ AudioResource::~AudioResource() {
 }
 
 
-std::shared_ptr<AudioResource> AudioResource::create(
+SharedPtr<AudioResource> AudioResource::create(
     FilePath& filepath
 ) {
     if (filepath.getExt() != ".wav") {
@@ -28,16 +28,16 @@ std::shared_ptr<AudioResource> AudioResource::create(
     Wav wav;
     wav.load(filepath);
     
-    std::shared_ptr<AudioResource> res;
+    SharedPtr<AudioResource> res;
     res.reset(T3_SYS_NEW AudioResource);
     res->setupBuffer(wav);
     return res;
 }
 
 
-std::shared_ptr<AudioHandle> AudioResource::createSound() {
+SharedPtr<AudioHandle> AudioResource::createSound() {
     
-    std::shared_ptr<AudioHandle> audio_handle;
+    SharedPtr<AudioHandle> audio_handle;
     audio_handle.reset(
         T3_SYS_NEW AudioHandle(id_)
     );

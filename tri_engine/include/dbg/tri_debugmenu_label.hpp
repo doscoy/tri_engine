@@ -24,7 +24,7 @@ class DebugMenuLabel
 public:
     DebugMenuLabel(
         DebugMenuFrame* parent,
-        const std::string& label
+        const String& label
     );
     
     virtual ~DebugMenuLabel();
@@ -32,7 +32,7 @@ public:
 
 public:
 
-    const std::string& getLabel() const {
+    const String& getLabel() const {
         return label_;
     };
     
@@ -107,7 +107,7 @@ private:
     
 protected:
     DebugMenuFrame* parent_;
-    std::string label_;
+    String label_;
     bool enable_;
     
     //  開閉コールバック

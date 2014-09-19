@@ -147,8 +147,8 @@ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 void SpriteRenderer::margeSprites() {
 
 
-    std::vector<VertexP2CT> vertices;
-    std::vector<uint32_t> indices;
+    Vector<VertexP2CT> vertices;
+    Vector<uint32_t> indices;
     
     vertices.reserve(sprites_.size());
     indices.reserve(sprites_.size() * 6);
@@ -164,7 +164,7 @@ void SpriteRenderer::margeSprites() {
     int current_index = 0;
     //  現在のバッチグループ
     //  バッチが切れる場合はコンテナにコピーされて新たなバッチグループのインスタンスとして使う
-    std::shared_ptr<BatchGroup> current_batch = std::make_shared<BatchGroup>();
+    SharedPtr<BatchGroup> current_batch = std::make_shared<BatchGroup>();
     
     for (int i = 0; i < sprites_.size(); ++i) {
         auto& spr = sprites_[i];
@@ -390,7 +390,7 @@ void SpriteRenderer::margeSprites() {
 
 bool SpriteRenderer::isBatchGroupChange(
     const SpritePtr sprite,
-    const std::shared_ptr<BatchGroup>& current_batch
+    const SharedPtr<BatchGroup>& current_batch
 ) {
 
     if (*sprite->texture() != *current_batch->texture()) {
@@ -402,7 +402,7 @@ bool SpriteRenderer::isBatchGroupChange(
 }
 
 
-void SpriteRenderer::renderBatch(std::shared_ptr<BatchGroup>& batch) {
+void SpriteRenderer::renderBatch(SharedPtr<BatchGroup>& batch) {
 
     //  テクスチャの割り当て
     const TexturePtr& texture = batch->texture();

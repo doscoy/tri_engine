@@ -1,7 +1,7 @@
 #ifndef PLATFORM_SDK_HPP_INCLUDED
 #define PLATFORM_SDK_HPP_INCLUDED
 
-#include <cstdint>
+
 
 #if defined(_WIN32)
 

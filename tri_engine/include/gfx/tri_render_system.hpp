@@ -5,9 +5,7 @@
 #include "math/tri_matrix.hpp"
 #include "gfx/tri_color.hpp"
 #include "platform/platform_sdk.hpp"
-
-#include <memory>
-#include <vector>
+#include "base/tri_std.hpp"
 
 
 #define STRINGIFY(A)  #A
@@ -320,11 +318,11 @@ public:
     
     
     static BufferID createVertexBuffer(
-        std::vector<float>& vertices
+        Vector<float>& vertices
     );
     
     static BufferID createIndexBuffer(
-        std::vector<uint32_t>& indices
+        Vector<uint32_t>& indices
     );
   
     

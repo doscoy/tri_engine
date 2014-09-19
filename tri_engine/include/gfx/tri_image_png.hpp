@@ -6,13 +6,13 @@
 #include "kernel/io/tri_file.hpp"
 
 
-#include <string>
+
 
 namespace t3 {
     
 struct PngImage {
     
-    explicit PngImage(std::string path);
+    explicit PngImage(String path);
     explicit PngImage(File& file);
 
     ~PngImage();
