@@ -151,6 +151,8 @@ void* Heap::allocate(
 ) {
     ScopedLock lock(Heap::mutex());
 
+    T3_ASSERT(size > 0);
+
     //  本当に確保するサイズ　リクエストサイズ + ヘッダ情報 + 終端マーク4byte
     size_t alloc_header_size = sizeof(AllocHeader);
     size_t request_bytes = size + alloc_header_size;

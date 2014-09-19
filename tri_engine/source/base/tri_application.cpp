@@ -136,7 +136,7 @@ Application::Application()
     : root_scene_generator_(nullptr)
     , system_menu_(nullptr)
     , last_scene_change_frame_(0)
-    , memory_leak_check_filter_(0)
+    , memory_leak_check_filter_(9990)
     , fps_timer_()
 {
 }

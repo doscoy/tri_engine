@@ -10,16 +10,24 @@
 namespace t3 {
 
     
-// *********************************************
 //  コンストラクタ
 File::File()    
-    : data_(nullptr)
-    , size_(0)
+    : File(nullptr, 0)
 {
 
 }    
+
+
+//  コンストラクタ
+File::File(
+    uint8_t* data,
+    size_t size
+)   : data_(data)
+    , size_(size)
+{
+}
+
     
-// *********************************************
 //  デストラクタ
 File::~File()
 {
@@ -28,11 +36,10 @@ File::~File()
     
     
     
-// *********************************************
 //  ファイル読み込み
 bool File::loadFile(
     const FilePath& filepath
-){
+) {
     std::string path = filepath.getFullPath();
     std::ifstream fs(path);                 //ファイルオープン。読み込み形式は指定なしのときはテキストモードになる。
     
@@ -48,23 +55,12 @@ bool File::loadFile(
     
     fs.read((char*)data_, size_);                //ファイル先頭からバッファへコピー
     
-
-
-//    platform::loadFile(filepath, &data_, &size_);
     return true;
 }
     
 
     
-    
 }   // namespace t3
-
-
-
-
-
-
-
 
 
 

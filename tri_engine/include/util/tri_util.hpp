@@ -12,6 +12,7 @@
 #include "tri_hash_string.hpp"
 #include "tri_framerate.hpp"
 #include "tri_singleton.hpp"
+#include "tri_string_util.hpp"
 #include "tri_unique_id.hpp"
 #include "tri_array_size.hpp"
 #include "tri_counter.hpp"
@@ -20,7 +21,7 @@
 #include "tri_nameable.hpp"
 #include "tri_stopwatch.hpp"
 #include "tri_signature.hpp"
-
+#include "tri_zipfile.hpp"
 
 
 #endif // TRI_UTIL_HPP_INCLUDED

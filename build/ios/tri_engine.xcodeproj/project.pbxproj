@@ -111,10 +111,12 @@
 		04391BE919BCAF81006FFF38 /* tri_streaming_player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_streaming_player.hpp; sourceTree = "<group>"; };
 		04391BEA19BCAF9B006FFF38 /* tri_streaming_player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_streaming_player.cpp; sourceTree = "<group>"; };
 		04391BED19BF4975006FFF38 /* tri_signature.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_signature.hpp; sourceTree = "<group>"; };
+		3A0AB7B019CC90B90050E0DF /* tri_std.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_std.hpp; sourceTree = "<group>"; };
 		3A1C1B2519AC2BD0005A69FA /* tri_mutex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tri_mutex.hpp; path = process/tri_mutex.hpp; sourceTree = "<group>"; };
 		3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_mutex.cpp; sourceTree = "<group>"; };
 		3A24B4CE19C16C5900E9CFFE /* tri_zipfile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_zipfile.hpp; sourceTree = "<group>"; };
 		3A24B4CF19C16C7900E9CFFE /* tri_zipfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_zipfile.cpp; sourceTree = "<group>"; };
+		3A24B4D219C8882000E9CFFE /* tri_string_util.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_string_util.hpp; sourceTree = "<group>"; };
 		3A6FC4B319B61E6600970B80 /* tri_vertex_buffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_vertex_buffer.hpp; sourceTree = "<group>"; };
 		3A6FC4B419B61FEF00970B80 /* tri_index_buffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_index_buffer.hpp; sourceTree = "<group>"; };
 		3AA7EBA719A0F48800CEB23A /* libtri_engine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtri_engine.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -675,6 +677,7 @@
 				3AA7EE0819A0F61700CEB23A /* tri_task.hpp */,
 				3AA7EE0919A0F61700CEB23A /* tri_task_manager.hpp */,
 				3AA7EE0A19A0F61700CEB23A /* tri_types.hpp */,
+				3A0AB7B019CC90B90050E0DF /* tri_std.hpp */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -875,6 +878,7 @@
 				3AD4071D19AF9F1B00762711 /* tri_bytesize.hpp */,
 				04391BED19BF4975006FFF38 /* tri_signature.hpp */,
 				3A24B4CE19C16C5900E9CFFE /* tri_zipfile.hpp */,
+				3A24B4D219C8882000E9CFFE /* tri_string_util.hpp */,
 			);
 			path = util;
 			sourceTree = "<group>";

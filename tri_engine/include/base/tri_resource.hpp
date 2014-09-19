@@ -9,7 +9,7 @@
 
 #include <cstring>
 
-constexpr int RESOURCE_NAME_SIZE = 200;
+constexpr int RESOURCE_NAME_SIZE = 128;
 
 namespace t3 {
 inline namespace base {

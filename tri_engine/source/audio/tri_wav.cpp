@@ -13,33 +13,6 @@ int readWaveHeader(
     t3::Wav::Info& info
 ) {
 
-/*
-    std::streamoff top = file.tellg();
-
-    for (int i = 0; i < 20000; ++i) {
-        uint32_t das;
-        file.read((char*)&das, 4);
-    
-        if (das == t3::makeSignature('R', 'I', 'F', 'F')) {
-            T3_TRACE("RIFF\n");
-        }
-        else if (das == t3::makeSignature('W', 'A', 'V', 'E')) {
-            T3_TRACE("WAVE\n");
-        }
-        else if (das == t3::makeSignature('f', 'm', 't', ' ')) {
-            T3_TRACE("fmt\n");
-        }
-        else if (das == t3::makeSignature('d', 'a', 't', 'a')) {
-            T3_TRACE("data\n");
-        }
-        else if (das == t3::makeSignature('D', 'A', 'T', 'A')) {
-            T3_TRACE("DATA\n");
-        }
-    }
-
-
-    file.seekg(top);
-*/
     // "RIFF" の読み込み
     unsigned int riff;
     file.read((char*)&riff,4);
@@ -124,90 +97,6 @@ int readWaveHeader(
 
     return true;
 
-
-
-   /*
-    int flag = 0;
-    
-    int res32;
-    fread(&res32, 4, 1,fp);
-    if(res32 != 0x46464952){	//"RIFF"
-        return 1;	//error 1
-    }
-    
-    //データサイズ = ファイルサイズ - 8 byte の取得
-    fread(&info.size_, 4, 1, fp);
-    
-    //WAVEヘッダーの読み
-    fread(&res32, 4, 1, fp);
-    if(res32 != 0x45564157){	//"WAVE"
-        return 2;	//error 2
-    }
-    
-    while(flag != 3){
-        //チャンクの読み
-        fread(&res32, 4, 1, fp);
-        int chunk_size;
-        fread(&chunk_size, 4, 1, fp);
-        
-        switch(res32){
-            case 0x20746d66:	//"fmt "
-                //format 読み込み
-                //PCM種類の取得
-                short res16;
-                fread(&res16, 2, 1, fp);
-                if(res16 != 1){
-                    //非対応フォーマット
-                    return 4;
-                }
-                //モノラル(1)orステレオ(2)
-                fread(&info.channel_, 2, 1, fp);
-                if(res16 > 2){
-                    //チャンネル数間違い
-                    return 5;
-                }
-                //サンプリングレート
-                int byte_par_sec;
-                fread(&info.sampling_rate_, 4, 1, fp);
-                
-                //データ速度(byte/sec)=サンプリングレート*ブロックサイズ
-                fread(&byte_par_sec, 4, 1, fp);
-                
-                //ブロックサイズ(byte/sample)=チャンネル数*サンプルあたりのバイト数
-                short block_size;
-                fread(&block_size, 2, 1, fp);
-                
-                //サンプルあたりのbit数(bit/sample)：8 or 16
-                fread(&info.bit_per_sample_, 2, 1, fp);
-                
-                
-                flag += 1;
-                
-                break;
-            case  0x61746164:	//"data"
-                
-                info.size_ = chunk_size;
-                
-                info.data_pos_ = ftell(fp);
-                
-                flag += 2;
-                break;
-        }
-        
-    }
-    
-    
-    
-    
-    //頭出し("fmt "が"data"より後にあった場合のみ動く)
-    if (info.data_pos_ != ftell(fp)){
-        fseek(fp, info.data_pos_, SEEK_SET);
-    }
-    
-    info.time_ = info.size_ / info.channel_ / 2.0f / info.sampling_rate_;
-
-    return 0;
-    */
 }
     
     
