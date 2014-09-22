@@ -23,7 +23,6 @@ TexturePtr TextureFactory::createFromData(
         height,
         color_format
     ));
-    tex->resourceName(name.c_str());
     
     glBindTexture(GL_TEXTURE_2D, tex->id());
     RenderSystem::setupTextureData(width, height, color_format, data);
@@ -70,8 +69,12 @@ TexturePtr TextureFactory::createFromPngFile(
     File png_file;
     png_file.loadFile(filepath);
 
+    return createFromPngFile(png_file);
+}
 
-    PngImage png(png_file);
+TexturePtr TextureFactory::createFromPngFile(const File& file) {
+
+    PngImage png(file);
     
     RenderSystem::ColorFormat color_format = RenderSystem::ColorFormat::RGB;
     switch (png.color_type_) {
@@ -90,7 +93,7 @@ TexturePtr TextureFactory::createFromPngFile(
     }
     
     TexturePtr tex = createFromData(
-        filepath.getFullPath(),
+        file.name(),
         png.width_,
         png.height_,
         color_format,

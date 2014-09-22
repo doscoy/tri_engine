@@ -10,29 +10,29 @@
 	<string>tri_samples_ios</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>09221730-74ED-40E9-B9C7-BA3754B1DC2F</key>
+		<key>BF55E8098439A3D587FA5F22409CE7EC62A98B6F</key>
 		<string>https://github.com/doscoy/tri_engine.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>samples/build_tools_ios/tri_samples_ios/tri_samples_ios.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>09221730-74ED-40E9-B9C7-BA3754B1DC2F</key>
+		<key>BF55E8098439A3D587FA5F22409CE7EC62A98B6F</key>
 		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/doscoy/tri_engine.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>09221730-74ED-40E9-B9C7-BA3754B1DC2F</string>
+	<string>BF55E8098439A3D587FA5F22409CE7EC62A98B6F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>09221730-74ED-40E9-B9C7-BA3754B1DC2F</string>
+			<string>BF55E8098439A3D587FA5F22409CE7EC62A98B6F</string>
 			<key>IDESourceControlWCCName</key>
 			<string>tri_engine</string>
 		</dict>

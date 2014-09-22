@@ -25,7 +25,7 @@ public:
         file_.close();
     }
 
-    bool initialize(const String& resFileName);
+    bool initialize(const String& zip_file_name);
     void terminate();
 
     int entries() const {
@@ -34,7 +34,9 @@ public:
     
     String getFileName(int index) const;
 
-    int getFileSize(int index) const;
+    size_t getFileSize(int index) const;
+
+    size_t getFileSize(const String& name) const;
 
     bool readFile(
         int index,
@@ -42,7 +44,7 @@ public:
     );
 
     bool readFile(
-        String& filename,
+        String& name,
         void* buffer
     );
 
@@ -52,16 +54,16 @@ public:
 	ZipContentsMap m_ZipContentsMap;
 
 private:
-    struct TZipDirHeader;
-    struct TZipDirFileHeader;
-    struct TZipLocalHeader;
+    struct ZipDirHeader;
+    struct ZipDirFileHeader;
+    struct ZipLocalHeader;
 
     FileStream file_;
 
     char* data_buffer_;       // Raw data buffer.
     int entries_;         // エントリー数.
 
-    const TZipDirFileHeader** m_papDir;
+    const ZipDirFileHeader** pap_dir_;
 };
 
 

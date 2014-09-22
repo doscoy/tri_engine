@@ -29,8 +29,7 @@ SpriteLayer::~SpriteLayer()
 
 
 SpritePtr SpriteLayer::createSprite(TexturePtr tex) {
-    SpritePtr spr;
-    spr.reset(T3_SYS_NEW Sprite);
+    SpritePtr spr(T3_SYS_NEW Sprite);
     spr->texture(tex);
     attachSprite(spr);
     

@@ -99,7 +99,7 @@ PngImage::PngImage(String path)
 
 
 PngImage::PngImage(
-    File& file
+    const File& file
 ) {
     png_structp png_ptr = png_create_read_struct(
         PNG_LIBPNG_VER_STRING,
@@ -111,7 +111,7 @@ PngImage::PngImage(
 
 
     //  本物のpngデータか確認
-    bool is_png = png_check_sig((png_bytep)file.getData(), 8);
+    bool is_png = png_check_sig((png_bytep)file.data(), 8);
     T3_ASSERT(is_png);
 
 
@@ -120,7 +120,7 @@ PngImage::PngImage(
     T3_NULL_ASSERT(info_ptr);
 
     my_png_buffer mybuf;
-    mybuf.data_ = file.getData();
+    mybuf.data_ = file.data();
     mybuf.data_len_ = file.size();
     mybuf.data_offset_ = 0;
     png_data_read(png_ptr, &mybuf);

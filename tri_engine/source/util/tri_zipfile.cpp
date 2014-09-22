@@ -18,21 +18,9 @@ constexpr int MAX_FILE_PATH = 256;
 }   // unname namespace
 
 
-
-// --------------------------------------------------------------------------
-// Basic types.
-// --------------------------------------------------------------------------
-
-
-// --------------------------------------------------------------------------
-// ZIP file structures. Note these have to be packed.
-// --------------------------------------------------------------------------
-
 #pragma pack(1)
-// --------------------------------------------------------------------------
-// struct ZipFile::TZipLocalHeader					- Chapter 8, page 215
-// --------------------------------------------------------------------------
-struct ZipFile::TZipLocalHeader
+
+struct ZipFile::ZipLocalHeader
 {
     enum
     {
@@ -61,10 +49,8 @@ struct ZipFile::TZipLocalHeader
 
 };
 
-// --------------------------------------------------------------------------
-// struct ZipFile::TZipDirHeader					- Chapter 8, page 215
-// --------------------------------------------------------------------------
-struct ZipFile::TZipDirHeader
+
+struct ZipFile::ZipDirHeader
 {
     enum
     {
@@ -80,10 +66,7 @@ struct ZipFile::TZipDirHeader
     uint16_t cmntLen;
 };
 
-// --------------------------------------------------------------------------
-// struct ZipFile::TZipDirFileHeader					- Chapter 8, page 215
-// --------------------------------------------------------------------------
-struct ZipFile::TZipDirFileHeader
+struct ZipFile::ZipDirFileHeader
 {
     enum
     {
@@ -131,43 +114,42 @@ bool ZipFile::initialize(
     file_.open(resFileName.c_str(), std::ios::binary);
 
     // Assuming no extra comment at the end, read the whole end record.
-    TZipDirHeader dh;
+    ZipDirHeader dh;
 
     file_.seekg(-(int)sizeof(dh), std::ios::end);
     std::streamoff dhOffset = file_.tellg();
     std::memset(&dh, 0, sizeof(dh));
     file_.read((char*)&dh, sizeof(dh));
     // Check
-    if (dh.sig != TZipDirHeader::SIGNATURE) {
+    if (dh.sig != ZipDirHeader::SIGNATURE) {
         return false;
     }
     
     // Go to the beginning of the directory.
     file_.seekg(dhOffset - dh.dirSize, std::ios::beg);
-    // Allocate the data buffer, and read the whole thing.
-    data_buffer_ = T3_NEW char[dh.dirSize + dh.nDirEntries*sizeof(*m_papDir)];
-  
-    if (!data_buffer_) {
-        return false;
-    }
     
-    std::memset(data_buffer_, 0, dh.dirSize + dh.nDirEntries*sizeof(*m_papDir));
+    //  データ用のバッファ確保
+    data_buffer_ = T3_NEW char[dh.dirSize + dh.nDirEntries*sizeof(*pap_dir_)];
+    T3_ASSERT(data_buffer_);
+
+    
+    std::memset(data_buffer_, 0, dh.dirSize + dh.nDirEntries*sizeof(*pap_dir_));
     file_.read(data_buffer_, dh.dirSize);
 
     // Now process each entry.
-    char* pfh = data_buffer_;
-    m_papDir = (const TZipDirFileHeader **)(data_buffer_ + dh.dirSize);
+    pap_dir_ = (const ZipDirFileHeader **)(data_buffer_ + dh.dirSize);
 
     bool success = true;
 
+    char* pfh = data_buffer_;
     for (int i = 0; i < dh.nDirEntries && success; i++) {
-        TZipDirFileHeader &fh = *(TZipDirFileHeader*)pfh;
+        ZipDirFileHeader &fh = *(ZipDirFileHeader*)pfh;
 
         // Store the address of nth file for quicker access.
-        m_papDir[i] = &fh;
+        pap_dir_[i] = &fh;
 
         // Check the directory entry integrity.
-        if (fh.sig != TZipDirFileHeader::SIGNATURE) {
+        if (fh.sig != ZipDirFileHeader::SIGNATURE) {
             success = false;
         } else {
             pfh += sizeof(fh);
@@ -229,10 +211,10 @@ String ZipFile::getFileName(int index) const {
         char pszDest[MAX_FILE_PATH];
         std::memcpy(
             pszDest,
-            m_papDir[index]->GetName(),
-            m_papDir[index]->fnameLen
+            pap_dir_[index]->GetName(),
+            pap_dir_[index]->fnameLen
         );
-        pszDest[m_papDir[index]->fnameLen] = '\0';
+        pszDest[pap_dir_[index]->fnameLen] = '\0';
         fileName = pszDest;
 	}
     
@@ -240,12 +222,17 @@ String ZipFile::getFileName(int index) const {
 }
 
 
-int ZipFile::getFileSize(int index) const {
+size_t ZipFile::getFileSize(int index) const {
     if (index < 0 || index >= entries_) {
         return -1;
     } else {
-        return m_papDir[index]->ucSize;
+        return pap_dir_[index]->ucSize;
     }
+}
+
+size_t ZipFile::getFileSize(const String& name) const {
+
+    return getFileSize(find(name));
 }
 
 
@@ -269,13 +256,13 @@ bool ZipFile::readFile(
     // Ungood if the ZIP has huge files inside
 
     // Go to the actual file and read the local header.
-    file_.seekg(m_papDir[index]->hdrOffset, std::ios::beg);
-    TZipLocalHeader h;
+    file_.seekg(pap_dir_[index]->hdrOffset, std::ios::beg);
+    ZipLocalHeader h;
 
     std::memset(&h, 0, sizeof(h));
     file_.read((char*)&h, sizeof(h));
     
-    if (h.sig != TZipLocalHeader::SIGNATURE) {
+    if (h.sig != ZipLocalHeader::SIGNATURE) {
         return false;
     }
     

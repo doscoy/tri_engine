@@ -12,7 +12,7 @@ namespace t3 {
     
 //  コンストラクタ
 File::File()    
-    : File(nullptr, 0)
+    : File(String(""), 0, nullptr)
 {
 
 }    
@@ -20,10 +20,13 @@ File::File()
 
 //  コンストラクタ
 File::File(
-    uint8_t* data,
-    size_t size
-)   : data_(data)
+    const String& name,
+    size_t size,
+    uint8_t* data
+)   : name_(name)
+    , data_(data)
     , size_(size)
+    , auto_free_(false)
 {
 }
 
@@ -31,7 +34,9 @@ File::File(
 //  デストラクタ
 File::~File()
 {
-    T3_FREE(data_);
+    if (auto_free_) {
+        T3_FREE(data_);
+    }
 }
     
     
@@ -50,9 +55,11 @@ bool File::loadFile(
     fs.seekg( 0, std::fstream::beg );       //ファイル先頭に戻る
     std::size_t beg_pos = static_cast<std::size_t>(fs.tellg());        //ファイル先頭インデクスを取得
     size_ = eof_pos - beg_pos;              //末尾-先頭でファイルサイズを計算
-    
+    if (auto_free_) {
+        T3_FREE(data_);
+    }
     data_ = (uint8_t*)T3_SYS_ALLOC(size_);
-    
+    auto_free_ = true;
     fs.read((char*)data_, size_);                //ファイル先頭からバッファへコピー
     
     return true;

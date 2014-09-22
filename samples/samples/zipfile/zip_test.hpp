@@ -22,7 +22,6 @@ public:
 private:
     class SceneContext;
     t3::ScopedPtr<SceneContext> context_;
-
 };
 
 #endif // ZIP_TEST_HPP_INCLUDED

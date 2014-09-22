@@ -32,14 +32,16 @@ public:
             );
         }
         
-        char buf[9999];
-        t3::String hog("hog/stamp.png");
+        
+        const size_t buf_size = 99999;
+        uint8_t buf[buf_size];
+        t3::String hog("hoj/stamp.png");
         zip.readFile(hog, buf);
+        t3::File png("hoj/stamp.png", buf_size, buf);
         
-        
-//        t3::TexturePtr tex = t3::TextureFactory::createFromPngFile(buf);
-//        sp_layer_.createSprite(tex);
-        
+        t3::TexturePtr tex = t3::TextureFactory::createFromPngFile(png);
+        spr_ = sp_layer_.createSprite(tex);
+    
         
     }
     
@@ -48,7 +50,6 @@ public:
     }
     
     void update(t3::tick_t delta_time) {
-
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -57,7 +58,7 @@ public:
 
 private:
     t3::SpriteLayer sp_layer_;
-
+    t3::SpritePtr spr_;
 };
 
 

@@ -52,8 +52,7 @@ TexturePtr Texture::create(
     const int height,
     const RenderSystem::ColorFormat color_format
 ) {
-    TexturePtr t;
-    t.reset(T3_SYS_NEW Texture(
+    TexturePtr t(T3_SYS_NEW Texture(
         name,
         width,
         height,

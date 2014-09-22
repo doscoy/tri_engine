@@ -14,7 +14,12 @@ class File : private Uncopyable
 {
 public:
     File();
-    File(uint8_t* data, size_t size);
+    File(
+        const String& name,
+        size_t size,
+        uint8_t* data
+    );
+    
     ~File();
 
 public:
@@ -23,7 +28,7 @@ public:
     bool loadFile(const FilePath& filepath);
 
     //  データ取得
-    const uint8_t* getData() const {
+    const uint8_t* data() const {
         return data_;
     }
     
@@ -37,14 +42,23 @@ public:
         return  data_ != nullptr;
     }
 
+    //  名前
+    const String& name() const {
+        return name_;
+    }
     
 private:
+    //  名前
+    String name_;
+
     //  データ
     uint8_t* data_;
     
     //  データサイズ
     std::size_t size_;
     
+    //  データバッファの自動解放
+    bool auto_free_;
 };
     
 using FilePtr = SharedPtr<File>;

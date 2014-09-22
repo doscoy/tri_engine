@@ -30,9 +30,12 @@ public:
         const void* data
     );
     
-private:
     static TexturePtr createFromPngFile(
         const FilePath& filepath
+    );
+
+    static TexturePtr createFromPngFile(
+        const File& file
     );
 };
 

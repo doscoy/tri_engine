@@ -13,7 +13,7 @@ namespace t3 {
 struct PngImage {
     
     explicit PngImage(String path);
-    explicit PngImage(File& file);
+    explicit PngImage(const File& file);
 
     ~PngImage();
     uint32_t width_;
