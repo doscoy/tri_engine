@@ -250,7 +250,7 @@ public:
     }
 
     bool isScaledSprite() const {
-        const Vec2& scale = transform()->scale();
+        Vec2 scale = transform()->globalScale();
         
         if (!isEqualFloat(scale.x_, 1.0f)) {
             return true;

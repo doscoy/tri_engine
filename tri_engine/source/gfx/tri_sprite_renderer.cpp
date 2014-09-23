@@ -131,16 +131,17 @@ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
     RenderSystem::setActiveTextureUnit(RenderSystem::TextureUnit::UNIT0);
 
-    t3::RenderSystem::setBlendFunctionType(
-        t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
-        t3::RenderSystem::BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
-    );
-
     t3::RenderSystem::setBlend(true);
     t3::RenderSystem::setCulling(false);
     t3::RenderSystem::setDepthTest(false);
     t3::RenderSystem::setDepthWrite(false);
-//    t3::RenderSystem::setAlphaTest(false);
+
+    t3::RenderSystem::setBlendFunctionType(
+        t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
+        t3::RenderSystem::BlendFunctionType::TYPE_ONE
+    );
+
+
 }
 
 
@@ -226,7 +227,7 @@ void SpriteRenderer::margeSprites() {
         
         //  スケーリング
         if (spr->isScaledSprite()) {
-            const Vec2& scale = spr->transform()->scale();
+            const Vec2& scale = spr->transform()->globalScale();
             lt *= scale;
             lb *= scale;
             rt *= scale;

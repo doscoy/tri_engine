@@ -19,8 +19,9 @@ namespace {
 #define LIMIT_AVG_SUM   3600
 t3::Vector<float> render_avg;
 
-bool show_heap_ = true;
-bool show_work_bar_ = true;
+bool show_fps_ = false;
+bool show_heap_ = false;
+bool show_work_bar_ = false;
 bool show_work_time_ = false;
 bool show_task_ = false;
 t3::Workbar cpu_bar_;
@@ -223,23 +224,23 @@ void Application::updateApplication()
 
 
     //  FPS表示
-    if ((frame_counter_.now() % 10) == 0) {
-        fps_ =  60.0f / (delta_time / frameToSec(1));
-    }
-    t3::printDisplay(0, 10, "FPS %.1f",fps_);
+    if (show_fps_) {
+        if ((frame_counter_.now() % 10) == 0) {
+            fps_ =  60.0f / (delta_time / frameToSec(1));
+        }
+        t3::printDisplay(0, 10, "FPS %.1f",fps_);
 
-
-    float sum_render = 0;
-    for (float a : render_avg) {
-        sum_render += a;
+        float sum_render = 0;
+        for (float a : render_avg) {
+            sum_render += a;
+        }
+    
+        //  ドローコール数
+        t3::printDisplay(140, 10, "DC:%d",
+            t3::RenderSystem::getDrawCallCount()
+        );
+        t3::RenderSystem::resetDrawCallCount();
     }
-    
-    //  ドローコール数
-    t3::printDisplay(140, 10, "DC:%d",
-        t3::RenderSystem::getDrawCallCount()
-    );
-    t3::RenderSystem::resetDrawCallCount();
-    
     
     
     
@@ -437,10 +438,13 @@ void Application::terminateApplication() {
 
 bool Application::isDebugMenuOpenRequest() {
 
+    bool result = false;
+
+#if DEBUG
+
     //  パッド操作でのオープンリクエスト
     const Pad& pad = debugPad();
     
-    bool result = false;
     if (pad.isPress(Pad::BUTTON_A)) {
         result = true;
     }
@@ -451,7 +455,7 @@ bool Application::isDebugMenuOpenRequest() {
     if (pointing.isDoubleClick() /*&& pointing.getPointingCount() == 3*/) {
         result = true;
     }
-    
+#endif // DEBUG
     return result;
 }
 

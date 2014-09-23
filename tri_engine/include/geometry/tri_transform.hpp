@@ -132,6 +132,16 @@ public:
         return rotation_ + parent_->globalRotation();
     }
 
+    t3::Vec2 globalScale() const {
+        if (!hasParent()) {
+            //  親が居ないのでただ回転情報を返す
+            return scale_;
+        }
+        
+        
+        return scale_ * parent_->globalScale();
+    }
+
 
 private:
     Vec2 position_;
