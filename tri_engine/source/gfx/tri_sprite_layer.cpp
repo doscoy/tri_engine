@@ -37,10 +37,11 @@ SpritePtr SpriteLayer::createSprite(TexturePtr tex) {
 }
 
 
-SpritePtr SpriteLayer::createSprite(const t3::FilePath& path) {
+SpritePtr SpriteLayer::createSprite(const String& tex_name) {
     t3::TextureManager& tex_mgr = t3::TextureManager::instance();
-    UniqueID tex_id = tex_mgr.load(path);
-    SharedPtr<t3::Texture> tex = tex_mgr.resource(tex_id);
+    UniqueID tex_id = tex_mgr.load(tex_name);
+    TexturePtr tex = tex_mgr.resource(tex_id);
+    
     return createSprite(tex);
 }
 
@@ -58,7 +59,7 @@ void SpriteLayer::updateLayer(
 
 
     //  レンダリング用にスプライトをマージする
-    for (auto target : sprites_) {
+    for (auto& target : sprites_) {
         //  対象のポインタは無効
         if (target.expired()) {
             T3_PANIC("null sprite.");

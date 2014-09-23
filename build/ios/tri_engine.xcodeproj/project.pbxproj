@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04391BD119BAE2B4006FFF38 /* tri_surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04391BD019BAE2B4006FFF38 /* tri_surface.cpp */; };
 		04391BEB19BCAF9B006FFF38 /* tri_streaming_player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04391BEA19BCAF9B006FFF38 /* tri_streaming_player.cpp */; };
+		046983A719D11720001B71E9 /* tri_archive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046983A619D11720001B71E9 /* tri_archive.cpp */; };
 		3A1C1B2919AC3065005A69FA /* tri_mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */; };
 		3A24B4D019C16C7900E9CFFE /* tri_zipfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B4CF19C16C7900E9CFFE /* tri_zipfile.cpp */; };
 		3AA7EEA319A101CE00CEB23A /* tri_audio_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3719A0F60600CEB23A /* tri_audio_handle.cpp */; };
@@ -111,6 +112,8 @@
 		04391BE919BCAF81006FFF38 /* tri_streaming_player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_streaming_player.hpp; sourceTree = "<group>"; };
 		04391BEA19BCAF9B006FFF38 /* tri_streaming_player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_streaming_player.cpp; sourceTree = "<group>"; };
 		04391BED19BF4975006FFF38 /* tri_signature.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_signature.hpp; sourceTree = "<group>"; };
+		046983A519D114A3001B71E9 /* tri_archive.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_archive.hpp; sourceTree = "<group>"; };
+		046983A619D11720001B71E9 /* tri_archive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_archive.cpp; sourceTree = "<group>"; };
 		3A0AB7B019CC90B90050E0DF /* tri_std.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_std.hpp; sourceTree = "<group>"; };
 		3A1C1B2519AC2BD0005A69FA /* tri_mutex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tri_mutex.hpp; path = process/tri_mutex.hpp; sourceTree = "<group>"; };
 		3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_mutex.cpp; sourceTree = "<group>"; };
@@ -611,6 +614,7 @@
 				3AA7ED9B19A0F60600CEB23A /* tri_counter.cpp */,
 				3AA7ED9C19A0F60600CEB23A /* tri_unique_id.cpp */,
 				3A24B4CF19C16C7900E9CFFE /* tri_zipfile.cpp */,
+				046983A619D11720001B71E9 /* tri_archive.cpp */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -879,6 +883,7 @@
 				04391BED19BF4975006FFF38 /* tri_signature.hpp */,
 				3A24B4CE19C16C5900E9CFFE /* tri_zipfile.hpp */,
 				3A24B4D219C8882000E9CFFE /* tri_string_util.hpp */,
+				046983A519D114A3001B71E9 /* tri_archive.hpp */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -1018,6 +1023,7 @@
 				3AA7EEC619A101F300CEB23A /* tri_frustum.cpp in Sources */,
 				3AA7EEC719A101F300CEB23A /* tri_point_collider.cpp in Sources */,
 				3AA7EEB819A101E600CEB23A /* tri_application.cpp in Sources */,
+				046983A719D11720001B71E9 /* tri_archive.cpp in Sources */,
 				3AA7EEB919A101E600CEB23A /* tri_director.cpp in Sources */,
 				3AA7EEBA19A101E600CEB23A /* tri_event_manager.cpp in Sources */,
 				3AA7EEBB19A101E600CEB23A /* tri_pause_level.cpp in Sources */,

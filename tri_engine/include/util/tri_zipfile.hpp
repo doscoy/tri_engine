@@ -40,12 +40,12 @@ public:
 
     bool readFile(
         int index,
-        void* buffer
+        const void* buffer
     );
 
     bool readFile(
         String& name,
-        void* buffer
+        const void* buffer
     );
 
 
@@ -60,7 +60,7 @@ private:
 
     FileStream file_;
 
-    char* data_buffer_;       // Raw data buffer.
+    char* data_buffer_;   // データバッファ.
     int entries_;         // エントリー数.
 
     const ZipDirFileHeader** pap_dir_;

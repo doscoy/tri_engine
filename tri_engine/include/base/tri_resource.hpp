@@ -8,8 +8,7 @@
 #include "kernel/tri_kernel.hpp"
 
 
-
-constexpr int RESOURCE_NAME_SIZE = 128;
+constexpr int RESOURCE_NAME_SIZE = 96;
 
 namespace t3 {
 inline namespace base {

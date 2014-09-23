@@ -108,6 +108,9 @@ void initializeTriEngine(
     platform::initializePlatform();
     platform::createWindow(width, height, title);
     
+    //  ファイルシステムベースパス設定
+    FilePath::setBaseDirectory(platform::getDeviceFilePath());
+
     //  マネージャインスタンス生成
     Director::createInstance();
     DebugMenu::createInstance();
@@ -136,7 +139,6 @@ Application::Application()
     : root_scene_generator_(nullptr)
     , system_menu_(nullptr)
     , last_scene_change_frame_(0)
-    , memory_leak_check_filter_(39990)
     , fps_timer_()
 {
 }
@@ -412,11 +414,11 @@ void Application::renderApplication()
         //  シーンが切り替わったのでデバッグメニューを閉じる
         dm.closeMenu();
         
-        HeapManager::dumpAllocateInfo(memory_leak_check_filter_);
-        memory_leak_check_filter_ = Heap::allocateCount();
+        uint32_t now_frame = frame_counter_.now();
+        HeapManager::dumpAllocateInfo(1, now_frame);
         
         //  シーンが切り替わったタイミングを保存
-        last_scene_change_frame_ = frame_counter_.now();
+        last_scene_change_frame_ = now_frame;
     }
 
     other_cost_timer_.end();

@@ -129,7 +129,7 @@ bool ZipFile::initialize(
     file_.seekg(dhOffset - dh.dirSize, std::ios::beg);
     
     //  データ用のバッファ確保
-    data_buffer_ = T3_NEW char[dh.dirSize + dh.nDirEntries*sizeof(*pap_dir_)];
+    data_buffer_ = T3_SYS_NEW char[dh.dirSize + dh.nDirEntries*sizeof(*pap_dir_)];
     T3_ASSERT(data_buffer_);
 
     
@@ -238,7 +238,7 @@ size_t ZipFile::getFileSize(const String& name) const {
 
 bool ZipFile::readFile(
     String& filename,
-    void *buffer
+    const void *buffer
 ) {
     return readFile(find(filename), buffer);
 }
@@ -246,7 +246,7 @@ bool ZipFile::readFile(
 
 bool ZipFile::readFile(
     int index,
-    void* buffer
+    const void* buffer
 ) {
     if (buffer == nullptr || index < 0 || index >= entries_) {
         return false;
@@ -323,7 +323,7 @@ bool ZipFile::readFile(
     
     
     //  圧縮済データを読み込む用のメモリ確保
-    char* pcData = T3_NEW char[comp_size];
+    char* pcData = T3_SYS_NEW char[comp_size];
 
     if (!pcData) {
         return false;

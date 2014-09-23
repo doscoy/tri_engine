@@ -161,9 +161,6 @@ PngImage::PngImage(
 // *********************************************
 //  デストラクタ
 PngImage::~PngImage(){
-    T3_TRACE( "png data is deleted." );
-
-
     T3_DELETE[] data_;
 }
     

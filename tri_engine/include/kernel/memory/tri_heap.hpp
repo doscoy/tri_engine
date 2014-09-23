@@ -25,8 +25,12 @@ public:
     const char* name() const {
         return heap_name_;
     }
+    
+    int no() const {
+        return heap_no_;
+    }
 
-    void activate(const char* const name);
+    void activate(const char* const name, int no);
     void deactivate();
 
     bool isActive() const {
@@ -42,7 +46,10 @@ public:
     );
     static void  deallocate(void* mem);
 
-    void dump(uint32_t filter_min) const;
+    void dump(
+        uint32_t filter_min,
+        uint32_t filter_max
+    ) const;
     
     //  １度のメモリ割り当てピーク
     ByteSize peak() {
@@ -62,7 +69,6 @@ public:
         return mutex_;
     }
     
-    static uint32_t allocateCount();
     
     
 private:
@@ -71,6 +77,7 @@ private:
 private:
     bool active_;
     char heap_name_[NAME_LENGTH];
+    int heap_no_;
     ByteSize allocated_;
     ByteSize peak_;
     uint32_t node_count_;
@@ -81,7 +88,6 @@ private:
     Heap* prev_sibling_;
 
     static Mutex mutex_;
-    static uint32_t alloc_count_;
 };
 
 

@@ -2,7 +2,7 @@
 #ifndef TRI_STRING_UTIL_HPP_INCLUDED
 #define TRI_STRING_UTIL_HPP_INCLUDED
 
-
+#include "dbg/tri_trace.hpp"
 #include <cctype>
 
 namespace t3 {
@@ -19,6 +19,15 @@ inline void strToLower(
         ++str;
         ++count;
     }
+}
+
+
+inline int stringCompare(
+    const char* const str1,
+    const char* const str2,
+    int length
+) {
+    return strncmp(str1, str2, length);
 }
 
 

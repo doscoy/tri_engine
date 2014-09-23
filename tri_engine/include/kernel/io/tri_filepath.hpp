@@ -13,23 +13,22 @@ inline namespace io {
 class FilePath {
 public:
     FilePath(
-        String filepath
+       const String& filepath
     );
-    
-    FilePath(const char* const filepath);
     
     ~FilePath();
 
 public:
     String getFullPath() const;
     
-    String getExt() const;
+    String ext() const;
+    
+    const String& path() const;
     
     String getFileNameNotExt() const;
     
-
 public:
-    static void setResourceDirectory(
+    static void setBaseDirectory(
         String const base
     );
 

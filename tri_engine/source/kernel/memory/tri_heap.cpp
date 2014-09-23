@@ -4,7 +4,7 @@
 #include "dbg/tri_assert.hpp"
 #include "dbg/tri_trace.hpp"
 #include "util/tri_util.hpp"
-
+#include "util/tri_counter.hpp"
 
 #define DIRTY_MEMORY        1
 #define ALLOC_ENDMARKING    1
@@ -29,18 +29,17 @@ constexpr uint32_t DIRTY_FREE_MARK  = 0xCAFEC0DE;
 namespace t3 {
 
 Mutex Heap::mutex_;
-uint32_t Heap::alloc_count_ = 0;
 
 
 class AllocHeader {
 public:
     void setup(
-        size_t size,
+        uint32_t size,
         Heap* heap,
         AllocHeader* next,
         AllocHeader* prev,
         const char* file,
-        int line
+        uint32_t line
     ) {
 
         signature_ = HEAP_SIGNATURE;
@@ -50,7 +49,8 @@ public:
         prev_ = prev;
         file_name_ = file;
         line_ = line;
-        alloc_no_ = Heap::allocateCount();
+        
+        alloc_no_ = frame_counter_.now();
 
     }
     
@@ -113,12 +113,12 @@ public:
 public:
     uint32_t signature_;
     uint32_t alloc_no_;
+    uint32_t size_;
+    uint32_t line_;
     Heap* heap_;
     AllocHeader* next_;
     AllocHeader* prev_;
     const char* file_name_;
-    int line_;
-    size_t size_;
 
 };
 
@@ -285,11 +285,12 @@ void Heap::deallocate(
     std::free(header);
 }
 
-void Heap::activate(const char *const name) {
+void Heap::activate(const char *const name, int no) {
     T3_NULL_ASSERT(name);
     T3_ASSERT(strlen(name) < NAME_LENGTH);
 
     strcpy(heap_name_, name);
+    heap_no_ = no;
     active_ = true;
 }
 
@@ -303,24 +304,22 @@ void Heap::deactivate() {
 }
 
 
-void Heap::dump(const uint32_t filter_min) const {
+void Heap::dump(
+    const uint32_t filter_min,
+    const uint32_t filter_max
+) const {
     ScopedLock lock(Heap::mutex());
 
     AllocHeader* ah = head_alloc_;
     while (ah) {
         T3_ASSERT(ah->isValid());
-        if (ah->no() > filter_min) {
+        if (ah->no() > filter_min && filter_max > ah->no()) {
             ah->dump();
         }
         ah = ah->next();
     }
 
 }
-
-uint32_t Heap::allocateCount() {
-    return alloc_count_++;
-}
-
 
 
 

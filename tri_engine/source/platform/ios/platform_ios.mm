@@ -113,7 +113,7 @@ void loadFile(
     const char* filename = file_path.getFileNameNotExt().c_str();
     NSString* nsfilename = [NSString stringWithCString: filename encoding:NSUTF8StringEncoding];
 
-    const char* extname = file_path.getExt().c_str();
+    const char* extname = file_path.ext().c_str();
     NSString* nsextname = [NSString stringWithCString: extname encoding:NSUTF8StringEncoding];
 
 

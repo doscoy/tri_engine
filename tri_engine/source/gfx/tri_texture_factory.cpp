@@ -45,12 +45,18 @@ TexturePtr TextureFactory::createFromData(
 TexturePtr TextureFactory::createFromFile(
     const FilePath& filename
 ){
-    T3_TRACE("Create texture from %s", filename.getFullPath().c_str());
+    File file;
+    file.loadFile(filename);
 
+    return createFromFile(file);
+}
+
+TexturePtr TextureFactory::createFromFile(const t3::File& file) {
     TexturePtr tex = nullptr;
-    String file_ext = filename.getExt();
+    FilePath path = file.name();
+    String file_ext = path.ext();
     if (file_ext == ".png") {
-        tex = createFromPngFile(filename);
+        tex = createFromPngFile(file);
     }
     else {
         T3_TRACE("unknown texture type.");
@@ -58,8 +64,6 @@ TexturePtr TextureFactory::createFromFile(
 
     return tex;
 }
-
-
 
 
 //  pngからテクスチャ生成

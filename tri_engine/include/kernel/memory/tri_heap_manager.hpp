@@ -20,15 +20,17 @@ enum HeapIndex {
 
 using HeapContainer = Array<Heap, HEAP_SIZE>;
 
-class HeapManager
-{    
+class HeapManager {
 
 public:
     static Heap* createHeap(const char* const name);
     static void destroyHeap(Heap* heap);
     static Heap* getDefaultHeap();
     static Heap* getHeap(int index);
-    static void dumpAllocateInfo(uint32_t filter_min);
+    static void dumpAllocateInfo(
+        uint32_t filter_min,
+        uint32_t filter_max
+    );
     static HeapContainer& heaps();
     
 private:

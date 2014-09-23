@@ -10,11 +10,11 @@ Heap* HeapManager::default_heap_ = nullptr;
 
 void HeapManager::initialize() {
 
-    heaps().at(0).activate(DEFAULT_HEAP_NAME);
+    heaps().at(0).activate(DEFAULT_HEAP_NAME, 0);
     default_heap_ = &heaps().at(0);
 
-    heaps().at(1).activate("Sys");
-    heaps().at(2).activate("App");
+    heaps().at(1).activate("Sys", 1);
+    heaps().at(2).activate("App", 2);
     
 }
 
@@ -53,9 +53,11 @@ Heap* HeapManager::createNewHeap(
     HeapContainer::iterator itr = heaps().begin();
     HeapContainer::iterator end = heaps().end();
     
+    int heap_idx = 0;
     for (;itr != end; ++itr) {
+        heap_idx += 1;
         if (!itr->isActive()) {
-            itr->activate(name);
+            itr->activate(name, heap_idx);
             return static_cast<Heap*>(&(*itr));
         }
     }
@@ -84,11 +86,16 @@ Heap* HeapManager::getHeap(int index) {
 }
 
 void HeapManager::dumpAllocateInfo(
-    const uint32_t filter_min
+    const uint32_t filter_min,
+    const uint32_t filter_max
 ) {
 
     for (auto& heap : heaps()) {
-        heap.dump(filter_min);
+        //  デフォルトヒープは追跡のしようがないので無視
+        if (heap.no() == 0) {
+            continue;
+        }
+        heap.dump(filter_min, filter_max);
     }
 
 }

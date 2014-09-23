@@ -16,6 +16,10 @@ public:
     File();
     File(
         const String& name,
+        size_t size
+    );
+    File(
+        const String& name,
         size_t size,
         uint8_t* data
     );
@@ -46,6 +50,7 @@ public:
     const String& name() const {
         return name_;
     }
+
     
 private:
     //  名前

@@ -29,44 +29,61 @@ protected:
 
 public:
     
-    // *********************************************
     //  ロード
     UniqueID load(
-        const FilePath& path
+        const String& name
     ){
-        for (auto res : resources_) {
-            if (std::strncmp(res->resourceName(), path.getFullPath().c_str(), RESOURCE_NAME_SIZE) == 0) {
-                //  既に読み込み済
-                return res->resourceID();
-            }
+        SharedPtr<ResourceType> res = resource(name);
+        if (res) {
+            return res->resourceID();
         }
-    
-        SharedPtr<ResourceType> res = ResourceType::create(path);
+        
+        //  無かったので読み込み
+        FilePath path(name);
+        res = ResourceType::create(path);
         T3_NULL_ASSERT(res);
+
+        //  追加
         resources_.push_back(res);
         
         return res->resourceID();
     }
+
+
+    //  プリロード
+    void prepare(
+        const t3::File& file
+    ) {
+        SharedPtr<ResourceType> res = resource(file.name());
+        if (res) {
+            //  同名のリソースが既に登録されている
+            return;
+        }
+        
+        res = ResourceType::create(file);
+        T3_NULL_ASSERT(res);
+
+        //  追加
+        resources_.push_back(res);
+        
+    }
     
-    
-    // *********************************************
     //  リソースを取得
     const SharedPtr<ResourceType> resource(
         String name
     ){
-        
-      
-        typename Resources::iterator end = resources_.end();
-        for (typename Resources::iterator it = resources_.begin(); it != end; ++it) {
-            if (strcmp((*it)->name(), name.c_str())) {
-                return (*it);
+        for (auto& res : resources_) {
+            const char* res_name = res->resourceName();
+            const char* fullpath = name.c_str();
+            if (stringCompare(res_name, fullpath, RESOURCE_NAME_SIZE) == 0) {
+                //  既に読み込み済
+                return res;
             }
         }
       
         return nullptr;
     }
     
-    // *********************************************
     //  リソースを取得
     const SharedPtr<ResourceType> resource(
         const UniqueID id

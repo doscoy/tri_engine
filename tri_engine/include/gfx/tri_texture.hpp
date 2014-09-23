@@ -61,6 +61,11 @@ public:
         const RenderSystem::ColorFormat
     );
     
+    static TexturePtr create(
+        const File& file
+    );
+    
+    
     void bind();
     
     RenderSystem::TextureID id() {

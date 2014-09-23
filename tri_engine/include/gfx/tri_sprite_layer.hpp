@@ -29,7 +29,7 @@ public:
 
 public:
     SpritePtr createSprite(TexturePtr tex);
-    SpritePtr createSprite(const FilePath& path);
+    SpritePtr createSprite(const String& tex_name);
 
     SpriteContainer* getManagementSprites() {
         return &sprites_;

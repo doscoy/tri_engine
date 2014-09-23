@@ -11,17 +11,9 @@ inline namespace io {
 String FilePath::base_filepath_;
 
 FilePath::FilePath(
-    String filepath
-)   : filepath_{""}
+    const String& filepath
+)   : filepath_(filepath)
 {
-    filepath_ = base_filepath_ + filepath;
-}
-
-FilePath::FilePath(
-    const char* const filepath
-) : filepath_("")
-{
-    filepath_ = base_filepath_ + filepath;
 }
 
 
@@ -30,14 +22,17 @@ FilePath::~FilePath() {
 }
 
 
-void FilePath::setResourceDirectory(
+void FilePath::setBaseDirectory(
     String base
 ) {
     base_filepath_ = base;
 }
 
+const String& FilePath::path() const {
+    return filepath_;
+}
 
-String FilePath::getExt() const {
+String FilePath::ext() const {
     String::size_type pos(filepath_.rfind('.'));
     return (pos != String::npos) ? filepath_.substr(pos, filepath_.length()) : String();
     
@@ -51,8 +46,7 @@ String FilePath::getFileNameNotExt() const {
 
 String FilePath::getFullPath() const {
     
-    String device_path = platform::getDeviceFilePath();
-    String str = device_path + getFileNameNotExt() + getExt();
+    String str = base_filepath_ + filepath_;
     return str;
 }
 

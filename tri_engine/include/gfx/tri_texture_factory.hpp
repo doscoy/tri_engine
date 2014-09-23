@@ -21,6 +21,9 @@ public:
         const FilePath& filename
     );
 
+    static TexturePtr createFromFile(
+        const File& file
+    );
     
     static TexturePtr createFromData(
         String name,

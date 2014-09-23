@@ -6,7 +6,7 @@
 namespace t3 {
 inline namespace util {
 
-constexpr uint32_t makeSignature(
+inline constexpr uint32_t makeSignature(
     char a,
     char b,
     char c,

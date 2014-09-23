@@ -62,6 +62,11 @@ TexturePtr Texture::create(
     return t;
 }
 
+TexturePtr Texture::create(const t3::File& file) {
+    
+    return TextureFactory::createFromFile(file);
+}
+
 
 void Texture::bind() {
 
