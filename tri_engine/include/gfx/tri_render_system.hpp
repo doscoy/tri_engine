@@ -46,6 +46,20 @@ public:
     using TextureID = unsigned int;
 
 
+
+
+    enum class BlendMode
+        : uint8_t {
+        NONE,
+        NORMAL,
+        ADD
+    };
+
+    static void setBlendMode(
+        BlendMode mode
+    );
+
+
     enum TextureUnit {
         UNIT0 = 0,
         UNIT1 = 1,

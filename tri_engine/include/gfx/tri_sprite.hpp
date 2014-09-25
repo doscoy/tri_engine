@@ -30,15 +30,15 @@ class Sprite final
 public:
     enum Priority {
         PRIORITY_LOWEST     = 10,
-        PRIORITY_LOW_1      = 130,
-        PRIORITY_LOW_2      = 135,
-        PRIORITY_LOW_3      = 140,
-        PRIORITY_NORMAL     = 150,
-        PRIORITY_HIGH_1     = 170,
-        PRIORITY_HIGH_2     = 175,
-        PRIORITY_HIGH_3     = 180,
-        PRIORITY_UI_DEFAULT = 200,
-        PRIORITY_HIGHEST    = 220
+        PRIORITY_LOW_1      = 50,
+        PRIORITY_LOW_2      = 70,
+        PRIORITY_LOW_3      = 90,
+        PRIORITY_NORMAL     = 120,
+        PRIORITY_HIGH_1     = 150,
+        PRIORITY_HIGH_2     = 170,
+        PRIORITY_HIGH_3     = 190,
+        PRIORITY_UI_DEFAULT = 210,
+        PRIORITY_HIGHEST    = 250
     };
 
 
@@ -207,6 +207,7 @@ public:
         const uint8_t priority
     ){
         priority_ = priority;
+        calcSortScore();
     }
     
 
@@ -268,7 +269,9 @@ public:
     }
     
     void color(const Color& color) {
+        float a = color_.alpha_;
         color_ = color;
+        color_.alpha_ = a;
     }
 
     int opacity() const {
@@ -282,6 +285,17 @@ public:
         color_.alpha_ = opa;
     }
 
+    RenderSystem::BlendMode blendMode() const {
+        return blend_mode_;
+    }
+    
+    void blendMode(const RenderSystem::BlendMode b) {
+        blend_mode_ = b;
+        calcSortScore();
+    }
+    
+private:
+    void calcSortScore();
 
 private:
     TexturePtr texture_;
@@ -291,9 +305,11 @@ private:
 
     Color color_;
     
+    RenderSystem::BlendMode blend_mode_;
+    
     uint8_t priority_;
     texture_coord_t texture_coord_;
-    
+    int sort_score_;
     bool enable_;
     
 };

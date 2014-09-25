@@ -18,8 +18,10 @@ Sprite::Sprite()
     , size_(0, 0)
     , pivot_(0, 0)
     , color_(255,255,255,255)
+    , blend_mode_(RenderSystem::BlendMode::NORMAL)
     , texture_coord_{0, 0, 1, 1}
     , priority_(PRIORITY_NORMAL)
+    , sort_score_(0)
     , enable_(true)
 {
 
@@ -48,8 +50,20 @@ void Sprite::texture(
 }
   
 
+void Sprite::calcSortScore() {
+    sort_score_ = priority() * 100;
+    int blend_score = 0;
+    if (blend_mode_ == RenderSystem::BlendMode::ADD) {
+        blend_score = 10;
+    }
+    else if (blend_mode_ == RenderSystem::BlendMode::NONE){
+        blend_score = 20;
+    }
+    sort_score_ = blend_score;
+}
+
 int Sprite::sortScore() const {
-    return priority();
+    return sort_score_;
 }
 
 

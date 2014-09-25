@@ -22,7 +22,26 @@ inline void countDrawCall() {
 namespace t3 {
 inline namespace gfx {
 
-
+void RenderSystem::setBlendMode(
+    t3::RenderSystem::BlendMode mode
+) {
+    if (mode == BlendMode::NONE) {
+        setBlend(false);
+    } else if (mode == BlendMode::ADD) {
+        setBlend(true);
+        setBlendFunctionType(
+            t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
+            t3::RenderSystem::BlendFunctionType::TYPE_ONE
+        );
+    } else {
+        setBlend(true);
+        setBlendFunctionType(
+            t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
+            t3::RenderSystem::BlendFunctionType::TYPE_DST_ALPHA
+        );
+    }
+    
+}
 
 
 void RenderSystem::createFrameBuffer(FrameBufferID* id) {

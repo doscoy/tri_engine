@@ -129,6 +129,11 @@ void initializeTriEngine(
     );
     T3_TRACE("Initialize TriEngine.\n");
     T3_TRACE("screen width %d  height %d\n", width, height);
+    
+#if DEBUG
+    show_fps_ = true;
+    show_work_bar_ = true;
+#endif
 }
 
 

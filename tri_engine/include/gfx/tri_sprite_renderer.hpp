@@ -24,6 +24,7 @@ class SpriteRenderer
             , index_buffer_()
             , texture_(nullptr)
             , draw_count_(0)
+            , blend_mode_(RenderSystem::BlendMode::NONE)
         {
         }
         
@@ -55,11 +56,21 @@ class SpriteRenderer
             draw_count_ = count;
         }
     
+        void blendMode(RenderSystem::BlendMode mode) {
+            blend_mode_ = mode;
+        }
+        
+        RenderSystem::BlendMode blendMode() const {
+            return blend_mode_;
+        }
+    
+    
     private:
         VertexBuffer vertex_buffer_;
         IndexBuffer index_buffer_;
         TexturePtr texture_;
         uint32_t draw_count_;
+        RenderSystem::BlendMode blend_mode_;
     };
     using BatchGroups = Vector<SharedPtr<BatchGroup>>;
     using Container = Vector<SpritePtr>;

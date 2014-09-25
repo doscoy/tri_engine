@@ -136,6 +136,7 @@ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     t3::RenderSystem::setDepthTest(false);
     t3::RenderSystem::setDepthWrite(false);
 
+
     t3::RenderSystem::setBlendFunctionType(
         t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
         t3::RenderSystem::BlendFunctionType::TYPE_ONE
@@ -172,6 +173,7 @@ void SpriteRenderer::margeSprites() {
 
         if (i == 0) {
             current_batch->texture(spr->texture());
+            current_batch->blendMode(spr->blendMode());
         }
     
         //
@@ -213,6 +215,9 @@ void SpriteRenderer::margeSprites() {
             
             //  次回のバッチグループのテクスチャを設定
             current_batch->texture(spr->texture());
+            
+            //  次回のバッチグループのブレンド設定を設定
+            current_batch->blendMode(spr->blendMode());
         }
 
     
@@ -389,12 +394,16 @@ void SpriteRenderer::margeSprites() {
 }
 
 
+//  バッチが切れるか判定
 bool SpriteRenderer::isBatchGroupChange(
     const SpritePtr sprite,
     const SharedPtr<BatchGroup>& current_batch
 ) {
-
     if (*sprite->texture() != *current_batch->texture()) {
+        //  テクスチャが変わったらバッチが切れる
+        return true;
+    } else if (sprite->blendMode() != current_batch->blendMode()) {
+        //  ブレンド設定が変わったらバッチが切れる
         return true;
     }
 
@@ -405,14 +414,18 @@ bool SpriteRenderer::isBatchGroupChange(
 
 void SpriteRenderer::renderBatch(SharedPtr<BatchGroup>& batch) {
 
-    //  テクスチャの割り当て
-    const TexturePtr& texture = batch->texture();
-    texture->bind();
-
-
+    //  描画前セットアップ
+    //  テクスチャ
+    batch->texture()->bind();
+    
+    //  頂点
     batch->vertexBuffer().bind();
+    
+    //  インデックス
     batch->indexBuffer().bind();
 
+    //  ブレンド設定
+    t3::RenderSystem::setBlendMode(batch->blendMode());
 
     shader_->setAttributePointer(
         SHADER_ATTR_POSITION,
