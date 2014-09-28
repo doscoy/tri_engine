@@ -6,14 +6,16 @@
 #include "util/tri_util.hpp"
 #include "util/tri_counter.hpp"
 
+
 #ifdef DEBUG
-    #define DIRTY_MEMORY        1
-    #define ALLOC_ENDMARKING    1
+    #define TRI_DIRTY_MEMORY        1
+    #define TRI_ALLOC_ENDMARKING    1
 #else
-    #define DIRTY_MEMORY        0
-    #define ALLOC_ENDMARKING    0
+    #define TRI_DIRTY_MEMORY        0
+    #define TRI_ALLOC_ENDMARKING    0
 #endif
 
+#define TRI_USE_MEMPOOL_ALLOCATE    1
 
 namespace {
 
@@ -27,6 +29,8 @@ constexpr uint32_t DIRTY_ALLOC_MARK = 0xDEADBEEF;
 constexpr uint32_t DIRTY_FREE_MARK  = 0xCAFEC0DE;
 
 
+
+
 }   // unname namespace
 
 
@@ -34,20 +38,35 @@ namespace t3 {
 
 
 
-void* heapAllocate(size_t size) __attribute__((weak));
-void heapDeallocate(void* addr) __attribute__((weak));
+MemoryPool* heapMemoryPool() __attribute__((weak));
 
-void* heapAllocate(size_t size) {
-    return std::malloc(size);
+MemoryPool* heapMemoryPool() {
+    static MemoryPool pool(1024*1024*24);
+    return &pool;
 }
 
-void heapDeallocate(void* addr) {
-    return std::free(addr);
+
+inline void* allocateCore(size_t size) {
+
+#if TRI_USE_MEMPOOL_ALLOCATE
+    void* addr = heapMemoryPool()->allocate(size);
+#else
+    void* addr = std::malloc(size);
+#endif
+
+    return addr;
+}
+
+inline void deallocateCore(void* addr) {
+#if TRI_USE_MEMPOOL_ALLOCATE
+    heapMemoryPool()->deallocate(addr);
+#else
+    std::free(addr);
+#endif
 }
 
 
 Mutex Heap::mutex_;
-
 
 class AllocHeader {
 public:
@@ -127,6 +146,7 @@ public:
     void dump() const {
         T3_TRACE_TERMINAL("[%u]Size %dbyte :%s(%d)\n",alloc_no_, size_, file_name_, line_);
     }
+    
 
 public:
     uint32_t signature_;
@@ -137,7 +157,6 @@ public:
     AllocHeader* next_;
     AllocHeader* prev_;
     const char* file_name_;
-
 };
 
 
@@ -174,12 +193,12 @@ void* Heap::allocate(
     size_t alloc_header_size = sizeof(AllocHeader);
     size_t request_bytes = size + alloc_header_size;
 
-#if ALLOC_ENDMARKING
+#if TRI_ALLOC_ENDMARKING
     request_bytes += sizeof(uint32_t);
-#endif // ALLOC_ENDMARKING
+#endif // TRI_ALLOC_ENDMARKING
 
     //  メモリ確保
-    int8_t* mem = reinterpret_cast<int8_t*>(heapAllocate(request_bytes));
+    int8_t* mem = reinterpret_cast<int8_t*>(allocateCore(request_bytes));
     AllocHeader* header = reinterpret_cast< AllocHeader* >(mem);
 
     //  ヘッダ情報書き込み
@@ -222,13 +241,13 @@ void* Heap::allocate(
 
     void* start_mem_block = mem + alloc_header_size;
 
-#if ALLOC_ENDMARKING
+#if TRI_ALLOC_ENDMARKING
     uint32_t* end_mark = reinterpret_cast<uint32_t*>((intptr_t)start_mem_block + size);
     *end_mark = ALLOC_END_MARK;
-#endif // ALLOC_ENDMARKING
+#endif // TRI_ALLOC_ENDMARKING
 
 
-#if DIRTY_MEMORY
+#if TRI_DIRTY_MEMORY
     size_t alloc_size = size;
     std::memset(start_mem_block, DIRTY_ALLOC_MARK, alloc_size);
 #endif
@@ -251,10 +270,10 @@ void Heap::deallocate(
     );
     T3_ASSERT(header->isValid());
 
-#if ALLOC_ENDMARKING
+#if TRI_ALLOC_ENDMARKING
     uint32_t* end_mark = reinterpret_cast<uint32_t*>((intptr_t)mem + header->size());
     T3_ASSERT(*end_mark == ALLOC_END_MARK);
-#endif // ALLOC_ENDMARKING
+#endif // TRI_ALLOC_ENDMARKING
 
     Heap* owner = header->heap();
     owner->deallocate(header);
@@ -294,13 +313,13 @@ void Heap::deallocate(
     node_count_ -= 1;
 
 
-#if DIRTY_MEMORY
+#if TRI_DIRTY_MEMORY
     size_t alloc_size = header->size() + sizeof(AllocHeader);
     void* start_mem_block = header;
     std::memset(start_mem_block, DIRTY_FREE_MARK, alloc_size);
 #endif
 
-    heapDeallocate(header);
+    deallocateCore(header);
 }
 
 void Heap::activate(const char *const name, int no) {
@@ -338,7 +357,6 @@ void Heap::dump(
     }
 
 }
-
 
 
 }   // namespace t3

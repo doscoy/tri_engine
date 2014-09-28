@@ -7,11 +7,12 @@
 #include "kernel/process/tri_mutex.hpp"
 #include "util/tri_uncopyable.hpp"
 #include "util/tri_bytesize.hpp"
+#include "tri_memory_pool.hpp"
 
 namespace t3 {
 
 constexpr int NAME_LENGTH = 6;
-
+extern MemoryPool* heapMemoryPool() __attribute__((weak));
 
 struct AllocHeader;
 class Heap
@@ -68,8 +69,6 @@ public:
     static Mutex& mutex() {
         return mutex_;
     }
-    
-    
     
 private:
     void deallocate(AllocHeader* header);

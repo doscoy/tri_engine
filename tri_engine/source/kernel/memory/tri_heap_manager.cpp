@@ -15,7 +15,6 @@ void HeapManager::initialize() {
 
     heaps().at(1).activate("Sys", 1);
     heaps().at(2).activate("App", 2);
-    
 }
 
 

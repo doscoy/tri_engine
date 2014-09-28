@@ -3,6 +3,14 @@
 #include "util/tri_signature.hpp"
 
 
+
+
+#if DEBUG
+#define TRI_PEAK_POOL_CHECK 0
+#else
+#define TRI_PEAK_POOL_CHECK 0
+#endif
+
 namespace  {
     
     
@@ -15,6 +23,7 @@ inline size_t roundup(
 
 //  メモリチャンク用のシグネチャ
 constexpr uint32_t CHUNK_SIGNATURE = t3::makeSignature('M', 'C', 'N', 'K');
+
     
 }   // unname namespace
 
@@ -50,6 +59,7 @@ MemoryPool::MemoryPool(size_t size)
     : pool_(nullptr)
     , use_chain_(nullptr)
     , free_chain_(nullptr)
+    , peak_use_size_(0)
 {
     initialize(size);
 }
@@ -84,9 +94,16 @@ bool MemoryPool::initialize(size_t pool_size) {
 
 
 void* MemoryPool::allocate(
-    size_t size
+    size_t size,
+    int align
 ) {
+    //  チャンクを含んだサイズをリクエスト
     size_t req_size = size + sizeof(MemoryChunk);
+
+    //  アライメントを考慮
+    req_size = roundup(req_size, align);
+    
+    //  フリーチャンクを探す
     MemoryChunk* target_chank = findFreeChunk(req_size);
 
     void* addr = nullptr;
@@ -97,6 +114,14 @@ void* MemoryPool::allocate(
         );
     }
     
+#if TRI_PEAK_POOL_CHECK
+    //  一番メモリ使った瞬間を記録
+    size_t total_use = totalUseSize();
+    if (total_use > peak_use_size_) {
+        peak_use_size_ = total_use;
+    }
+#endif
+
     return addr;
 }
 
@@ -342,73 +367,72 @@ size_t MemoryPool::calcChunkSize(
 
 
 void renderMemoryPool(MemoryPool& pool) {
-
+    float limit_x = 310;
     float now = -320;
-    float free_y = 120;
+    float line_y = 120;
     float rect_size = 1;
     float render_ratio = 0.001f;
     
     //  チェイン描画用の色設定
-    t3::Color free_color[2] = {
-        {0, 150, 0, 255},
-        {0, 255, 0, 255}
-    };
-    t3::Color use_color[2] = {
-        {150, 0, 0, 255},
-        {255, 0, 0, 255}
-    };
+    t3::Color free_color = t3::Color::skyblue();
+    t3::Color use_color = t3::Color::orange();
     
     //  フリーチェインを描画
     t3::MemoryChunk* free = pool.freeChainRoot();
-    int color_idx = 0;
-    int loop_count = 0;
+
     while (free) {
         size_t size = free->size() * render_ratio;
         
-        while (size + now > 320) {
-            int diff = 320-now;
+        while (size + now > limit_x) {
+            int diff = limit_x-now;
             
             t3::drawRectangle(
-                t3::Vec2(now, free_y),
+                t3::Vec2(now, line_y),
                 t3::Vec2(diff, rect_size),
-                free_color[color_idx]
+                free_color
             );
             now = -320;
             size -= diff;
-            free_y -= rect_size;
+            line_y -= rect_size;
         }
         t3::drawRectangle(
-            t3::Vec2(now, free_y),
+            t3::Vec2(now, line_y),
             t3::Vec2(size, rect_size),
-            free_color[color_idx]
+            free_color
         );
         now += size;
 
-//            color_idx = color_idx ? 0 : 1;
         free = free->next();
-        loop_count++;
     }
     
-    float use_y = free_y - rect_size;
+    line_y -= 2;
 
     //  ユーズチェインを描画
     t3::MemoryChunk* use = pool.useChainRoot();
     now = -320;
-    loop_count = 0;
     while (use) {
         size_t size = use->size() * render_ratio;
+        while (size + now > limit_x) {
+            int diff = limit_x-now;
+            
+            t3::drawRectangle(
+                t3::Vec2(now, line_y),
+                t3::Vec2(diff, rect_size),
+                use_color
+            );
+            now = -320;
+            size -= diff;
+            line_y -= rect_size;
+        }
         t3::drawRectangle(
-            t3::Vec2(now, use_y),
+            t3::Vec2(now, line_y),
             t3::Vec2(size, rect_size),
-            use_color[color_idx]
+            use_color
         );
         now += size;
-        if (now > 300) {
-            now = 0;
-            use_y += rect_size + 1;
-        }
+
+
         use = use->next();
-        loop_count++;
     }
 }
 

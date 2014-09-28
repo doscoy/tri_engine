@@ -79,11 +79,11 @@ public:
 
 class MemoryPool final {
 public:
-    explicit MemoryPool(size_t pool_size);
+    explicit MemoryPool(size_t size);
     ~MemoryPool();
     
 public:
-    void* allocate(size_t size);
+    void* allocate(size_t size, int align = 8);
     void deallocate(void* mem);
 
 public:
@@ -98,9 +98,11 @@ public:
     
     size_t totalFreeSize() const;
     size_t totalUseSize() const;
-    
+    size_t peakUseSize() const {
+        return peak_use_size_;
+    }
+
 private:
-    bool initialize(size_t pool_size);
     MemoryChunk* findFreeChunk(size_t request_size);
     void useChunk(
         MemoryChunk* chunk,
@@ -127,10 +129,14 @@ private:
         const MemoryChunk* const root
     ) const;
     
+    
+    bool initialize(size_t pool_size);
+
 private:
     void* pool_;
     MemoryChunk* use_chain_;
     MemoryChunk* free_chain_;
+    size_t peak_use_size_;
 };
 
 

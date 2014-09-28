@@ -12,15 +12,18 @@
 #include "gfx/tri_render_system.hpp"
 #include "audio/tri_audio_system.hpp"
 #include "util/tri_stopwatch.hpp"
-
+#include "kernel/memory/tri_memory_pool.hpp"
+#include "kernel/memory/tri_heap.hpp"
 
 namespace {
 
 #define LIMIT_AVG_SUM   3600
 t3::Vector<float> render_avg;
 
-bool show_fps_ = false;
-bool show_heap_ = false;
+bool show_fps_ = true;
+bool show_heap_ = true;
+bool show_heap_bar_ = false;
+bool show_mem_pool_ = true;
 bool show_work_bar_ = false;
 bool show_work_time_ = false;
 bool show_task_ = false;
@@ -30,6 +33,7 @@ t3::Stopwatch system_cost_timer_;
 t3::Stopwatch app_cost_timer_;
 t3::Stopwatch rendering_cost_timer_;
 t3::Stopwatch other_cost_timer_;
+t3::Stopwatch debug_cost_timer_;
 
 double last_system_cost_;
 double last_app_cost_;
@@ -132,6 +136,7 @@ void initializeTriEngine(
     
 #if DEBUG
     show_fps_ = true;
+    show_mem_pool_ = true;
     show_work_bar_ = true;
 #endif
 }
@@ -298,7 +303,7 @@ void Application::renderApplication()
     
     //  シーン描画
     beginRender();
-
+    debug_cost_timer_.start();
 
     //  デバッグメニュー描画
     dm.render();
@@ -311,23 +316,39 @@ void Application::renderApplication()
         cpu_bar_.setParam(1, app_cost_timer_.interval());
         cpu_bar_.setParam(2, rendering_cost_timer_.interval());
         cpu_bar_.setParam(3, other_cost_timer_.interval());
+        cpu_bar_.setParam(4, debug_cost_timer_.interval());
+        
     }
     
     if (render_avg.size() < LIMIT_AVG_SUM) {
         render_avg.push_back(rendering_cost_timer_.interval());
     }
+    
 
+
+
+    //  ワークバー描画
+    if (show_work_bar_) {
+        cpu_bar_.draw();
+    }
+    
+    
+    
+    //  メモリバー描画
+/*  renderMemoryPoolにmutex付けないと落ちる可能性があります
+    if (show_heap_bar_) {
+        MemoryPool* pool = heapMemoryPool();
+        renderMemoryPool(*pool);
+    }
+*/
+    SceneManager& sm = SceneManager::instance();
+    sm.debugRender();
+
+    debug_cost_timer_.end();
     rendering_cost_timer_.start();      // rendering cost 計算開始
     //  レイヤーの描画
     RenderLayer::drawLayers(gs.layers());
     rendering_cost_timer_.end();           // rendering cost 計算終了
-
-    if (show_work_bar_) {
-        cpu_bar_.draw();
-    }
-
-    SceneManager& sm = SceneManager::instance();
-    sm.debugRender();
 
     //  描画終了
     endRender();
@@ -390,7 +411,7 @@ void Application::renderApplication()
     if (show_heap_) {
         auto& heaps = t3::HeapManager::heaps();
         int heap_pos_x = 0;
-        int heap_pos_y = 28;
+        int heap_pos_y = 45;
         for (auto& heap : heaps) {
             if (!heap.isActive()) {
                 continue;
@@ -408,6 +429,16 @@ void Application::renderApplication()
             );
             heap_pos_y += 20;
         }
+    }
+
+    //  メモリプール量描画
+    if (show_mem_pool_) {
+        MemoryPool* heap = heapMemoryPool();
+        size_t free_pool = heap->totalFreeSize();
+        size_t use_pool = heap->totalUseSize();
+        size_t peak_use_size = heap->peakUseSize();
+        t3::printDisplay(0, 28, "POOL F(%7u)  U(%7u) P(%7u)", free_pool, use_pool, peak_use_size);
+
     }
 
 

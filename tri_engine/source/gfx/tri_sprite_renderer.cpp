@@ -170,6 +170,7 @@ void SpriteRenderer::margeSprites() {
     
     for (int i = 0; i < sprites_.size(); ++i) {
         auto& spr = sprites_[i];
+        
 
         if (i == 0) {
             current_batch->texture(spr->texture());
@@ -425,7 +426,8 @@ void SpriteRenderer::renderBatch(SharedPtr<BatchGroup>& batch) {
     batch->indexBuffer().bind();
 
     //  ブレンド設定
-    t3::RenderSystem::setBlendMode(batch->blendMode());
+    RenderSystem::BlendMode bmode = batch->blendMode();
+    RenderSystem::setBlendMode(bmode);
 
     shader_->setAttributePointer(
         SHADER_ATTR_POSITION,

@@ -163,7 +163,7 @@ public:
     }
 
     static Color magenta() {
-        return Color(0xFF, 0x00, 0xFF );
+        return Color(0xFF, 0x00, 0xFF);
     }
     
     static Color orange() {

@@ -24,7 +24,7 @@ Sprite::Sprite()
     , sort_score_(0)
     , enable_(true)
 {
-
+    calcSortScore();
     transform_ = std::make_shared<Transform2D>();
 }
 
@@ -59,7 +59,7 @@ void Sprite::calcSortScore() {
     else if (blend_mode_ == RenderSystem::BlendMode::NONE){
         blend_score = 20;
     }
-    sort_score_ = blend_score;
+    sort_score_ += blend_score;
 }
 
 int Sprite::sortScore() const {

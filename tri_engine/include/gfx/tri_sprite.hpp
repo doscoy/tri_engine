@@ -293,9 +293,9 @@ public:
         blend_mode_ = b;
         calcSortScore();
     }
+    void calcSortScore();
     
 private:
-    void calcSortScore();
 
 private:
     TexturePtr texture_;

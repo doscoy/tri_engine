@@ -28,6 +28,8 @@ Workbar::Workbar()
     bar_params_[1] = {0, Color::yellow()};
     bar_params_[2] = {0, Color::green()};
     bar_params_[3] = {0, Color::cyan()};
+    bar_params_[4] = {0, Color::orange()};
+    bar_params_[5] = {0, Color::white()};
 }
 
 
