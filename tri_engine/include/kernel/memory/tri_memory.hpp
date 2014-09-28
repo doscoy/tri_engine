@@ -6,7 +6,7 @@
 #include "tri_allocator.hpp"
 #include "tri_heap.hpp"
 #include "tri_heap_manager.hpp"
-#include "tri_memory_block.hpp"
+#include "tri_memory_pool.hpp"
 #include "tri_new.hpp"
 #include "tri_safe_delete.hpp"
 

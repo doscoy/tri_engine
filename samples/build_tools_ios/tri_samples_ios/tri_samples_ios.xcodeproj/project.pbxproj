@@ -14,6 +14,7 @@
 		04391BE619BC95EF006FFF38 /* stamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 04391BDF19BC95EF006FFF38 /* stamp.png */; };
 		04391BE819BC95EF006FFF38 /* tri_engine_ui_sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 04391BE119BC95EF006FFF38 /* tri_engine_ui_sample.png */; };
 		04391BF019C08D51006FFF38 /* akb48.wav in Resources */ = {isa = PBXBuildFile; fileRef = 04391BEF19C08D51006FFF38 /* akb48.wav */; };
+		046983AE19D6EC41001B71E9 /* mem_pool_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046983AC19D6EC41001B71E9 /* mem_pool_test.cpp */; };
 		04F100261985587400C8D498 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F100251985587400C8D498 /* OpenAL.framework */; };
 		04F100281985589300C8D498 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F100271985589300C8D498 /* CoreMotion.framework */; };
 		04F1002A198558B600C8D498 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F10029198558B600C8D498 /* libpng.a */; };
@@ -70,6 +71,8 @@
 		04391BDF19BC95EF006FFF38 /* stamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stamp.png; sourceTree = "<group>"; };
 		04391BE119BC95EF006FFF38 /* tri_engine_ui_sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tri_engine_ui_sample.png; sourceTree = "<group>"; };
 		04391BEF19C08D51006FFF38 /* akb48.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = akb48.wav; sourceTree = "<group>"; };
+		046983AC19D6EC41001B71E9 /* mem_pool_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mem_pool_test.cpp; sourceTree = "<group>"; };
+		046983AD19D6EC41001B71E9 /* mem_pool_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mem_pool_test.hpp; sourceTree = "<group>"; };
 		04F100251985587400C8D498 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		04F100271985589300C8D498 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		04F10029198558B600C8D498 /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = ../../../third_party_lib/ios/libpng.a; sourceTree = "<group>"; };
@@ -156,6 +159,15 @@
 			path = ../../resources;
 			sourceTree = "<group>";
 		};
+		046983AB19D6EC41001B71E9 /* mem_pool */ = {
+			isa = PBXGroup;
+			children = (
+				046983AC19D6EC41001B71E9 /* mem_pool_test.cpp */,
+				046983AD19D6EC41001B71E9 /* mem_pool_test.hpp */,
+			);
+			path = mem_pool;
+			sourceTree = "<group>";
+		};
 		04F1FE521985557F00C8D498 = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +250,7 @@
 		3AD406F019AE257000762711 /* samples */ = {
 			isa = PBXGroup;
 			children = (
+				046983AB19D6EC41001B71E9 /* mem_pool */,
 				3A24B4D319C88A4000E9CFFE /* zipfile */,
 				3AD406FA19AE257000762711 /* main.cpp */,
 				3AD4070119AE257000762711 /* samples.hpp */,
@@ -449,6 +462,7 @@
 				3A24B4D619C88A4000E9CFFE /* zip_test.cpp in Sources */,
 				04F1FE731985557F00C8D498 /* AppDelegate.mm in Sources */,
 				3AD4070F19AE257000762711 /* mesh_obj_scene.cpp in Sources */,
+				046983AE19D6EC41001B71E9 /* mem_pool_test.cpp in Sources */,
 				3AD4070D19AE257000762711 /* event_handling.cpp in Sources */,
 				3AD4071819AE2B8900762711 /* thread_test.cpp in Sources */,
 			);

@@ -58,8 +58,8 @@ public:
 public:
     void initialize() {
         //  通常ボタン
-        t3::FilePath path = t3::FilePath("tri_engine_ui_sample.png");
-        sprite_ = layer_.createSprite(path);
+        t3::String tex_name = "tri_engine_ui_sample.png";
+        sprite_ = layer_.createSprite(tex_name);
         sprite_->setupTextureCoordAndSize(t3::Vec2(0, 0), t3::Vec2(64, 64));
         button_.setupSprite(sprite_);
         button_.addTriggeredEvent(
@@ -70,9 +70,9 @@ public:
         
         
         //  スワップボタン
-        swap_a_ = layer_.createSprite(path);
+        swap_a_ = layer_.createSprite(tex_name);
         swap_a_->setupTextureCoordAndSize(t3::Vec2(0, 128), t3::Vec2(64, 64));
-        swap_b_ = layer_.createSprite(path);
+        swap_b_ = layer_.createSprite(tex_name);
         swap_b_->setupTextureCoordAndSize(t3::Vec2(64, 128), t3::Vec2(64, 64));
         
         swap_button_.setupSprite(swap_a_, swap_b_);
@@ -87,7 +87,7 @@ public:
         
         // ラジオボタン作成
         for (int i = 0; i < RADIO_BUTTON_NUM; ++i) {
-            auto spr = layer_.createSprite(path);
+            auto spr = layer_.createSprite(tex_name);
             spr->setupTextureCoordAndSize(
                 t3::Vec2(0, 64),
                 t3::Vec2(64, 64)

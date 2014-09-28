@@ -76,7 +76,7 @@
 		3AA7EEE119A1021600CEB23A /* tri_pointing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED7C19A0F60600CEB23A /* tri_pointing.cpp */; };
 		3AA7EEE319A1022000CEB23A /* tri_heap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED7F19A0F60600CEB23A /* tri_heap.cpp */; };
 		3AA7EEE419A1022000CEB23A /* tri_heap_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED8019A0F60600CEB23A /* tri_heap_manager.cpp */; };
-		3AA7EEE619A1022000CEB23A /* tri_memory_block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED8219A0F60600CEB23A /* tri_memory_block.cpp */; };
+		3AA7EEE619A1022000CEB23A /* tri_memory_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED8219A0F60600CEB23A /* tri_memory_pool.cpp */; };
 		3AA7EEE719A1022000CEB23A /* tri_new.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED8319A0F60600CEB23A /* tri_new.cpp */; };
 		3AA7EEE819A1022C00CEB23A /* tri_bezier_curve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED8519A0F60600CEB23A /* tri_bezier_curve.cpp */; };
 		3AA7EEE919A1022C00CEB23A /* tri_matrix_stack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED8619A0F60600CEB23A /* tri_matrix_stack.cpp */; };
@@ -188,7 +188,7 @@
 		3AA7ED7C19A0F60600CEB23A /* tri_pointing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_pointing.cpp; sourceTree = "<group>"; };
 		3AA7ED7F19A0F60600CEB23A /* tri_heap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_heap.cpp; sourceTree = "<group>"; };
 		3AA7ED8019A0F60600CEB23A /* tri_heap_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_heap_manager.cpp; sourceTree = "<group>"; };
-		3AA7ED8219A0F60600CEB23A /* tri_memory_block.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_memory_block.cpp; sourceTree = "<group>"; };
+		3AA7ED8219A0F60600CEB23A /* tri_memory_pool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_memory_pool.cpp; sourceTree = "<group>"; };
 		3AA7ED8319A0F60600CEB23A /* tri_new.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_new.cpp; sourceTree = "<group>"; };
 		3AA7ED8519A0F60600CEB23A /* tri_bezier_curve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_bezier_curve.cpp; sourceTree = "<group>"; };
 		3AA7ED8619A0F60600CEB23A /* tri_matrix_stack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_matrix_stack.cpp; sourceTree = "<group>"; };
@@ -297,7 +297,7 @@
 		3AA7EE5919A0F61700CEB23A /* tri_heap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_heap.hpp; sourceTree = "<group>"; };
 		3AA7EE5A19A0F61700CEB23A /* tri_heap_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_heap_manager.hpp; sourceTree = "<group>"; };
 		3AA7EE5B19A0F61700CEB23A /* tri_memory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_memory.hpp; sourceTree = "<group>"; };
-		3AA7EE5C19A0F61700CEB23A /* tri_memory_block.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_memory_block.hpp; sourceTree = "<group>"; };
+		3AA7EE5C19A0F61700CEB23A /* tri_memory_pool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_memory_pool.hpp; sourceTree = "<group>"; };
 		3AA7EE5D19A0F61700CEB23A /* tri_new.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_new.hpp; sourceTree = "<group>"; };
 		3AA7EE5E19A0F61700CEB23A /* tri_safe_delete.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_safe_delete.hpp; sourceTree = "<group>"; };
 		3AA7EE5F19A0F61700CEB23A /* tri_kernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_kernel.hpp; sourceTree = "<group>"; };
@@ -565,7 +565,7 @@
 			children = (
 				3AA7ED7F19A0F60600CEB23A /* tri_heap.cpp */,
 				3AA7ED8019A0F60600CEB23A /* tri_heap_manager.cpp */,
-				3AA7ED8219A0F60600CEB23A /* tri_memory_block.cpp */,
+				3AA7ED8219A0F60600CEB23A /* tri_memory_pool.cpp */,
 				3AA7ED8319A0F60600CEB23A /* tri_new.cpp */,
 			);
 			path = memory;
@@ -811,7 +811,7 @@
 				3AA7EE5919A0F61700CEB23A /* tri_heap.hpp */,
 				3AA7EE5A19A0F61700CEB23A /* tri_heap_manager.hpp */,
 				3AA7EE5B19A0F61700CEB23A /* tri_memory.hpp */,
-				3AA7EE5C19A0F61700CEB23A /* tri_memory_block.hpp */,
+				3AA7EE5C19A0F61700CEB23A /* tri_memory_pool.hpp */,
 				3AA7EE5D19A0F61700CEB23A /* tri_new.hpp */,
 				3AA7EE5E19A0F61700CEB23A /* tri_safe_delete.hpp */,
 			);
@@ -984,7 +984,7 @@
 				3AA7EEE919A1022C00CEB23A /* tri_matrix_stack.cpp in Sources */,
 				3AA7EEE319A1022000CEB23A /* tri_heap.cpp in Sources */,
 				3AA7EEE419A1022000CEB23A /* tri_heap_manager.cpp in Sources */,
-				3AA7EEE619A1022000CEB23A /* tri_memory_block.cpp in Sources */,
+				3AA7EEE619A1022000CEB23A /* tri_memory_pool.cpp in Sources */,
 				3AA7EEE719A1022000CEB23A /* tri_new.cpp in Sources */,
 				3AA7EEDE19A1021600CEB23A /* tri_file.cpp in Sources */,
 				3AA7EEDF19A1021600CEB23A /* tri_filepath.cpp in Sources */,

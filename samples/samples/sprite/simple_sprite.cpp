@@ -20,8 +20,8 @@ public:
         
         //  テクスチャ読み込み
         t3::TextureManager& texture_manager = t3::TextureManager::instance();
-        t3::FilePath stamp_path("stamp.png");
-        t3::FilePath ui_path("tri_engine_ui_sample.png");
+        t3::String stamp_path("stamp.png");
+        t3::String ui_path("tri_engine_ui_sample.png");
     
         //  ハンドルをとっておく
         stamp_handle_ = texture_manager.load(stamp_path);

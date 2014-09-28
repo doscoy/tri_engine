@@ -5,7 +5,6 @@
 #include "tri_heap.hpp"
 
 
-
 namespace t3 {
 
 enum HeapIndex {

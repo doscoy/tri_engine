@@ -103,7 +103,7 @@ public:
 
     void spriteInit() {
         
-        t3::FilePath tex_path = "stamp.png";
+        t3::String tex_path = "stamp.png";
         sprite_ = sprite_layer_.createSprite(tex_path);
         sprite_->texture(surface_.texture());
         sprite_->size(400, 450);

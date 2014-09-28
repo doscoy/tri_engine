@@ -6,9 +6,13 @@
 #include "util/tri_util.hpp"
 #include "util/tri_counter.hpp"
 
-#define DIRTY_MEMORY        1
-#define ALLOC_ENDMARKING    1
-
+#ifdef DEBUG
+    #define DIRTY_MEMORY        1
+    #define ALLOC_ENDMARKING    1
+#else
+    #define DIRTY_MEMORY        0
+    #define ALLOC_ENDMARKING    0
+#endif
 
 
 namespace {
@@ -27,6 +31,20 @@ constexpr uint32_t DIRTY_FREE_MARK  = 0xCAFEC0DE;
 
 
 namespace t3 {
+
+
+
+void* heapAllocate(size_t size) __attribute__((weak));
+void heapDeallocate(void* addr) __attribute__((weak));
+
+void* heapAllocate(size_t size) {
+    return std::malloc(size);
+}
+
+void heapDeallocate(void* addr) {
+    return std::free(addr);
+}
+
 
 Mutex Heap::mutex_;
 
@@ -161,7 +179,7 @@ void* Heap::allocate(
 #endif // ALLOC_ENDMARKING
 
     //  メモリ確保
-    int8_t* mem = reinterpret_cast<int8_t*>(std::malloc(request_bytes));
+    int8_t* mem = reinterpret_cast<int8_t*>(heapAllocate(request_bytes));
     AllocHeader* header = reinterpret_cast< AllocHeader* >(mem);
 
     //  ヘッダ情報書き込み
@@ -230,7 +248,7 @@ void Heap::deallocate(
 
     AllocHeader* header = reinterpret_cast<AllocHeader*>(
         (reinterpret_cast<char*>(mem) - sizeof(AllocHeader))
-                          );
+    );
     T3_ASSERT(header->isValid());
 
 #if ALLOC_ENDMARKING
@@ -282,7 +300,7 @@ void Heap::deallocate(
     std::memset(start_mem_block, DIRTY_FREE_MARK, alloc_size);
 #endif
 
-    std::free(header);
+    heapDeallocate(header);
 }
 
 void Heap::activate(const char *const name, int no) {

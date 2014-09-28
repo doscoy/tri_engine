@@ -10,6 +10,21 @@
 #include "samples.hpp"
 
 
+namespace t3 {
+
+t3::MemoryPool* pool_ = nullptr;
+void* heapAllocate(size_t size) {
+    if (!pool_) {
+        pool_ = new(std::malloc(sizeof(MemoryPool))) MemoryPool(1024*1024*20);
+    }
+    return pool_->allocate(size);
+}
+
+void heapDeallocate(void* addr) {
+    pool_->deallocate(addr);
+}
+
+}   // t3
 
 class SampleApp
     : public t3::Application
@@ -36,7 +51,8 @@ int main(int argc, char * argv[])
 //    app.setRootScene(t3::Scene::sceneGenerator<ThreadTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<OffscreenTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<AudioTestScene>());
-    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
+//    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
+    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
 
     t3::platform::run(argc, argv, &app);
 

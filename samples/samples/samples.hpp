@@ -16,6 +16,7 @@
 #include "ad/ad_test.hpp"
 #include "event_handling/event_handling.hpp"
 #include "mesh_obj/mesh_obj_scene.hpp"
+#include "mem_pool/mem_pool_test.hpp"
 #include "ui_button/ui_button_test.hpp"
 #include "quat/quat_test_scene.hpp"
 #include "offscreen/offscreen_test.hpp"
