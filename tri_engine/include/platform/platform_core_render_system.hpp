@@ -10,7 +10,7 @@
 #include "base/tri_std.hpp"
 
 
-#define STRINGIFY(A)  #A
+#define TRI_INSTANT_SHADER(A)  #A
 
 
 
@@ -83,6 +83,12 @@ public:
     static void setUniformValue(
         RenderSystem::ShaderVariableLocation location,
         float val
+    );
+    
+    static void setUniformValue(
+        RenderSystem::ShaderVariableLocation location,
+        size_t size,
+        float* val
     );
     
     static void setUniformValue(

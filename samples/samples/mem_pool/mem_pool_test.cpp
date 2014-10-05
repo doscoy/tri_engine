@@ -143,82 +143,6 @@ public:
 
     }
     
-    void renderPool() {
-    
-        float now = -320;
-        float free_y = 120;
-        float rect_size = 1;
-        float render_ratio = 0.001f;
-    
-        //  チェイン描画用の色設定
-        t3::Color free_color[2] = {
-            {0, 150, 0, 255},
-            {0, 255, 0, 255}
-        };
-        t3::Color use_color[2] = {
-            {150, 0, 0, 255},
-            {255, 0, 0, 255}
-        };
-        
-        //  フリーチェインを描画
-        t3::MemoryChunk* free = pool_.freeChainRoot();
-        int color_idx = 0;
-        int loop_count = 0;
-        while (free) {
-            size_t size = free->size() * render_ratio;
-            
-            while (size + now > 320) {
-                int diff = 320-now;
-                
-                t3::drawRectangle(
-                    t3::Vec2(now, free_y),
-                    t3::Vec2(diff, rect_size),
-                    free_color[color_idx]
-                );
-                now = -320;
-                size -= diff;
-                free_y -= rect_size;
-            }
-            t3::drawRectangle(
-                t3::Vec2(now, free_y),
-                t3::Vec2(size, rect_size),
-                free_color[color_idx]
-            );
-            now += size;
-
-//            color_idx = color_idx ? 0 : 1;
-            free = free->next();
-            loop_count++;
-        }
-        
-        float use_y = free_y - rect_size;
-
-        //  ユーズチェインを描画
-        t3::MemoryChunk* use = pool_.useChainRoot();
-        now = -320;
-        loop_count = 0;
-        while (use) {
-            size_t size = use->size() * render_ratio;
-            t3::drawRectangle(
-                t3::Vec2(now, use_y),
-                t3::Vec2(size, rect_size),
-                use_color[color_idx]
-            );
-            now += size;
-            if (now > 300) {
-                now = 0;
-                use_y += rect_size + 1;
-            }
-//            color_idx = color_idx ? 0 : 1;
-            use = use->next();
-            loop_count++;
-            T3_ASSERT(loop_count < 10000);
-        }
-        
-        
-    }
-    
-
 private:
     t3::MemoryPool pool_;
     std::array<AutoReleaser, 20> lst_;
@@ -268,7 +192,6 @@ void MemPoolScene::suspendScene(t3::tick_t delta_time) {
 }
 
 void MemPoolScene::debugRenderScene() {
-    context_->renderPool();
 }
 
 

@@ -1,4 +1,4 @@
-const char* SimpleVertexShader = STRINGIFY(
+const char* SimpleVertexShader = TRI_INSTANT_SHADER(
 
 attribute vec4 a_position;
 attribute vec3 a_normal;

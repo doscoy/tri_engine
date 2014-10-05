@@ -12,7 +12,16 @@ inline namespace gfx {
 Shader::Shader()
     : handle_(0)
     , linked_(false)
-{}
+    , log_()
+    , constant_int_()
+    , constant_float_()
+    , constant_vec3_()
+    , constant_float_array_()
+    , constant_float_array_location_{0,0,0,0,0,0,0,0,0}
+    , constant_float_array_use_(false)
+{
+    
+}
 
 Shader::~Shader()
 {
@@ -75,7 +84,48 @@ bool Shader::use() {
         return false;
     }
     
+
+    //  プログラム設定
     RenderSystem::setShader(handle_);
+        
+    //  ユニフォーム送信
+    //  int レジスタ
+    for (auto& i : constant_int_) {
+        if (i.use_) {
+            t3::RenderSystem::setUniformValue(i.location_, i.value_);
+        }
+    }
+
+    //  float レジスタ
+    for (auto& f : constant_float_) {
+        if (f.use_) {
+            t3::RenderSystem::setUniformValue(f.location_, f.value_);
+        }
+    }
+    
+    //  vec3 レジスタ
+    for (auto& v : constant_vec3_) {
+        if (v.use_) {
+            t3::RenderSystem::setUniformValue(
+                v.location_,
+                v.value_.x_,
+                v.value_.y_,
+                v.value_.z_
+            );
+        }
+    }
+    
+    //  float array　レジスタ
+    if (constant_float_array_use_) {
+        for (int i = 0; i < constant_float_array_size_; ++i) {
+            t3::RenderSystem::setUniformValue(
+                constant_float_array_location_[i],
+                constant_float_array_[i]
+            );
+        }
+    
+    }
+    
     return true;
 }
 

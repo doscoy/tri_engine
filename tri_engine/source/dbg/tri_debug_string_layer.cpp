@@ -31,9 +31,9 @@ void DebugStringLayer::writeString(
     const int size,
     const char *const str
 ){
-#ifndef NDEBUG
+#ifdef DEBUG
     debug_string_buffer_.addString(x, y, color, size, str);
-#endif // NDEBUG
+#endif // DEBUG
 }
 
 void DebugStringLayer::drawLayer()

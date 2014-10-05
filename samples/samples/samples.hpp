@@ -22,6 +22,10 @@
 #include "offscreen/offscreen_test.hpp"
 #include "thread/thread_test.hpp"
 #include "zipfile/zip_test.hpp"
+#include "blur/blur_test.hpp"
+
+
+
 
 class RootTest
     : public t3::Scene

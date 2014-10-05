@@ -4,12 +4,19 @@
 
 
 
-
+//  メモリプールの使用最大値を検証
 #if DEBUG
-#define TRI_PEAK_POOL_CHECK 0
+#define TRI_PEAK_POOL_CHECK     1
 #else
-#define TRI_PEAK_POOL_CHECK 0
+#define TRI_PEAK_POOL_CHECK     1
 #endif
+
+//  メモリチャンクを書き込む用に確保する追加エリアサイズ
+//  アライメントが綺麗になるように余裕をもって確保する
+#define TRI_MEMPOOL_CHUNK_AREA_SIZE     32
+static_assert(TRI_MEMPOOL_CHUNK_AREA_SIZE >= sizeof(t3::MemoryChunk), "error");
+
+#define TRI_MEMPOOL_CHUNK_DIVISION_LIMIT_SIZE (TRI_MEMPOOL_CHUNK_AREA_SIZE + 12)
 
 namespace  {
     
@@ -59,6 +66,8 @@ MemoryPool::MemoryPool(size_t size)
     : pool_(nullptr)
     , use_chain_(nullptr)
     , free_chain_(nullptr)
+    , pool_size_(0)
+    , total_use_size_(0)
     , peak_use_size_(0)
 {
     initialize(size);
@@ -87,6 +96,8 @@ bool MemoryPool::initialize(size_t pool_size) {
         nullptr
     );
 
+    //  プール全体のサイズを保存
+    pool_size_ = pool_size;
     
     //  プール使用準備完了
     return true;
@@ -98,7 +109,7 @@ void* MemoryPool::allocate(
     int align
 ) {
     //  チャンクを含んだサイズをリクエスト
-    size_t req_size = size + sizeof(MemoryChunk);
+    size_t req_size = size + TRI_MEMPOOL_CHUNK_AREA_SIZE;
 
     //  アライメントを考慮
     req_size = roundup(req_size, align);
@@ -107,10 +118,13 @@ void* MemoryPool::allocate(
     MemoryChunk* target_chank = findFreeChunk(req_size);
 
     void* addr = nullptr;
+    //  候補が見つかった
     if (target_chank) {
+
+        //  チャンクを使用中に切り替える
         useChunk(target_chank, req_size);
         addr = reinterpret_cast<void*>(
-            reinterpret_cast<uintptr_t>(target_chank) + sizeof(MemoryChunk)
+            reinterpret_cast<uintptr_t>(target_chank) + TRI_MEMPOOL_CHUNK_AREA_SIZE
         );
     }
     
@@ -127,7 +141,7 @@ void* MemoryPool::allocate(
 
 void MemoryPool::deallocate(void* mem) {
     MemoryChunk* chunk = reinterpret_cast<MemoryChunk*>(
-        reinterpret_cast<uintptr_t>(mem) - sizeof(MemoryChunk)
+        reinterpret_cast<uintptr_t>(mem) - TRI_MEMPOOL_CHUNK_AREA_SIZE
     );
     T3_ASSERT(chunk->isValidate());
     freeChunk(chunk);
@@ -141,37 +155,50 @@ MemoryChunk* MemoryPool::findFreeChunk(
     MemoryChunk* chunk = free_chain_;
 
     //  リクエスト以上の空き領域を持ったチャンクを探す
+    MemoryChunk* candidate = nullptr;
+    size_t min_sa = std::numeric_limits<size_t>::max();
     while (chunk) {
         //  サイズ判定
-        if (chunk->size() >= request_size) {
-            //  リクエスト以上のサイズを持ったチャンク発見
-            break;
+        int surplus = static_cast<int>(chunk->size()) - static_cast<int>(request_size);
+        if (surplus > 0) {
+            if (surplus < TRI_MEMPOOL_CHUNK_DIVISION_LIMIT_SIZE) {
+                //  ほぼぴったりサイズなので即決定
+                //  チャンクを分割するほどサイズが無いので
+                //  結局このチャンクのみが使われるから
+                candidate = chunk;
+                break;
+            }
+            else if (surplus < min_sa) {
+                //  リクエスト以上のサイズを持ったチャンク発見
+                min_sa = surplus;
+                candidate = chunk;
+            }
         }
         
         //  次のチャンク
         chunk = chunk->next();
     }
  
-    if (chunk == nullptr) {
+    if (candidate == nullptr) {
     
         printf("not found.");
     }
     
-    return chunk;
+    return candidate;
 }
 
 void MemoryPool::useChunk(
     MemoryChunk* chunk,
     size_t request_size
 ) {
-    T3_ASSERT(chunk->size() >= request_size);
+    T3_ASSERT_MSG(chunk->size() >= request_size, "%u >= %u", chunk->size(), request_size);
     
     //  リクエストされたサイズとチャンクのサイズの余りから
     //  新しいチャンクを作成
     size_t surplus = chunk->size() - request_size;
 
     //  余りで新しいチャンクを作れるか判定
-    if (surplus > sizeof(MemoryChunk) + 4) {
+    if (surplus >= TRI_MEMPOOL_CHUNK_DIVISION_LIMIT_SIZE) {
         //  新しいチャンクを作れるので作る
         MemoryChunk* surplus_chunk = MemoryChunk::create(
             reinterpret_cast<MemoryChunk*>(reinterpret_cast<intptr_t>(chunk) + request_size),
@@ -207,6 +234,9 @@ void MemoryPool::useChunk(
     //  使用中のチェインの先頭につなぐ
     chunk->chainNext(use_chain_);
     setUseChainRoot(chunk);
+    
+    //  使用中サイズを更新
+    total_use_size_ += chunk->size();
 }
 
 
@@ -226,6 +256,9 @@ void MemoryPool::freeChunk(
     //  完全にチェインから外れた
     chunk->chainPrev(nullptr);
     chunk->chainNext(nullptr);
+
+    //  使用中サイズを更新
+    total_use_size_ -= chunk->size();
 
     //  フリーチェインに繋ぎ直す
     mergeFreeChain(chunk);
@@ -341,15 +374,6 @@ void MemoryPool::setFreeChainRoot(
     if (chunk) {
         chunk->chainPrev(nullptr);
     }
-}
-
-size_t MemoryPool::totalFreeSize() const {
-
-    return calcChunkSize(free_chain_);
-}
-
-size_t MemoryPool::totalUseSize() const {
-    return calcChunkSize(use_chain_);
 }
 
 size_t MemoryPool::calcChunkSize(

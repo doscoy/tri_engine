@@ -2,6 +2,7 @@
 
 #include "gfx/tri_render_layer.hpp"
 #include "base/tri_director.hpp"
+#include "tri_surface.hpp"
 
 
 
@@ -16,6 +17,7 @@ RenderLayer::RenderLayer(
     , pause_(false)
     , visible_(true)
     , priority_(priority)
+    , render_target_(nullptr)
     , dmf_me_(nullptr, layer_name)
     , dmi_visible_(&dmf_me_, "VISIBLE", visible_, 1)
     , dmi_pause_(&dmf_me_, "PAUSE", pause_, 1)
@@ -25,7 +27,7 @@ RenderLayer::RenderLayer(
 }
     
 RenderLayer::RenderLayer(const String& name)
-    : RenderLayer(name, PRIORITY_APP_NORMAL)
+    : RenderLayer(name, PRIORITY_APP_DEFAULT)
 {
 }
 
@@ -73,14 +75,35 @@ void RenderLayer::updateLayers(
 void RenderLayer::drawLayers(
     RenderLayers& layers
 ){
-    for (auto layer : layers) {
+
+    for (auto& layer : layers) {
+        T3_ASSERT(layer);
         if (layer->isVisibleLayer()) {
-            layer->drawLayer();
+            layer->callDraw();
         }
     }
 }
 
+void RenderLayer::callDraw() {
+    if (render_target_) {
+        render_target_->bind();
+        render_target_->clear();
 
+        int x, y, w, h;
+        t3::RenderSystem::getViewport(&x, &y, &w, &h);
+        t3::RenderSystem::setViewport(0, 0, render_target_->width(), render_target_->height());
+
+        drawLayer();
+
+        render_target_->unbind();
+        t3::RenderSystem::setViewport(x, y, w, h);
+   
+    } else {
+        drawLayer();
+    }
+    
+
+}
     
     
 void RenderLayer::attachSystem() {

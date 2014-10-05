@@ -49,9 +49,9 @@ VirtualPad::~VirtualPad() {
 
 
 void VirtualPad::open() {
-#ifdef NDEBUG
+#ifndef DEBUG
     return;
-#endif // NDEBUG
+#endif // DEBUG
 
 
     pad_layer_.enableLayer();

@@ -23,7 +23,7 @@ DebugMenu::~DebugMenu() {
 
 
 void DebugMenu::openMenu() {
-#ifdef NDEBUG
+#ifndef DEBUG
     return;
 #endif
 

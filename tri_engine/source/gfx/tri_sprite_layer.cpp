@@ -7,7 +7,7 @@ namespace t3 {
 inline namespace gfx {
     
 SpriteLayer::SpriteLayer()
-    : SpriteLayer("Sprite", PRIORITY_APP_NORMAL)
+    : SpriteLayer("Sprite", PRIORITY_APP_DEFAULT)
 {
 }
 
@@ -61,10 +61,10 @@ void SpriteLayer::updateLayer(
     //  レンダリング用にスプライトをマージする
     for (auto& target : sprites_) {
         //  対象のポインタは無効
-        if (target.expired()) {
-            T3_PANIC("null sprite.");
-            continue;
-        }
+//        if (target.expired()) {
+//            T3_PANIC("null sprite.");
+//            continue;
+//        }
         
         auto sp = target.lock();
     

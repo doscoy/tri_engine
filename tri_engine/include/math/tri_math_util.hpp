@@ -88,45 +88,45 @@ bool inRange(
 
 //  絶対値取得
 template <class T>
-inline const T absolute( const T& val )
+inline const T absolute(const T& val)
 {
-	return ( val < 0 ? -val : val );
+	return (val < 0 ? -val : val);
 }
 
 
 //  デグリーからラジアンへ変換
-constexpr inline float toRadian( float degree ){
+constexpr inline float toRadian(float degree) {
     return degree * PI / 180.0f;
 }
 
 //  ラジアンからデグリーへ変換
-constexpr inline float toDegree( float radian ){
+constexpr inline float toDegree(float radian) {
     return radian / PI * 180.0f;
 }
 
 //  sin
-inline float sinf( float radian ){
-    return std::sin( radian );
+inline float sinf(float radian) {
+    return std::sin(radian);
 }
 
 //  cos
-inline float cosf( float radian ){
-    return std::cos( radian );
+inline float cosf(float radian) {
+    return std::cos(radian);
 }    
 
 //  acos
-inline float acosf( float radian ){
-    return std::acos( radian );
+inline float acosf(float radian) {
+    return std::acos(radian);
 }
 
 //  sqrt
-inline float sqrtf( float value ){
-    return std::sqrt( value );
+inline float sqrtf(float value) {
+    return std::sqrt(value);
 }
 
 //  atan2
-inline float atan2f( float y, float x ){
-    return std::atan2( y, x );
+inline float atan2f(float y, float x) {
+    return std::atan2(y, x);
 }
 
 
@@ -140,11 +140,17 @@ inline bool isEqualFloat(
 
 
 //  浮動小数０判定
-inline bool isZeroFloat(float f){
+inline bool isZeroFloat(float f) {
     
     return isEqualFloat(f, 0.0f);
 }
 
+//  ガウス
+inline float gauss(float x, float sigma2) {
+    double coeff = 1.0 / (2.0 * PI * sigma2);
+    double expon = -(x*x) / (2.0 * sigma2);
+    return static_cast<float>((coeff * exp(expon)));
+}
 
 
 

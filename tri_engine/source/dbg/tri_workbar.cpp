@@ -59,9 +59,9 @@ void Workbar::setParam(
 void Workbar::draw() {
 
 
-#ifdef NDEBUG
+#ifndef DEBUG
     return;
-#endif  // NDEBUG
+#endif  // DEBUG
 
     //
     float start_x = position_.x_;

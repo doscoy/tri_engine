@@ -1,4 +1,4 @@
-static const char* sprite_fsh = STRINGIFY(
+static const char* sprite_fsh = TRI_INSTANT_SHADER(
 
 
 

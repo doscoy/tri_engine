@@ -138,7 +138,9 @@ Director::Director()
     : log_layer_(nullptr)
     , dbg_screen_layer_(nullptr)
     , random_number_generator_(1)
-    , virtual_screen_size_(640, 1136)
+    , virtual_screen_size_(
+        Director::VIRTUAL_SCREEN_WIDTH,
+        Director::VIRTUAL_SCREEN_HEIGHT)
     , real_screen_size_(640, 1136)
     , input_()
     , layers_()
@@ -360,22 +362,21 @@ void Director::registryToDebugMenu( DebugMenuFrame& parent_frame )
 void Director::attachLayer(t3::RenderLayer* layer)
 {
     T3_NULL_ASSERT(layer);
-//    T3_TRACE("Attach Layer %s\n", layer->name().c_str());
     layers_.push_back(layer);
-    layers_.sort(
-        []( RenderLayer*lhs, RenderLayer* rhs ){
-            return lhs->priority() < rhs->priority();
-        }
-    );
+    sortLayers();
+    
+
 }
 
 void Director::detachLayer(t3::RenderLayer* layer)
 {
-//    T3_TRACE("Detach Layer %s\n", layer->name().c_str());
-
     layers_.remove(layer);
+    sortLayers();
+}
+
+void Director::sortLayers() {
     layers_.sort(
-        []( RenderLayer*lhs, RenderLayer* rhs ){
+        [](RenderLayer*lhs, RenderLayer* rhs) {
             return lhs->priority() < rhs->priority();
         }
     );

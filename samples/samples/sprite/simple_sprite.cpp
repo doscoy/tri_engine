@@ -9,7 +9,6 @@ class SimpleSpriteScene::SceneContext
 public:
     SceneContext()
         : total_time_(0)
-        , sprite_opacity_(0)
     {}
     
     ~SceneContext()
@@ -21,11 +20,9 @@ public:
         //  テクスチャ読み込み
         t3::TextureManager& texture_manager = t3::TextureManager::instance();
         t3::String stamp_path("stamp.png");
-        t3::String ui_path("tri_engine_ui_sample.png");
     
         //  ハンドルをとっておく
         stamp_handle_ = texture_manager.load(stamp_path);
-        ui_handle_ = texture_manager.load(ui_path);
         
         
         for (int i = 0; i < 28; ++i) {
@@ -41,7 +38,7 @@ public:
     void update(t3::tick_t delta_time){
 
         //  現在のスプライト数表示
-        t3::printDisplay(0, 50, "%d", sprites_.size());
+        t3::printDisplay(400, 0, "%d", sprites_.size());
         
         //  画面タッチで数制御
         t3::Pointing pointing = t3::Director::instance().input().pointing();
@@ -49,6 +46,10 @@ public:
         
             const t3::Point2& pointing_pos = pointing.position();
             if (pointing_pos.x_ < 0) {
+                addSprite();
+                addSprite();
+                addSprite();
+                addSprite();
                 addSprite();
             }
             else {
@@ -58,12 +59,7 @@ public:
         }
         
         rollingSprites();
-        fadeSprites();
-        total_time_ += delta_time;
-        float sin = (t3::sinf(total_time_) + 1.0f) * 0.5f;
         
-        sprite_opacity_ = (sin * 255);
-        T3_ASSERT_RANGE(sprite_opacity_, 0, 255);
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -77,35 +73,12 @@ private:
             return;
         }
         
-        int spr_idx = 0;
         for (auto spr : sprites_) {
             float angle = spr->transform()->rotation();
-            if (spr_idx % 2) {
-                spr->transform()->rotation(angle + 1);
-            }
-            spr_idx += 1;
+            spr->transform()->rotation(angle + 1);
         }
     }
     
-    
-    void fadeSprites() {
-
-        if (sprites_.empty()) {
-            //  スプライト無し
-            return;
-        }
-        
-        
-        int spr_idx = 0;
-        for (auto spr : sprites_) {
-            if ((spr_idx % 6) == 0) {
-                spr->opacity(sprite_opacity_);
-            }
-            spr_idx += 1;
-        }
-    
-    }
-
     void adjustSpritesPosition() {
         if (sprites_.empty()) {
             //  スプライト無し
@@ -115,24 +88,28 @@ private:
         t3::SpritePtr spr = sprites_.front();
         
         t3::Vec2 offset = t3::Vec2(
-            spr->scaledSize().x_ / 2,
+            spr->scaledSize().x_,
             spr->scaledSize().y_
         );
-        int x_count = t3::Director::instance().virtualScreenSize().x_ / offset.x_ -1;
-        int y = 7;
+        const t3::Vec2& screen_size = t3::Director::instance().virtualScreenSize();
+        
+        int x_count = screen_size.x_ / offset.x_ -1;
+        int y_start = 16;
+        int limit_y = -(screen_size.y_ / offset.y_) + y_start +2;
+        int y = y_start;
         int i = 0;
-        for (auto spr : sprites_) {
-            if (i % x_count == 0) {
+        for (auto& spr : sprites_) {
+            if (i % x_count == 0 && i != 0) {
                 y -= 1;
+                if (y < limit_y) {
+                    y = y_start;
+                }
             }
 
-            float pos_x = ((i % x_count) * offset.x_) - 300;
+            float pos_x = ((i % x_count) * offset.x_) - (screen_size.x_ / 2);
             float pos_y = y * offset.y_;
             spr->transform()->position(pos_x, pos_y);
-            if (i == 52) {
-                spr->priority(t3::Sprite::PRIORITY_HIGH_2);
-                spr->transform()->scale(3);
-            }
+            
             i += 1;
         }
     }
@@ -140,44 +117,10 @@ private:
 private:
     void addSprite() {
         t3::TextureManager& texture_manager = t3::TextureManager::instance();
-        t3::Director::random_t& random_gen =  t3::Director::instance().random();
 
         //  スプライト増やす
-        t3::TexturePtr tex;
-//        bool tex_type_ui = random_gen.getInt(5) == 0;
-        
-        bool tex_type_ui = true;
-        
-        if (sprites_.size() > 30 && sprites_.size() < 45) {
-            tex_type_ui = false;
-        }
-        
-        if (tex_type_ui) {
-            tex = texture_manager.resource(ui_handle_);
-        }
-        else {
-            tex = texture_manager.resource(stamp_handle_);
-        }
-        
-        t3::SpritePtr sprite = sprite_layer_.createSprite(
-            tex
-        );
-        sprite->transform()->scale(1.0f);
-        
-        
-        if (tex_type_ui) {
-            //  UIテクスチャが使われてる時はUVを設定
-            sprite->setupTextureCoordAndSize(t3::Vec2(0, 0), t3::Vec2(64, 64));
-        }
-        
-        
-        if (random_gen.getUInt(5) == 0) {
-            sprite->color(t3::Color::red());
-        }
-        else {
-            sprite->color(t3::Color::white());
-        }
-        
+        const auto& tex = texture_manager.resource(stamp_handle_);
+        auto sprite = sprite_layer_.createSprite(tex);
         sprites_.push_back(sprite);
     }
     
@@ -193,9 +136,7 @@ private:
 
 private:
     t3::UniqueID stamp_handle_;
-    t3::UniqueID ui_handle_;
     t3::tick_t total_time_;
-    int sprite_opacity_;
     t3::SpriteLayer sprite_layer_;
     t3::Vector<t3::SpritePtr> sprites_;
 };

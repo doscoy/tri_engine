@@ -12,10 +12,10 @@
 namespace t3 {
 
     
-enum InterpolationType{
-    INTERPOLATION_LINER,            // 線形補間
-    INTERPOLATION_ACCELERATION,     // 加速補間
-    INTERPOLATION_DECELERATION,     // 減速補間
+enum class InterpolationType{
+    LINER,            // 線形補間
+    ACCELERATION,     // 加速補間
+    DECELERATION,     // 減速補間
 };
 
 
@@ -83,7 +83,7 @@ public:
         : interpolation_time_( 0.0f )
         , now_time_( 0.0f )
         , active_( false )
-        , type_( INTERPOLATION_LINER )
+        , type_(InterpolationType::LINER)
     {
     }
 
@@ -117,9 +117,8 @@ public:
     }
 
     //  更新処理
-    void updateInterpolation( const tick_t delta_time )
-    {
-        if ( !active_ ){
+    void updateInterpolation(const tick_t delta_time) {
+        if (!active_) {
             //  startされていないのですぐ終了
             return;
         }
@@ -128,29 +127,28 @@ public:
         now_time_ += delta_time;
 
         float t = 0;
-        if ( interpolation_time_ < now_time_ ){
+        if (interpolation_time_ < now_time_) {
             t = 1.0f;
             active_ = false;
-        }
-        else {
+        } else {
             t = now_time_ / interpolation_time_;
         }
         
         //  補間処理
         switch ( type_ ){
             //  線形
-            case INTERPOLATION_LINER:
-                interpolateLiner( *target_, start_, goal_, t );
+            case InterpolationType::LINER:
+                interpolateLiner(*target_, start_, goal_, t);
                 break;
 
             //  後半加速
-            case INTERPOLATION_ACCELERATION:
-                interpolateT2( *target_, start_, goal_, t );
+            case InterpolationType::ACCELERATION:
+                interpolateT2(*target_, start_, goal_, t);
                 break;
                 
             //  後半減速
-            case INTERPOLATION_DECELERATION:
-                interpolateLiner( *target_, start_, goal_, t );
+            case InterpolationType::DECELERATION:
+                interpolateLiner(*target_, start_, goal_, t);
                 break;
 
         }

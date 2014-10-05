@@ -9,7 +9,7 @@ namespace t3 {
 class MemoryChunk final {
 
     uint32_t signature_;
-    uint32_t size_;
+    size_t size_;
     MemoryChunk* prev_;
     MemoryChunk* next_;
 
@@ -83,7 +83,7 @@ public:
     ~MemoryPool();
     
 public:
-    void* allocate(size_t size, int align = 8);
+    void* allocate(size_t size, int align = 16);
     void deallocate(void* mem);
 
 public:
@@ -96,8 +96,14 @@ public:
         return free_chain_;
     }
     
-    size_t totalFreeSize() const;
-    size_t totalUseSize() const;
+    size_t totalFreeSize() const {
+        return pool_size_ - totalUseSize();
+    }
+    
+    size_t totalUseSize() const {
+        return total_use_size_;
+    }
+    
     size_t peakUseSize() const {
         return peak_use_size_;
     }
@@ -136,6 +142,8 @@ private:
     void* pool_;
     MemoryChunk* use_chain_;
     MemoryChunk* free_chain_;
+    size_t pool_size_;
+    size_t total_use_size_;
     size_t peak_use_size_;
 };
 

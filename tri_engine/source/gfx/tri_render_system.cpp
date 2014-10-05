@@ -13,6 +13,16 @@ int render_call_count_ = 0;
 
 
 
+namespace  {
+
+int viewport_x_ = -99;
+int viewport_y_ = -99;
+int viewport_w_ = -99;
+int viewport_h_ = -99;
+
+};
+
+
 inline void countDrawCall() {
 #if COUNT_RENDER_CALL
     render_call_count_ += 1;
@@ -37,7 +47,7 @@ void RenderSystem::setBlendMode(
         setBlend(true);
         setBlendFunctionType(
             t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
-            t3::RenderSystem::BlendFunctionType::TYPE_DST_ALPHA
+            t3::RenderSystem::BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
         );
     }
     
@@ -186,6 +196,14 @@ void RenderSystem::setUniformValue(
     float val
 ) {
     CoreRenderSystem::setUniformValue(location, val);
+}
+
+void RenderSystem::setUniformValue(
+    RenderSystem::ShaderVariableLocation location,
+    size_t size,
+    float* val
+) {
+    CoreRenderSystem::setUniformValue(location, size, val);
 }
 
 void RenderSystem::setUniformValue(
@@ -347,25 +365,37 @@ void RenderSystem::setViewport(
     static int last_w;
     static int last_h;
 
-    if (initialized && last_x == x) {
-        if (last_y == y) {
-            if (last_w == w) {
-                if (last_h == h) {
+    if (initialized && viewport_x_ == x) {
+        if (viewport_y_ == y) {
+            if (viewport_w_ == w) {
+                if (viewport_h_ == h) {
                     return;
                 }
             }
         }
     }
     initialized = true;
-    last_x = x;
-    last_y = y;
-    last_w = w;
-    last_h = h;
 #endif
+    viewport_x_ = x;
+    viewport_y_ = y;
+    viewport_w_ = w;
+    viewport_h_ = h;
 
     CoreRenderSystem::setViewport(x, y, w, h);
 }
 
+
+void RenderSystem::getViewport(
+    int* x,
+    int* y,
+    int* w,
+    int* h
+) {
+    *x = viewport_x_;
+    *y = viewport_y_;
+    *w = viewport_w_;
+    *h = viewport_h_;
+}
 
 void RenderSystem::setDepthTest(
     bool enable

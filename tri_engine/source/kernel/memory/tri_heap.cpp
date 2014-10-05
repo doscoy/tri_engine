@@ -15,7 +15,7 @@
     #define TRI_ALLOC_ENDMARKING    0
 #endif
 
-#define TRI_USE_MEMPOOL_ALLOCATE    1
+#define TRI_USE_MEMPOOL_ALLOCATE    0
 
 namespace {
 
@@ -24,10 +24,15 @@ namespace {
 const char* UNKNOWEN_FILE_NAME = "Unknown...";
 
 constexpr uint32_t HEAP_SIGNATURE   = t3::makeSignature('H','E','A','P');
+
+#if TRI_ALLOC_ENDMARKING
 constexpr uint32_t ALLOC_END_MARK   = 0x99999999;
+#endif
+
+#if TRI_DIRTY_MEMORY
 constexpr uint32_t DIRTY_ALLOC_MARK = 0xDEADBEEF;
 constexpr uint32_t DIRTY_FREE_MARK  = 0xCAFEC0DE;
-
+#endif
 
 
 
@@ -159,6 +164,10 @@ public:
     const char* file_name_;
 };
 
+//  アロケートヘッダを書き込む用に確保する追加エリアサイズ
+//  アライメントが綺麗になるように余裕をもって確保する
+#define TRI_HEAP_ALLOC_HEADER_AREA_SIZE     48
+static_assert(sizeof(AllocHeader) <= TRI_HEAP_ALLOC_HEADER_AREA_SIZE, "error");
 
 Heap::Heap()
     : active_(false)
@@ -190,17 +199,16 @@ void* Heap::allocate(
     T3_ASSERT(size > 0);
 
     //  本当に確保するサイズ　リクエストサイズ + ヘッダ情報 + 終端マーク4byte
-    size_t alloc_header_size = sizeof(AllocHeader);
-    size_t request_bytes = size + alloc_header_size;
+    size_t request_bytes = size + TRI_HEAP_ALLOC_HEADER_AREA_SIZE;
 
 #if TRI_ALLOC_ENDMARKING
     request_bytes += sizeof(uint32_t);
 #endif // TRI_ALLOC_ENDMARKING
 
     //  メモリ確保
-    int8_t* mem = reinterpret_cast<int8_t*>(allocateCore(request_bytes));
-    AllocHeader* header = reinterpret_cast< AllocHeader* >(mem);
-
+    AllocHeader* header = reinterpret_cast<AllocHeader*>(allocateCore(request_bytes));
+    T3_NULL_ASSERT(header);
+    
     //  ヘッダ情報書き込み
     header->setup(
         size,
@@ -239,7 +247,7 @@ void* Heap::allocate(
 
     node_count_ += 1;
 
-    void* start_mem_block = mem + alloc_header_size;
+    void* start_mem_block = (int8_t*)header + TRI_HEAP_ALLOC_HEADER_AREA_SIZE;
 
 #if TRI_ALLOC_ENDMARKING
     uint32_t* end_mark = reinterpret_cast<uint32_t*>((intptr_t)start_mem_block + size);
@@ -251,6 +259,7 @@ void* Heap::allocate(
     size_t alloc_size = size;
     std::memset(start_mem_block, DIRTY_ALLOC_MARK, alloc_size);
 #endif
+
 
     return start_mem_block;
 }
@@ -266,7 +275,7 @@ void Heap::deallocate(
     ScopedLock lock(Heap::mutex());
 
     AllocHeader* header = reinterpret_cast<AllocHeader*>(
-        (reinterpret_cast<char*>(mem) - sizeof(AllocHeader))
+        (reinterpret_cast<char*>(mem) - TRI_HEAP_ALLOC_HEADER_AREA_SIZE)
     );
     T3_ASSERT(header->isValid());
 
@@ -314,7 +323,7 @@ void Heap::deallocate(
 
 
 #if TRI_DIRTY_MEMORY
-    size_t alloc_size = header->size() + sizeof(AllocHeader);
+    size_t alloc_size = header->size() + TRI_HEAP_ALLOC_HEADER_AREA_SIZE;
     void* start_mem_block = header;
     std::memset(start_mem_block, DIRTY_FREE_MARK, alloc_size);
 #endif

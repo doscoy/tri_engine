@@ -2,7 +2,7 @@
 #define SIMPLE_2D_FSH
 
 
-const char* simple2d_fsh = STRINGIFY(
+const char* simple2d_fsh = TRI_INSTANT_SHADER(
 
 varying lowp vec4 out_color;
 

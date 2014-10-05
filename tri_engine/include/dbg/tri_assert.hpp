@@ -20,9 +20,9 @@ bool isInvalidFloat(const float f);
 } // namespace t3
 
 
-#ifndef NDEBUG
-    #define ENABLE_ASSERT
-#endif // NDEBUG
+#ifdef DEBUG
+    #define ENABLE_ASSERT   1
+#endif // DEBUG
 
 #ifdef ENABLE_ASSERT
 

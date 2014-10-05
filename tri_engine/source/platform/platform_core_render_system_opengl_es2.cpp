@@ -217,6 +217,14 @@ void CoreRenderSystem::setUniformValue(
     T3_GL_ASSERT();
 }
 
+void CoreRenderSystem::setUniformValue(
+    RenderSystem::ShaderVariableLocation location,
+    size_t size,
+    float* val
+) {
+    glUniform1fv(location, size, val);
+    T3_GL_ASSERT();
+}
 
 void CoreRenderSystem::setUniformMatrix(
     RenderSystem::ShaderVariableLocation location,

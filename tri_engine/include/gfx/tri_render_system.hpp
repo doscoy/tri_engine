@@ -8,7 +8,7 @@
 #include "base/tri_std.hpp"
 
 
-#define STRINGIFY(A)  #A
+#define TRI_INSTANT_SHADER(A)  #A
 
 
 
@@ -122,6 +122,12 @@ public:
     static void setUniformValue(
         ShaderVariableLocation location,
         float val
+    );
+    
+    static void setUniformValue(
+        ShaderVariableLocation location,
+        size_t size,
+        float* val
     );
     
     static void setUniformValue(
@@ -242,6 +248,13 @@ public:
         const int y,
         const int w,
         const int h
+    );
+    
+    static void getViewport(
+        int* x,
+        int* y,
+        int* w,
+        int* h
     );
 
 

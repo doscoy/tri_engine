@@ -10,6 +10,7 @@ inline namespace gfx {
 class Surface {
 
 public:
+    Surface();
     Surface(
         int width,
         int height
@@ -19,7 +20,11 @@ public:
 
 
 public:
-    t3::TexturePtr texture() {
+    TexturePtr texture() {
+        return texture_;
+    }
+    
+    const TexturePtr texture() const {
         return texture_;
     }
     
@@ -33,6 +38,8 @@ public:
     
     void bind();
     void unbind();
+    
+    void clear();
 
 private:
     int width_;
@@ -42,7 +49,7 @@ private:
     RenderSystem::RenderBufferID depth_;
     RenderSystem::FrameBufferID last_fb_;
     RenderSystem::RenderBufferID last_rb_;
-    t3::TexturePtr texture_;
+    TexturePtr texture_;
 };
 
 

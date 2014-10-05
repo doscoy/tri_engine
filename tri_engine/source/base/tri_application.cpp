@@ -21,9 +21,9 @@ namespace {
 t3::Vector<float> render_avg;
 
 bool show_fps_ = true;
-bool show_heap_ = true;
+bool show_heap_ = false;
 bool show_heap_bar_ = false;
-bool show_mem_pool_ = true;
+bool show_mem_pool_ = false;
 bool show_work_bar_ = false;
 bool show_work_time_ = false;
 bool show_task_ = false;
@@ -133,6 +133,8 @@ void initializeTriEngine(
     );
     T3_TRACE("Initialize TriEngine.\n");
     T3_TRACE("screen width %d  height %d\n", width, height);
+    RenderSystem::setViewport(0, 0, width, height);
+
     
 #if DEBUG
     show_fps_ = true;
@@ -230,7 +232,7 @@ void Application::updateApplication()
     //  delta time取得
     float delta_time = fps_timer_.interval();
     //  ブレークポイント貼ってる時に異常な数値になる為、最大でも１０フレの遅延に収める
-    clampMaximum(delta_time, frameSec<10>());
+    clampMaximum(delta_time, frameSec<30>());
 
 
     //  FPS表示
@@ -238,7 +240,7 @@ void Application::updateApplication()
         if ((frame_counter_.now() % 10) == 0) {
             fps_ =  60.0f / (delta_time / frameToSec(1));
         }
-        t3::printDisplay(0, 10, "FPS %.1f",fps_);
+        t3::printDisplay(0, 0, "FPS %.1f",fps_);
 
         float sum_render = 0;
         for (float a : render_avg) {
@@ -246,7 +248,7 @@ void Application::updateApplication()
         }
     
         //  ドローコール数
-        t3::printDisplay(140, 10, "DC:%d",
+        t3::printDisplay(140, 0, "DC:%d",
             t3::RenderSystem::getDrawCallCount()
         );
         t3::RenderSystem::resetDrawCallCount();

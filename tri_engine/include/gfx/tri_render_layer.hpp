@@ -13,9 +13,9 @@
 namespace t3 {
 inline namespace gfx {
 
-    
+class Surface;
 class RenderLayer;
-typedef List<RenderLayer*>   RenderLayers;
+using RenderLayers = List<RenderLayer*>;
 
 
 class RenderLayer
@@ -24,15 +24,23 @@ class RenderLayer
 {
 public:
     enum LayerPriority {
-        PRIORITY_LOWEST     =  20, // 奥
-        PRIORITY_SYS_BACK   =  60,
-        PRIORITY_APP_BACK   =  60,
-        PRIORITY_APP_NORMAL =  90,
-        PRIORITY_APP_FRONT  = 120,
-        PRIORITY_SYS_FRONT  = 150,
-        PRIORITY_SYS_FADE   = 170,
-        PRIORITY_DEBUG      = 180,
-        PRIORITY_HIGHEST    = 240, // 手前
+        PRIORITY_LOWEST      =  20, // 奥
+        PRIORITY_SYS_BACK1   =  61,
+        PRIORITY_APP_BACK2   =  62,
+        PRIORITY_APP_BACK3   =  63,
+        PRIORITY_APP_BACK4   =  64,
+        PRIORITY_APP_BACK5   =  65,
+        PRIORITY_APP_DEFAULT =  90,
+        PRIORITY_APP_FRONT1  = 101,
+        PRIORITY_APP_FRONT2  = 102,
+        PRIORITY_APP_FRONT3  = 103,
+        PRIORITY_APP_FRONT4  = 104,
+        PRIORITY_APP_FRONT5  = 104,
+        PRIORITY_APP_UI      = 110,
+        PRIORITY_SYS_FRONT   = 150,
+        PRIORITY_SYS_FADE    = 170,
+        PRIORITY_DEBUG       = 180,
+        PRIORITY_HIGHEST     = 240, // 手前
     };
     
 public:
@@ -41,6 +49,18 @@ public:
     virtual ~RenderLayer();
 
 public:
+
+    void renderTarget(
+        Surface* target
+    ) {
+        render_target_ = target;
+    }
+    
+    const Surface* renderTarget() const {
+        return render_target_;
+    }
+
+
     void priority(const int priority);
     
     int priority() const {
@@ -113,7 +133,8 @@ public:
 protected:
     virtual void updateLayer(tick_t delta_time){};
     virtual void drawLayer(){};
-
+    
+    void callDraw();
     void attachSystem();
     void detachSystem();
 
@@ -122,6 +143,8 @@ protected:
     bool pause_;
     bool visible_;
     uint8_t priority_;
+    Surface* render_target_;
+
 
     //  デバッグメニュー登録
     DebugMenuFrame dmf_me_;

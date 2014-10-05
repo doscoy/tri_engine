@@ -67,7 +67,7 @@ SpriteRenderer::SpriteRenderer()
     useDefaultShader();
     
     //  スプライトコンテナのメモリを事前に確保
-    sprites_.reserve(2000);
+    sprites_.reserve(4096);
     
 }
     
@@ -203,7 +203,7 @@ void SpriteRenderer::margeSprites() {
     
     
             //  ドローカウント設定
-            current_batch->drawCount(indices.size());
+            current_batch->drawCount(static_cast<uint32_t>(indices.size()));
     
             //  バッチグループ保存
             batch_groups_.push_back(current_batch);
@@ -387,7 +387,7 @@ void SpriteRenderer::margeSprites() {
     
     
     //  ドローカウント設定
-    current_batch->drawCount(indices.size());
+    current_batch->drawCount(static_cast<uint32_t>(indices.size()));
     
     //  バッチグループ保存
     batch_groups_.push_back(current_batch);

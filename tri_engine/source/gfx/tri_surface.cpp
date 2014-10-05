@@ -1,7 +1,7 @@
 
 #include "tri_surface.hpp"
 #include "gfx/tri_render_system.hpp"
-
+#include "base/tri_director.hpp"
 
 
 namespace t3 {
@@ -11,6 +11,11 @@ inline namespace gfx {
 void GL_CHECK() {
     int err = glGetError();
     T3_ASSERT_MSG(err == GL_NO_ERROR, "err = %d", err);
+}
+
+Surface::Surface()
+    : Surface(t3::Director::VIRTUAL_SCREEN_WIDTH, t3::Director::VIRTUAL_SCREEN_HEIGHT)
+{
 }
 
 
@@ -37,6 +42,10 @@ Surface::Surface(
         height,
         t3::RenderSystem::ColorFormat::RGBA
     );
+    texture_->bind();
+    
+    
+    
     
     //  カラーバッファ作成
     RenderSystem::createRenderBuffer(&cb_);
@@ -100,6 +109,13 @@ void Surface::bind() {
     RenderSystem::bindFrameBuffer(fb_);
     RenderSystem::bindRenderBuffer(cb_);
 }
+
+void Surface::clear() {
+
+    t3::RenderSystem::clearBuffer(true, true, false);
+
+}
+
 
 void Surface::unbind() {
     T3_ASSERT(last_fb_ != 0);

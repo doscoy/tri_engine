@@ -49,9 +49,9 @@ void traceValue(const char* const name, const Mtx44Template<float>& value);
 }   // namespace t3
 
 
-#ifndef NDEBUG
+#ifdef DEBUG
     #define TRI_DEVELOPMENT_ENABLE_TRACE
-#endif // NDEBUG
+#endif // DEBUG
 
 #ifdef TRI_DEVELOPMENT_ENABLE_TRACE
 

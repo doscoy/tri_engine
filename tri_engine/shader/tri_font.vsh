@@ -1,4 +1,4 @@
-static const char* font_vsh = STRINGIFY(
+static const char* font_vsh = TRI_INSTANT_SHADER(
 
 attribute vec2 in_position;
 attribute vec2 in_uv;

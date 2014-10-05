@@ -116,6 +116,9 @@ public:
     //  レイヤーの削除
     void detachLayer(RenderLayer* layer);
     
+    //  登録済レイヤーのソート
+    void sortLayers();
+    
     float getGameSpeed() const {
         return game_speed_;
     }
@@ -163,6 +166,9 @@ public:
         const int font_size,
         const char* const buf
     );
+    
+    static const int VIRTUAL_SCREEN_WIDTH = 640;
+    static const int VIRTUAL_SCREEN_HEIGHT = 1136;
     
 private:
     
