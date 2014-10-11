@@ -5,6 +5,7 @@
 #include "dbg/tri_debugmenu.hpp"
 #include "dbg/tri_workbar.hpp"
 #include "dbg/tri_draw_primitive.hpp"
+#include "dbg/tri_print.hpp"
 #include "dbg/tri_debugpad.hpp"
 #include "util/tri_framerate.hpp"
 #include "util/tri_counter.hpp"
@@ -260,7 +261,7 @@ void Application::updateApplication()
             fps_avg /= fps_size;
             fps_ = fps_avg;
         }
-        t3::printDisplay(0, 0, "FPS %.1f",fps_);
+        T3_PRINT_DISP(0, 0, "FPS %.1f",fps_);
 
         float sum_render = 0;
         for (float a : render_avg) {
@@ -268,7 +269,7 @@ void Application::updateApplication()
         }
     
         //  ドローコール数
-        t3::printDisplay(140, 0, "DC:%d",
+        T3_PRINT_DISP(140, 0, "DC:%d",
             t3::RenderSystem::getDrawCallCount()
         );
         t3::RenderSystem::resetDrawCallCount();
@@ -389,7 +390,7 @@ void Application::renderApplication()
     if (show_work_time_) {
         int cost_pos_x = 5;
         int cost_pos_y = 880;
-        t3::printDisplay(
+        T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y,
             Color::white(),
@@ -397,7 +398,7 @@ void Application::renderApplication()
             last_system_cost_ * 1000,
             last_system_cost_ / frameSec<60>() * 100
         );
-        t3::printDisplay(
+        T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y + 16,
             Color::white(),
@@ -405,7 +406,7 @@ void Application::renderApplication()
             last_app_cost_ * 1000,
             last_app_cost_ / frameSec<60>() * 100
         );
-        t3::printDisplay(
+        T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y + 32,
             Color::white(),
@@ -413,7 +414,7 @@ void Application::renderApplication()
             last_rendering_cost_ * 1000,
             last_rendering_cost_ / frameSec<60>() * 100
         );
-        t3::printDisplay(
+        T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y + 48,
             Color::white(),
@@ -439,7 +440,7 @@ void Application::renderApplication()
                 continue;
             }
         
-            t3::printDisplay(
+            T3_PRINT_DISP(
                 heap_pos_x,
                 heap_pos_y,
                 Color::white(),
@@ -459,7 +460,7 @@ void Application::renderApplication()
         size_t free_pool = heap->totalFreeSize();
         size_t use_pool = heap->totalUseSize();
         size_t peak_use_size = heap->peakUseSize();
-        t3::printDisplay(0, 28, "POOL F(%7u)  U(%7u) P(%7u)", free_pool, use_pool, peak_use_size);
+        T3_PRINT_DISP(0, 28, "POOL F(%7u)  U(%7u) P(%7u)", free_pool, use_pool, peak_use_size);
 
     }
 
@@ -549,7 +550,7 @@ void Application::beginRender() {
 
 
 void Application::endRender() {
-    RenderSystem::fenceDraw();
+//    RenderSystem::fenceDraw();
     RenderSystem::swapBuffers();
 }
 

@@ -70,7 +70,7 @@ public:
         const float y,
         const Color& color
     ) const {
-        printDisplay(x, y, color, DEBUG_MENU_FONT_SIZE, getLabel().c_str());
+        T3_PRINT_DISP(x, y, color, DEBUG_MENU_FONT_SIZE, getLabel().c_str());
     }
     
     template <typename T>

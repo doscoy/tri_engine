@@ -80,7 +80,7 @@ void TaskManager::printTask() const {
         int show_x = task_num / 61;
         int show_y = task_num % 61;
         SharedPtr<Task> t(*itr);
-        t3::printDisplay(show_x * 120, show_y * 15, "%s", t->name().c_str());
+        T3_PRINT_DISP(show_x * 120, show_y * 15, "%s", t->name().c_str());
         task_num += 1;
     }
 }

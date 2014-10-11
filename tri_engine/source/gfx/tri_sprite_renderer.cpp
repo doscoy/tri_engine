@@ -174,7 +174,6 @@ void SpriteRenderer::render() {
 void SpriteRenderer::beginRender() {
 
 
-
     T3_NULL_ASSERT(shader_);
     bool use_result = shader_->use();
     T3_ASSERT(use_result);

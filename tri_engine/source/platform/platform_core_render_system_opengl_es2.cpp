@@ -14,7 +14,7 @@ extern GLFWwindow* window_;
 namespace {
 
 
-GLsync fence_;
+GLsync fence_ = 0;
 
 inline void checkGLError() {
     int err = glGetError();
@@ -505,11 +505,11 @@ void RenderSystem::setTextureMinFilter(
 void RenderSystem::setTextureWrapS(
     RenderSystem::TextureWrapType type
 ) {
-    if (type == RenderSystem::TextureWrapType::TYPE_CLAMP_TO_EDGE) {
+    if (type == RenderSystem::TextureWrapType::CLAMP_TO_EDGE) {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     }
     else {
-        T3_PANIC("unknown type");
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     }
     T3_GL_ASSERT();
 }
@@ -517,11 +517,11 @@ void RenderSystem::setTextureWrapS(
 void RenderSystem::setTextureWrapT(
     RenderSystem::TextureWrapType type
 ) {
-    if (type == RenderSystem::TextureWrapType::TYPE_CLAMP_TO_EDGE) {
+    if (type == RenderSystem::TextureWrapType::CLAMP_TO_EDGE) {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     }
     else {
-        T3_PANIC("unknown type");
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     }
     T3_GL_ASSERT();
 }
@@ -776,7 +776,8 @@ void RenderSystem::attachRenderBuffer(
         GL_RENDERBUFFER,
         id
     );
-    
+    T3_GL_ASSERT();
+
 }
 
 
@@ -802,7 +803,8 @@ void RenderSystem::attachFrameBufferTexture(
         id,
         0
     );
-    
+    T3_GL_ASSERT();
+   
 }
 
 
@@ -830,11 +832,13 @@ void RenderSystem::setupRenderBufferStorage(
         width,
         height
     );
+    T3_GL_ASSERT();
 }
 
 RenderSystem::BufferID RenderSystem::createVertexArrayBuffer() {
     RenderSystem::BufferID id;
     glGenVertexArraysOES(1, &id);
+    T3_GL_ASSERT();
     return id;
 }
 
@@ -842,25 +846,31 @@ RenderSystem::BufferID RenderSystem::createVertexArrayBuffer() {
 
 void RenderSystem::bindVertexArrayBuffer(const RenderSystem::BufferID id) {
     glBindVertexArrayOES(id);
+    T3_GL_ASSERT();
 }
 
 
 void RenderSystem::deleteVertexArrayBuffer(const RenderSystem::BufferID id) {
     glDeleteVertexArraysOES(1, &id);
+    T3_GL_ASSERT();
 }
 
 void RenderSystem::fenceDraw() {
     fence_ = glFenceSyncAPPLE(GL_SYNC_GPU_COMMANDS_COMPLETE_APPLE, 0);
+    T3_GL_ASSERT();
 }
 
 void RenderSystem::fenceDrawWaiting() {
-
+    if (!fence_) {
+        return;
+    }
     glClientWaitSyncAPPLE(
         fence_,
         GL_SYNC_FLUSH_COMMANDS_BIT_APPLE,
         GL_TIMEOUT_IGNORED_APPLE
     );
 
+    T3_GL_ASSERT();
 }
 
 
@@ -882,10 +892,12 @@ void RenderSystem::mapBuffer(RenderSystem::BufferType type, intptr_t offset, siz
     memcpy(buf_data, data, size);
     glFlushMappedBufferRangeEXT(gl_type, offset, size);
 
+    T3_GL_ASSERT();
 }
 
 void RenderSystem::unmapBuffer(RenderSystem::BufferType type) {
     glUnmapBufferOES(bufferTypeToGL(type));
+    T3_GL_ASSERT();
 }
 
 

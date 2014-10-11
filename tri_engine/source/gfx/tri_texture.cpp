@@ -26,7 +26,7 @@ Texture::Texture(
     glBindTexture(GL_TEXTURE_2D, texture_handle_);
     T3_ASSERT(glGetError() == GL_NO_ERROR);
     
-    RenderSystem::setTextureWrap(RenderSystem::TextureWrapType::TYPE_CLAMP_TO_EDGE);
+    RenderSystem::setTextureWrap(RenderSystem::TextureWrapType::CLAMP_TO_EDGE);
     RenderSystem::setTextureMagFilter(RenderSystem::TextureFilterType::TYPE_LINEAR);
     RenderSystem::setTextureMinFilter(RenderSystem::TextureFilterType::TYPE_LINEAR);
     RenderSystem::setupTextureData(width, height, RenderSystem::ColorFormat::RGBA, nullptr);

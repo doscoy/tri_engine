@@ -77,7 +77,7 @@ public:
         else if ( pad.isTrigger(t3::Pad::BUTTON_DOWN)) {
             target_ += step_;
         }
-        t3::util::clampLimitation(target_, l_limit_, h_limit_);
+        clampLimitation(target_, l_limit_, h_limit_);
     }
     
     
@@ -91,7 +91,7 @@ public:
         
         makeTargetValueString(target_, buf, 32);
         
-        printDisplay(
+        T3_PRINT_DISP(
             x,
             y,
             color,
@@ -99,7 +99,7 @@ public:
             getLabel().c_str()
         );
         
-        printDisplay(
+        T3_PRINT_DISP(
             x + (DEBUG_MENU_FONT_SIZE*13),
             y,
             color,

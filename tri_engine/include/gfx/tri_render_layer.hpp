@@ -25,7 +25,8 @@ class RenderLayer
 public:
     enum LayerPriority {
         PRIORITY_LOWEST      =  20, // 奥
-        PRIORITY_SYS_BACK1   =  61,
+        PRIORITY_SYS_BACK    =  50,
+        PRIORITY_APP_BACK1   =  61,
         PRIORITY_APP_BACK2   =  62,
         PRIORITY_APP_BACK3   =  63,
         PRIORITY_APP_BACK4   =  64,

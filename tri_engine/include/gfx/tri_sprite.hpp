@@ -56,6 +56,10 @@ public:
     
     
     //  テクスチャ取得
+    TexturePtr& texture() {
+        return texture_;
+    }
+    
     const TexturePtr& texture() const {
         return texture_;
     }

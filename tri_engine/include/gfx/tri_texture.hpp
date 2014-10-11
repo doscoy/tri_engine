@@ -49,6 +49,15 @@ public:
         return color_format_;
     }
     
+    void setWrapMode(
+        RenderSystem::TextureWrapType type
+    ) {
+        bind();
+        RenderSystem::setTextureWrap(type);
+    }
+    
+    
+    
     //  テクスチャ生成
     static TexturePtr create(
         const FilePath& filepath

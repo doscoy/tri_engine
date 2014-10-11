@@ -298,7 +298,8 @@ public:
     );
     
     enum class TextureWrapType {
-        TYPE_CLAMP_TO_EDGE,
+        CLAMP_TO_EDGE,
+        REPEAT
     };
     
     static void setTextureWrap(
@@ -353,6 +354,7 @@ public:
     static void resetBufferBind() {
         bindBuffer(BufferType::TYPE_VERTEX, 0);
         bindBuffer(BufferType::TYPE_INDEX, 0);
+        bindVertexArrayBuffer(0);
     }
     
     static void createBuffer(uint32_t* buffer);

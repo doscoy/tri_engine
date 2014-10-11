@@ -50,6 +50,8 @@ void CinemaLayer::updateLayer(tick_t delta_time) {
 
 void CinemaLayer::drawLayer() {
     
+    RenderSystem::resetBufferBind();
+    
     if (!texture_) {
         return;
     }
@@ -59,10 +61,12 @@ void CinemaLayer::drawLayer() {
     RenderSystem::setBlendMode(RenderSystem::BlendMode::NONE);
 
     // シェーダで描画
-    shader_->use();
+    bool use_result = shader_->use();
+    T3_ASSERT(use_result);
     int position_slot = shader_->getAttributeLocation("a_position");
+    T3_ASSERT(position_slot >= 0);
     int uv_slot = shader_->getAttributeLocation("a_uv");
-    
+    T3_ASSERT(uv_slot >= 0);
     
     float x0 = -1.0f;
     float x1 = 1.0f;
