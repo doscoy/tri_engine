@@ -10,7 +10,7 @@ typedef uint32_t rgba32_t;
 
 class Color
 {
-public:
+private:
     uint8_t red_;
     uint8_t blue_;
     uint8_t green_;
@@ -82,45 +82,79 @@ public:
     }
     
     void redFloat(const float r) {
-        red_ = 255.0f * r;
-        if (red_ > 255) {
-            red_ = 255;
-        }
-        else if (red_ < 0) {
-            red_ = 0;
-        }
+        red(255.0f * r);
     }
     
     void greenFloat(const float g) {
-        green_ = 255.0f * g;
-        if (green_ > 255) {
-            green_ = 255;
-        }
-        else if (green_ < 0) {
-            green_ = 0;
-        }
+        green(255.0f * g);
     }
     
     void blueFloat(const float b) {
-        blue_ = 255.0f * b;
-        if (blue_ > 255) {
-            blue_ = 255;
-        }
-        else if (blue_ < 0) {
-            blue_ = 0;
-        }
+        blue(255.0f * b);
     }
     
 
-    
-    
-    static Color black() {
-        return Color(0x00, 0x00, 0x00);
+
+    void red(int r) {
+        if (r > 255) {
+            r = 255;
+        } else if (r < 0) {
+            r = 0;
+        }
+        red_ = r;
     }
     
-    static Color blue() {
-        return Color(0x00, 0x00, 0xFF);
+    void green(int g) {
+        if (g > 255) {
+            g = 255;
+        } else if (g < 0) {
+            g = 0;
+        }
+        green_ = g;
     }
+    
+    void blue(int b) {
+        if (b > 255) {
+            b = 255;
+        } else if (b < 0) {
+            b = 0;
+        }
+        blue_ = b;
+    }
+    
+    void alpha(int a) {
+        if (a > 255) {
+            a = 255;
+        } else if (a < 0) {
+            a = 0;
+        }
+        alpha_ = a;
+    }
+
+    int red() const {
+        return red_;
+    }
+
+    int green() const {
+        return green_;
+    }
+    
+    int blue() const {
+        return blue_;
+    }
+    
+    int alpha() const {
+        return alpha_;
+    }
+    
+public:
+    
+    
+    static Color BLACK;
+    static Color BLUE;
+    static Color GREEN;
+    static Color RED;
+    
     
     static Color blueivy() {
         return Color(0x30, 0x90, 0xc7);
@@ -154,9 +188,6 @@ public:
         return Color(0xFF, 0xFF, 0xFF);
     }
     
-    static Color red() {
-        return Color(0xFF, 0x00, 0x00);
-    }
     
     static Color lime() {
         return Color(0x00, 0xFF, 0x00 );
@@ -170,9 +201,6 @@ public:
         return Color(0xFF, 0xA5, 0x00);
     }
     
-    static Color green() {
-        return Color(0x00, 0x80, 0x00);
-    }
 
     static Color cyan() {
         return Color(0x00, 0xFF, 0xFF);
@@ -210,6 +238,17 @@ public:
         return Color(0x52, 0xd0, 0x17);
     }
     
+    static Color forestgreen() {
+        return Color(0x22, 0x8b, 0x22);
+    }
+
+    static Color purple() {
+        return Color(0x80, 0x00, 0x80);
+    }
+  
+    static Color khaki() {
+        return Color(0xf0, 0xe6, 0x8c);
+    }
     
 };
 

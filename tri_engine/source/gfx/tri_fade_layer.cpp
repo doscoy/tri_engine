@@ -22,7 +22,7 @@ FadeLayer::FadeLayer(
     , fading_(false)
     , fade_in_(true)
     , fade_speed_(1.0f)
-    , fade_color_(Color::black())
+    , fade_color_(Color::BLACK)
     , alpha_(0.0f)
 {
     setUpdateCallback(this, &FadeLayer::fadeUpdate);

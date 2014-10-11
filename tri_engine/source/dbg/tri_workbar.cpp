@@ -26,7 +26,7 @@ Workbar::Workbar()
 {
     bar_params_[0] = {0, Color::magenta()};
     bar_params_[1] = {0, Color::yellow()};
-    bar_params_[2] = {0, Color::green()};
+    bar_params_[2] = {0, Color::GREEN};
     bar_params_[3] = {0, Color::cyan()};
     bar_params_[4] = {0, Color::orange()};
     bar_params_[5] = {0, Color::white()};
@@ -149,7 +149,7 @@ void Workbar::draw() {
     //  上限バー描画
     Color limit_bar_color = Color::lime();
     if (limit_bar_pos_x_ > 0) {
-        limit_bar_color = Color::red();
+        limit_bar_color = Color::RED;
     }
     drawRectangle(Vec2(limit_bar_pos_x_, y-1), Vec2(3, thickness_+2), limit_bar_color);
     

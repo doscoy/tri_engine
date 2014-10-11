@@ -1,7 +1,7 @@
 
 
 #include "gfx/tri_render_system.hpp"
-#include "platform/platform_core_render_system.hpp"
+
 
 
 #define BEFORE_JUDGE_GL     (0)
@@ -40,60 +40,19 @@ void RenderSystem::setBlendMode(
     } else if (mode == BlendMode::ADD) {
         setBlend(true);
         setBlendFunctionType(
-            t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
-            t3::RenderSystem::BlendFunctionType::TYPE_ONE
+            BlendFunctionType::TYPE_SRC_ALPHA,
+            BlendFunctionType::TYPE_ONE
         );
     } else {
         setBlend(true);
         setBlendFunctionType(
-            t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
-            t3::RenderSystem::BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
+            BlendFunctionType::TYPE_SRC_ALPHA,
+            BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
         );
     }
     
 }
 
-
-void RenderSystem::createFrameBuffer(FrameBufferID* id) {
-    CoreRenderSystem::createFrameBuffer(id);
-}
-
-void RenderSystem::deleteFrameBuffer(FrameBufferID* id) {
-    CoreRenderSystem::deleteFrameBuffer(id);
-}
-
-void RenderSystem::bindFrameBuffer(FrameBufferID id) {
-    CoreRenderSystem::bindFrameBuffer(id);
-}
-
-void RenderSystem::createRenderBuffer(RenderBufferID* id) {
-    CoreRenderSystem::createRenderBuffer(id);
-}
-
-void RenderSystem::deleteRenderBuffer(RenderBufferID* id) {
-    CoreRenderSystem::deleteRenderBuffer(id);
-}
-
-void RenderSystem::bindRenderBuffer(RenderBufferID id) {
-    CoreRenderSystem::bindRenderBuffer(id);
-}
-
-RenderSystem::FrameBufferID RenderSystem::getCurrentFrameBufferID() {
-    return CoreRenderSystem::getCurrentFrameBufferID();
-}
-
-
-RenderSystem::RenderBufferID RenderSystem::getCurrentRenderBufferID() {
-    return CoreRenderSystem::getCurrentRenderBufferID();
-}
-
-
-void RenderSystem::bindTexture(
-    const TextureID texture
-) {
-
-    CoreRenderSystem::bindTexture(texture);
-}
 
 int RenderSystem::getDrawCallCount() {
     return render_call_count_;
@@ -101,195 +60,6 @@ int RenderSystem::getDrawCallCount() {
 
 void RenderSystem::resetDrawCallCount() {
     render_call_count_ = 0;
-}
-
-
-int RenderSystem::buildShader(
-    const char* const source,
-    RenderSystem::ShaderType shader_type
-) {
-    return CoreRenderSystem::buildShader(source, shader_type);
-}
-
-void RenderSystem::attachShader(
-    RenderSystem::ShaderProgramID program_handle,
-    int shader_handle
-) {
-    CoreRenderSystem::attachShader(program_handle, shader_handle);
-}
-
-void RenderSystem::linkShader(
-    RenderSystem::ShaderProgramID program_handle
-) {
-    CoreRenderSystem::linkShader(program_handle);
-}
-
-void RenderSystem::setShader(
-    RenderSystem::ShaderProgramID shader
-) {
-#if BEFORE_JUDGE_GL
-    static bool initialized = false;
-    static RenderSystem::ShaderProgramID last;
-    if (initialized && last == shader) {
-        return;
-    }
-    initialized = true;
-    last = shader;
-#endif
-    
-    CoreRenderSystem::setShader(shader);
-}
-
-void RenderSystem::bindAttributeLocation(
-    RenderSystem::ShaderProgramID handle,
-    RenderSystem::ShaderVariableLocation location,
-    const char* const name
-) {
-    CoreRenderSystem::bindAttributeLocation(handle, location, name);
-}
-
-
-void RenderSystem::bindFragmentDataLocation(
-    RenderSystem::ShaderProgramID handle,
-    RenderSystem::ShaderVariableLocation location,
-    const char* const name
-) {
-    CoreRenderSystem::bindFragmentDataLocation(handle, location, name);
-}
-
-RenderSystem::ShaderVariableLocation RenderSystem::getAttributeLocation(
-    RenderSystem::ShaderProgramID program,
-    const char* const name
-) {
-    return CoreRenderSystem::getAttributeLocation(program, name);
-}
-
-RenderSystem::ShaderVariableLocation RenderSystem::getUniformLocation(
-    RenderSystem::ShaderProgramID program,
-    const char* const name
-) {
-    return CoreRenderSystem::getUniformLocation(program, name);
-}
-
-
-void RenderSystem::setUniformValue(
-    RenderSystem::ShaderVariableLocation location,
-    float x,
-    float y,
-    float z
-) {
-    CoreRenderSystem::setUniformValue(location, x, y, z);
-}
-
-void RenderSystem::setUniformValue(
-    RenderSystem::ShaderVariableLocation location,
-    float x,
-    float y,
-    float z,
-    float w
-) {
-    CoreRenderSystem::setUniformValue(location, x, y, z, w);
-}
-
-void RenderSystem::setUniformValue(
-    RenderSystem::ShaderVariableLocation location,
-    float val
-) {
-    CoreRenderSystem::setUniformValue(location, val);
-}
-
-void RenderSystem::setUniformValue(
-    RenderSystem::ShaderVariableLocation location,
-    size_t size,
-    float* val
-) {
-    CoreRenderSystem::setUniformValue(location, size, val);
-}
-
-void RenderSystem::setUniformValue(
-    RenderSystem::ShaderVariableLocation location,
-    int val
-) {
-    CoreRenderSystem::setUniformValue(location, val);
-}
-
-
-void RenderSystem::setUniformMatrix(
-    RenderSystem::ShaderVariableLocation location,
-    t3::Mtx44 mtx
-) {
-    CoreRenderSystem::setUniformMatrix(location, mtx);
-
-}
-
-void RenderSystem::initializeRenderSystem() {
-    CoreRenderSystem::initializeRenderSystem();
-}
-
-
-
-
-
-
-void RenderSystem::swapBuffers() {
-    CoreRenderSystem::swapBuffers();
-}
-
-
-void RenderSystem::setDepthWrite(
-    bool enable
-) {
-#if BEFORE_JUDGE_GL
-    static bool initialized = false;
-    static bool last;
-    if (initialized && last == enable) {
-        return;
-    }
-    initialized = true;
-    last = enable;
-#endif
-
-    CoreRenderSystem::setDepthWrite(enable);
-}
-
-
-void RenderSystem::clearBuffer(
-    bool color_clear,
-    bool depth_clear,
-    bool stencil_clear
-) {
-    CoreRenderSystem::clearBuffer(color_clear, depth_clear, stencil_clear);
-}
-
-void RenderSystem::setCullingMode(
-    RenderSystem::CullingMode mode
-) {
-#if BEFORE_JUDGE_GL
-    static bool initialized = false;
-    static RenderSystem::CullingMode last;
-    if (initialized && last == mode) {
-        return;
-    }
-    initialized = true;
-    last = mode;
-#endif
-    CoreRenderSystem::setCullingMode(mode);
-}
-
-
-void RenderSystem::setClearDepthValue(
-    const float value
-) {
-#if BEFORE_JUDGE_GL
-    static bool initialized = false;
-    static float last;
-    if (initialized && last == value) {
-        return;
-    }
-    initialized = true;
-    last = value;
-#endif
-    CoreRenderSystem::setClearDepthValue(value);
 }
 
 
@@ -307,49 +77,12 @@ void RenderSystem::clearColor(
     last = clear_color;
 #endif
 
-    CoreRenderSystem::clearColor(
+    clearColor(
         clear_color.redFloat(),
         clear_color.greenFloat(),
         clear_color.blueFloat(),
         clear_color.alphaFloat()
     );
-}
-
-
-void RenderSystem::setDepthTestMode(
-    RenderSystem::DepthTestMode mode
-) {
-#if BEFORE_JUDGE_GL
-    static bool initialized = false;
-    static RenderSystem::DepthTestMode last;
-    if (initialized && last == mode) {
-        return;
-    }
-    initialized = true;
-    last = mode;
-#endif
-
-    CoreRenderSystem::setDepthTestMode(mode);
-}
-
-void RenderSystem::setBlendFunctionType(
-    RenderSystem::BlendFunctionType sfactor,
-    RenderSystem::BlendFunctionType dfactor
-) {
-#if BEFORE_JUDGE_GL
-    static bool initialized = false;
-    static RenderSystem::BlendFunctionType last_sf;
-    static RenderSystem::BlendFunctionType last_df;
-    if (initialized && last_sf == sfactor) {
-        if (last_df == dfactor) {
-            return;
-        }
-    }
-    initialized = true;
-    last_sf = sfactor;
-    last_df = dfactor;
-#endif
-    CoreRenderSystem::setBlendFunctionType(sfactor, dfactor);
 }
 
 void RenderSystem::setViewport(
@@ -381,7 +114,7 @@ void RenderSystem::setViewport(
     viewport_w_ = w;
     viewport_h_ = h;
 
-    CoreRenderSystem::setViewport(x, y, w, h);
+    setViewportC(x, y, w, h);
 }
 
 
@@ -397,70 +130,11 @@ void RenderSystem::getViewport(
     *h = viewport_h_;
 }
 
-void RenderSystem::setDepthTest(
-    bool enable
-) {
-#if BEFORE_JUDGE_GL
-    static bool initialized = false;
-    static bool last;
-    if (initialized && last == enable) {
-        return;
-    }
-    initialized = true;
-    last = enable;
-#endif
-    CoreRenderSystem::setDepthTest(enable);
-}
-
-void RenderSystem::setBlend(
-    bool enable
-) {
-#if BEFORE_JUDGE_GL
-    static bool initialized = false;
-    static bool last;
-    if (initialized && last == enable) {
-        return;
-    }
-    initialized = true;
-    last = enable;
-#endif
-    CoreRenderSystem::setBlend(enable);
-}
-
-void RenderSystem::setCulling(
-    bool enable
-) {
-#if BEFORE_JUDGE_GL
-    static bool initialized = false;
-    static bool last;
-    if (initialized && last == enable) {
-        return;
-    }
-    initialized = true;
-    last = enable;
-#endif
-    CoreRenderSystem::setCulling(enable);
-}
-
-
-
-void RenderSystem::setTextureMagFilter(
-    RenderSystem::TextureFilterType type
-) {
-    CoreRenderSystem::setTextureMagFilter(type);
-}
-
-void RenderSystem::setTextureMinFilter(
-    RenderSystem::TextureFilterType type
-) {
-    CoreRenderSystem::setTextureMinFilter(type);
-}
-
 void RenderSystem::setTextureWrap(
     RenderSystem::TextureWrapType type
 ) {
-    CoreRenderSystem::setTextureWrapS(type);
-    CoreRenderSystem::setTextureWrapT(type);
+    setTextureWrapS(type);
+    setTextureWrapT(type);
 }
 
 
@@ -470,7 +144,7 @@ void RenderSystem::drawElements(
     size_t indices_type_size
 ) {
     countDrawCall();
-    CoreRenderSystem::drawElements(mode, count, indices_type_size);
+    drawElementsC(mode, count, indices_type_size);
 }
 
 void RenderSystem::drawArray(
@@ -479,134 +153,19 @@ void RenderSystem::drawArray(
     int count
 ) {
     countDrawCall();
-    CoreRenderSystem::drawArray(mode, first, count);
+    drawArrayC(mode, first, count);
 }
 
 
-void RenderSystem::setVertexAttributePointer(
-    int slot,
-    int element_num,
-    int type,
-    bool normalized,
-    int stride,
-    void* ptr
-) {
-    CoreRenderSystem::setVertexAttributePointer(slot, element_num, type, normalized, stride, ptr);
-}
 
-void RenderSystem::setupTextureData(
-    int width,
-    int height,
-    RenderSystem::ColorFormat color_format,
-    const void* data
-) {
-    CoreRenderSystem::setupTextureData(width, height, color_format, data);
-}
-
-void RenderSystem::bindBuffer(
-    RenderSystem::BufferType target_type,
-    int buffer_id
-) {
-    CoreRenderSystem::bindBuffer(target_type, buffer_id);
-}
-
-
-void RenderSystem::createBuffer(uint32_t* buffer) {
-
-    CoreRenderSystem::createBuffer(buffer);
-}
 
 void RenderSystem::deleteBuffer(uint32_t* buffer) {
 
-    CoreRenderSystem::deleteBuffer(buffer);
+    deleteBufferC(buffer);
     *buffer = 0;
 }
 
-void RenderSystem::setupBufferData(
-    RenderSystem::BufferType type,
-    int size,
-    const void* data,
-    RenderSystem::BufferUsage usage
-) {
-    CoreRenderSystem::setupBufferData(type, size, data, usage);
-}
 
-void RenderSystem::setupBufferSubData(
-    RenderSystem::BufferType type,
-    int offset,
-    int size,
-    const void *data
-) {
-    CoreRenderSystem::setupBufferSubData(type, offset, size, data);
-}
-
-void RenderSystem::setActiveTextureUnit(
-    int unit
-) {
-#if BEFORE_JUDGE_GL
-    static bool initialized = false;
-    static int last;
-    if (initialized && last == unit) {
-        return;
-    }
-    initialized = true;
-    last = unit;
-#endif
-    CoreRenderSystem::setActiveTextureUnit(unit);
-}
-
-void RenderSystem::setEnableVertexAttribute(
-    int slot
-) {
-    CoreRenderSystem::setEnableVertexAttribute(slot);
-}
-
-void RenderSystem::setDisableVertexAttribute(
-    int slot
-) {
-
-    CoreRenderSystem::setDisableVertexAttribute(slot);
-}
-
-void RenderSystem::setAttributeValue(
-    int slot,
-    float a,
-    float b,
-    float c,
-    float d
-) {
-
-    CoreRenderSystem::setAttributeValue(slot, a, b, c, d);
-}
-
-
-void RenderSystem::attachRenderBuffer(
-    RenderSystem::RenderBufferAttachType type,
-    RenderSystem::RenderBufferID id
-) {
-    CoreRenderSystem::attachRenderBuffer(type, id);
-}
-
-void RenderSystem::attachFrameBufferTexture(
-    RenderBufferAttachType type,
-    TextureID id
-) {
-    CoreRenderSystem::attachFrameBufferTexture(type, id);
-}
-
-
-void RenderSystem::setupRenderBufferStorage(
-    t3::RenderSystem::RenderBufferUsage usage,
-    int width,
-    int height
-) {
-
-    CoreRenderSystem::setupRenderBufferStorage(
-        usage,
-        width,
-        height
-    );
-}
 
 
 

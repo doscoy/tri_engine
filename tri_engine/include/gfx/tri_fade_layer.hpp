@@ -75,9 +75,9 @@ public:
         int g,
         int b
     ) {
-        fade_color_.red_ = r;
-        fade_color_.green_ = g;
-        fade_color_.blue_ = b;
+        fade_color_.red(r);
+        fade_color_.green(g);
+        fade_color_.blue(b);
     }
     
     void setFadeColor(

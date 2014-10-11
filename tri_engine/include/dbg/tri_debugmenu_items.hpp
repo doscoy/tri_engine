@@ -119,7 +119,7 @@ private:
 
 
     
-    
+/*
 template<>
 class DebugMenuItem<Color>
 {
@@ -146,6 +146,7 @@ private:
     DebugMenuItem<step_type_t> b_;
     DebugMenuItem<step_type_t> a_;
 };
+*/
     
 
 template<>

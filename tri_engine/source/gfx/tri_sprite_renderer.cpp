@@ -16,6 +16,9 @@
 #define SHADER_ATTR_UV              "a_uv"
 #define SHADER_ATTR_COLOR           "a_color"
 
+#define USE_VAO 1
+#define USE_GLMAP 1
+
 
 namespace {
 
@@ -48,6 +51,8 @@ SpriteRenderer::SpriteRenderer()
     : sprites_()
     , shader_(nullptr)
     , default_shader_(nullptr)
+    , batch_groups_()
+    , current_batch_idx_(-1)
 {
     //  デフォルトのシェーダ準備
     default_shader_ = std::make_shared<Shader>();
@@ -69,6 +74,64 @@ SpriteRenderer::SpriteRenderer()
     //  スプライトコンテナのメモリを事前に確保
     sprites_.reserve(4096);
     
+    
+    //  バッチグループの初期化
+#ifdef USE_VAO
+    for (auto& group : batch_groups_) {
+        group.bindVOA();
+        group.vertexBuffer().bind();
+
+         //  設定の後片付け
+
+        shader_->setAttributePointer(
+            SHADER_ATTR_POSITION,
+            2,
+            GL_FLOAT,
+            false,
+            sizeof(VertexP2CT),
+            (void*)offsetof(VertexP2CT, x_)
+        );
+
+        shader_->setAttributePointer(
+            SHADER_ATTR_COLOR,
+            4,
+            GL_UNSIGNED_BYTE,
+            true,
+            sizeof(VertexP2CT),
+            (void*)offsetof(VertexP2CT, r_)
+        );
+        
+        shader_->setAttributePointer(
+            SHADER_ATTR_UV,
+            2,
+            GL_FLOAT,
+            false,
+            sizeof(VertexP2CT),
+            (void*)offsetof(VertexP2CT, tu_)
+        );
+
+        shader_->setEnableAttributeArray(SHADER_ATTR_POSITION, true);
+        shader_->setEnableAttributeArray(SHADER_ATTR_COLOR, true);
+        shader_->setEnableAttributeArray(SHADER_ATTR_UV, true);
+
+        RenderSystem::setupBufferData(
+            t3::RenderSystem::BufferType::TYPE_VERTEX,
+            sizeof(VertexP2CT) * 4096 * 4,
+            nullptr,
+            t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+        );
+        
+        group.indexBuffer().bind();
+        RenderSystem::setupBufferData(
+            t3::RenderSystem::BufferType::TYPE_INDEX,
+            sizeof(uint32_t) * 4096 * 4 * 2,
+            nullptr,
+            t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+        );
+
+    }
+    RenderSystem::bindVertexArrayBuffer(0);
+#endif
 }
     
 
@@ -99,10 +162,9 @@ void SpriteRenderer::render() {
 
     //  レンダリング設定
     beginRender();
-    margeSprites();
     
-    for (auto& batch : batch_groups_) {
-        renderBatch(batch);
+    for (int i = 0; i <= current_batch_idx_; ++i) {
+        renderBatch(&batch_groups_[i]);
     }
     
     endRender();
@@ -111,20 +173,17 @@ void SpriteRenderer::render() {
 
 void SpriteRenderer::beginRender() {
 
-glBindBuffer(GL_ARRAY_BUFFER, 0);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 
     T3_NULL_ASSERT(shader_);
     bool use_result = shader_->use();
     T3_ASSERT(use_result);
-    //  スプライトのソート
-    std::sort(sprites_.begin(), sprites_.end(), PriorityCompare());
 
+#ifndef USE_VAO
     shader_->setEnableAttributeArray(SHADER_ATTR_POSITION, true);
     shader_->setEnableAttributeArray(SHADER_ATTR_COLOR, true);
     shader_->setEnableAttributeArray(SHADER_ATTR_UV, true );
-    
+ #endif
     //頂点配列を有効化
     shader_->setUniform("sampler", 0);
     
@@ -142,18 +201,26 @@ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         t3::RenderSystem::BlendFunctionType::TYPE_ONE
     );
 
+}
+    
 
+SpriteRenderer::BatchGroup* SpriteRenderer::getNewBatch() {
+    current_batch_idx_ += 1;
+    T3_ASSERT(batch_groups_.size() >= current_batch_idx_);
+    return &batch_groups_[current_batch_idx_];
 }
 
-
+GLsync sync;
 void SpriteRenderer::margeSprites() {
 
+    //  スプライトのソート
+    std::sort(sprites_.begin(), sprites_.end(), PriorityCompare());
 
     Vector<VertexP2CT> vertices;
     Vector<uint32_t> indices;
     
-    vertices.reserve(sprites_.size());
-    indices.reserve(sprites_.size() * 6);
+    vertices.reserve(sprites_.size() * 4);
+    indices.reserve(sprites_.size() * 8);
 
 
     Vec2 screen_size = Director::instance().virtualScreenSize();
@@ -166,7 +233,7 @@ void SpriteRenderer::margeSprites() {
     int current_index = 0;
     //  現在のバッチグループ
     //  バッチが切れる場合はコンテナにコピーされて新たなバッチグループのインスタンスとして使う
-    SharedPtr<BatchGroup> current_batch = std::make_shared<BatchGroup>();
+    BatchGroup* current_batch = getNewBatch();
     
     for (int i = 0; i < sprites_.size(); ++i) {
         auto& spr = sprites_[i];
@@ -185,29 +252,41 @@ void SpriteRenderer::margeSprites() {
         
             //  頂点バッファ更新
             current_batch->vertexBuffer().bind();
+            current_batch->indexBuffer().bind();
+            size_t vbo_size = static_cast<size_t>(vertices.size() * sizeof(VertexP2CT));
+            intptr_t offset = 0;
+            size_t ibo_size = static_cast<int>(indices.size() * sizeof(uint32_t));
+#ifndef USE_GLMAP
             RenderSystem::setupBufferData(
                 t3::RenderSystem::BufferType::TYPE_VERTEX,
-                static_cast<int>(vertices.size() * sizeof(VertexP2CT)),
+                vbo_size,
                 vertices.data(),
-                t3::RenderSystem::BufferUsage::STATIC_DRAW
+                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
             );
-    
+
             //  インデックスバッファ更新
-            current_batch->indexBuffer().bind();
             RenderSystem::setupBufferData(
                 t3::RenderSystem::BufferType::TYPE_INDEX,
-                static_cast<int>(indices.size() * sizeof(uint32_t)),
+                ibo_size,
                 indices.data(),
-                t3::RenderSystem::BufferUsage::STATIC_DRAW
+                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
             );
+
+
+#else
+            RenderSystem::fenceDrawWaiting();
+            RenderSystem::mapBuffer(RenderSystem::BufferType::TYPE_VERTEX, offset, vbo_size, vertices.data());
+            RenderSystem::unmapBuffer(RenderSystem::BufferType::TYPE_VERTEX);
+            RenderSystem::mapBuffer(RenderSystem::BufferType::TYPE_INDEX, offset, ibo_size, indices.data());
+            RenderSystem::unmapBuffer(RenderSystem::BufferType::TYPE_INDEX);
+#endif
     
     
             //  ドローカウント設定
             current_batch->drawCount(static_cast<uint32_t>(indices.size()));
     
             //  バッチグループ保存
-            batch_groups_.push_back(current_batch);
-            current_batch.reset(T3_SYS_NEW BatchGroup);
+            current_batch = getNewBatch();
             
             
             //  頂点情報をクリア
@@ -296,10 +375,10 @@ void SpriteRenderer::margeSprites() {
             VertexP2CT v1;
             v1.x_ = lt.x_;
             v1.y_ = lt.y_;
-            v1.r_ = color.red_;
-            v1.g_ = color.green_;
-            v1.b_ = color.blue_;
-            v1.a_ = color.alpha_;
+            v1.r_ = color.red();
+            v1.g_ = color.green();
+            v1.b_ = color.blue();
+            v1.a_ = color.alpha();
             v1.tu_ = uv.u0_;
             v1.tv_ = uv.v0_;
             vertices.push_back(v1);
@@ -309,10 +388,10 @@ void SpriteRenderer::margeSprites() {
             VertexP2CT v2;
             v2.x_ = lb.x_;
             v2.y_ = lb.y_;
-            v2.r_ = color.red_;
-            v2.g_ = color.green_;
-            v2.b_ = color.blue_;
-            v2.a_ = color.alpha_;
+            v2.r_ = color.red();
+            v2.g_ = color.green();
+            v2.b_ = color.blue();
+            v2.a_ = color.alpha();
             v2.tu_ = uv.u0_;
             v2.tv_ = uv.v1_;
             vertices.push_back(v2);
@@ -323,10 +402,10 @@ void SpriteRenderer::margeSprites() {
             VertexP2CT v3;
             v3.x_ = rt.x_;
             v3.y_ = rt.y_;
-            v3.r_ = color.red_;
-            v3.g_ = color.green_;
-            v3.b_ = color.blue_;
-            v3.a_ = color.alpha_;
+            v3.r_ = color.red();
+            v3.g_ = color.green();
+            v3.b_ = color.blue();
+            v3.a_ = color.alpha();
             v3.tu_ = uv.u1_;
             v3.tv_ = uv.v0_;
             vertices.push_back(v3);
@@ -337,10 +416,10 @@ void SpriteRenderer::margeSprites() {
             VertexP2CT v4;
             v4.x_ = rb.x_;
             v4.y_ = rb.y_;
-            v4.r_ = color.red_;
-            v4.g_ = color.green_;
-            v4.b_ = color.blue_;
-            v4.a_ = color.alpha_;
+            v4.r_ = color.red();
+            v4.g_ = color.green();
+            v4.b_ = color.blue();
+            v4.a_ = color.alpha();
             v4.tu_ = uv.u1_;
             v4.tv_ = uv.v1_;
             vertices.push_back(v4);
@@ -367,30 +446,43 @@ void SpriteRenderer::margeSprites() {
     
     indices.pop_back();
     
-    //  頂点バッファ更新
-    current_batch->vertexBuffer().bind();
-    RenderSystem::setupBufferData(
-        t3::RenderSystem::BufferType::TYPE_VERTEX,
-        static_cast<int>(vertices.size() * sizeof(VertexP2CT)),
-        vertices.data(),
-        t3::RenderSystem::BufferUsage::STATIC_DRAW
-    );
-    
-    //  インデックスバッファ更新
-    current_batch->indexBuffer().bind();
-    RenderSystem::setupBufferData(
-        t3::RenderSystem::BufferType::TYPE_INDEX,
-        static_cast<int>(indices.size() * sizeof(uint32_t)),
-        indices.data(),
-        t3::RenderSystem::BufferUsage::STATIC_DRAW
-    );
-    
+
+///
+            //  頂点バッファ更新
+            current_batch->vertexBuffer().bind();
+            current_batch->indexBuffer().bind();
+            size_t vbo_size = static_cast<size_t>(vertices.size() * sizeof(VertexP2CT));
+            intptr_t offset = 0;
+            size_t ibo_size = static_cast<int>(indices.size() * sizeof(uint32_t));
+#ifndef USE_GLMAP
+            RenderSystem::setupBufferData(
+                t3::RenderSystem::BufferType::TYPE_VERTEX,
+                vbo_size,
+                vertices.data(),
+                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+            );
+
+            //  インデックスバッファ更新
+            RenderSystem::setupBufferData(
+                t3::RenderSystem::BufferType::TYPE_INDEX,
+                ibo_size,
+                indices.data(),
+                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+            );
+
+
+#else
+            RenderSystem::fenceDrawWaiting();
+            RenderSystem::mapBuffer(RenderSystem::BufferType::TYPE_VERTEX, offset, vbo_size, vertices.data());
+            RenderSystem::unmapBuffer(RenderSystem::BufferType::TYPE_VERTEX);
+            RenderSystem::mapBuffer(RenderSystem::BufferType::TYPE_INDEX, offset, ibo_size, indices.data());
+            RenderSystem::unmapBuffer(RenderSystem::BufferType::TYPE_INDEX);
+#endif
+///
     
     //  ドローカウント設定
     current_batch->drawCount(static_cast<uint32_t>(indices.size()));
     
-    //  バッチグループ保存
-    batch_groups_.push_back(current_batch);
 
 }
 
@@ -398,7 +490,7 @@ void SpriteRenderer::margeSprites() {
 //  バッチが切れるか判定
 bool SpriteRenderer::isBatchGroupChange(
     const SpritePtr sprite,
-    const SharedPtr<BatchGroup>& current_batch
+    const BatchGroup* current_batch
 ) {
     if (*sprite->texture() != *current_batch->texture()) {
         //  テクスチャが変わったらバッチが切れる
@@ -413,29 +505,25 @@ bool SpriteRenderer::isBatchGroupChange(
 }
 
 
-void SpriteRenderer::renderBatch(SharedPtr<BatchGroup>& batch) {
+void SpriteRenderer::renderBatch(BatchGroup* batch) {
 
     //  描画前セットアップ
     //  テクスチャ
     batch->texture()->bind();
     
     //  頂点
+#ifdef USE_VAO
+    batch->bindVOA();
+#else
     batch->vertexBuffer().bind();
     
-    //  インデックス
-    batch->indexBuffer().bind();
-
-    //  ブレンド設定
-    RenderSystem::BlendMode bmode = batch->blendMode();
-    RenderSystem::setBlendMode(bmode);
-
     shader_->setAttributePointer(
         SHADER_ATTR_POSITION,
         2,
         GL_FLOAT,
         false,
         sizeof(VertexP2CT),
-        0
+        (void*)offsetof(VertexP2CT, x_)
     );
 
     shader_->setAttributePointer(
@@ -444,36 +532,48 @@ void SpriteRenderer::renderBatch(SharedPtr<BatchGroup>& batch) {
         GL_UNSIGNED_BYTE,
         true,
         sizeof(VertexP2CT),
-        (void*)(sizeof(float) * 2)
+        (void*)offsetof(VertexP2CT, r_)
     );
-    
+        
     shader_->setAttributePointer(
         SHADER_ATTR_UV,
         2,
         GL_FLOAT,
         false,
         sizeof(VertexP2CT),
-        (void*)(sizeof(float) * 3)
+        (void*)offsetof(VertexP2CT, tu_)
     );
-    
+
+#endif
+
+    //  インデックス
+    batch->indexBuffer().bind();
+
+    //  ブレンド設定
+    RenderSystem::BlendMode bmode = batch->blendMode();
+    RenderSystem::setBlendMode(bmode);
+
+
     // 描画
     RenderSystem::drawElements(
         RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
         batch->drawCount(),
         sizeof(uint32_t)
     );
-
-
+#ifdef USE_VAO
+    RenderSystem::bindVertexArrayBuffer(0);
+#endif
 }
 
 
 void SpriteRenderer::endRender()
 {
+#ifndef USE_VAO
     //  設定の後片付け
     shader_->setEnableAttributeArray(SHADER_ATTR_POSITION, false);
     shader_->setEnableAttributeArray(SHADER_ATTR_COLOR, false);
     shader_->setEnableAttributeArray(SHADER_ATTR_UV, false);
-    
+#endif
 
     
     //  描画設定解除
@@ -482,7 +582,8 @@ void SpriteRenderer::endRender()
     //  描画コンテナのクリア
     sprites_.clear();
     
-    batch_groups_.clear();
+    current_batch_idx_ = -1;
+
 }
 
 

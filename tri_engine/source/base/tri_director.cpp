@@ -74,11 +74,11 @@ bool Director::isOutOfScreen(
 
 
 void Director::setupBlackOut() {
-    instance().fade_layer_->setupFadeParam(1, Color::black());
+    instance().fade_layer_->setupFadeParam(1, Color::BLACK);
 }
 
 void Director::setupBlackIn() {
-    instance().fade_layer_->setupFadeParam(0, Color::black());
+    instance().fade_layer_->setupFadeParam(0, Color::BLACK);
 }
 
 void Director::fadeOut() {
@@ -150,10 +150,10 @@ Director::Director()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
     , use_clear_color_index_(0)
     , clear_colors_{{
-        Color::black(),
+        Color::BLACK,
         Color::darkgray(),
         Color::white(),
-        Color::blue()
+        Color::BLUE
       }}
     , dm_random_pointing_(nullptr, "RANDOM POINTING", random_pointing_, 1)
     , random_pointing_(false)

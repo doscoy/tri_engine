@@ -1,4 +1,4 @@
-#include "platform/platform_core_render_system.hpp"
+#include "gfx/tri_render_system.hpp"
 #include "platform/platform_sdk.hpp"
 #include "gfx/tri_texture.hpp"
 
@@ -13,6 +13,8 @@ extern GLFWwindow* window_;
 
 namespace {
 
+
+GLsync fence_;
 
 inline void checkGLError() {
     int err = glGetError();
@@ -32,60 +34,67 @@ inline void setGLState(GLenum e, bool f) {
 }
 
 
+
+inline int bufferTypeToGL(t3::RenderSystem::BufferType type) {
+    int gl = GL_ARRAY_BUFFER;
+    if (type == t3::RenderSystem::BufferType::TYPE_INDEX) {
+        gl = GL_ELEMENT_ARRAY_BUFFER;
+    }
+    return gl;
+}
+
 }   // unname namespace
 
 
 namespace t3 {
-inline namespace platform {
+inline namespace gfx {
 
 
-
-
-void CoreRenderSystem::createFrameBuffer(RenderSystem::FrameBufferID* id) {
+void RenderSystem::createFrameBuffer(RenderSystem::FrameBufferID* id) {
     glGenFramebuffers(1, id);
 }
 
-void CoreRenderSystem::deleteFrameBuffer(RenderSystem::FrameBufferID* id) {
+void RenderSystem::deleteFrameBuffer(RenderSystem::FrameBufferID* id) {
     glDeleteFramebuffers(1, id);
 }
 
-void CoreRenderSystem::bindFrameBuffer(RenderSystem::FrameBufferID id) {
+void RenderSystem::bindFrameBuffer(RenderSystem::FrameBufferID id) {
     glBindFramebuffer(GL_FRAMEBUFFER, id);
 }
 
-void CoreRenderSystem::createRenderBuffer(RenderSystem::RenderBufferID* id) {
+void RenderSystem::createRenderBuffer(RenderSystem::RenderBufferID* id) {
     glGenRenderbuffers(1, id);
 }
 
-void CoreRenderSystem::deleteRenderBuffer(RenderSystem::RenderBufferID* id) {
+void RenderSystem::deleteRenderBuffer(RenderSystem::RenderBufferID* id) {
     glDeleteRenderbuffers(1, id);
 }
 
-void CoreRenderSystem::bindRenderBuffer(RenderSystem::RenderBufferID id) {
+void RenderSystem::bindRenderBuffer(RenderSystem::RenderBufferID id) {
     glBindRenderbuffer(GL_RENDERBUFFER, id);
 }
 
 
-RenderSystem::FrameBufferID CoreRenderSystem::getCurrentFrameBufferID() {
+RenderSystem::FrameBufferID RenderSystem::getCurrentFrameBufferID() {
     int id;
     glGetIntegerv(GL_FRAMEBUFFER_BINDING, &id);
     return id;
 }
 
 
-RenderSystem::RenderBufferID CoreRenderSystem::getCurrentRenderBufferID() {
+RenderSystem::RenderBufferID RenderSystem::getCurrentRenderBufferID() {
     int id;
     glGetIntegerv(GL_RENDERBUFFER_BINDING, &id);
     return id;
 }
 
 
-void CoreRenderSystem::bindTexture(RenderSystem::TextureID texture) {
+void RenderSystem::bindTexture(RenderSystem::TextureID texture) {
 
     glBindTexture(GL_TEXTURE_2D, texture);
 }
 
-int CoreRenderSystem::buildShader(
+int RenderSystem::buildShader(
     const char* const source,
     RenderSystem::ShaderType shader_type
 ) {
@@ -125,7 +134,7 @@ int CoreRenderSystem::buildShader(
     return shader_handle;
 }
 
-void CoreRenderSystem::attachShader(
+void RenderSystem::attachShader(
     RenderSystem::ShaderProgramID program_handle,
     int shader_handle
 ) {
@@ -133,21 +142,21 @@ void CoreRenderSystem::attachShader(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::linkShader(
+void RenderSystem::linkShader(
     RenderSystem::ShaderProgramID program_handle
 ) {
     glLinkProgram(program_handle);
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setShader(
+void RenderSystem::setShader(
     RenderSystem::ShaderProgramID shader
 ) {
     glUseProgram(shader);
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::bindAttributeLocation(
+void RenderSystem::bindAttributeLocation(
     RenderSystem::ShaderProgramID handle,
     RenderSystem::ShaderVariableLocation location,
     const char* const name
@@ -157,7 +166,7 @@ void CoreRenderSystem::bindAttributeLocation(
 }
 
 
-void CoreRenderSystem::bindFragmentDataLocation(
+void RenderSystem::bindFragmentDataLocation(
     RenderSystem::ShaderProgramID handle,
     RenderSystem::ShaderVariableLocation location,
     const char* const name
@@ -165,14 +174,14 @@ void CoreRenderSystem::bindFragmentDataLocation(
     //    glBindFragDataLocation();
 }
 
-RenderSystem::ShaderVariableLocation CoreRenderSystem::getAttributeLocation(
+RenderSystem::ShaderVariableLocation RenderSystem::getAttributeLocation(
     RenderSystem::ShaderProgramID program,
     const char* const name
 ) {
     return glGetAttribLocation(program, name);
 }
 
-RenderSystem::ShaderVariableLocation CoreRenderSystem::getUniformLocation(
+RenderSystem::ShaderVariableLocation RenderSystem::getUniformLocation(
     RenderSystem::ShaderProgramID program,
     const char* const name
 ) {
@@ -180,7 +189,7 @@ RenderSystem::ShaderVariableLocation CoreRenderSystem::getUniformLocation(
 }
 
 
-void CoreRenderSystem::setUniformValue(
+void RenderSystem::setUniformValue(
     RenderSystem::ShaderVariableLocation location,
     float x,
     float y,
@@ -190,7 +199,7 @@ void CoreRenderSystem::setUniformValue(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setUniformValue(
+void RenderSystem::setUniformValue(
     RenderSystem::ShaderVariableLocation location,
     float x,
     float y,
@@ -201,7 +210,7 @@ void CoreRenderSystem::setUniformValue(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setUniformValue(
+void RenderSystem::setUniformValue(
     RenderSystem::ShaderVariableLocation location,
     float val
 ) {
@@ -209,7 +218,7 @@ void CoreRenderSystem::setUniformValue(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setUniformValue(
+void RenderSystem::setUniformValue(
     RenderSystem::ShaderVariableLocation location,
     int val
 ) {
@@ -217,7 +226,7 @@ void CoreRenderSystem::setUniformValue(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setUniformValue(
+void RenderSystem::setUniformValue(
     RenderSystem::ShaderVariableLocation location,
     size_t size,
     float* val
@@ -226,7 +235,7 @@ void CoreRenderSystem::setUniformValue(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setUniformMatrix(
+void RenderSystem::setUniformMatrix(
     RenderSystem::ShaderVariableLocation location,
     t3::Mtx44 mtx
 ) {
@@ -239,10 +248,10 @@ void CoreRenderSystem::setUniformMatrix(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::initializeRenderSystem() {
+void RenderSystem::initializeRenderSystem() {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     
-    t3::CoreRenderSystem::setCulling(true);
+    t3::RenderSystem::setCulling(true);
     
     
 }
@@ -252,7 +261,7 @@ void CoreRenderSystem::initializeRenderSystem() {
 
 
 
-void CoreRenderSystem::swapBuffers() {
+void RenderSystem::swapBuffers() {
     
 #if defined(PLATFORM_MAC)
     glfwSwapBuffers(window_);
@@ -260,7 +269,7 @@ void CoreRenderSystem::swapBuffers() {
 }
 
 
-void CoreRenderSystem::setDepthWrite(
+void RenderSystem::setDepthWrite(
     bool enable
 ) {
     glDepthMask(enable);
@@ -268,7 +277,7 @@ void CoreRenderSystem::setDepthWrite(
 }
 
 
-void CoreRenderSystem::clearBuffer(
+void RenderSystem::clearBuffer(
     bool color_clear,
     bool depth_clear,
     bool stencil_clear
@@ -289,7 +298,7 @@ void CoreRenderSystem::clearBuffer(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setCullingMode(
+void RenderSystem::setCullingMode(
     RenderSystem::CullingMode mode
 ) {
     int cull_flag = 0;
@@ -311,7 +320,7 @@ void CoreRenderSystem::setCullingMode(
 }
 
 
-void CoreRenderSystem::setClearDepthValue(
+void RenderSystem::setClearDepthValue(
     const float value
 ) {
     glClearDepthf(value);
@@ -320,7 +329,7 @@ void CoreRenderSystem::setClearDepthValue(
 
 
 
-void CoreRenderSystem::clearColor(
+void RenderSystem::clearColor(
     float r,
     float g,
     float b,
@@ -336,7 +345,7 @@ void CoreRenderSystem::clearColor(
 }
 
 
-void CoreRenderSystem::setDepthTestMode(
+void RenderSystem::setDepthTestMode(
     RenderSystem::DepthTestMode mode
 ) {
     int depth_func = GL_LESS;
@@ -428,7 +437,7 @@ int blendFuncTypeToGLEnum(
     
 }
 
-void CoreRenderSystem::setBlendFunctionType(
+void RenderSystem::setBlendFunctionType(
     RenderSystem::BlendFunctionType sfactor,
     RenderSystem::BlendFunctionType dfactor
 ) {
@@ -438,7 +447,7 @@ void CoreRenderSystem::setBlendFunctionType(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setViewport(
+void RenderSystem::setViewportC(
     const int x,
     const int y,
     const int w,
@@ -450,26 +459,26 @@ void CoreRenderSystem::setViewport(
 }
 
 
-void CoreRenderSystem::setDepthTest(
+void RenderSystem::setDepthTest(
     bool enable
 ) {
     setGLState(GL_DEPTH_TEST, enable);
 }
 
-void CoreRenderSystem::setBlend(
+void RenderSystem::setBlend(
     bool enable
 ) {
     setGLState(GL_BLEND, enable);
 }
 
-void CoreRenderSystem::setCulling(
+void RenderSystem::setCulling(
     bool enable
 ) {
     setGLState(GL_CULL_FACE, enable);
 }
 
 
-void CoreRenderSystem::setTextureMagFilter(
+void RenderSystem::setTextureMagFilter(
     RenderSystem::TextureFilterType type
 ) {
     if (type == RenderSystem::TextureFilterType::TYPE_LINEAR) {
@@ -481,7 +490,7 @@ void CoreRenderSystem::setTextureMagFilter(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setTextureMinFilter(
+void RenderSystem::setTextureMinFilter(
     RenderSystem::TextureFilterType type
 ) {
     if (type == RenderSystem::TextureFilterType::TYPE_LINEAR) {
@@ -493,7 +502,7 @@ void CoreRenderSystem::setTextureMinFilter(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setTextureWrapS(
+void RenderSystem::setTextureWrapS(
     RenderSystem::TextureWrapType type
 ) {
     if (type == RenderSystem::TextureWrapType::TYPE_CLAMP_TO_EDGE) {
@@ -505,7 +514,7 @@ void CoreRenderSystem::setTextureWrapS(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setTextureWrapT(
+void RenderSystem::setTextureWrapT(
     RenderSystem::TextureWrapType type
 ) {
     if (type == RenderSystem::TextureWrapType::TYPE_CLAMP_TO_EDGE) {
@@ -521,7 +530,7 @@ void CoreRenderSystem::setTextureWrapT(
 
 
 
-void CoreRenderSystem::drawElements(
+void RenderSystem::drawElementsC(
     RenderSystem::DrawMode mode,
     int count,
     size_t indices_type_size
@@ -566,7 +575,7 @@ void CoreRenderSystem::drawElements(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::drawArray(
+void RenderSystem::drawArrayC(
     RenderSystem::DrawMode mode,
     int first,
     int count
@@ -594,7 +603,7 @@ void CoreRenderSystem::drawArray(
 
 
 
-void CoreRenderSystem::setVertexAttributePointer(
+void RenderSystem::setVertexAttributePointer(
     int slot,
     int element_num,
     int type,
@@ -612,7 +621,7 @@ void CoreRenderSystem::setVertexAttributePointer(
     );
 }
 
-void CoreRenderSystem::setupTextureData(
+void RenderSystem::setupTextureData(
     int width,
     int height,
     RenderSystem::ColorFormat color_format,
@@ -653,40 +662,38 @@ void CoreRenderSystem::setupTextureData(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::bindBuffer(
+
+
+
+void RenderSystem::bindBuffer(
     RenderSystem::BufferType target_type,
     int buffer_id
 ) {
-    int target = GL_ARRAY_BUFFER;
-    if (target_type == RenderSystem::BufferType::TYPE_INDEX) {
-        target = GL_ELEMENT_ARRAY_BUFFER;
-    }
+    int target = bufferTypeToGL(target_type);
     glBindBuffer(target, buffer_id);
     
     T3_GL_ASSERT();
 }
 
 
-void CoreRenderSystem::createBuffer(uint32_t* buffer) {
+void RenderSystem::createBuffer(uint32_t* buffer) {
     glGenBuffers(1, buffer);
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::deleteBuffer(uint32_t* buffer) {
+void RenderSystem::deleteBufferC(uint32_t* buffer) {
     glDeleteBuffers(1, buffer);
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setupBufferData(
+void RenderSystem::setupBufferData(
     RenderSystem::BufferType type,
     int size,
     const void* data,
     RenderSystem::BufferUsage usage
 ) {
-    int target = GL_ARRAY_BUFFER;
-    if (type == RenderSystem::BufferType::TYPE_INDEX) {
-        target = GL_ELEMENT_ARRAY_BUFFER;
-    }
+    int target = bufferTypeToGL(type);
+
     int gl_usage = GL_STATIC_DRAW;
     if (usage == RenderSystem::BufferUsage::STATIC_DRAW) {
         gl_usage = GL_STATIC_DRAW;
@@ -699,22 +706,19 @@ void CoreRenderSystem::setupBufferData(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setupBufferSubData(
+void RenderSystem::setupBufferSubData(
     RenderSystem::BufferType type,
     int offset,
     int size,
     const void *data
 ) {
-    int target = GL_ARRAY_BUFFER;
-    if (type == RenderSystem::BufferType::TYPE_INDEX) {
-        target = GL_ELEMENT_ARRAY_BUFFER;
-    }
+    int target = bufferTypeToGL(type);
     
     glBufferSubData(target, offset, size, data);
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setActiveTextureUnit(
+void RenderSystem::setActiveTextureUnit(
     int unit
 ) {
     unit += GL_TEXTURE0;
@@ -722,21 +726,21 @@ void CoreRenderSystem::setActiveTextureUnit(
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setEnableVertexAttribute(
+void RenderSystem::setEnableVertexAttribute(
     int slot
 ) {
     glEnableVertexAttribArray(slot);
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setDisableVertexAttribute(
+void RenderSystem::setDisableVertexAttribute(
     int slot
 ) {
     glDisableVertexAttribArray(slot);
     T3_GL_ASSERT();
 }
 
-void CoreRenderSystem::setAttributeValue(
+void RenderSystem::setAttributeValue(
     int slot,
     float a,
     float b,
@@ -750,7 +754,7 @@ void CoreRenderSystem::setAttributeValue(
 }
 
 
-void CoreRenderSystem::attachRenderBuffer(
+void RenderSystem::attachRenderBuffer(
     RenderSystem::RenderBufferAttachType type,
     RenderSystem::RenderBufferID id
 ) {
@@ -776,7 +780,7 @@ void CoreRenderSystem::attachRenderBuffer(
 }
 
 
-void CoreRenderSystem::attachFrameBufferTexture(
+void RenderSystem::attachFrameBufferTexture(
     RenderSystem::RenderBufferAttachType type,
     RenderSystem::TextureID id
 ) {
@@ -802,7 +806,7 @@ void CoreRenderSystem::attachFrameBufferTexture(
 }
 
 
-void CoreRenderSystem::setupRenderBufferStorage(
+void RenderSystem::setupRenderBufferStorage(
     RenderSystem::RenderBufferUsage usage,
     int width,
     int height
@@ -828,6 +832,61 @@ void CoreRenderSystem::setupRenderBufferStorage(
     );
 }
 
+RenderSystem::BufferID RenderSystem::createVertexArrayBuffer() {
+    RenderSystem::BufferID id;
+    glGenVertexArraysOES(1, &id);
+    return id;
+}
+
+
+
+void RenderSystem::bindVertexArrayBuffer(const RenderSystem::BufferID id) {
+    glBindVertexArrayOES(id);
+}
+
+
+void RenderSystem::deleteVertexArrayBuffer(const RenderSystem::BufferID id) {
+    glDeleteVertexArraysOES(1, &id);
+}
+
+void RenderSystem::fenceDraw() {
+    fence_ = glFenceSyncAPPLE(GL_SYNC_GPU_COMMANDS_COMPLETE_APPLE, 0);
+}
+
+void RenderSystem::fenceDrawWaiting() {
+
+    glClientWaitSyncAPPLE(
+        fence_,
+        GL_SYNC_FLUSH_COMMANDS_BIT_APPLE,
+        GL_TIMEOUT_IGNORED_APPLE
+    );
+
+}
+
+
+
+void RenderSystem::mapBuffer(RenderSystem::BufferType type, intptr_t offset, size_t size, void* data) {
+
+    int gl_type = bufferTypeToGL(type);
+    
+
+    void* buf_data = glMapBufferRangeEXT(
+        gl_type,
+        offset,
+        size,
+        GL_MAP_WRITE_BIT_EXT | GL_MAP_FLUSH_EXPLICIT_BIT_EXT | GL_MAP_UNSYNCHRONIZED_BIT_EXT
+    );
+
+
+
+    memcpy(buf_data, data, size);
+    glFlushMappedBufferRangeEXT(gl_type, offset, size);
+
+}
+
+void RenderSystem::unmapBuffer(RenderSystem::BufferType type) {
+    glUnmapBufferOES(bufferTypeToGL(type));
+}
 
 
 }   // namespace gfx

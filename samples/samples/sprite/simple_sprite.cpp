@@ -19,13 +19,24 @@ public:
         
         //  テクスチャ読み込み
         t3::TextureManager& texture_manager = t3::TextureManager::instance();
-        t3::String stamp_path("stamp.png");
-    
+        t3::String texpath[9] = {
+            "t1.png",
+            "t2.png",
+            "t3.png",
+            "t4.png",
+            "t5.png",
+            "t6.png",
+            "t7.png",
+            "t8.png",
+            "t9.png"
+        };
         //  ハンドルをとっておく
-        stamp_handle_ = texture_manager.load(stamp_path);
+        for (int i = 0; i < 9; ++i) {
+            t3::UniqueID id = texture_manager.load(texpath[i]);
+            textures_[i] = texture_manager.resource(id);
+        }
         
-        
-        for (int i = 0; i < 28; ++i) {
+        for (int i = 0; i < 2850; ++i) {
             addSprite();
         }
         adjustSpritesPosition();
@@ -118,9 +129,10 @@ private:
     void addSprite() {
         t3::TextureManager& texture_manager = t3::TextureManager::instance();
 
+        static int tex_idx;
         //  スプライト増やす
-        const auto& tex = texture_manager.resource(stamp_handle_);
-        auto sprite = sprite_layer_.createSprite(tex);
+        auto sprite = sprite_layer_.createSprite(textures_[tex_idx]);
+        tex_idx = (tex_idx +1) % 9;
         sprites_.push_back(sprite);
     }
     
@@ -135,10 +147,10 @@ private:
 
 
 private:
-    t3::UniqueID stamp_handle_;
     t3::tick_t total_time_;
     t3::SpriteLayer sprite_layer_;
     t3::Vector<t3::SpritePtr> sprites_;
+    t3::TexturePtr textures_[9];
 };
 
 

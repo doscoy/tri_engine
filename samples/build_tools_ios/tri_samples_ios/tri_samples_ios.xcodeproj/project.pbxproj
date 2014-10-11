@@ -17,6 +17,15 @@
 		04391BF019C08D51006FFF38 /* akb48.wav in Resources */ = {isa = PBXBuildFile; fileRef = 04391BEF19C08D51006FFF38 /* akb48.wav */; };
 		046983AE19D6EC41001B71E9 /* mem_pool_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046983AC19D6EC41001B71E9 /* mem_pool_test.cpp */; };
 		047CEA5719DC605B0015B46F /* piko.png in Resources */ = {isa = PBXBuildFile; fileRef = 047CEA5619DC605B0015B46F /* piko.png */; };
+		04D6B6A819E9049D002C8E77 /* t1.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6A019E9049D002C8E77 /* t1.png */; };
+		04D6B6A919E9049D002C8E77 /* t2.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6A119E9049D002C8E77 /* t2.png */; };
+		04D6B6AA19E9049D002C8E77 /* t3.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6A219E9049D002C8E77 /* t3.png */; };
+		04D6B6AB19E9049D002C8E77 /* t4.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6A319E9049D002C8E77 /* t4.png */; };
+		04D6B6AC19E9049D002C8E77 /* t5.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6A419E9049D002C8E77 /* t5.png */; };
+		04D6B6AD19E9049D002C8E77 /* t6.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6A519E9049D002C8E77 /* t6.png */; };
+		04D6B6AE19E9049D002C8E77 /* t7.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6A619E9049D002C8E77 /* t7.png */; };
+		04D6B6AF19E9049D002C8E77 /* t8.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6A719E9049D002C8E77 /* t8.png */; };
+		04D6B6B119E9071D002C8E77 /* t9.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6B019E9071D002C8E77 /* t9.png */; };
 		04F100261985587400C8D498 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F100251985587400C8D498 /* OpenAL.framework */; };
 		04F100281985589300C8D498 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F100271985589300C8D498 /* CoreMotion.framework */; };
 		04F1002A198558B600C8D498 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F10029198558B600C8D498 /* libpng.a */; };
@@ -78,6 +87,15 @@
 		046983AC19D6EC41001B71E9 /* mem_pool_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mem_pool_test.cpp; sourceTree = "<group>"; };
 		046983AD19D6EC41001B71E9 /* mem_pool_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mem_pool_test.hpp; sourceTree = "<group>"; };
 		047CEA5619DC605B0015B46F /* piko.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piko.png; sourceTree = "<group>"; };
+		04D6B6A019E9049D002C8E77 /* t1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t1.png; sourceTree = "<group>"; };
+		04D6B6A119E9049D002C8E77 /* t2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t2.png; sourceTree = "<group>"; };
+		04D6B6A219E9049D002C8E77 /* t3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t3.png; sourceTree = "<group>"; };
+		04D6B6A319E9049D002C8E77 /* t4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t4.png; sourceTree = "<group>"; };
+		04D6B6A419E9049D002C8E77 /* t5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t5.png; sourceTree = "<group>"; };
+		04D6B6A519E9049D002C8E77 /* t6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t6.png; sourceTree = "<group>"; };
+		04D6B6A619E9049D002C8E77 /* t7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t7.png; sourceTree = "<group>"; };
+		04D6B6A719E9049D002C8E77 /* t8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t8.png; sourceTree = "<group>"; };
+		04D6B6B019E9071D002C8E77 /* t9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t9.png; sourceTree = "<group>"; };
 		04F100251985587400C8D498 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		04F100271985589300C8D498 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		04F10029198558B600C8D498 /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = ../../../third_party_lib/ios/libpng.a; sourceTree = "<group>"; };
@@ -160,6 +178,15 @@
 		04391BDA19BC95EF006FFF38 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				04D6B6B019E9071D002C8E77 /* t9.png */,
+				04D6B6A019E9049D002C8E77 /* t1.png */,
+				04D6B6A119E9049D002C8E77 /* t2.png */,
+				04D6B6A219E9049D002C8E77 /* t3.png */,
+				04D6B6A319E9049D002C8E77 /* t4.png */,
+				04D6B6A419E9049D002C8E77 /* t5.png */,
+				04D6B6A519E9049D002C8E77 /* t6.png */,
+				04D6B6A619E9049D002C8E77 /* t7.png */,
+				04D6B6A719E9049D002C8E77 /* t8.png */,
 				047CEA5619DC605B0015B46F /* piko.png */,
 				3A24B4D719C9D3ED00E9CFFE /* test.zip */,
 				04391BEF19C08D51006FFF38 /* akb48.wav */,
@@ -444,18 +471,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D6B6AE19E9049D002C8E77 /* t7.png in Resources */,
+				04D6B6AF19E9049D002C8E77 /* t8.png in Resources */,
+				04D6B6AA19E9049D002C8E77 /* t3.png in Resources */,
 				04391BE519BC95EF006FFF38 /* sample.wav in Resources */,
 				047CEA5719DC605B0015B46F /* piko.png in Resources */,
 				04391BE619BC95EF006FFF38 /* stamp.png in Resources */,
 				04391BE319BC95EF006FFF38 /* ninja.obj in Resources */,
 				04391BF019C08D51006FFF38 /* akb48.wav in Resources */,
+				04D6B6B119E9071D002C8E77 /* t9.png in Resources */,
 				04F1FE791985557F00C8D498 /* Main_iPad.storyboard in Resources */,
 				3A24B4D819C9D3ED00E9CFFE /* test.zip in Resources */,
 				04391BE219BC95EF006FFF38 /* bunny.obj in Resources */,
+				04D6B6A819E9049D002C8E77 /* t1.png in Resources */,
+				04D6B6AB19E9049D002C8E77 /* t4.png in Resources */,
 				04F1FE761985557F00C8D498 /* Main_iPhone.storyboard in Resources */,
+				04D6B6A919E9049D002C8E77 /* t2.png in Resources */,
+				04D6B6AD19E9049D002C8E77 /* t6.png in Resources */,
 				04F1FE821985557F00C8D498 /* Images.xcassets in Resources */,
 				04F1FE6D1985557F00C8D498 /* InfoPlist.strings in Resources */,
 				04391BE819BC95EF006FFF38 /* tri_engine_ui_sample.png in Resources */,
+				04D6B6AC19E9049D002C8E77 /* t5.png in Resources */,
 				04391BE419BC95EF006FFF38 /* o.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

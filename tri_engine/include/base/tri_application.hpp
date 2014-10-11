@@ -67,6 +67,8 @@ private:
     uint32_t last_scene_change_frame_;
     uint32_t memory_leak_check_filter_;
     Stopwatch fps_timer_;
+    Array<float, 260> fps_stack_;
+    float fps_;
 };
 
 

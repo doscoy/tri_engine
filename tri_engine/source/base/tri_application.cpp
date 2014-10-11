@@ -39,7 +39,6 @@ double last_system_cost_;
 double last_app_cost_;
 double last_rendering_cost_;
 double last_other_cost_;
-float fps_;
 
 bool step_update_ = false;
 
@@ -153,6 +152,8 @@ Application::Application()
     , system_menu_(nullptr)
     , last_scene_change_frame_(0)
     , fps_timer_()
+    , fps_stack_{0,0,0,0,0,0,0,0,0,0}
+    , fps_(60.0f)
 {
 }
 
@@ -177,9 +178,9 @@ void Application::initializeWorkBar() {
     cpu_bar_.setLimitWidthPixel(screen_size.x_ - cpu_bar_margin);
     
     //  ワークバーの色
-    cpu_bar_.setColor(0, Color::blue());
-    cpu_bar_.setColor(1, Color::red());
-    cpu_bar_.setColor(2, Color::green());
+    cpu_bar_.setColor(0, Color::BLUE);
+    cpu_bar_.setColor(1, Color::RED);
+    cpu_bar_.setColor(2, Color::GREEN);
     cpu_bar_.setColor(3, Color::magenta());
     
 }
@@ -237,8 +238,27 @@ void Application::updateApplication()
 
     //  FPS表示
     if (show_fps_) {
-        if ((frame_counter_.now() % 10) == 0) {
-            fps_ =  60.0f / (delta_time / frameToSec(1));
+        //  直近数フレームの平均値を表示
+        
+        //  fpsを保存
+        float current_fps = 60.0f / (delta_time / frameToSec(1));
+    
+        const size_t fps_size = fps_stack_.size();
+        for (int fps_idx = 1; fps_idx < fps_size; ++fps_idx) {
+            fps_stack_[fps_idx-1] = fps_stack_[fps_idx];
+        }
+        fps_stack_[fps_size-1] = current_fps;
+    
+        //  描画は１０フレに１回
+        if (frame_counter_.now() % 10 == 0) {
+            //  平均計算
+            float fps_avg = 0.0f;
+        
+            for (auto& v : fps_stack_) {
+                fps_avg += v;
+            }
+            fps_avg /= fps_size;
+            fps_ = fps_avg;
         }
         t3::printDisplay(0, 0, "FPS %.1f",fps_);
 
@@ -523,12 +543,13 @@ bool Application::isSuspend() const {
 
 void Application::beginRender() {
     
-    RenderSystem::clearColor(Color::black());
+    RenderSystem::clearColor(Color(20,20,20));
     RenderSystem::clearBuffer(true, true, false);
 }
 
 
 void Application::endRender() {
+    RenderSystem::fenceDraw();
     RenderSystem::swapBuffers();
 }
 

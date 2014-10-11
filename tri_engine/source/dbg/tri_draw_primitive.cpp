@@ -179,9 +179,9 @@ void drawAxis(
         t3::Vec3(0, 0, 0)
     );
     
-    t3::drawSegment(seg1, t3::Color::red(), 3.1f);
-    t3::drawSegment(seg2, t3::Color::blue(), 3.1f);
-    t3::drawSegment(seg3, t3::Color::green(), 3.1f);
+    t3::drawSegment(seg1, t3::Color::RED, 3.1f);
+    t3::drawSegment(seg2, t3::Color::BLUE, 3.1f);
+    t3::drawSegment(seg3, t3::Color::GREEN, 3.1f);
 }
 
 void drawPlane(

@@ -40,7 +40,7 @@ public:
         
         
         t3::RenderSystem::setDepthWrite(true);
-        t3::RenderSystem::clearColor(t3::Color::blue());
+        t3::RenderSystem::clearColor(t3::Color::BLUE);
         t3::RenderSystem::clearBuffer(true, true, false);
         t3::RenderSystem::setDepthTest(true);
 

@@ -209,6 +209,13 @@ public:
        const Color& clear_color
     );
     
+    static void clearColor(
+        float r,
+        float g,
+        float b,
+        float a
+    );
+    
     
     enum class DepthTestMode {
         MODE_NEVER,
@@ -244,6 +251,13 @@ public:
     
     
     static void setViewport(
+        const int x,
+        const int y,
+        const int w,
+        const int h
+    );
+    
+    static void setViewportC(
         const int x,
         const int y,
         const int w,
@@ -288,7 +302,13 @@ public:
     };
     
     static void setTextureWrap(
+        TextureWrapType type
+    );
+    static void setTextureWrapS(
         TextureWrapType s
+    );
+    static void setTextureWrapT(
+        TextureWrapType t
     );
 
     enum class DrawMode{
@@ -300,8 +320,18 @@ public:
         int count,
         size_t indices_type_size
     );
+    static void drawElementsC(
+        DrawMode mode,
+        int count,
+        size_t indices_type_size
+    );
     
     static void drawArray(
+        DrawMode mode,
+        int first,
+        int count
+    );
+    static void drawArrayC(
         DrawMode mode,
         int first,
         int count
@@ -328,6 +358,7 @@ public:
     static void createBuffer(uint32_t* buffer);
     
     static void deleteBuffer(uint32_t* buffer);
+    static void deleteBufferC(uint32_t* buffer);
     
     static void setupBufferData(
         BufferType type,
@@ -343,14 +374,7 @@ public:
         const void* data
     );
     
-    
-    static BufferID createVertexBuffer(
-        Vector<float>& vertices
-    );
-    
-    static BufferID createIndexBuffer(
-        Vector<uint32_t>& indices
-    );
+
   
     
     static void setEnableVertexAttribute(
@@ -405,6 +429,24 @@ public:
         int height
     );
     
+    
+    static BufferID createVertexArrayBuffer();
+    static void bindVertexArrayBuffer(BufferID id);
+    static void deleteVertexArrayBuffer(BufferID id);
+    
+    
+    
+    static void fenceDraw();
+    static void fenceDrawWaiting();
+    
+    static void mapBuffer(
+        RenderSystem::BufferType type,
+        intptr_t offset,
+        size_t size,
+        void* data
+    );
+    
+    static void unmapBuffer(RenderSystem::BufferType type);
     
 };
 

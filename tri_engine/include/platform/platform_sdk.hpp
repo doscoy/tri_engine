@@ -15,6 +15,7 @@
         #warning "target ios"
         #include "png.h"
         #include <OpenGLES/ES2/gl.h>
+        #include <OpenGLES/ES2/glext.h>
         #include <OpenAL/al.h>
         #include <OpenAL/alc.h>
         #define TRI_TARGET_PLATFORM_IOS     1

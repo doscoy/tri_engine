@@ -63,7 +63,8 @@ CMMotionManager* motion_manager_ = nullptr;
     
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
-    view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    view.drawableDepthFormat = GLKViewDrawableDepthFormat16;
+    view.drawableColorFormat = GLKViewDrawableColorFormatRGB565;
     
     //  FPS設定
     self.preferredFramesPerSecond = 60;

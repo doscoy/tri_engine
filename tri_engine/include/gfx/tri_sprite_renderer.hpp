@@ -25,10 +25,13 @@ class SpriteRenderer
             , texture_(nullptr)
             , draw_count_(0)
             , blend_mode_(RenderSystem::BlendMode::NONE)
+            , vao_(0)
         {
+            vao_ = RenderSystem::createVertexArrayBuffer();
         }
         
         ~BatchGroup() {
+            RenderSystem::deleteVertexArrayBuffer(vao_);
         }
         
     public:
@@ -63,6 +66,10 @@ class SpriteRenderer
         RenderSystem::BlendMode blendMode() const {
             return blend_mode_;
         }
+        
+        void bindVOA() {
+            RenderSystem::bindVertexArrayBuffer(vao_);
+        }
     
     
     private:
@@ -71,8 +78,9 @@ class SpriteRenderer
         TexturePtr texture_;
         uint32_t draw_count_;
         RenderSystem::BlendMode blend_mode_;
+        RenderSystem::BufferID vao_;
     };
-    using BatchGroups = Vector<SharedPtr<BatchGroup>>;
+    using BatchGroups = Array<BatchGroup, 64>;
     using Container = Vector<SpritePtr>;
 
 public:
@@ -82,6 +90,7 @@ public:
     
 public:
     void collectSprite(SpritePtr sprite);
+    void margeSprites();
     void render();
     
     void useDefaultShader() {
@@ -98,17 +107,19 @@ private:
 
     bool isBatchGroupChange(
         const SpritePtr sprite,
-        const SharedPtr<BatchGroup>& batch
+        const BatchGroup* batch
     );
-    void margeSprites();
-    void renderBatch(SharedPtr<BatchGroup>& batch);
+    void renderBatch(BatchGroup* batch);
+
+    SpriteRenderer::BatchGroup* getNewBatch();
+    
 
 private:
     Container sprites_;
     ShaderPtr shader_;
     ShaderPtr default_shader_;
     BatchGroups batch_groups_;
-
+    int current_batch_idx_;
 };
 
 

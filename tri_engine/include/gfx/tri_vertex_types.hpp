@@ -8,18 +8,14 @@ namespace t3 {
 
 struct VertexP2CT
 {
-    typedef float   position_t;
-    typedef uint8_t color8_t;
-    typedef float   tex_coord_t;
-    
-    position_t x_;
-    position_t y_;
-    color8_t r_;
-    color8_t g_;
-    color8_t b_;
-    color8_t a_;
-    position_t tu_;
-    position_t tv_;
+    float x_;
+    float y_;
+    uint8_t r_;
+    uint8_t g_;
+    uint8_t b_;
+    uint8_t a_;
+    float tu_;
+    float tv_;
 };
 
 struct VertexP2T

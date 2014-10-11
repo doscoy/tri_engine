@@ -40,5 +40,16 @@ constexpr int DEBUG_FONT_POINT = 16;
 } // inline namespace dbg
 } // namespace t3
 
+
+#define TRI_DEVELOPMENT_ENABLE_PRINT_DISP 1
+
+
+#if TRI_DEVELOPMENT_ENABLE_PRINT_DISP
+#define T3_PRINT_DISP(x,y,c,...)     ::t3::printDisp(x,y,c__VA_ARGS__)
+#else
+#define T3_PRINT_DISP(x,y,c,...)     ((void)x,(void)y,(void)c)
+#endif //   TRI_DEVELOPMENT_ENABLE_PRINT_DISP
+
+
 #endif // TRI_DBG_HPP_INCLUDED
 

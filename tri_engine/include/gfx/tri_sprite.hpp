@@ -269,20 +269,20 @@ public:
     }
     
     void color(const Color& color) {
-        float a = color_.alpha_;
+        float a = color_.alpha();
         color_ = color;
-        color_.alpha_ = a;
+        color_.alpha(a);
     }
 
     int opacity() const {
-        return color_.alpha_;
+        return color_.alpha();
     }
     
     void opacity(
         const int opa
     ) {
-        T3_ASSERT_RANGE(opa, 0, 255);
-        color_.alpha_ = opa;
+        T3_ASSERT_RANGE((float)opa, 0.0f, 255.0f);
+        color_.alpha(opa);
     }
 
     RenderSystem::BlendMode blendMode() const {
