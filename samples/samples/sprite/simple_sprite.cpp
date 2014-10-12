@@ -55,7 +55,7 @@ public:
         t3::Pointing pointing = t3::Director::instance().input().pointing();
         if (pointing.isHold()) {
         
-            const t3::Point2& pointing_pos = pointing.position();
+            const t3::Vec2& pointing_pos = pointing.position();
             if (pointing_pos.x_ < 0) {
                 addSprite();
                 addSprite();

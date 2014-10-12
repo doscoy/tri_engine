@@ -11,6 +11,9 @@
 
 #include "tri_event.hpp"
 #include "math/tri_vec2.hpp"
+#include "kernel/io/tri_pointing.hpp"
+
+
 
 namespace t3 {
 inline namespace base {
@@ -112,6 +115,49 @@ private:
     Vec2 distance_;
     int input_no_;
 };
+
+
+//  フリックイベント
+class PointingFlickEvent
+    : public EventBase {
+public:
+    static const EventType TYPE;
+    const EventType& eventType() const override {
+        return TYPE;
+    }
+    
+    int inputNo() const {
+        return input_no_;
+    }
+    
+    void inputNo(int no) {
+        input_no_ = no;
+    }
+    
+    const t3::Vec2& flickMoveOffset() const {
+        return dir_;
+    }
+    
+    void flickMoveOffset(const t3::Vec2& d) {
+        dir_ = d;
+    }
+
+    Pointing::FlickDirection flickDirection() const {
+        return flick_dir_;
+    }
+    
+    void flickDirection(Pointing::FlickDirection dir) {
+        flick_dir_ = dir;
+    }
+
+private:
+    Vec2 dir_;
+    int input_no_;
+    Pointing::FlickDirection flick_dir_;
+};
+
+
+
 
 
 }   //  namespace base

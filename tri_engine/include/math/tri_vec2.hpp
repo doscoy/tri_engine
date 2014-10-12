@@ -100,7 +100,7 @@ struct Vec2Template {
     //  反転ベクトル取得
     Vec2Template getReversed() const {
         
-        return Point2( -x_, -y_ );
+        return Vec2( -x_, -y_ );
     }
     
     //  pointer
@@ -290,7 +290,6 @@ public:
 //  typedef
 typedef Vec2Template<bool>      Vec2b;
 typedef Vec2Template<float>     Vec2;
-typedef Vec2Template<int>       Point2;
     
 
 } // namespace t3

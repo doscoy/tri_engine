@@ -16,6 +16,13 @@ public:
     Pointing();
     ~Pointing();
 
+    enum class FlickDirection {
+        UP,
+        DOWN,
+        RIGHT,
+        LEFT
+    };
+
 public:
     void updatePointing(
         const PointingData& data,
@@ -46,22 +53,38 @@ public:
         return moved_;
     }
 
-    const Point2& position() const {
+    const Vec2& position() const {
         return position_[0];
     }
 
-    const Point2& moveDistance() const {
+    const Vec2& moveDistance() const {
         return moving_;
     }
     
     int getPointingCount() const {
         return pointing_count_;
     }
+    
+    bool isFlick() const {
+        return flick_;
+    }
+    
+    const Vec2& flickMoveOffset() const {
+    
+        return flick_move_;
+    }
+    
+    FlickDirection flickDirection() const {
+        return flick_direction_;
+    }
+    
+    
 
 private:
     void clearPositionList();
-
+    void updateFlick();
     void updateRepeat(tick_t delta_time);
+    void updateMoving();
 
 private:
     enum {
@@ -73,14 +96,19 @@ private:
     bool release_;
     bool repeat_;
     bool moved_;
+    bool flick_;
     bool double_click_;
-    Point2 position_[MAX_POSITION_SIZE];
-    Point2 moving_;
+    Vec2 position_[MAX_POSITION_SIZE];
+    Vec2 moving_;
     float double_click_timer_;
     int double_click_release_count_;
     float repeat_interval_;
     float pressed_time_;
     int pointing_count_;
+    Vec2 trigged_position_;
+    Vec2 released_position_;
+    Vec2 flick_move_;
+    FlickDirection flick_direction_;
 };
 
 

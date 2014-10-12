@@ -18,6 +18,9 @@ struct EventHandler {
 };
     
 
+#define TRI_DEV_EVENT_TRACE 1
+
+
 class EventManagerBase
 {
 public:

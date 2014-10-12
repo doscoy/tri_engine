@@ -21,6 +21,9 @@ class Event
 public:
     virtual const EventType& eventType() const = 0;
     virtual tick_t timeStamp() const = 0;
+    String eventName() {
+        return eventType().string();
+    }
 };
 using EventPtr = SharedPtr<Event>;
 

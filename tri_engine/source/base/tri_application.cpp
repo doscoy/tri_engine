@@ -170,8 +170,8 @@ bool Application::isActive() const {
 void Application::initializeWorkBar() {
     
     Director& d = Director::instance();
-    const Point2& screen_size = d.virtualScreenSize();
-    Point2 half_screen_size = screen_size / 2;
+    const Vec2& screen_size = d.virtualScreenSize();
+    Vec2 half_screen_size = screen_size / 2;
     
     //  ワークバーの配置
     int cpu_bar_margin = 70;

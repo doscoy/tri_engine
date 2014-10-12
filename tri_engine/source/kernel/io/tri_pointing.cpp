@@ -62,16 +62,8 @@ void Pointing::updatePointing(
     position_[0].x_ = new_point_x;
     position_[0].y_ = new_point_y;
 
-    //  移動量設定
-    moving_ = position_[0] - position_[1];
-    
-    //  移動判定設定
-    if (isZeroFloat(moving_.x_) && isZeroFloat(moving_.y_)) {
-        moved_ = false;
-    }
-    else {
-        moved_ = true;
-    }
+    //  移動判定
+    updateMoving();
     
     //  ダブルクリック判定
     double_click_ = false;
@@ -84,16 +76,40 @@ void Pointing::updatePointing(
                 double_click_timer_ = 0.0f;
             }
         }
-    }
-    else {
+    } else {
         if (trigger_) {
             double_click_timer_ = 0.3f;
             double_click_release_count_ = 0;
         }
     }
     
+    
+    if (trigger_) {
+        //  トリガータイミング
+        trigged_position_ = position();
+    } else if (release_) {
+        //  リリースタイミング
+        released_position_ = position();
+        
+    }
+    
+    //  フリック判定
+    updateFlick();
 }
 
+void Pointing::updateMoving() {
+
+    //  移動量設定
+    moving_ = position_[0] - position_[1];
+    
+    //  移動判定設定
+    if (isZeroFloat(moving_.x_) && isZeroFloat(moving_.y_)) {
+        moved_ = false;
+    } else {
+        moved_ = true;
+    }
+
+}
 
 void Pointing::clearPositionList() {
     for (int pos_idx = 0; pos_idx < MAX_POSITION_SIZE; ++pos_idx) {
@@ -116,6 +132,51 @@ void Pointing::updateRepeat(tick_t delta_time) {
         pressed_time_ = 0;
     }
 }
+
+
+void Pointing::updateFlick() {
+
+    flick_ = false;
+    //  フリック判定
+    if (release_) {
+        flick_move_ = released_position_ - trigged_position_;
+        if (flick_move_.lengthSquare() > 20.0f) {
+            //  フリック動作認定
+            flick_ = true;
+            
+            //  フリック方向計算
+            if (std::abs(flick_move_.x_) > std::abs(flick_move_.y_)) {
+                //  横方向フリック
+                if (flick_move_.x_) {
+                    //  右方向フリック
+                    flick_direction_ = FlickDirection::RIGHT;
+                } else {
+                    //  左方向フリック
+                    flick_direction_ = FlickDirection::LEFT;
+                }
+                
+            } else {
+                //  縦方向フリック
+                if (flick_move_.y_ > 0) {
+                    //  上方向フリック
+                    flick_direction_ = FlickDirection::UP;
+                } else {
+                    //  下方向フリック
+                    flick_direction_ = FlickDirection::DOWN;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 }   // namespace platform

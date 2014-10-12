@@ -326,6 +326,15 @@ void Director::updateInput(
             eve_point_move->moveDistance(pointing.moveDistance());
             safeQueueEvent(eve_point_move);
         }
+        //  フリック
+        if (pointing.isFlick()) {
+            auto eve_point_flick = std::make_shared<PointingFlickEvent>();
+            eve_point_flick->inputNo(pad_idx);
+            eve_point_flick->flickDirection(pointing.flickDirection());
+            eve_point_flick->flickMoveOffset(pointing.flickMoveOffset());
+            safeQueueEvent(eve_point_flick);
+        }
+        
     }
     
     

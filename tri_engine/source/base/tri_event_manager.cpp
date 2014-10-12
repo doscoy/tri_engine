@@ -267,6 +267,11 @@ bool EventManager::queueEvent(
     const EventPtr& in_event
 ) {
 
+#if TRI_DEV_EVENT_TRACE
+    T3_TRACE("Event << %s\n", in_event->eventName().c_str());
+#endif
+
+
     T3_ASSERT(inRange(active_queue_, (int)0, (int)NUM_QUEUES));
     
     if (!isValidateEventType(in_event->eventType())) {
@@ -281,7 +286,6 @@ bool EventManager::queueEvent(
         
         if (it_wc == registry_.end()) {
             //  このイベントのリスナはいないのでスキップ
-//            T3_TRACE("%s is skip\n", in_event->eventType().string().c_str());
             return false;
         }
     }
