@@ -173,6 +173,10 @@ Director::Director()
     //  コリジョンマネージャ生成
     CollisionManager::createInstance();
     
+#if TRI_DEVFLAG_AGING_CHECK
+    random_pointing_ = true;
+#endif
+    
 }
 
 // *********************************************

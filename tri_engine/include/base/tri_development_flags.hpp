@@ -15,4 +15,8 @@
 #endif
 
 
+#define TRI_DEVFLAG_AGING_CHECK     0
+
+
+
 #endif
