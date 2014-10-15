@@ -1,12 +1,16 @@
 static const char* font_fsh = TRI_INSTANT_SHADER(
 
-varying lowp vec2 out_uv;
-varying lowp vec4 out_color;
+varying lowp vec2 v_texture_uv;
+varying lowp vec4 v_color;
 
-uniform sampler2D SAMPLER;
+uniform sampler2D sampler;
 
 void main(void)
 {
-    gl_FragColor = texture2D(SAMPLER, out_uv) * out_color;
+    lowp vec4 tex_color = texture2D(sampler, v_texture_uv);
+    if (tex_color.a > 0.0) {
+        tex_color.rgb = v_color.rgb;
+    }
+    gl_FragColor = tex_color;
 }
 );

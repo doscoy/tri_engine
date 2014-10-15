@@ -57,16 +57,7 @@ SpriteRenderer::SpriteRenderer()
     //  デフォルトのシェーダ準備
     default_shader_ = std::make_shared<Shader>();
 
-    default_shader_->compileShaderFromString(
-        sprite_vsh,
-        RenderSystem::ShaderType::VERTEX_SHADER
-    );
-    default_shader_->compileShaderFromString(
-        sprite_fsh,
-        RenderSystem::ShaderType::FRAGMENT_SHADER
-    );
-    bool link_result = default_shader_->link();
-    T3_ASSERT(link_result);
+    default_shader_->build(sprite_vsh, sprite_fsh);
     
     //  デフォルトのシェーダを使う
     useDefaultShader();
@@ -182,7 +173,7 @@ void SpriteRenderer::beginRender() {
     shader_->setEnableAttributeArray(SHADER_ATTR_POSITION, true);
     shader_->setEnableAttributeArray(SHADER_ATTR_COLOR, true);
     shader_->setEnableAttributeArray(SHADER_ATTR_UV, true );
- #endif
+#endif
     //頂点配列を有効化
     shader_->setUniform("sampler", 0);
     

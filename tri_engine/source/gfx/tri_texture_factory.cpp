@@ -82,6 +82,9 @@ TexturePtr TextureFactory::createFromPngFile(const File& file) {
     
     RenderSystem::ColorFormat color_format = RenderSystem::ColorFormat::RGB;
     switch (png.color_type_) {
+    case PNG_COLOR_TYPE_GRAY:
+        color_format = RenderSystem::ColorFormat::GRAY;
+        break;
         
     case PNG_COLOR_TYPE_RGB:
         color_format = RenderSystem::ColorFormat::RGB;
@@ -90,7 +93,6 @@ TexturePtr TextureFactory::createFromPngFile(const File& file) {
     case PNG_COLOR_TYPE_RGBA:
         color_format = RenderSystem::ColorFormat::RGBA;
         break;
-    
     default:
         T3_PANIC( "unknown color format." );
         break;

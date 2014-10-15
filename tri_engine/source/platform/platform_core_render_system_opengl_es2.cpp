@@ -43,6 +43,36 @@ inline int bufferTypeToGL(t3::RenderSystem::BufferType type) {
     return gl;
 }
 
+inline int colorFormatToGL(t3::RenderSystem::ColorFormat format) {
+
+
+    int glcolor_format = GL_RGB;
+    
+    switch (format) {
+        case t3::RenderSystem::ColorFormat::RGBA:
+            glcolor_format = GL_RGBA;
+            break;
+            
+        case t3::RenderSystem::ColorFormat::RGB:
+            glcolor_format = GL_RGB;
+            break;
+            
+        case t3::RenderSystem::ColorFormat::GRAY:
+            glcolor_format = GL_ALPHA;
+            break;
+
+        case t3::RenderSystem::ColorFormat::GRAYA:
+            glcolor_format = GL_LUMINANCE_ALPHA;
+            break;
+            
+        default:
+            T3_PANIC("unknown format");
+            break;
+    }
+    
+    return glcolor_format;
+}
+
 }   // unname namespace
 
 
@@ -627,24 +657,7 @@ void RenderSystem::setupTextureData(
     RenderSystem::ColorFormat color_format,
     const void* data
 ) {
-    int glcolor_format = GL_RGB;
-    
-    switch (color_format) {
-        case RenderSystem::ColorFormat::RGBA:
-            glcolor_format = GL_RGBA;
-            break;
-            
-        case RenderSystem::ColorFormat::RGB:
-            glcolor_format = GL_RGB;
-            break;
-            
-        case RenderSystem::ColorFormat::BGR:
-      //      glcolor_format = GL_BGR;
-            break;
-            
-        default:
-            break;
-    }
+    int glcolor_format = colorFormatToGL(color_format);
     
     
     glTexImage2D(

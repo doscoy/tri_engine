@@ -18,21 +18,19 @@ class Shader {
     
 public:
     Shader();
+    Shader(
+        const char* const vsh,
+        const char* const fsh
+    );
     ~Shader();
 
 public:
-    bool compileShaderFromFile(
-        const char* file_name,
-        RenderSystem::ShaderType type
+    void build(
+        const char* const vsh,
+        const char* const fsh
     );
-    
-    bool compileShaderFromString(
-        const char* const source,
-        RenderSystem::ShaderType type
-    );
-    
-    bool link();
-    
+    void compileVertexShader(const char* const vsh);
+    void compileFragmentShader(const char* const fsh);
     bool use();
     
     const String& log() const {
@@ -163,7 +161,22 @@ public:
         }
         constant_float_array_use_ = true;
     }
-  
+
+
+private:
+    bool compileShaderFromFile(
+        const char* file_name,
+        RenderSystem::ShaderType type
+    );
+    
+    bool compileShaderFromString(
+        const char* const source,
+        RenderSystem::ShaderType type
+    );
+    
+    bool link();
+
+
 private:
     int handle_;
     bool linked_;

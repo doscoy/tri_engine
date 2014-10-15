@@ -69,7 +69,7 @@ void beginPrint(
 
     
     //  アクティブなサンプラーをステージ０に設定
-    font_shader_.setUniform("SAMPLER", 0);
+    font_shader_.setUniform("sampler", 0);
    
 }
 
@@ -190,11 +190,7 @@ void initializeDebugPrint()
     );
     T3_NULL_ASSERT(debugfont_);
     
-
-    font_shader_.compileShaderFromString(font_vsh, RenderSystem::ShaderType::VERTEX_SHADER);
-    font_shader_.compileShaderFromString(font_fsh, RenderSystem::ShaderType::FRAGMENT_SHADER);
-    bool shader_link_result = font_shader_.link();
-    T3_ASSERT(shader_link_result);
+    font_shader_.build(font_vsh, font_fsh);
     
 }
 

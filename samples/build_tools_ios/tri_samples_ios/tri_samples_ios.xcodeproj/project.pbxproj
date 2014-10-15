@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0403CC9F19DAEDDA000329EC /* blur_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0403CC9D19DAEDDA000329EC /* blur_test.cpp */; };
+		041544D119EC25E900C14705 /* font_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 041544D019EC25E900C14705 /* font_texture.png */; };
+		041544D619EC268200C14705 /* font_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041544D319EC268200C14705 /* font_test.cpp */; };
 		04391BE219BC95EF006FFF38 /* bunny.obj in Resources */ = {isa = PBXBuildFile; fileRef = 04391BDB19BC95EF006FFF38 /* bunny.obj */; };
 		04391BE319BC95EF006FFF38 /* ninja.obj in Resources */ = {isa = PBXBuildFile; fileRef = 04391BDC19BC95EF006FFF38 /* ninja.obj */; };
 		04391BE419BC95EF006FFF38 /* o.obj in Resources */ = {isa = PBXBuildFile; fileRef = 04391BDD19BC95EF006FFF38 /* o.obj */; };
@@ -77,6 +79,10 @@
 /* Begin PBXFileReference section */
 		0403CC9D19DAEDDA000329EC /* blur_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = blur_test.cpp; sourceTree = "<group>"; };
 		0403CC9E19DAEDDA000329EC /* blur_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = blur_test.hpp; sourceTree = "<group>"; };
+		041544D019EC25E900C14705 /* font_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font_texture.png; sourceTree = "<group>"; };
+		041544D319EC268200C14705 /* font_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = font_test.cpp; sourceTree = "<group>"; };
+		041544D419EC268200C14705 /* font_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = font_test.hpp; sourceTree = "<group>"; };
+		041544D519EC268200C14705 /* font_texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = font_texture.hpp; sourceTree = "<group>"; };
 		04391BDB19BC95EF006FFF38 /* bunny.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bunny.obj; sourceTree = "<group>"; };
 		04391BDC19BC95EF006FFF38 /* ninja.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ninja.obj; sourceTree = "<group>"; };
 		04391BDD19BC95EF006FFF38 /* o.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = o.obj; sourceTree = "<group>"; };
@@ -175,9 +181,20 @@
 			path = blur;
 			sourceTree = "<group>";
 		};
+		041544D219EC268200C14705 /* font */ = {
+			isa = PBXGroup;
+			children = (
+				041544D319EC268200C14705 /* font_test.cpp */,
+				041544D419EC268200C14705 /* font_test.hpp */,
+				041544D519EC268200C14705 /* font_texture.hpp */,
+			);
+			path = font;
+			sourceTree = "<group>";
+		};
 		04391BDA19BC95EF006FFF38 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				041544D019EC25E900C14705 /* font_texture.png */,
 				04D6B6B019E9071D002C8E77 /* t9.png */,
 				04D6B6A019E9049D002C8E77 /* t1.png */,
 				04D6B6A119E9049D002C8E77 /* t2.png */,
@@ -292,6 +309,7 @@
 		3AD406F019AE257000762711 /* samples */ = {
 			isa = PBXGroup;
 			children = (
+				041544D219EC268200C14705 /* font */,
 				0403CC9C19DAEDDA000329EC /* blur */,
 				046983AB19D6EC41001B71E9 /* mem_pool */,
 				3A24B4D319C88A4000E9CFFE /* zipfile */,
@@ -486,6 +504,7 @@
 				04D6B6A819E9049D002C8E77 /* t1.png in Resources */,
 				04D6B6AB19E9049D002C8E77 /* t4.png in Resources */,
 				04F1FE761985557F00C8D498 /* Main_iPhone.storyboard in Resources */,
+				041544D119EC25E900C14705 /* font_texture.png in Resources */,
 				04D6B6A919E9049D002C8E77 /* t2.png in Resources */,
 				04D6B6AD19E9049D002C8E77 /* t6.png in Resources */,
 				04F1FE821985557F00C8D498 /* Images.xcassets in Resources */,
@@ -508,6 +527,7 @@
 				0403CC9F19DAEDDA000329EC /* blur_test.cpp in Sources */,
 				3AD4071119AE257000762711 /* sandbox_template.cpp in Sources */,
 				3AD4070C19AE257000762711 /* audio_test.cpp in Sources */,
+				041544D619EC268200C14705 /* font_test.cpp in Sources */,
 				3AD4070B19AE257000762711 /* ad_test.cpp in Sources */,
 				3AD4070E19AE257000762711 /* main.cpp in Sources */,
 				3AD4071019AE257000762711 /* quat_test_scene.cpp in Sources */,

@@ -23,6 +23,15 @@ Shader::Shader()
     
 }
 
+Shader::Shader(
+    const char* vsh,
+    const char* fsh
+)   : Shader()
+{
+    build(vsh, fsh);
+}
+
+
 Shader::~Shader()
 {
 }
@@ -56,6 +65,28 @@ bool Shader::compileShaderFromString(
     
     
     return true;
+}
+
+
+void Shader::build(
+    const char* const vsh,
+    const char* const fsh
+) {
+    compileVertexShader(vsh);
+    compileFragmentShader(fsh);
+    link();
+}
+
+void Shader::compileVertexShader(
+    const char* const vsh
+) {
+    compileShaderFromString(vsh, RenderSystem::ShaderType::VERTEX_SHADER);
+}
+
+void Shader::compileFragmentShader(
+    const char* const fsh
+) {
+    compileShaderFromString(fsh, RenderSystem::ShaderType::FRAGMENT_SHADER);
 }
 
 

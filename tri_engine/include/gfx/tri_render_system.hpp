@@ -165,7 +165,8 @@ public:
     enum class ColorFormat {
         RGB,
         RGBA,
-        BGR
+        GRAY,
+        GRAYA
     };
     
     static void setupTextureData(

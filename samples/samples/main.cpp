@@ -54,8 +54,8 @@ int main(int argc, char * argv[])
 //    app.setRootScene(t3::Scene::sceneGenerator<AudioTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
-
-    app.setRootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
+//    app.setRootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
+    app.setRootScene(t3::Scene::sceneGenerator<FontTestScene>());
 
     t3::platform::run(argc, argv, &app);
 

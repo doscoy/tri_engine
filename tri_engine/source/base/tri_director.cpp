@@ -150,7 +150,7 @@ Director::Director()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
     , use_clear_color_index_(0)
     , clear_colors_{{
-        Color::BLACK,
+        Color::RED,
         Color::darkgray(),
         Color::white(),
         Color::BLUE

@@ -26,10 +26,7 @@ inline namespace dbg {
 
 void initializeDrawPrimitive()
 {
-    simple2d_.compileShaderFromString(simple2d_vsh, RenderSystem::ShaderType::VERTEX_SHADER);
-    simple2d_.compileShaderFromString(simple2d_fsh, RenderSystem::ShaderType::FRAGMENT_SHADER);
-    bool shader_link_result = simple2d_.link();
-    T3_ASSERT(shader_link_result);
+    simple2d_.build(simple2d_vsh, simple2d_fsh);
 
 }
 

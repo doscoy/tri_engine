@@ -27,11 +27,7 @@ CinemaLayer::CinemaLayer(
 {
 
     //  デフォルトシェーダ作成
-    default_shader_ = std::make_shared<Shader>();
-    default_shader_->compileShaderFromString(simple_tex_vsh, RenderSystem::ShaderType::VERTEX_SHADER);
-    default_shader_->compileShaderFromString(simple_tex_fsh, RenderSystem::ShaderType::FRAGMENT_SHADER);
-    bool shader_link_result = default_shader_->link();
-    T3_ASSERT(shader_link_result);
+    default_shader_ = std::make_shared<Shader>(simple_tex_vsh, simple_tex_fsh);
 
     //  デフォルトシェーダを設定
     shader_ = default_shader_;

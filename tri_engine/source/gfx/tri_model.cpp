@@ -26,9 +26,7 @@ Model::Model()
     , current_shader_(&default_shader_) {
 
     //  シェーダ作成
-    default_shader_.compileShaderFromString(SimpleVertexShader, t3::RenderSystem::ShaderType::VERTEX_SHADER);
-    default_shader_.compileShaderFromString(SimpleFragmentShader, t3::RenderSystem::ShaderType::FRAGMENT_SHADER);
-    default_shader_.link();
+    default_shader_.build(SimpleVertexShader, SimpleFragmentShader);
 
 }
 

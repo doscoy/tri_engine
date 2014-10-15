@@ -14,10 +14,7 @@ public:
         , surface_(512, 512)
         , moz_lv_(0)
     {
-        shader_ = std::make_shared<t3::Shader>();
 
-        shader_->compileShaderFromString(simple_tex_vsh, t3::RenderSystem::ShaderType::VERTEX_SHADER);
-        
         
         const char* my_fsh = TRI_INSTANT_SHADER(
             varying lowp vec2 v_texture_uv;
@@ -36,10 +33,7 @@ public:
             }
         );
         
-        
-        shader_->compileShaderFromString(my_fsh, t3::RenderSystem::ShaderType::FRAGMENT_SHADER);
-        bool shader_link_result = shader_->link();
-        T3_ASSERT(shader_link_result);
+        shader_ = std::make_shared<t3::Shader>(simple_tex_vsh, my_fsh);
 
     }
     

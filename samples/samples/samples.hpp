@@ -23,7 +23,7 @@
 #include "thread/thread_test.hpp"
 #include "zipfile/zip_test.hpp"
 #include "blur/blur_test.hpp"
-
+#include "font/font_test.hpp"
 
 
 
