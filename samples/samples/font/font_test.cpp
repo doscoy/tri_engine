@@ -50,6 +50,9 @@ class FontTestScene::SceneContext {
 
 public:
     SceneContext()
+        : layer_()
+        , moji_(nullptr)
+        , box_(&layer_)
     {}
     
     ~SceneContext()
@@ -76,6 +79,11 @@ public:
         
         auto shader = std::make_shared<t3::Shader>(sprite_vsh, font_fsh);
         layer_.renderer().useCustomShader(shader);
+        
+        
+        
+        box_.setText(u8"あいうえお");
+        
     }
     
     void terminate() {
@@ -97,6 +105,7 @@ public:
 private:
     t3::SpriteLayer layer_;
     t3::SpritePtr moji_;
+    t3::TextBox box_;
 };
 
 

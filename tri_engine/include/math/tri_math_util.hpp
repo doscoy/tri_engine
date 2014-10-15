@@ -71,11 +71,11 @@ inline const void clampMaximum(
 }
 
 //  範囲判定
-template <class T>
+template <class T, class U>
 bool inRange(
     const T& value,
-    const T& low,
-    const T& high
+    const U& low,
+    const U& high
 ){
     if(low <= value && value <= high){
         

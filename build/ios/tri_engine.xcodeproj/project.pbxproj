@@ -12,6 +12,8 @@
 		0444671C19E84D1400906B43 /* tri_color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0444671B19E84D1400906B43 /* tri_color.cpp */; };
 		046983A719D11720001B71E9 /* tri_archive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046983A619D11720001B71E9 /* tri_archive.cpp */; };
 		047CEA5319DC4C950015B46F /* tri_cinema_layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047CEA5219DC4C950015B46F /* tri_cinema_layer.cpp */; };
+		04AA28D119EEDDEC003E76FC /* tri_gui_textbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04AA28D019EEDDEC003E76FC /* tri_gui_textbox.cpp */; };
+		04AA28D419EEE3E0003E76FC /* tri_string_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04AA28D319EEE3E0003E76FC /* tri_string_util.cpp */; };
 		3A1C1B2919AC3065005A69FA /* tri_mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */; };
 		3A24B4D019C16C7900E9CFFE /* tri_zipfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B4CF19C16C7900E9CFFE /* tri_zipfile.cpp */; };
 		3AA7EEA319A101CE00CEB23A /* tri_audio_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3719A0F60600CEB23A /* tri_audio_handle.cpp */; };
@@ -121,6 +123,9 @@
 		047CEA5219DC4C950015B46F /* tri_cinema_layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_cinema_layer.cpp; sourceTree = "<group>"; };
 		047CEA5419DC56290015B46F /* tri_simple_tex.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tri_simple_tex.fsh; sourceTree = "<group>"; };
 		047CEA5519DC56290015B46F /* tri_simple_tex.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tri_simple_tex.vsh; sourceTree = "<group>"; };
+		04AA28D019EEDDEC003E76FC /* tri_gui_textbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_gui_textbox.cpp; sourceTree = "<group>"; };
+		04AA28D219EEDE05003E76FC /* tri_gui_textbox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_gui_textbox.hpp; sourceTree = "<group>"; };
+		04AA28D319EEE3E0003E76FC /* tri_string_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_string_util.cpp; sourceTree = "<group>"; };
 		3A0AB7B019CC90B90050E0DF /* tri_std.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_std.hpp; sourceTree = "<group>"; };
 		3A1C1B2519AC2BD0005A69FA /* tri_mutex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tri_mutex.hpp; path = process/tri_mutex.hpp; sourceTree = "<group>"; };
 		3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_mutex.cpp; sourceTree = "<group>"; };
@@ -543,6 +548,7 @@
 				3AA7ED7419A0F60600CEB23A /* tri_gui_button.cpp */,
 				3AA7ED7519A0F60600CEB23A /* tri_gui_radio_button.cpp */,
 				3AA7ED7619A0F60600CEB23A /* tri_gui_swap_button.cpp */,
+				04AA28D019EEDDEC003E76FC /* tri_gui_textbox.cpp */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -623,6 +629,7 @@
 				3AA7ED9C19A0F60600CEB23A /* tri_unique_id.cpp */,
 				3A24B4CF19C16C7900E9CFFE /* tri_zipfile.cpp */,
 				046983A619D11720001B71E9 /* tri_archive.cpp */,
+				04AA28D319EEE3E0003E76FC /* tri_string_util.cpp */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -785,6 +792,7 @@
 				3AA7EE4B19A0F61700CEB23A /* tri_gui_button.hpp */,
 				3AA7EE4C19A0F61700CEB23A /* tri_gui_radio_button.hpp */,
 				3AA7EE4D19A0F61700CEB23A /* tri_gui_swap_button.hpp */,
+				04AA28D219EEDE05003E76FC /* tri_gui_textbox.hpp */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -993,6 +1001,7 @@
 				3AA7EEF519A1024400CEB23A /* tri_unique_id.cpp in Sources */,
 				3AA7EEE819A1022C00CEB23A /* tri_bezier_curve.cpp in Sources */,
 				3AA7EEE919A1022C00CEB23A /* tri_matrix_stack.cpp in Sources */,
+				04AA28D419EEE3E0003E76FC /* tri_string_util.cpp in Sources */,
 				3AA7EEE319A1022000CEB23A /* tri_heap.cpp in Sources */,
 				3AA7EEE419A1022000CEB23A /* tri_heap_manager.cpp in Sources */,
 				3AA7EEE619A1022000CEB23A /* tri_memory_pool.cpp in Sources */,
@@ -1006,6 +1015,7 @@
 				3AA7EEDC19A1020900CEB23A /* tri_gui_radio_button.cpp in Sources */,
 				3AA7EEDD19A1020900CEB23A /* tri_gui_swap_button.cpp in Sources */,
 				3AA7EEC819A101FE00CEB23A /* tri_camera.cpp in Sources */,
+				04AA28D119EEDDEC003E76FC /* tri_gui_textbox.cpp in Sources */,
 				3AA7EEC919A101FE00CEB23A /* tri_camera_updater.cpp in Sources */,
 				3AA7EECA19A101FE00CEB23A /* tri_draw_layer.cpp in Sources */,
 				3AA7EECB19A101FE00CEB23A /* tri_entity.cpp in Sources */,

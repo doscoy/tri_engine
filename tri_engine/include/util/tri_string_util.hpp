@@ -31,6 +31,11 @@ inline int stringCompare(
 }
 
 
+int utf8Length(const char* const str, int n = 128);
+
+
+
+
 
 }   // namespace util
 }   // namespace t3
