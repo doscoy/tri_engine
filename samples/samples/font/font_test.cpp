@@ -7,45 +7,6 @@
 
 
 
-namespace  {
-
-bool isCompUTF8(
-    const char* const a,
-    const char* const b
-) {
-
-    for (int i = 0; i < 3; ++i) {
-        if (a[i] != b[i]) {
-            return false;
-        }
-    }
-
-
-    return true;
-}
-
-
-const Glyph* searchGryph(const char* c) {
-
-    for (int i = 0; i < GLYPHS_SIZE; ++i) {
-        const Glyph* glyph = &GLYPHS[i];
-        
-        if (isCompUTF8(glyph->char_, c)) {
-            return glyph;
-        }
-    }
-    return nullptr;
-}
-
-
-
-
-
-}
-
-
-
-
 class FontTestScene::SceneContext {
 
 public:
@@ -60,9 +21,11 @@ public:
   
 public:
     void initialize() {
+
+/*
         const Glyph* glyph = searchGryph("$");
         if (!glyph) {
-            glyph = searchGryph("?");
+            glyph = t3::searchGryph("?");
         }
     
         t3::Vec2 left_top(
@@ -71,19 +34,12 @@ public:
         );
         t3::Vec2 size(glyph->metrics_.width_, glyph->metrics_.height_);
         
-        moji_ = layer_.createSprite("font_texture.png");
-        moji_->setupTextureCoordAndSize(left_top, size);
-        moji_->transform()->scale(10.0);
-        moji_->color(t3::Color::BLUE);
         
         
+*/
         auto shader = std::make_shared<t3::Shader>(sprite_vsh, font_fsh);
         layer_.renderer().useCustomShader(shader);
-        
-        
-        
         box_.setText(u8"あいうえお");
-        
     }
     
     void terminate() {

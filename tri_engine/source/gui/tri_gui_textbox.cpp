@@ -12,12 +12,15 @@ namespace t3 {
 
 
 
-TextBox::TextBox(SpriteLayer* layer)
+TextBox::TextBox(SpriteLayer* layer, String font_seet)
     : layer_(layer)
-    , center_()
+    , font_seet_name_(font_seet)
+    , transform_(nullptr)
     , size_(128, 128)
+    , glyph_list_(nullptr)
+    , char_list_()
 {
-
+    transform_ = std::make_shared<Transform2D>();
 }
 
 TextBox::~TextBox() {
@@ -30,14 +33,25 @@ void TextBox::setArea(
     const Vec2& size
 ) {
 
-    center_ = center;
+    transform_->position(center);
     size_ = size;
 }
 
 void TextBox::setText(
-    const char* const text
+    const Utf8 text
 ) {
-    T3_TRACE("text length = %d", utf8Length(text));
+    T3_ASSERT(glyph_list_);
+    T3_ASSERT(layer_);
+    
+    int char_num = text.length();
+    T3_TRACE("text length = %d", char_num);
+    
+    
+    for (int i = 0; i <char_num; ++i) {
+        auto spr = layer_->createSprite(font_seet_name_);
+        const char* const c = text.at(i);
+        char_list_.push_back(c);
+    }
 }
 
 

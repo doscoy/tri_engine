@@ -31,7 +31,6 @@ inline int stringCompare(
 }
 
 
-int utf8Length(const char* const str, int n = 128);
 
 
 
