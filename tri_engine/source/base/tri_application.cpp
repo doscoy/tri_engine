@@ -544,7 +544,7 @@ bool Application::isSuspend() const {
 
 void Application::beginRender() {
     
-    RenderSystem::clearColor(Color::RED);
+    RenderSystem::clearColor(Color::darkgray());
     RenderSystem::clearBuffer(true, true, false);
 }
 

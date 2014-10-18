@@ -14,6 +14,8 @@
 
 namespace t3 {
 
+int utf8ByteSize(const char* const a);
+bool isCompUTF8Char(const char* const a, const char* const b);
 
 class Utf8 {
 public:
@@ -26,10 +28,9 @@ public:
         return  size_;
     }
     
-    char* at(int idx) {
+    const char* at(int idx) const {
         return char_pos_.at(idx);
     }
-
 
 private:
     uint32_t size_;

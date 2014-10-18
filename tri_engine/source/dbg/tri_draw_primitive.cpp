@@ -44,8 +44,16 @@ void drawPoint(
     drawSegment(seg2, color, 0.1f);
 }
 
-    
-void drawRectangle(
+void drawRectangleCenterSize(
+    const Vec2& center,
+    const Vec2& size,
+    const Color& color
+){
+    Vec2 min_pos = center - (size * 0.5f);
+    drawRectangleMinSize(min_pos, size, color);
+}
+
+void drawRectangleMinSize(
     const Vec2& min_pos,
     const Vec2& size,
     const Color& color

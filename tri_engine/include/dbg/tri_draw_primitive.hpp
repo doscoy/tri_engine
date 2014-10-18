@@ -36,8 +36,14 @@ void drawSegment(
 
 void drawAxis(const Vec3& pos);
 
-void drawRectangle(
+void drawRectangleMinSize(
      const Vec2& min,
+     const Vec2& size,
+     const Color& color
+);
+
+void drawRectangleCenterSize(
+     const Vec2& center,
      const Vec2& size,
      const Color& color
 );

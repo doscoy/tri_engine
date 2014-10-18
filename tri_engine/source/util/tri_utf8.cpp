@@ -18,7 +18,7 @@ int utf8Setup(
     t3::Vector<char*>& pos_list
 ) {
 
-    int str_len = strnlen(str, 24);
+    int str_len = strnlen(str, 64);
     int str_count = 0;
 
     const uint8_t* p = reinterpret_cast<const uint8_t*>(str);
@@ -26,26 +26,7 @@ int utf8Setup(
     int byte_size = 0;
     while (p) {
         pos_list.push_back((char*)p);
-        if (t3::inRange(*p, 0x00, 0x7f)) {
-            //  1byte
-            byte_size = 1;
-            
-        } else if (t3::inRange(*p, 0xc2, 0xdf)) {
-            //  2byte
-            byte_size = 2;
-            
-        } else if (t3::inRange(*p, 0xe0, 0xef)) {
-            //  3byte
-            byte_size = 3;
-        
-        } else if (t3::inRange(*p, 0xf0, 0xf7)) {
-            //  4byte
-            byte_size = 4;
-        } else {
-            // 5-6byteの文字は実際には無い
-            return 0;
-        }
-        
+        byte_size = t3::utf8ByteSize((char*)p);
         //  文字数カウント
         str_count += 1;
         
@@ -66,6 +47,47 @@ int utf8Setup(
 }   // unname namespace
 
 namespace t3 {
+
+bool isCompUTF8Char(
+    const char* const a,
+    const char* const b
+) {
+    int unicode_size = utf8ByteSize(a);
+    
+    
+    for (int i = 0; i < unicode_size; ++i) {
+        if (a[i] != b[i]) {
+            return false;
+        }
+    }
+
+
+    return true;
+}
+
+int utf8ByteSize(const char* const a) {
+    uint8_t code = *a;
+    if (t3::inRange(code, 0x00, 0x7f)) {
+        //  1byte
+        return 1;
+            
+    } else if (t3::inRange(code, 0xc2, 0xdf)) {
+        //  2byte
+        return 2;
+            
+    } else if (t3::inRange(code, 0xe0, 0xef)) {
+        //  3byte
+        return 3;
+        
+    } else if (t3::inRange(code, 0xf0, 0xf7)) {
+        //  4byte
+        return  4;
+    }
+    
+    return 5;
+}
+
+
 
 Utf8::Utf8(const char* const str)
     : size_(0)

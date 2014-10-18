@@ -410,7 +410,7 @@ void renderMemoryPool(MemoryPool& pool) {
         while (size + now > limit_x) {
             int diff = limit_x-now;
             
-            t3::drawRectangle(
+            t3::drawRectangleMinSize(
                 t3::Vec2(now, line_y),
                 t3::Vec2(diff, rect_size),
                 free_color
@@ -419,7 +419,7 @@ void renderMemoryPool(MemoryPool& pool) {
             size -= diff;
             line_y -= rect_size;
         }
-        t3::drawRectangle(
+        t3::drawRectangleMinSize(
             t3::Vec2(now, line_y),
             t3::Vec2(size, rect_size),
             free_color
@@ -439,7 +439,7 @@ void renderMemoryPool(MemoryPool& pool) {
         while (size + now > limit_x) {
             int diff = limit_x-now;
             
-            t3::drawRectangle(
+            t3::drawRectangleMinSize(
                 t3::Vec2(now, line_y),
                 t3::Vec2(diff, rect_size),
                 use_color
@@ -448,7 +448,7 @@ void renderMemoryPool(MemoryPool& pool) {
             size -= diff;
             line_y -= rect_size;
         }
-        t3::drawRectangle(
+        t3::drawRectangleMinSize(
             t3::Vec2(now, line_y),
             t3::Vec2(size, rect_size),
             use_color

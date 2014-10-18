@@ -89,7 +89,7 @@ void DebugLogLayer::drawLayer()
     t3::RenderSystem::setBlend(true);
 
     Color bg_color = Color(0, 0, 0, 80);
-    drawRectangle(
+    drawRectangleMinSize(
         Vec2(0, 0),
         Vec2(gs.virtualScreenSize().x_, gs.virtualScreenSize().y_),
         bg_color

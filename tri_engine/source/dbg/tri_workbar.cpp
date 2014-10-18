@@ -77,7 +77,7 @@ void Workbar::draw() {
         if (pixel_width < 1.0){
             continue;
         }
-        drawRectangle(
+        drawRectangleMinSize(
             Vec2(start_x, y),
             Vec2(pixel_width, thickness_),
             param.color_
@@ -89,14 +89,14 @@ void Workbar::draw() {
     
     //  目安の縦棒を描画
     //  0%
-    drawRectangle(
+    drawRectangleMinSize(
         Vec2(position_.x_, y-5),
         Vec2(1, 10),
         Color::silver()
     );
     
     //  100%
-    drawRectangle(
+    drawRectangleMinSize(
         Vec2(position_.x_ + limit_width_pixel_, y-5),
         Vec2(1, 10),
         Color::silver()
@@ -106,21 +106,21 @@ void Workbar::draw() {
     int per25pixel = limit_width_pixel_ / 4;
     
     //  50%
-    drawRectangle(
+    drawRectangleMinSize(
         Vec2(0, y-3),
         Vec2(1, 6),
         Color::silver()
     );
     
     //  25%
-    drawRectangle(
+    drawRectangleMinSize(
         Vec2(-per25pixel, y-3),
         Vec2(1, 6),
         Color::silver()
     );
     
     //  75%
-    drawRectangle(
+    drawRectangleMinSize(
         Vec2(per25pixel, y-3),
         Vec2(1, 6),
         Color::silver()
@@ -151,7 +151,7 @@ void Workbar::draw() {
     if (limit_bar_pos_x_ > 0) {
         limit_bar_color = Color::RED;
     }
-    drawRectangle(Vec2(limit_bar_pos_x_, y-1), Vec2(3, thickness_+2), limit_bar_color);
+    drawRectangleMinSize(Vec2(limit_bar_pos_x_, y-1), Vec2(3, thickness_+2), limit_bar_color);
     
 }
 

@@ -9,7 +9,12 @@
 #ifndef tri_engine_tri_glyph_hpp
 #define tri_engine_tri_glyph_hpp
 
+#include "util/tri_utf8.hpp"
+
 namespace t3 {
+ 
+ 
+
  
 struct GlyphPosition {
 	int16_t x_;
@@ -32,40 +37,55 @@ struct Glyph {
 };
 
 
-
-
-
-inline bool isCompUTF8Char(
-    const char* const a,
-    const char* const b
-) {
-
-    for (int i = 0; i < 3; ++i) {
-        if (a[i] != b[i]) {
-            return false;
-        }
-    }
-
-
-    return true;
-}
-
-
 inline const Glyph* searchGryph(
     const char* c,
     const Glyph* list,
     size_t list_size
 ) {
 
-    for (int i = 0; i < list_size; ++i) {
-        const Glyph* glyph = &list[i];
-        
-        if (isCompUTF8Char(glyph->char_, c)) {
-            return glyph;
-        }
-    }
+    
     return nullptr;
 }
+
+
+
+class GlyphList {
+public:
+    GlyphList(const Glyph* list, int list_size, String font_sheet)
+        : list_(list)
+        , list_size_(list_size)
+        , font_sheet_name_(font_sheet)
+    {
+    
+    }
+    ~GlyphList() {
+    
+    }
+    
+public:
+    const Glyph* search(const char* const c) const {
+    
+        for (int i = 0; i < list_size_; ++i) {
+            const Glyph* glyph = &list_[i];
+            
+            if (isCompUTF8Char(glyph->char_, c)) {
+                return glyph;
+            }
+        }
+        return nullptr;
+    }
+    
+    const String& fontSheetName() const {
+        return font_sheet_name_;
+    }
+
+private:
+    const Glyph* list_;
+    int list_size_;
+    String font_sheet_name_;
+};
+
+
 
 
 

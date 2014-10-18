@@ -20,22 +20,80 @@ namespace t3 {
 
 
 class TextBox {
+
 public:
-    TextBox(SpriteLayer* layer, const String font_seet);
+    enum class AlignX {
+        LEFT,
+        CENTER,
+        RIGHT
+    };
+    
+    enum class AlignY {
+        TOP,
+        CENTER,
+        BOTTOM
+    };
+
+public:
+    TextBox(SpriteLayer* layer, const GlyphList* glyph_list);
     ~TextBox();
     
 public:
-    void setArea(const Vec2& center, const Vec2& size);
-    void setText(const Utf8 text);
+    TextBox& text(const Utf8& text);
+    
+    TextBox& center(const Vec2& pos) {
+        transform_->position(pos);
+        return *this;
+    }
+    
+    const Vec2& center() const {
+        return transform_->position();
+    }
+    
+    TextBox& size(const Vec2& size) {
+        size_ = size;
+        return *this;
+    }
+    
+    const Vec2& size() const {
+        return size_;
+    }
+    
+    TextBox& alignX(AlignX align) {
+        align_x_ = align;
+        return *this;
+    }
+    
+    TextBox& alignY(AlignY align) {
+        align_y_ = align;
+        return *this;
+    }
+    
+    TextBox& fontsize(int size) {
+        font_size_ = size;
+        return *this;
+    }
+    
+    void setup() {
+        adjustStringLayout();
+    }
+    
+private:
+    void adjustStringLayout();
+    int textWidth() const;
 
+    
 private:
     SpriteLayer* layer_;
-    String font_seet_name_;
     Transform2DPtr transform_;
     Vec2 size_;
-    Glyph* glyph_list_;
-    
-    std::vector<SpritePtr> char_list_;
+    const GlyphList* glyph_list_;
+    const Glyph* unknown_char_glyph_;
+    std::vector<SpritePtr> char_sprites_;
+    std::vector<const Glyph*> char_glyphs_;
+    AlignX align_x_;
+    AlignY align_y_;
+    int font_size_;
 };
 
 

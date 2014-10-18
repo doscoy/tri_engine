@@ -18,7 +18,7 @@ public:
     void terminateScene() override;
     void updateScene(t3::tick_t delta_time) override;
     void suspendScene(t3::tick_t delta_time) override;
-    
+    void debugRenderScene() override;
 private:
     class SceneContext;
     t3::ScopedPtr<SceneContext> context_;
