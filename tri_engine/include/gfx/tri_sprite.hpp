@@ -91,7 +91,13 @@ public:
         const Vec2& dir
     ) {
         float angle = std::atan2(dir.y_, dir.x_);
-        transform_->rotation(t3::toDegree(angle));
+        transform_->rotation(
+            t3::Vec3(
+                0.0f,
+                0.0f,
+                t3::toDegree(angle)
+            )
+        );
     }
 
 
@@ -247,7 +253,7 @@ public:
     }
 
     bool isRotatedSprite() const {
-        float rot = transform()->globalRotation();
+        float rot = transform()->globalRotation().z_;
         if (isEqualFloat(rot, 0.0f)) {
             return false;
         }

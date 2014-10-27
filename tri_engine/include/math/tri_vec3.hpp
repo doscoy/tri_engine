@@ -18,11 +18,13 @@ namespace t3 {
 inline namespace math {
 
 template <typename T>
-struct Vec3Template {
+class Vec3Template {
+public:
     T x_;
     T y_;
     T z_;
-    
+
+public:
     //  コンストラクタ
     Vec3Template()
     {}
@@ -38,6 +40,28 @@ struct Vec3Template {
         , y_(rhs.y_)
         , z_(rhs.z_)
     {}
+
+
+
+public:
+
+    void addX(T v) {
+        x_ += v;
+    }
+
+    void addY(T v) {
+        y_ += v;
+    }
+    
+    void addZ(T v) {
+        z_ += v;
+    }
+    
+    void add(Vec3Template& rhs) {
+        addX(rhs.x_);
+        addY(rhs.y_);
+        addZ(rhs.z_);
+    }
     
     //  長さの二乗を取得
     T lengthSquare() const {

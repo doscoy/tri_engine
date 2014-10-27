@@ -51,10 +51,11 @@ inline const Glyph* searchGryph(
 
 class GlyphList {
 public:
-    GlyphList(const Glyph* list, int list_size, String font_sheet)
+    GlyphList(const Glyph* list, int list_size, String font_sheet, int default_font_size)
         : list_(list)
         , list_size_(list_size)
         , font_sheet_name_(font_sheet)
+        , default_font_size_(default_font_size)
     {
     
     }
@@ -78,11 +79,16 @@ public:
     const String& fontSheetName() const {
         return font_sheet_name_;
     }
+    
+    int defaultFontSize() const {
+        return default_font_size_;
+    }
 
 private:
     const Glyph* list_;
     int list_size_;
     String font_sheet_name_;
+    int default_font_size_;
 };
 
 

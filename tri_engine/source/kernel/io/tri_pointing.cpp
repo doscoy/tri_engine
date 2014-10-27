@@ -140,14 +140,14 @@ void Pointing::updateFlick() {
     //  フリック判定
     if (release_) {
         flick_move_ = released_position_ - trigged_position_;
-        if (flick_move_.lengthSquare() > 20.0f) {
+        if (flick_move_.lengthSquare() > 3000.0f) {
             //  フリック動作認定
             flick_ = true;
             
             //  フリック方向計算
             if (std::abs(flick_move_.x_) > std::abs(flick_move_.y_)) {
                 //  横方向フリック
-                if (flick_move_.x_) {
+                if (flick_move_.x_ < 0) {
                     //  右方向フリック
                     flick_direction_ = FlickDirection::RIGHT;
                 } else {

@@ -124,6 +124,7 @@
 		047CEA5219DC4C950015B46F /* tri_cinema_layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_cinema_layer.cpp; sourceTree = "<group>"; };
 		047CEA5419DC56290015B46F /* tri_simple_tex.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tri_simple_tex.fsh; sourceTree = "<group>"; };
 		047CEA5519DC56290015B46F /* tri_simple_tex.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tri_simple_tex.vsh; sourceTree = "<group>"; };
+		049757EB19F39F2300D1AF3C /* tri_df_font.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_df_font.fsh; sourceTree = "<group>"; };
 		04AA28D019EEDDEC003E76FC /* tri_gui_textbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_gui_textbox.cpp; sourceTree = "<group>"; };
 		04AA28D219EEDE05003E76FC /* tri_gui_textbox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_gui_textbox.hpp; sourceTree = "<group>"; };
 		04AA28D319EEE3E0003E76FC /* tri_string_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_string_util.cpp; sourceTree = "<group>"; };
@@ -928,6 +929,7 @@
 		3AA7EE9119A0F62800CEB23A /* shader */ = {
 			isa = PBXGroup;
 			children = (
+				049757EB19F39F2300D1AF3C /* tri_df_font.fsh */,
 				047CEA5419DC56290015B46F /* tri_simple_tex.fsh */,
 				047CEA5519DC56290015B46F /* tri_simple_tex.vsh */,
 				3AA7EE9219A0F62800CEB23A /* tri_font.fsh */,
@@ -1167,7 +1169,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "../../tri_engine/include ../../third_party_lib/ios";
+				USER_HEADER_SEARCH_PATHS = ../../tri_engine/include;
 			};
 			name = Debug;
 		};
@@ -1183,7 +1185,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "../../tri_engine/include ../../third_party_lib/ios";
+				USER_HEADER_SEARCH_PATHS = ../../tri_engine/include;
 			};
 			name = Release;
 		};

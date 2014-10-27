@@ -8,9 +8,7 @@ uniform sampler2D sampler;
 void main(void)
 {
     lowp vec4 tex_color = texture2D(sampler, v_texture_uv);
-    if (tex_color.a > 0.0) {
-        tex_color.rgb = v_color.rgb;
-    }
+    tex_color.rgb = v_color.rgb;
     gl_FragColor = tex_color;
 }
 );

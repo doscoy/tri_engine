@@ -18,7 +18,7 @@ int utf8Setup(
     t3::Vector<char*>& pos_list
 ) {
 
-    int str_len = strnlen(str, 64);
+    int str_len = strnlen(str, 128);
     int str_count = 0;
 
     const uint8_t* p = reinterpret_cast<const uint8_t*>(str);

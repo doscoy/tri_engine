@@ -2,7 +2,6 @@
 #ifndef tri_engine_tri_std_hpp
 #define tri_engine_tri_std_hpp
 
-#include <cstddef>
 #include <cstdint>
 #include <string>
 #include <memory>
@@ -17,6 +16,7 @@
 #include <fstream>
 #include <functional>
 #include <thread>
+#include <cstddef>
 
 
 

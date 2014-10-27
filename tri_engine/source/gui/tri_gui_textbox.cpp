@@ -22,7 +22,9 @@ TextBox::TextBox(SpriteLayer* layer, const GlyphList* glyph_list)
     , char_glyphs_()
     , align_x_(AlignX::LEFT)
     , align_y_(AlignY::TOP)
-    , font_size_(34)
+    , font_size_(16)
+    , auto_resize_(false)
+    , font_color_()
 {
     transform_ = std::make_shared<Transform2D>();
     unknown_char_glyph_ = glyph_list->search(u8"■");
@@ -39,18 +41,23 @@ TextBox& TextBox::text(
 ) {
     T3_ASSERT(glyph_list_);
     T3_ASSERT(layer_);
+
+    char_sprites_.clear();
+    char_glyphs_.clear();
     
     int char_num = text.length();
-    T3_TRACE("text length = %d", char_num);
 
     for (int i = 0; i <char_num; ++i) {
         auto spr = layer_->createSprite(glyph_list_->fontSheetName().c_str());
         //  一文字取得
         const char* const c = text.at(i);
 
-
         //  グリフを得る
         const Glyph* glyph = glyph_list_->search(c);
+        T3_NULL_ASSERT(glyph);
+        if (!glyph) {
+            continue;
+        }
         
         if (!glyph) {
             glyph = unknown_char_glyph_;
@@ -65,7 +72,8 @@ TextBox& TextBox::text(
             glyph->metrics_.height_
         );
         spr->setupTextureCoordAndSize(left_top, size);
-   //     spr->size(font_size_);
+        spr->transform()->setParentTransform(transform_);
+
 
         char_sprites_.push_back(spr);
         char_glyphs_.push_back(glyph);
@@ -111,23 +119,37 @@ void TextBox::adjustStringLayout() {
         auto& spr = char_sprites_[i];
         auto& glyph = char_glyphs_[i];
     
-    
-        float width = glyph->metrics_.width_;
-        float height = glyph->metrics_.height_;
-        float x_bearing = glyph->metrics_.x_bearing_;
-        float y_bearing = glyph->metrics_.y_bearing_;
-        float x_advance = glyph->metrics_.x_advance_;
+        float scale_ratio = fontScaleRatio();
+        float width = glyph->metrics_.width_ * scale_ratio;
+        float height = glyph->metrics_.height_ * scale_ratio;
+        float x_bearing = glyph->metrics_.x_bearing_ * scale_ratio;
+        float y_bearing = glyph->metrics_.y_bearing_ * scale_ratio;
+        float x_advance = glyph->metrics_.x_advance_ * scale_ratio;
 
         Vec2 pen_pos(
             x + x_bearing + (width / 2),
             y - y_bearing - (height / 2)
         );
         spr->transform()->position(pen_pos);
-        spr->transform()->setParentTransform(transform_);
-        
+        spr->transform()->scale(scale_ratio);
     
         x += x_advance;
     }
+    
+    if (auto_resize_) {
+        //  はみ出ていたらフォントサイズを調整する
+        while (size_.x_ < textWidth()) {
+            if (font_size_ < 24) {
+                //  24point以下になったらもう表示しちゃう
+                T3_TRACE("[Worning] font size under 24.\n");
+                break;
+            }
+            
+            font_size_ -= 4;
+            adjustStringLayout();
+        }
+    }
+    
 }
 
 
@@ -138,7 +160,18 @@ int TextBox::textWidth() const {
         total_width += glyph->metrics_.x_advance_;
     }
 
-    return total_width;
+    return total_width * fontScaleRatio();
+}
+
+float TextBox::fontScaleRatio() const {
+    return (float)font_size_ / (float)glyph_list_->defaultFontSize();
+}
+
+
+void TextBox::updateColor() {
+    for (auto& spr : char_sprites_) {
+        spr->color(font_color_);
+    }
 }
 
 }   // namespace t3

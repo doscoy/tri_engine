@@ -19,7 +19,7 @@ class Transform2D
 public:
     Transform2D()
         : position_(0, 0)
-        , rotation_(0)
+        , rotation_(0, 0, 0)
         , scale_(1.0f, 1.0f)
         , parent_(nullptr)
     {
@@ -29,6 +29,10 @@ public:
 
 public:
     //  位置
+    Vec2& position() {
+        return position_;
+    }
+    
     const Vec2& position() const {
         return position_;
     }
@@ -48,12 +52,16 @@ public:
     }
     
     //  回転角
-    float rotation() const {
+    Vec3& rotation() {
+        return rotation_;
+    }
+    
+    const Vec3& rotation() const {
         return rotation_;
     }
     
     void rotation(
-        const float rot
+        const Vec3& rot
     ) {
         rotation_ = rot;
     }
@@ -108,7 +116,7 @@ public:
         //  親の情報と掛けあわせてグローバル座標を計算
         
         //  親の回転の影響を受けた座標
-        float parent_rotate = toRadian(parent_->globalRotation());
+        float parent_rotate = toRadian(parent_->globalRotation().z_);
         float cos_angle = std::cos(parent_rotate);
         float sin_angle = std::sin(parent_rotate);
 
@@ -122,7 +130,7 @@ public:
     }
     
     
-    float globalRotation() const {
+    Vec3 globalRotation() const {
         if (!hasParent()) {
             //  親が居ないのでただ回転情報を返す
             return rotation_;
@@ -145,7 +153,7 @@ public:
 
 private:
     Vec2 position_;
-    float rotation_;
+    Vec3 rotation_;
     Vec2 scale_;
     SharedPtr<Transform2D> parent_;
 };

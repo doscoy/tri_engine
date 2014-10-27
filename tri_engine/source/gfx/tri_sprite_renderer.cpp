@@ -311,7 +311,7 @@ void SpriteRenderer::margeSprites() {
 
         //  回転
         if (spr->isRotatedSprite()) {
-            float angle = toRadian(spr->transform()->globalRotation());
+            float angle = toRadian(spr->transform()->globalRotation().z_);
 
             float cos_angle = std::cos(angle);
             float sin_angle = std::sin(angle);

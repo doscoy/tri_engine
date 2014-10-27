@@ -59,8 +59,8 @@ public:
     }
     
     void update(t3::tick_t delta_time) {
-        float r = sprite_->transform()->rotation();
-        sprite_->transform()->rotation(r + 0.33f);
+        float r = sprite_->transform()->rotation().z_;
+        sprite_->transform()->rotation(t3::Vec3(0,0,r + 0.33f));
         
         pola_.updateInterpolation(delta_time);
         shader_->setConstFloat(0, moz_lv_);

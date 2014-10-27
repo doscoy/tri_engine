@@ -19,6 +19,7 @@
 		04391BF019C08D51006FFF38 /* akb48.wav in Resources */ = {isa = PBXBuildFile; fileRef = 04391BEF19C08D51006FFF38 /* akb48.wav */; };
 		046983AE19D6EC41001B71E9 /* mem_pool_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046983AC19D6EC41001B71E9 /* mem_pool_test.cpp */; };
 		047CEA5719DC605B0015B46F /* piko.png in Resources */ = {isa = PBXBuildFile; fileRef = 047CEA5619DC605B0015B46F /* piko.png */; };
+		049757EA19F3980E00D1AF3C /* distance_font.png in Resources */ = {isa = PBXBuildFile; fileRef = 049757E919F3980E00D1AF3C /* distance_font.png */; };
 		04D6B6A819E9049D002C8E77 /* t1.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6A019E9049D002C8E77 /* t1.png */; };
 		04D6B6A919E9049D002C8E77 /* t2.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6A119E9049D002C8E77 /* t2.png */; };
 		04D6B6AA19E9049D002C8E77 /* t3.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6A219E9049D002C8E77 /* t3.png */; };
@@ -93,6 +94,7 @@
 		046983AC19D6EC41001B71E9 /* mem_pool_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mem_pool_test.cpp; sourceTree = "<group>"; };
 		046983AD19D6EC41001B71E9 /* mem_pool_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mem_pool_test.hpp; sourceTree = "<group>"; };
 		047CEA5619DC605B0015B46F /* piko.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piko.png; sourceTree = "<group>"; };
+		049757E919F3980E00D1AF3C /* distance_font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = distance_font.png; sourceTree = "<group>"; };
 		04D6B6A019E9049D002C8E77 /* t1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t1.png; sourceTree = "<group>"; };
 		04D6B6A119E9049D002C8E77 /* t2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t2.png; sourceTree = "<group>"; };
 		04D6B6A219E9049D002C8E77 /* t3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t3.png; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		04391BDA19BC95EF006FFF38 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				049757E919F3980E00D1AF3C /* distance_font.png */,
 				041544D019EC25E900C14705 /* font_texture.png */,
 				04D6B6B019E9071D002C8E77 /* t9.png */,
 				04D6B6A019E9049D002C8E77 /* t1.png */,
@@ -502,6 +505,7 @@
 				3A24B4D819C9D3ED00E9CFFE /* test.zip in Resources */,
 				04391BE219BC95EF006FFF38 /* bunny.obj in Resources */,
 				04D6B6A819E9049D002C8E77 /* t1.png in Resources */,
+				049757EA19F3980E00D1AF3C /* distance_font.png in Resources */,
 				04D6B6AB19E9049D002C8E77 /* t4.png in Resources */,
 				04F1FE761985557F00C8D498 /* Main_iPhone.storyboard in Resources */,
 				041544D119EC25E900C14705 /* font_texture.png in Resources */,

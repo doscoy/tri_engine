@@ -26,8 +26,8 @@ public:
     }
     
     void update(t3::tick_t delta_time) {
-        float rot = sprite_->transform()->rotation();
-        sprite_->transform()->rotation(rot + 0.1f);
+        float rot = sprite_->transform()->rotation().z_;
+        sprite_->transform()->rotation(t3::Vec3(0,0,rot + 0.1f));
     }
 
     void debugRender() {

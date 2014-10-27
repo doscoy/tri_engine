@@ -45,9 +45,20 @@ public:
         transform_->position(pos);
         return *this;
     }
+
+    TextBox& center(float x, float y) {
+        transform_->position(x, y);
+        return *this;
+    }
     
     const Vec2& center() const {
         return transform_->position();
+    }
+    
+    TextBox& size(float w, float h) {
+        size_.x_ = w;
+        size_.y_ = h;
+        return *this;
     }
     
     TextBox& size(const Vec2& size) {
@@ -69,19 +80,41 @@ public:
         return *this;
     }
     
-    TextBox& fontsize(int size) {
+    TextBox& fontSize(int size) {
         font_size_ = size;
+        return *this;
+    }
+    
+    int fontSize() const {
+        return font_size_;
+    }
+    
+    TextBox& fontColor(const t3::Color& c) {
+        font_color_ = c;
+        return *this;
+    }
+    
+    TextBox& parentTransform(t3::Transform2DPtr t) {
+        transform_->setParentTransform(t);
+        return *this;
+    }
+    
+    TextBox& autoResize(bool b) {
+        auto_resize_ = b;
         return *this;
     }
     
     void setup() {
         adjustStringLayout();
+        updateColor();
     }
+
+    int textWidth() const;
     
 private:
     void adjustStringLayout();
-    int textWidth() const;
-
+    void updateColor();
+    float fontScaleRatio() const;
     
 private:
     SpriteLayer* layer_;
@@ -94,6 +127,8 @@ private:
     AlignX align_x_;
     AlignY align_y_;
     int font_size_;
+    bool auto_resize_;
+    t3::Color font_color_;
 };
 
 

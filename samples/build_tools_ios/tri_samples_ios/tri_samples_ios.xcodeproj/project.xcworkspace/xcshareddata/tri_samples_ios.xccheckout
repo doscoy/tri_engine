@@ -14,7 +14,7 @@
 		<string>https://github.com/doscoy/tri_engine.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>samples/build_tools_ios/tri_samples_ios/tri_samples_ios.xcodeproj/project.xcworkspace</string>
+	<string>samples/build_tools_ios/tri_samples_ios/tri_samples_ios.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>BF55E8098439A3D587FA5F22409CE7EC62A98B6F</key>

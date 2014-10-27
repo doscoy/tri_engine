@@ -13,7 +13,7 @@
     //  iOS device
     #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
         #warning "target ios"
-        #include "png.h"
+        #include "../../third_party_lib/ios/png.h"
         #include <OpenGLES/ES2/gl.h>
         #include <OpenGLES/ES2/glext.h>
         #include <OpenAL/al.h>

@@ -3,6 +3,7 @@
 #include "font_test.hpp"
 #include "font_texture.hpp"
 #include "../shader/tri_font.fsh"
+#include "../shader/tri_df_font.fsh"
 #include "../shader/tri_sprite.vsh"
 
 
@@ -12,17 +13,33 @@ class FontTestScene::SceneContext {
 public:
     SceneContext()
         : layer_()
-        , glyph_lsit_(
+        , df_layer_()
+        , glyph_list_(
             (t3::Glyph*)GLYPHS,
             GLYPH_NUM,
-            "font_texture.png"
+            "font_texture.png",
+            FONT_SIZE
         )
-        , box1_(&layer_, &glyph_lsit_)
-        , box2_(&layer_, &glyph_lsit_)
-        , box3_(&layer_, &glyph_lsit_)
-        , box4_(&layer_, &glyph_lsit_)
-        , box5_(&layer_, &glyph_lsit_)
-        , box6_(&layer_, &glyph_lsit_)
+        , df1_glyph_list_(
+            (t3::Glyph*)GLYPHS,
+            GLYPH_NUM,
+            "distance_font.png",
+            FONT_SIZE
+        )
+        , df2_glyph_list_(
+            (t3::Glyph*)GLYPHS,
+            GLYPH_NUM,
+            "distance_font.png",
+            FONT_SIZE
+        )
+        , box1_(&layer_, &glyph_list_)
+        , box2_(&layer_, &glyph_list_)
+        , box3_(&layer_, &glyph_list_)
+        , box4_(&layer_, &glyph_list_)
+        , box5_(&layer_, &glyph_list_)
+        , box6_(&layer_, &glyph_list_)
+        , box_df1_(&layer_, &glyph_list_)
+        , box_df2_(&df_layer_, &glyph_list_)
     {
     }
     
@@ -38,7 +55,6 @@ public:
         box1_.text(u8"left")
             .center(t3::Vec2(-155, 400))
             .size(t3::Vec2(300, 150))
-            .fontsize(32)
             .alignX(t3::TextBox::AlignX::LEFT)
             .alignY(t3::TextBox::AlignY::CENTER)
             .setup();
@@ -46,7 +62,6 @@ public:
         box2_.text(u8"center")
             .center(t3::Vec2(155, 400))
             .size(t3::Vec2(300, 150))
-            .fontsize(32)
             .alignX(t3::TextBox::AlignX::CENTER)
             .alignY(t3::TextBox::AlignY::CENTER)
             .setup();
@@ -73,12 +88,39 @@ public:
             .alignY(t3::TextBox::AlignY::BOTTOM)
             .setup();
 
-        box6_.text(u8"01234567890")
+    const char* box_text = u8"top";
+    const int check_size = 164;
+
+        box6_.text(box_text)
+            .center(t3::Vec2(0,-240))
+            .size(t3::Vec2(300, 100))
+            .fontSize(32)
+            .alignX(t3::TextBox::AlignX::CENTER)
+            .alignY(t3::TextBox::AlignY::CENTER)
+            .setup();
+        
+        
+        
+        auto df_shader =  std::make_shared<t3::Shader>(sprite_vsh, df_font_fsh);
+     //   layer_.renderer().useCustomShader(df_shader);
+        df_layer_.renderer().useCustomShader(df_shader);
+
+        box_df1_.text(box_text)
+            .center(t3::Vec2(0,200))
+            .size(t3::Vec2(300, 100))
+            .alignX(t3::TextBox::AlignX::CENTER)
+            .fontSize(96)
+            .alignY(t3::TextBox::AlignY::CENTER)
+            .setup();
+
+        box_df2_.text(box_text)
             .center(t3::Vec2(0,-200))
             .size(t3::Vec2(300, 100))
             .alignX(t3::TextBox::AlignX::CENTER)
-            .alignY(t3::TextBox::AlignY::TOP)
+            .fontSize(96)
+            .alignY(t3::TextBox::AlignY::CENTER)
             .setup();
+
     }
     
     void terminate() {
@@ -91,14 +133,13 @@ public:
         t3::drawRectangleCenterSize(box3_.center(), box3_.size(), t3::Color(255, 113, 45, 128));
         t3::drawRectangleCenterSize(box4_.center(), box4_.size(), t3::Color(255, 113, 145, 128));
         t3::drawRectangleCenterSize(box5_.center(), box5_.size(), t3::Color(255, 113, 145, 128));
-        t3::drawRectangleCenterSize(box6_.center(), box6_.size(), t3::Color(255, 113, 145, 128));
+        t3::drawRectangleCenterSize(box6_.center(), box6_.size(), t3::Color(205, 13, 195, 100));
+        t3::drawRectangleCenterSize(box_df1_.center(), box_df1_.size(), t3::Color(205, 13, 195, 100));
+        t3::drawRectangleCenterSize(box_df2_.center(), box_df2_.size(), t3::Color(205, 13, 195, 100));
     }
     
     void update(t3::tick_t delta_time) {
-        T3_PRINT_DISP(40, 50, t3::Color::white(), "aiueo");
-        T3_PRINT_DISP(40, 70, t3::Color::lime(), "aiueo");
-        T3_PRINT_DISP(40, 90, t3::Color::BLACK, "aiueo");
-        T3_PRINT_DISP(40, 110, t3::Color::orange(), "aiueo");
+    
     }
 
 
@@ -108,13 +149,18 @@ public:
 
 private:
     t3::SpriteLayer layer_;
-    t3::GlyphList glyph_lsit_;
+    t3::SpriteLayer df_layer_;
+    t3::GlyphList glyph_list_;
+    t3::GlyphList df1_glyph_list_;
+    t3::GlyphList df2_glyph_list_;
     t3::TextBox box1_;
     t3::TextBox box2_;
     t3::TextBox box3_;
     t3::TextBox box4_;
     t3::TextBox box5_;
     t3::TextBox box6_;
+    t3::TextBox box_df1_;
+    t3::TextBox box_df2_;
 };
 
 

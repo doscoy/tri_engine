@@ -2,7 +2,7 @@
 #include "base/tri_system_events.hpp"
 
 namespace t3 {
-inline namespace base {
+inline namespace events {
 
 
 const EventType PointingTriggeredEvent::TYPE("PointingTriggeredEvent");

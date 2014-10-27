@@ -27,11 +27,11 @@ TexturePtr TextureFactory::createFromData(
     glBindTexture(GL_TEXTURE_2D, tex->id());
     RenderSystem::setupTextureData(width, height, color_format, data);
     t3::RenderSystem::setTextureMinFilter(
-        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
+        t3::RenderSystem::TextureFilterType::TYPE_LINEAR
     );
     
     t3::RenderSystem::setTextureMagFilter(
-        t3::RenderSystem::TextureFilterType::TYPE_NEAREST
+        t3::RenderSystem::TextureFilterType::TYPE_LINEAR
     );
 
 

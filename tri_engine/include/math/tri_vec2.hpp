@@ -17,12 +17,13 @@
 namespace t3 {
 
 template <typename T>
-struct Vec2Template {
-    
+class Vec2Template {
+public:
     //  データ
     T x_;
     T y_;
     
+public:
     //  コンストラクタ
     Vec2Template()
     {}
@@ -38,10 +39,23 @@ struct Vec2Template {
         , y_( rhs.y_ )
     {
     }
-
-   
  
     ~Vec2Template(){}
+    
+
+public:
+    void addX(T v) {
+        x_ += v;
+    }
+
+    void addY(T v) {
+        y_ += v;
+    }
+    
+    void add(Vec2Template& rhs) {
+        addX(rhs.x_);
+        addY(rhs.y_);
+    }
     
     //  内積
     T dotProduct( const Vec2Template& rhs ){

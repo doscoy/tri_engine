@@ -26,7 +26,7 @@ const char* UNKNOWEN_FILE_NAME = "Unknown...";
 constexpr uint32_t HEAP_SIGNATURE   = t3::makeSignature('H','E','A','P');
 
 #if TRI_ALLOC_ENDMARKING
-constexpr uint32_t ALLOC_END_MARK   = 0x99999999;
+constexpr uint32_t ALLOC_END_MARK   = 0xFF;
 #endif
 
 #if TRI_DIRTY_MEMORY
@@ -73,6 +73,9 @@ inline void deallocateCore(void* addr) {
 
 Mutex Heap::mutex_;
 
+
+#define TRI_HEAP_ALLOC_HEADER_AREA_SIZE     48
+
 class AllocHeader {
 public:
     void setup(
@@ -83,7 +86,9 @@ public:
         const char* file,
         uint32_t line
     ) {
-
+        T3_ASSERT(next->isValid());
+        T3_ASSERT(prev->isValid());
+        
         signature_ = HEAP_SIGNATURE;
         size_ = size;
         heap_ = heap;
@@ -91,7 +96,6 @@ public:
         prev_ = prev;
         file_name_ = file;
         line_ = line;
-        
         alloc_no_ = frame_counter_.now();
 
     }
@@ -102,33 +106,62 @@ public:
 
 
     void changePreviousNext() {
+        T3_ASSERT(prev_->isValid());
+        T3_ASSERT(next_->isValid());
         prev_->next_ = next_;
     }
 
     void changeNextPrevious() {
+        T3_ASSERT(prev_->isValid());
+        T3_ASSERT(next_->isValid());
         next_->prev_ = prev_;
     }
 
     bool isValid() const {
+        //  nullへのvalid checkは行わない
+        if (!this) {
+            return true;
+        }
+
+        //  シグネチャチェック
         if (signature_ != HEAP_SIGNATURE) {
+            T3_TRACE("signature_ error\n");
             return false;
         }
-        else if (size_ == 0) {
+        //  サイズチェック
+        if (size_ == 0) {
+            T3_TRACE("size error\n");
             return false;
         }
+        
+        //  エンドマークチェック
+#if TRI_ALLOC_ENDMARKING
+        void* start_mem_block = reinterpret_cast<void*>(
+            (uintptr_t)this + TRI_HEAP_ALLOC_HEADER_AREA_SIZE
+        );
+        uint32_t* end_mark = reinterpret_cast<uint32_t*>((uintptr_t)start_mem_block + size_);
+        if (*end_mark != ALLOC_END_MARK) {
+            T3_TRACE("endmark error  0x%x\n", *end_mark);
+            return false;
+        }
+#endif // TRI_ALLOC_ENDMARKING
 
         return true;
     }
 
     AllocHeader* next() {
+        T3_ASSERT(next_->isValid());
         return next_;
     }
 
     void previous(AllocHeader* h) {
+        T3_ASSERT(prev_->isValid());
+        T3_ASSERT(h->isValid());
         prev_ = h;
     }
 
     AllocHeader* previous() {
+        T3_ASSERT(prev_->isValid());
         return prev_;
     }
 
@@ -166,7 +199,6 @@ public:
 
 //  アロケートヘッダを書き込む用に確保する追加エリアサイズ
 //  アライメントが綺麗になるように余裕をもって確保する
-#define TRI_HEAP_ALLOC_HEADER_AREA_SIZE     48
 static_assert(sizeof(AllocHeader) <= TRI_HEAP_ALLOC_HEADER_AREA_SIZE, "error");
 
 Heap::Heap()
@@ -221,6 +253,17 @@ void* Heap::allocate(
     T3_ASSERT(header->next_ == head_alloc_);
     T3_ASSERT(header->prev_ == nullptr);
 
+    void* start_mem_block = (int8_t*)header + TRI_HEAP_ALLOC_HEADER_AREA_SIZE;
+
+#if TRI_DIRTY_MEMORY
+    std::memset(start_mem_block, DIRTY_ALLOC_MARK, size + sizeof(uint32_t));
+#endif
+
+#if TRI_ALLOC_ENDMARKING
+    uint32_t* end_mark = reinterpret_cast<uint32_t*>((intptr_t)start_mem_block + size);
+    *end_mark = ALLOC_END_MARK;
+#endif // TRI_ALLOC_ENDMARKING
+
     if (head_alloc_) {
         //  headerを新しいhead_alloc_にする為
         //  既存のhead_alloc_の前はheaderになる
@@ -247,19 +290,10 @@ void* Heap::allocate(
 
     node_count_ += 1;
 
-    void* start_mem_block = (int8_t*)header + TRI_HEAP_ALLOC_HEADER_AREA_SIZE;
-
-#if TRI_ALLOC_ENDMARKING
-    uint32_t* end_mark = reinterpret_cast<uint32_t*>((intptr_t)start_mem_block + size);
-    *end_mark = ALLOC_END_MARK;
-#endif // TRI_ALLOC_ENDMARKING
-
-
-#if TRI_DIRTY_MEMORY
-    size_t alloc_size = size;
-    std::memset(start_mem_block, DIRTY_ALLOC_MARK, alloc_size);
-#endif
-
+    T3_ASSERT(head_alloc_->isValid());
+    T3_ASSERT(header->isValid());
+    T3_ASSERT(header->next_->isValid());
+    T3_ASSERT(header->prev_->isValid());
 
     return start_mem_block;
 }
@@ -291,8 +325,8 @@ void Heap::deallocate(
 
 void Heap::deallocate(
     AllocHeader* header
-)
-{
+) {
+    T3_ASSERT(head_alloc_->isValid());
 
     if (header->hasPrevious()) {
         //  前の要素がある場合は前のリストのつなぎ先を次に変える
@@ -321,6 +355,10 @@ void Heap::deallocate(
     allocated_.sub(header->size());
     node_count_ -= 1;
 
+    T3_ASSERT(header->isValid());
+    T3_ASSERT(header->next_->isValid());
+    T3_ASSERT(header->prev_->isValid());
+
 
 #if TRI_DIRTY_MEMORY
     size_t alloc_size = header->size() + TRI_HEAP_ALLOC_HEADER_AREA_SIZE;
@@ -329,6 +367,7 @@ void Heap::deallocate(
 #endif
 
     deallocateCore(header);
+    T3_ASSERT(head_alloc_->isValid());
 }
 
 void Heap::activate(const char *const name, int no) {
