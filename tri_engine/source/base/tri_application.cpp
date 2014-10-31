@@ -543,8 +543,8 @@ bool Application::isSuspend() const {
 
 
 void Application::beginRender() {
-    
-    RenderSystem::clearColor(Color(255,255,210));
+    auto& c = t3::Director::getClearColor();
+    RenderSystem::clearColor(c);
     RenderSystem::clearBuffer(true, true, false);
 }
 

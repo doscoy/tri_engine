@@ -129,8 +129,8 @@ public:
     
 public:
 
-    static const Color& clearColor();
-
+    static const Color& getClearColor();
+    static void setClearColor(const Color& c);
     static void addSystemTask(SharedPtr<Task> task);
     
     static const Input& input(const int player_no = 0);

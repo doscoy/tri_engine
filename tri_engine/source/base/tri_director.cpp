@@ -127,8 +127,12 @@ void Director::printDisplay(
 }
 
 
-const Color& Director::clearColor() {
+const Color& Director::getClearColor() {
     return instance().clear_colors_[instance().use_clear_color_index_];
+}
+
+void Director::setClearColor(const Color& c) {
+    instance().clear_colors_[0] = c;
 }
 
 
@@ -192,7 +196,6 @@ Director::~Director()
 
 
 void Director::initializeGameSystem() {
-    clearColor();
     
     dm_layers_.setFocusCallback(
         this,
