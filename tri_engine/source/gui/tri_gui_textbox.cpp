@@ -22,7 +22,7 @@ TextBox::TextBox(SpriteLayer* layer, const GlyphList* glyph_list)
     , char_glyphs_()
     , align_x_(AlignX::LEFT)
     , align_y_(AlignY::TOP)
-    , font_size_(16)
+    , font_size_(glyph_list_->defaultFontSize())
     , auto_resize_(false)
     , font_color_()
 {
@@ -72,7 +72,7 @@ TextBox& TextBox::text(
             glyph->metrics_.height_
         );
         spr->setupTextureCoordAndSize(left_top, size);
-        spr->transform()->setParentTransform(transform_);
+        spr->transform()->parent(transform_);
 
 
         char_sprites_.push_back(spr);

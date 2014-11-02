@@ -200,6 +200,72 @@ SpriteRenderer::BatchGroup* SpriteRenderer::getNewBatch() {
     return &batch_groups_[current_batch_idx_];
 }
 
+
+
+void spriteTransformCore(
+    Vec2& lt,
+    Vec2& lb,
+    Vec2& rt,
+    Vec2& rb,
+    const Transform2DPtr transform
+) {
+    //  スケーリング
+    const Vec2& scale = transform->scale();
+    lt *= scale;
+    lb *= scale;
+    rt *= scale;
+    rb *= scale;
+
+
+    //  回転
+    float rot_z = transform->rotation().z_;
+
+    if (!isZeroFloat(rot_z)) {
+        float angle = toRadian(rot_z);
+        float cos_angle = std::cos(angle);
+        float sin_angle = std::sin(angle);
+        {
+            float ltx = lt.x_;
+            float lty = lt.y_;
+            lt.x_ = (ltx * cos_angle) - (lty * sin_angle);
+            lt.y_ = (ltx * sin_angle) + (lty * cos_angle);
+        }
+    
+        {
+            float lbx = lb.x_;
+            float lby = lb.y_;
+            lb.x_ = (lbx * cos_angle) - (lby * sin_angle);
+            lb.y_ = (lbx * sin_angle) + (lby * cos_angle);
+        }
+        {
+            float rtx = rt.x_;
+            float rty = rt.y_;
+            rt.x_ = (rtx * cos_angle) - (rty * sin_angle);
+            rt.y_ = (rtx * sin_angle) + (rty * cos_angle);
+        }
+    
+        {
+            float rbx = rb.x_;
+            float rby = rb.y_;
+            rb.x_ = (rbx * cos_angle) - (rby * sin_angle);
+            rb.y_ = (rbx * sin_angle) + (rby * cos_angle);
+        }
+    }
+    
+    //  位置移動
+    const Vec2& pos = transform->position();
+
+    lt += pos;
+    lb += pos;
+    rt += pos;
+    rb += pos;
+    
+    if (transform->hasParent()) {
+        spriteTransformCore(lt, lb, rt, rb, transform->parent());
+    }
+}
+
+
 GLsync sync;
 void SpriteRenderer::margeSprites() {
 
@@ -300,58 +366,7 @@ void SpriteRenderer::margeSprites() {
         Vec2 rt = Vec2(size.x_ - pivot.x_, size.y_ - pivot.y_);
         Vec2 rb = Vec2(size.x_ - pivot.x_, 0 - pivot.y_);
         
-        //  スケーリング
-        if (spr->isScaledSprite()) {
-            const Vec2& scale = spr->transform()->globalScale();
-            lt *= scale;
-            lb *= scale;
-            rt *= scale;
-            rb *= scale;
-        }
-
-        //  回転
-        if (spr->isRotatedSprite()) {
-            float angle = toRadian(spr->transform()->globalRotation().z_);
-
-            float cos_angle = std::cos(angle);
-            float sin_angle = std::sin(angle);
-            {
-                float ltx = lt.x_;
-                float lty = lt.y_;
-                lt.x_ = (ltx * cos_angle) - (lty * sin_angle);
-                lt.y_ = (ltx * sin_angle) + (lty * cos_angle);
-            }
-        
-            {
-                float lbx = lb.x_;
-                float lby = lb.y_;
-                lb.x_ = (lbx * cos_angle) - (lby * sin_angle);
-                lb.y_ = (lbx * sin_angle) + (lby * cos_angle);
-            }
-            {
-                float rtx = rt.x_;
-                float rty = rt.y_;
-                rt.x_ = (rtx * cos_angle) - (rty * sin_angle);
-                rt.y_ = (rtx * sin_angle) + (rty * cos_angle);
-            }
-        
-            {
-                float rbx = rb.x_;
-                float rby = rb.y_;
-                rb.x_ = (rbx * cos_angle) - (rby * sin_angle);
-                rb.y_ = (rbx * sin_angle) + (rby * cos_angle);
-            }
-        }
-        
-        //  位置移動
-        if (spr->isTransratedSprite()) {
-            const Vec2& pos =spr->transform()->globalPosition();
-
-            lt += pos;
-            lb += pos;
-            rt += pos;
-            rb += pos;
-        }
+        spriteTransformCore(lt, lb, rt, rb, spr->transform());
         
         lt *= half;
         lb *= half;

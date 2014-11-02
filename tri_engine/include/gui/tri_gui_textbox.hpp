@@ -95,7 +95,7 @@ public:
     }
     
     TextBox& parentTransform(t3::Transform2DPtr t) {
-        transform_->setParentTransform(t);
+        transform_->parent(t);
         return *this;
     }
     

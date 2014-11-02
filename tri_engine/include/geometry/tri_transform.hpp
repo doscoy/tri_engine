@@ -96,7 +96,7 @@ public:
         scale_.y_ = s;
     }
 
-    void setParentTransform(
+    void parent(
         SharedPtr<Transform2D> p
     ) {
         parent_ = p;
@@ -104,6 +104,14 @@ public:
     
     bool hasParent() const {
         return parent_ != nullptr;
+    }
+    
+    SharedPtr<Transform2D> parent() {
+        return parent_;
+    }
+    
+    const SharedPtr<Transform2D> parent() const {
+        return parent_;
     }
 
     t3::Vec2 globalPosition() const {
@@ -114,6 +122,7 @@ public:
         
         //  親が居る
         //  親の情報と掛けあわせてグローバル座標を計算
+        
         
         //  親の回転の影響を受けた座標
         float parent_rotate = toRadian(parent_->globalRotation().z_);

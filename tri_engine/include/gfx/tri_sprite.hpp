@@ -64,10 +64,10 @@ public:
         return texture_;
     }
     
-    void setParentTransform(
+    void parent(
         const Transform2DPtr transform
     ) {
-        transform_->setParentTransform(transform);
+        transform_->parent(transform);
     }
 
     Transform2DPtr transform() {
@@ -238,40 +238,6 @@ public:
     
     int sortScore() const;
     
-
-    
-    bool isTransratedSprite() const {
-        Vec2 pos = transform()->globalPosition();
-        if (!isEqualFloat(pos.x_, 0.0f)) {
-            return true;
-        }
-        if (!isEqualFloat(pos.y_, 0.0f)) {
-            return true;
-        }
-        
-        return false;
-    }
-
-    bool isRotatedSprite() const {
-        float rot = transform()->globalRotation().z_;
-        if (isEqualFloat(rot, 0.0f)) {
-            return false;
-        }
-        return true;
-    }
-
-    bool isScaledSprite() const {
-        Vec2 scale = transform()->globalScale();
-        
-        if (!isEqualFloat(scale.x_, 1.0f)) {
-            return true;
-        }
-        if (!isEqualFloat(scale.y_, 1.0f)) {
-            return true;
-        }
-
-        return false;
-    }
 
 
     const Color& color() const {
