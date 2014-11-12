@@ -26,11 +26,7 @@ void run(
     Application* app
 );
 
-void createWindow(
-    const int width,
-    const int height,
-    const char* const title
-);
+
 void terminatePlatform();
 void beginUpdate();
 void endUpdate();

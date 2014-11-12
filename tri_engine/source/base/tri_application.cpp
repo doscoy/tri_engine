@@ -111,7 +111,6 @@ void initializeTriEngine(
     
     //  プラットフォームの初期化
     platform::initializePlatform();
-    platform::createWindow(width, height, title);
     
     //  ファイルシステムベースパス設定
     FilePath::setBaseDirectory(platform::getDeviceFilePath());

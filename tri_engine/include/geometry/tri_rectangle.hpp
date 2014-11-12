@@ -18,6 +18,8 @@ public:
         , max_(
             std::numeric_limits<float>::min(),
             std::numeric_limits<float>::min())
+        , size_()
+        , center_()
     {
         calcCenterFromMinMax();
     }
@@ -27,6 +29,8 @@ public:
         const Vec2& max
     )   : min_(min)
         , max_(max)
+        , size_()
+        , center_()
     {
         calcCenterFromMinMax();
     }
@@ -38,7 +42,17 @@ public:
     }
     
 public:
-
+    void reset() {
+        min_ = Vec2(
+            std::numeric_limits<float>::max(),
+            std::numeric_limits<float>::max());
+        max_ = Vec2(
+            std::numeric_limits<float>::min(),
+            std::numeric_limits<float>::min());
+        
+        calcCenterFromMinMax();
+    }
+    
     void setupFromCenterSize(
         const Vec2& center,
         const Vec2& size
@@ -55,7 +69,20 @@ public:
         size_ = size;
     }
     
-    
+    void setupFromPoint(const Vec2& p) {
+        if (min_.x_ > p.x_) {
+            min_.x_ = p.x_;
+        }
+        if (min_.y_ > p.y_) {
+            min_.y_ = p.y_;
+        }
+        if (max_.x_ < p.x_) {
+            max_.x_ = p.x_;
+        }
+        if (max_.y_ < p.y_) {
+            max_.y_ = p.y_;
+        }
+    }
 
 public:
     void min(const Vec2& min) {

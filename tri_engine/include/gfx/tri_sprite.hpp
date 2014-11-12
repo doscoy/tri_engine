@@ -6,6 +6,7 @@
 
 #include "math/tri_math_types.hpp"
 #include "geometry/tri_transform.hpp"
+#include "geometry/tri_rectangle.hpp"
 #include "util/tri_uncopyable.hpp"
 #include "tri_gfx_types.hpp"
 #include "tri_render_system.hpp"
@@ -84,7 +85,14 @@ public:
         transform_ = t;
     }
 
-
+    //  AABB取得
+    Rectangle& rectangle() {
+        return rectangle_;
+    }
+    
+    const Rectangle& rectangle() const {
+        return rectangle_;
+    }
     
     //  向きを設定
     void direction(
@@ -271,7 +279,6 @@ public:
     }
     void calcSortScore();
     
-private:
 
 private:
     TexturePtr texture_;
@@ -280,7 +287,7 @@ private:
     Vec2 pivot_;
 
     Color color_;
-    
+    Rectangle rectangle_;
     RenderSystem::BlendMode blend_mode_;
     
     uint8_t priority_;

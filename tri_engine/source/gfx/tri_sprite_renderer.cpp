@@ -367,6 +367,12 @@ void SpriteRenderer::margeSprites() {
         Vec2 rb = Vec2(size.x_ - pivot.x_, 0 - pivot.y_);
         
         spriteTransformCore(lt, lb, rt, rb, spr->transform());
+
+        spr->rectangle().reset();
+        spr->rectangle().setupFromPoint(lt);
+        spr->rectangle().setupFromPoint(lb);
+        spr->rectangle().setupFromPoint(rt);
+        spr->rectangle().setupFromPoint(rb);
         
         lt *= half;
         lb *= half;

@@ -36,16 +36,10 @@ void run(int argc, char** argv, t3::Application* app) {
 
 
 void initializePlatform() {
-
+    platformAccelerometerInit();
 }
 
-void createWindow(
-    const int width,
-    const int height,
-    const char* const title
-) {
 
-}
 
 void terminatePlatform() {
 
