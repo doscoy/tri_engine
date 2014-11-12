@@ -297,7 +297,7 @@ void Director::updateInput(
         
         //  加速度センサー更新
         platform::AccelerometerData acc_data;
-        platform::platformAcceleromator(pad_idx, &acc_data);
+        platform::platformAccelerometer(pad_idx, &acc_data);
         input.updateAccelermeter(
             acc_data,
             delta_time

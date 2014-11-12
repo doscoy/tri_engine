@@ -5,6 +5,8 @@
 
 #include "tri_pad.hpp"
 #include "tri_pointing.hpp"
+#include "platform/platform_accelerometer.hpp"
+
 
 namespace t3 {
 inline namespace kernel {

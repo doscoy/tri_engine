@@ -10,7 +10,6 @@
 
 t3::platform::GamePadData pad_data_[4];
 t3::platform::PointingData point_data_[4];
-t3::platform::AccelerometerData acc_data_[4];
 
 
 
@@ -77,12 +76,6 @@ void platformPointingData(
     *data = point_data_[no];
 }
 
-void platformAcceleromator(
-    int no,
-    AccelerometerData* data
-) {
-    *data = acc_data_[no];
-}
 
 bool isExitRequest() {
     return false;

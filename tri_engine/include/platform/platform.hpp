@@ -4,6 +4,7 @@
 
 #include "platform_sdk.hpp"
 #include "platform_types.hpp"
+#include "platform_accelerometer.hpp"
 #include "kernel/io/tri_filepath.hpp"
 
 namespace t3 {
@@ -43,11 +44,6 @@ void platformPointingData(
     PointingData* data
 );
 
-
-void platformAcceleromator(
-    int no,
-    AccelerometerData* data
-);
 
 bool isExitRequest();
 

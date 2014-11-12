@@ -33,9 +33,7 @@ float screen_y_ = 0;
 
 extern t3::Application* app_;
 extern t3::platform::PointingData point_data_[4];
-extern t3::platform::AccelerometerData acc_data_[4];
 
-CMMotionManager* motion_manager_ = nullptr;
 
 
 @interface ViewController () {
@@ -71,7 +69,7 @@ CMMotionManager* motion_manager_ = nullptr;
     
     [EAGLContext setCurrentContext:self.context];
     
-    
+/*
     //  加速度センサー
     motion_manager_ = [[CMMotionManager alloc] init];
     
@@ -83,7 +81,7 @@ CMMotionManager* motion_manager_ = nullptr;
         [motion_manager_ startAccelerometerUpdates];
     
     }
-    
+*/
     
     // 各機種で内部の座標系を統一する
     screen_scale_ = [UIScreen mainScreen].scale;
@@ -102,10 +100,11 @@ CMMotionManager* motion_manager_ = nullptr;
 
 - (void)dealloc
 {
+/*
     if (motion_manager_.accelerometerActive) {
         [motion_manager_ stopAccelerometerUpdates];
     }
-    
+*/
     app_->terminateApplication();
     
     
@@ -172,9 +171,10 @@ CMMotionManager* motion_manager_ = nullptr;
     point_data_[0].hit_ = false;
 }
 
-
+/*
 - (void)updateAccele
 {
+
     CMAccelerometerData* newest_accel = motion_manager_.accelerometerData;
 
     acc_data_[0].x_ = newest_accel.acceleration.x;
@@ -183,14 +183,12 @@ CMMotionManager* motion_manager_ = nullptr;
 
 }
 
-
+*/
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
 - (void)update
 {
-    [self updateAccele];
-
     app_->updateApplication();
 }
 
