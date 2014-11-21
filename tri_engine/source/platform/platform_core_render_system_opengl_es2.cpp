@@ -893,6 +893,7 @@ void RenderSystem::mapBuffer(RenderSystem::BufferType type, intptr_t offset, siz
     int gl_type = bufferTypeToGL(type);
     
 
+    T3_GL_ASSERT();
     void* buf_data = glMapBufferRangeEXT(
         gl_type,
         offset,
@@ -901,6 +902,7 @@ void RenderSystem::mapBuffer(RenderSystem::BufferType type, intptr_t offset, siz
     );
 
 
+    T3_GL_ASSERT();
 
     memcpy(buf_data, data, size);
     glFlushMappedBufferRangeEXT(gl_type, offset, size);

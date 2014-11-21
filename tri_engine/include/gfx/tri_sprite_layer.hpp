@@ -23,7 +23,7 @@ public:
     SpriteLayer();
     SpriteLayer(
         const String& name,
-        const int priority
+        const int priority = PRIORITY_APP_DEFAULT
     );
     virtual ~SpriteLayer();
 

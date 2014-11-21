@@ -109,6 +109,14 @@ public:
         updateColor();
     }
 
+    TextBox& opacity(int opacity) {
+        font_color_.alpha(opacity);
+        return *this;
+    }
+    
+    int opacity() const {
+        return font_color_.alpha();
+    }
     int textWidth() const;
     
 private:

@@ -171,8 +171,13 @@ float TextBox::fontScaleRatio() const {
 void TextBox::updateColor() {
     for (auto& spr : char_sprites_) {
         spr->color(font_color_);
+        spr->opacity(font_color_.alpha());
     }
 }
+
+
+
+
 
 }   // namespace t3
 

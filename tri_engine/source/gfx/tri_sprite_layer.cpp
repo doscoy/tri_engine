@@ -49,13 +49,14 @@ SpritePtr SpriteLayer::createSprite(const String& tex_name) {
 void SpriteLayer::updateLayer(
     tick_t delta_time
 ) {
+    //  無効になった要素の掃除
+    sprites_.remove_if([](WeakSprite& wk){return wk.expired();});
+
     if (sprites_.empty()) {
         //  スプライト無ければ処理スキップ
         return;
     }
 
-    //  無効になった要素の掃除
-    sprites_.remove_if([](WeakSprite& wk){return wk.expired();});
 
 
     //  レンダリング用にスプライトをマージする

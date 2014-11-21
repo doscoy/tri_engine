@@ -458,7 +458,9 @@ void SpriteRenderer::margeSprites() {
     indices.pop_back();
     
 
-///
+    T3_ASSERT(!vertices.empty());
+    T3_ASSERT(!indices.empty());
+    
             //  頂点バッファ更新
             current_batch->vertexBuffer().bind();
             current_batch->indexBuffer().bind();
