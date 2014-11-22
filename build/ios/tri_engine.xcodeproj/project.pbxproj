@@ -15,6 +15,7 @@
 		04AA28D119EEDDEC003E76FC /* tri_gui_textbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04AA28D019EEDDEC003E76FC /* tri_gui_textbox.cpp */; };
 		04AA28D419EEE3E0003E76FC /* tri_string_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04AA28D319EEE3E0003E76FC /* tri_string_util.cpp */; };
 		04AA28D919F03444003E76FC /* tri_utf8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04AA28D819F03444003E76FC /* tri_utf8.cpp */; };
+		04BF39CC1A20DA2C003F1B1B /* TriViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04BF39CB1A20DA2C003F1B1B /* TriViewController.mm */; };
 		3A1C1B2919AC3065005A69FA /* tri_mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */; };
 		3A24B4D019C16C7900E9CFFE /* tri_zipfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B4CF19C16C7900E9CFFE /* tri_zipfile.cpp */; };
 		3AA7EEA319A101CE00CEB23A /* tri_audio_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3719A0F60600CEB23A /* tri_audio_handle.cpp */; };
@@ -132,6 +133,9 @@
 		04AA28D619F02910003E76FC /* tri_font_glyph.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_font_glyph.hpp; sourceTree = "<group>"; };
 		04AA28D719F03358003E76FC /* tri_utf8.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_utf8.hpp; sourceTree = "<group>"; };
 		04AA28D819F03444003E76FC /* tri_utf8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_utf8.cpp; sourceTree = "<group>"; };
+		04BF39CB1A20DA2C003F1B1B /* TriViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TriViewController.mm; sourceTree = "<group>"; };
+		04BF39CE1A20DA86003F1B1B /* TriViewController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TriViewController.hpp; sourceTree = "<group>"; };
+		04BF39CF1A20DA9E003F1B1B /* platform_ios.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = platform_ios.hpp; sourceTree = "<group>"; };
 		3A0AB7B019CC90B90050E0DF /* tri_std.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_std.hpp; sourceTree = "<group>"; };
 		3A1C1B2519AC2BD0005A69FA /* tri_mutex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tri_mutex.hpp; path = process/tri_mutex.hpp; sourceTree = "<group>"; };
 		3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_mutex.cpp; sourceTree = "<group>"; };
@@ -386,6 +390,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04BF39CD1A20DA86003F1B1B /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				04BF39CE1A20DA86003F1B1B /* TriViewController.hpp */,
+				04BF39CF1A20DA9E003F1B1B /* platform_ios.hpp */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
 		3A1C1B2619AC2BD8005A69FA /* process */ = {
 			isa = PBXGroup;
 			children = (
@@ -616,6 +629,7 @@
 			children = (
 				3AA7ED8919A0F60600CEB23A /* platform_ios.mm */,
 				3AE27A101A1347160039DC73 /* platform_accelerometer.mm */,
+				04BF39CB1A20DA2C003F1B1B /* TriViewController.mm */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -869,6 +883,7 @@
 		3AA7EE6E19A0F61700CEB23A /* platform */ = {
 			isa = PBXGroup;
 			children = (
+				04BF39CD1A20DA86003F1B1B /* ios */,
 				3AA7EE6F19A0F61700CEB23A /* platform.hpp */,
 				3AA7EE7119A0F61700CEB23A /* platform_sdk.hpp */,
 				3AA7EE7219A0F61700CEB23A /* platform_types.hpp */,
@@ -1072,6 +1087,7 @@
 				3AA7EEA919A101DD00CEB23A /* tri_debug_font_data.cpp in Sources */,
 				3AA7EEAA19A101DD00CEB23A /* tri_debug_log_buffer.cpp in Sources */,
 				3AA7EEAB19A101DD00CEB23A /* tri_debug_log_layer.cpp in Sources */,
+				04BF39CC1A20DA2C003F1B1B /* TriViewController.mm in Sources */,
 				3AA7EEAC19A101DD00CEB23A /* tri_debug_string_buffer.cpp in Sources */,
 				3AA7EEAD19A101DD00CEB23A /* tri_debug_string_layer.cpp in Sources */,
 				04AA28D919F03444003E76FC /* tri_utf8.cpp in Sources */,

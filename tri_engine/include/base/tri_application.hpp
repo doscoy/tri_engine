@@ -72,6 +72,14 @@ private:
 };
 
 
+void setApplication(Application& app);
+void initializeApplication();
+void terminateApplication();
+void updateApplication();
+void renderApplication();
+
+
+
 }   // namespace base
 }   // namespace t3
 

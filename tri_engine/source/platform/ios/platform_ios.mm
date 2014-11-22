@@ -13,9 +13,6 @@ t3::platform::PointingData point_data_[4];
 
 
 
-extern int iosMain(int argc, char** argv, t3::Application* app);
-
-
 namespace  {
 
 
@@ -28,11 +25,6 @@ namespace  {
 
 namespace t3 {
 inline namespace platform {
-
-
-void run(int argc, char** argv, t3::Application* app) {
-    iosMain(argc, argv, app);
-}
 
 
 void initializePlatform() {

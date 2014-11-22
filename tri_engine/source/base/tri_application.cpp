@@ -558,6 +558,33 @@ void Application::gotoRootScene() {
 }
 
 
+//-----------
+Application* app_ = nullptr;
+void setApplication(Application& app) {
+    app_ = &app;
+}
+
+void initializeApplication() {
+    app_->initializeApplication();
+}
+
+
+void terminateApplication() {
+    app_->terminateApplication();
+}
+
+
+void updateApplication() {
+    app_->updateApplication();
+}
+
+
+void renderApplication() {
+    app_->renderApplication();
+}
+
+
+
 
 
 
