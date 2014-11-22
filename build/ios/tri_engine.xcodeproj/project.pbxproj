@@ -136,6 +136,7 @@
 		04BF39CB1A20DA2C003F1B1B /* TriViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TriViewController.mm; sourceTree = "<group>"; };
 		04BF39CE1A20DA86003F1B1B /* TriViewController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TriViewController.hpp; sourceTree = "<group>"; };
 		04BF39CF1A20DA9E003F1B1B /* platform_ios.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = platform_ios.hpp; sourceTree = "<group>"; };
+		04BF39D41A210F1A003F1B1B /* tri_task_generator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_task_generator.hpp; sourceTree = "<group>"; };
 		3A0AB7B019CC90B90050E0DF /* tri_std.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_std.hpp; sourceTree = "<group>"; };
 		3A1C1B2519AC2BD0005A69FA /* tri_mutex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tri_mutex.hpp; path = process/tri_mutex.hpp; sourceTree = "<group>"; };
 		3A1C1B2819AC3065005A69FA /* tri_mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_mutex.cpp; sourceTree = "<group>"; };
@@ -711,6 +712,7 @@
 				3AA7EDFF19A0F61700CEB23A /* tri_director.hpp */,
 				3AA7EE0119A0F61700CEB23A /* tri_event_manager.hpp */,
 				3AA7EE0019A0F61700CEB23A /* tri_event.hpp */,
+				04AA28D619F02910003E76FC /* tri_font_glyph.hpp */,
 				3AA7EE0219A0F61700CEB23A /* tri_pause_level.hpp */,
 				3AA7EE0419A0F61700CEB23A /* tri_resource_manager.hpp */,
 				3AA7EE0319A0F61700CEB23A /* tri_resource.hpp */,
@@ -718,10 +720,10 @@
 				3AA7EE0619A0F61700CEB23A /* tri_scene.hpp */,
 				3A0AB7B019CC90B90050E0DF /* tri_std.hpp */,
 				3AA7EE0719A0F61700CEB23A /* tri_system_events.hpp */,
+				04BF39D41A210F1A003F1B1B /* tri_task_generator.hpp */,
 				3AA7EE0919A0F61700CEB23A /* tri_task_manager.hpp */,
 				3AA7EE0819A0F61700CEB23A /* tri_task.hpp */,
 				3AA7EE0A19A0F61700CEB23A /* tri_types.hpp */,
-				04AA28D619F02910003E76FC /* tri_font_glyph.hpp */,
 			);
 			path = base;
 			sourceTree = "<group>";
