@@ -50,6 +50,8 @@ private:
 };
 
 
+using CircleColliderPtr = std::shared_ptr<CircleCollider>;
+
 }   // namaespace geometry
 }   // namespace t3
 

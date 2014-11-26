@@ -28,6 +28,7 @@ public:
         : Task()
         , timer_(0.0f)
         , interval_(0.0f)
+        , interval_add_(0.0f)
     {
     }
 
@@ -36,6 +37,7 @@ public:
         timer_ += dt;
         if (timer_ > interval_) {
             timer_ = 0.0f;
+            interval_ += interval_add_;
             auto task = std::make_shared<T>();
             t3::SceneManager::addSceneTask(task);
         }
@@ -44,11 +46,16 @@ public:
     void interval(float interval) {
         interval_ = interval;
     }
+    
+    void intervalAdd(float add) {
+        interval_add_ = add;
+    }
 
 
 public:
     float timer_;
     float interval_;
+    float interval_add_;
 };
 
 
