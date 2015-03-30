@@ -72,6 +72,7 @@ void TaskManager::updateTask(const tick_t delta_time) {
 
 void TaskManager::printTask() const {
     
+#if DEBUG
     TaskList::const_iterator itr = taskes_.begin();
     TaskList::const_iterator end = taskes_.end();
     
@@ -83,6 +84,7 @@ void TaskManager::printTask() const {
         T3_PRINT_DISP(show_x * 120, show_y * 15, "%s", t->name().c_str());
         task_num += 1;
     }
+#endif // DEBUG
 }
 
 void TaskManager::killAllTask() {

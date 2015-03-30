@@ -343,7 +343,7 @@ bool ZipFile::readFile(
     stream.next_in = (Bytef*)pcData;
     stream.avail_in = (uInt)comp_size;
     stream.next_out = (Bytef*)buffer;
-    stream.avail_out = uncomp_size;
+    stream.avail_out = static_cast<unsigned int>(uncomp_size);
     stream.zalloc = (alloc_func)0;
     stream.zfree = (free_func)0;
 

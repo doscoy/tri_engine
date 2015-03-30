@@ -56,13 +56,15 @@ private:
     bool isSuspend() const;
 
     void initializeWorkBar();
-
+    void debugPrinting();
 public:
     void gotoRootScene();
     
     
 private:
+#if DEBUG
     ScopedPtr<ApplicationDebugMenu> system_menu_;
+#endif
     SceneGenerator* root_scene_generator_;
     uint32_t last_scene_change_frame_;
     uint32_t memory_leak_check_filter_;

@@ -243,7 +243,7 @@ void* Heap::allocate(
     
     //  ヘッダ情報書き込み
     header->setup(
-        size,
+        static_cast<uint32_t>(size),
         this,
         head_alloc_, // next
         nullptr,     // prev

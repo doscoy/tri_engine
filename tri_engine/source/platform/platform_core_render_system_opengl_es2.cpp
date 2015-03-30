@@ -261,7 +261,7 @@ void RenderSystem::setUniformValue(
     size_t size,
     float* val
 ) {
-    glUniform1fv(location, size, val);
+    glUniform1fv(location, static_cast<GLint>(size), val);
     T3_GL_ASSERT();
 }
 

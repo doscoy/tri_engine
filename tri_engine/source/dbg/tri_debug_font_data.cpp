@@ -4032,3 +4032,9 @@ const struct {
   "\0\0\0\0\0\0",
 };
 
+
+//  dbg_font_の未使用警告消す為
+inline void eraseDbgFont() {
+(void)dbg_font_;
+}
+

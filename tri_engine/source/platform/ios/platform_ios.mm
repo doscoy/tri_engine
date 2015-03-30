@@ -124,7 +124,7 @@ void loadInteger(
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSInteger nsval = [defaults integerForKey:nskey];
 
-    *val = nsval;
+    *val = static_cast<int>(nsval);
 }
 
 

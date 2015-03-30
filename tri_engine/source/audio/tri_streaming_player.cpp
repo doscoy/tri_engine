@@ -56,7 +56,12 @@ void StreamingPlayer::initialize(
     //  wav 一部読み込み
     wav_.open(path);
     
-    alSourceQueueBuffers(source_id_, buffer_id_.size(), &buffer_id_[0]);
+    alSourceQueueBuffers(
+        source_id_,
+        static_cast<ALsizei>(buffer_id_.size()),
+        &buffer_id_[0]
+    );
+
     readMore();
 }
 

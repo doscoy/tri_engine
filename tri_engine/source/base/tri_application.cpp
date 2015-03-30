@@ -21,6 +21,7 @@ namespace {
 #define LIMIT_AVG_SUM   3600
 t3::Vector<float> render_avg;
 
+#if DEBUG
 bool show_fps_ = true;
 bool show_heap_ = false;
 bool show_heap_bar_ = false;
@@ -28,6 +29,8 @@ bool show_mem_pool_ = false;
 bool show_work_bar_ = false;
 bool show_work_time_ = false;
 bool show_task_ = false;
+
+#endif // DEBUG
 t3::Workbar cpu_bar_;
 
 t3::Stopwatch system_cost_timer_;
@@ -65,7 +68,7 @@ bool isSuspending() {
 
 }   // unname namespace
 
-
+#if DEBUG
 class ApplicationDebugMenu {
 public:
     ApplicationDebugMenu(t3::Application* app)
@@ -98,7 +101,7 @@ private:
     t3::DebugMenuItem<bool> dm_show_heap_;
     t3::DebugMenuItem<bool> dm_show_task_;
 };
-
+#endif // DEBUG
 
 namespace t3 {
 
@@ -149,7 +152,9 @@ inline namespace base {
 
 Application::Application()
     : root_scene_generator_(nullptr)
+#if DEBUG
     , system_menu_(nullptr)
+#endif // DEBUG
     , last_scene_change_frame_(0)
     , fps_timer_()
     , fps_stack_{0,0,0,0,0,0,0,0,0,0}
@@ -197,6 +202,7 @@ void Application::initializeApplication()
     //  オーディオシステムの初期化
     t3::AudioSystem::initializeAudioSystem();
 
+#if DEBUG
     //  システムデバッグメニュー登録
     system_menu_.reset(T3_SYS_NEW ApplicationDebugMenu(this));
     
@@ -204,6 +210,7 @@ void Application::initializeApplication()
     system_menu_->getSystemDebugMenuRoot().attachSelf(
         debug_menu_root.getMenuRoot()
     );
+#endif // DEBUG
     
     //  ワークバー初期化
     initializeWorkBar();
@@ -237,6 +244,7 @@ void Application::updateApplication()
 
 
     //  FPS表示
+#if DEBUG
     if (show_fps_) {
         //  直近数フレームの平均値を表示
         
@@ -273,6 +281,7 @@ void Application::updateApplication()
         );
         t3::RenderSystem::resetDrawCallCount();
     }
+#endif // DEBUG
     
     
     
@@ -316,8 +325,8 @@ void Application::updateApplication()
 
 }
 
-void Application::renderApplication()
-{
+void Application::renderApplication() {
+
     Director& gs = Director::instance();
     DebugMenu& dm = DebugMenu::instance();
 
@@ -332,15 +341,6 @@ void Application::renderApplication()
     
     
 
-    //  CPU負荷可視化
-    if (show_work_bar_){
-        cpu_bar_.setParam(0, system_cost_timer_.interval());
-        cpu_bar_.setParam(1, app_cost_timer_.interval());
-        cpu_bar_.setParam(2, rendering_cost_timer_.interval());
-        cpu_bar_.setParam(3, other_cost_timer_.interval());
-        cpu_bar_.setParam(4, debug_cost_timer_.interval());
-        
-    }
     
     if (render_avg.size() < LIMIT_AVG_SUM) {
         render_avg.push_back(rendering_cost_timer_.interval());
@@ -348,21 +348,6 @@ void Application::renderApplication()
     
 
 
-
-    //  ワークバー描画
-    if (show_work_bar_) {
-        cpu_bar_.draw();
-    }
-    
-    
-    
-    //  メモリバー描画
-/*  renderMemoryPoolにmutex付けないと落ちる可能性があります
-    if (show_heap_bar_) {
-        MemoryPool* pool = heapMemoryPool();
-        renderMemoryPool(*pool);
-    }
-*/
     SceneManager& sm = SceneManager::instance();
     sm.debugRender();
 
@@ -386,6 +371,64 @@ void Application::renderApplication()
         last_other_cost_ = other_cost_timer_.interval();
     }
     
+#if DEBUG
+    debugPrinting();
+#endif // DEBUG
+
+
+    //  最後にシーンチェンジ処理
+    sm.directScene();
+    
+    //  シーン切り替わり判定
+    if (sm.isSceneChenged()) {
+        //  シーンが切り替わったのでデバッグメニューを閉じる
+        dm.closeMenu();
+        
+        uint32_t now_frame = frame_counter_.now();
+        HeapManager::dumpAllocateInfo(1, now_frame);
+        
+        //  シーンが切り替わったタイミングを保存
+        last_scene_change_frame_ = now_frame;
+    }
+
+    other_cost_timer_.end();
+
+}
+
+void Application::debugPrinting() {
+
+#if DEBUG
+    Director& gs = Director::instance();
+
+
+
+
+   //  CPU負荷可視化
+    if (show_work_bar_){
+        cpu_bar_.setParam(0, system_cost_timer_.interval());
+        cpu_bar_.setParam(1, app_cost_timer_.interval());
+        cpu_bar_.setParam(2, rendering_cost_timer_.interval());
+        cpu_bar_.setParam(3, other_cost_timer_.interval());
+        cpu_bar_.setParam(4, debug_cost_timer_.interval());
+        
+    }
+ 
+    //  ワークバー描画
+    if (show_work_bar_) {
+        cpu_bar_.draw();
+    }
+    
+    
+    
+    //  メモリバー描画
+//  renderMemoryPoolにmutex付けないと落ちる可能性があります
+    if (show_heap_bar_) {
+        MemoryPool* pool = heapMemoryPool();
+        renderMemoryPool(*pool);
+    }
+
+
+
     if (show_work_time_) {
         int cost_pos_x = 5;
         int cost_pos_y = 880;
@@ -462,28 +505,9 @@ void Application::renderApplication()
         T3_PRINT_DISP(0, 28, "POOL F(%7u)  U(%7u) P(%7u)", free_pool, use_pool, peak_use_size);
 
     }
-
-
-
-    //  最後にシーンチェンジ処理
-    sm.directScene();
-    
-    //  シーン切り替わり判定
-    if (sm.isSceneChenged()) {
-        //  シーンが切り替わったのでデバッグメニューを閉じる
-        dm.closeMenu();
-        
-        uint32_t now_frame = frame_counter_.now();
-        HeapManager::dumpAllocateInfo(1, now_frame);
-        
-        //  シーンが切り替わったタイミングを保存
-        last_scene_change_frame_ = now_frame;
-    }
-
-    other_cost_timer_.end();
+#endif
 
 }
-
 
 void Application::terminateApplication() {
     //  ゲームの終了処理

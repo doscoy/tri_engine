@@ -152,24 +152,26 @@ Mesh::Mesh(
 
 
     vb_.bind();
+    int vertex_size = static_cast<int>(sizeof(VertexP3N) * vertices.size());
     RenderSystem::setupBufferData(
         RenderSystem::BufferType::TYPE_VERTEX,
-        sizeof(VertexP3N) * vertices.size(),
+        vertex_size,
         vertices.data(),
         RenderSystem::BufferUsage::STATIC_DRAW
     );
 
     ib_.bind();
+    int index_data_size = static_cast<int>(sizeof(uint32_t) * indices.size());
     RenderSystem::setupBufferData(
         RenderSystem::BufferType::TYPE_INDEX,
-        sizeof(uint32_t) * indices.size(),
+        index_data_size,
         indices.data(),
         RenderSystem::BufferUsage::STATIC_DRAW
     );
     
 
-    vertex_count_ = vertices.size();
-    index_count_ = indices.size();
+    vertex_count_ = static_cast<uint32_t>(vertices.size());
+    index_count_ = static_cast<uint32_t>(indices.size());
 }
 
 
