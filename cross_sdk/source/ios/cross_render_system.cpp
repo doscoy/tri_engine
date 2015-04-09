@@ -1,15 +1,33 @@
-#include "gfx/tri_render_system.hpp"
-#include "platform/platform_sdk.hpp"
-#include "gfx/tri_texture.hpp"
+#include "../include/cross_render_system.hpp"
+#include <iostream>
+
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
 
 
 
-#if defined(PLATFORM_MAC)
-extern GLFWwindow* window_;
+int render_call_count_ = 0;
+
+
+
+namespace  {
+
+int viewport_x_ = -99;
+int viewport_y_ = -99;
+int viewport_w_ = -99;
+int viewport_h_ = -99;
+
+};
+
+
+inline void countDrawCall() {
+#if COUNT_RENDER_CALL
+    render_call_count_ += 1;
 #endif
+}
 
 
-#define T3_GL_ASSERT()        checkGLError()
+#define CROSS_GL_ASSERT()        checkGLError()
 
 namespace {
 
@@ -17,8 +35,8 @@ namespace {
 GLsync fence_ = 0;
 
 inline void checkGLError() {
-    int err = glGetError();
-    T3_ASSERT_MSG(err == GL_NO_ERROR, "err = %d", err);
+
+    
 }
 
 
@@ -30,43 +48,42 @@ inline void setGLState(GLenum e, bool f) {
     else {
         glDisable(e);
     }
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
 
-inline int bufferTypeToGL(t3::RenderSystem::BufferType type) {
+inline int bufferTypeToGL(cross::RenderSystem::BufferType type) {
     int gl = GL_ARRAY_BUFFER;
-    if (type == t3::RenderSystem::BufferType::TYPE_INDEX) {
+    if (type == cross::RenderSystem::BufferType::TYPE_INDEX) {
         gl = GL_ELEMENT_ARRAY_BUFFER;
     }
     return gl;
 }
 
-inline int colorFormatToGL(t3::RenderSystem::ColorFormat format) {
+inline int colorFormatToGL(cross::RenderSystem::ColorFormat format) {
 
 
     int glcolor_format = GL_RGB;
     
     switch (format) {
-        case t3::RenderSystem::ColorFormat::RGBA:
+        case cross::RenderSystem::ColorFormat::RGBA:
             glcolor_format = GL_RGBA;
             break;
             
-        case t3::RenderSystem::ColorFormat::RGB:
+        case cross::RenderSystem::ColorFormat::RGB:
             glcolor_format = GL_RGB;
             break;
             
-        case t3::RenderSystem::ColorFormat::GRAY:
+        case cross::RenderSystem::ColorFormat::GRAY:
             glcolor_format = GL_ALPHA;
             break;
 
-        case t3::RenderSystem::ColorFormat::GRAYA:
+        case cross::RenderSystem::ColorFormat::GRAYA:
             glcolor_format = GL_LUMINANCE_ALPHA;
             break;
             
         default:
-            T3_PANIC("unknown format");
             break;
     }
     
@@ -76,8 +93,8 @@ inline int colorFormatToGL(t3::RenderSystem::ColorFormat format) {
 }   // unname namespace
 
 
-namespace t3 {
-inline namespace gfx {
+namespace cross {
+
 
 
 void RenderSystem::createFrameBuffer(RenderSystem::FrameBufferID* id) {
@@ -169,21 +186,21 @@ void RenderSystem::attachShader(
     int shader_handle
 ) {
     glAttachShader(program_handle, shader_handle);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::linkShader(
     RenderSystem::ShaderProgramID program_handle
 ) {
     glLinkProgram(program_handle);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setShader(
     RenderSystem::ShaderProgramID shader
 ) {
     glUseProgram(shader);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::bindAttributeLocation(
@@ -192,7 +209,7 @@ void RenderSystem::bindAttributeLocation(
     const char* const name
 ) {
     glBindAttribLocation(handle, location, name);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
@@ -226,7 +243,7 @@ void RenderSystem::setUniformValue(
     float z
 ) {
     glUniform3f(location, x, y, z);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setUniformValue(
@@ -237,7 +254,7 @@ void RenderSystem::setUniformValue(
     float w
 ) {
     glUniform4f(location, x, y, z, w);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setUniformValue(
@@ -245,7 +262,7 @@ void RenderSystem::setUniformValue(
     float val
 ) {
     glUniform1f(location, val);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setUniformValue(
@@ -253,7 +270,7 @@ void RenderSystem::setUniformValue(
     int val
 ) {
     glUniform1i(location, val);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setUniformValue(
@@ -262,26 +279,26 @@ void RenderSystem::setUniformValue(
     float* val
 ) {
     glUniform1fv(location, static_cast<GLint>(size), val);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setUniformMatrix(
     RenderSystem::ShaderVariableLocation location,
-    t3::Mtx44 mtx
+    const float* mtx
 ) {
     glUniformMatrix4fv(
         location,
         1,
         0,
-        mtx.pointer()
+        mtx
     );
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::initializeRenderSystem() {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     
-    t3::RenderSystem::setCulling(true);
+    cross::RenderSystem::setCulling(true);
     
     
 }
@@ -303,7 +320,7 @@ void RenderSystem::setDepthWrite(
     bool enable
 ) {
     glDepthMask(enable);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
@@ -325,7 +342,7 @@ void RenderSystem::clearBuffer(
     }
     
     glClear(clear_flag);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setCullingMode(
@@ -346,7 +363,7 @@ void RenderSystem::setCullingMode(
     }
     
     glCullFace(cull_flag);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
@@ -354,7 +371,7 @@ void RenderSystem::setClearDepthValue(
     const float value
 ) {
     glClearDepthf(value);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
@@ -371,7 +388,7 @@ void RenderSystem::clearColor(
         b,
         a
     );
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
@@ -396,7 +413,7 @@ void RenderSystem::setDepthTestMode(
     }
     
     glDepthFunc(depth_func);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
@@ -474,7 +491,7 @@ void RenderSystem::setBlendFunctionType(
     int s = blendFuncTypeToGLEnum(sfactor);
     int d = blendFuncTypeToGLEnum(dfactor);
     glBlendFunc(s, d);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setViewportC(
@@ -484,7 +501,7 @@ void RenderSystem::setViewportC(
     const int h
 ) {
     glViewport(x, y, w, h);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 
 }
 
@@ -517,7 +534,7 @@ void RenderSystem::setTextureMagFilter(
     else {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     }
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setTextureMinFilter(
@@ -529,7 +546,7 @@ void RenderSystem::setTextureMinFilter(
     else {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     }
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setTextureWrapS(
@@ -541,7 +558,7 @@ void RenderSystem::setTextureWrapS(
     else {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     }
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setTextureWrapT(
@@ -553,7 +570,7 @@ void RenderSystem::setTextureWrapT(
     else {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     }
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
@@ -581,7 +598,7 @@ void RenderSystem::drawElementsC(
             break;
             
         default:
-            T3_PANIC("error");
+            break;
     }
     
     //  モード判定
@@ -597,12 +614,12 @@ void RenderSystem::drawElementsC(
             
             
         default:
-            T3_PANIC("error");
+//            CROSS_PANIC("error");
             break;
     }
     
     glDrawElements(draw_mode, count, index_type, 0);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::drawArrayC(
@@ -623,12 +640,12 @@ void RenderSystem::drawArrayC(
             
             
         default:
-            T3_PANIC("error");
+//            CROSS_PANIC("error");
             break;
     }
     
     glDrawArrays(draw_mode, first, count);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
@@ -672,7 +689,7 @@ void RenderSystem::setupTextureData(
         data
     );
     
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
@@ -685,18 +702,18 @@ void RenderSystem::bindBuffer(
     int target = bufferTypeToGL(target_type);
     glBindBuffer(target, buffer_id);
     
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
 void RenderSystem::createBuffer(uint32_t* buffer) {
     glGenBuffers(1, buffer);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::deleteBufferC(uint32_t* buffer) {
     glDeleteBuffers(1, buffer);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setupBufferData(
@@ -716,7 +733,7 @@ void RenderSystem::setupBufferData(
     }
     
     glBufferData(target, size, data, gl_usage);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setupBufferSubData(
@@ -728,7 +745,7 @@ void RenderSystem::setupBufferSubData(
     int target = bufferTypeToGL(type);
     
     glBufferSubData(target, offset, size, data);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setActiveTextureUnit(
@@ -736,21 +753,21 @@ void RenderSystem::setActiveTextureUnit(
 ) {
     unit += GL_TEXTURE0;
     glActiveTexture(unit);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setEnableVertexAttribute(
     int slot
 ) {
     glEnableVertexAttribArray(slot);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setDisableVertexAttribute(
     int slot
 ) {
     glDisableVertexAttribArray(slot);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setAttributeValue(
@@ -763,7 +780,7 @@ void RenderSystem::setAttributeValue(
     glVertexAttrib4f(
         slot, a, b, c, d
     );
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
@@ -789,7 +806,7 @@ void RenderSystem::attachRenderBuffer(
         GL_RENDERBUFFER,
         id
     );
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 
 }
 
@@ -816,7 +833,7 @@ void RenderSystem::attachFrameBufferTexture(
         id,
         0
     );
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
    
 }
 
@@ -845,13 +862,13 @@ void RenderSystem::setupRenderBufferStorage(
         width,
         height
     );
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 RenderSystem::BufferID RenderSystem::createVertexArrayBuffer() {
     RenderSystem::BufferID id;
     glGenVertexArraysOES(1, &id);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
     return id;
 }
 
@@ -859,18 +876,18 @@ RenderSystem::BufferID RenderSystem::createVertexArrayBuffer() {
 
 void RenderSystem::bindVertexArrayBuffer(const RenderSystem::BufferID id) {
     glBindVertexArrayOES(id);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
 void RenderSystem::deleteVertexArrayBuffer(const RenderSystem::BufferID id) {
     glDeleteVertexArraysOES(1, &id);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::fenceDraw() {
     fence_ = glFenceSyncAPPLE(GL_SYNC_GPU_COMMANDS_COMPLETE_APPLE, 0);
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::fenceDrawWaiting() {
@@ -883,7 +900,7 @@ void RenderSystem::fenceDrawWaiting() {
         GL_TIMEOUT_IGNORED_APPLE
     );
 
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
@@ -893,7 +910,7 @@ void RenderSystem::mapBuffer(RenderSystem::BufferType type, intptr_t offset, siz
     int gl_type = bufferTypeToGL(type);
     
 
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
     void* buf_data = glMapBufferRangeEXT(
         gl_type,
         offset,
@@ -902,20 +919,158 @@ void RenderSystem::mapBuffer(RenderSystem::BufferType type, intptr_t offset, siz
     );
 
 
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 
     memcpy(buf_data, data, size);
     glFlushMappedBufferRangeEXT(gl_type, offset, size);
 
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::unmapBuffer(RenderSystem::BufferType type) {
     glUnmapBufferOES(bufferTypeToGL(type));
-    T3_GL_ASSERT();
+    CROSS_GL_ASSERT();
 }
 
 
-}   // namespace gfx
-}   // namespace t3
+
+
+void RenderSystem::setBlendMode(
+    RenderSystem::BlendMode mode
+) {
+    if (mode == BlendMode::NONE) {
+        setBlend(false);
+    } else if (mode == BlendMode::ADD) {
+        setBlend(true);
+        setBlendFunctionType(
+            BlendFunctionType::TYPE_SRC_ALPHA,
+            BlendFunctionType::TYPE_ONE
+        );
+    } else {
+        setBlend(true);
+        setBlendFunctionType(
+            BlendFunctionType::TYPE_SRC_ALPHA,
+            BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
+        );
+    }
+    
+}
+
+
+int RenderSystem::getDrawCallCount() {
+    return render_call_count_;
+}
+
+void RenderSystem::resetDrawCallCount() {
+    render_call_count_ = 0;
+}
+
+
+
+
+void RenderSystem::setViewport(
+    const int x,
+    const int y,
+    const int w,
+    const int h
+) {
+#if BEFORE_JUDGE_GL
+    static bool initialized = false;
+    static int last_x;
+    static int last_y;
+    static int last_w;
+    static int last_h;
+
+    if (initialized && viewport_x_ == x) {
+        if (viewport_y_ == y) {
+            if (viewport_w_ == w) {
+                if (viewport_h_ == h) {
+                    return;
+                }
+            }
+        }
+    }
+    initialized = true;
+#endif
+    viewport_x_ = x;
+    viewport_y_ = y;
+    viewport_w_ = w;
+    viewport_h_ = h;
+
+    setViewportC(x, y, w, h);
+}
+
+
+void RenderSystem::getViewport(
+    int* x,
+    int* y,
+    int* w,
+    int* h
+) {
+    *x = viewport_x_;
+    *y = viewport_y_;
+    *w = viewport_w_;
+    *h = viewport_h_;
+}
+
+void RenderSystem::setTextureWrap(
+    RenderSystem::TextureWrapType type
+) {
+    setTextureWrapS(type);
+    setTextureWrapT(type);
+}
+
+
+void RenderSystem::drawElements(
+    RenderSystem::DrawMode mode,
+    int count,
+    size_t indices_type_size
+) {
+    countDrawCall();
+    drawElementsC(mode, count, indices_type_size);
+}
+
+void RenderSystem::drawArray(
+    RenderSystem::DrawMode mode,
+    int first,
+    int count
+) {
+    countDrawCall();
+    drawArrayC(mode, first, count);
+}
+
+
+
+
+void RenderSystem::deleteBuffer(uint32_t* buffer) {
+
+    deleteBufferC(buffer);
+    *buffer = 0;
+}
+
+int RenderSystem::createProgram() {
+    return glCreateProgram();
+}
+
+
+RenderSystem::TextureID RenderSystem::createTexture() {
+    TextureID tex;
+    glGenTextures(1, &tex);
+    return tex;
+}
+
+void RenderSystem::deleteTexture(
+    RenderSystem::TextureID* id
+) {
+    glDeleteTextures(1, id);
+}
+
+
+bool RenderSystem::isError() {
+    return glGetError() != GL_NO_ERROR;
+}
+
+}   // namespace cross
+
+
 

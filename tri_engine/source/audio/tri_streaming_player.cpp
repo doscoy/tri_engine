@@ -1,7 +1,7 @@
 
 #include "tri_streaming_player.hpp"
 #include "kernel/memory/tri_memory.hpp"
-#include "platform/platform_sdk.hpp"
+
 #include "dbg/tri_trace.hpp"
 
 
@@ -19,18 +19,18 @@ StreamingPlayer::StreamingPlayer()
     , buffer_id_()
     , loop_(false)
 {
-    alGenSources(1, &source_id_);
+    source_id_ = cross::AudioSystem::createSource();
 }
 
 
 StreamingPlayer::~StreamingPlayer() {
     stop();
     wav_.close();
-    AudioSystem::deleteSource(source_id_);
+    cross::AudioSystem::deleteSource(source_id_);
     
     
     for (int i = 0; i < BUFFER_SIZE; ++i) {
-        AudioSystem::deleteBuffer(buffer_id_[i]);
+        cross::AudioSystem::deleteBuffer(buffer_id_[i]);
         T3_FREE(buffer_[i].storage_);
     }
 
@@ -56,9 +56,9 @@ void StreamingPlayer::initialize(
     //  wav 一部読み込み
     wav_.open(path);
     
-    alSourceQueueBuffers(
+    cross::AudioSystem::queueBuffers(
         source_id_,
-        static_cast<ALsizei>(buffer_id_.size()),
+        buffer_id_.size(),
         &buffer_id_[0]
     );
 
@@ -89,34 +89,33 @@ void StreamingPlayer::readMore() {
     switchReadingBuffer();
 }
 
-AudioSystem::BufferID StreamingPlayer::createBuffer() {
-    AudioSystem::BufferID id = AudioSystem::createBuffer();
+cross::AudioSystem::BufferID StreamingPlayer::createBuffer() {
+    cross::AudioSystem::BufferID id = cross::AudioSystem::createBuffer();
     processBuffer(id);
     return id;
 }
 
 void StreamingPlayer::poling() {
 
-    int processed;
-    alGetSourcei(source_id_, AL_BUFFERS_PROCESSED, &processed);
+    int processed = cross::AudioSystem::getSourceProcessed(source_id_);
 
     if (processed) {
-        AudioSystem::BufferID buffer;
+        cross::AudioSystem::BufferID buffer;
 
         // 処理を終えたキューをデキュー
-        alSourceUnqueueBuffers(source_id_, 1, &buffer);
+        cross::AudioSystem::unqueueBuffers(source_id_, 1, &buffer);
 
         // バッファを埋める
         processBuffer(buffer);
         
         // エンキュー
-        alSourceQueueBuffers(source_id_, 1, &buffer);
+        cross::AudioSystem::queueBuffers(source_id_, 1, &buffer);
     }
 
 }
 
 void StreamingPlayer::processBuffer(
-    const AudioSystem::BufferID id
+    const cross::AudioSystem::BufferID id
 ) {
     readMore();
     switchCurrentBuffer();
@@ -126,9 +125,9 @@ void StreamingPlayer::processBuffer(
         return;
     }
     
-    AudioSystem::setBufferData(
+    cross::AudioSystem::setBufferData(
         id,
-        AudioSystem::format(wav_.channel(), wav_.bitPerSample()),
+        cross::AudioSystem::format(wav_.channel(), wav_.bitPerSample()),
         currentBufferStorage(),
         currentBufferSize(),
         wav_.samplingRate()

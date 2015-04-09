@@ -1,6 +1,6 @@
 #include "dbg/tri_debug_log_layer.hpp"
 #include "gfx/tri_color.hpp"
-#include "gfx/tri_render_system.hpp"
+
 #include "dbg/tri_print.hpp"
 #include "base/tri_director.hpp"
 #include "dbg/tri_draw_primitive.hpp"
@@ -85,8 +85,8 @@ void DebugLogLayer::drawLayer()
     Director& gs = t3::Director::instance();
     
     //  文字列が見やすいように背景に半透明の板を描画
-    t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_ALWAYS);
-    t3::RenderSystem::setBlend(true);
+    cross::RenderSystem::setDepthTestMode(cross::RenderSystem::DepthTestMode::MODE_ALWAYS);
+    cross::RenderSystem::setBlend(true);
 
     Color bg_color = Color(0, 0, 0, 80);
     drawRectangleMinSize(

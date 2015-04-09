@@ -1,10 +1,10 @@
 
 #include "dbg/tri_draw_primitive.hpp"
-#include "platform/platform_sdk.hpp"
-#include "platform/platform.hpp"
+
+
 #include "geometry/tri_geometry.hpp"
 #include "base/tri_director.hpp"
-#include "gfx/tri_render_system.hpp"
+
 #include "gfx/tri_shader.hpp"
 
 #include "../shader/tri_simple2d.vsh"
@@ -89,7 +89,7 @@ void drawRectangleViewport(
 ) {
 
     //  状態設定
-    t3::RenderSystem::resetBufferBind();
+    cross::RenderSystem::resetBufferBind();
 
     //  頂点配列を作る
     float x0 = left_top.x_;
@@ -106,8 +106,8 @@ void drawRectangleViewport(
     };
 
 
-    RenderSystem::setBlend(true);
-    RenderSystem::setCulling(false);
+    cross::RenderSystem::setBlend(true);
+    cross::RenderSystem::setCulling(false);
 
 
 
@@ -117,13 +117,13 @@ void drawRectangleViewport(
     
     //  描画
     // シェーダで描画
-    RenderSystem::ShaderVariableLocation position_slot = simple2d_.getAttributeLocation("in_position");
-    t3::RenderSystem::setEnableVertexAttribute(position_slot);
+    cross::RenderSystem::ShaderVariableLocation position_slot = simple2d_.getAttributeLocation("in_position");
+    cross::RenderSystem::setEnableVertexAttribute(position_slot);
     
-    t3::RenderSystem::setVertexAttributePointer(
+    cross::RenderSystem::setVertexAttributePointer(
         position_slot,
         2,
-        GL_FLOAT,
+        cross::RenderSystem::FLOAT,
         false,
         0,
         varray
@@ -138,7 +138,7 @@ void drawRectangleViewport(
         color.alphaFloat()
     );
     
-    RenderSystem::drawArray(RenderSystem::DrawMode::MODE_TRIANGLE_STRIP, 0, 4);
+    cross::RenderSystem::drawArray(cross::RenderSystem::DrawMode::MODE_TRIANGLE_STRIP, 0, 4);
 }
 
 void drawSegment(

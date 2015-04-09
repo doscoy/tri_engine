@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
 //
 
-#ifndef tri_engine_platform_accelerometer_hpp
-#define tri_engine_platform_accelerometer_hpp
+#ifndef CROSS_ACCELEROMETER_HPP_INCLUDED
+#define CROSS_ACCELEROMETER_HPP_INCLUDED
 
 
 
-namespace t3 {
-inline namespace platform {
+namespace cross {
+
 
 
 
@@ -30,19 +30,18 @@ struct AccelerometerData {
 };
 
 
-void platformAccelerometerInit();
+void accelerometerInit();
 
-void platformAccelerometerEnable(bool flag);
+void accelerometerEnable(bool flag);
 
-void platformAccelerometerInterval(float interval);
+void accelerometerInterval(float interval);
 
-void platformAccelerometer(
+void accelerometerRead(
     int no,
     AccelerometerData* data
 );
 
 
-}
-}
+}   //  namespace cross
 
-#endif
+#endif  // CROSS_ACCELEROMETER_HPP_INCLUDED

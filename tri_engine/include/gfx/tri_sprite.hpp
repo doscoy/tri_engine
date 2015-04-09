@@ -9,7 +9,8 @@
 #include "geometry/tri_rectangle.hpp"
 #include "util/tri_uncopyable.hpp"
 #include "tri_gfx_types.hpp"
-#include "tri_render_system.hpp"
+
+
 #include "dbg/tri_assert.hpp"
 #include "tri_texture.hpp"
 #include "base/tri_std.hpp"
@@ -269,11 +270,11 @@ public:
         color_.alpha(opa);
     }
 
-    RenderSystem::BlendMode blendMode() const {
+    cross::RenderSystem::BlendMode blendMode() const {
         return blend_mode_;
     }
     
-    void blendMode(const RenderSystem::BlendMode b) {
+    void blendMode(const cross::RenderSystem::BlendMode b) {
         blend_mode_ = b;
         calcSortScore();
     }
@@ -288,7 +289,7 @@ private:
 
     Color color_;
     Rectangle rectangle_;
-    RenderSystem::BlendMode blend_mode_;
+    cross::RenderSystem::BlendMode blend_mode_;
     
     uint8_t priority_;
     texture_coord_t texture_coord_;

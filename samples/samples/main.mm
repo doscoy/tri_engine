@@ -9,6 +9,9 @@
 #include "tri_engine.hpp"
 #include "samples.hpp"
 
+#import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+
 
 namespace t3 {
 
@@ -54,10 +57,14 @@ int main(int argc, char * argv[])
 //    app.setRootScene(t3::Scene::sceneGenerator<AudioTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
-//    app.setRootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
-    app.setRootScene(t3::Scene::sceneGenerator<FontTestScene>());
+    app.setRootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
+//    app.setRootScene(t3::Scene::sceneGenerator<FontTestScene>());
 
-    t3::platform::run(argc, argv, &app);
+
+    t3::setApplication(app);
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
 
     return 0;
 }

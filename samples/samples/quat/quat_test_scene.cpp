@@ -75,17 +75,17 @@ private:
     
     void layerRender(t3::DrawLayer* const) {
 
-        t3::RenderSystem::setCulling(false);
-        t3::RenderSystem::setCullingMode(t3::RenderSystem::CullingMode::MODE_BACK);
-        t3::RenderSystem::setBlend(false);
-        t3::RenderSystem::setDepthTest(true);
-        t3::RenderSystem::setDepthWrite(true);
-        t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
+        cross::RenderSystem::setCulling(false);
+        cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
+        cross::RenderSystem::setBlend(false);
+        cross::RenderSystem::setDepthTest(true);
+        cross::RenderSystem::setDepthWrite(true);
+        cross::RenderSystem::setDepthTestMode(cross::RenderSystem::DepthTestMode::MODE_LESS);
 
         auto& d = t3::Director::instance();
         auto& screen = d.virtualScreenSize();
     
-        t3::RenderSystem::setViewport(0, 0, screen.x_, screen.y_);
+        cross::RenderSystem::setViewport(0, 0, screen.x_, screen.y_);
         t3::Mtx44 projection;
         projection.perspective(60, screen.x_, screen.y_, 0.1f, 100.0f);
     

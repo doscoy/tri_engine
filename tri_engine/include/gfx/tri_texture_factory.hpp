@@ -5,7 +5,7 @@
 #define TRI_TEXTURE_FACTORY_HPP_INCLUDED
 
 #include "base/tri_std.hpp"
-#include "tri_render_system.hpp"
+
 #include "kernel/io/tri_filepath.hpp"
 #include "tri_texture.hpp"
 
@@ -29,7 +29,7 @@ public:
         String name,
         const uint32_t width,
         const uint32_t height,
-        const RenderSystem::ColorFormat color_format,
+        const cross::RenderSystem::ColorFormat color_format,
         const void* data
     );
     

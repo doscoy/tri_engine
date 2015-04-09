@@ -46,7 +46,7 @@ void CinemaLayer::updateLayer(tick_t delta_time) {
 
 void CinemaLayer::drawLayer() {
     
-    RenderSystem::resetBufferBind();
+    cross::RenderSystem::resetBufferBind();
     
     if (!texture_) {
         return;
@@ -54,7 +54,7 @@ void CinemaLayer::drawLayer() {
     
     T3_ASSERT(shader_);
     
-    RenderSystem::setBlendMode(RenderSystem::BlendMode::NONE);
+    cross::RenderSystem::setBlendMode(cross::RenderSystem::BlendMode::NONE);
 
     // シェーダで描画
     bool use_result = shader_->use();
@@ -86,31 +86,32 @@ void CinemaLayer::drawLayer() {
         u1, v0,
         u1, v1
     };
-    t3::RenderSystem::setEnableVertexAttribute(position_slot);
-    t3::RenderSystem::setEnableVertexAttribute(uv_slot);
+    cross::RenderSystem::setEnableVertexAttribute(position_slot);
+    cross::RenderSystem::setEnableVertexAttribute(uv_slot);
 
     //頂点配列を有効化
     shader_->setUniform("sampler", 0);
 
     texture_->bind();
-    t3::RenderSystem::setVertexAttributePointer(
+    cross::RenderSystem::setVertexAttributePointer(
         position_slot,
         2,
-        GL_FLOAT,
+        cross::RenderSystem::FLOAT,
         false,
         0,
         varray
     );
-    t3::RenderSystem::setVertexAttributePointer(
+    cross::RenderSystem::setVertexAttributePointer(
         uv_slot,
         2,
-        GL_FLOAT,
+        cross::RenderSystem::FLOAT,
         false,
         0,
         vuv
     );
     
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    
+    cross::RenderSystem::drawArray(cross::RenderSystem::DrawMode::MODE_TRIANGLE_STRIP, 0, 4);
 
 }
 

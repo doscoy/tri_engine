@@ -4,7 +4,7 @@
 #include "base/tri_director.hpp"
 #include "gfx/tri_texture.hpp"
 #include "math/tri_matrix.hpp"
-#include "gfx/tri_render_system.hpp"
+
 #include <algorithm>
 
 
@@ -77,7 +77,7 @@ SpriteRenderer::SpriteRenderer()
         shader_->setAttributePointer(
             SHADER_ATTR_POSITION,
             2,
-            GL_FLOAT,
+            cross::RenderSystem::FLOAT,
             false,
             sizeof(VertexP2CT),
             (void*)offsetof(VertexP2CT, x_)
@@ -86,7 +86,7 @@ SpriteRenderer::SpriteRenderer()
         shader_->setAttributePointer(
             SHADER_ATTR_COLOR,
             4,
-            GL_UNSIGNED_BYTE,
+            cross::RenderSystem::BYTE,
             true,
             sizeof(VertexP2CT),
             (void*)offsetof(VertexP2CT, r_)
@@ -95,7 +95,7 @@ SpriteRenderer::SpriteRenderer()
         shader_->setAttributePointer(
             SHADER_ATTR_UV,
             2,
-            GL_FLOAT,
+            cross::RenderSystem::FLOAT,
             false,
             sizeof(VertexP2CT),
             (void*)offsetof(VertexP2CT, tu_)
@@ -105,23 +105,23 @@ SpriteRenderer::SpriteRenderer()
         shader_->setEnableAttributeArray(SHADER_ATTR_COLOR, true);
         shader_->setEnableAttributeArray(SHADER_ATTR_UV, true);
 
-        RenderSystem::setupBufferData(
-            t3::RenderSystem::BufferType::TYPE_VERTEX,
+        cross::RenderSystem::setupBufferData(
+            cross::RenderSystem::BufferType::TYPE_VERTEX,
             sizeof(VertexP2CT) * 4096 * 4,
             nullptr,
-            t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+            cross::RenderSystem::BufferUsage::DYNAMIC_DRAW
         );
         
         group.indexBuffer().bind();
-        RenderSystem::setupBufferData(
-            t3::RenderSystem::BufferType::TYPE_INDEX,
+        cross::RenderSystem::setupBufferData(
+            cross::RenderSystem::BufferType::TYPE_INDEX,
             sizeof(uint32_t) * 4096 * 4 * 2,
             nullptr,
-            t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+            cross::RenderSystem::BufferUsage::DYNAMIC_DRAW
         );
 
     }
-    RenderSystem::bindVertexArrayBuffer(0);
+    cross::RenderSystem::bindVertexArrayBuffer(0);
 #endif
 }
     
@@ -178,17 +178,19 @@ void SpriteRenderer::beginRender() {
     shader_->setUniform("sampler", 0);
     
 
-    RenderSystem::setActiveTextureUnit(RenderSystem::TextureUnit::UNIT0);
+    cross::RenderSystem::setActiveTextureUnit(
+        cross::RenderSystem::TextureUnit::UNIT0
+    );
 
-    t3::RenderSystem::setBlend(true);
-    t3::RenderSystem::setCulling(false);
-    t3::RenderSystem::setDepthTest(false);
-    t3::RenderSystem::setDepthWrite(false);
+    cross::RenderSystem::setBlend(true);
+    cross::RenderSystem::setCulling(false);
+    cross::RenderSystem::setDepthTest(false);
+    cross::RenderSystem::setDepthWrite(false);
 
 
-    t3::RenderSystem::setBlendFunctionType(
-        t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
-        t3::RenderSystem::BlendFunctionType::TYPE_ONE
+    cross::RenderSystem::setBlendFunctionType(
+        cross::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
+        cross::RenderSystem::BlendFunctionType::TYPE_ONE
     );
 
 }
@@ -266,7 +268,7 @@ void spriteTransformCore(
 }
 
 
-GLsync sync;
+//GLsync sync;
 void SpriteRenderer::margeSprites() {
 
     //  スプライトのソート
@@ -314,27 +316,27 @@ void SpriteRenderer::margeSprites() {
             size_t ibo_size = static_cast<int>(indices.size() * sizeof(uint32_t));
 #ifndef USE_GLMAP
             RenderSystem::setupBufferData(
-                t3::RenderSystem::BufferType::TYPE_VERTEX,
+                cross::RenderSystem::BufferType::TYPE_VERTEX,
                 vbo_size,
                 vertices.data(),
-                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+                cross::RenderSystem::BufferUsage::DYNAMIC_DRAW
             );
 
             //  インデックスバッファ更新
             RenderSystem::setupBufferData(
-                t3::RenderSystem::BufferType::TYPE_INDEX,
+                cross::RenderSystem::BufferType::TYPE_INDEX,
                 ibo_size,
                 indices.data(),
-                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+                cross::RenderSystem::BufferUsage::DYNAMIC_DRAW
             );
 
 
 #else
-            RenderSystem::fenceDrawWaiting();
-            RenderSystem::mapBuffer(RenderSystem::BufferType::TYPE_VERTEX, offset, vbo_size, vertices.data());
-            RenderSystem::unmapBuffer(RenderSystem::BufferType::TYPE_VERTEX);
-            RenderSystem::mapBuffer(RenderSystem::BufferType::TYPE_INDEX, offset, ibo_size, indices.data());
-            RenderSystem::unmapBuffer(RenderSystem::BufferType::TYPE_INDEX);
+            cross::RenderSystem::fenceDrawWaiting();
+            cross::RenderSystem::mapBuffer(cross::RenderSystem::BufferType::TYPE_VERTEX, offset, vbo_size, vertices.data());
+            cross::RenderSystem::unmapBuffer(cross::RenderSystem::BufferType::TYPE_VERTEX);
+            cross::RenderSystem::mapBuffer(cross::RenderSystem::BufferType::TYPE_INDEX, offset, ibo_size, indices.data());
+            cross::RenderSystem::unmapBuffer(cross::RenderSystem::BufferType::TYPE_INDEX);
 #endif
     
     
@@ -469,27 +471,27 @@ void SpriteRenderer::margeSprites() {
             size_t ibo_size = static_cast<int>(indices.size() * sizeof(uint32_t));
 #ifndef USE_GLMAP
             RenderSystem::setupBufferData(
-                t3::RenderSystem::BufferType::TYPE_VERTEX,
+                cross::RenderSystem::BufferType::TYPE_VERTEX,
                 vbo_size,
                 vertices.data(),
-                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+                cross::RenderSystem::BufferUsage::DYNAMIC_DRAW
             );
 
             //  インデックスバッファ更新
             RenderSystem::setupBufferData(
-                t3::RenderSystem::BufferType::TYPE_INDEX,
+                cross::RenderSystem::BufferType::TYPE_INDEX,
                 ibo_size,
                 indices.data(),
-                t3::RenderSystem::BufferUsage::DYNAMIC_DRAW
+                cross::RenderSystem::BufferUsage::DYNAMIC_DRAW
             );
 
 
 #else
-            RenderSystem::fenceDrawWaiting();
-            RenderSystem::mapBuffer(RenderSystem::BufferType::TYPE_VERTEX, offset, vbo_size, vertices.data());
-            RenderSystem::unmapBuffer(RenderSystem::BufferType::TYPE_VERTEX);
-            RenderSystem::mapBuffer(RenderSystem::BufferType::TYPE_INDEX, offset, ibo_size, indices.data());
-            RenderSystem::unmapBuffer(RenderSystem::BufferType::TYPE_INDEX);
+            cross::RenderSystem::fenceDrawWaiting();
+            cross::RenderSystem::mapBuffer(cross::RenderSystem::BufferType::TYPE_VERTEX, offset, vbo_size, vertices.data());
+            cross::RenderSystem::unmapBuffer(cross::RenderSystem::BufferType::TYPE_VERTEX);
+            cross::RenderSystem::mapBuffer(cross::RenderSystem::BufferType::TYPE_INDEX, offset, ibo_size, indices.data());
+            cross::RenderSystem::unmapBuffer(cross::RenderSystem::BufferType::TYPE_INDEX);
 #endif
 ///
     
@@ -563,18 +565,18 @@ void SpriteRenderer::renderBatch(BatchGroup* batch) {
     batch->indexBuffer().bind();
 
     //  ブレンド設定
-    RenderSystem::BlendMode bmode = batch->blendMode();
-    RenderSystem::setBlendMode(bmode);
+    cross::RenderSystem::BlendMode bmode = batch->blendMode();
+    cross::RenderSystem::setBlendMode(bmode);
 
 
     // 描画
-    RenderSystem::drawElements(
-        RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
+    cross::RenderSystem::drawElements(
+        cross::RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
         batch->drawCount(),
         sizeof(uint32_t)
     );
 #ifdef USE_VAO
-    RenderSystem::bindVertexArrayBuffer(0);
+    cross::RenderSystem::bindVertexArrayBuffer(0);
 #endif
 }
 
@@ -590,7 +592,7 @@ void SpriteRenderer::endRender()
 
     
     //  描画設定解除
-    t3::RenderSystem::setBlend(false);
+    cross::RenderSystem::setBlend(false);
 
     //  描画コンテナのクリア
     sprites_.clear();

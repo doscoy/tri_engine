@@ -2,7 +2,7 @@
 #include "gfx/tri_scene_graph.hpp"
 #include "gfx/tri_scene_node.hpp"
 #include "dbg/tri_trace.hpp"
-#include "gfx/tri_render_system.hpp"
+
 #include "kernel/tri_kernel.hpp"
 #include "base/tri_director.hpp"
 
@@ -28,12 +28,12 @@ SceneGraph::~SceneGraph()
 
 void SceneGraph::renderScene()
 {
-    RenderSystem::setCulling(false);
-    RenderSystem::setCullingMode(t3::RenderSystem::CullingMode::MODE_BACK);
-    RenderSystem::setBlend(false);
-    RenderSystem::setDepthTest(true);
-    RenderSystem::setDepthWrite(true);
-    RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
+    cross::RenderSystem::setCulling(false);
+    cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
+    cross::RenderSystem::setBlend(false);
+    cross::RenderSystem::setDepthTest(true);
+    cross::RenderSystem::setDepthWrite(true);
+    cross::RenderSystem::setDepthTestMode(cross::RenderSystem::DepthTestMode::MODE_LESS);
 
     if (root_ && camera_) {
         matrix_stack_.clearStack();
@@ -54,7 +54,7 @@ void SceneGraph::setupView()
     auto& d = t3::Director::instance();
     auto& screen = d.virtualScreenSize();
     
-    t3::RenderSystem::setViewport(0, 0, screen.x_, screen.y_);
+    cross::RenderSystem::setViewport(0, 0, screen.x_, screen.y_);
     t3::Mtx44 projection = t3::Mtx44::getFrustumMatrix(
         -1,
         1,

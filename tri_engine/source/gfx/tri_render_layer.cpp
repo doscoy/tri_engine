@@ -90,13 +90,13 @@ void RenderLayer::callDraw() {
         render_target_->clear();
 
         int x, y, w, h;
-        t3::RenderSystem::getViewport(&x, &y, &w, &h);
-        t3::RenderSystem::setViewport(0, 0, render_target_->width(), render_target_->height());
+        cross::RenderSystem::getViewport(&x, &y, &w, &h);
+        cross::RenderSystem::setViewport(0, 0, render_target_->width(), render_target_->height());
 
         drawLayer();
 
         render_target_->unbind();
-        t3::RenderSystem::setViewport(x, y, w, h);
+        cross::RenderSystem::setViewport(x, y, w, h);
    
     } else {
         drawLayer();

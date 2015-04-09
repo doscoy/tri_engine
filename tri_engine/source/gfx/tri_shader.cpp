@@ -1,5 +1,5 @@
 #include "gfx/tri_shader.hpp"
-#include "platform/platform_sdk.hpp"
+
 #include "dbg/tri_assert.hpp"
 #include "dbg/tri_trace.hpp"
 
@@ -39,7 +39,7 @@ Shader::~Shader()
 
 bool Shader::compileShaderFromFile(
     const char *file_name,
-    RenderSystem::ShaderType type
+    cross::RenderSystem::ShaderType type
 ) {
     //## 作る
     return false;
@@ -47,18 +47,18 @@ bool Shader::compileShaderFromFile(
 
 bool Shader::compileShaderFromString(
     const char* const source,
-    RenderSystem::ShaderType type
+    cross::RenderSystem::ShaderType type
 ) {
     if (handle_ <= 0) {
-        handle_ = glCreateProgram();
+        handle_ = cross::RenderSystem::createProgram();
         if (handle_ == 0) {
             log_ = "create shader failed.";
         }
     }
-    int shader_handle = RenderSystem::buildShader(source, type);
+    int shader_handle = cross::RenderSystem::buildShader(source, type);
     T3_ASSERT(shader_handle >= 0);
 
-    RenderSystem::attachShader(
+    cross::RenderSystem::attachShader(
         handle_,
         shader_handle
     );
@@ -80,13 +80,13 @@ void Shader::build(
 void Shader::compileVertexShader(
     const char* const vsh
 ) {
-    compileShaderFromString(vsh, RenderSystem::ShaderType::VERTEX_SHADER);
+    compileShaderFromString(vsh, cross::RenderSystem::ShaderType::VERTEX_SHADER);
 }
 
 void Shader::compileFragmentShader(
     const char* const fsh
 ) {
-    compileShaderFromString(fsh, RenderSystem::ShaderType::FRAGMENT_SHADER);
+    compileShaderFromString(fsh, cross::RenderSystem::ShaderType::FRAGMENT_SHADER);
 }
 
 
@@ -99,7 +99,7 @@ bool Shader::link() {
         return false;
     }
     
-    RenderSystem::linkShader(handle_);
+    cross::RenderSystem::linkShader(handle_);
     
     //## 失敗した時のエラーログ取得
     
@@ -117,27 +117,27 @@ bool Shader::use() {
     
 
     //  プログラム設定
-    RenderSystem::setShader(handle_);
+    cross::RenderSystem::setShader(handle_);
         
     //  ユニフォーム送信
     //  int レジスタ
     for (auto& i : constant_int_) {
         if (i.use_) {
-            t3::RenderSystem::setUniformValue(i.location_, i.value_);
+            cross::RenderSystem::setUniformValue(i.location_, i.value_);
         }
     }
 
     //  float レジスタ
     for (auto& f : constant_float_) {
         if (f.use_) {
-            t3::RenderSystem::setUniformValue(f.location_, f.value_);
+            cross::RenderSystem::setUniformValue(f.location_, f.value_);
         }
     }
     
     //  vec3 レジスタ
     for (auto& v : constant_vec3_) {
         if (v.use_) {
-            t3::RenderSystem::setUniformValue(
+            cross::RenderSystem::setUniformValue(
                 v.location_,
                 v.value_.x_,
                 v.value_.y_,
@@ -149,7 +149,7 @@ bool Shader::use() {
     //  float array　レジスタ
     if (constant_float_array_use_) {
         for (int i = 0; i < constant_float_array_size_; ++i) {
-            t3::RenderSystem::setUniformValue(
+            cross::RenderSystem::setUniformValue(
                 constant_float_array_location_[i],
                 constant_float_array_[i]
             );
@@ -165,14 +165,14 @@ void Shader::bindAttributeLocation(
     int location,
     const char* const name
 ) {
-    RenderSystem::bindAttributeLocation(handle_, location, name);
+    cross::RenderSystem::bindAttributeLocation(handle_, location, name);
 }
 
 void Shader::bindFragmentDataLocation(
     int location,
     const char* const name
 ) {
-    RenderSystem::bindFragmentDataLocation(handle_, location, name);
+    cross::RenderSystem::bindFragmentDataLocation(handle_, location, name);
 }
 
 void Shader::setUniform(
@@ -182,7 +182,7 @@ void Shader::setUniform(
     float z
 ) {
     int location = getUniformLocation(name);
-    RenderSystem::setUniformValue(location, x, y, z);
+    cross::RenderSystem::setUniformValue(location, x, y, z);
 }
 
 void Shader::setUniform(
@@ -193,7 +193,7 @@ void Shader::setUniform(
     float w
 ) {
     int location = getUniformLocation(name);
-    RenderSystem::setUniformValue(location, x, y, z, w);
+    cross::RenderSystem::setUniformValue(location, x, y, z, w);
 }
 
 void Shader::setUniform(
@@ -208,7 +208,7 @@ void Shader::setUniform(
     const Mtx44& m
 ) {
     int location = getUniformLocation(name);
-    RenderSystem::setUniformMatrix(location, m);
+    cross::RenderSystem::setUniformMatrix(location, m.pointer());
 }
 
 void Shader::setUniform(
@@ -216,7 +216,7 @@ void Shader::setUniform(
     float val
 ) {
     int location = getUniformLocation(name);
-    RenderSystem::setUniformValue(location, val);
+    cross::RenderSystem::setUniformValue(location, val);
 }
 
 void Shader::setUniform(
@@ -224,7 +224,7 @@ void Shader::setUniform(
     int val
 ) {
     int location = getUniformLocation(name);
-    RenderSystem::setUniformValue(location, val);
+    cross::RenderSystem::setUniformValue(location, val);
 }
 
 void Shader::setUniform(
@@ -232,7 +232,7 @@ void Shader::setUniform(
     bool val
 ) {
     int location = getUniformLocation(name);
-    RenderSystem::setUniformValue(location, val);
+    cross::RenderSystem::setUniformValue(location, val);
 }
 
 void Shader::setAttribute(
@@ -243,18 +243,18 @@ void Shader::setAttribute(
     float d
 ) {
     int location = getAttributeLocation(name);
-    RenderSystem::setAttributeValue(location, a, b, c, d);
+    cross::RenderSystem::setAttributeValue(location, a, b, c, d);
 }
 
 
 int Shader::getUniformLocation(const char* const name) const {
-    int location = RenderSystem::getUniformLocation(handle_, name);
+    int location = cross::RenderSystem::getUniformLocation(handle_, name);
     T3_ASSERT_MSG(location >= 0, "name = %s", name);
     return location;
 }
 
 int Shader::getAttributeLocation(const char* const name) const {
-    int location = RenderSystem::getAttributeLocation(handle_, name);
+    int location = cross::RenderSystem::getAttributeLocation(handle_, name);
     T3_ASSERT_MSG(location >= 0, "name = %s", name);
     return location;
 }
@@ -269,7 +269,7 @@ void Shader::setAttributePointer(
     void* pointer
 ) {
     int location = getAttributeLocation(name);
-    RenderSystem::setVertexAttributePointer(location, element_num, type, normalized, stride, pointer);
+    cross::RenderSystem::setVertexAttributePointer(location, element_num, type, normalized, stride, pointer);
 }
 
 void Shader::setEnableAttributeArray(
@@ -279,10 +279,10 @@ void Shader::setEnableAttributeArray(
     int location = getAttributeLocation(name);
     
     if (flag) {
-        RenderSystem::setEnableVertexAttribute(location);
+        cross::RenderSystem::setEnableVertexAttribute(location);
     }
     else {
-        RenderSystem::setDisableVertexAttribute(location);
+        cross::RenderSystem::setDisableVertexAttribute(location);
     }
 }
 

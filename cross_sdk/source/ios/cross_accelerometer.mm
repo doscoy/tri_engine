@@ -1,19 +1,19 @@
 #import <UIKit/UIKit.h>
 #import <CoreMotion/CoreMotion.h>
-#import <CoreFoundation/CoreFoundation.h>
+//#import <CoreFoundation/CoreFoundation.h>
 
-#include "platform_accelerometer.hpp"
+#include "../include/cross_accelerometer.hpp"
 
 @interface AccelerometerDispatcher : NSObject<UIAccelerometerDelegate>
 {
-    t3::platform::AccelerometerData acc_data_[4];
+    cross::AccelerometerData acc_data_[4];
     CMMotionManager* motion_manager_;
 }
 
 - (id) init;
 - (void) setAccelerometerEnabled: (bool) isEnabled;
 - (void) setAccelerometerInterval: (float) interval;
-- (void) copyValue:(t3::platform::AccelerometerData*) v;
+- (void) copyValue:(cross::AccelerometerData*) v;
 @end
 
 
@@ -48,33 +48,32 @@
     acc_data_[0].z_ = data.acceleration.x;
 }
 
-- (void) copyValue:(t3::platform::AccelerometerData*) v {
+- (void) copyValue:(cross::AccelerometerData*) v {
     *v = acc_data_[0];
 }
 
 @end
 
 
-namespace t3 {
-inline namespace platform {
+namespace cross {
 
 AccelerometerDispatcher* acc_;
 
-void platformAccelerometerInit() {
+void accelerometerInit() {
     acc_ = [[AccelerometerDispatcher alloc] init];
 }
 
-void platformAccelerometerEnable(bool flag) {
+void accelerometerEnable(bool flag) {
     [acc_ setAccelerometerEnabled:flag];
 }
 
-void platformAccelerometerInterval(float interval) {
+void accelerometerInterval(float interval) {
     [acc_ setAccelerometerInterval:interval];
 }
 
 
 
-void platformAccelerometer(
+void accelerometerRead(
     int no,
     AccelerometerData* data
 ) {
@@ -82,6 +81,5 @@ void platformAccelerometer(
     [acc_ copyValue:data];
 }
 
+}   // namespace cross
 
-}
-}

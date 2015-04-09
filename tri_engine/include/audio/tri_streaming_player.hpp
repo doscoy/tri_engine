@@ -2,7 +2,7 @@
 #define TRI_STREAMING_PLAYER_HPP_INCLUDED
 
 #include "tri_wav.hpp"
-#include "tri_audio_system.hpp"
+#include <cross_sdk/cross_sdk.hpp>
 #include <array>
 
 
@@ -26,18 +26,18 @@ public:
     
     void play(bool loop = true) {
         loop_ = loop;
-        AudioSystem::play(source_id_);
+        cross::AudioSystem::play(source_id_);
     }
 
     void stop() {
-        AudioSystem::stop(source_id_);
+        cross::AudioSystem::stop(source_id_);
     }
 
     
 private:
     void readMore();
-    void processBuffer(AudioSystem::BufferID id);
-    AudioSystem::BufferID createBuffer();
+    void processBuffer(cross::AudioSystem::BufferID id);
+    cross::AudioSystem::BufferID createBuffer();
     void switchCurrentBuffer();
     void switchReadingBuffer();
     
@@ -61,9 +61,9 @@ private:
     
     int reading_buffer_index_;
     int current_buffer_index_;
-    AudioSystem::SourceID source_id_;
+    cross::AudioSystem::SourceID source_id_;
 
-    Array<AudioSystem::BufferID, BUFFER_SIZE> buffer_id_;
+    Array<cross::AudioSystem::BufferID, BUFFER_SIZE> buffer_id_;
 
     struct BufferStorage {
         BufferStorage()

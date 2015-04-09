@@ -13,8 +13,10 @@
 
 
 namespace t3 {
-    
-typedef float           tick_t;
+
+using tick_t = float;
+
+
     
 }   // namespace t3
 

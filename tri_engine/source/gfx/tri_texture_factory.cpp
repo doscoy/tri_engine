@@ -3,7 +3,9 @@
 #include "gfx/tri_texture.hpp"
 #include "gfx/tri_image_png.hpp"
 #include "dbg/tri_dbg.hpp"
-#include "platform/platform_sdk.hpp"
+
+
+#include "png.h"
 
 namespace t3 {
 inline namespace gfx {
@@ -13,7 +15,7 @@ TexturePtr TextureFactory::createFromData(
     String name,
     const uint32_t width,
     const uint32_t height,
-    const RenderSystem::ColorFormat color_format,
+    const cross::RenderSystem::ColorFormat color_format,
     const void* data
 ) {
     
@@ -23,19 +25,16 @@ TexturePtr TextureFactory::createFromData(
         height,
         color_format
     ));
-    
-    glBindTexture(GL_TEXTURE_2D, tex->id());
-    RenderSystem::setupTextureData(width, height, color_format, data);
-    t3::RenderSystem::setTextureMinFilter(
-        t3::RenderSystem::TextureFilterType::TYPE_LINEAR
+    cross::RenderSystem::bindTexture(tex->id());
+    cross::RenderSystem::setupTextureData(width, height, color_format, data);
+    cross::RenderSystem::setTextureMinFilter(
+        cross::RenderSystem::TextureFilterType::TYPE_LINEAR
     );
     
-    t3::RenderSystem::setTextureMagFilter(
-        t3::RenderSystem::TextureFilterType::TYPE_LINEAR
+    cross::RenderSystem::setTextureMagFilter(
+        cross::RenderSystem::TextureFilterType::TYPE_LINEAR
     );
 
-
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
 
     return tex;
 }
@@ -80,18 +79,18 @@ TexturePtr TextureFactory::createFromPngFile(const File& file) {
 
     PngImage png(file);
     
-    RenderSystem::ColorFormat color_format = RenderSystem::ColorFormat::RGB;
+    cross::RenderSystem::ColorFormat color_format = cross::RenderSystem::ColorFormat::RGB;
     switch (png.color_type_) {
     case PNG_COLOR_TYPE_GRAY:
-        color_format = RenderSystem::ColorFormat::GRAY;
+        color_format = cross::RenderSystem::ColorFormat::GRAY;
         break;
         
     case PNG_COLOR_TYPE_RGB:
-        color_format = RenderSystem::ColorFormat::RGB;
+        color_format = cross::RenderSystem::ColorFormat::RGB;
         break;
     
     case PNG_COLOR_TYPE_RGBA:
-        color_format = RenderSystem::ColorFormat::RGBA;
+        color_format = cross::RenderSystem::ColorFormat::RGBA;
         break;
     default:
         T3_PANIC( "unknown color format." );

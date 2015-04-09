@@ -5,7 +5,9 @@
 
 #include "tri_pad.hpp"
 #include "tri_pointing.hpp"
-#include "platform/platform_accelerometer.hpp"
+
+
+//#include <cross_sdk/cross_sdk.hpp>
 
 
 namespace t3 {
@@ -23,27 +25,27 @@ public:
         return pointing_;
     }
     
-    const AccelerometerData& getAccelerometer() const {
+    const cross::AccelerometerData& getAccelerometer() const {
         return accele_;
     }
 
 
     void updatePad(
-        const platform::GamePadData& paddata,
+        const cross::GamePadData& paddata,
         tick_t delta_time
     ) {
         pad_.updatePad(paddata.buttonData(), delta_time);
     }
     
     void updatePointing(
-        const platform::PointingData& pointing_data,
+        const cross::PointingData& pointing_data,
         tick_t delta_time
     ) {
         pointing_.updatePointing(pointing_data, delta_time);
     }
     
     void updateAccelermeter(
-        const platform::AccelerometerData acc_data,
+        const cross::AccelerometerData acc_data,
         tick_t delta_time
     ) {
         (void)delta_time;
@@ -54,7 +56,7 @@ public:
 private:
     Pad pad_;
     Pointing pointing_;
-    AccelerometerData accele_;
+    cross::AccelerometerData accele_;
 };
   
 }   // namespace kernel

@@ -1,33 +1,16 @@
-#ifndef PLATFORM_HPP_INCLUDED
-#define PLATFORM_HPP_INCLUDED
-
-
-#include "platform_sdk.hpp"
-#include "platform_types.hpp"
-#include "platform_accelerometer.hpp"
-#include "kernel/io/tri_filepath.hpp"
+#ifndef CROSS_BASE_HPP_INCLUDED
+#define CROSS_BASE_HPP_INCLUDED
 
 
 
-
-namespace t3 {
-
-inline namespace base {
-class Application;
-}   // namespace base
+#include "cross_types.hpp"
 
 
+namespace cross {
 
 
-inline namespace platform {
 
 void initializePlatform();
-
-void run(
-    int argc,
-    char** argv,
-    Application* app
-);
 
 
 void terminatePlatform();
@@ -53,7 +36,7 @@ void printConsole(
 String getDeviceFilePath();
 
 void loadFile(
-    const FilePath& file_path,
+    const char* const file_path,
     uint8_t** data,
     size_t* size
 );
@@ -74,7 +57,6 @@ void loadInteger(
 
 
 
-}   // namespace platform
-}   // namespace t3
+}   // namespace cross
 
 #endif // PLATFORM_HPP_INCLUDED

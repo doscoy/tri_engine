@@ -1,13 +1,16 @@
 
 
-#include "audio/tri_audio_system.hpp"
-#include "platform/platform_sdk.hpp"
-#include "dbg/tri_assert.hpp"
-#include "dbg/tri_trace.hpp"
+
+#include "../include/cross_audio_system.hpp"
+#include "../include/cross_types.hpp"
 
 
-namespace t3 {
-inline namespace audio {
+#include <OpenAL/al.h>
+#include <OpenAL/alc.h>
+
+
+namespace cross {
+
 
 namespace {
 
@@ -21,10 +24,10 @@ ALCcontext* context_ = nullptr;
 
 void AudioSystem::initializeAudioSystem() {
     device_ = alcOpenDevice(nullptr);
-    T3_NULL_ASSERT(device_);
+//    T3_NULL_ASSERT(device_);
     
     context_ = alcCreateContext(device_, nullptr);
-    T3_NULL_ASSERT(context_);
+//    T3_NULL_ASSERT(context_);
     
     alcMakeContextCurrent(context_);
 }
@@ -49,9 +52,16 @@ void AudioSystem::deleteBuffer(
 }
 
 
-AudioSystem::SourceID AudioSystem::createSource(BufferID buffer) {
+AudioSystem::SourceID AudioSystem::createSource() {
     SourceID source;
     alGenSources(1, &source);
+
+    return source;
+}
+
+
+AudioSystem::SourceID AudioSystem::createSource(BufferID buffer) {
+    SourceID source = createSource();
     alSourcei(source, AL_BUFFER, buffer);
 
     return source;
@@ -59,6 +69,27 @@ AudioSystem::SourceID AudioSystem::createSource(BufferID buffer) {
 
 void AudioSystem::deleteSource(SourceID source) {
     alDeleteSources(1, &source);
+}
+
+
+void AudioSystem::queueBuffers(
+    const SourceID source,
+    size_t size,
+    const BufferID* buffer
+) {
+    alSourceQueueBuffers(
+        source,
+        static_cast<ALsizei>(size),
+        buffer
+    );
+}
+
+void AudioSystem::unqueueBuffers(
+    const SourceID source,
+    size_t size,
+    BufferID* buffer
+) {
+    alSourceUnqueueBuffers(source, static_cast<ALsizei>(size), buffer);
 }
 
 
@@ -82,7 +113,7 @@ void AudioSystem::setBufferData(
     const BufferID id,
     const AudioSystem::AudioFormat format,
     const uint8_t *data,
-    const size_t size,
+    const std::size_t size,
     const int sampling_rate
 ) {
     ALenum al_format = AL_FORMAT_MONO8;
@@ -113,7 +144,7 @@ void AudioSystem::pitch(
     const SourceID sid,
     const float speed
 ) {
-    T3_ASSERT_RANGE(speed, 0.0f, 1.0f);
+//    CROSS_ASSERT_RANGE(speed, 0.0f, 1.0f);
     alSourcef(sid, AL_PITCH, speed);
 }
 
@@ -121,11 +152,19 @@ void AudioSystem::volume(
     const SourceID sid,
     const float vol
 ) {
-    T3_ASSERT_RANGE(vol, 0.0f, 1.0f);
+//    CROSS_ASSERT_RANGE(vol, 0.0f, 1.0f);
     alSourcef(sid, AL_GAIN, vol);
 }
 
 
+int AudioSystem::getSourceProcessed(
+    const AudioSystem::SourceID source
+) {
+    int processeed;
+    alGetSourcei(source, AL_BUFFERS_PROCESSED, &processeed);
+    return processeed;
+}
 
-}   // namespace audio
-}   // namepsace t3
+
+}   // namespace cross
+

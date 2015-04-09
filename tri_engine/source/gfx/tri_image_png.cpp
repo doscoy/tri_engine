@@ -3,8 +3,8 @@
 #include <iostream>
 #include "dbg/tri_dbg.hpp"
 #include "kernel/tri_kernel.hpp"
-#include "platform/platform_sdk.hpp"
 
+#include "png.h"
 
 
 namespace  {

@@ -2,7 +2,7 @@
 #define TRI_SPRITE_RENDERER_HPP_INCLUDED
 
 #include "util/tri_uncopyable.hpp"
-#include "tri_render_system.hpp"
+
 #include "base/tri_std.hpp"
 #include "tri_shader.hpp"
 #include "tri_sprite.hpp"
@@ -24,14 +24,14 @@ class SpriteRenderer
             , index_buffer_()
             , texture_(nullptr)
             , draw_count_(0)
-            , blend_mode_(RenderSystem::BlendMode::NONE)
+            , blend_mode_(cross::RenderSystem::BlendMode::NONE)
             , vao_(0)
         {
-            vao_ = RenderSystem::createVertexArrayBuffer();
+            vao_ = cross::RenderSystem::createVertexArrayBuffer();
         }
         
         ~BatchGroup() {
-            RenderSystem::deleteVertexArrayBuffer(vao_);
+            cross::RenderSystem::deleteVertexArrayBuffer(vao_);
         }
         
     public:
@@ -59,16 +59,16 @@ class SpriteRenderer
             draw_count_ = count;
         }
     
-        void blendMode(RenderSystem::BlendMode mode) {
+        void blendMode(cross::RenderSystem::BlendMode mode) {
             blend_mode_ = mode;
         }
         
-        RenderSystem::BlendMode blendMode() const {
+        cross::RenderSystem::BlendMode blendMode() const {
             return blend_mode_;
         }
         
         void bindVOA() {
-            RenderSystem::bindVertexArrayBuffer(vao_);
+            cross::RenderSystem::bindVertexArrayBuffer(vao_);
         }
     
     
@@ -77,8 +77,8 @@ class SpriteRenderer
         IndexBuffer index_buffer_;
         TexturePtr texture_;
         uint32_t draw_count_;
-        RenderSystem::BlendMode blend_mode_;
-        RenderSystem::BufferID vao_;
+        cross::RenderSystem::BlendMode blend_mode_;
+        cross::RenderSystem::BufferID vao_;
     };
     using BatchGroups = Array<BatchGroup, 64>;
     using Container = Vector<SpritePtr>;

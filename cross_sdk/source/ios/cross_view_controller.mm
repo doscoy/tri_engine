@@ -6,29 +6,25 @@
 //  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
 //
 
-#import "TriViewController.hpp"
-
-
-#include "base/tri_application.hpp"
-#include "platform/platform.hpp"
-#include "dbg/tri_trace.hpp"
+#import "../include/cross_view_controller.hpp"
+#import "../include/cross_types.hpp"
 #import <CoreMotion/CoreMotion.h>
 
 
 float screen_scale_ = 1.0f;
 float screen_x_ = 0;
 float screen_y_ = 0;
-extern t3::platform::PointingData point_data_[4];
+extern cross::PointingData point_data_[4];
 
 
-@interface TriViewController () {
+@interface CrossViewController () {
 
 }
 @property (strong, nonatomic) EAGLContext *context;
 
 @end
 
-@implementation TriViewController
+@implementation CrossViewController
 
 
 - (void)viewDidLoad
@@ -47,15 +43,6 @@ extern t3::platform::PointingData point_data_[4];
     [self setFPS:60];
     
     
-    // 各機種で内部の座標系を統一する
-    screen_scale_ = [UIScreen mainScreen].scale;
-
-    CGRect bounds = [UIScreen mainScreen].bounds;
-    screen_x_ = bounds.size.width * screen_scale_;
-    screen_y_ = bounds.size.height * screen_scale_;
-    
-    t3::initializeTriEngine(screen_x_, screen_y_, "ios");
-    t3::initializeApplication();
 }
 
 
@@ -65,7 +52,7 @@ extern t3::platform::PointingData point_data_[4];
 
 
 - (void)dealloc {
-    t3::terminateApplication();
+//    t3::terminateApplication();
     
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
@@ -134,12 +121,10 @@ extern t3::platform::PointingData point_data_[4];
 
 - (void)update {
 
-    t3::updateApplication();
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
 
-    t3::renderApplication();
 }
 
 

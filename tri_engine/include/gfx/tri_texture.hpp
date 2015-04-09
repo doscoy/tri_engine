@@ -6,7 +6,7 @@
 #include "../dbg/tri_dbg.hpp"
 #include "../base/tri_resource.hpp"
 #include "../gfx/tri_color.hpp"
-#include "gfx/tri_render_system.hpp"
+
 #include "base/tri_resource_manager.hpp"
 
 
@@ -28,7 +28,7 @@ private:
         String name,
         const uint32_t width,
         const uint32_t height,
-        const RenderSystem::ColorFormat color_format
+        const cross::RenderSystem::ColorFormat color_format
     );
     
     
@@ -45,15 +45,15 @@ public:
     }
     
     //  カラーフォーマット取得
-    RenderSystem::ColorFormat getColorFormat() const {
+    cross::RenderSystem::ColorFormat getColorFormat() const {
         return color_format_;
     }
     
     void setWrapMode(
-        RenderSystem::TextureWrapType type
+        cross::RenderSystem::TextureWrapType type
     ) {
         bind();
-        RenderSystem::setTextureWrap(type);
+        cross::RenderSystem::setTextureWrap(type);
     }
     
     
@@ -67,7 +67,7 @@ public:
         String name,
         const int width,
         const int height,
-        const RenderSystem::ColorFormat
+        const cross::RenderSystem::ColorFormat
     );
     
     static TexturePtr create(
@@ -77,7 +77,7 @@ public:
     
     void bind();
     
-    RenderSystem::TextureID id() {
+    cross::RenderSystem::TextureID id() {
         return texture_handle_;
     }
     
@@ -97,8 +97,8 @@ private:
     uint32_t height_;
 
     //  カラーフォーマット
-    RenderSystem::ColorFormat color_format_;
-    RenderSystem::TextureID texture_handle_;
+    cross::RenderSystem::ColorFormat color_format_;
+    cross::RenderSystem::TextureID texture_handle_;
 };
     
 

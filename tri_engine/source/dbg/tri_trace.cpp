@@ -24,7 +24,7 @@ void traceTerminal( const char* const format, ... )
 	vsnprintf(buf, 256, format, msg);
 	va_end(msg);
 
-    t3::platform::printConsole(buf);
+    cross::printConsole(buf);
 }
 
 void traceDisplay( const char* const format, ... )

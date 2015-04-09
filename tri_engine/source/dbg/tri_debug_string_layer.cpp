@@ -1,6 +1,6 @@
 
 #include "dbg/tri_debug_string_layer.hpp"
-#include "gfx/tri_render_system.hpp"
+
 
 
 
@@ -37,7 +37,7 @@ void DebugStringLayer::writeString(
 void DebugStringLayer::drawLayer()
 {
     //  デバッグフォント描画用の設定
-    t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_ALWAYS);
+    cross::RenderSystem::setDepthTestMode(cross::RenderSystem::DepthTestMode::MODE_ALWAYS);
     
     //  描画
     debug_string_buffer_.drawStrings();

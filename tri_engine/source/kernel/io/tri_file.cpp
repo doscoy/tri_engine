@@ -3,7 +3,7 @@
 #include "base/tri_types.hpp"
 #include "kernel/memory/tri_memory.hpp"
 #include "dbg/tri_assert.hpp"
-#include "platform/platform.hpp"
+
 #include <fstream>
 
 //==============================================================================

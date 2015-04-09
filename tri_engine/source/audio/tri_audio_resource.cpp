@@ -10,11 +10,11 @@ inline namespace audio {
 AudioResource::AudioResource()
     : id_()
 {
-    id_ = AudioSystem::createBuffer();
+    id_ = cross::AudioSystem::createBuffer();
 }
 
 AudioResource::~AudioResource() {
-    AudioSystem::deleteBuffer(id_);
+    cross::AudioSystem::deleteBuffer(id_);
 }
 
 
@@ -48,28 +48,28 @@ SharedPtr<AudioHandle> AudioResource::createSound() {
 void AudioResource::setupBuffer(
     const Wav& wav
 ) {
-    AudioSystem::AudioFormat format;
+    cross::AudioSystem::AudioFormat format;
 
     if (wav.channel() == 1) {
         // モノラル
         if (wav.bitPerSample() == 8) {
-            format = AudioSystem::AudioFormat::MONO_8;
+            format = cross::AudioSystem::AudioFormat::MONO_8;
         }
         else {
-            format = AudioSystem::AudioFormat::MONO_16;
+            format = cross::AudioSystem::AudioFormat::MONO_16;
         }
     }
     else {
         // ステレオ
         if (wav.bitPerSample() == 8) {
-            format = AudioSystem::AudioFormat::STEREO_8;
+            format = cross::AudioSystem::AudioFormat::STEREO_8;
         }
         else {
-            format = AudioSystem::AudioFormat::STEREO_16;
+            format = cross::AudioSystem::AudioFormat::STEREO_16;
         }
     }
     
-    AudioSystem::setBufferData(
+    cross::AudioSystem::setBufferData(
         id_,
         format,
         wav.getData(),

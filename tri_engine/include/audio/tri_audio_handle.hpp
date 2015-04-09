@@ -1,7 +1,7 @@
 #ifndef TRI_AUDIO_HANDLE_HPP_INCLUDED
 #define TRI_AUDIO_HANDLE_HPP_INCLUDED
 
-#include "tri_audio_system.hpp"
+#include <cross_sdk/cross_sdk.hpp>
 
 namespace t3 {
 inline namespace audio {
@@ -12,7 +12,7 @@ class AudioHandle {
     friend class AudioResource;
 private:
     explicit AudioHandle(
-        AudioSystem::BufferID buffer_id
+        cross::AudioSystem::BufferID buffer_id
     );
 
 public:
@@ -36,7 +36,7 @@ private:
     
 private:
     
-    AudioSystem::SourceID sid_;
+    cross::AudioSystem::SourceID sid_;
     bool bgm_;
 };
 

@@ -2,8 +2,7 @@
 #define TRI_VIRTUAL_PAD_HPP_INCLUDED
 
 #include "gfx/tri_draw_layer.hpp"
-#include "platform/platform_types.hpp"
-
+#include <cross_sdk/cross_sdk.hpp>
 
 namespace t3 {
 inline namespace dbg {
@@ -27,7 +26,7 @@ public:
     //  しまう
     void close();
     
-    const GamePadData* getPadData() const {
+    const cross::GamePadData* getPadData() const {
         return &pad_data_;
     }
     
@@ -45,7 +44,7 @@ private:
     DrawLayer pad_layer_;
     
     //  パッド情報
-    GamePadData pad_data_;
+    cross::GamePadData pad_data_;
 };
 
 

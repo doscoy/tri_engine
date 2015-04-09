@@ -2,7 +2,7 @@
 
 #include "gfx/tri_fade_layer.hpp"
 #include "dbg/tri_draw_primitive.hpp"
-#include "gfx/tri_render_system.hpp"
+
 
 
 
@@ -71,10 +71,10 @@ void FadeLayer::fadeRender(
         return;
     }
 
-    RenderSystem::setBlend(true);
-    RenderSystem::setBlendFunctionType(
-        RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
-        RenderSystem::BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
+    cross::RenderSystem::setBlend(true);
+    cross::RenderSystem::setBlendFunctionType(
+        cross::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
+        cross::RenderSystem::BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
     );
     
     drawRectangleViewport(

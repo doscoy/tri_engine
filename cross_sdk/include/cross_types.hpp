@@ -3,9 +3,12 @@
 
 
 #include <cstdint>
+#include <string>
+#include <cstdlib>
+#include <iostream>
 
-namespace t3 {
-inline namespace platform {
+
+namespace cross {
 
 //  プラットフォームから取得するパッドデータ
 struct GamePadData {
@@ -80,7 +83,18 @@ struct PointingData {
 
 
 
-}   // namespace platform
-}   // namespace t3
+using String = std::string;
+
+
+
+
+class Application {
+public:
+    
+};
+
+
+
+}   // namespace cross
 
 #endif // PLATFORM_TYPES_HPP_INCLUDED

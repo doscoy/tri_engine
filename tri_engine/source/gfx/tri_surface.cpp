@@ -1,6 +1,6 @@
 
 #include "tri_surface.hpp"
-#include "gfx/tri_render_system.hpp"
+
 #include "base/tri_director.hpp"
 
 
@@ -9,8 +9,8 @@ inline namespace gfx {
 
 
 void GL_CHECK() {
-    int err = glGetError();
-    T3_ASSERT_MSG(err == GL_NO_ERROR, "err = %d", err);
+
+    T3_ASSERT(cross::RenderSystem::isError());
 }
 
 Surface::Surface()
@@ -32,15 +32,15 @@ Surface::Surface(
     , texture_()
 {
 
-    RenderSystem::FrameBufferID default_fb = RenderSystem::getCurrentFrameBufferID();
-    RenderSystem::RenderBufferID default_rb = RenderSystem::getCurrentRenderBufferID();
+    cross::RenderSystem::FrameBufferID default_fb = cross::RenderSystem::getCurrentFrameBufferID();
+    cross::RenderSystem::RenderBufferID default_rb = cross::RenderSystem::getCurrentRenderBufferID();
     
     //  オフスクリーン用のテクスチャ
     texture_ = t3::Texture::create(
         "sfc",
         width,
         height,
-        t3::RenderSystem::ColorFormat::RGBA
+        cross::RenderSystem::ColorFormat::RGBA
     );
     texture_->bind();
     
@@ -48,11 +48,11 @@ Surface::Surface(
     
     
     //  カラーバッファ作成
-    RenderSystem::createRenderBuffer(&cb_);
-    RenderSystem::bindRenderBuffer(cb_);
+    cross::RenderSystem::createRenderBuffer(&cb_);
+    cross::RenderSystem::bindRenderBuffer(cb_);
     
-    RenderSystem::setupRenderBufferStorage(
-        RenderSystem::RenderBufferUsage::COLOR,
+    cross::RenderSystem::setupRenderBufferStorage(
+        cross::RenderSystem::RenderBufferUsage::COLOR,
         width,
         height
     );
@@ -60,59 +60,59 @@ Surface::Surface(
     
     
     //  デプスバッファ作成
-    RenderSystem::createRenderBuffer(&depth_);
-    RenderSystem::bindRenderBuffer(depth_);
+    cross::RenderSystem::createRenderBuffer(&depth_);
+    cross::RenderSystem::bindRenderBuffer(depth_);
     
-    RenderSystem::setupRenderBufferStorage(
-        RenderSystem::RenderBufferUsage::DEPTH,
+    cross::RenderSystem::setupRenderBufferStorage(
+        cross::RenderSystem::RenderBufferUsage::DEPTH,
         width,
         height
     );
     
     
     //  フレームバッファ作成
-    RenderSystem::createFrameBuffer(&fb_);
-    RenderSystem::bindFrameBuffer(fb_);
-    RenderSystem::attachRenderBuffer(
-        RenderSystem::RenderBufferAttachType::COLOR0,
+    cross::RenderSystem::createFrameBuffer(&fb_);
+    cross::RenderSystem::bindFrameBuffer(fb_);
+    cross::RenderSystem::attachRenderBuffer(
+        cross::RenderSystem::RenderBufferAttachType::COLOR0,
         cb_
     );
 
-    RenderSystem::attachRenderBuffer(
-        RenderSystem::RenderBufferAttachType::DEPTH,
+    cross::RenderSystem::attachRenderBuffer(
+        cross::RenderSystem::RenderBufferAttachType::DEPTH,
         depth_
     );
     
-    RenderSystem::attachFrameBufferTexture(
-        RenderSystem::RenderBufferAttachType::COLOR0,
+    cross::RenderSystem::attachFrameBufferTexture(
+        cross::RenderSystem::RenderBufferAttachType::COLOR0,
         texture_->id()
     );
 
-    RenderSystem::bindFrameBuffer(default_fb);
-    RenderSystem::bindRenderBuffer(default_rb);
+    cross::RenderSystem::bindFrameBuffer(default_fb);
+    cross::RenderSystem::bindRenderBuffer(default_rb);
     
     
 }
 
 Surface::~Surface() {
-    RenderSystem::deleteFrameBuffer(&fb_);
-    RenderSystem::deleteRenderBuffer(&depth_);
-    RenderSystem::deleteRenderBuffer(&cb_);
+    cross::RenderSystem::deleteFrameBuffer(&fb_);
+    cross::RenderSystem::deleteRenderBuffer(&depth_);
+    cross::RenderSystem::deleteRenderBuffer(&cb_);
 }
 
 
 void Surface::bind() {
 
-    last_fb_ = RenderSystem::getCurrentFrameBufferID();
-    last_rb_ = RenderSystem::getCurrentRenderBufferID();
+    last_fb_ = cross::RenderSystem::getCurrentFrameBufferID();
+    last_rb_ = cross::RenderSystem::getCurrentRenderBufferID();
 
-    RenderSystem::bindFrameBuffer(fb_);
-    RenderSystem::bindRenderBuffer(cb_);
+    cross::RenderSystem::bindFrameBuffer(fb_);
+    cross::RenderSystem::bindRenderBuffer(cb_);
 }
 
 void Surface::clear() {
 
-    t3::RenderSystem::clearBuffer(true, true, false);
+    cross::RenderSystem::clearBuffer(true, true, false);
 
 }
 
@@ -120,8 +120,8 @@ void Surface::clear() {
 void Surface::unbind() {
     T3_ASSERT(last_fb_ != 0);
     T3_ASSERT(last_rb_ != 0);
-    RenderSystem::bindFrameBuffer(last_fb_);
-    RenderSystem::bindRenderBuffer(last_rb_);
+    cross::RenderSystem::bindFrameBuffer(last_fb_);
+    cross::RenderSystem::bindRenderBuffer(last_rb_);
 
 }
 

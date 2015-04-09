@@ -1,7 +1,7 @@
 
 
 #include "kernel/io/tri_filepath.hpp"
-#include "platform/platform.hpp"
+#include <cross_sdk/cross_sdk.hpp>
 
 
 namespace t3 {

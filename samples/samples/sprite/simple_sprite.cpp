@@ -127,7 +127,6 @@ private:
     
 private:
     void addSprite() {
-        t3::TextureManager& texture_manager = t3::TextureManager::instance();
 
         static int tex_idx;
         //  スプライト増やす

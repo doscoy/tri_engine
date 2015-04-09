@@ -244,7 +244,7 @@ void Director::update(
     
     
     //  終了リクエストチェック
-    if (platform::isExitRequest()) {
+    if (cross::isExitRequest()) {
         exit_request_ =  true;
     }
 }
@@ -264,14 +264,14 @@ void Director::updateInput(
         Input& input = input_[pad_idx];
     
         //  パッド情報更新
-        platform::GamePadData pad_data;
-        platform::platformPadData(pad_idx, &pad_data);
+        cross::GamePadData pad_data;
+        cross::platformPadData(pad_idx, &pad_data);
         input.updatePad(pad_data, delta_time);
         
         
         //  ポインティング情報更新
-        platform::PointingData point_data;
-        platform::platformPointingData(
+        cross::PointingData point_data;
+        cross::platformPointingData(
             pad_idx,
             &point_data
         );
@@ -296,8 +296,8 @@ void Director::updateInput(
         );
         
         //  加速度センサー更新
-        platform::AccelerometerData acc_data;
-        platform::platformAccelerometer(pad_idx, &acc_data);
+        cross::AccelerometerData acc_data;
+        cross::accelerometerRead(pad_idx, &acc_data);
         input.updateAccelermeter(
             acc_data,
             delta_time
@@ -345,8 +345,8 @@ void Director::updateInput(
     
     
     //  debug pad
-    platform::GamePadData dbg_pad_data;
-    platform::platformPadData(0, &dbg_pad_data);
+    cross::GamePadData dbg_pad_data;
+    cross::platformPadData(0, &dbg_pad_data);
     uint32_t dpad_buttons = dbg_pad_data.buttonData();
 
     t3::DebugMenu& debug_menu = t3::DebugMenu::instance();

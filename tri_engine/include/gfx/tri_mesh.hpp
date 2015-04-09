@@ -5,7 +5,7 @@
 #include "geometry/tri_sphere.hpp"
 #include "tri_entity.hpp"
 #include "tri_renderable.hpp"
-#include "tri_render_system.hpp"
+
 #include "util/tri_uncopyable.hpp"
 #include "tri_index_buffer.hpp"
 #include "tri_vertex_buffer.hpp"

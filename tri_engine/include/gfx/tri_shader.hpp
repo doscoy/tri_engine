@@ -2,10 +2,12 @@
 #define TRI_SHADER_HPP_INCLUDED
 
 
+#include <cross_sdk/cross_sdk.hpp>
 
-#include "tri_render_system.hpp"
 #include "math/tri_vec3.hpp"
 #include "math/tri_matrix.hpp"
+#include "base/tri_std.hpp"
+
 
 namespace t3 {
 
@@ -95,7 +97,7 @@ public:
                 "const_i_4",
                 "const_i_5",
             };
-            constant_int_[no].location_ = t3::RenderSystem::getUniformLocation(handle_, CONST_UNIFORM_NAME[no]);
+            constant_int_[no].location_ = cross::RenderSystem::getUniformLocation(handle_, CONST_UNIFORM_NAME[no]);
         }
         constant_int_[no].use_ = true;
     }
@@ -111,7 +113,7 @@ public:
                 "const_f_4",
                 "const_f_5",
             };
-            constant_float_[no].location_ = t3::RenderSystem::getUniformLocation(handle_, CONST_UNIFORM_NAME[no]);
+            constant_float_[no].location_ = cross::RenderSystem::getUniformLocation(handle_, CONST_UNIFORM_NAME[no]);
         }
         constant_float_[no].use_ = true;
     }
@@ -127,7 +129,7 @@ public:
                 "const_vec3_4",
                 "const_vec3_5",
             };
-            constant_vec3_[no].location_ = t3::RenderSystem::getUniformLocation(handle_, CONST_UNIFORM_NAME[no]);
+            constant_vec3_[no].location_ = cross::RenderSystem::getUniformLocation(handle_, CONST_UNIFORM_NAME[no]);
         }
         constant_vec3_[no].use_ = true;
     }
@@ -153,7 +155,7 @@ public:
             };
             
             for (int i = 0; i < constant_float_array_size_; ++i) {
-                constant_float_array_location_[i] = t3::RenderSystem::getUniformLocation(
+                constant_float_array_location_[i] = cross::RenderSystem::getUniformLocation(
                     handle_,
                     CONST_UNIFORM_NAME[i]
                 );
@@ -166,12 +168,12 @@ public:
 private:
     bool compileShaderFromFile(
         const char* file_name,
-        RenderSystem::ShaderType type
+        cross::RenderSystem::ShaderType type
     );
     
     bool compileShaderFromString(
         const char* const source,
-        RenderSystem::ShaderType type
+        cross::RenderSystem::ShaderType type
     );
     
     bool link();

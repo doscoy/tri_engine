@@ -13,7 +13,7 @@ Texture::Texture(
     String name,
     const uint32_t width,
     const uint32_t height,
-    const RenderSystem::ColorFormat color_format
+    const cross::RenderSystem::ColorFormat color_format
 )   : Resource()
     , width_(width)
     , height_(height)
@@ -21,19 +21,19 @@ Texture::Texture(
     , texture_handle_(0)
 {
     resourceName(name.c_str());
-    glGenTextures(1, &texture_handle_);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
-    glBindTexture(GL_TEXTURE_2D, texture_handle_);
-    T3_ASSERT(glGetError() == GL_NO_ERROR);
+    texture_handle_ = cross::RenderSystem::createTexture();
+
+
+    cross::RenderSystem::bindTexture(texture_handle_);
     
-    RenderSystem::setTextureWrap(RenderSystem::TextureWrapType::CLAMP_TO_EDGE);
-    RenderSystem::setTextureMagFilter(RenderSystem::TextureFilterType::TYPE_LINEAR);
-    RenderSystem::setTextureMinFilter(RenderSystem::TextureFilterType::TYPE_LINEAR);
-    RenderSystem::setupTextureData(width, height, RenderSystem::ColorFormat::RGBA, nullptr);
+    cross::RenderSystem::setTextureWrap(cross::RenderSystem::TextureWrapType::CLAMP_TO_EDGE);
+    cross::RenderSystem::setTextureMagFilter(cross::RenderSystem::TextureFilterType::TYPE_LINEAR);
+    cross::RenderSystem::setTextureMinFilter(cross::RenderSystem::TextureFilterType::TYPE_LINEAR);
+    cross::RenderSystem::setupTextureData(width, height, cross::RenderSystem::ColorFormat::RGBA, nullptr);
 }
 
 Texture::~Texture() {
-    glDeleteTextures(1, &texture_handle_);
+    cross::RenderSystem::deleteTexture(&texture_handle_);
 }
 
 
@@ -47,7 +47,7 @@ TexturePtr Texture::create(
     String name,
     const int width,
     const int height,
-    const RenderSystem::ColorFormat color_format
+    const cross::RenderSystem::ColorFormat color_format
 ) {
     TexturePtr t(T3_SYS_NEW Texture(
         name,
@@ -67,7 +67,7 @@ TexturePtr Texture::create(const t3::File& file) {
 
 void Texture::bind() {
 
-    RenderSystem::bindTexture(texture_handle_);
+    cross::RenderSystem::bindTexture(texture_handle_);
 }
 
 

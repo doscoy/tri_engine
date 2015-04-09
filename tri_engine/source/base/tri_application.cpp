@@ -10,11 +10,14 @@
 #include "util/tri_framerate.hpp"
 #include "util/tri_counter.hpp"
 #include "kernel/tri_kernel.hpp"
-#include "gfx/tri_render_system.hpp"
-#include "audio/tri_audio_system.hpp"
+
+
 #include "util/tri_stopwatch.hpp"
 #include "kernel/memory/tri_memory_pool.hpp"
 #include "kernel/memory/tri_heap.hpp"
+
+
+//#include <cross_sdk/cross_sdk.hpp>
 
 namespace {
 
@@ -113,10 +116,10 @@ void initializeTriEngine(
 ) {
     
     //  プラットフォームの初期化
-    platform::initializePlatform();
+    cross::initializePlatform();
     
     //  ファイルシステムベースパス設定
-    FilePath::setBaseDirectory(platform::getDeviceFilePath());
+    FilePath::setBaseDirectory(cross::getDeviceFilePath());
 
     //  マネージャインスタンス生成
     Director::createInstance();
@@ -135,7 +138,7 @@ void initializeTriEngine(
     );
     T3_TRACE("Initialize TriEngine.\n");
     T3_TRACE("screen width %d  height %d\n", width, height);
-    RenderSystem::setViewport(0, 0, width, height);
+    cross::RenderSystem::setViewport(0, 0, width, height);
 
     
 #if DEBUG
@@ -197,10 +200,10 @@ void Application::initializeApplication()
     SceneManager::instance().forceChangeScene(root_scene_generator_);
 
     //  レンダリングシステムの初期化
-    t3::RenderSystem::initializeRenderSystem();
+    cross::RenderSystem::initializeRenderSystem();
 
     //  オーディオシステムの初期化
-    t3::AudioSystem::initializeAudioSystem();
+    cross::AudioSystem::initializeAudioSystem();
 
 #if DEBUG
     //  システムデバッグメニュー登録
@@ -231,7 +234,7 @@ void Application::updateApplication()
 {
     system_cost_timer_.start();     // system cost 計測開始
 
-    platform::beginUpdate();
+    cross::beginUpdate();
 
 
     fps_timer_.end();
@@ -277,9 +280,9 @@ void Application::updateApplication()
     
         //  ドローコール数
         T3_PRINT_DISP(140, 0, "DC:%d",
-            t3::RenderSystem::getDrawCallCount()
+            cross::RenderSystem::getDrawCallCount()
         );
-        t3::RenderSystem::resetDrawCallCount();
+        cross::RenderSystem::resetDrawCallCount();
     }
 #endif // DEBUG
     
@@ -320,7 +323,7 @@ void Application::updateApplication()
         }
     }
     
-    platform::endUpdate();
+    cross::endUpdate();
 
 
 }
@@ -514,7 +517,7 @@ void Application::terminateApplication() {
     terminateGame();
     
     //  プラットフォームの後片付け
-    platform::terminatePlatform();
+    cross::terminatePlatform();
 }
 
 
@@ -567,14 +570,14 @@ bool Application::isSuspend() const {
 
 void Application::beginRender() {
     auto& c = t3::Director::getClearColor();
-    RenderSystem::clearColor(c);
-    RenderSystem::clearBuffer(true, true, false);
+    cross::RenderSystem::clearColor(c.red(), c.green(), c.blue(), c.alpha());
+    cross::RenderSystem::clearBuffer(true, true, false);
 }
 
 
 void Application::endRender() {
 //    RenderSystem::fenceDraw();
-    RenderSystem::swapBuffers();
+    cross::RenderSystem::swapBuffers();
 }
 
 void Application::gotoRootScene() {

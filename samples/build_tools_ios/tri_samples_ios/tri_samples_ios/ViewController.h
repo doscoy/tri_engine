@@ -6,12 +6,10 @@
 //  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
 //
 // TIPS:GLKitでES1.1のヘッダを読むのを防ぐ
-#define ES1_GL_H_GUARD
-#define ES1_GLEXT_H_GUARD
 
-#import <UIKit/UIKit.h>
-#import <GLKit/GLKit.h>
+#import "cross_sdk/cross_view_controller.hpp"
 
-@interface ViewController : GLKViewController
+
+@interface ViewController : CrossViewController
 
 @end

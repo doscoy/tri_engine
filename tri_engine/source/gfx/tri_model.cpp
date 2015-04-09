@@ -40,7 +40,7 @@ Model::~Model() {
 
 void Model::render(const Mtx44& transform) {
 
-    RenderSystem::resetBufferBind();
+    cross::RenderSystem::resetBufferBind();
 
     current_shader_->use();
     current_shader_->setUniform(SHADER_UNIF_PMV, transform);
@@ -54,7 +54,7 @@ void Model::render(const Mtx44& transform) {
     current_shader_->setAttributePointer(
         SHADER_ATTR_POSITION,
         3,
-        GL_FLOAT,
+        cross::RenderSystem::FLOAT,
         false,
         sizeof(VertexP3N),
         0
@@ -65,14 +65,14 @@ void Model::render(const Mtx44& transform) {
     current_shader_->setAttributePointer(
         SHADER_ATTR_NORMAL,
         3,
-        GL_FLOAT,
+        cross::RenderSystem::FLOAT,
         false,
         sizeof(VertexP3N),
         (void*)(sizeof(t3::Vec3))
     );
 
-    RenderSystem::drawElements(
-        RenderSystem::DrawMode::MODE_TRIANGLES,
+    cross::RenderSystem::drawElements(
+        cross::RenderSystem::DrawMode::MODE_TRIANGLES,
         mesh_->indexCount(),
         sizeof(uint32_t)
     );

@@ -8,31 +8,22 @@
 
 #import "ViewController.h"
 
-
+#include <cross_sdk/cross_sdk.hpp>
 #include "base/tri_application.hpp"
-#include "platform/platform.hpp"
+
 #include "AppDelegate.h"
 #include "dbg/tri_trace.hpp"
 
 #import <CoreMotion/CoreMotion.h>
 
-t3::Application* app_ = nullptr;
 
 
-int iosMain(int argc, char** argv, t3::Application* app) {
-    app_ = app;
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
-    }
-
-}
 
 float screen_scale_ = 1.0f;
 float screen_x_ = 0;
 float screen_y_ = 0;
 
-extern t3::Application* app_;
-extern t3::platform::PointingData point_data_[4];
+extern cross::PointingData point_data_[4];
 
 
 
@@ -69,19 +60,6 @@ extern t3::platform::PointingData point_data_[4];
     
     [EAGLContext setCurrentContext:self.context];
     
-/*
-    //  加速度センサー
-    motion_manager_ = [[CMMotionManager alloc] init];
-    
-    if (motion_manager_.accelerometerAvailable) {
-        //  加速度センサー更新タイミング
-        motion_manager_.accelerometerUpdateInterval = 1.0f / 15.0f;
-    
-        // プル型の更新で取得
-        [motion_manager_ startAccelerometerUpdates];
-    
-    }
-*/
     
     // 各機種で内部の座標系を統一する
     screen_scale_ = [UIScreen mainScreen].scale;
@@ -91,7 +69,8 @@ extern t3::platform::PointingData point_data_[4];
     screen_y_ = bounds.size.height * screen_scale_;
     
     t3::initializeTriEngine(screen_x_, screen_y_, "ios");
-    app_->initializeApplication();
+    t3::initializeApplication();
+
 }
 
 
@@ -100,17 +79,11 @@ extern t3::platform::PointingData point_data_[4];
 
 - (void)dealloc
 {
-/*
-    if (motion_manager_.accelerometerActive) {
-        [motion_manager_ stopAccelerometerUpdates];
-    }
-*/
-    app_->terminateApplication();
-    
-    
+    t3::terminateApplication();
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -171,31 +144,18 @@ extern t3::platform::PointingData point_data_[4];
     point_data_[0].hit_ = false;
 }
 
-/*
-- (void)updateAccele
-{
 
-    CMAccelerometerData* newest_accel = motion_manager_.accelerometerData;
-
-    acc_data_[0].x_ = newest_accel.acceleration.x;
-    acc_data_[0].y_ = newest_accel.acceleration.y;
-    acc_data_[0].z_ = newest_accel.acceleration.z;
-
-}
-
-*/
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
 - (void)update
 {
-    app_->updateApplication();
+    t3::updateApplication();
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-
-    app_->renderApplication();
+    t3::renderApplication();
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation

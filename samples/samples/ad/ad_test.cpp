@@ -30,11 +30,11 @@ public:
         if (ptng.isRelease()) {
             if (show_ad_) {
                 show_ad_ = false;
-//                t3::platform::hideAd();
+//                t3::cross::hideAd();
             }
             else {
                 show_ad_ = true;
-//                t3::platform::showAd();
+//                t3::cross::showAd();
             }
         }
     }

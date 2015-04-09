@@ -1,34 +1,22 @@
-#include "platform/platform.hpp"
-#include "kernel/io/tri_pad.hpp"
-#include "util/tri_bit.hpp"
 #include <cstdio>
-#include "base/tri_application.hpp"
-#include "dbg/tri_assert.hpp"
-#include "kernel/memory/tri_memory.hpp"
 #import <UIKit/UIKit.h>
+#include "../include/cross_types.hpp"
+#include "../include/cross_accelerometer.hpp"
 
-
-t3::platform::GamePadData pad_data_[4];
-t3::platform::PointingData point_data_[4];
-
-
-
-namespace  {
+cross::GamePadData pad_data_[4];
+cross::PointingData point_data_[4];
 
 
 
-}   //  unname namespace
+namespace cross {
 
 
 
 
-
-namespace t3 {
-inline namespace platform {
 
 
 void initializePlatform() {
-    platformAccelerometerInit();
+    accelerometerInit();
 }
 
 
@@ -85,15 +73,12 @@ String getDeviceFilePath() {
 
 
 void loadFile(
-    const FilePath& file_path,
+    const char* const file_path,
     uint8_t** data,
     size_t* size
 ) {
-    const char* filename = file_path.getFileNameNotExt().c_str();
-    NSString* nsfilename = [NSString stringWithCString: filename encoding:NSUTF8StringEncoding];
-
-    const char* extname = file_path.ext().c_str();
-    NSString* nsextname = [NSString stringWithCString: extname encoding:NSUTF8StringEncoding];
+/*
+    NSString* nsextname = [NSString stringWithCString: file_path encoding:NSUTF8StringEncoding];
 
 
     NSBundle* bundle = [NSBundle mainBundle];
@@ -105,6 +90,7 @@ void loadFile(
     *data = (uint8_t*)T3_SYS_ALLOC(*size);
     const void* nsbytes = [nsdata bytes];
     std::memcpy(*data, nsbytes, *size);
+*/
 }
 
 void saveInteger(
@@ -131,6 +117,5 @@ void loadInteger(
 
 
 
-}   // namespace platform
-}   // namespace t3
+}   // namespace cross
 

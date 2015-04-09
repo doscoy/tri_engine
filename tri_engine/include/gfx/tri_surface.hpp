@@ -44,11 +44,11 @@ public:
 private:
     int width_;
     int height_;
-    RenderSystem::FrameBufferID fb_;
-    RenderSystem::RenderBufferID cb_;
-    RenderSystem::RenderBufferID depth_;
-    RenderSystem::FrameBufferID last_fb_;
-    RenderSystem::RenderBufferID last_rb_;
+    cross::RenderSystem::FrameBufferID fb_;
+    cross::RenderSystem::RenderBufferID cb_;
+    cross::RenderSystem::RenderBufferID depth_;
+    cross::RenderSystem::FrameBufferID last_fb_;
+    cross::RenderSystem::RenderBufferID last_rb_;
     TexturePtr texture_;
 };
 

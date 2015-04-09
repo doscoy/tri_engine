@@ -89,7 +89,6 @@ public:
             .setup();
 
     const char* box_text = u8"top";
-    const int check_size = 164;
 
         box6_.text(box_text)
             .center(t3::Vec2(0,-240))

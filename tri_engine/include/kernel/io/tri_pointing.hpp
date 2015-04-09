@@ -4,8 +4,9 @@
 #define TRI_POINTING_HPP_INCLUDED
 
 #include "../../math/tri_math_types.hpp"
-#include "platform/platform_types.hpp"
 #include "base/tri_types.hpp"
+
+#include <cross_sdk/cross_sdk.hpp>
 
 namespace t3 {
 inline namespace kernel {
@@ -25,7 +26,7 @@ public:
 
 public:
     void updatePointing(
-        const PointingData& data,
+        const cross::PointingData& data,
         tick_t delta_time
     );
     

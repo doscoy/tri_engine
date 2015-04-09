@@ -13,7 +13,7 @@
 
 #include "gfx/tri_texture.hpp"
 #include "gfx/tri_texture_factory.hpp"
-#include "gfx/tri_render_system.hpp"
+
 #include "base/tri_director.hpp"
 #include "dbg/tri_debug_string_layer.hpp"
 #include "kernel/tri_kernel.hpp"
@@ -45,7 +45,7 @@ void beginPrint(
     width_ = w;
     height_ = h;
 
-    t3::RenderSystem::resetBufferBind();
+    cross::RenderSystem::resetBufferBind();
     debugfont_->bind();
 
     //  シェーダ切り替え
@@ -53,17 +53,17 @@ void beginPrint(
     T3_ASSERT(shader_setup_result);
     
     //  テクスチャの割り当て
-    t3::RenderSystem::setActiveTextureUnit(t3::RenderSystem::TextureUnit::UNIT0);
+    cross::RenderSystem::setActiveTextureUnit(cross::RenderSystem::TextureUnit::UNIT0);
     
 
-    t3::RenderSystem::setBlendFunctionType(
-        t3::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
-        t3::RenderSystem::BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
+    cross::RenderSystem::setBlendFunctionType(
+        cross::RenderSystem::BlendFunctionType::TYPE_SRC_ALPHA,
+        cross::RenderSystem::BlendFunctionType::TYPE_ONE_MINUS_SRC_ALPHA
     );
     
-    t3::RenderSystem::setBlend(true);
-    t3::RenderSystem::setActiveTextureUnit(
-        t3::RenderSystem::TextureUnit::UNIT0
+    cross::RenderSystem::setBlend(true);
+    cross::RenderSystem::setActiveTextureUnit(
+        cross::RenderSystem::TextureUnit::UNIT0
     );
     
 
@@ -77,7 +77,7 @@ void beginPrint(
 void endPrint()
 {
 
-    t3::RenderSystem::setBlend(false);
+    cross::RenderSystem::setBlend(false);
 }
 
 void debugFontPrint(
@@ -140,21 +140,21 @@ void debugFontPrint(
         u1, v0,
         u1, v1
     };
-    t3::RenderSystem::setEnableVertexAttribute(position_slot);
-    t3::RenderSystem::setEnableVertexAttribute(uv_slot);
+    cross::RenderSystem::setEnableVertexAttribute(position_slot);
+    cross::RenderSystem::setEnableVertexAttribute(uv_slot);
 
-    t3::RenderSystem::setVertexAttributePointer(
+    cross::RenderSystem::setVertexAttributePointer(
         position_slot,
         2,
-        GL_FLOAT,
+        cross::RenderSystem::FLOAT,
         false,
         0,
         varray
     );
-    t3::RenderSystem::setVertexAttributePointer(
+    cross::RenderSystem::setVertexAttributePointer(
         uv_slot,
         2,
-        GL_FLOAT,
+        cross::RenderSystem::FLOAT,
         false,
         0,
         vuv
@@ -167,10 +167,7 @@ void debugFontPrint(
         (float)cb / 255.0f,
         (float)ca / 255.0f
     );
-
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-
+    cross::RenderSystem::drawArray(cross::RenderSystem::DrawMode::MODE_TRIANGLE_STRIP, 0, 4);
 
 }
 
@@ -185,7 +182,7 @@ void initializeDebugPrint()
         "debugfont",
         dbg_font_.width_,
         dbg_font_.height_,
-        RenderSystem::ColorFormat::RGBA,
+        cross::RenderSystem::ColorFormat::RGBA,
         dbg_font_.pixel_data_
     );
     T3_NULL_ASSERT(debugfont_);

@@ -31,7 +31,7 @@ Pointing::~Pointing()
 }
 
 void Pointing::updatePointing(
-    const PointingData& data,
+    const cross::PointingData& data,
     tick_t delta_time
 ){
     bool hit = data.hit_;
@@ -179,7 +179,7 @@ void Pointing::updateFlick() {
 
 
 
-}   // namespace platform
+}   // namespace kernel
 }   // namespace t3
 
 

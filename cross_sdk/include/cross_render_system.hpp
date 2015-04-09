@@ -1,25 +1,32 @@
 
-#ifndef TRI_RENDER_SYSTEM_HPP
-#define TRI_RENDER_SYSTEM_HPP
+#ifndef CROSS_RENDER_SYSTEM_HPP_INCLUDED
+#define CROSS_RENDER_SYSTEM_HPP_INCLUDED
 
-#include "math/tri_matrix.hpp"
-#include "gfx/tri_color.hpp"
-#include "platform/platform_sdk.hpp"
-#include "base/tri_std.hpp"
+
+
+#include <cstdint>
+#include <cstdlib>
 
 
 #define TRI_INSTANT_SHADER(A)  #A
 
 
 
-namespace t3 {
-inline namespace gfx {
+namespace cross {
+
 
 
 class Texture;
 
 class RenderSystem {
 public:
+    enum {
+        BYTE  = 0x1401,
+        INT   = 0x1404,
+        FLOAT = 0x1406,
+    };
+    
+    
     
     using FrameBufferID = unsigned int;
     static void createFrameBuffer(FrameBufferID* id);
@@ -157,7 +164,7 @@ public:
 
     static void setUniformMatrix(
         ShaderVariableLocation location,
-        t3::Mtx44 mtx
+        const float* mtx
     );
 
     static void initializeRenderSystem();
@@ -206,9 +213,6 @@ public:
         const float value
     );
     
-    static void clearColor(
-       const Color& clear_color
-    );
     
     static void clearColor(
         float r,
@@ -451,11 +455,15 @@ public:
     
     static void unmapBuffer(RenderSystem::BufferType type);
     
+    static int createProgram();
+    static TextureID createTexture();
+
+    static void deleteTexture(TextureID* id);
+    
+    static bool isError();
 };
 
 
-}   // namespace gfx
-}   // namespace t3
-
+}   // namespace cross
 
 #endif // TRI_RENDER_SYSTEM_HPP

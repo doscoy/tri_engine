@@ -1,15 +1,12 @@
-#ifndef TRI_AUDIO_SYSTEM_HPP_INCLUDED
-#define TRI_AUDIO_SYSTEM_HPP_INCLUDED
+#ifndef CROSS_AUDIO_SYSTEM_HPP_INCLUDED
+#define CROSS_AUDIO_SYSTEM_HPP_INCLUDED
 
 
+#include <cstdlib>
+#include <cstdint>
 
-#include "kernel/io/tri_filepath.hpp"
+namespace cross {
 
-
-
-
-namespace t3 {
-inline namespace audio {
 
 class AudioSystem {
 public:
@@ -65,11 +62,31 @@ public:
     static BufferID createBuffer();
     static void deleteBuffer(BufferID buffer);
 
+    static SourceID createSource();
     static SourceID createSource(
         BufferID buffer
     );
     static void deleteSource(SourceID source);
 
+
+    static void queueBuffers(
+        const SourceID source,
+        size_t size,
+        const BufferID* buffer
+    );
+    
+    static void unqueueBuffers(
+        const SourceID source,
+        size_t size,
+        BufferID* buffer
+    );
+    
+    
+    static int getSourceProcessed(
+        const AudioSystem::SourceID source
+    );
+
+    
     static void play(SourceID sid);
     static void stop(SourceID sid);
     
@@ -81,7 +98,6 @@ public:
 
 
 
-}   // namespace audio
-}   // namespace t3
+}   // namespace cross
 
-#endif // TRI_AUDIO_SYSTEM_HPP_INCLUDED
+#endif // CROSS_AUDIO_SYSTEM_HPP_INCLUDED
