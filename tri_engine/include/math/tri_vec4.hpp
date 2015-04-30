@@ -17,7 +17,8 @@ namespace t3 {
 
 
 template <typename T>
-struct Vec4Template {
+class Vec4Template {
+public:
     T x_;
     T y_;
     T z_;

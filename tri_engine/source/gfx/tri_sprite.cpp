@@ -19,13 +19,14 @@ Sprite::Sprite()
     , pivot_(0, 0)
     , color_(255,255,255,255)
     , blend_mode_(cross::RenderSystem::BlendMode::NORMAL)
-    , texture_coord_{0, 0, 1, 1}
     , priority_(PRIORITY_NORMAL)
     , sort_score_(0)
     , enable_(true)
 {
     calcSortScore();
     transform_ = std::make_shared<Transform2D>();
+
+	texture_coord_ = { 0,0,1,1 };
 }
 
 //  デストラクタ
@@ -73,8 +74,8 @@ void Sprite::textureCoord(
 ) {
     T3_NULL_ASSERT(texture_);
     
-    float tex_width = texture_->width();
-    float tex_height = texture_->height();
+    float tex_width = static_cast<float>(texture_->width());
+    float tex_height = static_cast<float>(texture_->height());
     
     float u0 = left_top.x_ / tex_width;
     float v0 = left_top.y_ / tex_height;

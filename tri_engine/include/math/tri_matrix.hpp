@@ -17,8 +17,8 @@ namespace t3 {
 
 
 template <typename T>
-struct Mtx44Template {
-
+class Mtx44Template {
+public:
     Mtx44Template() {
         identity();
     }
@@ -42,7 +42,6 @@ struct Mtx44Template {
         z_ = c;
         w_ = d;
     }
-    
     
     
     

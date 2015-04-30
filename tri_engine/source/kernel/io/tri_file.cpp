@@ -26,7 +26,6 @@ File::File(
     , size_(size)
     , auto_free_(true)
 {
-
 }
 
 

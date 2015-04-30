@@ -153,12 +153,7 @@ Director::Director()
     , task_manager_()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
     , use_clear_color_index_(0)
-    , clear_colors_{{
-        Color::RED,
-        Color::darkgray(),
-        Color::white(),
-        Color::BLUE
-      }}
+    , clear_colors_()
     , dm_random_pointing_(nullptr, "RANDOM POINTING", random_pointing_, 1)
     , random_pointing_(false)
     , dm_game_speed_(nullptr, "GAME SPEED", game_speed_, 0.1f, 0.0f, 4.0f)
@@ -177,6 +172,13 @@ Director::Director()
     //  コリジョンマネージャ生成
     CollisionManager::createInstance();
     
+
+	clear_colors_[0] = Color::RED;
+	clear_colors_[1] = Color::darkgray();
+	clear_colors_[2] = Color::white();
+	clear_colors_[3] = Color::BLUE;
+
+
 #if TRI_DEVFLAG_AGING_CHECK
     random_pointing_ = true;
 #endif

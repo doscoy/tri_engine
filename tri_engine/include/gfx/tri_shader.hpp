@@ -197,15 +197,16 @@ private:
     };
     enum {
         CONST_REGISTER_NUM = 9,
+		FLOAT_ARRAY_SLOT_SIZE = 9
     };
     Array<ConstValue<int>, CONST_REGISTER_NUM> constant_int_;
     Array<ConstValue<float>, CONST_REGISTER_NUM> constant_float_;
     Array<ConstValue<Vec3>, CONST_REGISTER_NUM> constant_vec3_;
     
-    float constant_float_array_[9];
+    float constant_float_array_[FLOAT_ARRAY_SLOT_SIZE];
     bool constant_float_array_use_;
     size_t constant_float_array_size_;
-    int constant_float_array_location_[9];
+    int constant_float_array_location_[FLOAT_ARRAY_SLOT_SIZE];
 };
 
 using ShaderPtr = SharedPtr<Shader>;

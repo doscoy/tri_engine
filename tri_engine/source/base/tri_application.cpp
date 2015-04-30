@@ -157,7 +157,7 @@ Application::Application()
 #endif // DEBUG
     , last_scene_change_frame_(0)
     , fps_timer_()
-    , fps_stack_{0,0,0,0,0,0,0,0,0,0}
+    , fps_stack_()
     , fps_(60.0f)
 {
 }
@@ -180,7 +180,9 @@ void Application::initializeWorkBar() {
     //  ワークバーの配置
     int cpu_bar_margin = 70;
     cpu_bar_.position(Vec2(-half_screen_size.x_ + (cpu_bar_margin / 2), -half_screen_size.y_ + 10));
-    cpu_bar_.setLimitWidthPixel(screen_size.x_ - cpu_bar_margin);
+    cpu_bar_.setLimitWidthPixel(
+		screen_size.x_ - cpu_bar_margin
+	);
     
     //  ワークバーの色
     cpu_bar_.setColor(0, Color::BLUE);

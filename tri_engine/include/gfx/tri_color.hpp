@@ -72,7 +72,7 @@ public:
     }
     
     void alphaFloat(const float a) {
-        alpha_ = 255.0f * a;
+        alpha_ = static_cast<std::uint8_t>(255.0f * a);
         if (alpha_ > 255) {
             alpha_ = 255;
         }
@@ -82,7 +82,7 @@ public:
     }
     
     void redFloat(const float r) {
-        red(255.0f * r);
+        red(static_cast<uint_fast8_t>(255.0f * r));
     }
     
     void greenFloat(const float g) {
@@ -95,7 +95,7 @@ public:
     
 
 
-    void red(int r) {
+    void red(uint_fast8_t r) {
         if (r > 255) {
             r = 255;
         } else if (r < 0) {
@@ -104,7 +104,7 @@ public:
         red_ = r;
     }
     
-    void green(int g) {
+    void green(uint_fast8_t g) {
         if (g > 255) {
             g = 255;
         } else if (g < 0) {
@@ -113,7 +113,7 @@ public:
         green_ = g;
     }
     
-    void blue(int b) {
+    void blue(uint_fast8_t b) {
         if (b > 255) {
             b = 255;
         } else if (b < 0) {
@@ -122,7 +122,7 @@ public:
         blue_ = b;
     }
     
-    void alpha(int a) {
+    void alpha(uint_fast8_t a) {
         if (a > 255) {
             a = 255;
         } else if (a < 0) {

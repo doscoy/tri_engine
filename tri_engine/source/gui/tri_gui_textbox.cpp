@@ -112,8 +112,8 @@ void TextBox::adjustStringLayout() {
         y_start = -(size_.y_ / 2);
     }
 
-    int x = x_start;
-    int y = y_start;
+    float x = x_start;
+    float y = y_start;
     for (int i = 0; i < sprite_size; ++i) {
         //  文字のスプライトとグリフを取得
         auto& spr = char_sprites_[i];

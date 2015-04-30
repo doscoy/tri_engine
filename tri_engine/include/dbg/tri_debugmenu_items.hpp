@@ -71,10 +71,10 @@ public:
             }
         }
         else if ( pad.isTrigger(t3::Pad::BUTTON_UP)) {
-            target_ -= step_;
+            target_ = static_cast<T>(target_ - step_);
         }
         else if ( pad.isTrigger(t3::Pad::BUTTON_DOWN)) {
-            target_ += step_;
+            target_ = static_cast<T>(target_ + step_);
         }
         clampLimitation(target_, l_limit_, h_limit_);
     }

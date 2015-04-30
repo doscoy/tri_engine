@@ -253,7 +253,7 @@ public:
     }
     
     void color(const Color& color) {
-        float a = color_.alpha();
+        auto a = color_.alpha();
         color_ = color;
         color_.alpha(a);
     }

@@ -23,7 +23,7 @@ inline float frameToSec(int frame)
 
 inline int secToFrame(float sec)
 {
-    return sec * 60;
+    return static_cast<int>(sec * 60.0f);
 }
 
 

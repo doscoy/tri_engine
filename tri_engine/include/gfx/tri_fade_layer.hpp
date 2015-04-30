@@ -21,7 +21,7 @@ public:
 
 public:
     void setFadeSpeed(
-        const int speed
+        const float speed
     ) {
         fade_speed_ = speed;
     }

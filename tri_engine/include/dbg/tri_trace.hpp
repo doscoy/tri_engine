@@ -9,16 +9,16 @@ namespace t3 {
 
 //  前方宣言
 template <class T>
-struct Vec2Template;
+class Vec2Template;
 
 template <class T>
-struct Vec3Template;
+class Vec3Template;
 
 template <class T>
-struct Vec4Template;
+class Vec4Template;
 
 template <class T>
-struct Mtx44Template;
+class Mtx44Template;
 
 
 

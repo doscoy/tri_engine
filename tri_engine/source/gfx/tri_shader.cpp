@@ -16,10 +16,14 @@ Shader::Shader()
     , constant_float_()
     , constant_vec3_()
     , constant_float_array_()
-    , constant_float_array_location_{0,0,0,0,0,0,0,0,0}
+    , constant_float_array_location_()
     , constant_float_array_use_(false)
 {
-    
+	for (int i = 0; i < FLOAT_ARRAY_SLOT_SIZE; ++i) {
+		constant_float_array_[i] = 0.0f;
+		constant_float_array_location_[i] = 0;
+	}
+
 }
 
 Shader::Shader(
