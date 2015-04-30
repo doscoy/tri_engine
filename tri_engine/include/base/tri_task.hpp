@@ -13,7 +13,7 @@
 
 
 namespace t3 {
-inline namespace base {
+
 
 class TaskManager;
 class Task
@@ -191,7 +191,6 @@ using TaskPtr = SharedPtr<Task>;
 
 
 
-}   // namespace base
 }   // namespace t3
 
 

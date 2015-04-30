@@ -3,7 +3,6 @@
 
 
 namespace t3 {
-inline namespace gui {
 
 //  ラジオボタン押されたイベント
 const EventType RadioButtonEvent::TYPE("RadioButtonEvent");
@@ -67,9 +66,6 @@ void RadioButton::onRadioButtonTriggered(
     
 }
 
-
-
-}   // namespace gui
 }   // namespace t3
 
 

@@ -5,7 +5,7 @@
 
 
 namespace t3 {
-inline namespace dbg {
+
  
 
 DebugStringLayer::DebugStringLayer(const char* const name)
@@ -45,5 +45,4 @@ void DebugStringLayer::drawLayer()
 }
 
 
-}   // inline namespace dbg
 }   // namespace t3

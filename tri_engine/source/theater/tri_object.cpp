@@ -10,7 +10,6 @@
 
 
 namespace t3 {
-inline namespace theater {
 
 
 
@@ -56,6 +55,4 @@ void Object::makeTransformMatrix()
     transform_ = s * r * t;
 }
 
-
-}   // namespace theater
 }   // namespace t3

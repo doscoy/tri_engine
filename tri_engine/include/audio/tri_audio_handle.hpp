@@ -1,10 +1,10 @@
 #ifndef TRI_AUDIO_HANDLE_HPP_INCLUDED
 #define TRI_AUDIO_HANDLE_HPP_INCLUDED
 
-#include <cross_sdk/cross_sdk.hpp>
+#include "cross_sdk.hpp"
 
 namespace t3 {
-inline namespace audio {
+
 
 class AudioResource;
 
@@ -42,7 +42,6 @@ private:
 
 
 
-}   // namespace audio
 }   // namespace t3
 
 #endif // TRI_AUDIO_HANDLE_HPP_INCLUDED

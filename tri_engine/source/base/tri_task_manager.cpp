@@ -5,7 +5,6 @@
 
 
 namespace t3 {
-inline namespace base {
 
 
 TaskManager::TaskManager()
@@ -110,5 +109,4 @@ void TaskManager::onResume(const t3::Event&) {
 }
 
 
-}   // namespace base
 }   // namespace t3

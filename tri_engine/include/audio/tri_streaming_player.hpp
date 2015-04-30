@@ -2,13 +2,13 @@
 #define TRI_STREAMING_PLAYER_HPP_INCLUDED
 
 #include "tri_wav.hpp"
-#include <cross_sdk/cross_sdk.hpp>
+#include "cross_sdk.hpp"
 #include <array>
 
 
 
 namespace t3 {
-inline namespace audio {
+
 
 class StreamingPlayer {
     enum {
@@ -81,11 +81,7 @@ private:
 };
 
 
-
-}   // audio
 }   // t3
-
-
 
 
 

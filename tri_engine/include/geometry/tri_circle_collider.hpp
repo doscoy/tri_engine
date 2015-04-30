@@ -7,7 +7,7 @@
 
 
 namespace t3 {
-inline namespace geometry {
+
 
 
 class CircleCollider
@@ -52,7 +52,7 @@ private:
 
 using CircleColliderPtr = std::shared_ptr<CircleCollider>;
 
-}   // namaespace geometry
+
 }   // namespace t3
 
 #endif  // TRI_CIRCLE_COLLIDER_HPP_INCLUDED

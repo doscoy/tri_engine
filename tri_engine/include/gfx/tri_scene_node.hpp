@@ -8,7 +8,6 @@
 
 
 namespace t3 {
-inline namespace gfx {
 
 
 
@@ -68,11 +67,6 @@ using RenderableSceneNodes = List<SceneNodePtr>;
 
 
 
-
-
-
-
-}   // namespace gfx
 }   // namespace t3
 
 #endif

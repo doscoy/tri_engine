@@ -6,7 +6,7 @@
 #include "../math/tri_vec3.hpp"
 
 namespace t3 {
-inline namespace geometry {
+
 
 class AABB
 {
@@ -122,7 +122,6 @@ private:
 
 };
 
-}   // namespace geometry
 }   // namespace t3
 
 #endif  // TRI_AABB_HPP_INCLUDED

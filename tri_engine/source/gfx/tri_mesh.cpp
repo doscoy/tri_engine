@@ -10,7 +10,8 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
+
 
 #define BUFFER_OFFSET(bytes) ((GLubyte *)nullptr + (bytes))
 
@@ -180,7 +181,5 @@ Mesh::~Mesh()
 }
 
 
-
-} // inline namespace gfx
 } // namespace t3
 

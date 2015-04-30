@@ -5,7 +5,6 @@
 
 
 namespace t3 {
-inline namespace gfx {
 
 
 
@@ -287,6 +286,4 @@ void Shader::setEnableAttributeArray(
 }
 
 
-
-}   // namespace gfx
 }   // namespace t3

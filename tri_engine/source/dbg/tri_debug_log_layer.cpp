@@ -8,7 +8,6 @@
 
 
 namespace t3 {
-inline namespace dbg {
 
 constexpr int DEBUG_LOG_LINE = 43;
 
@@ -125,5 +124,4 @@ void DebugLogLayer::slideDown()
 }
 
 
-}   // namespace dbg
 }   // namespace t3

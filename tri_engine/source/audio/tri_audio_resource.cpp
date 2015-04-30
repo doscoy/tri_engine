@@ -5,7 +5,7 @@
 #include "audio/tri_wav.hpp"
 
 namespace t3 {
-inline namespace audio {
+
 
 AudioResource::AudioResource()
     : id_()
@@ -85,5 +85,5 @@ void AudioResource::setupBuffer(
 
 }
 
-}   // namespace audio
+
 }   // namepsace t3

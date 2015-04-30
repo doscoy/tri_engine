@@ -4,9 +4,6 @@
 
 
 namespace t3 {
-inline namespace base {
 
-
-}   // base
 }   // t3
 

@@ -6,7 +6,6 @@
 #include "../math/tri_math.hpp"
 
 namespace t3 {
-inline namespace theater {
 
 
 class Object
@@ -179,8 +178,6 @@ private:
 };
 
 
-
-}   // namespace theater
 }   // namespace t3
 
 

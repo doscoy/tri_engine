@@ -9,7 +9,6 @@
 #include <memory.h>
 
 namespace t3 {
-inline namespace gfx {
 
 
 class SpriteLayer
@@ -53,7 +52,7 @@ private:
     
 };
 
-}   // namespace gfx
+
 }   // namespace t3
 
 

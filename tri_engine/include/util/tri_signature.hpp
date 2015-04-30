@@ -4,7 +4,7 @@
 #define TRI_SIGNATURE_HPP_INCLUDED
 
 namespace t3 {
-inline namespace util {
+
 
 inline constexpr uint32_t makeSignature(
     char a,
@@ -16,7 +16,6 @@ inline constexpr uint32_t makeSignature(
 }
 
 
-}   // util
 }   // t3
 
 

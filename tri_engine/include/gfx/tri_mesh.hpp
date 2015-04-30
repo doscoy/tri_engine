@@ -11,7 +11,7 @@
 #include "tri_vertex_buffer.hpp"
 
 namespace t3 {
-inline namespace gfx {
+
 
 
 
@@ -51,7 +51,7 @@ private:
     Sphere sphere_;
 };
 
-} // inline namespace gfx
+
 } // namespace t3
 
 #endif // TRI_MESH_HPP_INCLUDED

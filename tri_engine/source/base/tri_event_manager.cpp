@@ -6,7 +6,6 @@
 #include "base/tri_scene.hpp"
 
 namespace t3 {
-inline namespace base {
 
 
 class LounchEventTask
@@ -76,13 +75,6 @@ bool safeRemoveListener(
 
 }
 
-bool safeRemoveListener(
-    const EventListenerPtr listener
-) {
-    T3_NULL_ASSERT(listener);
-    T3_ASSERT(EventManagerBase::get());
-    return EventManagerBase::get()->removeListener(listener);
-}
 
 
 
@@ -562,9 +554,4 @@ bool EventManager::triggerEvent(
 }
 
 
-
-
-
-
-}   // namespace base
 }   // namespace t3

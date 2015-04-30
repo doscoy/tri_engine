@@ -12,7 +12,6 @@
 #include "dbg/tri_trace.hpp"
 
 namespace t3 {
-inline namespace dbg {
 
 
 DebugLogBuffer::DebugLogBuffer()
@@ -43,7 +42,4 @@ void DebugLogBuffer::addString(
 }
 
 
-
-
-}   // dbg
 }   // t3

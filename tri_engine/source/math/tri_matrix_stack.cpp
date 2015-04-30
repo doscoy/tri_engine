@@ -2,7 +2,7 @@
 #include "math/tri_matrix_stack.hpp"
 
 namespace t3 {
-inline namespace math {
+
 
 MatrixStack::MatrixStack()
     : stack_()
@@ -51,8 +51,5 @@ void MatrixStack::clearStack()
 
 
 
-
-  
-}   // namespace math
 }   // namespace t3
 

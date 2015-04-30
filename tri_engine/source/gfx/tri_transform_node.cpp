@@ -9,7 +9,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 extern NodeID getNewNodeID();
 
@@ -185,7 +185,7 @@ TransformNodePtr TransformNode::create(
     return new_node;
 }
 
-}   // namespace theater
+
 }   // namespace t3
 
 

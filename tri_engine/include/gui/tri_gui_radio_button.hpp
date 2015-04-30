@@ -6,7 +6,7 @@
 #include "tri_gui_button.hpp"
 
 namespace t3 {
-inline namespace gui {
+
 
 
 //  ラジオボタンに登録されているボタンが押された時のイベント
@@ -87,7 +87,6 @@ private:
 
 
 
-}   // gui
 }   // t3
 
 

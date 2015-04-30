@@ -7,7 +7,7 @@
 #include "base/tri_std.hpp"
 
 namespace t3 {
-inline namespace base {
+
 struct EventListen{};
 
 using EventListenerPtr = void*;
@@ -72,6 +72,7 @@ public:
 
     static EventManagerBase* get();
 
+
 private:
 
     
@@ -85,8 +86,9 @@ private:
         const EventType& in_type
     );
     
+	template <class T>
     friend bool safeRemoveListener(
-        const EventListenerPtr& listener
+        const T* listener
     );
 
 
@@ -275,9 +277,19 @@ private:
 };
 
 
+template <class T>
+bool safeRemoveListener(
+	const T* listener
+	) {
+	T3_NULL_ASSERT(listener);
+	T3_ASSERT(EventManagerBase::get());
+	return EventManagerBase::get()->removeListener(
+		(const t3::EventListenerPtr)listener
+//		reinterpret_cast<const t3::EventListenerPtr>(listener)
+	);
+}
 
 
-}   // namespace base
 }   // namespace t3
 
 #endif // TRI_EVENT_MANAGER_HPP_INCLUDED

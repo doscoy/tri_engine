@@ -5,7 +5,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
     
 // *********************************************
 //  コンストラクタ
@@ -71,5 +71,4 @@ void Texture::bind() {
 }
 
 
-}   // inline namespace gfx
 }   // namespace t3

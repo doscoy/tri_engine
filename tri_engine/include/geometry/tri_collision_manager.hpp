@@ -10,7 +10,7 @@
 
 
 namespace t3 {
-inline namespace geometry {
+
 
 using Colliders = List<SharedPtr<Collider>>;
 using CollidersPtr = SharedPtr<Colliders>;
@@ -54,7 +54,7 @@ private:
 };
 
 
-}   // namespace geometory
+
 }   // namespace t3
 
 

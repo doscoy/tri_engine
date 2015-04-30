@@ -5,7 +5,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 
 Camera::Camera()
@@ -95,6 +95,5 @@ const Mtx44* Camera::viewMatrix()
 }
 
 
-}   // namespace gfx
 }   // namespace nd
 

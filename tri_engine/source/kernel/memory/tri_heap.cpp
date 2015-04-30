@@ -5,7 +5,7 @@
 #include "dbg/tri_trace.hpp"
 #include "util/tri_util.hpp"
 #include "util/tri_counter.hpp"
-
+#include "cross_sdk.hpp"
 
 #ifdef DEBUG
     #define TRI_DIRTY_MEMORY        1
@@ -43,7 +43,7 @@ namespace t3 {
 
 
 
-MemoryPool* heapMemoryPool() __attribute__((weak));
+MemoryPool* heapMemoryPool() CROSS_WEAK_SIMBOL;
 
 MemoryPool* heapMemoryPool() {
     static MemoryPool pool(1024*1024*24);

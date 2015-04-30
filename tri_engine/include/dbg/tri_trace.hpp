@@ -5,7 +5,7 @@
 #include "base/tri_std.hpp"
 
 namespace t3 {
-inline namespace math {
+
 
 //  前方宣言
 template <class T>
@@ -20,10 +20,8 @@ struct Vec4Template;
 template <class T>
 struct Mtx44Template;
 
-}   // namespace math
 
 
-inline namespace dbg {
 
 
 void traceTerminal(const char* const format, ...);
@@ -45,7 +43,7 @@ void traceValue(const char* const name, const Mtx44Template<float>& value);
 
 
 
-}   // inline namespace dbg
+
 }   // namespace t3
 
 

@@ -104,10 +104,10 @@ int readWaveHeader(
 
 
 namespace t3 {
-inline namespace audio {
+
 
 Wav::Wav()
-    : file_(nullptr)
+    : file_()
     , info_()
     , readed_size_(0)
     , data_(nullptr)
@@ -167,6 +167,4 @@ void Wav::readReset() {
 }
 
 
-
-}   // namespace audio
 }   // namepsace t3

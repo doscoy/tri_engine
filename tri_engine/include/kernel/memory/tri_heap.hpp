@@ -3,6 +3,7 @@
 #ifndef TRI_HEAP_HPP_INCLUDED
 #define TRI_HEAP_HPP_INCLUDED
 
+#include "cross_sdk.hpp"
 #include "base/tri_std.hpp"
 #include "kernel/process/tri_mutex.hpp"
 #include "util/tri_uncopyable.hpp"
@@ -11,8 +12,8 @@
 
 namespace t3 {
 
-constexpr int NAME_LENGTH = 6;
-extern MemoryPool* heapMemoryPool() __attribute__((weak));
+#define NAME_LENGTH  6
+extern MemoryPool* heapMemoryPool() CROSS_WEAK_SIMBOL;
 
 struct AllocHeader;
 class Heap

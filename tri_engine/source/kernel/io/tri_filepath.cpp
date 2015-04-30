@@ -1,11 +1,10 @@
 
 
 #include "kernel/io/tri_filepath.hpp"
-#include <cross_sdk/cross_sdk.hpp>
+#include "cross_sdk.hpp"
 
 
 namespace t3 {
-inline namespace io {
 
 
 String FilePath::base_filepath_;
@@ -51,5 +50,4 @@ String FilePath::getFullPath() const {
 }
 
 
-}   // namespace io
 }   // namespace t3

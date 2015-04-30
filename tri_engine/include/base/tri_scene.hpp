@@ -15,7 +15,7 @@
 
 
 namespace t3 {
-inline namespace base {
+
 
 class Scene;
 class SceneGenerator
@@ -127,7 +127,7 @@ public:
 class SceneManager
     : public Singleton<SceneManager>
 {
-    friend class Singleton;
+    friend class Singleton<SceneManager>;
     
 private:
     SceneManager();
@@ -175,7 +175,6 @@ private:
 };
 
 
-}   // namespace base
 
 }   // namespace t3
 

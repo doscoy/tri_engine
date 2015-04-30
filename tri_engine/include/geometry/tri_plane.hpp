@@ -6,7 +6,6 @@
 #include "../math/tri_math.hpp"
 
 namespace t3 {
-inline namespace geometry {
 
 
 
@@ -75,7 +74,6 @@ public:
 };
 
 
-}   // namespace geometry
 }   // namespace t3
 
 #endif  // TRI_PLANE_HPP_INCLUDED

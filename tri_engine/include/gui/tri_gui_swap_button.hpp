@@ -6,7 +6,7 @@
 #include "tri_gui_button.hpp"
 
 namespace t3 {
-inline namespace gui {
+
 
 
 
@@ -67,7 +67,7 @@ private:
     EventPtr b_event_;
 };
 
-}   // namespace gui
+
 }   // namespace t3
 
 

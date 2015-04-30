@@ -8,7 +8,7 @@
 
 
 namespace t3 {
-inline namespace theater {
+
     
 class Object {
 public:
@@ -29,8 +29,8 @@ private:
     Mtx44 transform_;
     bool calc_request_;
 };
-    
-}   // namespace theater
+
+
 }   // namespace t3
 
 

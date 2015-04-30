@@ -7,7 +7,6 @@
 #include "base/tri_director.hpp"
 
 namespace t3 {
-inline namespace gfx {
 
 
 SceneGraph::SceneGraph()
@@ -120,13 +119,6 @@ TransformNodePtr SceneGraph::createNode()
 
 
 
-
-
-
-
-
-
-}   // namespace gfx
 }   // namespace t3
 
 

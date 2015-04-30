@@ -7,11 +7,8 @@
 #include "tri_pointing.hpp"
 
 
-//#include <cross_sdk/cross_sdk.hpp>
-
-
 namespace t3 {
-inline namespace kernel {
+
 
 class Input
     : private Uncopyable
@@ -59,7 +56,7 @@ private:
     cross::AccelerometerData accele_;
 };
   
-}   // namespace kernel
+
 }   // namespace t3
 
 #endif // TRI_PAD_HPP_INCLUDED

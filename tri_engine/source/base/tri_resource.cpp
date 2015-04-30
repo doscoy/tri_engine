@@ -3,7 +3,7 @@
 
 
 namespace t3 {
-inline namespace base {
+
 
 Resource::Resource()
     : Resource("\0")
@@ -20,6 +20,5 @@ Resource::Resource(
     std::strncpy(resource_name_, name, RESOURCE_NAME_SIZE);
 }
 
-}   //  namespace base
 }   //  namespace t3
 

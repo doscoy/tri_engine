@@ -17,7 +17,7 @@ namespace t3 {
 
 extern Counter frame_counter_;
 
-inline namespace base {
+
     
 const Input& Director::input(
     const int player_no
@@ -423,10 +423,6 @@ void Director::calcScreenRevise() {
     screen_revise_ = virtual_screen_size_ / real_screen_size_;
 }
 
-
-
-
-}   // inline namespace base
 }   // namespace t3
 
 

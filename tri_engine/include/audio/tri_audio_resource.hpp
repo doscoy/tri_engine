@@ -7,7 +7,6 @@
 
 
 namespace t3 {
-inline namespace audio {
 
 class Wav;
 
@@ -38,7 +37,7 @@ private:
 using AudioManager = ResourceManager<AudioResource>;
 
 
-} // namespace auido
+
 } // namespace t3
 
 #endif // TRI_AUDIO_RESOURCE_HPP_INCLUDED

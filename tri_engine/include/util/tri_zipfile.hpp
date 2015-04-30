@@ -4,7 +4,6 @@
 #include "base/tri_std.hpp"
 
 namespace t3 {
-inline namespace util {
 
 
 
@@ -14,9 +13,11 @@ class ZipFile {
 
 public:
     ZipFile()
-        : entries_(0)
-        , file_(nullptr)
+        : m_ZipContentsMap()
+        , file_()
         , data_buffer_(nullptr)
+        , entries_(0)
+        , pap_dir_(nullptr)
     {
     }
     
@@ -51,13 +52,13 @@ public:
 
 	int find(const String &path) const;
 
-	ZipContentsMap m_ZipContentsMap;
 
 private:
     struct ZipDirHeader;
     struct ZipDirFileHeader;
     struct ZipLocalHeader;
 
+	ZipContentsMap m_ZipContentsMap;
     FileStream file_;
 
     char* data_buffer_;   // データバッファ.
@@ -67,8 +68,6 @@ private:
 };
 
 
-
-}   // namespace util
 }   // namespace t3
 
 

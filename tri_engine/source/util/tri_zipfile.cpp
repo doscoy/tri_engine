@@ -1,5 +1,5 @@
 
-#include "tri_zipfile.hpp"
+
 #include <zlib.h>
 #include <cctype>			// for std::tolower
 
@@ -9,7 +9,7 @@
 #include "util/tri_util.hpp"
 
 namespace t3 {
-inline namespace util {
+
 
 namespace {
 
@@ -366,9 +366,6 @@ bool ZipFile::readFile(
 }
 
 
-
-
-}   // namespace util
 }   // namespace t3
 
 

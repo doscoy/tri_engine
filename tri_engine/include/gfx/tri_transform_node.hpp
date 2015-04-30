@@ -6,7 +6,7 @@
 #include "tri_scene_node.hpp"
 
 namespace t3 {
-inline namespace gfx {
+
 
 class Entity;
 
@@ -282,8 +282,6 @@ private:
 };
 
 
-
-}   // namespace gfx
 }   // namespace t3
 
 

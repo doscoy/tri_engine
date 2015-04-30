@@ -8,7 +8,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 class Model
     : public Entity
@@ -36,7 +36,7 @@ private:
 };
 
 
-}   // namespace gfx
+
 }   // namespace t3
 
 

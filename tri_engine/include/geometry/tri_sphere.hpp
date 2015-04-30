@@ -4,7 +4,7 @@
 #include "../math/tri_vec3.hpp"
 
 namespace t3 {
-inline namespace geometry {
+
 
 class Sphere
 {
@@ -55,7 +55,6 @@ private:
 
 };
 
-}   // geometry
 }   // t3
 
 #endif  // TRI_SPHERE_HPP_INCLUDED

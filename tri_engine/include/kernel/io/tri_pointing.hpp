@@ -6,10 +6,10 @@
 #include "../../math/tri_math_types.hpp"
 #include "base/tri_types.hpp"
 
-#include <cross_sdk/cross_sdk.hpp>
+#include "cross_sdk.hpp"
 
 namespace t3 {
-inline namespace kernel {
+
     
 
 class Pointing{
@@ -113,7 +113,6 @@ private:
 };
 
 
-}   // namespace kernel
 }   // namespace t3
 
 #endif // TRI_POINTING_HPP_INCLUDED

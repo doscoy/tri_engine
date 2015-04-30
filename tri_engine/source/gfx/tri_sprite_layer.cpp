@@ -4,7 +4,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
     
 SpriteLayer::SpriteLayer()
     : SpriteLayer("Sprite", PRIORITY_APP_DEFAULT)
@@ -99,8 +99,5 @@ void SpriteLayer::detachAllSprite() {
     }
 }
 
-
-
-}   // inline namespace gfx
 }   // namespace t3
 

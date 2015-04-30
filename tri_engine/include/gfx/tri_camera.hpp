@@ -9,7 +9,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 class Camera;
 using CameraPtr = SharedPtr<Camera>;
@@ -97,8 +97,6 @@ private:
 };  // class Camera
 
 
-
-}   // namespace gfx
 }   // namespace t3
 
 #endif // TRI_CAMERA_HPP_INCLUDED

@@ -15,7 +15,7 @@
 
 
 namespace t3 {
-inline namespace math {
+
 
 template <typename T>
 class Vec3Template {
@@ -329,7 +329,7 @@ using Vec3 = Vec3Template<float>;
 using Point3 = Vec3Template<int>;
 
 
-}   // namespace math
+
 }   // namespace t3
 
 

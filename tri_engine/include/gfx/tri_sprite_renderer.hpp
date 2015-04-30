@@ -11,7 +11,7 @@
 #include "tri_index_buffer.hpp"
 
 namespace t3 {
-inline namespace gfx {
+
 
 class IndexBuffer;
 class SpriteRenderer
@@ -124,7 +124,6 @@ private:
 
 
 
-}   // inline namespace gfx
 }   // namespace t3
 
 

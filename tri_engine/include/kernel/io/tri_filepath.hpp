@@ -8,7 +8,7 @@
 
 
 namespace t3 {
-inline namespace io {
+
 
 class FilePath {
 public:
@@ -38,7 +38,6 @@ private:
 };
 
 
-}   // namespace io
 }   // namespace t3
 
 

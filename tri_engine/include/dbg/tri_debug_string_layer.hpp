@@ -7,7 +7,7 @@
 #include "../gfx/tri_color.hpp"
 
 namespace t3 {
-inline namespace dbg {
+
 
 class DebugStringLayer
     : public RenderLayer
@@ -37,7 +37,6 @@ protected:
 
 
 
-} // inline namespace dbg
 } // namespace t3
 
 

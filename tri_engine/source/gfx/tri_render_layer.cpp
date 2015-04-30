@@ -2,12 +2,11 @@
 
 #include "gfx/tri_render_layer.hpp"
 #include "base/tri_director.hpp"
-#include "tri_surface.hpp"
+#include "gfx/tri_surface.hpp"
 
 
 
 namespace t3{
-inline namespace gfx {
     
 
 RenderLayer::RenderLayer(
@@ -115,6 +114,5 @@ void RenderLayer::detachSystem() {
 }
 
 
-}   // inline namespace gfx
 }   // namespace t3
 

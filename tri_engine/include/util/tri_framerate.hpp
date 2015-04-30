@@ -2,7 +2,7 @@
 #define TRI_FRAMERATE_HPP_INCLUDED
 
 namespace t3 {
-inline namespace util {
+
     
 
 // *********************************************
@@ -32,7 +32,7 @@ inline float deltaRate(float delta_time) {
 }
     
     
-}   // inline namespace util
+
 }   // namespace t3
 
 #endif // TRI_FRAMERATE_HPP_INCLUDED

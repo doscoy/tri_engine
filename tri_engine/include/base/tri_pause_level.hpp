@@ -5,7 +5,7 @@
 #include "tri_event.hpp"
 
 namespace t3 {
-inline namespace base {
+
 
 
 enum PauseLevel {
@@ -62,7 +62,7 @@ private:
     PauseLevel pause_lv_;
 };
 
-}   // namespace geometry
+
 }   // namespace t3
 
 

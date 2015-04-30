@@ -7,7 +7,6 @@
 
 
 namespace t3 {
-inline namespace dbg {
     
     
 typedef List<DebugMenuLabel*> DebugMenuList;
@@ -86,7 +85,6 @@ private:
 };
 
 
-}   // inline namespace dbg
 }   // namespace t3
 
 #endif // TRI_DEBUGMENU_FRAME_HPP_INCLUDED

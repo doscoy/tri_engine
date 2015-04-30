@@ -3,7 +3,7 @@
 #define TRI_RENDERABLE_HPP_INCLUDED
 
 namespace t3 {
-inline namespace gfx {
+
 
 class IRenderer;
 
@@ -14,7 +14,6 @@ public:
 };
 
 
-}   // namespace gfx
 }   // namespace t3
 
 

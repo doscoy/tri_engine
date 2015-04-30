@@ -7,17 +7,13 @@
 
 namespace t3 {
 
-inline namespace geometry {
+
 
 class Plane;
 class Segment;
 
 
-}   // namespace geometry
 
-
-
-inline namespace dbg {
 
 void initializeDrawPrimitive();
 
@@ -65,7 +61,6 @@ void drawPlane(
 
 
 
-}   // inline namespace dbg
 }   // namespace t3
 
 

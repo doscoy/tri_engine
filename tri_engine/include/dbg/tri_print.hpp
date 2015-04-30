@@ -5,7 +5,7 @@
 #include "../gfx/tri_color.hpp"
 
 namespace t3 {
-inline namespace dbg {
+
 
 void initializeDebugPrint();
 
@@ -37,7 +37,6 @@ void printDisplay(
 
 constexpr int DEBUG_FONT_POINT = 16;
 
-} // inline namespace dbg
 } // namespace t3
 
 

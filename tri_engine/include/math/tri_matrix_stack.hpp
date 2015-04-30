@@ -8,7 +8,7 @@
 
 
 namespace t3 {
-inline namespace math {
+
 
 class MatrixStack
 {
@@ -34,7 +34,7 @@ private:
 
 };
 
-}   // namespace math
+
 }   // namespace t3
 
 

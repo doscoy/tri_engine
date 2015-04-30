@@ -9,7 +9,7 @@
 
 
 namespace t3 {
-inline namespace geometry {
+
 
 class PointCollider;
 class CircleCollider;
@@ -70,7 +70,7 @@ private:
 using ColliderPtr = SharedPtr<Collider>;
 
         
-}   // namaespace geometry
+
 }   // namespace t3
 
 

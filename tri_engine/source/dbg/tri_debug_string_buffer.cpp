@@ -41,7 +41,6 @@ void drawString(
 
 
 namespace t3 {
-inline namespace dbg {
 
 DebugStringBuffer::DebugStringBuffer()
     : size_( 0 )
@@ -104,8 +103,5 @@ void DebugStringBuffer::drawStrings()
 }
 
 
-
-
-}   // inline namespace dbg
 }   // namespace t3
 

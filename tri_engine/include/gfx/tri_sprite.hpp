@@ -18,7 +18,6 @@
 
 
 namespace t3 {
-inline namespace gfx {
 
 
 class Texture;
@@ -303,8 +302,6 @@ using SpritePtr = SharedPtr<Sprite>;
 using WeakSprite = std::weak_ptr<Sprite>;
 
 
-
-}   // inline namespace gfx
 }   // namespace t3
 
 

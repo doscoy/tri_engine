@@ -1,12 +1,12 @@
 
-#include "tri_streaming_player.hpp"
+#include "audio/tri_streaming_player.hpp"
 #include "kernel/memory/tri_memory.hpp"
 
 #include "dbg/tri_trace.hpp"
 
 
 namespace t3 {
-inline namespace audio {
+
 
 
 StreamingPlayer::StreamingPlayer()
@@ -144,5 +144,6 @@ void StreamingPlayer::switchReadingBuffer() {
 }
 
 
-}   // namespace audio
+
 }   // namespace t3
+

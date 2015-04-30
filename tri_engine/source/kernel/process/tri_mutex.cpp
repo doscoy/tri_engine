@@ -2,25 +2,24 @@
 
 namespace t3 {
 
+std::mutex mtx;
 
+Mutex::Mutex() {
 
-Mutex::Mutex()
-    : handle_() {
-    pthread_mutex_init(&handle_, nullptr);
 }
 
 
 Mutex::~Mutex() {
-    pthread_mutex_destroy(&handle_);
+
 }
 
 
-void Mutex::lock() {
-    pthread_mutex_lock(&handle_);
+bool Mutex::lock() {
+    return mtx.try_lock();
 }
 
 void Mutex::unlock() {
-    pthread_mutex_unlock(&handle_);
+    mtx.unlock();
 }
 
 

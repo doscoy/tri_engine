@@ -13,7 +13,7 @@
 
 
 namespace t3 {
-inline namespace gui {
+
 
 
 class Button;
@@ -218,11 +218,6 @@ private:
 };   // class Button
 
 
-
-
-
-
-}   // namespace gui
 }   // namespace t3
 
 

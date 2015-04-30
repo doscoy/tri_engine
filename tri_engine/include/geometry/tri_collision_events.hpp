@@ -8,7 +8,7 @@
 #include "tri_collider.hpp"
 
 namespace t3 {
-inline namespace geometry {
+
     
 using CollisionPair = std::pair<ColliderPtr, ColliderPtr>;
     
@@ -48,7 +48,6 @@ public:
 };
 
 
-}   // namespace geometry
 }   // namespace t3
 
 #endif  // TRI_COLLISION_EVENTS_HPP_INCLUDED

@@ -22,7 +22,6 @@ void initializeTriEngine(
 
 void terminateTriEngine();
 
-inline namespace base{
 
 class SceneGenerator;
 
@@ -81,8 +80,6 @@ void updateApplication();
 void renderApplication();
 
 
-
-}   // namespace base
 }   // namespace t3
 
 #endif // TRI_APPLICATION_HPP_INCLUDED

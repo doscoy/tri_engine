@@ -2,10 +2,9 @@
 #define TRI_VIRTUAL_PAD_HPP_INCLUDED
 
 #include "gfx/tri_draw_layer.hpp"
-#include <cross_sdk/cross_sdk.hpp>
+#include "cross_sdk.hpp"
 
 namespace t3 {
-inline namespace dbg {
 
 
 class VirtualPad
@@ -48,7 +47,6 @@ private:
 };
 
 
-}   // inline namespace dbg
 }   // namespace t3
 
 

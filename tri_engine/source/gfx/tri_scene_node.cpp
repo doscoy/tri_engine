@@ -2,7 +2,6 @@
 
 
 namespace t3 {
-inline namespace gfx {
 
 
 NodeID getNewNodeID()
@@ -12,5 +11,5 @@ NodeID getNewNodeID()
     return new_id;
 }
 
-}   // namespace gfx
+
 }   // namespace t3

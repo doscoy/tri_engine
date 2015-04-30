@@ -5,7 +5,7 @@
 #define TRI_GFX_TYPES_HPP_INCLUDED
 
 namespace t3 {
-inline namespace gfx {
+
 
 struct texture_coord_t
 {
@@ -16,7 +16,6 @@ struct texture_coord_t
 };
 
 
-}   // gfx
 }   // t3
 
 #endif  // TRI_GFX_TYPES_HPP_INCLUDED

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
 //
 
-#include "tri_color.hpp"
+#include "gfx/tri_color.hpp"
 
 
 namespace t3 {

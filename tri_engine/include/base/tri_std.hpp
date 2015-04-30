@@ -19,7 +19,6 @@
 #include <cstddef>
 
 
-
 namespace t3 {
 
 

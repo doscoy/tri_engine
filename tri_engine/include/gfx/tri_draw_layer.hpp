@@ -9,7 +9,6 @@
 
 
 namespace t3 {
-inline namespace gfx {
 
 
 
@@ -57,7 +56,6 @@ private:
 
 
 
-}   // inline namespace gfx
 }   // namespace t3
 
 

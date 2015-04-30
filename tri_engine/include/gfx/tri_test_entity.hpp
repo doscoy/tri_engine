@@ -8,7 +8,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 class TestEntity
     : public Entity
@@ -31,7 +31,6 @@ public:
 };
 
 
-}   // namespace gfx
 }   // namespace t3
 
 

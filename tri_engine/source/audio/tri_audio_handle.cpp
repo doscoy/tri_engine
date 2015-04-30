@@ -4,7 +4,7 @@
 
 
 namespace t3 {
-inline namespace audio {
+
 
 AudioHandle::AudioHandle(
     const cross::AudioSystem::BufferID buffer_id
@@ -58,5 +58,6 @@ void AudioHandle::volume(
     cross::AudioSystem::volume(sid_, vol);
 }
 
-}   // namespace audio
+
 }   // namepsace t3
+

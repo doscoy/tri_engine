@@ -18,7 +18,7 @@
 
 //==============================================================================
 namespace t3 {
-inline namespace base {
+
 
 
 constexpr int MAX_PAD = 4;
@@ -26,7 +26,7 @@ constexpr int MAX_PAD = 4;
 class Director 
     : public Singleton<Director>
 {
-    friend class Singleton;
+    friend class Singleton<Director>;
 
 public:
     typedef RandomNumberGenerator<RandomWell> random_t;
@@ -236,7 +236,6 @@ private:
 };
 
 
-}   // namespace base
 }   // namespace t3
 
 

@@ -16,7 +16,7 @@
 
 
 namespace t3 {
-inline namespace util {
+
 
 class Archive {
 
@@ -37,7 +37,7 @@ private:
 };
 
 
-}   // namespace util
+
 }   // namespace t3
 
 

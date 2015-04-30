@@ -11,7 +11,7 @@
 #include "base/tri_std.hpp"
 
 namespace t3 {
-inline namespace util {
+
 
 
 // 指定bitを立てる
@@ -63,7 +63,7 @@ const char* bitToString(
 uint32_t bitPopulation(const uint32_t bits);
 
 
-} // namespace util
+
 } // namespace t3
 
 

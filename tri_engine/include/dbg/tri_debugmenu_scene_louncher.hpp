@@ -6,7 +6,6 @@
 #include "base/tri_scene.hpp"
 
 namespace t3 {
-inline namespace dbg {
 
 
 template <class T>
@@ -37,8 +36,6 @@ public:
     TypedSceneGenerator<T> gen_;
 };
 
-
-}   //  namespace dbg
 }   //  namespace t3
 
 #endif  // TRI_DEBUGMENU_SCENE_LOUNCHER_HPP_INCLUDED

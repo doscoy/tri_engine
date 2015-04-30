@@ -6,7 +6,7 @@
 #include "../math/tri_vec3.hpp"
 
 namespace t3 {
-inline namespace geometry {
+
 
 class Segment
 {
@@ -42,8 +42,6 @@ private:
 
 
 
-
-}   // namespace geometry
 }   // namespace t3
 
 

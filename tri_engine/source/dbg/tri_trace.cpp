@@ -12,7 +12,7 @@
 
 
 namespace t3 {
-inline namespace dbg {
+
 
 
 void traceTerminal( const char* const format, ... )
@@ -52,14 +52,14 @@ void trace( const char* const format, ... )
     traceTerminal("[%u]%s", count, buf);
     traceDisplay("[%u]%s", count, buf);
 }
-
+/*
 void traceValue(
     const char* const name,
     ::std::size_t value
 ) {
     trace("[%d] %s=%u\n", frame_counter_.now(), name, value);
 }
-
+*/
 void traceValue(
     const char* const name,
     int value
@@ -69,7 +69,7 @@ void traceValue(
 
 void traceValue(
     const char* const name,
-    uint32_t value
+    ::std::uint32_t value
 ) {
     trace("[%d] %s=%u\n", frame_counter_.now(), name, value);
 }
@@ -163,7 +163,5 @@ void traceValue(
     
 }
 
-
-}   // inline namespace dbg
 }   // namespace t3
 

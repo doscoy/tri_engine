@@ -7,7 +7,7 @@
 
 
 namespace t3 {
-inline namespace geometry {
+
         
 
 class CircleCollider;
@@ -39,7 +39,7 @@ private:
 };
         
         
-}   // namaespace geometry
+
 }   // namespace t3
 
 #endif  // TRI_POINT_COLLIDER_HPP_INCLUDED

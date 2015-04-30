@@ -3,7 +3,7 @@
 #include "geometry/tri_collision.hpp"
 
 namespace t3 {
-inline namespace geometry {
+
 
 
 const HashString CircleCollider::TYPE("CircleCollider");
@@ -36,8 +36,6 @@ const HashString& CircleCollider::getCollisionType() const {
     return TYPE;
 }
 
-
-}   // namespace geometry
 }   // namespace t3
 
 

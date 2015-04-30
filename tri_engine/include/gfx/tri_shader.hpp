@@ -2,7 +2,7 @@
 #define TRI_SHADER_HPP_INCLUDED
 
 
-#include <cross_sdk/cross_sdk.hpp>
+#include "cross_sdk.hpp"
 
 #include "math/tri_vec3.hpp"
 #include "math/tri_matrix.hpp"
@@ -11,8 +11,6 @@
 
 namespace t3 {
 
-
-inline namespace gfx {
 
 
 class Shader {
@@ -212,8 +210,7 @@ private:
 
 using ShaderPtr = SharedPtr<Shader>;
     
-    
-}   // namaspace gfx
+
 }   // namespace t3
 
 #endif // TRI_RESOURCE_MANAGER_HPP_INCLUDED

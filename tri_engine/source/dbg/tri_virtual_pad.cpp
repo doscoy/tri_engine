@@ -34,7 +34,6 @@ const t3::Rectangle B_BUTTON(POS_B, POS_B + BUTTON_SIZE);
 
 
 namespace t3 {
-inline namespace dbg {
 
 VirtualPad::VirtualPad()
     : pad_layer_("vpad", RenderLayer::PRIORITY_DEBUG)
@@ -157,7 +156,4 @@ void VirtualPad::renderVirtualPad(t3::DrawLayer* const layer) {
 
 
 
-
-
-}   // inline namespace dbg
 }   // namespace t3

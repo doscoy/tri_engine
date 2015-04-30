@@ -3,7 +3,7 @@
 #include "base/tri_director.hpp"
 
 namespace t3 {
-inline namespace kernel {
+
 
 Pointing::Pointing()
     : hold_(false)
@@ -171,15 +171,6 @@ void Pointing::updateFlick() {
 
 
 
-
-
-
-
-
-
-
-
-}   // namespace kernel
 }   // namespace t3
 
 

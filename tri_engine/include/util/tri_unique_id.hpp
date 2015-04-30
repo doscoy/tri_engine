@@ -6,7 +6,7 @@
 
 
 namespace t3 {
-inline namespace util {
+
 
 
 class UniqueID
@@ -45,7 +45,7 @@ private:
 };
 
 
-}   // namespace util
+
 }   // namespace t3
 
 #endif // TRI_UNIQUE_ID_HPP_INCLUDED

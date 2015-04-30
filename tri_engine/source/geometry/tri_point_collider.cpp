@@ -6,7 +6,7 @@
 
 
 namespace t3 {
-inline namespace geometry {
+
 
 const HashString PointCollider::TYPE("PointCollider");
 
@@ -34,5 +34,4 @@ const HashString& PointCollider::getCollisionType() const {
 }
 
 
-}   // namespace geometry
 }   // namespace t3

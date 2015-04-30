@@ -4,10 +4,9 @@
 
 
 namespace t3 {
-inline namespace geometry {
+
         
 const EventType CollisionEvent::TYPE("CollisionEvent");
 
 
-}   // namespace geometry
 }   // namespace t3

@@ -10,8 +10,7 @@
 #define DEBUG_MENU_FONT_SIZE    ::t3::dbg::DEBUG_FONT_POINT
 
 namespace t3 {
-inline namespace dbg {
-    
+
     
 
 class DebugMenuFrame;
@@ -117,7 +116,7 @@ protected:
 };
 
 
-}   // inline namespace dbg
+
 }   // namespace t3
 
 #endif // TRI_DEBUGMENU_LABEL_HPP_INCLUDED

@@ -8,7 +8,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 class VertexBuffer
     : Uncopyable {
@@ -32,7 +32,7 @@ private:
     cross::RenderSystem::BufferID buffer_id_;
 };
 
-}   // namespace gfx
+
 }   // namespace t3
 
 

@@ -5,7 +5,7 @@
 #include "../dbg/tri_assert.hpp"
 
 namespace t3 {
-inline namespace util {
+
 
 class MethodCallbackBase
 {
@@ -51,7 +51,9 @@ public:
     
     ReturnType invoke() {
         T3_ASSERT(canInvoke());
-        return (((T*)MethodCallbackBase::instance_)->*((callback_t)func_))();
+		T* t = (T*)MethodCallbackBase::instance_;
+		callback_t& f = (callback_t&)func_;
+        return (t->*(f))();
     }
 };
 
@@ -73,7 +75,9 @@ public:
     }
     
     ReturnType invoke( Arg1& arg1 ) {
-        return (((T*)MethodCallbackBase::instance_)->*((callback_t)func_))(arg1);
+		T* t = (T*)MethodCallbackBase::instance_;
+		callback_t& f = (callback_t&)func_;
+		return (t->*(f))(arg1);
     }
 };
 
@@ -95,8 +99,10 @@ class MethodCallback2
     }
     
     ReturnType invoke( Arg1& arg1, Arg2& arg2 ) {
-        return (((T*)MethodCallbackBase::instance_)->*((callback_t)func_))(arg1, arg2);
-    }
+		T* t = (T*)MethodCallbackBase::instance_;
+		callback_t& f = (callback_t&)func_;
+		return (t->*(f))(arg1, arg2);
+	}
 };
     
     
@@ -117,19 +123,16 @@ public:
     }
     
     ReturnType invoke( Arg1& arg1, Arg2& arg2, Arg3 arg3 ) {
-        return (((T*)MethodCallbackBase::instance_)->*((callback_t)func_))(arg1, arg2, arg3);
-    }
+		T* t = (T*)MethodCallbackBase::instance_;
+		callback_t& f = (callback_t&)func_;
+		return (t->*(f))(arg1, arg2, arg3);
+	}
 };
     
 
 
 
 
-
-
-
-
-}   // inline namespace
 }   // namespace t3
 
 #endif  // TRI_METHOD_CALLBACK_HPP_INCLUDED

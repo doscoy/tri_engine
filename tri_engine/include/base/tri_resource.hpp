@@ -11,7 +11,7 @@
 constexpr int RESOURCE_NAME_SIZE = 96;
 
 namespace t3 {
-inline namespace base {
+
 
 
 class Resource
@@ -43,7 +43,7 @@ private:
     char resource_name_[RESOURCE_NAME_SIZE];
 };
 
-}   // namespace base
+
 }   // namespace t3
 
 #endif // TRI_RESOURCE_HPP_INCLUDED

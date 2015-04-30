@@ -11,7 +11,6 @@
 
 
 namespace t3 {
-inline namespace gfx {
 
 class Texture;
 using TexturePtr = SharedPtr<Texture>;
@@ -105,8 +104,6 @@ private:
 using TextureManager = ResourceManager<Texture>;
 
     
-
-}   // inline namespace gfx
 }   // namespace t3
 
 #endif // TRI_TEXTURE_HPP_INCLUDED

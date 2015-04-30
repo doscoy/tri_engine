@@ -9,10 +9,10 @@
 #include "base/tri_pause_level.hpp"
 
 namespace t3 {
-inline namespace base {
+
         
 const EventType PauseEvent::TYPE("PauseEvent");
 const EventType ResumeEvent::TYPE("ResumeEvent");
 
-}   // namespace geometry
+
 }   // namespace t3

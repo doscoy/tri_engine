@@ -7,7 +7,7 @@
 
 
 namespace t3 {
-inline namespace math {
+
 
 //  大きい値を取得
 template <typename T>
@@ -155,7 +155,6 @@ inline float gauss(float x, float sigma2) {
 
 
 
-} // inline namespace math
 } // namespace t3
 
 

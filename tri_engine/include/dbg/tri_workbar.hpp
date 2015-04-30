@@ -7,7 +7,8 @@
 #include <array>
 
 namespace t3 {
-inline namespace dbg {
+
+
 constexpr int MAX_WORKBAR_ITEM = 6;
 
 class Workbar
@@ -55,7 +56,6 @@ private:
 };
 
 
-}   // inline namespace dbg
 }   // namespace t3
 
 

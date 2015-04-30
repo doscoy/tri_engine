@@ -45,7 +45,6 @@ public:
 }
 
 namespace t3 {
-inline namespace gfx {
 
 SpriteRenderer::SpriteRenderer()
     : sprites_()
@@ -601,18 +600,6 @@ void SpriteRenderer::endRender()
 
 }
 
-
-
-}   // inline namespace gfx
 }   // namespace t3
-
-
-
-
-
-
-
-
-
 
 

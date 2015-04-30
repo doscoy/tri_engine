@@ -5,7 +5,7 @@
 #include "kernel/io/tri_pad.hpp"
 
 namespace t3 {
-inline namespace dbg {
+
 
 void makeTargetValueString(
     const int target,
@@ -51,7 +51,5 @@ void DebugMenuButtonBase::update()
     }
 }
 
-
-}   // inline namespace dbg
 }   // namespace t3
 

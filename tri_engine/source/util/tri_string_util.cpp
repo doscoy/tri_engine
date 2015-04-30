@@ -6,16 +6,7 @@
 
 
 namespace t3 {
-inline namespace util {
 
-
-
-
-
-
-
-
-}   // util
 }   // t3
 
 

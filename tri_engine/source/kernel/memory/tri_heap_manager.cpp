@@ -73,7 +73,7 @@ Heap* HeapManager::findHeap(
     
     for (;itr != end; ++itr) {
         if (itr->isActive() && !strcmp(name, itr->name())) {
-            return itr;
+            return &(*itr);
         }
     }
     

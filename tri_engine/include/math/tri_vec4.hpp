@@ -13,7 +13,7 @@
 #include "tri_vec3.hpp"
 
 namespace t3 {
-inline namespace math {
+
 
 
 template <typename T>
@@ -53,7 +53,7 @@ struct Vec4Template {
 typedef Vec4Template<float>   Vec4;
 typedef Vec4Template<int>     Point4;
     
-}   // namespace math
+
 }   // namespace t3
 
 

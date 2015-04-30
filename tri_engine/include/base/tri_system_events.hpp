@@ -16,7 +16,7 @@
 
 
 namespace t3 {
-inline namespace events {
+
 
 
 //  タッチトリガーイベント
@@ -158,9 +158,6 @@ private:
 
 
 
-
-
-}   //  namespace events
 }   //  namespace t3
 
 

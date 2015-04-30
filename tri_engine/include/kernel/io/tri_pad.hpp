@@ -8,7 +8,7 @@
 #include "base/tri_types.hpp"
 
 namespace t3 {
-inline namespace kernel {
+
 
 class Pad 
     : private Uncopyable
@@ -96,7 +96,7 @@ private:
     float pressed_time_;
 };
   
-}   // namespace kernel
+
 }   // namespace t3
 
 #endif // TRI_PAD_HPP_INCLUDED

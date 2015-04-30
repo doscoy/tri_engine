@@ -3,7 +3,7 @@
 #include "kernel/memory/tri_new.hpp"
 
 namespace t3 {
-inline namespace util {
+
 
 Archive::Archive()
 {
@@ -45,10 +45,6 @@ const File* Archive::getFile(
 }
 
 
-
-
-
-}   // namespace util
 }   // namespace t3
 
 

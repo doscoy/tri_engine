@@ -5,7 +5,7 @@
 
 
 namespace t3 {
-inline namespace audio {
+
 
 class Wav {
 
@@ -88,7 +88,6 @@ private:
 };
 
 
-}   // namespace audio
 }   // namespace t3
 
 #endif // TRI_WAV_HPP_INCLUDED

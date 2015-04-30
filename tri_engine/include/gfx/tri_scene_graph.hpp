@@ -18,7 +18,6 @@
 
 
 namespace t3 {
-inline namespace gfx {
 
 
 
@@ -99,7 +98,7 @@ protected:
 };
 
 
-}   // namespace gfx
+
 }   // namespace t3
 
 

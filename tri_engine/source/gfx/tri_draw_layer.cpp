@@ -10,7 +10,6 @@
 
 
 namespace t3 {
-inline namespace gfx {
 
 DrawLayer::DrawLayer()
     : DrawLayer("Draw", PRIORITY_APP_DEFAULT)
@@ -44,7 +43,5 @@ void DrawLayer::drawLayer() {
 }
 
 
-
-}   // inline namespace gfx
 }   // namespace t3
 

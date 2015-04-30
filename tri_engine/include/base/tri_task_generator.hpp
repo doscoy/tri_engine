@@ -14,7 +14,6 @@
 #include "tri_scene.hpp"
 
 namespace t3 {
-inline namespace base {
 
 
 
@@ -59,7 +58,6 @@ public:
 };
 
 
-}
 }
 
 

@@ -2,7 +2,6 @@
 #ifndef TRI_MUTEX_HPP_INCLUDED
 #define TRI_MUTEX_HPP_INCLUDED
 
-#include <pthread.h>
 #include <mutex>
 
 
@@ -12,7 +11,6 @@ namespace t3 {
 
 class Mutex {
 
-    using NativeHandle = pthread_mutex_t;
 public:
     Mutex();
     ~Mutex();
@@ -21,11 +19,9 @@ public:
     Mutex& operator=(const Mutex&) = delete;
 
 public:
-    void lock();
+    bool lock();
     void unlock();
 
-private:
-    NativeHandle handle_;
 };
 
 

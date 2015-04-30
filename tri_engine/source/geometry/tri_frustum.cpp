@@ -12,7 +12,7 @@
 
 
 namespace t3 {
-inline namespace geometry {
+
 
 
 Frustum::Frustum()
@@ -104,8 +104,6 @@ bool Frustum::isInSide(
 }
 
 
-
-}   // namespace geometry
 }   // namespace t3
 
 

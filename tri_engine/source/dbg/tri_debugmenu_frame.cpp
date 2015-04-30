@@ -5,7 +5,7 @@
 #include "dbg/tri_trace.hpp"
 
 namespace t3 {
-inline namespace dbg {
+
     
 
 DebugMenuFrame::DebugMenuFrame(
@@ -184,5 +184,4 @@ void DebugMenuFrame::drawFrame(
     
 }
 
-}   // inline namespace dbg
 }   // namespace t3

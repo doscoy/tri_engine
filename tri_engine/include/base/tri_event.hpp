@@ -10,7 +10,7 @@
 
 
 namespace t3 {
-inline namespace base {
+
     
 //  ハッシュ文字列をイベントタイプとして使用
 using EventType = HashString;
@@ -53,7 +53,7 @@ private:
     const tick_t time_stamp_;
 };
 
-}   // namespace base
+
 }   // namespace t3
 
 

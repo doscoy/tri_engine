@@ -17,7 +17,6 @@
 #include "kernel/memory/tri_heap.hpp"
 
 
-//#include <cross_sdk/cross_sdk.hpp>
 
 namespace {
 
@@ -149,8 +148,6 @@ void initializeTriEngine(
 }
 
 
-
-inline namespace base {
 
 
 Application::Application()
@@ -612,10 +609,6 @@ void renderApplication() {
 
 
 
-
-
-
-}   // namespace base
 }   // namespace t3
 
 

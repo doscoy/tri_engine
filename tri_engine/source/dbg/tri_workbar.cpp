@@ -13,11 +13,11 @@ constexpr int RETURN_LIMIT_TIME = 140;
 }   // unname namespace
 
 namespace t3 {
-inline namespace dbg {
+
 
 Workbar::Workbar()
     : bar_params_()
-    , limit_param_(util::frameSec<60>())
+    , limit_param_(frameSec<60>())
     , limit_width_pixel_(200)
     , keep_frame_(0)
     , limit_bar_pos_x_(std::numeric_limits<int>::min())
@@ -156,8 +156,4 @@ void Workbar::draw() {
 }
 
 
-
-
-
-}   // inline namespace dbg
 }   // namespace t3

@@ -7,8 +7,7 @@
 #include "tri_object.hpp"
 
 namespace t3 {
-inline namespace theater {
-    
+
 class Box
     : public Object
 {
@@ -49,7 +48,6 @@ private:
 };
 
 
-}   // namespace theater
 }   // namespace t3
 
 #endif  // TRI_BOX_HPP_INCLUDED

@@ -5,7 +5,7 @@
 
 
 namespace t3 {
-inline namespace geometry {
+
 
 Collider::Collider(
     const HashString& name
@@ -18,6 +18,4 @@ Collider::Collider(
 }
 
 
-
-}   // namespace geometry
 }   // namespace t3

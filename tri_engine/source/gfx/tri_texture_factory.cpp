@@ -8,7 +8,7 @@
 #include "png.h"
 
 namespace t3 {
-inline namespace gfx {
+
 
 
 TexturePtr TextureFactory::createFromData(
@@ -109,6 +109,5 @@ TexturePtr TextureFactory::createFromPngFile(const File& file) {
 }
 
 
-}   // namespace gfx
 }   // namespace t3
 

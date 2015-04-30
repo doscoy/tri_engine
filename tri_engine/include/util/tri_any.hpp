@@ -18,7 +18,7 @@
 
 
 namespace t3 {
-inline namespace util {
+
 
 
 // =================================================================
@@ -141,7 +141,7 @@ private:
 };
 
 
-}   // namespace util
+
 }   // namespace t3
 
 

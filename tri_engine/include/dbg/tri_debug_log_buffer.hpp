@@ -7,7 +7,7 @@
 
 
 namespace t3 {
-inline namespace dbg {
+
 
 
 constexpr int DEBUG_LOG_BUFFER_SIZE = 2048;
@@ -46,7 +46,7 @@ private:
 };
 
 
-}   // namespace dbg
+
 }   // namespace t3
 
 

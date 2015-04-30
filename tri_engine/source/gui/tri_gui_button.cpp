@@ -6,7 +6,6 @@
 
 
 namespace t3 {
-inline namespace gui {
 
 
 //  デフォルトのアクティベート処理
@@ -167,7 +166,5 @@ void Button::deactivate() {
 }
 
 
-
-}   // namespace gui
 }   // namespace t3
 

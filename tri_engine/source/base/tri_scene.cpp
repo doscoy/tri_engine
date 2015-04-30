@@ -6,7 +6,7 @@
 
 
 namespace t3 {
-inline namespace base {
+
 
 Scene::Scene(
     const char* const scene_name
@@ -150,7 +150,5 @@ const TaskManager& SceneManager::taskManager() {
 }
 
 
-
-}   // namespace base
 }   // namespace t3
 

@@ -17,7 +17,7 @@ const char* SHADER_UNIF_PMV = "u_pmv";
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 
 Model::Model()
@@ -81,8 +81,5 @@ void Model::render(const Mtx44& transform) {
 
 
 
-
-
-}   // inline namespace gfx
 }   // namespace t3
 

@@ -1,17 +1,17 @@
 #ifndef TRI_STOPWATCH_HPP_INCLUDED
 #define TRI_STOPWATCH_HPP_INCLUDED
 
-#include <sys/time.h>
+
+#include <chrono>
 
 namespace t3 {
-inline namespace util {
+
     
+//using Time = std::chrono::system_clock::time_point;
 
-
-inline double getSystemTime(){
-    struct timeval tv;
-    gettimeofday(&tv, nullptr);
-    return ((double)(tv.tv_sec) + (double)(tv.tv_usec) * 0.001 * 0.001);
+	typedef std::chrono::time_point<std::chrono::steady_clock> Time;
+inline Time getSystemTime(){
+    return std::chrono::high_resolution_clock::now();
 }
 
 
@@ -27,17 +27,21 @@ public:
         last_start_time_ = start_time_;
     }
 
-    double interval() const {
-        return end_time_ - last_start_time_;
-    }
+//    std::chrono::microseconds interval() const {
+//        return std::chrono::duration_cast<std::chrono::microseconds>(end_time_ - last_start_time_);
+//    }
+
+	float interval() const {
+
+		return 0.1f;
+	}
 private:
-    double start_time_;
-    double last_start_time_;
-    double end_time_;
+    Time start_time_;
+    Time last_start_time_;
+    Time end_time_;
 };
 
 
-}   //  inline namespace dbg
 }   //  namespace t3
 
 

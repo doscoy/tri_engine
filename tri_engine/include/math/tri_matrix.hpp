@@ -12,7 +12,7 @@
 
 
 namespace t3 {
-inline namespace math {
+
 
 
 
@@ -692,8 +692,6 @@ public:
 using Mtx44 = Mtx44Template<float>;
 
 
-    
-}   // namespace math
 }   // namespace t3
 
 

@@ -6,7 +6,6 @@
 
 
 namespace t3 {
-inline namespace util {
     
     
 class HashString {
@@ -70,7 +69,6 @@ private:
 };
     
     
-}   // namespace util
 }   // namespace t3
 
 #endif  // TRI_HASH_STRING

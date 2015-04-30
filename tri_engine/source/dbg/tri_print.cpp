@@ -172,7 +172,7 @@ void debugFontPrint(
 }
 
 namespace t3 {
-inline namespace dbg {
+
 
 void initializeDebugPrint()
 {
@@ -262,8 +262,5 @@ void printDisplay(
 }
 
 
-
-
-}   // inline namespace dbg
 }   // namespace t3
 

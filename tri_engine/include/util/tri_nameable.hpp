@@ -5,7 +5,7 @@
 #include "tri_hash_string.hpp"
 
 namespace t3 {
-inline namespace util {
+
 
 
 class Nameable {
@@ -39,8 +39,6 @@ private:
     t3::HashString name_;
 };
 
-
-}   // namespace util
 }   // namespace t3
 
 

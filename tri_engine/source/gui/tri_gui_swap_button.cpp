@@ -44,7 +44,6 @@ const EventType SwapButtonBEvent::TYPE("SwapButtonBEvent");
 }   // unname namespace
 
 
-inline namespace gui {
 
 SwapButton::SwapButton()
     : a_()
@@ -126,7 +125,6 @@ void SwapButton::onTriggeredB(const t3::Event& eve) {
 }
 
 
-}   // gui
 }   // t3
 
 

@@ -7,7 +7,7 @@
 
 
 namespace t3 {
-inline namespace geometry {
+
 
 
 void CollisionManager::addCollider(
@@ -155,13 +155,5 @@ bool CollisionManager::isJudgedPair(
 
 
 
-
-    
-}   // namaespace geometry
 }   // namespace t3
-
-
-
-
-
 

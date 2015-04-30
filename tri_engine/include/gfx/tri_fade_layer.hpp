@@ -8,7 +8,6 @@
 
 
 namespace t3 {
-inline namespace gfx {
 
 
 class FadeLayer
@@ -111,8 +110,6 @@ private:
 };
 
 
-
-}   // namespace gfx
 }   // namesapce t3
 
 

@@ -1,11 +1,11 @@
 
-#include "tri_surface.hpp"
+#include "gfx/tri_surface.hpp"
 
 #include "base/tri_director.hpp"
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 
 void GL_CHECK() {
@@ -126,7 +126,6 @@ void Surface::unbind() {
 }
 
 
-}   // namespace gfx
 }   // namespace t3
 
 

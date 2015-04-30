@@ -21,7 +21,7 @@ t3::Shader simple2d_;
 
 
 namespace t3 {
-inline namespace dbg {
+
 
 
 void initializeDrawPrimitive()
@@ -198,6 +198,4 @@ void drawPlane(
 
 }
 
-
-}   // inline namespace dbg
 }   // namespace t3

@@ -9,7 +9,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 //  コンストラクタ
 Sprite::Sprite()
@@ -100,8 +100,5 @@ void Sprite::adjustPivotByCenter() {
 }
 
 
-
-
-}   // inline namespace gfx
 }   // namespace t3
 

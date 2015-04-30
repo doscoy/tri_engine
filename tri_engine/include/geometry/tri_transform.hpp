@@ -10,7 +10,6 @@
 #include "base/tri_std.hpp"
 
 namespace t3 {
-inline namespace geopetry {
 
 
 class Transform2D
@@ -170,8 +169,6 @@ private:
 using Transform2DPtr = SharedPtr<Transform2D>;
 
 
-
-}   // namespace geometry
 }   // namespace t3
 
 

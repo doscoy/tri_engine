@@ -7,7 +7,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 FadeLayer::FadeLayer()
     : FadeLayer("fade", PRIORITY_SYS_FADE)
@@ -84,7 +84,6 @@ void FadeLayer::fadeRender(
     );
 }
 
-}   //  namespace gfx
 }   //  namespace t3
 
 

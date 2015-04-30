@@ -7,7 +7,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 LookAtCameraUpdater::LookAtCameraUpdater()
 {
@@ -125,7 +125,4 @@ LookAtCameraUpdater::pan(
 }
 
 
-
-
-}   // namespace gfx
 }   // namespace nd

@@ -5,7 +5,7 @@
 #include "math/tri_vec2.hpp"
 
 namespace t3 {
-inline namespace geometry {
+
 
 class Circle {
 public:
@@ -51,7 +51,6 @@ private:
 };
 
 
-}   // namespace geometry
 }   // namespace t3
 
 

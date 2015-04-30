@@ -6,7 +6,6 @@
 #include <cctype>
 
 namespace t3 {
-inline namespace util {
 
 
 inline void strToLower(
@@ -34,9 +33,6 @@ inline int stringCompare(
 
 
 
-
-
-}   // namespace util
 }   // namespace t3
 
 

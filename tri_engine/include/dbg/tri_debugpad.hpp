@@ -4,13 +4,12 @@
 #include "../kernel/tri_kernel.hpp"
 
 namespace t3 {
-inline namespace dbg {
+
 
     
 const Pad& debugPad();
 void updateDebugPad( const uint32_t pad_data, tick_t delta_time );
-    
-}   // inline namespace dbg
+
 }   // namespace t3
 
 

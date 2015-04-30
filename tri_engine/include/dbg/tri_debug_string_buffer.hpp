@@ -9,8 +9,6 @@
 namespace t3 {
 
 
-inline namespace dbg {
-
 constexpr int DEBUG_STRING_ITEM_STR_SIZE = 95;
 
 struct DebugStringItem
@@ -52,7 +50,7 @@ private:
 
 
 
-}   // inline namespace dbg
+
 }   // namespace t3
 
 

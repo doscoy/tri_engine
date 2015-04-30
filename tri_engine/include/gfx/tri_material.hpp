@@ -13,7 +13,7 @@
 #include "tri_color.hpp"
 
 namespace t3 {
-inline namespace gfx {
+
 
 class Material
 {
@@ -53,7 +53,6 @@ private:
 };
 
 
-}   // namespace gfx
 }   // namespace t3
 
 

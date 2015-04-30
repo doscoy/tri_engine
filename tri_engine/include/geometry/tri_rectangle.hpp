@@ -6,7 +6,7 @@
 #include "../math/tri_vec2.hpp"
 
 namespace t3 {
-inline namespace geometry {
+
 
 class Rectangle
 {
@@ -139,7 +139,6 @@ private:
 
 };
 
-}   // namespace geometry
 }   // namespace t3
 
 #endif  // TRI_RECTANGLE_HPP_INCLUDED

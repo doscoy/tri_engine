@@ -6,7 +6,6 @@
 #include "tri_plane.hpp"
 
 namespace t3 {
-inline namespace geometry {
 
 
 
@@ -86,7 +85,6 @@ private:
 };
 
 
-}   // namespace geometry
 }   // namespace t3
 
 

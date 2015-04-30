@@ -5,7 +5,7 @@
 #include "gfx/tri_texture.hpp"
 
 namespace t3 {
-inline namespace gfx {
+
 
 class Surface {
 
@@ -53,7 +53,6 @@ private:
 };
 
 
-}   // namespace gfx
 }   // namespace t3
 
 

@@ -11,7 +11,6 @@
 
 
 namespace t3 {
-inline namespace gfx {
 
 
 class TextureFactory
@@ -44,7 +43,6 @@ public:
 
 
 
-}   // inline namespace gfx
 }   // namespace t3
 
 #endif // TRI_TEXTURE_FACTORY_HPP_INCLUDED

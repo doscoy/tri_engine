@@ -8,7 +8,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 
 class CameraUpdater
@@ -72,7 +72,6 @@ private:
 };
 
 
-}   // namespace gfx
 }   // namespace t3
 
 #endif // TRI_CAMERA_UPDATER_HPP_INCLUDED

@@ -9,7 +9,6 @@
 
 
 namespace t3 {
-inline namespace base {
 
 
 typedef List<TaskPtr> TaskList;
@@ -59,7 +58,6 @@ private:
     PauseLevel pause_level_;
 };
 
-}   // namespace base
 }   // namespace t3
 
 #endif // TRI_PROCESS_MANAGER_HPP_INCLUDED

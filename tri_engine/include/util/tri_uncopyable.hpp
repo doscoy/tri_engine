@@ -12,7 +12,6 @@
 #define TRI_UNCOPYABLE_HPP_INCLUDED
 
 namespace t3 {
-inline namespace util {
 
 
 //  コピー禁止ミックスイン
@@ -26,7 +25,6 @@ public:
 };
 
 
-}   // namespace util
 }   // namespace t3
 
 

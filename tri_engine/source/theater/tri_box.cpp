@@ -4,7 +4,7 @@
 #include "kernel/tri_kernel.hpp"
 
 namespace t3 {
-inline namespace theater {
+
 
 
 void Box::render()
@@ -13,5 +13,4 @@ void Box::render()
 }
 
 
-}   // namespace theater
 }   // namespace t3

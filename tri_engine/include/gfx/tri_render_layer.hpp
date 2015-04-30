@@ -11,7 +11,7 @@
 
 
 namespace t3 {
-inline namespace gfx {
+
 
 class Surface;
 class RenderLayer;
@@ -155,11 +155,6 @@ protected:
 
 
 
-
-
-
-
-}   // inline namespace gfx
 }   // namespace t3
 
 

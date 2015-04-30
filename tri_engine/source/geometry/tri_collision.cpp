@@ -5,7 +5,7 @@
 
 
 namespace t3 {
-inline namespace geometry {
+
 
 bool isHitPointRectangle(
     const Vec2& point,
@@ -57,8 +57,6 @@ bool isHitCirclePoint(
 }
 
 
-
-}   // namespace geometry
 }   // namespace t3
 
 
