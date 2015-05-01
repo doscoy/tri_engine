@@ -1,1 +1,4 @@
 xcschememanagement.plist
+*.tlog
+*.sdf
+*.idb
