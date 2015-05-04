@@ -2,7 +2,7 @@
 #import <CoreMotion/CoreMotion.h>
 //#import <CoreFoundation/CoreFoundation.h>
 
-#include "../include/cross_accelerometer.hpp"
+#include "cross_accelerometer.hpp"
 
 @interface AccelerometerDispatcher : NSObject<UIAccelerometerDelegate>
 {

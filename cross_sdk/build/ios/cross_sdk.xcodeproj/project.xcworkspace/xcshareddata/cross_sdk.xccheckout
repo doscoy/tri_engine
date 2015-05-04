@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1C0B7593-ED95-4BF9-A7C4-4F5F731056A0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>cross_sdk</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BF55E8098439A3D587FA5F22409CE7EC62A98B6F</key>
+		<string>https://github.com/doscoy/tri_engine.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>cross_sdk/build/ios/cross_sdk.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BF55E8098439A3D587FA5F22409CE7EC62A98B6F</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/doscoy/tri_engine.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BF55E8098439A3D587FA5F22409CE7EC62A98B6F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BF55E8098439A3D587FA5F22409CE7EC62A98B6F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>tri_engine</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -7,7 +7,7 @@
 
 #include <string.h>
 
-#define DEBUG_MENU_FONT_SIZE    ::t3::dbg::DEBUG_FONT_POINT
+#define DEBUG_MENU_FONT_SIZE    ::t3::DEBUG_FONT_POINT
 
 namespace t3 {
 

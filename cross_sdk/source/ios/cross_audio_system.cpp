@@ -1,8 +1,8 @@
 
 
 
-#include "../include/cross_audio_system.hpp"
-#include "../include/cross_types.hpp"
+#include "cross_audio_system.hpp"
+#include "cross_types.hpp"
 
 
 #include <OpenAL/al.h>

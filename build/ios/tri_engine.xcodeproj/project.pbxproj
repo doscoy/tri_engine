@@ -94,21 +94,22 @@
 		3AA7EEF319A1024400CEB23A /* tri_bit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED9A19A0F60600CEB23A /* tri_bit.cpp */; };
 		3AA7EEF419A1024400CEB23A /* tri_counter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED9B19A0F60600CEB23A /* tri_counter.cpp */; };
 		3AA7EEF519A1024400CEB23A /* tri_unique_id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED9C19A0F60600CEB23A /* tri_unique_id.cpp */; };
+		3AD301421AF3D3EC00516996 /* libcross_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD3013F1AF3D3C100516996 /* libcross_sdk.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3AC9887F1AD25881002D5152 /* PBXContainerItemProxy */ = {
+		3AD3013E1AF3D3C100516996 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3AC9887B1AD25880002D5152 /* cross_sdk.xcodeproj */;
+			containerPortal = 3AD301151AF3CFEA00516996 /* cross_sdk.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 3AC988391ACF7FDE002D5152;
+			remoteGlobalIDString = 3AD300FB1AF3CFEA00516996;
 			remoteInfo = cross_sdk;
 		};
-		3AC988811AD2588F002D5152 /* PBXContainerItemProxy */ = {
+		3AD301401AF3D3E500516996 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3AC9887B1AD25880002D5152 /* cross_sdk.xcodeproj */;
+			containerPortal = 3AD301151AF3CFEA00516996 /* cross_sdk.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 3AC988381ACF7FDE002D5152;
+			remoteGlobalIDString = 3AD300FA1AF3CFEA00516996;
 			remoteInfo = cross_sdk;
 		};
 /* End PBXContainerItemProxy section */
@@ -376,7 +377,7 @@
 		3AA7EE9719A0F62800CEB23A /* tri_simple2d.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tri_simple2d.vsh; sourceTree = "<group>"; };
 		3AA7EE9819A0F62800CEB23A /* tri_sprite.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tri_sprite.fsh; sourceTree = "<group>"; };
 		3AA7EE9919A0F62800CEB23A /* tri_sprite.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tri_sprite.vsh; sourceTree = "<group>"; };
-		3AC9887B1AD25880002D5152 /* cross_sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cross_sdk.xcodeproj; path = ../../../cross_sdk/build/ios/cross_sdk.xcodeproj; sourceTree = "<group>"; };
+		3AD301151AF3CFEA00516996 /* cross_sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cross_sdk.xcodeproj; path = ../../cross_sdk/build/ios/cross_sdk.xcodeproj; sourceTree = "<group>"; };
 		3AD4071D19AF9F1B00762711 /* tri_bytesize.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_bytesize.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -385,6 +386,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AD301421AF3D3EC00516996 /* libcross_sdk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,7 +412,7 @@
 		3AA7EB9E19A0F48800CEB23A = {
 			isa = PBXGroup;
 			children = (
-				3AC9887B1AD25880002D5152 /* cross_sdk.xcodeproj */,
+				3AD301151AF3CFEA00516996 /* cross_sdk.xcodeproj */,
 				3AA7EBAC19A0F48800CEB23A /* tri_engine */,
 				3AA7EBA919A0F48800CEB23A /* Frameworks */,
 				3AA7EBA819A0F48800CEB23A /* Products */,
@@ -922,10 +924,10 @@
 			path = shader;
 			sourceTree = "<group>";
 		};
-		3AC9887C1AD25880002D5152 /* Products */ = {
+		3AD3013B1AF3D3C100516996 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3AC988801AD25881002D5152 /* cross_sdk.framework */,
+				3AD3013F1AF3D3C100516996 /* libcross_sdk.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -944,7 +946,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3AC988821AD2588F002D5152 /* PBXTargetDependency */,
+				3AD301411AF3D3E500516996 /* PBXTargetDependency */,
 			);
 			name = tri_engine;
 			productName = tri_engine;
@@ -972,8 +974,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3AC9887C1AD25880002D5152 /* Products */;
-					ProjectRef = 3AC9887B1AD25880002D5152 /* cross_sdk.xcodeproj */;
+					ProductGroup = 3AD3013B1AF3D3C100516996 /* Products */;
+					ProjectRef = 3AD301151AF3CFEA00516996 /* cross_sdk.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -984,11 +986,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3AC988801AD25881002D5152 /* cross_sdk.framework */ = {
+		3AD3013F1AF3D3C100516996 /* libcross_sdk.a */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = cross_sdk.framework;
-			remoteRef = 3AC9887F1AD25881002D5152 /* PBXContainerItemProxy */;
+			fileType = archive.ar;
+			path = libcross_sdk.a;
+			remoteRef = 3AD3013E1AF3D3C100516996 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1091,10 +1093,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3AC988821AD2588F002D5152 /* PBXTargetDependency */ = {
+		3AD301411AF3D3E500516996 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = cross_sdk;
-			targetProxy = 3AC988811AD2588F002D5152 /* PBXContainerItemProxy */;
+			targetProxy = 3AD301401AF3D3E500516996 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1177,7 +1179,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../tri_engine/include $(SRCROOT)/../../third_party_lib/ios";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../tri_engine/include $(SRCROOT)/../../third_party_lib/ios $(SRCROOT)/../../cross_sdk/include";
 			};
 			name = Debug;
 		};
@@ -1193,7 +1195,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../tri_engine/include $(SRCROOT)/../../third_party_lib/ios";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../tri_engine/include $(SRCROOT)/../../third_party_lib/ios $(SRCROOT)/../../cross_sdk/include";
 			};
 			name = Release;
 		};

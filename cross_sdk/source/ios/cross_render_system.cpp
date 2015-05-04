@@ -1,4 +1,4 @@
-#include "../include/cross_render_system.hpp"
+#include "cross_render_system.hpp"
 #include <iostream>
 
 #include <OpenGLES/ES2/gl.h>

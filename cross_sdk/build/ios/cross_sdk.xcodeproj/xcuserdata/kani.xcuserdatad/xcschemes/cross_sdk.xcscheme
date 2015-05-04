@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0620"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3AC988381ACF7FDE002D5152"
-               BuildableName = "cross_sdk.framework"
+               BlueprintIdentifier = "3AD300FA1AF3CFEA00516996"
+               BuildableName = "libcross_sdk.a"
                BlueprintName = "cross_sdk"
                ReferencedContainer = "container:cross_sdk.xcodeproj">
             </BuildableReference>
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3AC988431ACF7FDE002D5152"
+               BlueprintIdentifier = "3AD301051AF3CFEA00516996"
                BuildableName = "cross_sdkTests.xctest"
                BlueprintName = "cross_sdkTests"
                ReferencedContainer = "container:cross_sdk.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3AC988431ACF7FDE002D5152"
+               BlueprintIdentifier = "3AD301051AF3CFEA00516996"
                BuildableName = "cross_sdkTests.xctest"
                BlueprintName = "cross_sdkTests"
                ReferencedContainer = "container:cross_sdk.xcodeproj">
@@ -56,8 +56,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3AC988381ACF7FDE002D5152"
-            BuildableName = "cross_sdk.framework"
+            BlueprintIdentifier = "3AD300FA1AF3CFEA00516996"
+            BuildableName = "libcross_sdk.a"
             BlueprintName = "cross_sdk"
             ReferencedContainer = "container:cross_sdk.xcodeproj">
          </BuildableReference>
@@ -75,8 +75,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3AC988381ACF7FDE002D5152"
-            BuildableName = "cross_sdk.framework"
+            BlueprintIdentifier = "3AD300FA1AF3CFEA00516996"
+            BuildableName = "libcross_sdk.a"
             BlueprintName = "cross_sdk"
             ReferencedContainer = "container:cross_sdk.xcodeproj">
          </BuildableReference>
@@ -93,8 +93,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3AC988381ACF7FDE002D5152"
-            BuildableName = "cross_sdk.framework"
+            BlueprintIdentifier = "3AD300FA1AF3CFEA00516996"
+            BuildableName = "libcross_sdk.a"
             BlueprintName = "cross_sdk"
             ReferencedContainer = "container:cross_sdk.xcodeproj">
          </BuildableReference>

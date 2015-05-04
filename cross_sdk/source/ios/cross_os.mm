@@ -1,7 +1,7 @@
 #include <cstdio>
 #import <UIKit/UIKit.h>
-#include "../include/cross_types.hpp"
-#include "../include/cross_accelerometer.hpp"
+#include "cross_types.hpp"
+#include "cross_accelerometer.hpp"
 
 cross::GamePadData pad_data_[4];
 cross::PointingData point_data_[4];

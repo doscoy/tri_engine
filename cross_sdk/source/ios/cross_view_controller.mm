@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
 //
 
-#import "../include/cross_view_controller.hpp"
-#import "../include/cross_types.hpp"
+#import "cross_view_controller.hpp"
+#import "cross_types.hpp"
 #import <CoreMotion/CoreMotion.h>
 
 
