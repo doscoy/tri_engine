@@ -35,7 +35,7 @@ public:
         return label_;
     };
     
-    short getLabelWidth() const {
+    std::size_t getLabelWidth() const {
         return label_.size();
     };
     

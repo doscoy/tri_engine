@@ -14,7 +14,7 @@ Scene::Scene(
     , show_task_(false)
     , scene_name_( scene_name )
     , scene_debug_menu_frame_(nullptr, scene_name)
-    , dmi_show_task_(&scene_debug_menu_frame_, "show task", show_task_, 1)
+    , dmi_show_task_(&scene_debug_menu_frame_, "show task", show_task_)
     , task_manager_()
 {
     DebugMenu& debug_menu_root = DebugMenu::instance();

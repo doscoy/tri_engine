@@ -51,7 +51,7 @@ public:
     void updatePad( uint32_t current_frame_data, tick_t delta_time );
     
     bool isTrigger( uint32_t button ) const {
-        return ( trigger_ & button );
+        return ( trigger_ & button ) != 0;
     }
     
     bool isPress( uint32_t button ) const {
@@ -59,11 +59,11 @@ public:
     }
     
     bool isRelease( uint32_t button ) const {
-        return ( release_ & button );
+        return ( release_ & button ) != 0;
     }
 
     bool isRepeat( uint32_t button ) const {
-        return ( repeat_ & button );
+        return ( repeat_ & button ) != 0;
     }
     
     

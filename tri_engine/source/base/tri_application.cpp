@@ -131,8 +131,8 @@ void initializeTriEngine(
     t3::Director& d = t3::Director::instance();
     d.realScreenSize(
         Vec2(
-            width,
-            height
+            static_cast<float>(width),
+            static_cast<float>(height)
         )
     );
     T3_TRACE("Initialize TriEngine.\n");
@@ -179,9 +179,11 @@ void Application::initializeWorkBar() {
     
     //  ワークバーの配置
     int cpu_bar_margin = 70;
-    cpu_bar_.position(Vec2(-half_screen_size.x_ + (cpu_bar_margin / 2), -half_screen_size.y_ + 10));
+    cpu_bar_.position(
+        Vec2(-half_screen_size.x_ + (cpu_bar_margin / 2), -half_screen_size.y_ + 10)
+    );
     cpu_bar_.setLimitWidthPixel(
-		screen_size.x_ - cpu_bar_margin
+		static_cast<int>(screen_size.x_) - cpu_bar_margin
 	);
     
     //  ワークバーの色
@@ -569,7 +571,7 @@ bool Application::isSuspend() const {
 
 void Application::beginRender() {
     auto& c = t3::Director::getClearColor();
-    cross::RenderSystem::clearColor(c.red(), c.green(), c.blue(), c.alpha());
+    cross::RenderSystem::clearColor(c.redFloat(), c.greenFloat(), c.blueFloat(), c.alphaFloat());
     cross::RenderSystem::clearBuffer(true, true, false);
 }
 

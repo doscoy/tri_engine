@@ -58,8 +58,8 @@ void DebugLogLayer::updateLayer(tick_t delta_time)
     //  下から順番にログを書く
     for (; line >= 0; --line) {
         DebugStringLayer::writeString(
-            30,
-            line * DEBUG_FONT_POINT,
+            30.0f,
+            static_cast<float>(line * DEBUG_FONT_POINT),
             Color::white().rgba32(),
             DEBUG_FONT_POINT,
             debug_log_buffer_.getString(str_idx)

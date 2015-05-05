@@ -15,7 +15,7 @@ namespace t3 {
 #define NAME_LENGTH  6
 extern MemoryPool* heapMemoryPool() CROSS_WEAK_SIMBOL;
 
-struct AllocHeader;
+class AllocHeader;
 class Heap
     : private Uncopyable
 {

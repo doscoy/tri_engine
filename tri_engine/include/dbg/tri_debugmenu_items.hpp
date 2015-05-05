@@ -71,10 +71,10 @@ public:
             }
         }
         else if ( pad.isTrigger(t3::Pad::BUTTON_UP)) {
-            target_ = static_cast<T>(target_ - step_);
+            target_ = target_ - step_;
         }
         else if ( pad.isTrigger(t3::Pad::BUTTON_DOWN)) {
-            target_ = static_cast<T>(target_ + step_);
+            target_ = target_ + step_;
         }
         clampLimitation(target_, l_limit_, h_limit_);
     }
@@ -114,6 +114,74 @@ private:
     T step_;
     T l_limit_;
     T h_limit_;
+};
+
+
+template <>
+class DebugMenuItem<bool>
+    : public DebugMenuLabel
+{
+public:
+    DebugMenuItem(
+        DebugMenuFrame* const parent,
+        const char* const label,
+        bool& target
+        ) : DebugMenuLabel(parent, label)
+        , target_(target)
+    {
+
+    }
+
+
+public:
+    void update() override
+    {
+        const Pad& pad = debugPad();
+        if (pad.isTrigger(t3::Pad::BUTTON_B)) {
+            if (parent_) {
+                parent_->setFocusItem(nullptr);
+            }
+        }
+        else if (pad.isTrigger(t3::Pad::BUTTON_UP)) {
+            target_ = false;
+        }
+        else if (pad.isTrigger(t3::Pad::BUTTON_DOWN)) {
+            target_ = true;
+        }
+    }
+
+
+    void draw(
+        const float x,
+        const float y,
+        const Color& color
+        ) const override {
+
+        char buf[32];
+
+        makeTargetValueString(target_, buf, 32);
+
+        T3_PRINT_DISP(
+            x,
+            y,
+            color,
+            DEBUG_MENU_FONT_SIZE,
+            getLabel().c_str()
+            );
+
+        T3_PRINT_DISP(
+            x + (DEBUG_MENU_FONT_SIZE * 13),
+            y,
+            color,
+            DEBUG_MENU_FONT_SIZE,
+            "%s",
+            buf
+            );
+    }
+
+
+private:
+    bool& target_;
 };
 
 

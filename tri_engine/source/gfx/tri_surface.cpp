@@ -14,14 +14,14 @@ void GL_CHECK() {
 }
 
 Surface::Surface()
-    : Surface(t3::Director::VIRTUAL_SCREEN_WIDTH, t3::Director::VIRTUAL_SCREEN_HEIGHT)
+    : Surface(VIRTUAL_SCREEN_WIDTH, VIRTUAL_SCREEN_HEIGHT)
 {
 }
 
 
 Surface::Surface(
-    int width,
-    int height
+    float width,
+    float height
 )   : width_(width)
     , height_(height)
     , fb_(0)
@@ -38,8 +38,8 @@ Surface::Surface(
     //  オフスクリーン用のテクスチャ
     texture_ = t3::Texture::create(
         "sfc",
-        width,
-        height,
+        static_cast<int>(width),
+        static_cast<int>(height),
         cross::RenderSystem::ColorFormat::RGBA
     );
     texture_->bind();
@@ -53,8 +53,8 @@ Surface::Surface(
     
     cross::RenderSystem::setupRenderBufferStorage(
         cross::RenderSystem::RenderBufferUsage::COLOR,
-        width,
-        height
+        static_cast<int>(width),
+            static_cast<int>(height)
     );
     
     
@@ -65,8 +65,8 @@ Surface::Surface(
     
     cross::RenderSystem::setupRenderBufferStorage(
         cross::RenderSystem::RenderBufferUsage::DEPTH,
-        width,
-        height
+        static_cast<int>(width),
+            static_cast<int>(height)
     );
     
     

@@ -14,8 +14,8 @@ constexpr int DEBUG_STRING_ITEM_STR_SIZE = 95;
 struct DebugStringItem
 {
     uint32_t color_;
-    short x_;
-    short y_;
+    int16_t x_;
+    int16_t y_;
     char str_[DEBUG_STRING_ITEM_STR_SIZE];
     char size_;
 };
@@ -31,8 +31,8 @@ public:
     
 public:
     void addString(
-        const int x,
-        const int y,
+        const float x,
+        const float y,
         const uint32_t color,
         const int size,
         const char* const str

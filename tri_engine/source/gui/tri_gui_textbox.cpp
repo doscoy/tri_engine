@@ -64,12 +64,12 @@ TextBox& TextBox::text(
         }
     
         t3::Vec2 left_top(
-            glyph->position_.x_,
-            glyph->position_.y_
+            static_cast<float>(glyph->position_.x_),
+            static_cast<float>(glyph->position_.y_)
         );
         t3::Vec2 size(
-            glyph->metrics_.width_ + 1,
-            glyph->metrics_.height_
+            static_cast<float>(glyph->metrics_.width_ + 1),
+            static_cast<float>(glyph->metrics_.height_)
         );
         spr->setupTextureCoordAndSize(left_top, size);
         spr->transform()->parent(transform_);
@@ -84,32 +84,33 @@ TextBox& TextBox::text(
 
 void TextBox::adjustStringLayout() {
     int sprite_size = static_cast<int>(char_sprites_.size());
-    int x_start = 0;
-    int y_start = 0;
+    float x_start = 0;
+    float y_start = 0;
     
-    int text_width = textWidth();
+    float text_width = static_cast<float>(textWidth());
+    t3::Vec2 half_size = size_ * 0.5f;
     //  横軸アライン設定
     if (align_x_ == AlignX::LEFT) {
         //  左寄せ
-        x_start = -(size_.x_ / 2);
+        x_start = -half_size.x_;
     } else if (align_x_ == AlignX::CENTER) {
         //  中央寄せ
-        x_start = -(text_width / 2);
+        x_start = -(text_width * 0.5f);
     } else {
         //  右寄せ
-        x_start = (size_.x_ / 2) - text_width;
+        x_start = half_size.x_ - text_width;
     }
 
     //  縦軸アライン設定
     if (align_y_ == AlignY::TOP) {
         //  上寄せ
-        y_start = (size_.y_ / 2) - font_size_;
+        y_start = half_size.y_ - font_size_;
     } else if (align_y_ == AlignY::CENTER) {
         //  中央寄せ
-        y_start = -(font_size_ / 3);
+        y_start = -(static_cast<float>(font_size_) / 3.0f);
     } else {
         //  下寄せ
-        y_start = -(size_.y_ / 2);
+        y_start = -half_size.y_;
     }
 
     float x = x_start;
@@ -160,7 +161,7 @@ int TextBox::textWidth() const {
         total_width += glyph->metrics_.x_advance_;
     }
 
-    return total_width * fontScaleRatio();
+    return static_cast<int>(total_width * fontScaleRatio());
 }
 
 float TextBox::fontScaleRatio() const {

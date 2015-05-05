@@ -18,8 +18,8 @@ public:
 
 public:
     void writeString(
-        const int x,
-        const int y,
+        const float x,
+        const float y,
         const uint32_t color,
         const int size,
         const char* const str

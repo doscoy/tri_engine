@@ -18,8 +18,8 @@ RenderLayer::RenderLayer(
     , priority_(priority)
     , render_target_(nullptr)
     , dmf_me_(nullptr, layer_name)
-    , dmi_visible_(&dmf_me_, "VISIBLE", visible_, 1)
-    , dmi_pause_(&dmf_me_, "PAUSE", pause_, 1)
+    , dmi_visible_(&dmf_me_, "VISIBLE", visible_)
+    , dmi_pause_(&dmf_me_, "PAUSE", pause_)
 {
     name(layer_name);
     attachSystem();
@@ -90,7 +90,12 @@ void RenderLayer::callDraw() {
 
         int x, y, w, h;
         cross::RenderSystem::getViewport(&x, &y, &w, &h);
-        cross::RenderSystem::setViewport(0, 0, render_target_->width(), render_target_->height());
+        cross::RenderSystem::setViewport(
+            0, 
+            0, 
+            static_cast<int>(render_target_->width()), 
+            static_cast<int>(render_target_->height())
+        );
 
         drawLayer();
 

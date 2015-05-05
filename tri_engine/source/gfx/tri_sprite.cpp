@@ -43,8 +43,8 @@ void Sprite::texture(
     T3_NULL_ASSERT( texture_ );
     
     
-    float tex_width = tex->width();
-    float tex_height = tex->height();
+    float tex_width = static_cast<float>(tex->width());
+    float tex_height = static_cast<float>(tex->height());
     
     size(Vec2(tex_width, tex_height));
     adjustPivotByCenter();

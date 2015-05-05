@@ -19,7 +19,8 @@
 //==============================================================================
 namespace t3 {
 
-
+constexpr float VIRTUAL_SCREEN_WIDTH = 1136.0f;
+constexpr float VIRTUAL_SCREEN_HEIGHT = 640.0f;
 
 constexpr int MAX_PAD = 4;
 
@@ -161,16 +162,13 @@ public:
     static void printLog(const char* const buf);
     
     static void printDisplay(
-        int x,
-        int y,
+        const float x,
+        const float y,
         const uint32_t color,
         const int font_size,
         const char* const buf
     );
-    
-    static const int VIRTUAL_SCREEN_WIDTH = 640;
-    static const int VIRTUAL_SCREEN_HEIGHT = 1136;
-    
+        
 private:
     
     void calcScreenRevise();

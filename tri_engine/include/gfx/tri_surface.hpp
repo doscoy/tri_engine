@@ -12,8 +12,8 @@ class Surface {
 public:
     Surface();
     Surface(
-        int width,
-        int height
+        float width,
+        float height
     );
     
     ~Surface();
@@ -28,11 +28,11 @@ public:
         return texture_;
     }
     
-    int width() {
+    float width() {
         return width_;
     }
     
-    int height() {
+    float height() {
         return height_;
     }
     
@@ -42,8 +42,8 @@ public:
     void clear();
 
 private:
-    int width_;
-    int height_;
+    float width_;
+    float height_;
     cross::RenderSystem::FrameBufferID fb_;
     cross::RenderSystem::RenderBufferID cb_;
     cross::RenderSystem::RenderBufferID depth_;

@@ -44,7 +44,7 @@ struct ZipFile::ZipLocalHeader
     
     
     bool isUseDataDescriptor() const {
-        return flag & 8;
+        return (flag & 8) != 0;
     }
 
 };

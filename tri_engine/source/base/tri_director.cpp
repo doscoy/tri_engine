@@ -117,8 +117,8 @@ void Director::printLog(const char* const buf) {
 }
 
 void Director::printDisplay(
-    int x,
-    int y,
+    const float x,
+    const float y,
     const uint32_t color,
     const int font_size,
     const char* const buf
@@ -143,9 +143,9 @@ Director::Director()
     , dbg_screen_layer_(nullptr)
     , random_number_generator_(1)
     , virtual_screen_size_(
-        Director::VIRTUAL_SCREEN_WIDTH,
-        Director::VIRTUAL_SCREEN_HEIGHT)
-    , real_screen_size_(640, 1136)
+        VIRTUAL_SCREEN_WIDTH,
+        VIRTUAL_SCREEN_HEIGHT)
+    , real_screen_size_(640.0f, 1136.0f)
     , input_()
     , layers_()
     , fade_layer_(nullptr)
@@ -154,7 +154,7 @@ Director::Director()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
     , use_clear_color_index_(0)
     , clear_colors_()
-    , dm_random_pointing_(nullptr, "RANDOM POINTING", random_pointing_, 1)
+    , dm_random_pointing_(nullptr, "RANDOM POINTING", random_pointing_)
     , random_pointing_(false)
     , dm_game_speed_(nullptr, "GAME SPEED", game_speed_, 0.1f, 0.0f, 4.0f)
     , game_speed_(1.0f)
@@ -283,8 +283,8 @@ void Director::updateInput(
                 point_data.hit_ = true;
                 const Vec2& screen_size = virtualScreenSize();
                 const Vec2 half = screen_size / 2;
-                point_data.x_ = random_number_generator_.getInt(screen_size.x_) - half.x_;
-                point_data.y_ = random_number_generator_.getInt(screen_size.y_) - half.y_;
+                point_data.x_ = random_number_generator_.getInt(static_cast<int>(screen_size.x_)) - half.x_;
+                point_data.y_ = random_number_generator_.getInt(static_cast<int>(screen_size.y_)) - half.y_;
         //        T3_TRACE("touch %f  %f\n", point_data.x_, point_data.y_);
             }
             else {

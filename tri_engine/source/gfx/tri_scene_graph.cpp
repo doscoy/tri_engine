@@ -53,7 +53,12 @@ void SceneGraph::setupView()
     auto& d = t3::Director::instance();
     auto& screen = d.virtualScreenSize();
     
-    cross::RenderSystem::setViewport(0, 0, screen.x_, screen.y_);
+    cross::RenderSystem::setViewport(
+        0, 
+        0, 
+        static_cast<int>(screen.x_), 
+        static_cast<int>(screen.y_)
+	);
     t3::Mtx44 projection = t3::Mtx44::getFrustumMatrix(
         -1,
         1,

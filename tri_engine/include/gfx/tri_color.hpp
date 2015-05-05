@@ -86,11 +86,11 @@ public:
     }
     
     void greenFloat(const float g) {
-        green(255.0f * g);
+        green(static_cast<uint_fast8_t>(255.0f * g));
     }
     
     void blueFloat(const float b) {
-        blue(255.0f * b);
+        blue(static_cast<uint_fast8_t>(255.0f * b));
     }
     
 

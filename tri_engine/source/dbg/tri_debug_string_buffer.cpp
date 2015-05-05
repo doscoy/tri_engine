@@ -55,8 +55,8 @@ DebugStringBuffer::~DebugStringBuffer()
 
 
 void DebugStringBuffer::addString(
-    const int x,
-    const int y,
+    const float x,
+    const float y,
     const rgba32_t color,
     const int size,
     const char* const str
@@ -68,8 +68,8 @@ void DebugStringBuffer::addString(
     DebugStringItem& item = buffer_.at(size_);
 
     item.color_ = color;
-    item.x_ = x;
-    item.y_ = y;
+    item.x_ = static_cast<short>(x);
+    item.y_ = static_cast<short>(y);
     item.size_ = size;
     std::strncpy( item.str_, str, DEBUG_STRING_ITEM_STR_SIZE );
     

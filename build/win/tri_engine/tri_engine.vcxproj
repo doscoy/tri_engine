@@ -49,6 +49,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\lpng;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\include;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\cross_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4819;4996;4018;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -71,6 +72,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\include;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\cross_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4819;4996;4018;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

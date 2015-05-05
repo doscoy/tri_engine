@@ -25,8 +25,8 @@ void DebugStringLayer::updateLayer( tick_t delta_time )
 }
 
 void DebugStringLayer::writeString(
-    const int x,
-    const int y,
+    const float x,
+    const float y,
     const rgba32_t color,
     const int size,
     const char *const str

@@ -391,8 +391,8 @@ size_t MemoryPool::calcChunkSize(
 
 
 void renderMemoryPool(MemoryPool& pool) {
-    float limit_x = 310;
-    float now = -320;
+    int limit_x = 310;
+    int now = -320;
     float line_y = 120;
     float rect_size = 1;
     float render_ratio = 0.001f;
@@ -405,14 +405,14 @@ void renderMemoryPool(MemoryPool& pool) {
     t3::MemoryChunk* free = pool.freeChainRoot();
 
     while (free) {
-        size_t size = free->size() * render_ratio;
+        size_t size = static_cast<std::size_t>(free->size() * render_ratio);
         
         while (size + now > limit_x) {
             int diff = limit_x-now;
             
             t3::drawRectangleMinSize(
-                t3::Vec2(now, line_y),
-                t3::Vec2(diff, rect_size),
+                t3::Vec2(static_cast<float>(now), line_y),
+                t3::Vec2(static_cast<float>(diff), rect_size),
                 free_color
             );
             now = -320;
@@ -420,8 +420,8 @@ void renderMemoryPool(MemoryPool& pool) {
             line_y -= rect_size;
         }
         t3::drawRectangleMinSize(
-            t3::Vec2(now, line_y),
-            t3::Vec2(size, rect_size),
+            t3::Vec2(static_cast<float>(now), line_y),
+            t3::Vec2(static_cast<float>(size), rect_size),
             free_color
         );
         now += size;
@@ -435,13 +435,13 @@ void renderMemoryPool(MemoryPool& pool) {
     t3::MemoryChunk* use = pool.useChainRoot();
     now = -320;
     while (use) {
-        size_t size = use->size() * render_ratio;
+        size_t size = static_cast<std::size_t>(use->size() * render_ratio);
         while (size + now > limit_x) {
             int diff = limit_x-now;
             
             t3::drawRectangleMinSize(
-                t3::Vec2(now, line_y),
-                t3::Vec2(diff, rect_size),
+                t3::Vec2(static_cast<float>(now), line_y),
+                t3::Vec2(static_cast<float>(diff), rect_size),
                 use_color
             );
             now = -320;
@@ -449,8 +449,8 @@ void renderMemoryPool(MemoryPool& pool) {
             line_y -= rect_size;
         }
         t3::drawRectangleMinSize(
-            t3::Vec2(now, line_y),
-            t3::Vec2(size, rect_size),
+            t3::Vec2(static_cast<float>(now), line_y),
+            t3::Vec2(static_cast<float>(size), rect_size),
             use_color
         );
         now += size;

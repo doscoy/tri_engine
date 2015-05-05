@@ -22,8 +22,8 @@ int utf8Setup(
     int str_count = 0;
 
     const uint8_t* p = reinterpret_cast<const uint8_t*>(str);
-    int byte_count = 0;
-    int byte_size = 0;
+    uint_fast32_t byte_count = 0;
+	uint_fast32_t byte_size = 0;
     while (p) {
         pos_list.push_back((char*)p);
         byte_size = t3::utf8ByteSize((char*)p);
@@ -36,7 +36,7 @@ int utf8Setup(
         //  ポインタ進める
         p += byte_size;
         
-        if (str_count > n || str_len <= byte_count) {
+        if ((str_count > n) || (str_len <= byte_count)) {
             break;
         }
     }

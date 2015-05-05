@@ -79,7 +79,7 @@ void Workbar::draw() {
         }
         drawRectangleMinSize(
             Vec2(start_x, y),
-            Vec2(pixel_width, thickness_),
+            Vec2(pixel_width, static_cast<float>(thickness_)),
             param.color_
         );
         start_x += pixel_width;
@@ -107,29 +107,29 @@ void Workbar::draw() {
     
     //  50%
     drawRectangleMinSize(
-        Vec2(0, y-3),
-        Vec2(1, 6),
+        Vec2(0.0f, static_cast<float>(y-3)),
+        Vec2(1.0f, 6.0f),
         Color::silver()
     );
     
     //  25%
     drawRectangleMinSize(
-        Vec2(-per25pixel, y-3),
-        Vec2(1, 6),
+        Vec2(static_cast<float>(-per25pixel), static_cast<float>(y-3)),
+        Vec2(1.0f, 6.0f),
         Color::silver()
     );
     
     //  75%
     drawRectangleMinSize(
-        Vec2(per25pixel, y-3),
-        Vec2(1, 6),
+        Vec2(static_cast<float>(per25pixel), static_cast<float>(y-3)),
+        Vec2(1.0f, 6.0f),
         Color::silver()
     );
     
     //  上限バーの更新
     if (start_x > limit_bar_pos_x_) {
         //  最大値が更新された
-        limit_bar_pos_x_ = start_x;
+        limit_bar_pos_x_ = static_cast<int>(start_x);
         keep_frame_ = 0;
     }
     
@@ -151,7 +151,11 @@ void Workbar::draw() {
     if (limit_bar_pos_x_ > 0) {
         limit_bar_color = Color::RED;
     }
-    drawRectangleMinSize(Vec2(limit_bar_pos_x_, y-1), Vec2(3, thickness_+2), limit_bar_color);
+    drawRectangleMinSize(
+        Vec2(static_cast<float>(limit_bar_pos_x_), y - 1.0f), 
+        Vec2(3.0f, static_cast<float>(thickness_ + 2)), 
+        limit_bar_color
+    );
     
 }
 
