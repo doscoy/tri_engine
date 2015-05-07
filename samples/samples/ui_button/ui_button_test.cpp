@@ -124,12 +124,12 @@ public:
     }
 private:
     t3::SpriteLayer layer_;
-    t3::gui::Button button_;
-    t3::gfx::SpritePtr sprite_;
+    t3::Button button_;
+    t3::SpritePtr sprite_;
     
     t3::SwapButton swap_button_;
-    t3::gfx::SpritePtr swap_a_;
-    t3::gfx::SpritePtr swap_b_;
+    t3::SpritePtr swap_a_;
+    t3::SpritePtr swap_b_;
     
     
     static const int RADIO_BUTTON_NUM = 3;

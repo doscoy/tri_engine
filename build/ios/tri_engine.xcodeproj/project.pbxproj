@@ -94,7 +94,7 @@
 		3AA7EEF319A1024400CEB23A /* tri_bit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED9A19A0F60600CEB23A /* tri_bit.cpp */; };
 		3AA7EEF419A1024400CEB23A /* tri_counter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED9B19A0F60600CEB23A /* tri_counter.cpp */; };
 		3AA7EEF519A1024400CEB23A /* tri_unique_id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED9C19A0F60600CEB23A /* tri_unique_id.cpp */; };
-		3AD301421AF3D3EC00516996 /* libcross_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD3013F1AF3D3C100516996 /* libcross_sdk.a */; };
+		3AD301491AFBC16A00516996 /* libcross_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD3013F1AF3D3C100516996 /* libcross_sdk.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,7 +105,7 @@
 			remoteGlobalIDString = 3AD300FB1AF3CFEA00516996;
 			remoteInfo = cross_sdk;
 		};
-		3AD301401AF3D3E500516996 /* PBXContainerItemProxy */ = {
+		3AD301471AFBC15500516996 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3AD301151AF3CFEA00516996 /* cross_sdk.xcodeproj */;
 			proxyType = 1;
@@ -235,7 +235,7 @@
 		3AA7ED9B19A0F60600CEB23A /* tri_counter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_counter.cpp; sourceTree = "<group>"; };
 		3AA7ED9C19A0F60600CEB23A /* tri_unique_id.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_unique_id.cpp; sourceTree = "<group>"; };
 		3AA7EDF519A0F61700CEB23A /* tri_audio.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_audio.hpp; sourceTree = "<group>"; };
-		3AA7EDF619A0F61700CEB23A /* tri_audio_handle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_audio_handle.hpp; sourceTree = "<group>"; };
+		3AA7EDF619A0F61700CEB23A /* tri_audio_handle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = tri_audio_handle.hpp; sourceTree = "<group>"; };
 		3AA7EDF819A0F61700CEB23A /* tri_audio_resource.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_audio_resource.hpp; sourceTree = "<group>"; };
 		3AA7EDFA19A0F61700CEB23A /* tri_wav.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_wav.hpp; sourceTree = "<group>"; };
 		3AA7EDFC19A0F61700CEB23A /* tri_application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_application.hpp; sourceTree = "<group>"; };
@@ -386,7 +386,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AD301421AF3D3EC00516996 /* libcross_sdk.a in Frameworks */,
+				3AD301491AFBC16A00516996 /* libcross_sdk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -946,7 +946,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3AD301411AF3D3E500516996 /* PBXTargetDependency */,
+				3AD301481AFBC15500516996 /* PBXTargetDependency */,
 			);
 			name = tri_engine;
 			productName = tri_engine;
@@ -1093,10 +1093,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3AD301411AF3D3E500516996 /* PBXTargetDependency */ = {
+		3AD301481AFBC15500516996 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = cross_sdk;
-			targetProxy = 3AD301401AF3D3E500516996 /* PBXContainerItemProxy */;
+			targetProxy = 3AD301471AFBC15500516996 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

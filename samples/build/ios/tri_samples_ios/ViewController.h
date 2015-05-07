@@ -7,7 +7,7 @@
 //
 // TIPS:GLKitでES1.1のヘッダを読むのを防ぐ
 
-#import "cross_sdk/cross_view_controller.hpp"
+#import "cross_view_controller.hpp"
 
 
 @interface ViewController : CrossViewController

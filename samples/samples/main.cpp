@@ -10,6 +10,11 @@
 #include "samples.hpp"
 
 
+#if defined(CROSS_TARGET_PLATFORM_IOS)
+#include "ViewController.h"
+#include "AppDelegate.h"
+#endif
+
 namespace t3 {
 
 t3::MemoryPool* pool_ = nullptr;
@@ -115,7 +120,7 @@ int main(int argc, char * argv[])
 
 
     t3::setApplication(app);
-#if 0
+#if defined(CROSS_TARGET_PLATFORM_IOS)
     @autoreleasepool {
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }

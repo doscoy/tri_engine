@@ -352,7 +352,7 @@ void Application::renderApplication() {
     
 
 
-    SceneManager& sm = SceneManager::instance();
+    auto& sm = SceneManager::instance();
     sm.debugRender();
 
     debug_cost_timer_.end();

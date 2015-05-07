@@ -6,51 +6,51 @@
 
 namespace t3 {
 
-//  ‘O•ûéŒ¾
+//  å‰æ–¹å®£è¨€
 class AudioResource;
 
 class AudioHandle {
     friend class AudioResource;
 private:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^.
-    /// ƒI[ƒfƒBƒIƒŠƒ\[ƒX‚©‚ç‚µ‚©¶¬‚Å‚«‚È‚­‚·‚é‚½‚ßprivate
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿.
+    /// ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒªã‚½ãƒ¼ã‚¹ã‹ã‚‰ã—ã‹ç”Ÿæˆã§ããªãã™ã‚‹ãŸã‚private
     explicit AudioHandle(
         cross::AudioSystem::BufferID buffer_id
     );
 
 public:
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~AudioHandle();
 
 public:
     ///
-    /// BGM‚Æ‚µ‚ÄÄ¶
+    /// BGMã¨ã—ã¦å†ç”Ÿ
     void playBGM();
 
     ///
-    /// BGM‚Æ‚µ‚Ä’â~
+    /// BGMã¨ã—ã¦åœæ­¢
     void stopBGM();
     
     ///
-    /// SE‚Æ‚µ‚ÄÄ¶
+    /// SEã¨ã—ã¦å†ç”Ÿ
     void playSE();
 
     ///
-    /// SE‚Æ‚µ‚Ä’â~
+    /// SEã¨ã—ã¦åœæ­¢
     void stopSE();
 
     ///
-    /// ƒsƒbƒ`İ’è
+    /// ãƒ”ãƒƒãƒè¨­å®š
     void pitch(float speed);
 
     ///
-    /// ƒ{ƒŠƒ…[ƒ€İ’è
+    /// ãƒœãƒªãƒ¥ãƒ¼ãƒ è¨­å®š
     void volume(float vol);
 
     ///
-    /// BGM‚©”»’è
+    /// BGMã‹åˆ¤å®š
     bool isBGM() const {
         return bgm_;
     }
@@ -58,17 +58,17 @@ public:
 private:
     
     ///
-    /// Ä¶ˆ—.
+    /// å†ç”Ÿå‡¦ç†.
     void play(bool loop = false);
 
     ///
-    /// ’â~ˆ—.
+    /// åœæ­¢å‡¦ç†.
     void stop();
     
 private:
     
-    cross::AudioSystem::SourceID sid_;  ///< ƒ\[ƒXID
-    bool bgm_;  ///< BGM”»’è—pƒtƒ‰ƒO
+    cross::AudioSystem::SourceID sid_;  ///< ã‚½ãƒ¼ã‚¹ID
+    bool bgm_;  ///< BGMåˆ¤å®šç”¨ãƒ•ãƒ©ã‚°
 };
 
 

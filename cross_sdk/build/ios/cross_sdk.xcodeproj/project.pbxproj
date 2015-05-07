@@ -41,6 +41,7 @@
 		3AD301371AF3D26A00516996 /* cross_sdk.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_sdk.hpp; sourceTree = "<group>"; };
 		3AD301381AF3D26A00516996 /* cross_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_types.hpp; sourceTree = "<group>"; };
 		3AD301391AF3D26A00516996 /* cross_view_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_view_controller.hpp; sourceTree = "<group>"; };
+		3AD3014A1AFBD45D00516996 /* cross_dbg.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = cross_dbg.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +104,7 @@
 				3AD301371AF3D26A00516996 /* cross_sdk.hpp */,
 				3AD301381AF3D26A00516996 /* cross_types.hpp */,
 				3AD301391AF3D26A00516996 /* cross_view_controller.hpp */,
+				3AD3014A1AFBD45D00516996 /* cross_dbg.hpp */,
 			);
 			name = include;
 			path = ../../include;

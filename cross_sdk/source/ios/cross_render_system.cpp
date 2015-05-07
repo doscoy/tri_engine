@@ -1,4 +1,5 @@
 #include "cross_render_system.hpp"
+#include "cross_dbg.hpp"
 #include <iostream>
 
 #include <OpenGLES/ES2/gl.h>
@@ -35,8 +36,8 @@ namespace {
 GLsync fence_ = 0;
 
 inline void checkGLError() {
-
-    
+    GLenum e = glGetError();
+    CROSS_ASSERT(e == GL_NO_ERROR);
 }
 
 
@@ -164,6 +165,9 @@ int RenderSystem::buildShader(
         default:
             return -1;
     }
+    
+    CROSS_GL_ASSERT();
+    CROSS_ASSERT(shader_handle > 0);
     
     glShaderSource(shader_handle, 1, &source, 0);
     glCompileShader(shader_handle);

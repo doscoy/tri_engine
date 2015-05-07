@@ -40,7 +40,7 @@ public:
         
         
         cross::RenderSystem::setDepthWrite(true);
-        t3::Color clear_color = t3::Color::BLUE;
+        t3::Color clear_color = t3::color_sample::blue();
         cross::RenderSystem::clearColor(
             clear_color.red(),
             clear_color.green(),

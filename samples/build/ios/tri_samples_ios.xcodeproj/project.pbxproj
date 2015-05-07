@@ -46,11 +46,10 @@
 		04F1FE821985557F00C8D498 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F1FE811985557F00C8D498 /* Images.xcassets */; };
 		3A24B4D619C88A4000E9CFFE /* zip_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B4D419C88A4000E9CFFE /* zip_test.cpp */; };
 		3A24B4D819C9D3ED00E9CFFE /* test.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A24B4D719C9D3ED00E9CFFE /* test.zip */; };
-		3AC9888A1AD3B5E0002D5152 /* cross_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC988891AD3B5E0002D5152 /* cross_sdk.framework */; };
+		3AD301461AFBBD2500516996 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD301451AFBBD2500516996 /* main.cpp */; };
 		3AD4070B19AE257000762711 /* ad_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F219AE257000762711 /* ad_test.cpp */; };
 		3AD4070C19AE257000762711 /* audio_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F519AE257000762711 /* audio_test.cpp */; };
 		3AD4070D19AE257000762711 /* event_handling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F819AE257000762711 /* event_handling.cpp */; };
-		3AD4070E19AE257000762711 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406FA19AE257000762711 /* main.mm */; };
 		3AD4070F19AE257000762711 /* mesh_obj_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406FC19AE257000762711 /* mesh_obj_scene.cpp */; };
 		3AD4071019AE257000762711 /* quat_test_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406FF19AE257000762711 /* quat_test_scene.cpp */; };
 		3AD4071119AE257000762711 /* sandbox_template.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070319AE257000762711 /* sandbox_template.cpp */; };
@@ -131,13 +130,13 @@
 		3A24B4D719C9D3ED00E9CFFE /* test.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = test.zip; sourceTree = "<group>"; };
 		3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = tri_engine.xcodeproj; path = ../../../build/ios/tri_engine.xcodeproj; sourceTree = "<group>"; };
 		3AC988891AD3B5E0002D5152 /* cross_sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = cross_sdk.framework; path = "../../../../cross_sdk/build/ios/build/Debug-iphoneos/cross_sdk.framework"; sourceTree = "<group>"; };
+		3AD301451AFBBD2500516996 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = main.cpp; sourceTree = "<group>"; };
 		3AD406F219AE257000762711 /* ad_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ad_test.cpp; sourceTree = "<group>"; };
 		3AD406F319AE257000762711 /* ad_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ad_test.hpp; sourceTree = "<group>"; };
 		3AD406F519AE257000762711 /* audio_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audio_test.cpp; sourceTree = "<group>"; };
 		3AD406F619AE257000762711 /* audio_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = audio_test.hpp; sourceTree = "<group>"; };
 		3AD406F819AE257000762711 /* event_handling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event_handling.cpp; sourceTree = "<group>"; };
 		3AD406F919AE257000762711 /* event_handling.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = event_handling.hpp; sourceTree = "<group>"; };
-		3AD406FA19AE257000762711 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		3AD406FC19AE257000762711 /* mesh_obj_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_obj_scene.cpp; sourceTree = "<group>"; };
 		3AD406FD19AE257000762711 /* mesh_obj_scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_obj_scene.hpp; sourceTree = "<group>"; };
 		3AD406FF19AE257000762711 /* quat_test_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = quat_test_scene.cpp; sourceTree = "<group>"; };
@@ -160,7 +159,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AC9888A1AD3B5E0002D5152 /* cross_sdk.framework in Frameworks */,
 				3AD4071419AE26C200762711 /* libtri_engine.a in Frameworks */,
 				04F1002C198558BF00C8D498 /* libz.dylib in Frameworks */,
 				04F1002A198558B600C8D498 /* libpng.a in Frameworks */,
@@ -316,11 +314,11 @@
 		3AD406F019AE257000762711 /* samples */ = {
 			isa = PBXGroup;
 			children = (
+				3AD301451AFBBD2500516996 /* main.cpp */,
 				041544D219EC268200C14705 /* font */,
 				0403CC9C19DAEDDA000329EC /* blur */,
 				046983AB19D6EC41001B71E9 /* mem_pool */,
 				3A24B4D319C88A4000E9CFFE /* zipfile */,
-				3AD406FA19AE257000762711 /* main.mm */,
 				3AD4070119AE257000762711 /* samples.hpp */,
 				3AD406F119AE257000762711 /* ad */,
 				3AD406F419AE257000762711 /* audio */,
@@ -535,9 +533,9 @@
 				0403CC9F19DAEDDA000329EC /* blur_test.cpp in Sources */,
 				3AD4071119AE257000762711 /* sandbox_template.cpp in Sources */,
 				3AD4070C19AE257000762711 /* audio_test.cpp in Sources */,
+				3AD301461AFBBD2500516996 /* main.cpp in Sources */,
 				041544D619EC268200C14705 /* font_test.cpp in Sources */,
 				3AD4070B19AE257000762711 /* ad_test.cpp in Sources */,
-				3AD4070E19AE257000762711 /* main.mm in Sources */,
 				3AD4071019AE257000762711 /* quat_test_scene.cpp in Sources */,
 				04F1FE801985557F00C8D498 /* ViewController.mm in Sources */,
 				3AD4071C19AE2B9200762711 /* offscreen_test.cpp in Sources */,
@@ -668,10 +666,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				COMPRESS_PNG_FILES = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/kani/project/cross_sdk/build/ios/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
@@ -679,6 +674,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					../../../third_party_lib/ios,
 					../../../tri_engine/include,
+					../../../cross_sdk/include,
 				);
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -696,10 +692,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				COMPRESS_PNG_FILES = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/kani/project/cross_sdk/build/ios/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
@@ -707,6 +700,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					../../../third_party_lib/ios,
 					../../../tri_engine/include,
+					../../../cross_sdk/include,
 				);
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
 				LIBRARY_SEARCH_PATHS = (

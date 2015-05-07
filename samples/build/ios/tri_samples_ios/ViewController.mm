@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#include <cross_sdk/cross_sdk.hpp>
+#include "cross_sdk.hpp"
 #include "base/tri_application.hpp"
 
 #include "AppDelegate.h"
@@ -19,9 +19,9 @@
 
 
 
-float screen_scale_ = 1.0f;
-float screen_x_ = 0;
-float screen_y_ = 0;
+extern float screen_scale_;
+extern float screen_x_;
+extern float screen_y_;
 
 extern cross::PointingData point_data_[4];
 
