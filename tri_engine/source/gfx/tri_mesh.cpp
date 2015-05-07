@@ -76,7 +76,7 @@ Mesh::Mesh(
             p3n.normal_ = Vec3::zero();
             vertices.push_back(p3n);
 
-            aabb.addPoint(new_point);
+            aabb.margePoint(new_point);
         } else if (buf[0] == 'f' && buf[1] == ' ') {
             //  面情報
             int f1, f2, f3, f4;
@@ -135,10 +135,8 @@ Mesh::Mesh(
     }
     
     //  aabbをもとに境界球作成
-    Vec3 radius;
-    Vec3 center;
-    aabb.center(&center);
-    aabb.getRadius(&radius);
+    Vec3 radius = aabb.radius();
+    Vec3 center = aabb.center();
     
     float sphere_radius = radius.x_;
     if (sphere_radius < radius.y_) {

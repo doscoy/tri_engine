@@ -60,14 +60,14 @@ void DebugLogLayer::updateLayer(tick_t delta_time)
         DebugStringLayer::writeString(
             30.0f,
             static_cast<float>(line * DEBUG_FONT_POINT),
-            Color::white().rgba32(),
+            color_sample::white().rgba32(),
             DEBUG_FONT_POINT,
             debug_log_buffer_.getString(str_idx)
         );
         --str_idx;
     }
     
-    Director& gs = t3::Director::instance();
+    auto& gs = t3::Director::instance();
     const t3::Pad& pad = gs.input().pad();
 
     if (pad.isPress(t3::Pad::BUTTON_DOWN)) {
@@ -81,7 +81,7 @@ void DebugLogLayer::updateLayer(tick_t delta_time)
 
 void DebugLogLayer::drawLayer()
 {
-    Director& gs = t3::Director::instance();
+    auto& gs = t3::Director::instance();
     
     //  文字列が見やすいように背景に半透明の板を描画
     cross::RenderSystem::setDepthTestMode(cross::RenderSystem::DepthTestMode::MODE_ALWAYS);

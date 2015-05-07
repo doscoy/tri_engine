@@ -59,10 +59,10 @@ void drawRectangleMinSize(
     const Color& color
 ){
     
-    t3::Director& gs = t3::Director::instance();
+    auto& director = t3::Director::instance();
     
-    float screen_width = gs.virtualScreenSize().x_ * 0.5f;
-    float screen_height = gs.virtualScreenSize().y_ * 0.5f;
+    float screen_width = director.virtualScreenSize().x_ * 0.5f;
+    float screen_height = director.virtualScreenSize().y_ * 0.5f;
     
     Vec2 view_left_top(
         min_pos.x_ / screen_width,
@@ -184,9 +184,9 @@ void drawAxis(
         t3::Vec3(0, 0, 0)
     );
     
-    t3::drawSegment(seg1, t3::Color::RED, 3.1f);
-    t3::drawSegment(seg2, t3::Color::BLUE, 3.1f);
-    t3::drawSegment(seg3, t3::Color::GREEN, 3.1f);
+    t3::drawSegment(seg1, t3::color_sample::red(), 3.1f);
+    t3::drawSegment(seg2, t3::color_sample::blue(), 3.1f);
+    t3::drawSegment(seg3, t3::color_sample::green(), 3.1f);
 }
 
 void drawPlane(

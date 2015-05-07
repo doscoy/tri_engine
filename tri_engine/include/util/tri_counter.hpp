@@ -3,30 +3,39 @@
 
 namespace t3 {
 
-class Counter
-{
+///
+/// カウンタークラス
+class Counter {
 public:
+    ///
+    /// コンストラクタ
     Counter()
         : num_( 0 )
     {}
     
     
-    
+    ///
+    /// 現在地
     int now() const {
         return num_;
     }
     
+    ///
+    /// カウントアップ
     void countup() {
         num_ += 1;
     }
     
+    ///
+    /// カウントダウン
     void countdown() {
         num_ -= 1;
     }
     
 private:
-    int num_;
+    int num_;   ///< カウント値
 };
+
 
 extern Counter frame_counter_;
 

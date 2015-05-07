@@ -30,7 +30,7 @@ void CollisionManager::addCollider(
     
     
     //  自分の属するグループに登録
-    const t3::HashString& group_name = collider->getColliderName();
+    const t3::HashString& group_name = collider->colliderName();
     CollidersMap::iterator group_it = colliders_.find(group_name);
     if (group_it == colliders_.end()) {
         //  未登録のグループ
@@ -48,7 +48,7 @@ void CollisionManager::removeCollider(
     ColliderPtr collider
 ) {
     //  自分の属するグループから削除
-    const t3::HashString& group_name = collider->getColliderName();
+    const t3::HashString& group_name = collider->colliderName();
     auto group_it = colliders_.find(group_name);
     if (group_it != colliders_.end()) {
         //  あった
@@ -101,7 +101,7 @@ void CollisionManager::judgeColliderPairs(
         if (a->isHit(*circle_coll)) {
             //  当たった
             auto event = std::make_shared<CollisionEvent>();
-            event->pos_ = circle_coll->getCircle().position();
+            event->pos_ = circle_coll->circle().position();
             event->collision_pair_ = std::make_pair(a, b);
             t3::safeQueueEvent(event);
         }
@@ -131,15 +131,15 @@ bool CollisionManager::isJudgedPair(
         judged_pairs_.begin(),
         judged_pairs_.end(),
         [&](const CollisionPair& target){
-            auto f = pair.first->getColliderID();
-            auto s = pair.second->getColliderID();
-            if (f == target.first->getColliderID()) {
-                if (s == target.second->getColliderID()) {
+            auto f = pair.first->colliderID();
+            auto s = pair.second->colliderID();
+            if (f == target.first->colliderID()) {
+                if (s == target.second->colliderID()) {
                     return true;
                 }
             }
-            else if (f == target.second->getColliderID()) {
-                if (s == target.first->getColliderID()) {
+            else if (f == target.second->colliderID()) {
+                if (s == target.first->colliderID()) {
                     return true;
                 }
             }

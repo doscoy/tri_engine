@@ -5,14 +5,12 @@
 
 #include "../math/tri_math_define.hpp"
 #include "../math/tri_math_util.hpp"
-#include "../util/tri_equal_comparable.hpp"
 
 namespace t3 {
 
 
 template <typename T>
 struct QuaternionTemplate
-    : public EqalComparable< QuaternionTemplate<T> >
 {
     
     T x_;

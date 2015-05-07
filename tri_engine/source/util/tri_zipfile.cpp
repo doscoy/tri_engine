@@ -163,7 +163,7 @@ bool ZipFile::initialize(
         strToLower(fileName, MAX_FILE_PATH);
         
         String spath = fileName;
-        m_ZipContentsMap[spath] = i;
+        zip_contents_map_[spath] = i;
 
         // Skip name, extra and comment fields.
         pfh += fh.fnameLen + fh.xtraLen + fh.cmntLen;
@@ -187,8 +187,8 @@ int ZipFile::find(const String &path) const
         lowerCase.begin(),
         (int(*)(int))std::tolower
     );
-	ZipContentsMap::const_iterator i = m_ZipContentsMap.find(lowerCase);
-	if (i == m_ZipContentsMap.end()) {
+	ZipContentsMap::const_iterator i = zip_contents_map_.find(lowerCase);
+	if (i == zip_contents_map_.end()) {
 		return -1;
     }
 
@@ -198,7 +198,7 @@ int ZipFile::find(const String &path) const
 
 void ZipFile::terminate()
 {
-    m_ZipContentsMap.clear();
+    zip_contents_map_.clear();
     T3_DELETE_A(data_buffer_);
     entries_ = 0;
 }

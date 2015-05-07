@@ -1,15 +1,8 @@
-//
-//  tri_archive.hpp
-//  tri_engine
-//
-//  Created by KANI Tetsuro on 2014/09/23.
-//  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
-//
 
-#ifndef tri_engine_tri_archive_hpp
-#define tri_engine_tri_archive_hpp
+#ifndef TRI_ARCHIVE_HPP_INCLUDED
+#define TRI_ARCHIVE_HPP_INCLUDED
 
-
+//  include
 #include "tri_zipfile.hpp"
 #include "base/tri_std.hpp"
 #include "kernel/io/tri_file.hpp"
@@ -17,31 +10,44 @@
 
 namespace t3 {
 
-
+///
+/// アーカイブ管理
 class Archive {
 
 public:
-    Archive();
-    ~Archive();
+    ///
+    /// コンストラクタ
+    Archive() {}
+
+    ///
+    /// デストラクタ
+    ~Archive() {}
 
 
 public:
-    void load(const String& arcname);
-    void decompressAll();
-    const File* getFile(const String& filename);
+    /// アーカイブファイル読み込み
+    void load(
+        const String& arcname   ///< アーカイブ名
+    );
 
+    ///
+    /// アーカイブの展開.
+    /// 全展開
+    void decompressAll();
+
+    ///
+    /// ファイル取得
+    const File* file(
+        const String& filename  ///< ファイル名
+    );
 
 private:
-    ZipFile zip_;
-    Vector<File*> files_;
+    ZipFile zip_;   ///< zipファイル
+    Vector<File*> files_;   ///< 管理しているファイル
 };
-
 
 
 }   // namespace t3
 
 
-
-
-
-#endif
+#endif // TRI_ARCHIVE_HPP_INCLUDED

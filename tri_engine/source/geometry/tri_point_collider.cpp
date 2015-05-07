@@ -20,7 +20,7 @@ PointCollider::PointCollider(
 bool PointCollider::isHit(
     const CircleCollider &col
 ) const {
-    return isHitCirclePoint(col.getCircle(), position_);
+    return isHitCirclePoint(col.circle(), position_);
 }
 
 bool PointCollider::isHit(

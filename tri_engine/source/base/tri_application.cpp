@@ -57,10 +57,10 @@ struct Step {
 
 
 bool isSuspending() {
-    t3::Director& gs = t3::Director::instance();
-    t3::DebugMenu& dm = t3::DebugMenu::instance();
+    auto& director = t3::Director::instance();
+    auto& dm = t3::DebugMenu::instance();
     
-    if (gs.isSuspend() || dm.isOpened()) {
+    if (director.isSuspend() || dm.isOpened()) {
         return true;
     }
    
@@ -78,10 +78,10 @@ public:
         , dmb_root_menu_(&dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootScene)
         , dmb_step_(&dmf_system_, "STEP", 0)
 
-        , dm_show_work_time_(&dmf_system_, "SHOW WORKTIME", show_work_time_, 1)
-        , dm_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_, 1)
-        , dm_show_heap_(&dmf_system_, "SHOW HEAP", show_heap_, 1)
-        , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_, 1)
+        , dm_show_work_time_(&dmf_system_, "SHOW WORKTIME", show_work_time_)
+        , dm_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_)
+        , dm_show_heap_(&dmf_system_, "SHOW HEAP", show_heap_)
+        , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_)
     {
         t3::Director::instance().registryToDebugMenu(dmf_system_);
         render_avg.reserve(LIMIT_AVG_SUM);
@@ -128,7 +128,7 @@ void initializeTriEngine(
     //  初期化
     Director::instance().initializeGameSystem();
     
-    t3::Director& d = t3::Director::instance();
+    auto& d = t3::Director::instance();
     d.realScreenSize(
         Vec2(
             static_cast<float>(width),
@@ -173,7 +173,7 @@ bool Application::isActive() const {
 
 void Application::initializeWorkBar() {
     
-    Director& d = Director::instance();
+    auto& d = Director::instance();
     const Vec2& screen_size = d.virtualScreenSize();
     Vec2 half_screen_size = screen_size / 2;
     
@@ -187,10 +187,10 @@ void Application::initializeWorkBar() {
 	);
     
     //  ワークバーの色
-    cpu_bar_.setColor(0, Color::BLUE);
-    cpu_bar_.setColor(1, Color::RED);
-    cpu_bar_.setColor(2, Color::GREEN);
-    cpu_bar_.setColor(3, Color::magenta());
+    cpu_bar_.setColor(0, color_sample::blue());
+    cpu_bar_.setColor(1, color_sample::red());
+    cpu_bar_.setColor(2, color_sample::green());
+    cpu_bar_.setColor(3, color_sample::magenta());
     
 }
 
@@ -290,7 +290,7 @@ void Application::updateApplication()
     
     
     SceneManager& sm = SceneManager::instance();
-    Director& gs = Director::instance();
+    auto& gs = Director::instance();
     DebugMenu& dm = DebugMenu::instance();
 
     //  ゲームスピード変更
@@ -331,7 +331,7 @@ void Application::updateApplication()
 
 void Application::renderApplication() {
 
-    Director& gs = Director::instance();
+    auto& gs = Director::instance();
     DebugMenu& dm = DebugMenu::instance();
 
     app_cost_timer_.end();              // app cost 計測終了
@@ -402,7 +402,7 @@ void Application::renderApplication() {
 void Application::debugPrinting() {
 
 #if DEBUG
-    Director& gs = Director::instance();
+    auto& gs = Director::instance();
 
 
 
@@ -439,7 +439,7 @@ void Application::debugPrinting() {
         T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y,
-            Color::white(),
+            color_sample::white(),
             "sys %2.2fms(%3.2f%%)",
             last_system_cost_ * 1000,
             last_system_cost_ / frameSec<60>() * 100
@@ -447,7 +447,7 @@ void Application::debugPrinting() {
         T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y + 16,
-            Color::white(),
+            color_sample::white(),
             "app %2.2fms(%3.2f%%)",
             last_app_cost_ * 1000,
             last_app_cost_ / frameSec<60>() * 100
@@ -455,7 +455,7 @@ void Application::debugPrinting() {
         T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y + 32,
-            Color::white(),
+            color_sample::white(),
             "ren %2.2fms(%3.2f%%)",
             last_rendering_cost_ * 1000,
             last_rendering_cost_ / frameSec<60>() * 100
@@ -463,7 +463,7 @@ void Application::debugPrinting() {
         T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y + 48,
-            Color::white(),
+            color_sample::white(),
             "oth %2.2fms(%3.2f%%)",
             last_other_cost_ * 1000,
             last_other_cost_ / frameSec<60>() * 100
@@ -489,7 +489,7 @@ void Application::debugPrinting() {
             T3_PRINT_DISP(
                 heap_pos_x,
                 heap_pos_y,
-                Color::white(),
+                color_sample::white(),
                 "%s:T(%7u) P(%7u) Node(%4u)",
                 heap.name(),
                 heap.allocated().byte(),

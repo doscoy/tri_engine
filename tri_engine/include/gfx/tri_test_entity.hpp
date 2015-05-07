@@ -20,7 +20,7 @@ public:
             t3::Vec3(0,0,0),
             t3::Vec3(0,1,0),
             t3::Vec3(2,2,2),
-            t3::Color::BLUE
+            t3::color_sample::blue()
         );
 
     }

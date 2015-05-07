@@ -76,9 +76,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\..\include\cross_accelerometer.hpp" />
     <ClInclude Include="..\..\..\include\cross_audio_system.hpp" />
     <ClInclude Include="..\..\..\include\cross_define.hpp" />
@@ -90,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\source\win\cross_accelerometer.cpp" />
     <ClCompile Include="..\..\..\source\win\cross_audio_system.cpp" />
+    <ClCompile Include="..\..\..\source\win\cross_os.cpp" />
     <ClCompile Include="..\..\..\source\win\cross_render_system.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -208,7 +208,7 @@ void printDisplay(
     t3::Director::printDisplay(
         x,
         y,
-        Color::magenta().rgba32(),
+        color_sample::magenta().rgba32(),
         DEBUG_FONT_POINT,
         buf
     );

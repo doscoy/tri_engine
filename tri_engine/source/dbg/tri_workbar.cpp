@@ -24,12 +24,12 @@ Workbar::Workbar()
     , thickness_(2)
     , position_()
 {
-    bar_params_[0] = {0, Color::magenta()};
-    bar_params_[1] = {0, Color::yellow()};
-    bar_params_[2] = {0, Color::GREEN};
-    bar_params_[3] = {0, Color::cyan()};
-    bar_params_[4] = {0, Color::orange()};
-    bar_params_[5] = {0, Color::white()};
+    bar_params_[0] = {0, color_sample::magenta()};
+    bar_params_[1] = {0, color_sample::yellow()};
+    bar_params_[2] = {0, color_sample::green()};
+    bar_params_[3] = {0, color_sample::cyan()};
+    bar_params_[4] = {0, color_sample::orange()};
+    bar_params_[5] = {0, color_sample::white()};
 }
 
 
@@ -92,14 +92,14 @@ void Workbar::draw() {
     drawRectangleMinSize(
         Vec2(position_.x_, y-5),
         Vec2(1, 10),
-        Color::silver()
+        color_sample::silver()
     );
     
     //  100%
     drawRectangleMinSize(
         Vec2(position_.x_ + limit_width_pixel_, y-5),
         Vec2(1, 10),
-        Color::silver()
+        color_sample::silver()
     );
     
     //  25%区切り
@@ -109,21 +109,21 @@ void Workbar::draw() {
     drawRectangleMinSize(
         Vec2(0.0f, static_cast<float>(y-3)),
         Vec2(1.0f, 6.0f),
-        Color::silver()
+        color_sample::silver()
     );
     
     //  25%
     drawRectangleMinSize(
         Vec2(static_cast<float>(-per25pixel), static_cast<float>(y-3)),
         Vec2(1.0f, 6.0f),
-        Color::silver()
+        color_sample::silver()
     );
     
     //  75%
     drawRectangleMinSize(
         Vec2(static_cast<float>(per25pixel), static_cast<float>(y-3)),
         Vec2(1.0f, 6.0f),
-        Color::silver()
+        color_sample::silver()
     );
     
     //  上限バーの更新
@@ -147,9 +147,9 @@ void Workbar::draw() {
     }
     
     //  上限バー描画
-    Color limit_bar_color = Color::lime();
+    auto limit_bar_color = color_sample::lime();
     if (limit_bar_pos_x_ > 0) {
-        limit_bar_color = Color::RED;
+        limit_bar_color = color_sample::red();
     }
     drawRectangleMinSize(
         Vec2(static_cast<float>(limit_bar_pos_x_), y - 1.0f), 

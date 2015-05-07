@@ -132,24 +132,24 @@ void VirtualPad::renderVirtualPad(t3::DrawLayer* const layer) {
     
     //  バーチャルパッド十字キー
     drawRectangleMinSize(
-        POS_UP, BUTTON_SIZE, Color::lime()
+        POS_UP, BUTTON_SIZE, color_sample::lime()
     );
     drawRectangleMinSize(
-        POS_DOWN, BUTTON_SIZE, Color::lime()
+        POS_DOWN, BUTTON_SIZE, color_sample::lime()
     );
     drawRectangleMinSize(
-        POS_RIGHT, BUTTON_SIZE, Color::lime()
+        POS_RIGHT, BUTTON_SIZE, color_sample::lime()
     );
     drawRectangleMinSize(
-        POS_LEFT, BUTTON_SIZE, Color::lime()
+        POS_LEFT, BUTTON_SIZE, color_sample::lime()
     );
 
     //  ABボタン
     drawRectangleMinSize(
-        POS_A, BUTTON_SIZE, Color::lime()
+        POS_A, BUTTON_SIZE, color_sample::lime()
     );
     drawRectangleMinSize(
-        POS_B, BUTTON_SIZE, Color::lime()
+        POS_B, BUTTON_SIZE, color_sample::lime()
     );
 
 }

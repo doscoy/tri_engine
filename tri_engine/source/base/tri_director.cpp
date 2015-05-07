@@ -74,11 +74,11 @@ bool Director::isOutOfScreen(
 
 
 void Director::setupBlackOut() {
-    instance().fade_layer_->setupFadeParam(1, Color::BLACK);
+    instance().fade_layer_->setupFadeParam(1, color_sample::black());
 }
 
 void Director::setupBlackIn() {
-    instance().fade_layer_->setupFadeParam(0, Color::BLACK);
+    instance().fade_layer_->setupFadeParam(0, color_sample::black());
 }
 
 void Director::fadeOut() {
@@ -173,10 +173,10 @@ Director::Director()
     CollisionManager::createInstance();
     
 
-	clear_colors_[0] = Color::RED;
-	clear_colors_[1] = Color::darkgray();
-	clear_colors_[2] = Color::white();
-	clear_colors_[3] = Color::BLUE;
+	clear_colors_[0] = color_sample::red();
+	clear_colors_[1] = color_sample::darkgray();
+	clear_colors_[2] = color_sample::white();
+	clear_colors_[3] = color_sample::blue();
 
 
 #if TRI_DEVFLAG_AGING_CHECK

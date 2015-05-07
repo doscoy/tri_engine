@@ -84,7 +84,7 @@ void DebugStringBuffer::clearBuffer()
 
 void DebugStringBuffer::drawStrings()
 {
-    Director& gs = Director::instance();
+    auto& gs = Director::instance();
     beginPrint(gs.screenSize().x_, gs.screenSize().y_);
  
     

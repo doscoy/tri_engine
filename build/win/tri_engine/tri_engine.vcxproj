@@ -50,16 +50,17 @@
       <AdditionalIncludeDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\lpng;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\include;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\cross_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4819;4996;4018;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <PrecompiledHeaderFile />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>cross_sdk.lib;zlib.lib;libpng16.lib</AdditionalDependencies>
+      <AdditionalDependencies>cross_sdk.lib;libpng16.lib;zlib.lib</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\lpng;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\cross_sdk\build\win\cross_sdk\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\samples\libs;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\lpng;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,6 +74,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\include;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\cross_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4819;4996;4018;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <PrecompiledHeaderFile />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -81,10 +83,10 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>cross_sdk.lib</AdditionalDependencies>
+      <AdditionalDependencies>cross_sdk.lib;libpng16.lib;zlib.lib</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\cross_sdk\build\win\cross_sdk\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\samples\libs;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\lpng;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

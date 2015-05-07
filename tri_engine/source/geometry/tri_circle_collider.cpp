@@ -21,7 +21,7 @@ CircleCollider::CircleCollider(
 bool CircleCollider::isHit(
     const CircleCollider &col
 ) const {
-    return isHitCircleCircle(circle_, col.getCircle());
+    return isHitCircleCircle(circle_, col.circle());
 }
 
 

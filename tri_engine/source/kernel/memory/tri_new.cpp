@@ -1,10 +1,10 @@
 #include "kernel/process/tri_mutex.hpp"
 #include "kernel/memory/tri_new.hpp"
-
+#include "dbg/tri_assert.hpp"
 
 
 //  デフォルトnew/delete
-
+/*
 void* operator new(
     ::std::size_t size
 ) {
@@ -28,7 +28,7 @@ void operator delete[](
 ) noexcept {
     t3::Heap::deallocate(mem);
 }
-
+*/
 
 //  カスタムnew/delete
 
@@ -39,7 +39,9 @@ void* operator new(
     const char* const filename,
     int line
 ) {
-    return heap->allocate(size, filename, line);
+    void* mem = heap->allocate(size, filename, line);
+    T3_NULL_ASSERT(mem);
+    return mem;
 }
 
 void operator delete(
@@ -57,7 +59,10 @@ void* operator new[](
     const char* const filename,
     int line
 ) {
-    return heap->allocate(size, filename, line);
+
+    void* mem = heap->allocate(size, filename, line);
+    T3_NULL_ASSERT(mem);
+    return mem;
 }
 
 void operator delete[](

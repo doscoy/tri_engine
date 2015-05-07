@@ -180,8 +180,8 @@ void SimpleSpriteScene::terminateScene() {
 void SimpleSpriteScene::updateScene(t3::tick_t delta_time) {
     context_->update(delta_time);
     
-    t3::Director& gs = t3::Director::instance();
-    const t3::Pad& pad = gs.input().pad();
+    auto& director = t3::Director::instance();
+    auto& pad = director.input().pad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
         finish();
     }

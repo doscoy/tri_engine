@@ -6,14 +6,13 @@
 namespace t3 {
 
 
-
 using ZipContentsMap = std::map<String, int>;
 
 class ZipFile {
 
 public:
     ZipFile()
-        : m_ZipContentsMap()
+        : zip_contents_map_()
         , file_()
         , data_buffer_(nullptr)
         , entries_(0)
@@ -58,7 +57,7 @@ private:
     struct ZipDirFileHeader;
     struct ZipLocalHeader;
 
-	ZipContentsMap m_ZipContentsMap;
+	ZipContentsMap zip_contents_map_;
     FileStream file_;
 
     char* data_buffer_;   // データバッファ.

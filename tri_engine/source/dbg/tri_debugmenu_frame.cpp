@@ -148,13 +148,13 @@ void DebugMenuFrame::drawFrame(
         T3_NULL_ASSERT(item);
 
         if (focus_item_ == item) {
-            font_color = Color::orange();
+            font_color = color_sample::orange();
         }
         else if (idx == select_idx_) {
-            font_color = Color::cyan();
+            font_color = color_sample::cyan();
         }
         else {
-            font_color = Color::white();
+            font_color = color_sample::white();
         }
         
         //

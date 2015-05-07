@@ -398,8 +398,8 @@ void renderMemoryPool(MemoryPool& pool) {
     float render_ratio = 0.001f;
     
     //  チェイン描画用の色設定
-    t3::Color free_color = t3::Color::skyblue();
-    t3::Color use_color = t3::Color::orange();
+    t3::Color free_color = t3::color_sample::skyblue();
+    t3::Color use_color = t3::color_sample::orange();
     
     //  フリーチェインを描画
     t3::MemoryChunk* free = pool.freeChainRoot();

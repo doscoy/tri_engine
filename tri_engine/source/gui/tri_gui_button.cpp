@@ -15,7 +15,7 @@ void ButtonDefaultActivator::activate(t3::Button *b) {
         return;
     }
 
-    b->sprite()->color(Color::white());
+    b->sprite()->color(color_sample::white());
 
 }
 
@@ -26,7 +26,7 @@ void ButtonDefaultActivator::deactivate(t3::Button* b) {
         return;
     }
 
-    b->sprite()->color(Color::gray());
+    b->sprite()->color(color_sample::gray());
 }
 
 

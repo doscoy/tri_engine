@@ -1,23 +1,16 @@
-
+//  include
 #include "util/tri_archive.hpp"
 #include "kernel/memory/tri_new.hpp"
 
 namespace t3 {
 
 
-Archive::Archive()
-{
-}
-
-Archive::~Archive()
-{
-}
-
-
+//  アーカイブの読み込み
 void Archive::load(const String& arcname) {
     zip_.initialize(arcname);
 }
 
+//  アーカイブの展開
 void Archive::decompressAll() {
     int entry_num = zip_.entries();
     for (int i = 0; i < entry_num; ++i) {
@@ -32,15 +25,18 @@ void Archive::decompressAll() {
     }
 }
 
-const File* Archive::getFile(
+//  ファイル取得
+const File* Archive::file(
     const String& filename
 ) {
+    //  指定ファイル名のファイルがあるか調査
     for (auto& f : files_) {
         if (f->name() == filename) {
             return f;
         }
     }
     
+    //  無かった
     return nullptr;
 }
 
