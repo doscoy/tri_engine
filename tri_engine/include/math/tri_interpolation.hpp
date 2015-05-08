@@ -1,46 +1,45 @@
-/**
- *
- * 補間クラス.
- *
- **/
+
 
 #ifndef TRI_INTERPOLATION_HPP_INCLUDED
 #define TRI_INTERPOLATION_HPP_INCLUDED
 
+//  include
 #include "../base/tri_types.hpp"
 
 namespace t3 {
 
-    
+///
+/// 補間タイプ
 enum class InterpolationType{
-    LINER,            // 線形補間
-    ACCELERATION,     // 加速補間
-    DECELERATION,     // 減速補間
+    LINER,            /// 線形補間
+    ACCELERATION,     /// 加速補間
+    DECELERATION,     ///< 減速補間
 };
 
 
 
 
 
-    
-//  線形補間関数
+///
+///  線形補間関数
 template <typename T>
 inline void interpolateLiner(
-    T& dest,            // 結果
-    const T& x0,        // 開始値
-    const T& x1,        // 終了値
-    const float t       // 割合 t
+    T& dest,            ///< 結果
+    const T& x0,        ///< 開始値
+    const T& x1,        ///< 終了値
+    const float t       ///< 割合 t
 ){
     dest = x0 + (( x1 - x0 ) * t);
 }
-    
-//  曲線補間関数
+
+/// 
+///  曲線補間関数
 template <typename T>
 inline void interpolateT2(
-    T& dest,            // 結果
-    const T& x0,        // 開始値
-    const T& x1,        // 終了値
-    const float t       // 割合 t
+    T& dest,            ///< 結果
+    const T& x0,        ///< 開始値
+    const T& x1,        ///< 終了値
+    const float t       ///< 割合 t
 ){
     float t2 = t * t;
     interpolateLiner( dest, x0, x1, t2 );
@@ -50,50 +49,58 @@ inline void interpolateT2(
 
 
 
-
-//  補間
+///
+///  補間
 template <typename T>
 class Interpolation
 {
 private:
-    // 補間にかかる時間
+    ///
+    /// 補間にかかる時間
     float interpolation_time_;
 
-    // 補間開始からの経過時間
+    ///
+    /// 補間開始からの経過時間
     float now_time_;
 
-    // 有効フラグ
+    ///
+    /// 有効フラグ
     bool active_;
 
-    // 補間タイプ
+    ///
+    /// 補間タイプ
     InterpolationType type_;
 
-    // 補間開始値
+    ///
+    /// 補間開始値
     T start_;
 
-    // 補間終了値
+    ///
+    /// 補間終了値
     T goal_;
 
-    // 補間結果適用変数
+    ///
+    /// 補間結果適用変数
     T* target_;
 
 public:
-    //  コンストラクタ
+    ///
+    ///  コンストラクタ
     Interpolation()
         : interpolation_time_( 0.0f )
         , now_time_( 0.0f )
         , active_( false )
         , type_(InterpolationType::LINER)
-    {
-    }
+    {}
 
-    //  デストラクタ
+    ///
+    ///  デストラクタ
     ~Interpolation()
-    {
-    }
+    {}
 
 public:
-    //  補間開始
+    ///
+    ///  補間開始
     void startInterpolation(
         T& target,                      ///< 操作対象変数
         const T& goal,                  ///< 終了値
@@ -116,7 +123,8 @@ public:
         active_ = true;
     }
 
-    //  更新処理
+    ///
+    ///  更新処理
     void updateInterpolation(const tick_t delta_time) {
         if (!active_) {
             //  startされていないのですぐ終了
@@ -154,16 +162,12 @@ public:
         }
     }
 
-    //  有効判定
+    ///
+    ///  有効判定
     bool isActive() const { 
         return active_;
     }
-
-
 };
-
-
-
 
 
 } // namespace t3

@@ -2,6 +2,8 @@
 #ifndef TRI_GFX_HPP_INCLUDED
 #define TRI_GFX_HPP_INCLUDED
 
+
+//  include
 #include "tri_camera.hpp"
 #include "tri_camera_updater.hpp"
 #include "tri_color.hpp"

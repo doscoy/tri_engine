@@ -2,6 +2,7 @@
 #ifndef TRI_DEBUGMENU_ITEMS_HPP_INCLUDED
 #define TRI_DEBUGMENU_ITEMS_HPP_INCLUDED
 
+//  include
 #include "tri_debugmenu_label.hpp"
 #include "tri_debugpad.hpp"
 #include "tri_debugmenu_frame.hpp"
@@ -13,6 +14,8 @@
 namespace t3 {
 
     
+///
+/// 
 void makeTargetValueString(
     const int target,
     char* buf,
@@ -38,12 +41,15 @@ void makeTargetValueString(
 );
 
 
-
+///
+/// ラベル
 template <class T>
 class DebugMenuItem
     : public DebugMenuLabel
 {
 public:
+    ///
+    /// コンストラクタ
     DebugMenuItem(
         DebugMenuFrame* const parent,
         const char* const label,
@@ -62,6 +68,8 @@ public:
     
         
 public:
+    ///
+    /// 更新
     void update() override
     {
         const Pad& pad = debugPad();
@@ -80,6 +88,8 @@ public:
     }
     
     
+    ///
+    /// 描画
     void draw(
         const float x,
         const float y,
@@ -110,18 +120,22 @@ public:
     
     
 private:
-    T& target_;
-    T step_;
-    T l_limit_;
-    T h_limit_;
+    T& target_; ///< 操作対象
+    T step_;    ///< 変化量
+    T l_limit_; ///< 下限値
+    T h_limit_; ///< 上限値
 };
 
 
+///
+/// bool値用の値編集メニュー
 template <>
 class DebugMenuItem<bool>
     : public DebugMenuLabel
 {
 public:
+    ///
+    /// コンストラクタ
     DebugMenuItem(
         DebugMenuFrame* const parent,
         const char* const label,
@@ -134,6 +148,8 @@ public:
 
 
 public:
+    ///
+    /// 更新
     void update() override
     {
         const Pad& pad = debugPad();
@@ -151,6 +167,8 @@ public:
     }
 
 
+    ///
+    /// 描画
     void draw(
         const float x,
         const float y,
@@ -181,52 +199,25 @@ public:
 
 
 private:
-    bool& target_;
+    bool& target_;  ///< 操作対象
 };
 
 
-    
-/*
-template<>
-class DebugMenuItem<Color>
-{
-    typedef Color item_t;
-    typedef uint8_t  step_type_t;
-public:
-    DebugMenuItem(
-        DebugMenuFrame* const parent,
-        const char* const label,
-        item_t& target,
-        const step_type_t step
-    )   : dmf_( parent, label )
-        , r_( &dmf_, "r", target.red_, step )
-        , g_( &dmf_, "g", target.green_, step )
-        , b_( &dmf_, "b", target.blue_, step )
-        , a_( &dmf_, "a", target.alpha_, step )
-    {
-    }
-    
-private:
-    DebugMenuFrame dmf_;
-    DebugMenuItem<step_type_t> r_;
-    DebugMenuItem<step_type_t> g_;
-    DebugMenuItem<step_type_t> b_;
-    DebugMenuItem<step_type_t> a_;
-};
-*/
-    
-
+///
+/// Vec2用の値編集メニュー
 template<>
 class DebugMenuItem<Vec2>
 {
     typedef Vec2 item_t;
     typedef float  step_type_t;
 public:
+    ///
+    /// コンストラクタ
     DebugMenuItem(
-        DebugMenuFrame* const parent,
-        const char* const label,
-        item_t& target,
-        const step_type_t step
+        DebugMenuFrame* const parent,   ///< 親メニュー
+        const char* const label,        ///< ラベル
+        item_t& target,                 ///< 操作対象の変数
+        const step_type_t step          ///< 変化量
     )   : dmf_( parent, label )
         , x_( &dmf_, "x", target.x_, step )
         , y_( &dmf_, "y", target.y_, step )
@@ -234,22 +225,26 @@ public:
     }
     
 private:
-    DebugMenuFrame dmf_;
-    DebugMenuItem<step_type_t> x_;
-    DebugMenuItem<step_type_t> y_;
+    DebugMenuFrame dmf_;                ///< フレーム
+    DebugMenuItem<step_type_t> x_;      ///< x値
+    DebugMenuItem<step_type_t> y_;      ///< y値
 };
 
+///
+/// Vec3用の値編集メニュー
 template<>
 class DebugMenuItem<Vec3>
 {
     typedef Vec3 item_t;
     typedef float  step_type_t;
 public:
+    ///
+    /// コンストラクタ
     DebugMenuItem(
-        DebugMenuFrame* const parent,
-        const char* const label,
-        item_t& target,
-        const step_type_t step
+        DebugMenuFrame* const parent,   ///< 親メニュー
+        const char* const label,        ///< ラベル
+        item_t& target,                 ///< 操作対象の変数
+        const step_type_t step          ///< ステップ量
     )   : dmf_( parent, label )
         , x_( &dmf_, "x", target.x_, step )
         , y_( &dmf_, "y", target.y_, step )
@@ -258,18 +253,22 @@ public:
     }
     
 private:
-    DebugMenuFrame dmf_;
-    DebugMenuItem<step_type_t> x_;
-    DebugMenuItem<step_type_t> y_;
-    DebugMenuItem<step_type_t> z_;
+    DebugMenuFrame dmf_;                ///< フレーム
+    DebugMenuItem<step_type_t> x_;      ///< x値
+    DebugMenuItem<step_type_t> y_;      ///< y値
+    DebugMenuItem<step_type_t> z_;      ///< z値
 };
 
 
 
+///
+/// 
 class DebugMenuButtonBase
     : public DebugMenuLabel
 {
 public:
+    ///
+    /// 
     DebugMenuButtonBase(
         DebugMenuFrame* parent,
         const char* const label
@@ -277,17 +276,26 @@ public:
     {
     }
     
+    ///
+    /// 
     virtual void invoke() = 0;
     
+    ///
+    /// 
     void update() override;
     
 };
 
+
+///
+///
 template <typename T, typename ArgType = int>
 class DebugMenuButtonFunctor
     : public DebugMenuButtonBase
 {
 public:
+    ///
+    /// 
     DebugMenuButtonFunctor(
         DebugMenuFrame* parent,
         const char* const label,
@@ -297,21 +305,26 @@ public:
     {
     }
     
+    ///
+    /// 
     void invoke() override {
         functor_(param_);
     }
     
 private:
-    T functor_;
-    ArgType  param_;
+    T functor_;         ///<
+    ArgType  param_;    ///<
 };
 
-
+///
+///
 template <typename T>
 class DebugMenuButtonMethod
     : public DebugMenuButtonBase
 {
 public:
+    ///
+    /// 
     DebugMenuButtonMethod(
         DebugMenuFrame* parent,
         const char* const label,
@@ -322,14 +335,16 @@ public:
         , owner_(owner)
     {}
     
+    ///
+    /// 
     void invoke() override {
         T3_NULL_ASSERT(owner_);
         func_(*owner_);
     }
     
 private:
-    std::function<void(T&)> func_;
-    T* owner_;
+    std::function<void(T&)> func_;  ///<
+    T* owner_;                      ///<
 };
 
 

@@ -20,7 +20,7 @@ Scene::Scene(
     DebugMenu& debug_menu_root = DebugMenu::instance();
 
     scene_debug_menu_frame_.attachSelf(
-        debug_menu_root.getMenuRoot()
+        debug_menu_root.rootMenu()
     );
 }
 

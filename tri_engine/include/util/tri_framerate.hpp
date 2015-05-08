@@ -3,31 +3,35 @@
 
 namespace t3 {
 
-    
-
-// *********************************************
-//  framerate N の時の1フレームあたりの秒取得
-
+///
+/// フレームレートN時の1フレームあたりの秒数取得
 template <int FRAMERATE>
-constexpr float frameSec()
-{
+constexpr float frameSec() {
     return 1.0f / FRAMERATE;
 }
 
 
-inline float frameToSec(int frame)
-{
+///
+/// フレームを秒に変換
+inline float frameToSec(
+    int frame   ///< フレーム数
+) {
     return static_cast<float>(frame) / 60.0f;
 }
 
-
-inline int secToFrame(float sec)
-{
+///
+/// 秒をフレームに変換
+inline int secToFrame(
+    float sec   ///< 秒
+) {
     return static_cast<int>(sec * 60.0f);
 }
 
-
-inline float deltaRate(float delta_time) {
+///
+/// デルタタイムあたりのレート
+inline float deltaRate(
+    float delta_time    ///< 現在のデルタタイム
+) {
     return delta_time / frameSec<60>();
 }
     

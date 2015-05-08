@@ -6,9 +6,16 @@
 namespace t3 {
 
 
-    
+///
+/// デバッグパッド取得
 const Pad& debugPad();
-void updateDebugPad( const uint32_t pad_data, tick_t delta_time );
+
+///
+/// デバッグパッドの更新
+void updateDebugPad( 
+    const uint32_t pad_data,    ///< パッドの入力情報
+    tick_t delta_time           ///< チック
+);
 
 }   // namespace t3
 

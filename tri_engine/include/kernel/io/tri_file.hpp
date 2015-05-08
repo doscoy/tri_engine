@@ -2,6 +2,8 @@
 #ifndef TRI_FILE_HPP_INCLUDED
 #define TRI_FILE_HPP_INCLUDED
 
+
+//  include
 #include "util/tri_uncopyable.hpp"
 #include "base/tri_types.hpp"
 #include "base/tri_std.hpp"
@@ -9,61 +11,73 @@
 
 namespace t3 {
 
-
-class File : private Uncopyable
+///
+/// ファイルクラス
+class File 
+    : private Uncopyable
 {
 public:
+    ///
+    /// コンストラクタ
     File();
+
+    ///
+    /// コンストラクタ
     File(
         const String& name,
         size_t size
     );
+
+    ///
+    /// コンストラクタ
     File(
         const String& name,
         size_t size,
         uint8_t* data
     );
     
+    ///
+    /// デストラクタ
     ~File();
 
 public:
-
-    //  ファイル読み込み
+    ///
+    ///  ファイル読み込み
     bool loadFile(const FilePath& filepath);
 
-    //  データ取得
+    ///
+    ///  データ取得
     const uint8_t* data() const {
         return data_;
     }
     
-    //  データサイズ取得
+    ///
+    ///  データサイズ取得
     std::size_t size() const {
         return size_;
     }
     
-    //  正当性チェック
+    ///
+    ///  正当性チェック
     bool isVaild() const {
         return  data_ != nullptr;
     }
 
-    //  名前
+    ///
+    ///  名前
     const String& name() const {
         return name_;
     }
 
     
 private:
-    //  名前
-    String name_;
+    String name_;       ///< 名前
 
-    //  データ
-    uint8_t* data_;
+    uint8_t* data_;     ///< データ
     
-    //  データサイズ
-    std::size_t size_;
+    std::size_t size_;  ///< データサイズ
     
-    //  データバッファの自動解放
-    bool auto_free_;
+    bool auto_free_;    ///< バッファの自動解放フラグ
 };
     
 using FilePtr = SharedPtr<File>;

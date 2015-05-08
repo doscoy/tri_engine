@@ -1,56 +1,58 @@
-//
-//  tri_glyph.hpp
-//  tri_engine
-//
-//  Created by KANI Tetsuro on 2014/10/17.
-//  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
-//
 
 #ifndef tri_engine_tri_glyph_hpp
 #define tri_engine_tri_glyph_hpp
 
+//  include
 #include "util/tri_utf8.hpp"
 
 namespace t3 {
  
  
 
- 
+///
+/// グリフ位置
 struct GlyphPosition {
-	int16_t x_;
-	int16_t y_;
+	int16_t x_;     ///< x
+	int16_t y_;     ///< y
 };
 
+///
+/// グリフメトリクス
 struct GlyphMetrics {
-	int8_t x_bearing_;
-	int8_t y_bearing_;
-	int8_t width_;
-	int8_t height_;
-	int8_t x_advance_;
-	int8_t y_advance_;
+	int8_t x_bearing_;  ///< xベアリング
+	int8_t y_bearing_;  ///< yベアリング
+	int8_t width_;      ///< 幅
+	int8_t height_;     ///< 高さ
+	int8_t x_advance_;  ///< 
+	int8_t y_advance_;  ///< 
 };
 
+///
+/// グリフ
 struct Glyph {
-	GlyphPosition position_;
-	GlyphMetrics metrics_;
-	const char* char_;
+	GlyphPosition position_;    ///< グリフ位置
+	GlyphMetrics metrics_;      ///< メトリクス
+	const char* char_;          ///< 文字
 };
 
-
+///
+/// グリフ検索
 inline const Glyph* searchGryph(
-    const char* c,
-    const Glyph* list,
-    size_t list_size
+    const char* c,      ///< 文字
+    const Glyph* list,  ///< グリフリスト
+    size_t list_size    ///< リストサイズ
 ) {
 
-    
     return nullptr;
 }
 
 
-
+///
+/// グリフリスト
 class GlyphList {
 public:
+    ///
+    /// コンストラクタ
     GlyphList(const Glyph* list, int list_size, String font_sheet, int default_font_size)
         : list_(list)
         , list_size_(list_size)
@@ -59,11 +61,16 @@ public:
     {
     
     }
+
+    ///
+    /// デストラクタ
     ~GlyphList() {
     
     }
     
 public:
+    ///
+    /// グリフ検索
     const Glyph* search(const char* const c) const {
     
         for (int i = 0; i < list_size_; ++i) {
@@ -76,19 +83,23 @@ public:
         return nullptr;
     }
     
+    ///
+    /// フォントシート名取得
     const String& fontSheetName() const {
         return font_sheet_name_;
     }
     
+    ///
+    /// デフォルトフォントサイズ取得
     int defaultFontSize() const {
         return default_font_size_;
     }
 
 private:
-    const Glyph* list_;
-    int list_size_;
-    String font_sheet_name_;
-    int default_font_size_;
+    const Glyph* list_;         ///< グリフリスト
+    int list_size_;             ///< リストサイズ
+    String font_sheet_name_;    ///< フォントシート名
+    int default_font_size_;     ///< デフォルトのフォントサイズ
 };
 
 

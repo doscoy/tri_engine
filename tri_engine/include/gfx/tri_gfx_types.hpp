@@ -6,9 +6,9 @@
 
 namespace t3 {
 
-
-struct texture_coord_t
-{
+///
+/// テクスチャ座標構造体
+struct texture_coord_t {
     float u0_;
     float v0_;
     float u1_;

@@ -1,39 +1,39 @@
-#ifndef TRI_COUNTER_HPP_INCLUDED
+ï»¿#ifndef TRI_COUNTER_HPP_INCLUDED
 #define TRI_COUNTER_HPP_INCLUDED
 
 namespace t3 {
 
 ///
-/// ƒJƒEƒ“ƒ^[ƒNƒ‰ƒX
+/// ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ã‚¯ãƒ©ã‚¹
 class Counter {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     Counter()
         : num_( 0 )
     {}
     
     
     ///
-    /// Œ»İ’n
+    /// ç¾åœ¨åœ°
     int now() const {
         return num_;
     }
     
     ///
-    /// ƒJƒEƒ“ƒgƒAƒbƒv
+    /// ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—
     void countup() {
         num_ += 1;
     }
     
     ///
-    /// ƒJƒEƒ“ƒgƒ_ƒEƒ“
+    /// ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³
     void countdown() {
         num_ -= 1;
     }
     
 private:
-    int num_;   ///< ƒJƒEƒ“ƒg’l
+    int num_;   ///< ã‚«ã‚¦ãƒ³ãƒˆå€¤
 };
 
 

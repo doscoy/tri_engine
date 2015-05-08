@@ -2,86 +2,110 @@
 #define TRI_FRUSTUM_HPP_INCLUDED
 
 
+//  include
 #include "../math/tri_vec3.hpp"
 #include "tri_plane.hpp"
 
 namespace t3 {
 
 
-
-class Frustum
-{
+///
+/// フラスタム
+class Frustum {
 public:
+    ///
+    /// コンストラクタ
     Frustum();
+
+    ///
+    /// デストラクタ
     ~Frustum();
 
 public:
+    ///
+    /// 面タイプ
     enum Side {
-        SIDE_NEAR,
-        SIDE_FAR,
-        SIDE_TOP,
-        SIDE_RIGHT,
-        SIDE_BOTTOM,
-        SIDE_LEFT,
+        SIDE_NEAR,      ///< 手前
+        SIDE_FAR,       ///< 奥
+        SIDE_TOP,       ///< 上
+        SIDE_RIGHT,     ///< 右
+        SIDE_BOTTOM,    ///< 下
+        SIDE_LEFT,      ///< 左
         
-        SIDE_NUM
+        SIDE_NUM        ///< 面総数
     };
 
 
 public:
+    ///
+    /// 視野角を設定
     void setFov(float fov){
         fov_ = fov;
     }
 
+    ///
+    /// アスペクト比を設定
     void setAspect(float aspect){
         aspect_ = aspect;
     }
 
+    ///
+    /// ニアクリップ面を設定
     void setNear(float near){
         near_ = near;
     }
 
+    ///
+    /// ファークリップ面を設定
     void setFar(float far){
         far_ = far;
     }
 
+    ///
+    /// フラスタム初期化
     void initializeFrustum(
-        float fov,
-        float aspect,
-        float near,
-        float far,
-        const Vec3& front,
-        const Vec3& right,
-        const Vec3& up,
-        const Vec3& pos
+        float fov,          ///< 視野角
+        float aspect,       ///< アスペクト比
+        float near,         ///< ニアクリップ
+        float far,          ///< ファークリップ
+        const Vec3& front,  ///< 前ベクトル
+        const Vec3& right,  ///< 右ベクトル
+        const Vec3& up,     ///< 上ベクトル
+        const Vec3& pos     ///< 位置
     );
 
+    ///
+    /// 面を構成する平面取得
     const Plane* getPlane(
-        int side
+        int side    ///< 面タイプ
     ) const {
         return &plane_[side];
     }
 
+    ///
+    /// 内側判定
     bool isInside(
-        const Vec3& point
+        const Vec3& point   ///< 位置
     );
 
-	bool isInSide(
-		const Vec3& point,
-		float radius
+    ///
+    /// 内側判定.
+    /// 位置と半径
+    bool isInSide(
+		const Vec3& point,  ///< 位置
+		float radius        ///< 半径
     );
 
 private:
-    Plane plane_[SIDE_NUM];
-    Vec3 near_clip_[4];
-    Vec3 far_clip_[4];
-    Vec3 pos_;
-    float fov_;
-    float aspect_;
-    float near_;
-    float far_;
-
-    
+    Plane plane_[SIDE_NUM];     ///< フラスタムを構成する各面
+    Vec3 near_clip_[4];         ///< 手前の面座標
+    Vec3 far_clip_[4];          ///< 奥の面座標
+    Vec3 pos_;                  ///< 位置
+    float fov_;                 ///< 視野角
+    float aspect_;              ///< アスペクト比
+    float near_;                ///< 前面オフセット
+    float far_;                 ///< 奥面オフセット
+ 
 };
 
 

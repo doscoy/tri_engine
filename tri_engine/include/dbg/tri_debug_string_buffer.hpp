@@ -9,10 +9,13 @@
 namespace t3 {
 
 
+///
+/// デバッグ文字のコンテナのサイズ
 constexpr int DEBUG_STRING_ITEM_STR_SIZE = 95;
 
-struct DebugStringItem
-{
+///
+/// デバッグ用文字
+struct DebugStringItem {
     uint32_t color_;
     int16_t x_;
     int16_t y_;
@@ -20,31 +23,48 @@ struct DebugStringItem
     char size_;
 };
 
-
+///
+/// デバッグ文字バッファ
 class DebugStringBuffer
     : private Uncopyable
 {
 public:
+    ///
+    /// コンストラクタ
     DebugStringBuffer();
+
+    ///
+    /// デストラクタ
     ~DebugStringBuffer();
     
     
 public:
+    ///
+    /// デバッグ文字列追加
     void addString(
-        const float x,
-        const float y,
-        const uint32_t color,
-        const int size,
-        const char* const str
+        const float x,          ///< 位置ｘ
+        const float y,          ///< 位置ｙ
+        const uint32_t color,   ///< 表示色
+        const int size,         ///< フォントサイズ
+        const char* const str   ///< 文字列
     );
     
+    ///
+    /// バッファクリア
     void clearBuffer();
+
+    ///
+    /// バッファを描画
     void drawStrings();
     
 private:
+    ///
+    /// 文字列のコンテナ
     Array<DebugStringItem, 300> buffer_;
-    int size_;
 
+    ///
+    /// 追加済みサイズ
+    int size_;
 };
 
 

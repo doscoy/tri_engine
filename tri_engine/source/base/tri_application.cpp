@@ -126,10 +126,10 @@ void initializeTriEngine(
     SceneManager::createInstance();
     
     //  初期化
-    Director::instance().initializeGameSystem();
+    Director::instance().initializeDirector();
     
     auto& d = t3::Director::instance();
-    d.realScreenSize(
+    d.deviceScreenSize(
         Vec2(
             static_cast<float>(width),
             static_cast<float>(height)
@@ -212,7 +212,7 @@ void Application::initializeApplication()
     
     DebugMenu& debug_menu_root = DebugMenu::instance();
     system_menu_->getSystemDebugMenuRoot().attachSelf(
-        debug_menu_root.getMenuRoot()
+        debug_menu_root.rootMenu()
     );
 #endif // DEBUG
     

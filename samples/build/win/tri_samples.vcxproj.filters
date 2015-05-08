@@ -329,9 +329,6 @@
     <ClInclude Include="..\..\..\tri_engine\include\base\tri_base.hpp">
       <Filter>tri_engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\tri_engine\include\base\tri_development_flags.hpp">
-      <Filter>tri_engine\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\tri_engine\include\base\tri_director.hpp">
       <Filter>tri_engine\include</Filter>
     </ClInclude>
@@ -708,9 +705,6 @@
       <Filter>tri_engine\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_hash_string.hpp">
-      <Filter>tri_engine\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\tri_engine\include\util\tri_less_than_comparable.hpp">
       <Filter>tri_engine\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_method_callback.hpp">

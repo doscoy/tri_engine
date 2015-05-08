@@ -1,13 +1,7 @@
-//
-//  tri_debug_log_layer.hpp
-//  tri_sandbox_osx
-//
-//  Created by KANI Tetsuro on 2013/11/01.
-//  Copyright (c) 2013年 KANI Tetsuro. All rights reserved.
-//
 
-#ifndef tri_sandbox_osx_tri_debug_log_layer_hpp
-#define tri_sandbox_osx_tri_debug_log_layer_hpp
+
+#ifndef TRI_DEBUG_LOG_LAYER_HPP_INCLUDED
+#define TRI_DEBUG_LOG_LAYER_HPP_INCLUDED
 
 #include "tri_debug_string_layer.hpp"
 #include "tri_debug_log_buffer.hpp"
@@ -21,32 +15,50 @@ class DebugLogLayer
     : public DebugStringLayer
 {
 public:
+    ///
+    /// コンストラクタ
     DebugLogLayer(const char* const name = "DISPLAY LOG");
+
+    ///
+    /// デストラクタ
     virtual ~DebugLogLayer();
 
 public:
+    ///
+    /// レイヤーにログを追加
     void writeString(
         const char* const str
     );
     
+    ///
+    /// ログレイヤをスクロール
     void slideUp();
+
+    ///
+    /// ログレイヤをスクロール
     void slideDown();
     
     
 protected:
-    void updateLayer( tick_t delta_time ) override;
+    ///
+    /// レイヤ更新
+    void updateLayer(tick_t delta_time) override;
+
+    ///
+    /// レイヤ描画
     void drawLayer() override;
     
+    ///
+    /// ログの現在の表示行を取得
     int getLogShowLineIndex() const;
 
 protected:
-    DebugLogBuffer debug_log_buffer_;
-    int log_show_offset_;
+    DebugLogBuffer debug_log_buffer_;   ///< ログバッファ
+    int log_show_offset_;               ///< 表示用オフセット
 };
 
 
 }   // namespace t3
 
 
-
-#endif
+#endif  // TRI_DEBUG_LOG_LAYER_HPP_INCLUDED

@@ -8,13 +8,13 @@
 namespace t3 {
 
 ///
-/// ƒoƒEƒ“ƒfƒBƒ“ƒOƒ{ƒbƒNƒX
+/// ãƒã‚¦ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ãƒœãƒƒã‚¯ã‚¹
 ///
 class AABB {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^.
-    /// ƒfƒtƒHƒ‹ƒg‚Åmin_,mix_‚Ífloat‚ÌŒÀŠE’l‚Å‰Šú‰»‚³‚ê‚é
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿.
+    /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§min_,mix_ã¯floatã®é™ç•Œå€¤ã§åˆæœŸåŒ–ã•ã‚Œã‚‹
     AABB()
         : min_(
             std::numeric_limits<float>::max(),
@@ -27,42 +27,42 @@ public:
     {}
     
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^.
-    /// Å¬’lAÅ‘å’lw’è
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿.
+    /// æœ€å°å€¤ã€æœ€å¤§å€¤æŒ‡å®š
     AABB(
-        const Vec3& min,    ///< Å¬’l
-        const Vec3& max     ///< Å‘å’l
+        const Vec3& min,    ///< æœ€å°å€¤
+        const Vec3& max     ///< æœ€å¤§å€¤
     )   : min_(min)
         , max_(max)
     {}
     
     
-    //  ƒfƒXƒgƒ‰ƒNƒ^
+    //  ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~AABB()
     {}
     
 public:
     ///
-    /// AABB‚ÌŠg’£.
-    /// ó‚¯æ‚Á‚½À•W‚ğŠÜ‚Ş‘å‚«‚³‚ÉŠg’£‚·‚é
+    /// AABBã®æ‹¡å¼µ.
+    /// å—ã‘å–ã£ãŸåº§æ¨™ã‚’å«ã‚€å¤§ãã•ã«æ‹¡å¼µã™ã‚‹
     void margePoint(
-        const Vec3& p   ///< À•W
+        const Vec3& p   ///< åº§æ¨™
     ) {
-        //  x²
+        //  xè»¸
         if (min_.x_ > p.x_) {
             min_.x_ = p.x_;
         } else if (max_.x_ < p.x_) {
             max_.x_ = p.x_;
         }
         
-        //  y²
+        //  yè»¸
         if (min_.y_ > p.y_) {
             min_.y_ = p.y_;
         } else if (max_.y_ < p.y_) {
             max_.y_ = p.y_;
         }
         
-        //  z²
+        //  zè»¸
         if (min_.z_ > p.z_) {
             min_.z_ = p.z_;
         } else if (max_.z_ < p.z_) {
@@ -71,37 +71,37 @@ public:
     }
     
     ///
-    /// Å¬’lİ’è.
+    /// æœ€å°å€¤è¨­å®š.
     void min(
-        const Vec3& min ///< Å¬’l
+        const Vec3& min ///< æœ€å°å€¤
     ) {
         min_ = min;
     }
 
     ///
-    /// Å¬’læ“¾.
+    /// æœ€å°å€¤å–å¾—.
     const Vec3& min() const {
         return min_;
     }
     
     /// 
-    /// Å‘å’lİ’è.
+    /// æœ€å¤§å€¤è¨­å®š.
     void max(
-        const Vec3& max ///< Å‘å’l
+        const Vec3& max ///< æœ€å¤§å€¤
     ) {
         max_ = max;
     }
     
     ///
-    /// Å‘å’læ“¾.
+    /// æœ€å¤§å€¤å–å¾—.
     const Vec3& max() const {
         return max_;
     }
     
     ///
-    /// “_‚ªAABB‚Ì“à‘¤‚©”»’è
+    /// ç‚¹ãŒAABBã®å†…å´ã‹åˆ¤å®š
     bool isInside(
-        const Vec3& p   ///< ”»’è‚·‚é“_
+        const Vec3& p   ///< åˆ¤å®šã™ã‚‹ç‚¹
     ) const {
         //  x
         if (p.x_ > max_.x_) {
@@ -130,21 +130,21 @@ public:
         return true;
     }
 
-    /// ’†S“_æ“¾.
+    /// ä¸­å¿ƒç‚¹å–å¾—.
     Vec3 center() const {
         return (min_ + max_) * 0.5f;
     }
     
     ///
-    /// ”¼Œaæ“¾.
+    /// åŠå¾„å–å¾—.
     Vec3 radius() const {
         return (max_ - min_) * 0.5f;
     }
 
 
 private:
-    Vec3 min_;          ///< Å¬’l
-    Vec3 max_;          ///< Å‘å’l
+    Vec3 min_;          ///< æœ€å°å€¤
+    Vec3 max_;          ///< æœ€å¤§å€¤
 
 };
 

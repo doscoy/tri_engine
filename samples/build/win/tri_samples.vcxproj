@@ -121,7 +121,6 @@
     <ClInclude Include="..\..\..\tri_engine\include\audio\tri_wav.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\base\tri_application.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\base\tri_base.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\base\tri_development_flags.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\base\tri_director.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\base\tri_event.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\base\tri_event_manager.hpp" />
@@ -248,7 +247,6 @@
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_counter.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_framerate.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_hash_string.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\util\tri_less_than_comparable.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_method_callback.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_nameable.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_optional.hpp" />

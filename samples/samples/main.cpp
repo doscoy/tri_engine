@@ -50,7 +50,7 @@ public:
 public:
     void initializeScene() override {
         t3::DebugMenu& dm = t3::DebugMenu::instance();
-        sandbox_.attachSelf(dm.getMenuRoot());
+        sandbox_.attachSelf(dm.rootMenu());
     }
 
     void updateScene(t3::tick_t delta_time) override {

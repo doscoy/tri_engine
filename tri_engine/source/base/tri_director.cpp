@@ -145,7 +145,7 @@ Director::Director()
     , virtual_screen_size_(
         VIRTUAL_SCREEN_WIDTH,
         VIRTUAL_SCREEN_HEIGHT)
-    , real_screen_size_(640.0f, 1136.0f)
+    , device_screen_size_(640.0f, 1136.0f)
     , input_()
     , layers_()
     , fade_layer_(nullptr)
@@ -197,7 +197,7 @@ Director::~Director()
 
 
 
-void Director::initializeGameSystem() {
+void Director::initializeDirector() {
     
     dm_layers_.setFocusCallback(
         this,
@@ -219,7 +219,7 @@ void Director::initializeGameSystem() {
 }
 
 
-void Director::terminategameSystem() {
+void Director::terminateDirector() {
 
 }
 
@@ -351,11 +351,9 @@ void Director::updateInput(
     cross::platformPadData(0, &dbg_pad_data);
     uint32_t dpad_buttons = dbg_pad_data.buttonData();
 
-    t3::DebugMenu& debug_menu = t3::DebugMenu::instance();
-    const VirtualPad* vpad = debug_menu.virtualPad();
-    if (vpad) {
-        dpad_buttons |= vpad->getPadData()->buttonData();
-    }
+    auto& debug_menu = t3::DebugMenu::instance();
+    const auto& vpad = debug_menu.virtualPad();
+    dpad_buttons |= vpad.getPadData()->buttonData();
     updateDebugPad(dpad_buttons, delta_time);
 
 }
@@ -422,7 +420,7 @@ void Director::showTask() const {
 
 void Director::calcScreenRevise() {
 
-    screen_revise_ = virtual_screen_size_ / real_screen_size_;
+    screen_revise_ = virtual_screen_size_ / device_screen_size_;
 }
 
 }   // namespace t3
