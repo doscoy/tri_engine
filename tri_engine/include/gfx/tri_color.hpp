@@ -8,26 +8,26 @@
 namespace t3 {
 
 ///
-/// RGBAƒJƒ‰[Œ^
+/// RGBAã‚«ãƒ©ãƒ¼å‹
 typedef uint32_t rgba32_t;
 
 ///
-/// F
+/// è‰²
 class Color {
 
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     Color()
         : Color(255, 255, 255, 255)
     {}
     
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~Color() = default;
 
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     Color(
         const uint8_t red,
         const uint8_t green,
@@ -42,7 +42,7 @@ public:
     
 public:
     ///
-    /// “¯ˆêF”»’è
+    /// åŒä¸€è‰²åˆ¤å®š
     bool operator ==(const Color& rhs) const {
         if (red_ != rhs.red_) {
             return false;
@@ -62,37 +62,37 @@ public:
     
 public:
     ///
-    /// rgba32bit‚Æ‚µ‚Äæ“¾
+    /// rgba32bitã¨ã—ã¦å–å¾—
     rgba32_t rgba32() const {
         return (red_ << 24 | green_ << 16 | blue_ << 8 | alpha_);
     }
     
     ///
-    /// Ôæ“¾.
+    /// èµ¤å–å¾—.
     float redFloat() const {
         return static_cast<float>(red_) / 255.0f;
     }
 
     ///
-    /// —Îæ“¾.
+    /// ç·‘å–å¾—.
     float greenFloat() const {
         return static_cast<float>(green_) / 255.0f;
     }
 
     ///
-    /// Âæ“¾.
+    /// é’å–å¾—.
     float blueFloat() const {
         return static_cast<float>(blue_) / 255.0f;
     }
 
     ///
-    /// ƒAƒ‹ƒtƒ@æ“¾.
+    /// ã‚¢ãƒ«ãƒ•ã‚¡å–å¾—.
     float alphaFloat() const {
         return static_cast<float>(alpha_) / 255.0f;
     }
     
     ///
-    /// ƒAƒ‹ƒtƒ@İ’è.
+    /// ã‚¢ãƒ«ãƒ•ã‚¡è¨­å®š.
     void alphaFloat(const float a) {
         alpha_ = static_cast<std::uint8_t>(255.0f * a);
         if (alpha_ > 255) {
@@ -104,26 +104,26 @@ public:
     }
     
     ///
-    /// Ôİ’è.
+    /// èµ¤è¨­å®š.
     void redFloat(const float r) {
         red(static_cast<uint_fast8_t>(255.0f * r));
     }
     
     ///
-    /// —Îİ’è.
+    /// ç·‘è¨­å®š.
     void greenFloat(const float g) {
         green(static_cast<uint_fast8_t>(255.0f * g));
     }
     
     ///
-    /// Âİ’è.
+    /// é’è¨­å®š.
     void blueFloat(const float b) {
         blue(static_cast<uint_fast8_t>(255.0f * b));
     }
     
 
     ///
-    /// Ôİ’è.
+    /// èµ¤è¨­å®š.
     void red(uint_fast8_t r) {
         if (r > 255) {
             r = 255;
@@ -134,7 +134,7 @@ public:
     }
     
     ///
-    /// —Îİ’è.
+    /// ç·‘è¨­å®š.
     void green(uint_fast8_t g) {
         if (g > 255) {
             g = 255;
@@ -145,7 +145,7 @@ public:
     }
     
     ///
-    /// Âİ’è.
+    /// é’è¨­å®š.
     void blue(uint_fast8_t b) {
         if (b > 255) {
             b = 255;
@@ -156,7 +156,7 @@ public:
     }
     
     ///
-    /// ƒAƒ‹ƒtƒ@İ’è.
+    /// ã‚¢ãƒ«ãƒ•ã‚¡è¨­å®š.
     void alpha(uint_fast8_t a) {
         if (a > 255) {
             a = 255;
@@ -167,34 +167,34 @@ public:
     }
 
     ///
-    /// Ôæ“¾.
+    /// èµ¤å–å¾—.
     uint_fast8_t red() const {
         return red_;
     }
 
     ///
-    /// —Îæ“¾.
+    /// ç·‘å–å¾—.
     uint_fast8_t green() const {
         return green_;
     }
     
     ///
-    /// Âæ“¾.
+    /// é’å–å¾—.
     uint_fast8_t blue() const {
         return blue_;
     }
     
     ///
-    /// ƒAƒ‹ƒtƒ@æ“¾.
+    /// ã‚¢ãƒ«ãƒ•ã‚¡å–å¾—.
     uint_fast8_t alpha() const {
         return alpha_;
     }
     
 private:
-    uint8_t red_;   ///< Ô
-    uint8_t blue_;  ///< Â
-    uint8_t green_; ///< —Î
-    uint8_t alpha_; ///< ƒAƒ‹ƒtƒ@
+    uint8_t red_;   ///< èµ¤
+    uint8_t blue_;  ///< é’
+    uint8_t green_; ///< ç·‘
+    uint8_t alpha_; ///< ã‚¢ãƒ«ãƒ•ã‚¡
 
 };
 

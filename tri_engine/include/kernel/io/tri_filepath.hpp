@@ -10,46 +10,46 @@
 namespace t3 {
 
 ///
-/// ƒtƒ@ƒCƒ‹ƒpƒXƒNƒ‰ƒX
+/// ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚¯ãƒ©ã‚¹
 class FilePath {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     FilePath(
        const String& filepath
     );
     
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~FilePath();
 
 public:
     ///
-    /// ƒtƒ‹ƒpƒXæ“¾
+    /// ãƒ•ãƒ«ãƒ‘ã‚¹å–å¾—
     String getFullPath() const;
     
     ///
-    /// Šg’£qæ“¾
+    /// æ‹¡å¼µå­å–å¾—
     String ext() const;
     
     ///
-    /// ƒpƒXæ“¾
+    /// ãƒ‘ã‚¹å–å¾—
     const String& path() const;
     
     ///
-    /// Šg’£q–³‚µ‚Ìƒtƒ@ƒCƒ‹–¼‚ğæ“¾
+    /// æ‹¡å¼µå­ç„¡ã—ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å–å¾—
     String getFileNameNotExt() const;
     
 public:
     ///
-    /// ‹¤’Ê‚Ìƒx[ƒXƒfƒBƒŒƒNƒgƒŠ‚ğİ’è
+    /// å…±é€šã®ãƒ™ãƒ¼ã‚¹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’è¨­å®š
     static void setBaseDirectory(
         String const base
     );
 
 private:
-    String filepath_;               ///< ƒtƒ@ƒCƒ‹ƒpƒX
-    static String base_filepath_;   ///< ƒx[ƒXƒfƒBƒŒƒNƒgƒŠ
+    String filepath_;               ///< ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+    static String base_filepath_;   ///< ãƒ™ãƒ¼ã‚¹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 };
 
 

@@ -9,12 +9,12 @@
 namespace t3 {
     
 ///
-/// ƒfƒoƒbƒOƒƒjƒ…[–¼ƒRƒ“ƒeƒi
+/// ãƒ‡ãƒãƒƒã‚°ãƒ¡ãƒ‹ãƒ¥ãƒ¼åã‚³ãƒ³ãƒ†ãƒŠ
 using DebugMenuList = List<DebugMenuLabel*>;
 
 
 ///
-/// ƒfƒoƒbƒOƒƒjƒ…[ŠÇ—
+/// ãƒ‡ãƒãƒƒã‚°ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç®¡ç†
 class DebugMenuFrame 
     : public DebugMenuLabel
 {
@@ -24,45 +24,45 @@ class DebugMenuFrame
     
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     DebugMenuFrame(
-        DebugMenuFrame* parent, ///< e
-        const String& label     ///< •\¦–¼
+        DebugMenuFrame* parent, ///< è¦ª
+        const String& label     ///< è¡¨ç¤ºå
     );
     
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~DebugMenuFrame();
 
 public:
     ///
-    /// ƒtƒŒ[ƒ€‚ğŠJ‚­
+    /// ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’é–‹ã
     void openFrame();
     
     ///
-    /// ƒtƒŒ[ƒ€‚ğ•Â‚¶‚é
+    /// ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’é–‰ã˜ã‚‹
     void closeFrame();
     
     ///
-    /// q—v‘f‚ğ‚Á‚Ä‚¢‚é‚©”»’è
+    /// å­è¦ç´ ã‚’æŒã£ã¦ã„ã‚‹ã‹åˆ¤å®š
     bool hasChild() const {
         return items_.size() > 0;
     }
     
     ///
-    /// ƒtƒH[ƒJƒX’†‚ÌƒAƒCƒeƒ€‚ğæ“¾
+    /// ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ä¸­ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’å–å¾—
     DebugMenuLabel* getFocusItem() {
         return focus_item_;
     }
     
     ///
-    /// ƒtƒH[ƒJƒX’†‚ÌƒAƒCƒeƒ€‚ğæ“¾
+    /// ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ä¸­ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’å–å¾—
     const DebugMenuLabel* getFocusItem() const {
         return focus_item_;
     }
     
     ///
-    /// ƒtƒH[ƒJƒXƒAƒCƒeƒ€‚ğİ’è
+    /// ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚¢ã‚¤ãƒ†ãƒ ã‚’è¨­å®š
     void setFocusItem(
         DebugMenuLabel* const item
     ){
@@ -76,23 +76,23 @@ public:
     }
     
     ///
-    /// ƒAƒCƒeƒ€‚ğæ“¾
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’å–å¾—
     DebugMenuList& getItems() {
         return items_;
     }
     
     ///
-    /// ƒAƒCƒeƒ€‚ğæ“¾
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’å–å¾—
     const DebugMenuList& getItems() const {
         return items_;
     }
     
     ///
-    /// XV
+    /// æ›´æ–°
     void update() override;
     
     ///
-    /// •`‰æ
+    /// æç”»
     void drawFrame(
         const float x,
         const float y,
@@ -102,17 +102,17 @@ public:
     
 private:
     ///
-    /// ƒAƒCƒeƒ€‚ğƒAƒ^ƒbƒ`
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’ã‚¢ã‚¿ãƒƒãƒ
     void attachItem(DebugMenuLabel& item);
     
     ///
-    /// ƒAƒCƒeƒ€‚ğƒfƒ^ƒbƒ`
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’ãƒ‡ã‚¿ãƒƒãƒ
     void detachItem(DebugMenuLabel& item);
     
 private:
-    DebugMenuList items_;           ///< qƒAƒCƒeƒ€ˆê——
-    DebugMenuLabel* focus_item_;    ///< ƒtƒH[ƒJƒX’†‚ÌƒAƒCƒeƒ€
-    int select_idx_;                ///< ‘I‘ğ’†‚ÌƒCƒ“ƒfƒbƒNƒX
+    DebugMenuList items_;           ///< å­ã‚¢ã‚¤ãƒ†ãƒ ä¸€è¦§
+    DebugMenuLabel* focus_item_;    ///< ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ä¸­ã®ã‚¢ã‚¤ãƒ†ãƒ 
+    int select_idx_;                ///< é¸æŠä¸­ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 
 
 };

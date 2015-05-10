@@ -1,6 +1,7 @@
 #ifndef TRI_RESOURCE_MANAGER_HPP_INCLUDED
 #define TRI_RESOURCE_MANAGER_HPP_INCLUDED
 
+//  include
 #include <list>
 #include "../util/tri_singleton.hpp"
 #include "../util/tri_unique_id.hpp"
@@ -10,10 +11,9 @@
 
 
 namespace t3 {
-    
 
-
-    
+///
+/// リソースマネージャ
 template <typename ResourceType>
 class ResourceManager
     : public Singleton<ResourceManager<ResourceType>>
@@ -24,12 +24,18 @@ class ResourceManager
 
     
 protected:
+    
+    ///
+    /// コンストラクタ
     ResourceManager() = default;
+    
+    ///
+    /// デストラクタ
     ~ResourceManager() = default;
 
 public:
-    
-    //  ロード
+    ///
+    ///  ロード
     UniqueID load(
         const String& name
     ){
@@ -49,8 +55,8 @@ public:
         return res->resourceID();
     }
 
-
-    //  プリロード
+    ///
+    ///  プリロード
     void prepare(
         const t3::File& file
     ) {
@@ -83,8 +89,8 @@ public:
       
         return nullptr;
     }
-    
-    //  リソースを取得
+    ///
+    ///  リソースを取得
     const SharedPtr<ResourceType> resource(
         const UniqueID id
     ){
@@ -100,14 +106,9 @@ public:
     }
 
 private:
-    Resources resources_;
+    Resources resources_;   ///< 管理リソース
 
 };
-
-    
-
-    
-    
     
 }   // namespace t3
 

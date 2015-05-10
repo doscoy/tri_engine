@@ -11,22 +11,22 @@ namespace t3 {
 
 
 ///
-/// ƒJƒƒ‰‘€ì
+/// ã‚«ãƒ¡ãƒ©æ“ä½œ
 class CameraUpdater
 {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     CameraUpdater(){}
 
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     virtual ~CameraUpdater(){}
 
 public:
     ///
-    /// ŠÇ—‚·‚éƒJƒƒ‰İ’è
+    /// ç®¡ç†ã™ã‚‹ã‚«ãƒ¡ãƒ©è¨­å®š
     void camera(
         SharedPtr<Camera> camera
     ) {
@@ -35,87 +35,87 @@ public:
     
 protected:
     ///
-    /// ŠÇ—‚·‚éƒJƒƒ‰æ“¾
+    /// ç®¡ç†ã™ã‚‹ã‚«ãƒ¡ãƒ©å–å¾—
     CameraPtr camera() {
         return camera_;
     }
     
 private:
-    CameraPtr camera_;  ///< ŠÇ—‚µ‚Ä‚¢‚éƒJƒƒ‰
+    CameraPtr camera_;  ///< ç®¡ç†ã—ã¦ã„ã‚‹ã‚«ãƒ¡ãƒ©
 };
 
 
 ///
-/// ˆÊ’uE’‹“_‚É‚æ‚é§Œä
+/// ä½ç½®ãƒ»æ³¨è¦–ç‚¹ã«ã‚ˆã‚‹åˆ¶å¾¡
 ///
 class LookAtCameraUpdater
     : public CameraUpdater
 {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     LookAtCameraUpdater();
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     virtual ~LookAtCameraUpdater();
 
 
 public:
     ///
-    /// À•Wİ’è
+    /// åº§æ¨™è¨­å®š
     void position(const Vec3& v);
 
     ///
-    /// À•Wİ’è
+    /// åº§æ¨™è¨­å®š
     void position(float x, float y, float z);
 
     ///
-    /// ’‹“_İ’è
+    /// æ³¨è¦–ç‚¹è¨­å®š
     void targetPosition(const Vec3& v);
 
     /// 
-    /// ’‹“_İ’è
+    /// æ³¨è¦–ç‚¹è¨­å®š
     void targetPosition(float x, float y, float z);
 
     ///
-    /// x²ƒhƒŠ[
+    /// xè»¸ãƒ‰ãƒªãƒ¼
     void dollyX( 
-        const float speed ///< ‘¬“x
+        const float speed ///< é€Ÿåº¦
     );
 
     ///
-    /// y²ƒhƒŠ[
+    /// yè»¸ãƒ‰ãƒªãƒ¼
     void dollyY( 
-        const float speed ///< ‘¬“x
+        const float speed ///< é€Ÿåº¦
     );
 
     ///
-    /// z²ƒhƒŠ[
+    /// zè»¸ãƒ‰ãƒªãƒ¼
     void dollyZ( 
-        const float speed ///< ‘¬“x
+        const float speed ///< é€Ÿåº¦
     );
 
     ///
-    /// ”CˆÓ•ûŒüƒhƒŠ[
+    /// ä»»æ„æ–¹å‘ãƒ‰ãƒªãƒ¼
     void dolly(
-        const Vec3& dir,    ///< •ûŒü
-        const float speed   ///< ‘¬“x
+        const Vec3& dir,    ///< æ–¹å‘
+        const float speed   ///< é€Ÿåº¦
     );
 
     ///
-    /// cñU‚è
+    /// ç¸¦é¦–æŒ¯ã‚Š
     void panV( const float speed );
 
     ///
-    /// ‰¡ñU‚è
+    /// æ¨ªé¦–æŒ¯ã‚Š
     void panH( const float speed );
 
     ///
-    /// ”CˆÓ²ñU‚è
+    /// ä»»æ„è»¸é¦–æŒ¯ã‚Š
     void pan(
-        const Vec3& axis,   ///< ²
-        const float speed   ///< ‘¬“x
+        const Vec3& axis,   ///< è»¸
+        const float speed   ///< é€Ÿåº¦
     );
     
 

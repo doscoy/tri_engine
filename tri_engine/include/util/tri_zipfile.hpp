@@ -1,55 +1,89 @@
 #ifndef TRI_ZIPFILE_HPP_INCLUDED
 #define TRI_ZIPFILE_HPP_INCLUDED
 
+//  include
 #include "base/tri_std.hpp"
 
 namespace t3 {
 
-
+///
+/// コンテンツのマップ
 using ZipContentsMap = std::map<String, int>;
 
+///
+/// Zipアーカイブ
 class ZipFile {
 
 public:
+    ///
+    /// コンストラクタ
     ZipFile()
         : zip_contents_map_()
         , file_()
         , data_buffer_(nullptr)
         , entries_(0)
         , pap_dir_(nullptr)
-    {
-    }
+    {}
     
+    ///
+    /// デストラクタ
     ~ZipFile() {
         terminate();
         file_.close();
     }
 
-    bool initialize(const String& zip_file_name);
+    ///
+    /// 初期化
+    bool initialize(
+        const String& zip_file_name ///< zipファイル名
+    );
+    
+    ///
+    /// 後片付け
     void terminate();
 
+    ///
+    /// コンテンツ数
     int entries() const {
         return entries_;
     }
     
+    ///
+    /// ファイル名を取得
     String getFileName(int index) const;
 
-    size_t getFileSize(int index) const;
+    ///
+    /// ファイルサイズを取得
+    size_t getFileSize(
+        int index   ///< ファイルインデックス
+    ) const;
 
-    size_t getFileSize(const String& name) const;
+    ///
+    /// ファイルサイズを取得
+    size_t getFileSize(
+        const String& name  ///< ファイル名
+    ) const;
 
+    ///
+    /// ファイル読み込み
     bool readFile(
         int index,
         const void* buffer
     );
 
+    ///
+    /// ファイル読み込み
     bool readFile(
         String& name,
         const void* buffer
     );
 
 
-	int find(const String &path) const;
+	///
+    /// ファイル検索
+    int find(
+        const String &path  ///< パス
+    ) const;
 
 
 private:
@@ -57,12 +91,24 @@ private:
     struct ZipDirFileHeader;
     struct ZipLocalHeader;
 
-	ZipContentsMap zip_contents_map_;
+	///
+    /// コンテンツマップ
+    ZipContentsMap zip_contents_map_;
+    
+    ///
+    /// ファイルストリーム
     FileStream file_;
 
-    char* data_buffer_;   // データバッファ.
-    int entries_;         // エントリー数.
+    ///
+    /// データバッファ
+    char* data_buffer_;
+    
+    ///
+    /// エントリー数
+    int entries_;
 
+    ///
+    ///
     const ZipDirFileHeader** pap_dir_;
 };
 

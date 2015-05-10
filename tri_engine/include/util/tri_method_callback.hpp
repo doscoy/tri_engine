@@ -2,26 +2,35 @@
 #ifndef TRI_METHOD_CALLBACK_HPP_INCLUDED
 #define TRI_METHOD_CALLBACK_HPP_INCLUDED
 
+//  include
 #include "../dbg/tri_assert.hpp"
 
 namespace t3 {
 
-
-class MethodCallbackBase
-{
+///
+/// メソッドコールバック
+class MethodCallbackBase {
 protected:
+    ///
+    /// コンストラクタ
     MethodCallbackBase()
         : instance_( nullptr )
         , func_( nullptr )
-    {
-    }
+    {}
     
     
 protected:
+    ///
+    /// インスタンス
     void* instance_;
+
+    ///
+    /// メンバ関数ポインタ
     void (MethodCallbackBase::*func_)();
 };
 
+///
+/// 引数無しメンバ関数
 template <typename T, typename ReturnType = void>
 class MethodCallback
     : public MethodCallbackBase
@@ -29,7 +38,12 @@ class MethodCallback
     typedef ReturnType (T::*callback_t)();
     
 public:
-    MethodCallback(){}
+    ///
+    /// コンストラクタ
+    MethodCallback() = default;
+    
+    ///
+    /// コンストラクタ
     MethodCallback(
         T* instance,
         callback_t func
@@ -38,6 +52,8 @@ public:
         (callback_t&)(MethodCallbackBase::func_) = func;
     }
 
+    ///
+    /// 実行可能か判定
     bool canInvoke() const {
         if (instance_ == nullptr) {
             return false;
@@ -49,6 +65,8 @@ public:
         return true;
     }
     
+    ///
+    /// メソッド実行
     ReturnType invoke() {
         T3_ASSERT(canInvoke());
 		T* t = (T*)MethodCallbackBase::instance_;
@@ -57,7 +75,8 @@ public:
     }
 };
 
-
+///
+/// 引数１つのコールバック
 template <typename T, typename Arg1, typename ReturnType = void>
 class MethodCallback1
     : public MethodCallbackBase
@@ -65,7 +84,13 @@ class MethodCallback1
     typedef ReturnType (T::*callback_t)(Arg1);
     
 public:
-    MethodCallback1(){}
+    
+    ///
+    /// コンストラクタ
+    MethodCallback1() = default;
+    
+    ///
+    /// コンストラクタ
     MethodCallback1(
         T* inst,
         callback_t func
@@ -74,6 +99,8 @@ public:
         (callback_t&)(MethodCallbackBase::func_) = func;
     }
     
+    ///
+    /// メソッド実行
     ReturnType invoke( Arg1& arg1 ) {
 		T* t = (T*)MethodCallbackBase::instance_;
 		callback_t& f = (callback_t&)func_;
@@ -82,14 +109,22 @@ public:
 };
 
     
+///
+/// 引数2つのコールバック
 template <typename T, typename Arg1, typename Arg2, typename ReturnType = void>
 class MethodCallback2
     : public MethodCallbackBase
 {
     typedef ReturnType (T::*callback_t)(Arg1, Arg2);
     
-    public:
-    MethodCallback2(){}
+public:
+    
+    ///
+    /// コンストラクタ
+    MethodCallback2() = default;
+    
+    ///
+    /// コンストラクタ
     MethodCallback2(
         T* inst,
         callback_t func
@@ -98,6 +133,8 @@ class MethodCallback2
         (callback_t&)(MethodCallbackBase::func_) = func;
     }
     
+    ///
+    /// メソッド実行
     ReturnType invoke( Arg1& arg1, Arg2& arg2 ) {
 		T* t = (T*)MethodCallbackBase::instance_;
 		callback_t& f = (callback_t&)func_;
@@ -106,6 +143,8 @@ class MethodCallback2
 };
     
     
+///
+/// 引数3つのコールバック
 template <typename T, typename Arg1, typename Arg2, typename Arg3, typename ReturnType = void>
 class MethodCallback3
     : public MethodCallbackBase
@@ -113,7 +152,13 @@ class MethodCallback3
     typedef ReturnType (T::*callback_t)(Arg1, Arg2);
     
 public:
-    MethodCallback3(){}
+    
+    ///
+    /// コンストラクタ
+    MethodCallback3() = default;
+    
+    ///
+    /// コンストラクタ
     MethodCallback3(
         T* inst,
         callback_t func
@@ -122,6 +167,8 @@ public:
         (callback_t&)(MethodCallbackBase::func_) = func;
     }
     
+    ///
+    /// メソッド実行
     ReturnType invoke( Arg1& arg1, Arg2& arg2, Arg3 arg3 ) {
 		T* t = (T*)MethodCallbackBase::instance_;
 		callback_t& f = (callback_t&)func_;

@@ -2,7 +2,7 @@
 #define TRI_SINGLETON_HPP_INCLUDED
 
 
-
+//  include
 #include "../dbg/tri_assert.hpp"
 #include "../kernel/tri_kernel.hpp"
 #include "util/tri_uncopyable.hpp"
@@ -11,38 +11,48 @@
 
 namespace t3{
 
+///
+/// シングルトン
 template <typename T>
 class Singleton
     : Uncopyable
 {
 protected:
-    Singleton(){
+    ///
+    /// コンストラクタ
+    Singleton() {
         T3_ASSERT_MSG(created_ == false, "instance is created.");
         created_ = true;
     }
+    
+    ///
+    /// デストラクタ
     ~Singleton(){
         created_ = false;
     }
     
 public:
+    
+    ///
+    /// インスタンス生成
     static void createInstance(){
         instance_ = T3_SYS_NEW T;
     }
     
-    // *********************************************
-    //  インスタンス破棄
+    ///
+    ///  インスタンス破棄
     static void destroyInstance(){
         T3_DELETE instance_;
     }
     
-    // *********************************************
-    //  インスタンスが生成済か確認
+    ///
+    ///  インスタンスが生成済か確認
     static bool isCreatedInstance(){
         return instance_ != nullptr;
     }
     
-    // *********************************************
-    //  インスタンス取得
+    ///
+    ///  インスタンス取得
     static T& instance(){
         T3_ASSERT(created_);
         return *instance_;
@@ -50,8 +60,8 @@ public:
 
 
 private:
-    static T* instance_;
-    static bool created_;
+    static T* instance_;    ///< インスタンス
+    static bool created_;   ///< 生成済フラグ
 };
 
 template <typename T> T* Singleton<T>::instance_ = nullptr;

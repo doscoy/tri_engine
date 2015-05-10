@@ -11,22 +11,22 @@ namespace t3 {
 
 
 ///
-/// ƒXƒƒbƒvƒ{ƒ^ƒ“.
-/// ƒ{ƒ^ƒ“‚ğ‰Ÿ‚·“x‚ÉA,B‚ªØ‚è‘Ö‚í‚é
+/// ã‚¹ãƒ¯ãƒƒãƒ—ãƒœã‚¿ãƒ³.
+/// ãƒœã‚¿ãƒ³ã‚’æŠ¼ã™åº¦ã«A,BãŒåˆ‡ã‚Šæ›¿ã‚ã‚‹
 class SwapButton
     : Uncopyable {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     SwapButton();
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~SwapButton();
     
 public:
     ///
-    /// ƒXƒvƒ‰ƒCƒg“o˜^
+    /// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆç™»éŒ²
     void setupSprite(
         SpritePtr a,
         SpritePtr b,
@@ -35,42 +35,42 @@ public:
     
     
     ///
-    /// ƒCƒxƒ“ƒg
+    /// ã‚¤ãƒ™ãƒ³ãƒˆ
     void triggeredEvent(
         EventPtr event_a,
         EventPtr event_b
     );
     
     ///
-    /// ƒ{ƒ^ƒ“‚ÌƒXƒvƒ‰ƒCƒg‚ÌƒTƒCƒYİ’è
+    /// ãƒœã‚¿ãƒ³ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚µã‚¤ã‚ºè¨­å®š
     void size(float s) {
         a_.size(s);
         b_.size(s);
     }
     
     ///
-    /// ƒ{ƒ^ƒ“‚ÌƒXƒvƒ‰ƒCƒg‚ÌƒTƒCƒYİ’è
+    /// ãƒœã‚¿ãƒ³ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚µã‚¤ã‚ºè¨­å®š
     void size(const Vec2& s) {
         a_.size(s);
         b_.size(s);
     }
     
     ///
-    /// ”»’èƒGƒŠƒAİ’è
+    /// åˆ¤å®šã‚¨ãƒªã‚¢è¨­å®š
     void hitAreaSize(const float s) {
         a_.hitAreaSize(s);
         b_.hitAreaSize(s);
     }
 
     ///
-    /// ”»’èƒGƒŠƒAİ’è
+    /// åˆ¤å®šã‚¨ãƒªã‚¢è¨­å®š
     void hitAreaSize(const Vec2 s) {
         a_.hitAreaSize(s);
         b_.hitAreaSize(s);
     }
     
     ///
-    /// À•Wİ’è
+    /// åº§æ¨™è¨­å®š
     void position(const Vec2& pos) {
         a_.position(pos);
         b_.position(pos);
@@ -79,19 +79,19 @@ public:
 
 private:
     ///
-    /// ƒ{ƒ^ƒ“A‚ª‰Ÿ‚³‚ê‚½‚ÉŒÄ‚Î‚ê‚é
+    /// ãƒœã‚¿ãƒ³AãŒæŠ¼ã•ã‚ŒãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹
     void onTriggeredA(const Event&);
 
     ///
-    /// ƒ{ƒ^ƒ“B‚ª‰Ÿ‚³‚ê‚½‚ÉŒÄ‚Î‚ê‚é
+    /// ãƒœã‚¿ãƒ³BãŒæŠ¼ã•ã‚ŒãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹
     void onTriggeredB(const Event&);
 
 private:
-    Button a_;  ///< ƒ{ƒ^ƒ“A
-    Button b_;  ///< ƒ{ƒ^ƒ“B
-    UniqueID swap_button_id_;   ///< ƒXƒƒbƒvƒ{ƒ^ƒ“‚ÌID
-    EventPtr a_event_;  ///< ƒ{ƒ^ƒ“A‚ÌƒCƒxƒ“ƒg
-    EventPtr b_event_;  ///< ƒ{ƒ^ƒ“B‚ÌƒCƒxƒ“ƒg
+    Button a_;  ///< ãƒœã‚¿ãƒ³A
+    Button b_;  ///< ãƒœã‚¿ãƒ³B
+    UniqueID swap_button_id_;   ///< ã‚¹ãƒ¯ãƒƒãƒ—ãƒœã‚¿ãƒ³ã®ID
+    EventPtr a_event_;  ///< ãƒœã‚¿ãƒ³Aã®ã‚¤ãƒ™ãƒ³ãƒˆ
+    EventPtr b_event_;  ///< ãƒœã‚¿ãƒ³Bã®ã‚¤ãƒ™ãƒ³ãƒˆ
 };
 
 

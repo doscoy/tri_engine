@@ -9,18 +9,18 @@ namespace t3 {
 
 
 ///
-/// ‰~
+/// å††
 class Circle {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     Circle()
         : Circle(Vec2(0.0f, 0.0f), 1.0f)
     {}
 
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^.
-    /// À•WA”¼Œaw’è
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿.
+    /// åº§æ¨™ã€åŠå¾„æŒ‡å®š
     Circle(
         const Vec2& pos,
         float radius
@@ -31,37 +31,37 @@ public:
 
 public:
     ///
-    /// ˆÊ’uİ’è
+    /// ä½ç½®è¨­å®š
     void position(
-        const Vec2& pos ///< ˆÊ’u
+        const Vec2& pos ///< ä½ç½®
     ) {
         position_ = pos;
     }
 
     ///
-    /// ˆÊ’uæ“¾
+    /// ä½ç½®å–å¾—
     const Vec2& position() const {
         return position_;
     }
     
     ///
-    /// ”¼Œaİ’è
+    /// åŠå¾„è¨­å®š
     void radius(
-        const float radius  ///< ”¼Œa
+        const float radius  ///< åŠå¾„
     ) {
         radius_ = radius;
     }
     
     ///
-    /// ”¼Œaæ“¾
+    /// åŠå¾„å–å¾—
     float radius() const {
         return radius_;
     }
 
 
 private:
-    Vec2 position_; ///< ˆÊ’u
-    float radius_;  ///< ”¼Œa
+    Vec2 position_; ///< ä½ç½®
+    float radius_;  ///< åŠå¾„
 };
 
 

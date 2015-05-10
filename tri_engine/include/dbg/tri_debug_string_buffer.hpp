@@ -10,11 +10,11 @@ namespace t3 {
 
 
 ///
-/// ƒfƒoƒbƒO•¶š‚ÌƒRƒ“ƒeƒi‚ÌƒTƒCƒY
+/// ãƒ‡ãƒãƒƒã‚°æ–‡å­—ã®ã‚³ãƒ³ãƒ†ãƒŠã®ã‚µã‚¤ã‚º
 constexpr int DEBUG_STRING_ITEM_STR_SIZE = 95;
 
 ///
-/// ƒfƒoƒbƒO—p•¶š
+/// ãƒ‡ãƒãƒƒã‚°ç”¨æ–‡å­—
 struct DebugStringItem {
     uint32_t color_;
     int16_t x_;
@@ -24,46 +24,46 @@ struct DebugStringItem {
 };
 
 ///
-/// ƒfƒoƒbƒO•¶šƒoƒbƒtƒ@
+/// ãƒ‡ãƒãƒƒã‚°æ–‡å­—ãƒãƒƒãƒ•ã‚¡
 class DebugStringBuffer
     : private Uncopyable
 {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     DebugStringBuffer();
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~DebugStringBuffer();
     
     
 public:
     ///
-    /// ƒfƒoƒbƒO•¶š—ñ’Ç‰Á
+    /// ãƒ‡ãƒãƒƒã‚°æ–‡å­—åˆ—è¿½åŠ 
     void addString(
-        const float x,          ///< ˆÊ’u‚˜
-        const float y,          ///< ˆÊ’u‚™
-        const uint32_t color,   ///< •\¦F
-        const int size,         ///< ƒtƒHƒ“ƒgƒTƒCƒY
-        const char* const str   ///< •¶š—ñ
+        const float x,          ///< ä½ç½®ï½˜
+        const float y,          ///< ä½ç½®ï½™
+        const uint32_t color,   ///< è¡¨ç¤ºè‰²
+        const int size,         ///< ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚º
+        const char* const str   ///< æ–‡å­—åˆ—
     );
     
     ///
-    /// ƒoƒbƒtƒ@ƒNƒŠƒA
+    /// ãƒãƒƒãƒ•ã‚¡ã‚¯ãƒªã‚¢
     void clearBuffer();
 
     ///
-    /// ƒoƒbƒtƒ@‚ğ•`‰æ
+    /// ãƒãƒƒãƒ•ã‚¡ã‚’æç”»
     void drawStrings();
     
 private:
     ///
-    /// •¶š—ñ‚ÌƒRƒ“ƒeƒi
+    /// æ–‡å­—åˆ—ã®ã‚³ãƒ³ãƒ†ãƒŠ
     Array<DebugStringItem, 300> buffer_;
 
     ///
-    /// ’Ç‰ÁÏ‚İƒTƒCƒY
+    /// è¿½åŠ æ¸ˆã¿ã‚µã‚¤ã‚º
     int size_;
 };
 

@@ -7,7 +7,7 @@
 namespace t3 {
 
 ///
-/// ƒeƒNƒXƒ`ƒƒÀ•W\‘¢‘Ì
+/// ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™æ§‹é€ ä½“
 struct texture_coord_t {
     float u0_;
     float v0_;

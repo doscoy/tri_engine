@@ -1,26 +1,49 @@
 #ifndef TRI_MEMORY_POOL_HPP_INCLUDED
 #define TRI_MEMORY_POOL_HPP_INCLUDED
 
+//  include
 #include "util/tri_uncopyable.hpp"
 #include "base/tri_std.hpp"
 
-namespace t3 {
-    
-class MemoryChunk final {
 
+namespace t3 {
+
+///
+/// メモリチャンク
+class MemoryChunk final {
+    ///
+    /// シグネチャ
     uint32_t signature_;
+
+    ///
+    /// メモリサイズ
     size_t size_;
+
+    ///
+    /// 直前のアドレス
     MemoryChunk* prev_;
+
+    ///
+    /// 直後のアドレス
     MemoryChunk* next_;
 
 private:
+    ///
+    /// コンストラクタ
     MemoryChunk();
+    
+    ///
+    /// デストラクタ
     ~MemoryChunk();
 
 public:
     
+    ///
+    /// 有効判定
     bool isValidate() const;
 
+    ///
+    /// 次のチャンクをつなげる
     void chainNext(
         MemoryChunk* next
     ) {
@@ -30,6 +53,8 @@ public:
         }
     }
     
+    ///
+    /// 前のチャンクをつなげる
     void chainPrev(
         MemoryChunk* prev
     ) {
@@ -39,34 +64,50 @@ public:
         }
     }
     
+    ///
+    /// 次のチャンク取得
     MemoryChunk* next() {
         return next_;
     }
     
+    ///
+    /// 次のチャンク取得
     const MemoryChunk* next() const {
         return next_;
     }
     
+    ///
+    /// 前のチャンク取得
     MemoryChunk* prev() {
         return prev_;
     }
     
+    ///
+    /// 前のチャンク取得
     const MemoryChunk* prev() const {
         return prev_;
     }
     
+    ///
+    /// チャンクの終端アドレス取得
     void* endAddress() const {
         return reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(this) + size_);
     }
     
+    ///
+    /// チャンクサイズ取得
     size_t size() const {
         return size_;
     }
     
+    ///
+    /// チャンクサイズ設定
     void size(size_t s) {
         size_ = s;
     }
     
+    ///
+    /// 新たなチャンクを生成
     static MemoryChunk* create(
         void* addr,
         size_t size,

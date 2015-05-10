@@ -2,39 +2,48 @@
 #ifndef TRI_PRINT_HPP_INCLUDED
 #define TRI_PRINT_HPP_INCLUDED
 
+//  include
 #include "../gfx/tri_color.hpp"
 
 namespace t3 {
 
-
+///
+/// デバッグ描画の初期化
 void initializeDebugPrint();
 
+///
+/// 画面にデバッグ描画
 void printDisplay(
-    const float x,
-    const float y,
-    const char* fmt,
+    const float x,      ///< x
+    const float y,      ///< y
+    const char* fmt,    ///< フォーマット文字列
     ...
 );
 
+///
+/// 画面にデバッグ描画
 void printDisplay(
-    const float x,
-    const float y,
-    const Color& color,
-    const char* fmt,
+    const float x,      ///< x
+    const float y,      ///< y
+    const Color& color, ///< 色
+    const char* fmt,    ///< フォーマット文字列
     ...
 );
 
+///
+/// 画面にデバッグ描画
 void printDisplay(
-    const float x,
-    const float y,
-    const Color& color,
-    const int size,
-    const char* fmt,
+    const float x,      ///< x
+    const float y,      ///< y
+    const Color& color, ///< 色
+    const int size,     ///< フォントサイズ
+    const char* fmt,    ///< フォーマット文字列
     ...
 );
 
 
-
+///
+/// デバッグフォントのサイズ
 constexpr int DEBUG_FONT_POINT = 16;
 
 } // namespace t3

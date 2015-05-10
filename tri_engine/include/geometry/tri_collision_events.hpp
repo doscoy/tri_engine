@@ -11,26 +11,26 @@
 namespace t3 {
 
 ///
-/// ƒRƒ‰ƒCƒ_“¯m‚ÌƒyƒA
+/// ã‚³ãƒ©ã‚¤ãƒ€åŒå£«ã®ãƒšã‚¢
 using CollisionPair = std::pair<ColliderPtr, ColliderPtr>;
     
 ///
-/// ƒRƒŠƒWƒ‡ƒ“ƒCƒxƒ“ƒg
+/// ã‚³ãƒªã‚¸ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆ
 class CollisionEvent
     : public EventBase {
 public:
     ///
-    /// ƒCƒxƒ“ƒgƒ^ƒCƒv
+    /// ã‚¤ãƒ™ãƒ³ãƒˆã‚¿ã‚¤ãƒ—
     static const EventType TYPE;
 
     ///
-    /// ƒCƒxƒ“ƒgƒ^ƒCƒvæ“¾
+    /// ã‚¤ãƒ™ãƒ³ãƒˆã‚¿ã‚¤ãƒ—å–å¾—
     const EventType& eventType() const override {
         return TYPE;
     }
 
     ///
-    /// ‘ÎÛ‚ÌƒyƒA‚ªw’è‚ÌID‚ğŠÜ‚ñ‚Å‚¢‚é‚©”»’è
+    /// å¯¾è±¡ã®ãƒšã‚¢ãŒæŒ‡å®šã®IDã‚’å«ã‚“ã§ã„ã‚‹ã‹åˆ¤å®š
     bool hasID(const UniqueID& id) const {
         if (id == collision_pair_.first->colliderID()) {
             return true;
@@ -42,7 +42,7 @@ public:
     }
 
     ///
-    /// w’èID‚¶‚á‚È‚¢•û‚ÌƒI[ƒi[ƒIƒuƒWƒFƒNƒg‚ğæ“¾
+    /// æŒ‡å®šIDã˜ã‚ƒãªã„æ–¹ã®ã‚ªãƒ¼ãƒŠãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—
     template <typename T>
     T getOtherOwner(const UniqueID& id) const {
         Any* owner = nullptr;
@@ -56,8 +56,8 @@ public:
 
 
 
-    Vec2 pos_;  ///< ˆÊ’u
-    CollisionPair collision_pair_;  ///< ƒyƒA
+    Vec2 pos_;  ///< ä½ç½®
+    CollisionPair collision_pair_;  ///< ãƒšã‚¢
 };
 
 

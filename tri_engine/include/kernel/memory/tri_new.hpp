@@ -2,6 +2,7 @@
 #ifndef TRI_NEW_HPP_INCLUDED
 #define TRI_NEW_HPP_INCLUDED
 
+//  include
 #include <cstddef>
 #include "kernel/memory/tri_heap_manager.hpp"
 
@@ -15,13 +16,17 @@
 
 
 
-
+///
+/// new
 extern void* operator new(
     ::std::size_t size,
     t3::Heap* heap,
     const char* const filename,
     int line
 );
+
+///
+/// delete
 extern void operator delete(
     void* mem,
     t3::Heap* heap,
@@ -29,12 +34,17 @@ extern void operator delete(
     int line
 );
 
+///
+/// 配列のnew
 extern void* operator new[](
     ::std::size_t size,
     t3::Heap* heap,
     const char* const filename,
     int line
 );
+
+///
+/// 配列のdelete
 extern void operator delete[](
     void* mem,
     t3::Heap* heap,

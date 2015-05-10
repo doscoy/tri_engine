@@ -6,7 +6,7 @@
 namespace t3 {
 
 ///
-/// ‹­§ƒAƒ{[ƒg
+/// å¼·åˆ¶ã‚¢ãƒœãƒ¼ãƒˆ
 bool panic(
     const char* const exp,
     const char* const filename,
@@ -17,7 +17,7 @@ bool panic(
 );
 
 ///
-/// float‚ª³í‚©”»’è
+/// floatãŒæ­£å¸¸ã‹åˆ¤å®š
 bool isInvalidFloat(const float f);
 
 } // namespace t3
@@ -29,43 +29,43 @@ bool isInvalidFloat(const float f);
 
 #ifdef ENABLE_ASSERT
 
-/*! @brief ƒpƒjƒbƒN */
+/*! @brief ãƒ‘ãƒ‹ãƒƒã‚¯ */
 #define T3_PANIC(...)               t3::panic("panic", __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 
-/*! @brief ƒƒbƒZ[ƒW•tƒAƒT[ƒg */
+/*! @brief ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ä»˜ã‚¢ã‚µãƒ¼ãƒˆ */
 #define T3_ASSERT_MSG(exp,...)      (void)( (exp) || (t3::panic( #exp, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__ )),0)
 
-/*! @brief ƒAƒT[ƒg */
+/*! @brief ã‚¢ã‚µãƒ¼ãƒˆ */
 #define T3_ASSERT(exp)              T3_ASSERT_MSG(exp, "assertion.")
 
-/*! @brief nullƒ`ƒFƒbƒNƒAƒT[ƒg */
+/*! @brief nullãƒã‚§ãƒƒã‚¯ã‚¢ã‚µãƒ¼ãƒˆ */
 #define T3_NULL_ASSERT(p)           T3_ASSERT_MSG(p != nullptr, "pointer must not be null.")
 
-/*! @brief floatƒ`ƒFƒbƒNƒAƒT[ƒg */
+/*! @brief floatãƒã‚§ãƒƒã‚¯ã‚¢ã‚µãƒ¼ãƒˆ */
 #define T3_FLOAT_ASSERT(f)          T3_ASSERT_MSG(t3::isInvalidFloat(f), "invalid float.")
 
-/*! @brief ”ÍˆÍƒ`ƒFƒbƒNƒAƒT[ƒg */
+/*! @brief ç¯„å›²ãƒã‚§ãƒƒã‚¯ã‚¢ã‚µãƒ¼ãƒˆ */
 #define T3_ASSERT_RANGE(v, l, h)    T3_ASSERT_MSG((v >= l && v <= h), "%s is out of range. (%f <= %s(%f) <= %f)", #v, l, #v, v, h)
 
 #else // ENABLE_ASSERT
 
 
-  /*! @brief ƒpƒjƒbƒN */
+  /*! @brief ãƒ‘ãƒ‹ãƒƒã‚¯ */
 #define T3_PANIC(...)               (void)0
 
-  /*! @brief ƒAƒT[ƒg */
+  /*! @brief ã‚¢ã‚µãƒ¼ãƒˆ */
 #define T3_ASSERT(exp)              (void)(exp)
 
-  /*! @brief ƒƒbƒZ[ƒW•tƒAƒT[ƒg */
+  /*! @brief ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ä»˜ã‚¢ã‚µãƒ¼ãƒˆ */
 #define T3_ASSERT_MSG(exp, ...)     (void)(exp)
 
-  /*! @brief ƒAƒT[ƒg */
+  /*! @brief ã‚¢ã‚µãƒ¼ãƒˆ */
 #define T3_NULL_ASSERT(p)           (void)(p)
 
-  /*! @brief ƒAƒT[ƒg */
+  /*! @brief ã‚¢ã‚µãƒ¼ãƒˆ */
 #define T3_FLOAT_ASSERT(f)          (void)(f)
 
-  /*! @brief ƒAƒT[ƒg */
+  /*! @brief ã‚¢ã‚µãƒ¼ãƒˆ */
 #define T3_ASSERT_RANGE(v, l, h)    T3_ASSERT_MSG((v >= l && v <= h), "%s is out of range.", #v)
 
 

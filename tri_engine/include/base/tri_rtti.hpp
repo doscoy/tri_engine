@@ -5,35 +5,40 @@
 namespace t3 {
 
 
-
-class RTTI
-{
+///
+/// RTTI
+class RTTI {
 public:
+    ///
+    /// コンストラクタ
     RTTI( const char* class_name )
         : class_name_( class_name )
         , base_rtti_( nullptr )
-    {
-    }
+    {}
     
     
+    ///
+    /// コンストラクタ
     RTTI( const char* class_name, const RTTI& base )
         : class_name_( class_name )
         , base_rtti_( &base )
-    {
-    }
+    {}
     
 public:
-    //  クラス名取得
+    ///
+    ///  クラス名取得.
     const char* getClassName() const {
         return class_name_;
     }
     
-    //  指定のクラスか判定
+    ///
+    ///  指定のクラスか判定.
     bool isExactly(const RTTI& rtti) const {
         return this == &rtti;
     }
     
-    //  継承元か判定
+    ///
+    ///  継承元か判定.
     bool isDerivesFrom(const RTTI& rtti) const {
         const RTTI* compare = this;
         while (compare) {
@@ -52,20 +57,22 @@ private:
     RTTI& operator=( const RTTI& obj );
     
 private:
-    //  クラス名
+    ///
+    ///  クラス名
     const char* class_name_;
     
-    //  継承元クラス情報
+    ///
+    ///  継承元クラス情報
     const RTTI* base_rtti_;
     
 };
 
-#define RTTI_DECLARE                        \
-    public:                                 \
-        virtual const ::t3::RTTI& getRTTI() {     \
-            return rtti_;                   \
-        }                                   \
-        static const ::t3::RTTI rtti_;            \
+#define RTTI_DECLARE                            \
+    public:                                     \
+        virtual const ::t3::RTTI& getRTTI() {   \
+            return rtti_;                       \
+        }                                       \
+        static const ::t3::RTTI rtti_;          \
         
         
         

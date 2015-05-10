@@ -11,73 +11,73 @@
 
 namespace t3 {
 
-//  ‘O•ûéŒ¾
+//  å‰æ–¹å®£è¨€
 class PointCollider;
 class CircleCollider;
 
 ///
-/// “–‚½‚è”»’èƒIƒuƒWƒFƒNƒg
+/// å½“ãŸã‚Šåˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 class Collider {
 
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     Collider(
         const HashString& name
     );
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     virtual ~Collider(){};
     
 public:
     ///
-    /// “–‚½‚è”»’è
+    /// å½“ãŸã‚Šåˆ¤å®š
     virtual bool isHit(
-        const PointCollider& col    ///< “_
+        const PointCollider& col    ///< ç‚¹
     ) const {
         return false;
     }
     
     ///
-    /// “–‚½‚è”»’è
+    /// å½“ãŸã‚Šåˆ¤å®š
     virtual bool isHit(
-        const CircleCollider& col   ///< ‰~
+        const CircleCollider& col   ///< å††
     ) const {
         return false;
     }
 
     ///
-    /// “–‚½‚è”»’èƒ^ƒCƒvæ“¾
+    /// å½“ãŸã‚Šåˆ¤å®šã‚¿ã‚¤ãƒ—å–å¾—
     virtual const HashString& getCollisionType() const = 0;
 
 public:
     ///
-    /// ƒRƒ‰ƒCƒ_IDæ“¾
+    /// ã‚³ãƒ©ã‚¤ãƒ€IDå–å¾—
     const UniqueID& colliderID() const {
         return collider_id_;
     }
     
     ///
-    /// ƒRƒ‰ƒCƒ_–¼æ“¾
+    /// ã‚³ãƒ©ã‚¤ãƒ€åå–å¾—
     const HashString& colliderName() const {
         return collider_name_;
     }
 
     ///
-    /// ƒI[ƒi[İ’è
+    /// ã‚ªãƒ¼ãƒŠãƒ¼è¨­å®š
     void owner(Any any) {
         owner_ = any;
     }
     
     ///
-    /// ƒI[ƒi[æ“¾
+    /// ã‚ªãƒ¼ãƒŠãƒ¼å–å¾—
     Any& owner() {
         return owner_;
     }
     
     ///
-    /// ƒI[ƒi[æ“¾
+    /// ã‚ªãƒ¼ãƒŠãƒ¼å–å¾—
     const Any& owner() const {
         return owner_;
     }
@@ -85,19 +85,19 @@ public:
 
 public:
     ///
-    /// ƒRƒ‰ƒCƒ_“¯m‚Ì”»’è
+    /// ã‚³ãƒ©ã‚¤ãƒ€åŒå£«ã®åˆ¤å®š
     bool operator ==(const Collider& rhs) {
         return colliderID() == rhs.colliderID();
     }
 
 private:
-    UniqueID collider_id_;      ///< ƒRƒ‰ƒCƒ_ID
-    HashString collider_name_;  ///< ƒRƒ‰ƒCƒ_–¼
-    Any owner_;                 ///< ƒI[ƒi[
+    UniqueID collider_id_;      ///< ã‚³ãƒ©ã‚¤ãƒ€ID
+    HashString collider_name_;  ///< ã‚³ãƒ©ã‚¤ãƒ€å
+    Any owner_;                 ///< ã‚ªãƒ¼ãƒŠãƒ¼
 };
 
 ///
-/// ƒRƒ‰ƒCƒ_‚Ìƒ|ƒCƒ“ƒ^
+/// ã‚³ãƒ©ã‚¤ãƒ€ã®ãƒã‚¤ãƒ³ã‚¿
 using ColliderPtr = SharedPtr<Collider>;
 
         

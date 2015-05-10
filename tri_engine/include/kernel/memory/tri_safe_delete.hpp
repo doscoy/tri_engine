@@ -8,12 +8,12 @@
 #include "base/tri_types.hpp"
 #include "tri_memory.hpp"
 
-//==============================================================================
+
 namespace t3 {
 
 
-// *********************************************
-// オブジェクトをdeleteしポインタを無効にする.
+///
+/// オブジェクトをdeleteしポインタを無効にする.
 template < class T >
 inline void safeDelete(T*& p) {
     //  不完全な型のポインタをT3_DELETEしようとした時にコンパイルエラーにする
@@ -26,8 +26,8 @@ inline void safeDelete(T*& p) {
 }
 
 
-// *********************************************
-// 配列をdelete後にポインタを無効にする.
+///
+/// 配列をdelete後にポインタを無効にする.
 template < class T >
 inline void safeDeleteArray(T*& p) {
     //  不完全な型のポインタをT3_DELETEしようとした時にコンパイルエラーにする

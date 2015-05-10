@@ -2,15 +2,18 @@
 #ifndef TRI_RECTANGLE_HPP_INCLUDED
 #define TRI_RECTANGLE_HPP_INCLUDED
 
-
+//  include
 #include "../math/tri_vec2.hpp"
 
 namespace t3 {
 
-
-class Rectangle
-{
+///
+/// 矩形プリミティブ
+class Rectangle {
 public:
+    
+    ///
+    /// コンストラクタ
     Rectangle()
         : min_(
             std::numeric_limits<float>::max(),
@@ -24,6 +27,8 @@ public:
         calcCenterFromMinMax();
     }
     
+    ///
+    /// コンストラクタ
     Rectangle(
         const Vec2& min,
         const Vec2& max
@@ -37,11 +42,15 @@ public:
     
     
     
+    ///
+    /// デストラクタ
     ~Rectangle()
     {
     }
     
 public:
+    ///
+    /// 数値をリセット
     void reset() {
         min_ = Vec2(
             std::numeric_limits<float>::max(),
@@ -53,6 +62,8 @@ public:
         calcCenterFromMinMax();
     }
     
+    ///
+    /// 中心とサイズから矩形を構築
     void setupFromCenterSize(
         const Vec2& center,
         const Vec2& size
@@ -69,6 +80,8 @@ public:
         size_ = size;
     }
     
+    ///
+    /// 点から矩形を構築
     void setupFromPoint(const Vec2& p) {
         if (min_.x_ > p.x_) {
             min_.x_ = p.x_;
@@ -85,32 +98,46 @@ public:
     }
 
 public:
+    ///
+    /// 最小値設定
     void min(const Vec2& min) {
         min_ = min;
         calcCenterFromMinMax();
     }
 
+    ///
+    /// 最小値を取得
     const Vec2& min() const {
         return min_;
     }
     
+    ///
+    /// 最大値を設定
     void max(const Vec2& max) {
         max_ = max;
         calcCenterFromMinMax();
     }
     
+    ///
+    /// 最大値を取得
     const Vec2& max() const {
         return max_;
     }
 
+    ///
+    /// 中心点を取得
     const Vec2& center() const {
         return center_;
     }
     
+    ///
+    /// 中心点を設定
     const Vec2& size() const {
         return size_;
     }
     
+    ///
+    /// サイズを設定
     void size(const Vec2& s) {
         size_ = s;
         calcMinMaxFromSize();
@@ -118,11 +145,14 @@ public:
 
     
 private:
+    ///
+    /// 最小値最大値から中心とサイズを計算
     void calcCenterFromMinMax() {
         size_ = max_ - min_;
         center_ = min_ + (size_ / 2);
     }
-    
+    ///
+    /// 中心とサイズから最小値最大値を計算
     void calcMinMaxFromSize() {
         Vec2 half = size_ / 2;
         min_ = center_ - half;
@@ -131,10 +161,20 @@ private:
     
 private:
 
+    ///
+    /// 最小値
     Vec2 min_;
+    
+    ///
+    /// 最大値
     Vec2 max_;
 
+    ///
+    /// サイズ
     Vec2 size_;
+    
+    ///
+    /// 中心点
     Vec2 center_;
 
 };

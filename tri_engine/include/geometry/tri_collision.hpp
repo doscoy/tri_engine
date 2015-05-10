@@ -10,21 +10,21 @@
 namespace t3 {
 
 ///
-/// “_‚Æ‹éŒ`‚Ì“–‚½‚è”»’è.
+/// ç‚¹ã¨çŸ©å½¢ã®å½“ãŸã‚Šåˆ¤å®š.
 bool isHitPointRectangle(
     const Vec2& point,
     const Rectangle& rect
 );
 
 ///
-/// ‰~‚Æ‰~‚Ì“–‚½‚è”»’è.
+/// å††ã¨å††ã®å½“ãŸã‚Šåˆ¤å®š.
 bool isHitCircleCircle(
     const Circle& a,
     const Circle& b
 );
 
 ///
-/// ‰~‚Æ“_‚Ì“–‚½‚è”»’è.
+/// å††ã¨ç‚¹ã®å½“ãŸã‚Šåˆ¤å®š.
 bool isHitCirclePoint(
     const Circle& circle,
     const Vec2& point

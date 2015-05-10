@@ -13,16 +13,16 @@
 namespace t3 {
 
 ///
-/// ƒRƒ‰ƒCƒ_W‡
+/// ã‚³ãƒ©ã‚¤ãƒ€é›†åˆ
 using Colliders = List<SharedPtr<Collider>>;
 
 ///
-/// ƒRƒ‰ƒCƒ_W‡‚Ìƒ|ƒCƒ“ƒ^
+/// ã‚³ãƒ©ã‚¤ãƒ€é›†åˆã®ãƒã‚¤ãƒ³ã‚¿
 using CollidersPtr = SharedPtr<Colliders>;
 
 
 ///
-/// ƒRƒŠƒWƒ‡ƒ“ƒ}ƒl[ƒWƒƒ
+/// ã‚³ãƒªã‚¸ãƒ§ãƒ³ãƒãƒãƒ¼ã‚¸ãƒ£
 class CollisionManager
     : public Singleton<CollisionManager>
 {
@@ -30,50 +30,50 @@ class CollisionManager
 
 private:
     ///
-    /// ”»’èÏ‚İƒyƒA
+    /// åˆ¤å®šæ¸ˆã¿ãƒšã‚¢
     using JudgedPairs = Vector<CollisionPair>;
 public:
 
     ///
-    /// ƒRƒ‰ƒCƒ_’Ç‰Á
+    /// ã‚³ãƒ©ã‚¤ãƒ€è¿½åŠ 
     void addCollider(
-        ColliderPtr collider,   ///< ƒRƒ‰ƒCƒ_
-        HashString target       ///< ‘ÎÛ‚Ì–¼‘O
+        ColliderPtr collider,   ///< ã‚³ãƒ©ã‚¤ãƒ€
+        HashString target       ///< å¯¾è±¡ã®åå‰
     );
 
     ///
-    /// ƒRƒ‰ƒCƒ_íœ
+    /// ã‚³ãƒ©ã‚¤ãƒ€å‰Šé™¤
     void removeCollider(
-        ColliderPtr collider    ///< ƒRƒ‰ƒCƒ_
+        ColliderPtr collider    ///< ã‚³ãƒ©ã‚¤ãƒ€
     );
 
 
     ///
-    /// ‘“–‚½‚è”»’è
+    /// ç·å½“ãŸã‚Šåˆ¤å®š
     void collisionDetection();
 
 private:
     ///
-    /// ƒyƒA‚Ì“–‚½‚è”»’è
+    /// ãƒšã‚¢ã®å½“ãŸã‚Šåˆ¤å®š
     void judgeColliderPairs(
         ColliderPtr& a,
         ColliderPtr& b
     );
     
     ///
-    /// ”»’èÏ‚İƒyƒA‚©
+    /// åˆ¤å®šæ¸ˆã¿ãƒšã‚¢ã‹
     bool isJudgedPair(
         const CollisionPair& pair
     );
     
 private:
     ///
-    ///  ƒRƒ‰ƒCƒ_ƒRƒ“ƒeƒi
+    ///  ã‚³ãƒ©ã‚¤ãƒ€ã‚³ãƒ³ãƒ†ãƒŠ
     using CollidersMap = std::map<HashString, CollidersPtr>;
 
-    CollidersMap colliders_;            ///< ŠÇ—ƒRƒ‰ƒCƒ_
-    CollidersMap same_target_group_;    ///< “¯‚¶“–‚½‚è”»’è‘ÎÛ‚ğ‚ÂƒOƒ‹[ƒv
-    JudgedPairs judged_pairs_;          ///< ”»’èÏ‚İ‚ÌƒyƒA
+    CollidersMap colliders_;            ///< ç®¡ç†ã‚³ãƒ©ã‚¤ãƒ€
+    CollidersMap same_target_group_;    ///< åŒã˜å½“ãŸã‚Šåˆ¤å®šå¯¾è±¡ã‚’æŒã¤ã‚°ãƒ«ãƒ¼ãƒ—
+    JudgedPairs judged_pairs_;          ///< åˆ¤å®šæ¸ˆã¿ã®ãƒšã‚¢
 };
 
 

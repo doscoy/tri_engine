@@ -8,23 +8,23 @@
 namespace t3 {
     
 ///
-/// ƒnƒbƒVƒ…’l•t•¶š—ñ
+/// ãƒãƒƒã‚·ãƒ¥å€¤ä»˜æ–‡å­—åˆ—
 class HashString {
 
 public:
-    //  ƒnƒbƒVƒ…ƒL[
+    //  ãƒãƒƒã‚·ãƒ¥ã‚­ãƒ¼
     using key_t = std::size_t;
 
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     HashString()
         : str_()
         , key_()
     {}
 
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     explicit HashString(const String str)
         : str_(str)
         , key_(strToHashKey(str))
@@ -32,26 +32,26 @@ public:
     }
     
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~HashString() = default;
     
     
     
 public:
     ///
-    /// •¶š—ñæ“¾
+    /// æ–‡å­—åˆ—å–å¾—
     String string() const {
         return str_;
     }
     
     ///
-    /// ƒnƒbƒVƒ…’læ“¾
+    /// ãƒãƒƒã‚·ãƒ¥å€¤å–å¾—
     key_t key() const {
         return key_;
     }
     
     ///
-    /// •¶š—ñ‚ğİ’è
+    /// æ–‡å­—åˆ—ã‚’è¨­å®š
     void setString(const String str) {
         str_ = str;
         key_ = strToHashKey(str);
@@ -59,14 +59,14 @@ public:
 
 public:
     ///
-    /// •¶š—ñ‚Ì”äŠr
+    /// æ–‡å­—åˆ—ã®æ¯”è¼ƒ
     bool operator <(const HashString& rhs) const {
         return key_ < rhs.key_;
     }
     
     
     ///
-    /// •¶š—ñ‚Ì”äŠr
+    /// æ–‡å­—åˆ—ã®æ¯”è¼ƒ
     bool operator ==(const HashString& rhs) const {
         return key_ == rhs.key_;
     }
@@ -74,7 +74,7 @@ public:
 private:
     
     ///
-    /// •¶š—ñ‚ğƒnƒbƒVƒ…’l‚É•ÏŠ·
+    /// æ–‡å­—åˆ—ã‚’ãƒãƒƒã‚·ãƒ¥å€¤ã«å¤‰æ›
     key_t strToHashKey(
         const String str
     ) {
@@ -82,8 +82,8 @@ private:
     }
     
 private:
-    String str_;    ///< •¶š—ñ
-    key_t key_;     ///< ƒnƒbƒVƒ…’l
+    String str_;    ///< æ–‡å­—åˆ—
+    key_t key_;     ///< ãƒãƒƒã‚·ãƒ¥å€¤
 
 };
     

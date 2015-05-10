@@ -11,32 +11,32 @@
 namespace t3 {
 
 ///
-/// “ü—Íî•ñ
+/// å…¥åŠ›æƒ…å ±
 class Input
     : private Uncopyable
 {
 public:
     ///
-    /// ƒpƒbƒhî•ñæ“¾
+    /// ãƒ‘ãƒƒãƒ‰æƒ…å ±å–å¾—
     const Pad& pad() const {
         return pad_;
     }
     
     ///
-    /// ƒ|ƒCƒ“ƒeƒBƒ“ƒOî•ñæ“¾
+    /// ãƒã‚¤ãƒ³ãƒ†ã‚£ãƒ³ã‚°æƒ…å ±å–å¾—
     const Pointing& pointing() const {
         return pointing_;
     }
     
     ///
-    /// ‰Á‘¬“xƒZƒ“ƒT[î•ñæ“¾
+    /// åŠ é€Ÿåº¦ã‚»ãƒ³ã‚µãƒ¼æƒ…å ±å–å¾—
     const cross::AccelerometerData& getAccelerometer() const {
         return accele_;
     }
 
 
     ///
-    /// ƒQ[ƒ€ƒpƒbƒhî•ñ‚ğXV
+    /// ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰æƒ…å ±ã‚’æ›´æ–°
     void updatePad(
         const cross::GamePadData& paddata,
         tick_t delta_time
@@ -45,7 +45,7 @@ public:
     }
     
     ///
-    /// ƒ|ƒCƒ“ƒeƒBƒ“ƒOƒfƒoƒCƒXî•ñ‚ğXV
+    /// ãƒã‚¤ãƒ³ãƒ†ã‚£ãƒ³ã‚°ãƒ‡ãƒã‚¤ã‚¹æƒ…å ±ã‚’æ›´æ–°
     void updatePointing(
         const cross::PointingData& pointing_data,
         tick_t delta_time
@@ -54,7 +54,7 @@ public:
     }
     
     ///
-    /// ‰Á‘¬“xƒZƒ“ƒT[î•ñ‚ğXV
+    /// åŠ é€Ÿåº¦ã‚»ãƒ³ã‚µãƒ¼æƒ…å ±ã‚’æ›´æ–°
     void updateAccelermeter(
         const cross::AccelerometerData acc_data,
         tick_t delta_time
@@ -65,9 +65,9 @@ public:
 
     
 private:
-    Pad pad_;                           ///< ƒQ[ƒ€ƒpƒbƒhî•ñ
-    Pointing pointing_;                 ///< ƒ|ƒCƒ“ƒeƒBƒ“ƒOƒfƒoƒCƒXî•ñ
-    cross::AccelerometerData accele_;   ///< ‰Á‘¬“xƒZƒ“ƒT[
+    Pad pad_;                           ///< ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰æƒ…å ±
+    Pointing pointing_;                 ///< ãƒã‚¤ãƒ³ãƒ†ã‚£ãƒ³ã‚°ãƒ‡ãƒã‚¤ã‚¹æƒ…å ±
+    cross::AccelerometerData accele_;   ///< åŠ é€Ÿåº¦ã‚»ãƒ³ã‚µãƒ¼
 };
   
 

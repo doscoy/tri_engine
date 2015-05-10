@@ -4,13 +4,20 @@
 
 namespace t3 {
 
-
+//  include
 class IRenderer;
 
+
+///
+/// レンダリングオブジェクトインターフェース
 class IRenderable
 {
 public:
-    virtual void render(IRenderer*) = 0;
+    ///
+    /// 描画
+    virtual void render(
+        IRenderer* r    ///< レンダラ
+    ) = 0;
 };
 
 

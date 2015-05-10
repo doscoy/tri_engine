@@ -10,101 +10,101 @@ namespace t3 {
 
 
 ///
-/// ƒtƒ‰ƒXƒ^ƒ€
+/// ãƒ•ãƒ©ã‚¹ã‚¿ãƒ 
 class Frustum {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     Frustum();
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~Frustum();
 
 public:
     ///
-    /// –Êƒ^ƒCƒv
+    /// é¢ã‚¿ã‚¤ãƒ—
     enum Side {
-        SIDE_NEAR,      ///< è‘O
-        SIDE_FAR,       ///< ‰œ
-        SIDE_TOP,       ///< ã
-        SIDE_RIGHT,     ///< ‰E
-        SIDE_BOTTOM,    ///< ‰º
-        SIDE_LEFT,      ///< ¶
+        SIDE_NEAR,      ///< æ‰‹å‰
+        SIDE_FAR,       ///< å¥¥
+        SIDE_TOP,       ///< ä¸Š
+        SIDE_RIGHT,     ///< å³
+        SIDE_BOTTOM,    ///< ä¸‹
+        SIDE_LEFT,      ///< å·¦
         
-        SIDE_NUM        ///< –Ê‘”
+        SIDE_NUM        ///< é¢ç·æ•°
     };
 
 
 public:
     ///
-    /// ‹–ìŠp‚ğİ’è
+    /// è¦–é‡è§’ã‚’è¨­å®š
     void setFov(float fov){
         fov_ = fov;
     }
 
     ///
-    /// ƒAƒXƒyƒNƒg”ä‚ğİ’è
+    /// ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”ã‚’è¨­å®š
     void setAspect(float aspect){
         aspect_ = aspect;
     }
 
     ///
-    /// ƒjƒAƒNƒŠƒbƒv–Ê‚ğİ’è
+    /// ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—é¢ã‚’è¨­å®š
     void setNear(float near){
         near_ = near;
     }
 
     ///
-    /// ƒtƒ@[ƒNƒŠƒbƒv–Ê‚ğİ’è
+    /// ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—é¢ã‚’è¨­å®š
     void setFar(float far){
         far_ = far;
     }
 
     ///
-    /// ƒtƒ‰ƒXƒ^ƒ€‰Šú‰»
+    /// ãƒ•ãƒ©ã‚¹ã‚¿ãƒ åˆæœŸåŒ–
     void initializeFrustum(
-        float fov,          ///< ‹–ìŠp
-        float aspect,       ///< ƒAƒXƒyƒNƒg”ä
-        float near,         ///< ƒjƒAƒNƒŠƒbƒv
-        float far,          ///< ƒtƒ@[ƒNƒŠƒbƒv
-        const Vec3& front,  ///< ‘OƒxƒNƒgƒ‹
-        const Vec3& right,  ///< ‰EƒxƒNƒgƒ‹
-        const Vec3& up,     ///< ãƒxƒNƒgƒ‹
-        const Vec3& pos     ///< ˆÊ’u
+        float fov,          ///< è¦–é‡è§’
+        float aspect,       ///< ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”
+        float near,         ///< ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—
+        float far,          ///< ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—
+        const Vec3& front,  ///< å‰ãƒ™ã‚¯ãƒˆãƒ«
+        const Vec3& right,  ///< å³ãƒ™ã‚¯ãƒˆãƒ«
+        const Vec3& up,     ///< ä¸Šãƒ™ã‚¯ãƒˆãƒ«
+        const Vec3& pos     ///< ä½ç½®
     );
 
     ///
-    /// –Ê‚ğ\¬‚·‚é•½–Êæ“¾
+    /// é¢ã‚’æ§‹æˆã™ã‚‹å¹³é¢å–å¾—
     const Plane* getPlane(
-        int side    ///< –Êƒ^ƒCƒv
+        int side    ///< é¢ã‚¿ã‚¤ãƒ—
     ) const {
         return &plane_[side];
     }
 
     ///
-    /// “à‘¤”»’è
+    /// å†…å´åˆ¤å®š
     bool isInside(
-        const Vec3& point   ///< ˆÊ’u
+        const Vec3& point   ///< ä½ç½®
     );
 
     ///
-    /// “à‘¤”»’è.
-    /// ˆÊ’u‚Æ”¼Œa
+    /// å†…å´åˆ¤å®š.
+    /// ä½ç½®ã¨åŠå¾„
     bool isInSide(
-		const Vec3& point,  ///< ˆÊ’u
-		float radius        ///< ”¼Œa
+		const Vec3& point,  ///< ä½ç½®
+		float radius        ///< åŠå¾„
     );
 
 private:
-    Plane plane_[SIDE_NUM];     ///< ƒtƒ‰ƒXƒ^ƒ€‚ğ\¬‚·‚éŠe–Ê
-    Vec3 near_clip_[4];         ///< è‘O‚Ì–ÊÀ•W
-    Vec3 far_clip_[4];          ///< ‰œ‚Ì–ÊÀ•W
-    Vec3 pos_;                  ///< ˆÊ’u
-    float fov_;                 ///< ‹–ìŠp
-    float aspect_;              ///< ƒAƒXƒyƒNƒg”ä
-    float near_;                ///< ‘O–ÊƒIƒtƒZƒbƒg
-    float far_;                 ///< ‰œ–ÊƒIƒtƒZƒbƒg
+    Plane plane_[SIDE_NUM];     ///< ãƒ•ãƒ©ã‚¹ã‚¿ãƒ ã‚’æ§‹æˆã™ã‚‹å„é¢
+    Vec3 near_clip_[4];         ///< æ‰‹å‰ã®é¢åº§æ¨™
+    Vec3 far_clip_[4];          ///< å¥¥ã®é¢åº§æ¨™
+    Vec3 pos_;                  ///< ä½ç½®
+    float fov_;                 ///< è¦–é‡è§’
+    float aspect_;              ///< ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”
+    float near_;                ///< å‰é¢ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+    float far_;                 ///< å¥¥é¢ã‚ªãƒ•ã‚»ãƒƒãƒˆ
  
 };
 

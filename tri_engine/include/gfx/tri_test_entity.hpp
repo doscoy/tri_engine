@@ -1,19 +1,22 @@
 
-#ifndef tri_sandbox_osx_tri_test_entity_hpp
-#define tri_sandbox_osx_tri_test_entity_hpp
+#ifndef TRI_TEST_ENTITY_HPP_INCLUDED
+#define TRI_TEST_ENTITY_HPP_INCLUDED
 
-//#include "tri_renderabl.hpp"
+//  include
 #include "tri_entity.hpp"
 #include "tri_color.hpp"
 
 
 namespace t3 {
 
-
+///
+/// テスト用オブジェクト
 class TestEntity
     : public Entity
 {
 public:
+    ///
+    /// 描画
     virtual void render() {
     
         drawPlane(
@@ -25,6 +28,8 @@ public:
 
     }
 
+    ///
+    /// 描画判定
     virtual bool isRenderable() const {
         return true;
     }
@@ -34,4 +39,4 @@ public:
 }   // namespace t3
 
 
-#endif
+#endif // TRI_TEST_ENTITY_HPP_INCLUDED

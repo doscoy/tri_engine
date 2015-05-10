@@ -15,15 +15,20 @@ namespace t3 {
 
 
 
-
+///
+/// 行列
 template <typename T>
 class Mtx44Template {
 public:
+    ///
+    /// 行列初期化
     Mtx44Template() {
         identity();
     }
     
     
+    ///
+    /// 行列初期化
     Mtx44Template(const T* m) {
         x_.x_ = m[0];  x_.y_ = m[1];  x_.z_ = m[2];  x_.w_ = m[3];
         y_.x_ = m[4];  y_.y_ = m[5];  y_.z_ = m[6];  y_.w_ = m[7];
@@ -31,6 +36,8 @@ public:
         w_.x_ = m[12]; w_.y_ = m[13]; w_.z_ = m[14]; w_.w_ = m[15];
     }
 
+    ///
+    /// 行列初期化
     Mtx44Template(
         const Vec3Template<T> a,
         const Vec3Template<T> b,
@@ -45,10 +52,14 @@ public:
     
     
     
+    ///
+    /// 行列同士の掛け算
     Mtx44Template operator * (const Mtx44Template& rhs) const {
         return multiply(*this, rhs);
     }
 
+    ///
+    /// 行列同士の掛け算
     static Mtx44Template multiply(
         const Mtx44Template& lhs,
         const Mtx44Template& rhs
@@ -75,10 +86,14 @@ public:
     }
 
 
+    ///
+    /// ベクトルと行列の掛け算
     Vec4Template<T> operator * (const Vec4Template<T>& b) const {
         return xform(b);
     }
     
+    ///
+    /// ベクトルと行列の掛け算
     Vec3Template<T> xform(const Vec3Template<T>& b) const {
         Vec4Template<T> a(b);
         Vec4Template<T> a2 = xform(a);
@@ -86,6 +101,8 @@ public:
         return a3;
     }
     
+    ///
+    /// ベクトルと行列の掛け算
     Vec4Template<T> xform(const Vec4Template<T>& b) const {
         Vec4Template<T> v;
         v.x_ = x_.x_ * b.x_ + x_.y_ * b.y_ + x_.z_ * b.z_ + x_.w_ * b.w_;
@@ -96,11 +113,15 @@ public:
     }
     
 
+    ///
+    /// 行列掛け算
     Mtx44Template& operator *= (const Mtx44Template& b) {
         Mtx44Template m = *this * b;
         return (*this = m);
     }
     
+    ///
+    /// 転置行列
     Mtx44Template transposed() const {
         Mtx44Template m;
         m.x_.x_ = x_.x_; m.x_.y_ = y_.x_; m.x_.z_ = z_.x_; m.x_.w_ = w_.x_;
@@ -110,14 +131,20 @@ public:
         return m;
     }
     
+    ///
+    /// ポインタ取得
     T* pointer() {
         return &x_.x_;
     }
     
+    ///
+    /// ポインタ取得
     const T* pointer() const {
         return &x_.x_;
     }
     
+    ///
+    /// 単位行列生成
     void identity() {
         x_.x_ = 1; x_.y_ = 0; x_.z_ = 0; x_.w_ = 0;
         y_.x_ = 0; y_.y_ = 1; y_.z_ = 0; y_.w_ = 0;
@@ -125,24 +152,34 @@ public:
         w_.x_ = 0; w_.y_ = 0; w_.z_ = 0; w_.w_ = 1;
     }
     
+    ///
+    ///
     static Mtx44Template<T> getIdentity() {
         return Mtx44Template();
     }
     
+    ///
+    /// 並行移動行列生成
     void translate(const Vec3Template<T>& v) {
         makeTranslateMatrix( *this, v.x_, v.y_, v.z_ );
     }
     
+    ///
+    /// 並行移動行列生成
     void translate( T x, T y, T z ) {
         makeTranslateMatrix( *this, x, y, z );
     }
     
+    ///
+    /// 平行移動行列生成
     static Mtx44Template<T> getTranslateMatrix( T x, T y, T z) {
         Mtx44Template m;
         makeTranslateMatrix( m, x, y, z );
         return m;
     }
     
+    ///
+    /// 平行移動行列生成
     static void makeTranslateMatrix(
         Mtx44Template<T>& mtx,
         T x,
@@ -155,6 +192,8 @@ public:
         mtx.w_.x_ = x; mtx.w_.y_ = y; mtx.w_.z_ = z; mtx.w_.w_ = 1;
     }
     
+    ///
+    /// 平行移動成分設定
     void position(
         T x,
         T y,
@@ -165,30 +204,40 @@ public:
         w_.z_ = z;
     }
     
+    ///
+    /// 平行移動成分取得
     Vec3Template<T> position() const {
         return Vec3Template<T>(w_.x_, w_.y_, w_.z_);
     }
     
-    
-    
+    ///
+    /// スケール行列生成
     void scale( T s ) {
         makeScaleMatrix( *this, s, s, s );
     }
     
+    ///
+    /// スケール行列生成
     void scale( const Vec3Template<T> v ) {
         makeScaleMatrix( *this, v.x_, v.y_, v.z_ );
     }
     
+    ///
+    /// スケール行列生成
     void scale( T x, T y, T z ) {
         makeScaleMatrix( *this, x, y, z );
     }
     
+    ///
+    /// スケール行列生成
     static Mtx44Template<T> getScaleMatrix( T x, T y, T z ) {
         Mtx44Template m;
         makeScaleMatrix( m, x, y, z );
         return m;
     }
     
+    ///
+    /// スケール行列生成
     static void makeScaleMatrix( Mtx44Template<T>& m, T x, T y, T z) {
         m.x_.x_ = x; m.x_.y_ = 0; m.x_.z_ = 0; m.x_.w_ = 0;
         m.y_.x_ = 0; m.y_.y_ = y; m.y_.z_ = 0; m.y_.w_ = 0;
@@ -196,27 +245,39 @@ public:
         m.w_.x_ = 0; m.w_.y_ = 0; m.w_.z_ = 0; m.w_.w_ = 1;
     }
     
+    ///
+    /// 回転行列生成
     void rotateX(T r) {
         makeRotateMatrixX(*this, r);
     }
     
+    ///
+    /// 回転行列生成
     void rotateY(T r) {
         makeRotateMatrixY(*this, r);
     }
     
+    ///
+    /// 回転行列生成
     void rotateZ(T r) {
         makeRotateMatrixZ(*this, r);
     }
     
+    ///
+    /// 回転行列生成
     void rotate(Vec3Template<T> v) {
         makeRotateYawPitchRoll(*this, v.y_, v.x_, v.z_);
     }
     
     
+    ///
+    /// 回転行列生成
     void rotate(const Quaternion& q) {
         makeRotateQuaternion(*this, q);
     }
     
+    ///
+    /// 回転行列生成
     static Mtx44Template<T> getRotateMatrixY(
         T degrees
     ) {
@@ -224,6 +285,8 @@ public:
         return makeRotateMatrixY(m, degrees);
     }
     
+    ///
+    /// 回転行列生成
     static Mtx44Template<T> getRotateMatrixZ(
         T degrees
     ) {
@@ -233,6 +296,8 @@ public:
     
     
     
+    ///
+    /// 回転行列生成
     static Mtx44Template<T>& makeRotateMatrixX(
         Mtx44Template<T>& m,
         T degrees
@@ -249,7 +314,9 @@ public:
     }
     
 			 
-	static Mtx44Template<T>& makeRotateMatrixY(
+	///
+    /// 回転行列生成
+    static Mtx44Template<T>& makeRotateMatrixY(
         Mtx44Template<T>& m,
         T degrees
     ) {
@@ -265,6 +332,8 @@ public:
         return m;
     }
 	
+    ///
+    ///
     static Mtx44Template<T>& makeRotateMatrixZ(
         Mtx44Template<T>& m,
         T degrees
@@ -281,6 +350,8 @@ public:
         return m;
     }
     
+    ///
+    /// 回転行列生成
     static void makeRotateYawPitchRoll(
         Mtx44Template<T>& m,
         T yaw,
@@ -299,6 +370,8 @@ public:
         m = yaw_mtx * pitch_mtx * roll_mtx;
     }
     
+    ///
+    /// 回転行列生成
     static void makeRotateQuaternion(
         Mtx44Template<T>& out,
         const Quaternion& quat
@@ -338,6 +411,8 @@ public:
     }
     
     
+    ///
+    /// 任意軸回転行列生成
     static void makeRotateAxis(
         Mtx44Template<T>& out,
         const Vec3Template<T>& axis,
@@ -380,6 +455,8 @@ public:
     }
     
     
+    ///
+    /// 正射影行列生成
     void ortho(
         T left,
         T right,
@@ -391,6 +468,8 @@ public:
         makeOrthoMatrix(*this, left, right, bottom, top, near, far);
     }
     
+    ///
+    /// 正射影行列生成
     static void makeOrthoMatrix(
         Mtx44Template<T>& mtx,
         T left,
@@ -413,6 +492,8 @@ public:
         mtx.w_.x_ = tx; mtx.w_.y_ = ty; mtx.w_.z_ = tz; mtx.w_.w_ = 1;
     }
     
+    ///
+    /// 正射影行列生成
     static Mtx44Template<T> getOrthoMatrix(
         T left,
         T right,
@@ -427,6 +508,8 @@ public:
     }
     
     
+    ///
+    /// 投影行列生成
     void perspective(
         T const & fov,
 		T const & width,
@@ -438,9 +521,8 @@ public:
     }
     
     
-    
-    
-    
+    ///
+    /// 投影行列生成
     static void makePerspective(
         Mtx44Template<T>& mtx,
         T const & fov,
@@ -463,11 +545,15 @@ public:
 	}
     
     
+    ///
+    /// フラスタム行列生成
     void frustum(T left, T right, T bottom, T top, T near, T far) {
         makeFrustumMatrix(*this, left, right, bottom, top, near, far);
     }
     
     
+    ///
+    /// フラスタム行列生成
     static void makeFrustumMatrix(
         Mtx44Template<T>& mtx,
         T left,
@@ -490,6 +576,8 @@ public:
         mtx.w_.x_ = 0; mtx.w_.y_ = 0; mtx.w_.z_ = f; mtx.w_.w_ = T(1);
     }
     
+    ///
+    /// フラスタム行列生成
     static Mtx44Template<T> getFrustumMatrix(
         T left,
         T right,
@@ -504,6 +592,8 @@ public:
     }
 
 
+    ///
+    /// 視線行列生成
     void lookat(
         const Vec3Template<T>& eye,
         const Vec3Template<T>& target,
@@ -512,6 +602,8 @@ public:
         makeLookAtMatrix(*this, eye, target, up);
     }
     
+    ///
+    /// 視線行列生成
     void lookat(
         const Vec3Template<T>& eye,
         const Vec3Template<T>& normalized_front,
@@ -522,6 +614,8 @@ public:
     }
     
     
+    ///
+    /// 視線行列生成
     static void makeLookAtMatrix(
         Mtx44Template<T>& mtx,
         const Vec3Template<T>& eye,
@@ -554,6 +648,8 @@ public:
  
     }
 
+    ///
+    /// 視線行列生成
     static void makeLookAtMatrix(
         Mtx44Template<T>& mtx,
         const Vec3Template<T>& eye,
@@ -583,7 +679,9 @@ public:
     }
 
     
-    static Mtx44Template<T> getLookAtMatrix( 
+    ///
+    /// 視線行列生成
+    static Mtx44Template<T> getLookAtMatrix(
         const Vec3Template<T>& eye,
         const Vec3Template<T>& target,
         const Vec3Template<T>& up
@@ -595,6 +693,8 @@ public:
     
     
 
+    ///
+    /// 逆行列生成
     static bool makeInverseMatrix(
         Mtx44Template<T>& dest,
         const Mtx44Template<T> src
@@ -680,10 +780,10 @@ public:
     
 public:
     
-    Vec4Template<T> x_;
-    Vec4Template<T> y_;
-    Vec4Template<T> z_;
-    Vec4Template<T> w_;
+    Vec4Template<T> x_; ///< 1要素
+    Vec4Template<T> y_; ///< 2要素
+    Vec4Template<T> z_; ///< 3要素
+    Vec4Template<T> w_; ///< 4要素
 };
 
 

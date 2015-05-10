@@ -10,22 +10,22 @@
 namespace t3 {
 
 ///
-/// ƒfƒoƒbƒO•¶Žš•\Ž¦ƒŒƒCƒ„
+/// ãƒ‡ãƒãƒƒã‚°æ–‡å­—è¡¨ç¤ºãƒ¬ã‚¤ãƒ¤
 class DebugStringLayer
     : public RenderLayer
 {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     DebugStringLayer(const char* const name = "DEBUG SCREEN");
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     virtual ~DebugStringLayer();
 
 public:
     ///
-    /// •¶Žš’Ç‰Á
+    /// æ–‡å­—è¿½åŠ 
     void writeString(
         const float x,
         const float y,
@@ -36,16 +36,16 @@ public:
 
 protected:
     ///
-    /// XVŠÖ”
+    /// æ›´æ–°é–¢æ•°
     void updateLayer(tick_t delta_time) override;
 
     ///
-    /// •`‰æŠÖ”
+    /// æç”»é–¢æ•°
     void drawLayer() override;
 
 
 protected:
-    DebugStringBuffer debug_string_buffer_; ///<  •¶Žš—ñ•Û‘¶—pƒoƒbƒtƒ@
+    DebugStringBuffer debug_string_buffer_; ///<  æ–‡å­—åˆ—ä¿å­˜ç”¨ãƒãƒƒãƒ•ã‚¡
 
 };
 

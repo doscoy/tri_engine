@@ -15,25 +15,35 @@ namespace t3 {
 
     
 ///
-/// 
+/// æ•°å€¤ã‚’æ–‡å­—åˆ—åŒ–.
+/// intå€¤
 void makeTargetValueString(
     const int target,
     char* buf,
     size_t buf_size
 );
 
+///
+/// æ•°å€¤ã‚’æ–‡å­—åˆ—åŒ–.
+/// doubleå€¤
 void makeTargetValueString(
     const double target,
     char* buf,
     size_t buf_size
 );
 
+///
+/// æ•°å€¤ã‚’æ–‡å­—åˆ—åŒ–.
+/// floatå€¤
 void makeTargetValueString(
     const float target,
     char* buf,
     size_t buf_size
 );
 
+///
+/// æ•°å€¤ã‚’æ–‡å­—åˆ—åŒ–.
+/// boolå€¤
 void makeTargetValueString(
     const bool target,
     char* buf,
@@ -42,14 +52,14 @@ void makeTargetValueString(
 
 
 ///
-/// ƒ‰ƒxƒ‹
+/// ãƒ©ãƒ™ãƒ«
 template <class T>
 class DebugMenuItem
     : public DebugMenuLabel
 {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     DebugMenuItem(
         DebugMenuFrame* const parent,
         const char* const label,
@@ -69,7 +79,7 @@ public:
         
 public:
     ///
-    /// XV
+    /// æ›´æ–°
     void update() override
     {
         const Pad& pad = debugPad();
@@ -89,7 +99,7 @@ public:
     
     
     ///
-    /// •`‰æ
+    /// æç”»
     void draw(
         const float x,
         const float y,
@@ -120,22 +130,22 @@ public:
     
     
 private:
-    T& target_; ///< ‘€ì‘ÎÛ
-    T step_;    ///< •Ï‰»—Ê
-    T l_limit_; ///< ‰ºŒÀ’l
-    T h_limit_; ///< ãŒÀ’l
+    T& target_; ///< æ“ä½œå¯¾è±¡
+    T step_;    ///< å¤‰åŒ–é‡
+    T l_limit_; ///< ä¸‹é™å€¤
+    T h_limit_; ///< ä¸Šé™å€¤
 };
 
 
 ///
-/// bool’l—p‚Ì’l•ÒWƒƒjƒ…[
+/// boolå€¤ç”¨ã®å€¤ç·¨é›†ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 template <>
 class DebugMenuItem<bool>
     : public DebugMenuLabel
 {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     DebugMenuItem(
         DebugMenuFrame* const parent,
         const char* const label,
@@ -149,7 +159,7 @@ public:
 
 public:
     ///
-    /// XV
+    /// æ›´æ–°
     void update() override
     {
         const Pad& pad = debugPad();
@@ -168,7 +178,7 @@ public:
 
 
     ///
-    /// •`‰æ
+    /// æç”»
     void draw(
         const float x,
         const float y,
@@ -199,12 +209,12 @@ public:
 
 
 private:
-    bool& target_;  ///< ‘€ì‘ÎÛ
+    bool& target_;  ///< æ“ä½œå¯¾è±¡
 };
 
 
 ///
-/// Vec2—p‚Ì’l•ÒWƒƒjƒ…[
+/// Vec2ç”¨ã®å€¤ç·¨é›†ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 template<>
 class DebugMenuItem<Vec2>
 {
@@ -212,12 +222,12 @@ class DebugMenuItem<Vec2>
     typedef float  step_type_t;
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     DebugMenuItem(
-        DebugMenuFrame* const parent,   ///< eƒƒjƒ…[
-        const char* const label,        ///< ƒ‰ƒxƒ‹
-        item_t& target,                 ///< ‘€ì‘ÎÛ‚Ì•Ï”
-        const step_type_t step          ///< •Ï‰»—Ê
+        DebugMenuFrame* const parent,   ///< è¦ªãƒ¡ãƒ‹ãƒ¥ãƒ¼
+        const char* const label,        ///< ãƒ©ãƒ™ãƒ«
+        item_t& target,                 ///< æ“ä½œå¯¾è±¡ã®å¤‰æ•°
+        const step_type_t step          ///< å¤‰åŒ–é‡
     )   : dmf_( parent, label )
         , x_( &dmf_, "x", target.x_, step )
         , y_( &dmf_, "y", target.y_, step )
@@ -225,13 +235,13 @@ public:
     }
     
 private:
-    DebugMenuFrame dmf_;                ///< ƒtƒŒ[ƒ€
-    DebugMenuItem<step_type_t> x_;      ///< x’l
-    DebugMenuItem<step_type_t> y_;      ///< y’l
+    DebugMenuFrame dmf_;                ///< ãƒ•ãƒ¬ãƒ¼ãƒ 
+    DebugMenuItem<step_type_t> x_;      ///< xå€¤
+    DebugMenuItem<step_type_t> y_;      ///< yå€¤
 };
 
 ///
-/// Vec3—p‚Ì’l•ÒWƒƒjƒ…[
+/// Vec3ç”¨ã®å€¤ç·¨é›†ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 template<>
 class DebugMenuItem<Vec3>
 {
@@ -239,12 +249,12 @@ class DebugMenuItem<Vec3>
     typedef float  step_type_t;
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     DebugMenuItem(
-        DebugMenuFrame* const parent,   ///< eƒƒjƒ…[
-        const char* const label,        ///< ƒ‰ƒxƒ‹
-        item_t& target,                 ///< ‘€ì‘ÎÛ‚Ì•Ï”
-        const step_type_t step          ///< ƒXƒeƒbƒv—Ê
+        DebugMenuFrame* const parent,   ///< è¦ªãƒ¡ãƒ‹ãƒ¥ãƒ¼
+        const char* const label,        ///< ãƒ©ãƒ™ãƒ«
+        item_t& target,                 ///< æ“ä½œå¯¾è±¡ã®å¤‰æ•°
+        const step_type_t step          ///< ã‚¹ãƒ†ãƒƒãƒ—é‡
     )   : dmf_( parent, label )
         , x_( &dmf_, "x", target.x_, step )
         , y_( &dmf_, "y", target.y_, step )
@@ -253,10 +263,10 @@ public:
     }
     
 private:
-    DebugMenuFrame dmf_;                ///< ƒtƒŒ[ƒ€
-    DebugMenuItem<step_type_t> x_;      ///< x’l
-    DebugMenuItem<step_type_t> y_;      ///< y’l
-    DebugMenuItem<step_type_t> z_;      ///< z’l
+    DebugMenuFrame dmf_;                ///< ãƒ•ãƒ¬ãƒ¼ãƒ 
+    DebugMenuItem<step_type_t> x_;      ///< xå€¤
+    DebugMenuItem<step_type_t> y_;      ///< yå€¤
+    DebugMenuItem<step_type_t> z_;      ///< zå€¤
 };
 
 

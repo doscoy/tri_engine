@@ -2,12 +2,14 @@
 #ifndef TRI_STRING_UTIL_HPP_INCLUDED
 #define TRI_STRING_UTIL_HPP_INCLUDED
 
+//  include
 #include "dbg/tri_trace.hpp"
 #include <cctype>
 
 namespace t3 {
 
-
+///
+/// 小文字化
 inline void strToLower(
     char* str,
     int strlen
@@ -20,7 +22,8 @@ inline void strToLower(
     }
 }
 
-
+///
+/// 文字列を比較
 inline int stringCompare(
     const char* const str1,
     const char* const str2,

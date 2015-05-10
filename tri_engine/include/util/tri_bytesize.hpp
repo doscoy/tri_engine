@@ -8,72 +8,72 @@
 
 
 ///
-/// �o�C�g�T�C�Y
+/// バイトサイズ
 class ByteSize {
 
 public:
     ///
-    /// �R���X�g���N�^
+    /// コンストラクタ
     ByteSize()
         : size_(0)
     {
     }
     
     ///
-    /// �f�X�g���N�^
+    /// デストラクタ
     ~ByteSize() = default;
 
 public:
     ///
-    /// byte�Ƃ��ăT�C�Y��ݒ�
+    /// byteとしてサイズを設定
     void byte(size_t size) {
         size_ = size;
     }
     
-    /// byte�Ƃ��ăT�C�Y���擾
+    /// byteとしてサイズを取得
     size_t byte() const {
         return size_;
     }
 
     ///
-    /// �L���o�C�g�Ƃ��ăT�C�Y��ݒ�
+    /// キロバイトとしてサイズを設定
     void kbyte(size_t size) {
         size_ = size * 1024;
     }
     
     ///
-    /// �L���o�C�g�Ƃ��ăT�C�Y���擾
+    /// キロバイトとしてサイズを取得
     size_t kbyte() const {
         return size_ / 1024;
     }
 
     ///
-    /// ���K�o�C�g�Ƃ��ăT�C�Y��ݒ�
+    /// メガバイトとしてサイズを設定
     void mbyte(size_t size) {
         size_ = size * 1024 * 1024;
     }
     
     ///
-    /// ���K�o�C�g�Ƃ��ăT�C�Y���擾
+    /// メガバイトとしてサイズを取得
     size_t mbyte() const {
         return size_ / 1024 / 1024;
     }
 
     ///
-    /// �T�C�Y�����Z
+    /// サイズを加算
     void add(size_t size) {
         size_ += size;
     }
     
     ///
-    /// �T�C�Y�����Z
+    /// サイズを減算
     void sub(size_t size) {
         size_ -= size;
     }
 
 
 private:
-    size_t size_;   ///< �T�C�Y
+    size_t size_;   ///< サイズ
 };
 
 

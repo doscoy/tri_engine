@@ -7,14 +7,14 @@ namespace t3 {
 
 
 ///
-/// ƒfƒoƒbƒOƒpƒbƒhæ“¾
+/// ãƒ‡ãƒãƒƒã‚°ãƒ‘ãƒƒãƒ‰å–å¾—
 const Pad& debugPad();
 
 ///
-/// ƒfƒoƒbƒOƒpƒbƒh‚ÌXV
+/// ãƒ‡ãƒãƒƒã‚°ãƒ‘ãƒƒãƒ‰ã®æ›´æ–°
 void updateDebugPad( 
-    const uint32_t pad_data,    ///< ƒpƒbƒh‚Ì“ü—Íî•ñ
-    tick_t delta_time           ///< ƒ`ƒbƒN
+    const uint32_t pad_data,    ///< ãƒ‘ãƒƒãƒ‰ã®å…¥åŠ›æƒ…å ±
+    tick_t delta_time           ///< ãƒãƒƒã‚¯
 );
 
 }   // namespace t3

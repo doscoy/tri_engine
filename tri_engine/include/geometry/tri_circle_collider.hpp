@@ -10,34 +10,34 @@ namespace t3 {
 
 
 ///
-/// “–‚½‚è”»’èƒIƒuƒWƒFƒNƒg.
-/// ‰~
+/// å½“ãŸã‚Šåˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ.
+/// å††
 class CircleCollider
     : public Collider {
 
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     CircleCollider(
         const HashString& name
     );
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~CircleCollider() = default;
     
 public:
     ///
-    /// “–‚½‚è”»’è.
-    /// ‘Î‰~
+    /// å½“ãŸã‚Šåˆ¤å®š.
+    /// å¯¾å††
     bool isHit(const CircleCollider& col) const override;
 
     ///
-    /// “–‚½‚è”»’è.
-    /// ‘Î“_
+    /// å½“ãŸã‚Šåˆ¤å®š.
+    /// å¯¾ç‚¹
     bool isHit(const PointCollider& col) const override;
 
     ///
-    /// “–‚½‚è”»’èí•Êæ“¾
+    /// å½“ãŸã‚Šåˆ¤å®šç¨®åˆ¥å–å¾—
     const HashString& getCollisionType() const override;
     
 public:
@@ -45,23 +45,23 @@ public:
 
 public:
     ///
-    /// ˆÊ’uİ’è
+    /// ä½ç½®è¨­å®š
     void position(
-        const Vec2& pos ///< ˆÊ’u
+        const Vec2& pos ///< ä½ç½®
     ) {
         circle_.position(pos);
     }
 
     ///
-    /// ”¼Œaİ’è    
+    /// åŠå¾„è¨­å®š    
     void radius(
-        const float radius  ///< ”¼Œa
+        const float radius  ///< åŠå¾„
     ) {
         circle_.radius(radius);
     }
 
     ///
-    /// ‰~æ“¾
+    /// å††å–å¾—
     const Circle& circle() const {
         return circle_;
     }
@@ -71,7 +71,7 @@ public:
     }
 
 private:
-    Circle circle_; ///< ”»’è—p‰~
+    Circle circle_; ///< åˆ¤å®šç”¨å††
 
 };
 

@@ -12,27 +12,27 @@
 namespace t3 {
 
 ///
-/// pngƒCƒ[ƒW
+/// pngã‚¤ãƒ¡ãƒ¼ã‚¸
 struct PngImage {
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     explicit PngImage(String path);
 
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     explicit PngImage(const File& file);
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~PngImage();
 
-    uint32_t width_;        ///< •
-    uint32_t height_;       ///< ‚‚³
-    uint8_t* data_;         ///< ƒf[ƒ^
-    int bit_depth_;         ///< ƒrƒbƒg[“x
-    int color_type_;        ///< ƒJƒ‰[ƒ^ƒCƒv
-    int interlace_type_;    ///< ƒCƒ“ƒ^[ƒŒ[ƒX•û®
-    int size_;              ///< ƒTƒCƒY
+    uint32_t width_;        ///< å¹…
+    uint32_t height_;       ///< é«˜ã•
+    uint8_t* data_;         ///< ãƒ‡ãƒ¼ã‚¿
+    int bit_depth_;         ///< ãƒ“ãƒƒãƒˆæ·±åº¦
+    int color_type_;        ///< ã‚«ãƒ©ãƒ¼ã‚¿ã‚¤ãƒ—
+    int interlace_type_;    ///< ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ¬ãƒ¼ã‚¹æ–¹å¼
+    int size_;              ///< ã‚µã‚¤ã‚º
 };
 
 

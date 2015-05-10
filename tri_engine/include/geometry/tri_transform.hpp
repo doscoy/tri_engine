@@ -4,6 +4,7 @@
 #ifndef TRI_TRANSFORM_HPP_INCLUDED
 #define TRI_TRANSFORM_HPP_INCLUDED
 
+//  include
 #include "util/tri_uncopyable.hpp"
 #include "math/tri_vec3.hpp"
 #include "base/tri_types.hpp"
@@ -11,37 +12,48 @@
 
 namespace t3 {
 
-
+///
+/// 2次元姿勢制御クラス
 class Transform2D
     :  Uncopyable
 {
 public:
+    ///
+    /// コンストラクタ
     Transform2D()
         : position_(0, 0)
         , rotation_(0, 0, 0)
         , scale_(1.0f, 1.0f)
         , parent_(nullptr)
-    {
-    }
+    {}
     
+    ///
+    /// デストラクタ
     ~Transform2D() = default;
 
 public:
-    //  位置
+    ///
+    /// 座標を取得
     Vec2& position() {
         return position_;
     }
     
+    ///
+    /// 座標を取得
     const Vec2& position() const {
         return position_;
     }
     
+    ///
+    /// 座標を設定
     void position(
         const Vec2& pos
     ) {
         position_ = pos;
     }
     
+    ///
+    /// 座標を設定
     void position(
         const float x,
         const float y
@@ -50,36 +62,48 @@ public:
         position_.y_ = y;
     }
     
-    //  回転角
+    ///
+    ///  回転情報を取得
     Vec3& rotation() {
         return rotation_;
     }
     
+    ///
+    /// 回転情報を取得
     const Vec3& rotation() const {
         return rotation_;
     }
     
+    ///
+    /// 回転情報を設定
     void rotation(
         const Vec3& rot
     ) {
         rotation_ = rot;
     }
     
-    //  スケール
+    ///
+    ///  スケールを取得
     Vec2& scale() {
         return scale_;
     }
     
+    ///
+    /// スケールを取得
     const Vec2& scale() const {
         return scale_;
     }
     
+    ///
+    /// スケールを設定
     void scale(
         const Vec2& scale
     ) {
         scale_ = scale;
     }
     
+    ///
+    /// スケールを設定
     void scale(
        const float x,
        const float y
@@ -88,6 +112,8 @@ public:
         scale_.y_ = y;
     }
 
+    ///
+    /// スケールを設定
     void scale(
         const float s
     ) {
@@ -95,24 +121,34 @@ public:
         scale_.y_ = s;
     }
 
+    ///
+    /// 親の姿勢を設定
     void parent(
         SharedPtr<Transform2D> p
     ) {
         parent_ = p;
     }
     
+    ///
+    /// 親の姿勢があるか取得
     bool hasParent() const {
         return parent_ != nullptr;
     }
     
+    ///
+    /// 親情報を取得
     SharedPtr<Transform2D> parent() {
         return parent_;
     }
     
+    ///
+    /// 親情報を取得
     const SharedPtr<Transform2D> parent() const {
         return parent_;
     }
 
+    ///
+    /// 階層構造を加味した座標を取得
     t3::Vec2 globalPosition() const {
         if (!hasParent()) {
             //  親が居ないのでただ座標を返す
@@ -138,6 +174,8 @@ public:
     }
     
     
+    ///
+    /// 階層構造を加味した回転情報を取得
     Vec3 globalRotation() const {
         if (!hasParent()) {
             //  親が居ないのでただ回転情報を返す
@@ -148,6 +186,8 @@ public:
         return rotation_ + parent_->globalRotation();
     }
 
+    ///
+    /// 階層構造を加味したスケールを取得
     t3::Vec2 globalScale() const {
         if (!hasParent()) {
             //  親が居ないのでただ回転情報を返す
@@ -160,9 +200,20 @@ public:
 
 
 private:
+    ///
+    /// 座標
     Vec2 position_;
+    
+    ///
+    /// 回転
     Vec3 rotation_;
+    
+    ///
+    /// スケール
     Vec2 scale_;
+    
+    ///
+    /// 親の姿勢
     SharedPtr<Transform2D> parent_;
 };
 

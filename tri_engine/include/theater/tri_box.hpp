@@ -10,25 +10,25 @@
 namespace t3 {
 
 ///
-/// ƒ{ƒbƒNƒXƒIƒuƒWƒFƒNƒg.
+/// ãƒœãƒƒã‚¯ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ.
 class Box
     : public Object
 {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^.
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿.
     Box()
         : size_(1,1,1)
     {}
     
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^.
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿.
     virtual ~Box()
     {}
 
 public:
     ///
-    /// ƒTƒCƒYİ’è
+    /// ã‚µã‚¤ã‚ºè¨­å®š
     void size(
         const Vec3& v
     ) {
@@ -36,7 +36,7 @@ public:
     }
 
     ///
-    /// ƒTƒCƒYİ’è
+    /// ã‚µã‚¤ã‚ºè¨­å®š
     void size(
         const float x,
         const float y,
@@ -48,17 +48,17 @@ public:
     }
 
     ///
-    /// ƒTƒCƒYæ“¾
+    /// ã‚µã‚¤ã‚ºå–å¾—
     const Vec3& size() const {
         return size_;
     }
 
     ///
-    /// •`‰æ
+    /// æç”»
     void render();
 
 private:
-    Vec3 size_;     ///< ƒTƒCƒY
+    Vec3 size_;     ///< ã‚µã‚¤ã‚º
 };
 
 

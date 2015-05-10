@@ -8,11 +8,11 @@
 namespace t3 {
 
 ///
-/// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+/// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
 class IndexBuffer {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     IndexBuffer()
         : buffer_id_()
     {
@@ -20,20 +20,20 @@ public:
     }
     
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~IndexBuffer() {
         cross::RenderSystem::deleteBuffer(&buffer_id_);
     }
     
 public:
     ///
-    /// ‚±‚ÌƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ðƒŒƒ“ƒ_ƒŠƒ“ƒOƒVƒXƒeƒ€‚É•R•t‚¯
+    /// ã“ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚·ã‚¹ãƒ†ãƒ ã«ç´ä»˜ã‘
     void bind() const {
         cross::RenderSystem::bindBuffer(cross::RenderSystem::BufferType::TYPE_INDEX, buffer_id_);
     }
 
 private:
-    cross::RenderSystem::BufferID buffer_id_;   ///< ƒoƒbƒtƒ@ID
+    cross::RenderSystem::BufferID buffer_id_;   ///< ãƒãƒƒãƒ•ã‚¡ID
 };
 
 

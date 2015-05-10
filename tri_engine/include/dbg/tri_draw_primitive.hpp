@@ -9,73 +9,73 @@
 namespace t3 {
 
 
-//  ‘O•ûéŒ¾
+//  å‰æ–¹å®£è¨€
 class Plane;
 class Segment;
 
 
 
 ///
-/// ƒvƒŠƒ~ƒeƒBƒu•`‰æ‚Ì‰Šú‰»
+/// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–æç”»ã®åˆæœŸåŒ–
 void initializeDrawPrimitive();
 
 ///
-/// “_‚ğ•`‰æ
+/// ç‚¹ã‚’æç”»
 void drawPoint(
-    const Vec3& pos,    ///< À•W
-    const Color& color  ///< F
+    const Vec3& pos,    ///< åº§æ¨™
+    const Color& color  ///< è‰²
 );
 
 
 ///
-/// ü•ª‚ğ•`‰æ
+/// ç·šåˆ†ã‚’æç”»
 void drawSegment(
-    const Segment& segment, ///< ü•ª
-    const Color& color,     ///< F
-    const float width       ///< •
+    const Segment& segment, ///< ç·šåˆ†
+    const Color& color,     ///< è‰²
+    const float width       ///< å¹…
 );
 
 ///
-/// 3²‚ğ•`‰æ
+/// 3è»¸ã‚’æç”»
 void drawAxis(
-    const Vec3& pos     ///< À•W
+    const Vec3& pos     ///< åº§æ¨™
 );
 
 ///
-/// 2D‹éŒ`‚ğ•`‰æ.
-/// Å¬’l‚Æ•‚ğw’è
+/// 2DçŸ©å½¢ã‚’æç”».
+/// æœ€å°å€¤ã¨å¹…ã‚’æŒ‡å®š
 void drawRectangleMinSize(
-     const Vec2& min,   ///< Å¬’l
-     const Vec2& size,  ///< •
-     const Color& color ///< F
+     const Vec2& min,   ///< æœ€å°å€¤
+     const Vec2& size,  ///< å¹…
+     const Color& color ///< è‰²
 );
 
 ///
-/// 2D‹éŒ`‚ğ•`‰æ.
-/// ’†S“_‚Æ•‚ğw’è
+/// 2DçŸ©å½¢ã‚’æç”».
+/// ä¸­å¿ƒç‚¹ã¨å¹…ã‚’æŒ‡å®š
 void drawRectangleCenterSize(
-     const Vec2& center,    ///< ’†S“_
-     const Vec2& size,      ///< ƒTƒCƒY
-     const Color& color     ///< F
+     const Vec2& center,    ///< ä¸­å¿ƒç‚¹
+     const Vec2& size,      ///< ã‚µã‚¤ã‚º
+     const Color& color     ///< è‰²
 );
 
 ///
-/// 2D‹éŒ`‚ğ•`‰æ.
-/// ¶ã‚Æ‰E‰º‚ğw’è
+/// 2DçŸ©å½¢ã‚’æç”».
+/// å·¦ä¸Šã¨å³ä¸‹ã‚’æŒ‡å®š
 void drawRectangleViewport(
-    const Vec2& left_top,       ///< ¶ã
-    const Vec2& right_bottom,   ///< ‰E‰º
-    const Color& color          ///< F
+    const Vec2& left_top,       ///< å·¦ä¸Š
+    const Vec2& right_bottom,   ///< å³ä¸‹
+    const Color& color          ///< è‰²
 );
 
 
 ///
-/// •½–Ê‚ğ•`‰æ
+/// å¹³é¢ã‚’æç”»
 void drawPlane(
-    const Vec3& center, ///< •½–Ê‚Ì’†S
-    const Vec3& normal, ///< •½–Ê‚Ì–@ü
-    const Vec3& size,   ///< •½–Ê‚ÌƒTƒCƒY
-    const Color& color  ///< F
+    const Vec3& center, ///< å¹³é¢ã®ä¸­å¿ƒ
+    const Vec3& normal, ///< å¹³é¢ã®æ³•ç·š
+    const Vec3& size,   ///< å¹³é¢ã®ã‚µã‚¤ã‚º
+    const Color& color  ///< è‰²
 );
 
 

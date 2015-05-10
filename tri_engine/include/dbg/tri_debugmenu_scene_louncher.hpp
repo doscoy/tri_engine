@@ -8,28 +8,28 @@
 namespace t3 {
 
 ///
-/// ƒfƒoƒbƒOƒƒjƒ…[.
-/// ƒV[ƒ“ƒ‰ƒ“ƒ`ƒƒ
+/// ãƒ‡ãƒãƒƒã‚°ãƒ¡ãƒ‹ãƒ¥ãƒ¼.
+/// ã‚·ãƒ¼ãƒ³ãƒ©ãƒ³ãƒãƒ£
 template <class T>
 class DebugMenuSceneLouncher
     : public DebugMenuLabel
 {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     DebugMenuSceneLouncher(
-        DebugMenuFrame* parent, ///< eƒtƒŒ[ƒ€
-        const char* const label ///< ƒ‰ƒxƒ‹
+        DebugMenuFrame* parent, ///< è¦ªãƒ•ãƒ¬ãƒ¼ãƒ 
+        const char* const label ///< ãƒ©ãƒ™ãƒ«
     )   : DebugMenuLabel(parent, label)
     {}
 
 public:
     ///
-    /// XVˆ—
+    /// æ›´æ–°å‡¦ç†
     void update() override {
 
         const auto& pad = debugPad();
-        //  ƒtƒH[ƒJƒX‚³‚ê‚ÄŒˆ’è‚µ‚½‚ç“o˜^‚µ‚Ä‚ ‚éƒV[ƒ“‚É‹­§“I‚É”ò‚Î‚·
+        //  ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã•ã‚Œã¦æ±ºå®šã—ãŸã‚‰ç™»éŒ²ã—ã¦ã‚ã‚‹ã‚·ãƒ¼ãƒ³ã«å¼·åˆ¶çš„ã«é£›ã°ã™
         if (pad.isTrigger(Pad::BUTTON_A)) {
             auto& sm = SceneManager::instance();
             sm.forceChangeScene(gen_.instancePtr());
@@ -39,7 +39,7 @@ public:
         }
 
     }
-    TypedSceneGenerator<T> gen_;    ///< Ø‚è‘Ö‚¦‚éƒV[ƒ“
+    TypedSceneGenerator<T> gen_;    ///< åˆ‡ã‚Šæ›¿ãˆã‚‹ã‚·ãƒ¼ãƒ³
 };
 
 }   //  namespace t3

@@ -10,27 +10,27 @@
 namespace t3 {
 
 ///
-/// ƒtƒF[ƒhƒŒƒCƒ„[
+/// ãƒ•ã‚§ãƒ¼ãƒ‰ãƒ¬ã‚¤ãƒ¤ãƒ¼
 class FadeLayer
     : public DrawLayer
 {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     FadeLayer();
 
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     FadeLayer(const String& name, const int priority);
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~FadeLayer();
 
 
 public:
     ///
-    /// ƒtƒF[ƒhƒXƒs[ƒhİ’è
+    /// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¹ãƒ”ãƒ¼ãƒ‰è¨­å®š
     void setFadeSpeed(
         const float speed
     ) {
@@ -38,7 +38,7 @@ public:
     }
     
     ///
-    /// ƒtƒF[ƒhƒCƒ“
+    /// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³
     void fadeIn(
         const t3::tick_t sec
     ) {
@@ -49,7 +49,7 @@ public:
     }
     
     ///
-    /// ƒtƒF[ƒhƒAƒEƒg
+    /// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆ
     void fadeOut(
         const tick_t sec
     ) {
@@ -61,13 +61,13 @@ public:
     
     
     ///
-    /// ƒtƒF[ƒh”»’è
+    /// ãƒ•ã‚§ãƒ¼ãƒ‰åˆ¤å®š
     bool isFadeEnd() const {
         return fading_ == false;
     }
     
     ///
-    /// ƒtƒF[ƒhƒCƒ“I—¹”»’è
+    /// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³çµ‚äº†åˆ¤å®š
     bool isFadeInEnd() const {
         if (fade_in_) {
             if (fading_ == false) {
@@ -79,7 +79,7 @@ public:
     }
     
     ///
-    /// ƒtƒF[ƒhƒAƒEƒgI—¹”»’è
+    /// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆçµ‚äº†åˆ¤å®š
     bool isFadeOutEnd() const {
         if (!fade_in_) {
             if (fading_ == false) {
@@ -91,7 +91,7 @@ public:
     
 
     ///
-    /// ƒtƒF[ƒhƒJƒ‰[‚Ìİ’è
+    /// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚«ãƒ©ãƒ¼ã®è¨­å®š
     void setFadeColor(
         int r,
         int g,
@@ -103,7 +103,7 @@ public:
     }
     
     ///
-    /// ƒtƒF[ƒhƒJƒ‰[‚Ìİ’è
+    /// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚«ãƒ©ãƒ¼ã®è¨­å®š
     void setFadeColor(
         const Color& c
     ) {
@@ -111,7 +111,7 @@ public:
     }
     
     ///
-    /// ƒtƒF[ƒhƒpƒ‰ƒ[ƒ^‚Ìİ’è
+    /// ãƒ•ã‚§ãƒ¼ãƒ‰ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®š
     void setupFadeParam(
         float fade_alpha,
         const Color& c
@@ -124,21 +124,21 @@ public:
 
 private:
     ///
-    /// ƒtƒF[ƒh‚ÌXVƒR[ƒ‹ƒoƒbƒN
+    /// ãƒ•ã‚§ãƒ¼ãƒ‰ã®æ›´æ–°ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
     void fadeUpdate(DrawLayer* const, tick_t);
 
     ///
-    /// ƒtƒF[ƒh‚Ì•`‰æƒR[ƒ‹ƒoƒbƒN
+    /// ãƒ•ã‚§ãƒ¼ãƒ‰ã®æç”»ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
     void fadeRender(DrawLayer* const);
 
 
 
 private:
-    bool fading_;           ///< ƒtƒF[ƒh’†‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
-    bool fade_in_;          ///< ƒtƒF[ƒhƒCƒ“‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
-    float fade_speed_;      ///< ƒtƒF[ƒh‘¬“x
-    Color fade_color_;      ///< ƒtƒF[ƒhƒJƒ‰[
-    float alpha_;           ///< “§–¾“x
+    bool fading_;           ///< ãƒ•ã‚§ãƒ¼ãƒ‰ä¸­ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
+    bool fade_in_;          ///< ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
+    float fade_speed_;      ///< ãƒ•ã‚§ãƒ¼ãƒ‰é€Ÿåº¦
+    Color fade_color_;      ///< ãƒ•ã‚§ãƒ¼ãƒ‰ã‚«ãƒ©ãƒ¼
+    float alpha_;           ///< é€æ˜åº¦
 };
 
 

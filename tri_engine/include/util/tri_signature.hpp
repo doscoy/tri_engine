@@ -5,7 +5,8 @@
 
 namespace t3 {
 
-
+///
+/// シグネチャ生成
 inline constexpr uint32_t makeSignature(
     char a,
     char b,

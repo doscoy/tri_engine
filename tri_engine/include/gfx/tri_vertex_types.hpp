@@ -1,13 +1,15 @@
 #ifndef TRI_VERTEX_TYPES_HPP_INCLUDED
 #define TRI_VERTEX_TYPES_HPP_INCLUDED
 
+//  include
 #include "math/tri_vec3.hpp"
 
 namespace t3 {
 
-
-struct VertexP2CT
-{
+///
+/// 頂点定義.
+/// 座標とカラー、UV値を持つ
+struct VertexP2CT {
     float x_;
     float y_;
     uint8_t r_;
@@ -18,6 +20,9 @@ struct VertexP2CT
     float tv_;
 };
 
+///
+/// 頂点定義.
+/// 座標とUV値を持つ
 struct VertexP2T
 {
     float x_;
@@ -26,6 +31,9 @@ struct VertexP2T
     float v_;
 };
 
+///
+/// 頂点定義.
+/// 座標と法線を持つ
 struct VertexP3N {
 
     Vec3 position_;

@@ -12,32 +12,32 @@ namespace t3 {
   
 
 ///
-/// ƒVƒlƒ}ƒŒƒCƒ„[.
-/// ƒŒƒ“ƒ_ƒŠƒ“ƒOÏ‚ÝƒeƒNƒXƒ`ƒƒ‚ð“\‚éƒŒƒCƒ„[
+/// ã‚·ãƒãƒžãƒ¬ã‚¤ãƒ¤ãƒ¼.
+/// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°æ¸ˆã¿ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’è²¼ã‚‹ãƒ¬ã‚¤ãƒ¤ãƒ¼
 class CinemaLayer
     : public RenderLayer {
     
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     CinemaLayer();
 
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^.
-    /// ƒŒƒCƒ„–¼‚Æ—Dæ“x‚ðÝ’è
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿.
+    /// ãƒ¬ã‚¤ãƒ¤åã¨å„ªå…ˆåº¦ã‚’è¨­å®š
     CinemaLayer(
-        const String& name, ///< ƒŒƒCƒ„[–¼
-        const int priority  ///< —Dæ“x
+        const String& name, ///< ãƒ¬ã‚¤ãƒ¤ãƒ¼å
+        const int priority  ///< å„ªå…ˆåº¦
     );
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     virtual ~CinemaLayer();
 
 
 public:
     ///
-    /// Žg—p‚·‚éƒeƒNƒXƒ`ƒƒ‚ðÝ’è
+    /// ä½¿ç”¨ã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’è¨­å®š
     void texture(
         TexturePtr tex
     ) {
@@ -45,30 +45,30 @@ public:
     }
     
     ///
-    /// ƒfƒtƒHƒ‹ƒg‚ÌƒVƒF[ƒ_‚ðŽg—p
+    /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚·ã‚§ãƒ¼ãƒ€ã‚’ä½¿ç”¨
     void useDefaultShader() {
         shader_ = default_shader_;
     }
     
     ///
-    /// ƒVƒF[ƒ_‚ðÝ’è
+    /// ã‚·ã‚§ãƒ¼ãƒ€ã‚’è¨­å®š
     void shader(ShaderPtr shader) {
         shader_ = shader;
     }
 private:
     ///
-    /// XVŠÖ”
+    /// æ›´æ–°é–¢æ•°
     void updateLayer(tick_t delta_time) override;
 
     ///
-    /// •`‰æŠÖ”
+    /// æç”»é–¢æ•°
     void drawLayer() override;
     
 
 private:
-    ShaderPtr shader_;          ///< ƒVƒF[ƒ_
-    ShaderPtr default_shader_;  ///< ƒfƒtƒHƒ‹ƒgƒVƒF[ƒ_
-    TexturePtr texture_;        ///< ƒeƒNƒXƒ`ƒƒ
+    ShaderPtr shader_;          ///< ã‚·ã‚§ãƒ¼ãƒ€
+    ShaderPtr default_shader_;  ///< ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚·ã‚§ãƒ¼ãƒ€
+    TexturePtr texture_;        ///< ãƒ†ã‚¯ã‚¹ãƒãƒ£
 };
   
   

@@ -9,67 +9,67 @@
 namespace t3 {
 
 ///
-/// ƒq[ƒv‚Ìí—Ş
+/// ãƒ’ãƒ¼ãƒ—ã®ç¨®é¡
 enum HeapIndex {
-    HEAP_DEFAULT,   ///< ƒfƒtƒHƒ‹ƒgƒq[ƒv
-    HEAP_SYS,       ///< ƒVƒXƒeƒ€ƒq[ƒv
-    HEAP_APP,       ///< ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒq[ƒv
-    HEAP_APP_EX1,   ///< —\”õ
-    HEAP_APP_EX2,   ///< —\”õ
-    HEAP_APP_EX3,   ///< —\”õ
-    HEAP_SIZE       ///< ƒq[ƒv”
+    HEAP_DEFAULT,   ///< ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ’ãƒ¼ãƒ—
+    HEAP_SYS,       ///< ã‚·ã‚¹ãƒ†ãƒ ãƒ’ãƒ¼ãƒ—
+    HEAP_APP,       ///< ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãƒ’ãƒ¼ãƒ—
+    HEAP_APP_EX1,   ///< äºˆå‚™
+    HEAP_APP_EX2,   ///< äºˆå‚™
+    HEAP_APP_EX3,   ///< äºˆå‚™
+    HEAP_SIZE       ///< ãƒ’ãƒ¼ãƒ—æ•°
 };
 
 using HeapContainer = Array<Heap, HEAP_SIZE>;
 
 ///
-/// ƒq[ƒvƒ}ƒl[ƒWƒƒ
+/// ãƒ’ãƒ¼ãƒ—ãƒãƒãƒ¼ã‚¸ãƒ£
 class HeapManager {
 
 public:
     ///
-    /// ƒq[ƒv¶¬
+    /// ãƒ’ãƒ¼ãƒ—ç”Ÿæˆ
     static Heap* createHeap(const char* const name);
 
     ///
-    /// ƒq[ƒv”jŠü
+    /// ãƒ’ãƒ¼ãƒ—ç ´æ£„
     static void destroyHeap(Heap* heap);
 
     ///
-    /// ƒfƒtƒHƒ‹ƒgƒq[ƒv‚ğæ“¾
+    /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ’ãƒ¼ãƒ—ã‚’å–å¾—
     static Heap* getDefaultHeap();
 
     ///
-    /// ƒq[ƒv‚ğæ“¾
+    /// ãƒ’ãƒ¼ãƒ—ã‚’å–å¾—
     static Heap* getHeap(int index);
 
     ///
-    /// ƒAƒƒP[ƒVƒ‡ƒ“î•ñ‚ğƒ_ƒ“ƒv
+    /// ã‚¢ãƒ­ã‚±ãƒ¼ã‚·ãƒ§ãƒ³æƒ…å ±ã‚’ãƒ€ãƒ³ãƒ—
     static void dumpAllocateInfo(
         uint32_t filter_min,
         uint32_t filter_max
     );
 
     ///
-    /// ƒq[ƒvƒRƒ“ƒeƒiæ“¾
+    /// ãƒ’ãƒ¼ãƒ—ã‚³ãƒ³ãƒ†ãƒŠå–å¾—
     static HeapContainer& heaps();
     
 private:
     ///
-    /// ƒq[ƒvƒ}ƒl[ƒWƒƒ‰Šú‰»
+    /// ãƒ’ãƒ¼ãƒ—ãƒãƒãƒ¼ã‚¸ãƒ£åˆæœŸåŒ–
     static void initialize();
 
     ///
-    /// ƒq[ƒv–¼‚Åƒq[ƒvŒŸõ
+    /// ãƒ’ãƒ¼ãƒ—åã§ãƒ’ãƒ¼ãƒ—æ¤œç´¢
     static Heap* findHeap(const char* const name);
 
     ///
-    /// V‚µ‚¢ƒq[ƒv‚ğì¬
+    /// æ–°ã—ã„ãƒ’ãƒ¼ãƒ—ã‚’ä½œæˆ
     static Heap* createNewHeap(const char* const name);
 
 private:
     ///
-    /// ƒfƒtƒHƒ‹ƒgƒq[ƒv
+    /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ’ãƒ¼ãƒ—
     static Heap* default_heap_;
 };
 

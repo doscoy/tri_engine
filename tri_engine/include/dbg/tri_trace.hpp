@@ -23,24 +23,76 @@ class Mtx44Template;
 
 
 
-
+///
+/// ターミナルにログ出力
 void traceTerminal(const char* const format, ...);
+
+///
+/// 画面にログ出力
 void traceDisplay(const char* const format, ...);
+
+///
+/// ログ出力
 void trace(const char* const format, ...);
 
+///
+/// ログ出力
 void traceValue(const char* const name, ::std::size_t value);
-void traceValue(const char* const name, int value);
-void traceValue(const char* const name, uint32_t value);
-void traceValue(const char* const name, long value);
-void traceValue(const char* const name, uint32_t value);
-void traceValue(const char* const name, float value);
-void traceValue(const char* const name, void* value);
-void traceValue(const char* const name, const char* value);
-void traceValue(const char* const name, const Vec2Template<float>& value);
-void traceValue(const char* const name, const Vec3Template<float>& value);
-void traceValue(const char* const name, const Vec4Template<float>& value);
-void traceValue(const char* const name, const Mtx44Template<float>& value);
 
+///
+/// ログ出力.
+/// int値
+void traceValue(const char* const name, int value);
+
+///
+/// ログ出力.
+/// uint32_t版
+void traceValue(const char* const name, uint32_t value);
+
+///
+/// ログ出力.
+/// long版
+void traceValue(const char* const name, long value);
+
+///
+/// ログ出力.
+/// uint32_t版
+void traceValue(const char* const name, uint32_t value);
+
+///
+/// ログ出力.
+/// float版
+void traceValue(const char* const name, float value);
+
+///
+/// ログ出力.
+/// void*版
+void traceValue(const char* const name, void* value);
+
+///
+/// ログ出力.
+/// const char*版
+void traceValue(const char* const name, const char* value);
+
+///
+/// ログ出力.
+/// Vec2版
+void traceValue(const char* const name, const Vec2Template<float>& value);
+
+///
+/// ログ出力.
+/// Vec3版
+void traceValue(const char* const name, const Vec3Template<float>& value);
+
+///
+/// ログ出力.
+/// Vec4版
+void traceValue(const char* const name, const Vec4Template<float>& value);
+
+///
+/// ログ出力.
+/// Mtx44版
+void traceValue(const char* const name, const Mtx44Template<float>& value);
 
 
 

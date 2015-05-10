@@ -13,30 +13,30 @@ namespace t3 {
 
 
 ///
-/// •`‰æƒŒƒCƒ„[
+/// æç”»ãƒ¬ã‚¤ãƒ¤ãƒ¼
 class DrawLayer
     : public RenderLayer
 {
     using self_t = DrawLayer;
 protected:
-    using UpdateCallback = MethodCallback2<self_t, self_t* const, tick_t>;  ///< XVƒR[ƒ‹ƒoƒbƒNŒ^
-    using RenderCallback = MethodCallback1<self_t, self_t* const>;          ///< •`‰æƒR[ƒ‹ƒoƒbƒNŒ^
+    using UpdateCallback = MethodCallback2<self_t, self_t* const, tick_t>;  ///< æ›´æ–°ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯å‹
+    using RenderCallback = MethodCallback1<self_t, self_t* const>;          ///< æç”»ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯å‹
 
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     DrawLayer();
 
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     explicit DrawLayer(const String name, const int priority);
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     virtual ~DrawLayer();
     
     ///
-    /// XVƒR[ƒ‹ƒoƒbƒNİ’è
+    /// æ›´æ–°ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯è¨­å®š
     template <typename T>
     void setUpdateCallback(
         T* instance,
@@ -47,7 +47,7 @@ public:
     }
     
     ///
-    /// •`‰æƒR[ƒ‹ƒoƒbƒNİ’è
+    /// æç”»ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯è¨­å®š
     template <typename T>
     void setRenderCallback(
         T* instance,
@@ -59,24 +59,24 @@ public:
     
 protected:
     ///
-    /// ƒŒƒCƒ„[‚ÌXV
+    /// ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ›´æ–°
     void updateLayer(tick_t delta_time) override;
 
     ///
-    /// ƒŒƒCƒ„[‚Ì•`‰æ
+    /// ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æç”»
     void drawLayer() override;
 
     ///
-    /// ‰½‚à‚µ‚È‚¢XVƒR[ƒ‹ƒoƒbƒN
+    /// ä½•ã‚‚ã—ãªã„æ›´æ–°ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
     void nullUpdate(self_t* const, tick_t) {}
 
     ///
-    /// ‰½‚à‚µ‚È‚¢•`‰æƒR[ƒ‹ƒoƒbƒN
+    /// ä½•ã‚‚ã—ãªã„æç”»ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
     void nullRender(self_t* const) {}
     
 private:
-    UpdateCallback update_func_;    ///< ƒAƒbƒvƒf[ƒgƒR[ƒ‹ƒoƒbƒNŠÖ”
-    RenderCallback render_func_;    ///< •`‰æƒR[ƒ‹ƒoƒbƒNŠÖ”
+    UpdateCallback update_func_;    ///< ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆæ™‚ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°
+    RenderCallback render_func_;    ///< æç”»æ™‚ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°
 };
 
 

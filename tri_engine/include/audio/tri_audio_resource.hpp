@@ -9,50 +9,50 @@
 
 namespace t3 {
 
-//  ‘O•ûéŒ¾
+//  å‰æ–¹å®£è¨€
 class Wav;
 
 ///
-/// ƒI[ƒfƒBƒIƒŠƒ\[ƒX
+/// ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒªã‚½ãƒ¼ã‚¹
 class AudioResource final
     : Resource
 {
 private:
     /// 
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^.
-    /// createŠÖ”Œo—R‚Å‚µ‚©¶¬‚Å‚«‚È‚¢
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿.
+    /// createé–¢æ•°çµŒç”±ã§ã—ã‹ç”Ÿæˆã§ããªã„
     AudioResource();
 
 public:
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~AudioResource();
 
     ///
-    /// ƒTƒEƒ“ƒh¶¬
+    /// ã‚µã‚¦ãƒ³ãƒ‰ç”Ÿæˆ
     SharedPtr<AudioHandle>  createSound();
 
 public:
     ///
-    /// ƒŠƒ\[ƒX‚Ì¶¬ŠÖ”.
+    /// ãƒªã‚½ãƒ¼ã‚¹ã®ç”Ÿæˆé–¢æ•°.
     static SharedPtr<AudioResource> create(FilePath& filepath);
 
 
 
 private:
     ///
-    /// ƒoƒbƒtƒ@\’z
+    /// ãƒãƒƒãƒ•ã‚¡æ§‹ç¯‰
     void setupBuffer(
-        const Wav& wav  ///< wav‚©‚ç\’z
+        const Wav& wav  ///< wavã‹ã‚‰æ§‹ç¯‰
     );
 
 private:
-    cross::AudioSystem::BufferID id_;   ///< ƒoƒbƒtƒ@ID
+    cross::AudioSystem::BufferID id_;   ///< ãƒãƒƒãƒ•ã‚¡ID
 };
 
 
 ///
-/// ƒI[ƒfƒBƒIƒŠƒ\[ƒXƒ}ƒl[ƒWƒƒ
+/// ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒªã‚½ãƒ¼ã‚¹ãƒãƒãƒ¼ã‚¸ãƒ£
 using AudioManager = ResourceManager<AudioResource>;
 
 

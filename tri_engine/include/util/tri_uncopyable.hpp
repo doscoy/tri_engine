@@ -13,11 +13,10 @@
 
 namespace t3 {
 
-
-//  コピー禁止ミックスイン
-class Uncopyable
-{
-public:
+///
+///  コピー禁止ミックスイン
+class Uncopyable {
+protected:
     Uncopyable() = default;
     ~Uncopyable() = default;
     Uncopyable( const Uncopyable& ) = delete;

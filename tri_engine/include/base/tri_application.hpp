@@ -1,14 +1,14 @@
 #ifndef TRI_APPLICATION_HPP_INCLUDED
 #define TRI_APPLICATION_HPP_INCLUDED
 
-//  ƒCƒ“ƒNƒ‹[ƒh
+//  ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 #include "util/tri_uncopyable.hpp"
 #include "base/tri_std.hpp"
 #include "tri_types.hpp"
 #include "util/tri_stopwatch.hpp"
 
 
-//  ‘O•ûéŒ¾
+//  å‰æ–¹å®£è¨€
 class ApplicationDebugMenu;
 
 
@@ -16,58 +16,58 @@ class ApplicationDebugMenu;
 namespace t3 {
 
 
-//  ‘O•ûéŒ¾
+//  å‰æ–¹å®£è¨€
 class SceneGenerator;
 
 ///
-/// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒNƒ‰ƒX.
-/// ‘S‚Ä‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌŠî“_
+/// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒ©ã‚¹.
+/// å…¨ã¦ã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®åŸºç‚¹
 class Application 
     : Uncopyable 
 {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     Application();
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     virtual ~Application();
 
 
 private:
     ///
-    /// ƒQ[ƒ€‘¤‚Ì‰Šú‰»
+    /// ã‚²ãƒ¼ãƒ å´ã®åˆæœŸåŒ–
     virtual void initializeGame() = 0;
 
     ///
-    /// ƒQ[ƒ€‘¤‚ÌŒã•Ğ•t‚¯
+    /// ã‚²ãƒ¼ãƒ å´ã®å¾Œç‰‡ä»˜ã‘
     virtual void terminateGame() = 0;
 
 public:
     ///
-    /// ‰Šú‰»
+    /// åˆæœŸåŒ–
     void initializeApplication();
 
     ///
-    /// XV
+    /// æ›´æ–°
     void updateApplication();
 
     ///
-    /// •`‰æ
+    /// æç”»
     void renderApplication();
 
     ///
-    /// Œã•Ğ•t‚¯
+    /// å¾Œç‰‡ä»˜ã‘
     void terminateApplication();
 
 
     ///
-    /// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ªÀs’†‚©”»’è
+    /// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãŒå®Ÿè¡Œä¸­ã‹åˆ¤å®š
     bool isActive() const;
 
     ///
-    /// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Ìƒ‹[ƒgƒV[ƒ“‚ğİ’è
+    /// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒ«ãƒ¼ãƒˆã‚·ãƒ¼ãƒ³ã‚’è¨­å®š
     void rootScene(
         SceneGenerator* root    ///< root
     ) {
@@ -76,32 +76,32 @@ public:
     
 private:
     ///
-    /// •`‰æ‘Oˆ—
+    /// æç”»å‰å‡¦ç†
     void beginRender();
 
     ///
-    /// •`‰æŒãˆ—
+    /// æç”»å¾Œå‡¦ç†
     void endRender();
 
 
     ///
-    /// ƒfƒoƒbƒOƒƒjƒ…[‚ÌƒI[ƒvƒ“ƒŠƒNƒGƒXƒg‚ª”­¶‚µ‚Ä‚¢‚é‚©”»’è
+    /// ãƒ‡ãƒãƒƒã‚°ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¯ã‚¨ã‚¹ãƒˆãŒç™ºç”Ÿã—ã¦ã„ã‚‹ã‹åˆ¤å®š
     bool isDebugMenuOpenRequest();
 
     ///
-    /// ƒTƒXƒyƒ“ƒh’†‚©”»’è
+    /// ã‚µã‚¹ãƒšãƒ³ãƒ‰ä¸­ã‹åˆ¤å®š
     bool isSuspend() const;
 
     ///
-    /// ƒ[ƒNƒo[‚Ì‰Šú‰»
+    /// ãƒ¯ãƒ¼ã‚¯ãƒãƒ¼ã®åˆæœŸåŒ–
     void initializeWorkBar();
 
     ///
-    /// ƒfƒoƒbƒO—p•`‰æ
+    /// ãƒ‡ãƒãƒƒã‚°ç”¨æç”»
     void debugPrinting();
 public:
     ///
-    /// ƒ‹[ƒgƒV[ƒ“‚Ö‘JˆÚ
+    /// ãƒ«ãƒ¼ãƒˆã‚·ãƒ¼ãƒ³ã¸é·ç§»
     void gotoRootScene();
     
     
@@ -109,11 +109,11 @@ private:
 #if DEBUG
     ScopedPtr<ApplicationDebugMenu> system_menu_;
 #endif
-    SceneGenerator* root_scene_generator_;  ///< ƒ‹[ƒgƒV[ƒ“‚ÌƒWƒFƒlƒŒ[ƒ^
-    uint32_t last_scene_change_frame_;  ///< ÅŒã‚ÉƒV[ƒ“ƒ`ƒFƒ“ƒW‚µ‚½ƒtƒŒ[ƒ€
-    uint32_t memory_leak_check_filter_; ///< ƒƒ‚ƒŠƒŠ[ƒNƒ`ƒFƒbƒNƒtƒBƒ‹ƒ^
-    Stopwatch fps_timer_;   ///< fpsŒv‘ª—pƒ^ƒCƒ}[
-    Array<float, 260> fps_stack_;   ///< fps•Û‘¶—pƒRƒ“ƒeƒi
+    SceneGenerator* root_scene_generator_;  ///< ãƒ«ãƒ¼ãƒˆã‚·ãƒ¼ãƒ³ã®ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚¿
+    uint32_t last_scene_change_frame_;  ///< æœ€å¾Œã«ã‚·ãƒ¼ãƒ³ãƒã‚§ãƒ³ã‚¸ã—ãŸãƒ•ãƒ¬ãƒ¼ãƒ 
+    uint32_t memory_leak_check_filter_; ///< ãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯ãƒã‚§ãƒƒã‚¯ãƒ•ã‚£ãƒ«ã‚¿
+    Stopwatch fps_timer_;   ///< fpsè¨ˆæ¸¬ç”¨ã‚¿ã‚¤ãƒãƒ¼
+    Array<float, 260> fps_stack_;   ///< fpsä¿å­˜ç”¨ã‚³ãƒ³ãƒ†ãƒŠ
     float fps_; ///< fps
 };
 
@@ -121,7 +121,7 @@ private:
 
 
 ///
-/// ƒGƒ“ƒWƒ“‚Ì‰Šú‰»
+/// ã‚¨ãƒ³ã‚¸ãƒ³ã®åˆæœŸåŒ–
 void initializeTriEngine(
     const int width,
     const int height,
@@ -130,30 +130,30 @@ void initializeTriEngine(
 
 
 ///
-/// ƒGƒ“ƒWƒ“‚ÌŒã•Ğ•t‚¯
+/// ã‚¨ãƒ³ã‚¸ãƒ³ã®å¾Œç‰‡ä»˜ã‘
 void terminateTriEngine();
 
 
 ///
-/// ‹N“®‚·‚éƒAƒvƒŠ‚ğİ’è.
+/// èµ·å‹•ã™ã‚‹ã‚¢ãƒ—ãƒªã‚’è¨­å®š.
 void setApplication(Application& app);
 
 
 ///
-/// ‰Šú‰».
+/// åˆæœŸåŒ–.
 void initializeApplication();
 
 
 ///
-/// Œã•Ğ•t‚¯.
+/// å¾Œç‰‡ä»˜ã‘.
 void terminateApplication();
 
 ///
-/// XV.
+/// æ›´æ–°.
 void updateApplication();
 
 ///
-/// •`‰æ.
+/// æç”».
 void renderApplication();
 
 

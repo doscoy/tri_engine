@@ -68,7 +68,7 @@ SpriteRenderer::SpriteRenderer()
     //  バッチグループの初期化
 #ifdef USE_VAO
     for (auto& group : batch_groups_) {
-        group.bindVOA();
+        group.bindVAO();
         group.vertexBuffer().bind();
 
          //  設定の後片付け
@@ -527,7 +527,7 @@ void SpriteRenderer::renderBatch(BatchGroup* batch) {
     
     //  頂点
 #ifdef USE_VAO
-    batch->bindVOA();
+    batch->bindVAO();
 #else
     batch->vertexBuffer().bind();
     
