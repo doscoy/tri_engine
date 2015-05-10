@@ -52,7 +52,7 @@ void printConsole(
 
 ///
 /// デバイスの基本ファイルパスを取得
-String getDeviceFilePath();
+std::string getDeviceFilePath();
 
 ///
 /// ファイル読み込み

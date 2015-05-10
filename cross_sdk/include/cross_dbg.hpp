@@ -1,16 +1,9 @@
-//
-//  cross_dbg.hpp
-//  cross_sdk
-//
-//  Created by KANI Tetsuro on 2015/05/08.
-//  Copyright (c) 2015年 KANI Tetsuro. All rights reserved.
-//
 
-#ifndef cross_sdk_cross_dbg_hpp
-#define cross_sdk_cross_dbg_hpp
+#ifndef CROSS_DBG_HPP_INCLUDED
+#define CROSS_DBG_HPP_INCLUDED
 
 #include <cassert>
 
-#define CROSS_ASSERT(exp)    assert(exp)
+#define CROSS_ASSERT(exp)    do{assert(exp);}while(0)
 
-#endif
+#endif  // CROSS_DBG_HPP_INCLUDED
