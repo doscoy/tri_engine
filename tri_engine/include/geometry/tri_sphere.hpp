@@ -1,3 +1,7 @@
+/**
+    @file tri_sphere.hpp
+    球.
+*/
 #ifndef TRI_SPHERE_HPP_INCLUDED
 #define TRI_SPHERE_HPP_INCLUDED
 

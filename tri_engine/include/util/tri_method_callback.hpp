@@ -1,3 +1,7 @@
+/**
+    @file tri_method_callback.hpp
+    メソッドコールバック型.
+*/
 
 #ifndef TRI_METHOD_CALLBACK_HPP_INCLUDED
 #define TRI_METHOD_CALLBACK_HPP_INCLUDED

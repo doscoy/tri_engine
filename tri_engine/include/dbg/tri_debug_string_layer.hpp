@@ -1,3 +1,7 @@
+/**
+    @file tri_debug_string_layer.hpp
+    デバッグ文字列表示レイヤー.
+*/
 
 #ifndef TRI_DEBUG_SCREEN_LAYER_HPP_INCLUDED
 #define TRI_DEBUG_SCREEN_LAYER_HPP_INCLUDED

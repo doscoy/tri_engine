@@ -1,9 +1,12 @@
+/**
+    @file tri_matrix_stack.hpp
+    行列スタック.
+*/
 
 #ifndef TRI_MATRIX_STACK_HPP_INCLUDED
 #define TRI_MATRIX_STACK_HPP_INCLUDED
 
-///
-/// include
+// include
 #include "tri_matrix.hpp"
 #include <stack>
 

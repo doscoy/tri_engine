@@ -1,3 +1,7 @@
+/**
+    @file tri_render_layer.hpp
+    描画レイヤー基底.
+*/
 
 #ifndef TRI_RENDER_LAYER_HPP_INCLUDED
 #define TRI_RENDER_LAYER_HPP_INCLUDED

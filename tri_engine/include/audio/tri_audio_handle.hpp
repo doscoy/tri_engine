@@ -1,3 +1,8 @@
+/**
+    @file tri_audio_handle.hpp
+    オーディオ操作のためのハンドルクラス.
+*/
+
 #ifndef TRI_AUDIO_HANDLE_HPP_INCLUDED
 #define TRI_AUDIO_HANDLE_HPP_INCLUDED
 
@@ -9,6 +14,8 @@ namespace t3 {
 //  前方宣言
 class AudioResource;
 
+///
+/// オーディオ操作のためのハンドルクラス
 class AudioHandle {
     friend class AudioResource;
 private:

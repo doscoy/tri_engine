@@ -1,3 +1,7 @@
+/**
+    @file tri_font_glyph.hpp
+    フォントグリフ.
+*/
 
 #ifndef tri_engine_tri_glyph_hpp
 #define tri_engine_tri_glyph_hpp

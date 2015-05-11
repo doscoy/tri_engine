@@ -1,3 +1,8 @@
+/**
+    @file tri_memory_pool.hpp
+    メモリプール.
+*/
+
 #ifndef TRI_MEMORY_POOL_HPP_INCLUDED
 #define TRI_MEMORY_POOL_HPP_INCLUDED
 

@@ -1,3 +1,7 @@
+/**
+    @file cross_render_system.hpp
+    システム用グラフィックスAPI.
+*/
 
 #ifndef CROSS_RENDER_SYSTEM_HPP_INCLUDED
 #define CROSS_RENDER_SYSTEM_HPP_INCLUDED

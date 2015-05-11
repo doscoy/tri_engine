@@ -1,3 +1,8 @@
+/**
+    @file tri_audio.hpp
+    オーディオまわり統合ヘッダ.
+*/
+
 #ifndef TRI_AUDIO_HPP_INCLUDED
 #define TRI_AUDIO_HPP_INCLUDED
 

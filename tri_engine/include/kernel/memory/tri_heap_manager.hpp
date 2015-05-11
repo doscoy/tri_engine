@@ -1,4 +1,7 @@
-
+/**
+    @file tri_heap_manager.hpp
+    ヒープ管理.
+*/
 #ifndef TRI_HEAP_FACTORY_HPP_INCLUDED
 #define TRI_HEAP_FACTORY_HPP_INCLUDED
 

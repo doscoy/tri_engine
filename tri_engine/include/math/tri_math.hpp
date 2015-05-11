@@ -1,3 +1,7 @@
+/**
+    @file tri_math.hpp
+    Zp“‡ƒwƒbƒ_.
+*/
 
 #ifndef TRI_MATH_HPP_INCLUDED
 #define TRI_MATH_HPP_INCLUDED

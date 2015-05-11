@@ -1,3 +1,7 @@
+/**
+    @file tri_texture.hpp
+    テクスチャ.
+*/
 #ifndef TRI_TEXTURE_HPP_INCLUDED
 #define TRI_TEXTURE_HPP_INCLUDED
 

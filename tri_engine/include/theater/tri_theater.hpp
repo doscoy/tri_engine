@@ -1,3 +1,7 @@
+/**
+    @file tri_theater.hpp
+    シーンオブジェクト統合.
+*/
 
 #ifndef TRI_THEATER_HPP_INCLUDED
 #define TRI_THEATER_HPP_INCLUDED

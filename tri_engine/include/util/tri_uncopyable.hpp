@@ -1,13 +1,7 @@
-/*
- *  uncopyable.hpp
- *  TriEngine
- *
- *  Created by 可児 哲郎 on 11/09/23.
- *  Copyright 2011  . All rights reserved.
- *
- */
-
-
+/**
+    @file tri_uncopyable.hpp
+    コピー禁止ミックスインクラス.
+*/
 #ifndef TRI_UNCOPYABLE_HPP_INCLUDED
 #define TRI_UNCOPYABLE_HPP_INCLUDED
 

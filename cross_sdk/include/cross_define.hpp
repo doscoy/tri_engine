@@ -1,4 +1,9 @@
-﻿#ifndef PLATFORM_SDK_HPP_INCLUDED
+﻿/**
+    @file cross_define.hpp
+    クロスプラットフォームに対処するための各種定義.
+*/
+
+#ifndef PLATFORM_SDK_HPP_INCLUDED
 #define PLATFORM_SDK_HPP_INCLUDED
 
 

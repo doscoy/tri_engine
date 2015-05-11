@@ -1,4 +1,7 @@
-
+/**
+    @file tri_heap.hpp
+    ヒープ.
+*/
 
 #ifndef TRI_HEAP_HPP_INCLUDED
 #define TRI_HEAP_HPP_INCLUDED

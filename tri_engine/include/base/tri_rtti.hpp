@@ -1,3 +1,8 @@
+/**
+    @file tri_rtti.hpp
+    RTTI.
+*/
+
 #ifndef TRI_RTTI_HPP_INCLUDED
 #define TRI_RTTI_HPP_INCLUDED
 

@@ -1,3 +1,7 @@
+/**
+    @file tri_segment.hpp
+    線分プリミティブ.
+*/
 
 #ifndef TRI_SEGMENT_HPP_INCLUDED
 #define TRI_SEGMENT_HPP_INCLUDED

@@ -1,3 +1,7 @@
+/**
+    @file tri_math_util.hpp
+    算術系ユーティリティ.
+*/
 
 #ifndef TRI_MATH_UTIL_HPP_INCLUDED
 #define TRI_MATH_UTIL_HPP_INCLUDED

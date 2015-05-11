@@ -1,3 +1,7 @@
+/**
+    @file tri_bezier_curve.hpp
+    ベジェ曲線.
+*/
 
 #ifndef TRI_BEZIER_CURVE_HPP_INCLUDED
 #define TRI_BEZIER_CURVE_HPP_INCLUDED

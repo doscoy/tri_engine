@@ -1,3 +1,8 @@
+/**
+    @file tri_camera.hpp
+    カメラ.
+*/
+
 #ifndef TRI_CAMERA_HPP_INCLUDED
 #define TRI_CAMERA_HPP_INCLUDED
 

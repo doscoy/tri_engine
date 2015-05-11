@@ -1,4 +1,7 @@
-//  M系列乱数
+/**
+    @file tri_random_mseq.hpp
+    M系列乱数.
+*/
 
 #ifndef TRI_RANDOM_MSEQ_HPP_INCLUDED
 #define TRI_RANDOM_MSEQ_HPP_INCLUDED

@@ -1,12 +1,7 @@
-/*
- *  tri_vec4.hpp
- *  TriEngine
- *
- *  Created by 可児 哲郎 on 11/09/22.
- *  Copyright 2011  . All rights reserved.
- *
- */
-
+/**
+    @file tri_vec4.hpp
+    ４次元ベクトル.
+*/
 #ifndef TRI_VEC4_HPP_INCLUDED
 #define TRI_VEC4_HPP_INCLUDED
 

@@ -1,3 +1,7 @@
+/**
+    @file tri_index_buffer.hpp
+    インデックスバッファ.
+*/
 
 #ifndef TRI_INDEX_BUFFER_HPP_INCLUDED
 #define TRI_INDEX_BUFFER_HPP_INCLUDED

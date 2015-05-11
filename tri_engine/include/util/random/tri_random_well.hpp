@@ -1,4 +1,7 @@
-//  WELLアルゴリズム乱数
+/**
+    @file tri_random_well.hpp
+    WELL乱数.
+*/
 
 #ifndef TRI_RANDOM_WELL_HPP_INCLUDED
 #define TRI_RANDOM_WELL_HPP_INCLUDED

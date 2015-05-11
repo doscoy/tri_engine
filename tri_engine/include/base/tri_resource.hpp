@@ -1,3 +1,7 @@
+/**
+    @file tri_resource.hpp
+    リソース.
+*/
 
 #ifndef TRI_RESOURCE_HPP_INCLUDED
 #define TRI_RESOURCE_HPP_INCLUDED

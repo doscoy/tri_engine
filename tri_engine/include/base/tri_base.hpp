@@ -1,3 +1,8 @@
+/**
+    @file tri_base.hpp
+    base‚Ü‚í‚è‚Ì“‡ƒwƒbƒ_.
+*/
+
 #ifndef TRI_BASE_HPP_INCLUDED
 #define TRI_BASE_HPP_INCLUDED
 

@@ -1,3 +1,7 @@
+/**
+    @file tri_color.hpp
+    色情報.
+*/
 #ifndef TRI_COLOR_HPP_INCLUDED
 #define TRI_COLOR_HPP_INCLUDED
 
@@ -199,120 +203,175 @@ private:
 };
 
 
-
+///
+/// カラーサンプル
 namespace color_sample {
 
-    inline Color red() {
+    ///
+    /// 赤
+    inline constexpr Color red() {
 
         return Color(0xff, 0x00, 0x00);
     }
 
+    ///
+    /// 緑
     inline Color green() {
 
         return Color(0x00, 0xff, 0x00);
     }
 
+    ///
+    /// 青
     inline Color blue() {
 
         return Color(0x00, 0x00, 0xff);
     }
 
+    ///
+    /// 黒
     inline Color black() {
 
         return Color(0x00, 0x00, 0x00);
     }
 
 
-    inline Color blueivy() {
+   ///
+   /// ブルーアイビー
+   inline Color blueivy() {
         return Color(0x30, 0x90, 0xc7);
     }
 
+    ///
+    /// オーシャンブルー
     inline Color oceanblue() {
         return Color(0x2b, 0x65, 0xec);
     }
 
+    ///
+    /// スカイブルー
     inline Color skyblue() {
         return Color(0x66, 0x98, 0xff);
     }
 
+    ///
+    /// 淡青色
     inline Color azure() {
         return Color(0xf0, 0xff, 0xff);
     }
 
+    ///
+    /// ダークグレー
     inline Color darkgray() {
         return Color(0xA9, 0xA9, 0xA9);
     }
 
+    ///
+    /// グレー
     inline Color gray() {
         return Color(0x80, 0x80, 0x80);
     }
 
+    ///
+    /// ライトグレー
     inline Color lightgray() {
         return Color(0xD3, 0xD3, 0xD3);
     }
 
+    ///
+    /// 白
     inline Color white() {
         return Color(0xFF, 0xFF, 0xFF);
     }
 
 
+    ///
+    /// ライム
     inline Color lime() {
         return Color(0x00, 0xFF, 0x00);
     }
 
+    ///
+    /// マゼンダ 
     inline Color magenta() {
         return Color(0xFF, 0x00, 0xFF);
     }
 
+    ///
+    /// オレンジ
     inline Color orange() {
         return Color(0xFF, 0xA5, 0x00);
     }
 
 
+    ///
+    /// シアン
     inline Color cyan() {
         return Color(0x00, 0xFF, 0xFF);
     }
 
+    ///
+    /// バイオレット
     inline Color violet() {
         return Color(0xEE, 0x82, 0xEE);
     }
 
+    ///
+    /// 黄色
     inline Color yellow() {
         return Color(0xFF, 0xFF, 0x00);
     }
 
-    inline Color pinc() {
+    ///
+    /// ピンク 
+    inline Color pink() {
         return Color(0xFA, 0xAF, 0xBE);
     }
 
+    ///
+    /// ライトピンク
     inline Color lightpink() {
         return Color(0xFA, 0xAF, 0xBA);
     }
 
+    ///
+    /// オリーブ
     inline Color olive() {
         return Color(0x80, 0x80, 0x00);
     }
 
+    ///
+    /// ブラウン
     inline Color brown() {
         return Color(0xa5, 0x2a, 0x2a);
     }
 
+    ///
+    /// シルバー
     inline Color silver() {
         return Color(0xc0, 0xc0, 0xc0);
     }
 
+    ///
+    /// 黄緑
     inline Color yellowgreen() {
         return Color(0x52, 0xd0, 0x17);
     }
 
+    ///
+    /// フォレストグリーン
     inline Color forestgreen() {
         return Color(0x22, 0x8b, 0x22);
     }
 
+    ///
+    /// 紫
     inline Color purple() {
         return Color(0x80, 0x00, 0x80);
     }
 
+    ///
+    /// カーキ
     inline Color khaki() {
         return Color(0xf0, 0xe6, 0x8c);
     }

@@ -1,6 +1,10 @@
+/**
+    @file tri_task_generator.hpp
+    タスクジェネレータ.
+*/
 
-#ifndef tri_engine_tri_task_generator_hpp
-#define tri_engine_tri_task_generator_hpp
+#ifndef TRI_TASK_GENERATOR_HPP_INCLUDED
+#define TRI_TASK_GENERATOR_HPP_INCLUDED
 
 //  include
 #include "tri_task.hpp"
@@ -65,5 +69,4 @@ public:
 
 }
 
-
-#endif
+#endif // TRI_TASK_GENERATOR_HPP_INCLUDED

@@ -1,4 +1,7 @@
-
+/**
+    @file tri_gui_button.hpp
+    ボタン.
+*/
 
 #ifndef TRI_GUI_BUTTON_HPP_INCLUDED
 #define TRI_GUI_BUTTON_HPP_INCLUDED

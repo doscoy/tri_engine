@@ -1,3 +1,8 @@
+/**
+    @file tri_collision_manager.hpp
+    アーカイブ管理.
+*/
+
 #ifndef TRI_COLLISION_MANAGER_HPP_INCLUDED
 #define TRI_COLLISION_MANAGER_HPP_INCLUDED
 

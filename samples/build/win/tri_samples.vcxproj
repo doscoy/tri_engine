@@ -54,7 +54,6 @@
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_camera.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_camera_updater.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_cinema_layer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_color.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_draw_layer.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_entity.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_fade_layer.cpp" />
@@ -113,7 +112,6 @@
     <ClInclude Include="..\..\..\cross_sdk\include\cross_render_system.hpp" />
     <ClInclude Include="..\..\..\cross_sdk\include\cross_sdk.hpp" />
     <ClInclude Include="..\..\..\cross_sdk\include\cross_types.hpp" />
-    <ClInclude Include="..\..\..\cross_sdk\include\cross_view_controller.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\audio\tri_audio.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\audio\tri_audio_handle.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\audio\tri_audio_resource.hpp" />
@@ -226,7 +224,6 @@
     <ClInclude Include="..\..\..\tri_engine\include\math\tri_matrix.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\math\tri_matrix_stack.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\math\tri_quaternion.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\math\tri_trigonometric_functions.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\math\tri_vec2.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\math\tri_vec3.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\math\tri_vec4.hpp" />
@@ -241,6 +238,7 @@
     <ClInclude Include="..\..\..\tri_engine\include\util\random\tri_random_number_generator.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\random\tri_random_well.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\random\tri_random_xorshift.hpp" />
+    <ClInclude Include="..\..\..\tri_engine\include\util\tri_any.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_archive.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_bit.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_bytesize.hpp" />
@@ -249,7 +247,6 @@
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_hash_string.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_method_callback.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_nameable.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\util\tri_optional.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_signature.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_singleton.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_stopwatch.hpp" />

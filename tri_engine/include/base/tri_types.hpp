@@ -1,3 +1,7 @@
+/**
+    @file tri_types.hpp
+    型定義.
+*/
 
 #ifndef TRI_TYPES_HPP_INCLUDED
 #define TRI_TYPES_HPP_INCLUDED

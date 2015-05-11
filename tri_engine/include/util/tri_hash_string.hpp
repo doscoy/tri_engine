@@ -1,3 +1,8 @@
+/**
+    @file tri_hash_string.hpp
+    ハッシュ値付文字列.
+*/
+
 #ifndef TRI_HASH_STRING_HPP_INCLUDED
 #define TRI_HASH_STRING_HPP_INCLUDED
 

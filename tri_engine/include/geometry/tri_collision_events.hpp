@@ -1,3 +1,7 @@
+/**
+    @file tri_collision_events.hpp
+    衝突判定イベント定義.
+*/
 
 #ifndef TRI_COLLISION_EVENTS_HPP_INCLUDED
 #define TRI_COLLISION_EVENTS_HPP_INCLUDED

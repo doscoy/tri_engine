@@ -1,3 +1,7 @@
+/**
+    @file tri_pause_level.hpp
+    ポーズレベル.LV5のポーズはLV4以下も全てポーズ
+*/
 
 #ifndef TRI_PAUSE_LEVEL_HPP_INCLUDED
 #define TRI_PAUSE_LEVEL_HPP_INCLUDED

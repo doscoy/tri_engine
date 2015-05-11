@@ -1,4 +1,7 @@
-
+/**
+    @file tri_gui_swap_button.hpp
+    スワップボタン.
+*/
 
 #ifndef TRI_GUI_SWAP_BUTTON_HPP_INCLUDED
 #define TRI_GUI_SWAP_BUTTON_HPP_INCLUDED

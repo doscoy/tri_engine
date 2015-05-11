@@ -1,3 +1,7 @@
+/**
+    @file tri_stopwatch.hpp
+    ストップウォッチ.
+*/
 #ifndef TRI_STOPWATCH_HPP_INCLUDED
 #define TRI_STOPWATCH_HPP_INCLUDED
 

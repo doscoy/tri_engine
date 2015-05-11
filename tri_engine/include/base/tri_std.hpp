@@ -1,3 +1,7 @@
+/**
+    @file tri_std.hpp
+    c++標準ヘッダ群インクルード用.
+*/
 
 #ifndef tri_engine_tri_std_hpp
 #define tri_engine_tri_std_hpp

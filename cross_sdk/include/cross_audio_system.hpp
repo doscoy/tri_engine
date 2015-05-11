@@ -1,3 +1,8 @@
+/**
+    @file cross_audio_system.hpp
+    オーディオ制御API.
+*/
+
 #ifndef CROSS_AUDIO_SYSTEM_HPP_INCLUDED
 #define CROSS_AUDIO_SYSTEM_HPP_INCLUDED
 

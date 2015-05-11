@@ -1,3 +1,7 @@
+/**
+    @file tri_virtual_pad.hpp
+    バーチャルパッド.
+*/
 #ifndef TRI_VIRTUAL_PAD_HPP_INCLUDED
 #define TRI_VIRTUAL_PAD_HPP_INCLUDED
 

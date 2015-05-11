@@ -1,4 +1,7 @@
-
+/**
+    @file tri_interpolation.hpp
+    補間処理.
+*/
 
 #ifndef TRI_INTERPOLATION_HPP_INCLUDED
 #define TRI_INTERPOLATION_HPP_INCLUDED

@@ -1,3 +1,8 @@
+/**
+    @file tri_mesh.hpp
+    メッシュ.
+*/
+
 #ifndef TRI_MESH_HPP_INCLUDED
 #define TRI_MESH_HPP_INCLUDED
 

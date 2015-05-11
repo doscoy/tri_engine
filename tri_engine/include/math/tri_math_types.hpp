@@ -1,4 +1,7 @@
-
+/**
+    @file tri_math_types.hpp
+    éZèpånå^íËã`.
+*/
 
 #ifndef TRI_MATH_TYPES_HPP_INCLUDED
 #define TRI_MATH_TYPES_HPP_INCLUDED

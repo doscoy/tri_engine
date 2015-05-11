@@ -1,3 +1,7 @@
+/**
+    @file tri_plane.hpp
+    平面プリミティブ.
+*/
 
 #ifndef TRI_PLANE_HPP_INCLUDED
 #define TRI_PLANE_HPP_INCLUDED

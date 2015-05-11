@@ -1,3 +1,7 @@
+/**
+    @file tri_resource_manager.hpp
+    リソースマネージャ.
+*/
 #ifndef TRI_RESOURCE_MANAGER_HPP_INCLUDED
 #define TRI_RESOURCE_MANAGER_HPP_INCLUDED
 

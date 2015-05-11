@@ -1,4 +1,7 @@
-
+/**
+    @file tri_utf8.hpp
+    UTF-8.
+*/
 #ifndef tri_engine_tri_utf8string_hpp
 #define tri_engine_tri_utf8string_hpp
 

@@ -1,3 +1,8 @@
+/**
+    @file tri_camera_updater.hpp
+    カメラ操作.
+*/
+
 #ifndef TRI_CAMERA_UPDATER_HPP_INCLUDED
 #define TRI_CAMERA_UPDATER_HPP_INCLUDED
 

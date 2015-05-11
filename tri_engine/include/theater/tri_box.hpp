@@ -1,3 +1,8 @@
+/**
+    @file tri_box.hpp
+    ゲームシーン用箱エンティティ.
+*/
+
 #ifndef TRI_BOX_HPP_INCLUDED
 #define TRI_BOX_HPP_INCLUDED
 

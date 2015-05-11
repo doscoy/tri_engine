@@ -1,3 +1,7 @@
+/**
+    @file tri_debugmenu_scene_louncher.hpp
+    シーン起動用デバッグメニュー.
+*/
 
 #ifndef TRI_DEBUGMENU_SCENE_LOUNCHER_HPP_INCLUDED
 #define TRI_DEBUGMENU_SCENE_LOUNCHER_HPP_INCLUDED

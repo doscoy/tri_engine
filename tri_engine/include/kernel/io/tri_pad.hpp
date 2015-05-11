@@ -1,4 +1,7 @@
-
+/**
+    @file tri_pad.hpp
+    ゲームパッド.
+*/
 
 #ifndef TRI_PAD_HPP_INCLUDED
 #define TRI_PAD_HPP_INCLUDED

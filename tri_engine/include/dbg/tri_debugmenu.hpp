@@ -1,3 +1,7 @@
+/**
+    @file tri_debugmenu.hpp
+    デバッグメニュー.
+*/
 
 #ifndef TRI_DEBUGMENU_HPP_INCLUDED
 #define TRI_DEBUGMENU_HPP_INCLUDED

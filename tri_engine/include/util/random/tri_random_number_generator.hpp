@@ -1,4 +1,7 @@
-//  乱数取得インターフェイス
+/**
+    @file tri_random_number_generator.hpp
+    乱数生成器インターフェース.
+*/
 
 #ifndef TRI_RANDOM_NUMBER_GENERATOR_HPP_INCLUDED
 #define TRI_RANDOM_NUMBER_GENERATOR_HPP_INCLUDED
@@ -10,6 +13,9 @@
 namespace t3 {
 
 
+///
+/// 乱数生成器.
+/// 実際の乱数生成の実装はテンプレートで渡す。
 template<typename RandomAlgorithm>
 class RandomNumberGenerator
     : private Uncopyable

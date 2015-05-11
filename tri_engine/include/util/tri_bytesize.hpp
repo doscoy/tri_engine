@@ -1,4 +1,7 @@
-
+/**
+    @file tri_bytesize.hpp
+    バイトサイズの単位変換.
+*/
 
 #ifndef TRI_BYTE_SIZE_HPP_INCLUDED
 #define TRI_BYTE_SIZE_HPP_INCLUDED
@@ -6,6 +9,7 @@
 //  include
 #include <cstdlib>
 
+namespace t3 {
 
 ///
 /// バイトサイズ
@@ -77,6 +81,6 @@ private:
 };
 
 
-
+}   // namespace t3
 
 #endif  // TRI_BYTE_SIZE_HPP_INCLUDED

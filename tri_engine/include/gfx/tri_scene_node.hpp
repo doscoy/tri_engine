@@ -1,3 +1,7 @@
+/**
+    @file tri_scene_node.hpp
+    シーンノード.
+*/
 
 #ifndef dev_t3_tri_scene_node_h
 #define dev_t3_tri_scene_node_h

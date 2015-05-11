@@ -1,4 +1,7 @@
-
+/**
+    @file tri_task.hpp
+    タスク.
+*/
 
 #ifndef TRI_TASK_HPP_INCLUDED
 #define TRI_TASK_HPP_INCLUDED

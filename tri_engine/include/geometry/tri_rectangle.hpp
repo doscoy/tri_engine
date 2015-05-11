@@ -1,4 +1,7 @@
-
+/**
+    @file tri_rectangle.hpp
+    矩形プリミティブ.
+*/
 #ifndef TRI_RECTANGLE_HPP_INCLUDED
 #define TRI_RECTANGLE_HPP_INCLUDED
 

@@ -1,5 +1,7 @@
-
-
+/**
+    @file tri_gfx_types.hpp
+    グラフィックス関連型定義.
+*/
 
 #ifndef TRI_GFX_TYPES_HPP_INCLUDED
 #define TRI_GFX_TYPES_HPP_INCLUDED

@@ -1,3 +1,7 @@
+/**
+    @file tri_renderable.hpp
+    描画可能オブジェクト.
+*/
 
 #ifndef TRI_RENDERABLE_HPP_INCLUDED
 #define TRI_RENDERABLE_HPP_INCLUDED

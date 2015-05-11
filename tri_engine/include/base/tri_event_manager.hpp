@@ -1,4 +1,7 @@
-
+/**
+    @file tri_event_manager.hpp
+    イベントマネージャ.
+*/
 #ifndef TRI_EVENT_MANAGER_HPP_INCLUDED
 #define TRI_EVENT_MANAGER_HPP_INCLUDED
 

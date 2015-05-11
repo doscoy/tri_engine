@@ -1,4 +1,7 @@
-
+/**
+    @file tri_engine.hpp
+    TriENGINEìùçáÉwÉbÉ_.
+*/
 
 #ifndef TRI_ENGINE_HPP_INCLUDED
 #define TRI_ENGINE_HPP_INCLUDED

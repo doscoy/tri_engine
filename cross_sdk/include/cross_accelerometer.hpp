@@ -1,3 +1,7 @@
+/**
+    @file cross_accelerometer.hpp
+    デバイスの加速度センサ.
+*/
 
 
 #ifndef CROSS_ACCELEROMETER_HPP_INCLUDED

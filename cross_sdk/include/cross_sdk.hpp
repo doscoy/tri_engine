@@ -1,3 +1,7 @@
+/**
+    @file cross_sdk.hpp
+    cross_sdkìùçáÉwÉbÉ_Å[.
+*/
 
 #ifndef CROSS_SDK_HPP_INCLUDED
 #define CROSS_SDK_HPP_INCLUDED

@@ -1,3 +1,7 @@
+/**
+    @file tri_util.hpp
+    ユーティリティ統合ヘッダー.
+*/
 
 #ifndef TRI_UTIL_HPP_INCLUDED
 #define TRI_UTIL_HPP_INCLUDED

@@ -1,3 +1,7 @@
+/**
+    @file tri_wav.hpp
+    ウェブサウンド.
+*/
 #ifndef TRI_WAV3_HPP_INCLUDED
 #define TRI_WAV3_HPP_INCLUDED
 

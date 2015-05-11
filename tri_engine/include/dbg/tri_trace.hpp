@@ -1,3 +1,7 @@
+/**
+    @file tri_trace.hpp
+    デバッグトレース.
+*/
 
 #ifndef TRI_TRACE_HPP_INCLUDED
 #define TRI_TRACE_HPP_INCLUDED

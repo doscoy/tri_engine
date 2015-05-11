@@ -1,3 +1,7 @@
+/**
+    @file tri_circle.hpp
+    円プリミティブ.
+*/
 
 #ifndef TRI_CIRCLE_HPP_INCLUDED
 #define TRI_CIRCLE_HPP_INCLUDED
@@ -5,6 +9,8 @@
 //  include
 #include "math/tri_vec2.hpp"
 
+///
+/// TriENGINEのトップレベルネームスペース
 namespace t3 {
 
 

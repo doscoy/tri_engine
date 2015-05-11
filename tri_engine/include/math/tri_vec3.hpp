@@ -1,4 +1,7 @@
-
+/**
+    @file tri_vec3.hpp
+    三次元ベクトル.
+*/
 
 #ifndef TRI_VEC3_HPP_INCLUDED
 #define TRI_VEC3_HPP_INCLUDED

@@ -1,3 +1,8 @@
+/**
+    @file tri_audio_resource.hpp
+    オーディオリソース.
+*/
+
 #ifndef TRI_AUDIO_RESOURCE_HPP_INCLUDED
 #define TRI_AUDIO_RESOURCE_HPP_INCLUDED
 

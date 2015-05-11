@@ -1,3 +1,7 @@
+/**
+    @file tri_transform_node.hpp
+    トランスフォームノード.
+*/
 
 #ifndef TRI_TRANSFORM_NODE_HPP_INCLUDED
 #define TRI_TRANSFORM_NODE_HPP_INCLUDED

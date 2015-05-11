@@ -1,4 +1,7 @@
-
+/**
+    @file tri_task_manager.hpp
+    タスクマネージャ.
+*/
 
 #ifndef TRI_TASK_MANAGER_HPP_INCLUDED
 #define TRI_TASK_MANAGER_HPP_INCLUDED

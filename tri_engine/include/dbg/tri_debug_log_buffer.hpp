@@ -1,3 +1,7 @@
+/**
+    @file tri_debug_log_buffer.hpp
+    デバッグログバッファ.
+*/
 
 #ifndef TRI_DEBUG_LOG_BUFFER_HPP_INCLUDED
 #define TRI_DEBUG_LOG_BUFFER_HPP_INCLUDED

@@ -1,4 +1,7 @@
-
+/**
+    @file tri_print.hpp
+    デバッグ用画面プリント.
+*/
 #ifndef TRI_PRINT_HPP_INCLUDED
 #define TRI_PRINT_HPP_INCLUDED
 

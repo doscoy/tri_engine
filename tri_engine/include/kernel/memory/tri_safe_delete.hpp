@@ -1,4 +1,7 @@
-
+/**
+    @file tri_safe_delete.hpp
+    型安全delete.
+*/
 
 #ifndef TRI_SAFE_DELETE_HPP_INCLUDED
 #define TRI_SAFE_DELETE_HPP_INCLUDED

@@ -1,4 +1,7 @@
-
+/**
+    @file tri_object.hpp
+    ゲームオブジェクト基底.
+*/
 
 #ifndef TRI_OBJECT_HPP_INCLUDED
 #define TRI_OBJECT_HPP_INCLUDED

@@ -1,3 +1,8 @@
+/**
+    @file tri_surface.hpp
+    描画ターゲット.
+*/
+
 #ifndef TRI_SURFACE_HPP_INCLUDED
 #define TRI_SURFACE_HPP_INCLUDED
 

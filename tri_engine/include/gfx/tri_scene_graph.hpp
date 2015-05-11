@@ -1,4 +1,7 @@
-
+/**
+    @file tri_scene_graph.hpp
+    シーングラフ.
+*/
 
 #ifndef TRI_SCENE_GRAPH_HPP_INCLUDED
 #define TRI_SCENE_GRAPH_HPP_INCLUDED

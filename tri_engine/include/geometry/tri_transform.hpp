@@ -1,5 +1,7 @@
-
-
+/**
+    @file tri_transform.hpp
+    姿勢制御.
+*/
 
 #ifndef TRI_TRANSFORM_HPP_INCLUDED
 #define TRI_TRANSFORM_HPP_INCLUDED

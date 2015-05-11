@@ -1,3 +1,7 @@
+/**
+    @file tri_material.hpp
+    マテリアル.
+*/
 
 #ifndef TRI_MATERIAL_HPP_INCLUDED
 #define TRI_MATERIAL_HPP_INCLUDED

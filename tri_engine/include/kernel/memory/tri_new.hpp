@@ -1,3 +1,7 @@
+/**
+    @file tri_new.hpp
+    newオーバーライド.
+*/
 
 #ifndef TRI_NEW_HPP_INCLUDED
 #define TRI_NEW_HPP_INCLUDED

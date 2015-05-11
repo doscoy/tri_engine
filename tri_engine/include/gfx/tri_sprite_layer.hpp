@@ -1,3 +1,7 @@
+/**
+    @file tri_sprite_layer.hpp
+    スプライト表示用レイヤー.
+*/
 
 #ifndef TRI_SPRITE_LAYER_HPP_INCLUDED
 #define TRI_SPRITE_LAYER_HPP_INCLUDED

@@ -1,3 +1,7 @@
+/**
+    @file tri_event.hpp
+    イベント基底.
+*/
 
 #ifndef TRI_EVENT_HPP_INCLUDED
 #define TRI_EVENT_HPP_INCLUDED

@@ -1,4 +1,7 @@
-
+/**
+    @file tri_signature.hpp
+    シグネチャ生成.
+*/
 
 #ifndef TRI_SIGNATURE_HPP_INCLUDED
 #define TRI_SIGNATURE_HPP_INCLUDED

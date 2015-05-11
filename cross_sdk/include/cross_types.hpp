@@ -1,3 +1,7 @@
+/**
+    @file cross_types.hpp
+    クロスプラットフォームの為の型定義.
+*/
 #ifndef PLATFORM_TYPES_HPP_INCLUDED
 #define PLATFORM_TYPES_HPP_INCLUDED
 

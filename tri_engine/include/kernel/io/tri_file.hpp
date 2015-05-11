@@ -1,3 +1,7 @@
+/**
+    @file tri_file.hpp
+    ファイル.
+*/
 
 #ifndef TRI_FILE_HPP_INCLUDED
 #define TRI_FILE_HPP_INCLUDED

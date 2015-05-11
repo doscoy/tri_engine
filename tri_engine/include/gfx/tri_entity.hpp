@@ -1,3 +1,8 @@
+/**
+    @file tri_entity.hpp
+    シーンエンティティ.
+*/
+
 #ifndef TRI_ENTITY_HPP_INCLUDED
 #define TRI_ENTITY_HPP_INCLUDED
 

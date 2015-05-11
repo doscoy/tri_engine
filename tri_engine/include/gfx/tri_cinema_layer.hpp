@@ -1,3 +1,8 @@
+/**
+    @file tri_cinema_layer.hpp
+    シネマレイヤー.
+*/
+
 #ifndef TRI_CINEMA_LAYER_HPP_INCLUDED
 #define TRI_CINEMA_LAYER_HPP_INCLUDED
 
@@ -12,8 +17,10 @@ namespace t3 {
   
 
 ///
-/// シネマレイヤー.
-/// レンダリング済みテクスチャを貼るレイヤー
+/// シネマレイヤー
+///
+/// @par 別レンダリングしたテクスチャを貼るレイヤーです。
+/// むにゃむにゃわちゃわちゃ
 class CinemaLayer
     : public RenderLayer {
     
@@ -23,8 +30,7 @@ public:
     CinemaLayer();
 
     ///
-    /// コンストラクタ.
-    /// レイヤ名と優先度を設定
+    /// コンストラクタ. レイヤ名と優先度を設定
     CinemaLayer(
         const String& name, ///< レイヤー名
         const int priority  ///< 優先度

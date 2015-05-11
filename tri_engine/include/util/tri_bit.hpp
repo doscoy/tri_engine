@@ -1,8 +1,12 @@
+/**
+    @file tri_bit.hpp
+    各種ビット操作関数.
+*/
 
 #ifndef TRI_BIT_HPP_INCLUDED
 #define TRI_BIT_HPP_INCLUDED
 
-// include
+// includes
 #include "base/tri_std.hpp"
 
 namespace t3 {

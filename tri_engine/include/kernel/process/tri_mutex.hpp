@@ -1,3 +1,7 @@
+/**
+    @file tri_mutex.hpp
+    ミューテックス.
+*/
 
 #ifndef TRI_MUTEX_HPP_INCLUDED
 #define TRI_MUTEX_HPP_INCLUDED

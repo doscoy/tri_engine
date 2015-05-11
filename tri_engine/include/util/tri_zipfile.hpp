@@ -1,3 +1,8 @@
+/**
+    @file tri_zipfile.hpp
+    zipファイル操作.
+*/
+
 #ifndef TRI_ZIPFILE_HPP_INCLUDED
 #define TRI_ZIPFILE_HPP_INCLUDED
 

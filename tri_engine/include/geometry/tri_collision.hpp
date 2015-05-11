@@ -1,3 +1,8 @@
+/**
+    @file tri_collision.hpp
+    衝突判定用関数群.
+*/
+
 #ifndef TRI_COLLISION_HPP_INCLUDED
 #define TRI_COLLISION_HPP_INCLUDED
 

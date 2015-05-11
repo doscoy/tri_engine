@@ -1,3 +1,8 @@
+/**
+    @file tri_sprite_renderer.hpp
+    スプライトレンダラ.
+*/
+
 #ifndef TRI_SPRITE_RENDERER_HPP_INCLUDED
 #define TRI_SPRITE_RENDERER_HPP_INCLUDED
 

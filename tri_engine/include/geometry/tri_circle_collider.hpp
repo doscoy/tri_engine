@@ -1,3 +1,8 @@
+/**
+    @file tri_circle_collider.hpp
+    円の衝突判定オブジェクト.
+*/
+
 #ifndef TRI_CIRCLE_COLLIDER_HPP_INCLUDED
 #define TRI_CIRCLE_COLLIDER_HPP_INCLUDED
 

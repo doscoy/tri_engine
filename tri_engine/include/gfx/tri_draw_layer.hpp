@@ -1,3 +1,7 @@
+/**
+    @file tri_draw_layer.hpp
+    描画レイヤー.
+*/
 
 #ifndef TRI_DRAW_LAYER_HPP_INCLUDED
 #define TRI_DRAW_LAYER_HPP_INCLUDED

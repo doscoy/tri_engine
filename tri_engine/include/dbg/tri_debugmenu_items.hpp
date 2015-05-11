@@ -1,3 +1,7 @@
+/**
+    @file tri_debugmenu_items.hpp
+    デバッグメニューアイテム.
+*/
 
 #ifndef TRI_DEBUGMENU_ITEMS_HPP_INCLUDED
 #define TRI_DEBUGMENU_ITEMS_HPP_INCLUDED
@@ -52,7 +56,7 @@ void makeTargetValueString(
 
 
 ///
-/// ラベル
+/// メニューアイテム
 template <class T>
 class DebugMenuItem
     : public DebugMenuLabel
@@ -272,7 +276,7 @@ private:
 
 
 ///
-/// 
+/// デバッグメニュー用ボタン基底
 class DebugMenuButtonBase
     : public DebugMenuLabel
 {

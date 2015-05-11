@@ -1,3 +1,7 @@
+/**
+    @file tri_define.hpp
+    算術系定義.
+*/
 
 #ifndef TRI_MATH_DEFINE_INCLUDED
 #define TRI_MATH_DEFINE_INCLUDED

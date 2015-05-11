@@ -1,3 +1,7 @@
+/**
+    @file tri_test_entity.hpp
+    テストエンティティ.
+*/
 
 #ifndef TRI_TEST_ENTITY_HPP_INCLUDED
 #define TRI_TEST_ENTITY_HPP_INCLUDED

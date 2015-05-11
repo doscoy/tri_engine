@@ -1,3 +1,9 @@
+/**
+    @file tri_application.hpp
+    アプリケーション基底クラス.
+    全てのアプリケーションはこのクラスを継承して作成する
+*/
+
 #ifndef TRI_APPLICATION_HPP_INCLUDED
 #define TRI_APPLICATION_HPP_INCLUDED
 
@@ -21,7 +27,6 @@ class SceneGenerator;
 
 ///
 /// アプリケーションクラス.
-/// 全てのアプリケーションの基点
 class Application 
     : Uncopyable 
 {
@@ -64,6 +69,7 @@ public:
 
     ///
     /// アプリケーションが実行中か判定
+    /// @retval true 実行中
     bool isActive() const;
 
     ///
@@ -86,10 +92,12 @@ private:
 
     ///
     /// デバッグメニューのオープンリクエストが発生しているか判定
+    /// @retval true リクエストが発生した
     bool isDebugMenuOpenRequest();
 
     ///
     /// サスペンド中か判定
+    /// @retval true サスペンド中
     bool isSuspend() const;
 
     ///
@@ -123,10 +131,10 @@ private:
 ///
 /// エンジンの初期化
 void initializeTriEngine(
-    const int width,
-    const int height,
-    const char* const title
-    );
+    const int width,        ///< スクリーン幅
+    const int height,       ///< スクリーン高さ
+    const char* const title ///< 任意の文字列
+);
 
 
 ///
@@ -136,7 +144,9 @@ void terminateTriEngine();
 
 ///
 /// 起動するアプリを設定.
-void setApplication(Application& app);
+void setApplication(
+    Application& app    ///< アプリケーション
+);
 
 
 ///

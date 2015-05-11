@@ -1,3 +1,7 @@
+/**
+    @file tri_point_collider.hpp
+    点衝突判定オブジェクト.
+*/
 #ifndef TRI_POINT_COLLIDER_HPP_INCLUDED
 #define TRI_POINT_COLLIDER_HPP_INCLUDED
 

@@ -1,3 +1,8 @@
+/**
+    @file tri_streaming_player.hpp
+    ストリーミングサウンドプレイヤー.
+*/
+
 #ifndef TRI_STREAMING_PLAYER_HPP_INCLUDED
 #define TRI_STREAMING_PLAYER_HPP_INCLUDED
 

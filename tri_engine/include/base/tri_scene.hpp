@@ -1,4 +1,7 @@
-
+/**
+    @file tri_scene.hpp
+    シーン.
+*/
 
 #ifndef TRI_SCENE_HPP_INCLUDED
 #define TRI_SCENE_HPP_INCLUDED

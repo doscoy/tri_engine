@@ -1,3 +1,7 @@
+/**
+    @file tri_string_util.hpp
+    文字列ユーティリティ.
+*/
 
 #ifndef TRI_STRING_UTIL_HPP_INCLUDED
 #define TRI_STRING_UTIL_HPP_INCLUDED

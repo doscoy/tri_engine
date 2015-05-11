@@ -1,10 +1,13 @@
+/**
+    @file tri_random_linear_congruential.hpp
+    線形合同法.
+*/
 
 #ifndef TRI_RANDOM_LINEAR_CONGRUENTIAL_HPP_INCLUDED
 #define TRI_RANDOM_LINEAR_CONGRUENTIAL_HPP_INCLUDED
 
 
 #include "base/tri_std.hpp"
-
 
 namespace t3 {
 

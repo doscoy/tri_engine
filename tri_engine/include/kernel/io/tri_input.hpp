@@ -1,4 +1,7 @@
-
+/**
+    @file tri_input.hpp
+    入力情報.
+*/
 
 #ifndef TRI_INPUT_HPP_INCLUDED
 #define TRI_INPUT_HPP_INCLUDED

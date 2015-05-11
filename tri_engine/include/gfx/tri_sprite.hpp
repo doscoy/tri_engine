@@ -1,4 +1,7 @@
-
+/**
+    @file tri_sprite.hpp
+    スプライト.
+*/
 #ifndef TRI_SPRITE_HPP_INCLUDED
 #define TRI_SPRITE_HPP_INCLUDED
 

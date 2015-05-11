@@ -1,3 +1,7 @@
+/**
+    @file tri_fade_layer.hpp
+    フェードレイヤー.
+*/
 
 #ifndef TRI_FADE_LAYER_HPP_INCLUDED
 #define TRI_FADE_LAYER_HPP_INCLUDED

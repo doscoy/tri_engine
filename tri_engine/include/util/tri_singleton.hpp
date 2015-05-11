@@ -1,3 +1,7 @@
+/**
+    @file tri_singleton.hpp
+    シングルトン.
+*/
 #ifndef TRI_SINGLETON_HPP_INCLUDED
 #define TRI_SINGLETON_HPP_INCLUDED
 

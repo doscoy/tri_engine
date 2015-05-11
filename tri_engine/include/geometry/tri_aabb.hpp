@@ -1,15 +1,18 @@
+/**
+    @file tri_aabb.hpp
+    バウンディングボックスの定義.
+*/
 
 #ifndef TRI_AABB_HPP_INCLUDED
 #define TRI_AABB_HPP_INCLUDED
 
-
+//  include
 #include "../math/tri_vec3.hpp"
 
 namespace t3 {
 
 ///
 /// バウンディングボックス
-///
 class AABB {
 public:
     ///
@@ -36,8 +39,8 @@ public:
         , max_(max)
     {}
     
-    
-    //  デストラクタ
+    ///
+    ///  デストラクタ
     ~AABB()
     {}
     
@@ -94,12 +97,15 @@ public:
     
     ///
     /// 最大値取得.
+    /// @return 最大値
     const Vec3& max() const {
         return max_;
     }
     
     ///
     /// 点がAABBの内側か判定
+    /// @retval true 内側
+    /// @retval false 外側
     bool isInside(
         const Vec3& p   ///< 判定する点
     ) const {

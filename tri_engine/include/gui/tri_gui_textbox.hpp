@@ -1,3 +1,7 @@
+/**
+    @file tri_gui_textbox.hpp
+    テキストボックス.
+*/
 
 #ifndef TRI_GUI_TEXTBOX_HPP_INCLUDED
 #define TRI_GUI_TEXTBOX_HPP_INCLUDED

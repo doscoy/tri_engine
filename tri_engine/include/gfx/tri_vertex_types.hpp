@@ -1,3 +1,7 @@
+/**
+    @file tri_vertex_types.hpp
+    頂点属性の型.
+*/
 #ifndef TRI_VERTEX_TYPES_HPP_INCLUDED
 #define TRI_VERTEX_TYPES_HPP_INCLUDED
 

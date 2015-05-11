@@ -1,4 +1,7 @@
-
+/**
+    @file tri_filepath.hpp
+    ファイルパス.
+*/
 
 #ifndef TRI_FILEPATH_HPP_INCLUDED
 #define TRI_FILEPATH_HPP_INCLUDED

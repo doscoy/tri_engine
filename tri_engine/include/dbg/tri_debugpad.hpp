@@ -1,3 +1,8 @@
+/**
+    @file tri_debugpad.hpp
+    デバッグパッド.
+*/
+
 #ifndef TRI_DEBUGPAD_HPP_INCLUDED
 #define TRI_DEBUGPAD_HPP_INCLUDED
 

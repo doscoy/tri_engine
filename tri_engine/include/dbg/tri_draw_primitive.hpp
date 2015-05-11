@@ -1,3 +1,8 @@
+/**
+    @file tri_draw_primitive.hpp
+    プリミティブ描画.
+*/
+
 #ifndef TRI_DRAW_PRIMITIVE_HPP_INCLUDED
 #define TRI_DRAW_PRIMITIVE_HPP_INCLUDED
 

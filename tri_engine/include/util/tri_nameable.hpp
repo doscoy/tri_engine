@@ -1,3 +1,8 @@
+/**
+    @file tri_nameable.hpp
+    名前を持つクラス.
+*/
+
 #ifndef TRI_NAMEABLE_HPP_INCLUDED
 #define TRI_NAMEABLE_HPP_INCLUDED
 

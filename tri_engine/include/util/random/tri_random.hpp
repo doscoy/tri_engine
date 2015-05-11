@@ -1,3 +1,8 @@
+/**
+    @file tri_random.hpp
+    —”“‡ƒwƒbƒ_.
+*/
+
 #ifndef TRI_RANDOM_HPP_INCLUDED
 #define TRI_RANDOM_HPP_INCLUDED
 

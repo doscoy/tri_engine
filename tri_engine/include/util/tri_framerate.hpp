@@ -1,3 +1,8 @@
+/**
+    @file tri_framerate.hpp
+    フレームレート変換.
+*/
+
 #ifndef TRI_FRAMERATE_HPP_INCLUDED
 #define TRI_FRAMERATE_HPP_INCLUDED
 

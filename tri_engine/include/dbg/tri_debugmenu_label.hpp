@@ -1,3 +1,7 @@
+/**
+    @file tri_debugmenu_label.hpp
+    ラベル付デバッグメニューアイテム.
+*/
 
 #ifndef TRI_DEBUGMENU_LABEL_HPP_INCLUDED
 #define TRI_DEBUGMENU_LABEL_HPP_INCLUDED
@@ -7,6 +11,7 @@
 #include "tri_print.hpp"
 #include "../util/tri_util.hpp"
 #include <string.h>
+
 
 
 #define DEBUG_MENU_FONT_SIZE    ::t3::DEBUG_FONT_POINT

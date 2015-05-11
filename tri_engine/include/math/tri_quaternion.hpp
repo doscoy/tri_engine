@@ -1,4 +1,7 @@
-
+/**
+    @file tri_quaternion.hpp
+    クォータニオン.
+*/
 
 #ifndef TRI_QUATERNION_HPP_INCLUDED
 #define TRI_QUATERNION_HPP_INCLUDED

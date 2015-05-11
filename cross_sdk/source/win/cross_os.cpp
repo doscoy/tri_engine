@@ -49,9 +49,9 @@ void printConsole(
     std::printf(str);
 }
 
-String getDeviceFilePath() {
+std::string getDeviceFilePath() {
 
-    return String();
+    return std::string();
 }
 
 }   // namespace cross

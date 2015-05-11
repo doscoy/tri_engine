@@ -1,3 +1,7 @@
+/**
+    @file tri_image_png.hpp
+    png画像ファイル.
+*/
 
 #ifndef TRI_PNG_HPP_INCLUDED
 #define TRI_PNG_HPP_INCLUDED

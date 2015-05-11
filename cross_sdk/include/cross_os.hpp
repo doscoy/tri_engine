@@ -1,3 +1,8 @@
+/**
+    @file cross_os.hpp
+    入力情報等の低級API.
+*/
+
 #ifndef CROSS_BASE_HPP_INCLUDED
 #define CROSS_BASE_HPP_INCLUDED
 
@@ -5,7 +10,8 @@
 //  include
 #include "cross_types.hpp"
 
-
+///
+/// cross_sdkのトップレベルネームスペース.
 namespace cross {
 
 

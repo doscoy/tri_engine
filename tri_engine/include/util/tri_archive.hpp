@@ -1,3 +1,7 @@
+/**
+    @file tri_archive.hpp
+    アーカイブ管理.
+*/
 
 #ifndef TRI_ARCHIVE_HPP_INCLUDED
 #define TRI_ARCHIVE_HPP_INCLUDED

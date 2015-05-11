@@ -1,4 +1,7 @@
-
+/**
+    @file tri_matrix.hpp
+    行列.
+*/
 
 #ifndef TRI_MATRIX_HPP_INCLUDED
 #define TRI_MATRIX_HPP_INCLUDED

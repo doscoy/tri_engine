@@ -1,3 +1,8 @@
+/**
+    @file tri_kernel.hpp
+    カーネル統合ヘッダ.
+*/
+
 #ifndef TRI_KERNEL_HPP_INCLUDED
 #define TRI_KERNEL_HPP_INCLUDED
 

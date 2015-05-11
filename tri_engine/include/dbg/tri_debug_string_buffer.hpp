@@ -1,7 +1,12 @@
+/**
+    @file tri_debug_string_buffer.hpp
+    デバッグ文字列バッファ.
+*/
 
 #ifndef TRI_DEBUG_STRING_BUFFER_HPP_INCLUDED
 #define TRI_DEBUG_STRING_BUFFER_HPP_INCLUDED
 
+//  include
 #include "base/tri_std.hpp"
 #include "util/tri_uncopyable.hpp"
 

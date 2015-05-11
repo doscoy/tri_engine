@@ -1,4 +1,7 @@
-
+/**
+    @file tri_gui_radio_button.hpp
+    ラジオボタン.
+*/
 
 #ifndef TRI_GUI_RADIO_BUTTON_HPP_INCLUDED
 #define TRI_GUI_RADIO_BUTTON_HPP_INCLUDED

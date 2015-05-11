@@ -1,3 +1,7 @@
+/**
+    @file tri_texture_factory.hpp
+    テクスチャファクトリ.
+*/
 
 #ifndef TRI_TEXTURE_FACTORY_HPP_INCLUDED
 #define TRI_TEXTURE_FACTORY_HPP_INCLUDED

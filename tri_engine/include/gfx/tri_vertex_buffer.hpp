@@ -1,4 +1,7 @@
-
+/**
+    @file tri_vertex_buffer.hpp
+    頂点バッファ.
+*/
 #ifndef TRI_VERTEX_BUFFER_HPP_INCLUDED
 #define TRI_VERTEX_BUFFER_HPP_INCLUDED
 

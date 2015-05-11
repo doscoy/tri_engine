@@ -1,4 +1,7 @@
-//  メルセンヌ・ツイスタ
+/**
+    @file tri_random_mt.hpp
+    メルセンヌ・ツイスタ.
+*/
 
 #ifndef TRI_RANDOM_MT_HPP_INCLUDED
 #define TRI_RANDOM_MT_HPP_INCLUDED

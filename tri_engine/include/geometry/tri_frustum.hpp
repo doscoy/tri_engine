@@ -1,3 +1,8 @@
+/**
+    @file tri_frustum.hpp
+    フラスタム.
+*/
+
 #ifndef TRI_FRUSTUM_HPP_INCLUDED
 #define TRI_FRUSTUM_HPP_INCLUDED
 

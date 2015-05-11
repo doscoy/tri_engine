@@ -1,3 +1,7 @@
+/**
+    @file tri_shader.hpp
+    シェーダ.
+*/
 #ifndef TRI_SHADER_HPP_INCLUDED
 #define TRI_SHADER_HPP_INCLUDED
 

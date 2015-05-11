@@ -1,3 +1,7 @@
+/**
+    @file tri_system_events.hpp
+    システム定義イベント.
+*/
 
 #ifndef TRI_SYSTEM_EVENTS_HPP_INCLUDED
 #define TRI_SYSTEM_EVENTS_HPP_INCLUDED

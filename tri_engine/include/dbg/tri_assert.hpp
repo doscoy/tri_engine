@@ -1,3 +1,7 @@
+/**
+    @file tri_assert.hpp
+    デバッグアサート.
+*/
 
 #ifndef TRI_ASSERT_HPP_INCLUDED
 #define TRI_ASSERT_HPP_INCLUDED

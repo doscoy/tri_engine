@@ -1,4 +1,9 @@
-﻿#ifndef TRI_COUNTER_HPP_INCLUDED
+﻿/**
+    @file tri_counter.hpp
+    カウンタークラス定義.
+*/
+
+#ifndef TRI_COUNTER_HPP_INCLUDED
 #define TRI_COUNTER_HPP_INCLUDED
 
 namespace t3 {

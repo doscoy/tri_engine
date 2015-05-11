@@ -1,3 +1,7 @@
+/**
+    @file tri_debugmenu_frame.hpp
+    デバッグメニュー管理.
+*/
 
 #ifndef TRI_DEBUGMENU_FRAME_HPP_INCLUDED
 #define TRI_DEBUGMENU_FRAME_HPP_INCLUDED

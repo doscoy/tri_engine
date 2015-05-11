@@ -1,4 +1,7 @@
-
+/**
+    @file tri_gui.hpp
+    GUI“‡ƒwƒbƒ_.
+*/
 
 #ifndef TRI_GUI_HPP_INCLUDED
 #define TRI_GUI_HPP_INCLUDED

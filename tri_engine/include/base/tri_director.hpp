@@ -1,3 +1,8 @@
+/**
+    @file tri_director.hpp
+    ゲームシステム管理.
+*/
+
 #ifndef TRI_GAME_SYSTEM_HPP_INCLUDED
 #define TRI_GAME_SYSTEM_HPP_INCLUDED
 

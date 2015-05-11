@@ -1,3 +1,7 @@
+/**
+    @file tri_model.hpp
+    モデルエンティティ.
+*/
 #ifndef TRI_MODEL_HPP_INCLUDED
 #define TRI_MODEL_HPP_INCLUDED
 

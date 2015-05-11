@@ -1,3 +1,7 @@
+/**
+    @file tri_workbar.hpp
+    ワークバー.
+*/
 #ifndef TRI_WORKBAR_HPP_INCLUDED
 #define TRI_WORKBAR_HPP_INCLUDED
 

@@ -1,4 +1,7 @@
-
+/**
+    @file tri_pointing.hpp
+    ポインティングデバイス.
+*/
 
 #ifndef TRI_POINTING_HPP_INCLUDED
 #define TRI_POINTING_HPP_INCLUDED

@@ -1,4 +1,7 @@
-
+/**
+    @file tri_io.hpp
+    IOìùçáÉwÉbÉ_.
+*/
 
 #ifndef TRI_IO_HPP_INCLUDED
 #define TRI_IO_HPP_INCLUDED

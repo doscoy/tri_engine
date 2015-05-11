@@ -1,8 +1,11 @@
-//  xorshift乱数
-
+/**
+    @file tri_random_xorshift.hpp
+    xorshift.
+*/
 #ifndef TRI_RANDOM_XORSHIFT_HPP_INCLUDED
 #define TRI_RANDOM_XORSHIFT_HPP_INCLUDED
 
+//  include
 #include "base/tri_std.hpp"
 
 

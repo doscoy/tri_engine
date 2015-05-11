@@ -1,3 +1,7 @@
+/**
+    @file tri_dbg.hpp
+    デバッグ統合ヘッダ.
+*/
 
 #ifndef TRI_DBG_HPP_INCLUDED
 #define TRI_DBG_HPP_INCLUDED

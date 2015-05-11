@@ -1,3 +1,7 @@
+/**
+    @file tri_collider.hpp
+    衝突判定オブジェクト.
+*/
 
 #ifndef TRI_COLLIDER_HPP_INCLUDED
 #define TRI_COLLIDER_HPP_INCLUDED
@@ -16,7 +20,7 @@ class PointCollider;
 class CircleCollider;
 
 ///
-/// 当たり判定オブジェクト
+/// 衝突判定オブジェクト
 class Collider {
 
 public:

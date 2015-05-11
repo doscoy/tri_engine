@@ -1,3 +1,7 @@
+/**
+    @file tri_gfx.hpp
+    グラフィックス統合.
+*/
 
 #ifndef TRI_GFX_HPP_INCLUDED
 #define TRI_GFX_HPP_INCLUDED

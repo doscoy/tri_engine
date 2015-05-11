@@ -1,4 +1,7 @@
-
+/**
+    @file tri_debug_log_layer.hpp
+    デバッグログレイヤー.
+*/
 
 #ifndef TRI_DEBUG_LOG_LAYER_HPP_INCLUDED
 #define TRI_DEBUG_LOG_LAYER_HPP_INCLUDED
@@ -10,7 +13,8 @@
 namespace t3 {
 
 
-
+///
+/// デバッグ用ログ表示レイヤー
 class DebugLogLayer
     : public DebugStringLayer
 {
