@@ -24,8 +24,8 @@
 namespace t3 {
 
 
-constexpr float VIRTUAL_SCREEN_WIDTH = 1136.0f; ///< ゲーム内仮想スクリーンサイズ幅
-constexpr float VIRTUAL_SCREEN_HEIGHT = 640.0f; ///< ゲーム内仮想スクリーンサイズ高さ
+constexpr float VIRTUAL_SCREEN_WIDTH = 640.0f; ///< ゲーム内仮想スクリーンサイズ幅
+constexpr float VIRTUAL_SCREEN_HEIGHT = 1136.0f; ///< ゲーム内仮想スクリーンサイズ高さ
 
 constexpr int MAX_PAD = 4;  ///< パッド数
 

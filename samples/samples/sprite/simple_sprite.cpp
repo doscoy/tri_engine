@@ -36,7 +36,7 @@ public:
             textures_[i] = texture_manager.resource(id);
         }
         
-        for (int i = 0; i < 2850; ++i) {
+        for (int i = 0; i < 250; ++i) {
             addSprite();
         }
         adjustSpritesPosition();

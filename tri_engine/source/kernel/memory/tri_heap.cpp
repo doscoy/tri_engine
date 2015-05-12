@@ -46,7 +46,7 @@ namespace t3 {
 MemoryPool* heapMemoryPool() CROSS_WEAK_SIMBOL;
 
 MemoryPool* heapMemoryPool() {
-    static MemoryPool pool(1024*1024*24);
+    static MemoryPool pool(1024*1024*2);
     return &pool;
 }
 

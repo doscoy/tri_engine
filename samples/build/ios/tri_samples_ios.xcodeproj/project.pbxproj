@@ -675,6 +675,7 @@
 					../../../third_party_lib/ios,
 					../../../tri_engine/include,
 					../../../cross_sdk/include,
+					../../../starter/ios,
 				);
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -701,6 +702,7 @@
 					../../../third_party_lib/ios,
 					../../../tri_engine/include,
 					../../../cross_sdk/include,
+					../../../starter/ios,
 				);
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
 				LIBRARY_SEARCH_PATHS = (

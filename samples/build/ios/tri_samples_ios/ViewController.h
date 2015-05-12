@@ -7,9 +7,9 @@
 //
 // TIPS:GLKitでES1.1のヘッダを読むのを防ぐ
 
-#import "cross_view_controller.hpp"
+#import "tri_view_controller.hpp"
 
 
-@interface ViewController : CrossViewController
+@interface ViewController : TriViewController
 
 @end
