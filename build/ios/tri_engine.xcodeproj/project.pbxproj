@@ -94,25 +94,17 @@
 		3AA7EEF319A1024400CEB23A /* tri_bit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED9A19A0F60600CEB23A /* tri_bit.cpp */; };
 		3AA7EEF419A1024400CEB23A /* tri_counter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED9B19A0F60600CEB23A /* tri_counter.cpp */; };
 		3AA7EEF519A1024400CEB23A /* tri_unique_id.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED9C19A0F60600CEB23A /* tri_unique_id.cpp */; };
-		3AD301491AFBC16A00516996 /* libcross_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD3013F1AF3D3C100516996 /* libcross_sdk.a */; };
+		3AAD92671B0110B40033798D /* cross_accelerometer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD925D1B0110B40033798D /* cross_accelerometer.mm */; };
+		3AAD92681B0110B40033798D /* cross_audio_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD925E1B0110B40033798D /* cross_audio_system.cpp */; };
+		3AAD92691B0110B40033798D /* cross_os.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD925F1B0110B40033798D /* cross_os.mm */; };
+		3AAD926A1B0110B40033798D /* cross_render_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD92601B0110B40033798D /* cross_render_system.cpp */; };
+		3AAD926B1B0110B40033798D /* cross_view_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD92611B0110B40033798D /* cross_view_controller.mm */; };
+		3AAD926C1B0110B40033798D /* cross_accelerometer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD92631B0110B40033798D /* cross_accelerometer.cpp */; };
+		3AAD926D1B0110B40033798D /* cross_audio_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD92641B0110B40033798D /* cross_audio_system.cpp */; };
+		3AAD926E1B0110B40033798D /* cross_os.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD92651B0110B40033798D /* cross_os.cpp */; };
+		3AAD926F1B0110B40033798D /* cross_render_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD92661B0110B40033798D /* cross_render_system.cpp */; };
+		3ADC6DEB1B0228AD0023A7D4 /* tri_view_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC6DEA1B0228AD0023A7D4 /* tri_view_controller.mm */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3AD3013E1AF3D3C100516996 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3AD301151AF3CFEA00516996 /* cross_sdk.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3AD300FB1AF3CFEA00516996;
-			remoteInfo = cross_sdk;
-		};
-		3AD301471AFBC15500516996 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3AD301151AF3CFEA00516996 /* cross_sdk.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3AD300FA1AF3CFEA00516996;
-			remoteInfo = cross_sdk;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3AA7EBA519A0F48800CEB23A /* CopyFiles */ = {
@@ -322,7 +314,7 @@
 		3AA7EE5519A0F61700CEB23A /* tri_pointing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_pointing.hpp; sourceTree = "<group>"; };
 		3AA7EE5919A0F61700CEB23A /* tri_heap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_heap.hpp; sourceTree = "<group>"; };
 		3AA7EE5A19A0F61700CEB23A /* tri_heap_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_heap_manager.hpp; sourceTree = "<group>"; };
-		3AA7EE5B19A0F61700CEB23A /* tri_memory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_memory.hpp; sourceTree = "<group>"; };
+		3AA7EE5B19A0F61700CEB23A /* tri_memory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_memory.hpp; sourceTree = "<group>"; };
 		3AA7EE5C19A0F61700CEB23A /* tri_memory_pool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_memory_pool.hpp; sourceTree = "<group>"; };
 		3AA7EE5D19A0F61700CEB23A /* tri_new.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_new.hpp; sourceTree = "<group>"; };
 		3AA7EE5E19A0F61700CEB23A /* tri_safe_delete.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_safe_delete.hpp; sourceTree = "<group>"; };
@@ -370,8 +362,27 @@
 		3AA7EE9719A0F62800CEB23A /* tri_simple2d.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tri_simple2d.vsh; sourceTree = "<group>"; };
 		3AA7EE9819A0F62800CEB23A /* tri_sprite.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tri_sprite.fsh; sourceTree = "<group>"; };
 		3AA7EE9919A0F62800CEB23A /* tri_sprite.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tri_sprite.vsh; sourceTree = "<group>"; };
-		3AD301151AF3CFEA00516996 /* cross_sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cross_sdk.xcodeproj; path = ../../cross_sdk/build/ios/cross_sdk.xcodeproj; sourceTree = "<group>"; };
+		3AAD92521B0110B40033798D /* cross_accelerometer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_accelerometer.hpp; sourceTree = "<group>"; };
+		3AAD92531B0110B40033798D /* cross_audio_system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_audio_system.hpp; sourceTree = "<group>"; };
+		3AAD92541B0110B40033798D /* cross_dbg.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_dbg.hpp; sourceTree = "<group>"; };
+		3AAD92551B0110B40033798D /* cross_define.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_define.hpp; sourceTree = "<group>"; };
+		3AAD92561B0110B40033798D /* cross_os.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_os.hpp; sourceTree = "<group>"; };
+		3AAD92571B0110B40033798D /* cross_render_system.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_render_system.hpp; sourceTree = "<group>"; };
+		3AAD92581B0110B40033798D /* cross_sdk.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_sdk.hpp; sourceTree = "<group>"; };
+		3AAD92591B0110B40033798D /* cross_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_types.hpp; sourceTree = "<group>"; };
+		3AAD925A1B0110B40033798D /* cross_view_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_view_controller.hpp; sourceTree = "<group>"; };
+		3AAD925D1B0110B40033798D /* cross_accelerometer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cross_accelerometer.mm; sourceTree = "<group>"; };
+		3AAD925E1B0110B40033798D /* cross_audio_system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_audio_system.cpp; sourceTree = "<group>"; };
+		3AAD925F1B0110B40033798D /* cross_os.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cross_os.mm; sourceTree = "<group>"; };
+		3AAD92601B0110B40033798D /* cross_render_system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_render_system.cpp; sourceTree = "<group>"; };
+		3AAD92611B0110B40033798D /* cross_view_controller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cross_view_controller.mm; sourceTree = "<group>"; };
+		3AAD92631B0110B40033798D /* cross_accelerometer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_accelerometer.cpp; sourceTree = "<group>"; };
+		3AAD92641B0110B40033798D /* cross_audio_system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_audio_system.cpp; sourceTree = "<group>"; };
+		3AAD92651B0110B40033798D /* cross_os.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_os.cpp; sourceTree = "<group>"; };
+		3AAD92661B0110B40033798D /* cross_render_system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_render_system.cpp; sourceTree = "<group>"; };
 		3AD4071D19AF9F1B00762711 /* tri_bytesize.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_bytesize.hpp; sourceTree = "<group>"; };
+		3ADC6DE91B0228AD0023A7D4 /* tri_view_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_view_controller.hpp; sourceTree = "<group>"; };
+		3ADC6DEA1B0228AD0023A7D4 /* tri_view_controller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tri_view_controller.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,7 +390,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AD301491AFBC16A00516996 /* libcross_sdk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,7 +415,8 @@
 		3AA7EB9E19A0F48800CEB23A = {
 			isa = PBXGroup;
 			children = (
-				3AD301151AF3CFEA00516996 /* cross_sdk.xcodeproj */,
+				3ADC6DE71B0228AD0023A7D4 /* starter */,
+				3AAD92501B0110B40033798D /* cross_sdk */,
 				3AA7EBAC19A0F48800CEB23A /* tri_engine */,
 				3AA7EBA919A0F48800CEB23A /* Frameworks */,
 				3AA7EBA819A0F48800CEB23A /* Products */,
@@ -910,12 +921,80 @@
 			path = shader;
 			sourceTree = "<group>";
 		};
-		3AD3013B1AF3D3C100516996 /* Products */ = {
+		3AAD92501B0110B40033798D /* cross_sdk */ = {
 			isa = PBXGroup;
 			children = (
-				3AD3013F1AF3D3C100516996 /* libcross_sdk.a */,
+				3AAD92511B0110B40033798D /* include */,
+				3AAD925B1B0110B40033798D /* source */,
 			);
-			name = Products;
+			name = cross_sdk;
+			path = ../../cross_sdk;
+			sourceTree = "<group>";
+		};
+		3AAD92511B0110B40033798D /* include */ = {
+			isa = PBXGroup;
+			children = (
+				3AAD92521B0110B40033798D /* cross_accelerometer.hpp */,
+				3AAD92531B0110B40033798D /* cross_audio_system.hpp */,
+				3AAD92541B0110B40033798D /* cross_dbg.hpp */,
+				3AAD92551B0110B40033798D /* cross_define.hpp */,
+				3AAD92561B0110B40033798D /* cross_os.hpp */,
+				3AAD92571B0110B40033798D /* cross_render_system.hpp */,
+				3AAD92581B0110B40033798D /* cross_sdk.hpp */,
+				3AAD92591B0110B40033798D /* cross_types.hpp */,
+				3AAD925A1B0110B40033798D /* cross_view_controller.hpp */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		3AAD925B1B0110B40033798D /* source */ = {
+			isa = PBXGroup;
+			children = (
+				3AAD925C1B0110B40033798D /* ios */,
+				3AAD92621B0110B40033798D /* win */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		3AAD925C1B0110B40033798D /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				3AAD925D1B0110B40033798D /* cross_accelerometer.mm */,
+				3AAD925E1B0110B40033798D /* cross_audio_system.cpp */,
+				3AAD925F1B0110B40033798D /* cross_os.mm */,
+				3AAD92601B0110B40033798D /* cross_render_system.cpp */,
+				3AAD92611B0110B40033798D /* cross_view_controller.mm */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		3AAD92621B0110B40033798D /* win */ = {
+			isa = PBXGroup;
+			children = (
+				3AAD92631B0110B40033798D /* cross_accelerometer.cpp */,
+				3AAD92641B0110B40033798D /* cross_audio_system.cpp */,
+				3AAD92651B0110B40033798D /* cross_os.cpp */,
+				3AAD92661B0110B40033798D /* cross_render_system.cpp */,
+			);
+			path = win;
+			sourceTree = "<group>";
+		};
+		3ADC6DE71B0228AD0023A7D4 /* starter */ = {
+			isa = PBXGroup;
+			children = (
+				3ADC6DE81B0228AD0023A7D4 /* ios */,
+			);
+			name = starter;
+			path = ../../starter;
+			sourceTree = "<group>";
+		};
+		3ADC6DE81B0228AD0023A7D4 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				3ADC6DE91B0228AD0023A7D4 /* tri_view_controller.hpp */,
+				3ADC6DEA1B0228AD0023A7D4 /* tri_view_controller.mm */,
+			);
+			path = ios;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -932,7 +1011,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3AD301481AFBC15500516996 /* PBXTargetDependency */,
 			);
 			name = tri_engine;
 			productName = tri_engine;
@@ -958,28 +1036,12 @@
 			mainGroup = 3AA7EB9E19A0F48800CEB23A;
 			productRefGroup = 3AA7EBA819A0F48800CEB23A /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3AD3013B1AF3D3C100516996 /* Products */;
-					ProjectRef = 3AD301151AF3CFEA00516996 /* cross_sdk.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3AA7EBA619A0F48800CEB23A /* tri_engine */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3AD3013F1AF3D3C100516996 /* libcross_sdk.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libcross_sdk.a;
-			remoteRef = 3AD3013E1AF3D3C100516996 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3AA7EBA319A0F48800CEB23A /* Sources */ = {
@@ -988,6 +1050,7 @@
 			files = (
 				0444671C19E84D1400906B43 /* tri_color.cpp in Sources */,
 				3AA7EEEC19A1024400CEB23A /* tri_box.cpp in Sources */,
+				3AAD926E1B0110B40033798D /* cross_os.cpp in Sources */,
 				3AA7EEED19A1024400CEB23A /* tri_object.cpp in Sources */,
 				3AA7EEEE19A1024400CEB23A /* tri_random_linear_congruential.cpp in Sources */,
 				3AA7EEEF19A1024400CEB23A /* tri_random_mseq.cpp in Sources */,
@@ -1013,7 +1076,9 @@
 				3AA7EEDC19A1020900CEB23A /* tri_gui_radio_button.cpp in Sources */,
 				3AA7EEDD19A1020900CEB23A /* tri_gui_swap_button.cpp in Sources */,
 				3AA7EEC819A101FE00CEB23A /* tri_camera.cpp in Sources */,
+				3AAD926C1B0110B40033798D /* cross_accelerometer.cpp in Sources */,
 				04AA28D119EEDDEC003E76FC /* tri_gui_textbox.cpp in Sources */,
+				3AAD926A1B0110B40033798D /* cross_render_system.cpp in Sources */,
 				3AA7EEC919A101FE00CEB23A /* tri_camera_updater.cpp in Sources */,
 				3AA7EECA19A101FE00CEB23A /* tri_draw_layer.cpp in Sources */,
 				3AA7EECB19A101FE00CEB23A /* tri_entity.cpp in Sources */,
@@ -1024,6 +1089,8 @@
 				3AA7EED019A101FE00CEB23A /* tri_render_layer.cpp in Sources */,
 				3AA7EED119A101FE00CEB23A /* tri_render_system.cpp in Sources */,
 				3AA7EED219A101FE00CEB23A /* tri_scene_graph.cpp in Sources */,
+				3AAD92691B0110B40033798D /* cross_os.mm in Sources */,
+				3ADC6DEB1B0228AD0023A7D4 /* tri_view_controller.mm in Sources */,
 				3AA7EED319A101FE00CEB23A /* tri_scene_node.cpp in Sources */,
 				3AA7EED419A101FE00CEB23A /* tri_shader.cpp in Sources */,
 				3AA7EED519A101FE00CEB23A /* tri_sprite.cpp in Sources */,
@@ -1031,17 +1098,21 @@
 				3AA7EED719A101FE00CEB23A /* tri_sprite_renderer.cpp in Sources */,
 				3AA7EED819A101FE00CEB23A /* tri_texture.cpp in Sources */,
 				04391BD119BAE2B4006FFF38 /* tri_surface.cpp in Sources */,
+				3AAD926B1B0110B40033798D /* cross_view_controller.mm in Sources */,
 				3AA7EED919A101FE00CEB23A /* tri_texture_factory.cpp in Sources */,
 				3AA7EEDA19A101FE00CEB23A /* tri_transform_node.cpp in Sources */,
 				3AA7EEC119A101F300CEB23A /* tri_circle_collider.cpp in Sources */,
+				3AAD926F1B0110B40033798D /* cross_render_system.cpp in Sources */,
 				3A1C1B2919AC3065005A69FA /* tri_mutex.cpp in Sources */,
 				3AA7EEC219A101F300CEB23A /* tri_collider.cpp in Sources */,
+				3AAD926D1B0110B40033798D /* cross_audio_system.cpp in Sources */,
 				3AA7EEC319A101F300CEB23A /* tri_collision.cpp in Sources */,
 				3AA7EEC419A101F300CEB23A /* tri_collision_events.cpp in Sources */,
 				3AA7EEC519A101F300CEB23A /* tri_collision_manager.cpp in Sources */,
 				047CEA5319DC4C950015B46F /* tri_cinema_layer.cpp in Sources */,
 				3AA7EEC619A101F300CEB23A /* tri_frustum.cpp in Sources */,
 				3AA7EEC719A101F300CEB23A /* tri_point_collider.cpp in Sources */,
+				3AAD92681B0110B40033798D /* cross_audio_system.cpp in Sources */,
 				3AA7EEB819A101E600CEB23A /* tri_application.cpp in Sources */,
 				046983A719D11720001B71E9 /* tri_archive.cpp in Sources */,
 				3AA7EEB919A101E600CEB23A /* tri_director.cpp in Sources */,
@@ -1068,6 +1139,7 @@
 				3AA7EEB419A101DD00CEB23A /* tri_print.cpp in Sources */,
 				3AA7EEB519A101DD00CEB23A /* tri_trace.cpp in Sources */,
 				3A24B4D019C16C7900E9CFFE /* tri_zipfile.cpp in Sources */,
+				3AAD92671B0110B40033798D /* cross_accelerometer.mm in Sources */,
 				3AA7EEB619A101DD00CEB23A /* tri_virtual_pad.cpp in Sources */,
 				3AA7EEB719A101DD00CEB23A /* tri_workbar.cpp in Sources */,
 				3AA7EEA319A101CE00CEB23A /* tri_audio_handle.cpp in Sources */,
@@ -1077,14 +1149,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3AD301481AFBC15500516996 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = cross_sdk;
-			targetProxy = 3AD301471AFBC15500516996 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3AA7EBC819A0F48800CEB23A /* Debug */ = {

@@ -209,7 +209,7 @@ namespace color_sample {
 
     ///
     /// 赤
-    inline constexpr Color red() {
+    inline Color red() {
 
         return Color(0xff, 0x00, 0x00);
     }

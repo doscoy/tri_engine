@@ -173,8 +173,8 @@ Director::Director()
     CollisionManager::createInstance();
     
 
-	clear_colors_[0] = color_sample::red();
-	clear_colors_[1] = color_sample::darkgray();
+	clear_colors_[0] = color_sample::darkgray();
+	clear_colors_[1] = color_sample::green();
 	clear_colors_[2] = color_sample::white();
 	clear_colors_[3] = color_sample::blue();
 

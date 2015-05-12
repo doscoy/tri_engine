@@ -10,9 +10,6 @@
 
 namespace t3 {
 
-    
-//using Time = std::chrono::system_clock::time_point;
-
 ///
 /// タイム型
 typedef std::chrono::time_point<std::chrono::steady_clock> Time;
@@ -42,16 +39,13 @@ public:
 
     ///
     /// インターバル値
-//    std::chrono::microseconds interval() const {
-//        return std::chrono::duration_cast<std::chrono::microseconds>(end_time_ - last_start_time_);
-//    }
+    /// @return 秒
+    float interval() const {
+        auto v = std::chrono::duration_cast<std::chrono::microseconds>(end_time_ - last_start_time_);
+        return (float)v.count() / (float)1000000;
+    }
 
-    ///
-    /// インターバル値
-	float interval() const {
-
-		return 0.1f;
-	}
+    
 private:
     ///
     /// 開始時間

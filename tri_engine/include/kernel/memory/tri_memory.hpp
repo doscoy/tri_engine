@@ -1,6 +1,6 @@
 /**
     @file tri_memory.hpp
-    ƒƒ‚ƒŠ“‡ƒwƒbƒ_.
+    ãƒ¡ãƒ¢ãƒªçµ±åˆãƒ˜ãƒƒãƒ€.
 */
 
 #ifndef TRI_MEMORY_HPP_INCLUDED
@@ -16,17 +16,19 @@
 
 
 ///
-/// ƒƒ‚ƒŠŠm•Û
-#define T3_ALLOC(size)      ::t3::HeapManager::getHeap(::t3::HEAP_APP)->allocate(size, __FILE__, __LINE__)
+/// ãƒ¡ãƒ¢ãƒªç¢ºä¿
+//#define T3_ALLOC(size)      ::t3::HeapManager::getHeap(::t3::HEAP_APP)->allocate(size, __FILE__, __LINE__)
+#define T3_ALLOC(size)      std::malloc(size)
 
 ///
-/// ƒVƒXƒeƒ€ƒƒ‚ƒŠŠm•Û
-#define T3_SYS_ALLOC(size)  ::t3::HeapManager::getHeap(::t3::HEAP_SYS)->allocate(size, __FILE__, __LINE__)
+/// ã‚·ã‚¹ãƒ†ãƒ ãƒ¡ãƒ¢ãƒªç¢ºä¿
+//#define T3_SYS_ALLOC(size)  ::t3::HeapManager::getHeap(::t3::HEAP_SYS)->allocate(size, __FILE__, __LINE__)
+#define T3_SYS_ALLOC(size)  std::malloc(size)
 
 ///
-/// ƒƒ‚ƒŠ‰ğ•ú
-#define T3_FREE(addr)       ::t3::Heap::deallocate(addr)
-
+/// ãƒ¡ãƒ¢ãƒªè§£æ”¾
+//#define T3_FREE(addr)       ::t3::Heap::deallocate(addr)
+#define T3_FREE(addr)       std::free(addr)
 
 
 #endif // TRI_MEMORY_HPP_INCLUDED

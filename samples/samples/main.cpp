@@ -105,7 +105,6 @@ class SampleApp
 
 int main(int argc, char * argv[])
 {
-    int a= 30;
     SampleApp app;
     
 //    app.setRootScene(t3::Scene::sceneGenerator<UiButtonScene>());
