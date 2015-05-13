@@ -46,6 +46,7 @@
 		04F1FE821985557F00C8D498 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F1FE811985557F00C8D498 /* Images.xcassets */; };
 		3A24B4D619C88A4000E9CFFE /* zip_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B4D419C88A4000E9CFFE /* zip_test.cpp */; };
 		3A24B4D819C9D3ED00E9CFFE /* test.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A24B4D719C9D3ED00E9CFFE /* test.zip */; };
+		3A7A6A6B1B039ED300D63415 /* simple_triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A6A691B039ED300D63415 /* simple_triangle.cpp */; };
 		3AD301461AFBBD2500516996 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD301451AFBBD2500516996 /* main.cpp */; };
 		3AD4070B19AE257000762711 /* ad_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F219AE257000762711 /* ad_test.cpp */; };
 		3AD4070C19AE257000762711 /* audio_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F519AE257000762711 /* audio_test.cpp */; };
@@ -124,12 +125,12 @@
 		04F1FE7E1985557F00C8D498 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		04F1FE7F1985557F00C8D498 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		04F1FE811985557F00C8D498 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		04F1FE881985557F00C8D498 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		3A24B4D419C88A4000E9CFFE /* zip_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zip_test.cpp; sourceTree = "<group>"; };
 		3A24B4D519C88A4000E9CFFE /* zip_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = zip_test.hpp; sourceTree = "<group>"; };
 		3A24B4D719C9D3ED00E9CFFE /* test.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = test.zip; sourceTree = "<group>"; };
+		3A7A6A691B039ED300D63415 /* simple_triangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simple_triangle.cpp; sourceTree = "<group>"; };
+		3A7A6A6A1B039ED300D63415 /* simple_triangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = simple_triangle.hpp; sourceTree = "<group>"; };
 		3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = tri_engine.xcodeproj; path = ../../../build/ios/tri_engine.xcodeproj; sourceTree = "<group>"; };
-		3AC988891AD3B5E0002D5152 /* cross_sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = cross_sdk.framework; path = "../../../../cross_sdk/build/ios/build/Debug-iphoneos/cross_sdk.framework"; sourceTree = "<group>"; };
 		3AD301451AFBBD2500516996 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = main.cpp; sourceTree = "<group>"; };
 		3AD406F219AE257000762711 /* ad_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ad_test.cpp; sourceTree = "<group>"; };
 		3AD406F319AE257000762711 /* ad_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ad_test.hpp; sourceTree = "<group>"; };
@@ -254,7 +255,6 @@
 		04F1FE5D1985557F00C8D498 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AC988891AD3B5E0002D5152 /* cross_sdk.framework */,
 				04F1002B198558BF00C8D498 /* libz.dylib */,
 				04F10029198558B600C8D498 /* libpng.a */,
 				04F100271985589300C8D498 /* CoreMotion.framework */,
@@ -264,7 +264,6 @@
 				04F1FE621985557F00C8D498 /* UIKit.framework */,
 				04F1FE641985557F00C8D498 /* GLKit.framework */,
 				04F1FE661985557F00C8D498 /* OpenGLES.framework */,
-				04F1FE881985557F00C8D498 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -303,6 +302,15 @@
 			path = zipfile;
 			sourceTree = "<group>";
 		};
+		3A7A6A681B039ED300D63415 /* simple_triangle */ = {
+			isa = PBXGroup;
+			children = (
+				3A7A6A691B039ED300D63415 /* simple_triangle.cpp */,
+				3A7A6A6A1B039ED300D63415 /* simple_triangle.hpp */,
+			);
+			path = simple_triangle;
+			sourceTree = "<group>";
+		};
 		3AA7EE9B19A0FCB600CEB23A /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +322,7 @@
 		3AD406F019AE257000762711 /* samples */ = {
 			isa = PBXGroup;
 			children = (
+				3A7A6A681B039ED300D63415 /* simple_triangle */,
 				3AD301451AFBBD2500516996 /* main.cpp */,
 				041544D219EC268200C14705 /* font */,
 				0403CC9C19DAEDDA000329EC /* blur */,
@@ -529,6 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AD4071319AE257000762711 /* ui_button_test.cpp in Sources */,
+				3A7A6A6B1B039ED300D63415 /* simple_triangle.cpp in Sources */,
 				3AD4071219AE257000762711 /* simple_sprite.cpp in Sources */,
 				0403CC9F19DAEDDA000329EC /* blur_test.cpp in Sources */,
 				3AD4071119AE257000762711 /* sandbox_template.cpp in Sources */,
@@ -665,6 +675,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -692,6 +703,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;

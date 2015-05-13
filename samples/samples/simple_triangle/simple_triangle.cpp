@@ -24,13 +24,20 @@ public:
     
     void update(t3::tick_t delta_time){
 
-  
+        
     }
 
     void suspend(t3::tick_t delta_time) {
 
     }
 
+    void debugRender() {
+        t3::drawRectangleCenterSize(
+            t3::Vec2(0, 0),
+            t3::Vec2(30, 30),
+            t3::color_sample::cyan()
+        );
+    }
 
 private:
     t3::tick_t total_time_;
@@ -44,27 +51,27 @@ private:
 
 
 
-SimpleSpriteScene::SimpleSpriteScene()
+SimpleTriangleScene::SimpleTriangleScene()
     : Scene( "TriangleTest" ) {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 
-SimpleSpriteScene::~SimpleSpriteScene() {
+SimpleTriangleScene::~SimpleTriangleScene() {
     
 }
 
 
-void SimpleSpriteScene::initializeScene() {
+void SimpleTriangleScene::initializeScene() {
     context_->initialize();
 }
 
 
-void SimpleSpriteScene::terminateScene() {
+void SimpleTriangleScene::terminateScene() {
     context_->terminate();
 }
 
 
-void SimpleSpriteScene::updateScene(t3::tick_t delta_time) {
+void SimpleTriangleScene::updateScene(t3::tick_t delta_time) {
     context_->update(delta_time);
     
     auto& director = t3::Director::instance();
@@ -74,13 +81,15 @@ void SimpleSpriteScene::updateScene(t3::tick_t delta_time) {
     }
 }
 
-void SimpleSpriteScene::suspendScene(t3::tick_t delta_time) {
+void SimpleTriangleScene::suspendScene(t3::tick_t delta_time) {
 
     context_->suspend(delta_time);
 }
 
 
-
+void SimpleTriangleScene::debugRenderScene() {
+    context_->debugRender();
+}
 
 
 

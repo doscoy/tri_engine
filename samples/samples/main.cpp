@@ -116,7 +116,9 @@ int main(int argc, char * argv[])
 //    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
 ///    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<FontTestScene>());
-app.rootScene(t3::Scene::sceneGenerator<t3::NullScene>());
+//  app.rootScene(t3::Scene::sceneGenerator<t3::NullScene>());
+    app.rootScene(t3::Scene::sceneGenerator<SimpleTriangleScene>());
+
     t3::setApplication(app);
 #if defined(CROSS_TARGET_PLATFORM_IOS)
     @autoreleasepool {

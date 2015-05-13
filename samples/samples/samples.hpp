@@ -12,6 +12,7 @@
 #include "tri_engine.hpp"
 
 #include "sprite/simple_sprite.hpp"
+#include "simple_triangle/simple_triangle.hpp"
 //#include "audio/audio_test.hpp"
 //#include "ad/ad_test.hpp"
 //#include "event_handling/event_handling.hpp"
