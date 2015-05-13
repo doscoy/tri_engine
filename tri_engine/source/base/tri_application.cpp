@@ -147,6 +147,9 @@ void initializeTriEngine(
 #endif
 }
 
+void terminateTriEngine() {
+
+}
 
 
 
@@ -577,8 +580,7 @@ void Application::beginRender() {
 
 
 void Application::endRender() {
-//    RenderSystem::fenceDraw();
-    cross::RenderSystem::swapBuffers();
+    cross::endRender();
 }
 
 void Application::gotoRootScene() {
@@ -611,6 +613,10 @@ void renderApplication() {
     app_->renderApplication();
 }
 
+
+bool isActiveApplication() {
+    return app_->isActive();
+}
 
 
 }   // namespace t3

@@ -60,7 +60,10 @@ void VirtualPad::close() {
     pad_layer_.disableLayer();
 }
 
-void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t delta_time) {
+void VirtualPad::updateVirtualPad(
+    DrawLayer* const layer, 
+    tick_t delta_time
+) {
 
     //  パッドデータクリア
     pad_data_.clearData();
@@ -126,7 +129,7 @@ void VirtualPad::updateVirtualPad(t3::DrawLayer* const layer, tick_t delta_time)
 
 }
 
-void VirtualPad::renderVirtualPad(t3::DrawLayer* const layer) {
+void VirtualPad::renderVirtualPad(DrawLayer* const layer) {
 
 
     

@@ -177,13 +177,15 @@ public:
     );
     
 protected:
+
+    
     ///
     /// 更新
-    virtual void updateLayer(tick_t delta_time){};
+    virtual void updateLayer(tick_t delta_time) {}
     
     ///
     /// 描画
-    virtual void drawLayer(){};
+    virtual void drawLayer() {}
     
     ///
     /// drawLayerを呼ぶ

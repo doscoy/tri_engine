@@ -31,6 +31,9 @@ void beginUpdate();
 /// アップデート後処理
 void endUpdate();
 
+///
+/// 描画後処理
+void endRender();
 
 ///
 /// パッドデータ取得

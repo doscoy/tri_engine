@@ -18,15 +18,13 @@ FadeLayer::FadeLayer()
 FadeLayer::FadeLayer(
     const String& name,
     const int priority
-)   : DrawLayer(name, priority)
+)   : RenderLayer(name, priority)
     , fading_(false)
     , fade_in_(true)
     , fade_speed_(1.0f)
     , fade_color_(color_sample::black())
     , alpha_(0.0f)
 {
-    setUpdateCallback(this, &FadeLayer::fadeUpdate);
-    setRenderCallback(this, &FadeLayer::fadeRender);
     fade_color_.alphaFloat(alpha_);
 }
 
@@ -34,8 +32,8 @@ FadeLayer::~FadeLayer() {
 
 }
 
-void FadeLayer::fadeUpdate(
-    t3::DrawLayer* const layer,
+
+void FadeLayer::updateLayer(
     tick_t delta_time
 ) {
     if (!fading_) {
@@ -64,9 +62,7 @@ void FadeLayer::fadeUpdate(
 }
 
 
-void FadeLayer::fadeRender(
-    t3::DrawLayer* const layer
-) {
+void FadeLayer::drawLayer() {
     if (isZeroFloat(alpha_)) {
         return;
     }

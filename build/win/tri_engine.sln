@@ -4,11 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tri_engine", "tri_engine.vcxproj", "{419EAEF3-9F14-4CAF-9959-3E535CD51183}"
-	ProjectSection(ProjectDependencies) = postProject
-		{12309110-9821-4B88-A96F-AB17AE478206} = {12309110-9821-4B88-A96F-AB17AE478206}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cross_sdk", "..\..\..\cross_sdk\build\win\cross_sdk\cross_sdk.vcxproj", "{12309110-9821-4B88-A96F-AB17AE478206}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +15,6 @@ Global
 		{419EAEF3-9F14-4CAF-9959-3E535CD51183}.Debug|Win32.Build.0 = Debug|Win32
 		{419EAEF3-9F14-4CAF-9959-3E535CD51183}.Release|Win32.ActiveCfg = Release|Win32
 		{419EAEF3-9F14-4CAF-9959-3E535CD51183}.Release|Win32.Build.0 = Release|Win32
-		{12309110-9821-4B88-A96F-AB17AE478206}.Debug|Win32.ActiveCfg = Debug|Win32
-		{12309110-9821-4B88-A96F-AB17AE478206}.Debug|Win32.Build.0 = Debug|Win32
-		{12309110-9821-4B88-A96F-AB17AE478206}.Release|Win32.ActiveCfg = Release|Win32
-		{12309110-9821-4B88-A96F-AB17AE478206}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

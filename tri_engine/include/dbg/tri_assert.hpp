@@ -28,10 +28,12 @@ bool isInvalidFloat(const float f);
 
 
 #ifdef DEBUG
-    #define ENABLE_ASSERT   1
+    #define ENABLE_ASSERT   0
+#else
+    #define ENABLE_ASSERT   0
 #endif // DEBUG
 
-#ifdef ENABLE_ASSERT
+#if ENABLE_ASSERT
 
 /*! @brief パニック */
 #define T3_PANIC(...)               t3::panic("panic", __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)

@@ -2,6 +2,7 @@
 #import <UIKit/UIKit.h>
 #include "cross_types.hpp"
 #include "cross_accelerometer.hpp"
+#include "cross_render_system.hpp"
 
 cross::GamePadData pad_data_[4];
 cross::PointingData point_data_[4];
@@ -34,6 +35,11 @@ void beginUpdate() {
 void endUpdate() {
     
 
+}
+
+void endRender() {
+
+    cross::RenderSystem::swapBuffers();
 }
 
 void platformPadData(

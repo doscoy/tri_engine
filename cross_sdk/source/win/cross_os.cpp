@@ -2,17 +2,26 @@
 #include "cross_os.hpp"
 #include "cstdio"
 
+#include <glfw3.h>
+
+namespace {
+
+GLFWwindow* window_ = nullptr;
+}
+
 namespace cross {
 
 void initializePlatform() {
 
-
+    glfwInit();
+    window_ = glfwCreateWindow(640, 480, "mytesz", nullptr, nullptr);
+    glfwMakeContextCurrent(window_);
 }
 
 
 void terminatePlatform() {
 
-
+    glfwTerminate();
 }
 
 void beginUpdate() {
@@ -20,7 +29,13 @@ void beginUpdate() {
 }
 
 void endUpdate() {
+}
 
+
+void endRender() {
+
+    glfwSwapBuffers(window_);
+    glfwPollEvents();
 }
 
 void platformPadData(
@@ -40,7 +55,7 @@ void platformPointingData(
 
 bool isExitRequest() {
 
-    return false;
+    return glfwWindowShouldClose(window_);
 }
 
 void printConsole(

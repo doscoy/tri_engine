@@ -114,10 +114,9 @@ int main(int argc, char * argv[])
 //    app.setRootScene(t3::Scene::sceneGenerator<AudioTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
-    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
+///    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<FontTestScene>());
-
-
+app.rootScene(t3::Scene::sceneGenerator<t3::NullScene>());
     t3::setApplication(app);
 #if defined(CROSS_TARGET_PLATFORM_IOS)
     @autoreleasepool {
@@ -127,6 +126,13 @@ int main(int argc, char * argv[])
     t3::initializeTriEngine(640, 480, "win");
     t3::initializeApplication();
 
+    while (t3::isActiveApplication()) {
+
+        t3::updateApplication();
+        t3::renderApplication();
+    }
+    t3::terminateApplication();
+    t3::terminateTriEngine();
 #endif
     return 0;
 }

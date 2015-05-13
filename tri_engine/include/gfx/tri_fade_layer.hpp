@@ -16,7 +16,7 @@ namespace t3 {
 ///
 /// フェードレイヤー
 class FadeLayer
-    : public DrawLayer
+    : public RenderLayer
 {
 public:
     ///
@@ -33,6 +33,17 @@ public:
 
 
 public:
+
+    
+    ///
+    /// 更新
+    void updateLayer(tick_t delta_time) override;
+    
+    ///
+    /// 描画
+    void drawLayer() override;
+
+
     ///
     /// フェードスピード設定
     void setFadeSpeed(
@@ -124,17 +135,6 @@ public:
         alpha_ = fade_alpha;
         fade_color_ = c;
     }
-
-
-private:
-    ///
-    /// フェードの更新コールバック
-    void fadeUpdate(DrawLayer* const, tick_t);
-
-    ///
-    /// フェードの描画コールバック
-    void fadeRender(DrawLayer* const);
-
 
 
 private:

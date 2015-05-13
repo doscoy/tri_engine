@@ -275,6 +275,9 @@
     <ClCompile Include="..\..\..\tri_engine\source\util\tri_zipfile.cpp">
       <Filter>tri_engine\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\samples\simple_triangle\simple_triangle.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\samples\samples.hpp" />
@@ -733,6 +736,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\tri_engine\include\audio\tri_wav.hpp">
       <Filter>tri_engine\include\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\samples\simple_triangle\simple_triangle.hpp">
+      <Filter>sample</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

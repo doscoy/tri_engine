@@ -31,6 +31,7 @@ protected:
     ///
     /// メンバ関数ポインタ
     void (MethodCallbackBase::*func_)();
+    void (MethodCallbackBase::*func2_)(void*,void*);
 };
 
 ///
@@ -125,7 +126,10 @@ public:
     
     ///
     /// コンストラクタ
-    MethodCallback2() = default;
+    MethodCallback2() {
+        MethodCallbackBase::instance_ = 0;
+        MethodCallbackBase::func_ = 0;
+    }
     
     ///
     /// コンストラクタ
@@ -141,8 +145,12 @@ public:
     /// メソッド実行
     ReturnType invoke( Arg1& arg1, Arg2& arg2 ) {
 		T* t = (T*)MethodCallbackBase::instance_;
-		callback_t& f = (callback_t&)func_;
-		return (t->*(f))(arg1, arg2);
+		callback_t* f = (callback_t*)&func_;
+        callback_t f2 = *f;
+		return (t->*f2)(arg1, arg2);
+
+//        return (((T*)MethodCallbackBase::instance_)->*((callback_t)func2_))(arg1, arg2);
+
 	}
 };
     

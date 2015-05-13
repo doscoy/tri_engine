@@ -166,6 +166,9 @@ void updateApplication();
 /// 描画.
 void renderApplication();
 
+///
+/// アプリ有効判定
+bool isActiveApplication();
 
 }   // namespace t3
 
