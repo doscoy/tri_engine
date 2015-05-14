@@ -115,7 +115,7 @@ void initializeTriEngine(
 ) {
     
     //  プラットフォームの初期化
-    cross::initializePlatform();
+    cross::initializePlatform(width, height, title);
     
     //  ファイルシステムベースパス設定
     FilePath::setBaseDirectory(cross::getDeviceFilePath());

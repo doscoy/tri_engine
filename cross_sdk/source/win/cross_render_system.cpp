@@ -1,5 +1,8 @@
 
 #include "cross_render_system.hpp"
+#include <glew.h>
+#include <glfw3.h>
+#include <gl/GL.h>
 
 int render_call_count_ = 0;
 
@@ -43,7 +46,6 @@ inline int bufferTypeToGL(cross::RenderSystem::BufferType type) {
 
 inline int colorFormatToGL(cross::RenderSystem::ColorFormat format) {
 
-
     return 0;
 }
 
@@ -55,7 +57,7 @@ namespace cross {
 
 
 void RenderSystem::createFrameBuffer(RenderSystem::FrameBufferID* id) {
-
+    glGenFramebuffers(1, id);
 }
 
 void RenderSystem::deleteFrameBuffer(RenderSystem::FrameBufferID* id) {

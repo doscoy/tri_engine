@@ -17,7 +17,11 @@ namespace cross {
 
 ///
 /// プラットフォーム初期化
-void initializePlatform();
+void initializePlatform(
+    int w,
+    int h,
+    const char* title
+);
 
 ///
 /// プラットフォーム後片付け

@@ -125,7 +125,7 @@ int main(int argc, char * argv[])
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 #else
-    t3::initializeTriEngine(640, 480, "win");
+    t3::initializeTriEngine(640, 680, "win");
     t3::initializeApplication();
 
     while (t3::isActiveApplication()) {

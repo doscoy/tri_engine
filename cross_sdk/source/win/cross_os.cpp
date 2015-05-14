@@ -11,10 +11,14 @@ GLFWwindow* window_ = nullptr;
 
 namespace cross {
 
-void initializePlatform() {
+void initializePlatform(
+    int w,
+    int h,
+    const char* title
+) {
 
     glfwInit();
-    window_ = glfwCreateWindow(640, 480, "mytesz", nullptr, nullptr);
+    window_ = glfwCreateWindow(w, h, title, nullptr, nullptr);
     glfwMakeContextCurrent(window_);
 }
 
