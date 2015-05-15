@@ -10,7 +10,7 @@
 #include <iostream>
 #include "dbg/tri_assert.hpp"
 #include "dbg/tri_trace.hpp"
-
+#include "cross_dbg.hpp"
 
 namespace t3 {
 
@@ -52,7 +52,8 @@ bool panic(
     trace(" file:%s(%d)\n", filename, line);
     trace(" func:%s\n", funcname);
     trace("-----------------------------------------\n");
-    abort();
+
+    CROSS_PANIC();
 }
 
 

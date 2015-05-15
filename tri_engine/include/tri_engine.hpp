@@ -7,6 +7,8 @@
 #define TRI_ENGINE_HPP_INCLUDED
 
 //  include
+#include "cross_sdk.hpp"
+
 #include "audio/tri_audio.hpp"
 #include "kernel/tri_kernel.hpp"
 #include "math/tri_math.hpp"
@@ -17,6 +19,7 @@
 #include "base/tri_base.hpp"
 #include "util/tri_util.hpp"
 #include "theater/tri_theater.hpp"
+
 
 
 #endif // TRI_ENGINE_HPP_INCLUDED

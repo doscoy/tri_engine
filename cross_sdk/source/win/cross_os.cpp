@@ -1,9 +1,9 @@
+#include <glew.h>
 
 #include "cross_os.hpp"
 #include "cstdio"
 
 #include <glfw3.h>
-
 namespace {
 
 GLFWwindow* window_ = nullptr;
@@ -16,10 +16,16 @@ void initializePlatform(
     int h,
     const char* title
 ) {
-
     glfwInit();
     window_ = glfwCreateWindow(w, h, title, nullptr, nullptr);
     glfwMakeContextCurrent(window_);
+
+    GLenum init_result = glewInit();
+
+    if ( init_result != GLEW_OK ) {
+		std::cout << "error: " << glewGetErrorString( init_result ) << std::endl;
+	}
+
 }
 
 

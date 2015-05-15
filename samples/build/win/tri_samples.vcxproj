@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_accelerometer.cpp" />
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_audio_system.cpp" />
+    <ClCompile Include="..\..\..\cross_sdk\source\win\cross_dbg.cpp" />
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_os.cpp" />
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_render_system.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\audio\tri_audio_handle.cpp" />
@@ -108,6 +109,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\cross_sdk\include\cross_accelerometer.hpp" />
     <ClInclude Include="..\..\..\cross_sdk\include\cross_audio_system.hpp" />
+    <ClInclude Include="..\..\..\cross_sdk\include\cross_dbg.hpp" />
     <ClInclude Include="..\..\..\cross_sdk\include\cross_define.hpp" />
     <ClInclude Include="..\..\..\cross_sdk\include\cross_os.hpp" />
     <ClInclude Include="..\..\..\cross_sdk\include\cross_render_system.hpp" />
@@ -314,7 +316,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\GLFW;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\lpng;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\samples\libs;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\glew;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libpng16.lib;zlib.lib;glfw3.lib;GLU32.Lib;OpenGL32.Lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libpng16.lib;zlib.lib;glfw3.lib;GLU32.Lib;OpenGL32.Lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -337,7 +339,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\GLFW;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\lpng;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\samples\libs;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\glew;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libpng16.lib;zlib.lib;glfw3.lib;GLU32.Lib;OpenGL32.Lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libpng16.lib;zlib.lib;glfw3.lib;GLU32.Lib;OpenGL32.Lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

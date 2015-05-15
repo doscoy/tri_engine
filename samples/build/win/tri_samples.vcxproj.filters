@@ -278,6 +278,9 @@
     <ClCompile Include="..\..\samples\simple_triangle\simple_triangle.cpp">
       <Filter>sample</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\cross_sdk\source\win\cross_dbg.cpp">
+      <Filter>cross_sdk\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\samples\samples.hpp" />
@@ -739,6 +742,9 @@
     </ClInclude>
     <ClInclude Include="..\..\samples\simple_triangle\simple_triangle.hpp">
       <Filter>sample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\cross_sdk\include\cross_dbg.hpp">
+      <Filter>cross_sdk\include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
