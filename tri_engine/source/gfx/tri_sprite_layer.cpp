@@ -40,7 +40,7 @@ SpritePtr SpriteLayer::createSprite(TexturePtr tex) {
 SpritePtr SpriteLayer::createSprite(const String& tex_name) {
     t3::TextureManager& tex_mgr = t3::TextureManager::instance();
     UniqueID tex_id = tex_mgr.load(tex_name);
-    TexturePtr tex = tex_mgr.resource(tex_id);
+    TexturePtr tex = tex_mgr.findResource(tex_id);
     
     return createSprite(tex);
 }

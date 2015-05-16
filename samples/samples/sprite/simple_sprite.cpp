@@ -33,7 +33,7 @@ public:
         //  ハンドルをとっておく
         for (int i = 0; i < 9; ++i) {
             t3::UniqueID id = texture_manager.load(texpath[i]);
-            textures_[i] = texture_manager.resource(id);
+            textures_[i] = texture_manager.findResource(id);
         }
         
         for (int i = 0; i < 250; ++i) {

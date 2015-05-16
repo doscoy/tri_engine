@@ -43,7 +43,7 @@ public:
     UniqueID load(
         const String& name
     ){
-        SharedPtr<ResourceType> res = resource(name);
+        auto res = findResource(name);
         if (res) {
             return res->resourceID();
         }
@@ -64,7 +64,7 @@ public:
     void prepare(
         const t3::File& file
     ) {
-        SharedPtr<ResourceType> res = resource(file.name());
+        auto res = findResource(file.name());
         if (res) {
             //  同名のリソースが既に登録されている
             return;
@@ -79,7 +79,7 @@ public:
     }
     
     //  リソースを取得
-    const SharedPtr<ResourceType> resource(
+    const SharedPtr<ResourceType> findResource(
         String name
     ){
         for (auto& res : resources_) {
@@ -95,7 +95,7 @@ public:
     }
     ///
     ///  リソースを取得
-    const SharedPtr<ResourceType> resource(
+    const SharedPtr<ResourceType> findResource(
         const UniqueID id
     ){
         typename Resources::iterator end = resources_.end();
