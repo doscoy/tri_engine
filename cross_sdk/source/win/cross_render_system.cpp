@@ -4,6 +4,8 @@
 #include "cross_render_system.hpp"
 #include "cross_dbg.hpp"
 #include <iostream>
+#include <regex>
+
 
 int render_call_count_ = 0;
 
@@ -166,8 +168,9 @@ int RenderSystem::buildShader(
     
     CROSS_GL_ASSERT();
     CROSS_ASSERT(shader_handle > 0);
-    
-    glShaderSource(shader_handle, 1, &source, 0);
+    auto replaced = std::regex_replace(source, std::regex(R"(lowp|mediump|highp)"), "");
+    const char* replaced_src = replaced.c_str();
+    glShaderSource(shader_handle, 1, &replaced_src, 0);
     glCompileShader(shader_handle);
     
     GLint compile_success;
