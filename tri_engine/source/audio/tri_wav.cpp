@@ -130,7 +130,7 @@ void Wav::load(const FilePath& filepath ) {
 
 void Wav::open(const t3::FilePath &filepath) {
 
-    file_.open(filepath.getFullPath().c_str(), std::ios::binary);
+    file_.open(filepath.fullpath().c_str(), std::ios::binary);
     readWaveHeader(file_, info_);
 }
 

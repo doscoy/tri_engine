@@ -28,7 +28,7 @@ bool isInvalidFloat(const float f);
 
 
 #ifdef DEBUG
-    #define ENABLE_ASSERT   0
+    #define ENABLE_ASSERT   1
 #else
     #define ENABLE_ASSERT   0
 #endif // DEBUG

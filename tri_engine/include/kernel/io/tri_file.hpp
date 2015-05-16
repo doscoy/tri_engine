@@ -77,8 +77,7 @@ public:
 private:
     String name_;       ///< 名前
 
-    uint8_t* data_;     ///< データ
-    
+    std::uint8_t* data_;     ///< データ
     std::size_t size_;  ///< データサイズ
     
     bool auto_free_;    ///< バッファの自動解放フラグ

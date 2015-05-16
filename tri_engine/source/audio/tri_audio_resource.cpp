@@ -22,7 +22,7 @@ SharedPtr<AudioResource> AudioResource::create(
     FilePath& filepath
 ) {
     if (filepath.ext() != ".wav") {
-        T3_PANIC("%s is not found.\n", filepath.getFullPath().c_str());
+        T3_PANIC("%s is not found.\n", filepath.fullpath().c_str());
     }
     
     Wav wav;

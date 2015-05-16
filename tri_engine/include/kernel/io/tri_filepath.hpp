@@ -29,7 +29,7 @@ public:
 public:
     ///
     /// フルパス取得
-    String getFullPath() const;
+    String fullpath() const;
     
     ///
     /// 拡張子取得

@@ -76,7 +76,7 @@ void printConsole(
 
 std::string getDeviceFilePath() {
 
-    return std::string();
+    return std::string("resources/");
 }
 
 }   // namespace cross

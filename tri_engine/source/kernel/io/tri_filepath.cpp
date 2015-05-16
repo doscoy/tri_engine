@@ -43,7 +43,7 @@ String FilePath::getFileNameNotExt() const {
 }
 
 
-String FilePath::getFullPath() const {
+String FilePath::fullpath() const {
     
     String str = base_filepath_ + filepath_;
     return str;

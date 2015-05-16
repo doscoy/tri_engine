@@ -18,17 +18,17 @@
 ///
 /// メモリ確保
 //#define T3_ALLOC(size)      ::t3::HeapManager::getHeap(::t3::HEAP_APP)->allocate(size, __FILE__, __LINE__)
-#define T3_ALLOC(size)      std::malloc(size)
+#define T3_ALLOC(size)      std::malloc((size))
 
 ///
 /// システムメモリ確保
 //#define T3_SYS_ALLOC(size)  ::t3::HeapManager::getHeap(::t3::HEAP_SYS)->allocate(size, __FILE__, __LINE__)
-#define T3_SYS_ALLOC(size)  std::malloc(size)
+#define T3_SYS_ALLOC(size)  std::malloc((size))
 
 ///
 /// メモリ解放
 //#define T3_FREE(addr)       ::t3::Heap::deallocate(addr)
-#define T3_FREE(addr)       std::free(addr)
+#define T3_FREE(addr)       std::free((addr))
 
 
 #endif // TRI_MEMORY_HPP_INCLUDED
