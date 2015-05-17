@@ -17,7 +17,8 @@
 #define SHADER_ATTR_COLOR           "a_color"
 
 #define USE_VAO 1
-#define USE_GLMAP 1
+
+//#define USE_GLMAP 1
 
 
 namespace {
@@ -314,7 +315,7 @@ void SpriteRenderer::margeSprites() {
             intptr_t offset = 0;
             size_t ibo_size = static_cast<int>(indices.size() * sizeof(uint32_t));
 #ifndef USE_GLMAP
-            RenderSystem::setupBufferData(
+            cross::RenderSystem::setupBufferData(
                 cross::RenderSystem::BufferType::TYPE_VERTEX,
                 vbo_size,
                 vertices.data(),
@@ -322,7 +323,7 @@ void SpriteRenderer::margeSprites() {
             );
 
             //  インデックスバッファ更新
-            RenderSystem::setupBufferData(
+            cross::RenderSystem::setupBufferData(
                 cross::RenderSystem::BufferType::TYPE_INDEX,
                 ibo_size,
                 indices.data(),
@@ -469,7 +470,7 @@ void SpriteRenderer::margeSprites() {
             intptr_t offset = 0;
             size_t ibo_size = static_cast<int>(indices.size() * sizeof(uint32_t));
 #ifndef USE_GLMAP
-            RenderSystem::setupBufferData(
+            cross::RenderSystem::setupBufferData(
                 cross::RenderSystem::BufferType::TYPE_VERTEX,
                 vbo_size,
                 vertices.data(),
@@ -477,7 +478,7 @@ void SpriteRenderer::margeSprites() {
             );
 
             //  インデックスバッファ更新
-            RenderSystem::setupBufferData(
+            cross::RenderSystem::setupBufferData(
                 cross::RenderSystem::BufferType::TYPE_INDEX,
                 ibo_size,
                 indices.data(),

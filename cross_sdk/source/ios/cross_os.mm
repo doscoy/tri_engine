@@ -16,7 +16,11 @@ namespace cross {
 
 
 
-void initializePlatform() {
+void initializePlatform(
+    int width,
+    int height,
+    const char* const title
+) {
     accelerometerInit();
 }
 
@@ -68,7 +72,9 @@ void printConsole(
     std::printf("%s", str);
 }
 
+void breakpoint() {
 
+}
 
 std::string getDeviceFilePath() {
     NSString* readPath = [NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] bundlePath], @"/"];

@@ -1,10 +1,4 @@
-//
-//  main.m
-//  tri_samples_ios
-//
-//  Created by KANI Tetsuro on 2014/03/19.
-//  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
-//
+
 
 #include "tri_engine.hpp"
 #include "samples.hpp"
@@ -124,7 +118,7 @@ int main(int argc, char * argv[])
     @autoreleasepool {
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
-#else
+#else // MacOSX or Windows
     t3::initializeTriEngine(640, 680, "win");
     t3::initializeApplication();
 

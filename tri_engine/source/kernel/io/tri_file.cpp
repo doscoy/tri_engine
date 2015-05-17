@@ -83,7 +83,6 @@ bool File::loadFile(
     fs.read((char*)data_, size_);                //ファイル先頭からバッファへコピー
     T3_ASSERT(!fs.bad());
 
-    std::size_t fin = static_cast<std::size_t>(fs.tellg());        //ファイル先頭インデクスを取得
     
     return true;
 }

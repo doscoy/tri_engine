@@ -17,7 +17,7 @@ public:
     void initialize() {
         t3::FilePath path("test.zip");
         t3::ZipFile zip;
-        bool init_res = zip.initialize(path.getFullPath());
+        bool init_res = zip.initialize(path.fullpath());
         
         if (!init_res) {
             return;

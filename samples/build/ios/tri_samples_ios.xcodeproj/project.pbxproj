@@ -46,6 +46,29 @@
 		04F1FE821985557F00C8D498 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F1FE811985557F00C8D498 /* Images.xcassets */; };
 		3A24B4D619C88A4000E9CFFE /* zip_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B4D419C88A4000E9CFFE /* zip_test.cpp */; };
 		3A24B4D819C9D3ED00E9CFFE /* test.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A24B4D719C9D3ED00E9CFFE /* test.zip */; };
+		3A6EE1881B088AEF00BB4247 /* simple_triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A6A691B039ED300D63415 /* simple_triangle.cpp */; };
+		3A6EE1891B088AEF00BB4247 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD301451AFBBD2500516996 /* main.cpp */; };
+		3A6EE18A1B088AEF00BB4247 /* font_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041544D319EC268200C14705 /* font_test.cpp */; };
+		3A6EE18B1B088AEF00BB4247 /* blur_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0403CC9D19DAEDDA000329EC /* blur_test.cpp */; };
+		3A6EE18C1B088AEF00BB4247 /* mem_pool_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046983AC19D6EC41001B71E9 /* mem_pool_test.cpp */; };
+		3A6EE18D1B088AEF00BB4247 /* zip_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B4D419C88A4000E9CFFE /* zip_test.cpp */; };
+		3A6EE18E1B088AEF00BB4247 /* ad_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F219AE257000762711 /* ad_test.cpp */; };
+		3A6EE18F1B088AEF00BB4247 /* audio_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F519AE257000762711 /* audio_test.cpp */; };
+		3A6EE1901B088AEF00BB4247 /* event_handling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F819AE257000762711 /* event_handling.cpp */; };
+		3A6EE1911B088AEF00BB4247 /* mesh_obj_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406FC19AE257000762711 /* mesh_obj_scene.cpp */; };
+		3A6EE1921B088AEF00BB4247 /* offscreen_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071A19AE2B9200762711 /* offscreen_test.cpp */; };
+		3A6EE1931B088AEF00BB4247 /* quat_test_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406FF19AE257000762711 /* quat_test_scene.cpp */; };
+		3A6EE1941B088AEF00BB4247 /* sandbox_template.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070319AE257000762711 /* sandbox_template.cpp */; };
+		3A6EE1951B088AEF00BB4247 /* simple_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070619AE257000762711 /* simple_sprite.cpp */; };
+		3A6EE1961B088AEF00BB4247 /* thread_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071619AE2B8900762711 /* thread_test.cpp */; };
+		3A6EE1971B088AEF00BB4247 /* ui_button_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070919AE257000762711 /* ui_button_test.cpp */; };
+		3A6EE19A1B0896D600BB4247 /* libtri_engine_osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE1851B08891500BB4247 /* libtri_engine_osx.a */; };
+		3A6EE19C1B089B5400BB4247 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE19B1B089B5400BB4247 /* libglfw.dylib */; };
+		3A6EE19E1B08A1C500BB4247 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE19D1B08A1C500BB4247 /* OpenGL.framework */; };
+		3A6EE1A01B08A20F00BB4247 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE19F1B08A20F00BB4247 /* libz.dylib */; };
+		3A6EE1A21B08A25100BB4247 /* libpng.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE1A11B08A25100BB4247 /* libpng.dylib */; };
+		3A6EE1A81B08C98700BB4247 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE1A71B08C98700BB4247 /* libGLEW.a */; };
+		3A6EE1A91B08FBC300BB4247 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE1A51B08AD8A00BB4247 /* IOKit.framework */; };
 		3A7A6A6B1B039ED300D63415 /* simple_triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A6A691B039ED300D63415 /* simple_triangle.cpp */; };
 		3AD301461AFBBD2500516996 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD301451AFBBD2500516996 /* main.cpp */; };
 		3AD4070B19AE257000762711 /* ad_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F219AE257000762711 /* ad_test.cpp */; };
@@ -56,12 +79,26 @@
 		3AD4071119AE257000762711 /* sandbox_template.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070319AE257000762711 /* sandbox_template.cpp */; };
 		3AD4071219AE257000762711 /* simple_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070619AE257000762711 /* simple_sprite.cpp */; };
 		3AD4071319AE257000762711 /* ui_button_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070919AE257000762711 /* ui_button_test.cpp */; };
-		3AD4071419AE26C200762711 /* libtri_engine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA7EE9F19A0FCB600CEB23A /* libtri_engine.a */; };
+		3AD4071419AE26C200762711 /* libtri_engine_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA7EE9F19A0FCB600CEB23A /* libtri_engine_ios.a */; };
 		3AD4071819AE2B8900762711 /* thread_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071619AE2B8900762711 /* thread_test.cpp */; };
 		3AD4071C19AE2B9200762711 /* offscreen_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071A19AE2B9200762711 /* offscreen_test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3A6EE1841B08891500BB4247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3AC2EE481B084DB800F73048;
+			remoteInfo = tri_engine_osx;
+		};
+		3A6EE1981B08940200BB4247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3AC2EE471B084DB800F73048;
+			remoteInfo = tri_engine_osx;
+		};
 		3AA7EE9E19A0FCB600CEB23A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */;
@@ -77,6 +114,18 @@
 			remoteInfo = tri_engine;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3A6EE17B1B08891500BB4247 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = /Users/kani/project/tri_engine/samples/resources;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0403CC9D19DAEDDA000329EC /* blur_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = blur_test.cpp; sourceTree = "<group>"; };
@@ -117,7 +166,6 @@
 		04F1FE661985557F00C8D498 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		04F1FE6A1985557F00C8D498 /* tri_samples_ios-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tri_samples_ios-Info.plist"; sourceTree = "<group>"; };
 		04F1FE6C1985557F00C8D498 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		04F1FE701985557F00C8D498 /* tri_samples_ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tri_samples_ios-Prefix.pch"; sourceTree = "<group>"; };
 		04F1FE711985557F00C8D498 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		04F1FE721985557F00C8D498 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		04F1FE751985557F00C8D498 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
@@ -128,6 +176,14 @@
 		3A24B4D419C88A4000E9CFFE /* zip_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zip_test.cpp; sourceTree = "<group>"; };
 		3A24B4D519C88A4000E9CFFE /* zip_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = zip_test.hpp; sourceTree = "<group>"; };
 		3A24B4D719C9D3ED00E9CFFE /* test.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = test.zip; sourceTree = "<group>"; };
+		3A6EE17D1B08891500BB4247 /* tri_samples_osx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tri_samples_osx; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A6EE19B1B089B5400BB4247 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../opt/local/lib/libglfw.dylib; sourceTree = "<group>"; };
+		3A6EE19D1B08A1C500BB4247 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
+		3A6EE19F1B08A20F00BB4247 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
+		3A6EE1A11B08A25100BB4247 /* libpng.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng.dylib; path = ../../../../../../../opt/local/lib/libpng.dylib; sourceTree = "<group>"; };
+		3A6EE1A31B08AD7B00BB4247 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		3A6EE1A51B08AD8A00BB4247 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
+		3A6EE1A71B08C98700BB4247 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../../../../opt/local/lib/libGLEW.a; sourceTree = "<group>"; };
 		3A7A6A691B039ED300D63415 /* simple_triangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simple_triangle.cpp; sourceTree = "<group>"; };
 		3A7A6A6A1B039ED300D63415 /* simple_triangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = simple_triangle.hpp; sourceTree = "<group>"; };
 		3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = tri_engine.xcodeproj; path = ../../../build/ios/tri_engine.xcodeproj; sourceTree = "<group>"; };
@@ -160,7 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AD4071419AE26C200762711 /* libtri_engine.a in Frameworks */,
+				3AD4071419AE26C200762711 /* libtri_engine_ios.a in Frameworks */,
 				04F1002C198558BF00C8D498 /* libz.dylib in Frameworks */,
 				04F1002A198558B600C8D498 /* libpng.a in Frameworks */,
 				04F100281985589300C8D498 /* CoreMotion.framework in Frameworks */,
@@ -170,6 +226,20 @@
 				04F1FE631985557F00C8D498 /* UIKit.framework in Frameworks */,
 				04F1FE651985557F00C8D498 /* GLKit.framework in Frameworks */,
 				04F1FE5F1985557F00C8D498 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A6EE17A1B08891500BB4247 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A6EE1A91B08FBC300BB4247 /* IOKit.framework in Frameworks */,
+				3A6EE1A01B08A20F00BB4247 /* libz.dylib in Frameworks */,
+				3A6EE19E1B08A1C500BB4247 /* OpenGL.framework in Frameworks */,
+				3A6EE1A81B08C98700BB4247 /* libGLEW.a in Frameworks */,
+				3A6EE19A1B0896D600BB4247 /* libtri_engine_osx.a in Frameworks */,
+				3A6EE1A21B08A25100BB4247 /* libpng.dylib in Frameworks */,
+				3A6EE19C1B089B5400BB4247 /* libglfw.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				04F1FE5B1985557F00C8D498 /* tri_samples_ios.app */,
+				3A6EE17D1B08891500BB4247 /* tri_samples_osx */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -255,6 +326,13 @@
 		04F1FE5D1985557F00C8D498 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A6EE1A71B08C98700BB4247 /* libGLEW.a */,
+				3A6EE1A51B08AD8A00BB4247 /* IOKit.framework */,
+				3A6EE1A31B08AD7B00BB4247 /* Cocoa.framework */,
+				3A6EE1A11B08A25100BB4247 /* libpng.dylib */,
+				3A6EE19F1B08A20F00BB4247 /* libz.dylib */,
+				3A6EE19D1B08A1C500BB4247 /* OpenGL.framework */,
+				3A6EE19B1B089B5400BB4247 /* libglfw.dylib */,
 				04F1002B198558BF00C8D498 /* libz.dylib */,
 				04F10029198558B600C8D498 /* libpng.a */,
 				04F100271985589300C8D498 /* CoreMotion.framework */,
@@ -288,7 +366,6 @@
 			children = (
 				04F1FE6A1985557F00C8D498 /* tri_samples_ios-Info.plist */,
 				04F1FE6B1985557F00C8D498 /* InfoPlist.strings */,
-				04F1FE701985557F00C8D498 /* tri_samples_ios-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -314,7 +391,8 @@
 		3AA7EE9B19A0FCB600CEB23A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3AA7EE9F19A0FCB600CEB23A /* libtri_engine.a */,
+				3AA7EE9F19A0FCB600CEB23A /* libtri_engine_ios.a */,
+				3A6EE1851B08891500BB4247 /* libtri_engine_osx.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -455,6 +533,24 @@
 			productReference = 04F1FE5B1985557F00C8D498 /* tri_samples_ios.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3A6EE17C1B08891500BB4247 /* tri_samples_osx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A6EE1861B08891500BB4247 /* Build configuration list for PBXNativeTarget "tri_samples_osx" */;
+			buildPhases = (
+				3A6EE1791B08891500BB4247 /* Sources */,
+				3A6EE17A1B08891500BB4247 /* Frameworks */,
+				3A6EE17B1B08891500BB4247 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3A6EE1991B08940200BB4247 /* PBXTargetDependency */,
+			);
+			name = tri_samples_osx;
+			productName = tri_samples_osx;
+			productReference = 3A6EE17D1B08891500BB4247 /* tri_samples_osx */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -463,6 +559,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "KANI Tetsuro";
+				TargetAttributes = {
+					3A6EE17C1B08891500BB4247 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+				};
 			};
 			buildConfigurationList = 04F1FE561985557F00C8D498 /* Build configuration list for PBXProject "tri_samples_ios" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -484,15 +585,23 @@
 			projectRoot = "";
 			targets = (
 				04F1FE5A1985557F00C8D498 /* tri_samples_ios */,
+				3A6EE17C1B08891500BB4247 /* tri_samples_osx */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3AA7EE9F19A0FCB600CEB23A /* libtri_engine.a */ = {
+		3A6EE1851B08891500BB4247 /* libtri_engine_osx.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libtri_engine.a;
+			path = libtri_engine_osx.a;
+			remoteRef = 3A6EE1841B08891500BB4247 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3AA7EE9F19A0FCB600CEB23A /* libtri_engine_ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libtri_engine_ios.a;
 			remoteRef = 3AA7EE9E19A0FCB600CEB23A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -558,9 +667,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3A6EE1791B08891500BB4247 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A6EE1881B088AEF00BB4247 /* simple_triangle.cpp in Sources */,
+				3A6EE1891B088AEF00BB4247 /* main.cpp in Sources */,
+				3A6EE18A1B088AEF00BB4247 /* font_test.cpp in Sources */,
+				3A6EE18B1B088AEF00BB4247 /* blur_test.cpp in Sources */,
+				3A6EE18C1B088AEF00BB4247 /* mem_pool_test.cpp in Sources */,
+				3A6EE18D1B088AEF00BB4247 /* zip_test.cpp in Sources */,
+				3A6EE18E1B088AEF00BB4247 /* ad_test.cpp in Sources */,
+				3A6EE18F1B088AEF00BB4247 /* audio_test.cpp in Sources */,
+				3A6EE1901B088AEF00BB4247 /* event_handling.cpp in Sources */,
+				3A6EE1911B088AEF00BB4247 /* mesh_obj_scene.cpp in Sources */,
+				3A6EE1921B088AEF00BB4247 /* offscreen_test.cpp in Sources */,
+				3A6EE1931B088AEF00BB4247 /* quat_test_scene.cpp in Sources */,
+				3A6EE1941B088AEF00BB4247 /* sandbox_template.cpp in Sources */,
+				3A6EE1951B088AEF00BB4247 /* simple_sprite.cpp in Sources */,
+				3A6EE1961B088AEF00BB4247 /* thread_test.cpp in Sources */,
+				3A6EE1971B088AEF00BB4247 /* ui_button_test.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3A6EE1991B08940200BB4247 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = tri_engine_osx;
+			targetProxy = 3A6EE1981B08940200BB4247 /* PBXContainerItemProxy */;
+		};
 		3AA7EEA119A0FCCE00CEB23A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = tri_engine;
@@ -726,6 +863,43 @@
 			};
 			name = Release;
 		};
+		3A6EE1811B08891500BB4247 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "/Users/kani/project/tri_engine/cross_sdk/include /Users/kani/project/tri_engine/tri_engine/include";
+			};
+			name = Debug;
+		};
+		3A6EE1821B08891500BB4247 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "/Users/kani/project/tri_engine/cross_sdk/include /Users/kani/project/tri_engine/tri_engine/include";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -746,6 +920,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		3A6EE1861B08891500BB4247 /* Build configuration list for PBXNativeTarget "tri_samples_osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A6EE1811B08891500BB4247 /* Debug */,
+				3A6EE1821B08891500BB4247 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

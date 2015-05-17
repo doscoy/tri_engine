@@ -62,7 +62,7 @@ public:
     void modelInit() {
         //  メッシュ読み込み
         t3::FilePath obj_path("bunny.obj");
-        mesh_ = T3_SYS_NEW t3::Mesh(obj_path.getFullPath().c_str());
+        mesh_ = T3_SYS_NEW t3::Mesh(obj_path.fullpath().c_str());
     
 
         //  モデル作成
