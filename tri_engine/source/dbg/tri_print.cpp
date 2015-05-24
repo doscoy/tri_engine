@@ -167,7 +167,52 @@ void debugFontPrint(
         (float)cb / 255.0f,
         (float)ca / 255.0f
     );
-    cross::RenderSystem::drawArray(cross::RenderSystem::DrawMode::MODE_TRIANGLE_STRIP, 0, 4);
+    cross::RenderSystem::drawArray(
+        cross::RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
+        0,
+        4
+    );
+
+////
+    float vuv2[] = {
+        u0, v0,
+        u0, v1,
+        u1, v0,
+        u1, v1
+    };
+    cross::RenderSystem::setEnableVertexAttribute(position_slot);
+    cross::RenderSystem::setEnableVertexAttribute(uv_slot);
+
+    cross::RenderSystem::setVertexAttributePointer(
+        position_slot,
+        2,
+        cross::RenderSystem::FLOAT,
+        false,
+        0,
+        varray
+    );
+    cross::RenderSystem::setVertexAttributePointer(
+        uv_slot,
+        2,
+        cross::RenderSystem::FLOAT,
+        false,
+        0,
+        vuv2
+    );
+
+    font_shader_.setAttribute(
+        "in_color",
+        0.0f,
+        0.0f,
+        0.0f,
+        1.0f
+    );
+    cross::RenderSystem::drawArray(
+        cross::RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
+        0,
+        4
+    );
+
 
 }
 

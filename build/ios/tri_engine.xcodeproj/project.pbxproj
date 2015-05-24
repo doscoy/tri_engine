@@ -339,7 +339,7 @@
 		3AA7EE0F19A0F61700CEB23A /* tri_debug_log_layer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_debug_log_layer.hpp; sourceTree = "<group>"; };
 		3AA7EE1019A0F61700CEB23A /* tri_debug_string_buffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_debug_string_buffer.hpp; sourceTree = "<group>"; };
 		3AA7EE1119A0F61700CEB23A /* tri_debug_string_layer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_debug_string_layer.hpp; sourceTree = "<group>"; };
-		3AA7EE1219A0F61700CEB23A /* tri_debugmenu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_debugmenu.hpp; sourceTree = "<group>"; };
+		3AA7EE1219A0F61700CEB23A /* tri_debugmenu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_debugmenu.hpp; sourceTree = "<group>"; };
 		3AA7EE1319A0F61700CEB23A /* tri_debugmenu_frame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_debugmenu_frame.hpp; sourceTree = "<group>"; };
 		3AA7EE1419A0F61700CEB23A /* tri_debugmenu_items.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_debugmenu_items.hpp; sourceTree = "<group>"; };
 		3AA7EE1519A0F61700CEB23A /* tri_debugmenu_label.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_debugmenu_label.hpp; sourceTree = "<group>"; };

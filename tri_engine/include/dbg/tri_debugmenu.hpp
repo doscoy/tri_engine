@@ -1,6 +1,6 @@
 /**
     @file tri_debugmenu.hpp
-    ƒfƒoƒbƒOƒƒjƒ…[.
+    ãƒ‡ãƒãƒƒã‚°ãƒ¡ãƒ‹ãƒ¥ãƒ¼.
 */
 
 #ifndef TRI_DEBUGMENU_HPP_INCLUDED
@@ -14,68 +14,77 @@
 namespace t3 {
 
 ///
-/// ƒfƒoƒbƒOƒƒjƒ…[
+/// ãƒ‡ãƒãƒƒã‚°ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 class DebugMenu
     : public Singleton<DebugMenu>
 {
 public:
     ///
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     DebugMenu();
 
     ///
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~DebugMenu();
     
 public:
     ///
-    /// ƒƒjƒ…[‚ğŠJ‚­
+    /// åˆæœŸåŒ–
+    void initialize();
+    
+    ///
+    /// å¾Œç‰‡ä»˜ã‘
+    void terminate();
+
+
+    ///
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é–‹ã
     void openMenu();
 
     ///
-    /// ƒƒjƒ…[‚ğ•Â‚¶‚é
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é–‰ã˜ã‚‹
     void closeMenu();
     
     ///
-    /// —LŒøİ’è
+    /// æœ‰åŠ¹è¨­å®š
     void enable( const bool enable ){
         enable_ = enable;
     }
     
     ///
-    /// —LŒø”»’è
+    /// æœ‰åŠ¹åˆ¤å®š
     bool isEnable() const {
         return enable_;
     }
     
     ///
-    /// ƒI[ƒvƒ“”»’è
+    /// ã‚ªãƒ¼ãƒ—ãƒ³åˆ¤å®š
     bool isOpened() const {
         return open_;
     }
 
     ///
-    /// ƒ‹[ƒgƒƒjƒ…[æ“¾
+    /// ãƒ«ãƒ¼ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼å–å¾—
     DebugMenuFrame& rootMenu() {
         return menu_root_;
     }
     
     ///
-    /// ƒ‹[ƒgƒƒjƒ…[æ“¾
+    /// ãƒ«ãƒ¼ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼å–å¾—
     const DebugMenuFrame& rootMenu() const {
         return menu_root_;
     }
        
     ///
-    /// XV
+    /// æ›´æ–°
     void update( tick_t delta_time );
     
     ///
-    /// •`‰æ
+    /// æç”»
     void render();
     
     ///
-    /// ƒtƒŒ[ƒ€‚É’Ç‰Á
+    /// ãƒ•ãƒ¬ãƒ¼ãƒ ã«è¿½åŠ 
     void attachFrame(
         DebugMenuFrame& frame
     ){
@@ -83,18 +92,18 @@ public:
     }
     
     ///
-    /// ƒo[ƒ`ƒƒƒ‹ƒpƒbƒhæ“¾
-    const VirtualPad& virtualPad() const {
+    /// ãƒãƒ¼ãƒãƒ£ãƒ«ãƒ‘ãƒƒãƒ‰å–å¾—
+    const t3::ScopedPtr<VirtualPad>& virtualPad() const {
         return vpad_;
     }
             
 private:
-    VirtualPad vpad_;               ///< ƒo[ƒ`ƒƒƒ‹ƒpƒbƒh
-    DebugMenuFrame menu_root_;      ///< ƒfƒoƒƒ‹[ƒg
-    bool enable_;                   ///< —LŒø”»’è
-    bool open_;                     ///< ƒI[ƒvƒ“”»’è
+    t3::ScopedPtr<VirtualPad> vpad_;               ///< ãƒãƒ¼ãƒãƒ£ãƒ«ãƒ‘ãƒƒãƒ‰
+    DebugMenuFrame menu_root_;      ///< ãƒ‡ãƒãƒ¡ãƒ«ãƒ¼ãƒˆ
+    bool enable_;                   ///< æœ‰åŠ¹åˆ¤å®š
+    bool open_;                     ///< ã‚ªãƒ¼ãƒ—ãƒ³åˆ¤å®š
     
-    short left_offset_;             ///< ¶’[‚©‚ç‚ÌƒIƒtƒZƒbƒgˆÊ’u
+    short left_offset_;             ///< å·¦ç«¯ã‹ã‚‰ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆä½ç½®
     
 };
 

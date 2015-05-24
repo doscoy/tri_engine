@@ -163,6 +163,15 @@ Director::Director()
     , exit_request_(false)
     , suspend_(false)
 {
+    //  ファイルシステムベースパス設定
+    FilePath::setBaseDirectory(cross::getDeviceFilePath());
+
+    //  デバッグメニュー生成
+    DebugMenu::createInstance();
+
+    //  シーンマネージャ生成
+    SceneManager::createInstance();
+
     //  テクスチャマネージャ生成
     TextureManager::createInstance();
     
@@ -193,11 +202,22 @@ Director::~Director()
     AudioManager::destroyInstance();
     TextureManager::destroyInstance();
     SceneManager::destroyInstance();
+    DebugMenu::destroyInstance();
+    
 }
 
 
 
 void Director::initializeDirector() {
+    
+    DebugMenu::instance().initialize();
+    
+    //  レンダリングシステムの初期化
+    cross::RenderSystem::initializeRenderSystem();
+
+    //  オーディオシステムの初期化
+    cross::AudioSystem::initializeAudioSystem();
+
     
     dm_layers_.setFocusCallback(
         this,
@@ -233,6 +253,10 @@ void Director::update(
 
     //  入力更新
     updateInput(delta_time);
+
+
+    auto& sm = SceneManager::instance();
+    sm.updateScene(delta_time);
     
     //  タスク更新
     task_manager_.updateTask(delta_time);
@@ -241,9 +265,17 @@ void Director::update(
     CollisionManager& col_manager = CollisionManager::instance();
     col_manager.collisionDetection();
     
+    
+    auto& dm = DebugMenu::instance();
+    dm.update(delta_time);
+    
+    
     //  イベントのブロードキャスト
     safeTickEventManager();
     
+    //  レイヤーの更新
+    RenderLayer::updateLayers(layers(), delta_time);
+
     
     //  終了リクエストチェック
     if (cross::isExitRequest()) {
@@ -251,13 +283,7 @@ void Director::update(
     }
 }
 
-void Director::suspend(
-    const tick_t delta_time
-) {
-    //  入力更新
-    updateInput(delta_time);
-}
-
+  
 
 void Director::updateInput(
     const tick_t delta_time
@@ -348,12 +374,12 @@ void Director::updateInput(
     
     //  debug pad
     cross::GamePadData dbg_pad_data;
-    cross::platformPadData(0, &dbg_pad_data);
+    cross::platformPadData(1, &dbg_pad_data);
     uint32_t dpad_buttons = dbg_pad_data.buttonData();
 
     auto& debug_menu = t3::DebugMenu::instance();
     const auto& vpad = debug_menu.virtualPad();
-    dpad_buttons |= vpad.getPadData()->buttonData();
+    dpad_buttons |= vpad->getPadData()->buttonData();
     updateDebugPad(dpad_buttons, delta_time);
 
 }

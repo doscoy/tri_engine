@@ -12,8 +12,9 @@ DebugMenu::DebugMenu()
     , menu_root_(nullptr, "")
     , enable_(false)
     , open_(false)
-    , left_offset_(0) {
-    vpad_.close();
+    , left_offset_(0)
+{
+
 }
 
 
@@ -21,6 +22,14 @@ DebugMenu::~DebugMenu() {
     
 }
 
+void DebugMenu::initialize() {
+    vpad_.reset(T3_SYS_NEW VirtualPad);
+    vpad_->close();
+}
+
+void DebugMenu::terminate() {
+
+}
 
 void DebugMenu::openMenu() {
 #ifndef DEBUG
@@ -32,7 +41,7 @@ void DebugMenu::openMenu() {
         return;
     }
     
-    vpad_.open();
+    vpad_->open();
     
     menu_root_.openFrame();
     open_ = true;
@@ -46,7 +55,7 @@ void DebugMenu::closeMenu() {
         return;
     }
     
-    vpad_.close();
+    vpad_->close();
     
     menu_root_.closeFrame();
     open_ = false;

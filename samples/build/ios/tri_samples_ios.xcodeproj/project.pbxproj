@@ -82,6 +82,8 @@
 		3AD4071419AE26C200762711 /* libtri_engine_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA7EE9F19A0FCB600CEB23A /* libtri_engine_ios.a */; };
 		3AD4071819AE2B8900762711 /* thread_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071619AE2B8900762711 /* thread_test.cpp */; };
 		3AD4071C19AE2B9200762711 /* offscreen_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071A19AE2B9200762711 /* offscreen_test.cpp */; };
+		3AF43DD31B0A4306005A748C /* input_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AF43DD11B0A4306005A748C /* input_test.cpp */; };
+		3AF43DD41B0A4306005A748C /* input_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AF43DD11B0A4306005A748C /* input_test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +211,8 @@
 		3AD4071719AE2B8900762711 /* thread_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thread_test.hpp; sourceTree = "<group>"; };
 		3AD4071A19AE2B9200762711 /* offscreen_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = offscreen_test.cpp; sourceTree = "<group>"; };
 		3AD4071B19AE2B9200762711 /* offscreen_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = offscreen_test.hpp; sourceTree = "<group>"; };
+		3AF43DD11B0A4306005A748C /* input_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input_test.cpp; sourceTree = "<group>"; };
+		3AF43DD21B0A4306005A748C /* input_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = input_test.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,6 +404,7 @@
 		3AD406F019AE257000762711 /* samples */ = {
 			isa = PBXGroup;
 			children = (
+				3AF43DD01B0A4306005A748C /* input */,
 				3A7A6A681B039ED300D63415 /* simple_triangle */,
 				3AD301451AFBBD2500516996 /* main.cpp */,
 				041544D219EC268200C14705 /* font */,
@@ -510,6 +515,15 @@
 				3AD4071B19AE2B9200762711 /* offscreen_test.hpp */,
 			);
 			path = offscreen;
+			sourceTree = "<group>";
+		};
+		3AF43DD01B0A4306005A748C /* input */ = {
+			isa = PBXGroup;
+			children = (
+				3AF43DD11B0A4306005A748C /* input_test.cpp */,
+				3AF43DD21B0A4306005A748C /* input_test.hpp */,
+			);
+			path = input;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -652,6 +666,7 @@
 				0403CC9F19DAEDDA000329EC /* blur_test.cpp in Sources */,
 				3AD4071119AE257000762711 /* sandbox_template.cpp in Sources */,
 				3AD4070C19AE257000762711 /* audio_test.cpp in Sources */,
+				3AF43DD31B0A4306005A748C /* input_test.cpp in Sources */,
 				3AD301461AFBBD2500516996 /* main.cpp in Sources */,
 				041544D619EC268200C14705 /* font_test.cpp in Sources */,
 				3AD4070B19AE257000762711 /* ad_test.cpp in Sources */,
@@ -671,6 +686,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AF43DD41B0A4306005A748C /* input_test.cpp in Sources */,
 				3A6EE1881B088AEF00BB4247 /* simple_triangle.cpp in Sources */,
 				3A6EE1891B088AEF00BB4247 /* main.cpp in Sources */,
 				3A6EE18A1B088AEF00BB4247 /* font_test.cpp in Sources */,
@@ -928,6 +944,7 @@
 				3A6EE1821B08891500BB4247 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

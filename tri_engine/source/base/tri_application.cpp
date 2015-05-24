@@ -56,16 +56,6 @@ struct Step {
 
 
 
-bool isSuspending() {
-    auto& director = t3::Director::instance();
-    auto& dm = t3::DebugMenu::instance();
-    
-    if (director.isSuspend() || dm.isOpened()) {
-        return true;
-    }
-   
-    return false;
-}
 
 
 }   // unname namespace
@@ -117,13 +107,9 @@ void initializeTriEngine(
     //  プラットフォームの初期化
     cross::initializePlatform(width, height, title);
     
-    //  ファイルシステムベースパス設定
-    FilePath::setBaseDirectory(cross::getDeviceFilePath());
 
     //  マネージャインスタンス生成
     Director::createInstance();
-    DebugMenu::createInstance();
-    SceneManager::createInstance();
     
     //  初期化
     Director::instance().initializeDirector();
@@ -203,11 +189,6 @@ void Application::initializeApplication()
     T3_NULL_ASSERT(root_scene_generator_);
     SceneManager::instance().forceChangeScene(root_scene_generator_);
 
-    //  レンダリングシステムの初期化
-    cross::RenderSystem::initializeRenderSystem();
-
-    //  オーディオシステムの初期化
-    cross::AudioSystem::initializeAudioSystem();
 
 #if DEBUG
     //  システムデバッグメニュー登録
@@ -292,7 +273,6 @@ void Application::updateApplication()
     
     
     
-    SceneManager& sm = SceneManager::instance();
     auto& gs = Director::instance();
     DebugMenu& dm = DebugMenu::instance();
 
@@ -300,31 +280,18 @@ void Application::updateApplication()
     float game_speed = gs.getGameSpeed();
     delta_time *= game_speed;
     
-    dm.update(delta_time);
     
-    if (!isSuspend()) {
-        gs.update(delta_time);
-    }
-    //  レイヤーの更新
-    RenderLayer::updateLayers(gs.layers(), delta_time);
+    gs.update(delta_time);
+
 
     
     system_cost_timer_.end();       // system cost 計測終了
     app_cost_timer_.start();       // app cost 計測開始
 
-    //  シーンの更新
-    if (isSuspend()) {
-        //  サスペンド中
-        gs.suspend(delta_time);
-        sm.suspendScene(delta_time);
-    } else {
-        //  更新中
-        sm.updateScene(delta_time);
-        
-        //  デバッグメニュー開く
-        if (isDebugMenuOpenRequest()) {
-            dm.openMenu();
-        }
+
+    //  デバッグメニュー開く
+    if (isDebugMenuOpenRequest()) {
+        dm.openMenu();
     }
     
     cross::endUpdate();
@@ -549,24 +516,14 @@ bool Application::isDebugMenuOpenRequest() {
 }
 
 bool Application::isSuspend() const {
-    //  ステップ実行フック
-    if (step_update_) {
-        step_update_ = false;
-        return false;
-    }
+
+    auto& director = t3::Director::instance();
+    auto& dm = t3::DebugMenu::instance();
     
-    //  強制シーンチェンジ時もサスペンドを解く
-    SceneManager& sm = SceneManager::instance();
-    if (sm.isForceChangeRequested()) {
-        return false;
+    if (director.isSuspend() || dm.isOpened()) {
+        return true;
     }
-
-    //  サスペンド中か判定
-   if (isSuspending()) {
-       return true;
-   }
-
-
+   
     return false;
 }
 

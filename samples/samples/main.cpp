@@ -100,6 +100,8 @@ class SampleApp
 int main(int argc, char * argv[])
 {
     SampleApp app;
+
+    app.rootScene(t3::Scene::sceneGenerator<InputTestScene>());
     
 //    app.setRootScene(t3::Scene::sceneGenerator<UiButtonScene>());
 //      app.setRootScene(t3::Scene::sceneGenerator<QuatTestScene>());
@@ -108,7 +110,7 @@ int main(int argc, char * argv[])
 //    app.setRootScene(t3::Scene::sceneGenerator<AudioTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
-    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
+//    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<FontTestScene>());
 //  app.rootScene(t3::Scene::sceneGenerator<t3::NullScene>());
 //    app.rootScene(t3::Scene::sceneGenerator<SimpleTriangleScene>());

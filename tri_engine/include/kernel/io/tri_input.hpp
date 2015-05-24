@@ -33,7 +33,7 @@ public:
     
     ///
     /// 加速度センサー情報取得
-    const cross::AccelerometerData& getAccelerometer() const {
+    const cross::AccelerometerData& accelerometer() const {
         return accele_;
     }
 

@@ -20,6 +20,7 @@ void initializePlatform(
     window_ = glfwCreateWindow(w, h, title, nullptr, nullptr);
     glfwMakeContextCurrent(window_);
     glewInit();
+
 }
 
 
@@ -46,14 +47,71 @@ void platformPadData(
     int no,
     GamePadData* data
 ) {
+    if (no > 0) {
+        return;
+    }
+    uint32_t button_bit = 0;
 
+    if (glfwGetKey(window_, GLFW_KEY_UP) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_UP;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_DOWN) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_DOWN;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_LEFT) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_LEFT;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_RIGHT;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_Z) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_A;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_X) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_B;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_C) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_X;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_V) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_Y;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_A) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_L;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_S) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_R;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_SPACE) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_HOME;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_1) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_DEBUG1;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_2) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_DEBUG2;
+    }
+    if (glfwGetKey(window_, GLFW_KEY_3) == GLFW_PRESS) {
+        button_bit |= PAD_BUTTON_DEBUG3;
+    }
+    
+    data->button_data_ = button_bit;
 }
 
 void platformPointingData(
     int no,
     PointingData* data
 ) {
-
+    if (no > 0) {
+        return;
+    }
+    
+    double x, y;
+    glfwGetCursorPos(window_, &x, &y);
+    data->x_ = x;
+    data->y_ = y;
+    
+    data->hit_ = (glfwGetMouseButton(window_, GLFW_MOUSE_BUTTON_LEFT) != 0);
 
 }
 

@@ -10,7 +10,7 @@
 #include "util/tri_uncopyable.hpp"
 #include "base/tri_std.hpp"
 #include "base/tri_types.hpp"
-
+#include "cross_sdk.hpp"
 namespace t3 {
 
 ///
@@ -22,28 +22,28 @@ public:
     ///
     /// ボタン定義
     enum ButtonID{
-        BUTTON_A        = 1 << 0,
-        BUTTON_B        = 1 << 1,
-        BUTTON_X        = 1 << 2,
-        BUTTON_Y        = 1 << 3,
+        BUTTON_A        = cross::PAD_BUTTON_A,
+        BUTTON_B        = cross::PAD_BUTTON_B,
+        BUTTON_X        = cross::PAD_BUTTON_X,
+        BUTTON_Y        = cross::PAD_BUTTON_Y,
         
-        BUTTON_L        = 1 << 5,
-        BUTTON_R        = 1 << 6,
+        BUTTON_L        = cross::PAD_BUTTON_L,
+        BUTTON_R        = cross::PAD_BUTTON_R,
         
-        BUTTON_UP       = 1 << 10,
-        BUTTON_DOWN     = 1 << 11,
-        BUTTON_RIGHT    = 1 << 12,
-        BUTTON_LEFT     = 1 << 13,
+        BUTTON_UP       = cross::PAD_BUTTON_UP,
+        BUTTON_DOWN     = cross::PAD_BUTTON_DOWN,
+        BUTTON_RIGHT    = cross::PAD_BUTTON_RIGHT,
+        BUTTON_LEFT     = cross::PAD_BUTTON_LEFT,
         
-        BUTTON_OPTION1  = 1 << 15,
-        BUTTON_OPTION2  = 1 << 16,
-        BUTTON_HOME     = 1 << 17,
+        BUTTON_OPTION1  = cross::PAD_BUTTON_OPTION1,
+        BUTTON_OPTION2  = cross::PAD_BUTTON_OPTION2,
+        BUTTON_HOME     = cross::PAD_BUTTON_HOME,
         
         MAX_NORMAL_BUTTON_ID = 13,
         
-        DEBUG_BUTTON_1  = 1 << 22,
-        DEBUG_BUTTON_2  = 1 << 23,
-        DEBUG_BUTTON_3  = 1 << 24,
+        DEBUG_BUTTON_1  = cross::PAD_BUTTON_DEBUG1,
+        DEBUG_BUTTON_2  = cross::PAD_BUTTON_DEBUG2,
+        DEBUG_BUTTON_3  = cross::PAD_BUTTON_DEBUG3,
         
         MAX_DEBUG_BUTTON_ID = 3,
         

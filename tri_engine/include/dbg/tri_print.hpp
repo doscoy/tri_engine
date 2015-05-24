@@ -59,9 +59,9 @@ constexpr int DEBUG_FONT_POINT = 16;
 #endif
 
 #if TRI_DEVELOPMENT_ENABLE_PRINT_DISP
-#define T3_PRINT_DISP(x,y,c,...)     ::t3::printDisplay(x,y,c,__VA_ARGS__)
+#define T3_PRINT_DISP(x,y,...)     ::t3::printDisplay(x,y,__VA_ARGS__)
 #else
-#define T3_PRINT_DISP(x,y,c,...)     (void)0
+#define T3_PRINT_DISP(x,y,...)     (void)0
 #endif //   TRI_DEVELOPMENT_ENABLE_PRINT_DISP
 
 
