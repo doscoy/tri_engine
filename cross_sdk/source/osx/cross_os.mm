@@ -2,11 +2,16 @@
 #include "GLFW/glfw3.h"
 #include "cross_os.hpp"
 #include "cstdio"
+#include <sys/time.h>
 
 
 namespace {
 
 GLFWwindow* window_ = nullptr;
+float window_width_;
+float window_height_;
+float half_width_;
+float half_height_;
 }
 
 namespace cross {
@@ -16,11 +21,17 @@ void initializePlatform(
     int h,
     const char* title
 ) {
+    //  システム初期化
     glfwInit();
     window_ = glfwCreateWindow(w, h, title, nullptr, nullptr);
     glfwMakeContextCurrent(window_);
     glewInit();
-
+    
+    //  スクリーンサイズを覚えておく
+    window_width_ = w;
+    window_height_ = h;
+    half_width_ = w / 2;
+    half_height_ = h / 2;
 }
 
 
@@ -34,6 +45,7 @@ void beginUpdate() {
 }
 
 void endUpdate() {
+
 }
 
 
@@ -41,6 +53,8 @@ void endRender() {
 
     glfwSwapBuffers(window_);
     glfwPollEvents();
+    timespec  req = {0, 1000000};
+    nanosleep(&req, 0);
 }
 
 void platformPadData(
@@ -108,8 +122,9 @@ void platformPointingData(
     
     double x, y;
     glfwGetCursorPos(window_, &x, &y);
-    data->x_ = x;
-    data->y_ = y;
+    
+    data->x_ = (x - half_width_) / half_width_;
+    data->y_ = -((y - half_height_) / half_height_);
     
     data->hit_ = (glfwGetMouseButton(window_, GLFW_MOUSE_BUTTON_LEFT) != 0);
 
@@ -135,5 +150,9 @@ std::string getDeviceFilePath() {
     return std::string("");
 #endif
 }
+
+
+
+
 
 }   // namespace cross

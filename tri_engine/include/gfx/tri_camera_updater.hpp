@@ -38,7 +38,6 @@ public:
         camera_ = camera;
     }
     
-protected:
     ///
     /// 管理するカメラ取得
     CameraPtr camera() {

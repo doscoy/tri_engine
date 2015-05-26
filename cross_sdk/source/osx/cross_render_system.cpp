@@ -6,7 +6,6 @@
 #include <iostream>
 #include <regex>
 
-
 int render_call_count_ = 0;
 
 

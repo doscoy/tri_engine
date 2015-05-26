@@ -1,17 +1,17 @@
 
-#ifndef MESH_OBJ_TEST_HPP_INCLUDED
-#define MESH_OBJ_TEST_HPP_INCLUDED
+#ifndef SIMPLE_MESH2_HPP_INCLUDED
+#define SIMPLE_MESH2_HPP_INCLUDED
 
 
 #include "tri_engine.hpp"
 
 
-class MeshObjScene
+class SimpleMesh2Scene
     : public t3::Scene
 {
 public:
-    MeshObjScene();
-    ~MeshObjScene();
+    SimpleMesh2Scene();
+    ~SimpleMesh2Scene();
     
 public:
     void initializeScene() override;
@@ -24,4 +24,4 @@ private:
 
 };
 
-#endif // MESH_OBJ_TEST_HPP_INCLUDED
+#endif // SIMPLE_MESH2_HPP_INCLUDED

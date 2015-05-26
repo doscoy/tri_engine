@@ -11,7 +11,7 @@ namespace t3 {
 Camera::Camera()
     : position_( 0, 0, 0 )
     , target_( 0, 0, -1 )
-    , fov_( toRadian( 35.0f ) )
+    , fov_( toRadian( 90.0f ) )
     , up_( 0, 1, 0 )
     , front_( 0, 0, -1 )
     , right_( 1, 0, 0 )

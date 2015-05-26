@@ -1,11 +1,11 @@
 
 
-#include "mesh_obj_scene.hpp"
+#include "simple_mesh2.hpp"
 
 
 
 
-class MeshObjScene::SceneContext
+class SimpleMesh2Scene::SceneContext
 {
 public:
     SceneContext()
@@ -95,27 +95,27 @@ private:
 
 
 
-MeshObjScene::MeshObjScene()
+SimpleMesh2Scene::SimpleMesh2Scene()
     : Scene( "MeshObjScene" ) {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 
-MeshObjScene::~MeshObjScene() {
+SimpleMesh2Scene::~SimpleMesh2Scene() {
     
 }
 
 
-void MeshObjScene::initializeScene() {
+void SimpleMesh2Scene::initializeScene() {
     context_->initialize();
 }
 
 
-void MeshObjScene::terminateScene() {
+void SimpleMesh2Scene::terminateScene() {
     context_->terminate();
 }
 
 
-void MeshObjScene::updateScene(t3::tick_t delta_time) {
+void SimpleMesh2Scene::updateScene(t3::tick_t delta_time) {
     context_->update(delta_time);
     
     auto& gs = t3::Director::instance();
@@ -125,7 +125,7 @@ void MeshObjScene::updateScene(t3::tick_t delta_time) {
     }
 }
 
-void MeshObjScene::suspendScene(t3::tick_t delta_time) {
+void SimpleMesh2Scene::suspendScene(t3::tick_t delta_time) {
 
     context_->suspend(delta_time);
 }

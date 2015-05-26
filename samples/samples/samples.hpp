@@ -1,23 +1,18 @@
-//
-//  sandbox.hpp
-//  tri_sandbox_osx
-//
-//  Created by KANI Tetsuro on 2013/01/25.
-//  Copyright (c) 2013年 KANI Tetsuro. All rights reserved.
-//
 
 #ifndef SAMPLES_HPP_INCLUDED
 #define SAMPLES_HPP_INCLUDED
 
+//  includes
 #include "tri_engine.hpp"
 
-#include "sprite/simple_sprite.hpp"
-#include "simple_triangle/simple_triangle.hpp"
+#include "simple_sprite/simple_sprite.hpp"
+#include "simple_primitive/simple_primitive.hpp"
 #include "input/input_test.hpp"
 //#include "audio/audio_test.hpp"
-//#include "ad/ad_test.hpp"
+#include "blur/blur_test.hpp"
 //#include "event_handling/event_handling.hpp"
-//#include "mesh_obj/mesh_obj_scene.hpp"
+#include "simple_mesh/simple_mesh.hpp"
+#include "simple_mesh2/simple_mesh2.hpp"
 //#include "mem_pool/mem_pool_test.hpp"
 //#include "ui_button/ui_button_test.hpp"
 //#include "quat/quat_test_scene.hpp"
@@ -28,6 +23,74 @@
 //#include "font/font_test.hpp"
 
 
+
+class RootTest
+    : public t3::Scene
+{
+public:
+    RootTest()
+        : Scene("RootTest")
+        , samples_(0, "SAMPLES")
+        , simple_primitive_(&samples_, "SIMPLE PRIMITIVE")
+        , simple_sprite_(&samples_, "SIMPLE SPRITE")
+        , input_test_(&samples_, "INPUT TEST")
+        , blur_test_(&samples_, "BLUR TEST")
+//        , dmsl_event_handling_(&sandbox_, "EVENT HANDLING")
+        , simple_mesh_(&samples_, "SIMPLE MESH")
+        , simple_mesh2_(&samples_, "SIMPLE MESH2")
+    {}
+
+public:
+    void initializeScene() override {
+        auto& dm = t3::DebugMenu::instance();
+        samples_.attachSelf(dm.rootMenu());
+    }
+
+    void updateScene(t3::tick_t delta_time) override {
+        t3::printDisplay(
+            0,
+            100,
+            t3::color_sample::white(),
+            "%d",
+            t3::frame_counter_.now()
+        );
+
+    }
+
+    void terminateScene() override {
+        samples_.detachSelf();
+    }
+
+
+private:
+    t3::DebugMenuFrame samples_;
+    t3::DebugMenuSceneLouncher<SimplePrimitiveScene> simple_primitive_;
+    t3::DebugMenuSceneLouncher<SimpleSpriteScene> simple_sprite_;
+    t3::DebugMenuSceneLouncher<InputTestScene> input_test_;
+    t3::DebugMenuSceneLouncher<BlurScene> blur_test_;
+//    t3::DebugMenuSceneLouncher<EventHandlingScene> dmsl_event_handling_;
+    t3::DebugMenuSceneLouncher<SimpleMeshScene>  simple_mesh_;
+    t3::DebugMenuSceneLouncher<SimpleMesh2Scene> simple_mesh2_;
+
+};
+
+
+class SampleApp
+    : public t3::Application
+{
+    //  ゲームの初期化
+    void initializeGame() override {
+        
+        
+    }
+    
+    
+    //  ゲームの後片付け
+    void terminateGame() override {
+        
+        
+    }
+};
 
 
 #endif

@@ -1,14 +1,13 @@
 
 
-#include "simple_triangle.hpp"
+#include "simple_primitive.hpp"
 #include "base/tri_std.hpp"
 
 
-class SimpleTriangleScene::SceneContext
+class SimplePrimitiveScene::SceneContext
 {
 public:
     SceneContext()
-        : total_time_(0)
     {}
     
     ~SceneContext()
@@ -39,11 +38,6 @@ public:
         );
     }
 
-private:
-    t3::tick_t total_time_;
-    t3::SpriteLayer sprite_layer_;
-    t3::Vector<t3::SpritePtr> sprites_;
-    t3::TexturePtr textures_[9];
 };
 
 
@@ -51,27 +45,27 @@ private:
 
 
 
-SimpleTriangleScene::SimpleTriangleScene()
-    : Scene( "TriangleTest" ) {
+SimplePrimitiveScene::SimplePrimitiveScene()
+    : Scene( "PrimitiveTest" ) {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 
-SimpleTriangleScene::~SimpleTriangleScene() {
+SimplePrimitiveScene::~SimplePrimitiveScene() {
     
 }
 
 
-void SimpleTriangleScene::initializeScene() {
+void SimplePrimitiveScene::initializeScene() {
     context_->initialize();
 }
 
 
-void SimpleTriangleScene::terminateScene() {
+void SimplePrimitiveScene::terminateScene() {
     context_->terminate();
 }
 
 
-void SimpleTriangleScene::updateScene(t3::tick_t delta_time) {
+void SimplePrimitiveScene::updateScene(t3::tick_t delta_time) {
     context_->update(delta_time);
     
     auto& director = t3::Director::instance();
@@ -81,13 +75,13 @@ void SimpleTriangleScene::updateScene(t3::tick_t delta_time) {
     }
 }
 
-void SimpleTriangleScene::suspendScene(t3::tick_t delta_time) {
+void SimplePrimitiveScene::suspendScene(t3::tick_t delta_time) {
 
     context_->suspend(delta_time);
 }
 
 
-void SimpleTriangleScene::debugRenderScene() {
+void SimplePrimitiveScene::debugRenderScene() {
     context_->debugRender();
 }
 

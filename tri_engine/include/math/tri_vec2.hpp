@@ -137,6 +137,14 @@ public:
         return Vec2( -x_, -y_ );
     }
     
+    
+    ///
+    /// ハーフベクトルを返す
+    Vec2Template half() const {
+        return *this * 0.5f;
+    }
+    
+    
     ///
     ///  pointer
     const T* pointer() const {

@@ -48,9 +48,9 @@ void Pointing::updatePointing(
     
     //  座標系補正
     //  仮想スクリーン座標に変換
-    const Vec2& revise = t3::Director::instance().screenRevise();
-    float new_point_x = data.x_ * revise.x_;
-    float new_point_y = data.y_ * revise.y_;
+    const Vec2& screen_size = t3::Director::instance().virtualScreenSize().half();
+    float new_point_x = data.x_ * screen_size.x_;
+    float new_point_y = data.y_ * screen_size.y_;
     
     
     //  座標設定

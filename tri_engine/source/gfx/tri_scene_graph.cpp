@@ -51,7 +51,7 @@ void SceneGraph::renderScene()
 void SceneGraph::setupView()
 {
     auto& d = t3::Director::instance();
-    auto& screen = d.virtualScreenSize();
+    auto& screen = d.deviceScreenSize();
     
     cross::RenderSystem::setViewport(
         0, 
@@ -59,14 +59,17 @@ void SceneGraph::setupView()
         static_cast<int>(screen.x_), 
         static_cast<int>(screen.y_)
 	);
+
     t3::Mtx44 projection = t3::Mtx44::getFrustumMatrix(
         -1,
         1,
         -(float)screen.y_ /screen.x_,
         (float)screen.y_/screen.x_,
         0.1f,
-        1000.0f
+        100.0f
     );
+
+//    auto proj = t3::Mtx44::getPerspectiveMatrix()
     
     const Mtx44* view_mtx = camera_->viewMatrix();
     Mtx44 view_projection = *view_mtx * projection;

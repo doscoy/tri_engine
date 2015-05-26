@@ -70,11 +70,11 @@ public:
 
         
         //  カメラ生成
-        const t3::Sphere* sphere = mesh_->getBoundingSphere();;
+        const t3::Sphere& sphere = mesh_->boundingSphere();
         cam_ = t3::Camera::create();
         cam_update_.camera(cam_);
-        cam_update_.position(sphere->position() + t3::Vec3(0, 0, sphere->radius() * 2));
-        cam_update_.targetPosition(sphere->position());
+        cam_update_.position(sphere.position() + t3::Vec3(0, 0, sphere.radius() * 2));
+        cam_update_.targetPosition(sphere.position());
     }
     
     void modelDraw() {

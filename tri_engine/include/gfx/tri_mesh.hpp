@@ -58,8 +58,8 @@ public:
     
     ///
     /// 境界球を取得
-    const Sphere* getBoundingSphere() const {
-        return &sphere_;
+    const Sphere& boundingSphere() const {
+        return sphere_;
     }
 
 private:

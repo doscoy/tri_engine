@@ -82,12 +82,16 @@ extern cross::PointingData point_data_[4];
     point_data_[0].hit_ = true;
     UITouch* touch = [touches anyObject];
     CGPoint location = [touch locationInView:self.view];
+
     float touch_x = location.x * screen_scale_;
     float touch_y = location.y * screen_scale_;
-    float pos_x = touch_x - (screen_x_ / 2);
-    float pos_y = -touch_y + (screen_y_ / 2);
+    float half_w = screen_x_ / 2;
+    float half_h = screen_y_ / 2;
+    float pos_x = (touch_x - half_w) / half_w;
+    float pos_y = -((touch_y - half_h) / half_h);
     point_data_[0].x_ = pos_x;
     point_data_[0].y_ = pos_y;
+
 }
 
 // 画面に触れている指が一本以上移動したときに実行されるメソッド
@@ -98,10 +102,13 @@ extern cross::PointingData point_data_[4];
     CGPoint location = [touch locationInView:self.view];
     float touch_x = location.x * screen_scale_;
     float touch_y = location.y * screen_scale_;
-    float pos_x = touch_x - (screen_x_ / 2);
-    float pos_y = -touch_y + (screen_y_ / 2);
+    float half_w = screen_x_ / 2;
+    float half_h = screen_y_ / 2;
+    float pos_x = (touch_x - half_w) / half_w;
+    float pos_y = -((touch_y - half_h) / half_h);
     point_data_[0].x_ = pos_x;
     point_data_[0].y_ = pos_y;
+
 
 }
 

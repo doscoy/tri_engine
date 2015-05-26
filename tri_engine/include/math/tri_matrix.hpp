@@ -547,6 +547,20 @@ public:
 		mtx.w_.z_ = - (T(2) * far * near) / (far - near);
 	}
     
+    ///
+    /// 正射影行列生成
+    static Mtx44Template<T> getPerspectiveMatrix(
+        T const & fov,
+		T const & width,
+		T const & height,
+		T const & near,
+		T const & far
+    ) {
+        Mtx44Template m;
+        makePerspective(&m, fov, width, height, near, far);
+        return m;
+    }
+    
     
     ///
     /// フラスタム行列生成
