@@ -15,7 +15,7 @@ RadioButton::RadioButton()
     , group_id_()
     , active_button_idx_(0) {
  
-    safeAddListener(this, &RadioButton::onRadioButtonTriggered, RadioButtonEvent::TYPE);
+    safeAddListener<RadioButton>(this, &RadioButton::onRadioButtonTriggered, RadioButtonEvent::TYPE);
 }
 
 RadioButton::~RadioButton() {

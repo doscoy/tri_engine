@@ -27,6 +27,7 @@ using EventHandlerFunction = MethodCallback1<EventListen, const Event&>;
 
 ///
 /// イベントハンドラ
+/*
 class EventHandler {
 public:
     EventHandler()
@@ -58,7 +59,9 @@ private:
     EventListenerPtr listener_;            ///< リスナ
     EventHandlerFunction func_; ///< コールバック
 };
-    
+*/
+
+using EventHandler = t3::SharedPtr<MethodCallbackBaseX>;
 
 
 #define TRI_DEV_EVENT_TRACE 1   ///< イベントのトレースフラグ
@@ -188,16 +191,11 @@ private:
 template <typename T>
 bool safeAddListener(
     const T* listener,
-    void (T::*func)(const Event&),
+//    void (T::*func)(const Event&),
+    std::function<void(T&, const Event&)> func,
     const EventType& in_type
 ) {
-    MethodCallback1<T, const Event&> callback((T*)listener, func);
-
-    EventHandler handler;
-    
-    handler.listener((EventListenerPtr)listener);
-    handler.callback((EventHandlerFunction&)callback);
-
+    auto handler = std::make_shared<MethodCallbackX1<T, const Event&>>(listener, func);
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->addListener(handler, in_type);
 }
@@ -208,7 +206,7 @@ bool safeRemoveListener(
     const EventListenerPtr in_handler,
     const EventType& in_type
 );
-
+   
 ///
 /// リスナ削除
 bool safeRemoveListener(

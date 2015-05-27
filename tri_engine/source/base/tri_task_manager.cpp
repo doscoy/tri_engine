@@ -11,7 +11,8 @@ TaskManager::TaskManager()
     : taskes_()
     , pause_level_(PAUSE_NONE)
 {
-    safeAddListener(this, &TaskManager::onPause, PauseEvent::TYPE);
+    auto t = PauseEvent::TYPE;
+    safeAddListener(this, &TaskManager::onPause, t);
     safeAddListener(this, &TaskManager::onResume, ResumeEvent::TYPE);
 }
 

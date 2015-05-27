@@ -54,19 +54,19 @@ Button::Button()
     , activator_(std::make_shared<ButtonDefaultActivator>())
     , hover_effector_(std::make_shared<ButtonDefaultHoverEffector>())
 {
-    safeAddListener(
+    safeAddListener<Button>(
         this,
         &self_t::onPointingTrigger,
         PointingTriggeredEvent::TYPE
     );
 
-    safeAddListener(
+    safeAddListener<Button>(
         this,
         &self_t::onPointingMoving,
         PointingMovingEvent::TYPE
     );
     
-    safeAddListener(
+    safeAddListener<Button>(
         this,
         &self_t::onPointingRelease,
         PointingReleasedEvent::TYPE

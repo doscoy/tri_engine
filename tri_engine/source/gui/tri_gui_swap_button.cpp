@@ -52,8 +52,8 @@ SwapButton::SwapButton()
     , a_event_(nullptr)
     , b_event_(nullptr)
 {
-    safeAddListener(this, &SwapButton::onTriggeredA, SwapButtonAEvent::TYPE);
-    safeAddListener(this, &SwapButton::onTriggeredB, SwapButtonBEvent::TYPE);
+    safeAddListener<SwapButton>(this, &SwapButton::onTriggeredA, SwapButtonAEvent::TYPE);
+    safeAddListener<SwapButton>(this, &SwapButton::onTriggeredB, SwapButtonBEvent::TYPE);
 }
 
 SwapButton::~SwapButton()

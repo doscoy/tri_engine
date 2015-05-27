@@ -164,9 +164,8 @@ public:
     /// メソッド実行
     ReturnType invoke( Arg1& arg1, Arg2& arg2 ) {
 		T* t = (T*)target();
-        T* u = nullptr;
         callback_t& f = reinterpret_cast<callback_t&>(*(&func_));
-		return (u->*f)(arg1, arg2);
+		return (t->*f)(arg1, arg2);
 	}
 
 
@@ -255,10 +254,48 @@ protected:
 
     ///
     /// メンバ関数ポインタ
-    std::function<void(T&)> func_;
+    callback_t func_;
 
 };
 
+///
+/// メソッドコールバック2
+template <class T, class Arg1>
+class MethodCallbackX1
+    : public MethodCallbackBaseX {
+public:
+    typedef std::function<void(T&, Arg1)> callback_t;
+
+    ///
+    /// コンストラクタ
+    MethodCallbackX1(T* ins, callback_t& callback)
+        : target_(ins)
+        , func_(callback)
+    {}
+
+
+    ///
+    /// 実行
+    void invoke() override{
+		func_(*target_, arg_);
+	}
+
+    void arg(Arg1 arg) {
+        arg_ = arg;
+    }
+
+protected:
+    ///
+    /// インスタンス
+    T* target_;
+
+    ///
+    /// メンバ関数ポインタ
+    callback_t func_;
+    
+    Arg1 arg_;
+
+};
 
 }   // namespace t3
 

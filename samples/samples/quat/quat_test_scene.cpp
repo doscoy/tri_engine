@@ -19,8 +19,7 @@ public:
   
 public:
     void initialize() {
-        layer_.setUpdateCallback(this, &SceneContext::layerUpdate);
-        layer_.setRenderCallback(this, &SceneContext::layerRender);
+        layer_.setRenderCallback<QuatTestScene::SceneContext>(this, &SceneContext::layerRender);
 
         //  メッシュ読み込み
         t3::FilePath obj_path("ninja.obj");
@@ -69,11 +68,8 @@ public:
     
     
 private:
-    void layerUpdate(t3::DrawLayer* const, t3::tick_t dt) {
-
-    }
     
-    void layerRender(t3::DrawLayer* const) {
+    void layerRender() {
 
         cross::RenderSystem::setCulling(false);
         cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
