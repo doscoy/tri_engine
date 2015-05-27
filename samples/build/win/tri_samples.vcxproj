@@ -102,9 +102,13 @@
     <ClCompile Include="..\..\..\tri_engine\source\util\tri_unique_id.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\util\tri_utf8.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\util\tri_zipfile.cpp" />
+    <ClCompile Include="..\..\samples\blur\blur_test.cpp" />
+    <ClCompile Include="..\..\samples\input\input_test.cpp" />
     <ClCompile Include="..\..\samples\main.cpp" />
-    <ClCompile Include="..\..\samples\simple_triangle\simple_triangle.cpp" />
-    <ClCompile Include="..\..\samples\sprite\simple_sprite.cpp" />
+    <ClCompile Include="..\..\samples\simple_mesh2\simple_mesh2.cpp" />
+    <ClCompile Include="..\..\samples\simple_mesh\simple_mesh.cpp" />
+    <ClCompile Include="..\..\samples\simple_primitive\simple_primitive.cpp" />
+    <ClCompile Include="..\..\samples\simple_sprite\simple_sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\cross_sdk\include\cross_accelerometer.hpp" />
@@ -259,9 +263,13 @@
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_utf8.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_util.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\util\tri_zipfile.hpp" />
+    <ClInclude Include="..\..\samples\blur\blur_test.hpp" />
+    <ClInclude Include="..\..\samples\input\input_test.hpp" />
     <ClInclude Include="..\..\samples\samples.hpp" />
-    <ClInclude Include="..\..\samples\simple_triangle\simple_triangle.hpp" />
-    <ClInclude Include="..\..\samples\sprite\simple_sprite.hpp" />
+    <ClInclude Include="..\..\samples\simple_mesh2\simple_mesh2.hpp" />
+    <ClInclude Include="..\..\samples\simple_mesh\simple_mesh.hpp" />
+    <ClInclude Include="..\..\samples\simple_primitive\simple_primitive.hpp" />
+    <ClInclude Include="..\..\samples\simple_sprite\simple_sprite.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{61F7614C-C50A-465B-8824-FA1FC566FF8A}</ProjectGuid>

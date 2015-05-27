@@ -38,8 +38,8 @@ namespace t3 {
 VirtualPad::VirtualPad()
     : pad_layer_("vpad", RenderLayer::PRIORITY_DEBUG)
 {
-    pad_layer_.setUpdateCallback(this, &VirtualPad::updateVirtualPad);
-    pad_layer_.setRenderCallback(this, &VirtualPad::renderVirtualPad);
+    pad_layer_.setUpdateCallback<VirtualPad>(this, &VirtualPad::updateVirtualPad);
+    pad_layer_.setRenderCallback<VirtualPad>(this, &VirtualPad::renderVirtualPad);
 }
 
 VirtualPad::~VirtualPad() {
@@ -60,10 +60,7 @@ void VirtualPad::close() {
     pad_layer_.disableLayer();
 }
 
-void VirtualPad::updateVirtualPad(
-    DrawLayer* const layer, 
-    tick_t delta_time
-) {
+void VirtualPad::updateVirtualPad() {
 
     //  パッドデータクリア
     pad_data_.clearData();
@@ -129,7 +126,7 @@ void VirtualPad::updateVirtualPad(
 
 }
 
-void VirtualPad::renderVirtualPad(DrawLayer* const layer) {
+void VirtualPad::renderVirtualPad() {
 
 
     

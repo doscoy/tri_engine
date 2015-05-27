@@ -21,8 +21,8 @@ DrawLayer::DrawLayer(
     const String name,
     const int priority
 )   : RenderLayer(name, priority)
-    , update_func_(this, &self_t::nullUpdate)
-    , render_func_(this, &self_t::nullRender)
+    , update_func_(nullptr)
+    , render_func_(nullptr)
 {
 }
 
@@ -35,11 +35,15 @@ DrawLayer::~DrawLayer()
 void DrawLayer::updateLayer(
     tick_t delta_time
 ) {
-    update_func_.invoke(this, delta_time);
+    if (update_func_) {
+        update_func_->invoke();
+    }
 }
 
 void DrawLayer::drawLayer() {
-    render_func_.invoke(this);
+    if (render_func_) {
+        render_func_->invoke();
+    }
 }
 
 

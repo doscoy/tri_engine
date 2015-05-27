@@ -25,7 +25,6 @@ using RenderLayers = List<RenderLayer*>;
 /// 描画レイヤーベース
 class RenderLayer
     : private Uncopyable
-    , virtual public Nameable
 {
 public:
     ///
@@ -160,7 +159,9 @@ public:
     /// デバッグメニューを削除
     virtual void unregistryToDebugMenu();
     
-    
+    std::string name() {
+        return layer_name_;
+    }
     
 public:
     ///
@@ -228,6 +229,8 @@ protected:
     ///
     /// ポーズデバッグ
     DebugMenuItem<bool> dmi_pause_;
+
+    std::string layer_name_;
 };
 
 

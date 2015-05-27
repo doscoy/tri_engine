@@ -27,8 +27,35 @@ using EventHandlerFunction = MethodCallback1<EventListen, const Event&>;
 
 ///
 /// イベントハンドラ
-struct EventHandler {
-    void* listener_;            ///< リスナ
+class EventHandler {
+public:
+    EventHandler()
+        : listener_(nullptr)
+        , func_(nullptr, nullptr)
+    {}
+
+    void listener(EventListenerPtr listener) {
+        listener_ = listener;
+    }
+
+    EventListenerPtr listener() {
+        return listener_;
+    }
+
+    const EventListenerPtr listener() const {
+        return listener_;
+    }
+
+    EventHandlerFunction& callback() {
+        return func_;
+    }
+
+    void callback(EventHandlerFunction& func) {
+        func_ = func;
+    }
+
+private:
+    EventListenerPtr listener_;            ///< リスナ
     EventHandlerFunction func_; ///< コールバック
 };
     
@@ -167,8 +194,9 @@ bool safeAddListener(
     MethodCallback1<T, const Event&> callback((T*)listener, func);
 
     EventHandler handler;
-    handler.listener_ = (EventListenerPtr)listener;
-    handler.func_ = (EventHandlerFunction&)callback;
+    
+    handler.listener((EventListenerPtr)listener);
+    handler.callback((EventHandlerFunction&)callback);
 
     T3_ASSERT(EventManagerBase::get());
     return EventManagerBase::get()->addListener(handler, in_type);

@@ -19,8 +19,8 @@ public:
   
 public:
     void initialize(){
-        layer_.setUpdateCallback(this, &SceneContext::layerUpdate);
-        layer_.setRenderCallback(this, &SceneContext::layerRender);
+        layer_.setUpdateCallback<SimpleMeshScene::SceneContext>(this, &SceneContext::layerUpdate);
+        layer_.setRenderCallback<SimpleMeshScene::SceneContext>(this, &SceneContext::layerRender);
 
         //  メッシュ読み込み
         t3::FilePath obj_path("o.obj");
@@ -47,6 +47,7 @@ public:
     }
     
     void update(t3::tick_t delta_time){
+        
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -54,10 +55,10 @@ public:
     }
     
 private:
-    void layerUpdate(t3::DrawLayer* const, t3::tick_t dt) {
-        scene_graph_.updateScene(dt);
+    void layerUpdate() {
+        scene_graph_.updateScene(t3::frameSec<60>());
     }
-    void layerRender(t3::DrawLayer* const) {
+    void layerRender() {
         scene_graph_.renderScene();
     }
 

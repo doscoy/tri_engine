@@ -35,10 +35,10 @@ public:
     
 private:
     //  バーチャルパッド更新
-    void updateVirtualPad(t3::DrawLayer* const layer, tick_t delta_time);
+    void updateVirtualPad();
 
     //  バーチャルパッド描画
-    void renderVirtualPad(t3::DrawLayer* const layer);
+    void renderVirtualPad();
 
     
     

@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\..\samples\main.cpp" />
-    <ClCompile Include="..\..\samples\sprite\simple_sprite.cpp">
-      <Filter>sample</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_accelerometer.cpp">
       <Filter>cross_sdk\src</Filter>
     </ClCompile>
@@ -275,18 +272,29 @@
     <ClCompile Include="..\..\..\tri_engine\source\util\tri_zipfile.cpp">
       <Filter>tri_engine\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\samples\simple_triangle\simple_triangle.cpp">
-      <Filter>sample</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_dbg.cpp">
       <Filter>cross_sdk\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\samples\simple_primitive\simple_primitive.cpp">
+      <Filter>sample\simple_primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\samples\simple_sprite\simple_sprite.cpp">
+      <Filter>sample\simple_sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\samples\simple_mesh\simple_mesh.cpp">
+      <Filter>sample\simple_mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\samples\simple_mesh2\simple_mesh2.cpp">
+      <Filter>sample\simple_mesh2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\samples\input\input_test.cpp">
+      <Filter>sample\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\samples\blur\blur_test.cpp">
+      <Filter>sample\blur</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\samples\samples.hpp" />
-    <ClInclude Include="..\..\samples\sprite\simple_sprite.hpp">
-      <Filter>sample</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\cross_sdk\include\cross_accelerometer.hpp">
       <Filter>cross_sdk\include</Filter>
     </ClInclude>
@@ -740,11 +748,29 @@
     <ClInclude Include="..\..\..\tri_engine\include\audio\tri_wav.hpp">
       <Filter>tri_engine\include\audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\samples\simple_triangle\simple_triangle.hpp">
-      <Filter>sample</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\cross_sdk\include\cross_dbg.hpp">
       <Filter>cross_sdk\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\samples\samples.hpp">
+      <Filter>sample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\samples\simple_primitive\simple_primitive.hpp">
+      <Filter>sample\simple_primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\samples\simple_sprite\simple_sprite.hpp">
+      <Filter>sample\simple_sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\samples\simple_mesh\simple_mesh.hpp">
+      <Filter>sample\simple_mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\samples\simple_mesh2\simple_mesh2.hpp">
+      <Filter>sample\simple_mesh2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\samples\input\input_test.hpp">
+      <Filter>sample\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\samples\blur\blur_test.hpp">
+      <Filter>sample\blur</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -798,6 +824,24 @@
     </Filter>
     <Filter Include="tri_engine\src">
       <UniqueIdentifier>{5755c786-e839-458a-bb34-739ee16d6df6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample\simple_primitive">
+      <UniqueIdentifier>{d08f247a-2ac2-4fd1-88aa-22146f9c38e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample\simple_sprite">
+      <UniqueIdentifier>{304f6e6a-f539-43a3-9450-3cbe5a18c429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample\simple_mesh">
+      <UniqueIdentifier>{c5b4af08-87bd-4806-ae2e-695cd22be8bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample\simple_mesh2">
+      <UniqueIdentifier>{2e207423-056a-4bce-9c98-0de37f8b09d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample\input">
+      <UniqueIdentifier>{7eecc334-8c52-44c0-9962-9ad33e0299a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample\blur">
+      <UniqueIdentifier>{df4b6d27-0308-47fa-9c19-f12ad09a2fda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

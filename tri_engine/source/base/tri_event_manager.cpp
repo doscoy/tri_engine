@@ -234,7 +234,7 @@ bool EventManager::removeListener(const EventListenerPtr listener) {
         EventListenerTable::iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-            if (table_it->listener_ == listener) {
+            if (table_it->listener() == listener) {
                 
                 table.erase(table_it);
                 
@@ -362,7 +362,7 @@ bool EventManager::tick(
             
             for (; table_it != table_end; ++table_it) {
 
-                table_it->func_.invoke(*event);
+                table_it->callback().invoke(*event);
             }
         }
         
@@ -377,7 +377,7 @@ bool EventManager::tick(
         EventListenerTable::iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-            table_it->func_.invoke(*event);
+            table_it->callback().invoke(*event);
         }
         
         process_count += 1;
@@ -451,7 +451,7 @@ EventListenerList EventManager::getListenerList(
     EventListenerTable::const_iterator table_it = table.begin();
     EventListenerTable::const_iterator table_end = table.end();
     for (; table_it != table_end; ++table_it) {
-        result.push_back(table_it->listener_);
+        result.push_back(table_it->listener());
     }
     
     return result;
@@ -528,7 +528,7 @@ bool EventManager::triggerEvent(
         EventListenerTable::iterator table_it = table.begin();
         EventListenerTable::iterator table_end = table.end();
         for (; table_it != table_end; ++table_it) {
-            table_it->func_.invoke(*in_event);
+            table_it->callback().invoke(*in_event);
         }
     }
     
@@ -547,7 +547,7 @@ bool EventManager::triggerEvent(
     EventListenerTable::iterator table_end = table.end();
     
     for (; table_it != table_end; ++table_it) {
-        table_it->func_.invoke(*in_event);
+        table_it->callback().invoke(*in_event);
     }
 
     return processed;

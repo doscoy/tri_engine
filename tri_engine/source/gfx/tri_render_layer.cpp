@@ -12,16 +12,15 @@ namespace t3{
 RenderLayer::RenderLayer(
     const String& layer_name,
     const int priority
-)   : Nameable()
-    , pause_(false)
+)   : pause_(false)
     , visible_(true)
     , priority_(priority)
     , render_target_(nullptr)
     , dmf_me_(nullptr, layer_name)
     , dmi_visible_(&dmf_me_, "VISIBLE", visible_)
     , dmi_pause_(&dmf_me_, "PAUSE", pause_)
+    , layer_name_(layer_name)
 {
-    name(layer_name);
     attachSystem();
 }
     

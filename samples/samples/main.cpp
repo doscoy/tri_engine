@@ -23,7 +23,7 @@ int main(int argc, char * argv[])
 //    app.setRootScene(t3::Scene::sceneGenerator<AudioTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
-//    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
+    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
     app.rootScene(t3::Scene::sceneGenerator<SimpleMeshScene>());
 
     t3::setApplication(app);
