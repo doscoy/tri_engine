@@ -5,6 +5,7 @@
 #ifndef TRI_MODEL_HPP_INCLUDED
 #define TRI_MODEL_HPP_INCLUDED
 
+#include <memory>
 
 //  include
 #include "tri_entity.hpp"
@@ -14,17 +15,20 @@
 
 namespace t3 {
 
+class Model;
+using ModelPtr = ScopedPtr<Model>;
 
 ///
 /// モデル
 class Model
     : public Entity
 {
-public:
+
+protected:
     ///
     /// コンストラクタ
     Model();
-    
+public:
     ///
     /// デストラクタ
     ~Model();
@@ -45,7 +49,20 @@ public:
     void mesh(Mesh* mesh) {
         mesh_ = mesh;
     }
+    
+    Mesh* mesh() {
+        return mesh_;
+    }
+    
+    const Mesh* mesh() const {
+        return mesh_;
+    }
 
+public:
+    ///
+    /// モデル生成関数
+    static ModelPtr create();
+    static ModelPtr create(const char* const mesh_path);
 
 private:
     ///

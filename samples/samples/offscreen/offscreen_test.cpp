@@ -62,17 +62,13 @@ public:
     void modelInit() {
         //  メッシュ読み込み
         t3::FilePath obj_path("bunny.obj");
-        mesh_ = T3_SYS_NEW t3::Mesh(obj_path.fullpath().c_str());
-    
 
         //  モデル作成
-        model_.mesh(mesh_);
+        model_ = t3::Model::create(obj_path.fullpath().c_str());
 
         
         //  カメラ生成
-        const t3::Sphere& sphere = mesh_->boundingSphere();
-        cam_ = t3::Camera::create();
-        cam_update_.camera(cam_);
+        const t3::Sphere& sphere = model_->mesh()->boundingSphere();
         cam_update_.position(sphere.position() + t3::Vec3(0, 0, sphere.radius() * 2));
         cam_update_.targetPosition(sphere.position());
     }
@@ -88,7 +84,7 @@ public:
         t3::Mtx44 projection;
         projection.perspective(60, screen.x_, screen.y_, 0.01f, 1000.0f);
     
-        const t3::Mtx44& view_mtx = *cam_->viewMatrix();
+        const auto view_mtx = cam_update_.camera()->viewMatrix();
 
 
         static int rotY;
@@ -103,7 +99,7 @@ public:
         cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
 
         cross::RenderSystem::setDepthTestMode(cross::RenderSystem::DepthTestMode::MODE_LESS);
-        model_.render(mtx);
+        model_->render(mtx);
     }
 
     void spriteInit() {
@@ -123,9 +119,7 @@ public:
 private:
     t3::SpriteLayer sprite_layer_;
     t3::SpritePtr sprite_;
-    t3::Model model_;
-    t3::Mesh* mesh_;
-    t3::CameraPtr cam_;
+    t3::ModelPtr model_;
     t3::LookAtCameraUpdater cam_update_;
     t3::Surface surface_;
 };

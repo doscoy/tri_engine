@@ -11,7 +11,6 @@ public:
     SceneContext()
         : layer_()
         , model_()
-        , mesh_(nullptr)
     {}
     
     ~SceneContext()
@@ -23,28 +22,26 @@ public:
         layer_.setRenderCallback<SimpleMesh2Scene::SceneContext>(this, &SceneContext::layerRender);
 
         //  メッシュ読み込み
-        t3::FilePath obj_path("o.obj");
-        mesh_ = T3_SYS_NEW t3::Mesh(obj_path.fullpath().c_str());
+        t3::FilePath donut_path("o.obj");
+        t3::FilePath bunny_path("bunny.obj");
     
-
         //  モデル作成
-        model_.mesh(mesh_);
-
+        model_ = t3::Model::create(bunny_path.fullpath().c_str());
+        float model_radius = model_->mesh()->boundingSphere().radius() * 30;
         
         //  カメラ生成
-        cam_ = t3::Camera::create();
-        cam_update_.camera(cam_);
-        cam_update_.position(0, 5, 5);
+        cam_update_.position(0, model_radius, model_radius);
         cam_update_.targetPosition(0,0,0);
         
         //  シーングラフ初期化
-        scene_graph_.camera(cam_);
+        scene_graph_.camera(cam_update_.camera());
         node1_ = scene_graph_.createNode();
-        node1_->attachEntity(&model_);
-        
+        node1_->attachEntity(model_.get());
+        node1_->scale(10, 10, 10);
+        node1_->rotation(180, 0, 0);
         node2_ = node1_->createNode("node2");
-        node2_->attachEntity(&model_);
-        node2_->position(3, 0, 0);
+        node2_->attachEntity(model_.get());
+        node2_->position(model_radius, 0, 0);
         
         
     }
@@ -56,8 +53,8 @@ public:
     void update(t3::tick_t delta_time){
         static float angle = 0;
         angle += 1;
-        node1_->rotation(0, angle, 0);
-        node2_->rotation(angle*4, 0, 0);
+        node1_->rotationY(angle);
+        node2_->rotation(angle, 0, 0);
     }
 
     void suspend(t3::tick_t delta_time) {
@@ -79,9 +76,7 @@ private:
 
 private:
     t3::DrawLayer layer_;
-    t3::Model model_;
-    t3::Mesh* mesh_;
-    t3::CameraPtr cam_;
+    t3::ModelPtr model_;
     t3::LookAtCameraUpdater cam_update_;
     t3::SceneGraph scene_graph_;
     

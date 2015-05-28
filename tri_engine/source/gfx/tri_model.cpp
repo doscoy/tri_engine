@@ -1,7 +1,7 @@
 
 #include "gfx/tri_model.hpp"
 #include "gfx/tri_vertex_types.hpp"
-
+#include "kernel/memory/tri_new.hpp"
 #include "../shader/tri_simple.vsh"
 #include "../shader/tri_simple.fsh"
 
@@ -76,7 +76,23 @@ void Model::render(const Mtx44& transform) {
         mesh_->indexCount(),
         sizeof(uint32_t)
     );
+    
+}
 
+
+//  モデル生成関数
+ModelPtr Model::create() {
+    ModelPtr m(T3_NEW Model);
+    return m;
+}
+
+ModelPtr Model::create(
+    const char* const mesh_path
+) {
+    Mesh* mesh = T3_NEW Mesh(mesh_path);
+    ModelPtr m(T3_NEW Model);
+    m->mesh(mesh);
+    return m;
 }
 
 

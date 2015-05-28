@@ -244,7 +244,7 @@ public:
     
     ///
     /// x軸回転を設定
-    void setRotationX(
+    void rotationX(
         const float r
     ) {
         calc_request_ = true;
@@ -253,7 +253,7 @@ public:
     
     ///
     /// y軸回転を設定
-    void setRotationY(
+    void rotationY(
         const float r
     ) {
         calc_request_ = true;
@@ -262,7 +262,7 @@ public:
     
     ///
     /// z軸回転を設定
-    void setRotationZ(
+    void rotationZ(
         const float r
     ) {
         calc_request_ = true;

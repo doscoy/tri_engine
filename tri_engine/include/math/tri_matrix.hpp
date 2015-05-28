@@ -528,27 +528,63 @@ public:
     /// 投影行列生成
     static void makePerspective(
         Mtx44Template<T>& mtx,
-        T const & fov,
+        T const & fov_radian,
 		T const & width,
 		T const & height,
 		T const & near,
 		T const & far
 	) {
+/*
         mtx.identity();
-		T rad = toRadian(fov);
+		T rad = fov_radian;
 
 		T h = cos(T(0.5) * rad) / sin(T(0.5) * rad);
 		T w = h * height / width;
-
+        T delta_z = far - near;
 		mtx.x_.x_ = w;
 		mtx.y_.y_ = h;
-		mtx.z_.z_ = - (far + near) / (far - near);
+		mtx.z_.z_ = - (far + near) / delta_z;
 		mtx.z_.w_ = - T(1);
-		mtx.w_.z_ = - (T(2) * far * near) / (far - near);
+		mtx.w_.z_ = - (T(2) * far * near) / delta_z;
+        mtx.w_.w_ = 0.0f;
+*/
+	T sine, cotangent, deltaZ;
+	T radians = fov_radian / 2.0;
+
+	deltaZ = far - near;
+	sine = std::sin(radians);
+	cotangent = std::cos(radians) / sine;
+
+    mtx.identity();
+    T aspect = width / height;
+	mtx.x_.x_ = cotangent / aspect;
+	mtx.y_.y_ = cotangent;
+	mtx.z_.z_ = -(far + near) / deltaZ;
+	mtx.z_.w_ = -2.0 * near * far / deltaZ;
+	mtx.w_.z_ = -1.0;
+	mtx.w_.w_ = 0.0;
+        
+/*
+	T sine, cotangent, deltaZ;
+	T radians = fov / 2.0;
+
+	deltaZ = far - near;
+	sine = std::sin(radians);
+	cotangent = std::cos(radians) / sine;
+
+	Mat4f m;
+	m = Mat4f::Identity();
+	m(0,0) = cotangent / aspect;
+	m(1,1) = cotangent;
+	m(2,2) = -(zFar + zNear) / deltaZ;
+	m(2,3) = -2.0 * zNear * zFar / deltaZ;
+	m(3,2) = -1.0;
+	m(3,3) = 0.0;
+*/
 	}
     
     ///
-    /// 正射影行列生成
+    /// 投影行列生成
     static Mtx44Template<T> getPerspectiveMatrix(
         T const & fov,
 		T const & width,
@@ -556,8 +592,8 @@ public:
 		T const & near,
 		T const & far
     ) {
-        Mtx44Template m;
-        makePerspective(&m, fov, width, height, near, far);
+        Mtx44Template<T> m;
+        makePerspective(m, fov, width, height, near, far);
         return m;
     }
     
@@ -603,7 +639,7 @@ public:
         T near,
         T far
     ) {
-        Mtx44Template m;
+        Mtx44Template<T> m;
         makeFrustumMatrix(m, left, right, bottom, top, near, far);
         return m;
     }

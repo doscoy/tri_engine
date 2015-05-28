@@ -46,7 +46,7 @@ private:
 public:
     ///
     /// カメラ行列取得.
-    const Mtx44* viewMatrix();
+    const Mtx44& viewMatrix();
     
     ///
     /// 位置設定.
@@ -103,6 +103,14 @@ public:
         const float fov     ///< 視野角
     ) {
         fov_ = fov;
+    }
+    
+    float fieldOfView() const {
+        return fov_;
+    }
+    
+    float fieldOfViewRadian() const {
+        return toRadian(fov_);
     }
 
     ///

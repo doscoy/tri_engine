@@ -88,10 +88,9 @@ void Camera::calculateMatrix()
 }
 
 
-const Mtx44* Camera::viewMatrix()
-{
+const Mtx44& Camera::viewMatrix() {
     recalculate();
-    return &view_matrix_;
+    return view_matrix_;
 }
 
 

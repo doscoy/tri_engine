@@ -22,18 +22,21 @@ class CameraUpdater
 public:
     ///
     /// コンストラクタ
-    CameraUpdater(){}
+    CameraUpdater()
+        : camera_(Camera::create())
+    {}
 
 
     ///
     /// デストラクタ
-    virtual ~CameraUpdater(){}
+    virtual ~CameraUpdater()
+    {}
 
 public:
     ///
     /// 管理するカメラ設定
     void camera(
-        SharedPtr<Camera> camera
+        CameraPtr camera
     ) {
         camera_ = camera;
     }

@@ -19,12 +19,12 @@ int main(int argc, char * argv[])
 //    app.setRootScene(t3::Scene::sceneGenerator<UiButtonScene>());
 //      app.setRootScene(t3::Scene::sceneGenerator<QuatTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<ThreadTestScene>());
-    app.rootScene(t3::Scene::sceneGenerator<BlurScene>());
+//    app.rootScene(t3::Scene::sceneGenerator<BlurScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<AudioTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
-    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
-    app.rootScene(t3::Scene::sceneGenerator<SimpleMeshScene>());
+//    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
+    app.rootScene(t3::Scene::sceneGenerator<SimpleMesh2Scene>());
 
     t3::setApplication(app);
 #if defined(CROSS_TARGET_PLATFORM_IOS)

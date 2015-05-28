@@ -60,19 +60,17 @@ void SceneGraph::setupView()
         static_cast<int>(screen.y_)
 	);
 
-    t3::Mtx44 projection = t3::Mtx44::getFrustumMatrix(
-        -1,
-        1,
-        -(float)screen.y_ /screen.x_,
-        (float)screen.y_/screen.x_,
-        0.1f,
-        100.0f
-    );
 
-//    auto proj = t3::Mtx44::getPerspectiveMatrix()
+    auto proj = t3::Mtx44::getPerspectiveMatrix(
+        camera()->fieldOfView(),
+		screen.x_,
+		screen.y_,
+		1.0f,
+        10000.0f
+    );
     
-    const Mtx44* view_mtx = camera_->viewMatrix();
-    Mtx44 view_projection = *view_mtx * projection;
+    const auto& view_mtx = camera_->viewMatrix();
+    auto view_projection = view_mtx * proj;
     pushAndSetMatrix(view_projection);
 }
 

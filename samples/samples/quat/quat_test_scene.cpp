@@ -11,7 +11,6 @@ public:
     SceneContext()
         : layer_()
         , model_()
-        , mesh_(nullptr)
     {}
     
     ~SceneContext()
@@ -23,17 +22,14 @@ public:
 
         //  メッシュ読み込み
         t3::FilePath obj_path("ninja.obj");
-        mesh_ = T3_SYS_NEW t3::Mesh(obj_path.fullpath().c_str());
     
 
         //  モデル作成
-        model_.mesh(mesh_);
+        model_ = t3::Model::create(obj_path.fullpath().c_str());
 
         
         //  カメラ生成
-        const auto& sphere = mesh_->boundingSphere();
-        cam_ = t3::Camera::create();
-        cam_update_.camera(cam_);
+        const auto& sphere = model_->mesh()->boundingSphere();
         cam_update_.position(sphere.position() + t3::Vec3(0, 0, sphere.radius() * 2));
         cam_update_.targetPosition(sphere.position());
     }
@@ -85,7 +81,7 @@ private:
         t3::Mtx44 projection;
         projection.perspective(60, screen.x_, screen.y_, 0.1f, 100.0f);
     
-        const t3::Mtx44& view_mtx = *cam_->viewMatrix();
+        const t3::Mtx44& view_mtx = cam_update_.camera()->viewMatrix();
 
         t3::Mtx44 transform;
         
@@ -96,16 +92,14 @@ private:
         
         t3::Mtx44 mtx = transform * view_mtx * projection;
         
-        model_.render(mtx);
+        model_->render(mtx);
 
     }
 
 
 private:
     t3::DrawLayer layer_;
-    t3::Model model_;
-    t3::Mesh* mesh_;
-    t3::CameraPtr cam_;
+    t3::ModelPtr model_;
     t3::LookAtCameraUpdater cam_update_;
     
     t3::Quaternion quat_;
