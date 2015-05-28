@@ -108,7 +108,7 @@ private:
     ///
     /// ラジオボタンが変更された時に呼ばれる関数
     void onRadioButtonTriggered(
-        const Event& event
+        const EventPtr event
     );
 
 private:

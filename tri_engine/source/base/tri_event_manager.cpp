@@ -234,7 +234,7 @@ bool EventManager::removeListener(const EventListenerPtr listener) {
         EventListenerTable::iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-            if (table_it->listener() == listener) {
+            if ((*table_it)->target() == listener) {
                 
                 table.erase(table_it);
                 
@@ -361,8 +361,8 @@ bool EventManager::tick(
             EventListenerTable::iterator table_end = table.end();
             
             for (; table_it != table_end; ++table_it) {
-
-                table_it->callback().invoke(*event);
+                (*table_it)->arg1(event.get());
+                (*table_it)->invoke();
             }
         }
         
@@ -377,7 +377,8 @@ bool EventManager::tick(
         EventListenerTable::iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-            table_it->callback().invoke(*event);
+            (*table_it)->arg1(event.get());
+            (*table_it)->invoke();
         }
         
         process_count += 1;
@@ -451,7 +452,7 @@ EventListenerList EventManager::getListenerList(
     EventListenerTable::const_iterator table_it = table.begin();
     EventListenerTable::const_iterator table_end = table.end();
     for (; table_it != table_end; ++table_it) {
-        result.push_back(table_it->listener());
+        result.push_back((*table_it)->target());
     }
     
     return result;
@@ -528,7 +529,8 @@ bool EventManager::triggerEvent(
         EventListenerTable::iterator table_it = table.begin();
         EventListenerTable::iterator table_end = table.end();
         for (; table_it != table_end; ++table_it) {
-            table_it->callback().invoke(*in_event);
+            (*table_it)->arg1(in_event.get());
+            (*table_it)->invoke();
         }
     }
     
@@ -547,7 +549,8 @@ bool EventManager::triggerEvent(
     EventListenerTable::iterator table_end = table.end();
     
     for (; table_it != table_end; ++table_it) {
-        table_it->callback().invoke(*in_event);
+            (*table_it)->arg1(in_event.get());
+        (*table_it)->invoke();
     }
 
     return processed;

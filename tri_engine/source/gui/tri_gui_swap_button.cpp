@@ -52,8 +52,8 @@ SwapButton::SwapButton()
     , a_event_(nullptr)
     , b_event_(nullptr)
 {
-    safeAddListener<SwapButton>(this, &SwapButton::onTriggeredA, SwapButtonAEvent::TYPE);
-    safeAddListener<SwapButton>(this, &SwapButton::onTriggeredB, SwapButtonBEvent::TYPE);
+    EventManager::safeAddListener<SwapButton>(this, &SwapButton::onTriggeredA, SwapButtonAEvent::TYPE);
+    EventManager::safeAddListener<SwapButton>(this, &SwapButton::onTriggeredB, SwapButtonBEvent::TYPE);
 }
 
 SwapButton::~SwapButton()
@@ -95,9 +95,9 @@ void SwapButton::triggeredEvent(
 }
 
 
-void SwapButton::onTriggeredA(const t3::Event& eve) {
-    auto& event = static_cast<const SwapButtonAEvent&>(eve);
-    if (event.ui_id_ != swap_button_id_) {
+void SwapButton::onTriggeredA(const t3::EventPtr eve) {
+    auto event = static_cast<const SwapButtonAEvent*>(eve.get());
+    if (event->ui_id_ != swap_button_id_) {
         //  自分のボタンイベントじゃない
         return;
     }
@@ -110,9 +110,9 @@ void SwapButton::onTriggeredA(const t3::Event& eve) {
     b_.sprite()->enable();
 }
 
-void SwapButton::onTriggeredB(const t3::Event& eve) {
-    auto& event = static_cast<const SwapButtonBEvent&>(eve);
-    if (event.ui_id_ != swap_button_id_) {
+void SwapButton::onTriggeredB(const t3::EventPtr eve) {
+    auto event = static_cast<const SwapButtonBEvent*>(eve.get());
+    if (event->ui_id_ != swap_button_id_) {
         //  自分のボタンイベントじゃない
         return;
     }

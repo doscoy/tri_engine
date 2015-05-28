@@ -15,7 +15,7 @@ RadioButton::RadioButton()
     , group_id_()
     , active_button_idx_(0) {
  
-    safeAddListener<RadioButton>(this, &RadioButton::onRadioButtonTriggered, RadioButtonEvent::TYPE);
+    EventManager::safeAddListener<RadioButton>(this, &RadioButton::onRadioButtonTriggered, RadioButtonEvent::TYPE);
 }
 
 RadioButton::~RadioButton() {
@@ -39,24 +39,24 @@ void RadioButton::registryButton(
 
 
 void RadioButton::onRadioButtonTriggered(
-    const Event& event
+    const EventPtr event
 ) {
 
-    auto& radio_event = static_cast<const RadioButtonEvent&>(event);
+    auto radio_event = static_cast<const RadioButtonEvent*>(event.get());
     
-    if (radio_event.groupID() != group_id_) {
+    if (radio_event->groupID() != group_id_) {
         //  このラジオボタンで管理されているボタンイベントじゃなかった
         return;
     }
     
     //  このラジオボタンのボタンイベント
     //   インデックス保存
-    active_button_idx_ = radio_event.buttonIndex();
+    active_button_idx_ = radio_event->buttonIndex();
 
     //  管理しているボタンのアクティブ状態変更
     for (auto& button : buttons_) {
     
-        if (button->buttonID() == radio_event.buttonID()) {
+        if (button->buttonID() == radio_event->buttonID()) {
             button->activate();
         }
         else {

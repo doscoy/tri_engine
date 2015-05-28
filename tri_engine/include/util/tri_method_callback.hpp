@@ -218,9 +218,28 @@ public:
 
 class MethodCallbackBaseX {
 public:
-    MethodCallbackBaseX() = default;
+    MethodCallbackBaseX(const void* target)
+        : target_(nullptr)
+        , arg1_(nullptr)
+    {}
+
     virtual ~MethodCallbackBaseX() = default;
     virtual void invoke() = 0;
+
+    void arg1(void* arg) {
+        arg1_ = arg;
+    }
+    void* arg1() {
+        return arg1_;
+    }
+    const void* target() const {
+        return target_;
+    }
+private:
+    ///
+    /// インスタンス
+    const void* target_;
+    void* arg1_;
 };
 
 
@@ -234,8 +253,8 @@ public:
 
     ///
     /// コンストラクタ
-    MethodCallbackX(T* ins, callback_t& callback)
-        : target_(ins)
+    MethodCallbackX(const T* ins, callback_t callback)
+        : MethodCallbackBaseX(ins)
         , func_(callback)
     {}
 
@@ -243,15 +262,15 @@ public:
     ///
     /// 実行
     void invoke() override{
-		func_(*target_);
+        const T* cp = reinterpret_cast<const T*>(target());
+        T3_NULL_ASSERT(cp);
+        T* p = const_cast<T*>(cp);
+		func_(*p);
 	}
 
 
-protected:
-    ///
-    /// インスタンス
-    T* target_;
 
+protected:
     ///
     /// メンバ関数ポインタ
     callback_t func_;
@@ -268,8 +287,8 @@ public:
 
     ///
     /// コンストラクタ
-    MethodCallbackX1(T* ins, callback_t& callback)
-        : target_(ins)
+    MethodCallbackX1(const T* ins, callback_t callback)
+        : MethodCallbackBaseX(ins)
         , func_(callback)
     {}
 
@@ -277,24 +296,18 @@ public:
     ///
     /// 実行
     void invoke() override{
-		func_(*target_, arg_);
+        const T* cp = reinterpret_cast<const T*>(target());
+        T3_NULL_ASSERT(cp);
+        T* p = const_cast<T*>(cp);
+        Arg1* arg = reinterpret_cast<Arg1*>(arg1());
+		func_(*p, *arg);
 	}
 
-    void arg(Arg1 arg) {
-        arg_ = arg;
-    }
 
 protected:
     ///
-    /// インスタンス
-    T* target_;
-
-    ///
     /// メンバ関数ポインタ
     callback_t func_;
-    
-    Arg1 arg_;
-
 };
 
 }   // namespace t3

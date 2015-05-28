@@ -85,11 +85,11 @@ private:
     
     ///
     /// ポーズコールバック
-    void onPause(const Event&);
+    void onPause(const EventPtr);
     
     ///
     /// レジュームコールバック
-    void onResume(const Event&);
+    void onResume(const EventPtr);
     
 private:
     PauseLevel pause_level_;    ///< ポーズレベル

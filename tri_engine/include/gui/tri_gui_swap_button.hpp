@@ -83,11 +83,11 @@ public:
 private:
     ///
     /// ボタンAが押された時に呼ばれる
-    void onTriggeredA(const Event&);
+    void onTriggeredA(const EventPtr);
 
     ///
     /// ボタンBが押された時に呼ばれる
-    void onTriggeredB(const Event&);
+    void onTriggeredB(const EventPtr);
 
 private:
     Button a_;  ///< ボタンA

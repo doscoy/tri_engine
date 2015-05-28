@@ -54,19 +54,19 @@ Button::Button()
     , activator_(std::make_shared<ButtonDefaultActivator>())
     , hover_effector_(std::make_shared<ButtonDefaultHoverEffector>())
 {
-    safeAddListener<Button>(
+    EventManager::safeAddListener<Button>(
         this,
         &self_t::onPointingTrigger,
         PointingTriggeredEvent::TYPE
     );
 
-    safeAddListener<Button>(
+    EventManager::safeAddListener<Button>(
         this,
         &self_t::onPointingMoving,
         PointingMovingEvent::TYPE
     );
     
-    safeAddListener<Button>(
+    EventManager::safeAddListener<Button>(
         this,
         &self_t::onPointingRelease,
         PointingReleasedEvent::TYPE
@@ -97,7 +97,7 @@ void Button::setupSprite(
 
 
 void Button::onPointingTrigger(
-    const Event& eve
+    const EventPtr eve
 ) {
     if (!sprite_) {
         //  スプライトの設定がまだ
@@ -110,8 +110,8 @@ void Button::onPointingTrigger(
         return;
     }
     
-    auto& trg_event = static_cast<const PointingTriggeredEvent&>(eve);
-    if (isHitPointRectangle(trg_event.position(), hit_area_)) {
+    auto trg_event = static_cast<const PointingTriggeredEvent*>(eve.get());
+    if (isHitPointRectangle(trg_event->position(), hit_area_)) {
         //  ファーストタッチで触っていた
         first_touch_ = true;
         hover();
@@ -119,7 +119,7 @@ void Button::onPointingTrigger(
 }
 
 void Button::onPointingRelease(
-    const Event& eve
+    const EventPtr eve
 ) {
     //  触った状態で離されたか？
     if (hover_) {
@@ -137,7 +137,7 @@ void Button::onPointingRelease(
 }
 
 void Button::onPointingMoving(
-    const Event& eve
+    const EventPtr eve
 ) {
     //  最初のタッチで触ってない場合は無反応
     if (!first_touch_) {
@@ -145,8 +145,8 @@ void Button::onPointingMoving(
     }
 
     
-    auto& move_event = static_cast<const t3::PointingMovingEvent&>(eve);
-    if (isHitPointRectangle(move_event.position(), hit_area_)) {
+    auto move_event = static_cast<const t3::PointingMovingEvent*>(eve.get());
+    if (isHitPointRectangle(move_event->position(), hit_area_)) {
         hover();
     }
     else {

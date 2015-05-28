@@ -11,9 +11,8 @@ TaskManager::TaskManager()
     : taskes_()
     , pause_level_(PAUSE_NONE)
 {
-    auto t = PauseEvent::TYPE;
-    safeAddListener(this, &TaskManager::onPause, t);
-    safeAddListener(this, &TaskManager::onResume, ResumeEvent::TYPE);
+    EventManager::safeAddListener<TaskManager>(this, &TaskManager::onPause, PauseEvent::TYPE);
+    EventManager::safeAddListener<TaskManager>(this, &TaskManager::onResume, ResumeEvent::TYPE);
 }
 
 TaskManager::~TaskManager() {
@@ -100,12 +99,12 @@ void TaskManager::killAllTask() {
 }
 
 
-void TaskManager::onPause(const t3::Event& eve) {
-    auto& pause_eve = static_cast<const PauseEvent&>(eve);
-    pause_level_ = pause_eve.getPauseLevel();
+void TaskManager::onPause(const t3::EventPtr eve) {
+    auto pause_eve = static_cast<const PauseEvent*>(eve.get());
+    pause_level_ = pause_eve->getPauseLevel();
 }
 
-void TaskManager::onResume(const t3::Event&) {
+void TaskManager::onResume(const t3::EventPtr) {
     pause_level_ = PAUSE_NONE;
 }
 

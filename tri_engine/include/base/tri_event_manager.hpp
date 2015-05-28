@@ -18,11 +18,11 @@ struct EventListen{};
 
 ///
 /// イベントリスナポインタ
-using EventListenerPtr = void*;
+using EventListenerPtr = const void*;
 
 ///
 /// イベントハンドラのコールバック
-using EventHandlerFunction = MethodCallback1<EventListen, const Event&>;
+using EventHandlerFunction = MethodCallback1<EventListen, const EventPtr>;
 
 
 ///
@@ -145,12 +145,6 @@ public:
 
 
 private:
-
-    //  friends
-    friend bool safeAddListener(
-        const EventListenerPtr& in_hander,
-        const EventType& in_type
-    );
     
     friend bool safeRemoveListener(
         const EventListenerPtr in_handler,
@@ -186,20 +180,7 @@ private:
 };
 
 
-///
-/// リスナ追加
-template <typename T>
-bool safeAddListener(
-    const T* listener,
-//    void (T::*func)(const Event&),
-    std::function<void(T&, const Event&)> func,
-    const EventType& in_type
-) {
-    auto handler = std::make_shared<MethodCallbackX1<T, const Event&>>(listener, func);
-    T3_ASSERT(EventManagerBase::get());
-    return EventManagerBase::get()->addListener(handler, in_type);
-}
-    
+
 ///
 /// リスナ削除
 bool safeRemoveListener(
@@ -259,7 +240,7 @@ void safeTriggerEvent(
 
 
 
-using EventListenerList = Vector<void*>;
+using EventListenerList = Vector<EventListenerPtr>;
 using EventTypeList = Vector<EventType>;
 
 ///
@@ -315,6 +296,19 @@ public:
         const EventHandler& in_handler,
         const EventType& in_type
     ) override;
+    
+    ///
+    /// リスナ追加
+    template <typename T>
+    static bool safeAddListener(
+        const T* listener,
+        std::function<void(T&, const EventPtr)> func,
+        const EventType& in_type
+    ) {
+        auto handler = std::make_shared<MethodCallbackX1<T,const EventPtr>>(listener, func);
+//        return EventManagerBase::get()->addListener(handler, in_type);
+        return false;
+    }
     
     
     ///

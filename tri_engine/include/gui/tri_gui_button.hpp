@@ -246,15 +246,15 @@ private:
 
     ///
     /// トリガイベントレシーバ
-    void onPointingTrigger(const Event&);
+    void onPointingTrigger(const EventPtr);
 
     ///
     /// ポイントムーブイベントレシーバ
-    void onPointingMoving(const Event&);
+    void onPointingMoving(const EventPtr);
 
     ///
     /// リリースイベントレシーバ
-    void onPointingRelease(const Event&);
+    void onPointingRelease(const EventPtr);
 
     ///
     /// 判定エリア更新
