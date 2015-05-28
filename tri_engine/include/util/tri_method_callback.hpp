@@ -219,7 +219,7 @@ public:
 class MethodCallbackBaseX {
 public:
     MethodCallbackBaseX(const void* target)
-        : target_(nullptr)
+        : target_(target)
         , arg1_(nullptr)
     {}
 

@@ -19,6 +19,7 @@ public:
   
 public:
     void initialize(){
+        layer_.name("SimpleMeshScene::DrawLayer");
         layer_.setUpdateCallback<SimpleMeshScene::SceneContext>(this, &SceneContext::layerUpdate);
         layer_.setRenderCallback<SimpleMeshScene::SceneContext>(this, &SceneContext::layerRender);
 

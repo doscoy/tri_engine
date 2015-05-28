@@ -80,9 +80,9 @@ public:
         swap_button_.position(t3::Vec2(100, 200));
         
         //  イベント登録
-        t3::safeAddListener(this, &SceneContext::onEventAA, EventAAA::TYPE);
-        t3::safeAddListener(this, &SceneContext::onSwapA, EventSwapA::TYPE);
-        t3::safeAddListener(this, &SceneContext::onSwapB, EventSwapB::TYPE);
+        t3::EventManager::safeAddListener<UiButtonScene::SceneContext>(this, &SceneContext::onEventAA, EventAAA::TYPE);
+        t3::EventManager::safeAddListener<UiButtonScene::SceneContext>(this, &SceneContext::onSwapA, EventSwapA::TYPE);
+        t3::EventManager::safeAddListener<UiButtonScene::SceneContext>(this, &SceneContext::onSwapB, EventSwapB::TYPE);
         
         
         // ラジオボタン作成
@@ -111,15 +111,15 @@ public:
 
     }
     
-    void onEventAA(const t3::Event& eve) {
+    void onEventAA(const t3::EventPtr eve) {
         T3_TRACE("onEventAA\n");
     }
 
-    void onSwapA(const t3::Event& eve) {
+    void onSwapA(const t3::EventPtr eve) {
         T3_TRACE("onSwapA\n");
     }
     
-    void onSwapB(const t3::Event& eve) {
+    void onSwapB(const t3::EventPtr eve) {
         T3_TRACE("onSwapB\n");
     }
 private:

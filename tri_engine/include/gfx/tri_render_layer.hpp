@@ -159,10 +159,17 @@ public:
     /// デバッグメニューを削除
     virtual void unregistryToDebugMenu();
     
+    ///
+    /// レイヤー名を取得
     std::string name() {
         return layer_name_;
     }
     
+    ///
+    /// レイヤー名を設定
+    void name(std::string name) {
+        layer_name_ = name;
+    }
 public:
     ///
     ///  全てのレイヤーを更新

@@ -62,15 +62,15 @@ public:
     
 public:
     
-    void handleEvent(const t3::Event& event) {
+    void handleEvent(const t3::EventPtr event) {
     
-        const EventAAA& aaa = static_cast<const EventAAA&>(event);
+        const auto aaa = static_cast<const EventAAA*>(event.get());
     
-        T3_TRACE("aaa hp %d\n", aaa.hp_);
+        T3_TRACE("aaa hp %d\n", aaa->hp_);
     
     }
     
-    void krif(const t3::Event& event) {
+    void krif(const t3::EventPtr event) {
         T3_TRACE("kriffff\n");
     }
 };
@@ -88,8 +88,8 @@ public:
   
 public:
     void initialize(){
-        t3::safeAddListener(hp_text_, &HpText::krif, EventAAA::TYPE);
-        t3::safeAddListener(hp_text_, &HpText::krif, EventBBB::TYPE);
+        t3::EventManager::safeAddListener<HpText>(hp_text_, &HpText::krif, EventAAA::TYPE);
+        t3::EventManager::safeAddListener<HpText>(hp_text_, &HpText::krif, EventBBB::TYPE);
     }
     
     void terminate(){
