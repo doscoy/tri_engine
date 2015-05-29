@@ -61,7 +61,7 @@ void SceneGraph::setupView()
 	);
 
 
-    auto proj = t3::Mtx44::getPerspectiveMatrix(
+    auto proj = t3::Mtx44::getPerspective(
         camera()->fieldOfView(),
 		screen.x_,
 		screen.y_,

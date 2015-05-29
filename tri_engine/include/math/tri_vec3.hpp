@@ -105,6 +105,12 @@ public:
     }
     
     ///
+    /// 正規化されたベクトルか判定
+    bool isNormalized() const {
+        return isEqualFloat(length(), 1.0f);
+    }
+
+    ///
     ///  ブレンド
     Vec3Template& blend( 
         const float t,
@@ -118,12 +124,17 @@ public:
     
     ///
     ///  外積
-    Vec3Template crossProduct( const Vec3Template& v ) const {
-        return Vec3Template(
+    Vec3Template crossProduct(
+        const Vec3Template& v 
+    ) const {
+        return crossProduct(
+            *this, v
+        );
+/*
             y_ * v.z_ - z_ * v.y_,
             z_ * v.x_ - x_ * v.z_,
             x_ * v.y_ - y_ * v.x_
-        );
+*/
     }
     
     ///

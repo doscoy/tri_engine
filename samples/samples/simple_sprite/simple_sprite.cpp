@@ -104,7 +104,7 @@ private:
         );
         const t3::Vec2& screen_size = t3::Director::instance().virtualScreenSize();
         
-        int x_count = screen_size.x_ / offset.x_ -1;
+        int x_count = static_cast<int>(screen_size.x_ / offset.x_ -1);
         int y_start = 16;
         int limit_y = -(screen_size.y_ / offset.y_) + y_start +2;
         int y = y_start;

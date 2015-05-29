@@ -25,7 +25,7 @@ public:
 
 
         //  モデル作成
-        t3::FilePath obj_path("o.obj");
+        t3::FilePath obj_path("poly.obj");
         model_ = t3::Model::create(obj_path.fullpath().c_str());
 
         

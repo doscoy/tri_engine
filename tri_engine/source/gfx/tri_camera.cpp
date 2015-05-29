@@ -9,12 +9,12 @@ namespace t3 {
 
 
 Camera::Camera()
-    : position_( 0, 0, 0 )
-    , target_( 0, 0, -1 )
-    , fov_( toRadian( 90.0f ) )
-    , up_( 0, 1, 0 )
-    , front_( 0, 0, -1 )
-    , right_( 1, 0, 0 )
+    : position_(0, 0, 0)
+    , target_(0, 0, -1 )
+    , fov_(45.0f)
+    , up_(0, 1, 0)
+    , front_(0, 0, -1)
+    , right_(1, 0, 0)
     , recalculation_request_( false )
 {
     calculateDirection();
@@ -34,23 +34,22 @@ CameraPtr Camera::create() {
 void Camera::calculateDirection()
 {
 
-    //  右方向ベクトル計算
-    front_ = target_ - position_;
+    //  前方向ベクトル計算
+    front_ = (target_ - position_).getNormalized();
+    
+    //  右方向ベクトル
     if ( !isZeroFloat( front_.x_ ) || !isZeroFloat( front_.z_ ) ){
         right_ = Vec3::crossProduct(front_, Vec3::axisY());
     }
     else {
-         right_ = Vec3::crossProduct(front_, Vec3::axisZ());
+        right_ = Vec3::crossProduct(front_, Vec3::axisZ());
     }
-
     right_.normalize();
 
     //  上方向ベクトル計算
     up_ = Vec3::crossProduct(right_, front_);
     up_.normalize();
 
-    //  前方向ベクトル計算
-    front_.normalize();
 }
 
 void Camera::recalculate()
@@ -71,7 +70,8 @@ void Camera::calculateFrustum()
     float near = 1.0f;
     float far = 10000.0f;
 
-    frustum_.initializeFrustum(fov_,
+    frustum_.initializeFrustum(
+        fieldOfViewRadian(),
         aspect,
         near,
         far,
@@ -84,7 +84,8 @@ void Camera::calculateFrustum()
 
 void Camera::calculateMatrix()
 {
-    view_matrix_.lookat(position_, target_, up_);
+//    view_matrix_.lookat(position_, target_, up_);
+    view_matrix_.lookat(position_, front_, right_, up_);
 }
 
 
