@@ -89,7 +89,7 @@ public:
 
         static int rotY;
         rotY++;
-        t3::Mtx44 transform = t3::Mtx44::getRotateMatrixY(rotY);
+        t3::Mtx44 transform = t3::Mtx44::getRotateY(rotY);
         
         
         t3::Mtx44 mtx = transform * view_mtx * projection;

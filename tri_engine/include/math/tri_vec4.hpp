@@ -42,8 +42,18 @@ public:
         , y_(v.y_)
         , z_(v.z_)
         , w_(1.0f)
-    {
-    }
+    {}
+    
+    ///
+    /// コンストラクタ
+    Vec4Template(Vec3Template<T> v, T w)
+        : x_(v.x_)
+        , y_(v.y_)
+        , z_(v.z_)
+        , w_(w)
+    {}
+    
+    
     
     ///
     /// ポインタを取得

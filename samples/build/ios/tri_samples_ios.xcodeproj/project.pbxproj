@@ -11,8 +11,6 @@
 		041544D119EC25E900C14705 /* font_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 041544D019EC25E900C14705 /* font_texture.png */; };
 		041544D619EC268200C14705 /* font_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041544D319EC268200C14705 /* font_test.cpp */; };
 		04391BE219BC95EF006FFF38 /* bunny.obj in Resources */ = {isa = PBXBuildFile; fileRef = 04391BDB19BC95EF006FFF38 /* bunny.obj */; };
-		04391BE319BC95EF006FFF38 /* ninja.obj in Resources */ = {isa = PBXBuildFile; fileRef = 04391BDC19BC95EF006FFF38 /* ninja.obj */; };
-		04391BE419BC95EF006FFF38 /* o.obj in Resources */ = {isa = PBXBuildFile; fileRef = 04391BDD19BC95EF006FFF38 /* o.obj */; };
 		04391BE519BC95EF006FFF38 /* sample.wav in Resources */ = {isa = PBXBuildFile; fileRef = 04391BDE19BC95EF006FFF38 /* sample.wav */; };
 		04391BE619BC95EF006FFF38 /* stamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 04391BDF19BC95EF006FFF38 /* stamp.png */; };
 		04391BE819BC95EF006FFF38 /* tri_engine_ui_sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 04391BE119BC95EF006FFF38 /* tri_engine_ui_sample.png */; };
@@ -139,8 +137,6 @@
 		041544D419EC268200C14705 /* font_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = font_test.hpp; sourceTree = "<group>"; };
 		041544D519EC268200C14705 /* font_texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = font_texture.hpp; sourceTree = "<group>"; };
 		04391BDB19BC95EF006FFF38 /* bunny.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bunny.obj; sourceTree = "<group>"; };
-		04391BDC19BC95EF006FFF38 /* ninja.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ninja.obj; sourceTree = "<group>"; };
-		04391BDD19BC95EF006FFF38 /* o.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = o.obj; sourceTree = "<group>"; };
 		04391BDE19BC95EF006FFF38 /* sample.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sample.wav; sourceTree = "<group>"; };
 		04391BDF19BC95EF006FFF38 /* stamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stamp.png; sourceTree = "<group>"; };
 		04391BE119BC95EF006FFF38 /* tri_engine_ui_sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tri_engine_ui_sample.png; sourceTree = "<group>"; };
@@ -291,8 +287,6 @@
 				3A24B4D719C9D3ED00E9CFFE /* test.zip */,
 				04391BEF19C08D51006FFF38 /* akb48.wav */,
 				04391BDB19BC95EF006FFF38 /* bunny.obj */,
-				04391BDC19BC95EF006FFF38 /* ninja.obj */,
-				04391BDD19BC95EF006FFF38 /* o.obj */,
 				04391BDE19BC95EF006FFF38 /* sample.wav */,
 				04391BDF19BC95EF006FFF38 /* stamp.png */,
 				04391BE119BC95EF006FFF38 /* tri_engine_ui_sample.png */,
@@ -646,7 +640,6 @@
 				04391BE519BC95EF006FFF38 /* sample.wav in Resources */,
 				047CEA5719DC605B0015B46F /* piko.png in Resources */,
 				04391BE619BC95EF006FFF38 /* stamp.png in Resources */,
-				04391BE319BC95EF006FFF38 /* ninja.obj in Resources */,
 				04391BF019C08D51006FFF38 /* akb48.wav in Resources */,
 				04D6B6B119E9071D002C8E77 /* t9.png in Resources */,
 				04F1FE791985557F00C8D498 /* Main_iPad.storyboard in Resources */,
@@ -663,7 +656,6 @@
 				04F1FE6D1985557F00C8D498 /* InfoPlist.strings in Resources */,
 				04391BE819BC95EF006FFF38 /* tri_engine_ui_sample.png in Resources */,
 				04D6B6AC19E9049D002C8E77 /* t5.png in Resources */,
-				04391BE419BC95EF006FFF38 /* o.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -673,17 +673,17 @@ public:
         float near,
         float far
     ) {
-        float a = float(2) * near / (right - left);
-        float b = float(2) * near / (top - bottom);
+        float a = 2.0f * near / (right - left);
+        float b = 2.0f * near / (top - bottom);
         float c = (right + left) / (right - left);
         float d = (top + bottom) / (top - bottom);
         float e = -(far + near) / (far - near);
-        float f = -(float(2) * far * near) / (far - near);
+        float f = -2.0f * far * near / (far - near);
       
-        mtx.x_.x_ = a; mtx.x_.y_ = 0; mtx.x_.z_ = 0; mtx.x_.w_ = 0;
-        mtx.y_.x_ = 0; mtx.y_.y_ = b; mtx.y_.z_ = 0; mtx.y_.w_ = 0;
-        mtx.z_.x_ = c; mtx.z_.y_ = d; mtx.z_.z_ = e; mtx.z_.w_ = float(-1);
-        mtx.w_.x_ = 0; mtx.w_.y_ = 0; mtx.w_.z_ = f; mtx.w_.w_ = float(1);
+        mtx.x_.x_ =    a; mtx.x_.y_ = 0.0f; mtx.x_.z_ = 0.0f; mtx.x_.w_ =  0.0f;
+        mtx.y_.x_ = 0.0f; mtx.y_.y_ =    b; mtx.y_.z_ = 0.0f; mtx.y_.w_ =  0.0f;
+        mtx.z_.x_ =    c; mtx.z_.y_ =    d; mtx.z_.z_ =    e; mtx.z_.w_ = -1.0f;
+        mtx.w_.x_ = 0.0f; mtx.w_.y_ = 0.0f; mtx.w_.z_ =    f; mtx.w_.w_ =  0.0f;
     }
     
     ///
@@ -760,29 +760,17 @@ public:
         T3_ASSERT(normalized_right.isNormalized());
         T3_ASSERT(normalized_up.isNormalized());
 
-        const Vec3 negative_front = -normalized_front;
-
-        mtx.x_.x_ = normalized_right.x_;
-        mtx.y_.x_ = normalized_right.y_;
-        mtx.z_.x_ = normalized_right.z_;
-    
-        mtx.x_.y_ = normalized_up.x_;
-        mtx.y_.y_ = normalized_up.y_;
-        mtx.z_.y_ = normalized_up.z_;
-	
-        mtx.x_.z_ = negative_front.x_;
-        mtx.y_.z_ = negative_front.y_;
-        mtx.z_.z_ = negative_front.z_;
-    
-        mtx.w_.x_ = -Vec3::dotProduct(normalized_right, eye);
-        mtx.w_.y_ = -Vec3::dotProduct(normalized_up, eye);
-        mtx.w_.z_ = -Vec3::dotProduct(negative_front, eye);
-    
-        mtx.x_.w_ = 0.0f;
-        mtx.y_.w_ = 0.0f;
-        mtx.z_.w_ = 0.0f;
-        mtx.w_.w_ = 1.0f;
- 
+        mtx.x_ = Vec4(normalized_right, 0);
+        
+        mtx.y_ = Vec4(normalized_up, 0);
+        
+        mtx.z_ = Vec4(normalized_front, 0);
+        
+        mtx.w_ = Vec4(0, 0, 0, 1);
+        
+        Vec4 eye_prime = mtx * Vec4(-eye, 1);
+        mtx.transpose();
+        mtx.w_ = eye_prime;
     }
 
     

@@ -21,8 +21,7 @@ class Vec3Template;
 template <class T>
 class Vec4Template;
 
-template <class T>
-class Mtx44Template;
+class Mtx44;
 
 
 
@@ -96,7 +95,7 @@ void traceValue(const char* const name, const Vec4Template<float>& value);
 ///
 /// ログ出力.
 /// Mtx44版
-void traceValue(const char* const name, const Mtx44Template<float>& value);
+void traceValue(const char* const name, const Mtx44& value);
 
 
 
