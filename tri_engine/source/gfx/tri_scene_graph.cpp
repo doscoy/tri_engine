@@ -65,16 +65,12 @@ void SceneGraph::setupView()
         camera()->fieldOfView(),
 		screen.x_,
 		screen.y_,
-		1.0f,
+		0.1f,
         10000.0f
     );
-
-
-
-//    auto proj = t3::Mtx44::getFrustum(-1, 1, -(screen.y_ / screen.x_), (screen.y_ / screen.x_), 1, 1000);
     
     const auto& view_mtx = camera_->viewMatrix();
-    auto view_projection = proj * view_mtx;
+    auto view_projection = view_mtx * proj;
     pushAndSetMatrix(view_projection);
 }
 

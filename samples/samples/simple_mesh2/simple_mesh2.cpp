@@ -27,12 +27,12 @@ public:
     
         //  モデル作成
         model_ = t3::Model::create(bunny_path.fullpath().c_str());
-        float model_radius = model_->mesh()->boundingSphere().radius()*10;
+        float model_radius = model_->mesh()->boundingSphere().radius();
         T3_TRACE_VALUE(model_radius);
 
 
         //  カメラ生成
-        cam_update_.position(0, model_radius, model_radius);
+        cam_update_.position(0, model_radius * 5, model_radius * 5);
         cam_update_.targetPosition(0,0,0);
         
         //  シーングラフ初期化
@@ -41,7 +41,7 @@ public:
         node1_->attachEntity(model_.get());
         node2_ = node1_->createNode("node2");
         node2_->attachEntity(model_.get());
-        node2_->position(model_radius, 0, 0);
+        node2_->position(model_radius * 2, 0, 0);
         
         
     }

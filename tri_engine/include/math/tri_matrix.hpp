@@ -560,22 +560,7 @@ public:
 		float const & near,
 		float const & far
 	) {
-#if 0
-        mtx.identity();
-		float rad = fov_radian;
 
-		float h = cos(float(0.5) * rad) / sin(float(0.5) * rad);
-		float w = h * height / width;
-        float delta_z = far - near;
-		mtx.x_.x_ = w;
-		mtx.y_.y_ = h;
-		mtx.z_.z_ = - (far + near) / delta_z;
-		mtx.z_.w_ = - float(1);
-		mtx.w_.z_ = - (float(2) * far * near) / delta_z;
-        mtx.w_.w_ = 0.0f;
-#endif
-
-#if 1
     //  mesa
 	float radians = fov_radian * 0.5f;
 	float deltaZ = far - near;
@@ -587,57 +572,11 @@ public:
 	mtx.x_.x_ = cotangent / aspect;
 	mtx.y_.y_ = cotangent;
 	mtx.z_.z_ = -(far + near) / deltaZ;
-	mtx.z_.w_ = -2.0f * near * far / deltaZ;
-	mtx.w_.z_ = -1.0f;
 	mtx.w_.w_ = 0.0f;
 
-#endif
+	mtx.w_.z_ = -2.0f * near * far / deltaZ;
+	mtx.z_.w_ = -1.0f;
 
-/*
-    // ngs
-    float aspect = width / height;
-    float angle = fov_radian * 0.5f;
-    float cot = 1.0f / std::tan(angle);
-
-    mtx.set(0, 0, cot / aspect);
-    mtx.set(0, 1, 0.0f);
-    mtx.set(0, 2, 0.0f);
-    mtx.set(0, 3, 0.0f);
-
-    mtx.set(1, 0, 0.0f);
-    mtx.set(1, 1, cot);
-    mtx.set(1, 2, 0.0f);
-    mtx.set(1, 3, 0.0f);
-
-    float tmp     = 1.0f / (far - near);
-    mtx.set(2, 0, 0.0f);
-    mtx.set(2, 1, 0.0f);
-    mtx.set(2, 2, -(far + near) * tmp);
-    mtx.set(2, 3, -(2 * far * near) * tmp);
-    
-    mtx.set(3, 0, 0);
-    mtx.set(3, 1, 0);
-    mtx.set(3, 2, -1.0f);
-    mtx.set(3, 3, 0);
-    
-*/
-/*
-	float sine, cotangent, deltaZ;
-	float radians = fov / 2.0;
-
-	deltaZ = far - near;
-	sine = std::sin(radians);
-	cotangent = std::cos(radians) / sine;
-
-	Mat4f m;
-	m = Mat4f::Identity();
-	m(0,0) = cotangent / aspect;
-	m(1,1) = cotangent;
-	m(2,2) = -(zFar + zNear) / deltaZ;
-	m(2,3) = -2.0 * zNear * zFar / deltaZ;
-	m(3,2) = -1.0;
-	m(3,3) = 0.0;
-*/
 	}
     
     ///
@@ -733,10 +672,9 @@ public:
         const Vec3& up
     ){
 
-        Vec3 normalized_front = (target - eye).getNormalized();
-        Vec3 normalized_right = normalized_front.crossProduct(up).getNormalized();
-        
-        Vec3 normalized_up = normalized_right.crossProduct(normalized_front);
+        Vec3 normalized_front = (eye - target).getNormalized();
+        Vec3 normalized_right = up.crossProduct(normalized_front).getNormalized();
+        Vec3 normalized_up = normalized_front.crossProduct(normalized_right);
         makeLookAt(
             mtx, 
             eye, 

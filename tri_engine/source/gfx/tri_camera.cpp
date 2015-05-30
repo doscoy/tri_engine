@@ -84,8 +84,8 @@ void Camera::calculateFrustum()
 
 void Camera::calculateMatrix()
 {
-//    view_matrix_.lookat(position_, target_, up_);
-    view_matrix_.lookat(position_, front_, right_, up_);
+    view_matrix_.lookat(position_, target_, up_);
+//    view_matrix_.lookat(position_, front_, right_, up_);
 }
 
 

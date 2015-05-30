@@ -25,13 +25,13 @@ public:
 
 
         //  モデル作成
-        t3::FilePath obj_path("poly.obj");
+        t3::FilePath obj_path("o.obj");
         model_ = t3::Model::create(obj_path.fullpath().c_str());
 
         
         //  カメラ位置調整
         float len = model_->mesh()->boundingSphere().radius();
-        cam_updater_.position(0, len, len);
+        cam_updater_.position(0, 10, 10);
         cam_updater_.targetPosition(0,0,0);
         
         //  シーングラフ初期化
