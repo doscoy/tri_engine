@@ -28,7 +28,6 @@ public:
         //  モデル作成
         model_ = t3::Model::create(bunny_path.fullpath().c_str());
         float model_radius = model_->mesh()->boundingSphere().radius();
-        T3_TRACE_VALUE(model_radius);
 
 
         //  カメラ生成
@@ -67,9 +66,6 @@ private:
         
     }
     void layerRender() {
-    
-        
-
         scene_graph_.renderScene();
     }
 
@@ -82,7 +78,6 @@ private:
     
     t3::TransformNodePtr node1_;
     t3::TransformNodePtr node2_;
-    t3::Quaternion quat_;
 };
 
 

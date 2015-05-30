@@ -24,7 +24,7 @@ int main(int argc, char * argv[])
 //    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
 //    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
-    app.rootScene(t3::Scene::sceneGenerator<SimpleMesh2Scene>());
+    app.rootScene(t3::Scene::sceneGenerator<SimpleMesh3Scene>());
 
     t3::setApplication(app);
 #if defined(CROSS_TARGET_PLATFORM_IOS)

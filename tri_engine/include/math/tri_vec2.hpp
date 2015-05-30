@@ -337,7 +337,24 @@ public:
         );
     }
  
+    ///
+    /// ゼロベクトル
+    static Vec2Template zero() {
+        return Vec2Template(0, 0);
+    }
     
+    ///
+    /// x軸ベクトルを生成
+    static Vec2Template axisX() {
+        return Vec2Template(1, 0);
+    }
+
+    ///
+    /// y軸ベクトルを生成
+    static Vec2Template axisY() {
+        return Vec2Template(0, 1);
+    }
+
 };
 
 

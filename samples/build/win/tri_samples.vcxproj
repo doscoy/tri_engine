@@ -106,6 +106,7 @@
     <ClCompile Include="..\..\samples\input\input_test.cpp" />
     <ClCompile Include="..\..\samples\main.cpp" />
     <ClCompile Include="..\..\samples\simple_mesh2\simple_mesh2.cpp" />
+    <ClCompile Include="..\..\samples\simple_mesh3\simple_mesh3.cpp" />
     <ClCompile Include="..\..\samples\simple_mesh\simple_mesh.cpp" />
     <ClCompile Include="..\..\samples\simple_primitive\simple_primitive.cpp" />
     <ClCompile Include="..\..\samples\simple_sprite\simple_sprite.cpp" />
@@ -267,6 +268,7 @@
     <ClInclude Include="..\..\samples\input\input_test.hpp" />
     <ClInclude Include="..\..\samples\samples.hpp" />
     <ClInclude Include="..\..\samples\simple_mesh2\simple_mesh2.hpp" />
+    <ClInclude Include="..\..\samples\simple_mesh3\simple_mesh3.hpp" />
     <ClInclude Include="..\..\samples\simple_mesh\simple_mesh.hpp" />
     <ClInclude Include="..\..\samples\simple_primitive\simple_primitive.hpp" />
     <ClInclude Include="..\..\samples\simple_sprite\simple_sprite.hpp" />

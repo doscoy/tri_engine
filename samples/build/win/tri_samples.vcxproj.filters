@@ -293,6 +293,9 @@
     <ClCompile Include="..\..\samples\blur\blur_test.cpp">
       <Filter>sample\blur</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\samples\simple_mesh3\simple_mesh3.cpp">
+      <Filter>sample\simple_mesh3</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\cross_sdk\include\cross_accelerometer.hpp">
@@ -772,6 +775,9 @@
     <ClInclude Include="..\..\samples\blur\blur_test.hpp">
       <Filter>sample\blur</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\samples\simple_mesh3\simple_mesh3.hpp">
+      <Filter>sample\simple_mesh3</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="sample">
@@ -842,6 +848,9 @@
     </Filter>
     <Filter Include="sample\blur">
       <UniqueIdentifier>{df4b6d27-0308-47fa-9c19-f12ad09a2fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample\simple_mesh3">
+      <UniqueIdentifier>{7dd3368d-c5ad-4ae5-a76b-d3dc93dea4b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

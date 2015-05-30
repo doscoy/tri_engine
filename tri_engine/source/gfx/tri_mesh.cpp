@@ -51,10 +51,10 @@ Mesh::Mesh(
     T3_ASSERT_MSG(file, "%s is not found.", name);
     
 
-    Vector<VertexP3N> vertices;
+    Vector<VertexP3NT> vertices;
     Vector<uint32_t> indices;
     
-    vertices.reserve(500);
+    vertices.reserve(1000);
     indices.reserve(1000);
     
 
@@ -71,10 +71,11 @@ Mesh::Mesh(
                 &new_point.z_
             );
             
-            VertexP3N p3n;
-            p3n.position_ = new_point;
-            p3n.normal_ = Vec3::zero();
-            vertices.push_back(p3n);
+            VertexP3NT p3nt;
+            p3nt.position_ = new_point;
+            p3nt.normal_ = Vec3::zero();
+            p3nt.uv_ = Vec2::zero();
+            vertices.push_back(p3nt);
 
             aabb.margePoint(new_point);
         } else if (buf[0] == 'f' && buf[1] == ' ') {
@@ -104,7 +105,7 @@ Mesh::Mesh(
             }
             
             
-            //  e面法線計算
+            //  面法線計算
             auto& face_vertex1 = vertices.at(f1);
             auto& face_vertex2 = vertices.at(f2);
             auto& face_vertex3 = vertices.at(f3);

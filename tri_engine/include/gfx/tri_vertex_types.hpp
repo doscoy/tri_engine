@@ -45,6 +45,15 @@ struct VertexP3N {
 
 };
 
+///
+/// 頂点定義.
+/// 座標と法線とUVを持つ
+struct VertexP3NT {
+
+    Vec3 position_;
+    Vec3 normal_;
+    Vec2 uv_;
+};
 
 
 }   // namespace t3

@@ -13,6 +13,7 @@
 //#include "event_handling/event_handling.hpp"
 #include "simple_mesh/simple_mesh.hpp"
 #include "simple_mesh2/simple_mesh2.hpp"
+#include "simple_mesh3/simple_mesh3.hpp"
 //#include "mem_pool/mem_pool_test.hpp"
 //#include "ui_button/ui_button_test.hpp"
 //#include "quat/quat_test_scene.hpp"
@@ -36,8 +37,9 @@ public:
         , input_test_(&samples_, "INPUT TEST")
         , blur_test_(&samples_, "BLUR TEST")
 //        , dmsl_event_handling_(&sandbox_, "EVENT HANDLING")
-        , simple_mesh_(&samples_, "SIMPLE MESH")
+        , simple_mesh1_(&samples_, "SIMPLE MESH1")
         , simple_mesh2_(&samples_, "SIMPLE MESH2")
+        , simple_mesh3_(&samples_, "SIMPLE MESH3")
     {}
 
 public:
@@ -69,8 +71,9 @@ private:
     t3::DebugMenuSceneLouncher<InputTestScene> input_test_;
     t3::DebugMenuSceneLouncher<BlurScene> blur_test_;
 //    t3::DebugMenuSceneLouncher<EventHandlingScene> dmsl_event_handling_;
-    t3::DebugMenuSceneLouncher<SimpleMeshScene>  simple_mesh_;
+    t3::DebugMenuSceneLouncher<SimpleMeshScene>  simple_mesh1_;
     t3::DebugMenuSceneLouncher<SimpleMesh2Scene> simple_mesh2_;
+    t3::DebugMenuSceneLouncher<SimpleMesh3Scene> simple_mesh3_;
 
 };
 
