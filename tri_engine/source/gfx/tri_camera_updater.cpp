@@ -1,4 +1,4 @@
-// -*- mode:c++; coding:utf-8 -*-
+
 
 #include "gfx/tri_camera_updater.hpp"
 #include "math/tri_math_util.hpp"

@@ -14,6 +14,9 @@
 #include "util/tri_uncopyable.hpp"
 #include "tri_index_buffer.hpp"
 #include "tri_vertex_buffer.hpp"
+#include "tri_material.hpp"
+
+
 
 namespace t3 {
 
@@ -62,6 +65,12 @@ public:
         return sphere_;
     }
 
+    ///
+    /// マテリアルを取得
+    const MaterialPtr material() const {
+        return material_;
+    }
+
 private:
     ///
     /// 頂点数
@@ -82,6 +91,10 @@ private:
     ///
     /// 境界球
     Sphere sphere_;
+    
+    ///
+    /// マテリアル
+    MaterialPtr material_;
 };
 
 

@@ -176,9 +176,11 @@ int RenderSystem::buildShader(
     glGetShaderiv(shader_handle, GL_COMPILE_STATUS, &compile_success);
     
     if (compile_success == GL_FALSE) {
-        GLchar messages[256];
+        GLchar messages[512];
         glGetShaderInfoLog(shader_handle, sizeof(messages), 0, &messages[0]);
-        std::cout << messages;
+        std::cout << "\n\n______ Shader compile fail. LOG _________" << std::endl;
+        std::cout << messages << std::endl;
+        std::cout << "_________________________________________" << std::endl;
         return -1;
     }
     

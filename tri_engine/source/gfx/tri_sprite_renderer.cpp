@@ -535,7 +535,7 @@ void SpriteRenderer::renderBatch(BatchGroup* batch) {
     shader_->setAttributePointer(
         SHADER_ATTR_POSITION,
         2,
-        GL_FLOAT,
+        cross::RenderSystem::FLOAT,
         false,
         sizeof(VertexP2CT),
         (void*)offsetof(VertexP2CT, x_)
@@ -544,7 +544,7 @@ void SpriteRenderer::renderBatch(BatchGroup* batch) {
     shader_->setAttributePointer(
         SHADER_ATTR_COLOR,
         4,
-        GL_UNSIGNED_BYTE,
+        cross::RenderSystem::BYTE,
         true,
         sizeof(VertexP2CT),
         (void*)offsetof(VertexP2CT, r_)
@@ -553,7 +553,7 @@ void SpriteRenderer::renderBatch(BatchGroup* batch) {
     shader_->setAttributePointer(
         SHADER_ATTR_UV,
         2,
-        GL_FLOAT,
+        cross::RenderSystem::FLOAT,
         false,
         sizeof(VertexP2CT),
         (void*)offsetof(VertexP2CT, tu_)

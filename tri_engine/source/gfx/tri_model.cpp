@@ -11,7 +11,6 @@ namespace  {
 const char* SHADER_ATTR_POSITION = "a_position";
 const char* SHADER_ATTR_NORMAL = "a_normal";
 const char* SHADER_ATTR_UV = "a_uv";
-
 const char* SHADER_UNIF_PMV = "u_pmv";
 
 }
@@ -45,10 +44,20 @@ void Model::render(const Mtx44& transform) {
 
     current_shader_->use();
     current_shader_->setUniform(SHADER_UNIF_PMV, transform);
+//頂点配列を有効化
+    current_shader_->setUniform("sampler", 0);
+    
 
+    cross::RenderSystem::setActiveTextureUnit(
+        cross::RenderSystem::TextureUnit::UNIT0
+    );
 
     mesh_->vertexBuffer().bind();
     mesh_->indexBuffer().bind();
+
+    auto& material = mesh_->material();
+
+    material->texture()->bind();
 
     //  頂点座標有効化
     current_shader_->setEnableAttributeArray(SHADER_ATTR_POSITION, true);
@@ -69,7 +78,7 @@ void Model::render(const Mtx44& transform) {
         cross::RenderSystem::FLOAT,
         false,
         sizeof(VertexP3NT),
-        (void*)(sizeof(t3::Vec3))
+        (void*)offsetof(VertexP3NT, normal_)
     );
 
 
@@ -81,7 +90,7 @@ void Model::render(const Mtx44& transform) {
         cross::RenderSystem::FLOAT,
         false,
         sizeof(VertexP3NT),
-        (void*)(sizeof(t3::Vec2) + sizeof(t3::Vec3))
+        (void*)offsetof(VertexP3NT, uv_)
     );
 
 

@@ -11,6 +11,7 @@ uniform mat4 u_pmv;
 
 void main(void)
 {
+    vec3 nn = a_normal;
     gl_Position = u_pmv * a_position;
     v_texture_uv = a_uv;
 

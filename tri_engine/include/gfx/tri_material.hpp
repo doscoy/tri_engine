@@ -8,14 +8,20 @@
 
 //  include
 #include "tri_color.hpp"
+#include "tri_texture.hpp"
+
+
 
 namespace t3 {
+
+class Material;
+using MaterialPtr = SharedPtr<Material>;
+
 
 ///
 /// マテリアル
 class Material
 {
-public:
 
     ///
     /// コンストラクタ
@@ -24,6 +30,8 @@ public:
         , ambient_()
         , opacity_(255)
     {}
+
+public:
     
     ///
     /// デストラクタ
@@ -55,9 +63,36 @@ public:
     
     }
 
+    ///
+    /// マテリアル名を取得
+    String name() {
+        return material_name_;
+    }
+    
+    ///
+    /// テクスチャを取得
+    TexturePtr texture() {
+        return texture_;
+    }
+
+
+    ///
+    /// マテリアル生成
+    static MaterialPtr create();
+
+    ///
+    /// マテリアル生成
+    static MaterialPtr create(const char* const material_file_path);
+
 private:
+    void load(const char* const file_path);
+
+private:
+    String material_name_;
+    TexturePtr texture_;
     Color diffuse_;     ///< ディフューズ
     Color ambient_;     ///< アンビエント
+    Color specular_;
     uint8_t opacity_;   ///< 透明度
 };
 

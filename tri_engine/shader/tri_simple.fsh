@@ -1,4 +1,4 @@
-const char* SimpleFragmentShader = TRI_INSTANT_SHADER(
+const char* simple_fsh = TRI_INSTANT_SHADER(
 
 varying lowp vec4 v_color;
 

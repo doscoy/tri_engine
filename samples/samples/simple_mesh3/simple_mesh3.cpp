@@ -25,13 +25,13 @@ public:
 
 
         //  モデル作成
-        t3::FilePath obj_path("vox.obj");
+        t3::FilePath obj_path("character_chr_old.obj");
         model_ = t3::Model::create(obj_path.fullpath().c_str());
 
         
         //  カメラ位置調整
         float len = model_->mesh()->boundingSphere().radius();
-        cam_updater_.position(0, 10, 10);
+        cam_updater_.position(0, len*2, len*4);
         cam_updater_.targetPosition(0,0,0);
         
         //  シーングラフ初期化
@@ -45,7 +45,9 @@ public:
     }
     
     void update(t3::tick_t delta_time){
-        
+        static float angle;
+        angle += 0.25f;
+        node1_->rotationY(angle);
     }
 
     void suspend(t3::tick_t delta_time) {
