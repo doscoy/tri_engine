@@ -84,8 +84,8 @@ void RenderLayer::drawLayers(
 
 void RenderLayer::callDraw() {
     if (render_target_) {
-        render_target_->bind();
-        render_target_->clear();
+
+        render_target_->preRender();
 
         int x, y, w, h;
         cross::RenderSystem::getViewport(&x, &y, &w, &h);
@@ -98,7 +98,7 @@ void RenderLayer::callDraw() {
 
         drawLayer();
 
-        render_target_->unbind();
+        render_target_->postRender();
         cross::RenderSystem::setViewport(x, y, w, h);
    
     } else {

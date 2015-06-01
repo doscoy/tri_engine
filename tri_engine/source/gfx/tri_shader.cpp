@@ -258,7 +258,6 @@ int Shader::getUniformLocation(const char* const name) const {
 
 int Shader::getAttributeLocation(const char* const name) const {
     int location = cross::RenderSystem::getAttributeLocation(handle_, name);
-    T3_ASSERT_MSG(location >= 0, "name = %s", name);
     return location;
 }
 
@@ -275,18 +274,23 @@ void Shader::setAttributePointer(
     cross::RenderSystem::setVertexAttributePointer(location, element_num, type, normalized, stride, pointer);
 }
 
-void Shader::setEnableAttributeArray(
+bool Shader::setEnableAttributeArray(
     const char* const name,
     bool flag
 ) {
     int location = getAttributeLocation(name);
     
-    if (flag) {
-        cross::RenderSystem::setEnableVertexAttribute(location);
+    if (location >= 0) {
+
+        if (flag) {
+            cross::RenderSystem::setEnableVertexAttribute(location);
+        }
+        else {
+            cross::RenderSystem::setDisableVertexAttribute(location);
+        }
+        return true;
     }
-    else {
-        cross::RenderSystem::setDisableVertexAttribute(location);
-    }
+    return false;
 }
 
 

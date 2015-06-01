@@ -30,7 +30,7 @@ CinemaLayer::CinemaLayer(
     default_shader_ = std::make_shared<Shader>(simple_tex_vsh, simple_tex_fsh);
 
     //  デフォルトシェーダを設定
-    shader_ = default_shader_;
+    useDefaultShader();
 }
 
 CinemaLayer::~CinemaLayer() {

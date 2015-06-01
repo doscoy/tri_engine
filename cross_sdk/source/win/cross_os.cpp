@@ -4,6 +4,12 @@
 #include "cstdio"
 
 #include <glfw3.h>
+#include <windows.h>
+
+
+#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
+
+
 namespace {
 
 GLFWwindow* window_ = nullptr;
@@ -71,7 +77,8 @@ bool isExitRequest() {
 void printConsole(
     const char* const str
 ) {
-    std::printf(str);
+    OutputDebugStringA(str);
+
 }
 
 std::string getDeviceFilePath() {

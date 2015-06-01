@@ -29,7 +29,11 @@ Texture::Texture(
     cross::RenderSystem::setTextureWrap(cross::RenderSystem::TextureWrapType::CLAMP_TO_EDGE);
     cross::RenderSystem::setTextureMagFilter(cross::RenderSystem::TextureFilterType::TYPE_LINEAR);
     cross::RenderSystem::setTextureMinFilter(cross::RenderSystem::TextureFilterType::TYPE_LINEAR);
-    cross::RenderSystem::setupTextureData(width, height, cross::RenderSystem::ColorFormat::RGBA, nullptr);
+    cross::RenderSystem::setupTextureData(width, height, color_format, nullptr);
+
+
+    cross::RenderSystem::bindTexture(0);
+
 }
 
 Texture::~Texture() {

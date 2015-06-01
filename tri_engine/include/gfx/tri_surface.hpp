@@ -58,6 +58,16 @@ public:
     }
     
     ///
+    /// 描画前処理
+    void preRender();
+
+    ///
+    /// 描画後処理
+    void postRender();
+
+private:
+
+    ///
     /// バインド
     void bind();
     
@@ -101,6 +111,11 @@ private:
     ///
     /// テクスチャ
     TexturePtr texture_;
+
+
+    ///
+    /// バインド中フラグ
+    bool bound_;
 };
 
 

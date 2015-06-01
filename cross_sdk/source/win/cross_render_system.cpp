@@ -7,6 +7,11 @@
 #include <regex>
 
 
+namespace cross {
+extern void printConsole(
+    const char* const str
+);
+}   // namespace cross
 int render_call_count_ = 0;
 
 
@@ -28,16 +33,53 @@ inline void countDrawCall() {
 }
 
 
-#define CROSS_GL_ASSERT()        checkGLError()
+#define CROSS_GL_ASSERT()        checkGLError(__func__)
 
 namespace {
 
 
 GLsync fence_ = 0;
 
-inline void checkGLError() {
+inline void checkGLError(const char* str) {
     GLenum e = glGetError();
-    CROSS_ASSERT(e == GL_NO_ERROR);
+
+    switch (e) {
+    case GL_NO_ERROR:
+        return;
+    case GL_INVALID_ENUM:
+        cross::printConsole("An unacceptable value is specified for an enumerated argument\n");
+        break;
+    case GL_INVALID_VALUE:
+        cross::printConsole("A numeric argument is out of range\n");
+        break;
+    case GL_INVALID_OPERATION:
+        cross::printConsole("The specified operation is not allowed in the current state\n");
+        break;
+    case GL_STACK_OVERFLOW:
+        cross::printConsole("This command would cause a stack overflow\n");
+        break;
+    case GL_STACK_UNDERFLOW:
+        cross::printConsole("This command would cause a a stack underflow\n");
+        break;
+    case GL_OUT_OF_MEMORY:
+        cross::printConsole("There is not enough memory left to execute the command\n");
+        break;
+    case GL_TABLE_TOO_LARGE:
+        cross::printConsole("The specified table exceeds the implementation's maximum supported table size\n");
+        break;
+    case GL_INVALID_FRAMEBUFFER_OPERATION:
+        cross::printConsole("The specified operation is not allowed current frame buffer\n");
+        break;
+    default:
+        cross::printConsole("An OpenGL error unknown\n");
+        break;
+    }
+
+cross::printConsole(str);
+
+
+    CROSS_PANIC();
+
 }
 
 
@@ -83,7 +125,11 @@ inline int colorFormatToGL(cross::RenderSystem::ColorFormat format) {
         case cross::RenderSystem::ColorFormat::GRAYA:
             glcolor_format = GL_LUMINANCE_ALPHA;
             break;
-            
+
+        case cross::RenderSystem::ColorFormat::DEPTH:
+            glcolor_format = GL_DEPTH_COMPONENT;
+            break;
+
         default:
             break;
     }
@@ -830,7 +876,6 @@ void RenderSystem::attachFrameBufferTexture(
         gltype = GL_DEPTH_ATTACHMENT;
     }
 
-
     glFramebufferTexture2D(
         GL_FRAMEBUFFER,
         gltype,   //  カラーバッファとして設定
@@ -839,7 +884,12 @@ void RenderSystem::attachFrameBufferTexture(
         0
     );
     CROSS_GL_ASSERT();
-   
+
+    glDrawBuffer(GL_NONE);
+    glReadBuffer(GL_NONE);
+
+    GLenum state = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+   CROSS_ASSERT(state == GL_FRAMEBUFFER_COMPLETE);
 }
 
 
@@ -1074,6 +1124,18 @@ void RenderSystem::deleteTexture(
 bool RenderSystem::isError() {
     return glGetError() != GL_NO_ERROR;
 }
+
+void RenderSystem::colorMask(
+    bool r,
+    bool g,
+    bool b,
+    bool a
+) {
+    glColorMask(r, g, b, a);
+}
+
+
+
 
 }   // namespace cross
 

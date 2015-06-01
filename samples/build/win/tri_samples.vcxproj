@@ -59,6 +59,7 @@
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_entity.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_fade_layer.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_image_png.cpp" />
+    <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_material.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_mesh.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_model.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_render_layer.cpp" />
@@ -105,6 +106,7 @@
     <ClCompile Include="..\..\samples\blur\blur_test.cpp" />
     <ClCompile Include="..\..\samples\input\input_test.cpp" />
     <ClCompile Include="..\..\samples\main.cpp" />
+    <ClCompile Include="..\..\samples\shadow\shadow_test.cpp" />
     <ClCompile Include="..\..\samples\simple_mesh2\simple_mesh2.cpp" />
     <ClCompile Include="..\..\samples\simple_mesh3\simple_mesh3.cpp" />
     <ClCompile Include="..\..\samples\simple_mesh\simple_mesh.cpp" />
@@ -267,6 +269,7 @@
     <ClInclude Include="..\..\samples\blur\blur_test.hpp" />
     <ClInclude Include="..\..\samples\input\input_test.hpp" />
     <ClInclude Include="..\..\samples\samples.hpp" />
+    <ClInclude Include="..\..\samples\shadow\shadow_test.hpp" />
     <ClInclude Include="..\..\samples\simple_mesh2\simple_mesh2.hpp" />
     <ClInclude Include="..\..\samples\simple_mesh3\simple_mesh3.hpp" />
     <ClInclude Include="..\..\samples\simple_mesh\simple_mesh.hpp" />
@@ -326,7 +329,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\GLFW;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\lpng;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\samples\libs;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\glew;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libpng16.lib;zlib.lib;glfw3.lib;GLU32.Lib;OpenGL32.Lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libpng.lib;zlib.lib;glfw3.lib;GLU32.Lib;OpenGL32.Lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -349,7 +352,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\GLFW;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\lpng;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\samples\libs;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\third_party_lib\win\glew;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libpng16.lib;zlib.lib;glfw3.lib;GLU32.Lib;OpenGL32.Lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libpng.lib;zlib.lib;glfw3.lib;GLU32.Lib;OpenGL32.Lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

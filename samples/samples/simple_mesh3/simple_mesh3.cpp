@@ -68,7 +68,6 @@ private:
     t3::ModelPtr model_;
     t3::LookAtCameraUpdater cam_updater_;
     t3::SceneGraph scene_graph_;
-    
     t3::TransformNodePtr node1_;
 };
 

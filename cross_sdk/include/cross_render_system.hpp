@@ -263,7 +263,8 @@ public:
         RGB,    ///< RGB
         RGBA,   ///< RGBA
         GRAY,   ///< グレースケール
-        GRAYA   ///< アルファ付きグレースケール
+        GRAYA,  ///< アルファ付きグレースケール
+        DEPTH,  ///< デプス値
     };
     
     ///
@@ -297,9 +298,9 @@ public:
     ///
     /// バッファのクリア
     static void clearBuffer(
-        bool color_clear,
-        bool depth_clear,
-        bool stencil_clear
+        bool color_clear,   ///< カラーバッファクリア
+        bool depth_clear,   ///< デプスバッファクリア
+        bool stencil_clear  ///< ステンシルバッファクリア
     );
     
     
@@ -679,6 +680,16 @@ public:
     ///
     /// レンダリングシステムエラー判定
     static bool isError();
+
+
+    ///
+    /// 描画カラーマスク設定
+    static void colorMask(
+        bool r,
+        bool g,
+        bool b,
+        bool a
+    );
 };
 
 

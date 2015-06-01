@@ -24,7 +24,7 @@ int main(int argc, char * argv[])
 //    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
 //    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
 //    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
-    app.rootScene(t3::Scene::sceneGenerator<SimpleMesh3Scene>());
+    app.rootScene(t3::Scene::sceneGenerator<ShadowTestScene>());
 
     t3::setApplication(app);
 #if defined(CROSS_TARGET_PLATFORM_IOS)
@@ -32,7 +32,7 @@ int main(int argc, char * argv[])
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 #else // MacOSX or Windows
-    t3::initializeTriEngine(640, 640, "win");
+    t3::initializeTriEngine(150, 150, "win");
     t3::initializeApplication();
 
     while (t3::isActiveApplication()) {

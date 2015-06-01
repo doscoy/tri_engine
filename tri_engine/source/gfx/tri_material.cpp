@@ -1,6 +1,6 @@
 
 
-#include "tri_material.hpp"
+#include "gfx/tri_material.hpp"
 
 namespace t3 {
 

@@ -296,6 +296,12 @@
     <ClCompile Include="..\..\samples\simple_mesh3\simple_mesh3.cpp">
       <Filter>sample\simple_mesh3</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_material.cpp">
+      <Filter>tri_engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\samples\shadow\shadow_test.cpp">
+      <Filter>sample\shadow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\cross_sdk\include\cross_accelerometer.hpp">
@@ -778,6 +784,9 @@
     <ClInclude Include="..\..\samples\simple_mesh3\simple_mesh3.hpp">
       <Filter>sample\simple_mesh3</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\samples\shadow\shadow_test.hpp">
+      <Filter>sample\shadow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="sample">
@@ -851,6 +860,9 @@
     </Filter>
     <Filter Include="sample\simple_mesh3">
       <UniqueIdentifier>{7dd3368d-c5ad-4ae5-a76b-d3dc93dea4b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample\shadow">
+      <UniqueIdentifier>{bceee6c5-2772-4215-82fe-884382d114e0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

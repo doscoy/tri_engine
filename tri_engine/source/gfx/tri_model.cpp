@@ -71,16 +71,16 @@ void Model::render(const Mtx44& transform) {
     );
 
     //  頂点法線有効化
-    current_shader_->setEnableAttributeArray(SHADER_ATTR_NORMAL, true);
-    current_shader_->setAttributePointer(
-        SHADER_ATTR_NORMAL,
-        3,
-        cross::RenderSystem::FLOAT,
-        false,
-        sizeof(VertexP3NT),
-        (void*)offsetof(VertexP3NT, normal_)
-    );
-
+    if (current_shader_->setEnableAttributeArray(SHADER_ATTR_NORMAL, true)) {
+        current_shader_->setAttributePointer(
+            SHADER_ATTR_NORMAL,
+            3,
+            cross::RenderSystem::FLOAT,
+            false,
+            sizeof(VertexP3NT),
+            (void*)offsetof(VertexP3NT, normal_)
+        );
+    }
 
     //  UV有効化
     current_shader_->setEnableAttributeArray(SHADER_ATTR_UV, true);

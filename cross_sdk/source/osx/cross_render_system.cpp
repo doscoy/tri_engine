@@ -82,6 +82,11 @@ inline int colorFormatToGL(cross::RenderSystem::ColorFormat format) {
         case cross::RenderSystem::ColorFormat::GRAYA:
             glcolor_format = GL_LUMINANCE_ALPHA;
             break;
+
+        case cross::RenderSystem::ColorFormat::DEPTH:
+            glcolor_format = GL_DEPTH_COMPONENT;
+            break;
+
             
         default:
             break;

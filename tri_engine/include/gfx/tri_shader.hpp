@@ -135,7 +135,10 @@ public:
     
     ///
     /// アトリビュートを有効化
-    void setEnableAttributeArray(const char* const name, bool flag);
+    bool setEnableAttributeArray(
+        const char* const name,     ///< アトリビュート変数名
+        bool flag                   ///< 設定フラグ
+    );
     
     ///
     /// ユニフォーム位置を取得
