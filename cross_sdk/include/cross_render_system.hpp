@@ -27,6 +27,14 @@ class Texture;
 class RenderSystem {
 public:
     ///
+    /// レンダリングシステムの初期化
+    static bool initialize(int w, int h, const char* const title);
+    static void terminate();
+    static bool isExitRequest();
+    static void swapBuffers();
+
+public:
+    ///
     /// 型の数値
     enum class TypeFormat{
         UNSIGNED_BYTE  = 0x1401,
@@ -262,9 +270,6 @@ public:
         const float* mtx
     );
 
-    ///
-    /// レンダリングシステムの初期化
-    static void initializeRenderSystem();
 
     ///
     /// カラーフォーマット定義
@@ -299,11 +304,6 @@ public:
     static void setCullingMode(
         CullingMode mode        ///< モード
     );
-    
-    
-    ///
-    /// ダブルバッファリング時のフレームバッファ切り替え
-    static void swapBuffers();
     
     ///
     /// バッファのクリア
@@ -700,6 +700,24 @@ public:
         bool b,
         bool a
     );
+
+    enum class TextureCompareFunc {
+        LEQUAL
+    };
+
+    static void setTextureCompareFunc(
+        TextureCompareFunc func
+    );
+
+    enum class TextureCompareMode {
+        R_TO_TEX
+    };
+
+    static void setTextureCompareMode(
+        TextureCompareMode mode
+    );
+
+
 };
 
 

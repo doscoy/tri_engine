@@ -31,6 +31,9 @@ Texture::Texture(
     cross::RenderSystem::setTextureWrap(cross::RenderSystem::TextureWrapType::CLAMP_TO_EDGE);
     cross::RenderSystem::setTextureMagFilter(cross::RenderSystem::TextureFilterType::TYPE_LINEAR);
     cross::RenderSystem::setTextureMinFilter(cross::RenderSystem::TextureFilterType::TYPE_LINEAR);
+    cross::RenderSystem::setTextureCompareFunc(cross::RenderSystem::TextureCompareFunc::LEQUAL);
+    cross::RenderSystem::setTextureCompareMode(cross::RenderSystem::TextureCompareMode::R_TO_TEX);
+
     cross::RenderSystem::setupTextureData(width, height, color_format, type_format, nullptr);
 
 

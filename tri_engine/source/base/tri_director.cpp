@@ -212,12 +212,6 @@ void Director::initializeDirector() {
     
     DebugMenu::instance().initialize();
     
-    //  レンダリングシステムの初期化
-    cross::RenderSystem::initializeRenderSystem();
-
-    //  オーディオシステムの初期化
-    cross::AudioSystem::initializeAudioSystem();
-
     
     dm_layers_.setFocusCallback(
         this,

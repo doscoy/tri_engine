@@ -1,4 +1,6 @@
 
+//#define GLFW_INCLUDE_ES2
+
 #include <glew.h>
 #include <glfw3.h>
 #include "cross_render_system.hpp"
@@ -47,35 +49,35 @@ inline void checkGLError(const char* str) {
     case GL_NO_ERROR:
         return;
     case GL_INVALID_ENUM:
-        cross::printConsole("An unacceptable value is specified for an enumerated argument\n");
+        cross::printConsole("[GL_INVALID_ENUM]An unacceptable value is specified for an enumerated argument\n");
         break;
     case GL_INVALID_VALUE:
-        cross::printConsole("A numeric argument is out of range\n");
+        cross::printConsole("[GL_INVALID_VALUE]A numeric argument is out of range\n");
         break;
     case GL_INVALID_OPERATION:
-        cross::printConsole("The specified operation is not allowed in the current state\n");
+        cross::printConsole("[GL_INVALID_OPERATION]The specified operation is not allowed in the current state\n");
         break;
     case GL_STACK_OVERFLOW:
-        cross::printConsole("This command would cause a stack overflow\n");
+        cross::printConsole("[GL_STACK_OVERFLOW]This command would cause a stack overflow\n");
         break;
     case GL_STACK_UNDERFLOW:
-        cross::printConsole("This command would cause a a stack underflow\n");
+        cross::printConsole("[GL_STACK_UNDERFLOW]This command would cause a a stack underflow\n");
         break;
     case GL_OUT_OF_MEMORY:
-        cross::printConsole("There is not enough memory left to execute the command\n");
+        cross::printConsole("[GL_OUT_OF_MEMORY]There is not enough memory left to execute the command\n");
         break;
     case GL_TABLE_TOO_LARGE:
-        cross::printConsole("The specified table exceeds the implementation's maximum supported table size\n");
+        cross::printConsole("[GL_TABLE_TOO_LARGE]The specified table exceeds the implementation's maximum supported table size\n");
         break;
     case GL_INVALID_FRAMEBUFFER_OPERATION:
-        cross::printConsole("The specified operation is not allowed current frame buffer\n");
+        cross::printConsole("[GL_INVALID_FRAMEBUFFER_OPERATION]The specified operation is not allowed current frame buffer\n");
         break;
     default:
         cross::printConsole("An OpenGL error unknown\n");
         break;
     }
 
-cross::printConsole(str);
+    cross::printConsole(str);
 
 
     CROSS_PANIC();
@@ -104,7 +106,33 @@ inline int bufferTypeToGL(cross::RenderSystem::BufferType type) {
     return gl;
 }
 
-inline int colorFormatToGL(cross::RenderSystem::ColorFormat format) {
+inline int colorFormatToGLInternalFormat(cross::RenderSystem::ColorFormat format) {
+
+
+    int glcolor_format = GL_RGB;
+    
+    switch (format) {
+        case cross::RenderSystem::ColorFormat::RGBA:
+            glcolor_format = GL_RGBA8;
+            break;
+            
+        case cross::RenderSystem::ColorFormat::RGB:
+            glcolor_format = GL_RGB8;
+            break;
+            
+        case cross::RenderSystem::ColorFormat::DEPTH:
+            glcolor_format = GL_DEPTH_COMPONENT16;
+            break;
+
+        default:
+            CROSS_PANIC();
+            break;
+    }
+    
+    return glcolor_format;
+}
+
+inline int colorFormatToGLFormat(cross::RenderSystem::ColorFormat format) {
 
 
     int glcolor_format = GL_RGB;
@@ -118,13 +146,6 @@ inline int colorFormatToGL(cross::RenderSystem::ColorFormat format) {
             glcolor_format = GL_RGB;
             break;
             
-        case cross::RenderSystem::ColorFormat::GRAY:
-            glcolor_format = GL_ALPHA;
-            break;
-
-        case cross::RenderSystem::ColorFormat::GRAYA:
-            glcolor_format = GL_LUMINANCE_ALPHA;
-            break;
 
         case cross::RenderSystem::ColorFormat::DEPTH:
             glcolor_format = GL_DEPTH_COMPONENT;
@@ -165,38 +186,129 @@ inline int typeFormatToGL(cross::RenderSystem::TypeFormat format) {
 
 }
 
-
+GLFWwindow* window_ = nullptr;
 
 
 }   // unname namespace
 
 
+
+
+
+
 namespace cross {
+
+
+bool RenderSystem::initialize(
+    int w,
+    int h,
+    const char* const title
+) {
+
+
+    if (!glfwInit()) {
+        //  glfw初期化失敗
+        CROSS_PANIC();
+    }
+    
+    // ------------------------------------------------
+    //  glfwを使う設定
+    //  GLのバージョン
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+
+    //  ウィンドウリサイズ設定
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
+    //  デプスバッファビット深度
+    glfwWindowHint(GLFW_DEPTH_BITS, 16);
+
+    //  API設定
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API); // GLFW_OPENGL_API or GLFW_OPENGL_ES_API
+
+    //  コアプロファイル
+//    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    window_ = glfwCreateWindow(w, h, title, nullptr, nullptr);
+    if (window_) {
+        glfwMakeContextCurrent(window_);
+    } else {
+        return false;
+    }
+
+    glewExperimental = true;
+    GLenum init_result = glewInit();
+
+
+    if ( init_result != GLEW_OK ) {
+		std::cout << "error: " << glewGetErrorString( init_result ) << std::endl;
+        return false;
+	}
+
+//    CROSS_GL_ASSERT();
+
+
+
+//    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    
+//    cross::RenderSystem::setCulling(true);
+
+    return true;
+
+}
+
+
+void RenderSystem::terminate() {
+    glfwTerminate();
+}
+
+void RenderSystem::swapBuffers() {
+    glfwSwapBuffers(window_);
+    glfwPollEvents();
+}
+
+bool RenderSystem::isExitRequest() {
+    return glfwWindowShouldClose(window_);
+}
+
+
+
+
+
+
+
 
 
 
 void RenderSystem::createFrameBuffer(RenderSystem::FrameBufferID* id) {
     glGenFramebuffers(1, id);
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::deleteFrameBuffer(RenderSystem::FrameBufferID* id) {
     glDeleteFramebuffers(1, id);
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::bindFrameBuffer(RenderSystem::FrameBufferID id) {
+    CROSS_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
     glBindFramebuffer(GL_FRAMEBUFFER, id);
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::createRenderBuffer(RenderSystem::RenderBufferID* id) {
     glGenRenderbuffers(1, id);
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::deleteRenderBuffer(RenderSystem::RenderBufferID* id) {
     glDeleteRenderbuffers(1, id);
+    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::bindRenderBuffer(RenderSystem::RenderBufferID id) {
     glBindRenderbuffer(GL_RENDERBUFFER, id);
+    CROSS_GL_ASSERT();
 }
 
 
@@ -217,6 +329,7 @@ RenderSystem::RenderBufferID RenderSystem::getCurrentRenderBufferID() {
 void RenderSystem::bindTexture(RenderSystem::TextureID texture) {
 
     glBindTexture(GL_TEXTURE_2D, texture);
+    CROSS_GL_ASSERT();
 }
 
 int RenderSystem::buildShader(
@@ -247,6 +360,7 @@ int RenderSystem::buildShader(
     CROSS_ASSERT(shader_handle > 0);
     auto replaced = std::regex_replace(source, std::regex(R"(lowp|mediump|highp)"), "");
     const char* replaced_src = replaced.c_str();
+//    const char* replaced_src = source;
     glShaderSource(shader_handle, 1, &replaced_src, 0);
     glCompileShader(shader_handle);
     
@@ -375,26 +489,6 @@ void RenderSystem::setUniformMatrix(
         mtx
     );
     CROSS_GL_ASSERT();
-}
-
-void RenderSystem::initializeRenderSystem() {
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    
-    cross::RenderSystem::setCulling(true);
-    
-    
-}
-
-
-
-
-
-
-void RenderSystem::swapBuffers() {
-    
-#if defined(PLATFORM_MAC)
-    glfwSwapBuffers(window_);
-#endif
 }
 
 
@@ -758,13 +852,16 @@ void RenderSystem::setupTextureData(
     RenderSystem::TypeFormat type_format,
     const void* data
 ) {
-    int glcolor_format = colorFormatToGL(color_format);
+    int glinternal_format = colorFormatToGLInternalFormat(color_format);
+    int glcolor_format = colorFormatToGLFormat(color_format);
     int gltype_format = typeFormatToGL(type_format);
     
+
+
     glTexImage2D(
         GL_TEXTURE_2D,
         0,
-        (glcolor_format == GL_DEPTH_COMPONENT? GL_DEPTH_COMPONENT24:glcolor_format),
+        glinternal_format,
         width,
         height,
         0,
@@ -918,8 +1015,8 @@ void RenderSystem::attachFrameBufferTexture(
     );
     CROSS_GL_ASSERT();
 
-    GLenum state = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-    CROSS_ASSERT(state == GL_FRAMEBUFFER_COMPLETE);
+
+    CROSS_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 }
 
 
@@ -1170,6 +1267,24 @@ void RenderSystem::setDrawBuffer(RenderSystem::DrawBufferTarget target) {
 
     glDrawBuffer(GL_NONE);
 }
+
+void RenderSystem::setTextureCompareFunc(
+    RenderSystem::TextureCompareFunc func
+) {
+    int gl_func = GL_LEQUAL;
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, gl_func);
+}
+
+void RenderSystem::setTextureCompareMode(
+    RenderSystem::TextureCompareMode mode
+) {
+    int gl_mode = GL_COMPARE_R_TO_TEXTURE;
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, gl_mode);
+}
+
+
 
 }   // namespace cross
 

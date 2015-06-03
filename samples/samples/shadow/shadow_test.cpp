@@ -12,7 +12,7 @@ public:
         , cinema_()
         , chara_()
         , field_()
-        , surface_(150,150)
+        , surface_(256,256)
     {}
     
     ~SceneContext()
@@ -56,6 +56,10 @@ public:
 
         //  シャドウ用テクスチャ表示用
         layer_.renderTarget(&surface_);
+
+
+        my_t_ = t3::Texture::create(t3::FilePath("t2.png"));
+
         cinema_.texture(surface_.depthTexture());
     }
     
@@ -96,6 +100,7 @@ private:
     t3::TransformNodePtr node_chara_;
     t3::TransformNodePtr node_sun_;
     t3::Surface surface_;
+    t3::TexturePtr my_t_;
 };
 
 

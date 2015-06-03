@@ -1,43 +1,33 @@
-#include <glew.h>
 
-#include "cross_os.hpp"
-#include "cstdio"
 
-#include <glfw3.h>
+
 #include <windows.h>
 
+#include "cross_render_system.hpp"
+#include "cross_audio_system.hpp"
+#include "cross_dbg.hpp"
+#include "cross_os.hpp"
+#include "cstdio"
 
 #pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 
 
-namespace {
-
-GLFWwindow* window_ = nullptr;
-}
-
 namespace cross {
 
-void initializePlatform(
+bool initializePlatform(
     int w,
     int h,
     const char* title
 ) {
-    glfwInit();
-    window_ = glfwCreateWindow(w, h, title, nullptr, nullptr);
-    glfwMakeContextCurrent(window_);
+    //  オーディオシステムの初期化
+    AudioSystem::initializeAudioSystem();
 
-    GLenum init_result = glewInit();
-
-    if ( init_result != GLEW_OK ) {
-		std::cout << "error: " << glewGetErrorString( init_result ) << std::endl;
-	}
-
+    return RenderSystem::initialize(w, h, title);
 }
 
 
 void terminatePlatform() {
-
-    glfwTerminate();
+    RenderSystem::terminate();
 }
 
 void beginUpdate() {
@@ -49,9 +39,7 @@ void endUpdate() {
 
 
 void endRender() {
-
-    glfwSwapBuffers(window_);
-    glfwPollEvents();
+    RenderSystem::swapBuffers();
 }
 
 void platformPadData(
@@ -71,7 +59,11 @@ void platformPointingData(
 
 bool isExitRequest() {
 
-    return glfwWindowShouldClose(window_);
+    if (RenderSystem::isExitRequest()) {
+        return true;
+    }
+
+    return false;
 }
 
 void printConsole(

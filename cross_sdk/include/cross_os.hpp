@@ -17,7 +17,7 @@ namespace cross {
 
 ///
 /// プラットフォーム初期化
-void initializePlatform(
+bool initializePlatform(
     int w,
     int h,
     const char* title

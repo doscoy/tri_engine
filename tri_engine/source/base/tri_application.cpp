@@ -98,14 +98,16 @@ private:
 namespace t3 {
 
 
-void initializeTriEngine(
+bool initializeTriEngine(
     int width,
     int height,
     const char* const title
 ) {
     
     //  プラットフォームの初期化
-    cross::initializePlatform(width, height, title);
+    if (!cross::initializePlatform(width, height, title)) {
+        return false;
+    }
     
 
     //  マネージャインスタンス生成
@@ -131,6 +133,9 @@ void initializeTriEngine(
     show_mem_pool_ = true;
     show_work_bar_ = true;
 #endif
+
+
+    return true;
 }
 
 void terminateTriEngine() {
@@ -532,7 +537,11 @@ bool Application::isSuspend() const {
 void Application::beginRender() {
     auto& c = t3::Director::getClearColor();
     cross::RenderSystem::clearColor(c.redFloat(), c.greenFloat(), c.blueFloat(), c.alphaFloat());
-    cross::RenderSystem::clearBuffer(true, true, false);
+    static int a;
+    if (a < 5) {
+        cross::RenderSystem::clearBuffer(true, true, false);
+        a++;
+    }
 }
 
 

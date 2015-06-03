@@ -130,7 +130,7 @@ private:
 
 ///
 /// エンジンの初期化
-void initializeTriEngine(
+bool initializeTriEngine(
     const int width,        ///< スクリーン幅
     const int height,       ///< スクリーン高さ
     const char* const title ///< 任意の文字列

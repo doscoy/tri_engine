@@ -15,7 +15,7 @@
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_audio_system.cpp" />
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_dbg.cpp" />
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_os.cpp" />
-    <ClCompile Include="..\..\..\cross_sdk\source\win\cross_render_system.cpp" />
+    <ClCompile Include="..\..\..\cross_sdk\source\win\cross_render_system_gl3.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\audio\tri_audio_handle.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\audio\tri_audio_resource.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\audio\tri_streaming_player.cpp" />

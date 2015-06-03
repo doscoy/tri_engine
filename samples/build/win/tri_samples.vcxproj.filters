@@ -11,9 +11,6 @@
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_os.cpp">
       <Filter>cross_sdk\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\cross_sdk\source\win\cross_render_system.cpp">
-      <Filter>cross_sdk\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\tri_engine\source\audio\tri_audio_handle.cpp">
       <Filter>tri_engine\src</Filter>
     </ClCompile>
@@ -301,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="..\..\samples\shadow\shadow_test.cpp">
       <Filter>sample\shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\cross_sdk\source\win\cross_render_system_gl3.cpp">
+      <Filter>cross_sdk\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
