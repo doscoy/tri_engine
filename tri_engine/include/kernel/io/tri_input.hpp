@@ -44,7 +44,7 @@ public:
         const cross::GamePadData& paddata,
         tick_t delta_time
     ) {
-        pad_.updatePad(paddata.buttonData(), delta_time);
+        pad_.updatePad(paddata, delta_time);
     }
     
     ///

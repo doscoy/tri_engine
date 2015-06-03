@@ -11,6 +11,8 @@
 #include "base/tri_std.hpp"
 #include "base/tri_types.hpp"
 #include "cross_sdk.hpp"
+#include "math/tri_vec2.hpp"
+
 namespace t3 {
 
 ///
@@ -62,7 +64,7 @@ public:
 public:
     ///
     /// 入力情報更新
-    void updatePad( uint32_t current_frame_data, tick_t delta_time );
+    void updatePad(const cross::GamePadData& paddata, tick_t delta_time);
     
     ///
     /// トリガー判定
@@ -113,6 +115,23 @@ public:
         return repeat_;
     }
 
+    float getLTrigger() const {
+        return l_trigger_;
+    }
+    
+    float getRTrigger() const {
+        return r_trigger_;
+    }
+    
+    const Vec2& getLeftStick() const {
+        return left_stick_;
+    }
+    
+    const Vec2& getRightStick() const {
+        return right_stick_;
+    }
+
+
 private:
     ///
     /// リピートを更新
@@ -146,6 +165,12 @@ private:
     ///
     /// プレス入力時間
     float pressed_time_;
+    
+    Vec2 left_stick_;
+    Vec2 right_stick_;
+    
+    float l_trigger_;
+    float r_trigger_;
 };
   
 

@@ -375,12 +375,10 @@ void Director::updateInput(
     //  debug pad
     cross::GamePadData dbg_pad_data;
     cross::platformPadData(1, &dbg_pad_data);
-    uint32_t dpad_buttons = dbg_pad_data.buttonData();
 
     auto& debug_menu = t3::DebugMenu::instance();
     const auto& vpad = debug_menu.virtualPad();
-    dpad_buttons |= vpad->getPadData()->buttonData();
-    updateDebugPad(dpad_buttons, delta_time);
+    updateDebugPad(*vpad->getPadData(), delta_time);
 
 }
 

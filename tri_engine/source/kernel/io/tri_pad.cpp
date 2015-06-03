@@ -13,6 +13,10 @@ Pad::Pad()
     , repeat_start_time_(0.35f)
     , repeat_interval_(0.125f)
     , pressed_time_(0.0)
+    , left_stick_()
+    , right_stick_()
+    , l_trigger_(0.0f)
+    , r_trigger_(0.0f)
 {
 }
 
@@ -20,14 +24,25 @@ Pad::~Pad() {
 
 }
 
-void Pad::updatePad(const uint32_t current_frame_data, tick_t delta_time) {
-        
+void Pad::updatePad(const cross::GamePadData& paddata, tick_t delta_time) {
+    uint32_t current_frame_data = paddata.buttonData();
     trigger_ = current_frame_data & (current_frame_data ^ last_frame_data_);
     release_ = last_frame_data_ & (current_frame_data ^ last_frame_data_);
     
     last_frame_data_ = current_frame_data;
     
     updateRepeat(delta_time);
+    
+    
+    //  スティックデータ更新
+    left_stick_.x_ = paddata.stick1x_;
+    left_stick_.y_ = paddata.stick1y_;
+    right_stick_.x_ = paddata.stick2x_;
+    right_stick_.y_ = paddata.stick2y_;
+
+    l_trigger_ = paddata.trigger_l_;
+    r_trigger_ = paddata.trigger_r_;
+
 }
 
 

@@ -18,7 +18,7 @@ const Pad& debugPad();
 ///
 /// デバッグパッドの更新
 void updateDebugPad( 
-    const uint32_t pad_data,    ///< パッドの入力情報
+    const cross::GamePadData& pad_data,    ///< パッドの入力情報
     tick_t delta_time           ///< チック
 );
 

@@ -76,6 +76,8 @@
 		3A6EE1A21B08A25100BB4247 /* libpng.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE1A11B08A25100BB4247 /* libpng.dylib */; };
 		3A6EE1A81B08C98700BB4247 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE1A71B08C98700BB4247 /* libGLEW.a */; };
 		3A6EE1A91B08FBC300BB4247 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE1A51B08AD8A00BB4247 /* IOKit.framework */; };
+		3AC867171B1DEE6400AADEA8 /* shadow_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC867151B1DEE6400AADEA8 /* shadow_test.cpp */; };
+		3AC867181B1DEE6400AADEA8 /* shadow_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC867151B1DEE6400AADEA8 /* shadow_test.cpp */; };
 		3AD301461AFBBD2500516996 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD301451AFBBD2500516996 /* main.cpp */; };
 		3AD4070B19AE257000762711 /* ad_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F219AE257000762711 /* ad_test.cpp */; };
 		3AD4070C19AE257000762711 /* audio_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F519AE257000762711 /* audio_test.cpp */; };
@@ -204,6 +206,8 @@
 		3A6EE1A51B08AD8A00BB4247 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 		3A6EE1A71B08C98700BB4247 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../../../../opt/local/lib/libGLEW.a; sourceTree = "<group>"; };
 		3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = tri_engine.xcodeproj; path = ../../../build/ios/tri_engine.xcodeproj; sourceTree = "<group>"; };
+		3AC867151B1DEE6400AADEA8 /* shadow_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shadow_test.cpp; sourceTree = "<group>"; };
+		3AC867161B1DEE6400AADEA8 /* shadow_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shadow_test.hpp; sourceTree = "<group>"; };
 		3AD301451AFBBD2500516996 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = main.cpp; sourceTree = "<group>"; };
 		3AD406F219AE257000762711 /* ad_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ad_test.cpp; sourceTree = "<group>"; };
 		3AD406F319AE257000762711 /* ad_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ad_test.hpp; sourceTree = "<group>"; };
@@ -448,9 +452,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3AC867141B1DEE6400AADEA8 /* shadow */ = {
+			isa = PBXGroup;
+			children = (
+				3AC867151B1DEE6400AADEA8 /* shadow_test.cpp */,
+				3AC867161B1DEE6400AADEA8 /* shadow_test.hpp */,
+			);
+			path = shadow;
+			sourceTree = "<group>";
+		};
 		3AD406F019AE257000762711 /* samples */ = {
 			isa = PBXGroup;
 			children = (
+				3AC867141B1DEE6400AADEA8 /* shadow */,
 				3A2BC73E1B1A8ECE00F889BC /* simple_mesh3 */,
 				3A25ED111B14D927002FD2E6 /* simple_mesh2 */,
 				3A25ED0C1B14D884002FD2E6 /* simple_sprite */,
@@ -715,6 +729,7 @@
 				3A25ED0A1B14D87A002FD2E6 /* simple_primitive.cpp in Sources */,
 				3A2BC7411B1A8ECE00F889BC /* simple_mesh3.cpp in Sources */,
 				3A25ED141B14D927002FD2E6 /* simple_mesh2.cpp in Sources */,
+				3AC867171B1DEE6400AADEA8 /* shadow_test.cpp in Sources */,
 				3AD4070B19AE257000762711 /* ad_test.cpp in Sources */,
 				3AD4071019AE257000762711 /* quat_test_scene.cpp in Sources */,
 				04F1FE801985557F00C8D498 /* ViewController.mm in Sources */,
@@ -741,6 +756,7 @@
 				3A6EE18D1B088AEF00BB4247 /* zip_test.cpp in Sources */,
 				3A6EE18E1B088AEF00BB4247 /* ad_test.cpp in Sources */,
 				3A25ED0B1B14D87A002FD2E6 /* simple_primitive.cpp in Sources */,
+				3AC867181B1DEE6400AADEA8 /* shadow_test.cpp in Sources */,
 				3A6EE18F1B088AEF00BB4247 /* audio_test.cpp in Sources */,
 				3A2BC7421B1A8ECE00F889BC /* simple_mesh3.cpp in Sources */,
 				3A6EE1901B088AEF00BB4247 /* event_handling.cpp in Sources */,

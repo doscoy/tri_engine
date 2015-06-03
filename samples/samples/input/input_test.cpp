@@ -36,14 +36,14 @@ public:
 
         //  ポインティングデバイス
         const auto& touch = input.pointing();
-        T3_PRINT_DISP(220, 270, "TOUCH DATA");
-        T3_PRINT_DISP(220, 280, "TRIGGER : %d", touch.isTrigger());
-        T3_PRINT_DISP(220, 290, "HOLD    : %d", touch.isHold());
-        T3_PRINT_DISP(220, 300, "RELEASE : %d", touch.isRelease());
-        T3_PRINT_DISP(220, 310, "REPEAT  : %d", touch.isRepeat());
-        T3_PRINT_DISP(220, 320, "D CLICK : %d", touch.isDoubleClick());
-        T3_PRINT_DISP(220, 330, "X : %f", touch.position().x_);
-        T3_PRINT_DISP(220, 340, "Y : %f", touch.position().y_);
+        T3_PRINT_DISP(220, 320, "TOUCH DATA");
+        T3_PRINT_DISP(220, 330, "TRIGGER : %d", touch.isTrigger());
+        T3_PRINT_DISP(220, 340, "HOLD    : %d", touch.isHold());
+        T3_PRINT_DISP(220, 350, "RELEASE : %d", touch.isRelease());
+        T3_PRINT_DISP(220, 360, "REPEAT  : %d", touch.isRepeat());
+        T3_PRINT_DISP(220, 370, "D CLICK : %d", touch.isDoubleClick());
+        T3_PRINT_DISP(220, 380, "X : %f", touch.position().x_);
+        T3_PRINT_DISP(220, 390, "Y : %f", touch.position().y_);
         
 
         //  ゲームパッド
@@ -129,13 +129,27 @@ public:
             pad.isRelease(t3::Pad::DEBUG_BUTTON_2),
             pad.isRepeat(t3::Pad::DEBUG_BUTTON_2)
         );
+        T3_PRINT_DISP(10, 250, "STICK1:  %f  %f",
+            pad.getLeftStick().x_,
+            pad.getLeftStick().y_
+        );
+        T3_PRINT_DISP(10, 260, "STICK2:  %f  %f",
+            pad.getRightStick().x_,
+            pad.getRightStick().y_
+        );
+        T3_PRINT_DISP(10, 270, "L TRIGGER: %f",
+            pad.getLTrigger()
+        );
+        T3_PRINT_DISP(10, 280, "R TRIGGER: %f",
+            pad.getRTrigger()
+        );
 
         //  加速度センサ
         const auto& acc = input.accelerometer();
-        T3_PRINT_DISP(10, 270, "ACCELEROMETER");
-        T3_PRINT_DISP(10, 280, "X %f", acc.x_);
-        T3_PRINT_DISP(10, 290, "Y %f", acc.y_);
-        T3_PRINT_DISP(10, 300, "Z %f", acc.z_);
+        T3_PRINT_DISP(10, 320, "ACCELEROMETER");
+        T3_PRINT_DISP(10, 330, "X %f", acc.x_);
+        T3_PRINT_DISP(10, 340, "Y %f", acc.y_);
+        T3_PRINT_DISP(10, 350, "Z %f", acc.z_);
         
     }
 

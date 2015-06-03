@@ -36,7 +36,7 @@ public:
     }
 
     void draw() {
-        surface_.bind();
+        surface_.preRender();
         
         
         cross::RenderSystem::setDepthWrite(true);
@@ -55,7 +55,7 @@ public:
       
         
         //  フレームバッファを戻す
-        surface_.unbind();
+        surface_.postRender();
 
     }
     
