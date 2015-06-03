@@ -64,7 +64,7 @@ void Model::render(const Mtx44& transform) {
     current_shader_->setAttributePointer(
         SHADER_ATTR_POSITION,
         3,
-        cross::RenderSystem::FLOAT,
+        cross::RenderSystem::TypeFormat::FLOAT,
         false,
         sizeof(VertexP3NT),
         0
@@ -75,7 +75,7 @@ void Model::render(const Mtx44& transform) {
         current_shader_->setAttributePointer(
             SHADER_ATTR_NORMAL,
             3,
-            cross::RenderSystem::FLOAT,
+            cross::RenderSystem::TypeFormat::FLOAT,
             false,
             sizeof(VertexP3NT),
             (void*)offsetof(VertexP3NT, normal_)
@@ -87,7 +87,7 @@ void Model::render(const Mtx44& transform) {
     current_shader_->setAttributePointer(
         SHADER_ATTR_UV,
         2,
-        cross::RenderSystem::FLOAT,
+        cross::RenderSystem::TypeFormat::FLOAT,
         false,
         sizeof(VertexP3NT),
         (void*)offsetof(VertexP3NT, uv_)

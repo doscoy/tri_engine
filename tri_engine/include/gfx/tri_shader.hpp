@@ -127,7 +127,7 @@ public:
     void setAttributePointer(
         const char* const name,
         int element_num,
-        int type,
+        cross::RenderSystem::TypeFormat type,
         bool normalized,
         int stride,
         void* pointer

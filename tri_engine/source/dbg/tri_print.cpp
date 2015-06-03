@@ -146,7 +146,7 @@ void debugFontPrint(
     cross::RenderSystem::setVertexAttributePointer(
         position_slot,
         2,
-        cross::RenderSystem::FLOAT,
+        cross::RenderSystem::TypeFormat::FLOAT,
         false,
         0,
         varray
@@ -154,7 +154,7 @@ void debugFontPrint(
     cross::RenderSystem::setVertexAttributePointer(
         uv_slot,
         2,
-        cross::RenderSystem::FLOAT,
+        cross::RenderSystem::TypeFormat::FLOAT,
         false,
         0,
         vuv
@@ -186,7 +186,7 @@ void debugFontPrint(
     cross::RenderSystem::setVertexAttributePointer(
         position_slot,
         2,
-        cross::RenderSystem::FLOAT,
+        cross::RenderSystem::TypeFormat::FLOAT,
         false,
         0,
         varray
@@ -194,7 +194,7 @@ void debugFontPrint(
     cross::RenderSystem::setVertexAttributePointer(
         uv_slot,
         2,
-        cross::RenderSystem::FLOAT,
+        cross::RenderSystem::TypeFormat::FLOAT,
         false,
         0,
         vuv2
@@ -228,6 +228,7 @@ void initializeDebugPrint()
         dbg_font_.width_,
         dbg_font_.height_,
         cross::RenderSystem::ColorFormat::RGBA,
+        cross::RenderSystem::TypeFormat::UNSIGNED_BYTE,
         dbg_font_.pixel_data_
     );
     T3_NULL_ASSERT(debugfont_);

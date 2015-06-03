@@ -96,7 +96,7 @@ void CinemaLayer::drawLayer() {
     cross::RenderSystem::setVertexAttributePointer(
         position_slot,
         2,
-        cross::RenderSystem::FLOAT,
+        cross::RenderSystem::TypeFormat::FLOAT,
         false,
         0,
         varray
@@ -104,7 +104,7 @@ void CinemaLayer::drawLayer() {
     cross::RenderSystem::setVertexAttributePointer(
         uv_slot,
         2,
-        cross::RenderSystem::FLOAT,
+        cross::RenderSystem::TypeFormat::FLOAT,
         false,
         0,
         vuv

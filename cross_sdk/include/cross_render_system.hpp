@@ -28,10 +28,11 @@ class RenderSystem {
 public:
     ///
     /// 型の数値
-    enum {
-        BYTE  = 0x1401,
+    enum class TypeFormat{
+        UNSIGNED_BYTE  = 0x1401,
         INT   = 0x1404,
         FLOAT = 0x1406,
+        UNSIGNED_SHORT = 0x1403,
     };
     
     
@@ -73,9 +74,17 @@ public:
     static void bindRenderBuffer(RenderBufferID id);
     
     ///
-    /// カレントのれんだーバッファを取得
+    /// カレントのレンダーバッファを取得
     static RenderBufferID getCurrentRenderBufferID();
 
+
+    enum class DrawBufferTarget {
+        NONE
+    };
+
+    ///
+    /// 描画対象を設定
+    static void setDrawBuffer(DrawBufferTarget);
 
     ///
     /// ドローコール数を取得
@@ -273,6 +282,7 @@ public:
         int width,
         int height,
         RenderSystem::ColorFormat color_format,
+        RenderSystem::TypeFormat type_format,
         const void* data
     );
 
@@ -576,7 +586,7 @@ public:
     static void setVertexAttributePointer(
         int slot,
         int element_num,
-        int type,
+        TypeFormat type,
         bool normalized,
         int stride,
         void* ptr

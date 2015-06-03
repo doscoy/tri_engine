@@ -48,7 +48,7 @@ public:
         //  スプライトレイヤはオフスクリーンに書く
         layer_.renderTarget(&surface_);
         
-        screen_.texture(surface_.texture());
+        screen_.texture(surface_.colorTexture());
         screen_.shader(shader_);
         
         pola_.startInterpolation(moz_lv_, 13, 33.0f, t3::InterpolationType::LINER);

@@ -39,7 +39,8 @@ private:
         String name,            ///< 名前
         const uint32_t width,   ///< 幅
         const uint32_t height,  ///< 高さ
-        const cross::RenderSystem::ColorFormat color_format ///< カラーフォーマット
+        const cross::RenderSystem::ColorFormat color_format, ///< カラーフォーマット
+        const cross::RenderSystem::TypeFormat type_format   ///< 型フォーマット
     );
     
     
@@ -85,7 +86,8 @@ public:
         String name,        ///< 名前
         const int width,    ///< 幅
         const int height,   ///< 高さ
-        const cross::RenderSystem::ColorFormat cf   ///< カラーフォーマット
+        const cross::RenderSystem::ColorFormat cf,   ///< カラーフォーマット
+        const cross::RenderSystem::TypeFormat tf    ///< 型フォーマット
     );
     
     ///
@@ -131,6 +133,11 @@ private:
     /// カラーフォーマット
     cross::RenderSystem::ColorFormat color_format_;
     
+    ///
+    /// 型フォーマット
+    cross::RenderSystem::TypeFormat type_format_;
+
+
     ///
     /// テクスチャハンドル
     cross::RenderSystem::TextureID texture_handle_;

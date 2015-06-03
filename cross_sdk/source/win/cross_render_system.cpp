@@ -137,6 +137,37 @@ inline int colorFormatToGL(cross::RenderSystem::ColorFormat format) {
     return glcolor_format;
 }
 
+inline int typeFormatToGL(cross::RenderSystem::TypeFormat format) {
+    int gltype_format = GL_FLOAT;
+    
+    switch (format) {
+        case cross::RenderSystem::TypeFormat::UNSIGNED_BYTE:
+            gltype_format = GL_UNSIGNED_BYTE;
+            break;
+            
+        case cross::RenderSystem::TypeFormat::INT:
+            gltype_format = GL_INT;
+            break;
+
+        case cross::RenderSystem::TypeFormat::FLOAT:
+            gltype_format = GL_FLOAT;
+            break;
+
+        case cross::RenderSystem::TypeFormat::UNSIGNED_SHORT:
+            gltype_format = GL_UNSIGNED_SHORT;
+            break;
+
+        default:
+            break;
+    }
+    
+    return gltype_format;
+
+}
+
+
+
+
 }   // unname namespace
 
 
@@ -704,15 +735,16 @@ void RenderSystem::drawArrayC(
 void RenderSystem::setVertexAttributePointer(
     int slot,
     int element_num,
-    int type,
+    cross::RenderSystem::TypeFormat type,
     bool normalized,
     int stride,
     void* ptr
 ) {
+    int gltype_format = typeFormatToGL(type);
     glVertexAttribPointer(
         slot,
         element_num,
-        type,
+        gltype_format,
         normalized,
         stride,
         ptr
@@ -723,20 +755,21 @@ void RenderSystem::setupTextureData(
     int width,
     int height,
     RenderSystem::ColorFormat color_format,
+    RenderSystem::TypeFormat type_format,
     const void* data
 ) {
     int glcolor_format = colorFormatToGL(color_format);
-    
+    int gltype_format = typeFormatToGL(type_format);
     
     glTexImage2D(
         GL_TEXTURE_2D,
         0,
-        glcolor_format,
+        (glcolor_format == GL_DEPTH_COMPONENT? GL_DEPTH_COMPONENT24:glcolor_format),
         width,
         height,
         0,
         glcolor_format,
-        GL_UNSIGNED_BYTE,
+        gltype_format,
         data
     );
     
@@ -885,11 +918,8 @@ void RenderSystem::attachFrameBufferTexture(
     );
     CROSS_GL_ASSERT();
 
-    glDrawBuffer(GL_NONE);
-    glReadBuffer(GL_NONE);
-
     GLenum state = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-   CROSS_ASSERT(state == GL_FRAMEBUFFER_COMPLETE);
+    CROSS_ASSERT(state == GL_FRAMEBUFFER_COMPLETE);
 }
 
 
@@ -1136,6 +1166,10 @@ void RenderSystem::colorMask(
 
 
 
+void RenderSystem::setDrawBuffer(RenderSystem::DrawBufferTarget target) {
+
+    glDrawBuffer(GL_NONE);
+}
 
 }   // namespace cross
 

@@ -265,13 +265,20 @@ int Shader::getAttributeLocation(const char* const name) const {
 void Shader::setAttributePointer(
     const char* const name,
     int element_num,
-    int type,
+    cross::RenderSystem::TypeFormat type,
     bool normalized,
     int stride,
     void* pointer
 ) {
     int location = getAttributeLocation(name);
-    cross::RenderSystem::setVertexAttributePointer(location, element_num, type, normalized, stride, pointer);
+    cross::RenderSystem::setVertexAttributePointer(
+        location, 
+        element_num, 
+        type, 
+        normalized, 
+        stride, 
+        pointer
+    );
 }
 
 bool Shader::setEnableAttributeArray(

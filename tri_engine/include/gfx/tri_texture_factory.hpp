@@ -38,6 +38,7 @@ public:
         const uint32_t width,   ///< 幅
         const uint32_t height,  ///< 高さ
         const cross::RenderSystem::ColorFormat color_format, ///< カラーフォーマット
+        const cross::RenderSystem::TypeFormat type_format,
         const void* data        ///< データ
     );
     

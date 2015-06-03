@@ -16,6 +16,7 @@ TexturePtr TextureFactory::createFromData(
     const uint32_t width,
     const uint32_t height,
     const cross::RenderSystem::ColorFormat color_format,
+    const cross::RenderSystem::TypeFormat type_format,
     const void* data
 ) {
     
@@ -23,10 +24,18 @@ TexturePtr TextureFactory::createFromData(
         name.c_str(),
         width,
         height,
-        color_format
+        color_format,
+        type_format
     ));
+
     cross::RenderSystem::bindTexture(tex->id());
-    cross::RenderSystem::setupTextureData(width, height, color_format, data);
+    cross::RenderSystem::setupTextureData(
+        width, 
+        height, 
+        color_format, 
+        type_format, 
+        data
+    );
     cross::RenderSystem::setTextureMinFilter(
         cross::RenderSystem::TextureFilterType::TYPE_LINEAR
     );
@@ -102,6 +111,7 @@ TexturePtr TextureFactory::createFromPngFile(const File& file) {
         png.width_,
         png.height_,
         color_format,
+        cross::RenderSystem::TypeFormat::UNSIGNED_BYTE,
         png.data_
     );
     

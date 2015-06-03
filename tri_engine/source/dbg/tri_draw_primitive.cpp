@@ -123,7 +123,7 @@ void drawRectangleViewport(
     cross::RenderSystem::setVertexAttributePointer(
         position_slot,
         2,
-        cross::RenderSystem::FLOAT,
+        cross::RenderSystem::TypeFormat::FLOAT,
         false,
         0,
         varray

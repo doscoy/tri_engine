@@ -13,11 +13,13 @@ Texture::Texture(
     String name,
     const uint32_t width,
     const uint32_t height,
-    const cross::RenderSystem::ColorFormat color_format
+    const cross::RenderSystem::ColorFormat color_format,
+    const cross::RenderSystem::TypeFormat type_format
 )   : Resource()
     , width_(width)
     , height_(height)
     , color_format_(color_format)
+    , type_format_(type_format)
     , texture_handle_(0)
 {
     resourceName(name.c_str());
@@ -29,7 +31,7 @@ Texture::Texture(
     cross::RenderSystem::setTextureWrap(cross::RenderSystem::TextureWrapType::CLAMP_TO_EDGE);
     cross::RenderSystem::setTextureMagFilter(cross::RenderSystem::TextureFilterType::TYPE_LINEAR);
     cross::RenderSystem::setTextureMinFilter(cross::RenderSystem::TextureFilterType::TYPE_LINEAR);
-    cross::RenderSystem::setupTextureData(width, height, color_format, nullptr);
+    cross::RenderSystem::setupTextureData(width, height, color_format, type_format, nullptr);
 
 
     cross::RenderSystem::bindTexture(0);
@@ -51,13 +53,15 @@ TexturePtr Texture::create(
     String name,
     const int width,
     const int height,
-    const cross::RenderSystem::ColorFormat color_format
+    const cross::RenderSystem::ColorFormat color_format,
+    const cross::RenderSystem::TypeFormat type_format
 ) {
     TexturePtr t(T3_SYS_NEW Texture(
         name,
         width,
         height,
-        color_format
+        color_format,
+        type_format
     ));
     
     return t;

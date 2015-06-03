@@ -56,7 +56,7 @@ public:
 
         //  シャドウ用テクスチャ表示用
         layer_.renderTarget(&surface_);
-        cinema_.texture(surface_.texture());
+        cinema_.texture(surface_.depthTexture());
     }
     
     void terminate(){

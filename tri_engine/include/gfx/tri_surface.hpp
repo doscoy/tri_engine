@@ -35,14 +35,26 @@ public:
 public:
     ///
     /// テクスチャ取得
-    TexturePtr texture() {
-        return texture_;
+    TexturePtr colorTexture() {
+        return color_texture_;
     }
     
     ///
     /// テクスチャ取得
-    const TexturePtr texture() const {
-        return texture_;
+    const TexturePtr colorTexture() const {
+        return color_texture_;
+    }
+
+    ///
+    /// デプステクスチャ取得
+    TexturePtr depthTexture() {
+        return depth_texture_;
+    }
+    
+    ///
+    /// デプステクスチャ取得
+    const TexturePtr depthTexture() const {
+        return depth_texture_;
     }
     
     ///
@@ -110,7 +122,8 @@ private:
     
     ///
     /// テクスチャ
-    TexturePtr texture_;
+    TexturePtr color_texture_;
+    TexturePtr depth_texture_;
 
 
     ///
