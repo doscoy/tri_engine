@@ -105,7 +105,6 @@
 		3AC2EE531B085BAC00F73048 /* cross_audio_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2EE4E1B085BAC00F73048 /* cross_audio_system.cpp */; };
 		3AC2EE541B085BAC00F73048 /* cross_dbg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2EE4F1B085BAC00F73048 /* cross_dbg.cpp */; };
 		3AC2EE551B085BAC00F73048 /* cross_os.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2EE501B085BAC00F73048 /* cross_os.mm */; };
-		3AC2EE561B085BAC00F73048 /* cross_render_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2EE511B085BAC00F73048 /* cross_render_system.cpp */; };
 		3AC2EE571B085C1A00F73048 /* tri_audio_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3719A0F60600CEB23A /* tri_audio_handle.cpp */; };
 		3AC2EE581B085C1A00F73048 /* tri_audio_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3919A0F60600CEB23A /* tri_audio_resource.cpp */; };
 		3AC2EE591B085C1A00F73048 /* tri_wav.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7ED3B19A0F60600CEB23A /* tri_wav.cpp */; };
@@ -194,6 +193,9 @@
 		3AC2EEAC1B085C1A00F73048 /* tri_string_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04AA28D319EEE3E0003E76FC /* tri_string_util.cpp */; };
 		3AC2EEAD1B085C1A00F73048 /* tri_utf8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04AA28D819F03444003E76FC /* tri_utf8.cpp */; };
 		3AC2EEB11B08860E00F73048 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC2EEB01B08860E00F73048 /* libglfw.dylib */; };
+		3AC8671D1B1F32DA00AADEA8 /* cross_os_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8671B1B1F32DA00AADEA8 /* cross_os_glfw.cpp */; };
+		3AC8671E1B1F32DA00AADEA8 /* cross_render_system_gl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8671C1B1F32DA00AADEA8 /* cross_render_system_gl3.cpp */; };
+		3AC867201B1F339F00AADEA8 /* cross_glfw.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3AC8671F1B1F339F00AADEA8 /* cross_glfw.hpp */; };
 		3ADC6DEB1B0228AD0023A7D4 /* tri_view_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC6DEA1B0228AD0023A7D4 /* tri_view_controller.mm */; };
 /* End PBXBuildFile section */
 
@@ -476,9 +478,11 @@
 		3AC2EE4E1B085BAC00F73048 /* cross_audio_system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_audio_system.cpp; sourceTree = "<group>"; };
 		3AC2EE4F1B085BAC00F73048 /* cross_dbg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_dbg.cpp; sourceTree = "<group>"; };
 		3AC2EE501B085BAC00F73048 /* cross_os.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cross_os.mm; sourceTree = "<group>"; };
-		3AC2EE511B085BAC00F73048 /* cross_render_system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_render_system.cpp; sourceTree = "<group>"; };
 		3AC2EEAE1B0864B700F73048 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		3AC2EEB01B08860E00F73048 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../opt/local/lib/libglfw.dylib; sourceTree = "<group>"; };
+		3AC8671B1B1F32DA00AADEA8 /* cross_os_glfw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_os_glfw.cpp; sourceTree = "<group>"; };
+		3AC8671C1B1F32DA00AADEA8 /* cross_render_system_gl3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_render_system_gl3.cpp; sourceTree = "<group>"; };
+		3AC8671F1B1F339F00AADEA8 /* cross_glfw.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_glfw.hpp; sourceTree = "<group>"; };
 		3AD4071D19AF9F1B00762711 /* tri_bytesize.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_bytesize.hpp; sourceTree = "<group>"; };
 		3ADC6DE91B0228AD0023A7D4 /* tri_view_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_view_controller.hpp; sourceTree = "<group>"; };
 		3ADC6DEA1B0228AD0023A7D4 /* tri_view_controller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tri_view_controller.mm; sourceTree = "<group>"; };
@@ -1059,6 +1063,7 @@
 				3AAD92581B0110B40033798D /* cross_sdk.hpp */,
 				3AAD92591B0110B40033798D /* cross_types.hpp */,
 				3AAD925A1B0110B40033798D /* cross_view_controller.hpp */,
+				3AC8671F1B1F339F00AADEA8 /* cross_glfw.hpp */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -1066,6 +1071,7 @@
 		3AAD925B1B0110B40033798D /* source */ = {
 			isa = PBXGroup;
 			children = (
+				3AC8671A1B1F32DA00AADEA8 /* common */,
 				3AC2EE4C1B085BAC00F73048 /* osx */,
 				3AAD925C1B0110B40033798D /* ios */,
 			);
@@ -1091,9 +1097,17 @@
 				3AC2EE4E1B085BAC00F73048 /* cross_audio_system.cpp */,
 				3AC2EE4F1B085BAC00F73048 /* cross_dbg.cpp */,
 				3AC2EE501B085BAC00F73048 /* cross_os.mm */,
-				3AC2EE511B085BAC00F73048 /* cross_render_system.cpp */,
 			);
 			path = osx;
+			sourceTree = "<group>";
+		};
+		3AC8671A1B1F32DA00AADEA8 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				3AC8671B1B1F32DA00AADEA8 /* cross_os_glfw.cpp */,
+				3AC8671C1B1F32DA00AADEA8 /* cross_render_system_gl3.cpp */,
+			);
+			path = common;
 			sourceTree = "<group>";
 		};
 		3ADC6DE71B0228AD0023A7D4 /* starter */ = {
@@ -1121,6 +1135,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AC867201B1F339F00AADEA8 /* cross_glfw.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1367,6 +1382,7 @@
 				3AC2EE971B085C1A00F73048 /* tri_filepath.cpp in Sources */,
 				3AC2EE981B085C1A00F73048 /* tri_pad.cpp in Sources */,
 				3AC2EE991B085C1A00F73048 /* tri_pointing.cpp in Sources */,
+				3AC8671D1B1F32DA00AADEA8 /* cross_os_glfw.cpp in Sources */,
 				3AC2EE9A1B085C1A00F73048 /* tri_heap.cpp in Sources */,
 				3AC2EE9B1B085C1A00F73048 /* tri_heap_manager.cpp in Sources */,
 				3AC2EE9C1B085C1A00F73048 /* tri_memory_pool.cpp in Sources */,
@@ -1376,6 +1392,7 @@
 				3AC2EEA01B085C1A00F73048 /* tri_box.cpp in Sources */,
 				3AC2EEA11B085C1A00F73048 /* tri_object.cpp in Sources */,
 				3AC2EEA21B085C1A00F73048 /* tri_random_linear_congruential.cpp in Sources */,
+				3AC8671E1B1F32DA00AADEA8 /* cross_render_system_gl3.cpp in Sources */,
 				3AC2EEA31B085C1A00F73048 /* tri_random_mseq.cpp in Sources */,
 				3AC2EEA41B085C1A00F73048 /* tri_random_mt.cpp in Sources */,
 				3AC2EEA51B085C1A00F73048 /* tri_random_well.cpp in Sources */,
@@ -1390,7 +1407,6 @@
 				3AC2EE551B085BAC00F73048 /* cross_os.mm in Sources */,
 				3AC2EE541B085BAC00F73048 /* cross_dbg.cpp in Sources */,
 				3AC2EE531B085BAC00F73048 /* cross_audio_system.cpp in Sources */,
-				3AC2EE561B085BAC00F73048 /* cross_render_system.cpp in Sources */,
 				3AC2EE521B085BAC00F73048 /* cross_accelerometer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

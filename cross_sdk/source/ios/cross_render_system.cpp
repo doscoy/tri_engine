@@ -54,6 +54,7 @@ inline void setGLState(GLenum e, bool f) {
 
 
 
+
 inline int bufferTypeToGL(cross::RenderSystem::BufferType type) {
     int gl = GL_ARRAY_BUFFER;
     if (type == cross::RenderSystem::BufferType::TYPE_INDEX) {
@@ -61,6 +62,88 @@ inline int bufferTypeToGL(cross::RenderSystem::BufferType type) {
     }
     return gl;
 }
+
+inline int colorFormatToGLInternalFormat(cross::RenderSystem::ColorFormat format) {
+
+
+    int glcolor_format = GL_RGB;
+    
+    switch (format) {
+        case cross::RenderSystem::ColorFormat::RGBA:
+            glcolor_format = GL_RGBA8;
+            break;
+            
+        case cross::RenderSystem::ColorFormat::RGB:
+            glcolor_format = GL_RGB8;
+            break;
+            
+        case cross::RenderSystem::ColorFormat::DEPTH:
+            glcolor_format = GL_DEPTH_COMPONENT16;
+            break;
+
+        default:
+            CROSS_PANIC();
+            break;
+    }
+    
+    return glcolor_format;
+}
+
+inline int colorFormatToGLFormat(cross::RenderSystem::ColorFormat format) {
+
+
+    int glcolor_format = GL_RGB;
+    
+    switch (format) {
+        case cross::RenderSystem::ColorFormat::RGBA:
+            glcolor_format = GL_RGBA;
+            break;
+            
+        case cross::RenderSystem::ColorFormat::RGB:
+            glcolor_format = GL_RGB;
+            break;
+            
+
+        case cross::RenderSystem::ColorFormat::DEPTH:
+            glcolor_format = GL_DEPTH_COMPONENT;
+            break;
+
+        default:
+            break;
+    }
+    
+    return glcolor_format;
+}
+
+inline int typeFormatToGL(cross::RenderSystem::TypeFormat format) {
+    int gltype_format = GL_FLOAT;
+    
+    switch (format) {
+        case cross::RenderSystem::TypeFormat::UNSIGNED_BYTE:
+            gltype_format = GL_UNSIGNED_BYTE;
+            break;
+            
+        case cross::RenderSystem::TypeFormat::INT:
+            gltype_format = GL_INT;
+            break;
+
+        case cross::RenderSystem::TypeFormat::FLOAT:
+            gltype_format = GL_FLOAT;
+            break;
+
+        case cross::RenderSystem::TypeFormat::UNSIGNED_SHORT:
+            gltype_format = GL_UNSIGNED_SHORT;
+            break;
+
+        default:
+            break;
+    }
+    
+    return gltype_format;
+
+}
+
+
 
 inline int colorFormatToGL(cross::RenderSystem::ColorFormat format) {
 
@@ -306,25 +389,10 @@ void RenderSystem::setUniformMatrix(
     CROSS_GL_ASSERT();
 }
 
-void RenderSystem::initializeRenderSystem() {
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    
-    cross::RenderSystem::setCulling(true);
-    
-    
-}
 
 
 
 
-
-
-void RenderSystem::swapBuffers() {
-    
-#if defined(PLATFORM_MAC)
-    glfwSwapBuffers(window_);
-#endif
-}
 
 
 void RenderSystem::setDepthWrite(
@@ -664,11 +732,14 @@ void RenderSystem::drawArrayC(
 void RenderSystem::setVertexAttributePointer(
     int slot,
     int element_num,
-    int type,
+    RenderSystem::TypeFormat type,
     bool normalized,
     int stride,
     void* ptr
 ) {
+
+    
+
     glVertexAttribPointer(
         slot,
         element_num,

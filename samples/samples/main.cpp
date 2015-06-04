@@ -33,7 +33,7 @@ int main(int argc, char * argv[])
     }
 #else // MacOSX or Windows
     if (!t3::initializeTriEngine(256, 256, "win")) {
-        //  ‰Šú‰»‚É¸”s
+        //  åˆæœŸåŒ–ã«å¤±æ•—
         return 0;
     }
     t3::initializeApplication();

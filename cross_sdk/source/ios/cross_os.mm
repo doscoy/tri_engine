@@ -43,7 +43,6 @@ void endUpdate() {
 
 void endRender() {
 
-    cross::RenderSystem::swapBuffers();
 }
 
 void platformPadData(

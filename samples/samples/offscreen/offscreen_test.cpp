@@ -106,7 +106,7 @@ public:
         
         t3::String tex_path = "stamp.png";
         sprite_ = sprite_layer_.createSprite(tex_path);
-        sprite_->texture(surface_.texture());
+        sprite_->texture(surface_.colorTexture());
         sprite_->size(400, 450);
         sprite_->adjustPivotByCenter();
     }

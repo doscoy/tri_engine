@@ -257,9 +257,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A6EE19E1B08A1C500BB4247 /* OpenGL.framework in Frameworks */,
 				3A6EE1A91B08FBC300BB4247 /* IOKit.framework in Frameworks */,
 				3A6EE1A01B08A20F00BB4247 /* libz.dylib in Frameworks */,
-				3A6EE19E1B08A1C500BB4247 /* OpenGL.framework in Frameworks */,
 				3A6EE1A81B08C98700BB4247 /* libGLEW.a in Frameworks */,
 				3A6EE19A1B0896D600BB4247 /* libtri_engine_osx.a in Frameworks */,
 				3A6EE1A21B08A25100BB4247 /* libpng.dylib in Frameworks */,

@@ -25,13 +25,6 @@ class Texture;
 ///
 /// レンダリングシステム
 class RenderSystem {
-public:
-    ///
-    /// レンダリングシステムの初期化
-    static bool initialize(int w, int h, const char* const title);
-    static void terminate();
-    static bool isExitRequest();
-    static void swapBuffers();
 
 public:
     ///
