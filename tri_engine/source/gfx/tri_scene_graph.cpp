@@ -27,7 +27,7 @@ SceneGraph::~SceneGraph()
 
 void SceneGraph::renderScene()
 {
-    cross::RenderSystem::setCulling(false);
+    cross::RenderSystem::setCulling(true);
     cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
     cross::RenderSystem::setBlend(false);
     cross::RenderSystem::setDepthTest(true);

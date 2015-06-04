@@ -11,11 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\cross_sdk\source\common\cross_os_glfw.cpp" />
+    <ClCompile Include="..\..\..\cross_sdk\source\common\cross_render_system_gl3.cpp" />
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_accelerometer.cpp" />
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_audio_system.cpp" />
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_dbg.cpp" />
     <ClCompile Include="..\..\..\cross_sdk\source\win\cross_os.cpp" />
-    <ClCompile Include="..\..\..\cross_sdk\source\win\cross_render_system_gl3.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\audio\tri_audio_handle.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\audio\tri_audio_resource.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\audio\tri_streaming_player.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="..\..\..\cross_sdk\include\cross_audio_system.hpp" />
     <ClInclude Include="..\..\..\cross_sdk\include\cross_dbg.hpp" />
     <ClInclude Include="..\..\..\cross_sdk\include\cross_define.hpp" />
+    <ClInclude Include="..\..\..\cross_sdk\include\cross_glfw.hpp" />
     <ClInclude Include="..\..\..\cross_sdk\include\cross_os.hpp" />
     <ClInclude Include="..\..\..\cross_sdk\include\cross_render_system.hpp" />
     <ClInclude Include="..\..\..\cross_sdk\include\cross_sdk.hpp" />

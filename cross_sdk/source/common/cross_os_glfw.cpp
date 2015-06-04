@@ -154,9 +154,8 @@ void endRender() {
     glfwPollEvents();
 
     
-
-    timespec  req = {0, 1000000};
-    nanosleep(&req, 0);
+//    timespec  req = {0, 1000000};
+//    nanosleep(&req, 0);
 }
 
 void platformPadData(

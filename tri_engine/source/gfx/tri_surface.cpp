@@ -42,7 +42,7 @@ Surface::Surface(
     );
 
     depth_texture_ = t3::Texture::create(
-        "sfcd",
+        "dsfd",
         static_cast<int>(width),
         static_cast<int>(height),
         cross::RenderSystem::ColorFormat::DEPTH,
@@ -78,7 +78,7 @@ Surface::Surface(
     cross::RenderSystem::createFrameBuffer(&fb_);
     cross::RenderSystem::bindFrameBuffer(fb_);
 
-    cross::RenderSystem::setDrawBuffer(cross::RenderSystem::DrawBufferTarget::NONE);
+//    cross::RenderSystem::setDrawBuffer(cross::RenderSystem::DrawBufferTarget::NONE);
 
 //    cross::RenderSystem::attachRenderBuffer(
 //        cross::RenderSystem::RenderBufferAttachType::COLOR0,
@@ -122,21 +122,29 @@ void Surface::bind() {
     last_fb_ = cross::RenderSystem::getCurrentFrameBufferID();
     last_rb_ = cross::RenderSystem::getCurrentRenderBufferID();
 
+    cross::RenderSystem::setDepthTest(true);
+    cross::RenderSystem::setDepthWrite(true);
+    cross::RenderSystem::setDepthTest(true);
+
     cross::RenderSystem::bindFrameBuffer(fb_);
  //   cross::RenderSystem::bindRenderBuffer(cb_);
+    cross::RenderSystem::setDepthTest(true);
+    cross::RenderSystem::setDepthWrite(true);
+    cross::RenderSystem::setDepthTest(true);
+
 
     T3_ASSERT(!bound_);
     bound_ = true;
 }
 
 void Surface::clear() {
-    if (color_texture_->getColorFormat() == cross::RenderSystem::ColorFormat::DEPTH) {
-        cross::RenderSystem::clearBuffer(false, true, false);
-    }
-    else {
+//    if (color_texture_->getColorFormat() == cross::RenderSystem::ColorFormat::DEPTH) {
+//        cross::RenderSystem::clearBuffer(false, true, false);
+//    }
+//    else {
         cross::RenderSystem::clearBuffer(true, true, false);
     
-    }
+//    }
 
 }
 
@@ -153,9 +161,7 @@ void Surface::unbind() {
 void Surface::preRender() {
 
     bind();
-//    clear();
-
-//    cross::RenderSystem::clearBuffer(false, true, false);
+    clear();
 
     cross::RenderSystem::setDepthTest(true);
     cross::RenderSystem::setDepthWrite(true);

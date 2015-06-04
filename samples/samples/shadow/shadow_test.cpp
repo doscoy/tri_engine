@@ -9,7 +9,7 @@ class ShadowTestScene::SceneContext {
 public:
     SceneContext()
         : layer_()
-        , cinema_()
+//        , cinema_()
         , chara_()
         , field_()
         , surface_(256,256)
@@ -56,11 +56,13 @@ public:
 
         //  シャドウ用テクスチャ表示用
         layer_.renderTarget(&surface_);
-
+        
 
         my_t_ = t3::Texture::create(t3::FilePath("t2.png"));
 
         cinema_.texture(surface_.depthTexture());
+
+
     }
     
     void terminate(){

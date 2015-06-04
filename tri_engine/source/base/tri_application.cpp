@@ -537,11 +537,8 @@ bool Application::isSuspend() const {
 void Application::beginRender() {
     auto& c = t3::Director::getClearColor();
     cross::RenderSystem::clearColor(c.redFloat(), c.greenFloat(), c.blueFloat(), c.alphaFloat());
-    static int a;
-    if (a < 5) {
-        cross::RenderSystem::clearBuffer(true, true, false);
-        a++;
-    }
+    cross::RenderSystem::clearBuffer(true, true, false);
+
 }
 
 

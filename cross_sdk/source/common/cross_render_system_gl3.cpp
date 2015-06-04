@@ -112,7 +112,7 @@ inline int colorFormatToGLInternalFormat(cross::RenderSystem::ColorFormat format
     
     switch (format) {
         case cross::RenderSystem::ColorFormat::RGBA:
-            glcolor_format = GL_RGBA8;
+            glcolor_format = GL_RGBA;
             break;
             
         case cross::RenderSystem::ColorFormat::RGB:

@@ -95,6 +95,9 @@ void Model::render(const Mtx44& transform) {
 
 
 
+    cross::RenderSystem::setDepthTest(true);
+    cross::RenderSystem::setDepthWrite(true);
+    cross::RenderSystem::setDepthTest(true);
 
 
     cross::RenderSystem::drawElements(

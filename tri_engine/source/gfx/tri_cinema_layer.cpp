@@ -51,10 +51,16 @@ void CinemaLayer::drawLayer() {
     if (!texture_) {
         return;
     }
+
+
     
     T3_ASSERT(shader_);
     
-    cross::RenderSystem::setBlendMode(cross::RenderSystem::BlendMode::NONE);
+    cross::RenderSystem::setCulling(false);
+    cross::RenderSystem::setDepthTest(true);
+    cross::RenderSystem::setDepthWrite(true);
+    cross::RenderSystem::setDepthTest(true);
+//    cross::RenderSystem::setBlendMode(cross::RenderSystem::BlendMode::NONE);
 
     // シェーダで描画
     bool use_result = shader_->use();
@@ -93,6 +99,10 @@ void CinemaLayer::drawLayer() {
     shader_->setUniform("sampler", 0);
 
     texture_->bind();
+    cross::RenderSystem::setDepthTest(true);
+    cross::RenderSystem::setDepthWrite(true);
+    cross::RenderSystem::setDepthTest(true);
+
     cross::RenderSystem::setVertexAttributePointer(
         position_slot,
         2,
