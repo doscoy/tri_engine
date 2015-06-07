@@ -40,7 +40,7 @@ void DebugStringLayer::drawLayer()
     cross::RenderSystem::setDepthTestMode(cross::RenderSystem::DepthTestMode::MODE_ALWAYS);
     
     //  描画
-    debug_string_buffer_.drawStrings();
+//    debug_string_buffer_.drawStrings();
     debug_string_buffer_.clearBuffer();
 }
 

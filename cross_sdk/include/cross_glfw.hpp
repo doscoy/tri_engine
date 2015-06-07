@@ -9,7 +9,7 @@
 #ifndef tri_engine_cross_glfw_hpp
 #define tri_engine_cross_glfw_hpp
 
-#if 1
+#if 0
 #include <glew.h>
 #include <glfw3.h>
 #else 

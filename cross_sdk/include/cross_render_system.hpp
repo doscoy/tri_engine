@@ -527,7 +527,7 @@ public:
     static void resetBufferBind() {
         bindBuffer(BufferType::TYPE_VERTEX, 0);
         bindBuffer(BufferType::TYPE_INDEX, 0);
-        bindVertexArrayBuffer(0);
+        bindVertexArrayObject(0);
     }
     
     ///
@@ -635,11 +635,11 @@ public:
     
     ///
     /// VAOを作成
-    static BufferID createVertexArrayBuffer();
+    static BufferID createVertexArrayObject();
     
     ///
     /// VAOをバインド
-    static void bindVertexArrayBuffer(BufferID id);
+    static void bindVertexArrayObject(BufferID id);
     
     ///
     /// VAOを削除
@@ -694,22 +694,39 @@ public:
         bool a
     );
 
+    ///
+    ///
     enum class TextureCompareFunc {
-        LEQUAL
+        LEQUAL,
+        LESS
     };
 
+    ///
+    ///
     static void setTextureCompareFunc(
         TextureCompareFunc func
     );
 
+    ///
+    ///
     enum class TextureCompareMode {
-        R_TO_TEX
+        REF_TO_TEX
     };
 
+    ///
+    ///
     static void setTextureCompareMode(
         TextureCompareMode mode
     );
 
+    ///
+    /// テクスチャボーダーカラー設定
+    static void setTextureBorderColor(
+        float r,
+        float g,
+        float b,
+        float a
+    );
 
 };
 

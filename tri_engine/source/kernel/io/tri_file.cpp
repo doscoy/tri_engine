@@ -50,28 +50,56 @@ File::~File()
     }
 }
     
+
+//  ファイル読み込み
+bool File::loadFile(
+    const FilePath& filepath,
+    File::IOMode mode,
+    File::IOType type
+) {
+    return loadFile(filepath.fullpath().c_str(), mode, type);
+}
     
     
 //  ファイル読み込み
 bool File::loadFile(
-    const FilePath& filepath
+    const char* const path,
+    File::IOMode mode,
+    File::IOType type
 ) {
+    int flag = 0;
+    if (mode == IOMode::IN) {
+        flag |= std::ios::in;
+    } else {
+        flag |= std::ios::out;
+    }
     
-    String path = filepath.fullpath();
-    name_ = filepath.path();
+    if (type == IOType::BINARY) {
+        flag |= std::ios::binary;
+    }
+    
+    name_ = path;
     FileStream fs;
-    fs.open(path, std::ios_base::binary | std::ios::in);                 //ファイルオープン。読み込み形式は指定なしのときはテキストモードになる。
+    //  ファイルオープン。読み込み形式は指定なしのときはテキストモードになる。
+    fs.open(path, flag);
     
-    T3_ASSERT_MSG(!fs.fail(), "filepath = %s", path.c_str());
-    fs.seekg( 0, std::fstream::end );       //ファイル末尾を探す
-    std::size_t eof_pos = static_cast<std::size_t>(fs.tellg());        //ファイル末尾インデクスを取得
+    T3_ASSERT_MSG(!fs.fail(), "filepath = %s", path);
+    //  ファイル末尾を探す
+    fs.seekg( 0, std::fstream::end );
+    
+    //  ファイル末尾インデクスを取得
+    std::size_t eof_pos = static_cast<std::size_t>(fs.tellg());
     fs.clear();
-    fs.seekg( 0, std::fstream::beg );       //ファイル先頭に戻る
-    std::size_t beg_pos = static_cast<std::size_t>(fs.tellg());        //ファイル先頭インデクスを取得
+    //  ファイル先頭に戻る
+    fs.seekg( 0, std::fstream::beg );
+    
+    //  ファイル先頭インデクスを取得
+    std::size_t beg_pos = static_cast<std::size_t>(fs.tellg());
     fs.clear();
     
     //  サイズ取得
-    size_ = eof_pos - beg_pos + 1;              //末尾-先頭でファイルサイズを計算
+    //  末尾-先頭でファイルサイズを計算
+    size_ = eof_pos - beg_pos + 1;
     if (auto_free_) {
         T3_FREE(data_);
     }
@@ -80,7 +108,8 @@ bool File::loadFile(
     auto_free_ = true;
 
     //  データ保持
-    fs.read((char*)data_, size_);                //ファイル先頭からバッファへコピー
+    //  ファイル先頭からバッファへコピー
+    fs.read((char*)data_, size_);
     T3_ASSERT(!fs.bad());
 
     

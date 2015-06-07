@@ -103,23 +103,7 @@ private:
     ///
     /// フレームバッファ
     cross::RenderSystem::FrameBufferID fb_;
-    
-    ///
-    /// カラーバッファ
-    cross::RenderSystem::RenderBufferID cb_;
-    
-    ///
-    /// デプスバッファ
-    cross::RenderSystem::RenderBufferID depth_;
-    
-    ///
-    /// フレームバッファ
-    cross::RenderSystem::FrameBufferID last_fb_;
-    
-    ///
-    /// レンダーバッファ
-    cross::RenderSystem::RenderBufferID last_rb_;
-    
+        
     ///
     /// テクスチャ
     TexturePtr color_texture_;

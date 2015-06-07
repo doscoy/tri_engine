@@ -86,8 +86,10 @@ bool initializePlatform(
     // ------------------------------------------------
     //  glfwを使う設定
     //  GLのバージョン
-//    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-//    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, true);
 
     //  ウィンドウリサイズ設定
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
@@ -96,10 +98,10 @@ bool initializePlatform(
     glfwWindowHint(GLFW_DEPTH_BITS, 16);
 
     //  API設定
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API); // GLFW_OPENGL_API or GLFW_OPENGL_ES_API
+//    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API); // GLFW_OPENGL_API or GLFW_OPENGL_ES_API
 
     //  コアプロファイル
-//    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     window_ = glfwCreateWindow(w, h, title, nullptr, nullptr);
     if (window_) {
@@ -110,7 +112,7 @@ bool initializePlatform(
 
     glewExperimental = true;
     GLenum init_result = glewInit();
-
+    glGetError();
 
     if ( init_result != GLEW_OK ) {
 		std::cout << "error: " << glewGetErrorString( init_result ) << std::endl;

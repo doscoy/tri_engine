@@ -286,7 +286,7 @@ bool Shader::setEnableAttributeArray(
     bool flag
 ) {
     int location = getAttributeLocation(name);
-    
+
     if (location >= 0) {
 
         if (flag) {

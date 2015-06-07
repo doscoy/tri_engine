@@ -16,12 +16,13 @@ namespace cross {
 
 
 
-void initializePlatform(
+bool initializePlatform(
     int width,
     int height,
     const char* const title
 ) {
     accelerometerInit();
+    return true;
 }
 
 
@@ -82,27 +83,6 @@ std::string getDeviceFilePath() {
     return path;
 }
 
-
-void loadFile(
-    const char* const file_path,
-    uint8_t** data,
-    size_t* size
-) {
-/*
-    NSString* nsextname = [NSString stringWithCString: file_path encoding:NSUTF8StringEncoding];
-
-
-    NSBundle* bundle = [NSBundle mainBundle];
-    NSString* path = [bundle pathForResource:nsfilename ofType:nsextname];
-    NSData* nsdata = [[NSData alloc] initWithContentsOfFile:path];
-    T3_NULL_ASSERT(nsdata);
-    *size = [nsdata length];
-    
-    *data = (uint8_t*)T3_SYS_ALLOC(*size);
-    const void* nsbytes = [nsdata bytes];
-    std::memcpy(*data, nsbytes, *size);
-*/
-}
 
 void saveInteger(
     const char* const key,

@@ -9,7 +9,7 @@ class ShadowTestScene::SceneContext {
 public:
     SceneContext()
         : layer_()
-//        , cinema_()
+        , cinema_()
         , chara_()
         , field_()
         , surface_(256,256)
@@ -20,41 +20,42 @@ public:
   
 public:
     void initialize(){
-        //  ƒŒƒCƒ„[€”õ
+  
+        //  ãƒ¬ã‚¤ãƒ¤ãƒ¼æº–å‚™
         layer_.name("ShadowTestScene::DrawLayer");
         layer_.setUpdateCallback<ShadowTestScene::SceneContext>(this, &SceneContext::layerUpdate);
         layer_.setRenderCallback<ShadowTestScene::SceneContext>(this, &SceneContext::layerRender);
 
 
-        //  ƒLƒƒƒ‰ƒNƒ^ì¬
+        //  ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ä½œæˆ
         t3::FilePath char_path("character_chr_old.obj");
         chara_ = t3::Model::create(char_path.fullpath().c_str());
 
-        //  ƒtƒB[ƒ‹ƒhì¬
+        //  ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ä½œæˆ
         t3::FilePath field_path("field.obj");
         field_ = t3::Model::create(field_path.fullpath().c_str());
 
-        //  ƒ‰ƒCƒgì¬
+        //  ãƒ©ã‚¤ãƒˆä½œæˆ
         t3::FilePath sun_path("sun.obj");
         sun_ = t3::Model::create(sun_path.fullpath().c_str());
         
-        //  ƒJƒƒ‰ˆÊ’u’²®
+        //  ã‚«ãƒ¡ãƒ©ä½ç½®èª¿æ•´
         float len = chara_->mesh()->boundingSphere().radius();
         cam_updater_.position(0, len*4, len*8);
         cam_updater_.targetPosition(0,0,0);
         
-        //  ƒV[ƒ“ƒOƒ‰ƒt‰Šú‰»
+        //  ã‚·ãƒ¼ãƒ³ã‚°ãƒ©ãƒ•åˆæœŸåŒ–
         scene_graph_.camera(cam_updater_.camera());
         node_field_ = scene_graph_.createNode();
         node_field_->attachEntity(field_.get());
+
         node_chara_ = node_field_->createNode("3");
         node_chara_->attachEntity(chara_.get());
         node_sun_ = scene_graph_.createNode();
         node_sun_->attachEntity(sun_.get());
         node_sun_->position(10,20,0);
 
-
-        //  ƒVƒƒƒhƒE—pƒeƒNƒXƒ`ƒƒ•\Ž¦—p
+        //  ã‚·ãƒ£ãƒ‰ã‚¦ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£è¡¨ç¤ºç”¨
         layer_.renderTarget(&surface_);
         
 
@@ -65,11 +66,11 @@ public:
 
     }
     
-    void terminate(){
+    void terminate() {
     
     }
     
-    void update(t3::tick_t delta_time){
+    void update(t3::tick_t delta_time) {
         static float angle;
         angle += 0.25f;
         node_field_->rotationY(angle);
@@ -84,9 +85,7 @@ private:
         scene_graph_.updateScene(t3::frameSec<60>());
     }
     void layerRender() {
-
         scene_graph_.renderScene();
-
     }
 
 

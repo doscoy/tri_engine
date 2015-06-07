@@ -20,17 +20,10 @@ Surface::Surface(
 )   : width_(width)
     , height_(height)
     , fb_(0)
-    , cb_(0)
-    , depth_(0)
-    , last_fb_(0)
-    , last_rb_(0)
     , color_texture_()
     , depth_texture_()
     , bound_(false)
 {
-
-    cross::RenderSystem::FrameBufferID default_fb = cross::RenderSystem::getCurrentFrameBufferID();
-    cross::RenderSystem::RenderBufferID default_rb = cross::RenderSystem::getCurrentRenderBufferID();
     
     //  オフスクリーン用のテクスチャ
     color_texture_ = t3::Texture::create(
@@ -46,50 +39,24 @@ Surface::Surface(
         static_cast<int>(width),
         static_cast<int>(height),
         cross::RenderSystem::ColorFormat::DEPTH,
-        cross::RenderSystem::TypeFormat::FLOAT
+        cross::RenderSystem::TypeFormat::UNSIGNED_SHORT
     );
     
-    
-    
-    //  カラーバッファ作成
-//    cross::RenderSystem::createRenderBuffer(&cb_);
-//    cross::RenderSystem::bindRenderBuffer(cb_);
-
-//    cross::RenderSystem::setupRenderBufferStorage(
-//        cross::RenderSystem::RenderBufferUsage::COLOR,
-//        static_cast<int>(width),
-//            static_cast<int>(height)
-//    );
-    
-    
-
-    //  デプスバッファ作成
-//    cross::RenderSystem::createRenderBuffer(&depth_);
-//    cross::RenderSystem::bindRenderBuffer(depth_);
-    
-//    cross::RenderSystem::setupRenderBufferStorage(
-//        cross::RenderSystem::RenderBufferUsage::DEPTH,
-//        static_cast<int>(width),
-//        static_cast<int>(height)
-//    );
+    depth_texture_->bind();
+    cross::RenderSystem::setTextureBorderColor(1, 0, 0, 0);
+    cross::RenderSystem::bindTexture(0);
   
+    cross::RenderSystem::setActiveTextureUnit(0);
+    depth_texture_->bind();
+
+
+    
     
     //  フレームバッファ作成
     cross::RenderSystem::createFrameBuffer(&fb_);
     cross::RenderSystem::bindFrameBuffer(fb_);
 
 //    cross::RenderSystem::setDrawBuffer(cross::RenderSystem::DrawBufferTarget::NONE);
-
-//    cross::RenderSystem::attachRenderBuffer(
-//        cross::RenderSystem::RenderBufferAttachType::COLOR0,
-//        cb_
-//    );
-
-//    cross::RenderSystem::attachRenderBuffer(
-//        cross::RenderSystem::RenderBufferAttachType::DEPTH,
-//        depth_
-//    );
-
 
     cross::RenderSystem::attachFrameBufferTexture(
         cross::RenderSystem::RenderBufferAttachType::COLOR0,
@@ -100,34 +67,22 @@ Surface::Surface(
         cross::RenderSystem::RenderBufferAttachType::DEPTH,
         depth_texture_->id()
     );
-
-//    cross::RenderSystem::setDrawBuffer(cross::RenderSystem::DrawBufferTarget::NONE);
-    cross::RenderSystem::clearBuffer(false, true, false);
-
-    cross::RenderSystem::bindFrameBuffer(default_fb);
-//    cross::RenderSystem::bindRenderBuffer(default_rb);
     
-    
+    cross::RenderSystem::bindFrameBuffer(0);
 }
 
 Surface::~Surface() {
-//    cross::RenderSystem::deleteFrameBuffer(&fb_);
-//    cross::RenderSystem::deleteRenderBuffer(&depth_);
-//    cross::RenderSystem::deleteRenderBuffer(&cb_);
+    cross::RenderSystem::deleteFrameBuffer(&fb_);
 }
 
 
 void Surface::bind() {
-
-    last_fb_ = cross::RenderSystem::getCurrentFrameBufferID();
-    last_rb_ = cross::RenderSystem::getCurrentRenderBufferID();
 
     cross::RenderSystem::setDepthTest(true);
     cross::RenderSystem::setDepthWrite(true);
     cross::RenderSystem::setDepthTest(true);
 
     cross::RenderSystem::bindFrameBuffer(fb_);
- //   cross::RenderSystem::bindRenderBuffer(cb_);
     cross::RenderSystem::setDepthTest(true);
     cross::RenderSystem::setDepthWrite(true);
     cross::RenderSystem::setDepthTest(true);
@@ -152,8 +107,7 @@ void Surface::clear() {
 void Surface::unbind() {
     T3_ASSERT(bound_);
     bound_ = false;
-    cross::RenderSystem::bindFrameBuffer(last_fb_);
- //   cross::RenderSystem::bindRenderBuffer(last_rb_);
+    cross::RenderSystem::bindFrameBuffer(0);
 
 }
 

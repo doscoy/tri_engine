@@ -12,6 +12,8 @@ const char* SHADER_ATTR_POSITION = "a_position";
 const char* SHADER_ATTR_NORMAL = "a_normal";
 const char* SHADER_ATTR_UV = "a_uv";
 const char* SHADER_UNIF_PMV = "u_pmv";
+const char* SHADER_UNIF_SAMPLER = "sampler";
+const char* SHADER_OUT_COLOR = "FragColor";
 
 }
 
@@ -41,35 +43,27 @@ Model::~Model() {
 void Model::render(const Mtx44& transform) {
 
     cross::RenderSystem::resetBufferBind();
+    mesh_->bind();
 
     current_shader_->use();
     current_shader_->setUniform(SHADER_UNIF_PMV, transform);
-//頂点配列を有効化
-    current_shader_->setUniform("sampler", 0);
+    current_shader_->setUniform(SHADER_UNIF_SAMPLER, 0);
     
+    default_shader_.bindAttributeLocation(0, SHADER_ATTR_POSITION);
+    default_shader_.bindAttributeLocation(1, SHADER_ATTR_NORMAL);
+    default_shader_.bindAttributeLocation(2, SHADER_ATTR_UV);
+    default_shader_.bindFragmentDataLocation(0, SHADER_OUT_COLOR);
+
 
     cross::RenderSystem::setActiveTextureUnit(
         cross::RenderSystem::TextureUnit::UNIT0
     );
 
-    mesh_->vertexBuffer().bind();
-    mesh_->indexBuffer().bind();
 
     auto& material = mesh_->material();
 
     material->texture()->bind();
-
-    //  頂点座標有効化
-    current_shader_->setEnableAttributeArray(SHADER_ATTR_POSITION, true);
-    current_shader_->setAttributePointer(
-        SHADER_ATTR_POSITION,
-        3,
-        cross::RenderSystem::TypeFormat::FLOAT,
-        false,
-        sizeof(VertexP3NT),
-        0
-    );
-
+/*
     //  頂点法線有効化
     if (current_shader_->setEnableAttributeArray(SHADER_ATTR_NORMAL, true)) {
         current_shader_->setAttributePointer(
@@ -94,7 +88,18 @@ void Model::render(const Mtx44& transform) {
     );
 
 
+    //  頂点座標有効化
+    current_shader_->setEnableAttributeArray(SHADER_ATTR_POSITION, true);
+    current_shader_->setAttributePointer(
+        SHADER_ATTR_POSITION,
+        3,
+        cross::RenderSystem::TypeFormat::FLOAT,
+        false,
+        sizeof(VertexP3NT),
+        0
+    );
 
+*/
     cross::RenderSystem::setDepthTest(true);
     cross::RenderSystem::setDepthWrite(true);
     cross::RenderSystem::setDepthTest(true);
@@ -105,7 +110,7 @@ void Model::render(const Mtx44& transform) {
         mesh_->indexCount(),
         sizeof(uint32_t)
     );
-    
+    mesh_->unbind();
 }
 
 

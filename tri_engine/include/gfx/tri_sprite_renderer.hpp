@@ -42,7 +42,7 @@ class SpriteRenderer
             , blend_mode_(cross::RenderSystem::BlendMode::NONE)
             , vao_(0)
         {
-            vao_ = cross::RenderSystem::createVertexArrayBuffer();
+            vao_ = cross::RenderSystem::createVertexArrayObject();
         }
         
         ///
@@ -103,7 +103,7 @@ class SpriteRenderer
         ///
         /// VAOをバインド
         void bindVAO() {
-            cross::RenderSystem::bindVertexArrayBuffer(vao_);
+            cross::RenderSystem::bindVertexArrayObject(vao_);
         }
     
     

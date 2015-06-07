@@ -29,10 +29,8 @@ struct VertexP2CT {
 /// 座標とUV値を持つ
 struct VertexP2T
 {
-    float x_;
-    float y_;
-    float u_;
-    float v_;
+    Vec2 position_;
+    Vec2 uv_;
 };
 
 ///

@@ -1,8 +1,6 @@
-#ifndef SIMPLE_TEX_VSH
-#define SIMPLE_TEX_VSH
 
-
-constexpr char* simple_tex_vsh = TRI_INSTANT_SHADER(
+#if CROSS_GL_VERSION == CROSS_GL_ES2
+constexpr char* simple_tex_vsh = R"(
 
 attribute vec2 a_position;
 attribute vec2 a_uv;
@@ -13,7 +11,26 @@ void main(void)
     gl_Position = vec4(a_position, 0, 1);
     v_texture_uv = a_uv;
 }
-);
+)";
+
+#else
+//  GLSL 4.0
+constexpr char* simple_tex_vsh = R"(
+
+#version 400
+
+in vec2 a_position;
+in vec2 a_uv;
+out vec2 v_texture_uv;
+
+void main(void)
+{
+    gl_Position = vec4(a_position, 0, 1);
+    v_texture_uv = a_uv;
+}
+)";
 
 
-#endif // SIMPLE_TEX_VSH
+#endif
+
+

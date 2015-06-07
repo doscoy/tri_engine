@@ -49,7 +49,7 @@
 
 #endif
 
-
+//  コンパイラバージョン
 #if defined(CROSS_TARGET_COMPILER_MSVC)
 	#define CROSS_WEAK_SIMBOL 
 
@@ -59,7 +59,19 @@
 
 #endif
 
+//  OpenGLバージョン
+#define CROSS_GL_40  400
+#define CROSS_GL_ES2  20
 
+#if defined(CROSS_TARGET_PLATFORM_WIN32)
+    #define CROSS_GL_VERSION    CROSS_GL_40
+#elif defined(CROSS_TARGET_PLATFORM_OSX)
+    #define CROSS_GL_VERSION    CROSS_GL_40
+
+#else
+    #define CROSS_GL_VERSION    CROSS_GL_ES2
+
+#endif
 
 
 #endif // PLATFORM_SDK_HPP_INCLUDED

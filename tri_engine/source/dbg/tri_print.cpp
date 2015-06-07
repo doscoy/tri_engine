@@ -67,7 +67,6 @@ void beginPrint(
     );
     
 
-    
     //  アクティブなサンプラーをステージ０に設定
     font_shader_.setUniform("sampler", 0);
    

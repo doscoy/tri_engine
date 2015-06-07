@@ -247,8 +247,10 @@ Mesh::Mesh(
         final_indices.push_back(i);
     }
 
-
-
+    //  VAO作成
+    vao_ = cross::RenderSystem::createVertexArrayObject();
+    cross::RenderSystem::bindVertexArrayObject(vao_);
+    
     //  最終結果を登録
     vb_.bind();
     int vertex_size = static_cast<int>(sizeof(VerticesContainer::value_type) * final_vertices.size());
@@ -268,14 +270,59 @@ Mesh::Mesh(
         cross::RenderSystem::BufferUsage::STATIC_DRAW
     );
     
+    enum {
+        POSITION_SLOT,
+        NORMAL_SLOT,
+        UV_SLOT
+    };
+    
+    //  頂点法線有効化
+    cross::RenderSystem::setEnableVertexAttribute(NORMAL_SLOT);
+    cross::RenderSystem::setVertexAttributePointer(
+        NORMAL_SLOT,
+        3,
+        cross::RenderSystem::TypeFormat::FLOAT,
+        false,
+        sizeof(VerticesContainer::value_type),
+        (void*)offsetof(VerticesContainer::value_type, normal_)
+    );
+
+
+    //  UV有効化
+    cross::RenderSystem::setEnableVertexAttribute(UV_SLOT);
+    cross::RenderSystem::setVertexAttributePointer(
+        UV_SLOT,
+        2,
+        cross::RenderSystem::TypeFormat::FLOAT,
+        false,
+        sizeof(VerticesContainer::value_type),
+        (void*)offsetof(VerticesContainer::value_type, uv_)
+    );
+
+
+    //  座標有効化
+    cross::RenderSystem::setEnableVertexAttribute(POSITION_SLOT);
+    cross::RenderSystem::setVertexAttributePointer(
+        POSITION_SLOT,
+        3,
+        cross::RenderSystem::TypeFormat::FLOAT,
+        false,
+        sizeof(VerticesContainer::value_type),
+        0
+    );
+
 
     vertex_count_ = static_cast<uint32_t>(final_vertices.size());
     index_count_ = static_cast<uint32_t>(final_indices.size());
+
+    cross::RenderSystem::bindVertexArrayObject(0);
+
 }
 
 
 Mesh::~Mesh()
 {
+    cross::RenderSystem::deleteVertexArrayBuffer(vao_);
 }
 
 

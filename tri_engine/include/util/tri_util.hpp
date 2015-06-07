@@ -1,6 +1,6 @@
 /**
     @file tri_util.hpp
-    ƒ†[ƒeƒBƒŠƒeƒB“‡ƒwƒbƒ_[.
+    ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£çµ±åˆãƒ˜ãƒƒãƒ€ãƒ¼.
 */
 
 #ifndef TRI_UTIL_HPP_INCLUDED
@@ -23,6 +23,6 @@
 #include "tri_stopwatch.hpp"
 #include "tri_signature.hpp"
 #include "tri_zipfile.hpp"
-
+#include "tri_text_loader.hpp"
 
 #endif // TRI_UTIL_HPP_INCLUDED

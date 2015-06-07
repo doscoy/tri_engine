@@ -38,6 +38,12 @@ public:
     void bind() const {
         cross::RenderSystem::bindBuffer(cross::RenderSystem::BufferType::TYPE_VERTEX, buffer_id_);
     }
+    
+    ///
+    /// バインド解除
+    void unbind() const {
+        cross::RenderSystem::bindBuffer(cross::RenderSystem::BufferType::TYPE_VERTEX, 0);
+    }
 
 private:
     ///

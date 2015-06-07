@@ -11,7 +11,8 @@
 #include "tri_render_layer.hpp"
 #include "tri_shader.hpp"
 #include "tri_texture.hpp"
-
+#include "tri_vertex_buffer.hpp"
+#include "tri_index_buffer.hpp"
 
 namespace t3 {
   
@@ -72,6 +73,9 @@ private:
     
 
 private:
+    cross::RenderSystem::BufferID vao_;
+    VertexBuffer vb_;
+    IndexBuffer ib_;
     ShaderPtr shader_;          ///< シェーダ
     ShaderPtr default_shader_;  ///< デフォルトシェーダ
     TexturePtr texture_;        ///< テクスチャ

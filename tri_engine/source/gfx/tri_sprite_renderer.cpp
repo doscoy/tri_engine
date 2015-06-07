@@ -121,7 +121,7 @@ SpriteRenderer::SpriteRenderer()
         );
 
     }
-    cross::RenderSystem::bindVertexArrayBuffer(0);
+    cross::RenderSystem::bindVertexArrayObject(0);
 #endif
 }
     
@@ -576,7 +576,7 @@ void SpriteRenderer::renderBatch(BatchGroup* batch) {
         sizeof(uint32_t)
     );
 #ifdef USE_VAO
-    cross::RenderSystem::bindVertexArrayBuffer(0);
+    cross::RenderSystem::bindVertexArrayObject(0);
 #endif
 }
 

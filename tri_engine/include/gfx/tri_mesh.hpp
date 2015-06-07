@@ -35,6 +35,19 @@ public:
     virtual ~Mesh();
     
 public:
+
+    ///
+    /// バインド
+    void bind() {
+        cross::RenderSystem::bindVertexArrayObject(vao_);
+    }
+    
+    ///
+    /// バインド解除
+    void unbind() {
+        cross::RenderSystem::bindVertexArrayObject(0);
+    }
+
     ///
     /// 頂点数を取得
     uint32_t vertexCount() const {
@@ -79,6 +92,11 @@ private:
     ///
     /// インデックス数
     uint32_t index_count_;
+    
+    
+    ///
+    /// VAO
+    cross::RenderSystem::BufferID vao_;
     
     ///
     /// 頂点バッファ

@@ -4,7 +4,7 @@
 #include "gfx/tri_cinema_layer.hpp"
 #include "../shader/tri_simple_tex.fsh"
 #include "../shader/tri_simple_tex.vsh"
-
+#include "gfx/tri_vertex_types.hpp"
 
 
 namespace t3 {
@@ -13,8 +13,7 @@ namespace t3 {
 
 CinemaLayer::CinemaLayer()
     : CinemaLayer("cinema", RenderLayer::PRIORITY_APP_FRONT1)
-{
-}
+{}
 
 
 CinemaLayer::CinemaLayer(
@@ -28,13 +27,77 @@ CinemaLayer::CinemaLayer(
 
     //  デフォルトシェーダ作成
     default_shader_ = std::make_shared<Shader>(simple_tex_vsh, simple_tex_fsh);
-
+    default_shader_->use();
+    default_shader_->bindAttributeLocation(0, "a_position");
+    default_shader_->bindAttributeLocation(1, "a_uv");
+    default_shader_->bindFragmentDataLocation(0, "FragColor");
+    
     //  デフォルトシェーダを設定
     useDefaultShader();
+    
+    
+    vao_ = cross::RenderSystem::createVertexArrayObject();
+    cross::RenderSystem::bindVertexArrayObject(vao_);
+
+    vb_.bind();
+    
+    VertexP2T varray[] = {
+    //   x, y, u, v
+        {{0, 0}, {0, 0}},
+        {{0, 1}, {0, 1}},
+        {{1, 0}, {1, 0}},
+        {{1, 1}, {1, 1}}
+    };
+    
+    cross::RenderSystem::setupBufferData(
+        cross::RenderSystem::BufferType::TYPE_VERTEX,
+        sizeof(VertexP2T) * 4,
+        varray,
+        cross::RenderSystem::BufferUsage::STATIC_DRAW
+    );
+    
+    constexpr int POSITION_SLOT = 0;
+    constexpr int UV_SLOT = 1;
+
+
+    //  座標有効化
+    cross::RenderSystem::setEnableVertexAttribute(POSITION_SLOT);
+    cross::RenderSystem::setVertexAttributePointer(
+        POSITION_SLOT,
+        3,
+        cross::RenderSystem::TypeFormat::FLOAT,
+        false,
+        sizeof(VertexP2T),
+        0
+    );
+
+
+    //  UV有効化
+    cross::RenderSystem::setEnableVertexAttribute(UV_SLOT);
+    cross::RenderSystem::setVertexAttributePointer(
+        UV_SLOT,
+        2,
+        cross::RenderSystem::TypeFormat::FLOAT,
+        false,
+        sizeof(VertexP2T),
+        (void*)offsetof(VertexP2T, uv_)
+    );
+
+
+
+    
+
+    
+
+    
+
+
+    cross::RenderSystem::bindVertexArrayObject(0);
 }
 
-CinemaLayer::~CinemaLayer() {
 
+CinemaLayer::~CinemaLayer() {
+    cross::RenderSystem::deleteVertexArrayBuffer(vao_);
 }
 
 
@@ -46,15 +109,12 @@ void CinemaLayer::updateLayer(tick_t delta_time) {
 
 void CinemaLayer::drawLayer() {
     
-    cross::RenderSystem::resetBufferBind();
-    
     if (!texture_) {
         return;
     }
 
-
-    
-    T3_ASSERT(shader_);
+    cross::RenderSystem::resetBufferBind();
+    cross::RenderSystem::bindVertexArrayObject(vao_);
     
     cross::RenderSystem::setCulling(false);
     cross::RenderSystem::setDepthTest(true);
@@ -65,63 +125,19 @@ void CinemaLayer::drawLayer() {
     // シェーダで描画
     bool use_result = shader_->use();
     T3_ASSERT(use_result);
-    int position_slot = shader_->getAttributeLocation("a_position");
-    T3_ASSERT(position_slot >= 0);
-    int uv_slot = shader_->getAttributeLocation("a_uv");
-    T3_ASSERT(uv_slot >= 0);
     
-    float x0 = -1.0f;
-    float x1 = 1.0f;
-    float y0 = -1.0f;
-    float y1 = 1.0f;
-    
-    float u0 = 0.0f;
-    float u1 = 1.0f;
-    float v0 = 0.0f;
-    float v1 = 1.0f;
-    
-    float varray[] = {
-        x0, y0,
-        x0, y1,
-        x1, y0,
-        x1, y1
-    };
-    float vuv[] = {
-        u0, v0,
-        u0, v1,
-        u1, v0,
-        u1, v1
-    };
-    cross::RenderSystem::setEnableVertexAttribute(position_slot);
-    cross::RenderSystem::setEnableVertexAttribute(uv_slot);
 
     //頂点配列を有効化
     shader_->setUniform("sampler", 0);
-
+    cross::RenderSystem::setActiveTextureUnit(0);
     texture_->bind();
     cross::RenderSystem::setDepthTest(true);
     cross::RenderSystem::setDepthWrite(true);
     cross::RenderSystem::setDepthTest(true);
-
-    cross::RenderSystem::setVertexAttributePointer(
-        position_slot,
-        2,
-        cross::RenderSystem::TypeFormat::FLOAT,
-        false,
-        0,
-        varray
-    );
-    cross::RenderSystem::setVertexAttributePointer(
-        uv_slot,
-        2,
-        cross::RenderSystem::TypeFormat::FLOAT,
-        false,
-        0,
-        vuv
-    );
     
     
     cross::RenderSystem::drawArray(cross::RenderSystem::DrawMode::MODE_TRIANGLE_STRIP, 0, 4);
+    cross::RenderSystem::bindVertexArrayObject(0);
 
 }
 

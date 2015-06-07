@@ -1,18 +1,13 @@
-
-
-
-#include "cross_glfw.hpp"
 #include "cross_render_system.hpp"
 #include "cross_dbg.hpp"
+#include "cross_os.hpp"
 #include <iostream>
-#include <regex>
+
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
 
 
-namespace cross {
-extern void printConsole(
-    const char* const str
-);
-}   // namespace cross
+
 int render_call_count_ = 0;
 
 
@@ -47,31 +42,22 @@ inline void checkGLError(const char* str) {
     case GL_NO_ERROR:
         return;
     case GL_INVALID_ENUM:
-        cross::printConsole("[GL_INVALID_ENUM]An unacceptable value is specified for an enumerated argument");
+        cross::printConsole("[GL_INVALID_ENUM]An unacceptable value is specified for an enumerated argument\n");
         break;
     case GL_INVALID_VALUE:
-        cross::printConsole("[GL_INVALID_VALUE]A numeric argument is out of range");
+        cross::printConsole("[GL_INVALID_VALUE]A numeric argument is out of range\n");
         break;
     case GL_INVALID_OPERATION:
-        cross::printConsole("[GL_INVALID_OPERATION]The specified operation is not allowed in the current state");
-        break;
-    case GL_STACK_OVERFLOW:
-        cross::printConsole("[GL_STACK_OVERFLOW]This command would cause a stack overflow");
-        break;
-    case GL_STACK_UNDERFLOW:
-        cross::printConsole("[GL_STACK_UNDERFLOW]This command would cause a a stack underflow");
+        cross::printConsole("[GL_INVALID_OPERATION]The specified operation is not allowed in the current state\n");
         break;
     case GL_OUT_OF_MEMORY:
-        cross::printConsole("[GL_OUT_OF_MEMORY]There is not enough memory left to execute the command");
-        break;
-    case GL_TABLE_TOO_LARGE:
-        cross::printConsole("[GL_TABLE_TOO_LARGE]The specified table exceeds the implementation's maximum supported table size");
+        cross::printConsole("[GL_OUT_OF_MEMORY]There is not enough memory left to execute the command\n");
         break;
     case GL_INVALID_FRAMEBUFFER_OPERATION:
-        cross::printConsole("[GL_INVALID_FRAMEBUFFER_OPERATION]The specified operation is not allowed current frame buffer");
+        cross::printConsole("[GL_INVALID_FRAMEBUFFER_OPERATION]The specified operation is not allowed current frame buffer\n");
         break;
     default:
-        cross::printConsole("An OpenGL error unknown");
+        cross::printConsole("An OpenGL error unknown\n");
         break;
     }
 
@@ -96,6 +82,7 @@ inline void setGLState(GLenum e, bool f) {
 
 
 
+
 inline int bufferTypeToGL(cross::RenderSystem::BufferType type) {
     int gl = GL_ARRAY_BUFFER;
     if (type == cross::RenderSystem::BufferType::TYPE_INDEX) {
@@ -115,7 +102,7 @@ inline int colorFormatToGLInternalFormat(cross::RenderSystem::ColorFormat format
             break;
             
         case cross::RenderSystem::ColorFormat::RGB:
-            glcolor_format = GL_RGB8;
+            glcolor_format = GL_RGB;
             break;
             
         case cross::RenderSystem::ColorFormat::DEPTH:
@@ -146,7 +133,7 @@ inline int colorFormatToGLFormat(cross::RenderSystem::ColorFormat format) {
             
 
         case cross::RenderSystem::ColorFormat::DEPTH:
-            glcolor_format = GL_DEPTH_COMPONENT;
+            glcolor_format = GL_DEPTH_COMPONENT16;
             break;
 
         default:
@@ -184,14 +171,43 @@ inline int typeFormatToGL(cross::RenderSystem::TypeFormat format) {
 
 }
 
-GLFWwindow* window_ = nullptr;
 
+
+inline int colorFormatToGL(cross::RenderSystem::ColorFormat format) {
+
+
+    int glcolor_format = GL_RGB;
+    
+    switch (format) {
+        case cross::RenderSystem::ColorFormat::RGBA:
+            glcolor_format = GL_RGBA;
+            break;
+            
+        case cross::RenderSystem::ColorFormat::RGB:
+            glcolor_format = GL_RGB;
+            break;
+            
+        case cross::RenderSystem::ColorFormat::GRAY:
+            glcolor_format = GL_ALPHA;
+            break;
+
+        case cross::RenderSystem::ColorFormat::GRAYA:
+            glcolor_format = GL_LUMINANCE_ALPHA;
+            break;
+
+        case cross::RenderSystem::ColorFormat::DEPTH:
+            glcolor_format = GL_DEPTH_COMPONENT;
+            break;
+
+            
+        default:
+            break;
+    }
+    
+    return glcolor_format;
+}
 
 }   // unname namespace
-
-
-
-
 
 
 namespace cross {
@@ -200,40 +216,32 @@ namespace cross {
 
 void RenderSystem::createFrameBuffer(RenderSystem::FrameBufferID* id) {
     glGenFramebuffers(1, id);
-    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::deleteFrameBuffer(RenderSystem::FrameBufferID* id) {
     glDeleteFramebuffers(1, id);
-    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::bindFrameBuffer(RenderSystem::FrameBufferID id) {
-    CROSS_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
     glBindFramebuffer(GL_FRAMEBUFFER, id);
-    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::createRenderBuffer(RenderSystem::RenderBufferID* id) {
     glGenRenderbuffers(1, id);
-    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::deleteRenderBuffer(RenderSystem::RenderBufferID* id) {
     glDeleteRenderbuffers(1, id);
-    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::bindRenderBuffer(RenderSystem::RenderBufferID id) {
     glBindRenderbuffer(GL_RENDERBUFFER, id);
-    CROSS_GL_ASSERT();
 }
 
 
 RenderSystem::FrameBufferID RenderSystem::getCurrentFrameBufferID() {
     int id;
     glGetIntegerv(GL_FRAMEBUFFER_BINDING, &id);
-    CROSS_GL_ASSERT();
     return id;
 }
 
@@ -241,7 +249,6 @@ RenderSystem::FrameBufferID RenderSystem::getCurrentFrameBufferID() {
 RenderSystem::RenderBufferID RenderSystem::getCurrentRenderBufferID() {
     int id;
     glGetIntegerv(GL_RENDERBUFFER_BINDING, &id);
-    CROSS_GL_ASSERT();
     return id;
 }
 
@@ -249,7 +256,6 @@ RenderSystem::RenderBufferID RenderSystem::getCurrentRenderBufferID() {
 void RenderSystem::bindTexture(RenderSystem::TextureID texture) {
 
     glBindTexture(GL_TEXTURE_2D, texture);
-    CROSS_GL_ASSERT();
 }
 
 int RenderSystem::buildShader(
@@ -282,20 +288,18 @@ int RenderSystem::buildShader(
     glShaderSource(shader_handle, 1, &source, 0);
     glCompileShader(shader_handle);
     
-    std::cout << source;
-    
     GLint compile_success;
     glGetShaderiv(shader_handle, GL_COMPILE_STATUS, &compile_success);
     
     if (compile_success == GL_FALSE) {
-        GLchar messages[256];
+        GLchar messages[512];
         glGetShaderInfoLog(shader_handle, sizeof(messages), 0, &messages[0]);
-        std::cout << std::endl;
-        std::cout << messages;
+        std::cout << "\n\n______ Shader compile fail. LOG _________" << std::endl;
+        std::cout << messages << std::endl;
+        std::cout << "_________________________________________" << std::endl;
         return -1;
     }
     
-    CROSS_GL_ASSERT();
     return shader_handle;
 }
 
@@ -336,8 +340,7 @@ void RenderSystem::bindFragmentDataLocation(
     RenderSystem::ShaderVariableLocation location,
     const char* const name
 ) {
-    glBindFragDataLocation(handle, location, name);
-    CROSS_GL_ASSERT();
+    //    glBindFragDataLocation();
 }
 
 RenderSystem::ShaderVariableLocation RenderSystem::getAttributeLocation(
@@ -353,9 +356,7 @@ RenderSystem::ShaderVariableLocation RenderSystem::getUniformLocation(
     RenderSystem::ShaderProgramID program,
     const char* const name
 ) {
-    int location = glGetUniformLocation(program, name);
-    CROSS_GL_ASSERT();
-    return location;
+    return glGetUniformLocation(program, name);
 }
 
 
@@ -417,6 +418,11 @@ void RenderSystem::setUniformMatrix(
     );
     CROSS_GL_ASSERT();
 }
+
+
+
+
+
 
 
 void RenderSystem::setDepthWrite(
@@ -685,7 +691,6 @@ void RenderSystem::drawElementsC(
     int count,
     size_t indices_type_size
 ) {
-    CROSS_GL_ASSERT();
     //  index_type判定
     int index_type = GL_UNSIGNED_INT;
     switch (indices_type_size) {
@@ -718,7 +723,7 @@ void RenderSystem::drawElementsC(
             
             
         default:
-            CROSS_PANIC();
+//            CROSS_PANIC("error");
             break;
     }
     
@@ -757,22 +762,22 @@ void RenderSystem::drawArrayC(
 void RenderSystem::setVertexAttributePointer(
     int slot,
     int element_num,
-    cross::RenderSystem::TypeFormat type,
+    RenderSystem::TypeFormat type,
     bool normalized,
     int stride,
     void* ptr
 ) {
-    CROSS_GL_ASSERT();
-    int gltype_format = typeFormatToGL(type);
+    auto gltype = typeFormatToGL(type);
+    
+
     glVertexAttribPointer(
         slot,
         element_num,
-        gltype_format,
+        gltype,
         normalized,
         stride,
         ptr
     );
-    CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setupTextureData(
@@ -782,12 +787,11 @@ void RenderSystem::setupTextureData(
     RenderSystem::TypeFormat type_format,
     const void* data
 ) {
+    int glcolor_format = colorFormatToGL(color_format);
     int glinternal_format = colorFormatToGLInternalFormat(color_format);
-    int glcolor_format = colorFormatToGLFormat(color_format);
     int gltype_format = typeFormatToGL(type_format);
+    CROSS_GL_ASSERT();
     
-
-
     glTexImage2D(
         GL_TEXTURE_2D,
         0,
@@ -799,7 +803,7 @@ void RenderSystem::setupTextureData(
         gltype_format,
         data
     );
-    
+        
     CROSS_GL_ASSERT();
 }
 
@@ -936,6 +940,7 @@ void RenderSystem::attachFrameBufferTexture(
         gltype = GL_DEPTH_ATTACHMENT;
     }
 
+
     glFramebufferTexture2D(
         GL_FRAMEBUFFER,
         gltype,   //  カラーバッファとして設定
@@ -944,9 +949,7 @@ void RenderSystem::attachFrameBufferTexture(
         0
     );
     CROSS_GL_ASSERT();
-
-
-    CROSS_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+   
 }
 
 
@@ -979,7 +982,7 @@ void RenderSystem::setupRenderBufferStorage(
 
 RenderSystem::BufferID RenderSystem::createVertexArrayObject() {
     RenderSystem::BufferID id;
-    glGenVertexArrays(1, &id);
+    glGenVertexArraysOES(1, &id);
     CROSS_GL_ASSERT();
     return id;
 }
@@ -987,19 +990,18 @@ RenderSystem::BufferID RenderSystem::createVertexArrayObject() {
 
 
 void RenderSystem::bindVertexArrayObject(const RenderSystem::BufferID id) {
-    CROSS_GL_ASSERT();
-    glBindVertexArray(id);
+    glBindVertexArrayOES(id);
     CROSS_GL_ASSERT();
 }
 
 
 void RenderSystem::deleteVertexArrayBuffer(const RenderSystem::BufferID id) {
-    glDeleteVertexArrays(1, &id);
+    glDeleteVertexArraysOES(1, &id);
     CROSS_GL_ASSERT();
 }
 
 void RenderSystem::fenceDraw() {
-    fence_ = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
+    fence_ = glFenceSyncAPPLE(GL_SYNC_GPU_COMMANDS_COMPLETE_APPLE, 0);
     CROSS_GL_ASSERT();
 }
 
@@ -1007,10 +1009,10 @@ void RenderSystem::fenceDrawWaiting() {
     if (!fence_) {
         return;
     }
-    glClientWaitSync(
+    glClientWaitSyncAPPLE(
         fence_,
-        GL_SYNC_FLUSH_COMMANDS_BIT,
-        GL_TIMEOUT_IGNORED
+        GL_SYNC_FLUSH_COMMANDS_BIT_APPLE,
+        GL_TIMEOUT_IGNORED_APPLE
     );
 
     CROSS_GL_ASSERT();
@@ -1024,24 +1026,24 @@ void RenderSystem::mapBuffer(RenderSystem::BufferType type, intptr_t offset, siz
     
 
     CROSS_GL_ASSERT();
-    void* buf_data = glMapBufferRange(
+    void* buf_data = glMapBufferRangeEXT(
         gl_type,
         offset,
         size,
-        GL_MAP_WRITE_BIT | GL_MAP_FLUSH_EXPLICIT_BIT | GL_MAP_UNSYNCHRONIZED_BIT
+        GL_MAP_WRITE_BIT_EXT | GL_MAP_FLUSH_EXPLICIT_BIT_EXT | GL_MAP_UNSYNCHRONIZED_BIT_EXT
     );
 
 
     CROSS_GL_ASSERT();
 
     memcpy(buf_data, data, size);
-    glFlushMappedBufferRange(gl_type, offset, size);
+    glFlushMappedBufferRangeEXT(gl_type, offset, size);
 
     CROSS_GL_ASSERT();
 }
 
 void RenderSystem::unmapBuffer(RenderSystem::BufferType type) {
-    glUnmapBuffer(bufferTypeToGL(type));
+    glUnmapBufferOES(bufferTypeToGL(type));
     CROSS_GL_ASSERT();
 }
 
@@ -1176,7 +1178,6 @@ void RenderSystem::deleteTexture(
     RenderSystem::TextureID* id
 ) {
     glDeleteTextures(1, id);
-    CROSS_GL_ASSERT();
 }
 
 
@@ -1184,21 +1185,9 @@ bool RenderSystem::isError() {
     return glGetError() != GL_NO_ERROR;
 }
 
-void RenderSystem::colorMask(
-    bool r,
-    bool g,
-    bool b,
-    bool a
-) {
-    glColorMask(r, g, b, a);
-    CROSS_GL_ASSERT();
-}
-
-
-
 void RenderSystem::setDrawBuffer(RenderSystem::DrawBufferTarget target) {
 
-    glDrawBuffer(GL_NONE);
+//    glDrawBuffer(GL_NONE);
 }
 
 void RenderSystem::setTextureCompareFunc(
@@ -1212,18 +1201,20 @@ void RenderSystem::setTextureCompareFunc(
         gl_func = GL_LESS;
     }
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, gl_func);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, gl_func);
     CROSS_GL_ASSERT();
 }
 
 void RenderSystem::setTextureCompareMode(
     RenderSystem::TextureCompareMode mode
 ) {
-    int gl_mode = GL_COMPARE_REF_TO_TEXTURE;
+//    int gl_mode = GL_COMPARE_REF_TO_TEXTURE;
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, gl_mode);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, gl_mode);
     CROSS_GL_ASSERT();
 }
+
+
 
 
 void RenderSystem::setTextureBorderColor(
@@ -1233,11 +1224,11 @@ void RenderSystem::setTextureBorderColor(
     float a
 ) {
     GLfloat border[] = {r, g, b, a};
-    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, border);
+//    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, border);
     CROSS_GL_ASSERT();
 }
 
-
 }   // namespace cross
+
 
 

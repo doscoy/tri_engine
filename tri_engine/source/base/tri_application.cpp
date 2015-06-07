@@ -216,12 +216,14 @@ void Application::initializeApplication()
 
     //  ゲームの初期化
     initializeGame();
+    T3_ASSERT(!cross::RenderSystem::isError());
 
 }
 
 
 void Application::updateApplication()
 {
+    T3_ASSERT(!cross::RenderSystem::isError());
     system_cost_timer_.start();     // system cost 計測開始
 
     cross::beginUpdate();
@@ -300,11 +302,13 @@ void Application::updateApplication()
     }
     
     cross::endUpdate();
+    T3_ASSERT(!cross::RenderSystem::isError());
 
 
 }
 
 void Application::renderApplication() {
+    T3_ASSERT(!cross::RenderSystem::isError());
 
     auto& gs = Director::instance();
     DebugMenu& dm = DebugMenu::instance();
@@ -394,7 +398,7 @@ void Application::debugPrinting() {
  
     //  ワークバー描画
     if (show_work_bar_) {
-        cpu_bar_.draw();
+     //   cpu_bar_.draw();
     }
     
     

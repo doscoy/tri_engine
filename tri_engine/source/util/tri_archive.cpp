@@ -5,12 +5,12 @@
 namespace t3 {
 
 
-//  ƒA[ƒJƒCƒu‚Ì“Ç‚İ‚İ
+//  ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã®èª­ã¿è¾¼ã¿
 void Archive::load(const String& arcname) {
     zip_.initialize(arcname);
 }
 
-//  ƒA[ƒJƒCƒu‚Ì“WŠJ
+//  ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã®å±•é–‹
 void Archive::decompressAll() {
     int entry_num = zip_.entries();
     for (int i = 0; i < entry_num; ++i) {
@@ -25,18 +25,18 @@ void Archive::decompressAll() {
     }
 }
 
-//  ƒtƒ@ƒCƒ‹æ“¾
+//  ãƒ•ã‚¡ã‚¤ãƒ«å–å¾—
 const File* Archive::file(
     const String& filename
 ) {
-    //  w’èƒtƒ@ƒCƒ‹–¼‚Ìƒtƒ@ƒCƒ‹‚ª‚ ‚é‚©’²¸
+    //  æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«åã®ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚‹ã‹èª¿æŸ»
     for (auto& f : files_) {
         if (f->name() == filename) {
             return f;
         }
     }
     
-    //  –³‚©‚Á‚½
+    //  ç„¡ã‹ã£ãŸ
     return nullptr;
 }
 

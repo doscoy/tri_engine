@@ -34,9 +34,9 @@ extern cross::PointingData point_data_[4];
     
     GLKView *view = (GLKView *)self.view;
 
-    self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
     view.context = self.context;
-    view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+//    view.drawableDepthFormat = GLKViewDrawableDepthFormat16;
     [EAGLContext setCurrentContext:self.context];
     
     //  FPS設定

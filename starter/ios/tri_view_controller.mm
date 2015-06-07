@@ -30,8 +30,12 @@ extern float screen_y_;
     screen_x_ = bounds.size.width * screen_scale_;
     screen_y_ = bounds.size.height * screen_scale_;
     
-    t3::initializeTriEngine(screen_x_, screen_y_, "ios");
-    t3::initializeApplication();
+    if (t3::initializeTriEngine(screen_x_, screen_y_, "ios")) {
+        t3::initializeApplication();
+    } else {
+        T3_PANIC("initialize failed");
+    }
+    T3_ASSERT(!cross::RenderSystem::isError());
 
 }
 
@@ -48,6 +52,7 @@ extern float screen_y_;
 
 - (void)update
 {
+    T3_ASSERT(!cross::RenderSystem::isError());
     t3::updateApplication();
 }
 

@@ -1,5 +1,5 @@
-#if TRI_TARGET_IOS_SIMULATER
-static const char* df_font_fsh = TRI_INSTANT_SHADER(
+#if CROSS_GL_VERSION == CROSS_GL_ES2
+const char* df_font_fsh = TRI_INSTANT_SHADER(
 
 
 varying lowp vec2 v_texture_uv;
