@@ -25,7 +25,7 @@ out vec4 FragColor;
 
 void main(void)
 {
-    FragColor = vec4(texture(sampler, v_texture_uv).xyz, 1.0);
+    FragColor = texture(sampler, v_texture_uv);
 }
 
 )";

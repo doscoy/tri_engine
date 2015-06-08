@@ -32,6 +32,7 @@ int main(int argc, char * argv[])
         @autoreleasepool {
             return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
         }
+    }
     #else // MacOSX or Windows
         if (!t3::initializeTriEngine(256, 256, "win")) {
             //  初期化に失敗

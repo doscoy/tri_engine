@@ -23,7 +23,7 @@ const char* simple3d_fsh = R"(
 
 #version 400
 in vec2 v_texture_uv;
-in float power;
+flat in float power;
 uniform sampler2D sampler;
 out vec4 FragColor;
 

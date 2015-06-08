@@ -2,7 +2,7 @@
 
 #include "dbg/tri_assert.hpp"
 #include "dbg/tri_trace.hpp"
-
+#include "kernel/memory/tri_new.hpp"
 
 namespace t3 {
 
@@ -306,7 +306,7 @@ ShaderPtr Shader::create(
     const char* const vsh,
     const char* const fsh
 ) {
-    auto s = T3_NEW Shader();
+    ShaderPtr s(T3_NEW Shader());
     s->build(vsh, fsh);
     return s;
 }

@@ -42,11 +42,11 @@ CinemaLayer::CinemaLayer(
     vb_.bind();
     
     VertexP2T varray[] = {
-    //   x, y, u, v
-        {{-1, -1}, {0, 0}},
-        {{-1, 1}, {0, 1}},
-        {{1, -1}, {1, 0}},
-        {{1, 1}, {1, 1}}
+    //     x, y,     u,  v
+        {{0, 0}, {0, 0}},
+        {{0,  1}, {0, 1}},
+        {{ 1, 0}, {1, 0}},
+        {{ 1,  1}, {1, 1}}
     };
     
     cross::RenderSystem::setupBufferData(
@@ -64,7 +64,7 @@ CinemaLayer::CinemaLayer(
     cross::RenderSystem::setEnableVertexAttribute(POSITION_SLOT);
     cross::RenderSystem::setVertexAttributePointer(
         POSITION_SLOT,
-        3,
+        2,
         cross::RenderSystem::TypeFormat::FLOAT,
         false,
         sizeof(VertexP2T),
@@ -82,14 +82,6 @@ CinemaLayer::CinemaLayer(
         sizeof(VertexP2T),
         (void*)offsetof(VertexP2T, uv_)
     );
-
-
-
-    
-
-    
-
-    
 
 
     cross::RenderSystem::bindVertexArrayObject(0);
@@ -112,7 +104,9 @@ void CinemaLayer::drawLayer() {
     if (!texture_) {
         return;
     }
-
+    
+    cross::RenderSystem::setViewport(-256, -256, 512, 512);
+    
     cross::RenderSystem::resetBufferBind();
     cross::RenderSystem::bindVertexArrayObject(vao_);
     
@@ -136,7 +130,11 @@ void CinemaLayer::drawLayer() {
     cross::RenderSystem::setDepthTest(true);
     
     
-    cross::RenderSystem::drawArray(cross::RenderSystem::DrawMode::MODE_TRIANGLE_STRIP, 0, 4);
+    cross::RenderSystem::drawArray(
+        cross::RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
+        0,
+        4
+    );
     cross::RenderSystem::bindVertexArrayObject(0);
 
 }

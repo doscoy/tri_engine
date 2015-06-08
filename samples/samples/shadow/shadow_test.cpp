@@ -20,7 +20,6 @@ public:
   
 public:
     void initialize(){
-  
         //  レイヤー準備
         layer_.name("ShadowTestScene::DrawLayer");
         layer_.setUpdateCallback<ShadowTestScene::SceneContext>(this, &SceneContext::layerUpdate);
@@ -62,7 +61,7 @@ public:
         my_t_ = t3::Texture::create(t3::FilePath("t2.png"));
 
         cinema_.texture(surface_.colorTexture());
-
+        //cinema_.texture(my_t_);
 
     }
     
@@ -74,11 +73,21 @@ public:
         static float angle;
         angle += 0.25f;
         node_field_->rotationY(angle);
+        
+        
+        auto pointing = t3::Director::instance().input().pointing();
+        float move_y = pointing.moveDistance().y_;
+        if (std::abs(move_y) > 2) {
+            cam_updater_.dollyZ(move_y*0.1f);
+        }
     }
 
     void suspend(t3::tick_t delta_time) {
     
     }
+    
+    
+
     
 private:
     void layerUpdate() {

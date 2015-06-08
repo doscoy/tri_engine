@@ -25,7 +25,8 @@ TexturePtr TextureFactory::createFromData(
         width,
         height,
         color_format,
-        type_format
+        type_format,
+        nullptr
     ));
 
     cross::RenderSystem::bindTexture(tex->id());

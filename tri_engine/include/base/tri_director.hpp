@@ -17,6 +17,7 @@
 #include "gfx/tri_color.hpp"
 #include "gfx/tri_render_layer.hpp"
 #include "gfx/tri_fade_layer.hpp"
+
 #include <array>
 
 
@@ -281,6 +282,8 @@ private:
     //  デバッグ用レイヤー
     ScopedPtr<DebugLogLayer> log_layer_;                ///< デバッグログ用レイヤー
     ScopedPtr<DebugStringLayer> dbg_screen_layer_;      ///< デバッグプリント用レイヤー
+    
+
 
     //  システムフェード
     ScopedPtr<FadeLayer> fade_layer_;   ///< フェードレイヤー

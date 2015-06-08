@@ -15,7 +15,7 @@ Texture::Texture(
     const uint32_t height,
     const cross::RenderSystem::ColorFormat color_format,
     const cross::RenderSystem::TypeFormat type_format,
-    const uint8_t* data
+    uint8_t* data
 )   : Resource()
     , width_(width)
     , height_(height)
@@ -55,17 +55,19 @@ TexturePtr Texture::create(const FilePath& path) {
 
 TexturePtr Texture::create(
     String name,
-    const int width,
-    const int height,
+    const uint32_t width,
+    const uint32_t height,
     const cross::RenderSystem::ColorFormat color_format,
-    const cross::RenderSystem::TypeFormat type_format
+    const cross::RenderSystem::TypeFormat type_format,
+    uint8_t* data
 ) {
     TexturePtr t(T3_SYS_NEW Texture(
         name,
         width,
         height,
         color_format,
-        type_format
+        type_format,
+        data
     ));
     
     return t;

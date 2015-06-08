@@ -26,20 +26,22 @@ Surface::Surface(
 {
     
     //  オフスクリーン用のテクスチャ
-    color_texture_ = t3::Texture::create(
+    color_texture_ = Texture::create(
         "sfcc",
         static_cast<int>(width),
         static_cast<int>(height),
         cross::RenderSystem::ColorFormat::RGBA,
-        cross::RenderSystem::TypeFormat::UNSIGNED_BYTE
+        cross::RenderSystem::TypeFormat::UNSIGNED_BYTE,
+        nullptr
     );
 
-    depth_texture_ = t3::Texture::create(
+    depth_texture_ = Texture::create(
         "dsfd",
         static_cast<int>(width),
         static_cast<int>(height),
         cross::RenderSystem::ColorFormat::DEPTH,
-        cross::RenderSystem::TypeFormat::UNSIGNED_SHORT
+        cross::RenderSystem::TypeFormat::UNSIGNED_SHORT,
+        nullptr
     );
     
     depth_texture_->bind();

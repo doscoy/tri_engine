@@ -40,7 +40,7 @@ private:
         const uint32_t height,  ///< 高さ
         const cross::RenderSystem::ColorFormat color_format, ///< カラーフォーマット
         const cross::RenderSystem::TypeFormat type_format,   ///< 型フォーマット
-        const uint8_t* data     ///< ピクセルデータ
+        uint8_t* data     ///< ピクセルデータ
     );
     
     
@@ -84,10 +84,11 @@ public:
     /// テクスチャ生成
     static TexturePtr create(
         String name,        ///< 名前
-        const int width,    ///< 幅
-        const int height,   ///< 高さ
+        const uint32_t width,    ///< 幅
+        const uint32_t height,   ///< 高さ
         const cross::RenderSystem::ColorFormat cf,   ///< カラーフォーマット
-        const cross::RenderSystem::TypeFormat tf    ///< 型フォーマット
+        const cross::RenderSystem::TypeFormat tf,    ///< 型フォーマット
+        uint8_t* data
     );
     
     ///

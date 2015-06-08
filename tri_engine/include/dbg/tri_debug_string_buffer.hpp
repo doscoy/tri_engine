@@ -9,7 +9,7 @@
 //  include
 #include "base/tri_std.hpp"
 #include "util/tri_uncopyable.hpp"
-
+#include "tri_debug_writer.hpp"
 
 namespace t3 {
 
@@ -70,6 +70,8 @@ private:
     ///
     /// 追加済みサイズ
     int size_;
+    
+    DebugWriter writer_;
 };
 
 

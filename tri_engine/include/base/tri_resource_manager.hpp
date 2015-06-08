@@ -11,7 +11,7 @@
 #include "../util/tri_unique_id.hpp"
 #include "../dbg/tri_assert.hpp"
 #include "../base/tri_resource.hpp"
-
+#include "../util/tri_string_util.hpp"
 
 
 namespace t3 {
