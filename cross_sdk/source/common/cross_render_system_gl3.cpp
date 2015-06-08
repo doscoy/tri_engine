@@ -292,6 +292,7 @@ int RenderSystem::buildShader(
         glGetShaderInfoLog(shader_handle, sizeof(messages), 0, &messages[0]);
         std::cout << std::endl;
         std::cout << messages;
+        cross::printConsole(messages);
         return -1;
     }
     
@@ -1175,6 +1176,7 @@ RenderSystem::TextureID RenderSystem::createTexture() {
 void RenderSystem::deleteTexture(
     RenderSystem::TextureID* id
 ) {
+    CROSS_GL_ASSERT();
     glDeleteTextures(1, id);
     CROSS_GL_ASSERT();
 }

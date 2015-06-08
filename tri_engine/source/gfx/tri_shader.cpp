@@ -301,4 +301,15 @@ bool Shader::setEnableAttributeArray(
 }
 
 
+
+ShaderPtr Shader::create(
+    const char* const vsh,
+    const char* const fsh
+) {
+    auto s = T3_NEW Shader();
+    s->build(vsh, fsh);
+    return s;
+}
+
+
 }   // namespace t3

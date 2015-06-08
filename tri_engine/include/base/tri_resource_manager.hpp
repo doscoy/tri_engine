@@ -9,7 +9,7 @@
 #include <list>
 #include "../util/tri_singleton.hpp"
 #include "../util/tri_unique_id.hpp"
-#include "../dbg/tri_dbg.hpp"
+#include "../dbg/tri_assert.hpp"
 #include "../base/tri_resource.hpp"
 
 

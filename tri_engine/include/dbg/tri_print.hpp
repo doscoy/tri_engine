@@ -7,6 +7,8 @@
 
 //  include
 #include "../gfx/tri_color.hpp"
+#include "gfx/tri_shader.hpp"
+#include "gfx/tri_texture.hpp"
 
 namespace t3 {
 
@@ -48,6 +50,43 @@ void printDisplay(
 ///
 /// デバッグフォントのサイズ
 constexpr int DEBUG_FONT_POINT = 16;
+
+
+class DebugWriter {
+public:
+    DebugWriter();
+    ~DebugWriter();
+public:
+    enum {
+        FONT_PIXEL = 16,
+        BUFFER_LENGTH = 256,
+    };
+
+
+private:
+    float width_;
+    float height_;
+    TexturePtr font_sheet_;
+    ShaderPtr shader_;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 } // namespace t3
 

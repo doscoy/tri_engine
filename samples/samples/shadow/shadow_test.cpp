@@ -61,7 +61,7 @@ public:
 
         my_t_ = t3::Texture::create(t3::FilePath("t2.png"));
 
-        cinema_.texture(surface_.depthTexture());
+        cinema_.texture(surface_.colorTexture());
 
 
     }

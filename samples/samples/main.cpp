@@ -4,7 +4,7 @@
 #include "samples.hpp"
 
 
-#if defined(CROSS_TARGET_PLATFORM_IOS)
+#if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_IOS
 #include "ViewController.h"
 #include "AppDelegate.h"
 #endif
@@ -12,38 +12,40 @@
 
 int main(int argc, char * argv[])
 {
-    SampleApp app;
-    app.rootScene(t3::Scene::sceneGenerator<RootTest>());
+    {
+        SampleApp app;
+        app.rootScene(t3::Scene::sceneGenerator<RootTest>());
   
-    app.rootScene(t3::Scene::sceneGenerator<InputTestScene>());
-//    app.setRootScene(t3::Scene::sceneGenerator<UiButtonScene>());
-//      app.setRootScene(t3::Scene::sceneGenerator<QuatTestScene>());
-//    app.setRootScene(t3::Scene::sceneGenerator<ThreadTestScene>());
-//    app.rootScene(t3::Scene::sceneGenerator<BlurScene>());
-//    app.setRootScene(t3::Scene::sceneGenerator<AudioTestScene>());
-//    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
-//    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
-//    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
-    app.rootScene(t3::Scene::sceneGenerator<ShadowTestScene>());
+        app.rootScene(t3::Scene::sceneGenerator<InputTestScene>());
+    //    app.setRootScene(t3::Scene::sceneGenerator<UiButtonScene>());
+    //      app.setRootScene(t3::Scene::sceneGenerator<QuatTestScene>());
+    //    app.setRootScene(t3::Scene::sceneGenerator<ThreadTestScene>());
+    //    app.rootScene(t3::Scene::sceneGenerator<BlurScene>());
+    //    app.setRootScene(t3::Scene::sceneGenerator<AudioTestScene>());
+    //    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
+    //    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
+    //    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
+        app.rootScene(t3::Scene::sceneGenerator<ShadowTestScene>());
 
-    t3::setApplication(app);
-#if defined(CROSS_TARGET_PLATFORM_IOS)
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
-    }
-#else // MacOSX or Windows
-    if (!t3::initializeTriEngine(256, 256, "win")) {
-        //  初期化に失敗
-        return 0;
-    }
-    t3::initializeApplication();
+        t3::setApplication(app);
+    #if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_IOS
+        @autoreleasepool {
+            return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+        }
+    #else // MacOSX or Windows
+        if (!t3::initializeTriEngine(256, 256, "win")) {
+            //  初期化に失敗
+            return 0;
+        }
+        t3::initializeApplication();
 
-    while (t3::isActiveApplication()) {
+        while (t3::isActiveApplication()) {
 
-        t3::updateApplication();
-        t3::renderApplication();
+            t3::updateApplication();
+            t3::renderApplication();
+        }
+        t3::terminateApplication();
     }
-    t3::terminateApplication();
     t3::terminateTriEngine();
 #endif
     return 0;

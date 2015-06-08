@@ -14,7 +14,8 @@ Texture::Texture(
     const uint32_t width,
     const uint32_t height,
     const cross::RenderSystem::ColorFormat color_format,
-    const cross::RenderSystem::TypeFormat type_format
+    const cross::RenderSystem::TypeFormat type_format,
+    const uint8_t* data
 )   : Resource()
     , width_(width)
     , height_(height)
@@ -34,7 +35,7 @@ Texture::Texture(
     cross::RenderSystem::setTextureCompareFunc(cross::RenderSystem::TextureCompareFunc::LESS);
     cross::RenderSystem::setTextureCompareMode(cross::RenderSystem::TextureCompareMode::REF_TO_TEX);
 
-    cross::RenderSystem::setupTextureData(width, height, color_format, type_format, nullptr);
+    cross::RenderSystem::setupTextureData(width, height, color_format, type_format, data);
 
 
     cross::RenderSystem::bindTexture(0);

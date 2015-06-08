@@ -112,10 +112,8 @@ public:
         const float x,
         const float y,
         const Color& color
-    ) const {
-        T3_PRINT_DISP(x, y, color, DEBUG_MENU_FONT_SIZE, getLabel().c_str());
-    }
-    
+    ) const;
+
     ///
     /// フォーカス時のコールバックを設定
     template <typename T>

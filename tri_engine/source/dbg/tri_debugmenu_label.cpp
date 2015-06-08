@@ -2,6 +2,8 @@
 
 #include "dbg/tri_debugmenu_label.hpp"
 #include "dbg/tri_debugmenu_frame.hpp"
+#include "dbg/tri_print.hpp"
+
 
 namespace t3 {
 
@@ -35,6 +37,14 @@ void DebugMenuLabel::attachSelf(
 void DebugMenuLabel::detachSelf(){
     T3_NULL_ASSERT(parent_);
     parent_->detachItem(*this);
+}
+
+void DebugMenuLabel::draw(
+    const float x,
+    const float y,
+    const Color& color
+) const {
+    T3_PRINT_DISP(x, y, color, DEBUG_MENU_FONT_SIZE, getLabel().c_str());
 }
 
 }   // namespace t3

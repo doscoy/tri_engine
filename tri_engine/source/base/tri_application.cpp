@@ -139,7 +139,11 @@ bool initializeTriEngine(
 }
 
 void terminateTriEngine() {
-
+    T3_ASSERT(!cross::RenderSystem::isError());
+    auto& d = Director::instance();
+    d.terminateDirector();
+    Director::destroyInstance();
+    cross::terminatePlatform();
 }
 
 
@@ -494,10 +498,7 @@ void Application::debugPrinting() {
 
 void Application::terminateApplication() {
     //  ゲームの終了処理
-    terminateGame();
-    
-    //  プラットフォームの後片付け
-    cross::terminatePlatform();
+    terminateGame();    
 }
 
 
@@ -567,6 +568,7 @@ void initializeApplication() {
 
 
 void terminateApplication() {
+    T3_ASSERT(!cross::RenderSystem::isError());
     app_->terminateApplication();
 }
 
@@ -582,6 +584,7 @@ void renderApplication() {
 
 
 bool isActiveApplication() {
+    T3_ASSERT(!cross::RenderSystem::isError());
     return app_->isActive();
 }
 

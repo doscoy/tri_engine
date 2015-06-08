@@ -8,7 +8,6 @@
 //  include
 #include "../util/tri_unique_id.hpp"
 #include "../math/tri_vec2.hpp"
-#include "../dbg/tri_dbg.hpp"
 #include "../base/tri_resource.hpp"
 #include "../gfx/tri_color.hpp"
 #include "base/tri_resource_manager.hpp"
@@ -40,7 +39,8 @@ private:
         const uint32_t width,   ///< 幅
         const uint32_t height,  ///< 高さ
         const cross::RenderSystem::ColorFormat color_format, ///< カラーフォーマット
-        const cross::RenderSystem::TypeFormat type_format   ///< 型フォーマット
+        const cross::RenderSystem::TypeFormat type_format,   ///< 型フォーマット
+        const uint8_t* data     ///< ピクセルデータ
     );
     
     

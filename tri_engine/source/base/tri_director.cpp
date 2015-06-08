@@ -169,9 +169,6 @@ Director::Director()
     //  デバッグメニュー生成
     DebugMenu::createInstance();
 
-    //  シーンマネージャ生成
-    SceneManager::createInstance();
-
     //  テクスチャマネージャ生成
     TextureManager::createInstance();
     
@@ -181,6 +178,8 @@ Director::Director()
     //  コリジョンマネージャ生成
     CollisionManager::createInstance();
     
+    //  シーンマネージャ生成
+    SceneManager::createInstance();
 
 	clear_colors_[0] = color_sample::darkgray();
 	clear_colors_[1] = color_sample::green();
@@ -198,10 +197,10 @@ Director::Director()
 //  デストラクタ
 Director::~Director()
 {
+    SceneManager::destroyInstance();
     CollisionManager::destroyInstance();
     AudioManager::destroyInstance();
     TextureManager::destroyInstance();
-    SceneManager::destroyInstance();
     DebugMenu::destroyInstance();
     
 }
@@ -234,7 +233,9 @@ void Director::initializeDirector() {
 
 
 void Director::terminateDirector() {
-
+    dbg_screen_layer_.reset();
+    log_layer_.reset();
+    fade_layer_.reset();
 }
 
 // *********************************************

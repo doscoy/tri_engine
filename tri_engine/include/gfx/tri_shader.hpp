@@ -14,6 +14,12 @@
 
 namespace t3 {
 
+
+///
+/// シェーダポインタ
+class Shader;
+using ShaderPtr = SharedPtr<Shader>;
+
 ///
 /// シェーダ
 class Shader {
@@ -239,6 +245,9 @@ public:
     }
 
 
+public:
+    static ShaderPtr create(const char* const vsh, const char* const fsh);
+
 private:
     ///
     /// ファイルからシェーダをコンパイル
@@ -320,9 +329,7 @@ private:
     int constant_float_array_location_[FLOAT_ARRAY_SLOT_SIZE];
 };
 
-///
-/// シェーダポインタ
-using ShaderPtr = SharedPtr<Shader>;
+
     
 
 }   // namespace t3

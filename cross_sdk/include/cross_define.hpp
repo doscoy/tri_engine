@@ -8,18 +8,20 @@
 
 
 
-
+#define CROSS_TARGET_PLATFORM_WIN32     (2)
+#define CROSS_TARGET_PLATFORM_OSX       (3)
+#define CROSS_TARGET_PLATFORM_IOS       (4)
 
 #if defined(_WIN32)
 
-    #define CROSS_TARGET_PLATFORM_WIN32
+    #define CROSS_TARGET_PLATFORM       CROSS_TARGET_PLATFORM_WIN32
 	#define CROSS_TARGET_COMPILER_MSVC
 
 #elif defined(__APPLE__)
     //  iOS device
     #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
         #warning "target ios"
-        #define CROSS_TARGET_PLATFORM_IOS     1
+        #define CROSS_TARGET_PLATFORM       CROSS_TARGET_PLATFORM_IOS
 
         #ifdef __i386__
             #warning "ios sim 32bit"
@@ -37,11 +39,7 @@
 
     //  MAC
     #else
-//        #warning "target mac"
-//        #include "png.h"
-//        #include <OpenGL/OpenGL.h>
-//        #include "GLFW/glfw3.h"
-//        #define PLATFORM_MAC
+        #define CROSS_TARGET_PLATFORM       CROSS_TARGET_PLATFORM_OSX
         
     #endif
 
@@ -63,9 +61,9 @@
 #define CROSS_GL_40  400
 #define CROSS_GL_ES2  20
 
-#if defined(CROSS_TARGET_PLATFORM_WIN32)
+#if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_WIN32
     #define CROSS_GL_VERSION    CROSS_GL_40
-#elif defined(CROSS_TARGET_PLATFORM_OSX)
+#elif CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_OSX
     #define CROSS_GL_VERSION    CROSS_GL_40
 
 #else

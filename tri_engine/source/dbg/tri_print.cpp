@@ -307,5 +307,40 @@ void printDisplay(
 }
 
 
+
+
+
+DebugWriter::DebugWriter()
+    : width_()
+    , height_()
+    , font_sheet_()
+    , shader_()
+{
+    font_sheet_ = Texture::create(
+        "debugfont",
+        dbg_font_.width_,
+        dbg_font_.height_,
+        cross::RenderSystem::ColorFormat::RGBA,
+        cross::RenderSystem::TypeFormat::UNSIGNED_BYTE,
+        dbg_font_.pixel_data_
+    );
+
+    font_shader_ = Shader::create(font_vsh, font_fsh);
+}
+
+DebugWriter::~DebugWriter() {
+
+}
+
+
+
+
+
+
+
+
+
+
+
 }   // namespace t3
 

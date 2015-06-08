@@ -3,6 +3,8 @@
 
 #include "audio/tri_audio_resource.hpp"
 #include "audio/tri_wav.hpp"
+#include "dbg/tri_trace.hpp"
+#include "dbg/tri_assert.hpp"
 
 namespace t3 {
 
