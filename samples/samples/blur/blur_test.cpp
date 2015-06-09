@@ -11,7 +11,7 @@ public:
         : layer_()
         , screen_()
         , sprite_(nullptr)
-        , surface_(512, 512)
+        , surface_(512, 512, t3::Surface::Type::COLOR_DEPTH)
         , moz_lv_(0)
     {
 

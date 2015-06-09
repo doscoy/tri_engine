@@ -361,7 +361,7 @@ bool EventManager::tick(
             EventListenerTable::iterator table_end = table.end();
             
             for (; table_it != table_end; ++table_it) {
-                (*table_it)->arg1(event.get());
+                (*table_it)->arg1(&event);
                 (*table_it)->invoke();
             }
         }
@@ -377,7 +377,7 @@ bool EventManager::tick(
         EventListenerTable::iterator table_end = table.end();
         
         for (; table_it != table_end; ++table_it) {
-            (*table_it)->arg1(event.get());
+            (*table_it)->arg1(&event);
             (*table_it)->invoke();
         }
         

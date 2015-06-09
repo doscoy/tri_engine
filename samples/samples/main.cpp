@@ -17,7 +17,7 @@ int main(int argc, char * argv[])
         app.rootScene(t3::Scene::sceneGenerator<RootTest>());
   
         app.rootScene(t3::Scene::sceneGenerator<InputTestScene>());
-    //    app.setRootScene(t3::Scene::sceneGenerator<UiButtonScene>());
+        app.rootScene(t3::Scene::sceneGenerator<UiButtonScene>());
     //      app.setRootScene(t3::Scene::sceneGenerator<QuatTestScene>());
     //    app.setRootScene(t3::Scene::sceneGenerator<ThreadTestScene>());
     //    app.rootScene(t3::Scene::sceneGenerator<BlurScene>());
@@ -25,7 +25,7 @@ int main(int argc, char * argv[])
     //    app.setRootScene(t3::Scene::sceneGenerator<ZipTestScene>());
     //    app.setRootScene(t3::Scene::sceneGenerator<MemPoolScene>());
     //    app.rootScene(t3::Scene::sceneGenerator<SimpleSpriteScene>());
-        app.rootScene(t3::Scene::sceneGenerator<ShadowTestScene>());
+    //    app.rootScene(t3::Scene::sceneGenerator<ShadowTestScene>());
 
         t3::setApplication(app);
     #if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_IOS

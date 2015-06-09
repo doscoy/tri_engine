@@ -65,8 +65,8 @@ void SceneGraph::setupView()
         camera()->fieldOfView(),
 		screen.x_,
 		screen.y_,
-		1.0f,
-        100.0f
+		10.0f,
+        70.0f
     );
     
     const auto& view_mtx = camera_->viewMatrix();

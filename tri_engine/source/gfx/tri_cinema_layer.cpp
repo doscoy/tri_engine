@@ -4,6 +4,7 @@
 #include "gfx/tri_cinema_layer.hpp"
 #include "../shader/tri_simple_tex.fsh"
 #include "../shader/tri_simple_tex.vsh"
+#include "../shader/tri_show_depth_tex.fsh"
 #include "gfx/tri_vertex_types.hpp"
 
 
@@ -21,19 +22,27 @@ CinemaLayer::CinemaLayer(
     const int priority
 )   : RenderLayer(name, priority)
     , shader_(nullptr)
-    , default_shader_(nullptr)
+    , color_shader_(nullptr)
+    , depth_shader_(nullptr)
     , texture_(nullptr)
 {
 
-    //  デフォルトシェーダ作成
-    default_shader_ = std::make_shared<Shader>(simple_tex_vsh, simple_tex_fsh);
-    default_shader_->use();
-    default_shader_->bindAttributeLocation(0, "a_position");
-    default_shader_->bindAttributeLocation(1, "a_uv");
-    default_shader_->bindFragmentDataLocation(0, "FragColor");
+    //  デフォルトのカラーシェーダ作成
+    color_shader_ = Shader::create(simple_tex_vsh, simple_tex_fsh);
+    color_shader_->use();
+    color_shader_->bindAttributeLocation(0, "a_position");
+    color_shader_->bindAttributeLocation(1, "a_uv");
+    color_shader_->bindFragmentDataLocation(0, "FragColor");
+
+    //  デフォルトのデプスシェーダ作成
+    depth_shader_ = Shader::create(simple_tex_vsh, show_depth_tex_fsh);
+    depth_shader_->use();
+    depth_shader_->bindAttributeLocation(0, "a_position");
+    depth_shader_->bindAttributeLocation(1, "a_uv");
+    depth_shader_->bindFragmentDataLocation(0, "FragColor");
     
     //  デフォルトシェーダを設定
-    useDefaultShader();
+    useDefaultColorShader();
     
     
     vao_ = cross::RenderSystem::createVertexArrayObject();

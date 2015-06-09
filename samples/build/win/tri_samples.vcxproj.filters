@@ -305,6 +305,12 @@
     <ClCompile Include="..\..\..\cross_sdk\source\common\cross_render_system_gl3.cpp">
       <Filter>cross_sdk\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\dbg\tri_debug_writer.cpp">
+      <Filter>tri_engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\samples\ui_button\ui_button_test.cpp">
+      <Filter>sample\ui_button</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\cross_sdk\include\cross_accelerometer.hpp">
@@ -793,6 +799,12 @@
     <ClInclude Include="..\..\..\cross_sdk\include\cross_glfw.hpp">
       <Filter>cross_sdk\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\include\dbg\tri_debug_writer.hpp">
+      <Filter>tri_engine\include\dbg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\samples\ui_button\ui_button_test.hpp">
+      <Filter>sample\ui_button</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="sample">
@@ -872,6 +884,9 @@
     </Filter>
     <Filter Include="tri_engine\shader">
       <UniqueIdentifier>{a2982c42-e24e-4817-9cf8-b7c2c7a851af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample\ui_button">
+      <UniqueIdentifier>{08270ca9-6352-493c-a1c3-ac7d9d59545a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

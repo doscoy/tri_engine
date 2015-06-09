@@ -14,7 +14,12 @@ namespace t3 {
 ///
 /// サーフェス
 class Surface {
-
+public:
+    enum class Type {
+        DEPTH_ONLY,
+        COLOR_ONLY,
+        COLOR_DEPTH
+    };
 public:
     ///
     /// コンストラクタ
@@ -24,7 +29,8 @@ public:
     /// コンストラクタ
     Surface(
         float width,
-        float height
+        float height,
+        Type type
     );
     
     ///
@@ -77,6 +83,20 @@ public:
     /// 描画後処理
     void postRender();
 
+    ///
+    /// サーフェスのタイプ判定
+    bool isDepthOnly() const {
+        return type_ == Type::DEPTH_ONLY;
+    }
+
+    ///
+    /// カラーのタイプ判定
+    bool isColorOnly() const {
+        return type_ == Type::COLOR_ONLY;
+    }
+
+
+
 private:
 
     ///
@@ -113,6 +133,10 @@ private:
     ///
     /// バインド中フラグ
     bool bound_;
+
+    ///
+    /// サーフェスタイプ
+    Type type_;
 };
 
 

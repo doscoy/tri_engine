@@ -41,6 +41,7 @@
     <ClCompile Include="..\..\..\tri_engine\source\dbg\tri_debug_log_layer.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\dbg\tri_debug_string_buffer.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\dbg\tri_debug_string_layer.cpp" />
+    <ClCompile Include="..\..\..\tri_engine\source\dbg\tri_debug_writer.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\dbg\tri_draw_primitive.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\dbg\tri_print.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\dbg\tri_trace.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="..\..\samples\simple_mesh\simple_mesh.cpp" />
     <ClCompile Include="..\..\samples\simple_primitive\simple_primitive.cpp" />
     <ClCompile Include="..\..\samples\simple_sprite\simple_sprite.cpp" />
+    <ClCompile Include="..\..\samples\ui_button\ui_button_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\cross_sdk\include\cross_accelerometer.hpp" />
@@ -158,6 +160,7 @@
     <ClInclude Include="..\..\..\tri_engine\include\dbg\tri_debug_log_layer.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\dbg\tri_debug_string_buffer.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\dbg\tri_debug_string_layer.hpp" />
+    <ClInclude Include="..\..\..\tri_engine\include\dbg\tri_debug_writer.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\dbg\tri_draw_primitive.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\dbg\tri_print.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\dbg\tri_trace.hpp" />
@@ -277,6 +280,7 @@
     <ClInclude Include="..\..\samples\simple_mesh\simple_mesh.hpp" />
     <ClInclude Include="..\..\samples\simple_primitive\simple_primitive.hpp" />
     <ClInclude Include="..\..\samples\simple_sprite\simple_sprite.hpp" />
+    <ClInclude Include="..\..\samples\ui_button\ui_button_test.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{61F7614C-C50A-465B-8824-FA1FC566FF8A}</ProjectGuid>

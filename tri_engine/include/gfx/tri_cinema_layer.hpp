@@ -52,11 +52,16 @@ public:
     }
     
     ///
-    /// デフォルトのシェーダを使用
-    void useDefaultShader() {
-        shader_ = default_shader_;
+    /// デフォルトのカラーシェーダを使用
+    void useDefaultColorShader() {
+        shader_ = color_shader_;
     }
     
+    ///
+    /// デフォルトのデプスシェーダを使用
+    void useDefaultDepthShader() {
+        shader_ = depth_shader_;
+    }
     ///
     /// シェーダを設定
     void shader(ShaderPtr shader) {
@@ -75,9 +80,10 @@ private:
 private:
     cross::RenderSystem::BufferID vao_;
     VertexBuffer vb_;
-    IndexBuffer ib_;
+
     ShaderPtr shader_;          ///< シェーダ
-    ShaderPtr default_shader_;  ///< デフォルトシェーダ
+    ShaderPtr color_shader_;    ///< カラー値表示シェーダ
+    ShaderPtr depth_shader_;    ///< デプス値表示シェーダ
     TexturePtr texture_;        ///< テクスチャ
 };
   

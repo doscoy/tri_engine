@@ -15,7 +15,7 @@
 #include "simple_mesh2/simple_mesh2.hpp"
 #include "simple_mesh3/simple_mesh3.hpp"
 //#include "mem_pool/mem_pool_test.hpp"
-//#include "ui_button/ui_button_test.hpp"
+#include "ui_button/ui_button_test.hpp"
 //#include "quat/quat_test_scene.hpp"
 //#include "offscreen/offscreen_test.hpp"
 //#include "thread/thread_test.hpp"

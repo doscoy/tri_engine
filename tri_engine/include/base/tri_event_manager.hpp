@@ -306,8 +306,7 @@ public:
         const EventType& in_type
     ) {
         auto handler = std::make_shared<MethodCallbackX1<T,const EventPtr>>(listener, func);
-//        return EventManagerBase::get()->addListener(handler, in_type);
-        return false;
+        return EventManagerBase::get()->addListener(handler, in_type);
     }
     
     
