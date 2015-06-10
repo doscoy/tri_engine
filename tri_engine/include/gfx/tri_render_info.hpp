@@ -63,7 +63,7 @@ public:
 private:
     const Mtx44* transform_;
     const Mtx44* light_mtx_;
-    Mtx44 projection_;
+    Mtx44 projection_mtx_;
     TexturePtr shadow_texture_;
     Mode mode_;
 };

@@ -67,7 +67,7 @@ void TransformNode::render(
     info.lightMatrix(&scene_graph->lightCamera()->viewMatrix());
     info.shadowTexture(scene_graph->shadowTexture());
     info.renderMode(scene_graph->renderMode());
-    info.projMatrix(scene_graph->projection());
+    info.projMatrix(scene_graph->projector()->projectionMatrix());
     entity_->render(info);
 
 }

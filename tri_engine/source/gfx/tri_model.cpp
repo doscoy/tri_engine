@@ -66,9 +66,9 @@ void Model::render(const RenderInfo& info) {
     //  影用行列生成
     Mtx44 shadow_bias;
     Mtx44::makeShadowBias(shadow_bias);
-    
+
     Mtx44 shadow_mtx;
-    shadow_mtx = shadowBias * info.projection() * info.lightMatrix();
+    shadow_mtx = info.lightMatrix() * info.projMatrix() *shadow_bias;
     
     current_shader_->setUniform(SHADER_UNIF_SHADOW_MTX, shadow_mtx);
     

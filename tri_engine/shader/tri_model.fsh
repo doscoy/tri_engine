@@ -31,11 +31,8 @@ out vec4 FragColor;
 
 void main() {
     vec4 tex_color = texture(sampler, v_texture_uv);
-    float shadow = textureProj(shadow_samp, v_shadow_coord);
+    float shadow = textureProj(shadow_samp, v_shadow_coord) * 0.5 + 0.5;
     vec4 color = vec4(tex_color.xyz * shadow, 1.0);
-    if (shadow > 0.99f) {
-        color = vec4(1,0,0,1);
-    }
     FragColor = color;
 }
 

@@ -64,6 +64,7 @@
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_material.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_mesh.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_model.cpp" />
+    <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_projector.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_render_layer.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_render_system.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_scene_graph.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="..\..\..\tri_engine\include\gfx\tri_mesh.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\gfx\tri_model.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\gfx\tri_object.hpp" />
+    <ClInclude Include="..\..\..\tri_engine\include\gfx\tri_projector.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\gfx\tri_renderable.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\gfx\tri_render_layer.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\gfx\tri_scene_graph.hpp" />

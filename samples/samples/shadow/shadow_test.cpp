@@ -49,7 +49,6 @@ public:
         sun_ = t3::Model::create(sun_path.fullpath().c_str());
         
         //  シーングラフ初期化
-
         node_field_ = scene_graph_.createNode();
         node_field_->attachEntity(field_.get());
 
@@ -71,14 +70,15 @@ public:
         light_camera_.position(node_sun_->position());
         light_camera_.targetPosition(node_chara_->position());
         
-        //  シーングラフにライトカメラの行列設定
+        //  シーングラフにカメラ設定
+        scene_graph_.camera(cam_updater_.camera());
         scene_graph_.lightCamera(light_camera_.camera());
-
+        
         //  シャドウ用テクスチャ表示用
         shadow_render_layer_.renderTarget(&surface_);
         scene_graph_.shadowTexture(surface_.depthTexture());
 
-//        showDepth();
+      //  showDepth();
     }
     
     void terminate() {
@@ -131,7 +131,6 @@ private:
     }
     void shadowRender() {
         chara_->cullingMode(cross::RenderSystem::CullingMode::MODE_FRONT);
-        scene_graph_.camera(light_camera_.camera());
         scene_graph_.renderMode(t3::RenderInfo::SHADOW);
         scene_graph_.renderScene();
     }
@@ -142,7 +141,6 @@ private:
     void colorRender() {
         chara_->cullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
         scene_graph_.renderMode(t3::RenderInfo::NORMAL);
-        scene_graph_.camera(cam_updater_.camera());
         scene_graph_.renderScene();
     }
 

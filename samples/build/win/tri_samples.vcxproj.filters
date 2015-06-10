@@ -311,6 +311,9 @@
     <ClCompile Include="..\..\samples\ui_button\ui_button_test.cpp">
       <Filter>sample\ui_button</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\gfx\tri_projector.cpp">
+      <Filter>tri_engine\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\cross_sdk\include\cross_accelerometer.hpp">
@@ -804,6 +807,9 @@
     </ClInclude>
     <ClInclude Include="..\..\samples\ui_button\ui_button_test.hpp">
       <Filter>sample\ui_button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\include\gfx\tri_projector.hpp">
+      <Filter>tri_engine\include\gfx</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

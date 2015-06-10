@@ -10,6 +10,8 @@
 #include "tri_transform_node.hpp"
 #include "tri_scene_node.hpp"
 #include "tri_camera.hpp"
+#include "tri_projector.hpp"
+
 #include "util/tri_uncopyable.hpp"
 
 
@@ -75,11 +77,14 @@ public:
         return camera_;
     }
     
-
+    ///
+    /// シャドウ描画用カメラを設定
     void lightCamera(CameraPtr cam) {
         light_camera_ = cam;
     }
     
+    ///
+    /// シャドウ描画用カメラを取得
     const CameraPtr lightCamera() const {
         return light_camera_;
     }
@@ -121,21 +126,34 @@ public:
         shadow_texture_ = tex;
     }
 
-
+    ///
+    /// 描画モード取得
     RenderInfo::Mode renderMode() const {
         return render_mode_;
     }
     
+    /// 描画モード設定
     void renderMode(
         RenderInfo::Mode mode
     ) {
         render_mode_ = mode;
     }
 
-
-    Mtx44& projectionMtx() {
-        return projection_;
+    ///
+    /// プロジェクターを取得
+    ProjectorPtr& projector() {
+        return projector_;
     }
+
+    ///
+    /// プロジェクターを設定
+    void projector(
+        ProjectorPtr& projector
+    ) {
+        projector_ = projector;
+    }
+
+
 private:
 
     ///
@@ -174,8 +192,8 @@ protected:
     CameraPtr light_camera_;
     
     ///
-    ///
-    Mtx44 projection_;
+    /// プロジェクター
+    ProjectorPtr projector_;
     
     ///
     /// 行列スタック
@@ -189,6 +207,8 @@ protected:
     /// シャドウ用テクスチャ
     TexturePtr shadow_texture_;
 
+    ///
+    /// 描画モード
     RenderInfo::Mode render_mode_;
 };
 
