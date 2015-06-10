@@ -252,7 +252,6 @@ void Shader::setAttribute(
 
 int Shader::getUniformLocation(const char* const name) const {
     int location = cross::RenderSystem::getUniformLocation(handle_, name);
-    T3_ASSERT_MSG(location >= 0, "name = %s", name);
     return location;
 }
 

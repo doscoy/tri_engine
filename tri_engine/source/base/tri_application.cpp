@@ -123,10 +123,10 @@ bool initializeTriEngine(
             static_cast<float>(height)
         )
     );
+    
     T3_TRACE("Initialize TriEngine.\n");
     T3_TRACE("screen width %d  height %d\n", width, height);
-    cross::RenderSystem::setViewport(0, 0, width, height);
-
+    
     
 #if DEBUG
     show_fps_ = true;

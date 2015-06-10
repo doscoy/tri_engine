@@ -86,20 +86,10 @@ void RenderLayer::callDraw() {
     if (render_target_) {
 
         render_target_->preRender();
-/*
-        int x, y, w, h;
-        cross::RenderSystem::getViewport(&x, &y, &w, &h);
-        cross::RenderSystem::setViewport(
-            0, 
-            0, 
-            static_cast<int>(render_target_->width()), 
-            static_cast<int>(render_target_->height())
-        );
-*/
+
         drawLayer();
 
         render_target_->postRender();
- //       cross::RenderSystem::setViewport(x, y, w, h);
    
     } else {
         drawLayer();

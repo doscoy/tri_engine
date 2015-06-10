@@ -28,14 +28,17 @@ namespace t3 {
 
 Model::Model()
     : mesh_(nullptr)
-    , default_shader_()
-    , current_shader_(&default_shader_)
+    , model_shader_()
+    , simple_shader_()
+    , current_shader_(&model_shader_)
     , shadow_cast_(false)
+    , shadow_receive_(false)
+    , culling_mode_(cross::RenderSystem::CullingMode::MODE_BACK)
 {
 
     //  シェーダ作成
-    default_shader_.build(model_vsh, model_fsh);
-
+    model_shader_.build(model_vsh, model_fsh);
+    simple_shader_.build(simple3d_vsh, simple3d_fsh);
 }
 
 
@@ -53,6 +56,9 @@ void Model::render(const RenderInfo& info) {
         if (!shadow_cast_) {
             return;
         }
+        current_shader_ = &simple_shader_;
+    } else {
+        current_shader_ = &model_shader_;
     }
 
     cross::RenderSystem::resetBufferBind();
@@ -62,20 +68,24 @@ void Model::render(const RenderInfo& info) {
     current_shader_->setUniform(SHADER_UNIF_PMV, *info.transform());
     current_shader_->setUniform(SHADER_UNIF_SAMPLER, 0);
     current_shader_->setUniform(SHADER_UNIF_SHADOW_SAMPLER, 1);
+    bool draw_flag = info.renderMode() == RenderInfo::SHADOW ? false : true;
+    current_shader_->setUniform("draw_flag", draw_flag);
+    
+    current_shader_->setUniform("draw_shadow", shadow_receive_);
     
     //  影用行列生成
     Mtx44 shadow_bias;
     Mtx44::makeShadowBias(shadow_bias);
 
     Mtx44 shadow_mtx;
-    shadow_mtx = info.lightMatrix() * info.projMatrix() *shadow_bias;
+    shadow_mtx = shadow_bias * info.projMatrix()* info.lightMatrix();
     
     current_shader_->setUniform(SHADER_UNIF_SHADOW_MTX, shadow_mtx);
     
-    default_shader_.bindAttributeLocation(0, SHADER_ATTR_POSITION);
-    default_shader_.bindAttributeLocation(1, SHADER_ATTR_NORMAL);
-    default_shader_.bindAttributeLocation(2, SHADER_ATTR_UV);
-    default_shader_.bindFragmentDataLocation(0, SHADER_OUT_COLOR);
+    current_shader_->bindAttributeLocation(0, SHADER_ATTR_POSITION);
+    current_shader_->bindAttributeLocation(1, SHADER_ATTR_NORMAL);
+    current_shader_->bindAttributeLocation(2, SHADER_ATTR_UV);
+    current_shader_->bindFragmentDataLocation(0, SHADER_OUT_COLOR);
 
 
     cross::RenderSystem::setActiveTextureUnit(

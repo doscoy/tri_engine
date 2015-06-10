@@ -64,15 +64,21 @@ public:
     }
     
     ///
+    /// サイズ取得
+    const Vec2& size() const {
+        return size_;
+    }
+    
+    ///
     /// 幅取得
     float width() {
-        return width_;
+        return size_.x_;
     }
     
     ///
     /// 高さ取得
     float height() {
-        return height_;
+        return size_.y_;
     }
     
     ///
@@ -113,12 +119,8 @@ private:
 
 private:
     ///
-    /// 幅
-    float width_;
-    
-    ///
-    /// 高さ
-    float height_;
+    /// サイズ
+    Vec2 size_;
     
     ///
     /// フレームバッファ

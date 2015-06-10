@@ -64,10 +64,10 @@ void TransformNode::render(
     
     RenderInfo info;
     info.transform(scene_graph->topMatrix());
-    info.lightMatrix(&scene_graph->lightCamera()->viewMatrix());
+    info.lightMatrix(&scene_graph->shadowCamera()->viewMatrix());
     info.shadowTexture(scene_graph->shadowTexture());
     info.renderMode(scene_graph->renderMode());
-    info.projMatrix(scene_graph->projector()->projectionMatrix());
+    info.projMatrix(scene_graph->shadowProjector()->projectionMatrix());
     entity_->render(info);
 
 }
@@ -95,7 +95,7 @@ void TransformNode::makeTransformMatrix()
     t.translate(position_);
 
 
-    transform_ = s * r * t;
+    transform_ = r * t * s; //s * r * t;
 }
 
 void TransformNode::renderChildren(t3::SceneGraph *scene_graph)

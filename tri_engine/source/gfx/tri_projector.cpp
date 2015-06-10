@@ -1,7 +1,7 @@
 #include "kernel/memory/tri_new.hpp"
 #include "gfx/tri_projector.hpp"
 #include "math/tri_math_util.hpp"
-
+#include "base/tri_director.hpp"
 
 
 namespace t3 {
@@ -26,8 +26,8 @@ Projector::~Projector()
 {}
 
 ProjectorPtr Projector::create() {
-
-    ProjectorPtr projctor(T3_SYS_NEW Projector(Vec2(256,256), 45.0f, 1.0f, 1000.0f));
+    auto& d = Director::instance();
+    ProjectorPtr projctor(T3_SYS_NEW Projector(d.deviceScreenSize(), 45.0f, 1.0f, 1000.0f));
     return projctor;
 }
 

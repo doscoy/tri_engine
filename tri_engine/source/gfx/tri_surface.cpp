@@ -18,8 +18,7 @@ Surface::Surface(
     float width,
     float height,
     Type type
-)   : width_(width)
-    , height_(height)
+)   : size_(width, height)
     , fb_(0)
     , color_texture_()
     , depth_texture_()
@@ -46,8 +45,8 @@ Surface::Surface(
     if (use_depth) {
         depth_texture_ = Texture::create(
             "dsfd",
-            static_cast<int>(width),
-            static_cast<int>(height),
+            static_cast<int>(size_.x_),
+            static_cast<int>(size_.y_),
             cross::RenderSystem::ColorFormat::DEPTH,
             cross::RenderSystem::TypeFormat::UNSIGNED_SHORT,
             nullptr
@@ -95,15 +94,7 @@ Surface::~Surface() {
 
 void Surface::bind() {
 
-    cross::RenderSystem::setDepthTest(true);
-    cross::RenderSystem::setDepthWrite(true);
-    cross::RenderSystem::setDepthTest(true);
-
     cross::RenderSystem::bindFrameBuffer(fb_);
-    cross::RenderSystem::setDepthTest(true);
-    cross::RenderSystem::setDepthWrite(true);
-    cross::RenderSystem::setDepthTest(true);
-
 
     T3_ASSERT(!bound_);
     bound_ = true;
@@ -130,10 +121,8 @@ void Surface::preRender() {
     //  フレームバッファ接続
     bind();
     clear();
-
-    cross::RenderSystem::setDepthTest(true);
-    cross::RenderSystem::setDepthWrite(true);
-
+    auto half = size_.half();
+    cross::RenderSystem::setViewport(half.x_, half.y_, size_.x_, size_.y_);
 }
 
 

@@ -24,9 +24,12 @@ class Mtx44 {
 public:
     ///
     /// 行列初期化
-    Mtx44() {
-        identity();
-    }
+    Mtx44()
+        : x_(1,0,0,0)
+        , y_(0,1,0,0)
+        , z_(0,0,1,0)
+        , w_(0,0,0,1)
+    {}
     
     
     ///
@@ -45,55 +48,68 @@ public:
         const Vec3 b,
         const Vec3 c,
         const Vec3 d
-    ) {
-        x_ = a;
-        y_ = b;
-        z_ = c;
-        w_ = d;
-    }
-
-    ///
-    /// 要素設定
-    void set(
-        std::int_fast8_t x,
-        std::int_fast8_t y,
-        float value
-    ) {
-        float* m = pointer();
-        m[(x * 4) + y] = value;
-    }
-    
+    )   : x_(a)
+        , y_(b)
+        , z_(c)
+        , w_(d)
+    {}
     
     
     ///
     /// 行列同士の掛け算
-    Mtx44 operator * (const Mtx44& rhs) const {
-        return multiply(*this, rhs);
+    Mtx44 operator * (const Mtx44& r) const {
+        return multiply(*this, r);
     }
 
     ///
     /// 行列同士の掛け算
     static Mtx44 multiply(
-        const Mtx44& lhs,
-        const Mtx44& rhs
+        const Mtx44& l,
+        const Mtx44& r
     ) {
         Mtx44 m;
-        m.x_.x_ = lhs.x_.x_ * rhs.x_.x_ + lhs.x_.y_ * rhs.y_.x_ + lhs.x_.z_ * rhs.z_.x_ + lhs.x_.w_ * rhs.w_.x_;
-        m.x_.y_ = lhs.x_.x_ * rhs.x_.y_ + lhs.x_.y_ * rhs.y_.y_ + lhs.x_.z_ * rhs.z_.y_ + lhs.x_.w_ * rhs.w_.y_;
-        m.x_.z_ = lhs.x_.x_ * rhs.x_.z_ + lhs.x_.y_ * rhs.y_.z_ + lhs.x_.z_ * rhs.z_.z_ + lhs.x_.w_ * rhs.w_.z_;
-        m.x_.w_ = lhs.x_.x_ * rhs.x_.w_ + lhs.x_.y_ * rhs.y_.w_ + lhs.x_.z_ * rhs.z_.w_ + lhs.x_.w_ * rhs.w_.w_;
-        m.y_.x_ = lhs.y_.x_ * rhs.x_.x_ + lhs.y_.y_ * rhs.y_.x_ + lhs.y_.z_ * rhs.z_.x_ + lhs.y_.w_ * rhs.w_.x_;
-        m.y_.y_ = lhs.y_.x_ * rhs.x_.y_ + lhs.y_.y_ * rhs.y_.y_ + lhs.y_.z_ * rhs.z_.y_ + lhs.y_.w_ * rhs.w_.y_;
-        m.y_.z_ = lhs.y_.x_ * rhs.x_.z_ + lhs.y_.y_ * rhs.y_.z_ + lhs.y_.z_ * rhs.z_.z_ + lhs.y_.w_ * rhs.w_.z_;
-        m.y_.w_ = lhs.y_.x_ * rhs.x_.w_ + lhs.y_.y_ * rhs.y_.w_ + lhs.y_.z_ * rhs.z_.w_ + lhs.y_.w_ * rhs.w_.w_;
-        m.z_.x_ = lhs.z_.x_ * rhs.x_.x_ + lhs.z_.y_ * rhs.y_.x_ + lhs.z_.z_ * rhs.z_.x_ + lhs.z_.w_ * rhs.w_.x_;
-        m.z_.y_ = lhs.z_.x_ * rhs.x_.y_ + lhs.z_.y_ * rhs.y_.y_ + lhs.z_.z_ * rhs.z_.y_ + lhs.z_.w_ * rhs.w_.y_;
-        m.z_.z_ = lhs.z_.x_ * rhs.x_.z_ + lhs.z_.y_ * rhs.y_.z_ + lhs.z_.z_ * rhs.z_.z_ + lhs.z_.w_ * rhs.w_.z_;
-        m.z_.w_ = lhs.z_.x_ * rhs.x_.w_ + lhs.z_.y_ * rhs.y_.w_ + lhs.z_.z_ * rhs.z_.w_ + lhs.z_.w_ * rhs.w_.w_;
-        m.w_.x_ = lhs.w_.x_ * rhs.x_.x_ + lhs.w_.y_ * rhs.y_.x_ + lhs.w_.z_ * rhs.z_.x_ + lhs.w_.w_ * rhs.w_.x_;
-        m.w_.y_ = lhs.w_.x_ * rhs.x_.y_ + lhs.w_.y_ * rhs.y_.y_ + lhs.w_.z_ * rhs.z_.y_ + lhs.w_.w_ * rhs.w_.y_;
-        m.w_.z_ = lhs.w_.x_ * rhs.x_.z_ + lhs.w_.y_ * rhs.y_.z_ + lhs.w_.z_ * rhs.z_.z_ + lhs.w_.w_ * rhs.w_.z_;
-        m.w_.w_ = lhs.w_.x_ * rhs.x_.w_ + lhs.w_.y_ * rhs.y_.w_ + lhs.w_.z_ * rhs.z_.w_ + lhs.w_.w_ * rhs.w_.w_;
+/*
+        //  S * R * T
+        m.x_.x_ = l.x_.x_ * r.x_.x_ + l.x_.y_ * r.y_.x_ + l.x_.z_ * r.z_.x_ + l.x_.w_ * r.w_.x_;
+        m.x_.y_ = l.x_.x_ * r.x_.y_ + l.x_.y_ * r.y_.y_ + l.x_.z_ * r.z_.y_ + l.x_.w_ * r.w_.y_;
+        m.x_.z_ = l.x_.x_ * r.x_.z_ + l.x_.y_ * r.y_.z_ + l.x_.z_ * r.z_.z_ + l.x_.w_ * r.w_.z_;
+        m.x_.w_ = l.x_.x_ * r.x_.w_ + l.x_.y_ * r.y_.w_ + l.x_.z_ * r.z_.w_ + l.x_.w_ * r.w_.w_;
+      
+        m.y_.x_ = l.y_.x_ * r.x_.x_ + l.y_.y_ * r.y_.x_ + l.y_.z_ * r.z_.x_ + l.y_.w_ * r.w_.x_;
+        m.y_.y_ = l.y_.x_ * r.x_.y_ + l.y_.y_ * r.y_.y_ + l.y_.z_ * r.z_.y_ + l.y_.w_ * r.w_.y_;
+        m.y_.z_ = l.y_.x_ * r.x_.z_ + l.y_.y_ * r.y_.z_ + l.y_.z_ * r.z_.z_ + l.y_.w_ * r.w_.z_;
+        m.y_.w_ = l.y_.x_ * r.x_.w_ + l.y_.y_ * r.y_.w_ + l.y_.z_ * r.z_.w_ + l.y_.w_ * r.w_.w_;
+        
+        m.z_.x_ = l.z_.x_ * r.x_.x_ + l.z_.y_ * r.y_.x_ + l.z_.z_ * r.z_.x_ + l.z_.w_ * r.w_.x_;
+        m.z_.y_ = l.z_.x_ * r.x_.y_ + l.z_.y_ * r.y_.y_ + l.z_.z_ * r.z_.y_ + l.z_.w_ * r.w_.y_;
+        m.z_.z_ = l.z_.x_ * r.x_.z_ + l.z_.y_ * r.y_.z_ + l.z_.z_ * r.z_.z_ + l.z_.w_ * r.w_.z_;
+        m.z_.w_ = l.z_.x_ * r.x_.w_ + l.z_.y_ * r.y_.w_ + l.z_.z_ * r.z_.w_ + l.z_.w_ * r.w_.w_;
+        
+        m.w_.x_ = l.w_.x_ * r.x_.x_ + l.w_.y_ * r.y_.x_ + l.w_.z_ * r.z_.x_ + l.w_.w_ * r.w_.x_;
+        m.w_.y_ = l.w_.x_ * r.x_.y_ + l.w_.y_ * r.y_.y_ + l.w_.z_ * r.z_.y_ + l.w_.w_ * r.w_.y_;
+        m.w_.z_ = l.w_.x_ * r.x_.z_ + l.w_.y_ * r.y_.z_ + l.w_.z_ * r.z_.z_ + l.w_.w_ * r.w_.z_;
+        m.w_.w_ = l.w_.x_ * r.x_.w_ + l.w_.y_ * r.y_.w_ + l.w_.z_ * r.z_.w_ + l.w_.w_ * r.w_.w_;
+*/
+        //  T * R * S
+        m.x_.x_ = l.x_.x_ * r.x_.x_ + l.y_.x_ * r.x_.y_ + l.z_.x_ * r.x_.z_ + l.w_.x_ * r.x_.w_;
+        m.x_.y_ = l.x_.y_ * r.x_.x_ + l.y_.y_ * r.x_.y_ + l.z_.y_ * r.x_.z_ + l.w_.y_ * r.x_.w_;
+        m.x_.z_ = l.x_.z_ * r.x_.x_ + l.y_.z_ * r.x_.y_ + l.z_.z_ * r.x_.z_ + l.w_.z_ * r.x_.w_;
+        m.x_.w_ = l.x_.w_ * r.x_.x_ + l.y_.w_ * r.x_.y_ + l.z_.w_ * r.x_.z_ + l.w_.w_ * r.x_.w_;
+
+        m.y_.x_ = l.x_.x_ * r.y_.x_ + l.y_.x_ * r.y_.y_ + l.z_.x_ * r.y_.z_ + l.w_.x_ * r.y_.w_;
+        m.y_.y_ = l.x_.y_ * r.y_.x_ + l.y_.y_ * r.y_.y_ + l.z_.y_ * r.y_.z_ + l.w_.y_ * r.y_.w_;
+        m.y_.z_ = l.x_.z_ * r.y_.x_ + l.y_.z_ * r.y_.y_ + l.z_.z_ * r.y_.z_ + l.w_.z_ * r.y_.w_;
+        m.y_.w_ = l.x_.w_ * r.y_.x_ + l.y_.w_ * r.y_.y_ + l.z_.w_ * r.y_.z_ + l.w_.w_ * r.y_.w_;
+
+        m.z_.x_ = l.x_.x_ * r.z_.x_ + l.y_.x_ * r.z_.y_ + l.z_.x_ * r.z_.z_ + l.w_.x_ * r.z_.w_;
+        m.z_.y_ = l.x_.y_ * r.z_.x_ + l.y_.y_ * r.z_.y_ + l.z_.y_ * r.z_.z_ + l.w_.y_ * r.z_.w_;
+        m.z_.z_ = l.x_.z_ * r.z_.x_ + l.y_.z_ * r.z_.y_ + l.z_.z_ * r.z_.z_ + l.w_.z_ * r.z_.w_;
+        m.z_.w_ = l.x_.w_ * r.z_.x_ + l.y_.w_ * r.z_.y_ + l.z_.w_ * r.z_.z_ + l.w_.w_ * r.z_.w_;
+
+        m.w_.x_ = l.x_.x_ * r.w_.x_ + l.y_.x_ * r.w_.y_ + l.z_.x_ * r.w_.z_ + l.w_.x_ * r.w_.w_;
+        m.w_.y_ = l.x_.y_ * r.w_.x_ + l.y_.y_ * r.w_.y_ + l.z_.y_ * r.w_.z_ + l.w_.y_ * r.w_.w_;
+        m.w_.z_ = l.x_.z_ * r.w_.x_ + l.y_.z_ * r.w_.y_ + l.z_.z_ * r.w_.z_ + l.w_.z_ * r.w_.w_;
+        m.w_.w_ = l.x_.w_ * r.w_.x_ + l.y_.w_ * r.w_.y_ + l.z_.w_ * r.w_.z_ + l.w_.w_ * r.w_.w_;
         return m;
 
     }
@@ -167,10 +183,10 @@ public:
     ///
     /// 単位行列生成
     void identity() {
-        x_.x_ = 1; x_.y_ = 0; x_.z_ = 0; x_.w_ = 0;
-        y_.x_ = 0; y_.y_ = 1; y_.z_ = 0; y_.w_ = 0;
-        z_.x_ = 0; z_.y_ = 0; z_.z_ = 1; z_.w_ = 0;
-        w_.x_ = 0; w_.y_ = 0; w_.z_ = 0; w_.w_ = 1;
+        x_ = Vec4(1,0,0,0);
+        y_ = Vec4(0,1,0,0);
+        z_ = Vec4(0,0,1,0);
+        w_ = Vec4(0,0,0,1);
     }
     
     ///
@@ -568,7 +584,7 @@ public:
 	float cotangent = std::cos(radians) / sine;
 
     mtx.identity();
-    float aspect = width / height;
+    float aspect =  height / width;
 	mtx.x_.x_ = cotangent / aspect;
 	mtx.y_.y_ = cotangent;
 	mtx.z_.z_ = -(far + near) / deltaZ;
@@ -599,7 +615,7 @@ public:
         m.x_.x_ = 0.5f; m.x_.y_ = 0;    m.x_.z_ = 0;    m.x_.w_ = 0;
         m.y_.x_ = 0;    m.y_.y_ = 0.5f; m.y_.z_ = 0;    m.y_.w_ = 0;
         m.z_.x_ = 0;    m.z_.y_ = 0;    m.z_.z_ = 0.5f; m.z_.w_ = 0;
-        m.w_.x_ = 0.5f;    m.w_.y_ = 0.5f;    m.w_.z_ = 0.5f;    m.w_.w_ = 1.0f;
+        m.w_.x_ = 0.5f; m.w_.y_ = 0.5f; m.w_.z_ = 0.5f; m.w_.w_ = 1.0f;
     }
     
     ///

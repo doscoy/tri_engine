@@ -30,6 +30,7 @@ public:
 
     void screenSize(const Vec2& v) {
         screen_size_ = v;
+        calc_request_ = true;
     }
 
     const Vec2& screenSize() const {
@@ -38,6 +39,7 @@ public:
 
     void near(float n) {
         near_ = n;
+        calc_request_ = true;
     }
 
     float near() const {
@@ -46,6 +48,7 @@ public:
 
     void far(float f) {
         far_ = f;
+        calc_request_ = true;
     }
 
     float far() const {
@@ -54,6 +57,7 @@ public:
 
     void fieldOfView(float fov) {
         fov_ = fov;
+        calc_request_ = true;
     }
 
     float fieldOfView() const {

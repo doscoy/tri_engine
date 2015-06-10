@@ -50,11 +50,7 @@ public:
     
     ///
     /// シーンを描画
-    void renderScene();
-    
-    ///
-    /// シーンを更新
-    void updateScene(tick_t delta_time);
+    void renderScene(RenderInfo::Mode mode);
     
     ///
     /// ノードを検索
@@ -79,14 +75,14 @@ public:
     
     ///
     /// シャドウ描画用カメラを設定
-    void lightCamera(CameraPtr cam) {
-        light_camera_ = cam;
+    void shadowCamera(CameraPtr cam) {
+        shadow_camera_ = cam;
     }
     
     ///
     /// シャドウ描画用カメラを取得
-    const CameraPtr lightCamera() const {
-        return light_camera_;
+    const CameraPtr shadowCamera() const {
+        return shadow_camera_;
     }
     
     
@@ -132,12 +128,6 @@ public:
         return render_mode_;
     }
     
-    /// 描画モード設定
-    void renderMode(
-        RenderInfo::Mode mode
-    ) {
-        render_mode_ = mode;
-    }
 
     ///
     /// プロジェクターを取得
@@ -151,6 +141,20 @@ public:
         ProjectorPtr& projector
     ) {
         projector_ = projector;
+    }
+    
+    ///
+    /// 影用プロジェクターを取得
+    ProjectorPtr& shadowProjector() {
+        return shadow_projector_;
+    }
+
+    ///
+    /// 影用プロジェクターを設定
+    void shadowProjector(
+        ProjectorPtr& projector
+    ) {
+        shadow_projector_ = projector;
     }
 
 
@@ -188,12 +192,16 @@ protected:
     CameraPtr camera_;
     
     ///
-    /// ライトカメラ
-    CameraPtr light_camera_;
+    /// 影用カメラ
+    CameraPtr shadow_camera_;
     
     ///
     /// プロジェクター
     ProjectorPtr projector_;
+    
+    ///
+    /// 影用プロジェクター
+    ProjectorPtr shadow_projector_;
     
     ///
     /// 行列スタック

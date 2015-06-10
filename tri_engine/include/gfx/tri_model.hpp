@@ -50,37 +50,68 @@ public:
         mesh_ = mesh;
     }
     
+    ///
+    /// メッシュを取得
     Mesh* mesh() {
         return mesh_;
     }
     
+    ///
+    /// メッシュを取得
     const Mesh* mesh() const {
         return mesh_;
     }
 
-
+    ///
+    /// カリングモードを取得
     cross::RenderSystem::CullingMode cullingMode() const {
         return culling_mode_;
     }
     
+    ///
+    /// カリングモードを設定
     void cullingMode(
         cross::RenderSystem::CullingMode mode
     ) {
         culling_mode_ = mode;
     }
 
-
+    ///
+    /// 影を落とすオブジェクトか判定
     bool isShadowCaster() const {
         return shadow_cast_;
     }
 
+    ///
+    /// このモデルの影を落とすように設定する
     void enableShadowCast() {
         shadow_cast_ = true;
     }
     
+    ///
+    /// このモデルの影を落とさないように設定する
     void disableShadowCast() {
         shadow_cast_ = false;
     }
+    
+    ///
+    /// 他のモデルの影をこのモデルに落とすか判定
+    bool isShadowReceiver() const {
+        return shadow_receive_;
+    }
+    
+    ///
+    /// 影をこのモデルに落とすよう設定
+    void enalbeShadowReceive() {
+        shadow_receive_ = true;
+    }
+    
+    ///
+    /// 影をこのモデルに落とさないよう設定
+    void disableShadowReceive() {
+        shadow_receive_ = false;
+    }
+    
 
 public:
     ///
@@ -95,8 +126,8 @@ private:
     
     ///
     /// デフォルトシェーダ
-    Shader default_shader_;
-    
+    Shader model_shader_;
+    Shader simple_shader_;
     ///
     /// 使用しているシェーダ
     Shader* current_shader_;
@@ -108,6 +139,10 @@ private:
     ///
     /// 影を落とすオブジェクトフラグ
     bool shadow_cast_;
+    
+    ///
+    /// 影を落とされるオブジェクトフラグ
+    bool shadow_receive_;
 };
 
 

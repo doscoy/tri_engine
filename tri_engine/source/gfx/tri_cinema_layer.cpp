@@ -49,14 +49,20 @@ CinemaLayer::CinemaLayer(
     cross::RenderSystem::bindVertexArrayObject(vao_);
 
     vb_.bind();
-    
-    VertexP2T varray[] = {
-    //     x, y,     u,  v
-        {{0, 0}, {0, 0}},
-        {{0,  1}, {0, 1}},
-        {{ 1, 0}, {1, 0}},
-        {{ 1,  1}, {1, 1}}
-    };
+    float a = 0.0f;
+    float b = 1.0f;
+    VertexP2T varray[4];
+    varray[0].position_ = t3::Vec2(a,a);
+    varray[0].uv_ = t3::Vec2(0,0);
+
+    varray[1].position_ = t3::Vec2(b,a);
+    varray[1].uv_ = t3::Vec2(1,0);
+
+    varray[2].position_ = t3::Vec2(a,b);
+    varray[2].uv_ = t3::Vec2(0,1);
+
+    varray[3].position_ = t3::Vec2(b,b);
+    varray[3].uv_ = t3::Vec2(1,1);
     
     cross::RenderSystem::setupBufferData(
         cross::RenderSystem::BufferType::TYPE_VERTEX,
@@ -114,7 +120,7 @@ void CinemaLayer::drawLayer() {
         return;
     }
     
-    cross::RenderSystem::setViewport(-256, -256, 512, 512);
+//    cross::RenderSystem::setViewport(0, 0, 640, 480);
     
     cross::RenderSystem::resetBufferBind();
     cross::RenderSystem::bindVertexArrayObject(vao_);

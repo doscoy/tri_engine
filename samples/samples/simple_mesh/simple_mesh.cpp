@@ -54,10 +54,9 @@ public:
     
 private:
     void layerUpdate() {
-        scene_graph_.updateScene(t3::frameSec<60>());
     }
     void layerRender() {
-        scene_graph_.renderScene();
+        scene_graph_.renderScene(t3::RenderInfo::NORMAL);
     }
 
 

@@ -197,6 +197,9 @@
 		3AC8671E1B1F32DA00AADEA8 /* cross_render_system_gl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8671C1B1F32DA00AADEA8 /* cross_render_system_gl3.cpp */; };
 		3AC867201B1F339F00AADEA8 /* cross_glfw.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3AC8671F1B1F339F00AADEA8 /* cross_glfw.hpp */; };
 		3AD240241B2719B600EE9B6B /* tri_render_info.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3AD240231B2719B600EE9B6B /* tri_render_info.hpp */; };
+		3AD240271B286D0700EE9B6B /* tri_projector.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3AD240261B286D0700EE9B6B /* tri_projector.hpp */; };
+		3AD240291B286D3000EE9B6B /* tri_projector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD240281B286D3000EE9B6B /* tri_projector.cpp */; };
+		3AD2402A1B286D3000EE9B6B /* tri_projector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD240281B286D3000EE9B6B /* tri_projector.cpp */; };
 		3ADC6DEB1B0228AD0023A7D4 /* tri_view_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC6DEA1B0228AD0023A7D4 /* tri_view_controller.mm */; };
 		3AE4040C1B228BBB0052362D /* tri_text_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4040B1B228BBB0052362D /* tri_text_loader.cpp */; };
 		3AE4040D1B228BBB0052362D /* tri_text_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4040B1B228BBB0052362D /* tri_text_loader.cpp */; };
@@ -494,6 +497,8 @@
 		3AD240211B27100A00EE9B6B /* tri_model.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_model.vsh; sourceTree = "<group>"; };
 		3AD240221B27100A00EE9B6B /* tri_model.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_model.fsh; sourceTree = "<group>"; };
 		3AD240231B2719B600EE9B6B /* tri_render_info.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_render_info.hpp; sourceTree = "<group>"; };
+		3AD240261B286D0700EE9B6B /* tri_projector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_projector.hpp; sourceTree = "<group>"; };
+		3AD240281B286D3000EE9B6B /* tri_projector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_projector.cpp; sourceTree = "<group>"; };
 		3AD4071D19AF9F1B00762711 /* tri_bytesize.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_bytesize.hpp; sourceTree = "<group>"; };
 		3ADC6DE91B0228AD0023A7D4 /* tri_view_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_view_controller.hpp; sourceTree = "<group>"; };
 		3ADC6DEA1B0228AD0023A7D4 /* tri_view_controller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tri_view_controller.mm; sourceTree = "<group>"; };
@@ -664,6 +669,7 @@
 		3AA7ED5F19A0F60600CEB23A /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				3AD240281B286D3000EE9B6B /* tri_projector.cpp */,
 				3AA7ED6019A0F60600CEB23A /* tri_camera.cpp */,
 				3AA7ED6119A0F60600CEB23A /* tri_camera_updater.cpp */,
 				3AA7ED6219A0F60600CEB23A /* tri_draw_layer.cpp */,
@@ -885,6 +891,7 @@
 		3AA7EE2D19A0F61700CEB23A /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				3AD240261B286D0700EE9B6B /* tri_projector.hpp */,
 				3AA7EE2E19A0F61700CEB23A /* tri_camera.hpp */,
 				3AA7EE2F19A0F61700CEB23A /* tri_camera_updater.hpp */,
 				3AA7EE3019A0F61700CEB23A /* tri_color.hpp */,
@@ -1158,6 +1165,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AD240271B286D0700EE9B6B /* tri_projector.hpp in Headers */,
 				3AE4040F1B228C1D0052362D /* tri_text_loader.hpp in Headers */,
 				3AC867201B1F339F00AADEA8 /* cross_glfw.hpp in Headers */,
 				3AD240241B2719B600EE9B6B /* tri_render_info.hpp in Headers */,
@@ -1298,6 +1306,7 @@
 				3AA7EEC219A101F300CEB23A /* tri_collider.cpp in Sources */,
 				3AA7EEC319A101F300CEB23A /* tri_collision.cpp in Sources */,
 				3AA7EEC419A101F300CEB23A /* tri_collision_events.cpp in Sources */,
+				3AD240291B286D3000EE9B6B /* tri_projector.cpp in Sources */,
 				3AA7EEC519A101F300CEB23A /* tri_collision_manager.cpp in Sources */,
 				047CEA5319DC4C950015B46F /* tri_cinema_layer.cpp in Sources */,
 				3AA7EEC619A101F300CEB23A /* tri_frustum.cpp in Sources */,
@@ -1401,6 +1410,7 @@
 				3AC2EE8C1B085C1A00F73048 /* tri_texture_factory.cpp in Sources */,
 				3AC2EE8D1B085C1A00F73048 /* tri_transform_node.cpp in Sources */,
 				3AC2EE8E1B085C1A00F73048 /* tri_surface.cpp in Sources */,
+				3AD2402A1B286D3000EE9B6B /* tri_projector.cpp in Sources */,
 				3AC2EE8F1B085C1A00F73048 /* tri_cinema_layer.cpp in Sources */,
 				3AC2EE901B085C1A00F73048 /* tri_color.cpp in Sources */,
 				3AC2EE911B085C1A00F73048 /* tri_gui_button.cpp in Sources */,

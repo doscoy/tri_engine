@@ -30,8 +30,8 @@ void MatrixStack::popMatrix()
 void MatrixStack::multMatrixLocal(
     const Mtx44& mtx
 ) {
-    top_ = mtx * top_;
-//    top_ = top_ * mtx;
+//    top_ = mtx * top_;
+    top_ = top_ * mtx;
 }
 
 

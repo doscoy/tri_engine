@@ -15,8 +15,7 @@ public:
         , field_()
         , cam_updater_()
         , light_camera_()
-        , surface_(256, 256, t3::Surface::Type::COLOR_DEPTH)
-        , show_color_(true)
+        , surface_(512, 1024, t3::Surface::Type::DEPTH_ONLY)
     {}
     
     ~SceneContext()
@@ -26,12 +25,10 @@ public:
     void initialize(){
         //  レイヤー準備
         shadow_render_layer_.name("ShadowTestScene::shadow_render_layer_");
-        shadow_render_layer_.setUpdateCallback<ShadowTestScene::SceneContext>(this, &SceneContext::shadowUpdate);
         shadow_render_layer_.setRenderCallback<ShadowTestScene::SceneContext>(this, &SceneContext::shadowRender);
 
         //  レイヤー準備
         final_layer_.name("ShadowTestScene::final_layer_");
-        final_layer_.setUpdateCallback<ShadowTestScene::SceneContext>(this, &SceneContext::colorUpdate);
         final_layer_.setRenderCallback<ShadowTestScene::SceneContext>(this, &SceneContext::colorRender);
 
 
@@ -43,7 +40,7 @@ public:
         //  フィールド作成
         t3::FilePath field_path("field.obj");
         field_ = t3::Model::create(field_path.fullpath().c_str());
-
+        field_->enalbeShadowReceive();
         //  太陽作成
         t3::FilePath sun_path("sun.obj");
         sun_ = t3::Model::create(sun_path.fullpath().c_str());
@@ -57,7 +54,7 @@ public:
 
         node_sun_ = scene_graph_.createNode();
         node_sun_->attachEntity(sun_.get());
-        node_sun_->position(12,22,0);
+        node_sun_->position(-12,22,-10);
 
 
         //  カメラ位置調整
@@ -72,13 +69,14 @@ public:
         
         //  シーングラフにカメラ設定
         scene_graph_.camera(cam_updater_.camera());
-        scene_graph_.lightCamera(light_camera_.camera());
+        scene_graph_.shadowCamera(light_camera_.camera());
         
         //  シャドウ用テクスチャ表示用
         shadow_render_layer_.renderTarget(&surface_);
         scene_graph_.shadowTexture(surface_.depthTexture());
-
-      //  showDepth();
+        scene_graph_.shadowProjector()->screenSize(surface_.size());
+        cinema_.texture(surface_.depthTexture());
+        cinema_.useDefaultDepthShader();
     }
     
     void terminate() {
@@ -88,7 +86,7 @@ public:
     void update(t3::tick_t delta_time) {
         static float angle;
         angle += 0.25f;
-        node_field_->rotationY(angle);
+        node_chara_->rotationY(angle);
         
         
         auto pointing = t3::Director::instance().input().pointing();
@@ -99,49 +97,23 @@ public:
             }
         }
 
-        if (pointing.isRelease()) {
-            if (show_color_) {
-  //              showDepth();
-            } else {
-  //              showColor();
-            }
-        }
     }
 
     void suspend(t3::tick_t delta_time) {
     
     }
-    
-    void showColor() {
-        cinema_.texture(surface_.colorTexture());
-        cinema_.useDefaultColorShader();
-        show_color_ = true;
-    }
-    
-    void showDepth() {
-        cinema_.texture(surface_.depthTexture());
-        cinema_.useDefaultDepthShader();
-        show_color_ = false;
-    }
+
 
     
 private:
-    void shadowUpdate() {
-        scene_graph_.updateScene(t3::frameSec<60>());
-    }
     void shadowRender() {
-        chara_->cullingMode(cross::RenderSystem::CullingMode::MODE_FRONT);
-        scene_graph_.renderMode(t3::RenderInfo::SHADOW);
-        scene_graph_.renderScene();
+        chara_->cullingMode(cross::RenderSystem::CullingMode::MODE_FRONT);        
+        scene_graph_.renderScene(t3::RenderInfo::SHADOW);
     }
 
-    void colorUpdate() {
-//        scene_graph_.updateScene(t3::frameSec<60>());
-    }
     void colorRender() {
         chara_->cullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
-        scene_graph_.renderMode(t3::RenderInfo::NORMAL);
-        scene_graph_.renderScene();
+        scene_graph_.renderScene(t3::RenderInfo::NORMAL);
     }
 
 
@@ -161,7 +133,6 @@ private:
     t3::TransformNodePtr node_chara_;
     t3::TransformNodePtr node_sun_;
     t3::Surface surface_;
-    bool show_color_;
 };
 
 

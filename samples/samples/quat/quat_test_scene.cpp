@@ -92,7 +92,7 @@ private:
         
         t3::Mtx44 mtx = transform * view_mtx * projection;
         
-        model_->render(mtx);
+//        model_->render(mtx);
 
     }
 

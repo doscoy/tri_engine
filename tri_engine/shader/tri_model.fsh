@@ -27,13 +27,20 @@ in vec2 v_texture_uv;
 
 uniform sampler2D sampler;
 uniform sampler2DShadow shadow_samp;
+uniform bool draw_flag;
+uniform bool draw_shadow;
 out vec4 FragColor;
 
 void main() {
-    vec4 tex_color = texture(sampler, v_texture_uv);
-    float shadow = textureProj(shadow_samp, v_shadow_coord) * 0.5 + 0.5;
-    vec4 color = vec4(tex_color.xyz * shadow, 1.0);
-    FragColor = color;
+    if (draw_flag) {
+        vec4 tex_color = texture(sampler, v_texture_uv);
+        if (draw_shadow) {
+            float shadow = textureProj(shadow_samp, v_shadow_coord) * 0.5 + 0.5;
+            FragColor = vec4(tex_color.xyz * shadow, 1.0);
+        } else {
+            FragColor = tex_color;
+        }
+    }
 }
 
 
