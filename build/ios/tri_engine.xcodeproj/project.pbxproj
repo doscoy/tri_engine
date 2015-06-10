@@ -196,6 +196,7 @@
 		3AC8671D1B1F32DA00AADEA8 /* cross_os_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8671B1B1F32DA00AADEA8 /* cross_os_glfw.cpp */; };
 		3AC8671E1B1F32DA00AADEA8 /* cross_render_system_gl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8671C1B1F32DA00AADEA8 /* cross_render_system_gl3.cpp */; };
 		3AC867201B1F339F00AADEA8 /* cross_glfw.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3AC8671F1B1F339F00AADEA8 /* cross_glfw.hpp */; };
+		3AD240241B2719B600EE9B6B /* tri_render_info.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3AD240231B2719B600EE9B6B /* tri_render_info.hpp */; };
 		3ADC6DEB1B0228AD0023A7D4 /* tri_view_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC6DEA1B0228AD0023A7D4 /* tri_view_controller.mm */; };
 		3AE4040C1B228BBB0052362D /* tri_text_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4040B1B228BBB0052362D /* tri_text_loader.cpp */; };
 		3AE4040D1B228BBB0052362D /* tri_text_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4040B1B228BBB0052362D /* tri_text_loader.cpp */; };
@@ -489,6 +490,10 @@
 		3AC8671B1B1F32DA00AADEA8 /* cross_os_glfw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_os_glfw.cpp; sourceTree = "<group>"; };
 		3AC8671C1B1F32DA00AADEA8 /* cross_render_system_gl3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_render_system_gl3.cpp; sourceTree = "<group>"; };
 		3AC8671F1B1F339F00AADEA8 /* cross_glfw.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_glfw.hpp; sourceTree = "<group>"; };
+		3AD240201B27100A00EE9B6B /* tri_show_depth_tex.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_show_depth_tex.fsh; sourceTree = "<group>"; };
+		3AD240211B27100A00EE9B6B /* tri_model.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_model.vsh; sourceTree = "<group>"; };
+		3AD240221B27100A00EE9B6B /* tri_model.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_model.fsh; sourceTree = "<group>"; };
+		3AD240231B2719B600EE9B6B /* tri_render_info.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_render_info.hpp; sourceTree = "<group>"; };
 		3AD4071D19AF9F1B00762711 /* tri_bytesize.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_bytesize.hpp; sourceTree = "<group>"; };
 		3ADC6DE91B0228AD0023A7D4 /* tri_view_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_view_controller.hpp; sourceTree = "<group>"; };
 		3ADC6DEA1B0228AD0023A7D4 /* tri_view_controller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tri_view_controller.mm; sourceTree = "<group>"; };
@@ -783,7 +788,7 @@
 				3AA7EDFB19A0F61700CEB23A /* base */,
 				3AA7EE0B19A0F61700CEB23A /* dbg */,
 				3AA7EE1D19A0F61700CEB23A /* geometry */,
-				3AA7EE2D19A0F61700CEB23A /* fraphics */,
+				3AA7EE2D19A0F61700CEB23A /* graphics */,
 				3AA7EE4919A0F61700CEB23A /* gui */,
 				3AA7EE4E19A0F61700CEB23A /* kernel */,
 				3AA7EE6019A0F61700CEB23A /* math */,
@@ -877,7 +882,7 @@
 			path = geometry;
 			sourceTree = "<group>";
 		};
-		3AA7EE2D19A0F61700CEB23A /* fraphics */ = {
+		3AA7EE2D19A0F61700CEB23A /* graphics */ = {
 			isa = PBXGroup;
 			children = (
 				3AA7EE2E19A0F61700CEB23A /* tri_camera.hpp */,
@@ -910,8 +915,9 @@
 				3A6FC4B419B61FEF00970B80 /* tri_index_buffer.hpp */,
 				04391BCF19BAE280006FFF38 /* tri_surface.hpp */,
 				047CEA5119DC4B270015B46F /* tri_cinema_layer.hpp */,
+				3AD240231B2719B600EE9B6B /* tri_render_info.hpp */,
 			);
-			name = fraphics;
+			name = graphics;
 			path = gfx;
 			sourceTree = "<group>";
 		};
@@ -1038,6 +1044,9 @@
 		3AA7EE9119A0F62800CEB23A /* shader */ = {
 			isa = PBXGroup;
 			children = (
+				3AD240201B27100A00EE9B6B /* tri_show_depth_tex.fsh */,
+				3AD240211B27100A00EE9B6B /* tri_model.vsh */,
+				3AD240221B27100A00EE9B6B /* tri_model.fsh */,
 				3A2BC7431B1A90AB00F889BC /* tri_simple3d.vsh */,
 				3A2BC7441B1A90AB00F889BC /* tri_simple3d.fsh */,
 				049757EB19F39F2300D1AF3C /* tri_df_font.fsh */,
@@ -1151,6 +1160,7 @@
 			files = (
 				3AE4040F1B228C1D0052362D /* tri_text_loader.hpp in Headers */,
 				3AC867201B1F339F00AADEA8 /* cross_glfw.hpp in Headers */,
+				3AD240241B2719B600EE9B6B /* tri_render_info.hpp in Headers */,
 				3AE404131B25ED750052362D /* tri_debug_writer.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

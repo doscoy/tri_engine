@@ -38,7 +38,8 @@ public:
         //  キャラクタ作成
         t3::FilePath char_path("character_chr_old.obj");
         chara_ = t3::Model::create(char_path.fullpath().c_str());
-
+        chara_->enableShadowCast();
+        
         //  フィールド作成
         t3::FilePath field_path("field.obj");
         field_ = t3::Model::create(field_path.fullpath().c_str());
@@ -69,12 +70,15 @@ public:
         //  太陽の位置からキャラを見る
         light_camera_.position(node_sun_->position());
         light_camera_.targetPosition(node_chara_->position());
-
+        
+        //  シーングラフにライトカメラの行列設定
+        scene_graph_.lightCamera(light_camera_.camera());
 
         //  シャドウ用テクスチャ表示用
         shadow_render_layer_.renderTarget(&surface_);
-        
- //       showColor();
+        scene_graph_.shadowTexture(surface_.depthTexture());
+
+//        showDepth();
     }
     
     void terminate() {
@@ -97,9 +101,9 @@ public:
 
         if (pointing.isRelease()) {
             if (show_color_) {
-                showDepth();
+  //              showDepth();
             } else {
-                showColor();
+  //              showColor();
             }
         }
     }
@@ -126,7 +130,9 @@ private:
         scene_graph_.updateScene(t3::frameSec<60>());
     }
     void shadowRender() {
+        chara_->cullingMode(cross::RenderSystem::CullingMode::MODE_FRONT);
         scene_graph_.camera(light_camera_.camera());
+        scene_graph_.renderMode(t3::RenderInfo::SHADOW);
         scene_graph_.renderScene();
     }
 
@@ -134,6 +140,8 @@ private:
 //        scene_graph_.updateScene(t3::frameSec<60>());
     }
     void colorRender() {
+        chara_->cullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
+        scene_graph_.renderMode(t3::RenderInfo::NORMAL);
         scene_graph_.camera(cam_updater_.camera());
         scene_graph_.renderScene();
     }

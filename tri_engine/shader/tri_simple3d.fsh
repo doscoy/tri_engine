@@ -8,8 +8,7 @@ varying lowp vec2 v_texture_uv;
 uniform sampler2D sampler;
 
 
-void main(void)
-{
+void main() {
     gl_FragColor = texture2D(sampler, v_texture_uv);
 }
 
@@ -23,13 +22,11 @@ const char* simple3d_fsh = R"(
 
 #version 400
 in vec2 v_texture_uv;
-flat in float power;
 uniform sampler2D sampler;
 out vec4 FragColor;
 
-void main(void)
-{
-    FragColor = texture(sampler, v_texture_uv) * power;
+void main() {
+    FragColor = texture(sampler, v_texture_uv);
 }
 
 

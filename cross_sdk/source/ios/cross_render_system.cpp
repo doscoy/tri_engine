@@ -471,21 +471,22 @@ void RenderSystem::clearBuffer(
 void RenderSystem::setCullingMode(
     RenderSystem::CullingMode mode
 ) {
-    int cull_flag = 0;
     switch (mode) {
         case RenderSystem::CullingMode::MODE_BACK:
-            cull_flag = GL_BACK;
+            setCulling(true);
+            glCullFace(GL_BACK);
             break;
             
         case RenderSystem::CullingMode::MODE_FRONT:
-            cull_flag = GL_FRONT;
+            setCulling(true);
+            glCullFace(GL_FRONT);
             break;
             
         default:
+            setCulling(false);
             break;
     }
     
-    glCullFace(cull_flag);
     CROSS_GL_ASSERT();
 }
 

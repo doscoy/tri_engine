@@ -75,6 +75,16 @@ public:
         return camera_;
     }
     
+
+    void lightCamera(CameraPtr cam) {
+        light_camera_ = cam;
+    }
+    
+    const CameraPtr lightCamera() const {
+        return light_camera_;
+    }
+    
+    
     ///
     /// ルートノード取得
     const TransformNodePtr getRootNode() const {
@@ -99,6 +109,33 @@ public:
     /// ノード生成
     TransformNodePtr createNode();
     
+    ///
+    /// 影用テクスチャ
+    TexturePtr shadowTexture() {
+        return shadow_texture_;
+    }
+    
+    ///
+    /// 影用テクスチャ
+    void shadowTexture(TexturePtr tex) {
+        shadow_texture_ = tex;
+    }
+
+
+    RenderInfo::Mode renderMode() const {
+        return render_mode_;
+    }
+    
+    void renderMode(
+        RenderInfo::Mode mode
+    ) {
+        render_mode_ = mode;
+    }
+
+
+    Mtx44& projectionMtx() {
+        return projection_;
+    }
 private:
 
     ///
@@ -119,6 +156,8 @@ private:
         node_map_.erase(id);
         return root_->removeChild(id);
     }
+    
+
 
 
 protected:
@@ -131,6 +170,14 @@ protected:
     CameraPtr camera_;
     
     ///
+    /// ライトカメラ
+    CameraPtr light_camera_;
+    
+    ///
+    ///
+    Mtx44 projection_;
+    
+    ///
     /// 行列スタック
     MatrixStack matrix_stack_;
     
@@ -138,6 +185,11 @@ protected:
     /// 子ノード
     SceneNodeMap node_map_;
     
+    ///
+    /// シャドウ用テクスチャ
+    TexturePtr shadow_texture_;
+
+    RenderInfo::Mode render_mode_;
 };
 
 

@@ -42,7 +42,7 @@ public:
     
     ///
     /// 描画
-    void render(const Mtx44& transform) override;
+    void render(const RenderInfo& info) override;
 
     ///
     /// メッシュを設定
@@ -56,6 +56,30 @@ public:
     
     const Mesh* mesh() const {
         return mesh_;
+    }
+
+
+    cross::RenderSystem::CullingMode cullingMode() const {
+        return culling_mode_;
+    }
+    
+    void cullingMode(
+        cross::RenderSystem::CullingMode mode
+    ) {
+        culling_mode_ = mode;
+    }
+
+
+    bool isShadowCaster() const {
+        return shadow_cast_;
+    }
+
+    void enableShadowCast() {
+        shadow_cast_ = true;
+    }
+    
+    void disableShadowCast() {
+        shadow_cast_ = false;
     }
 
 public:
@@ -76,6 +100,14 @@ private:
     ///
     /// 使用しているシェーダ
     Shader* current_shader_;
+
+    ///
+    /// カリング設定
+    cross::RenderSystem::CullingMode culling_mode_;
+
+    ///
+    /// 影を落とすオブジェクトフラグ
+    bool shadow_cast_;
 };
 
 

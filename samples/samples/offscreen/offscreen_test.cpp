@@ -8,7 +8,7 @@ class OffscreenTestScene::SceneContext {
 
 public:
     SceneContext()
-        : surface_(t3::Director::screenSize().x_, t3::Director::screenSize().y_)
+        : surface_(t3::Director::screenSize().x_, t3::Director::screenSize().y_, t3::Surface::Type::COLOR_DEPTH)
     {}
     
     ~SceneContext()
@@ -99,7 +99,7 @@ public:
         cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
 
         cross::RenderSystem::setDepthTestMode(cross::RenderSystem::DepthTestMode::MODE_LESS);
-        model_->render(mtx);
+//        model_->render(mtx);
     }
 
     void spriteInit() {

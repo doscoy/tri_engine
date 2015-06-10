@@ -593,6 +593,14 @@ public:
         return m;
     }
     
+    static void makeShadowBias(
+        Mtx44& m
+    ) {
+        m.x_.x_ = 0.5f; m.x_.y_ = 0;    m.x_.z_ = 0;    m.x_.w_ = 0.5f;
+        m.y_.x_ = 0;    m.y_.y_ = 0.5f; m.y_.z_ = 0;    m.y_.w_ = 0.5f;
+        m.z_.x_ = 0;    m.z_.y_ = 0;    m.z_.z_ = 0.5f; m.z_.w_ = 0.5f;
+        m.w_.x_ = 0;    m.w_.y_ = 0;    m.w_.z_ = 0;    m.w_.w_ = 1.0f;
+    }
     
     ///
     /// フラスタム行列生成

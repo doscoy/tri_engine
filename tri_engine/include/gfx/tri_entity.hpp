@@ -7,7 +7,7 @@
 #define TRI_ENTITY_HPP_INCLUDED
 
 //  include
-#include "math/tri_matrix.hpp"
+#include "gfx/tri_render_info.hpp"
 
 
 namespace t3 {
@@ -35,7 +35,7 @@ public:
     
     ///
     /// 描画
-    virtual void render(const Mtx44&){}
+    virtual void render(const RenderInfo&){}
 };
 
 

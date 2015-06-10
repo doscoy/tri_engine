@@ -289,6 +289,7 @@ public:
     enum class CullingMode {
         MODE_FRONT,     ///< 前面カリング
         MODE_BACK,      ///< 背面カリング
+        MODE_NONE,      ///< カリングしない
     };
     
     ///

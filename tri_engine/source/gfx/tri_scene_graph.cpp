@@ -15,7 +15,17 @@ SceneGraph::SceneGraph()
     , matrix_stack_()
     , node_map_()
 {
+    auto& d = t3::Director::instance();
+    auto& screen = d.deviceScreenSize();
+    
     root_ = TransformNode::create("root");
+    projection_ = t3::Mtx44::getPerspective(
+        camera()->fieldOfView(),
+		screen.x_,
+		screen.y_,
+		1.0f,
+        90.0f
+    );
 }
 
 
@@ -61,16 +71,13 @@ void SceneGraph::setupView()
 	);
 
 
-    auto proj = t3::Mtx44::getPerspective(
-        camera()->fieldOfView(),
-		screen.x_,
-		screen.y_,
-		10.0f,
-        70.0f
-    );
     
-    const auto& view_mtx = camera_->viewMatrix();
-    auto view_projection = view_mtx * proj;
+    auto use_cam = camera_;
+    if (render_mode_ == RenderInfo::SHADOW) {
+        use_cam = light_camera_;
+    }
+    const Mtx44& view_mtx = use_cam->viewMatrix();
+    auto view_projection = view_mtx * projection_;
     pushAndSetMatrix(view_projection);
 }
 

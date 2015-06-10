@@ -52,11 +52,24 @@ void TransformNode::onUpdate(
 void TransformNode::render(
     SceneGraph* scene_graph
 ) {
-    if (hasEntity()
-        && entity_->isRenderable()) {
-    
-        entity_->render(*scene_graph->topMatrix());
+    if (!hasEntity()) {
+        //  エンティティ未登録
+        return;
     }
+    
+    if (!entity_->isRenderable()) {
+        //  描画エンティティじゃない
+        return;
+    }
+    
+    RenderInfo info;
+    info.transform(scene_graph->topMatrix());
+    info.lightMatrix(&scene_graph->lightCamera()->viewMatrix());
+    info.shadowTexture(scene_graph->shadowTexture());
+    info.renderMode(scene_graph->renderMode());
+    info.projMatrix(scene_graph->projection());
+    entity_->render(info);
+
 }
 
 const Mtx44* TransformNode::getTransformMatrix() {
