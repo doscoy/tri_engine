@@ -49,7 +49,6 @@ Model::~Model() {
 
 
 
-//void Model::render(const Mtx44& transform) {
 void Model::render(const RenderInfo& info) {
 
     if (info.renderMode() == RenderInfo::SHADOW) {

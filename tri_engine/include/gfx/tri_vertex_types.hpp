@@ -27,8 +27,7 @@ struct VertexP2CT {
 ///
 /// 頂点定義.
 /// 座標とUV値を持つ
-struct VertexP2T
-{
+struct VertexP2T {
     Vec2 position_;
     Vec2 uv_;
 };

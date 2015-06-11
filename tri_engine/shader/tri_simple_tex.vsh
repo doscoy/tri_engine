@@ -19,8 +19,8 @@ constexpr char* simple_tex_vsh = R"(
 
 #version 400
 
-in vec2 a_position;
-in vec2 a_uv;
+layout (location = 0) in vec2 a_position;
+layout (location = 1) in vec2 a_uv;
 out vec2 v_texture_uv;
 
 void main(void)

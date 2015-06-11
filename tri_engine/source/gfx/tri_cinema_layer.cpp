@@ -13,55 +13,44 @@ namespace t3 {
 
 
 CinemaLayer::CinemaLayer()
-    : CinemaLayer("cinema", RenderLayer::PRIORITY_APP_FRONT1)
+    : CinemaLayer(Vec2(-1,-1), Vec2(1,1), "cinema", RenderLayer::PRIORITY_APP_FRONT1)
 {}
 
 
 CinemaLayer::CinemaLayer(
+    const Vec2 min_pos,
+    const Vec2 max_pos,
     const String& name,
     const int priority
 )   : RenderLayer(name, priority)
+    , vao_()
+    , vb_()
+    , ib_()
     , shader_(nullptr)
     , color_shader_(nullptr)
     , depth_shader_(nullptr)
     , texture_(nullptr)
 {
 
-    //  デフォルトのカラーシェーダ作成
-    color_shader_ = Shader::create(simple_tex_vsh, simple_tex_fsh);
-    color_shader_->use();
-    color_shader_->bindAttributeLocation(0, "a_position");
-    color_shader_->bindAttributeLocation(1, "a_uv");
-    color_shader_->bindFragmentDataLocation(0, "FragColor");
-
-    //  デフォルトのデプスシェーダ作成
-    depth_shader_ = Shader::create(simple_tex_vsh, show_depth_tex_fsh);
-    depth_shader_->use();
-    depth_shader_->bindAttributeLocation(0, "a_position");
-    depth_shader_->bindAttributeLocation(1, "a_uv");
-    depth_shader_->bindFragmentDataLocation(0, "FragColor");
     
-    //  デフォルトシェーダを設定
-    useDefaultColorShader();
-    
-    
+    //  VAO用意
     vao_ = cross::RenderSystem::createVertexArrayObject();
     cross::RenderSystem::bindVertexArrayObject(vao_);
 
+    //  VertexBuffer登録
     vb_.bind();
-    float a = 0.0f;
-    float b = 1.0f;
+
     VertexP2T varray[4];
-    varray[0].position_ = t3::Vec2(a,a);
+    varray[0].position_ = min_pos;
     varray[0].uv_ = t3::Vec2(0,0);
 
-    varray[1].position_ = t3::Vec2(b,a);
+    varray[1].position_ = t3::Vec2(max_pos.x_, min_pos.y_);
     varray[1].uv_ = t3::Vec2(1,0);
 
-    varray[2].position_ = t3::Vec2(a,b);
+    varray[2].position_ = t3::Vec2(min_pos.x_, max_pos.y_);
     varray[2].uv_ = t3::Vec2(0,1);
 
-    varray[3].position_ = t3::Vec2(b,b);
+    varray[3].position_ = max_pos;
     varray[3].uv_ = t3::Vec2(1,1);
     
     cross::RenderSystem::setupBufferData(
@@ -70,6 +59,28 @@ CinemaLayer::CinemaLayer(
         varray,
         cross::RenderSystem::BufferUsage::STATIC_DRAW
     );
+    
+    //  IndexBuffer登録
+    ib_.bind();
+    uint32_t iarray[] = {0,1,2,3};
+    cross::RenderSystem::setupBufferData(
+        cross::RenderSystem::BufferType::TYPE_INDEX,
+        sizeof(uint32_t) * 4,
+        iarray,
+        cross::RenderSystem::BufferUsage::STATIC_DRAW
+    );
+    
+    
+        //  デフォルトのカラーシェーダ作成
+    color_shader_ = Shader::create(simple_tex_vsh, simple_tex_fsh);
+    //  デフォルトのデプスシェーダ作成
+    depth_shader_ = Shader::create(simple_tex_vsh, show_depth_tex_fsh);
+    
+    //  デフォルトシェーダを設定
+    useDefaultColorShader();
+
+
+    
     
     constexpr int POSITION_SLOT = 0;
     constexpr int UV_SLOT = 1;
@@ -120,16 +131,12 @@ void CinemaLayer::drawLayer() {
         return;
     }
     
-//    cross::RenderSystem::setViewport(0, 0, 640, 480);
-    
     cross::RenderSystem::resetBufferBind();
     cross::RenderSystem::bindVertexArrayObject(vao_);
     
     cross::RenderSystem::setCulling(false);
-    cross::RenderSystem::setDepthTest(true);
-    cross::RenderSystem::setDepthWrite(true);
-    cross::RenderSystem::setDepthTest(true);
-//    cross::RenderSystem::setBlendMode(cross::RenderSystem::BlendMode::NONE);
+    cross::RenderSystem::setDepthTest(false);
+
 
     // シェーダで描画
     bool use_result = shader_->use();
@@ -137,18 +144,19 @@ void CinemaLayer::drawLayer() {
     
 
     //頂点配列を有効化
+    shader_->bindAttributeLocation(0, "a_position");
+    shader_->bindAttributeLocation(1, "a_uv");
+    shader_->bindFragmentDataLocation(0, "FragColor");
+
     shader_->setUniform("sampler", 0);
     cross::RenderSystem::setActiveTextureUnit(0);
     texture_->bind();
-    cross::RenderSystem::setDepthTest(true);
-    cross::RenderSystem::setDepthWrite(true);
-    cross::RenderSystem::setDepthTest(true);
     
     
-    cross::RenderSystem::drawArray(
+    cross::RenderSystem::drawElements(
         cross::RenderSystem::DrawMode::MODE_TRIANGLE_STRIP,
-        0,
-        4
+        4,
+        sizeof(uint32_t)
     );
     cross::RenderSystem::bindVertexArrayObject(0);
 

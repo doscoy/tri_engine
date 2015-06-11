@@ -33,8 +33,10 @@ public:
     ///
     /// コンストラクタ. レイヤ名と優先度を設定
     CinemaLayer(
-        const String& name, ///< レイヤー名
-        const int priority  ///< 優先度
+        const Vec2 min_pos,                                     ///< ビューポート座標最小値
+        const Vec2 max_pos,                                     ///< ビューポート座標最大値
+        const String& name = "cinema",                          ///< レイヤー名
+        const int priority = RenderLayer::PRIORITY_APP_FRONT1   ///< 優先度
     );
 
     ///
@@ -80,6 +82,7 @@ private:
 private:
     cross::RenderSystem::BufferID vao_;
     VertexBuffer vb_;
+    IndexBuffer ib_;
 
     ShaderPtr shader_;          ///< シェーダ
     ShaderPtr color_shader_;    ///< カラー値表示シェーダ

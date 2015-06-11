@@ -10,12 +10,12 @@ public:
     SceneContext()
         : shadow_render_layer_()
         , final_layer_()
-        , cinema_()
+        , cinema_(t3::Vec2(0.4f, 0.4f), t3::Vec2(1,1))
         , chara_()
         , field_()
         , cam_updater_()
         , light_camera_()
-        , surface_(512, 1024, t3::Surface::Type::DEPTH_ONLY)
+        , surface_(256, 256, t3::Surface::Type::DEPTH_ONLY)
     {}
     
     ~SceneContext()

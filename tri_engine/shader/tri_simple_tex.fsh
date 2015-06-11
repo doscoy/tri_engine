@@ -21,7 +21,7 @@ const char* simple_tex_fsh = R"(
 
 in vec2 v_texture_uv;
 uniform sampler2D sampler;
-out vec4 FragColor;
+layout (location = 0) out vec4 FragColor;
 
 void main(void)
 {
