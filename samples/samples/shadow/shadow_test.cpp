@@ -107,12 +107,12 @@ public:
     
 private:
     void shadowRender() {
-        chara_->cullingMode(cross::RenderSystem::CullingMode::MODE_FRONT);        
+        chara_->cullingMode(t3::cross::RenderSystem::CullingMode::MODE_FRONT);        
         scene_graph_.renderScene(t3::RenderInfo::SHADOW);
     }
 
     void colorRender() {
-        chara_->cullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
+        chara_->cullingMode(t3::cross::RenderSystem::CullingMode::MODE_BACK);
         scene_graph_.renderScene(t3::RenderInfo::NORMAL);
     }
 
