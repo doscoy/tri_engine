@@ -1,7 +1,6 @@
 
 
 #include "simple_sprite.hpp"
-#include "base/tri_std.hpp"
 
 
 class SimpleSpriteScene::SceneContext

@@ -1,7 +1,6 @@
 
 
 #include "simple_primitive.hpp"
-#include "base/tri_std.hpp"
 
 
 class SimplePrimitiveScene::SceneContext

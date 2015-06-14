@@ -2,9 +2,9 @@
 
 #include "font_test.hpp"
 #include "font_texture.hpp"
-#include "../shader/tri_font.fsh"
-#include "../shader/tri_df_font.fsh"
-#include "../shader/tri_sprite.vsh"
+#include "shader/tri_font.fsh"
+#include "shader/tri_df_font.fsh"
+#include "shader/tri_sprite.vsh"
 
 
 

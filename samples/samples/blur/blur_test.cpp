@@ -1,7 +1,7 @@
 
 
 #include "blur_test.hpp"
-#include "../shader/tri_simple_tex.vsh"
+#include "shader/tri_simple_tex.vsh"
 
 
 class BlurScene::SceneContext {

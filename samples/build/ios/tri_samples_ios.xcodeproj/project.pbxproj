@@ -55,6 +55,8 @@
 		3A2BC73D1B1A8E6C00F889BC /* vox.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 3A2BC73A1B1A8E6C00F889BC /* vox.mtl */; };
 		3A2BC7411B1A8ECE00F889BC /* simple_mesh3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A2BC73F1B1A8ECE00F889BC /* simple_mesh3.cpp */; };
 		3A2BC7421B1A8ECE00F889BC /* simple_mesh3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A2BC73F1B1A8ECE00F889BC /* simple_mesh3.cpp */; };
+		3A480C811B2D35E3001064BB /* libtri_engine_osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4809931B2C898C001064BB /* libtri_engine_osx.a */; };
+		3A480C821B2D35EC001064BB /* libtri_engine_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4809911B2C898C001064BB /* libtri_engine_ios.a */; };
 		3A6EE1891B088AEF00BB4247 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD301451AFBBD2500516996 /* main.cpp */; };
 		3A6EE18A1B088AEF00BB4247 /* font_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041544D319EC268200C14705 /* font_test.cpp */; };
 		3A6EE18B1B088AEF00BB4247 /* blur_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0403CC9D19DAEDDA000329EC /* blur_test.cpp */; };
@@ -69,7 +71,6 @@
 		3A6EE1941B088AEF00BB4247 /* sandbox_template.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070319AE257000762711 /* sandbox_template.cpp */; };
 		3A6EE1961B088AEF00BB4247 /* thread_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071619AE2B8900762711 /* thread_test.cpp */; };
 		3A6EE1971B088AEF00BB4247 /* ui_button_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070919AE257000762711 /* ui_button_test.cpp */; };
-		3A6EE19A1B0896D600BB4247 /* libtri_engine_osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE1851B08891500BB4247 /* libtri_engine_osx.a */; };
 		3A6EE19C1B089B5400BB4247 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE19B1B089B5400BB4247 /* libglfw.dylib */; };
 		3A6EE19E1B08A1C500BB4247 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE19D1B08A1C500BB4247 /* OpenGL.framework */; };
 		3A6EE1A01B08A20F00BB4247 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE19F1B08A20F00BB4247 /* libz.dylib */; };
@@ -86,7 +87,6 @@
 		3AD4071019AE257000762711 /* quat_test_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406FF19AE257000762711 /* quat_test_scene.cpp */; };
 		3AD4071119AE257000762711 /* sandbox_template.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070319AE257000762711 /* sandbox_template.cpp */; };
 		3AD4071319AE257000762711 /* ui_button_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070919AE257000762711 /* ui_button_test.cpp */; };
-		3AD4071419AE26C200762711 /* libtri_engine_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA7EE9F19A0FCB600CEB23A /* libtri_engine_ios.a */; };
 		3AD4071819AE2B8900762711 /* thread_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071619AE2B8900762711 /* thread_test.cpp */; };
 		3AD4071C19AE2B9200762711 /* offscreen_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071A19AE2B9200762711 /* offscreen_test.cpp */; };
 		3AE404051B21D1F10052362D /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE403FC1B21D1F10052362D /* sun.png */; };
@@ -103,33 +103,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3A6EE1841B08891500BB4247 /* PBXContainerItemProxy */ = {
+		3A4809901B2C898C001064BB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */;
+			containerPortal = 3A48098B1B2C898B001064BB /* tri_engine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3AA7EBA719A0F48800CEB23A;
+			remoteInfo = tri_engine_ios;
+		};
+		3A4809921B2C898C001064BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A48098B1B2C898B001064BB /* tri_engine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3AC2EE481B084DB800F73048;
 			remoteInfo = tri_engine_osx;
 		};
-		3A6EE1981B08940200BB4247 /* PBXContainerItemProxy */ = {
+		3A480C7B1B2D35CD001064BB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */;
+			containerPortal = 3A48098B1B2C898B001064BB /* tri_engine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3AA7EBA619A0F48800CEB23A;
+			remoteInfo = tri_engine_ios;
+		};
+		3A480C7F1B2D35D4001064BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A48098B1B2C898B001064BB /* tri_engine.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 3AC2EE471B084DB800F73048;
 			remoteInfo = tri_engine_osx;
-		};
-		3AA7EE9E19A0FCB600CEB23A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3AA7EBA719A0F48800CEB23A;
-			remoteInfo = tri_engine;
-		};
-		3AA7EEA019A0FCCE00CEB23A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3AA7EBA619A0F48800CEB23A;
-			remoteInfo = tri_engine;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -203,6 +203,7 @@
 		3A2BC73A1B1A8E6C00F889BC /* vox.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = vox.mtl; sourceTree = "<group>"; };
 		3A2BC73F1B1A8ECE00F889BC /* simple_mesh3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simple_mesh3.cpp; sourceTree = "<group>"; };
 		3A2BC7401B1A8ECE00F889BC /* simple_mesh3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = simple_mesh3.hpp; sourceTree = "<group>"; };
+		3A48098B1B2C898B001064BB /* tri_engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = tri_engine.xcodeproj; path = ../../../build/ios/tri_engine.xcodeproj; sourceTree = "<group>"; };
 		3A6EE17D1B08891500BB4247 /* tri_samples_osx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tri_samples_osx; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6EE19B1B089B5400BB4247 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../opt/local/lib/libglfw.dylib; sourceTree = "<group>"; };
 		3A6EE19D1B08A1C500BB4247 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
@@ -211,7 +212,6 @@
 		3A6EE1A31B08AD7B00BB4247 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		3A6EE1A51B08AD8A00BB4247 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 		3A6EE1A71B08C98700BB4247 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../../../../opt/local/lib/libGLEW.a; sourceTree = "<group>"; };
-		3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = tri_engine.xcodeproj; path = ../../../build/ios/tri_engine.xcodeproj; sourceTree = "<group>"; };
 		3AC867151B1DEE6400AADEA8 /* shadow_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = shadow_test.cpp; sourceTree = "<group>"; };
 		3AC867161B1DEE6400AADEA8 /* shadow_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shadow_test.hpp; sourceTree = "<group>"; };
 		3AD301451AFBBD2500516996 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = main.cpp; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AD4071419AE26C200762711 /* libtri_engine_ios.a in Frameworks */,
+				3A480C821B2D35EC001064BB /* libtri_engine_ios.a in Frameworks */,
 				04F1002C198558BF00C8D498 /* libz.dylib in Frameworks */,
 				04F1002A198558B600C8D498 /* libpng.a in Frameworks */,
 				04F100281985589300C8D498 /* CoreMotion.framework in Frameworks */,
@@ -272,11 +272,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A480C811B2D35E3001064BB /* libtri_engine_osx.a in Frameworks */,
 				3A6EE19E1B08A1C500BB4247 /* OpenGL.framework in Frameworks */,
 				3A6EE1A91B08FBC300BB4247 /* IOKit.framework in Frameworks */,
 				3A6EE1A01B08A20F00BB4247 /* libz.dylib in Frameworks */,
 				3A6EE1A81B08C98700BB4247 /* libGLEW.a in Frameworks */,
-				3A6EE19A1B0896D600BB4247 /* libtri_engine_osx.a in Frameworks */,
 				3A6EE1A21B08A25100BB4247 /* libpng.dylib in Frameworks */,
 				3A6EE19C1B089B5400BB4247 /* libglfw.dylib in Frameworks */,
 			);
@@ -357,7 +357,7 @@
 		04F1FE521985557F00C8D498 = {
 			isa = PBXGroup;
 			children = (
-				3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */,
+				3A48098B1B2C898B001064BB /* tri_engine.xcodeproj */,
 				04391BDA19BC95EF006FFF38 /* resources */,
 				3AD406F019AE257000762711 /* samples */,
 				04F1FE681985557F00C8D498 /* tri_samples_ios */,
@@ -467,11 +467,11 @@
 			path = simple_mesh3;
 			sourceTree = "<group>";
 		};
-		3AA7EE9B19A0FCB600CEB23A /* Products */ = {
+		3A48098C1B2C898B001064BB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3AA7EE9F19A0FCB600CEB23A /* libtri_engine_ios.a */,
-				3A6EE1851B08891500BB4247 /* libtri_engine_osx.a */,
+				3A4809911B2C898C001064BB /* libtri_engine_ios.a */,
+				3A4809931B2C898C001064BB /* libtri_engine_osx.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -618,7 +618,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3AA7EEA119A0FCCE00CEB23A /* PBXTargetDependency */,
+				3A480C7C1B2D35CD001064BB /* PBXTargetDependency */,
 			);
 			name = tri_samples_ios;
 			productName = tri_samples_ios;
@@ -636,7 +636,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3A6EE1991B08940200BB4247 /* PBXTargetDependency */,
+				3A480C801B2D35D4001064BB /* PBXTargetDependency */,
 			);
 			name = tri_samples_osx;
 			productName = tri_samples_osx;
@@ -670,8 +670,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3AA7EE9B19A0FCB600CEB23A /* Products */;
-					ProjectRef = 3AA7EE9A19A0FCB600CEB23A /* tri_engine.xcodeproj */;
+					ProductGroup = 3A48098C1B2C898B001064BB /* Products */;
+					ProjectRef = 3A48098B1B2C898B001064BB /* tri_engine.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -683,18 +683,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3A6EE1851B08891500BB4247 /* libtri_engine_osx.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libtri_engine_osx.a;
-			remoteRef = 3A6EE1841B08891500BB4247 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3AA7EE9F19A0FCB600CEB23A /* libtri_engine_ios.a */ = {
+		3A4809911B2C898C001064BB /* libtri_engine_ios.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libtri_engine_ios.a;
-			remoteRef = 3AA7EE9E19A0FCB600CEB23A /* PBXContainerItemProxy */;
+			remoteRef = 3A4809901B2C898C001064BB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3A4809931B2C898C001064BB /* libtri_engine_osx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libtri_engine_osx.a;
+			remoteRef = 3A4809921B2C898C001064BB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -803,15 +803,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3A6EE1991B08940200BB4247 /* PBXTargetDependency */ = {
+		3A480C7C1B2D35CD001064BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = tri_engine_ios;
+			targetProxy = 3A480C7B1B2D35CD001064BB /* PBXContainerItemProxy */;
+		};
+		3A480C801B2D35D4001064BB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = tri_engine_osx;
-			targetProxy = 3A6EE1981B08940200BB4247 /* PBXContainerItemProxy */;
-		};
-		3AA7EEA119A0FCCE00CEB23A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = tri_engine;
-			targetProxy = 3AA7EEA019A0FCCE00CEB23A /* PBXContainerItemProxy */;
+			targetProxy = 3A480C7F1B2D35D4001064BB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -876,7 +876,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = ../../../third_party_lib/ios;
+				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -910,7 +910,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = ../../../third_party_lib/ios;
+				LIBRARY_SEARCH_PATHS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -930,15 +930,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					../../../third_party_lib/ios,
 					../../../tri_engine/include,
-					../../../cross_sdk/include,
-					../../../starter/ios,
 				);
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					../../../third_party_lib/ios,
+					../../../tri_engine/third_party_lib/ios,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -958,15 +955,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					../../../third_party_lib/ios,
 					../../../tri_engine/include,
-					../../../cross_sdk/include,
-					../../../starter/ios,
 				);
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					../../../third_party_lib/ios,
+					../../../tri_engine/third_party_lib/ios,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -989,7 +983,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "/Users/kani/project/tri_engine/cross_sdk/include /Users/kani/project/tri_engine/tri_engine/include";
+				USER_HEADER_SEARCH_PATHS = ../../../tri_engine/include;
 			};
 			name = Debug;
 		};
@@ -1006,7 +1000,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "/Users/kani/project/tri_engine/cross_sdk/include /Users/kani/project/tri_engine/tri_engine/include";
+				USER_HEADER_SEARCH_PATHS = ../../../tri_engine/include;
 			};
 			name = Release;
 		};

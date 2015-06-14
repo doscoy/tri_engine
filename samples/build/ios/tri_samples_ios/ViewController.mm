@@ -8,11 +8,11 @@
 
 #import "ViewController.h"
 
-#include "cross_sdk.hpp"
+#include "cross/cross_sdk.hpp"
 #include "base/tri_application.hpp"
 
 #include "AppDelegate.h"
-#include "dbg/tri_trace.hpp"
+#include "debug/tri_trace.hpp"
 
 #import <CoreMotion/CoreMotion.h>
 

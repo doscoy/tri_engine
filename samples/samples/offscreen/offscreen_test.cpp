@@ -39,16 +39,16 @@ public:
         surface_.preRender();
         
         
-        cross::RenderSystem::setDepthWrite(true);
+        t3::RenderSystem::setDepthWrite(true);
         t3::Color clear_color = t3::color_sample::blue();
-        cross::RenderSystem::clearColor(
+        t3::RenderSystem::clearColor(
             clear_color.red(),
             clear_color.green(),
             clear_color.blue(),
             clear_color.alpha()
         );
-        cross::RenderSystem::clearBuffer(true, true, false);
-        cross::RenderSystem::setDepthTest(true);
+        t3::RenderSystem::clearBuffer(true, true, false);
+        t3::RenderSystem::setDepthTest(true);
 
         
         modelDraw();
@@ -80,7 +80,7 @@ public:
         auto& d = t3::Director::instance();
         auto& screen = d.virtualScreenSize();
     
-        cross::RenderSystem::setViewport(0, 0, surface_.width(), surface_.height());
+        t3::RenderSystem::setViewport(0, 0, surface_.width(), surface_.height());
         t3::Mtx44 projection;
         projection.perspective(60, screen.x_, screen.y_, 0.01f, 1000.0f);
     
@@ -94,11 +94,11 @@ public:
         
         t3::Mtx44 mtx = transform * view_mtx * projection;
 
-        cross::RenderSystem::setBlend(false);
-        cross::RenderSystem::setCulling(true);
-        cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
+        t3::RenderSystem::setBlend(false);
+        t3::RenderSystem::setCulling(true);
+        t3::RenderSystem::setCullingMode(t3::RenderSystem::CullingMode::MODE_BACK);
 
-        cross::RenderSystem::setDepthTestMode(cross::RenderSystem::DepthTestMode::MODE_LESS);
+        t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
 //        model_->render(mtx);
     }
 
