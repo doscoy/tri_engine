@@ -3,11 +3,11 @@
 
 #include <windows.h>
 
-#include "cross_render_system.hpp"
-#include "cross_audio_system.hpp"
-#include "cross_dbg.hpp"
-#include "cross_os.hpp"
-#include "cstdio"
+#include "cross/cross_render_system.hpp"
+#include "cross/cross_audio_system.hpp"
+#include "cross/cross_dbg.hpp"
+#include "cross/cross_os.hpp"
+#include <cstdio>
 
 #pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 

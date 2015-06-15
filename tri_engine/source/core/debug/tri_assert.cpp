@@ -10,7 +10,7 @@
 #include <iostream>
 #include "core/debug/tri_assert.hpp"
 #include "core/debug/tri_trace.hpp"
-#include "cross_dbg.hpp"
+#include "cross/cross_dbg.hpp"
 
 TRI_CORE_NS_BEGIN
 

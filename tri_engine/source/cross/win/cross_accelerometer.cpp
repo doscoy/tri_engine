@@ -1,5 +1,5 @@
 
-#include "cross_accelerometer.hpp"
+#include "cross/cross_accelerometer.hpp"
 
 CROSS_NS_BEGIN
 
