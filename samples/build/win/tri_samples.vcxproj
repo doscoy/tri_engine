@@ -102,6 +102,7 @@
     <ClCompile Include="..\..\..\tri_engine\source\jet\gui\jet_radio_button.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\jet\gui\jet_swap_button.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\jet\gui\jet_textbox.cpp" />
+    <ClCompile Include="..\..\..\tri_engine\source\jet\scene\jet_scene.cpp" />
     <ClCompile Include="..\..\samples\blur\blur_test.cpp" />
     <ClCompile Include="..\..\samples\input\input_test.cpp" />
     <ClCompile Include="..\..\samples\main.cpp" />
@@ -273,6 +274,7 @@
     <ClInclude Include="..\..\..\tri_engine\include\jet\gui\jet_textbox.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\jet\jet_config.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\jet\jet_engine.hpp" />
+    <ClInclude Include="..\..\..\tri_engine\include\jet\scene\jet_scene.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\tri_engine.hpp" />
     <ClInclude Include="..\..\samples\blur\blur_test.hpp" />
     <ClInclude Include="..\..\samples\input\input_test.hpp" />

@@ -7,7 +7,7 @@
 
 
 class SimpleMesh3Scene
-    : public t3::Scene
+    : public t3::SceneBase
 {
 public:
     SimpleMesh3Scene();

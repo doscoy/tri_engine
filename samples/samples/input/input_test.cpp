@@ -163,7 +163,7 @@ private:
 
 
 InputTestScene::InputTestScene()
-    : Scene( "InputTestScene" ) {
+    : SceneBase( "InputTestScene" ) {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 

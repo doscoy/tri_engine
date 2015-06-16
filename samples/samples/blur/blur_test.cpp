@@ -87,7 +87,7 @@ private:
 
 
 BlurScene::BlurScene()
-    : Scene( "Blur" ) {
+    : SceneBase( "Blur" ) {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 

@@ -27,11 +27,11 @@
 
 
 class RootTest
-    : public t3::Scene
+    : public t3::SceneBase
 {
 public:
     RootTest()
-        : Scene("RootTest")
+        : SceneBase("RootTest")
         , samples_(0, "SAMPLES")
         , simple_primitive_(&samples_, "SIMPLE PRIMITIVE")
         , simple_sprite_(&samples_, "SIMPLE SPRITE")

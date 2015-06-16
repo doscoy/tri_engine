@@ -23,12 +23,14 @@ TRI_CORE_NS_BEGIN
 
 
 
-class Scene;
+class SceneBase;
+using ScenePtr = SharedPtr<SceneBase>;
+
 class SceneGenerator
 {
 public:
     virtual ~SceneGenerator(){}
-    virtual SharedPtr<Scene> createScene() = 0;
+    virtual ScenePtr createScene() = 0;
 };
 
 
@@ -48,23 +50,23 @@ public:
     
     
     //  シーン生成
-    SharedPtr<Scene> createScene() override {
-        return SharedPtr<Scene>(T3_SYS_NEW scene_t);
+    ScenePtr createScene() override {
+        return ScenePtr(T3_SYS_NEW scene_t);
     }
 
 };
 
 
-class Scene
+class SceneBase
     : private Uncopyable
 {
     friend class SceneGenerator;
     
 public:
-    explicit Scene(
+    explicit SceneBase(
         const char* const scene_name 
     );
-    virtual ~Scene();
+    virtual ~SceneBase();
 
 public:
     virtual void initializeScene(){}
@@ -120,11 +122,11 @@ private:
 
 
 class NullScene
-    : public Scene
+    : public SceneBase
 {
 public:
     NullScene()
-        : Scene( "NullScene" )
+        : SceneBase("NullScene")
     {}
 };
 
@@ -140,15 +142,15 @@ private:
     ~SceneManager();
     
 public:
-    void updateScene( tick_t delta_time );
-    void suspendScene( tick_t delta_time );
+    void updateScene(tick_t delta_time);
+    void suspendScene(tick_t delta_time);
     void debugRender();
     
-    static void requestNextScene( SceneGenerator* const next_scene_generator ){
+    static void requestNextScene(SceneGenerator* const next_scene_generator){
         instance().next_scene_generator_ = next_scene_generator;
     }
     
-    void forceChangeScene( SceneGenerator* const next_scene_generator ){
+    void forceChangeScene(SceneGenerator* const next_scene_generator){
         next_scene_generator_ = next_scene_generator;
         force_change_ = true;
     }
@@ -174,7 +176,7 @@ private:
     void sceneChange();
 
 private:
-    SharedPtr<Scene> current_scene_;
+    ScenePtr current_scene_;
     SceneGenerator* next_scene_generator_;
     bool force_change_;
     bool scene_changed_;

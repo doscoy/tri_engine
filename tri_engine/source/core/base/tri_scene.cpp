@@ -9,7 +9,7 @@ TRI_CORE_NS_BEGIN
 
 
 
-Scene::Scene(
+SceneBase::SceneBase(
     const char* const scene_name
 )   : finish_(false)
     , show_task_(false)
@@ -25,13 +25,13 @@ Scene::Scene(
     );
 }
 
-Scene::~Scene()
+SceneBase::~SceneBase()
 {
     scene_debug_menu_frame_.detachSelf();
 }
 
 
-void Scene::update(
+void SceneBase::update(
     tick_t delta_time
 ) {
     task_manager_.updateTask(delta_time);
@@ -39,13 +39,13 @@ void Scene::update(
     
 }
 
-void Scene::suspend(
+void SceneBase::suspend(
     tick_t delta_time
 ) {
     suspendScene(delta_time);
 }
 
-void Scene::debugRender() {
+void SceneBase::debugRender() {
     if (show_task_) {
         task_manager_.printTask();
     }
@@ -64,7 +64,7 @@ SceneManager::SceneManager()
     , force_change_( false )
     , scene_changed_( false )
 {
-    SceneGenerator* sg = Scene::sceneGenerator<NullScene>();
+    SceneGenerator* sg = SceneBase::sceneGenerator<NullScene>();
     current_scene_ = sg->createScene();
 }
 
@@ -118,7 +118,7 @@ void SceneManager::sceneChange()
     //  次のシーンに遷移
     T3_TRACE_VALUE(current_scene_.use_count());
     current_scene_ = next_scene_generator_->createScene();
-    next_scene_generator_ = Scene::sceneGenerator<NullScene>();
+    next_scene_generator_ = SceneBase::sceneGenerator<NullScene>();
     
     EventManagerBase::get()->dumpListeners();
 

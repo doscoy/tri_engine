@@ -75,7 +75,7 @@ private:
 
 
 SimpleMeshScene::SimpleMeshScene()
-    : Scene( "MeshObjScene" ) {
+    : SceneBase( "MeshObjScene" ) {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 

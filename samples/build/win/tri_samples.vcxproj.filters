@@ -302,6 +302,9 @@
     <ClCompile Include="..\..\..\tri_engine\source\jet\gui\jet_textbox.cpp">
       <Filter>tri_engine\source\jet\gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\jet\scene\jet_scene.cpp">
+      <Filter>tri_engine\include\jet\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\samples\samples.hpp">
@@ -814,6 +817,9 @@
     <ClInclude Include="..\..\..\tri_engine\include\jet\gui\jet_textbox.hpp">
       <Filter>tri_engine\include\jet\gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\include\jet\scene\jet_scene.hpp">
+      <Filter>tri_engine\source\jet\scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="sample">
@@ -926,6 +932,12 @@
     </Filter>
     <Filter Include="tri_engine\source\jet\gui">
       <UniqueIdentifier>{579e031b-8b84-4a4e-86f3-852d9279f01a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tri_engine\source\jet\scene">
+      <UniqueIdentifier>{17cab7e8-2c68-430a-9b21-cccd05ea6a50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tri_engine\include\jet\scene">
+      <UniqueIdentifier>{96b4b5dd-ee0e-4de1-a905-eed44e2b5f8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

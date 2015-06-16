@@ -146,7 +146,7 @@ private:
 
 
 UiButtonScene::UiButtonScene()
-    : Scene( "AudioTest" ) {
+    : SceneBase("AudioTest") {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 

@@ -33,8 +33,16 @@ void SceneGraph::renderScene(
 ) {
     render_mode_ = mode;
     
-    cross::RenderSystem::setCulling(true);
-    cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
+
+    if (mode == RenderInfo::SHADOW) {
+        //  影テクスチャを作る時はフロントフェースカリング
+        cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_FRONT);
+    } else {
+        //  通常描画は強制カリング
+        cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
+    }
+
+    //  基本描画設定
     cross::RenderSystem::setBlend(false);
     cross::RenderSystem::setDepthTest(true);
     cross::RenderSystem::setDepthWrite(true);

@@ -7,7 +7,7 @@
 
 
 class BlurScene
-    : public t3::Scene
+    : public t3::SceneBase
 {
 public:
     BlurScene();

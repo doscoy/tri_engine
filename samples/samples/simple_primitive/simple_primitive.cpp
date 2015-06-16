@@ -45,7 +45,7 @@ public:
 
 
 SimplePrimitiveScene::SimplePrimitiveScene()
-    : Scene( "PrimitiveTest" ) {
+    : SceneBase("PrimitiveTest") {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 
