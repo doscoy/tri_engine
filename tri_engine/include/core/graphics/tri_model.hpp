@@ -17,7 +17,7 @@ TRI_CORE_NS_BEGIN
 
 
 class Model;
-using ModelPtr = ScopedPtr<Model>;
+using ModelPtr = SharedPtr<Model>;
 
 ///
 /// モデル

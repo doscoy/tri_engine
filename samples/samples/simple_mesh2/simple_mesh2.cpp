@@ -37,9 +37,9 @@ public:
         //  シーングラフ初期化
         scene_graph_.camera(cam_update_.camera());
         node1_ = scene_graph_.createNode();
-        node1_->attachEntity(model_.get());
+        node1_->entity(model_);
         node2_ = node1_->createNode("node2");
-        node2_->attachEntity(model_.get());
+        node2_->entity(model_);
         node2_->position(model_radius * 2, 0, 0);
         
         

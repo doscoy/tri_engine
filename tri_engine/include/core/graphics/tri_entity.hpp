@@ -24,11 +24,12 @@ protected:
     /// コンストラクタ
     Entity(){};
 
+    
+public:
     ///
     /// デストラクタ
     virtual ~Entity(){};
-    
-public:
+
     ///
     /// 描画するものか判定
     virtual bool isRenderable() const {
@@ -38,8 +39,9 @@ public:
     ///
     /// 描画
     virtual void render(const RenderInfo&){}
-};
 
+};
+using EntityPtr = SharedPtr<Entity>;
 
 TRI_CORE_NS_END
 

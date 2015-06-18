@@ -7,7 +7,7 @@ TRI_JET_NS_BEGIN
 Scene::Scene(const char* const name) 
     : core::SceneBase(name)
     , shadow_render_layer_()
-    , shadow_render_target_()
+    , shadow_render_target_(256,256,Surface::Type::DEPTH_ONLY)
     , scene_layer_()
     , scene_graph_()
 {}
@@ -21,13 +21,24 @@ void Scene::initializeScene() {
     //  レイヤー準備
     shadow_render_layer_.name("shadow_render_layer_");
     shadow_render_layer_.setRenderCallback<Scene>(this, &Scene::shadowRender);
+    shadow_render_layer_.renderTarget(&shadow_render_target_);
 
     //  レイヤー準備
     scene_layer_.name("scene_layer_");
     scene_layer_.setRenderCallback<Scene>(this, &Scene::sceneRender);
 
+    //  シャドウ設定
+    shadow_render_layer_.renderTarget(&shadow_render_target_);
+    scene_graph_.shadowTexture(shadow_render_target_.depthTexture());
+    scene_graph_.shadowProjector()->screenSize(shadow_render_target_.size());
+
+
 
     initialize();
+}
+
+void Scene::terminateScene() {
+    terminate();
 }
 
 void Scene::updateScene(tick_t dt) {
@@ -35,11 +46,27 @@ void Scene::updateScene(tick_t dt) {
 }
 
 
-ModelPtr createModel(
+TransformNodePtr Scene::createModel(
     const FilePath& path
 ) {
-    return Model::create(path.fullpath().c_str());
+    ModelPtr model = Model::create(path.fullpath().c_str());
+    TransformNodePtr node = scene_graph_.createNode();
+    node->entity(model);
+    return node;
 }
+
+TransformNodePtr Scene::createChildModel(
+    const FilePath& path,
+    TransformNodePtr& parent
+) {
+    ModelPtr model = Model::create(path.fullpath().c_str());
+    TransformNodePtr node = parent->createNode();
+    node->entity(model);
+    return node;
+}
+
+
+
 
 
 TRI_JET_NS_END

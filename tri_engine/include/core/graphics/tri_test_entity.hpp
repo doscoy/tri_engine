@@ -10,7 +10,7 @@
 #include "core/core_config.hpp"
 #include "tri_entity.hpp"
 #include "tri_color.hpp"
-
+#include "core/debug/tri_draw_primitive.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -26,10 +26,10 @@ public:
     virtual void render() {
     
         drawPlane(
-            t3::Vec3(0,0,0),
-            t3::Vec3(0,1,0),
-            t3::Vec3(2,2,2),
-            t3::color_sample::blue()
+            Vec3(0,0,0),
+            Vec3(0,1,0),
+            Vec3(2,2,2),
+            color_sample::blue()
         );
 
     }

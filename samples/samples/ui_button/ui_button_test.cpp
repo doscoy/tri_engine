@@ -92,7 +92,7 @@ public:
                 t3::Vec2(0, 64),
                 t3::Vec2(64, 64)
             );
-            spr->transform()->position(i * 70, -190);
+            spr->transform()->position(static_cast<float>(i * 70), -190.0f);
             btn_radio_[i].setupSprite(spr);
             group_.registryButton(&btn_radio_[i]);
         }

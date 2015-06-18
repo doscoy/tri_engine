@@ -8,6 +8,6 @@
 
 
 #include "gui/jet_gui.hpp"
-
+#include "scene/jet_scene.hpp"
 
 #endif // JET_ENGINE_HPP_INCLUDED

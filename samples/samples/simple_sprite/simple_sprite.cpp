@@ -105,7 +105,7 @@ private:
         
         int x_count = static_cast<int>(screen_size.x_ / offset.x_ -1);
         int y_start = 16;
-        int limit_y = -(screen_size.y_ / offset.y_) + y_start +2;
+        int limit_y = static_cast<int>(-(screen_size.y_ / offset.y_) + y_start +2);
         int y = y_start;
         int i = 0;
         for (auto& spr : sprites_) {

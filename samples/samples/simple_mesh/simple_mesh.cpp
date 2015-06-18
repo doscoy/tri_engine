@@ -37,7 +37,7 @@ public:
         //  シーングラフ初期化
         scene_graph_.camera(cam_updater_.camera());
         node1_ = scene_graph_.createNode();
-        node1_->attachEntity(model_.get());
+        node1_->entity(model_);
     }
     
     void terminate(){

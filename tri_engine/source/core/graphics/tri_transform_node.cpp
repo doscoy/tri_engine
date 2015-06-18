@@ -27,12 +27,10 @@ TransformNode::TransformNode(
     , calc_request_(true)
     , entity_(nullptr)
     , node_id_(id)
-{
-}
+{}
 
 TransformNode::~TransformNode()
-{
-}
+{}
 
 
 
@@ -190,6 +188,11 @@ TransformNodePtr TransformNode::createNode(
     addChild(new_node);
     return new_node;
 }
+
+TransformNodePtr TransformNode::createNode() {
+    return createNode(String("UnnameNode"));
+}
+
 
 TransformNodePtr TransformNode::create(
     String name

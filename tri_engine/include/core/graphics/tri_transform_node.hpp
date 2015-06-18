@@ -9,12 +9,12 @@
 //  include
 #include "tri_scene_node.hpp"
 #include "core/core_config.hpp"
+#include "tri_entity.hpp"
 
 TRI_CORE_NS_BEGIN
 
 
 //  前方宣言
-class Entity;
 class TransformNode;
 
 ///
@@ -54,17 +54,29 @@ public:
     }
 
     ///
-    /// オブジェクトをアタッチ
-    void attachEntity(
-        Entity* entity
+    /// ノードにエンティティをアタッチ
+    void entity(
+        EntityPtr entity
     ) {
         entity_ = entity;
     }
+
+    ///
+    /// ノードにアタッチしているエンティティを取得
+    EntityPtr entity() {
+        return entity_;
+    }
     
+    ///
+    /// ノードにアタッチしているエンティティを取得
+    const EntityPtr entity() const {
+        return entity_;
+    }
+
     ///
     /// オブジェクトをデタッチ
     void detachEntity() {
-        entity_ = nullptr;
+        entity_.reset();
     }
     
     ///
@@ -164,6 +176,9 @@ public:
         String name
     );
 
+    ///
+    /// ノードを生成
+    TransformNodePtr createNode();
 
 public:
     ///
@@ -392,7 +407,7 @@ private:
     
     ///
     /// ノードにひもづけるオブジェクト
-    Entity* entity_;
+    EntityPtr entity_;
     
     ///
     /// 子ノード

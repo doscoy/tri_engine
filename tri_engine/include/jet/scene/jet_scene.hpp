@@ -21,19 +21,37 @@ public:
 
 public:
     void initializeScene() final;
+    void terminateScene() final;
     void updateScene(tick_t dt) final;
     
 protected:
-    ModelPtr createModel(FilePath path);
+    TransformNodePtr createModel(const FilePath& path);
+    TransformNodePtr createModel(const char* const model_name) {
+        return createModel(FilePath(model_name));
+    }
 
+    TransformNodePtr Scene::createChildModel(
+        const FilePath& path,
+        TransformNodePtr& parent
+    );
+    TransformNodePtr Scene::createChildModel(
+        const char* const model_name,
+        TransformNodePtr& parent
+    ) {
+        return createChildModel(FilePath(model_name), parent);
+    }
 
     SceneGraph& sceneGraph() {
         return scene_graph_;
     }
 
+    Surface& shadowSurface() {
+        return shadow_render_target_;
+    }
 
 private:
     virtual void initialize() {}
+    virtual void terminate() {}
     virtual void update() {}
 
 private:
