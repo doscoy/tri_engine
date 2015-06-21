@@ -133,7 +133,7 @@ private:
 
 
 EventHandlingScene::EventHandlingScene()
-    : Scene( "EventHandling" ) {
+    : SceneBase( "EventHandling" ) {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 

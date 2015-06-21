@@ -9,10 +9,10 @@
 #import "ViewController.h"
 
 #include "cross/cross_sdk.hpp"
-#include "base/tri_application.hpp"
+#include "core/base/tri_application.hpp"
 
 #include "AppDelegate.h"
-#include "debug/tri_trace.hpp"
+#include "core/debug/tri_trace.hpp"
 
 #import <CoreMotion/CoreMotion.h>
 

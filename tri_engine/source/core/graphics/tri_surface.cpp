@@ -20,7 +20,7 @@ Surface::Surface(
     float height,
     Type type
 )   : size_(width, height)
-    , fb_(0)
+    , fb_()
     , color_texture_()
     , depth_texture_()
     , bound_(false)
@@ -58,14 +58,13 @@ Surface::Surface(
     }
   
     cross::RenderSystem::setActiveTextureUnit(0);
-//    depth_texture_->bind();
+
 
 
     
     
     //  フレームバッファ作成
-    cross::RenderSystem::createFrameBuffer(&fb_);
-    cross::RenderSystem::bindFrameBuffer(fb_);
+    fb_.bind();
 
     //  カラーテクスチャを接続
     if (use_color) {
@@ -86,17 +85,18 @@ Surface::Surface(
         );
     }
     cross::RenderSystem::bindFrameBuffer(0);
+ 
+    fb_.unbind();
 }
 
 Surface::~Surface() {
-    cross::RenderSystem::deleteFrameBuffer(&fb_);
+
 }
 
 
 void Surface::bind() {
 
-    cross::RenderSystem::bindFrameBuffer(fb_);
-
+    fb_.bind();
     T3_ASSERT(!bound_);
     bound_ = true;
 }
@@ -114,7 +114,7 @@ void Surface::clear() {
 void Surface::unbind() {
     T3_ASSERT(bound_);
     bound_ = false;
-    cross::RenderSystem::bindFrameBuffer(0);
+    fb_.unbind();
 }
 
 

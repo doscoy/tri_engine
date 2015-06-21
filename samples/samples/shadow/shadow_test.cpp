@@ -6,7 +6,7 @@
 
 ShadowTestScene::ShadowTestScene()
     : Scene("ShadowTest")
-    , cinema_(t3::Vec2(0,0), t3::Vec2(1.0f, 0.6f))
+//    , cinema_(t3::Vec2(0,0), t3::Vec2(1.0f, 0.6f))
 {
 }
 
@@ -17,6 +17,7 @@ ShadowTestScene::~ShadowTestScene() {
 
 void ShadowTestScene::initialize() {
 
+    T3_RENDER_ASSERT();
 
     //  キャラクタ作成
     node_chara_ = createModel("character_chr_old.obj");
@@ -51,6 +52,8 @@ void ShadowTestScene::initialize() {
     //  シャドウ用テクスチャ表示用
 //    cinema_.texture(shadowSurface().depthTexture());
 //    cinema_.useDefaultDepthShader();
+
+    T3_RENDER_ASSERT();
 }
 
 
@@ -62,7 +65,7 @@ void ShadowTestScene::terminate() {
 void ShadowTestScene::update() {
     static float angle;
     angle += 0.25f;
-    node_chara_->rotationY(angle);
+//    node_chara_->rotationY(angle);
         
         
     auto pointing = t3::Director::instance().input().pointing();

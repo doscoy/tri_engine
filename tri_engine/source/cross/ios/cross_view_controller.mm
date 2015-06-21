@@ -1,10 +1,4 @@
-//
-//  ViewController.m
-//  tri_sandbox_ios
-//
-//  Created by KANI Tetsuro on 2014/02/25.
-//  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
-//
+
 
 #import "cross_view_controller.hpp"
 #import "cross_types.hpp"
@@ -35,7 +29,7 @@ extern t3::cross::PointingData point_data_[4];
     
     GLKView *view = (GLKView *)self.view;
 
-    self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+    self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     view.context = self.context;
 //    view.drawableDepthFormat = GLKViewDrawableDepthFormat16;
     [EAGLContext setCurrentContext:self.context];
@@ -53,8 +47,6 @@ extern t3::cross::PointingData point_data_[4];
 
 
 - (void)dealloc {
-//    t3::terminateApplication();
-    
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
     }
@@ -124,17 +116,6 @@ extern t3::cross::PointingData point_data_[4];
 {
     point_data_[0].hit_ = false;
 }
-
-
-
-- (void)update {
-
-}
-
-- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
-
-}
-
 
 
 @end

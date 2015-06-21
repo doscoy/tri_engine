@@ -168,7 +168,7 @@ private:
 
 
 FontTestScene::FontTestScene()
-    : Scene( "Template" ) {
+    : SceneBase( "Template" ) {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 

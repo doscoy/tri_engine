@@ -128,14 +128,6 @@ bool safeValidateEventType(
 
 
 
-void safeTriggerEvent(
-    const EventPtr event
-) {
-
-    EventManagerBase::get()->triggerEvent(event);
-}
-
-
 
 
 
@@ -514,47 +506,5 @@ String EventManager::getEventNameByKey(
     return "not found.";
 }
 
-
-bool EventManager::triggerEvent(
-    const t3::EventPtr in_event
-) {
-    if (!isValidateEventType(in_event->eventType())) {
-        return false;
-    }
-
-    EventListenerMap::iterator it_wc = registry_.find(0);
-    
-    if (it_wc != registry_.end()) {
-        EventListenerTable& table = it_wc->second;
-        
-        EventListenerTable::iterator table_it = table.begin();
-        EventListenerTable::iterator table_end = table.end();
-        for (; table_it != table_end; ++table_it) {
-            (*table_it)->arg1(in_event.get());
-            (*table_it)->invoke();
-        }
-    }
-    
-    EventListenerMap::iterator it = registry_.find((in_event->eventType().key()));
-    
-    if (it == registry_.end()) {
-        return false;
-    }
-    
-    EventListenerTable& table = it->second;
-
-
-    bool processed = false;
-
-    EventListenerTable::iterator table_it = table.begin();
-    EventListenerTable::iterator table_end = table.end();
-    
-    for (; table_it != table_end; ++table_it) {
-            (*table_it)->arg1(in_event.get());
-        (*table_it)->invoke();
-    }
-
-    return processed;
-}
 
 TRI_CORE_NS_END

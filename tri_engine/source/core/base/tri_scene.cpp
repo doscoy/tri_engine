@@ -107,6 +107,7 @@ void SceneManager::debugRender() {
 
 void SceneManager::sceneChange()
 {
+    T3_RENDER_ASSERT();
     EventManagerBase::get()->dumpListeners();
     
     

@@ -7,6 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A24583B1B341FF600E928B9 /* jet_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A24583A1B341FF600E928B9 /* jet_scene.cpp */; };
+		3A24583C1B341FF600E928B9 /* jet_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A24583A1B341FF600E928B9 /* jet_scene.cpp */; };
+		3A24583F1B34201300E928B9 /* jet_scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A24583E1B34201300E928B9 /* jet_scene.hpp */; };
+		3A24585C1B345E4200E928B9 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458441B345E4200E928B9 /* png.c */; };
+		3A24585D1B345E4200E928B9 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458441B345E4200E928B9 /* png.c */; };
+		3A24585E1B345E4200E928B9 /* png.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A2458451B345E4200E928B9 /* png.h */; };
+		3A24585F1B345E4200E928B9 /* pngconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A2458461B345E4200E928B9 /* pngconf.h */; };
+		3A2458601B345E4200E928B9 /* pngdebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A2458471B345E4200E928B9 /* pngdebug.h */; };
+		3A2458611B345E4200E928B9 /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458481B345E4200E928B9 /* pngerror.c */; };
+		3A2458621B345E4200E928B9 /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458481B345E4200E928B9 /* pngerror.c */; };
+		3A2458631B345E4200E928B9 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458491B345E4200E928B9 /* pngget.c */; };
+		3A2458641B345E4200E928B9 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458491B345E4200E928B9 /* pngget.c */; };
+		3A2458651B345E4200E928B9 /* pnginfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A24584A1B345E4200E928B9 /* pnginfo.h */; };
+		3A2458661B345E4200E928B9 /* pnglibconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A24584B1B345E4200E928B9 /* pnglibconf.h */; };
+		3A2458671B345E4200E928B9 /* pngmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A24584C1B345E4200E928B9 /* pngmem.c */; };
+		3A2458681B345E4200E928B9 /* pngmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A24584C1B345E4200E928B9 /* pngmem.c */; };
+		3A2458691B345E4200E928B9 /* pngpread.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A24584D1B345E4200E928B9 /* pngpread.c */; };
+		3A24586A1B345E4200E928B9 /* pngpread.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A24584D1B345E4200E928B9 /* pngpread.c */; };
+		3A24586B1B345E4200E928B9 /* pngpriv.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A24584E1B345E4200E928B9 /* pngpriv.h */; };
+		3A24586C1B345E4200E928B9 /* pngread.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A24584F1B345E4200E928B9 /* pngread.c */; };
+		3A24586D1B345E4200E928B9 /* pngread.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A24584F1B345E4200E928B9 /* pngread.c */; };
+		3A24586E1B345E4200E928B9 /* pngrio.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458501B345E4200E928B9 /* pngrio.c */; };
+		3A24586F1B345E4200E928B9 /* pngrio.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458501B345E4200E928B9 /* pngrio.c */; };
+		3A2458701B345E4200E928B9 /* pngrtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458511B345E4200E928B9 /* pngrtran.c */; };
+		3A2458711B345E4200E928B9 /* pngrtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458511B345E4200E928B9 /* pngrtran.c */; };
+		3A2458721B345E4200E928B9 /* pngrutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458521B345E4200E928B9 /* pngrutil.c */; };
+		3A2458731B345E4200E928B9 /* pngrutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458521B345E4200E928B9 /* pngrutil.c */; };
+		3A2458741B345E4200E928B9 /* pngset.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458531B345E4200E928B9 /* pngset.c */; };
+		3A2458751B345E4200E928B9 /* pngset.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458531B345E4200E928B9 /* pngset.c */; };
+		3A2458761B345E4200E928B9 /* pngstruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A2458541B345E4200E928B9 /* pngstruct.h */; };
+		3A2458771B345E4200E928B9 /* pngtest.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458551B345E4200E928B9 /* pngtest.c */; };
+		3A2458781B345E4200E928B9 /* pngtest.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458551B345E4200E928B9 /* pngtest.c */; };
+		3A2458791B345E4200E928B9 /* pngtrans.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458561B345E4200E928B9 /* pngtrans.c */; };
+		3A24587A1B345E4200E928B9 /* pngtrans.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458561B345E4200E928B9 /* pngtrans.c */; };
+		3A24587B1B345E4200E928B9 /* pngwio.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458571B345E4200E928B9 /* pngwio.c */; };
+		3A24587C1B345E4200E928B9 /* pngwio.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458571B345E4200E928B9 /* pngwio.c */; };
+		3A24587D1B345E4200E928B9 /* pngwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458581B345E4200E928B9 /* pngwrite.c */; };
+		3A24587E1B345E4200E928B9 /* pngwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458581B345E4200E928B9 /* pngwrite.c */; };
+		3A24587F1B345E4200E928B9 /* pngwtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458591B345E4200E928B9 /* pngwtran.c */; };
+		3A2458801B345E4200E928B9 /* pngwtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A2458591B345E4200E928B9 /* pngwtran.c */; };
+		3A2458811B345E4200E928B9 /* pngwutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A24585A1B345E4200E928B9 /* pngwutil.c */; };
+		3A2458821B345E4200E928B9 /* pngwutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A24585A1B345E4200E928B9 /* pngwutil.c */; };
+		3A2458831B345E4200E928B9 /* picojson.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A24585B1B345E4200E928B9 /* picojson.h */; };
 		3A480C771B2C8C72001064BB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A480C761B2C8C72001064BB /* UIKit.framework */; };
 		3A480DE21B2D4159001064BB /* tri_audio.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480C871B2D4158001064BB /* tri_audio.hpp */; };
 		3A480DE31B2D4159001064BB /* tri_audio_handle.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480C881B2D4159001064BB /* tri_audio_handle.hpp */; };
@@ -167,27 +210,6 @@
 		3A480E7F1B2D4159001064BB /* jet_textbox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D321B2D4159001064BB /* jet_textbox.hpp */; };
 		3A480E801B2D4159001064BB /* jet_config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D331B2D4159001064BB /* jet_config.hpp */; };
 		3A480E811B2D4159001064BB /* jet_engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D341B2D4159001064BB /* jet_engine.hpp */; };
-		3A480E821B2D4159001064BB /* picojson.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D481B2D4159001064BB /* picojson.h */; };
-		3A480E831B2D4159001064BB /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A480D4A1B2D4159001064BB /* libpng.a */; };
-		3A480E841B2D4159001064BB /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A480D4A1B2D4159001064BB /* libpng.a */; };
-		3A480E851B2D4159001064BB /* png.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D4B1B2D4159001064BB /* png.h */; };
-		3A480E861B2D4159001064BB /* pngconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D4C1B2D4159001064BB /* pngconf.h */; };
-		3A480E871B2D4159001064BB /* pnglibconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D4D1B2D4159001064BB /* pnglibconf.h */; };
-		3A480E881B2D4159001064BB /* glew.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D501B2D4159001064BB /* glew.h */; };
-		3A480E891B2D4159001064BB /* glxew.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D511B2D4159001064BB /* glxew.h */; };
-		3A480E8A1B2D4159001064BB /* wglew.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D521B2D4159001064BB /* wglew.h */; };
-		3A480E8B1B2D4159001064BB /* GL.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D541B2D4159001064BB /* GL.h */; };
-		3A480E8D1B2D4159001064BB /* glfw3native.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D561B2D4159001064BB /* glfw3native.h */; };
-		3A480E8E1B2D4159001064BB /* GLU.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D571B2D4159001064BB /* GLU.h */; };
-		3A480E8F1B2D4159001064BB /* png.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D591B2D4159001064BB /* png.h */; };
-		3A480E901B2D4159001064BB /* pngconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D5A1B2D4159001064BB /* pngconf.h */; };
-		3A480E911B2D4159001064BB /* pngdebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D5B1B2D4159001064BB /* pngdebug.h */; };
-		3A480E921B2D4159001064BB /* pnginfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D5C1B2D4159001064BB /* pnginfo.h */; };
-		3A480E931B2D4159001064BB /* pnglibconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D5D1B2D4159001064BB /* pnglibconf.h */; };
-		3A480E941B2D4159001064BB /* pngpriv.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D5E1B2D4159001064BB /* pngpriv.h */; };
-		3A480E951B2D4159001064BB /* pngstruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D5F1B2D4159001064BB /* pngstruct.h */; };
-		3A480E961B2D4159001064BB /* zconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D611B2D4159001064BB /* zconf.h */; };
-		3A480E971B2D4159001064BB /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D621B2D4159001064BB /* zlib.h */; };
 		3A480E981B2D4159001064BB /* tri_engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D631B2D4159001064BB /* tri_engine.hpp */; };
 		3A480E991B2D4159001064BB /* tri_audio_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D671B2D4159001064BB /* tri_audio_handle.cpp */; };
 		3A480E9A1B2D4159001064BB /* tri_audio_handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D671B2D4159001064BB /* tri_audio_handle.cpp */; };
@@ -356,7 +378,6 @@
 		3A480F431B2D4159001064BB /* cross_audio_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DCA1B2D4159001064BB /* cross_audio_system.cpp */; };
 		3A480F441B2D4159001064BB /* cross_audio_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DCA1B2D4159001064BB /* cross_audio_system.cpp */; };
 		3A480F451B2D4159001064BB /* cross_os.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DCB1B2D4159001064BB /* cross_os.mm */; };
-		3A480F471B2D4159001064BB /* cross_render_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DCC1B2D4159001064BB /* cross_render_system.cpp */; };
 		3A480F491B2D4159001064BB /* cross_view_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DCD1B2D4159001064BB /* cross_view_controller.mm */; };
 		3A480F4C1B2D4159001064BB /* cross_accelerometer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DCF1B2D4159001064BB /* cross_accelerometer.cpp */; };
 		3A480F4E1B2D4159001064BB /* cross_audio_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DD01B2D4159001064BB /* cross_audio_system.cpp */; };
@@ -376,6 +397,7 @@
 		3A480F661B2D4872001064BB /* cross_os_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DC51B2D4159001064BB /* cross_os_glfw.cpp */; };
 		3A480F671B2D4872001064BB /* cross_render_system_gl4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DC61B2D4159001064BB /* cross_render_system_gl4.cpp */; };
 		3AC2EEB11B08860E00F73048 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC2EEB01B08860E00F73048 /* libglfw.dylib */; };
+		3AEF1DB41B357C6A0029344E /* tri_framebuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3AEF1DB31B357C6A0029344E /* tri_framebuffer.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -391,6 +413,32 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A24583A1B341FF600E928B9 /* jet_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jet_scene.cpp; sourceTree = "<group>"; };
+		3A24583E1B34201300E928B9 /* jet_scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jet_scene.hpp; sourceTree = "<group>"; };
+		3A2458441B345E4200E928B9 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
+		3A2458451B345E4200E928B9 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
+		3A2458461B345E4200E928B9 /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
+		3A2458471B345E4200E928B9 /* pngdebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngdebug.h; sourceTree = "<group>"; };
+		3A2458481B345E4200E928B9 /* pngerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngerror.c; sourceTree = "<group>"; };
+		3A2458491B345E4200E928B9 /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngget.c; sourceTree = "<group>"; };
+		3A24584A1B345E4200E928B9 /* pnginfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnginfo.h; sourceTree = "<group>"; };
+		3A24584B1B345E4200E928B9 /* pnglibconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnglibconf.h; sourceTree = "<group>"; };
+		3A24584C1B345E4200E928B9 /* pngmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngmem.c; sourceTree = "<group>"; };
+		3A24584D1B345E4200E928B9 /* pngpread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngpread.c; sourceTree = "<group>"; };
+		3A24584E1B345E4200E928B9 /* pngpriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngpriv.h; sourceTree = "<group>"; };
+		3A24584F1B345E4200E928B9 /* pngread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngread.c; sourceTree = "<group>"; };
+		3A2458501B345E4200E928B9 /* pngrio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrio.c; sourceTree = "<group>"; };
+		3A2458511B345E4200E928B9 /* pngrtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrtran.c; sourceTree = "<group>"; };
+		3A2458521B345E4200E928B9 /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrutil.c; sourceTree = "<group>"; };
+		3A2458531B345E4200E928B9 /* pngset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngset.c; sourceTree = "<group>"; };
+		3A2458541B345E4200E928B9 /* pngstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngstruct.h; sourceTree = "<group>"; };
+		3A2458551B345E4200E928B9 /* pngtest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngtest.c; sourceTree = "<group>"; };
+		3A2458561B345E4200E928B9 /* pngtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngtrans.c; sourceTree = "<group>"; };
+		3A2458571B345E4200E928B9 /* pngwio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwio.c; sourceTree = "<group>"; };
+		3A2458581B345E4200E928B9 /* pngwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwrite.c; sourceTree = "<group>"; };
+		3A2458591B345E4200E928B9 /* pngwtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwtran.c; sourceTree = "<group>"; };
+		3A24585A1B345E4200E928B9 /* pngwutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwutil.c; sourceTree = "<group>"; };
+		3A24585B1B345E4200E928B9 /* picojson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = picojson.h; sourceTree = "<group>"; };
 		3A480C761B2C8C72001064BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3A480C871B2D4158001064BB /* tri_audio.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_audio.hpp; sourceTree = "<group>"; };
 		3A480C881B2D4159001064BB /* tri_audio_handle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_audio_handle.hpp; sourceTree = "<group>"; };
@@ -568,27 +616,6 @@
 		3A480D431B2D4159001064BB /* tri_simple_tex.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_simple_tex.vsh; sourceTree = "<group>"; };
 		3A480D441B2D4159001064BB /* tri_sprite.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_sprite.fsh; sourceTree = "<group>"; };
 		3A480D451B2D4159001064BB /* tri_sprite.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_sprite.vsh; sourceTree = "<group>"; };
-		3A480D481B2D4159001064BB /* picojson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = picojson.h; sourceTree = "<group>"; };
-		3A480D4A1B2D4159001064BB /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpng.a; sourceTree = "<group>"; };
-		3A480D4B1B2D4159001064BB /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
-		3A480D4C1B2D4159001064BB /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
-		3A480D4D1B2D4159001064BB /* pnglibconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnglibconf.h; sourceTree = "<group>"; };
-		3A480D501B2D4159001064BB /* glew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glew.h; sourceTree = "<group>"; };
-		3A480D511B2D4159001064BB /* glxew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glxew.h; sourceTree = "<group>"; };
-		3A480D521B2D4159001064BB /* wglew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wglew.h; sourceTree = "<group>"; };
-		3A480D541B2D4159001064BB /* GL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GL.h; sourceTree = "<group>"; };
-		3A480D551B2D4159001064BB /* glfw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfw3.h; sourceTree = "<group>"; };
-		3A480D561B2D4159001064BB /* glfw3native.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfw3native.h; sourceTree = "<group>"; };
-		3A480D571B2D4159001064BB /* GLU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLU.h; sourceTree = "<group>"; };
-		3A480D591B2D4159001064BB /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
-		3A480D5A1B2D4159001064BB /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
-		3A480D5B1B2D4159001064BB /* pngdebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngdebug.h; sourceTree = "<group>"; };
-		3A480D5C1B2D4159001064BB /* pnginfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnginfo.h; sourceTree = "<group>"; };
-		3A480D5D1B2D4159001064BB /* pnglibconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnglibconf.h; sourceTree = "<group>"; };
-		3A480D5E1B2D4159001064BB /* pngpriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngpriv.h; sourceTree = "<group>"; };
-		3A480D5F1B2D4159001064BB /* pngstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngstruct.h; sourceTree = "<group>"; };
-		3A480D611B2D4159001064BB /* zconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zconf.h; sourceTree = "<group>"; };
-		3A480D621B2D4159001064BB /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
 		3A480D631B2D4159001064BB /* tri_engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_engine.hpp; sourceTree = "<group>"; };
 		3A480D671B2D4159001064BB /* tri_audio_handle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_audio_handle.cpp; sourceTree = "<group>"; };
 		3A480D681B2D4159001064BB /* tri_audio_resource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_audio_resource.cpp; sourceTree = "<group>"; };
@@ -677,7 +704,6 @@
 		3A480DC91B2D4159001064BB /* cross_accelerometer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cross_accelerometer.mm; sourceTree = "<group>"; };
 		3A480DCA1B2D4159001064BB /* cross_audio_system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_audio_system.cpp; sourceTree = "<group>"; };
 		3A480DCB1B2D4159001064BB /* cross_os.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cross_os.mm; sourceTree = "<group>"; };
-		3A480DCC1B2D4159001064BB /* cross_render_system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_render_system.cpp; sourceTree = "<group>"; };
 		3A480DCD1B2D4159001064BB /* cross_view_controller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cross_view_controller.mm; sourceTree = "<group>"; };
 		3A480DCF1B2D4159001064BB /* cross_accelerometer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_accelerometer.cpp; sourceTree = "<group>"; };
 		3A480DD01B2D4159001064BB /* cross_audio_system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_audio_system.cpp; sourceTree = "<group>"; };
@@ -698,6 +724,7 @@
 		3AC2EE481B084DB800F73048 /* libtri_engine_osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtri_engine_osx.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC2EEAE1B0864B700F73048 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		3AC2EEB01B08860E00F73048 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../opt/local/lib/libglfw.dylib; sourceTree = "<group>"; };
+		3AEF1DB31B357C6A0029344E /* tri_framebuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_framebuffer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -706,7 +733,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A480C771B2C8C72001064BB /* UIKit.framework in Frameworks */,
-				3A480E831B2D4159001064BB /* libpng.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,16 +741,80 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AC2EEB11B08860E00F73048 /* libglfw.dylib in Frameworks */,
-				3A480E841B2D4159001064BB /* libpng.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A2458391B341FF600E928B9 /* scene */ = {
+			isa = PBXGroup;
+			children = (
+				3A24583A1B341FF600E928B9 /* jet_scene.cpp */,
+			);
+			path = scene;
+			sourceTree = "<group>";
+		};
+		3A24583D1B34201300E928B9 /* scene */ = {
+			isa = PBXGroup;
+			children = (
+				3A24583E1B34201300E928B9 /* jet_scene.hpp */,
+			);
+			path = scene;
+			sourceTree = "<group>";
+		};
+		3A2458411B345E2A00E928B9 /* third_party_lib */ = {
+			isa = PBXGroup;
+			children = (
+				3A2458421B345E4200E928B9 /* common */,
+			);
+			name = third_party_lib;
+			sourceTree = "<group>";
+		};
+		3A2458421B345E4200E928B9 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				3A2458431B345E4200E928B9 /* libpng */,
+				3A24585B1B345E4200E928B9 /* picojson.h */,
+			);
+			name = common;
+			path = third_party_lib/common;
+			sourceTree = "<group>";
+		};
+		3A2458431B345E4200E928B9 /* libpng */ = {
+			isa = PBXGroup;
+			children = (
+				3A2458441B345E4200E928B9 /* png.c */,
+				3A2458451B345E4200E928B9 /* png.h */,
+				3A2458461B345E4200E928B9 /* pngconf.h */,
+				3A2458471B345E4200E928B9 /* pngdebug.h */,
+				3A2458481B345E4200E928B9 /* pngerror.c */,
+				3A2458491B345E4200E928B9 /* pngget.c */,
+				3A24584A1B345E4200E928B9 /* pnginfo.h */,
+				3A24584B1B345E4200E928B9 /* pnglibconf.h */,
+				3A24584C1B345E4200E928B9 /* pngmem.c */,
+				3A24584D1B345E4200E928B9 /* pngpread.c */,
+				3A24584E1B345E4200E928B9 /* pngpriv.h */,
+				3A24584F1B345E4200E928B9 /* pngread.c */,
+				3A2458501B345E4200E928B9 /* pngrio.c */,
+				3A2458511B345E4200E928B9 /* pngrtran.c */,
+				3A2458521B345E4200E928B9 /* pngrutil.c */,
+				3A2458531B345E4200E928B9 /* pngset.c */,
+				3A2458541B345E4200E928B9 /* pngstruct.h */,
+				3A2458551B345E4200E928B9 /* pngtest.c */,
+				3A2458561B345E4200E928B9 /* pngtrans.c */,
+				3A2458571B345E4200E928B9 /* pngwio.c */,
+				3A2458581B345E4200E928B9 /* pngwrite.c */,
+				3A2458591B345E4200E928B9 /* pngwtran.c */,
+				3A24585A1B345E4200E928B9 /* pngwutil.c */,
+			);
+			path = libpng;
+			sourceTree = "<group>";
+		};
 		3A480C831B2D4158001064BB /* tri_engine */ = {
 			isa = PBXGroup;
 			children = (
+				3A2458411B345E2A00E928B9 /* third_party_lib */,
 				3A480C841B2D4158001064BB /* include */,
 				3A480D641B2D4159001064BB /* source */,
 				3A480DDE1B2D4159001064BB /* starter */,
@@ -740,7 +830,6 @@
 				3A480D201B2D4159001064BB /* cross */,
 				3A480D2C1B2D4159001064BB /* jet */,
 				3A480D351B2D4159001064BB /* shader */,
-				3A480D461B2D4159001064BB /* third_party_lib */,
 				3A480D631B2D4159001064BB /* tri_engine.hpp */,
 			);
 			path = include;
@@ -881,6 +970,7 @@
 				3A480CE11B2D4159001064BB /* tri_transform_node.hpp */,
 				3A480CE21B2D4159001064BB /* tri_vertex_buffer.hpp */,
 				3A480CE31B2D4159001064BB /* tri_vertex_types.hpp */,
+				3AEF1DB31B357C6A0029344E /* tri_framebuffer.hpp */,
 			);
 			path = graphics;
 			sourceTree = "<group>";
@@ -1012,6 +1102,7 @@
 		3A480D2C1B2D4159001064BB /* jet */ = {
 			isa = PBXGroup;
 			children = (
+				3A24583D1B34201300E928B9 /* scene */,
 				3A480D2D1B2D4159001064BB /* gui */,
 				3A480D331B2D4159001064BB /* jet_config.hpp */,
 				3A480D341B2D4159001064BB /* jet_engine.hpp */,
@@ -1052,90 +1143,6 @@
 				3A480D451B2D4159001064BB /* tri_sprite.vsh */,
 			);
 			path = shader;
-			sourceTree = "<group>";
-		};
-		3A480D461B2D4159001064BB /* third_party_lib */ = {
-			isa = PBXGroup;
-			children = (
-				3A480D471B2D4159001064BB /* common */,
-				3A480D491B2D4159001064BB /* ios */,
-				3A480D4E1B2D4159001064BB /* win */,
-			);
-			path = third_party_lib;
-			sourceTree = "<group>";
-		};
-		3A480D471B2D4159001064BB /* common */ = {
-			isa = PBXGroup;
-			children = (
-				3A480D481B2D4159001064BB /* picojson.h */,
-			);
-			path = common;
-			sourceTree = "<group>";
-		};
-		3A480D491B2D4159001064BB /* ios */ = {
-			isa = PBXGroup;
-			children = (
-				3A480D4A1B2D4159001064BB /* libpng.a */,
-				3A480D4B1B2D4159001064BB /* png.h */,
-				3A480D4C1B2D4159001064BB /* pngconf.h */,
-				3A480D4D1B2D4159001064BB /* pnglibconf.h */,
-			);
-			path = ios;
-			sourceTree = "<group>";
-		};
-		3A480D4E1B2D4159001064BB /* win */ = {
-			isa = PBXGroup;
-			children = (
-				3A480D4F1B2D4159001064BB /* glew */,
-				3A480D531B2D4159001064BB /* GLFW */,
-				3A480D581B2D4159001064BB /* lpng */,
-				3A480D601B2D4159001064BB /* zlib */,
-			);
-			path = win;
-			sourceTree = "<group>";
-		};
-		3A480D4F1B2D4159001064BB /* glew */ = {
-			isa = PBXGroup;
-			children = (
-				3A480D501B2D4159001064BB /* glew.h */,
-				3A480D511B2D4159001064BB /* glxew.h */,
-				3A480D521B2D4159001064BB /* wglew.h */,
-			);
-			path = glew;
-			sourceTree = "<group>";
-		};
-		3A480D531B2D4159001064BB /* GLFW */ = {
-			isa = PBXGroup;
-			children = (
-				3A480D541B2D4159001064BB /* GL.h */,
-				3A480D551B2D4159001064BB /* glfw3.h */,
-				3A480D561B2D4159001064BB /* glfw3native.h */,
-				3A480D571B2D4159001064BB /* GLU.h */,
-			);
-			path = GLFW;
-			sourceTree = "<group>";
-		};
-		3A480D581B2D4159001064BB /* lpng */ = {
-			isa = PBXGroup;
-			children = (
-				3A480D591B2D4159001064BB /* png.h */,
-				3A480D5A1B2D4159001064BB /* pngconf.h */,
-				3A480D5B1B2D4159001064BB /* pngdebug.h */,
-				3A480D5C1B2D4159001064BB /* pnginfo.h */,
-				3A480D5D1B2D4159001064BB /* pnglibconf.h */,
-				3A480D5E1B2D4159001064BB /* pngpriv.h */,
-				3A480D5F1B2D4159001064BB /* pngstruct.h */,
-			);
-			path = lpng;
-			sourceTree = "<group>";
-		};
-		3A480D601B2D4159001064BB /* zlib */ = {
-			isa = PBXGroup;
-			children = (
-				3A480D611B2D4159001064BB /* zconf.h */,
-				3A480D621B2D4159001064BB /* zlib.h */,
-			);
-			path = zlib;
 			sourceTree = "<group>";
 		};
 		3A480D641B2D4159001064BB /* source */ = {
@@ -1359,7 +1366,6 @@
 				3A480DC91B2D4159001064BB /* cross_accelerometer.mm */,
 				3A480DCA1B2D4159001064BB /* cross_audio_system.cpp */,
 				3A480DCB1B2D4159001064BB /* cross_os.mm */,
-				3A480DCC1B2D4159001064BB /* cross_render_system.cpp */,
 				3A480DCD1B2D4159001064BB /* cross_view_controller.mm */,
 			);
 			path = ios;
@@ -1390,6 +1396,7 @@
 		3A480DD81B2D4159001064BB /* jet */ = {
 			isa = PBXGroup;
 			children = (
+				3A2458391B341FF600E928B9 /* scene */,
 				3A480DD91B2D4159001064BB /* gui */,
 			);
 			path = jet;
@@ -1459,12 +1466,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A480E881B2D4159001064BB /* glew.h in Headers */,
 				3A480E6E1B2D4159001064BB /* tri_util.hpp in Headers */,
 				3A480E091B2D4159001064BB /* tri_trace.hpp in Headers */,
 				3A480E1D1B2D4159001064BB /* tri_cinema_layer.hpp in Headers */,
 				3A480E211B2D4159001064BB /* tri_fade_layer.hpp in Headers */,
-				3A480E971B2D4159001064BB /* zlib.h in Headers */,
 				3A480E121B2D4159001064BB /* tri_collision_manager.hpp in Headers */,
 				3A480E6A1B2D4159001064BB /* tri_text_loader.hpp in Headers */,
 				3A480E101B2D4159001064BB /* tri_collision.hpp in Headers */,
@@ -1487,17 +1492,17 @@
 				3A480DEE1B2D4159001064BB /* tri_resource.hpp in Headers */,
 				3A480E7B1B2D4159001064BB /* jet_button.hpp in Headers */,
 				3A480DF21B2D4159001064BB /* tri_std.hpp in Headers */,
+				3A2458661B345E4200E928B9 /* pnglibconf.h in Headers */,
 				3A480E4F1B2D4159001064BB /* tri_matrix.hpp in Headers */,
-				3A480E8F1B2D4159001064BB /* png.h in Headers */,
 				3A480E571B2D4159001064BB /* tri_random_mseq.hpp in Headers */,
 				3A480DE91B2D4159001064BB /* tri_director.hpp in Headers */,
 				3A480E1A1B2D4159001064BB /* tri_transform.hpp in Headers */,
 				3A480E131B2D4159001064BB /* tri_frustum.hpp in Headers */,
 				3A480E4C1B2D4159001064BB /* tri_math_define.hpp in Headers */,
+				3A24586B1B345E4200E928B9 /* pngpriv.h in Headers */,
 				3A480DEC1B2D4159001064BB /* tri_font_glyph.hpp in Headers */,
 				3A480E261B2D4159001064BB /* tri_material.hpp in Headers */,
 				3A480DE21B2D4159001064BB /* tri_audio.hpp in Headers */,
-				3A480E8D1B2D4159001064BB /* glfw3native.h in Headers */,
 				3A480E421B2D4159001064BB /* tri_heap_manager.hpp in Headers */,
 				3A480E791B2D4159001064BB /* cross_types.hpp in Headers */,
 				3A480DFC1B2D4159001064BB /* tri_debug_log_buffer.hpp in Headers */,
@@ -1505,7 +1510,6 @@
 				3A480E631B2D4159001064BB /* tri_json.hpp in Headers */,
 				3A480E081B2D4159001064BB /* tri_print.hpp in Headers */,
 				3A480E481B2D4159001064BB /* tri_kernel.hpp in Headers */,
-				3A480E961B2D4159001064BB /* zconf.h in Headers */,
 				3A480E591B2D4159001064BB /* tri_random_number_generator.hpp in Headers */,
 				3A480E641B2D4159001064BB /* tri_method_callback.hpp in Headers */,
 				3A480E381B2D4159001064BB /* tri_transform_node.hpp in Headers */,
@@ -1514,11 +1518,14 @@
 				3A480E031B2D4159001064BB /* tri_debugmenu_items.hpp in Headers */,
 				3A480E191B2D4159001064BB /* tri_sphere.hpp in Headers */,
 				3A480DEF1B2D4159001064BB /* tri_resource_manager.hpp in Headers */,
+				3A24583F1B34201300E928B9 /* jet_scene.hpp in Headers */,
 				3A480E5F1B2D4159001064BB /* tri_bytesize.hpp in Headers */,
 				3A480E441B2D4159001064BB /* tri_memory_pool.hpp in Headers */,
 				3A480E651B2D4159001064BB /* tri_nameable.hpp in Headers */,
 				3A480E3B1B2D4159001064BB /* tri_file.hpp in Headers */,
 				3A480E3A1B2D4159001064BB /* tri_vertex_types.hpp in Headers */,
+				3A2458601B345E4200E928B9 /* pngdebug.h in Headers */,
+				3A2458761B345E4200E928B9 /* pngstruct.h in Headers */,
 				3A480E051B2D4159001064BB /* tri_debugmenu_scene_louncher.hpp in Headers */,
 				3A480E3E1B2D4159001064BB /* tri_io.hpp in Headers */,
 				3A480E741B2D4159001064BB /* cross_define.hpp in Headers */,
@@ -1529,13 +1536,13 @@
 				3A480E511B2D4159001064BB /* tri_quaternion.hpp in Headers */,
 				3A480DF81B2D4159001064BB /* core_config.hpp in Headers */,
 				3A480E351B2D4159001064BB /* tri_test_entity.hpp in Headers */,
-				3A480E891B2D4159001064BB /* glxew.h in Headers */,
 				3A480DF61B2D4159001064BB /* tri_task_manager.hpp in Headers */,
 				3A480E331B2D4159001064BB /* tri_sprite_renderer.hpp in Headers */,
 				3A480DF91B2D4159001064BB /* core_engine.hpp in Headers */,
 				3A480E171B2D4159001064BB /* tri_rectangle.hpp in Headers */,
 				3A480DF41B2D4159001064BB /* tri_task.hpp in Headers */,
 				3A480DF31B2D4159001064BB /* tri_system_events.hpp in Headers */,
+				3AEF1DB41B357C6A0029344E /* tri_framebuffer.hpp in Headers */,
 				3A480E5C1B2D4159001064BB /* tri_any.hpp in Headers */,
 				3A480E451B2D4159001064BB /* tri_new.hpp in Headers */,
 				3A480E1C1B2D4159001064BB /* tri_camera_updater.hpp in Headers */,
@@ -1543,7 +1550,6 @@
 				3A480E401B2D4159001064BB /* tri_pointing.hpp in Headers */,
 				3A480E0F1B2D4159001064BB /* tri_collider.hpp in Headers */,
 				3A480E661B2D4159001064BB /* tri_signature.hpp in Headers */,
-				3A480E901B2D4159001064BB /* pngconf.h in Headers */,
 				3A480E671B2D4159001064BB /* tri_singleton.hpp in Headers */,
 				3A480E711B2D4159001064BB /* cross_audio_system.hpp in Headers */,
 				3A480DEB1B2D4159001064BB /* tri_event_manager.hpp in Headers */,
@@ -1559,11 +1565,10 @@
 				3A480E291B2D4159001064BB /* tri_object.hpp in Headers */,
 				3A480E271B2D4159001064BB /* tri_mesh.hpp in Headers */,
 				3A480E0B1B2D4159001064BB /* tri_workbar.hpp in Headers */,
-				3A480E931B2D4159001064BB /* pnglibconf.h in Headers */,
 				3A480E6F1B2D4159001064BB /* tri_zipfile.hpp in Headers */,
 				3A480E221B2D4159001064BB /* tri_gfx.hpp in Headers */,
-				3A480E871B2D4159001064BB /* pnglibconf.h in Headers */,
-				3A480E851B2D4159001064BB /* png.h in Headers */,
+				3A2458831B345E4200E928B9 /* picojson.h in Headers */,
+				3A24585E1B345E4200E928B9 /* png.h in Headers */,
 				3A480E0A1B2D4159001064BB /* tri_virtual_pad.hpp in Headers */,
 				3A480DFA1B2D4159001064BB /* tri_assert.hpp in Headers */,
 				3A480E621B2D4159001064BB /* tri_hash_string.hpp in Headers */,
@@ -1580,7 +1585,7 @@
 				3A480E561B2D4159001064BB /* tri_random_linear_congruential.hpp in Headers */,
 				3A480DE71B2D4159001064BB /* tri_application.hpp in Headers */,
 				3A480E6D1B2D4159001064BB /* tri_utf8.hpp in Headers */,
-				3A480E861B2D4159001064BB /* pngconf.h in Headers */,
+				3A24585F1B345E4200E928B9 /* pngconf.h in Headers */,
 				3A480E0C1B2D4159001064BB /* tri_aabb.hpp in Headers */,
 				3A480DFE1B2D4159001064BB /* tri_debug_string_buffer.hpp in Headers */,
 				3A480E231B2D4159001064BB /* tri_gfx_types.hpp in Headers */,
@@ -1588,18 +1593,15 @@
 				3A480DEA1B2D4159001064BB /* tri_event.hpp in Headers */,
 				3A480E301B2D4159001064BB /* tri_shader.hpp in Headers */,
 				3A480DFD1B2D4159001064BB /* tri_debug_log_layer.hpp in Headers */,
-				3A480E8E1B2D4159001064BB /* GLU.h in Headers */,
 				3A480E5D1B2D4159001064BB /* tri_archive.hpp in Headers */,
 				3A480E321B2D4159001064BB /* tri_sprite_layer.hpp in Headers */,
 				3A480E201B2D4159001064BB /* tri_entity.hpp in Headers */,
+				3A2458651B345E4200E928B9 /* pnginfo.h in Headers */,
 				3A480DE61B2D4159001064BB /* tri_wav.hpp in Headers */,
 				3A480E781B2D4159001064BB /* cross_sdk.hpp in Headers */,
-				3A480E8A1B2D4159001064BB /* wglew.h in Headers */,
 				3A480E811B2D4159001064BB /* jet_engine.hpp in Headers */,
 				3A480E341B2D4159001064BB /* tri_surface.hpp in Headers */,
 				3A480E411B2D4159001064BB /* tri_heap.hpp in Headers */,
-				3A480E951B2D4159001064BB /* pngstruct.h in Headers */,
-				3A480E911B2D4159001064BB /* pngdebug.h in Headers */,
 				3A480E021B2D4159001064BB /* tri_debugmenu_frame.hpp in Headers */,
 				3A480E7F1B2D4159001064BB /* jet_textbox.hpp in Headers */,
 				3A480E3C1B2D4159001064BB /* tri_filepath.hpp in Headers */,
@@ -1616,7 +1618,6 @@
 				3A480E721B2D4159001064BB /* cross_config.hpp in Headers */,
 				3A480E1F1B2D4159001064BB /* tri_draw_layer.hpp in Headers */,
 				3A480E5A1B2D4159001064BB /* tri_random_well.hpp in Headers */,
-				3A480E821B2D4159001064BB /* picojson.h in Headers */,
 				3A480DFF1B2D4159001064BB /* tri_debug_string_layer.hpp in Headers */,
 				3A480E071B2D4159001064BB /* tri_draw_primitive.hpp in Headers */,
 				3A480E461B2D4159001064BB /* tri_safe_delete.hpp in Headers */,
@@ -1625,7 +1626,6 @@
 				3A480DF11B2D4159001064BB /* tri_scene.hpp in Headers */,
 				3A480E161B2D4159001064BB /* tri_point_collider.hpp in Headers */,
 				3A480DF51B2D4159001064BB /* tri_task_generator.hpp in Headers */,
-				3A480E941B2D4159001064BB /* pngpriv.h in Headers */,
 				3A480E001B2D4159001064BB /* tri_debug_writer.hpp in Headers */,
 				3A480E2F1B2D4159001064BB /* tri_scene_node.hpp in Headers */,
 				3A480E4E1B2D4159001064BB /* tri_math_util.hpp in Headers */,
@@ -1633,9 +1633,7 @@
 				3A480E701B2D4159001064BB /* cross_accelerometer.hpp in Headers */,
 				3A480E6B1B2D4159001064BB /* tri_uncopyable.hpp in Headers */,
 				3A480E801B2D4159001064BB /* jet_config.hpp in Headers */,
-				3A480E921B2D4159001064BB /* pnginfo.h in Headers */,
 				3A480E431B2D4159001064BB /* tri_memory.hpp in Headers */,
-				3A480E8B1B2D4159001064BB /* GL.h in Headers */,
 				3A480E2D1B2D4159001064BB /* tri_renderable.hpp in Headers */,
 				3A480E1E1B2D4159001064BB /* tri_color.hpp in Headers */,
 			);
@@ -1725,6 +1723,7 @@
 				3A480EFB1B2D4159001064BB /* tri_shader.cpp in Sources */,
 				3A480F191B2D4159001064BB /* tri_new.cpp in Sources */,
 				3A480F431B2D4159001064BB /* cross_audio_system.cpp in Sources */,
+				3A24583B1B341FF600E928B9 /* jet_scene.cpp in Sources */,
 				3A480F111B2D4159001064BB /* tri_pointing.cpp in Sources */,
 				3A480E9F1B2D4159001064BB /* tri_wav.cpp in Sources */,
 				3A480EE31B2D4159001064BB /* tri_camera_updater.cpp in Sources */,
@@ -1745,24 +1744,31 @@
 				3A480EA91B2D4159001064BB /* tri_resource.cpp in Sources */,
 				3A480EFD1B2D4159001064BB /* tri_sprite.cpp in Sources */,
 				3A480F0B1B2D4159001064BB /* tri_file.cpp in Sources */,
+				3A24586C1B345E4200E928B9 /* pngread.c in Sources */,
 				3A480F151B2D4159001064BB /* tri_heap_manager.cpp in Sources */,
 				3A480EA31B2D4159001064BB /* tri_director.cpp in Sources */,
 				3A480EC91B2D4159001064BB /* tri_draw_primitive.cpp in Sources */,
 				3A480F491B2D4159001064BB /* cross_view_controller.mm in Sources */,
 				3A480E9D1B2D4159001064BB /* tri_streaming_player.cpp in Sources */,
+				3A24586E1B345E4200E928B9 /* pngrio.c in Sources */,
 				3A480EC51B2D4159001064BB /* tri_debugmenu_label.cpp in Sources */,
 				3A480EAF1B2D4159001064BB /* tri_task_manager.cpp in Sources */,
 				3A480EBF1B2D4159001064BB /* tri_debugmenu.cpp in Sources */,
+				3A2458671B345E4200E928B9 /* pngmem.c in Sources */,
 				3A480F611B2D4159001064BB /* jet_textbox.cpp in Sources */,
 				3A480F1D1B2D4159001064BB /* tri_bezier_curve.cpp in Sources */,
 				3A480F371B2D4159001064BB /* tri_utf8.cpp in Sources */,
+				3A2458611B345E4200E928B9 /* pngerror.c in Sources */,
 				3A480EAB1B2D4159001064BB /* tri_scene.cpp in Sources */,
+				3A24587F1B345E4200E928B9 /* pngwtran.c in Sources */,
+				3A2458721B345E4200E928B9 /* pngrutil.c in Sources */,
 				3A480EA51B2D4159001064BB /* tri_event_manager.cpp in Sources */,
 				3A480F5F1B2D4159001064BB /* jet_swap_button.cpp in Sources */,
 				3A480EA11B2D4159001064BB /* tri_application.cpp in Sources */,
 				3A480F031B2D4159001064BB /* tri_surface.cpp in Sources */,
 				3A480F2F1B2D4159001064BB /* tri_counter.cpp in Sources */,
 				3A480EB71B2D4159001064BB /* tri_debug_log_layer.cpp in Sources */,
+				3A2458791B345E4200E928B9 /* pngtrans.c in Sources */,
 				3A480E9B1B2D4159001064BB /* tri_audio_resource.cpp in Sources */,
 				3A480ECB1B2D4159001064BB /* tri_print.cpp in Sources */,
 				3A480F171B2D4159001064BB /* tri_memory_pool.cpp in Sources */,
@@ -1773,25 +1779,32 @@
 				3A480EAD1B2D4159001064BB /* tri_system_events.cpp in Sources */,
 				3A480E991B2D4159001064BB /* tri_audio_handle.cpp in Sources */,
 				3A480F1B1B2D4159001064BB /* tri_mutex.cpp in Sources */,
+				3A24587B1B345E4200E928B9 /* pngwio.c in Sources */,
 				3A480EBB1B2D4159001064BB /* tri_debug_string_layer.cpp in Sources */,
+				3A2458771B345E4200E928B9 /* pngtest.c in Sources */,
+				3A24585C1B345E4200E928B9 /* png.c in Sources */,
 				3A480F641B2D4159001064BB /* tri_view_controller.mm in Sources */,
 				3A480F131B2D4159001064BB /* tri_heap.cpp in Sources */,
 				3A480EF71B2D4159001064BB /* tri_scene_graph.cpp in Sources */,
+				3A2458811B345E4200E928B9 /* pngwutil.c in Sources */,
 				3A480F291B2D4159001064BB /* tri_random_xorshift.cpp in Sources */,
 				3A480F2D1B2D4159001064BB /* tri_bit.cpp in Sources */,
 				3A480F091B2D4159001064BB /* tri_transform_node.cpp in Sources */,
 				3A480F1F1B2D4159001064BB /* tri_matrix_stack.cpp in Sources */,
 				3A480F5B1B2D4159001064BB /* jet_button.cpp in Sources */,
+				3A2458631B345E4200E928B9 /* pngget.c in Sources */,
 				3A480ED31B2D4159001064BB /* tri_circle_collider.cpp in Sources */,
 				3A480F231B2D4159001064BB /* tri_random_mseq.cpp in Sources */,
 				3A480F3F1B2D4159001064BB /* cross_render_system_gles2.cpp in Sources */,
 				3A480F011B2D4159001064BB /* tri_sprite_renderer.cpp in Sources */,
+				3A2458691B345E4200E928B9 /* pngpread.c in Sources */,
 				3A480EF91B2D4159001064BB /* tri_scene_node.cpp in Sources */,
 				3A480F5D1B2D4159001064BB /* jet_radio_button.cpp in Sources */,
 				3A480EEF1B2D4159001064BB /* tri_mesh.cpp in Sources */,
 				3A480EF51B2D4159001064BB /* tri_render_layer.cpp in Sources */,
 				3A480EC31B2D4159001064BB /* tri_debugmenu_items.cpp in Sources */,
 				3A480EB91B2D4159001064BB /* tri_debug_string_buffer.cpp in Sources */,
+				3A2458701B345E4200E928B9 /* pngrtran.c in Sources */,
 				3A480F071B2D4159001064BB /* tri_texture_factory.cpp in Sources */,
 				3A480EE11B2D4159001064BB /* tri_camera.cpp in Sources */,
 				3A480F351B2D4159001064BB /* tri_unique_id.cpp in Sources */,
@@ -1801,11 +1814,12 @@
 				3A480ED91B2D4159001064BB /* tri_collision_events.cpp in Sources */,
 				3A480EC11B2D4159001064BB /* tri_debugmenu_frame.cpp in Sources */,
 				3A480ED71B2D4159001064BB /* tri_collision.cpp in Sources */,
+				3A24587D1B345E4200E928B9 /* pngwrite.c in Sources */,
 				3A480ECF1B2D4159001064BB /* tri_virtual_pad.cpp in Sources */,
 				3A480EB51B2D4159001064BB /* tri_debug_log_buffer.cpp in Sources */,
+				3A2458741B345E4200E928B9 /* pngset.c in Sources */,
 				3A480EA71B2D4159001064BB /* tri_pause_level.cpp in Sources */,
 				3A480EDD1B2D4159001064BB /* tri_frustum.cpp in Sources */,
-				3A480F471B2D4159001064BB /* cross_render_system.cpp in Sources */,
 				3A480F0F1B2D4159001064BB /* tri_pad.cpp in Sources */,
 				3A480F331B2D4159001064BB /* tri_text_loader.cpp in Sources */,
 			);
@@ -1825,6 +1839,7 @@
 				3A480EB41B2D4159001064BB /* tri_debug_font_data.cpp in Sources */,
 				3A480EE81B2D4159001064BB /* tri_draw_layer.cpp in Sources */,
 				3A480EFC1B2D4159001064BB /* tri_shader.cpp in Sources */,
+				3A24583C1B341FF600E928B9 /* jet_scene.cpp in Sources */,
 				3A480F1A1B2D4159001064BB /* tri_new.cpp in Sources */,
 				3A480F441B2D4159001064BB /* cross_audio_system.cpp in Sources */,
 				3A480F121B2D4159001064BB /* tri_pointing.cpp in Sources */,
@@ -1845,24 +1860,31 @@
 				3A480F521B2D4159001064BB /* cross_os.mm in Sources */,
 				3A480EEC1B2D4159001064BB /* tri_image_png.cpp in Sources */,
 				3A480ECE1B2D4159001064BB /* tri_trace.cpp in Sources */,
+				3A24586D1B345E4200E928B9 /* pngread.c in Sources */,
 				3A480EAA1B2D4159001064BB /* tri_resource.cpp in Sources */,
 				3A480EFE1B2D4159001064BB /* tri_sprite.cpp in Sources */,
 				3A480F0C1B2D4159001064BB /* tri_file.cpp in Sources */,
 				3A480F161B2D4159001064BB /* tri_heap_manager.cpp in Sources */,
 				3A480EA41B2D4159001064BB /* tri_director.cpp in Sources */,
+				3A24586F1B345E4200E928B9 /* pngrio.c in Sources */,
 				3A480ECA1B2D4159001064BB /* tri_draw_primitive.cpp in Sources */,
 				3A480E9E1B2D4159001064BB /* tri_streaming_player.cpp in Sources */,
 				3A480EC61B2D4159001064BB /* tri_debugmenu_label.cpp in Sources */,
+				3A2458681B345E4200E928B9 /* pngmem.c in Sources */,
 				3A480EB01B2D4159001064BB /* tri_task_manager.cpp in Sources */,
 				3A480EC01B2D4159001064BB /* tri_debugmenu.cpp in Sources */,
 				3A480F4E1B2D4159001064BB /* cross_audio_system.cpp in Sources */,
+				3A2458621B345E4200E928B9 /* pngerror.c in Sources */,
 				3A480F621B2D4159001064BB /* jet_textbox.cpp in Sources */,
+				3A2458801B345E4200E928B9 /* pngwtran.c in Sources */,
+				3A2458731B345E4200E928B9 /* pngrutil.c in Sources */,
 				3A480F1E1B2D4159001064BB /* tri_bezier_curve.cpp in Sources */,
 				3A480F381B2D4159001064BB /* tri_utf8.cpp in Sources */,
 				3A480EAC1B2D4159001064BB /* tri_scene.cpp in Sources */,
 				3A480EA61B2D4159001064BB /* tri_event_manager.cpp in Sources */,
 				3A480F601B2D4159001064BB /* jet_swap_button.cpp in Sources */,
 				3A480EA21B2D4159001064BB /* tri_application.cpp in Sources */,
+				3A24587A1B345E4200E928B9 /* pngtrans.c in Sources */,
 				3A480F041B2D4159001064BB /* tri_surface.cpp in Sources */,
 				3A480F301B2D4159001064BB /* tri_counter.cpp in Sources */,
 				3A480F501B2D4159001064BB /* cross_dbg.cpp in Sources */,
@@ -1873,25 +1895,32 @@
 				3A480EEA1B2D4159001064BB /* tri_fade_layer.cpp in Sources */,
 				3A480EF41B2D4159001064BB /* tri_projector.cpp in Sources */,
 				3A480F221B2D4159001064BB /* tri_random_linear_congruential.cpp in Sources */,
+				3A24587C1B345E4200E928B9 /* pngwio.c in Sources */,
 				3A480EF21B2D4159001064BB /* tri_model.cpp in Sources */,
+				3A2458781B345E4200E928B9 /* pngtest.c in Sources */,
+				3A24585D1B345E4200E928B9 /* png.c in Sources */,
 				3A480EAE1B2D4159001064BB /* tri_system_events.cpp in Sources */,
 				3A480E9A1B2D4159001064BB /* tri_audio_handle.cpp in Sources */,
 				3A480F1C1B2D4159001064BB /* tri_mutex.cpp in Sources */,
+				3A2458821B345E4200E928B9 /* pngwutil.c in Sources */,
 				3A480EBC1B2D4159001064BB /* tri_debug_string_layer.cpp in Sources */,
 				3A480F141B2D4159001064BB /* tri_heap.cpp in Sources */,
 				3A480EF81B2D4159001064BB /* tri_scene_graph.cpp in Sources */,
 				3A480F2A1B2D4159001064BB /* tri_random_xorshift.cpp in Sources */,
 				3A480F2E1B2D4159001064BB /* tri_bit.cpp in Sources */,
+				3A2458641B345E4200E928B9 /* pngget.c in Sources */,
 				3A480F0A1B2D4159001064BB /* tri_transform_node.cpp in Sources */,
 				3A480F201B2D4159001064BB /* tri_matrix_stack.cpp in Sources */,
 				3A480F5C1B2D4159001064BB /* jet_button.cpp in Sources */,
 				3A480ED41B2D4159001064BB /* tri_circle_collider.cpp in Sources */,
+				3A24586A1B345E4200E928B9 /* pngpread.c in Sources */,
 				3A480F241B2D4159001064BB /* tri_random_mseq.cpp in Sources */,
 				3A480F021B2D4159001064BB /* tri_sprite_renderer.cpp in Sources */,
 				3A480EFA1B2D4159001064BB /* tri_scene_node.cpp in Sources */,
 				3A480F5E1B2D4159001064BB /* jet_radio_button.cpp in Sources */,
 				3A480EF01B2D4159001064BB /* tri_mesh.cpp in Sources */,
 				3A480EF61B2D4159001064BB /* tri_render_layer.cpp in Sources */,
+				3A2458711B345E4200E928B9 /* pngrtran.c in Sources */,
 				3A480EC41B2D4159001064BB /* tri_debugmenu_items.cpp in Sources */,
 				3A480EBA1B2D4159001064BB /* tri_debug_string_buffer.cpp in Sources */,
 				3A480F081B2D4159001064BB /* tri_texture_factory.cpp in Sources */,
@@ -1901,8 +1930,10 @@
 				3A480F321B2D4159001064BB /* tri_string_util.cpp in Sources */,
 				3A480EDA1B2D4159001064BB /* tri_collision_events.cpp in Sources */,
 				3A480EC21B2D4159001064BB /* tri_debugmenu_frame.cpp in Sources */,
+				3A24587E1B345E4200E928B9 /* pngwrite.c in Sources */,
 				3A480ED81B2D4159001064BB /* tri_collision.cpp in Sources */,
 				3A480ED01B2D4159001064BB /* tri_virtual_pad.cpp in Sources */,
+				3A2458751B345E4200E928B9 /* pngset.c in Sources */,
 				3A480EB61B2D4159001064BB /* tri_debug_log_buffer.cpp in Sources */,
 				3A480EA81B2D4159001064BB /* tri_pause_level.cpp in Sources */,
 				3A480EDE1B2D4159001064BB /* tri_frustum.cpp in Sources */,

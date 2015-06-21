@@ -5,10 +5,24 @@ const char* model_fsh = R"(
 
 
 varying lowp vec2 v_texture_uv;
+varying lowp vec4 v_shadow_coord;
+
 uniform sampler2D sampler;
+uniform sampler2DShadow shadow_samp;
+uniform bool draw_flag;
+uniform bool draw_shadow;
 
 
 void main() {
+//    if (draw_flag) {
+//        lowp vec4 tex_color = texture2D(sampler, v_texture_uv);
+//        if (draw_shadow) {
+//            float shadow = texture2DProj(shadow_samp, v_shadow_coord.xyz) * 0.5 + 0.5;
+//            gl_FragColor = vec4(tex_color.xyz * shadow, 1.0);
+//        } else {
+//           gl_FragColor = tex_color;
+//        }
+//    }
     gl_FragColor = texture2D(sampler, v_texture_uv);
 }
 
@@ -22,8 +36,8 @@ const char* model_fsh = R"(
 
 #version 400
 
-in vec4 v_shadow_coord;
 in vec2 v_texture_uv;
+in vec4 v_shadow_coord;
 
 uniform sampler2D sampler;
 uniform sampler2DShadow shadow_samp;

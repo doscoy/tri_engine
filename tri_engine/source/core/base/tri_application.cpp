@@ -139,7 +139,7 @@ bool initializeTriEngine(
 }
 
 void terminateTriEngine() {
-    T3_ASSERT(!cross::RenderSystem::isError());
+
     auto& d = Director::instance();
     d.terminateDirector();
     Director::destroyInstance();
@@ -220,14 +220,10 @@ void Application::initializeApplication()
 
     //  ゲームの初期化
     initializeGame();
-    T3_ASSERT(!cross::RenderSystem::isError());
-
 }
 
 
-void Application::updateApplication()
-{
-    T3_ASSERT(!cross::RenderSystem::isError());
+void Application::updateApplication() {
     system_cost_timer_.start();     // system cost 計測開始
 
     cross::beginUpdate();
@@ -306,13 +302,10 @@ void Application::updateApplication()
     }
     
     cross::endUpdate();
-    T3_ASSERT(!cross::RenderSystem::isError());
-
-
 }
 
 void Application::renderApplication() {
-    T3_ASSERT(!cross::RenderSystem::isError());
+    T3_RENDER_ASSERT();
 
     auto& gs = Director::instance();
     DebugMenu& dm = DebugMenu::instance();
@@ -326,8 +319,6 @@ void Application::renderApplication() {
     //  デバッグメニュー描画
     dm.render();
     
-    
-
     
     if (render_avg.size() < LIMIT_AVG_SUM) {
         render_avg.push_back(rendering_cost_timer_.interval());
@@ -347,7 +338,7 @@ void Application::renderApplication() {
     //  描画終了
     endRender();
     other_cost_timer_.start();
-
+    T3_RENDER_ASSERT();
 
     //  コスト表示は数フレームに1回書き換える
     //  毎フレだと速すぎて読めないからね
@@ -379,7 +370,7 @@ void Application::renderApplication() {
     }
 
     other_cost_timer_.end();
-
+    T3_RENDER_ASSERT();
 }
 
 void Application::debugPrinting() {
@@ -568,7 +559,7 @@ void initializeApplication() {
 
 
 void terminateApplication() {
-    T3_ASSERT(!cross::RenderSystem::isError());
+    T3_RENDER_ASSERT();
     app_->terminateApplication();
 }
 
@@ -584,7 +575,6 @@ void renderApplication() {
 
 
 bool isActiveApplication() {
-    T3_ASSERT(!cross::RenderSystem::isError());
     return app_->isActive();
 }
 

@@ -7,6 +7,7 @@
 #define TRI_ASSERT_HPP_INCLUDED
 
 #include "core/core_config.hpp"
+#include "cross/cross_render_system.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -56,6 +57,9 @@ TRI_CORE_NS_END
 
 /*! @brief 範囲チェックアサート */
 #define T3_ASSERT_RANGE(v, l, h)    T3_ASSERT_MSG((v >= l && v <= h), "%s is out of range. (%f <= %s(%f) <= %f)", #v, l, #v, v, h)
+
+#define T3_RENDER_ASSERT()          T3_ASSERT(!t3::cross::RenderSystem::isError());
+
 
 #else // ENABLE_ASSERT
 

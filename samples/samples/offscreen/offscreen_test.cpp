@@ -130,7 +130,7 @@ private:
 
 
 OffscreenTestScene::OffscreenTestScene()
-    : Scene( "Offscreen" ) {
+    : SceneBase( "Offscreen" ) {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 

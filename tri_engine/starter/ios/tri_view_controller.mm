@@ -35,7 +35,7 @@ extern float screen_y_;
     } else {
         T3_PANIC("initialize failed");
     }
-    T3_ASSERT(!t3::cross::RenderSystem::isError());
+    T3_RENDER_ASSERT();
 
 }
 
@@ -52,7 +52,7 @@ extern float screen_y_;
 
 - (void)update
 {
-    T3_ASSERT(!t3::cross::RenderSystem::isError());
+    T3_RENDER_ASSERT();
     t3::updateApplication();
 }
 

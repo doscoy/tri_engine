@@ -9,6 +9,8 @@
 //  include
 #include "core/core_config.hpp"
 #include "core/graphics/tri_texture.hpp"
+#include "tri_framebuffer.hpp"
+
 
 TRI_CORE_NS_BEGIN
 
@@ -126,7 +128,7 @@ private:
     
     ///
     /// フレームバッファ
-    cross::RenderSystem::FrameBufferID fb_;
+    FrameBuffer fb_;
         
     ///
     /// テクスチャ

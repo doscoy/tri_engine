@@ -23,7 +23,7 @@ using EventListenerPtr = const void*;
 
 ///
 /// イベントハンドラのコールバック
-using EventHandlerFunction = MethodCallback1<EventListen, const EventPtr>;
+//using EventHandlerFunction = MethodCallback1<EventListen, const EventPtr>;
 
 
 ///
@@ -111,12 +111,6 @@ public:
     /// イベント登録
     virtual bool queueEvent(
         const EventPtr& in_event
-    ) = 0;
-    
-    ///
-    /// イベント通知
-    virtual bool triggerEvent(
-        const EventPtr in_event
     ) = 0;
     
     ///
@@ -232,14 +226,6 @@ bool safeValidateEventType(
 );
 
 
-///
-/// イベント発動
-void safeTriggerEvent(
-    const EventPtr in_event
-);
-
-
-
 
 using EventListenerList = Vector<EventListenerPtr>;
 using EventTypeList = Vector<EventType>;
@@ -342,12 +328,6 @@ public:
     /// 更新
     bool tick(
         uint32_t proc_limit = 999999
-    ) override;
-    
-    ///
-    /// イベント実行
-    bool triggerEvent(
-        const EventPtr in_event
     ) override;
     
     

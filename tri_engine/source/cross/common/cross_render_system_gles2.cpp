@@ -108,7 +108,7 @@ inline int colorFormatToGLInternalFormat(RenderSystem::ColorFormat format) {
             break;
             
         case RenderSystem::ColorFormat::DEPTH:
-            glcolor_format = GL_DEPTH_COMPONENT16;
+            glcolor_format = GL_DEPTH_COMPONENT;
             break;
 
         default:
@@ -135,7 +135,7 @@ inline int colorFormatToGLFormat(RenderSystem::ColorFormat format) {
             
 
         case RenderSystem::ColorFormat::DEPTH:
-            glcolor_format = GL_DEPTH_COMPONENT16;
+            glcolor_format = GL_DEPTH_COMPONENT;
             break;
 
         default:
@@ -175,39 +175,6 @@ inline int typeFormatToGL(cross::RenderSystem::TypeFormat format) {
 
 
 
-inline int colorFormatToGL(cross::RenderSystem::ColorFormat format) {
-
-
-    int glcolor_format = GL_RGB;
-    
-    switch (format) {
-        case cross::RenderSystem::ColorFormat::RGBA:
-            glcolor_format = GL_RGBA;
-            break;
-            
-        case cross::RenderSystem::ColorFormat::RGB:
-            glcolor_format = GL_RGB;
-            break;
-            
-        case cross::RenderSystem::ColorFormat::GRAY:
-            glcolor_format = GL_ALPHA;
-            break;
-
-        case cross::RenderSystem::ColorFormat::GRAYA:
-            glcolor_format = GL_LUMINANCE_ALPHA;
-            break;
-
-        case cross::RenderSystem::ColorFormat::DEPTH:
-            glcolor_format = GL_DEPTH_COMPONENT;
-            break;
-
-            
-        default:
-            break;
-    }
-    
-    return glcolor_format;
-}
 
 }   // unname namespace
 
@@ -787,7 +754,7 @@ void RenderSystem::setupTextureData(
     RenderSystem::TypeFormat type_format,
     const void* data
 ) {
-    int glcolor_format = colorFormatToGL(color_format);
+    int glcolor_format = colorFormatToGLFormat(color_format);
     int glinternal_format = colorFormatToGLInternalFormat(color_format);
     int gltype_format = typeFormatToGL(type_format);
     CROSS_GL_ASSERT();

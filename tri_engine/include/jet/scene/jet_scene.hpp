@@ -30,11 +30,11 @@ protected:
         return createModel(FilePath(model_name));
     }
 
-    TransformNodePtr Scene::createChildModel(
+    TransformNodePtr createChildModel(
         const FilePath& path,
         TransformNodePtr& parent
     );
-    TransformNodePtr Scene::createChildModel(
+    TransformNodePtr createChildModel(
         const char* const model_name,
         TransformNodePtr& parent
     ) {

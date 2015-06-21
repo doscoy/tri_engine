@@ -29,7 +29,6 @@
 		04D6B6B119E9071D002C8E77 /* t9.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D6B6B019E9071D002C8E77 /* t9.png */; };
 		04F100261985587400C8D498 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F100251985587400C8D498 /* OpenAL.framework */; };
 		04F100281985589300C8D498 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F100271985589300C8D498 /* CoreMotion.framework */; };
-		04F1002A198558B600C8D498 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F10029198558B600C8D498 /* libpng.a */; };
 		04F1002C198558BF00C8D498 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1002B198558BF00C8D498 /* libz.dylib */; };
 		04F1FE5F1985557F00C8D498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1FE5E1985557F00C8D498 /* Foundation.framework */; };
 		04F1FE611985557F00C8D498 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1FE601985557F00C8D498 /* CoreGraphics.framework */; };
@@ -257,7 +256,6 @@
 			files = (
 				3A480C821B2D35EC001064BB /* libtri_engine_ios.a in Frameworks */,
 				04F1002C198558BF00C8D498 /* libz.dylib in Frameworks */,
-				04F1002A198558B600C8D498 /* libpng.a in Frameworks */,
 				04F100281985589300C8D498 /* CoreMotion.framework in Frameworks */,
 				04F100261985587400C8D498 /* OpenAL.framework in Frameworks */,
 				04F1FE671985557F00C8D498 /* OpenGLES.framework in Frameworks */,
@@ -933,10 +931,7 @@
 					../../../tri_engine/include,
 				);
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					../../../tri_engine/third_party_lib/ios,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -958,10 +953,7 @@
 					../../../tri_engine/include,
 				);
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					../../../tri_engine/third_party_lib/ios,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

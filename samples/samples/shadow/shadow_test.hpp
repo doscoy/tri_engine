@@ -19,7 +19,6 @@ public:
     void update() override;
     
 private:
-    t3::DrawLayer shadow_render_layer_;
     t3::DrawLayer final_layer_;
     t3::CinemaLayer cinema_;
     t3::LookAtCameraUpdater cam_updater_;

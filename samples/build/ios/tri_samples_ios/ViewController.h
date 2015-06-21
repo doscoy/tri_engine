@@ -7,7 +7,7 @@
 //
 // TIPS:GLKitでES1.1のヘッダを読むのを防ぐ
 
-#import "tri_view_controller.hpp"
+#import "../starter/ios/tri_view_controller.hpp"
 
 
 @interface ViewController : TriViewController

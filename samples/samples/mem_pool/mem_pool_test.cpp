@@ -157,7 +157,7 @@ private:
 
 
 MemPoolScene::MemPoolScene()
-    : Scene( "MemPool" ) {
+    : SceneBase( "MemPool" ) {
     context_.reset(T3_NEW SceneContext());
 }
 

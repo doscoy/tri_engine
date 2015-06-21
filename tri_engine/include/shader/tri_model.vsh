@@ -3,19 +3,22 @@
 //  OpenGL ES 2.0
 const char* model_vsh = R"(
 
-attribute vec4 a_position;
+attribute vec3 a_position;
 attribute vec3 a_normal;
 attribute vec2 a_uv;
 
 varying lowp vec2 v_texture_uv;
+varying lowp vec4 v_shadow_coord;
 
 uniform mat4 u_mvp;
+uniform mat4 u_shadow_mtx;
 
 
 void main() {
-    vec3 nn = a_normal;
-    gl_Position = u_mvp * a_position;
+    v_shadow_coord = u_shadow_mtx * vec4(a_position, 1.0);
     v_texture_uv = a_uv;
+
+    gl_Position = u_mvp * vec4(a_position, 1.0);
 
 }
 )";

@@ -7,7 +7,7 @@
 
 
 class ZipTestScene
-    : public t3::Scene
+    : public t3::SceneBase
 {
 public:
     ZipTestScene();

@@ -18,6 +18,8 @@ Scene::~Scene() {
 }
 
 void Scene::initializeScene() {
+    T3_RENDER_ASSERT();
+
     //  レイヤー準備
     shadow_render_layer_.name("shadow_render_layer_");
     shadow_render_layer_.setRenderCallback<Scene>(this, &Scene::shadowRender);

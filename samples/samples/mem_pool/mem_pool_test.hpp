@@ -7,7 +7,7 @@
 
 
 class MemPoolScene
-    : public t3::Scene
+    : public t3::SceneBase
 {
 public:
     MemPoolScene();

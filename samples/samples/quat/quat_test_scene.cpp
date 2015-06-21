@@ -111,7 +111,7 @@ private:
 
 
 QuatTestScene::QuatTestScene()
-    : Scene( "QuatTestScene" ) {
+    : SceneBase( "QuatTestScene" ) {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 

@@ -34,7 +34,7 @@ int main(int argc, char * argv[])
         }
     }
     #else // MacOSX or Windows
-        if (!t3::initializeTriEngine(640, 480, "win")) {
+        if (!t3::initializeTriEngine(480, 1124, "win")) {
             //  初期化に失敗
             return 0;
         }

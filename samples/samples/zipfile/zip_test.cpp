@@ -67,7 +67,7 @@ private:
 
 
 ZipTestScene::ZipTestScene()
-    : Scene("ZipTest") {
+    : SceneBase("ZipTest") {
     context_.reset(T3_SYS_NEW SceneContext());
 }
 
