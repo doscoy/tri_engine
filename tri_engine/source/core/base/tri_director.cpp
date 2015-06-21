@@ -150,7 +150,6 @@ Director::Director()
     , input_()
     , layers_()
     , fade_layer_(nullptr)
-    , event_manager_("ev_man", true)
     , task_manager_()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
     , use_clear_color_index_(0)
@@ -267,7 +266,7 @@ void Director::update(
     
     
     //  イベントのブロードキャスト
-    safeTickEventManager();
+    EventManager::broadCast();
     
     //  レイヤーの更新
     RenderLayer::updateLayers(layers(), delta_time);
@@ -336,14 +335,14 @@ void Director::updateInput(
             auto eve_point_trg = std::make_shared<PointingTriggeredEvent>();
             eve_point_trg->inputNo(pad_idx);
             eve_point_trg->position(pointing.position());
-            safeQueueEvent(eve_point_trg);
+            EventManager::queueEvent(eve_point_trg);
         }
         //  リリース
         if (pointing.isRelease()) {
             auto eve_point_rls = std::make_shared<PointingReleasedEvent>();
             eve_point_rls->inputNo(pad_idx);
             eve_point_rls->position(pointing.position());
-            safeQueueEvent(eve_point_rls);
+            EventManager::queueEvent(eve_point_rls);
         }
         //  ムーブ
         if (pointing.isMoving()) {
@@ -351,7 +350,7 @@ void Director::updateInput(
             eve_point_move->inputNo(pad_idx);
             eve_point_move->position(pointing.position());
             eve_point_move->moveDistance(pointing.moveDistance());
-            safeQueueEvent(eve_point_move);
+            EventManager::queueEvent(eve_point_move);
         }
         //  フリック
         if (pointing.isFlick()) {
@@ -359,7 +358,7 @@ void Director::updateInput(
             eve_point_flick->inputNo(pad_idx);
             eve_point_flick->flickDirection(pointing.flickDirection());
             eve_point_flick->flickMoveOffset(pointing.flickMoveOffset());
-            safeQueueEvent(eve_point_flick);
+            EventManager::queueEvent(eve_point_flick);
         }
         
     }

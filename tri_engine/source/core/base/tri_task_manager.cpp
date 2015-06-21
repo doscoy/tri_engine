@@ -12,15 +12,15 @@ TaskManager::TaskManager()
     : taskes_()
     , pause_level_(PAUSE_NONE)
 {
-    EventManager::safeAddListener<TaskManager>(this, &TaskManager::onPause, PauseEvent::TYPE);
-    EventManager::safeAddListener<TaskManager>(this, &TaskManager::onResume, ResumeEvent::TYPE);
+    EventManager::addListener<TaskManager>(this, &TaskManager::onPause, PauseEvent::TYPE);
+    EventManager::addListener<TaskManager>(this, &TaskManager::onResume, ResumeEvent::TYPE);
 }
 
 TaskManager::~TaskManager() {
     //  残ってるタスク全部にkillを立ててから
     killAllTask();
     
-    safeRemoveListener(this);
+    EventManager::removeListener(this);
 }
 
 

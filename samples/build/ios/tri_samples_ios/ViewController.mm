@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
 //
 
+#include "cross/cross_sdk.hpp"
 #import "ViewController.h"
 
-#include "cross/cross_sdk.hpp"
 #include "core/base/tri_application.hpp"
 
 #include "AppDelegate.h"

@@ -10,8 +10,6 @@
 #define tri_engine_cross_glfw_hpp
 
 
-#include "cross_define.hpp"
-
 #if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_WIN32
 #include <glew.h>
 #include <glfw3.h>

@@ -54,19 +54,19 @@ Button::Button()
     , activator_(std::make_shared<ButtonDefaultActivator>())
     , hover_effector_(std::make_shared<ButtonDefaultHoverEffector>())
 {
-    EventManager::safeAddListener<Button>(
+    EventManager::addListener<Button>(
         this,
         &self_t::onPointingTrigger,
         PointingTriggeredEvent::TYPE
     );
 
-    EventManager::safeAddListener<Button>(
+    EventManager::addListener<Button>(
         this,
         &self_t::onPointingMoving,
         PointingMovingEvent::TYPE
     );
     
-    EventManager::safeAddListener<Button>(
+    EventManager::addListener<Button>(
         this,
         &self_t::onPointingRelease,
         PointingReleasedEvent::TYPE
@@ -75,7 +75,7 @@ Button::Button()
 }
 
 Button::~Button() {
-    safeRemoveListener(this);
+    EventManager::removeListener(this);
 }
 
 
@@ -125,7 +125,7 @@ void Button::onPointingRelease(
     if (hover_) {
         if (!triggerd_events_.empty()) {
             for (auto event: triggerd_events_) {
-                safeQueueEvent(event);
+                EventManager::queueEvent(event);
             }
         }
     }

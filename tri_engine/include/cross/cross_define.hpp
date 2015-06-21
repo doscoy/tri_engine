@@ -16,10 +16,13 @@
 
     #define CROSS_TARGET_PLATFORM       CROSS_TARGET_PLATFORM_WIN32
 	#define CROSS_TARGET_COMPILER_MSVC
+    #warning "target windows"
 
 #elif defined(__APPLE__)
+    #include <TargetConditionals.h>
+
     //  iOS device
-    #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
+    #if defined(TARGET_OS_IPHONE)
         #warning "target ios"
         #define CROSS_TARGET_PLATFORM       CROSS_TARGET_PLATFORM_IOS
 
@@ -40,7 +43,8 @@
     //  MAC
     #else
         #define CROSS_TARGET_PLATFORM       CROSS_TARGET_PLATFORM_OSX
-        
+        #warning "target osx"
+
     #endif
 
 	#define CROSS_TARGET_COMPILER_CLANG
@@ -60,14 +64,19 @@
 //  OpenGLバージョン
 #define CROSS_GL_40  400
 #define CROSS_GL_ES2  20
+#define CROSS_GL_ES3  30
 
 #if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_WIN32
     #define CROSS_GL_VERSION    CROSS_GL_40
+    #warning "target gl4"
+
 #elif CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_OSX
     #define CROSS_GL_VERSION    CROSS_GL_40
+    #warning "target gl4"
 
 #else
     #define CROSS_GL_VERSION    CROSS_GL_ES2
+    #warning "target gles2"
 
 #endif
 

@@ -8,8 +8,8 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "tri_wav.hpp"
 #include "cross/cross_sdk.hpp"
+#include "tri_wav.hpp"
 #include <array>
 
 

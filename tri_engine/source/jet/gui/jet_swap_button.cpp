@@ -52,13 +52,13 @@ SwapButton::SwapButton()
     , a_event_(nullptr)
     , b_event_(nullptr)
 {
-    EventManager::safeAddListener<SwapButton>(this, &SwapButton::onTriggeredA, SwapButtonAEvent::TYPE);
-    EventManager::safeAddListener<SwapButton>(this, &SwapButton::onTriggeredB, SwapButtonBEvent::TYPE);
+    EventManager::addListener<SwapButton>(this, &SwapButton::onTriggeredA, SwapButtonAEvent::TYPE);
+    EventManager::addListener<SwapButton>(this, &SwapButton::onTriggeredB, SwapButtonBEvent::TYPE);
 }
 
 SwapButton::~SwapButton()
 {
-    safeRemoveListener(this);
+    EventManager::removeListener(this);
 }
 
 void SwapButton::setupSprite(
@@ -104,7 +104,7 @@ void SwapButton::onTriggeredA(const t3::EventPtr eve) {
     
     
     if (a_event_) {
-        safeQueueEvent(a_event_);
+        EventManager::queueEvent(a_event_);
     }
     a_.sprite()->disable();
     b_.sprite()->enable();
@@ -118,7 +118,7 @@ void SwapButton::onTriggeredB(const t3::EventPtr eve) {
     }
 
     if (b_event_) {
-        safeQueueEvent(b_event_);
+        EventManager::queueEvent(b_event_);
     }
     a_.sprite()->enable();
     b_.sprite()->disable();

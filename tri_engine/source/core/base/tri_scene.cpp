@@ -108,7 +108,7 @@ void SceneManager::debugRender() {
 void SceneManager::sceneChange()
 {
     T3_RENDER_ASSERT();
-    EventManagerBase::get()->dumpListeners();
+    EventManager::dumpListeners();
     
     
     //  シーン終了
@@ -121,7 +121,7 @@ void SceneManager::sceneChange()
     current_scene_ = next_scene_generator_->createScene();
     next_scene_generator_ = SceneBase::sceneGenerator<NullScene>();
     
-    EventManagerBase::get()->dumpListeners();
+    EventManager::dumpListeners();
 
     //  シーン切り替え情報表示
     const char* next_scene_name = current_scene_->sceneName();
@@ -135,7 +135,7 @@ void SceneManager::sceneChange()
     //  シーンが切り替わったフラグON
     scene_changed_ = true;
     
-    EventManagerBase::get()->dumpListeners();
+    EventManager::dumpListeners();
 
 }
 

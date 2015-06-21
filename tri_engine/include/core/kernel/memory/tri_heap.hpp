@@ -7,8 +7,8 @@
 #define TRI_HEAP_HPP_INCLUDED
 
 //  include
-#include "core/core_config.hpp"
 #include "cross/cross_sdk.hpp"
+#include "core/core_config.hpp"
 #include "core/base/tri_std.hpp"
 #include "core/kernel/process/tri_mutex.hpp"
 #include "core/utility/tri_uncopyable.hpp"
@@ -20,7 +20,7 @@ TRI_CORE_NS_BEGIN
 
 //
 #define NAME_LENGTH  6
-extern MemoryPool* heapMemoryPool() CROSS_WEAK_SIMBOL;
+extern MemoryPool* heapMemoryPool();
 
 //  前方宣言
 class AllocHeader;

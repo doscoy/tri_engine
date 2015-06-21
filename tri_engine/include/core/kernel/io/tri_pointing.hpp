@@ -7,9 +7,9 @@
 #define TRI_POINTING_HPP_INCLUDED
 
 //  include
+#include "cross/cross_sdk.hpp"
 #include "../../math/tri_math_types.hpp"
 #include "core/base/tri_types.hpp"
-#include "cross/cross_sdk.hpp"
 #include "core/core_config.hpp"
 
 TRI_CORE_NS_BEGIN

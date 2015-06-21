@@ -1,10 +1,10 @@
+// .cpp
+#include "tri_debug_font_data.cpp"
 
 #include "core/debug/tri_debug_writer.hpp"
 #include "shader/tri_font.fsh"
 #include "shader/tri_font.vsh"
 
-// .cpp
-#include "tri_debug_font_data.cpp"
 
 
 TRI_CORE_NS_BEGIN

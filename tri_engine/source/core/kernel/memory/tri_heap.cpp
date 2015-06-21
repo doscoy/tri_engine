@@ -1,11 +1,11 @@
 
+#include "cross/cross_sdk.hpp"
 #include "core/base/tri_types.hpp"
 #include "core/kernel/memory/tri_heap.hpp"
 #include "core/debug/tri_assert.hpp"
 #include "core/debug/tri_trace.hpp"
 #include "core/utility/tri_util.hpp"
 #include "core/utility/tri_counter.hpp"
-#include "cross/cross_sdk.hpp"
 
 #ifdef DEBUG
     #define TRI_DIRTY_MEMORY        1
@@ -46,7 +46,7 @@ constexpr uint32_t DIRTY_FREE_MARK  = 0xCAFEC0DE;
 
 
 
-MemoryPool* heapMemoryPool() CROSS_WEAK_SIMBOL;
+MemoryPool* heapMemoryPool();
 
 MemoryPool* heapMemoryPool() {
     static MemoryPool pool(1024*1024*2);
@@ -121,10 +121,6 @@ public:
     }
 
     bool isValid() const {
-        //  nullへのvalid checkは行わない
-        if (!this) {
-            return true;
-        }
 
         //  シグネチャチェック
         if (signature_ != HEAP_SIGNATURE) {

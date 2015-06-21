@@ -8,10 +8,10 @@
 
 //  include
 #include "core/core_config.hpp"
+#include "cross/cross_sdk.hpp"
 #include "core/utility/tri_uncopyable.hpp"
 #include "core/base/tri_std.hpp"
 #include "core/base/tri_types.hpp"
-#include "cross/cross_sdk.hpp"
 #include "core/math/tri_vec2.hpp"
 
 TRI_CORE_NS_BEGIN

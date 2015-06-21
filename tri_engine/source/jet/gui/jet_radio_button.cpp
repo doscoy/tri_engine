@@ -15,11 +15,11 @@ RadioButton::RadioButton()
     , group_id_()
     , active_button_idx_(0) {
  
-    EventManager::safeAddListener<RadioButton>(this, &RadioButton::onRadioButtonTriggered, RadioButtonEvent::TYPE);
+    EventManager::addListener<RadioButton>(this, &RadioButton::onRadioButtonTriggered, RadioButtonEvent::TYPE);
 }
 
 RadioButton::~RadioButton() {
-    safeRemoveListener(this);
+    EventManager::removeListener(this);
 }
 
 

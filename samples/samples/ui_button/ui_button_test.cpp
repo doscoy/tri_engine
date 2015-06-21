@@ -80,9 +80,9 @@ public:
         swap_button_.position(t3::Vec2(100, 200));
         
         //  イベント登録
-        t3::EventManager::safeAddListener<UiButtonScene::SceneContext>(this, &SceneContext::onEventAA, EventAAA::TYPE);
-        t3::EventManager::safeAddListener<UiButtonScene::SceneContext>(this, &SceneContext::onSwapA, EventSwapA::TYPE);
-        t3::EventManager::safeAddListener<UiButtonScene::SceneContext>(this, &SceneContext::onSwapB, EventSwapB::TYPE);
+        t3::EventManager::addListener<UiButtonScene::SceneContext>(this, &SceneContext::onEventAA, EventAAA::TYPE);
+        t3::EventManager::addListener<UiButtonScene::SceneContext>(this, &SceneContext::onSwapA, EventSwapA::TYPE);
+        t3::EventManager::addListener<UiButtonScene::SceneContext>(this, &SceneContext::onSwapB, EventSwapB::TYPE);
         
         
         // ラジオボタン作成
@@ -100,7 +100,7 @@ public:
     }
     
     void terminate() {
-        t3::safeRemoveListener(this);
+        t3::EventManager::removeListener(this);
     }
     
     void update(t3::tick_t delta_time) {

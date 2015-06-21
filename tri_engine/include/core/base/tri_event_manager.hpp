@@ -21,209 +21,10 @@ struct EventListen{};
 /// イベントリスナポインタ
 using EventListenerPtr = const void*;
 
-///
-/// イベントハンドラのコールバック
-//using EventHandlerFunction = MethodCallback1<EventListen, const EventPtr>;
-
-
-///
-/// イベントハンドラ
-/*
-class EventHandler {
-public:
-    EventHandler()
-        : listener_(nullptr)
-        , func_(nullptr, nullptr)
-    {}
-
-    void listener(EventListenerPtr listener) {
-        listener_ = listener;
-    }
-
-    EventListenerPtr listener() {
-        return listener_;
-    }
-
-    const EventListenerPtr listener() const {
-        return listener_;
-    }
-
-    EventHandlerFunction& callback() {
-        return func_;
-    }
-
-    void callback(EventHandlerFunction& func) {
-        func_ = func;
-    }
-
-private:
-    EventListenerPtr listener_;            ///< リスナ
-    EventHandlerFunction func_; ///< コールバック
-};
-*/
-
 using EventHandler = t3::SharedPtr<MethodCallbackBaseX>;
 
 
 #define TRI_DEV_EVENT_TRACE 1   ///< イベントのトレースフラグ
-
-
-///
-/// イベントマネージャベース
-class EventManagerBase {
-public:
-    ///
-    /// コンストラクタ
-    explicit EventManagerBase(
-        const char* const name,
-        bool set_as_global
-    );
-    
-    ///
-    /// デストラクタ
-    virtual ~EventManagerBase();
-    
-public:
-    ///
-    /// リスナ登録
-    virtual bool addListener(
-        const EventHandler& in_handler,
-        const EventType& in_type
-    ) = 0;
-  
-    
-    ///
-    /// リスナ削除
-    virtual bool removeListener(
-        const EventListenerPtr in_handler,
-        const EventType& in_type
-    ) = 0;
-    
-    ///
-    /// リスナ削除
-    virtual bool removeListener(
-        const EventListenerPtr listener
-    ) = 0;
-    
-    
-    
-    ///
-    /// イベント登録
-    virtual bool queueEvent(
-        const EventPtr& in_event
-    ) = 0;
-    
-    ///
-    /// イベント停止
-    virtual bool abortEvent(
-        const EventType& in_type,
-        bool all_type = false
-    ) = 0;
-    
-    ///
-    /// 更新
-    virtual bool tick(
-        uint32_t max_milli = 999999
-    ) = 0;
-    
-    ///
-    /// リスナを一覧表示
-    virtual void dumpListeners() const = 0;
-    
-    ///
-    /// イベントを有効化
-    virtual bool isValidateEventType(const EventType& in_type) const = 0;
-
-    ///
-    /// イベントマネージャのインスタンス取得
-    static EventManagerBase* get();
-
-
-private:
-    
-    friend bool safeRemoveListener(
-        const EventListenerPtr in_handler,
-        const EventType& in_type
-    );
-    
-    template <class T>
-    friend bool safeRemoveListener(
-        const T* listener
-    );
-
-    friend bool safeQueueEvent(
-        const EventPtr& in_event
-    );
-    
-    
-    friend bool safeAbortEvent(
-        const EventType& in_type,
-        bool all_type
-    );
-    
-    friend bool safeTickEventManager(
-       uint32_t max_milli
-    );
-    
- 
-    friend bool safeValidateEventType(
-        const EventType& in_type
-    );
-
-
-
-};
-
-
-
-///
-/// リスナ削除
-bool safeRemoveListener(
-    const EventListenerPtr in_handler,
-    const EventType& in_type
-);
-   
-///
-/// リスナ削除
-bool safeRemoveListener(
-    const EventListenerPtr listener
-);
-    
-    
-///
-/// イベント登録
-bool safeQueueEvent(
-    const EventPtr& in_event
-);
-
-///
-/// イベント登録
-void safeQueueEvent(
-    const EventPtr& in_event,
-    float delay_sec
-);
-
-
-
-
-///
-/// イベントの停止
-bool safeAbortEvent(
-    const EventType& in_type,
-    bool all_type = false
-);
-    
-///
-/// イベント通知
-bool safeTickEventManager(
-    uint32_t max_milli = 99999
-);
-    
-///
-/// イベントタイプを有効化
-bool safeValidateEventType(
-    const EventType& in_type
-);
 
 
 
@@ -232,9 +33,7 @@ using EventTypeList = Vector<EventType>;
 
 ///
 ///
-class EventManager
-    : public EventManagerBase
-{
+class EventManager {
 private:
     ///
     /// イベントマネージャが処理できる固有のイベント型のセット
@@ -266,124 +65,96 @@ private:
 
 public:
     ///
-    /// コンストラクタ
-    explicit EventManager(
-        const char* const name,
-        bool set_as_global
-    );
-    
-    ///
-    /// デストラクタ
-    ~EventManager();
-    
-public:
-    ///
     /// リスナー登録
-    bool addListener(
+    static bool addListenerCore(
         const EventHandler& in_handler,
         const EventType& in_type
-    ) override;
+    );
     
     ///
     /// リスナ追加
     template <typename T>
-    static bool safeAddListener(
+    static bool addListener(
         const T* listener,
         std::function<void(T&, const EventPtr)> func,
         const EventType& in_type
     ) {
         auto handler = std::make_shared<MethodCallbackX1<T,const EventPtr>>(listener, func);
-        return EventManagerBase::get()->addListener(handler, in_type);
+        return addListenerCore(handler, in_type);
     }
     
     
     ///
     /// リスナーの削除
-    bool removeListener(
+    static bool removeListener(
         const EventListenerPtr in_handler,
         const EventType& in_type
-    ) override;
+    );
     
     ///
     /// リスナーの削除
-    bool removeListener(
+    static bool removeListener(
         const EventListenerPtr listener
-    ) override;
+    );
     
     
     ///
     /// イベントを登録
-    bool queueEvent(
+    static bool queueEvent(
         const EventPtr& in_event
-    ) override;
+    );
+    
+    ///
+    /// イベント登録
+    static void queueEvent(
+        const EventPtr& in_event,
+        float delay_sec
+    );
+
     
     ///
     /// イベント停止
-    bool abortEvent(
+    static bool abortEvent(
         const EventType& in_type,
         bool all_type = false
-    ) override;
+    );
     
     ///
     /// 更新
-    bool tick(
-        uint32_t proc_limit = 999999
-    ) override;
+    static bool broadCast();
     
     
     ///
     /// イベントタイプを取得
-    bool isValidateEventType(const EventType& in_type) const override;
+    static bool isValidateEventType(const EventType& in_type);
 
     ///
     /// リスナーリストを取得
-    EventListenerList getListenerList(
+    static EventListenerList getListenerList(
         const EventType& event_type
-    ) const;
+    );
 
     ///
     /// タイプリストを取得
-    EventTypeList getTypeList() const;
+    static EventTypeList getTypeList();
     
     ///
     /// リスナー一覧をダンプ
-    void dumpListeners() const;
+    static void dumpListeners();
 
     ///
     /// イベント名をキーから取得
-    String getEventNameByKey(HashString::key_t key) const;
+    static String getEventNameByKey(HashString::key_t key);
 private:
-    enum {
-        NUM_QUEUES = 2  ///< キューの数
-    };
     
+    static EventTypeSet type_list_;        ///< 登録済のイベントリスト
     
-    EventTypeSet type_list_;        ///< 登録済のイベントリスト
+    static EventListenerMap registry_;     ///< 登録済のリスナ
     
-    EventListenerMap registry_;     ///< 登録済のリスナ
-    
-    EventQueue queues_[NUM_QUEUES]; ///< 二重バッファのイベントキュー
-    
-    int active_queue_;              ///< アクティブなキューの番号
-
+    static EventQueue queue_;               ///< イベントキュー
+  
 };
 
-
-///
-/// リスナの削除
-template <class T>
-bool safeRemoveListener(
-	const T* listener       ///< リスナ
-) {
-	T3_NULL_ASSERT(listener);
-	T3_ASSERT(EventManagerBase::get());
-    
-
-    //  リスナ削除    
-	return EventManagerBase::get()->removeListener(
-		(const t3::EventListenerPtr)listener
-	);
-}
 
 
 TRI_CORE_NS_END

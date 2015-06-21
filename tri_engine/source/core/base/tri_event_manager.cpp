@@ -22,7 +22,7 @@ public:
     void taskUpdate(
         const tick_t delta_time
     ) override {
-        safeQueueEvent(event_);
+        EventManager::queueEvent(event_);
         killTask();
     }
     
@@ -30,70 +30,17 @@ private:
     EventPtr event_;
 };
 
+EventManager::EventTypeSet EventManager::type_list_;
+EventManager::EventListenerMap EventManager::registry_;
+EventManager::EventQueue EventManager::queue_;
 
 
 
-EventManagerBase* event_manager_ = nullptr;
-
-EventManagerBase* EventManagerBase::get() {
-    return event_manager_;
-}
-
-EventManagerBase::EventManagerBase(
-    const char* const name,
-    bool set_as_global
-) {
-    if (set_as_global) {
-        event_manager_ = this;
-    }
-}
-
-EventManagerBase::~EventManagerBase() {
-    if (event_manager_ == this) {
-        event_manager_ = nullptr;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-bool safeRemoveListener(
-    const EventListenerPtr in_handler,
-    const EventType& in_type
-) {
-
-    T3_NULL_ASSERT(in_handler);
-    T3_ASSERT(EventManagerBase::get());
-    return EventManagerBase::get()->removeListener(in_handler, in_type);
-
-}
-
-
-
-
-bool safeQueueEvent(
-    const EventPtr& in_event
-) {
-    T3_NULL_ASSERT(in_event);
-    T3_ASSERT(EventManagerBase::get());
-    return EventManagerBase::get()->queueEvent(in_event);
-
-}
-
-void safeQueueEvent(
+void EventManager::queueEvent(
     const EventPtr& in_event,
     float delay_sec
 ) {
     T3_NULL_ASSERT(in_event);
-    T3_ASSERT(EventManagerBase::get());
 
     auto lounch_event = std::make_shared<LounchEventTask>(in_event);
     auto delay_task = std::make_shared<WaitingTask>(delay_sec);
@@ -102,51 +49,7 @@ void safeQueueEvent(
 }
 
 
-bool safeAbortEvent(
-    const EventType& in_type,
-    bool all_type
-) {
-    T3_ASSERT(EventManagerBase::get());
-    return EventManagerBase::get()->abortEvent(in_type, all_type);
-
-}
-
-bool safeTickEventManager(
-    uint32_t max_milli
-) {
-    T3_ASSERT(EventManagerBase::get());
-    return EventManagerBase::get()->tick(max_milli);
-}
-
-bool safeValidateEventType(
-    const EventType& in_type
-) {
-    T3_ASSERT(EventManagerBase::get());
-    return EventManagerBase::get()->isValidateEventType(in_type);
-}
-
-
-
-
-
-
-
-EventManager::EventManager(
-    const char* const name,
-    bool set_as_global
-)   : EventManagerBase(name, set_as_global)
-    , active_queue_(0)
-{
-    
-}
-
-
-EventManager::~EventManager() {
-    active_queue_ = 0;
-}
-
-
-bool EventManager::addListener(
+bool EventManager::addListenerCore(
     const EventHandler& in_listener,
     const EventType& in_type
 ) {
@@ -183,14 +86,6 @@ bool EventManager::addListener(
     //  リスナーのマップリストを更新する
     //  既存のリストをたどりリスナーを二重に追加することを防ぐ
     EventListenerTable& table = (*elm_it).second;
-    
-//    EventListenerTable::iterator end = table.end();
-//    for (EventListenerTable::iterator it = table.begin(); it != end; ++it) {
-//        if (*it == in_listener) {
-            //  追加済だった
-//            return false;
-//        }
-//    }
     
     
     //  イベント型の有効性確認
@@ -256,8 +151,6 @@ bool EventManager::queueEvent(
     T3_TRACE("Event << %s\n", in_event->eventName().c_str());
 #endif
 
-
-    T3_ASSERT(inRange(active_queue_, (int)0, (int)NUM_QUEUES));
     
     if (!isValidateEventType(in_event->eventType())) {
         return false;
@@ -275,7 +168,7 @@ bool EventManager::queueEvent(
         }
     }
 
-    queues_[active_queue_].push_back(in_event);
+    queue_.push_back(in_event);
     return true;
 }
 
@@ -286,7 +179,7 @@ bool EventManager::abortEvent(
     const EventType& in_type,
     bool all_of_type
 ) {
-    T3_ASSERT(inRange(active_queue_, (int)0, (int)NUM_QUEUES));
+
 
     if (isValidateEventType(in_type)) {
         return false;
@@ -300,7 +193,7 @@ bool EventManager::abortEvent(
 
     bool result = false;
     
-    EventQueue& queue = queues_[active_queue_];
+    EventQueue& queue = queue_;
     
     EventQueue::iterator queue_it = queue.begin();
     EventQueue::iterator queue_end = queue.end();
@@ -323,22 +216,13 @@ bool EventManager::abortEvent(
 
 
 
-bool EventManager::tick(
-    uint32_t proc_limit
-) {
+bool EventManager::broadCast() {
 
     EventListenerMap::iterator it_wc = registry_.find(0);
     
-    //  アクティブなキューを交換
-    int queue_to_process = active_queue_;
-    active_queue_ = (active_queue_ + 1) % NUM_QUEUES;
-    queues_[active_queue_].clear();
+    EventQueue& process_queue = queue_;
     
-    EventQueue& active_queue = queues_[active_queue_];
-    EventQueue& process_queue = queues_[queue_to_process];
-    
-    //  リミットまでイベントを処理
-    int process_count = 0;
+    //  全イベントを処理
     while (process_queue.size() > 0) {
         EventPtr event = process_queue.front();
         process_queue.pop_front();
@@ -373,33 +257,16 @@ bool EventManager::tick(
             (*table_it)->arg1(&event);
             (*table_it)->invoke();
         }
-        
-        process_count += 1;
-        
-        if (process_count >= proc_limit) {
-            break;
-        }
     }
+    //  次のフレームまで持ち越すことは考えない
 
-    //  処理すべきイベントが残ってる場合アクティブなキューにプッシュしておく
-    //  並び方を維持するために残りの順序を逆にしてアクティブなキューの先頭に挿入
-    bool queue_flushed = (process_queue.size() == 0);
-    
-    if (!queue_flushed) {
-        while (process_queue.size() > 0) {
-            EventPtr event = process_queue.back();
-            process_queue.pop_back();
-            active_queue.push_front(event);
-        }
-    }
-    
-    return queue_flushed;
+    return true;
 }
 
 
 bool EventManager::isValidateEventType(
     const EventType& in_type
-) const {
+) {
 
     if (in_type.string().length() == 0) {
         return false;
@@ -420,7 +287,7 @@ bool EventManager::isValidateEventType(
 
 EventListenerList EventManager::getListenerList(
     const EventType &event_type
-) const {
+) {
     if (!isValidateEventType(event_type)) {
         return EventListenerList();
     }
@@ -451,7 +318,7 @@ EventListenerList EventManager::getListenerList(
     return result;
 }
 
-EventTypeList EventManager::getTypeList() const {
+EventTypeList EventManager::getTypeList() {
     if (type_list_.empty()) {
         return EventTypeList();
     }
@@ -470,7 +337,7 @@ EventTypeList EventManager::getTypeList() const {
 }
 
 
-void EventManager::dumpListeners() const {
+void EventManager::dumpListeners() {
     
     //  登録済の全名前出力
     EventListenerMap::const_iterator map_it = registry_.begin();
@@ -494,7 +361,7 @@ void EventManager::dumpListeners() const {
 
 String EventManager::getEventNameByKey(
     HashString::key_t key
-) const {
+) {
 
     for (auto type:type_list_) {
     

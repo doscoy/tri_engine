@@ -280,3 +280,4 @@ bool isExitRequest() {
 }
 
 CROSS_NS_END
+

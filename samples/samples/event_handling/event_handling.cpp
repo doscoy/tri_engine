@@ -88,12 +88,12 @@ public:
   
 public:
     void initialize(){
-        t3::EventManager::safeAddListener<HpText>(hp_text_, &HpText::krif, EventAAA::TYPE);
-        t3::EventManager::safeAddListener<HpText>(hp_text_, &HpText::krif, EventBBB::TYPE);
+        t3::EventManager::addListener<HpText>(hp_text_, &HpText::krif, EventAAA::TYPE);
+        t3::EventManager::addListener<HpText>(hp_text_, &HpText::krif, EventBBB::TYPE);
     }
     
     void terminate(){
-        t3::safeRemoveListener(hp_text_);
+        t3::EventManager::removeListener(hp_text_);
     }
     
     void update(t3::tick_t delta_time){
@@ -104,12 +104,12 @@ public:
             if (d.random().getBool()){
                 T3_TRACE("A\n");
                 t3::EventPtr new_event(T3_SYS_NEW EventAAA);
-                t3::safeQueueEvent(new_event);
+                t3::EventManager::queueEvent(new_event);
             }
             else {
                 T3_TRACE("B\n");
                 t3::EventPtr new_event(T3_SYS_NEW EventBBB);
-                t3::safeQueueEvent(new_event);
+                t3::EventManager::queueEvent(new_event);
                 
             }
         }
