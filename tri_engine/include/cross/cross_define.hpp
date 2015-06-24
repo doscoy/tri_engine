@@ -16,7 +16,6 @@
 
     #define CROSS_TARGET_PLATFORM       CROSS_TARGET_PLATFORM_WIN32
 	#define CROSS_TARGET_COMPILER_MSVC
-    #warning "target windows"
 
 #elif defined(__APPLE__)
     #include <TargetConditionals.h>
@@ -68,7 +67,7 @@
 
 #if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_WIN32
     #define CROSS_GL_VERSION    CROSS_GL_40
-    #warning "target gl4"
+//    #warning "target gl4"
 
 #elif CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_OSX
     #define CROSS_GL_VERSION    CROSS_GL_40
