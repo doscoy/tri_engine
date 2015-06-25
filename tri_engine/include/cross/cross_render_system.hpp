@@ -269,8 +269,7 @@ public:
     enum class ColorFormat {
         RGB,    ///< RGB
         RGBA,   ///< RGBA
-        GRAY,   ///< グレースケール
-        GRAYA,  ///< アルファ付きグレースケール
+        LUMINANCE_ALPHA,  ///< アルファ付き輝度
         DEPTH,  ///< デプス値
     };
     

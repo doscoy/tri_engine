@@ -92,9 +92,6 @@ TexturePtr TextureFactory::createFromPngFile(const File& file) {
     
     cross::RenderSystem::ColorFormat color_format = cross::RenderSystem::ColorFormat::RGB;
     switch (png.color_type_) {
-    case PNG_COLOR_TYPE_GRAY:
-        color_format = cross::RenderSystem::ColorFormat::GRAY;
-        break;
         
     case PNG_COLOR_TYPE_RGB:
         color_format = cross::RenderSystem::ColorFormat::RGB;

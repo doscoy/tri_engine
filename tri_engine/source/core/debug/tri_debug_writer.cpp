@@ -23,7 +23,7 @@ DebugWriter::DebugWriter()
         String("debugfont"),
         dbg_font_.width_,
         dbg_font_.height_,
-        cross::RenderSystem::ColorFormat::RGBA,
+        cross::RenderSystem::ColorFormat::LUMINANCE_ALPHA,
         cross::RenderSystem::TypeFormat::UNSIGNED_BYTE,
         (uint8_t*)dbg_font_.pixel_data_
     );
