@@ -10,17 +10,10 @@ TRI_CORE_NS_BEGIN
 
 
 DebugStringBuffer::DebugStringBuffer()
-    : buffer_()
-    , size_(0)
-    , writer_()
-{
-    
-}
+{}
 
 DebugStringBuffer::~DebugStringBuffer()
-{
-    
-}
+{}
 
 
 void DebugStringBuffer::addString(
@@ -30,47 +23,31 @@ void DebugStringBuffer::addString(
     const int size,
     const char* const str
 ){
-    if (size_ >= buffer_.size()) {
-        return;
+
+
+    
+    //  受け取った文字列を一文字づつに分解して保存
+    
+    int font_size = size;
+    int pitch = font_size - 2;
+    int count = 0;
+    const char* c = str;
+    while(*c){
+        DebugStringItem character;
+        character.x_ = x + (pitch * count);
+        character.y_ = y;
+        character.size_ = size;
+        character.character_ = *c;
+        character.color_ = color;
+        
+        push_back(character);
+
+        ++c;
+        ++count;
     }
 
-    DebugStringItem& item = buffer_.at(size_);
-
-    item.color_ = color;
-    item.x_ = static_cast<short>(x);
-    item.y_ = static_cast<short>(y);
-    item.size_ = size;
-    std::strncpy( item.str_, str, DEBUG_STRING_ITEM_STR_SIZE );
     
-    ++size_;
 }
-
-
-void DebugStringBuffer::clearBuffer()
-{
-    size_ = 0;
-}
-
-void DebugStringBuffer::drawStrings()
-{
-    auto& d = Director::instance();
-    writer_.beginPrint(d.screenSize().x_, d.screenSize().y_);
- 
-    
-    for (int item_idx = 0; item_idx < size_; ++item_idx ) {
-        const DebugStringItem& str_item = buffer_[item_idx];
-        writer_.print(
-            str_item.str_,
-            str_item.x_,
-            str_item.y_,
-            str_item.color_,
-            str_item.size_
-        );
-    }
-    
-    writer_.endPrint();
-}
-
 
 TRI_CORE_NS_END
 

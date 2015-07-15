@@ -26,14 +26,16 @@ struct DebugStringItem {
     uint32_t color_;
     int16_t x_;
     int16_t y_;
-    char str_[DEBUG_STRING_ITEM_STR_SIZE];
+    char character_;
     char size_;
 };
+
+using DebugStringItemContainer = Vector<DebugStringItem>;
 
 ///
 /// デバッグ文字バッファ
 class DebugStringBuffer
-    : private Uncopyable
+    : protected DebugStringItemContainer
 {
 public:
     ///
@@ -58,22 +60,8 @@ public:
     
     ///
     /// バッファクリア
-    void clearBuffer();
-
-    ///
-    /// バッファを描画
-    void drawStrings();
+    using DebugStringItemContainer::clear;
     
-private:
-    ///
-    /// 文字列のコンテナ
-    Array<DebugStringItem, 300> buffer_;
-
-    ///
-    /// 追加済みサイズ
-    int size_;
-    
-    DebugWriter writer_;
 };
 
 
