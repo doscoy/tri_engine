@@ -18,7 +18,7 @@
 #include "core/graphics/tri_color.hpp"
 #include "core/graphics/tri_render_layer.hpp"
 #include "core/graphics/tri_fade_layer.hpp"
-
+#include "core/graphics/tri_sprite_layer.hpp"
 #include <array>
 
 
@@ -144,13 +144,13 @@ public:
 
     ///
     /// 登録済レイヤー取得
-    RenderLayers& layers() {
+    Layers& layers() {
         return layers_;
     }
     
     ///
     /// 登録済みレイヤー取得
-    const RenderLayers& layers() const {
+    const Layers& layers() const {
         return layers_;
     }
     
@@ -162,11 +162,11 @@ public:
 
     ///
     /// レイヤー登録
-    void attachLayer(RenderLayer* layer);
+    void attachLayer(LayerBase* layer);
     
     ///
     /// レイヤー削除
-    void detachLayer(RenderLayer* layer);
+    void detachLayer(LayerBase* layer);
     
 
     ///
@@ -205,7 +205,7 @@ public:
     
     ///
     /// 登録されている指定レイヤーを探す
-    static RenderLayer* findLayer(const String& layer_name);
+    static LayerBase* findLayer(const String& layer_name);
     
     ///
     /// ビューポートの位置に変換
@@ -262,7 +262,7 @@ public:
         const float y,
         const uint32_t color,
         const int font_size,
-        const char* const buf
+        const char* const str
     );
         
 private:
@@ -278,13 +278,19 @@ private:
     ///
     /// デバッグメニューから削除
     void unregistryLayersToDebugMenu();
+
+    ///
+    /// デバッグプリントの更新前準備
+    void prepareDebugPrintFontSprites();
+
+
     
 private:
     //  デバッグ用レイヤー
     ScopedPtr<DebugLogLayer> log_layer_;                ///< デバッグログ用レイヤー
     ScopedPtr<DebugStringLayer> dbg_screen_layer_;      ///< デバッグプリント用レイヤー
-    
-
+    ScopedPtr<SpriteLayer> dbg_print_layer_;
+    ScopedPtr<DebugStringBuffer> dbg_print_buffer_;
 
     //  システムフェード
     ScopedPtr<FadeLayer> fade_layer_;   ///< フェードレイヤー
@@ -301,7 +307,7 @@ private:
     Array<Input, MAX_PAD> input_;   ///< 入力データ
 
     //  描画レイヤー
-    RenderLayers layers_;           ///<  描画レイヤー
+    Layers layers_;           ///<  描画レイヤー
     
     
     

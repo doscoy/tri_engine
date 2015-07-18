@@ -25,7 +25,7 @@ TRI_CORE_NS_BEGIN
 /// @par 別レンダリングしたテクスチャを貼るレイヤーです。
 /// むにゃむにゃわちゃわちゃ
 class CinemaLayer
-    : public RenderLayer {
+    : public LayerBase {
     
 public:
     ///
@@ -38,7 +38,7 @@ public:
         const Vec2 min_pos,                                     ///< ビューポート座標最小値
         const Vec2 max_pos,                                     ///< ビューポート座標最大値
         const String& name = "cinema",                          ///< レイヤー名
-        const int priority = RenderLayer::PRIORITY_APP_FRONT1   ///< 優先度
+        const int priority = LayerBase::PRIORITY_APP_FRONT1   ///< 優先度
     );
 
     ///

@@ -47,7 +47,7 @@ public:
 }
 
 SpriteRenderer::SpriteRenderer()
-    : sprites_()
+    : collections_()
     , shader_(nullptr)
     , default_shader_(nullptr)
     , batch_groups_()
@@ -62,7 +62,7 @@ SpriteRenderer::SpriteRenderer()
     useDefaultShader();
     
     //  スプライトコンテナのメモリを事前に確保
-    sprites_.reserve(4096);
+    collections_.reserve(4096);
     
     
     //  バッチグループの初期化
@@ -136,7 +136,7 @@ SpriteRenderer::~SpriteRenderer()
 void SpriteRenderer::collectSprite(
     SpritePtr sprite
 ) {
-    sprites_.push_back(sprite);
+    collections_.push_back(sprite);
 }
 
 
@@ -145,7 +145,7 @@ void SpriteRenderer::collectSprite(
 
 void SpriteRenderer::render() {
 
-    if (sprites_.empty()) {
+    if (collections_.empty()) {
         //  描画すべきスプライトが無い場合は即終了
         return;
     }
@@ -271,13 +271,13 @@ void spriteTransformCore(
 void SpriteRenderer::margeSprites() {
 
     //  スプライトのソート
-    std::sort(sprites_.begin(), sprites_.end(), PriorityCompare());
+    std::sort(collections_.begin(), collections_.end(), PriorityCompare());
 
     Vector<VertexP2CT> vertices;
     Vector<uint32_t> indices;
     
-    vertices.reserve(sprites_.size() * 4);
-    indices.reserve(sprites_.size() * 8);
+    vertices.reserve(collections_.size() * 4);
+    indices.reserve(collections_.size() * 8);
 
 
     Vec2 screen_size = Director::instance().virtualScreenSize();
@@ -292,8 +292,8 @@ void SpriteRenderer::margeSprites() {
     //  バッチが切れる場合はコンテナにコピーされて新たなバッチグループのインスタンスとして使う
     BatchGroup* current_batch = getNewBatch();
     
-    for (int i = 0; i < sprites_.size(); ++i) {
-        auto& spr = sprites_[i];
+    for (int i = 0; i < collections_.size(); ++i) {
+        auto& spr = collections_[i];
         
 
         if (i == 0) {
@@ -594,7 +594,7 @@ void SpriteRenderer::endRender()
     cross::RenderSystem::setBlend(false);
 
     //  描画コンテナのクリア
-    sprites_.clear();
+    collections_.clear();
     
     current_batch_idx_ = -1;
 

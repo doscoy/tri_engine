@@ -17,6 +17,12 @@ TRI_CORE_NS_BEGIN
 
 class MethodCallbackBaseX {
 public:
+    MethodCallbackBaseX()
+        : target_(nullptr)
+        , arg1_(nullptr)
+    {}
+
+
     MethodCallbackBaseX(const void* target)
         : target_(target)
         , arg1_(nullptr)

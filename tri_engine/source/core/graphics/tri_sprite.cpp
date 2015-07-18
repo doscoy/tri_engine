@@ -20,7 +20,8 @@ Sprite::Sprite()
     , blend_mode_(cross::RenderSystem::BlendMode::NORMAL)
     , priority_(PRIORITY_NORMAL)
     , sort_score_(0)
-    , enable_(true)
+    , visibility_(true)
+    , enable_(false)
 {
     calcSortScore();
     transform_ = std::make_shared<Transform2D>();
@@ -97,6 +98,11 @@ void Sprite::setupTextureCoordAndSize(
 
 void Sprite::adjustPivotByCenter() {
     pivot(size_.x_ * 0.5f, size_.y_ * 0.5f);
+}
+
+void Sprite::destroy() {
+
+    disable();
 }
 
 

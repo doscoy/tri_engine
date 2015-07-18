@@ -8,31 +8,47 @@ TRI_CORE_NS_BEGIN
 
     
 SpriteLayer::SpriteLayer()
-    : SpriteLayer("Sprite", PRIORITY_APP_DEFAULT)
+    : SpriteLayer("Sprite", 2048, PRIORITY_APP_DEFAULT)
 {
 }
 
 SpriteLayer::SpriteLayer(
     const String& name,
+    const int managed_size,
     const int priority
-)   : RenderLayer(name, priority)
+)   : LayerBase(name, priority)
     , renderer_()
     , sprites_()
 {
+    for (int i = 0; i < managed_size; ++i) {
+        sprites_.push_back(T3_SYS_NEW Sprite());
+    }
 }
 
-SpriteLayer::~SpriteLayer()
-{
-    detachAllSprite();
-
-    sprites_.clear();
+SpriteLayer::~SpriteLayer() {
+    for (int i = 0; i < sprites_.size(); ++i) {
+        T3_DELETE sprites_[i];
+    }
 }
 
+SpritePtr SpriteLayer::newSprite() {
+    for (int i = 0; i < sprites_.size(); ++i) {
+        SpritePtr spr = sprites_.at(i);
+        if (!spr->isEnabled()) {
+            return spr;
+        }
+    }
+
+    return nullptr;
+}
 
 SpritePtr SpriteLayer::createSprite(TexturePtr tex) {
-    SpritePtr spr(T3_SYS_NEW Sprite);
-    spr->texture(tex);
-    attachSprite(spr);
+    SpritePtr spr = newSprite();
+    if (spr) {
+        spr->enable();
+        spr->texture(tex);
+    }
+    
     
     return spr;
 }
@@ -50,24 +66,20 @@ SpritePtr SpriteLayer::createSprite(const String& tex_name) {
 void SpriteLayer::updateLayer(
     tick_t delta_time
 ) {
-    //  無効になった要素の掃除
-    sprites_.remove_if([](WeakSprite& wk){return wk.expired();});
-
-    if (sprites_.empty()) {
-        //  スプライト無ければ処理スキップ
-        return;
-    }
-
-
-
     //  レンダリング用にスプライトをマージする
-    for (auto& target : sprites_) {
+    for (auto& sp : sprites_) {
         
-        auto sp = target.lock();
-    
-        if (!sp->enabled()) {
+        //  無効なスプライトはスキップ
+        if (!sp->isEnabled()) {
             continue;
         }
+
+        //  非表示のスプライトはスキップ
+        if (!sp->isVisible()) {
+            continue;
+        }
+
+
         renderer_.collectSprite(sp);
     }
     
@@ -77,7 +89,7 @@ void SpriteLayer::updateLayer(
 
 void SpriteLayer::drawLayer() {
 
-    if (sprites_.empty()) {
+    if (renderer_.collections().empty()) {
         //  スプライト無ければ処理スキップ
         return;
     }
@@ -86,20 +98,13 @@ void SpriteLayer::drawLayer() {
 }
 
 
-void SpriteLayer::attachSprite(WeakSprite sprite) {
-    sprites_.push_back(sprite);
-}
+void SpriteLayer::disableAllSprites() {
 
-
-
-void SpriteLayer::detachAllSprite() {
-    SpriteContainer::iterator it = sprites_.begin();
-    SpriteContainer::iterator end = sprites_.end();
-    
-    while (it != end) {
-        it = sprites_.erase(it);
+    for (int i = 0; i < sprites_.size(); ++i) {
+        sprites_[i]->destroy();
     }
 }
+
 
 TRI_CORE_NS_END
 

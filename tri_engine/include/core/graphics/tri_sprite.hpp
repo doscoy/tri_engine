@@ -263,28 +263,36 @@ public:
         calcSortScore();
     }
     
-    ///
-    ///  有効化
-    void enable() {
-        enable_ = true;
-    }
-    
-    ///
-    /// 無効化
-    void disable() {
-        enable_ = false;
-    }
-    
-    ///
-    ///  有効判定
-    bool enabled() const {
-        return enable_;
-    }
     
     ///
     /// ソート用スコアを取得
     int sortScore() const;
     
+    ///
+    /// ソート用のスコアを計算
+    void calcSortScore();
+
+
+    ///
+    /// 表示
+    void show() {
+        visibility_ = true;
+    }
+
+    ///
+    /// 非表示
+    void hide() {
+
+        visibility_ = false;
+    }
+
+    ///
+    /// 表示判定
+    bool isVisible() const {
+
+        return visibility_;
+    }
+
 
     ///
     /// 色を取得
@@ -332,10 +340,26 @@ public:
         calcSortScore();
     }
     
-    ///
-    /// ソート用のスコアを計算
-    void calcSortScore();
+    void destroy();
     
+private:
+    ///
+    ///  有効化
+    void enable() {
+        enable_ = true;
+    }
+    
+    ///
+    /// 無効化
+    void disable() {
+        enable_ = false;
+    }
+    
+    ///
+    ///  有効判定
+    bool isEnabled() const {
+        return enable_;
+    }
 
 private:
     ///
@@ -378,16 +402,19 @@ private:
     ///
     /// ソート用スコア
     int sort_score_;
+
+    ///
+    /// 表示フラグ
+    bool visibility_;
     
     ///
-    /// 有効判定
+    /// 有効フラグ
     bool enable_;
     
 };
 
-//  ポインタ型定義
-using SpritePtr = SharedPtr<Sprite>;
-using WeakSprite = std::weak_ptr<Sprite>;
+
+using SpritePtr = Sprite*;
 
 
 TRI_CORE_NS_END

@@ -10,7 +10,7 @@ TRI_CORE_NS_BEGIN
  
 
 DebugStringLayer::DebugStringLayer(const char* const name)
-    : RenderLayer(name, RenderLayer::PRIORITY_DEBUG)
+    : LayerBase(name, LayerBase::PRIORITY_DEBUG)
 {
 
 }
@@ -42,7 +42,7 @@ void DebugStringLayer::drawLayer()
     
     //  描画
 //    debug_string_buffer_.drawStrings();
-    debug_string_buffer_.clearBuffer();
+//    debug_string_buffer_.clearBuffer();
 }
 
 

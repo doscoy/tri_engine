@@ -14,7 +14,7 @@ TRI_CORE_NS_BEGIN
 
 
 CinemaLayer::CinemaLayer()
-    : CinemaLayer(Vec2(-1,-1), Vec2(1,1), "cinema", RenderLayer::PRIORITY_APP_FRONT1)
+    : CinemaLayer(Vec2(-1,-1), Vec2(1,1), "cinema", LayerBase::PRIORITY_APP_FRONT1)
 {}
 
 
@@ -23,7 +23,7 @@ CinemaLayer::CinemaLayer(
     const Vec2 max_pos,
     const String& name,
     const int priority
-)   : RenderLayer(name, priority)
+)   : LayerBase(name, priority)
     , vao_()
     , vb_()
     , ib_()

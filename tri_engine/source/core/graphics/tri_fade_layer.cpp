@@ -19,7 +19,7 @@ FadeLayer::FadeLayer()
 FadeLayer::FadeLayer(
     const String& name,
     const int priority
-)   : RenderLayer(name, priority)
+)   : LayerBase(name, priority)
     , fading_(false)
     , fade_in_(true)
     , fade_speed_(1.0f)

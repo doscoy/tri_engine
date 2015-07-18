@@ -20,12 +20,12 @@ TRI_CORE_NS_BEGIN
 
 //  前方参照
 class Surface;
-class RenderLayer;
-using RenderLayers = List<RenderLayer*>;
+class LayerBase;
+using Layers = List<LayerBase*>;
 
 ///
 /// 描画レイヤーベース
-class RenderLayer
+class LayerBase
     : private Uncopyable
 {
 public:
@@ -55,15 +55,15 @@ public:
 public:
     ///
     /// コンストラクタ
-    RenderLayer(const String& name, const int priority);
+    LayerBase(const String& name, const int priority);
     
     ///
     /// コンストラクタ
-    explicit RenderLayer(const String& name);
+    explicit LayerBase(const String& name);
     
     ///
     /// デストラクタ
-    virtual ~RenderLayer();
+    virtual ~LayerBase();
 
 public:
 
@@ -172,18 +172,60 @@ public:
     void name(std::string name) {
         layer_name_ = name;
     }
+
+
+    ///
+    /// 更新前コールバック設定
+    template <typename T>
+    void setPreUpdateCallback(
+        T* instance,
+        std::function<void(T&)> call
+    ) {
+        preupdate_callback_.reset(new MethodCallbackX<T>(instance, call));
+    }
+
+    ///
+    /// 更新後コールバック設定
+    template <typename T>
+    void setPostUpdateCallback(
+        T* instance,
+        std::function<void(T&)> call
+    ) {
+        postupdate_callback_.reset(new MethodCallbackX<T>(instance, call));
+    }
+
+    ///
+    /// 描画前コールバック設定
+    template <typename T>
+    void setPreRenderCallback(
+        T* instance,
+        std::function<void(T&)> call
+    ) {
+        prerender_callback_.reset(new MethodCallbackX<T>(instance, call));
+    }
+
+    ///
+    /// 描画後コールバック設定
+    template <typename T>
+    void setPostRenderCallback(
+        T* instance,
+        std::function<void(T&)> call
+    ) {
+        postrender_callback_.reset(new MethodCallbackX<T>(instance, call));
+    }
+
 public:
     ///
     ///  全てのレイヤーを更新
     static void updateLayers(
-        RenderLayers& layers,
+        Layers& layers,
         tick_t delta_time
     );
     
     ///
     /// 全てのレイヤーを描画
     static void drawLayers(
-        RenderLayers& layers
+        Layers& layers
     );
     
 protected:
@@ -239,7 +281,26 @@ protected:
     /// ポーズデバッグ
     DebugMenuItem<bool> dmi_pause_;
 
+    ///
+    /// レイヤー名
     std::string layer_name_;
+
+    ///
+    /// 更新前ユーザーコールバック
+    ScopedPtr<MethodCallbackBaseX> preupdate_callback_;
+
+    ///
+    /// 更新後ユーザーコールバック
+    ScopedPtr<MethodCallbackBaseX> postupdate_callback_;
+
+    ///
+    /// 描画前ユーザーコールバック
+    ScopedPtr<MethodCallbackBaseX> prerender_callback_;
+
+    ///
+    /// 描画後ユーザーコールバック
+    ScopedPtr<MethodCallbackBaseX> postrender_callback_;
+
 };
 
 

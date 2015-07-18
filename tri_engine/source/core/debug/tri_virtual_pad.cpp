@@ -37,7 +37,7 @@ const t3::Rectangle B_BUTTON(POS_B, POS_B + BUTTON_SIZE);
 
 
 VirtualPad::VirtualPad()
-    : pad_layer_("vpad", RenderLayer::PRIORITY_DEBUG)
+    : pad_layer_("vpad", LayerBase::PRIORITY_DEBUG)
 {
     pad_layer_.setUpdateCallback<VirtualPad>(this, &VirtualPad::updateVirtualPad);
     pad_layer_.setRenderCallback<VirtualPad>(this, &VirtualPad::renderVirtualPad);

@@ -332,7 +332,7 @@ void Application::renderApplication() {
     debug_cost_timer_.end();
     rendering_cost_timer_.start();      // rendering cost 計算開始
     //  レイヤーの描画
-    RenderLayer::drawLayers(gs.layers());
+    LayerBase::drawLayers(gs.layers());
     rendering_cost_timer_.end();           // rendering cost 計算終了
 
     //  描画終了

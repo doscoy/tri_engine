@@ -17,7 +17,7 @@ TRI_CORE_NS_BEGIN
 ///
 /// デバッグ文字表示レイヤ
 class DebugStringLayer
-    : public RenderLayer
+    : public LayerBase
 {
 public:
     ///

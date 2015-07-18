@@ -23,7 +23,7 @@ extern Counter frame_counter_;
 const Input& Director::input(
     const int player_no
 )  {
-    return t3::Director::instance().input_.at(player_no);
+    return Director::instance().input_.at(player_no);
 }
     
 void Director::addSystemTask(
@@ -33,10 +33,10 @@ void Director::addSystemTask(
 }
 
 
-RenderLayer* Director::findLayer(
+LayerBase* Director::findLayer(
     const String& layer_name
 ) {
-    t3::RenderLayers layers = t3::Director::instance().layers();
+    Layers layers = Director::instance().layers();
     
     for (auto layer : layers) {
         if (layer_name == layer->name()) {
@@ -122,9 +122,9 @@ void Director::printDisplay(
     const float y,
     const uint32_t color,
     const int font_size,
-    const char* const buf
+    const char* const str
 ) {
-    instance().dbg_screen_layer_->writeString(x, y, color, font_size, buf);
+    instance().dbg_print_buffer_->addString(x, y, color, font_size, str);
 }
 
 
@@ -137,7 +137,7 @@ void Director::setClearColor(const Color& c) {
 }
 
 
-// *********************************************
+
 //  コンストラクタ
 Director::Director()
     : log_layer_(nullptr)
@@ -193,7 +193,7 @@ Director::Director()
     
 }
 
-// *********************************************
+
 //  デストラクタ
 Director::~Director()
 {
@@ -223,12 +223,18 @@ void Director::initializeDirector() {
  
     
     //  システムフェードレイヤー生成
-    fade_layer_.reset(T3_SYS_NEW FadeLayer("sys-fade", RenderLayer::PRIORITY_SYS_FADE));
+    fade_layer_.reset(T3_SYS_NEW FadeLayer("sys-fade", LayerBase::PRIORITY_SYS_FADE));
     
     //  デバッグ用レイヤー生成
     log_layer_.reset(T3_SYS_NEW DebugLogLayer("dbg log"));
     dbg_screen_layer_.reset(T3_SYS_NEW DebugStringLayer("dbg print"));
+    dbg_print_layer_.reset(T3_SYS_NEW SpriteLayer("dbg print"));
+    dbg_print_buffer_.reset(T3_SYS_NEW DebugStringBuffer());
 
+    dbg_print_layer_->setPreUpdateCallback(
+        this, 
+        &Director::prepareDebugPrintFontSprites
+    );
 }
 
 
@@ -238,7 +244,7 @@ void Director::terminateDirector() {
     fade_layer_.reset();
 }
 
-// *********************************************
+
 //  アップデート
 void Director::update(
     const tick_t delta_time
@@ -269,7 +275,7 @@ void Director::update(
     EventManager::broadCast();
     
     //  レイヤーの更新
-    RenderLayer::updateLayers(layers(), delta_time);
+    LayerBase::updateLayers(layers(), delta_time);
 
     
     //  終了リクエストチェック
@@ -371,17 +377,28 @@ void Director::updateInput(
     cross::GamePadData dbg_pad_data;
     cross::platformPadData(1, &dbg_pad_data);
 
-    auto& debug_menu = t3::DebugMenu::instance();
+    auto& debug_menu = DebugMenu::instance();
     const auto& vpad = debug_menu.virtualPad();
     updateDebugPad(*vpad->getPadData(), delta_time);
 
 }
 
+void Director::prepareDebugPrintFontSprites() {
 
+
+    dbg_print_layer_->disableAllSprites();
+
+    while (!dbg_print_buffer_->empty()) {
+        //  末尾の文字を取り出す
+        auto& item = dbg_print_buffer_->back();
+        dbg_print_buffer_->pop_back();
+    }
+}
     
     
-void Director::registryToDebugMenu( DebugMenuFrame& parent_frame )
-{
+void Director::registryToDebugMenu( 
+    DebugMenuFrame& parent_frame
+) {
     //  塗りつぶしカラーの登録
     dm_color_idx_.attachSelf(parent_frame);
     
@@ -394,7 +411,7 @@ void Director::registryToDebugMenu( DebugMenuFrame& parent_frame )
 }
 
 
-void Director::attachLayer(t3::RenderLayer* layer)
+void Director::attachLayer(LayerBase* layer)
 {
     T3_NULL_ASSERT(layer);
     layers_.push_back(layer);
@@ -403,7 +420,7 @@ void Director::attachLayer(t3::RenderLayer* layer)
 
 }
 
-void Director::detachLayer(t3::RenderLayer* layer)
+void Director::detachLayer(LayerBase* layer)
 {
     layers_.remove(layer);
     sortLayers();
@@ -411,7 +428,7 @@ void Director::detachLayer(t3::RenderLayer* layer)
 
 void Director::sortLayers() {
     layers_.sort(
-        [](RenderLayer*lhs, RenderLayer* rhs) {
+        [](LayerBase*lhs, LayerBase* rhs) {
             return lhs->priority() < rhs->priority();
         }
     );

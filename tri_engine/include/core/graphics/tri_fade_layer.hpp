@@ -18,7 +18,7 @@ TRI_CORE_NS_BEGIN
 ///
 /// フェードレイヤー
 class FadeLayer
-    : public RenderLayer
+    : public LayerBase
 {
 public:
     ///

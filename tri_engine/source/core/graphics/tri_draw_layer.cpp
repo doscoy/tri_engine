@@ -21,7 +21,7 @@ DrawLayer::DrawLayer()
 DrawLayer::DrawLayer(
     const String name,
     const int priority
-)   : RenderLayer(name, priority)
+)   : LayerBase(name, priority)
     , update_func_(nullptr)
     , render_func_(nullptr)
 {

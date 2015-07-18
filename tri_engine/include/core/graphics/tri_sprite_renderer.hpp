@@ -139,6 +139,7 @@ class SpriteRenderer
     /// バッチグループの集合
     using BatchGroups = Array<BatchGroup, 64>;
 
+public:
     ///
     /// スプライトコンテナ
     using Container = Vector<SpritePtr>;
@@ -178,6 +179,13 @@ public:
         shader_ = shader;
     }
 
+
+    ///
+    /// 集めたスプライト取得
+    const Container& collections() const {
+        return collections_;
+    }
+
 private:
     ///
     /// 描画前処理
@@ -209,7 +217,7 @@ private:
 private:
     ///
     /// 集めてきたスプライト群
-    Container sprites_;
+    Container collections_;
     
     ///
     /// 使用するシェーダ

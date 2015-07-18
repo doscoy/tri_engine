@@ -9,7 +9,7 @@ TRI_CORE_NS_BEGIN
 
     
 
-RenderLayer::RenderLayer(
+LayerBase::LayerBase(
     const String& layer_name,
     const int priority
 )   : pause_(false)
@@ -20,23 +20,25 @@ RenderLayer::RenderLayer(
     , dmi_visible_(&dmf_me_, "VISIBLE", visible_)
     , dmi_pause_(&dmf_me_, "PAUSE", pause_)
     , layer_name_(layer_name)
+    , preupdate_callback_(nullptr)
+    , postupdate_callback_(nullptr)
+    , prerender_callback_(nullptr)
+    , postrender_callback_(nullptr)
 {
     attachSystem();
 }
     
-RenderLayer::RenderLayer(const String& name)
-    : RenderLayer(name, PRIORITY_APP_DEFAULT)
-{
-}
+LayerBase::LayerBase(const String& name)
+    : LayerBase(name, PRIORITY_APP_DEFAULT)
+{}
 
 
 
-RenderLayer::~RenderLayer()
-{
+LayerBase::~LayerBase() {
     detachSystem();
 }
 
-void RenderLayer::priority(
+void LayerBase::priority(
     const int priority
 ) {
     T3_ASSERT( PRIORITY_LOWEST <= priority && priority <= PRIORITY_HIGHEST  );
@@ -45,13 +47,13 @@ void RenderLayer::priority(
 
 
 
-void RenderLayer::registryToDebugMenu(
+void LayerBase::registryToDebugMenu(
     DebugMenuFrame& parent
 ) {
     dmf_me_.attachSelf(parent);
 }
 
-void RenderLayer::unregistryToDebugMenu()
+void LayerBase::unregistryToDebugMenu()
 {
     dmf_me_.detachSelf();
 }
@@ -59,32 +61,63 @@ void RenderLayer::unregistryToDebugMenu()
     
     
 //  レイヤー更新
-void RenderLayer::updateLayers(
-    RenderLayers& layers,
+void LayerBase::updateLayers(
+    Layers& layers,
     tick_t delta_time
 ){
-    for (auto layer : layers) {
-        if (!layer->isPauseLayer()) {
-            layer->updateLayer(delta_time);
+    for (auto& layer : layers) {
+        //  ポーズしてるレイヤーはスキップ
+        if (layer->isPauseLayer()) {
+            continue;
+        }
+
+        //  更新前コールバック
+        if (layer->preupdate_callback_) {
+            layer->preupdate_callback_->invoke();
+        }
+
+        //  更新
+        layer->updateLayer(delta_time);
+
+        //  更新後コールバック
+        if (layer->postupdate_callback_) {
+            layer->postupdate_callback_->invoke();
         }
     }
 }
     
-void RenderLayer::drawLayers(
-    RenderLayers& layers
-){
+void LayerBase::drawLayers(
+    Layers& layers
+) {
 
     for (auto& layer : layers) {
         T3_ASSERT(layer);
-        if (layer->isVisibleLayer()) {
-            layer->callDraw();
+
+        //  表示オフしているレイヤーはスキップ
+        if (!layer->isVisibleLayer()) {
+            continue;
         }
+
+        //  描画前コールバック
+        if (layer->prerender_callback_) {
+            layer->prerender_callback_->invoke();
+        }
+
+        //  描画
+        layer->callDraw();
+
+        //  描画後コールバック
+        if (layer->postrender_callback_) {
+            layer->postrender_callback_->invoke();
+        }
+
     }
 }
 
-void RenderLayer::callDraw() {
+void LayerBase::callDraw() {
     if (render_target_) {
-
+        //  専用の描画ターゲットが指定されているので
+        //  描画ターゲットの描画前後処理も呼ぶ
         render_target_->preRender();
 
         drawLayer();
@@ -92,6 +125,7 @@ void RenderLayer::callDraw() {
         render_target_->postRender();
    
     } else {
+        //  描画ターゲットの指定が無い場合はただ描画
         drawLayer();
     }
     
@@ -99,11 +133,11 @@ void RenderLayer::callDraw() {
 }
     
     
-void RenderLayer::attachSystem() {
+void LayerBase::attachSystem() {
     t3::Director::instance().attachLayer(this);
 }
 
-void RenderLayer::detachSystem() {
+void LayerBase::detachSystem() {
     t3::Director::instance().detachLayer(this);
 }
 

@@ -20,12 +20,12 @@ TRI_CORE_NS_BEGIN
 ///
 /// スプライトレイヤー
 class SpriteLayer
-    : public RenderLayer
+    : public LayerBase
 {
 public:
     ///
     /// スプライトコンテナ
-    using SpriteContainer = List<WeakSprite>;
+    using SpriteContainer = Vector<SpritePtr>;
 
 public:
     ///
@@ -35,7 +35,8 @@ public:
     ///
     /// コンストラクタ
     SpriteLayer(
-        const String& name, ///< レイヤー名
+        const String& name,                         ///< レイヤー名
+        const int managed_size = 2048,              ///< 管理スプライト数
         const int priority = PRIORITY_APP_DEFAULT   ///< プライオリティ
     );
     
@@ -68,17 +69,15 @@ public:
     SpriteRenderer& renderer() {
         return renderer_;
     }
+
+    ///
+    /// 全てのスプライトを無効にする
+    void disableAllSprites();
     
 private:
     ///
-    /// スプライトを登録
-    void attachSprite(
-        WeakSprite const sprite ///< スプライト
-    );
-    
-    ///
-    /// スプライトを全て解除
-    void detachAllSprite();
+    /// 管理領域から未使用のスプライトを探す
+    SpritePtr newSprite();
 
     ///
     /// レイヤーの更新

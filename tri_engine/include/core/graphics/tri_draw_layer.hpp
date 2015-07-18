@@ -21,7 +21,7 @@ TRI_CORE_NS_BEGIN
 ///
 /// 描画レイヤー
 class DrawLayer
-    : public RenderLayer
+    : public LayerBase
 {
 public:
     ///
@@ -67,8 +67,8 @@ protected:
 
     
 private:
-    t3::ScopedPtr<MethodCallbackBaseX> update_func_;    ///< アップデート時コールバック関数
-    t3::ScopedPtr<MethodCallbackBaseX> render_func_;    ///< 描画時コールバック関数
+    ScopedPtr<MethodCallbackBaseX> update_func_;    ///< アップデート時コールバック関数
+    ScopedPtr<MethodCallbackBaseX> render_func_;    ///< 描画時コールバック関数
 };
 
 

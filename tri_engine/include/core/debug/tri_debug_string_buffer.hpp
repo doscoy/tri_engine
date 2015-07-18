@@ -61,7 +61,18 @@ public:
     ///
     /// バッファクリア
     using DebugStringItemContainer::clear;
+
+    ///
+    /// pop_back
+    using DebugStringItemContainer::pop_back;
+
+    ///
+    /// back
+    using DebugStringItemContainer::back;
     
+    ///
+    /// empty
+    using DebugStringItemContainer::empty;
 };
 
 
