@@ -30,11 +30,7 @@
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debugmenu_label.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debugpad.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_font_data.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_log_buffer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_log_layer.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_string_buffer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_string_layer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_writer.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_draw_primitive.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_print.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_trace.cpp" />
@@ -147,11 +143,7 @@
     <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debugmenu_label.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debugmenu_scene_louncher.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debugpad.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debug_log_buffer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debug_log_layer.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debug_string_buffer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debug_string_layer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debug_writer.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_draw_primitive.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_print.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_trace.hpp" />

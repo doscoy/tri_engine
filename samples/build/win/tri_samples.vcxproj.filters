@@ -224,19 +224,7 @@
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_font_data.cpp">
       <Filter>tri_engine\source\core\debug</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_log_buffer.cpp">
-      <Filter>tri_engine\source\core\debug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_log_layer.cpp">
-      <Filter>tri_engine\source\core\debug</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_string_buffer.cpp">
-      <Filter>tri_engine\source\core\debug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_string_layer.cpp">
-      <Filter>tri_engine\source\core\debug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_writer.cpp">
       <Filter>tri_engine\source\core\debug</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_draw_primitive.cpp">
@@ -757,19 +745,7 @@
     <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debugpad.hpp">
       <Filter>tri_engine\include\core\debug</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debug_log_buffer.hpp">
-      <Filter>tri_engine\include\core\debug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debug_log_layer.hpp">
-      <Filter>tri_engine\include\core\debug</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debug_string_buffer.hpp">
-      <Filter>tri_engine\include\core\debug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debug_string_layer.hpp">
-      <Filter>tri_engine\include\core\debug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debug_writer.hpp">
       <Filter>tri_engine\include\core\debug</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_draw_primitive.hpp">

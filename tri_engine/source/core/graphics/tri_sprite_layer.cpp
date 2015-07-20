@@ -6,7 +6,7 @@
 TRI_CORE_NS_BEGIN
 
 
-    
+
 SpriteLayer::SpriteLayer()
     : SpriteLayer("Sprite", 2048, PRIORITY_APP_DEFAULT)
 {
@@ -16,7 +16,7 @@ SpriteLayer::SpriteLayer(
     const String& name,
     const int managed_size,
     const int priority
-)   : LayerBase(name, priority)
+    ) : LayerBase(name, priority)
     , renderer_()
     , sprites_()
 {
@@ -48,8 +48,8 @@ SpritePtr SpriteLayer::createSprite(TexturePtr tex) {
         spr->enable();
         spr->texture(tex);
     }
-    
-    
+
+
     return spr;
 }
 
@@ -58,17 +58,17 @@ SpritePtr SpriteLayer::createSprite(const String& tex_name) {
     t3::TextureManager& tex_mgr = t3::TextureManager::instance();
     UniqueID tex_id = tex_mgr.load(tex_name);
     TexturePtr tex = tex_mgr.findResource(tex_id);
-    
+
     return createSprite(tex);
 }
 
 
 void SpriteLayer::updateLayer(
     tick_t delta_time
-) {
+    ) {
     //  レンダリング用にスプライトをマージする
     for (auto& sp : sprites_) {
-        
+
         //  無効なスプライトはスキップ
         if (!sp->isEnabled()) {
             continue;
@@ -82,8 +82,11 @@ void SpriteLayer::updateLayer(
 
         renderer_.collectSprite(sp);
     }
-    
-    renderer_.margeSprites();
+
+    //  スプライトがあれば、ドローコールを抑える為マージする
+    if (!renderer_.collections().empty()) {
+        renderer_.margeSprites();    
+    }
     
 }
 

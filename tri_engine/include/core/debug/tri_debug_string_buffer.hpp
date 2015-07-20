@@ -10,7 +10,6 @@
 #include "core/core_config.hpp"
 #include "core/base/tri_std.hpp"
 #include "core/utility/tri_uncopyable.hpp"
-#include "tri_debug_writer.hpp"
 
 TRI_CORE_NS_BEGIN
 

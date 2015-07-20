@@ -10,7 +10,6 @@
 //  include
 #include "tri_assert.hpp"
 #include "tri_print.hpp"
-#include "tri_debug_log_buffer.hpp"
 #include "tri_debug_string_buffer.hpp"
 #include "tri_debugmenu.hpp"
 #include "tri_debugmenu_frame.hpp"

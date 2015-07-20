@@ -12,6 +12,7 @@
 #include "tri_debugpad.hpp"
 #include "tri_debugmenu_frame.hpp"
 #include "core/math/tri_math_types.hpp"
+#include "tri_print.hpp"
 #include <limits.h>
 #include <functional>
 
@@ -116,19 +117,19 @@ public:
         
         makeTargetValueString(target_, buf, 32);
         
-        T3_PRINT_DISP(
+        printDisplay(
             x,
             y,
             color,
-            DEBUG_MENU_FONT_SIZE,
+            TRI_DEBUG_FONT_SIZE,
             getLabel().c_str()
         );
         
-        T3_PRINT_DISP(
-            x + (DEBUG_MENU_FONT_SIZE*13),
+        printDisplay(
+            x + (TRI_DEBUG_FONT_SIZE*13),
             y,
             color,
-            DEBUG_MENU_FONT_SIZE,
+            TRI_DEBUG_FONT_SIZE,
             "%s",
             buf
         );
@@ -195,22 +196,22 @@ public:
 
         makeTargetValueString(target_, buf, 32);
 
-        T3_PRINT_DISP(
+        printDisplay(
             x,
             y,
             color,
-            DEBUG_MENU_FONT_SIZE,
+            TRI_DEBUG_FONT_SIZE,
             getLabel().c_str()
-            );
+        );
 
-        T3_PRINT_DISP(
-            x + (DEBUG_MENU_FONT_SIZE * 13),
+        printDisplay(
+            x + (TRI_DEBUG_FONT_SIZE * 13),
             y,
             color,
-            DEBUG_MENU_FONT_SIZE,
+            TRI_DEBUG_FONT_SIZE,
             "%s",
             buf
-            );
+        );
     }
 
 

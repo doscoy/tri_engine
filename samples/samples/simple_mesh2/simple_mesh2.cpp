@@ -18,8 +18,8 @@ public:
   
 public:
     void initialize(){
-        layer_.setUpdateCallback<SimpleMesh2Scene::SceneContext>(this, &SceneContext::layerUpdate);
-        layer_.setRenderCallback<SimpleMesh2Scene::SceneContext>(this, &SceneContext::layerRender);
+        layer_.setUpdateCallback(this, &SceneContext::layerUpdate);
+        layer_.setRenderCallback(this, &SceneContext::layerRender);
 
         //  メッシュ読み込み
         t3::FilePath donut_path("poly.obj");

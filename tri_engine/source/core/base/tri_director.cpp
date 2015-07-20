@@ -3,12 +3,14 @@
 #include "core/utility/tri_counter.hpp"
 #include "core/kernel/tri_kernel.hpp"
 #include "core/debug/tri_dbg.hpp"
-
 #include "core/graphics/tri_texture.hpp"
 
 #include "core/audio/tri_audio_resource.hpp"
 #include "core/geometry/tri_geometry.hpp"
 #include "core/base/tri_system_events.hpp"
+
+
+#include "../debug/tri_debug_font_data.cpp"
 
 
 
@@ -106,16 +108,6 @@ const Vec2& Director::screenSize() {
     return instance().virtualScreenSize();
 }
 
-void Director::printLog(const char* const buf) {
-    if (!isCreatedInstance()) {
-        return;
-    }
-
-    if (!instance().log_layer_) {
-        return;
-    }
-    instance().log_layer_->writeString(buf);
-}
 
 void Director::printDisplay(
     const float x,
@@ -140,16 +132,18 @@ void Director::setClearColor(const Color& c) {
 
 //  コンストラクタ
 Director::Director()
-    : log_layer_(nullptr)
-    , dbg_screen_layer_(nullptr)
-    , random_number_generator_(1)
+    : dbg_print_layer_(nullptr)
+    , dbg_print_buffer_(nullptr)
+    , fade_layer_(nullptr)
+    , random_number_generator_(1)    
+    , device_screen_size_(640.0f, 1136.0f)
     , virtual_screen_size_(
         VIRTUAL_SCREEN_WIDTH,
         VIRTUAL_SCREEN_HEIGHT)
-    , device_screen_size_(640.0f, 1136.0f)
+    , screen_revise_()
     , input_()
     , layers_()
-    , fade_layer_(nullptr)
+    , event_manager_()
     , task_manager_()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
     , use_clear_color_index_(0)
@@ -226,8 +220,6 @@ void Director::initializeDirector() {
     fade_layer_.reset(T3_SYS_NEW FadeLayer("sys-fade", LayerBase::PRIORITY_SYS_FADE));
     
     //  デバッグ用レイヤー生成
-    log_layer_.reset(T3_SYS_NEW DebugLogLayer("dbg log"));
-    dbg_screen_layer_.reset(T3_SYS_NEW DebugStringLayer("dbg print"));
     dbg_print_layer_.reset(T3_SYS_NEW SpriteLayer("dbg print"));
     dbg_print_buffer_.reset(T3_SYS_NEW DebugStringBuffer());
 
@@ -235,12 +227,20 @@ void Director::initializeDirector() {
         this, 
         &Director::prepareDebugPrintFontSprites
     );
+
+    //  デバッグ用フォントシート作成
+    dbg_font_sheet_ = Texture::create(
+        String("debugfont"),
+        dbg_font_.width_,
+        dbg_font_.height_,
+        cross::RenderSystem::ColorFormat::LUMINANCE_ALPHA,
+        cross::RenderSystem::TypeFormat::UNSIGNED_BYTE,
+        (uint8_t*)dbg_font_.pixel_data_
+    );
 }
 
 
 void Director::terminateDirector() {
-    dbg_screen_layer_.reset();
-    log_layer_.reset();
     fade_layer_.reset();
 }
 
@@ -385,13 +385,38 @@ void Director::updateInput(
 
 void Director::prepareDebugPrintFontSprites() {
 
-
+    //  前のフレームで作ったスプライトは全て削除
     dbg_print_layer_->disableAllSprites();
 
     while (!dbg_print_buffer_->empty()) {
         //  末尾の文字を取り出す
         auto& item = dbg_print_buffer_->back();
         dbg_print_buffer_->pop_back();
+
+        //  スプライト生成
+        auto font = dbg_print_layer_->createSprite(dbg_font_sheet_);
+        font->size(item.size_);
+        font->transform()->position(item.x_, item.y_);
+        
+
+
+        //  UV設定
+        char char_idx = item.character_ - '!' + 1;
+        constexpr int font_size = 8;
+        int width_num = dbg_font_sheet_->width() / font_size;
+        int tex_x = (char_idx % width_num) * font_size;
+        int tex_y = (char_idx / width_num) * font_size;
+    
+        float dbg_font_tex_width = static_cast<float>(dbg_font_sheet_->width());
+        float dbg_font_tex_height = static_cast<float>(dbg_font_sheet_->height());
+    
+        float u0 = static_cast<float>(tex_x) / dbg_font_tex_width;
+        float v0 = static_cast<float>(tex_y) / dbg_font_tex_height;
+    
+        float u1 = static_cast<float>(tex_x + font_size) / dbg_font_tex_width;
+        float v1 = static_cast<float>(tex_y + font_size) / dbg_font_tex_height;
+    
+        font->textureCoord(u0, v0, u1, v1);
     }
 }
     

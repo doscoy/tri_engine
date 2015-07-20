@@ -20,8 +20,8 @@ public:
     void initialize(){
         //  レイヤー準備
         layer_.name("SimpleMeshScene::DrawLayer");
-        layer_.setUpdateCallback<SimpleMeshScene::SceneContext>(this, &SceneContext::layerUpdate);
-        layer_.setRenderCallback<SimpleMeshScene::SceneContext>(this, &SceneContext::layerRender);
+        layer_.setUpdateCallback(this, &SceneContext::layerUpdate);
+        layer_.setRenderCallback(this, &SceneContext::layerRender);
 
 
         //  モデル作成

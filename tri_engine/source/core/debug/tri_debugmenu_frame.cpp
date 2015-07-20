@@ -141,7 +141,7 @@ void DebugMenuFrame::drawFrame(
 ) const {
 
     
-    T3_PRINT_DISP(x, y, color, DEBUG_MENU_FONT_SIZE, getLabel().c_str());
+    printDisplay(x, y, color, TRI_DEBUG_FONT_SIZE, getLabel().c_str());
 
     int idx = 0;
     Color font_color;
@@ -163,16 +163,16 @@ void DebugMenuFrame::drawFrame(
             //  フレームなのでさらにフレームの内容を描画
             DebugMenuFrame* dmf = static_cast<DebugMenuFrame*>(item);
             dmf->drawFrame(
-                x + getLabelWidth() * DEBUG_FONT_POINT,
-                y + (idx * DEBUG_FONT_POINT) + DEBUG_FONT_POINT / 2,
+                x + getLabelWidth() * TRI_DEBUG_FONT_SIZE,
+                y + (idx * TRI_DEBUG_FONT_SIZE) + TRI_DEBUG_FONT_SIZE / 2,
                 font_color
             );
         }
         else {
             //  アイテムを描画
             item->draw(
-                x + getLabelWidth() * DEBUG_FONT_POINT,
-                y + (DEBUG_FONT_POINT*idx) + DEBUG_FONT_POINT / 2,
+                x + getLabelWidth() * TRI_DEBUG_FONT_SIZE,
+                y + (TRI_DEBUG_FONT_SIZE*idx) + TRI_DEBUG_FONT_SIZE / 2,
                 font_color
             );
         }

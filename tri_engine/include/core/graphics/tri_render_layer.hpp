@@ -179,9 +179,9 @@ public:
     template <typename T>
     void setPreUpdateCallback(
         T* instance,
-        std::function<void(T&)> call
+        void (T::*callback)()
     ) {
-        preupdate_callback_.reset(new MethodCallbackX<T>(instance, call));
+        preupdate_callback_.reset(new MethodCallbackX<T>(instance, callback));
     }
 
     ///
@@ -189,9 +189,9 @@ public:
     template <typename T>
     void setPostUpdateCallback(
         T* instance,
-        std::function<void(T&)> call
+        void (T::*callback)()
     ) {
-        postupdate_callback_.reset(new MethodCallbackX<T>(instance, call));
+        postupdate_callback_.reset(new MethodCallbackX<T>(instance, callback));
     }
 
     ///
@@ -199,9 +199,9 @@ public:
     template <typename T>
     void setPreRenderCallback(
         T* instance,
-        std::function<void(T&)> call
+        void (T::*callback)()
     ) {
-        prerender_callback_.reset(new MethodCallbackX<T>(instance, call));
+        prerender_callback_.reset(new MethodCallbackX<T>(instance, callback));
     }
 
     ///
@@ -209,9 +209,9 @@ public:
     template <typename T>
     void setPostRenderCallback(
         T* instance,
-        std::function<void(T&)> call
+        void (T::*callback)()
     ) {
-        postrender_callback_.reset(new MethodCallbackX<T>(instance, call));
+        postrender_callback_.reset(new MethodCallbackX<T>(instance, callback));
     }
 
 public:

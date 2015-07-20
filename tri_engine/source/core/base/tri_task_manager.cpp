@@ -12,8 +12,8 @@ TaskManager::TaskManager()
     : taskes_()
     , pause_level_(PAUSE_NONE)
 {
-    EventManager::addListener<TaskManager>(this, &TaskManager::onPause, PauseEvent::TYPE);
-    EventManager::addListener<TaskManager>(this, &TaskManager::onResume, ResumeEvent::TYPE);
+    EventManager::addListener(this, &TaskManager::onPause, PauseEvent::TYPE);
+    EventManager::addListener(this, &TaskManager::onResume, ResumeEvent::TYPE);
 }
 
 TaskManager::~TaskManager() {

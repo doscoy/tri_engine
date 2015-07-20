@@ -51,10 +51,9 @@ public:
     }
 
     void updateScene(t3::tick_t delta_time) override {
-        t3::printDisplay(
+        T3_PRINT_DISP(
             0,
             100,
-            t3::color_sample::white(),
             "%d",
             t3::frame_counter_.now()
         );

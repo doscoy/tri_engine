@@ -7,7 +7,6 @@
 #include "core/debug/tri_trace.hpp"
 #include "core/base/tri_director.hpp"
 #include "core/utility/tri_counter.hpp"
-#include "core/debug/tri_debug_log_layer.hpp"
 #include "core/math/tri_math.hpp"
 
 
@@ -29,16 +28,7 @@ void traceTerminal( const char* const format, ... )
 }
 
 void traceDisplay( const char* const format, ... )
-{
-    va_list msg;
-    
-	char buf[256];    
-	va_start( msg, format );
-	vsnprintf(buf, 256, format, msg);
-	va_end(msg);
-
-    t3::Director::printLog(buf);
-}
+{}
 
 void trace( const char* const format, ... )
 {

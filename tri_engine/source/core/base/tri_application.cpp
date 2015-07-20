@@ -413,7 +413,6 @@ void Application::debugPrinting() {
         T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y,
-            color_sample::white(),
             "sys %2.2fms(%3.2f%%)",
             last_system_cost_ * 1000,
             last_system_cost_ / frameSec<60>() * 100
@@ -421,7 +420,6 @@ void Application::debugPrinting() {
         T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y + 16,
-            color_sample::white(),
             "app %2.2fms(%3.2f%%)",
             last_app_cost_ * 1000,
             last_app_cost_ / frameSec<60>() * 100
@@ -429,7 +427,6 @@ void Application::debugPrinting() {
         T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y + 32,
-            color_sample::white(),
             "ren %2.2fms(%3.2f%%)",
             last_rendering_cost_ * 1000,
             last_rendering_cost_ / frameSec<60>() * 100
@@ -437,7 +434,6 @@ void Application::debugPrinting() {
         T3_PRINT_DISP(
             cost_pos_x,
             cost_pos_y + 48,
-            color_sample::white(),
             "oth %2.2fms(%3.2f%%)",
             last_other_cost_ * 1000,
             last_other_cost_ / frameSec<60>() * 100
@@ -463,7 +459,6 @@ void Application::debugPrinting() {
             T3_PRINT_DISP(
                 heap_pos_x,
                 heap_pos_y,
-                color_sample::white(),
                 "%s:T(%7u) P(%7u) Node(%4u)",
                 heap.name(),
                 heap.allocated().byte(),

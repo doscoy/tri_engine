@@ -18,25 +18,6 @@ TRI_CORE_NS_BEGIN
 void printDisplay(
     const float x,      ///< x
     const float y,      ///< y
-    const char* fmt,    ///< フォーマット文字列
-    ...
-);
-
-///
-/// 画面にデバッグ描画
-void printDisplay(
-    const float x,      ///< x
-    const float y,      ///< y
-    const Color& color, ///< 色
-    const char* fmt,    ///< フォーマット文字列
-    ...
-);
-
-///
-/// 画面にデバッグ描画
-void printDisplay(
-    const float x,      ///< x
-    const float y,      ///< y
     const Color& color, ///< 色
     const int size,     ///< フォントサイズ
     const char* fmt,    ///< フォーマット文字列
@@ -46,7 +27,7 @@ void printDisplay(
 
 ///
 /// デバッグフォントのサイズ
-constexpr int DEBUG_FONT_POINT = 16;
+#define TRI_DEBUG_FONT_SIZE    16
 
 
 
@@ -65,7 +46,7 @@ TRI_CORE_NS_END
 #endif
 
 #if TRI_DEVELOPMENT_ENABLE_PRINT_DISP
-#define T3_PRINT_DISP(x,y,...)     ::t3::printDisplay(x,y,__VA_ARGS__)
+#define T3_PRINT_DISP(x,y,...)     ::t3::printDisplay(x,y,::t3::color_sample::white(), TRI_DEBUG_FONT_SIZE, __VA_ARGS__)
 #else
 #define T3_PRINT_DISP(x,y,...)     (void)0
 #endif //   TRI_DEVELOPMENT_ENABLE_PRINT_DISP

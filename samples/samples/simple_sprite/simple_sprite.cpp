@@ -48,7 +48,7 @@ public:
     void update(t3::tick_t delta_time){
 
         //  現在のスプライト数表示
-        t3::printDisplay(400, 0, "%d", sprites_.size());
+        T3_PRINT_DISP(400, 0, "%d", sprites_.size());
         
         //  画面タッチで数制御
         t3::Pointing pointing = t3::Director::instance().input().pointing();

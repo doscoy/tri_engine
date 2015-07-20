@@ -76,13 +76,14 @@ public:
     template <typename T>
     static bool addListener(
         const T* listener,
-        std::function<void(T&, const EventPtr)> func,
+        void (T::*func)(const EventPtr),
         const EventType& in_type
     ) {
         auto handler = std::make_shared<MethodCallbackX1<T,const EventPtr>>(listener, func);
         return addListenerCore(handler, in_type);
     }
-    
+
+
     
     ///
     /// リスナーの削除

@@ -45,7 +45,7 @@ void DebugMenuLabel::draw(
     const float y,
     const Color& color
 ) const {
-    T3_PRINT_DISP(x, y, color, DEBUG_MENU_FONT_SIZE, getLabel().c_str());
+    printDisplay(x, y, color, TRI_DEBUG_FONT_SIZE, getLabel().c_str());
 }
 
 TRI_CORE_NS_END

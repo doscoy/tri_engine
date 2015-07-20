@@ -41,9 +41,9 @@ public:
     template <typename T>
     void setUpdateCallback(
         T* instance,
-        std::function<void(T&)> call
+        void (T::*callback)()
     ) {
-        update_func_.reset(new MethodCallbackX<T>(instance, call));
+        update_func_.reset(new MethodCallbackX<T>(instance, callback));
     }
     
     ///
@@ -51,9 +51,9 @@ public:
     template <typename T>
     void setRenderCallback(
         T* instance,
-        std::function<void(T&)> call
+        void (T::*callback)()
     ) {
-        render_func_.reset(new MethodCallbackX<T>(instance, call));
+        render_func_.reset(new MethodCallbackX<T>(instance, callback));
     }
     
 protected:

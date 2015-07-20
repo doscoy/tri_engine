@@ -7,7 +7,6 @@
 #define TRI_DEBUG_LOG_LAYER_HPP_INCLUDED
 
 #include "core/core_config.hpp"
-#include "tri_debug_string_layer.hpp"
 #include "tri_debug_log_buffer.hpp"
 
 

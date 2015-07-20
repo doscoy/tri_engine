@@ -11,7 +11,7 @@
 #include "tri_event_manager.hpp"
 #include "tri_task_manager.hpp"
 #include "core/debug/tri_debugmenu.hpp"
-#include "core/debug/tri_debug_log_layer.hpp"
+#include "core/debug/tri_debug_string_buffer.hpp"
 #include "core/kernel/tri_kernel.hpp"
 #include "core/utility/random/tri_random.hpp"
 #include "core/utility/tri_singleton.hpp"
@@ -252,10 +252,6 @@ public:
     static const Vec2& screenSize();
     
     ///
-    /// 画面にログを登録
-    static void printLog(const char* const buf);
-    
-    ///
     /// 画面にデバッグ文字を描画
     static void printDisplay(
         const float x,
@@ -287,10 +283,10 @@ private:
     
 private:
     //  デバッグ用レイヤー
-    ScopedPtr<DebugLogLayer> log_layer_;                ///< デバッグログ用レイヤー
-    ScopedPtr<DebugStringLayer> dbg_screen_layer_;      ///< デバッグプリント用レイヤー
     ScopedPtr<SpriteLayer> dbg_print_layer_;
     ScopedPtr<DebugStringBuffer> dbg_print_buffer_;
+    TexturePtr dbg_font_sheet_;
+
 
     //  システムフェード
     ScopedPtr<FadeLayer> fade_layer_;   ///< フェードレイヤー

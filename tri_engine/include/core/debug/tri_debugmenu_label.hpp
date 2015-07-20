@@ -15,7 +15,7 @@
 
 
 
-#define DEBUG_MENU_FONT_SIZE    ::t3::DEBUG_FONT_POINT
+
 
 
 TRI_CORE_NS_BEGIN

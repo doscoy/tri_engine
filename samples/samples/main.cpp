@@ -24,8 +24,8 @@ int main(int argc, char * argv[])
     //    app.setRootScene(t3::SceneBase::sceneGenerator<AudioTestScene>());
     //    app.setRootScene(t3::SceneBase::sceneGenerator<ZipTestScene>());
     //    app.setRootScene(t3::SceneBase::sceneGenerator<MemPoolScene>());
-    //    app.rootScene(t3::SceneBase::sceneGenerator<SimpleSpriteScene>());
-        app.rootScene(t3::SceneBase::sceneGenerator<ShadowTestScene>());
+        app.rootScene(t3::SceneBase::sceneGenerator<SimpleSpriteScene>());
+     //   app.rootScene(t3::SceneBase::sceneGenerator<ShadowTestScene>());
 
         t3::setApplication(app);
     #if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_IOS
