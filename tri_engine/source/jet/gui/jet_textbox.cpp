@@ -135,7 +135,7 @@ void TextBox::adjustStringLayout() {
         while (size_.x_ < textWidth()) {
             if (font_size_ < 24) {
                 //  24point以下になったらもう表示しちゃう
-                T3_TRACE("[Worning] font size under 24.\n");
+                T3_SYSTEM_WARNING("font size under 24.\n");
                 break;
             }
             

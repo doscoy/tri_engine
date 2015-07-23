@@ -37,8 +37,8 @@ void DebugMenu::openMenu() {
     return;
 #endif
 
-    if ( isOpened() ) {
-        T3_TRACE( "debug menu is already opened.\n" );
+    if (isOpened()) {
+        T3_SYSTEM_WARNING( "debug menu is already opened.\n" );
         return;
     }
     

@@ -79,7 +79,6 @@ PngImage::PngImage(String path)
         nullptr,
         nullptr
     );
-    T3_TRACE( "w= %d  h=%d\n", width_, height_ );
     
     // メモリ領域確保
     int rb = (int)png_get_rowbytes(png_ptr, info_ptr);
@@ -139,7 +138,6 @@ PngImage::PngImage(
         nullptr
     );
     
-    T3_TRACE( "w= %d  h=%d\n", width_, height_ );
     
     // メモリ領域確保
     int rb = (int)png_get_rowbytes(png_ptr, info_ptr);

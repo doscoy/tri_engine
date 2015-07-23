@@ -80,11 +80,11 @@ void AudioResource::setupBuffer(
         wav.samplingRate()
     );
  
-    T3_TRACE("create Wav\n");
-    T3_TRACE(" channel %d\n", wav.channel());
-    T3_TRACE(" bit sample %d\n", wav.bitPerSample());
-    T3_TRACE(" rate %d\n", wav.samplingRate());
-    T3_TRACE(" size %d\n", wav.size());
+    T3_SYSTEM_LOG("create Wav\n");
+    T3_SYSTEM_LOG(" channel %d\n", wav.channel());
+    T3_SYSTEM_LOG(" bit sample %d\n", wav.bitPerSample());
+    T3_SYSTEM_LOG(" rate %d\n", wav.samplingRate());
+    T3_SYSTEM_LOG(" size %d\n", wav.size());
 
 }
 

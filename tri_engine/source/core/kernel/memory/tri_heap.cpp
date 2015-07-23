@@ -124,12 +124,12 @@ public:
 
         //  シグネチャチェック
         if (signature_ != HEAP_SIGNATURE) {
-            T3_TRACE("signature_ error\n");
+            T3_SYSTEM_WARNING("signature_ error\n");
             return false;
         }
         //  サイズチェック
         if (size_ == 0) {
-            T3_TRACE("size error\n");
+            T3_SYSTEM_WARNING("size error\n");
             return false;
         }
         
@@ -140,7 +140,7 @@ public:
         );
         uint32_t* end_mark = reinterpret_cast<uint32_t*>((uintptr_t)start_mem_block + size_);
         if (*end_mark != ALLOC_END_MARK) {
-            T3_TRACE("endmark error  0x%x\n", *end_mark);
+            T3_SYSTEM_WARNING("endmark error  0x%x\n", *end_mark);
             return false;
         }
 #endif // TRI_ALLOC_ENDMARKING

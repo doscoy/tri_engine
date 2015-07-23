@@ -112,15 +112,15 @@ public:
     }
     
     void onEventAA(const t3::EventPtr eve) {
-        T3_TRACE("onEventAA\n");
+        T3_TRACE_TERMINAL("onEventAA\n");
     }
 
     void onSwapA(const t3::EventPtr eve) {
-        T3_TRACE("onSwapA\n");
+        T3_TRACE_TERMINAL("onSwapA\n");
     }
     
     void onSwapB(const t3::EventPtr eve) {
-        T3_TRACE("onSwapB\n");
+        T3_TRACE_TERMINAL("onSwapB\n");
     }
 private:
     t3::SpriteLayer layer_;

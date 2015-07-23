@@ -75,7 +75,6 @@ void DebugMenuFrame::detachItem(
     T3_ASSERT(item.getParent() == this);
     if (&item == focus_item_) {
         setFocusItem(nullptr);
-        T3_TRACE("focus_item_detaching......\n\n");
     }
     //  親を無効化
     item.setParent( nullptr );

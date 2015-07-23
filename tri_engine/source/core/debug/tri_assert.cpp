@@ -47,12 +47,13 @@ bool panic(
 	vsnprintf(buf, 256, fmt, msg);
 	va_end(msg);
     
-    trace("\n--[ASSERTION]----------------------------\n");
-    trace(" exp :%s\n", exp);
-    trace(" msg :%s\n", buf);
-    trace(" file:%s(%d)\n", filename, line);
-    trace(" func:%s\n", funcname);
-    trace("-----------------------------------------\n");
+    T3_SYSTEM_WARNING("\n");
+    T3_SYSTEM_WARNING("--[ASSERTION]----------------------------\n");
+    T3_SYSTEM_WARNING(" exp :%s\n", exp);
+    T3_SYSTEM_WARNING(" msg :%s\n", buf);
+    T3_SYSTEM_WARNING(" file:%s(%d)\n", filename, line);
+    T3_SYSTEM_WARNING(" func:%s\n", funcname);
+    T3_SYSTEM_WARNING("-----------------------------------------\n");
 
     CROSS_PANIC();
 }

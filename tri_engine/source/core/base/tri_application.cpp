@@ -124,8 +124,8 @@ bool initializeTriEngine(
         )
     );
     
-    T3_TRACE("Initialize TriEngine.\n");
-    T3_TRACE("screen width %d  height %d\n", width, height);
+    T3_SYSTEM_LOG("Initialize TriEngine.\n");
+    T3_SYSTEM_LOG("screen width %d  height %d\n", width, height);
     
     
 #if DEBUG

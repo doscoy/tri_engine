@@ -195,7 +195,7 @@ Mesh::Mesh(
             //  マテリアルファイル名
             char mtlfile[256];
             sscanf(buf, "%*s %s", mtlfile);
-            T3_TRACE("mtlfile = %s\n",mtlfile);
+            T3_SYSTEM_LOG("mtlfile = %s\n",mtlfile);
             FilePath path = String(mtlfile);
             material_ = Material::create(path.fullpath().c_str());
         } else if (buf[0] == 'v' && buf[1] == 't') {

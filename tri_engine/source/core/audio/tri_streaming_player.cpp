@@ -71,7 +71,7 @@ void StreamingPlayer::readMore() {
 
     //  読み込み
     size_t read_size = wav_.read(readingBufferStorage(), read_byte_);
-    T3_TRACE("Streaming read %d  buf %d.\n", read_size, reading_buffer_index_);
+    T3_SYSTEM_LOG("Streaming read %d  buf %d.\n", read_size, reading_buffer_index_);
     
     if (read_size < read_byte_) {
         //  wavの終端まで読んだ

@@ -148,7 +148,7 @@ bool EventManager::queueEvent(
 ) {
 
 #if TRI_DEV_EVENT_TRACE
-    T3_TRACE("Event << %s\n", in_event->eventName().c_str());
+    T3_SYSTEM_LOG("Event << %s\n", in_event->eventName().c_str());
 #endif
 
     

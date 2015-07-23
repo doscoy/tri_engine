@@ -69,7 +69,7 @@ TexturePtr TextureFactory::createFromFile(const t3::File& file) {
         tex = createFromPngFile(file);
     }
     else {
-        T3_TRACE("unknown texture type.");
+        T3_SYSTEM_WARNING("unknown texture type.");
     }
 
     return tex;

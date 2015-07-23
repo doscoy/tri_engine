@@ -117,7 +117,6 @@ void SceneManager::sceneChange()
     current_scene_->terminateScene();
 
     //  次のシーンに遷移
-    T3_TRACE_VALUE(current_scene_.use_count());
     current_scene_ = next_scene_generator_->createScene();
     next_scene_generator_ = SceneBase::sceneGenerator<NullScene>();
     
@@ -125,7 +124,7 @@ void SceneManager::sceneChange()
 
     //  シーン切り替え情報表示
     const char* next_scene_name = current_scene_->sceneName();
-    T3_TRACE("scene change. %s --> %s\n", prev_scene_name, next_scene_name);
+    T3_SYSTEM_LOG("scene change. %s --> %s\n", prev_scene_name, next_scene_name);
     (void)(prev_scene_name);
     (void)(next_scene_name);
 

@@ -11,6 +11,19 @@
 
 TRI_CORE_NS_BEGIN
 
+#define T3_TRACE_CHANNEL_BIT_USER_0         (1<<0)
+#define T3_TRACE_CHANNEL_BIT_USER_1         (1<<1)
+#define T3_TRACE_CHANNEL_BIT_USER_2         (1<<2)
+#define T3_TRACE_CHANNEL_BIT_USER_3         (1<<3)
+#define T3_TRACE_CHANNEL_BIT_USER_4         (1<<4)
+#define T3_TRACE_CHANNEL_BIT_USER_5         (1<<5)
+#define T3_TRACE_CHANNEL_BIT_USER_6         (1<<6)
+#define T3_TRACE_CHANNEL_BIT_USER_7         (1<<7)
+
+#define T3_TRACE_CHANNEL_BIT_SYSTEM_LOG     (1<<8)
+#define T3_TRACE_CHANNEL_BIT_SYSTEM_WARNING (1<<9)
+
+#define T3_TRACE_CHANNEL_BIT_ALL            (0xffff)
 
 
 //  前方宣言
@@ -26,7 +39,9 @@ class Vec4Template;
 class Mtx44;
 
 
-
+///
+/// ターミナルにログ出力
+void setTraceMask(int mask_bit);
 
 ///
 /// ターミナルにログ出力
@@ -38,66 +53,66 @@ void traceDisplay(const char* const format, ...);
 
 ///
 /// ログ出力
-void trace(const char* const format, ...);
+void trace(int ch, const char* const format, ...);
 
 ///
 /// ログ出力
-void traceValue(const char* const name, ::std::size_t value);
+void traceValue(int ch, const char* const name, ::std::size_t value);
 
 ///
 /// ログ出力.
 /// int値
-void traceValue(const char* const name, int value);
+void traceValue(int ch, const char* const name, int value);
 
 ///
 /// ログ出力.
 /// uint32_t版
-void traceValue(const char* const name, uint32_t value);
+void traceValue(int ch, const char* const name, uint32_t value);
 
 ///
 /// ログ出力.
 /// long版
-void traceValue(const char* const name, long value);
+void traceValue(int ch, const char* const name, long value);
 
 ///
 /// ログ出力.
 /// uint32_t版
-void traceValue(const char* const name, uint32_t value);
+void traceValue(int ch, const char* const name, uint32_t value);
 
 ///
 /// ログ出力.
 /// float版
-void traceValue(const char* const name, float value);
+void traceValue(int ch, const char* const name, float value);
 
 ///
 /// ログ出力.
 /// void*版
-void traceValue(const char* const name, void* value);
+void traceValue(int ch, const char* const name, void* value);
 
 ///
 /// ログ出力.
 /// const char*版
-void traceValue(const char* const name, const char* value);
+void traceValue(int ch, const char* const name, const char* value);
 
 ///
 /// ログ出力.
 /// Vec2版
-void traceValue(const char* const name, const Vec2Template<float>& value);
+void traceValue(int ch, const char* const name, const Vec2Template<float>& value);
 
 ///
 /// ログ出力.
 /// Vec3版
-void traceValue(const char* const name, const Vec3Template<float>& value);
+void traceValue(int ch, const char* const name, const Vec3Template<float>& value);
 
 ///
 /// ログ出力.
 /// Vec4版
-void traceValue(const char* const name, const Vec4Template<float>& value);
+void traceValue(int ch, const char* const name, const Vec4Template<float>& value);
 
 ///
 /// ログ出力.
 /// Mtx44版
-void traceValue(const char* const name, const Mtx44& value);
+void traceValue(int ch, const char* const name, const Mtx44& value);
 
 
 
@@ -110,17 +125,20 @@ TRI_CORE_NS_END
 
 #ifdef TRI_DEVELOPMENT_ENABLE_TRACE
 
-#define T3_TRACE(...)           ::t3::trace(__VA_ARGS__)
-#define T3_TRACE_PASS()         T3_TRACE("%s[%d]\n", __FUNCTION__, __LINE__);
-#define T3_TRACE_VALUE(x)       ::t3::traceValue(#x, x)
-#define T3_TRACE_TERMINAL(...)  ::t3::traceTerminal(__VA_ARGS__) // ターミナルのみにトレース。意図が無い場合はT3_TRACEを使う
+#define T3_TRACE(ch, ...)           ::t3::trace(ch, __VA_ARGS__)
+#define T3_TRACE_PASS()             T3_TRACE("%s[%d]\n", __FUNCTION__, __LINE__);
+#define T3_TRACE_VALUE(ch, x)       ::t3::traceValue(ch, #x, x)
+#define T3_TRACE_TERMINAL(...)      ::t3::traceTerminal(__VA_ARGS__) // ターミナルのみにトレース。意図が無い場合はT3_TRACEを使う
+
+#define T3_SYSTEM_LOG(...)          T3_TRACE(T3_TRACE_CHANNEL_BIT_SYSTEM_LOG, __VA_ARGS__)
+#define T3_SYSTEM_WARNING(...)      T3_TRACE(T3_TRACE_CHANNEL_BIT_SYSTEM_WARNING, __VA_ARGS__)
 
 #else // TRI_DEVELOPMENT_ENABLE_TRACE
 
-#define T3_TRACE(...)           (void)0
-#define T3_TRACE_PASS()         (void)0
-#define T3_TRACE_VALUE(x)       (void)0
-#define T3_TRACE_TERMINAL(...)  (void)0
+#define T3_TRACE(...)               (void)0
+#define T3_TRACE_PASS()             (void)0
+#define T3_TRACE_VALUE(x)           (void)0
+#define T3_TRACE_TERMINAL(...)      (void)0
 
 #endif // TRI_DEVELOPMENT_ENABLE_TRACE
 

@@ -312,7 +312,6 @@ void Director::updateInput(
                 const Vec2 half = screen_size / 2;
                 point_data.x_ = random_number_generator_.getInt(static_cast<int>(screen_size.x_)) - half.x_;
                 point_data.y_ = random_number_generator_.getInt(static_cast<int>(screen_size.y_)) - half.y_;
-        //        T3_TRACE("touch %f  %f\n", point_data.x_, point_data.y_);
             }
             else {
                 
