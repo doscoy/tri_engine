@@ -1,6 +1,5 @@
 
-
-#include <zlib.h>
+#include "../../third_party/zlib/zlib.h"
 #include <cctype>			// for std::tolower
 
 #include "core/kernel/memory/tri_new.hpp"

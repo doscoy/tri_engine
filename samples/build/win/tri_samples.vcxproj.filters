@@ -293,6 +293,96 @@
     <ClCompile Include="..\..\..\tri_engine\source\jet\scene\jet_scene.cpp">
       <Filter>tri_engine\include\jet\scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\png.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngerror.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngget.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngmem.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngpread.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngread.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngrio.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngrtran.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngrutil.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngset.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngtrans.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngwio.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngwrite.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngwtran.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngwutil.c">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\adler32.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\compress.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\crc32.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\deflate.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\gzclose.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\gzlib.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\gzread.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\gzwrite.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\infback.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\inffast.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\inflate.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\inftrees.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\trees.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\uncompr.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\zutil.c">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\samples\samples.hpp">
@@ -796,6 +886,63 @@
     <ClInclude Include="..\..\..\tri_engine\include\jet\scene\jet_scene.hpp">
       <Filter>tri_engine\source\jet\scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\png.h">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pngconf.h">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pngdebug.h">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pnginfo.h">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pnglibconf.h">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pngpriv.h">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pngstruct.h">
+      <Filter>tri_engine\source\third_party\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\picojson\picojson.h">
+      <Filter>tri_engine\source\third_party\picojson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\crc32.h">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\deflate.h">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\gzguts.h">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\inffast.h">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\inffixed.h">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\inflate.h">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\inftrees.h">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\trees.h">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\zconf.h">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\zlib.h">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\zutil.h">
+      <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="sample">
@@ -914,6 +1061,18 @@
     </Filter>
     <Filter Include="tri_engine\include\jet\scene">
       <UniqueIdentifier>{96b4b5dd-ee0e-4de1-a905-eed44e2b5f8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tri_engine\source\third_party">
+      <UniqueIdentifier>{d03b0eb5-7051-4399-b1db-3a44fb48697b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tri_engine\source\third_party\picojson">
+      <UniqueIdentifier>{34acf67f-2f28-428d-8023-7687b027b43f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tri_engine\source\third_party\libpng">
+      <UniqueIdentifier>{7c307063-f900-4555-8f8e-e05aa68829f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tri_engine\source\third_party\zlib">
+      <UniqueIdentifier>{d0ad57b6-b0ea-49d2-9b97-2b93e305b507}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

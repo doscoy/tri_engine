@@ -4,7 +4,7 @@
 #include "core/debug/tri_dbg.hpp"
 #include "core/kernel/tri_kernel.hpp"
 
-#include "png.h"
+#include "../../third_party/libpng/png.h"
 
 
 

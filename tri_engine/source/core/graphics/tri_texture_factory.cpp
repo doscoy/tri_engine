@@ -5,7 +5,7 @@
 #include "core/debug/tri_dbg.hpp"
 
 
-#include "png.h"
+#include "../../third_party/libpng/png.h"
 
 TRI_CORE_NS_BEGIN
 
