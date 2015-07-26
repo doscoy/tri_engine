@@ -25,7 +25,7 @@ public:
         
         //  初期化成功
         for (int i = 0; i < zip.entries(); ++i) {
-            T3_TRACE("%d>%s %d\n",
+            t3::traceTerminal("%d>%s %d\n",
                 i,
                 zip.getFileName(i).c_str(),
                 zip.getFileSize(i)

@@ -21,7 +21,7 @@
     #include <TargetConditionals.h>
 
     //  iOS device
-    #if defined(TARGET_OS_IPHONE)
+    #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
         #warning "target ios"
         #define CROSS_TARGET_PLATFORM       CROSS_TARGET_PLATFORM_IOS
 

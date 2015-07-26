@@ -111,6 +111,10 @@ inline int colorFormatToGLInternalFormat(RenderSystem::ColorFormat format) {
             glcolor_format = GL_DEPTH_COMPONENT;
             break;
 
+        case RenderSystem::ColorFormat::LUMINANCE_ALPHA:
+            glcolor_format = GL_RG_EXT;
+            break;
+
         default:
             CROSS_PANIC();
             break;
@@ -138,7 +142,12 @@ inline int colorFormatToGLFormat(RenderSystem::ColorFormat format) {
             glcolor_format = GL_DEPTH_COMPONENT;
             break;
 
+        case RenderSystem::ColorFormat::LUMINANCE_ALPHA:
+            glcolor_format = GL_RG_EXT;
+            break;
+            
         default:
+            CROSS_PANIC();
             break;
     }
     

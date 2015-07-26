@@ -54,10 +54,10 @@ class HpText
 {
 public:
     HpText(){
-        T3_TRACE("HpText ctr\n");
+
     }
     ~HpText(){
-        T3_TRACE("HpText dtr\n");
+
     }
     
 public:
@@ -66,12 +66,11 @@ public:
     
         const auto aaa = static_cast<const EventAAA*>(event.get());
     
-        T3_TRACE("aaa hp %d\n", aaa->hp_);
     
     }
     
     void krif(const t3::EventPtr event) {
-        T3_TRACE("kriffff\n");
+
     }
 };
 
@@ -102,14 +101,10 @@ public:
         if (input.pointing().isTrigger()) {
             //  画面をタッチした
             if (d.random().getBool()){
-                T3_TRACE("A\n");
-                t3::EventPtr new_event(T3_SYS_NEW EventAAA);
-                t3::EventManager::queueEvent(new_event);
+
             }
             else {
-                T3_TRACE("B\n");
-                t3::EventPtr new_event(T3_SYS_NEW EventBBB);
-                t3::EventManager::queueEvent(new_event);
+
                 
             }
         }
