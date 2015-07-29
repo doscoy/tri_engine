@@ -118,9 +118,9 @@ ModelPtr Model::create() {
 }
 
 ModelPtr Model::create(
-    const char* const mesh_path
+    const FilePath& mesh_path
 ) {
-    Mesh* mesh = T3_NEW Mesh(mesh_path);
+    Mesh* mesh = Mesh::create(mesh_path);
     ModelPtr m(T3_NEW Model);
     m->mesh(mesh);
     return m;

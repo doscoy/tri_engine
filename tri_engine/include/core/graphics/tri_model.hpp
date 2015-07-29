@@ -118,7 +118,7 @@ public:
     ///
     /// モデル生成関数
     static ModelPtr create();
-    static ModelPtr create(const char* const mesh_path);
+    static ModelPtr create(const FilePath& mesh_path);
 
 private:
     ///

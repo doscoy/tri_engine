@@ -64,8 +64,6 @@ public:
     
     void handleEvent(const t3::EventPtr event) {
     
-        const auto aaa = static_cast<const EventAAA*>(event.get());
-    
     
     }
     

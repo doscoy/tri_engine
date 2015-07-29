@@ -26,7 +26,7 @@ public:
 
         //  モデル作成
         t3::FilePath obj_path("character_chr_old.obj");
-        model_ = t3::Model::create(obj_path.fullpath().c_str());
+        model_ = t3::Model::create(obj_path);
 
         
         //  カメラ位置調整

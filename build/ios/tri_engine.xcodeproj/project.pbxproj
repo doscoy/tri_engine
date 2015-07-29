@@ -422,6 +422,12 @@
 		3A629A0F1B65436800E8AC76 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6299BF1B65436800E8AC76 /* zutil.c */; };
 		3A629A101B65436800E8AC76 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6299BF1B65436800E8AC76 /* zutil.c */; };
 		3A629A111B65436800E8AC76 /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6299C01B65436800E8AC76 /* zutil.h */; };
+		3A63317C1B67D7E60007D1C1 /* tiny_collada_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A6331781B67D7E60007D1C1 /* tiny_collada_parser.cpp */; };
+		3A63317D1B67D7E60007D1C1 /* tiny_collada_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A6331781B67D7E60007D1C1 /* tiny_collada_parser.cpp */; };
+		3A63317E1B67D7E60007D1C1 /* tiny_collada_parser.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A6331791B67D7E60007D1C1 /* tiny_collada_parser.hpp */; };
+		3A63317F1B67D7E60007D1C1 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A63317A1B67D7E60007D1C1 /* tinyxml2.cpp */; };
+		3A6331801B67D7E60007D1C1 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A63317A1B67D7E60007D1C1 /* tinyxml2.cpp */; };
+		3A6331811B67D7E60007D1C1 /* tinyxml2.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A63317B1B67D7E60007D1C1 /* tinyxml2.h */; };
 		3A816E7F1B3710AC008B4B4C /* cross_render_system_selector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A816E7E1B3710AC008B4B4C /* cross_render_system_selector.cpp */; };
 		3A816E801B3710AC008B4B4C /* cross_render_system_selector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A816E7E1B3710AC008B4B4C /* cross_render_system_selector.cpp */; };
 		3AC2EEB11B08860E00F73048 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC2EEB01B08860E00F73048 /* libglfw.dylib */; };
@@ -764,6 +770,10 @@
 		3A6299BE1B65436800E8AC76 /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
 		3A6299BF1B65436800E8AC76 /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
 		3A6299C01B65436800E8AC76 /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
+		3A6331781B67D7E60007D1C1 /* tiny_collada_parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tiny_collada_parser.cpp; sourceTree = "<group>"; };
+		3A6331791B67D7E60007D1C1 /* tiny_collada_parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tiny_collada_parser.hpp; sourceTree = "<group>"; };
+		3A63317A1B67D7E60007D1C1 /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml2.cpp; sourceTree = "<group>"; };
+		3A63317B1B67D7E60007D1C1 /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml2.h; sourceTree = "<group>"; };
 		3A816E7E1B3710AC008B4B4C /* cross_render_system_selector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cross_render_system_selector.cpp; sourceTree = "<group>"; };
 		3AA7EBA719A0F48800CEB23A /* libtri_engine_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtri_engine_ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA7EBAA19A0F48800CEB23A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1423,6 +1433,7 @@
 		3A62998B1B65436800E8AC76 /* third_party */ = {
 			isa = PBXGroup;
 			children = (
+				3A6331771B67D7E60007D1C1 /* tiny_collada */,
 				3A62998C1B65436800E8AC76 /* libpng */,
 				3A6299A41B65436800E8AC76 /* picojson */,
 				3A6299A61B65436800E8AC76 /* zlib */,
@@ -1499,6 +1510,17 @@
 				3A6299C01B65436800E8AC76 /* zutil.h */,
 			);
 			path = zlib;
+			sourceTree = "<group>";
+		};
+		3A6331771B67D7E60007D1C1 /* tiny_collada */ = {
+			isa = PBXGroup;
+			children = (
+				3A6331781B67D7E60007D1C1 /* tiny_collada_parser.cpp */,
+				3A6331791B67D7E60007D1C1 /* tiny_collada_parser.hpp */,
+				3A63317A1B67D7E60007D1C1 /* tinyxml2.cpp */,
+				3A63317B1B67D7E60007D1C1 /* tinyxml2.h */,
+			);
+			path = tiny_collada;
 			sourceTree = "<group>";
 		};
 		3AA7EB9E19A0F48800CEB23A = {
@@ -1589,6 +1611,7 @@
 				3A480DE31B2D4159001064BB /* tri_audio_handle.hpp in Headers */,
 				3A480E241B2D4159001064BB /* tri_image_png.hpp in Headers */,
 				3A629A0D1B65436800E8AC76 /* zconf.h in Headers */,
+				3A6331811B67D7E60007D1C1 /* tinyxml2.h in Headers */,
 				3A480E031B2D4159001064BB /* tri_debugmenu_items.hpp in Headers */,
 				3A480E191B2D4159001064BB /* tri_sphere.hpp in Headers */,
 				3A6299DB1B65436800E8AC76 /* pngstruct.h in Headers */,
@@ -1657,6 +1680,7 @@
 				3A480E771B2D4159001064BB /* cross_render_system.hpp in Headers */,
 				3A480E2E1B2D4159001064BB /* tri_scene_graph.hpp in Headers */,
 				3A480E061B2D4159001064BB /* tri_debugpad.hpp in Headers */,
+				3A63317E1B67D7E60007D1C1 /* tiny_collada_parser.hpp in Headers */,
 				3A480E5E1B2D4159001064BB /* tri_bit.hpp in Headers */,
 				3A480E281B2D4159001064BB /* tri_model.hpp in Headers */,
 				3A480DE51B2D4159001064BB /* tri_streaming_player.hpp in Headers */,
@@ -1885,6 +1909,7 @@
 				3A480F011B2D4159001064BB /* tri_sprite_renderer.cpp in Sources */,
 				3A480EF91B2D4159001064BB /* tri_scene_node.cpp in Sources */,
 				3A480F5D1B2D4159001064BB /* jet_radio_button.cpp in Sources */,
+				3A63317F1B67D7E60007D1C1 /* tinyxml2.cpp in Sources */,
 				3A480EEF1B2D4159001064BB /* tri_mesh.cpp in Sources */,
 				3A480EF51B2D4159001064BB /* tri_render_layer.cpp in Sources */,
 				3A480EC31B2D4159001064BB /* tri_debugmenu_items.cpp in Sources */,
@@ -1892,6 +1917,7 @@
 				3A6299C11B65436800E8AC76 /* png.c in Sources */,
 				3A480F071B2D4159001064BB /* tri_texture_factory.cpp in Sources */,
 				3A480EE11B2D4159001064BB /* tri_camera.cpp in Sources */,
+				3A63317C1B67D7E60007D1C1 /* tiny_collada_parser.cpp in Sources */,
 				3A6299E91B65436800E8AC76 /* adler32.c in Sources */,
 				3A6299F31B65436800E8AC76 /* gzclose.c in Sources */,
 				3A480F351B2D4159001064BB /* tri_unique_id.cpp in Sources */,
@@ -2004,7 +2030,9 @@
 				3A480F2A1B2D4159001064BB /* tri_random_xorshift.cpp in Sources */,
 				3A480F2E1B2D4159001064BB /* tri_bit.cpp in Sources */,
 				3A480F0A1B2D4159001064BB /* tri_transform_node.cpp in Sources */,
+				3A6331801B67D7E60007D1C1 /* tinyxml2.cpp in Sources */,
 				3A480F201B2D4159001064BB /* tri_matrix_stack.cpp in Sources */,
+				3A63317D1B67D7E60007D1C1 /* tiny_collada_parser.cpp in Sources */,
 				3A480F5C1B2D4159001064BB /* jet_button.cpp in Sources */,
 				3A480ED41B2D4159001064BB /* tri_circle_collider.cpp in Sources */,
 				3A6299DA1B65436800E8AC76 /* pngset.c in Sources */,

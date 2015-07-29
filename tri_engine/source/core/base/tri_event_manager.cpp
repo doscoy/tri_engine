@@ -145,13 +145,7 @@ bool EventManager::removeListener(const EventListenerPtr listener) {
 
 bool EventManager::queueEvent(
     const EventPtr& in_event
-) {
-
-#if TRI_DEV_EVENT_TRACE
-    T3_SYSTEM_LOG("Event << %s\n", in_event->eventName().c_str());
-#endif
-
-    
+) {    
     if (!isValidateEventType(in_event->eventType())) {
         return false;
     }

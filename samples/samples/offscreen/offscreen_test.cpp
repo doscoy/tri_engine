@@ -64,7 +64,7 @@ public:
         t3::FilePath obj_path("bunny.obj");
 
         //  モデル作成
-        model_ = t3::Model::create(obj_path.fullpath().c_str());
+        model_ = t3::Model::create(obj_path);
 
         
         //  カメラ生成
@@ -91,9 +91,7 @@ public:
         rotY++;
         t3::Mtx44 transform = t3::Mtx44::getRotateY(rotY);
         
-        
-        t3::Mtx44 mtx = transform * view_mtx * projection;
-
+    
         t3::RenderSystem::setBlend(false);
         t3::RenderSystem::setCulling(true);
         t3::RenderSystem::setCullingMode(t3::RenderSystem::CullingMode::MODE_BACK);

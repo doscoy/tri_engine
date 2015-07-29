@@ -51,7 +51,7 @@ void Scene::updateScene(tick_t dt) {
 TransformNodePtr Scene::createModel(
     const FilePath& path
 ) {
-    ModelPtr model = Model::create(path.fullpath().c_str());
+    ModelPtr model = Model::create(path);
     TransformNodePtr node = scene_graph_.createNode();
     node->entity(model);
     return node;
@@ -61,7 +61,7 @@ TransformNodePtr Scene::createChildModel(
     const FilePath& path,
     TransformNodePtr& parent
 ) {
-    ModelPtr model = Model::create(path.fullpath().c_str());
+    ModelPtr model = Model::create(path);
     TransformNodePtr node = parent->createNode();
     node->entity(model);
     return node;

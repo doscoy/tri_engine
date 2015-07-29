@@ -27,11 +27,12 @@ TRI_CORE_NS_BEGIN
 class Mesh
     : Uncopyable
 {
-public:
+private:
     ///
     /// コンストラクタ
-    Mesh(const char* const name);
-    
+    Mesh();
+
+public:
     ///
     /// デストラクタ
     virtual ~Mesh();
@@ -88,6 +89,20 @@ public:
 
 private:
     ///
+    /// メッシュ読み込み
+    void load(const FilePath& file_path);
+
+    ///
+    /// .obj読み込み
+    void loadObj(const FilePath& file_path);
+
+
+    ///
+    /// .dae読み込み
+    void loadDae(const FilePath& file_path);
+
+private:
+    ///
     /// 頂点数
     uint32_t vertex_count_;
     
@@ -115,6 +130,10 @@ private:
     ///
     /// マテリアル
     MaterialPtr material_;
+
+public:
+    static Mesh* create(const FilePath& filepath);
+
 };
 
 

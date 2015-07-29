@@ -65,14 +65,29 @@ int safeScanUVIndex(
 
 
 
-Mesh::Mesh(
-    const char* const name
-)   : vertex_count_(0)
+Mesh::Mesh()
+    : vertex_count_(0)
     , index_count_(0)
     , vb_()
     , ib_()
     , sphere_()
-{
+{}
+
+
+void Mesh::load(
+    const FilePath& filepath
+) {
+    if (filepath.ext() == ".obj") {
+        loadObj(filepath);
+    } else if (filepath.ext() == ".dae") {
+        loadDae(filepath);
+    }
+}
+
+void Mesh::loadObj(
+    const FilePath& path
+) {
+    const char* const name = path.fullpath().c_str();
     FileStream file(name, std::ios::in | std::ios::binary);
     char buf[1024];
     
@@ -320,9 +335,24 @@ Mesh::Mesh(
 }
 
 
+void Mesh::loadDae(const t3::FilePath &file_path) {
+
+
+}
+
+
 Mesh::~Mesh()
 {
     cross::RenderSystem::deleteVertexArrayBuffer(vao_);
+}
+
+
+Mesh* Mesh::create(
+    const FilePath& file_path
+) {
+    auto* mesh = T3_NEW Mesh();
+    mesh->load(file_path);
+    return mesh;
 }
 
 

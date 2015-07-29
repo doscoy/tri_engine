@@ -25,7 +25,7 @@ public:
     
 
         //  モデル作成
-        model_ = t3::Model::create(obj_path.fullpath().c_str());
+        model_ = t3::Model::create(obj_path);
 
         
         //  カメラ生成
