@@ -35,16 +35,23 @@ public:
     
     ///
     /// 拡張子取得
-    String ext() const;
+    const String& ext() const {
+        return ext_;
+    }
     
     ///
     /// パス取得
-    const String& path() const;
+    const String& path() const {
+        return filepath_;
+    }
     
     ///
-    /// 拡張子無しのファイル名を取得
-    String getFileNameNotExt() const;
+    /// 拡張子付きのファイル名を取得
+    const String& filename() const {
+        return filename_;
+    }
     
+
 public:
     ///
     /// 共通のベースディレクトリを設定
@@ -54,7 +61,10 @@ public:
 
 private:
     String filepath_;               ///< ファイルパス
-    static String base_filepath_;   ///< ベースディレクトリ
+    String filename_;               ///< ファイル名
+    String ext_;                    ///< 拡張子
+
+    static String base_filepath_;   ///< アプリケーションのベースディレクトリ。プラットフォーム毎に変わる
 };
 
 

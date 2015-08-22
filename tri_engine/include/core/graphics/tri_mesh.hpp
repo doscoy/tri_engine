@@ -25,7 +25,7 @@ TRI_CORE_NS_BEGIN
 ///
 /// メッシュ
 class Mesh
-    : Uncopyable
+    : Resource
 {
 private:
     ///

@@ -14,7 +14,6 @@
 
 TRI_CORE_NS_BEGIN
 
-constexpr int RESOURCE_NAME_SIZE = 96;  ///< リソース名の長さ限界
 
 ///
 /// リソースクラス
@@ -24,11 +23,10 @@ class Resource
 public:
     ///
     /// コンストラクタ
-    Resource();
-    
-    ///
-    /// コンストラクタ
-    Resource(const char* const name);
+    Resource()
+        : resource_id_()
+        , resource_name_()
+    {}
     
     ///
     /// デストラクタ
@@ -37,17 +35,15 @@ public:
 public:
     ///
     /// リソース名設定
-    void resourceName(const char* const name){
-        std::strncpy(
-            resource_name_,
-            name,
-            RESOURCE_NAME_SIZE
-        );
+    void resourceName(
+        const String& name
+    ){
+        resource_name_ = name;
     }
     
     ///
     /// リソース名取得
-    const char* resourceName() const {
+    const String& resourceName() const {
         return resource_name_;
     }
     
@@ -58,8 +54,8 @@ public:
     }
     
 private:
-    UniqueID resource_id_;                      ///< リソースUD
-    char resource_name_[RESOURCE_NAME_SIZE];    ///< リソース名
+    UniqueID resource_id_;          ///< リソースUD
+    String resource_name_;          ///< リソース名
 };
 
 

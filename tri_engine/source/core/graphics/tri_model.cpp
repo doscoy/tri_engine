@@ -88,16 +88,28 @@ void Model::render(const RenderInfo& info) {
     current_shader_->bindFragmentDataLocation(0, SHADER_OUT_COLOR);
 
 
-    cross::RenderSystem::setActiveTextureUnit(
-        cross::RenderSystem::TextureUnit::UNIT0
-    );
+
     auto& material = mesh_->material();
-    material->texture()->bind();
-    
+    if (material) {
+        //  マテリアルを持っているので設定
+        auto& model_texture = material->texture();
+        if (model_texture) {
+            //  テクスチャを設定
+            cross::RenderSystem::setActiveTextureUnit(
+                cross::RenderSystem::TextureUnit::UNIT0
+            );
+            model_texture->bind();
+        }    
+    }
+
     cross::RenderSystem::setActiveTextureUnit(
         cross::RenderSystem::TextureUnit::UNIT1
     );
-    info.shadowTexture()->bind();
+    auto& shadow_texture = info.shadowTexture();
+    if (shadow_texture) {
+        shadow_texture->bind();
+    }
+
 
 
     cross::RenderSystem::setCullingMode(culling_mode_);

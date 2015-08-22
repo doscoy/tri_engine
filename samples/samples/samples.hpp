@@ -8,7 +8,7 @@
 #include "simple_sprite/simple_sprite.hpp"
 #include "simple_primitive/simple_primitive.hpp"
 #include "input/input_test.hpp"
-//#include "audio/audio_test.hpp"
+#include "collada_mesh/collada_mesh.hpp"
 #include "blur/blur_test.hpp"
 //#include "event_handling/event_handling.hpp"
 #include "simple_mesh/simple_mesh.hpp"
@@ -37,7 +37,7 @@ public:
         , simple_sprite_(&samples_, "SIMPLE SPRITE")
         , input_test_(&samples_, "INPUT TEST")
         , blur_test_(&samples_, "BLUR TEST")
-//        , dmsl_event_handling_(&sandbox_, "EVENT HANDLING")
+        , collada_mesh_(&samples_, "COLLADA_MESH")
         , simple_mesh1_(&samples_, "SIMPLE MESH1")
         , simple_mesh2_(&samples_, "SIMPLE MESH2")
         , simple_mesh3_(&samples_, "SIMPLE MESH3")
@@ -71,7 +71,7 @@ private:
     t3::DebugMenuSceneLouncher<SimpleSpriteScene> simple_sprite_;
     t3::DebugMenuSceneLouncher<InputTestScene> input_test_;
     t3::DebugMenuSceneLouncher<BlurScene> blur_test_;
-//    t3::DebugMenuSceneLouncher<EventHandlingScene> dmsl_event_handling_;
+    t3::DebugMenuSceneLouncher<ColladaMeshScene> collada_mesh_;
     t3::DebugMenuSceneLouncher<SimpleMeshScene>  simple_mesh1_;
     t3::DebugMenuSceneLouncher<SimpleMesh2Scene> simple_mesh2_;
     t3::DebugMenuSceneLouncher<SimpleMesh3Scene> simple_mesh3_;

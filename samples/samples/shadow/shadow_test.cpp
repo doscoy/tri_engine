@@ -49,9 +49,6 @@ void ShadowTestScene::initialize() {
     sceneGraph().camera(cam_updater_.camera());
     sceneGraph().shadowCamera(light_camera_.camera());
         
-    //  シャドウ用テクスチャ表示用
-//    cinema_.texture(shadowSurface().depthTexture());
-//    cinema_.useDefaultDepthShader();
 
     T3_RENDER_ASSERT();
 }

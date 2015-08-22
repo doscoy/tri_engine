@@ -5,8 +5,10 @@
 #include "core/debug/tri_trace.hpp"
 #include "core/base/tri_std.hpp"
 #include "core/geometry/tri_aabb.hpp"
-
 #include "core/graphics/tri_vertex_types.hpp"
+
+
+#include "../../third_party/tiny_collada/tiny_collada_parser.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -68,6 +70,7 @@ int safeScanUVIndex(
 Mesh::Mesh()
     : vertex_count_(0)
     , index_count_(0)
+    , vao_(0)
     , vb_()
     , ib_()
     , sphere_()
@@ -77,17 +80,24 @@ Mesh::Mesh()
 void Mesh::load(
     const FilePath& filepath
 ) {
+    //  リソース名設定
+    resourceName(filepath.path());
+
+    //  拡張子でローダ切り替え
     if (filepath.ext() == ".obj") {
         loadObj(filepath);
     } else if (filepath.ext() == ".dae") {
         loadDae(filepath);
+    } else {
+        T3_PANIC("Unknown file ext. [%s]", filepath.ext().c_str());
     }
 }
 
 void Mesh::loadObj(
     const FilePath& path
 ) {
-    const char* const name = path.fullpath().c_str();
+    auto full_path = path.fullpath();
+    const char* const name = full_path.c_str();
     FileStream file(name, std::ios::in | std::ios::binary);
     char buf[1024];
     
@@ -184,7 +194,7 @@ void Mesh::loadObj(
             
             Vec3 v12 = face_vertex1.position_ - face_vertex2.position_;
             Vec3 v13 = face_vertex1.position_ - face_vertex3.position_;
-            Vec3 normal = t3::Vec3::crossProduct(v12, v13).getNormalized();
+            Vec3 normal = Vec3::crossProduct(v12, v13).getNormalized();
             
             //  面法線を頂点法線に追加
             //  最終的に正規化するがここでは足すだけ
@@ -335,9 +345,20 @@ void Mesh::loadObj(
 }
 
 
-void Mesh::loadDae(const t3::FilePath &file_path) {
+void Mesh::loadDae(const FilePath &file_path) {
+    tinycollada::Parser parser;
+    parser.parse(file_path.fullpath().c_str());
 
+    const tinycollada::ColladaScenes* collada_scenes = parser.scenes();
 
+    T3_SYSTEM_LOG("Collada mesh list = %d\n", collada_scenes->size());
+    
+    
+    for (int scene_idx = 0; scene_idx < collada_scenes->size(); ++scene_idx) {
+        std::shared_ptr<tinycollada::ColladaScene> scene = collada_scenes->at(scene_idx);
+        scene->dump();
+    }
+    
 }
 
 

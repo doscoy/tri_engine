@@ -160,14 +160,38 @@ public:
             return stride_ != 0;
         }
     
-        void setStride(int8_t stride) {
+        void stride(std::int_fast8_t stride) {
             stride_ = stride;
+        }
+
+        std::int_fast8_t stride() const {
+            return stride_;
+        }
+
+        void data(const std::vector<float>& d) {
+            data_ = d;
+        }
+
+        std::vector<float>& data() {
+            return data_;
+        }
+
+        const std::vector<float>& data() const {
+            return data_;
+        }
+
+        Indices& indices() {
+            return indices_;
+        }
+    
+        const Indices& indices() const {
+            return indices_;
         }
     
         void dump();
 
-    public:
-        int8_t stride_;
+    private:
+        std::int_fast8_t stride_;
         std::vector<float> data_;
         Indices indices_;
     };
@@ -180,9 +204,9 @@ public:
     
 public:
     ColladaMesh()
-        : vertex_()
+        : vertices_()
         , normal_()
-        , uv_()
+        , uvs_()
         , primitive_type_(UNKNOWN_TYPE)
     {}
     ~ColladaMesh(){}
@@ -198,12 +222,12 @@ public:
     
     //  頂点を持っているか判定
     bool hasVertex() const {
-        return vertex_.isValidate();
+        return vertices_.isValidate();
     }
 
     //  テクスチャ座標を持っているか判定
     bool hasTexCoord() const {
-        return uv_.isValidate();
+        return uvs_.isValidate();
     }
 
     void setPrimitiveType(
@@ -216,25 +240,40 @@ public:
         return primitive_type_;
     }
     
-    const ArrayData* getVertex() const{
-        return &vertex_;
-    }
-    
-    const ArrayData* getNormals() const {
-        return &normal_;
+    ArrayData& vertices() {
+        return vertices_;
     }
 
-    const ArrayData* getTexCoord() const {
-        return &uv_;
+    const ArrayData& vertices() const{
+        return vertices_;
     }
+    
+    ArrayData& normals() {
+        return normal_;
+    }
+
+    const ArrayData& normals() const {
+        return normal_;
+    }
+
+    ArrayData& uvs() {
+        return uvs_;
+    }
+
+    const ArrayData& uvs() const {
+        return uvs_;
+    }
+
+
+
 
     void dump();
 
 
-public:
-    ArrayData vertex_;
+private:
+    ArrayData vertices_;
     ArrayData normal_;
-    ArrayData uv_;
+    ArrayData uvs_;
     PrimitiveType primitive_type_;
     std::shared_ptr<ColladaMaterial> material_;
 };
@@ -246,6 +285,10 @@ class ColladaScene final
 {
 public:
     void dump(){
+        for (auto& m : meshes_) {
+            m->dump();
+        }
+
         if (material_) {
             material_->dump();
         }

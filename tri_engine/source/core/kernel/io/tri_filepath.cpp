@@ -12,12 +12,28 @@ String FilePath::base_filepath_;
 FilePath::FilePath(
     const String& filepath
 )   : filepath_(filepath)
+    , filename_()
+    , ext_()
 {
+    //  最後のピリオドを検索
+    String::size_type last_period(filepath.rfind('.'));
+    String::size_type last_slash(filepath.rfind('/'));
+
+    if (last_period != String::npos) {
+        //  最後のピリオドから先が拡張子
+        ext_ = filepath.substr(last_period, filepath.length());
+    }
+
+    if (last_slash != String::npos) {
+        //  最後のスラッシュから先がファイル名
+        filename_ = filepath.substr(last_slash, filepath.length());
+    }
+
+
 }
 
 
 FilePath::~FilePath() {
-
 }
 
 
@@ -27,26 +43,10 @@ void FilePath::setBaseDirectory(
     base_filepath_ = base;
 }
 
-const String& FilePath::path() const {
-    return filepath_;
-}
-
-String FilePath::ext() const {
-    String::size_type pos(filepath_.rfind('.'));
-    return (pos != String::npos) ? filepath_.substr(pos, filepath_.length()) : String();
-    
-}
-
-String FilePath::getFileNameNotExt() const {
-    String::size_type pos(filepath_.rfind('.'));
-	return filepath_.substr(0, pos);
-}
-
 
 String FilePath::fullpath() const {
     
-    String str = base_filepath_ + filepath_;
-    return str;
+    return base_filepath_ + filepath_;
 }
 
 TRI_CORE_NS_END

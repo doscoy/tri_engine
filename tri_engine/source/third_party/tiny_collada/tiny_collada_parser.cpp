@@ -742,7 +742,7 @@ void parseEffect(
         const tinyxml2::XMLElement* data = firstChildElement(reflectivity, "float");
         const char* val = data->GetText();
 
-        material->reflectivity_ = atof(val);
+        material->reflectivity_ = std::atof(val);
     }
 
     //  シャイネス
@@ -1088,8 +1088,6 @@ Result parseCollada(
         while (geometry) {
             const char* geometry_id = getElementAttribute(geometry, "id");
             
-            printf("a%s ", geometry_id);
-            printf("b%s" , vs->url_);
             if (std::strncmp(vs->url_, geometry_id, STRING_COMP_SIZE) != 0) {
                 //  次のジオメトリ
                 geometry = geometry->NextSiblingElement(GEOMETRY_NODE_NAME);
@@ -1102,23 +1100,23 @@ Result parseCollada(
             );
             while (mesh_node) {
             
-                std::shared_ptr<ColladaMesh> data = std::make_shared<ColladaMesh>();
-                parseMeshNode(mesh_node, data);
+                std::shared_ptr<ColladaMesh> mesh = std::make_shared<ColladaMesh>();
+                parseMeshNode(mesh_node, mesh);
             
                 //  頂点と法線の並びが同じになっているかチェック
-                if (data->hasVertex()) {
-                    const ColladaMesh::ArrayData* varray = data->getVertex();
-                    if (data->hasNormal()) {
-                        const ColladaMesh::ArrayData* narray = data->getNormals();
-                        size_t visize = varray->data_.size();
-                        size_t nisize = narray->data_.size();
+                if (mesh->hasVertex()) {
+                    const auto& v_array = mesh->vertices();
+                    if (mesh->hasNormal()) {
+                        const auto& n_array = mesh->normals();
+                        size_t visize = v_array.data().size();
+                        size_t nisize = n_array.data().size();
                         TINY_COLLADA_TRACE("%lu[v] == %lu[n]\n", visize, nisize);
                         TINY_COLLADA_ASSERT(visize == nisize);
                     }
                 }
 
                 //  データ登録
-                scene->meshes_.push_back(data);
+                scene->meshes_.push_back(mesh);
                 
                 //  次へ
                 mesh_node = mesh_node->NextSiblingElement(MESH_NODE_NAME);
@@ -1137,7 +1135,7 @@ Result parseCollada(
 //  メッシュノードの解析
 void parseMeshNode(
     const tinyxml2::XMLElement* mesh_node,
-    ::std::shared_ptr<tinycollada::ColladaMesh> data
+    ::std::shared_ptr<tinycollada::ColladaMesh> mesh
 ) {
     std::shared_ptr<MeshInformation> info = std::make_shared<MeshInformation>();
 
@@ -1166,7 +1164,7 @@ void parseMeshNode(
     printf("\n\n");
 
 
-    setupMesh(mesh_node, info, data);
+    setupMesh(mesh_node, info, mesh);
     
 }
 
@@ -1185,12 +1183,16 @@ void setupMesh(
     //  頂点情報
     const SourceData* pos_source = info->searchSourceBySemantic("POSITION");
     if (pos_source) {
+
+        //  ソース情報をコピー
         printf("pos_source size %lu\n", pos_source->data_.size());
-        mesh->vertex_.data_ = pos_source->data_;
-        mesh->vertex_.stride_ = pos_source->stride_;
+        mesh->vertices().data(pos_source->data_);
+        mesh->vertices().stride(pos_source->stride_);
+
         if (info->face_count_.empty()) {
+            //  面情報がカラ
             setupIndices(
-                mesh->vertex_.indices_,
+                mesh->vertices().indices(),
                 info->raw_indices_,
                 pos_source->input_->offset_,
                 offset_size
@@ -1198,7 +1200,7 @@ void setupMesh(
         }
         else {
             setupIndicesMultiFace(
-                mesh->vertex_.indices_,
+                mesh->vertices().indices(),
                 info,
                 pos_source->input_->offset_,
                 offset_size
@@ -1211,10 +1213,10 @@ void setupMesh(
     if (normal_source) {
         printf("normal_source size %lu\n", normal_source->data_.size());
         
-        mesh->normal_.stride_ = normal_source->stride_;
+        mesh->normals().stride(normal_source->stride_);
         if (info->face_count_.empty()) {
             setupIndices(
-                mesh->normal_.indices_,
+                mesh->normals().indices(),
                 info->raw_indices_,
                 normal_source->input_->offset_,
                 offset_size
@@ -1222,7 +1224,7 @@ void setupMesh(
         }
         else {
             setupIndicesMultiFace(
-                mesh->normal_.indices_,
+                mesh->normals().indices(),
                 info,
                 normal_source->input_->offset_,
                 offset_size
@@ -1230,9 +1232,10 @@ void setupMesh(
         }
         
         //  頂点インデックスにあわせてデータ変更
-        Indices& vindices = mesh->vertex_.indices_;
-        Indices& nindices = mesh->normal_.indices_;
-        mesh->normal_.data_.resize(pos_source->data_.size(), 8.8);
+        Indices& vindices = mesh->vertices().indices();
+        Indices& nindices = mesh->normals().indices();
+        mesh->normals().data().resize(pos_source->data_.size(), 8.8);
+        auto& normal_data = mesh->normals().data();
         for (int vert_idx = 0; vert_idx < vindices.size(); ++vert_idx) {
             uint32_t vidx = vindices.at(vert_idx);
             uint32_t nidx = nindices.at(vert_idx);
@@ -1244,7 +1247,7 @@ void setupMesh(
                 int to = to_idx + di;
                 int from = from_idx + di;
                 printf("　　%d -> %d\n", from, to );
-                mesh->normal_.data_[to_idx + di] = normal_source->data_.at(from_idx + di);
+                normal_data[to_idx + di] = normal_source->data_.at(from_idx + di);
             }
         }
         
@@ -1256,10 +1259,10 @@ void setupMesh(
     if (uv_source) {
         printf("uv_source size %lu\n", uv_source->data_.size());
         
-        mesh->uv_.stride_ = uv_source->stride_;
+        mesh->uvs().stride(uv_source->stride_);
         if (info->face_count_.empty()) {
             setupIndices(
-                mesh->uv_.indices_,
+                mesh->uvs().indices(),
                 info->raw_indices_,
                 uv_source->input_->offset_,
                 offset_size
@@ -1267,7 +1270,7 @@ void setupMesh(
         }
         else {
             setupIndicesMultiFace(
-                mesh->uv_.indices_,
+                mesh->uvs().indices(),
                 info,
                 uv_source->input_->offset_,
                 offset_size
@@ -1275,12 +1278,12 @@ void setupMesh(
         }
         
         //  頂点インデックスにあわせてデータ変更
-        Indices& vindices = mesh->vertex_.indices_;
-        Indices& nindices = mesh->uv_.indices_;
-        mesh->uv_.data_.resize(pos_source->data_.size(), 8.8888f);
+        Indices& vindices = mesh->vertices().indices();
+        Indices& uvindices = mesh->uvs().indices();
+        mesh->uvs().data().resize(pos_source->data_.size(), 8.8888f);
         for (int vert_idx = 0; vert_idx < vindices.size(); ++vert_idx) {
             uint32_t vidx = vindices.at(vert_idx);
-            uint32_t nidx = nindices.at(vert_idx);
+            uint32_t nidx = uvindices.at(vert_idx);
             uint32_t nstride = uv_source->stride_;
             uint32_t from_idx = nidx * nstride;
             uint32_t to_idx = vidx * nstride;
@@ -1289,7 +1292,7 @@ void setupMesh(
                 int to = to_idx + di;
                 int from = from_idx + di;
                 printf("　　%d -> %d\n", from, to );
-                mesh->uv_.data_[to_idx + di] = uv_source->data_.at(from_idx + di);
+                mesh->uvs().data()[to_idx + di] = uv_source->data_.at(from_idx + di);
             }
         }
         
@@ -1453,7 +1456,7 @@ const ColladaScenes* Parser::scenes() const
 void ColladaMesh::dump()
 {
     printf("--- Vertex data dump ---\n");
-    vertex_.dump();
+    vertices().dump();
     printf("\n");
     printf("--- Normal data dump ---\n");
     normal_.dump();
@@ -1469,7 +1472,7 @@ void ColladaMesh::ArrayData::dump()
         printf("This ArrayData is invalidate data.\n");
         return;
     }
-    printf("vertices   size = %lu  stride = %hhd\n", data_.size(), stride_);
+    printf("vertices   size = %lu  stride = %hhd\n", data_.size(), stride());
     size_t data_size = data_.size();
     //  データ
     if (data_size > 0) {
@@ -1483,12 +1486,12 @@ void ColladaMesh::ArrayData::dump()
     }
     
     //  インデックス
-    printf("indices   size = %lu\n", indices_.size());
-    size_t idx_size = indices_.size();
+    printf("indices   size = %lu\n", indices().size());
+    size_t idx_size = indices().size();
     //  データ
     if (idx_size > 0) {
         for (size_t i = 0; i < idx_size; ++i) {
-            printf(" %d", indices_[i]);
+            printf(" %d", indices()[i]);
         }
         printf("\n");
     }

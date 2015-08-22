@@ -11,15 +11,17 @@ namespace t3 {
 
 SceneGraph::SceneGraph()
     : root_(TransformNode::create("root"))
-    , camera_()
-    , shadow_camera_()
+    , camera_(Camera::create())
+    , shadow_camera_(Camera::create())
     , projector_(Projector::create())
     , shadow_projector_(Projector::create())
     , matrix_stack_()
     , node_map_()
     , shadow_texture_()
     , render_mode_()
-{}
+{
+    shadow_camera_->position(Vec3(0, 1000, 1));
+}
 
 
 SceneGraph::~SceneGraph()
@@ -62,14 +64,18 @@ void SceneGraph::renderScene(
     
 }
 
-void SceneGraph::setupView()
-{
+void SceneGraph::setupView() {
+
+
     auto use_cam = camera_;
     auto use_projector = projector_;
     if (render_mode_ == RenderInfo::SHADOW) {
         use_cam = shadow_camera_;
         use_projector = shadow_projector_;
     }
+
+    T3_NULL_ASSERT(use_cam);
+
     const Mtx44& view_mtx = use_cam->viewMatrix();
     const Mtx44& proj_mtx = use_projector->projectionMatrix();
     auto view_projection = proj_mtx * view_mtx;

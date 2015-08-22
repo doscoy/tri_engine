@@ -19,7 +19,6 @@
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_director.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_event_manager.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_pause_level.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_resource.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_scene.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_system_events.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_task_manager.cpp" />
@@ -83,7 +82,6 @@
     <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_archive.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_bit.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_counter.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_string_util.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_text_loader.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_unique_id.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_utf8.cpp" />
@@ -114,6 +112,8 @@
     <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngwrite.c" />
     <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngwtran.c" />
     <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngwutil.c" />
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\tiny_collada\tinyxml2.cpp" />
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\tiny_collada\tiny_collada_parser.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\adler32.c" />
     <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\compress.c" />
     <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\crc32.c" />
@@ -130,6 +130,7 @@
     <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\uncompr.c" />
     <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\zutil.c" />
     <ClCompile Include="..\..\samples\blur\blur_test.cpp" />
+    <ClCompile Include="..\..\samples\collada_mesh\collada_mesh.cpp" />
     <ClCompile Include="..\..\samples\input\input_test.cpp" />
     <ClCompile Include="..\..\samples\main.cpp" />
     <ClCompile Include="..\..\samples\shadow\shadow_test.cpp" />
@@ -306,6 +307,8 @@
     <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pngpriv.h" />
     <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pngstruct.h" />
     <ClInclude Include="..\..\..\tri_engine\source\third_party\picojson\picojson.h" />
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\tiny_collada\tinyxml2.h" />
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\tiny_collada\tiny_collada_parser.hpp" />
     <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\crc32.h" />
     <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\deflate.h" />
     <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\gzguts.h" />
@@ -318,6 +321,7 @@
     <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\zlib.h" />
     <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\zutil.h" />
     <ClInclude Include="..\..\samples\blur\blur_test.hpp" />
+    <ClInclude Include="..\..\samples\collada_mesh\collada_mesh.hpp" />
     <ClInclude Include="..\..\samples\input\input_test.hpp" />
     <ClInclude Include="..\..\samples\samples.hpp" />
     <ClInclude Include="..\..\samples\shadow\shadow_test.hpp" />

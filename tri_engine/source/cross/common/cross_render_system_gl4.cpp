@@ -49,31 +49,31 @@ inline void checkGLError(const char* str) {
     case GL_NO_ERROR:
         return;
     case GL_INVALID_ENUM:
-        cross::printConsole("[GL_INVALID_ENUM]An unacceptable value is specified for an enumerated argument");
+        cross::printConsole("[GL_INVALID_ENUM]An unacceptable value is specified for an enumerated argument  ");
         break;
     case GL_INVALID_VALUE:
-        cross::printConsole("[GL_INVALID_VALUE]A numeric argument is out of range");
+        cross::printConsole("[GL_INVALID_VALUE]A numeric argument is out of range  ");
         break;
     case GL_INVALID_OPERATION:
-        cross::printConsole("[GL_INVALID_OPERATION]The specified operation is not allowed in the current state");
+        cross::printConsole("[GL_INVALID_OPERATION]The specified operation is not allowed in the current state  ");
         break;
     case GL_STACK_OVERFLOW:
-        cross::printConsole("[GL_STACK_OVERFLOW]This command would cause a stack overflow");
+        cross::printConsole("[GL_STACK_OVERFLOW]This command would cause a stack overflow  ");
         break;
     case GL_STACK_UNDERFLOW:
-        cross::printConsole("[GL_STACK_UNDERFLOW]This command would cause a a stack underflow");
+        cross::printConsole("[GL_STACK_UNDERFLOW]This command would cause a a stack underflow  ");
         break;
     case GL_OUT_OF_MEMORY:
-        cross::printConsole("[GL_OUT_OF_MEMORY]There is not enough memory left to execute the command");
+        cross::printConsole("[GL_OUT_OF_MEMORY]There is not enough memory left to execute the command  ");
         break;
     case GL_TABLE_TOO_LARGE:
-        cross::printConsole("[GL_TABLE_TOO_LARGE]The specified table exceeds the implementation's maximum supported table size");
+        cross::printConsole("[GL_TABLE_TOO_LARGE]The specified table exceeds the implementation's maximum supported table size  ");
         break;
     case GL_INVALID_FRAMEBUFFER_OPERATION:
-        cross::printConsole("[GL_INVALID_FRAMEBUFFER_OPERATION]The specified operation is not allowed current frame buffer");
+        cross::printConsole("[GL_INVALID_FRAMEBUFFER_OPERATION]The specified operation is not allowed current frame buffer  ");
         break;
     default:
-        cross::printConsole("An OpenGL error unknown");
+        cross::printConsole("An OpenGL error unknown  ");
         break;
     }
 
@@ -737,6 +737,7 @@ void RenderSystem::drawElementsC(
             break;
     }
     
+    CROSS_GL_ASSERT();
     glDrawElements(draw_mode, count, index_type, 0);
     CROSS_GL_ASSERT();
 }

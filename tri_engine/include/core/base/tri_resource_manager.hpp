@@ -85,11 +85,9 @@ public:
         String name
     ){
         for (auto& res : resources_) {
-            const char* res_name = res->resourceName();
-            const char* fullpath = name.c_str();
-            if (stringCompare(res_name, fullpath, RESOURCE_NAME_SIZE) == 0) {
-                //  既に読み込み済
-                return res;
+
+            if (res->resourceName() == name) {
+                res;
             }
         }
       

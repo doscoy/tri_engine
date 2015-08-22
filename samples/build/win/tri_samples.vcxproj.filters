@@ -71,9 +71,6 @@
     <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_counter.cpp">
       <Filter>tri_engine\source\core\utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_string_util.cpp">
-      <Filter>tri_engine\source\core\utility</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_text_loader.cpp">
       <Filter>tri_engine\source\core\utility</Filter>
     </ClCompile>
@@ -254,9 +251,6 @@
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_pause_level.cpp">
       <Filter>tri_engine\source\core\base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_resource.cpp">
-      <Filter>tri_engine\source\core\base</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_scene.cpp">
       <Filter>tri_engine\source\core\base</Filter>
     </ClCompile>
@@ -382,6 +376,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\zutil.c">
       <Filter>tri_engine\source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\samples\collada_mesh\collada_mesh.cpp">
+      <Filter>sample\collada_mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\tiny_collada\tiny_collada_parser.cpp">
+      <Filter>tri_engine\source\third_party\tiny_collada</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\third_party\tiny_collada\tinyxml2.cpp">
+      <Filter>tri_engine\source\third_party\tiny_collada</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -943,6 +946,15 @@
     <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\zutil.h">
       <Filter>tri_engine\source\third_party\zlib</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\samples\collada_mesh\collada_mesh.hpp">
+      <Filter>sample\collada_mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\tiny_collada\tiny_collada_parser.hpp">
+      <Filter>tri_engine\source\third_party\tiny_collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\source\third_party\tiny_collada\tinyxml2.h">
+      <Filter>tri_engine\source\third_party\tiny_collada</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="sample">
@@ -1073,6 +1085,12 @@
     </Filter>
     <Filter Include="tri_engine\source\third_party\zlib">
       <UniqueIdentifier>{d0ad57b6-b0ea-49d2-9b97-2b93e305b507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample\collada_mesh">
+      <UniqueIdentifier>{274dce5b-b62f-492e-9750-253231023b4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tri_engine\source\third_party\tiny_collada">
+      <UniqueIdentifier>{c514faf2-411c-4973-a290-af96d7b25fac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
