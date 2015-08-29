@@ -47,19 +47,19 @@ public:
 
     ///
     /// メッシュを設定
-    void mesh(Mesh* mesh) {
+    void mesh(MeshPtr& mesh) {
         mesh_ = mesh;
     }
     
     ///
     /// メッシュを取得
-    Mesh* mesh() {
+    MeshPtr& mesh() {
         return mesh_;
     }
     
     ///
     /// メッシュを取得
-    const Mesh* mesh() const {
+    const MeshPtr& mesh() const {
         return mesh_;
     }
 
@@ -123,7 +123,7 @@ public:
 private:
     ///
     /// メッシュ
-    Mesh* mesh_;
+    MeshPtr mesh_;
     
     ///
     /// デフォルトシェーダ

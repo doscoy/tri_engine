@@ -6,6 +6,7 @@
 #define TRI_VERTEX_TYPES_HPP_INCLUDED
 
 //  include
+#include "core/math/tri_vec2.hpp"
 #include "core/math/tri_vec3.hpp"
 #include "core/core_config.hpp"
 

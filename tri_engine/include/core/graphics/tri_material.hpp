@@ -24,16 +24,17 @@ using MaterialPtr = SharedPtr<Material>;
 /// マテリアル
 class Material
 {
-
+public:
     ///
     /// コンストラクタ
     Material()
-        : diffuse_()
-        , ambient_()
+        : diffuse_(255, 0, 0)
+        , ambient_(128, 0, 0)
+        , specular_(0, 255, 0)
         , opacity_(255)
     {}
 
-public:
+
     
     ///
     /// デストラクタ
@@ -41,6 +42,49 @@ public:
     {}
 
 public:
+
+    ///
+    /// Diffuse 設定
+    void diffuse(
+        const Color& color
+    ) {
+        diffuse_ = color;
+    }
+
+    ///
+    /// Diffuse 取得
+    const Color& diffuse() const {
+        return diffuse_;
+    }
+
+    ///
+    /// Ambient 設定
+    void ambient(
+        const Color& color
+    ) {
+        ambient_ = color;
+    }
+
+    ///
+    /// Ambient 取得
+    const Color& ambient() const {
+        return ambient_;
+    }
+    
+    ///
+    /// Specular 設定
+    void specular(
+        const Color& color
+    ) {
+        specular_ = color;
+    }
+
+    ///
+    /// Specular 取得
+    const Color& specular() const {
+        return specular_;
+    }
+    
     ///
     /// 透明度を持っているか
     bool hasAlpha() const {
@@ -49,14 +93,14 @@ public:
     
     ///
     /// 透明度取得
-    uint8_t getOpacity() const {
+    uint8_t opacity() const {
         return opacity_;
     }
     
     ///
     /// 透明度設定
-    void setOpacity(int opacity) {
-        opacity_ = opacity;
+    void opacity(int a) {
+        opacity_ = a;
     }
     
     ///
@@ -70,24 +114,26 @@ public:
     String name() {
         return material_name_;
     }
+
+    ///
+    /// マテリアル名を設定
+    void name(const String& name) {
+        material_name_ = name;
+    }
     
     ///
     /// テクスチャを取得
-    TexturePtr texture() {
+    const TexturePtr& texture() const {
         return texture_;
     }
 
-
     ///
-    /// マテリアル生成
-    static MaterialPtr create();
+    /// テクスチャを設定
+    void texture(TexturePtr t) {
+        texture_ = t;
+    }
 
-    ///
-    /// マテリアル生成
-    static MaterialPtr create(const char* const material_file_path);
 
-private:
-    void load(const char* const file_path);
 
 private:
     String material_name_;

@@ -386,6 +386,15 @@
     <ClCompile Include="..\..\..\tri_engine\source\third_party\tiny_collada\tinyxml2.cpp">
       <Filter>tri_engine\source\third_party\tiny_collada</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_dae_loader.cpp">
+      <Filter>tri_engine\source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_mtl_loader.cpp">
+      <Filter>tri_engine\source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_obj_loader.cpp">
+      <Filter>tri_engine\source\core\graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\samples\samples.hpp">
@@ -954,6 +963,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\tri_engine\source\third_party\tiny_collada\tinyxml2.h">
       <Filter>tri_engine\source\third_party\tiny_collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_dae_loader.hpp">
+      <Filter>tri_engine\include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_mtl_loader.hpp">
+      <Filter>tri_engine\include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_obj_loader.hpp">
+      <Filter>tri_engine\include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_submesh_data.hpp">
+      <Filter>tri_engine\include\core\graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

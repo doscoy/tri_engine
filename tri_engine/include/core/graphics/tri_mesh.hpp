@@ -22,6 +22,10 @@
 TRI_CORE_NS_BEGIN
 
 
+class Mesh;
+using MeshPtr = SharedPtr<Mesh>;
+
+
 ///
 /// メッシュ
 class Mesh
@@ -87,19 +91,28 @@ public:
         return material_;
     }
 
-private:
     ///
-    /// メッシュ読み込み
-    void load(const FilePath& file_path);
+    /// マテリアルを設定
+    void material(const MaterialPtr& m) {
+        material_ = m;
+    }
 
-    ///
-    /// .obj読み込み
-    void loadObj(const FilePath& file_path);
+    void load(
+        const FilePath& filepath
+    );
 
+    void loadObj(
+        const FilePath& filepath
+    );
 
-    ///
-    /// .dae読み込み
-    void loadDae(const FilePath& file_path);
+    void loadDae(
+        const FilePath& filepath
+    );
+
+    static MeshPtr create(
+        const FilePath& path  
+    );
+
 
 private:
     ///
@@ -131,8 +144,7 @@ private:
     /// マテリアル
     MaterialPtr material_;
 
-public:
-    static Mesh* create(const FilePath& filepath);
+
 
 };
 
