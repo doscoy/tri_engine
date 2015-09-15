@@ -3,8 +3,12 @@
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
+
+#if __APPLE__
+#include <unistd.h>
+#endif
+
 #include "gzguts.h"
-//#include <unistd.h>
 #if defined(_WIN32) && !defined(__BORLANDC__)
 #  define LSEEK _lseeki64
 #else

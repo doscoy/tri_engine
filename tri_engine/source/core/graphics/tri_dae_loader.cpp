@@ -11,28 +11,40 @@ TRI_CORE_NS_BEGIN
 SubMeshDataPtr DaeLoader::load(
     const char* const path
 ) {
-    //  –ß‚·ƒTƒuƒƒbƒVƒ…
+    //  æˆ»ã™ã‚µãƒ–ãƒ¡ãƒƒã‚·ãƒ¥
     SubMeshDataPtr submesh = std::make_shared<SubMeshData>();
 
-    //  dae‚ğƒp[ƒX
+    //  daeã‚’ãƒ‘ãƒ¼ã‚¹
     tinycollada::Parser parser;
     parser.parse(path);
 
     const auto& scenes = parser.scenes();
     for (int i = 0; i < scenes->size(); ++i) {
         const auto& s = scenes->at(i);
-        //  ƒV[ƒ“‚©‚çƒƒbƒVƒ…‚ğæ‚èo‚·
+        //  ã‚·ãƒ¼ãƒ³ã‹ã‚‰ãƒ¡ãƒƒã‚·ãƒ¥ã‚’å–ã‚Šå‡ºã™
         auto& meshes = s->meshes_;
         for (int mesh_idx = 0; mesh_idx < meshes.size(); ++mesh_idx) {
-            //  ƒƒbƒVƒ…‚ğ‘–¸
+            //  ãƒ¡ãƒƒã‚·ãƒ¥ã‚’èµ°æŸ»
             const auto& mesh = meshes.at(mesh_idx);
             if (!mesh->hasVertex()) {
-                //  ’¸“_î•ñ‚ğ‚Á‚Ä‚È‚¢ƒƒbƒVƒ…‚ÍƒXƒLƒbƒv
+                //  é ‚ç‚¹æƒ…å ±ã‚’æŒã£ã¦ãªã„ãƒ¡ãƒƒã‚·ãƒ¥ã¯ã‚¹ã‚­ãƒƒãƒ—
                 continue;
             }
 
-            //  ’¸“_‚ğƒRƒs[
-            submesh->vertices() = mesh->vertices().data()
+            //  é ‚ç‚¹ã‚’ã‚³ãƒ”ãƒ¼
+            int strid = mesh->vertices().stride();
+            T3_ASSERT(strid == 3);
+            auto& data = mesh->vertices().data();
+            SubMeshData::Vertices v;
+            for (int vindex = 0; vindex < data.size(); vindex += strid) {
+            
+                SubMeshData::Vertices::value_type p3nt;
+                p3nt.position_.x_ = data[vindex];
+                p3nt.position_.y_ = data[vindex + 1];
+                p3nt.position_.z_ = data[vindex + 2];
+                v.push_back(p3nt);
+            }
+            submesh->vertices(v);
         }
     }
 

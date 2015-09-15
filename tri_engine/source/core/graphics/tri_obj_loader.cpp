@@ -6,7 +6,7 @@
 TRI_CORE_NS_BEGIN
 
 
-//  ’¸“_‚ÌƒCƒ“ƒfƒbƒNƒXî•ñ‚ğæ“¾
+//  é ‚ç‚¹ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æƒ…å ±ã‚’å–å¾—
 int safeScanVertexIndex(
     char* buf,
     int* f1,
@@ -31,7 +31,7 @@ int safeScanVertexIndex(
     return scan_count;
 }
 
-//  UV’l‚ÌƒCƒ“ƒfƒbƒNƒXî•ñ‚ğæ“¾
+//  UVå€¤ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æƒ…å ±ã‚’å–å¾—
 int safeScanUVIndex(
     char* buf,
     int* f1,
@@ -70,11 +70,11 @@ SubMeshDataPtr ObjLoader::load(
     
     T3_ASSERT_MSG(file, "%s is not found.", path);
     
-    //  ’¸“_
+    //  é ‚ç‚¹
     auto& vertices = submesh->vertices();
     vertices.reserve(1000);
 
-    //  ’¸“_ƒCƒ“ƒfƒbƒNƒX
+    //  é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
     auto& indices = submesh->indices();
     indices.reserve(1000);
     
@@ -82,7 +82,7 @@ SubMeshDataPtr ObjLoader::load(
     auto& uvs = submesh->uvs();
     uvs.reserve(1000);
     
-    //  UVƒCƒ“ƒfƒbƒNƒX
+    //  UVã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
     auto& uv_indices = submesh->uvindices();
     uv_indices.reserve(1000);
     
@@ -90,7 +90,7 @@ SubMeshDataPtr ObjLoader::load(
     while (file.getline(buf, sizeof buf)) {
         if (buf[0] == 'v' && buf[1] == ' ') {
             // ------------------------------------------
-            //  ’¸“_ƒf[ƒ^æ“¾
+            //  é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿å–å¾—
             Vec3 new_point;
             sscanf(buf, "%*s %f %f %f",
                 &new_point.x_,
@@ -106,15 +106,15 @@ SubMeshDataPtr ObjLoader::load(
 
         } else if (buf[0] == 'f' && buf[1] == ' ') {
             // -----------------------------------------
-            //  –Êî•ñ
+            //  é¢æƒ…å ±
             int v1, v2, v3, v4;
             
-            //  ’¸“_ƒCƒ“ƒfƒbƒNƒXæ“¾
+            //  é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹å–å¾—
             int scan_num = safeScanVertexIndex(buf, &v1, &v2, &v3, &v4);
             T3_ASSERT(scan_num >= 3);
 
 
-            //  ’¸“_ƒCƒ“ƒfƒbƒNƒX“o˜^
+            //  é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç™»éŒ²
             indices.push_back(v1);
             indices.push_back(v2);
             indices.push_back(v3);
@@ -128,7 +128,7 @@ SubMeshDataPtr ObjLoader::load(
             }
             
             //
-            //  UVƒCƒ“ƒfƒbƒNƒXæ“¾
+            //  UVã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹å–å¾—
             int uv1, uv2, uv3, uv4;
             int uv_scan_num = safeScanUVIndex(buf, &uv1, &uv2, &uv3, &uv4);
 
@@ -150,7 +150,7 @@ SubMeshDataPtr ObjLoader::load(
             
             
             //
-            //  –Ê–@üŒvZ
+            //  é¢æ³•ç·šè¨ˆç®—
             auto& face_vertex1 = vertices.at(v1);
             auto& face_vertex2 = vertices.at(v2);
             auto& face_vertex3 = vertices.at(v3);
@@ -160,8 +160,8 @@ SubMeshDataPtr ObjLoader::load(
             Vec3 v13 = face_vertex1.position_ - face_vertex3.position_;
             Vec3 normal = Vec3::crossProduct(v12, v13).getNormalized();
             
-            //  –Ê–@ü‚ğ’¸“_–@ü‚É’Ç‰Á
-            //  ÅI“I‚É³‹K‰»‚·‚é‚ª‚±‚±‚Å‚Í‘«‚·‚¾‚¯
+            //  é¢æ³•ç·šã‚’é ‚ç‚¹æ³•ç·šã«è¿½åŠ 
+            //  æœ€çµ‚çš„ã«æ­£è¦åŒ–ã™ã‚‹ãŒã“ã“ã§ã¯è¶³ã™ã ã‘
             face_vertex1.normal_ += normal;
             face_vertex2.normal_ += normal;
             face_vertex3.normal_ += normal;
@@ -181,17 +181,17 @@ SubMeshDataPtr ObjLoader::load(
                 && buf[3] == 'l'
         ) {
             //----------------------------------------
-            //  ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹–¼
+            //  ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
             char mtlfile[256];
             sscanf(buf, "%*s %s", mtlfile);
-            T3_SYSTEM_LOG("mtlfile = %s\n",mtlfile);
+            T3_SYSTEM_LOG("mtlfile = %sÂ¥n",mtlfile);
             FilePath path = String(mtlfile);
-            //  MtlLoader‚Åƒ[ƒh
+            //  MtlLoaderã§ãƒ­ãƒ¼ãƒ‰
             auto material = MtlLoader::load(path.fullpath().c_str());
             submesh->material(material);
 
         } else if (buf[0] == 'v' && buf[1] == 't') {
-            //  UVî•ñ
+            //  UVæƒ…å ±
             Vec2 uv;
             sscanf(buf, "%*s %f %f", &uv.x_, &uv.y_);
 

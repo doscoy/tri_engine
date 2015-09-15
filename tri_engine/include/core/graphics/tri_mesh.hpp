@@ -10,13 +10,14 @@
 #include "core/core_config.hpp"
 #include "core/base/tri_types.hpp"
 #include "core/geometry/tri_sphere.hpp"
+#include "core/geometry/tri_aabb.hpp"
 #include "tri_entity.hpp"
 #include "tri_renderable.hpp"
 #include "core/utility/tri_uncopyable.hpp"
 #include "tri_index_buffer.hpp"
 #include "tri_vertex_buffer.hpp"
 #include "tri_material.hpp"
-
+#include "tri_submesh_data.hpp"
 
 
 TRI_CORE_NS_BEGIN
@@ -85,6 +86,10 @@ public:
         return sphere_;
     }
 
+    const AABB& aabb() const {
+        return aabb_;
+    }
+    
     ///
     /// マテリアルを取得
     const MaterialPtr material() const {
@@ -113,6 +118,11 @@ public:
         const FilePath& path  
     );
 
+private:
+    void setupFromSubMesh(
+        SubMeshDataPtr& vertices
+    );
+
 
 private:
     ///
@@ -139,6 +149,10 @@ private:
     ///
     /// 境界球
     Sphere sphere_;
+    
+    ///
+    /// AABB
+    AABB aabb_;
     
     ///
     /// マテリアル

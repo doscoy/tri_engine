@@ -15,17 +15,17 @@ FilePath::FilePath(
     , filename_()
     , ext_()
 {
-    //  ÅŒã‚ÌƒsƒŠƒIƒh‚ğŒŸõ
+    //  æœ€å¾Œã®ãƒ”ãƒªã‚ªãƒ‰ã‚’æ¤œç´¢
     String::size_type last_period(filepath.rfind('.'));
     String::size_type last_slash(filepath.rfind('/'));
 
     if (last_period != String::npos) {
-        //  ÅŒã‚ÌƒsƒŠƒIƒh‚©‚çæ‚ªŠg’£q
+        //  æœ€å¾Œã®ãƒ”ãƒªã‚ªãƒ‰ã‹ã‚‰å…ˆãŒæ‹¡å¼µå­
         ext_ = filepath.substr(last_period, filepath.length());
     }
 
     if (last_slash != String::npos) {
-        //  ÅŒã‚ÌƒXƒ‰ƒbƒVƒ…‚©‚çæ‚ªƒtƒ@ƒCƒ‹–¼
+        //  æœ€å¾Œã®ã‚¹ãƒ©ãƒƒã‚·ãƒ¥ã‹ã‚‰å…ˆãŒãƒ•ã‚¡ã‚¤ãƒ«å
         filename_ = filepath.substr(last_slash, filepath.length());
     }
 

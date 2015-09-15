@@ -6,7 +6,7 @@
 #include "core/base/tri_std.hpp"
 #include "core/geometry/tri_aabb.hpp"
 #include "core/graphics/tri_obj_loader.hpp"
-
+#include "core/graphics/tri_dae_loader.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -37,33 +37,25 @@ void Mesh::load(
     }
 }
 
-void Mesh::loadObj(
-    const FilePath& path
+
+void Mesh::setupFromSubMesh(
+    SubMeshDataPtr& submesh
 ) {
-    
-    auto submesh = ObjLoader::load(path.fullpath().c_str());
-    
+    auto& vertices = submesh->vertices();
+
     //  マテリアルをコピー
     material(submesh->material());
 
-    ///
-    /// メッシュ
-    ///
-    auto& vertices = submesh->vertices();
-
     //  頂点法線を正規化 & AABB作成
-    AABB aabb;
     for (auto& v : vertices) {
-        aabb.margePoint(v.position_);
+        aabb_.margePoint(v.position_);
         v.normal_.normalize();
     }
-    
-
 
 
     //  aabbをもとに境界球作成
-    Vec3 radius = aabb.radius();
-    Vec3 center = aabb.center();
+    Vec3 radius = aabb_.radius();
+    Vec3 center = aabb_.center();
     
     float sphere_radius = radius.x_;
     if (sphere_radius < radius.y_) {
@@ -168,16 +160,27 @@ void Mesh::loadObj(
 
     cross::RenderSystem::bindVertexArrayObject(0);
 
+
 }
 
-
-void Mesh::loadDae(const FilePath &file_path) {
+void Mesh::loadObj(
+    const FilePath& path
+) {
     
+    auto submesh = ObjLoader::load(path.fullpath().c_str());
+    setupFromSubMesh(submesh);
 }
 
 
-Mesh::~Mesh()
-{
+void Mesh::loadDae(
+    const FilePath &file_path
+) {
+    auto submesh = DaeLoader::load(file_path.fullpath().c_str());
+    setupFromSubMesh(submesh);
+}
+
+
+Mesh::~Mesh() {
     cross::RenderSystem::deleteVertexArrayBuffer(vao_);
 }
 

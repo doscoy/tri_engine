@@ -37,14 +37,14 @@ void SceneGraph::renderScene(
     
 
     if (mode == RenderInfo::SHADOW) {
-        //  ‰eƒeƒNƒXƒ`ƒƒ‚ğì‚é‚Íƒtƒƒ“ƒgƒtƒF[ƒXƒJƒŠƒ“ƒO
+        //  å½±ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½œã‚‹æ™‚ã¯ãƒ•ãƒ­ãƒ³ãƒˆãƒ•ã‚§ãƒ¼ã‚¹ã‚«ãƒªãƒ³ã‚°
         cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_FRONT);
     } else {
-        //  ’Êí•`‰æ‚Í‹­§ƒJƒŠƒ“ƒO
+        //  é€šå¸¸æç”»ã¯å¼·åˆ¶ã‚«ãƒªãƒ³ã‚°
         cross::RenderSystem::setCullingMode(cross::RenderSystem::CullingMode::MODE_BACK);
     }
 
-    //  Šî–{•`‰æİ’è
+    //  åŸºæœ¬æç”»è¨­å®š
     cross::RenderSystem::setBlend(false);
     cross::RenderSystem::setDepthTest(true);
     cross::RenderSystem::setDepthWrite(true);

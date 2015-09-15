@@ -19,6 +19,7 @@
 
 #elif defined(__APPLE__)
     #include <TargetConditionals.h>
+    #include <unistd.h>
 
     //  iOS device
     #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE

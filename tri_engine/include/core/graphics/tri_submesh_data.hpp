@@ -23,6 +23,10 @@ public:
     using Uvs = Vector<Vec2>;
 
 
+    void vertices(Vertices& v) {
+        vertices_ = v;
+    }
+
     Vertices& vertices() {
         return vertices_;
     }
