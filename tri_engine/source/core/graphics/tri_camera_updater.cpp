@@ -11,6 +11,7 @@ TRI_CORE_NS_BEGIN
 
 
 LookAtCameraUpdater::LookAtCameraUpdater()
+    : CameraUpdater()
 {
 }
 
@@ -46,7 +47,7 @@ void LookAtCameraUpdater::targetPosition(
     targetPosition(Vec3(x, y, z));
 }
 
-void LookAtCameraUpdater::dollyX(
+void LookAtCameraUpdater::dollyH(
     const float speed
 ){
     const Vec3* right = camera()->rightVector();
@@ -55,7 +56,7 @@ void LookAtCameraUpdater::dollyX(
     dolly(*right, speed);
 }
 
-void LookAtCameraUpdater::dollyY(
+void LookAtCameraUpdater::dollyV(
     const float speed
 ){
     const Vec3* up = camera()->upVector();
@@ -64,7 +65,7 @@ void LookAtCameraUpdater::dollyY(
     dolly(*up, speed);
 }
 
-void LookAtCameraUpdater::dollyZ(
+void LookAtCameraUpdater::dollyFront(
     const float speed
 ){
     const Vec3* front = camera()->frontVector();
@@ -124,6 +125,64 @@ LookAtCameraUpdater::pan(
     cam->targetPosition( *cam->position() + a );
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////
+
+RotateCameraUpdater::RotateCameraUpdater()
+    : CameraUpdater()
+    , center_(0, 0, 0)
+    , rotate_(-20.0f, 0)
+    , distance_(50.0f)
+{
+}
+
+
+RotateCameraUpdater::~RotateCameraUpdater() {
+
+}
+
+
+void RotateCameraUpdater::updateCamera() {
+    //  注視点設定
+    camera()->targetPosition(center_);
+    
+    //  長さと回転からカメラ位置を決定
+    Vec3 v(0,0,distance_);
+    Mtx44 rot_mtx = Mtx44::getRotate(rotate_.x_, rotate_.y_, 0);
+    v = rot_mtx.xform(v);
+    
+    camera()->position(v);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 TRI_CORE_NS_END

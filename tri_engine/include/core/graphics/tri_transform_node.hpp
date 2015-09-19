@@ -327,6 +327,13 @@ public:
         calc_request_ = true;
         rotation_.z_ += r;
     }
+
+    ///
+    /// スケール
+    void scale(float s) {
+        scale(s, s, s);
+    }
+
     
     ///
     /// スケール

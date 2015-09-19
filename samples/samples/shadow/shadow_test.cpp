@@ -69,7 +69,7 @@ void ShadowTestScene::update() {
     if (pointing.isHold()) {
         float move_y = pointing.moveDistance().y_;
         if (std::abs(move_y) > 2) {
-            cam_updater_.dollyZ(move_y*0.1f);
+            cam_updater_.dollyFront(move_y*0.1f);
         }
     }
 
@@ -80,17 +80,6 @@ void ShadowTestScene::update() {
         finish();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

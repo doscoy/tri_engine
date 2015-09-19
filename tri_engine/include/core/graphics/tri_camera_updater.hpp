@@ -88,20 +88,20 @@ public:
     void targetPosition(float x, float y, float z);
 
     ///
-    /// x軸ドリー
-    void dollyX( 
+    /// 水平ドリー
+    void dollyH( 
         const float speed ///< 速度
     );
 
     ///
-    /// y軸ドリー
-    void dollyY( 
+    /// 垂直ドリー
+    void dollyV( 
         const float speed ///< 速度
     );
 
     ///
-    /// z軸ドリー
-    void dollyZ( 
+    /// 前後ドリー
+    void dollyFront( 
         const float speed ///< 速度
     );
 
@@ -132,6 +132,88 @@ private:
 
 
 };
+
+
+
+
+///
+/// カメラ操作
+class RotateCameraUpdater     
+    : public CameraUpdater
+{
+public:
+    RotateCameraUpdater();
+    virtual ~RotateCameraUpdater();
+
+
+public:
+    ///
+    /// 姿勢設定
+    void setup(
+        Vec3 center,
+        Vec2 rotate,
+        float distance
+    ) {
+        center_ = center;
+        rotate_ = rotate;
+        distance_ = distance;
+    }
+
+    ///
+    /// x軸（縦）回転 
+    void rotateV(
+        float speed ///< 移動量
+    ) {
+        rotate_.addX(speed);
+    }
+
+    ///
+    /// y軸（横）回転
+    void rotateH(
+        float speed ///< 移動量
+    ) {
+        rotate_.addY(speed);
+    }
+
+
+    ///
+    /// 中心点を取得
+    const Vec3& center() const {
+        return center_;
+    }
+
+    ///
+    /// 中心点を設定
+    void center(
+        const Vec3& pos
+    ) {
+        center_ = pos;
+    }
+
+    ///
+    /// 距離を設定
+    void distance(float distance) {
+        distance_ = distance;
+    }
+    
+    ///
+    /// 距離を取得
+    float distance() const {
+        return distance_;
+    }
+
+    void updateCamera();
+
+private:
+
+
+private:
+    Vec3 center_;
+    Vec2 rotate_;
+    float distance_;
+};
+
+
 
 
 TRI_CORE_NS_END

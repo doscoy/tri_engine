@@ -257,25 +257,25 @@ public:
     
     ///
     /// スケール行列生成
-    void scale( float s ) {
-        makeScale( *this, s, s, s );
+    void scale(float s) {
+        makeScale(*this, s, s, s);
     }
     
     ///
     /// スケール行列生成
-    void scale( const Vec3 v ) {
-        makeScale( *this, v.x_, v.y_, v.z_ );
+    void scale(const Vec3& v) {
+        makeScale(*this, v.x_, v.y_, v.z_);
     }
     
     ///
     /// スケール行列生成
-    void scale( float x, float y, float z ) {
-        makeScale( *this, x, y, z );
+    void scale(float x, float y, float z) {
+        makeScale(*this, x, y, z);
     }
     
     ///
     /// スケール行列生成
-    static Mtx44 getScale( float x, float y, float z ) {
+    static Mtx44 getScale(float x, float y, float z) {
         Mtx44 m;
         makeScale( m, x, y, z );
         return m;
@@ -283,7 +283,7 @@ public:
     
     ///
     /// スケール行列生成
-    static void makeScale( Mtx44& m, float x, float y, float z) {
+    static void makeScale(Mtx44& m, float x, float y, float z) {
         m.x_.x_ = x; m.x_.y_ = 0; m.x_.z_ = 0; m.x_.w_ = 0;
         m.y_.x_ = 0; m.y_.y_ = y; m.y_.z_ = 0; m.y_.w_ = 0;
         m.z_.x_ = 0; m.z_.y_ = 0; m.z_.z_ = z; m.z_.w_ = 0;
@@ -313,6 +313,16 @@ public:
     void rotate(Vec3 v) {
         makeRotateYawPitchRoll(*this, v.y_, v.x_, v.z_);
     }
+
+    ///
+    /// 回転行列生成
+    void rotate(
+        float x,
+        float y,
+        float z
+    ) {
+        makeRotateYawPitchRoll(*this, y, x, z);
+    }
     
     
     ///
@@ -321,6 +331,35 @@ public:
         makeRotateQuaternion(*this, q);
     }
     
+    ///
+    /// 回転行列生成
+    static Mtx44 getRotate(
+        const Quaternion& q
+    ) {
+        Mtx44 m;
+        return makeRotateQuaternion(m, q);
+    }
+
+    ///
+    /// 回転行列生成
+    static Mtx44 getRotate(
+        float x,
+        float y,
+        float z
+    ) {
+        Mtx44 m;
+        return makeRotateYawPitchRoll(m, y, x, z);
+    }
+
+    ///
+    /// 回転行列生成
+    static Mtx44 getRotate(
+        Vec3 r
+    ) {
+        return getRotate(r.x_, r.y_, r.z_);
+    }
+
+
     ///
     /// 回転行列生成
     static Mtx44 getRotateY(
@@ -394,10 +433,11 @@ public:
     
         return m;
     }
-    
+
+
     ///
     /// 回転行列生成
-    static void makeRotateYawPitchRoll(
+    static Mtx44& makeRotateYawPitchRoll(
         Mtx44& m,
         float yaw,
         float pitch,
@@ -413,11 +453,13 @@ public:
         makeRotateZ(roll_mtx, roll);
         
         m = yaw_mtx * pitch_mtx * roll_mtx;
+
+        return m;
     }
     
     ///
     /// 回転行列生成
-    static void makeRotateQuaternion(
+    static Mtx44& makeRotateQuaternion(
         Mtx44& out,
         const Quaternion& quat
     ) {
@@ -452,13 +494,13 @@ public:
         out.w_.z_ = 0;
         out.w_.w_ = float(1);
     
-
+        return out;
     }
     
     
     ///
     /// 任意軸回転行列生成
-    static void makeRotateAxis(
+    static Mtx44& makeRotateAxis(
         Mtx44& out,
         const Vec3& axis,
         float radian
@@ -497,6 +539,8 @@ public:
         out.w_.y_ = 0.0f;
         out.w_.z_ = 0.0f;
         out.w_.w_ = 1.0f;
+
+        return out;
     }
     
     
@@ -515,7 +559,7 @@ public:
     
     ///
     /// 正射影行列生成
-    static void makeOrtho(
+    static Mtx44& makeOrtho(
         Mtx44& mtx,
         float left,
         float right,
@@ -535,6 +579,7 @@ public:
         mtx.y_.x_ = 0; mtx.y_.y_ = b; mtx.y_.z_ = 0; mtx.y_.w_ = 0;
         mtx.z_.x_ = 0; mtx.z_.y_ = 0; mtx.z_.z_ = c; mtx.z_.w_ = 0;
         mtx.w_.x_ = tx; mtx.w_.y_ = ty; mtx.w_.z_ = tz; mtx.w_.w_ = 1;
+        return mtx;
     }
     
     ///
@@ -577,21 +622,21 @@ public:
 		float const & far
 	) {
 
-    //  mesa
-	float radians = fov_radian * 0.5f;
-	float deltaZ = far - near;
-	float sine = std::sin(radians);
-	float cotangent = std::cos(radians) / sine;
+        //  mesa
+	    float radians = fov_radian * 0.5f;
+	    float deltaZ = far - near;
+	    float sine = std::sin(radians);
+	    float cotangent = std::cos(radians) / sine;
 
-    mtx.identity();
-    float aspect =  height / width;
-	mtx.x_.x_ = cotangent / aspect;
-	mtx.y_.y_ = cotangent;
-	mtx.z_.z_ = -(far + near) / deltaZ;
-	mtx.w_.w_ = 0.0f;
+        mtx.identity();
+        float aspect =  height / width;
+	    mtx.x_.x_ = cotangent / aspect;
+	    mtx.y_.y_ = cotangent;
+	    mtx.z_.z_ = -(far + near) / deltaZ;
+	    mtx.w_.w_ = 0.0f;
 
-	mtx.w_.z_ = -2.0f * near * far / deltaZ;
-	mtx.z_.w_ = -1.0f;
+	    mtx.w_.z_ = -2.0f * near * far / deltaZ;
+	    mtx.z_.w_ = -1.0f;
 
 	}
     

@@ -18,29 +18,24 @@ TRI_CORE_NS_BEGIN
 /// メッシュ
 class SubMeshData {
 public:
-    using Vertices = Vector<VertexP3NT>;
-    using Indices = Vector<uint32_t>;
-    using Uvs = Vector<Vec2>;
+    using VerticesType = Vector<VertexP3NT>;
+    using IndicesType = Vector<uint32_t>;
 
 
-    void vertices(Vertices& v) {
+    void vertices(VerticesType& v) {
         vertices_ = v;
     }
 
-    Vertices& vertices() {
+    VerticesType& vertices() {
         return vertices_;
     }
 
-    Indices& indices() {
+    void indices(IndicesType& i) {
+        indices_ = i;
+    }
+
+    IndicesType& indices() {
         return indices_;
-    }
-
-    Uvs& uvs() {
-        return uvs_;
-    }
-
-    Indices& uvindices() {
-        return uv_indices_;
     }
 
     void material(MaterialPtr m) {
@@ -52,10 +47,8 @@ public:
     }
 
 private:
-    Vertices vertices_;
-    Indices indices_;
-    Uvs uvs_;
-    Indices uv_indices_;
+    VerticesType vertices_;
+    IndicesType indices_;
 
     ///
     /// マテリアル

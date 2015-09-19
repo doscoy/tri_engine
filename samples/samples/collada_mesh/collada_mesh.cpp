@@ -22,8 +22,8 @@ void ColladaMeshScene::initialize() {
 
     //  キャラクタ作成
     node_chara_ = createModel("plane.dae");
-    t3::ModelPtr chara = std::dynamic_pointer_cast<t3::Model>(node_chara_->entity());
-
+//    node_chara_ = createModel("character_chr_old.obj");
+    node_chara_->scale(3.0f);
 
     //  太陽作成
     node_sun_ = createModel("sun.obj");
@@ -32,12 +32,12 @@ void ColladaMeshScene::initialize() {
     //  シーングラフ初期化
 
     //  カメラ位置調整
-    float len = chara->mesh()->boundingSphere().radius();
+    float len = 8.0f;//chara->mesh()->boundingSphere().radius();
     if (t3::isZeroFloat(len)) {
         len = 5.0f;
     }
-    cam_updater_.position(0, len*4, len*8);
-    cam_updater_.targetPosition(0, 0, 0);
+
+    cam_updater_.center(node_chara_->position());
 
         
     //  シーングラフにカメラ設定
@@ -55,11 +55,25 @@ void ColladaMeshScene::terminate() {
 
 void ColladaMeshScene::update() {
 
-    t3::Director& gs = t3::Director::instance();
-    const t3::Pad& pad = gs.input().pad();
+    auto& gs = t3::Director::instance();
+    auto& input = gs.input();
+    const t3::Pad& pad = input.pad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
         finish();
     }
+
+    auto& pointing = input.pointing();
+    if (pointing.isHold()) {
+        if (pointing.isMoving()) {
+
+            cam_updater_.rotateH(pointing.moveDistance().x_);
+            cam_updater_.rotateV(pointing.moveDistance().y_);
+            cam_updater_.updateCamera();
+        }
+
+    }
+ 
+
 }
 
 

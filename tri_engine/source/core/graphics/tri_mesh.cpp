@@ -18,6 +18,7 @@ Mesh::Mesh()
     , vb_()
     , ib_()
     , sphere_()
+    , aabb_()
 {}
 
 
@@ -69,26 +70,9 @@ void Mesh::setupFromSubMesh(
     sphere_.radius(sphere_radius);
 
 
-    //  最終的にワンインデックスのストリームを作る
-    auto& indices = submesh->indices();
-    auto& uvs = submesh->uvs();
-    auto& uv_indices = submesh->uvindices();
 
-    SubMeshData::Vertices final_vertices;
-    SubMeshData::Indices final_indices;
-
-    int indices_size = indices.size();
-    for (int i = 0; i < indices_size; ++i) {
-        SubMeshData::Vertices::value_type vtx;
-        
-        T3_ASSERT(uv_indices.at(i) < uvs.size());
-        vtx.uv_ = uvs.at(uv_indices.at(i));
-        vtx.normal_ = vertices.at(indices.at(i)).normal_;
-        vtx.position_ = vertices.at(indices.at(i)).position_;
-        
-        final_vertices.push_back(vtx);
-        final_indices.push_back(i);
-    }
+    SubMeshData::VerticesType& final_vertices = submesh->vertices();
+    SubMeshData::IndicesType& final_indices = submesh->indices();
 
     //  VAO作成
     vao_ = cross::RenderSystem::createVertexArrayObject();
@@ -96,7 +80,7 @@ void Mesh::setupFromSubMesh(
     
     //  最終結果を登録
     vb_.bind();
-    int vertex_size = static_cast<int>(sizeof(SubMeshData::Vertices::value_type) * final_vertices.size());
+    int vertex_size = static_cast<int>(sizeof(SubMeshData::VerticesType::value_type) * final_vertices.size());
     cross::RenderSystem::setupBufferData(
         cross::RenderSystem::BufferType::TYPE_VERTEX,
         vertex_size,
@@ -105,7 +89,7 @@ void Mesh::setupFromSubMesh(
     );
 
     ib_.bind();
-    int index_data_size = static_cast<int>(sizeof(SubMeshData::Indices::value_type) * final_indices.size());
+    int index_data_size = static_cast<int>(sizeof(SubMeshData::IndicesType::value_type) * final_indices.size());
     cross::RenderSystem::setupBufferData(
         cross::RenderSystem::BufferType::TYPE_INDEX,
         index_data_size,
@@ -126,8 +110,8 @@ void Mesh::setupFromSubMesh(
         3,
         cross::RenderSystem::TypeFormat::FLOAT,
         false,
-        sizeof(SubMeshData::Vertices::value_type),
-        (void*)offsetof(SubMeshData::Vertices::value_type, normal_)
+        sizeof(SubMeshData::VerticesType::value_type),
+        (void*)offsetof(SubMeshData::VerticesType::value_type, normal_)
     );
 
 
@@ -138,8 +122,8 @@ void Mesh::setupFromSubMesh(
         2,
         cross::RenderSystem::TypeFormat::FLOAT,
         false,
-        sizeof(SubMeshData::Vertices::value_type),
-        (void*)offsetof(SubMeshData::Vertices::value_type, uv_)
+        sizeof(SubMeshData::VerticesType::value_type),
+        (void*)offsetof(SubMeshData::VerticesType::value_type, uv_)
     );
 
 
@@ -150,7 +134,7 @@ void Mesh::setupFromSubMesh(
         3,
         cross::RenderSystem::TypeFormat::FLOAT,
         false,
-        sizeof(SubMeshData::Vertices::value_type),
+        sizeof(SubMeshData::VerticesType::value_type),
         0
     );
 

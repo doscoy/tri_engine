@@ -60,10 +60,7 @@ int safeScanUVIndex(
 
 SubMeshDataPtr ObjLoader::load(
     const char* const path
-) {
-
-    SubMeshDataPtr submesh = std::make_shared<SubMeshData>();
-  
+) {  
     FileStream file(path, std::ios::in | std::ios::binary);
     char buf[1024];
     
@@ -71,21 +68,24 @@ SubMeshDataPtr ObjLoader::load(
     T3_ASSERT_MSG(file, "%s is not found.", path);
     
     //  頂点
-    auto& vertices = submesh->vertices();
+    SubMeshData::VerticesType vertices;
     vertices.reserve(1000);
 
     //  頂点インデックス
-    auto& indices = submesh->indices();
+    SubMeshData::IndicesType indices;
     indices.reserve(1000);
     
     //  UV
-    auto& uvs = submesh->uvs();
+    Vector<Vec2> uvs;
     uvs.reserve(1000);
     
     //  UVインデックス
-    auto& uv_indices = submesh->uvindices();
+    SubMeshData::IndicesType uv_indices;
     uv_indices.reserve(1000);
     
+
+    SubMeshDataPtr submesh = std::make_shared<SubMeshData>();
+
     
     while (file.getline(buf, sizeof buf)) {
         if (buf[0] == 'v' && buf[1] == ' ') {
@@ -98,7 +98,7 @@ SubMeshDataPtr ObjLoader::load(
                 &new_point.z_
             );
 
-            SubMeshData::Vertices::value_type p3nt;
+            SubMeshData::VerticesType::value_type p3nt;
             p3nt.position_ = new_point;
             p3nt.normal_ = Vec3::zero();
             p3nt.uv_ = Vec2::zero();
@@ -199,6 +199,26 @@ SubMeshDataPtr ObjLoader::load(
         }
     }
 
+
+
+
+
+
+    //  最終的にワンインデックスのストリームを作る
+
+
+    int indices_size = indices.size();
+    for (int i = 0; i < indices_size; ++i) {
+        SubMeshData::VerticesType::value_type vtx;
+        
+        T3_ASSERT(uv_indices.at(i) < uvs.size());
+        vtx.uv_ = uvs.at(uv_indices.at(i));
+        vtx.normal_ = vertices.at(indices.at(i)).normal_;
+        vtx.position_ = vertices.at(indices.at(i)).position_;
+        
+        submesh->vertices().push_back(vtx);
+        submesh->indices().push_back(i);
+    }
 
     return submesh;
 }
