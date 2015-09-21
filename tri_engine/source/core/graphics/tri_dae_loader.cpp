@@ -59,7 +59,6 @@ SubMeshDataPtr DaeLoader::load(
         int stride = mesh->vertices().stride();
         T3_ASSERT(stride == 3);
 
-        int vertex_num = mesh_vertex_data.size() / stride;
        
         for (int vindex = 0; vindex < mesh_vertex_data.size(); vindex += stride) {
             

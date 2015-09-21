@@ -51,7 +51,7 @@ public:
     
     ///
     /// 子要素を持っているか判定
-    bool hasChild() const {
+    bool hasChild() const override {
         return items_.size() > 0;
     }
     

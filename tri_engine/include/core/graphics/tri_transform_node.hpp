@@ -105,22 +105,22 @@ public:
     
     ///
     /// 親を取得
-    virtual ISceneNode* getParent() {
+    ISceneNode* getParent() override {
         return parent_;
     }
     
     ///
     /// 親を取得
-    virtual const ISceneNode* getParent() const {
+    const ISceneNode* getParent() const override {
         return parent_;
     }
     
     
     ///
     /// 親を設定
-    virtual void setParent(
+    void setParent(
         ISceneNode* p
-    ) {
+    ) override {
         parent_ = p;
     }
     
@@ -142,9 +142,9 @@ public:
     
     ///
     /// 子ノードを描画
-    virtual void renderChildren(
+    void renderChildren(
         SceneGraph* scene_graph
-    );
+    ) override;
     
     ///
     /// 子ノードを追加

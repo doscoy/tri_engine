@@ -6,7 +6,7 @@
 
 ShadowTestScene::ShadowTestScene()
     : Scene("ShadowTest")
-//    , cinema_(t3::Vec2(0,0), t3::Vec2(1.0f, 0.6f))
+    , cinema_(t3::Vec2(0,0), t3::Vec2(1.0f, 0.6f))
 {
 }
 
@@ -23,7 +23,7 @@ void ShadowTestScene::initialize() {
     node_chara_ = createModel("character_chr_old.obj");
     t3::ModelPtr chara = std::dynamic_pointer_cast<t3::Model>(node_chara_->entity());
     chara->enableShadowCast();
-    chara->enalbeShadowReceive();
+//    chara->enalbeShadowReceive();
     //  フィールド作成
     node_field_ = createModel("field.obj");
     t3::ModelPtr field = std::dynamic_pointer_cast<t3::Model>(node_field_->entity());
@@ -48,7 +48,9 @@ void ShadowTestScene::initialize() {
     //  シーングラフにカメラ設定
     sceneGraph().camera(cam_updater_.camera());
     sceneGraph().shadowCamera(light_camera_.camera());
-        
+    
+    
+    cinema_.renderTarget(&shadowSurface());
 
     T3_RENDER_ASSERT();
 }
@@ -62,7 +64,7 @@ void ShadowTestScene::terminate() {
 void ShadowTestScene::update() {
     static float angle;
     angle += 0.25f;
-//    node_chara_->rotationY(angle);
+    node_chara_->rotationY(angle);
         
         
     auto pointing = t3::Director::instance().input().pointing();

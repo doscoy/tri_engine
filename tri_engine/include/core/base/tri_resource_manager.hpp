@@ -87,7 +87,7 @@ public:
         for (auto& res : resources_) {
 
             if (res->resourceName() == name) {
-                res;
+                return res;
             }
         }
       

@@ -15,6 +15,22 @@ void main() {
 
 )";
 
+#elif CROSS_GL_VERSION == CROSS_GL_ES3
+
+//  OpenGL ES 3.0
+const char* simple3d_fsh = R"(
+
+#version 300 es
+precision mediump float;
+in vec2 v_texture_uv;
+uniform sampler2D sampler;
+out vec4 FragColor;
+
+void main() {
+    FragColor = texture(sampler, v_texture_uv);
+}
+)";
+
 #else
 
 //  GLSL4.0
@@ -28,8 +44,6 @@ out vec4 FragColor;
 void main() {
     FragColor = texture(sampler, v_texture_uv);
 }
-
-
 )";
 
 #endif

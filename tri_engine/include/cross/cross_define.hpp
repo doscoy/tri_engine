@@ -75,8 +75,8 @@
     #warning "target gl4"
 
 #else
-    #define CROSS_GL_VERSION    CROSS_GL_ES2
-    #warning "target gles2"
+    #define CROSS_GL_VERSION    CROSS_GL_ES3
+    #warning "target gles3"
 
 #endif
 

@@ -64,7 +64,7 @@ public:
 public:
     ///
     /// イベントタイプ取得
-    virtual const EventType& eventType() const = 0;
+    const EventType& eventType() const override = 0;
     
 
 public:

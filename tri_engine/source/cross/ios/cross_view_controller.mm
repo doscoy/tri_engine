@@ -1,5 +1,5 @@
 
-
+#import "cross_define.hpp"
 #import "cross_view_controller.hpp"
 #import "cross_types.hpp"
 #import <CoreMotion/CoreMotion.h>
@@ -29,9 +29,14 @@ extern t3::cross::PointingData point_data_[4];
     
     GLKView *view = (GLKView *)self.view;
 
+#if CROSS_GL_VERSION == CROSS_GL_ES3
+    self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+#else 
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+#endif
+
     view.context = self.context;
-//    view.drawableDepthFormat = GLKViewDrawableDepthFormat16;
+
     [EAGLContext setCurrentContext:self.context];
     
     //  FPS設定

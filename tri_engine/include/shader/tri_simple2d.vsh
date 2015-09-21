@@ -16,6 +16,25 @@ void main(void)
 }
 )";
 
+#elif CROSS_GL_VERSION == CROSS_GL_ES3
+
+//  OpenGL ES 3.0
+const char* simple2d_vsh = R"(
+#version 300 es
+precision mediump float;
+in vec4 in_position;
+uniform vec4 in_color;
+out vec4 out_color;
+
+void main(void)
+{
+    out_color = in_color;
+    gl_Position = in_position;
+}
+)";
+
+
+
 #else
 //  GLSL 4.0
 const char* simple2d_vsh = R"(

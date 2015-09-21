@@ -13,6 +13,23 @@ void main(void)
 }
 )";
 
+#elif CROSS_GL_VERSION == CROSS_GL_ES3
+
+//  OpenGL ES 3.0
+const char* simple2d_fsh = R"(
+#version 300 es
+precision mediump float;
+in vec4 out_color;
+out vec4 FragColor;
+
+void main(void)
+{
+    FragColor = out_color;
+}
+)";
+
+
+
 #else
 
 //  GLSL 4.0

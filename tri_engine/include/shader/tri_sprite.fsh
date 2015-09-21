@@ -16,6 +16,30 @@ void main(void)
 
 )";
 
+#elif CROSS_GL_VERSION == CROSS_GL_ES3
+
+//  OpenGL ES 3.0
+static const char* sprite_fsh = R"(
+
+#version 300 es
+precision mediump float;
+
+in vec2 v_texture_uv;
+in vec4 v_color;
+out vec4 FragColor;
+uniform sampler2D sampler;
+
+
+void main(void)
+{
+    FragColor = texture(sampler, v_texture_uv) * v_color;
+}
+
+
+)";
+
+
+
 #else
 //  GLSL 4.0
 static const char* sprite_fsh = R"(

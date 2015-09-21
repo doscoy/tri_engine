@@ -16,6 +16,30 @@ void main(void)
 }
 )";
 
+
+#elif CROSS_GL_VERSION == CROSS_GL_ES3
+
+//  OpenGL ES 3.0
+static const char* sprite_vsh = R"(
+
+#version 300 es
+precision mediump float;
+in vec2 a_position;
+in vec2 a_uv;
+in vec4 a_color;
+out vec2 v_texture_uv;
+out vec4 v_color;
+
+void main(void)
+{
+    gl_Position = vec4(a_position, 0, 1);
+    v_texture_uv = a_uv;
+    v_color = a_color;
+}
+)";
+
+
+
 #else
 
 //  GLSL 4.0

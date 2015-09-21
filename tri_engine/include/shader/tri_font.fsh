@@ -20,7 +20,8 @@ void main(void)
 //  GLSL 4.0
 static const char* font_fsh = R"(
 
-#version 330 es
+#version 300 es
+precision mediump float;
 
 in vec2 v_texture_uv;
 in vec4 v_color;
