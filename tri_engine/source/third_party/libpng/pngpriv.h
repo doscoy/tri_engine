@@ -13,6 +13,9 @@
  * and license in png.h
  */
 
+#ifndef PNG_ARM_NEON_OPT
+#define PNG_ARM_NEON_OPT 0
+#endif
 /* The symbols declared in this file (including the functions declared
  * as extern) are PRIVATE.  They are not part of the libpng public
  * interface, and are not recommended for use by regular applications.

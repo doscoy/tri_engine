@@ -56,8 +56,8 @@ SubMeshDataPtr DaeLoader::load(
         auto& mesh_vertex_data = mesh_vertex.data();
 
         //  頂点をコピー
-        int strid = mesh->vertices().stride();
-        T3_ASSERT(strid == 3);
+        int stride = mesh->vertices().stride();
+        T3_ASSERT(stride == 3);
 
         int vertex_num = mesh_vertex_data.size() / stride;
        
@@ -74,10 +74,11 @@ SubMeshDataPtr DaeLoader::load(
 
         //  UVを取得
         auto& mesh_uvs = mesh->uvs();
-        auto& mesh_uvs_data = mesh_usv
+        auto& mesh_uvs_data = mesh_uvs.data();
         if (mesh->hasTexCoord()) {
             //  UVがある
-            for (int uvindex = 0; uvindex < )
+            for (int uvindex = 0; uvindex < mesh_uvs_data.size(); ++uvindex) {
+            }
         }
 
             
