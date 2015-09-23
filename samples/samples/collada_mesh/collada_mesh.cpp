@@ -21,7 +21,7 @@ void ColladaMeshScene::initialize() {
     T3_RENDER_ASSERT();
 
     //  キャラクタ作成
-    node_chara_ = createModel("plane.dae");
+    node_chara_ = createModel("blue_box.dae");
 //    node_chara_ = createModel("character_chr_old.obj");
     node_chara_->scale(3.0f);
 

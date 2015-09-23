@@ -1079,10 +1079,10 @@ Result parseCollada(
 
         //  マトリックス登録
         transposeMatrix(vs->matrix_);
-        scene->matrix_ = vs->matrix_;
+        scene->matrix(vs->matrix_);
         scenes_.push_back(scene);
         //  マテリアル設定
-        scene->material_ = searchMaterial(vs->bind_material_, materials, effects);
+        scene->material(searchMaterial(vs->bind_material_, materials, effects));
     
         //  メッシュ情報生成
         while (geometry) {
@@ -1116,7 +1116,7 @@ Result parseCollada(
                 }
 
                 //  データ登録
-                scene->meshes_.push_back(mesh);
+                scene->addMesh(mesh);
                 
                 //  次へ
                 mesh_node = mesh_node->NextSiblingElement(MESH_NODE_NAME);
@@ -1276,7 +1276,8 @@ void setupMesh(
                 offset_size
             );
         }
-        
+
+/*        
         //  頂点インデックスにあわせてデータ変更
         Indices& vindices = mesh->vertices().indices();
         Indices& uvindices = mesh->uvs().indices();
@@ -1295,6 +1296,9 @@ void setupMesh(
                 mesh->uvs().data()[to_idx + di] = uv_source->data_.at(from_idx + di);
             }
         }
+*/
+
+        mesh->uvs().data(uv_source->data_);
         
     }
 }

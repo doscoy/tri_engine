@@ -147,6 +147,8 @@ void Mesh::setupFromSubMesh(
 
 }
 
+///
+/// .objファイルのロード
 void Mesh::loadObj(
     const FilePath& path
 ) {
@@ -155,7 +157,8 @@ void Mesh::loadObj(
     setupFromSubMesh(submesh);
 }
 
-
+///
+/// .daeファイルのロード
 void Mesh::loadDae(
     const FilePath &file_path
 ) {
@@ -163,12 +166,14 @@ void Mesh::loadDae(
     setupFromSubMesh(submesh);
 }
 
-
+///
+/// デストラクタ
 Mesh::~Mesh() {
     cross::RenderSystem::deleteVertexArrayBuffer(vao_);
 }
 
-
+///
+/// メッシュ生成
 MeshPtr Mesh::create(
     const FilePath& file_path
 ) {

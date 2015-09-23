@@ -33,7 +33,7 @@ inline void interpolateLiner(
     const T& x0,        ///< 開始値
     const T& x1,        ///< 終了値
     const float t       ///< 割合 t
-){
+) {
     dest = x0 + (( x1 - x0 ) * t);
 }
 
@@ -45,7 +45,7 @@ inline void interpolateT2(
     const T& x0,        ///< 開始値
     const T& x1,        ///< 終了値
     const float t       ///< 割合 t
-){
+) {
     float t2 = t * t;
     interpolateLiner( dest, x0, x1, t2 );
 }
@@ -57,8 +57,7 @@ inline void interpolateT2(
 ///
 ///  補間
 template <typename T>
-class Interpolation
-{
+class Interpolation {
 private:
     ///
     /// 補間にかかる時間

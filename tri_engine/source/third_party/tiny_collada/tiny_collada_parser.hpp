@@ -209,6 +209,7 @@ public:
         , uvs_()
         , primitive_type_(UNKNOWN_TYPE)
     {}
+
     ~ColladaMesh(){}
     ColladaMesh& operator=(const ColladaMesh&) = delete;	// コピーの禁止
     ColladaMesh(const ColladaMesh&) = delete;
@@ -275,7 +276,7 @@ private:
     ArrayData normal_;
     ArrayData uvs_;
     PrimitiveType primitive_type_;
-    std::shared_ptr<ColladaMaterial> material_;
+//    std::shared_ptr<ColladaMaterial> material_;
 };
 using ColladaMeshes = std::vector<std::shared_ptr<ColladaMesh>>;
 
@@ -295,7 +296,32 @@ public:
     }
 
 
-public:
+    auto& material() {
+        return material_;
+    }
+
+    void material(std::shared_ptr<ColladaMaterial>& m) {
+        material_ = m;
+    }
+
+    auto& matrix() {
+        return matrix_;
+    }
+
+    void matrix(std::vector<float>& m) {
+        matrix_ = m;
+    }
+
+    void addMesh(std::shared_ptr<ColladaMesh>& mesh) {
+        meshes_.push_back(mesh);
+    }
+
+    auto& meshes() {
+        return meshes_;
+    }
+    
+
+private:
     std::vector<float> matrix_;
     std::vector<std::shared_ptr<ColladaMesh>> meshes_;
     std::shared_ptr<ColladaMaterial> material_;

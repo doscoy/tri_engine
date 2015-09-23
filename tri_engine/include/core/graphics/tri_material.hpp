@@ -22,9 +22,8 @@ using MaterialPtr = SharedPtr<Material>;
 
 ///
 /// マテリアル
-class Material
-{
-public:
+class Material {
+protected:
     ///
     /// コンストラクタ
     Material()
@@ -35,13 +34,14 @@ public:
     {}
 
 
-    
+public:
+
     ///
     /// デストラクタ
     ~Material()
     {}
 
-public:
+
 
     ///
     /// Diffuse 設定
@@ -53,7 +53,7 @@ public:
 
     ///
     /// Diffuse 取得
-    const Color& diffuse() const {
+    const auto& diffuse() const {
         return diffuse_;
     }
 
@@ -67,7 +67,7 @@ public:
 
     ///
     /// Ambient 取得
-    const Color& ambient() const {
+    const auto& ambient() const {
         return ambient_;
     }
     
@@ -81,7 +81,7 @@ public:
 
     ///
     /// Specular 取得
-    const Color& specular() const {
+    const auto& specular() const {
         return specular_;
     }
     
@@ -111,7 +111,7 @@ public:
 
     ///
     /// マテリアル名を取得
-    String name() {
+    auto& name() {
         return material_name_;
     }
 
@@ -123,7 +123,7 @@ public:
     
     ///
     /// テクスチャを取得
-    const TexturePtr& texture() const {
+    const auto& texture() const {
         return texture_;
     }
 
@@ -133,6 +133,8 @@ public:
         texture_ = t;
     }
 
+public:
+    static MaterialPtr create();
 
 
 private:

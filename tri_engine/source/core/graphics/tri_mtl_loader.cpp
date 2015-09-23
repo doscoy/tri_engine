@@ -15,7 +15,7 @@ MtlLoader::load(
     
     T3_ASSERT_MSG(file, "%s is not found.", path);
     
-    MaterialPtr material = std::make_shared<Material>();
+    MaterialPtr material = Material::create();
 
     while (file.getline(buf, sizeof buf)) {
         //  ƒtƒ@ƒCƒ‹‚ğ‡”Ô‚É“Ç‚ñ‚Å‚¢‚Á‚Äî•ñ‚ğE‚¤
