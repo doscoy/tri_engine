@@ -27,9 +27,9 @@ protected:
     ///
     /// コンストラクタ
     Material()
-        : diffuse_(255, 0, 0)
-        , ambient_(128, 0, 0)
-        , specular_(0, 255, 0)
+        : diffuse_(255, 255, 255)
+        , ambient_(255, 255, 255)
+        , specular_(0, 0, 0)
         , opacity_(255)
     {}
 
@@ -55,6 +55,16 @@ public:
     /// Diffuse 取得
     const auto& diffuse() const {
         return diffuse_;
+    }
+    
+    void diffuseMap(
+        TexturePtr t
+    ) {
+        diffuse_map_ = t;
+    }
+
+    const TexturePtr diffuseMap() const {
+        return diffuse_map_;
     }
 
     ///
@@ -120,18 +130,6 @@ public:
     void name(const String& name) {
         material_name_ = name;
     }
-    
-    ///
-    /// テクスチャを取得
-    const auto& texture() const {
-        return texture_;
-    }
-
-    ///
-    /// テクスチャを設定
-    void texture(TexturePtr t) {
-        texture_ = t;
-    }
 
 public:
     static MaterialPtr create();
@@ -139,7 +137,8 @@ public:
 
 private:
     String material_name_;
-    TexturePtr texture_;
+    TexturePtr diffuse_map_;
+    
     Color diffuse_;     ///< ディフューズ
     Color ambient_;     ///< アンビエント
     Color specular_;

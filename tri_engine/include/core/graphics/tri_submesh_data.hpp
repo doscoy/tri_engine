@@ -58,6 +58,8 @@ private:
 };
 
 using SubMeshDataPtr = SharedPtr<SubMeshData>;
+using SubMeshesData = Vector<SubMeshDataPtr>;
+using SubMeshesDataPtr = SharedPtr<SubMeshesData>;
 
 
 TRI_CORE_NS_END

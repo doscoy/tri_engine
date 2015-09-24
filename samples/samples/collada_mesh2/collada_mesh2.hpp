@@ -1,18 +1,18 @@
 
-#ifndef COLLADA_MESH_HPP_INCLUDED
-#define COLLADA_MESH_HPP_INCLUDED
+#ifndef COLLADA_MESH2_HPP_INCLUDED
+#define COLLADA_MESH2_HPP_INCLUDED
 
 
 #include "tri_engine.hpp"
 
 
 
-class ColladaMeshScene
+class ColladaMesh2Scene
     : public t3::jet::Scene
 {
 public:
-    ColladaMeshScene();
-    ~ColladaMeshScene();
+    ColladaMesh2Scene();
+    ~ColladaMesh2Scene();
     
 public:
     void initialize() override;
@@ -25,11 +25,8 @@ private:
     t3::RotateCameraUpdater cam_updater_;
     t3::LookAtCameraUpdater light_camera_;
     t3::SceneGraph scene_graph_;
-    t3::TransformNodePtr node_field_;
-    t3::TransformNodePtr node_box_;
-    t3::TransformNodePtr node_torus_;
-    t3::TransformNodePtr node_earth_;
+    t3::TransformNodePtr node_cone_;
 
 
 };
-#endif // SIMPLE_MESH_HPP_INCLUDED
+#endif // SIMPLE_MESH2_HPP_INCLUDED

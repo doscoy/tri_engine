@@ -30,7 +30,6 @@ public:
 
         
         //  カメラ位置調整
-        float len = model_->mesh()->boundingSphere().radius();
         cam_updater_.position(0, 10, 10);
         cam_updater_.targetPosition(0,0,0);
         

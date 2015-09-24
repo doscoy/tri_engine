@@ -64,16 +64,18 @@ layout (location = 2) in vec2 a_uv;
 
 out vec2 v_texture_uv;
 out vec4 v_shadow_coord;
-
+out vec4 v_color;
 
 uniform mat4 u_mvp;
 uniform mat4 u_shadow_mtx;
+uniform vec4 u_diffuse;
+
 
 void main() {
 
     v_shadow_coord = u_shadow_mtx * vec4(a_position, 1.0);
     v_texture_uv = a_uv;
-
+    v_color = u_diffuse;
     gl_Position = u_mvp * vec4(a_position, 1.0);
 }
 )";

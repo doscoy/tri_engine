@@ -18,21 +18,21 @@ MtlLoader::load(
     MaterialPtr material = Material::create();
 
     while (file.getline(buf, sizeof buf)) {
-        //  ƒtƒ@ƒCƒ‹‚ð‡”Ô‚É“Ç‚ñ‚Å‚¢‚Á‚Äî•ñ‚ðE‚¤
+        //  ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é †ç•ªã«èª­ã‚“ã§ã„ã£ã¦æƒ…å ±ã‚’æ‹¾ã†
         //--------------------------------
-        //  ƒ}ƒeƒŠƒAƒ‹–¼
+        //  ãƒžãƒ†ãƒªã‚¢ãƒ«å
         if (buf[0] == 'n'
             && buf[1] == 'e'
         ) {
-            //  newmtl ƒ}ƒeƒŠƒAƒ‹–¼
+            //  newmtl ãƒžãƒ†ãƒªã‚¢ãƒ«å
             char newmtl[128];
             sscanf(buf, "%*s %s", newmtl);
 
-            //  ƒ}ƒeƒŠƒAƒ‹–¼Ý’è
+            //  ãƒžãƒ†ãƒªã‚¢ãƒ«åè¨­å®š
             material->name(newmtl);
 
         //---------------------------------
-        //  ƒeƒNƒXƒ`ƒƒ
+        //  ãƒ†ã‚¯ã‚¹ãƒãƒ£
         } else if (buf[0] == 'm'
             && buf[1] == 'a'
         ) {
@@ -42,11 +42,11 @@ MtlLoader::load(
             FilePath tex_path = String(map_Kd);
             auto t = Texture::create(tex_path);
 
-            //  ƒeƒNƒXƒ`ƒƒÝ’è
-            material->texture(t);
+            //  ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®š
+            material->diffuseMap(t);
 
         //---------------------------------
-        //  ƒAƒ“ƒrƒGƒ“ƒg
+        //  ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆ
         } else if (buf[0] == 'K'
             && buf[1] == 'a'
         ) {
@@ -62,7 +62,7 @@ MtlLoader::load(
             material->ambient(c);
         
         //---------------------------------
-        //  ƒfƒBƒtƒ…[ƒY
+        //  ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚º
         } else if (buf[0] == 'K'
             && buf[1] == 'd'
         ) {
@@ -78,7 +78,7 @@ MtlLoader::load(
             material->diffuse(c);
 
         //---------------------------------
-        //  ƒXƒyƒLƒ…ƒ‰
+        //  ã‚¹ãƒšã‚­ãƒ¥ãƒ©
         } else if (buf[0] == 'K'
             && buf[1] == 's'
         ) {

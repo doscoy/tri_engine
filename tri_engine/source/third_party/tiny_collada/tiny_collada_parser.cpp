@@ -24,7 +24,7 @@
 
 namespace {
 
-
+constexpr int PARSE_STRING_SIZE = 64;
 
 const char* INPUT_NODE_NAME = "input";
 const char* SOURCE_NODE_NAME = "source";
@@ -85,8 +85,6 @@ const PrimitiveSelector PRIMITIVE_TYPE_SELECT[PRIMITIVE_TYPE_NUM] = {
     {"polylist", tinycollada::ColladaMesh::PRIMITIVE_TRIANGLES}
 };
 
-
-const size_t STRING_COMP_SIZE = 64;
 
 
 
@@ -383,81 +381,81 @@ struct SourceData
 //  メッシュ情報
 struct MeshInformation {
 
-//----------------------------------------------------------------------
-//  指定idのinputを探す
-InputData* searchInputBySource(
-    const char* const id
-) {
-    for (int i = 0; i < inputs_.size(); ++i) {
-        InputData* input = &inputs_[i];
-        TINY_COLLADA_TRACE("search %s == %s\n", id, input->source_);
-        if (std::strncmp(input->source_, id, STRING_COMP_SIZE) == 0){
-            return input;
+    //----------------------------------------------------------------------
+    //  指定idのinputを探す
+    InputData* searchInputBySource(
+        const char* const id
+    ) {
+        for (int i = 0; i < inputs_.size(); ++i) {
+            InputData* input = &inputs_[i];
+            TINY_COLLADA_TRACE("search %s == %s\n", id, input->source_);
+            if (std::strncmp(input->source_, id, PARSE_STRING_SIZE) == 0){
+                return input;
+            }
         }
+        return nullptr;
     }
-    return nullptr;
-}
 
 
-//----------------------------------------------------------------------
-//  指定semanticのsourceを探す
-SourceData* searchSourceBySemantic(
-    const char* const semantic
-) {
-    size_t sources_size = sources_.size();
-    TINY_COLLADA_TRACE("\nsearchSourceBySemantic %s %lu\n", semantic, sources_size);
-    for (int i = 0; i < sources_size; ++i) {
-        SourceData* source = &sources_[i];
-        InputData* input = source->input_;
-        if (!input) {
-            TINY_COLLADA_TRACE("no input - %s\n", source->id_);
-            continue;
+    //----------------------------------------------------------------------
+    //  指定semanticのsourceを探す
+    SourceData* searchSourceBySemantic(
+        const char* const semantic
+    ) {
+        size_t sources_size = sources_.size();
+        TINY_COLLADA_TRACE("\nsearchSourceBySemantic %s %lu\n", semantic, sources_size);
+        for (int i = 0; i < sources_size; ++i) {
+            SourceData* source = &sources_[i];
+            InputData* input = source->input_;
+            if (!input) {
+                TINY_COLLADA_TRACE("no input - %s\n", source->id_);
+                continue;
+            }
+            TINY_COLLADA_TRACE("  %s %s\n", input->semantic_, input->source_);   
+            if (std::strncmp(input->semantic_, semantic, PARSE_STRING_SIZE) == 0) {
+                TINY_COLLADA_TRACE("%s - %s [%s] FOUND.\n", __FUNCTION__, semantic, input->source_);
+                return source;
+            }
         }
-        TINY_COLLADA_TRACE("  %s %s\n", input->semantic_, input->source_);   
-        if (std::strncmp(input->semantic_, semantic, STRING_COMP_SIZE) == 0) {
-            TINY_COLLADA_TRACE("%s - %s [%s] FOUND.\n", __FUNCTION__, semantic, input->source_);
-            return source;
-        }
+        TINY_COLLADA_TRACE("%s - %s NOT FOUND.\n", __FUNCTION__, semantic);
+            
+        return nullptr;
     }
-    TINY_COLLADA_TRACE("%s - %s NOT FOUND.\n", __FUNCTION__, semantic);
+
+    //----------------------------------------------------------------------
+    //  inputのインデックスオフセット幅を取得
+    int getIndexStride() const
+    {
+        int max_offset = 0;
+        for (int i = 0; i < inputs_.size(); ++i) {
+            int offset = inputs_[i].offset_;
+            if (offset > max_offset) {
+                max_offset = offset;
+            }
+        }
+
+        return max_offset + 1;
+    }
+
+    //----------------------------------------------------------------------
+    //  データ表示
+    void dump()
+    {
         
-    return nullptr;
-}
-
-//----------------------------------------------------------------------
-//  inputのインデックスオフセット幅を取得
-int getIndexStride() const
-{
-    int max_offset = 0;
-    for (int i = 0; i < inputs_.size(); ++i) {
-        int offset = inputs_[i].offset_;
-        if (offset > max_offset) {
-            max_offset = offset;
+        for (int i = 0; i < sources_.size(); ++i) {
+            sources_[i].dump();
         }
+
+        for (int i = 0; i < inputs_.size(); ++i) {
+            inputs_[i].dump();
+        }
+
     }
 
-    return max_offset + 1;
-}
-
-//----------------------------------------------------------------------
-//  データ表示
-void dump()
-{
-    
-    for (int i = 0; i < sources_.size(); ++i) {
-        sources_[i].dump();
-    }
-
-    for (int i = 0; i < inputs_.size(); ++i) {
-        inputs_[i].dump();
-    }
-
-}
-
-tinycollada::Indices raw_indices_;
-std::vector<char> face_count_;
-std::vector<SourceData> sources_;
-std::vector<InputData> inputs_;
+    tinycollada::Indices raw_indices_;
+    std::vector<char> face_count_;
+    std::vector<SourceData> sources_;
+    std::vector<InputData> inputs_;
     
 };
 
@@ -692,7 +690,13 @@ void parseEffect(
         const tinyxml2::XMLElement* color = firstChildElement(emission, "color");
         if (color) {
             const char* text = color->GetText();
-            readArray(text, &material->emission_);
+            readArray(text, &material->emission_.color_);
+        }
+        
+        //  エミッションマップテクスチャ
+        const tinyxml2::XMLElement* texture = firstChildElement(emission, "texture");
+        if (texture) {
+            material->emission_.sampler_name_ = texture->Attribute("texture");
         }
     }
     //  アンビエント
@@ -701,18 +705,31 @@ void parseEffect(
         const tinyxml2::XMLElement* color = firstChildElement(ambient, "color");
         if (color) {
             const char* text = color->GetText();
-            readArray(text, &material->ambient_);
+            readArray(text, &material->ambient_.color_);
+        }
+        
+        //  アンビエントマップテクスチャ
+        const tinyxml2::XMLElement* texture = firstChildElement(ambient, "texture");
+        if (texture) {
+            material->ambient_.sampler_name_ = texture->Attribute("texture");
         }
     }
 
     //  ディフューズ
     const tinyxml2::XMLElement* diffuse = firstChildElement(shading, "diffuse");
     if (diffuse) {
+        //  ディフューズカラー値
         const tinyxml2::XMLElement* color = firstChildElement(diffuse, "color");
         if (color) {
             const char* text = color->GetText();
-            readArray(text, &material->diffuse_);
+            readArray(text, &material->diffuse_.color_);
         }
+        //  ディフューズマップテクスチャ
+        const tinyxml2::XMLElement* texture = firstChildElement(diffuse, "texture");
+        if (texture) {
+            material->diffuse_.sampler_name_ = texture->Attribute("texture");
+        }
+
     }
 
     //  スペキュラ
@@ -721,7 +738,13 @@ void parseEffect(
         const tinyxml2::XMLElement* color = firstChildElement(specular, "color");
         if (color) {
             const char* text = color->GetText();
-            readArray(text, &material->specular_);
+            readArray(text, &material->specular_.color_);
+        }
+
+        //  スペキュラマップテクスチャ
+        const tinyxml2::XMLElement* texture = firstChildElement(specular, "texture");
+        if (texture) {
+            material->specular_.sampler_name_ = texture->Attribute("texture");
         }
     }
 
@@ -731,7 +754,7 @@ void parseEffect(
         const tinyxml2::XMLElement* color = firstChildElement(reflective, "color");
         if (color) {
             const char* text = color->GetText();
-            readArray(text, &material->reflective_);
+            readArray(text, &material->reflective_.color_);
         }
     }
     
@@ -940,7 +963,7 @@ std::shared_ptr<tinycollada::ColladaMaterial> searchMaterial(
     //  マテリアルを探す
     const char* effect_url = nullptr;
     for (int i = 0; i < materials.size(); ++i) {
-        if (std::strncmp(materials[i]->id_, bind_material, 64) == 0) {
+        if (std::strncmp(materials[i]->id_, bind_material, PARSE_STRING_SIZE) == 0) {
             //  あった
             effect_url = materials[i]->url_;
             break;
@@ -955,7 +978,7 @@ std::shared_ptr<tinycollada::ColladaMaterial> searchMaterial(
     //  エフェクトを探す
     std::shared_ptr<tinycollada::ColladaMaterial> mat = nullptr;
     for (int i = 0; i < effects.size(); ++i) {
-        if (std::strncmp(effect_url, effects[i]->id_, 64) == 0) {
+        if (std::strncmp(effect_url, effects[i]->id_, PARSE_STRING_SIZE) == 0) {
             //  あった
             mat = effects[i]->material_;
         }
@@ -993,418 +1016,461 @@ namespace tinycollada {
 class Parser::Impl
 {
 public:
-Impl()
-    : scenes_()
-{
-}
+    Impl()
+        : scenes_()
+    {}
 
-~Impl()
-{
-}
+    ~Impl()
+    {}
 
     
-//----------------------------------------------------------------------
-Result parseCollada(
-    const tinyxml2::XMLDocument* const doc
-) {
-    
-    //  ルートノード取得
-    const tinyxml2::XMLElement* root_node = doc->RootElement();
+    //----------------------------------------------------------------------
+    Result parseCollada(
+        const tinyxml2::XMLDocument* const doc
+    ) {
+        
+        //  ルートノード取得
+        const tinyxml2::XMLElement* root_node = doc->RootElement();
 
 
-    //  visual_scene解析
-    VisualScenes visual_scenes;
-    const tinyxml2::XMLElement* library_visual_scene = firstChildElement(
-        root_node,
-        "library_visual_scenes"
-    );
-    collectVisualSceneNode(visual_scenes, library_visual_scene);
-
-    //  マテリアルノード解析
-    Materials materials;
-    const tinyxml2::XMLElement* library_materials = firstChildElement(root_node, "library_materials");
-    if (library_materials) {
-        collectMaterialNode(materials, library_materials);
-    }
-    
-    //  エフェクトノード解析
-    Effects effects;
-    const tinyxml2::XMLElement* library_effects = firstChildElement(root_node, "library_effects");
-    if (library_effects) {
-        collectEffectNode(effects, library_effects);
-    }
-
-    //  テクスチャパス解析
-    Images images;
-    const tinyxml2::XMLElement* library_images = firstChildElement(root_node, "library_images");
-    if (library_images) {
-        collectImageNode(images, library_images);
-    }
-
-
-    //  ダンプ
-    for (int i = 0; i < visual_scenes.size(); ++i) {
-        visual_scenes[i]->dump();
-    }
-    for (int i = 0; i < materials.size(); ++i) {
-        materials[i]->dump();
-    }
-    for (int i = 0; i < effects.size(); ++i) {
-        effects[i]->dump();
-    }
-    for (int i = 0; i < images.size(); ++i) {
-        images[i]->dump();
-    }
-
-    //  ジオメトリノード解析
-    const tinyxml2::XMLElement* library_geometries = firstChildElement(
-        root_node,
-        LIB_GEOMETRY_NODE_NAME
-    );
-    
-    
-    for (int vs_idx = 0; vs_idx < visual_scenes.size(); ++vs_idx) {
-        std::shared_ptr<VisualSceneData>& vs = visual_scenes[vs_idx];
-        if (vs->type_ != VisualSceneData::TYPE_GEOMETRY) {
-            continue;
-        }
-
-        const tinyxml2::XMLElement* geometry = firstChildElement(
-            library_geometries,
-            GEOMETRY_NODE_NAME
+        //  visual_scene解析
+        const tinyxml2::XMLElement* library_visual_scene = firstChildElement(
+            root_node,
+            "library_visual_scenes"
         );
+        collectVisualSceneNode(visual_scenes_, library_visual_scene);
 
-        //  シーン作成
-        std::shared_ptr<ColladaScene> scene = std::make_shared<ColladaScene>();
-
-        //  マトリックス登録
-        transposeMatrix(vs->matrix_);
-        scene->matrix(vs->matrix_);
-        scenes_.push_back(scene);
-        //  マテリアル設定
-        scene->material(searchMaterial(vs->bind_material_, materials, effects));
-    
-        //  メッシュ情報生成
-        while (geometry) {
-            const char* geometry_id = getElementAttribute(geometry, "id");
-            
-            if (std::strncmp(vs->url_, geometry_id, STRING_COMP_SIZE) != 0) {
-                //  次のジオメトリ
-                geometry = geometry->NextSiblingElement(GEOMETRY_NODE_NAME);
-            }
+        //  マテリアルノード解析
+        const tinyxml2::XMLElement* library_materials = firstChildElement(root_node, "library_materials");
+        if (library_materials) {
+            collectMaterialNode(materials_, library_materials);
+        }
         
-            //  メッシュデータ解析
-            const tinyxml2::XMLElement* mesh_node = firstChildElement(
-                geometry,
-                MESH_NODE_NAME
-            );
-            while (mesh_node) {
-            
-                std::shared_ptr<ColladaMesh> mesh = std::make_shared<ColladaMesh>();
-                parseMeshNode(mesh_node, mesh);
-            
-                //  頂点と法線の並びが同じになっているかチェック
-                if (mesh->hasVertex()) {
-                    const auto& v_array = mesh->vertices();
-                    if (mesh->hasNormal()) {
-                        const auto& n_array = mesh->normals();
-                        size_t visize = v_array.data().size();
-                        size_t nisize = n_array.data().size();
-                        TINY_COLLADA_TRACE("%lu[v] == %lu[n]\n", visize, nisize);
-                        TINY_COLLADA_ASSERT(visize == nisize);
-                    }
-                }
+        //  エフェクトノード解析
+        const tinyxml2::XMLElement* library_effects = firstChildElement(root_node, "library_effects");
+        if (library_effects) {
+            collectEffectNode(effects_, library_effects);
+        }
 
-                //  データ登録
-                scene->addMesh(mesh);
+        //  テクスチャパス解析
+        const tinyxml2::XMLElement* library_images = firstChildElement(root_node, "library_images");
+        if (library_images) {
+            collectImageNode(images_, library_images);
+        }
+
+
+        //  ダンプ
+        for (int i = 0; i < visual_scenes_.size(); ++i) {
+            visual_scenes_[i]->dump();
+        }
+        for (int i = 0; i < materials_.size(); ++i) {
+            materials_[i]->dump();
+        }
+        for (int i = 0; i < effects_.size(); ++i) {
+            effects_[i]->dump();
+        }
+        for (int i = 0; i < images_.size(); ++i) {
+            images_[i]->dump();
+        }
+
+        //  ジオメトリノード解析
+        const tinyxml2::XMLElement* library_geometries = firstChildElement(
+            root_node,
+            LIB_GEOMETRY_NODE_NAME
+        );
+        
+        
+        for (int vs_idx = 0; vs_idx < visual_scenes_.size(); ++vs_idx) {
+            std::shared_ptr<VisualSceneData>& vs = visual_scenes_[vs_idx];
+            if (vs->type_ != VisualSceneData::TYPE_GEOMETRY) {
+                continue;
+            }
+
+            const tinyxml2::XMLElement* geometry = firstChildElement(
+                library_geometries,
+                GEOMETRY_NODE_NAME
+            );
+
+            //  シーン作成
+            std::shared_ptr<ColladaScene> scene = std::make_shared<ColladaScene>();
+
+            //  マトリックス登録
+            transposeMatrix(vs->matrix_);
+            scene->matrix(vs->matrix_);
+            scenes_.push_back(scene);
+            //  マテリアル設定
+            auto a=searchMaterial(vs->bind_material_, materials_, effects_);
+            scene->material(a);
+        
+            //  メッシュ情報生成
+            while (geometry) {
+                const char* geometry_id = getElementAttribute(geometry, "id");
                 
-                //  次へ
-                mesh_node = mesh_node->NextSiblingElement(MESH_NODE_NAME);
+                if (std::strncmp(vs->url_, geometry_id, PARSE_STRING_SIZE) != 0) {
+                    //  次のジオメトリ
+                    geometry = geometry->NextSiblingElement(GEOMETRY_NODE_NAME);
+                }
+            
+                //  メッシュデータ解析
+                const tinyxml2::XMLElement* mesh_node = firstChildElement(
+                    geometry,
+                    MESH_NODE_NAME
+                );
+                while (mesh_node) {
+                
+                    std::shared_ptr<ColladaMesh> mesh = std::make_shared<ColladaMesh>();
+                    parseMeshNode(mesh_node, mesh);
+                
+                    //  頂点と法線の並びが同じになっているかチェック
+                    if (mesh->hasVertex()) {
+                        const auto& v_array = mesh->vertices();
+                        if (mesh->hasNormal()) {
+                            const auto& n_array = mesh->normals();
+                            size_t visize = v_array.data().size();
+                            size_t nisize = n_array.data().size();
+                            TINY_COLLADA_TRACE("%lu[v] == %lu[n]\n", visize, nisize);
+                            TINY_COLLADA_ASSERT(visize == nisize);
+                        }
+                    }
+
+                    //  データ登録
+                    scene->addMesh(mesh);
+                    
+                    //  次へ
+                    mesh_node = mesh_node->NextSiblingElement(MESH_NODE_NAME);
+                }
+                break;
             }
-            break;
+            
         }
         
-    }
-    
-    
-    
-    return Result::Code::SUCCESS;
-}
-
-//----------------------------------------------------------------------
-//  メッシュノードの解析
-void parseMeshNode(
-    const tinyxml2::XMLElement* mesh_node,
-    ::std::shared_ptr<tinycollada::ColladaMesh> mesh
-) {
-    std::shared_ptr<MeshInformation> info = std::make_shared<MeshInformation>();
-
-    //  インデックス情報保存
-    collectIndices(mesh_node, info->raw_indices_);
-    collectFaceCount(mesh_node, info->face_count_);
-
-    //  ソースノードの情報保存
-    collectMeshSources(info->sources_, mesh_node);
-    
-    //  インプットノードの情報保存
-    collectMeshInputs(info->inputs_, mesh_node);
-    
-    info->dump();
-    
-    //  ソースとインプットを関連付け
-    relateSourcesToInputs(info);
-    printf("\n\n");
-    for (int i = 0; i < info->sources_.size(); ++i) {
-        SourceData* src = &info->sources_[i];
-		if (src->input_) {
-			printf("SRC:%s - INPUT:%s\n", src->id_, src->input_->source_);
-			printf("  DATA size %lu\n", src->data_.size());
-		}
-    }
-    printf("\n\n");
-
-
-    setupMesh(mesh_node, info, mesh);
-    
-}
-
-//----------------------------------------------------------------------
-void setupMesh(
-    const tinyxml2::XMLElement* mesh_node,
-    std::shared_ptr<MeshInformation> info,
-    std::shared_ptr<tinycollada::ColladaMesh> mesh
-) {
-    //  プリミティブの描画タイプを設定
-    tinycollada::ColladaMesh::PrimitiveType prim_type = getPrimitiveType(mesh_node);
-    mesh->setPrimitiveType(prim_type);
-
-    int offset_size = info->getIndexStride();
-
-    //  頂点情報
-    const SourceData* pos_source = info->searchSourceBySemantic("POSITION");
-    if (pos_source) {
-
-        //  ソース情報をコピー
-        printf("pos_source size %lu\n", pos_source->data_.size());
-        mesh->vertices().data(pos_source->data_);
-        mesh->vertices().stride(pos_source->stride_);
-
-        if (info->face_count_.empty()) {
-            //  面情報がカラ
-            setupIndices(
-                mesh->vertices().indices(),
-                info->raw_indices_,
-                pos_source->input_->offset_,
-                offset_size
-            );
-        }
-        else {
-            setupIndicesMultiFace(
-                mesh->vertices().indices(),
-                info,
-                pos_source->input_->offset_,
-                offset_size
-            );
-        }
-    }
-
-    //  法線情報
-    const SourceData* normal_source = info->searchSourceBySemantic("NORMAL");
-    if (normal_source) {
-        printf("normal_source size %lu\n", normal_source->data_.size());
         
-        mesh->normals().stride(normal_source->stride_);
-        if (info->face_count_.empty()) {
-            setupIndices(
-                mesh->normals().indices(),
-                info->raw_indices_,
-                normal_source->input_->offset_,
-                offset_size
-            );
-        }
-        else {
-            setupIndicesMultiFace(
-                mesh->normals().indices(),
-                info,
-                normal_source->input_->offset_,
-                offset_size
-            );
-        }
         
-        //  頂点インデックスにあわせてデータ変更
-        Indices& vindices = mesh->vertices().indices();
-        Indices& nindices = mesh->normals().indices();
-        mesh->normals().data().resize(pos_source->data_.size(), 8.8);
-        auto& normal_data = mesh->normals().data();
-        for (int vert_idx = 0; vert_idx < vindices.size(); ++vert_idx) {
-            uint32_t vidx = vindices.at(vert_idx);
-            uint32_t nidx = nindices.at(vert_idx);
-            uint32_t nstride = normal_source->stride_;
-            uint32_t from_idx = nidx * nstride;
-            uint32_t to_idx = vidx * nstride;
-            printf("%d-%d\n", vidx, nidx);
-            for (int di = 0; di < nstride; ++di) {
-                int to = to_idx + di;
-                int from = from_idx + di;
-                printf("　　%d -> %d\n", from, to );
-                normal_data[to_idx + di] = normal_source->data_.at(from_idx + di);
+        return Result::Code::SUCCESS;
+    }
+
+    //----------------------------------------------------------------------
+    //  メッシュノードの解析
+    void parseMeshNode(
+        const tinyxml2::XMLElement* mesh_node,
+        ::std::shared_ptr<tinycollada::ColladaMesh> mesh
+    ) {
+        std::shared_ptr<MeshInformation> info = std::make_shared<MeshInformation>();
+
+        //  インデックス情報保存
+        collectIndices(mesh_node, info->raw_indices_);
+        collectFaceCount(mesh_node, info->face_count_);
+
+        //  ソースノードの情報保存
+        collectMeshSources(info->sources_, mesh_node);
+        
+        //  インプットノードの情報保存
+        collectMeshInputs(info->inputs_, mesh_node);
+        
+        info->dump();
+        
+        //  ソースとインプットを関連付け
+        relateSourcesToInputs(info);
+        printf("\n\n");
+        for (int i = 0; i < info->sources_.size(); ++i) {
+            SourceData* src = &info->sources_[i];
+            if (src->input_) {
+                printf("SRC:%s - INPUT:%s\n", src->id_, src->input_->source_);
+                printf("  DATA size %lu\n", src->data_.size());
             }
         }
+        printf("\n\n");
+
+
+        setupMesh(mesh_node, info, mesh);
         
     }
 
+    //----------------------------------------------------------------------
+    void setupMesh(
+        const tinyxml2::XMLElement* mesh_node,
+        std::shared_ptr<MeshInformation> info,
+        std::shared_ptr<tinycollada::ColladaMesh> mesh
+    ) {
+        //  プリミティブの描画タイプを設定
+        tinycollada::ColladaMesh::PrimitiveType prim_type = getPrimitiveType(mesh_node);
+        mesh->setPrimitiveType(prim_type);
 
-    //  uv
-    const SourceData* uv_source = info->searchSourceBySemantic("TEXCOORD");
-    if (uv_source) {
-        printf("uv_source size %lu\n", uv_source->data_.size());
-        
-        mesh->uvs().stride(uv_source->stride_);
-        if (info->face_count_.empty()) {
-            setupIndices(
-                mesh->uvs().indices(),
-                info->raw_indices_,
-                uv_source->input_->offset_,
-                offset_size
-            );
-        }
-        else {
-            setupIndicesMultiFace(
-                mesh->uvs().indices(),
-                info,
-                uv_source->input_->offset_,
-                offset_size
-            );
-        }
+        int offset_size = info->getIndexStride();
 
-/*        
-        //  頂点インデックスにあわせてデータ変更
-        Indices& vindices = mesh->vertices().indices();
-        Indices& uvindices = mesh->uvs().indices();
-        mesh->uvs().data().resize(pos_source->data_.size(), 8.8888f);
-        for (int vert_idx = 0; vert_idx < vindices.size(); ++vert_idx) {
-            uint32_t vidx = vindices.at(vert_idx);
-            uint32_t nidx = uvindices.at(vert_idx);
-            uint32_t nstride = uv_source->stride_;
-            uint32_t from_idx = nidx * nstride;
-            uint32_t to_idx = vidx * nstride;
-            printf("%d-%d\n", vidx, nidx);
-            for (int di = 0; di < nstride; ++di) {
-                int to = to_idx + di;
-                int from = from_idx + di;
-                printf("　　%d -> %d\n", from, to );
-                mesh->uvs().data()[to_idx + di] = uv_source->data_.at(from_idx + di);
+        //  頂点情報
+        const SourceData* pos_source = info->searchSourceBySemantic("POSITION");
+        if (pos_source) {
+
+            //  ソース情報をコピー
+            printf("pos_source size %lu\n", pos_source->data_.size());
+            mesh->vertices().data(pos_source->data_);
+            mesh->vertices().stride(pos_source->stride_);
+
+            if (info->face_count_.empty()) {
+                //  面情報がカラ
+                setupIndices(
+                    mesh->vertices().indices(),
+                    info->raw_indices_,
+                    pos_source->input_->offset_,
+                    offset_size
+                );
+            }
+            else {
+                setupIndicesMultiFace(
+                    mesh->vertices().indices(),
+                    info,
+                    pos_source->input_->offset_,
+                    offset_size
+                );
             }
         }
-*/
 
-        mesh->uvs().data(uv_source->data_);
+        //  法線情報
+        const SourceData* normal_source = info->searchSourceBySemantic("NORMAL");
+        if (normal_source) {
+            printf("normal_source size %lu\n", normal_source->data_.size());
+            
+            mesh->normals().stride(normal_source->stride_);
+            if (info->face_count_.empty()) {
+                setupIndices(
+                    mesh->normals().indices(),
+                    info->raw_indices_,
+                    normal_source->input_->offset_,
+                    offset_size
+                );
+            }
+            else {
+                setupIndicesMultiFace(
+                    mesh->normals().indices(),
+                    info,
+                    normal_source->input_->offset_,
+                    offset_size
+                );
+            }
+            
+            //  頂点インデックスにあわせてデータ変更
+            Indices& vindices = mesh->vertices().indices();
+            Indices& nindices = mesh->normals().indices();
+            mesh->normals().data().resize(pos_source->data_.size(), 8.8);
+            auto& normal_data = mesh->normals().data();
+            for (int vert_idx = 0; vert_idx < vindices.size(); ++vert_idx) {
+                uint32_t vidx = vindices.at(vert_idx);
+                uint32_t nidx = nindices.at(vert_idx);
+                uint32_t nstride = normal_source->stride_;
+                uint32_t from_idx = nidx * nstride;
+                uint32_t to_idx = vidx * nstride;
+                printf("%d-%d\n", vidx, nidx);
+                for (int di = 0; di < nstride; ++di) {
+                    int to = to_idx + di;
+                    int from = from_idx + di;
+                    printf("　　%d -> %d\n", from, to );
+                    normal_data[to_idx + di] = normal_source->data_.at(from_idx + di);
+                }
+            }
+            
+        }
+
+
+        //  uv
+        const SourceData* uv_source = info->searchSourceBySemantic("TEXCOORD");
+        if (uv_source) {
+            printf("uv_source size %lu\n", uv_source->data_.size());
+            
+            mesh->uvs().stride(uv_source->stride_);
+            if (info->face_count_.empty()) {
+                setupIndices(
+                    mesh->uvs().indices(),
+                    info->raw_indices_,
+                    uv_source->input_->offset_,
+                    offset_size
+                );
+            }
+            else {
+                setupIndicesMultiFace(
+                    mesh->uvs().indices(),
+                    info,
+                    uv_source->input_->offset_,
+                    offset_size
+                );
+            }
+
+            mesh->uvs().data(uv_source->data_);
+            
+        }
+    }
+
+
+
+
+    //----------------------------------------------------------------------
+    //  事前に抜いておいたインデックス一覧からインデックスのセットアップ
+    void setupIndices(
+        Indices& out,
+        Indices& src,
+        int start_offset,
+        int stride
+    ) {
+        TINY_COLLADA_TRACE("%s start_offset = %d stride = %d\n", __FUNCTION__, start_offset, stride);
+        for (int i = start_offset; i < src.size(); i += stride) {
+            out.push_back(src.at(i));
+        }
+        TINY_COLLADA_TRACE("index size = %lu\n", out.size());
+    }
+
+    //----------------------------------------------------------------------
+    //  事前に抜いておいたインデックス一覧からインデックスのセットアップ2
+    void setupIndicesMultiFace(
+        Indices& out,
+        std::shared_ptr<MeshInformation>& info,
+        int start_offset,
+        int stride
+    ) {
+        int idx = start_offset;
+        for (int i = 0; i < info->face_count_.size(); ++ i) {
+            int vcnt = info->face_count_.at(i);
+
+            if (vcnt == 3) {
+                uint32_t idx1 = info->raw_indices_.at(idx);
+                idx += stride;
+                uint32_t idx2 = info->raw_indices_.at(idx);
+                idx += stride;
+                uint32_t idx3 = info->raw_indices_.at(idx);
+                idx += stride;
+                out.push_back(idx1);
+                out.push_back(idx2);
+                out.push_back(idx3);
+
+            }
+            else if (vcnt == 4) {
+                uint32_t idx1 = info->raw_indices_.at(idx);
+                idx += stride;
+                uint32_t idx2 = info->raw_indices_.at(idx);
+                idx += stride;
+                uint32_t idx3 = info->raw_indices_.at(idx);
+                idx += stride;
+                uint32_t idx4 = info->raw_indices_.at(idx);
+                idx += stride;
+
+                out.push_back(idx1);
+                out.push_back(idx2);
+                out.push_back(idx3);
+
+                out.push_back(idx1);
+                out.push_back(idx3);
+                out.push_back(idx4);
+            }
+        }
+    }
+
         
-    }
-}
+    //----------------------------------------------------------------------
+    //  メッシュから抜いたinputsとsourcesを関連付ける
+    void relateSourcesToInputs(
+        std::shared_ptr<MeshInformation>& info
+    )
+    {
+        TINY_COLLADA_TRACE("%s\n", __FUNCTION__);
+        auto src_it = info->sources_.begin();
+        auto src_end = info->sources_.end();
+        
 
-
-
-
-//----------------------------------------------------------------------
-//  事前に抜いておいたインデックス一覧からインデックスのセットアップ
-void setupIndices(
-    Indices& out,
-    Indices& src,
-    int start_offset,
-    int stride
-) {
-    TINY_COLLADA_TRACE("%s start_offset = %d stride = %d\n", __FUNCTION__, start_offset, stride);
-    for (int i = start_offset; i < src.size(); i += stride) {
-        out.push_back(src.at(i));
-    }
-    TINY_COLLADA_TRACE("index size = %lu\n", out.size());
-}
-
-//----------------------------------------------------------------------
-//  事前に抜いておいたインデックス一覧からインデックスのセットアップ2
-void setupIndicesMultiFace(
-    Indices& out,
-    std::shared_ptr<MeshInformation>& info,
-    int start_offset,
-    int stride
-) {
-    int idx = start_offset;
-    for (int i = 0; i < info->face_count_.size(); ++ i) {
-        int vcnt = info->face_count_.at(i);
-
-        if (vcnt == 3) {
-            uint32_t idx1 = info->raw_indices_.at(idx);
-            idx += stride;
-            uint32_t idx2 = info->raw_indices_.at(idx);
-            idx += stride;
-            uint32_t idx3 = info->raw_indices_.at(idx);
-            idx += stride;
-            out.push_back(idx1);
-            out.push_back(idx2);
-            out.push_back(idx3);
-
-        }
-        else if (vcnt == 4) {
-            uint32_t idx1 = info->raw_indices_.at(idx);
-            idx += stride;
-            uint32_t idx2 = info->raw_indices_.at(idx);
-            idx += stride;
-            uint32_t idx3 = info->raw_indices_.at(idx);
-            idx += stride;
-            uint32_t idx4 = info->raw_indices_.at(idx);
-            idx += stride;
-
-            out.push_back(idx1);
-            out.push_back(idx2);
-            out.push_back(idx3);
-
-            out.push_back(idx1);
-            out.push_back(idx3);
-            out.push_back(idx4);
+        while (src_it != src_end) {
+            InputData* input = info->searchInputBySource(src_it->id_);
+            src_it->input_ = input;
+            
+            TINY_COLLADA_TRACE(" %s", src_it->id_);
+            if (input) {
+                TINY_COLLADA_TRACE(" OK\n");
+                TINY_COLLADA_TRACE("  %s %s\n", input->semantic_, input->source_);
+            }
+            else {
+                TINY_COLLADA_TRACE(" NG\n");
+            }
+            ++src_it;
         }
     }
-}
+        
 
+
+    //----------------------------------------------------------------------
+    //  メッシュリスト取得
+    const ColladaScenes* getScenes() const {
+        return &scenes_;
+    }
+
+
+public:
+    //  init_fromでテクスチャ名を検索
+    const char* getTextureNameFromInitFrom(
+        const char* const init_from
+    ) {
+        for (int i = 0; i < images_.size(); ++i) {
+            auto& image = images_.at(i);
+            
+            if (std::strncmp(init_from, image->id_, PARSE_STRING_SIZE) == 0) {
+                return image->init_from_;
+            }
+        }
     
-//----------------------------------------------------------------------
-//  メッシュから抜いたinputsとsourcesを関連付ける
-void relateSourcesToInputs(
-    std::shared_ptr<MeshInformation>& info
-)
-{
-    TINY_COLLADA_TRACE("%s\n", __FUNCTION__);
-    auto src_it = info->sources_.begin();
-    auto src_end = info->sources_.end();
+        return nullptr;
+    }
     
-
-	while (src_it != src_end) {
-		InputData* input = info->searchInputBySource(src_it->id_);
-		src_it->input_ = input;
-		
-		TINY_COLLADA_TRACE(" %s", src_it->id_);
-		if (input) {
-			TINY_COLLADA_TRACE(" OK\n");
-			TINY_COLLADA_TRACE("  %s %s\n", input->semantic_, input->source_);
-		}
-		else {
-			TINY_COLLADA_TRACE(" NG\n");
-		}
-		++src_it;
-	}
-}
+    const char* getInitFromFromSurface(
+        const char* const surface_name
+    ) {
+        for (int i = 0; i < effects_.size(); ++i) {
+            auto& effect = effects_.at(i);
+            auto& surface = effect->surface_;
+            const char* eff_sid = surface->sid_;
+            if (std::strncmp(eff_sid, surface_name, PARSE_STRING_SIZE) == 0) {
+                return surface->init_from_;
+            }
+        }
+        return nullptr;
+    }
     
-
-
-//----------------------------------------------------------------------
-//  メッシュリスト取得
-const ColladaScenes* getScenes() const {
-    return &scenes_;
-}
+    const char* getSurfaceFromSampler(
+        const char* const sampler_name
+    ) {
+    
+        for (int i = 0; i < effects_.size(); ++i) {
+            auto& effect = effects_.at(i);
+            auto& sampler = effect->sampler2d_;
+            
+            const char* eff_sampler = sampler->sid_;
+            if (std::strncmp(eff_sampler, sampler_name, PARSE_STRING_SIZE) == 0) {
+                return sampler->source_;
+            }
+        }
+    
+        return nullptr;
+    }
+    
+    const char* getTextureNameFromSampler(
+        const char* const sampler_name
+    ) {
+        const char* surface_name = getSurfaceFromSampler(sampler_name);
+        if (surface_name) {
+            const char* init_from = getInitFromFromSurface(surface_name);
+            if (init_from) {
+                return getTextureNameFromInitFrom(init_from);
+            }
+        }
+        
+    
+        return nullptr;
+    }
 
 
 private:
     ColladaScenes scenes_;
+    
+    VisualScenes visual_scenes_;
+    Materials materials_;
+    Images images_;
+    Effects effects_;
+    
 };  // class Parser::Impl
 
 
@@ -1444,21 +1510,20 @@ Result Parser::parse(
     return Result::Code::SUCCESS;
 }
 
-    
-//const Meshes* Parser::meshes() const
-//{
-//    return impl_->getMeshList();
-//}
 
-const ColladaScenes* Parser::scenes() const
-{
+const ColladaScenes* Parser::scenes() const {
     return impl_->getScenes();
+}
+
+const char* Parser::getTextureNameFromSampler(
+    const char* const sampler
+) {
+    return impl_->getTextureNameFromSampler(sampler);
 }
 
 //----------------------------------------------------------------------
 //  データをコンソールに出力
-void ColladaMesh::dump()
-{
+void ColladaMesh::dump() {
     printf("--- Vertex data dump ---\n");
     vertices().dump();
     printf("\n");
@@ -1470,8 +1535,7 @@ void ColladaMesh::dump()
 
 //----------------------------------------------------------------------
 //  データをコンソールに出力
-void ColladaMesh::ArrayData::dump()
-{
+void ColladaMesh::ArrayData::dump() {
     if (!isValidate()) {
         printf("This ArrayData is invalidate data.\n");
         return;

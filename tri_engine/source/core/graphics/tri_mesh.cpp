@@ -11,7 +11,7 @@
 TRI_CORE_NS_BEGIN
 
 
-Mesh::Mesh()
+SubMesh::SubMesh()
     : vertex_count_(0)
     , index_count_(0)
     , vao_(0)
@@ -21,25 +21,7 @@ Mesh::Mesh()
     , aabb_()
 {}
 
-
-void Mesh::load(
-    const FilePath& filepath
-) {
-    //  リソース名設定
-    resourceName(filepath.path());
-
-    //  拡張子でローダ切り替え
-    if (filepath.ext() == ".obj") {
-        loadObj(filepath);
-    } else if (filepath.ext() == ".dae") {
-        loadDae(filepath);
-    } else {
-        T3_PANIC("Unknown file ext. [%s]", filepath.ext().c_str());
-    }
-}
-
-
-void Mesh::setupFromSubMesh(
+void SubMesh::setupFromSubMeshData(
     SubMeshDataPtr& submesh
 ) {
     auto& vertices = submesh->vertices();
@@ -147,29 +129,35 @@ void Mesh::setupFromSubMesh(
 
 }
 
-///
-/// .objファイルのロード
-void Mesh::loadObj(
-    const FilePath& path
-) {
-    
-    auto submesh = ObjLoader::load(path.fullpath().c_str());
-    setupFromSubMesh(submesh);
-}
-
-///
-/// .daeファイルのロード
-void Mesh::loadDae(
-    const FilePath &file_path
-) {
-    auto submesh = DaeLoader::load(file_path.fullpath().c_str());
-    setupFromSubMesh(submesh);
-}
 
 ///
 /// デストラクタ
-Mesh::~Mesh() {
+SubMesh::~SubMesh() {
     cross::RenderSystem::deleteVertexArrayBuffer(vao_);
+}
+
+///
+/// 生成
+SubMeshPtr SubMesh::create(
+    SubMeshDataPtr& res
+) {
+    SubMeshPtr s(T3_NEW SubMesh());
+    s->setupFromSubMeshData(res);
+    return s;
+}
+
+
+
+///
+/// コンストラクタ
+Mesh::Mesh()
+    : Resource()
+    , meshes_()
+{
+}
+
+Mesh::~Mesh() {
+
 }
 
 ///
@@ -180,6 +168,48 @@ MeshPtr Mesh::create(
     MeshPtr mesh(T3_NEW Mesh());
     mesh->load(file_path);
     return mesh;
+}
+
+
+void Mesh::load(
+    const FilePath& filepath
+) {
+    //  リソース名設定
+    resourceName(filepath.path());
+
+    //  拡張子でローダ切り替え
+    if (filepath.ext() == ".obj") {
+        loadObj(filepath);
+    } else if (filepath.ext() == ".dae") {
+        loadDae(filepath);
+    } else {
+        T3_PANIC("Unknown file ext. [%s]", filepath.ext().c_str());
+    }
+}
+
+
+///
+/// .objファイルのロード
+void Mesh::loadObj(
+    const FilePath& path
+) {
+    auto submeshdata = ObjLoader::load(path.fullpath().c_str());
+    auto s = SubMesh::create(submeshdata);
+    meshes_.push_back(s);
+}
+
+///
+/// .daeファイルのロード
+void Mesh::loadDae(
+    const FilePath &file_path
+) {
+    auto submeshes = DaeLoader::load(file_path.fullpath().c_str());
+
+    for (int i = 0; i < submeshes->size(); ++i) {
+        auto& res = submeshes->at(i);
+        auto s = SubMesh::create(res);
+        meshes_.push_back(s);
+    }
 }
 
 

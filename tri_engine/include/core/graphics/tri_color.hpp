@@ -8,7 +8,7 @@
 //  include
 #include "core/core_config.hpp"
 #include "core/base/tri_std.hpp"
-
+#include "core/debug/tri_assert.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -35,15 +35,19 @@ public:
     ///
     /// コンストラクタ
     Color(
-        const uint8_t red,
-        const uint8_t green,
-        const uint8_t blue,
-        const uint8_t alpha = 255
+        const std::uint_fast8_t red,
+        const std::uint_fast8_t green,
+        const std::uint_fast8_t blue,
+        const std::uint_fast8_t alpha = 255
     )   : red_(red)
         , green_(green)
         , blue_(blue)
         , alpha_(alpha)
     {
+        T3_ASSERT_RANGE(red_, 0, 255);
+        T3_ASSERT_RANGE(green_, 0, 255);
+        T3_ASSERT_RANGE(blue_, 0, 255);
+        T3_ASSERT_RANGE(alpha_, 0, 255);
     }
     
 public:

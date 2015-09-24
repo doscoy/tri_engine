@@ -18,7 +18,7 @@ TRI_CORE_NS_BEGIN
 /// .ade loader
 class DaeLoader {
 public:
-    static SubMeshDataPtr load(
+    static SubMeshesDataPtr load(
         const char* const path
     );
 };

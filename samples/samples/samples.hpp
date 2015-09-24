@@ -9,6 +9,7 @@
 #include "simple_primitive/simple_primitive.hpp"
 #include "input/input_test.hpp"
 #include "collada_mesh/collada_mesh.hpp"
+#include "collada_mesh2/collada_mesh2.hpp"
 #include "blur/blur_test.hpp"
 //#include "event_handling/event_handling.hpp"
 #include "simple_mesh/simple_mesh.hpp"

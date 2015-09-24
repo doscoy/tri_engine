@@ -67,6 +67,21 @@ using Vertices = ::std::vector<float>;
 using Meshes =  ::std::vector<::std::shared_ptr<ColladaMesh>>;
 
 
+//  ColladaMaterialElement
+class ColladaMaterialElement {
+public:
+    ColladaMaterialElement()
+        : sampler_name_(nullptr)
+        , color_()
+    {}
+
+
+public:
+    const char* sampler_name_;
+    std::vector<float> color_;
+};
+
+
 //  ColladaMaterial
 class ColladaMaterial
 {
@@ -75,34 +90,34 @@ public:
         printf("ColladaMaterial:shading = %s\n", shading_name_);
         
         printf("  diffuse");
-        for (int i = 0; i < diffuse_.size(); ++i) {
-            printf(" %f", diffuse_[i]);
+        for (int i = 0; i < diffuse_.color_.size(); ++i) {
+            printf(" %f", diffuse_.color_[i]);
         }
         printf("\n");
 
         printf("  ambient");
-        for (int i = 0; i < ambient_.size(); ++i) {
-            printf(" %f", ambient_[i]);
+        for (int i = 0; i < ambient_.color_.size(); ++i) {
+            printf(" %f", ambient_.color_[i]);
         }
         printf("\n");
 
 
         printf("  emission");
-        for (int i = 0; i < emission_.size(); ++i) {
-            printf(" %f", emission_[i]);
+        for (int i = 0; i < emission_.color_.size(); ++i) {
+            printf(" %f", emission_.color_[i]);
         }
         printf("\n");
 
 
         printf("  specular");
-        for (int i = 0; i < specular_.size(); ++i) {
-            printf(" %f", specular_[i]);
+        for (int i = 0; i < specular_.color_.size(); ++i) {
+            printf(" %f", specular_.color_[i]);
         }
         printf("\n");
 
         printf("  reflective");
-        for (int i = 0; i < reflective_.size(); ++i) {
-            printf(" %f", reflective_[i]);
+        for (int i = 0; i < reflective_.color_.size(); ++i) {
+            printf(" %f", reflective_.color_[i]);
         }
         printf("\n");
         
@@ -128,11 +143,12 @@ public:
 
     const char* shading_name_;
     const char* texture_name_;
-    std::vector<float> diffuse_;
-    std::vector<float> ambient_;
-    std::vector<float> emission_;
-    std::vector<float> specular_;
-    std::vector<float> reflective_;
+    const char* diffuse__name_;
+    ColladaMaterialElement diffuse_;
+    ColladaMaterialElement ambient_;
+    ColladaMaterialElement emission_;
+    ColladaMaterialElement specular_;
+    ColladaMaterialElement reflective_;
     float shininess_;
     float transparency_;
     float reflectivity_;
@@ -342,6 +358,7 @@ public:
     
 //    const Meshes* meshes() const;
     const ColladaScenes* scenes() const;
+    const char* getTextureNameFromSampler(const char* const sampler);
 private:
     class Impl;
     ::std::unique_ptr<Impl> impl_;

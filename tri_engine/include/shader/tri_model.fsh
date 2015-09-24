@@ -72,21 +72,27 @@ const char* model_fsh = R"(
 
 in vec2 v_texture_uv;
 in vec4 v_shadow_coord;
+in vec4 v_color;
 
 uniform sampler2D sampler;
 uniform sampler2DShadow shadow_samp;
 uniform bool draw_flag;
+uniform bool use_texture;
 uniform bool draw_shadow;
 out vec4 FragColor;
 
 void main() {
     if (draw_flag) {
-        vec4 tex_color = texture(sampler, v_texture_uv);
+        
+        vec4 tex_color = vec4(1,1,1,1);
+        if (use_texture) {
+            tex_color = texture(sampler, v_texture_uv);
+        }
         if (draw_shadow) {
             float shadow = textureProj(shadow_samp, v_shadow_coord) * 0.5 + 0.5;
-            FragColor = vec4(tex_color.xyz * shadow, 1.0);
+            FragColor = vec4(tex_color.xyz * shadow, 1.0) * v_color;
         } else {
-            FragColor = tex_color;
+            FragColor = tex_color * v_color;
         }
     }
 }

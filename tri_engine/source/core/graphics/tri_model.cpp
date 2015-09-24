@@ -14,11 +14,12 @@ const char* SHADER_ATTR_POSITION = "a_position";
 const char* SHADER_ATTR_NORMAL = "a_normal";
 const char* SHADER_ATTR_UV = "a_uv";
 const char* SHADER_UNIF_PMV = "u_mvp";
+const char* SHADER_UNIF_COLOR_DIFFUSE = "u_diffuse";
 const char* SHADER_UNIF_SHADOW_MTX = "u_shadow_mtx";
 const char* SHADER_UNIF_SAMPLER = "sampler";
 const char* SHADER_UNIF_SHADOW_SAMPLER = "shadow_samp";
 const char* SHADER_OUT_COLOR = "FragColor";
-
+const char* SHADER_UNIF_USE_TEXTURE_FLAG = "use_texture";
 }
 
 
@@ -61,65 +62,88 @@ void Model::render(const RenderInfo& info) {
         current_shader_ = &model_shader_;
     }
 
-    cross::RenderSystem::resetBufferBind();
-    mesh_->bind();
-
-    current_shader_->use();
-    current_shader_->setUniform(SHADER_UNIF_PMV, *info.transform());
-    current_shader_->setUniform(SHADER_UNIF_SAMPLER, 0);
-    current_shader_->setUniform(SHADER_UNIF_SHADOW_SAMPLER, 1);
-    bool draw_flag = info.renderMode() == RenderInfo::SHADOW ? false : true;
-    current_shader_->setUniform("draw_flag", draw_flag);
+    auto& meshes = mesh_->meshes();
+    for (int i = 0; i < meshes.size(); ++i) {
     
-    current_shader_->setUniform("draw_shadow", shadow_receive_);
-    
-    //  影用行列生成
-    Mtx44 shadow_bias;
-    Mtx44::makeShadowBias(shadow_bias);
+        auto& mesh = meshes.at(i);
 
-    Mtx44 shadow_mtx;
-    shadow_mtx = shadow_bias * info.projMatrix()* info.lightMatrix();
-    
-    current_shader_->setUniform(SHADER_UNIF_SHADOW_MTX, shadow_mtx);
-    
-    current_shader_->bindAttributeLocation(0, SHADER_ATTR_POSITION);
-    current_shader_->bindAttributeLocation(1, SHADER_ATTR_NORMAL);
-    current_shader_->bindAttributeLocation(2, SHADER_ATTR_UV);
-    current_shader_->bindFragmentDataLocation(0, SHADER_OUT_COLOR);
+        cross::RenderSystem::resetBufferBind();
+        mesh->bind();
+
+        current_shader_->use();
+        current_shader_->setUniform(SHADER_UNIF_PMV, *info.transform());
+        current_shader_->setUniform(SHADER_UNIF_SAMPLER, 0);
+        current_shader_->setUniform(SHADER_UNIF_SHADOW_SAMPLER, 1);
+        bool draw_flag = info.renderMode() == RenderInfo::SHADOW ? false : true;
+
+        //  シェーダに描画フラグ設定
+        current_shader_->setUniform("draw_flag", draw_flag);
+        current_shader_->setUniform("draw_shadow", shadow_receive_);
+        
+        //  影用行列生成
+        Mtx44 shadow_bias;
+        Mtx44::makeShadowBias(shadow_bias);
+
+        Mtx44 shadow_mtx;
+        shadow_mtx = shadow_bias * info.projMatrix()* info.lightMatrix();
+        
+        current_shader_->setUniform(SHADER_UNIF_SHADOW_MTX, shadow_mtx);
+        
+        //  頂点設定
+        current_shader_->bindAttributeLocation(0, SHADER_ATTR_POSITION);
+
+        //  法線設定
+        current_shader_->bindAttributeLocation(1, SHADER_ATTR_NORMAL);
+
+        //  UV設定
+        current_shader_->bindAttributeLocation(2, SHADER_ATTR_UV);
+
+        //  出力カラー設定
+        current_shader_->bindFragmentDataLocation(0, SHADER_OUT_COLOR);
 
 
 
-    auto& material = mesh_->material();
-    if (material) {
-        //  マテリアルを持っているので設定
-        auto& model_texture = material->texture();
-        if (model_texture) {
+        auto& material = mesh->material();
+        if (material) {
+            //  マテリアルを持っているので設定
+            auto& model_texture = material->diffuseMap();
+
             //  テクスチャを設定
-            cross::RenderSystem::setActiveTextureUnit(
-                cross::RenderSystem::TextureUnit::UNIT0
-            );
-            model_texture->bind();
-        }    
+            if (model_texture) {
+                cross::RenderSystem::setActiveTextureUnit(
+                    cross::RenderSystem::TextureUnit::UNIT0
+                );
+                model_texture->bind();
+                current_shader_->setUniform(SHADER_UNIF_USE_TEXTURE_FLAG, true);
+
+            } else {
+                current_shader_->setUniform(SHADER_UNIF_USE_TEXTURE_FLAG, false);
+            }
+            
+            //  カラー設定
+            const auto& diffuse = material->diffuse();
+            current_shader_->setUniform(SHADER_UNIF_COLOR_DIFFUSE, diffuse.redFloat(), diffuse.greenFloat(), diffuse.blueFloat(), diffuse.alphaFloat());
+        }
+
+        cross::RenderSystem::setActiveTextureUnit(
+            cross::RenderSystem::TextureUnit::UNIT1
+        );
+        auto& shadow_texture = info.shadowTexture();
+        if (shadow_texture) {
+            shadow_texture->bind();
+        }
+
+
+
+        cross::RenderSystem::setCullingMode(culling_mode_);
+
+        cross::RenderSystem::drawElements(
+            cross::RenderSystem::DrawMode::MODE_TRIANGLES,
+            mesh->indexCount(),
+            sizeof(uint32_t)
+        );
+        mesh->unbind();
     }
-
-    cross::RenderSystem::setActiveTextureUnit(
-        cross::RenderSystem::TextureUnit::UNIT1
-    );
-    auto& shadow_texture = info.shadowTexture();
-    if (shadow_texture) {
-        shadow_texture->bind();
-    }
-
-
-
-    cross::RenderSystem::setCullingMode(culling_mode_);
-
-    cross::RenderSystem::drawElements(
-        cross::RenderSystem::DrawMode::MODE_TRIANGLES,
-        mesh_->indexCount(),
-        sizeof(uint32_t)
-    );
-    mesh_->unbind();
 }
 
 

@@ -1,52 +1,48 @@
 
 
-#include "collada_mesh.hpp"
+#include "collada_mesh2.hpp"
 
+//
+//  複数のシェイプを持つcolladaへの対応テスト
+//
 
-
-
-ColladaMeshScene::ColladaMeshScene()
+ColladaMesh2Scene::ColladaMesh2Scene()
     : Scene("ColladaMeshScene") 
 {
 
 }
 
-ColladaMeshScene::~ColladaMeshScene() {
+ColladaMesh2Scene::~ColladaMesh2Scene() {
 
 }
 
 
-void ColladaMeshScene::initialize() {
+void ColladaMesh2Scene::initialize() {
 
     T3_RENDER_ASSERT();
 
     //  キャラクタ作成
-    node_box_ = createModel("blue_box.dae");
-    node_box_->position(5.0f, 3.0f, 0.0f);
-
-    node_torus_ = createModel("sky_torus.dae");
-    
-    node_earth_ = createModel("earth.dae");
-    node_earth_->position(0.0f, 5.0f, 0.0f);
-
+    node_cone_ = createModel("cone2.dae");
+   
     //  カメラ位置調整
-    cam_updater_.center(t3::Vec3(0.0f, 2.0f, 0.0f));
+    cam_updater_.center(t3::Vec3(0.0f, 0.0f, 0.0f));
     cam_updater_.distance(20.0f);
         
     //  シーングラフにカメラ設定
     sceneGraph().camera(cam_updater_.camera());
+    cam_updater_.updateCamera();
 
 
     T3_RENDER_ASSERT();
 }
 
 
-void ColladaMeshScene::terminate() {
+void ColladaMesh2Scene::terminate() {
 
 }
 
 
-void ColladaMeshScene::update() {
+void ColladaMesh2Scene::update() {
 
     auto& gs = t3::Director::instance();
     auto& input = gs.input();

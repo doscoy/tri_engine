@@ -23,24 +23,22 @@
 TRI_CORE_NS_BEGIN
 
 
-class Mesh;
-using MeshPtr = SharedPtr<Mesh>;
+class SubMesh;
+using SubMeshPtr = SharedPtr<SubMesh>;
 
 
 ///
 /// メッシュ
-class Mesh
-    : Resource
-{
+class SubMesh {
 private:
     ///
     /// コンストラクタ
-    Mesh();
+    SubMesh();
 
 public:
     ///
     /// デストラクタ
-    virtual ~Mesh();
+    virtual ~SubMesh();
     
 public:
 
@@ -102,24 +100,10 @@ public:
         material_ = m;
     }
 
-    void load(
-        const FilePath& filepath
-    );
-
-    void loadObj(
-        const FilePath& filepath
-    );
-
-    void loadDae(
-        const FilePath& filepath
-    );
-
-    static MeshPtr create(
-        const FilePath& path  
-    );
+    static SubMeshPtr create(SubMeshDataPtr& data);
 
 private:
-    void setupFromSubMesh(
+    void setupFromSubMeshData(
         SubMeshDataPtr& vertices
     );
 
@@ -160,6 +144,61 @@ private:
 
 
 
+};
+
+
+
+
+////////
+class Mesh;
+using MeshPtr = SharedPtr<Mesh>;
+
+class Mesh
+    : Resource
+{
+public:
+    Mesh();
+    ~Mesh();
+
+
+    static MeshPtr create(
+        const FilePath& path
+    );
+    
+    
+    
+    void load(
+        const FilePath& filepath
+    );
+
+    void loadObj(
+        const FilePath& filepath
+    );
+
+    void loadDae(
+        const FilePath& filepath
+    );
+
+    
+    auto& meshes() {
+        return meshes_;
+    }
+    
+    const auto& meshes() const {
+        return meshes_;
+    }
+    
+    auto& boundingSphere() {
+        return bounding_sphere_;
+    }
+    
+    const auto& boundingSphere() const {
+        return bounding_sphere_;
+    }
+    
+private:
+    Sphere bounding_sphere_;
+    Vector<SubMeshPtr> meshes_;
 };
 
 
