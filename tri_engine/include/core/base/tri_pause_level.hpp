@@ -1,6 +1,13 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 /**
     @file tri_pause_level.hpp
-    ポーズレベル.LV5のポーズはLV4以下も全てポーズ
+    ポーズレベル. ex. LV5のポーズ処理はLV4以下の対象も全てポーズさせる
 */
 
 #ifndef TRI_PAUSE_LEVEL_HPP_INCLUDED

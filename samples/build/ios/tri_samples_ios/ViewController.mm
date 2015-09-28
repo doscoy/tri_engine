@@ -1,10 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
 //
-//  ViewController.m
-//  tri_sandbox_ios
-//
-//  Created by KANI Tetsuro on 2014/02/25.
-//  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
-//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
+
 
 #include "cross/cross_sdk.hpp"
 #import "ViewController.h"

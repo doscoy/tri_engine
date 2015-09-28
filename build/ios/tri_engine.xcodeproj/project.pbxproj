@@ -608,7 +608,7 @@
 		3A480D311B2D4159001064BB /* jet_swap_button.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jet_swap_button.hpp; sourceTree = "<group>"; };
 		3A480D321B2D4159001064BB /* jet_textbox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jet_textbox.hpp; sourceTree = "<group>"; };
 		3A480D331B2D4159001064BB /* jet_config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jet_config.hpp; sourceTree = "<group>"; };
-		3A480D341B2D4159001064BB /* jet_engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jet_engine.hpp; sourceTree = "<group>"; };
+		3A480D341B2D4159001064BB /* jet_engine.hpp */ = {isa = PBXFileReference; fileEncoding = 2147486209; lastKnownFileType = sourcecode.cpp.h; path = jet_engine.hpp; sourceTree = "<group>"; };
 		3A480D361B2D4159001064BB /* tri_df_font.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_df_font.fsh; sourceTree = "<group>"; };
 		3A480D371B2D4159001064BB /* tri_font.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_font.fsh; sourceTree = "<group>"; };
 		3A480D381B2D4159001064BB /* tri_font.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tri_font.vsh; sourceTree = "<group>"; };

@@ -1,21 +1,24 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
 //
-//  tri_assert.mm
-//  TriEngine
-//
-//  Created by 可児 哲郎 on 11/09/23.
-//  Copyright 2011年 __MyCompanyName__. All rights reserved.
-//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 
+//  includes
 #include <cmath>
 #include <iostream>
 #include "core/debug/tri_assert.hpp"
 #include "core/debug/tri_trace.hpp"
 #include "cross/cross_dbg.hpp"
 
+
 TRI_CORE_NS_BEGIN
 
 
-
+///
+/// 浮動小数の整合性チェック
 bool isInvalidFloat(const float f)
 {
     //  浮動少数の無効値チェック
@@ -29,7 +32,8 @@ bool isInvalidFloat(const float f)
     return false;
 }
 
-
+///
+/// エラーを出力して実行停止
 bool panic(
     const char* const exp,
     const char* const filename,

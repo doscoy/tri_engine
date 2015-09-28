@@ -1,3 +1,10 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 #include "core/graphics/tri_obj_loader.hpp"
 #include "core/graphics/tri_mtl_loader.hpp"
 #include "core/graphics/tri_vertex_types.hpp"

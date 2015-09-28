@@ -1,3 +1,10 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 #include "cross_config.hpp"
 #import <UIKit/UIKit.h>
 #import <CoreMotion/CoreMotion.h>

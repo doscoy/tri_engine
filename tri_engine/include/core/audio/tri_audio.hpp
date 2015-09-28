@@ -1,6 +1,14 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
+
 /**
     @file tri_audio.hpp
-    オーディオまわり統合ヘッダ.
+    繧ｪ繝ｼ繝�繧｣繧ｪ縺ｾ繧上ｊ邨ｱ蜷医�倥ャ繝.
 */
 
 #ifndef TRI_AUDIO_HPP_INCLUDED

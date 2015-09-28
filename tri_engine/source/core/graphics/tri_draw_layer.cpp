@@ -1,10 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
 //
-//  tri_draw_layer.cpp
-//  tri_sandbox_osx
-//
-//  Created by KANI Tetsuro on 2013/01/21.
-//  Copyright (c) 2013年 KANI Tetsuro. All rights reserved.
-//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
+
 
 #include "core/graphics/tri_draw_layer.hpp"
 

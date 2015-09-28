@@ -1,9 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
 //
-//  ViewController.h
-//  tri_samples_ios
-//
-//  Created by KANI Tetsuro on 2014/07/28.
-//  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
+
 //
 // TIPS:GLKitでES1.1のヘッダを読むのを防ぐ
 

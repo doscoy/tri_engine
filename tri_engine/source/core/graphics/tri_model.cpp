@@ -1,3 +1,10 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 
 #include "core/graphics/tri_model.hpp"
 #include "core/graphics/tri_vertex_types.hpp"
@@ -63,6 +70,8 @@ void Model::render(const RenderInfo& info) {
     }
 
     auto& meshes = mesh_->meshes();
+    auto& info_matrix = info.transform();
+    
     for (int i = 0; i < meshes.size(); ++i) {
     
         auto& mesh = meshes.at(i);
@@ -70,8 +79,11 @@ void Model::render(const RenderInfo& info) {
         cross::RenderSystem::resetBufferBind();
         mesh->bind();
 
+        //  親の姿勢行列にメッシュの姿勢行列を掛けて最終的な行列を作成
+        Mtx44 transform = info_matrix * mesh->matrix();
+
         current_shader_->use();
-        current_shader_->setUniform(SHADER_UNIF_PMV, *info.transform());
+        current_shader_->setUniform(SHADER_UNIF_PMV, transform);
         current_shader_->setUniform(SHADER_UNIF_SAMPLER, 0);
         current_shader_->setUniform(SHADER_UNIF_SHADOW_SAMPLER, 1);
         bool draw_flag = info.renderMode() == RenderInfo::SHADOW ? false : true;

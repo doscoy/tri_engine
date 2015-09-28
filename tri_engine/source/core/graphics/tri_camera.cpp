@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
+
 #include "core/kernel/memory/tri_new.hpp"
 #include "core/graphics/tri_camera.hpp"
 #include "core/math/tri_math_util.hpp"

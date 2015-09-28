@@ -1,3 +1,10 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 
 
 #include "tri_engine.hpp"
@@ -28,7 +35,7 @@ int main(int argc, char * argv[])
         app.rootScene(t3::SceneBase::sceneGenerator<ColladaMeshScene>());
         app.rootScene(t3::SceneBase::sceneGenerator<ColladaMesh2Scene>());
     //    app.rootScene(t3::SceneBase::sceneGenerator<SimpleMesh3Scene>());
-   // app.rootScene(t3::SceneBase::sceneGenerator<ShadowTestScene>());
+    app.rootScene(t3::SceneBase::sceneGenerator<ShadowTestScene>());
 
         t3::setApplication(app);
     #if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_IOS

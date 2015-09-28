@@ -1086,65 +1086,70 @@ public:
                 continue;
             }
 
+            //  シーン作成
+            //  構築したデータの受け皿
+            std::shared_ptr<ColladaScene> scene = std::make_shared<ColladaScene>();
+
+            // ------------------
+            //  マトリックス登録
+            transposeMatrix(vs->matrix_);
+            scene->matrix(vs->matrix_);
+            scenes_.push_back(scene);
+
+            // ------------------
+            //  マテリアル設定
+            auto a=searchMaterial(vs->bind_material_, materials_, effects_);
+            scene->material(a);
+        
+            // ------------------
+            //  メッシュ情報生成
+            
+            //  geometryを走査して、現在のシーンのメッシュデータを持っている場所を探す
             const tinyxml2::XMLElement* geometry = firstChildElement(
                 library_geometries,
                 GEOMETRY_NODE_NAME
             );
 
-            //  シーン作成
-            std::shared_ptr<ColladaScene> scene = std::make_shared<ColladaScene>();
-
-            //  マトリックス登録
-            transposeMatrix(vs->matrix_);
-            scene->matrix(vs->matrix_);
-            scenes_.push_back(scene);
-            //  マテリアル設定
-            auto a=searchMaterial(vs->bind_material_, materials_, effects_);
-            scene->material(a);
-        
-            //  メッシュ情報生成
             while (geometry) {
+                //  新しいジオメトリのID取得
                 const char* geometry_id = getElementAttribute(geometry, "id");
-                
-                if (std::strncmp(vs->url_, geometry_id, PARSE_STRING_SIZE) != 0) {
-                    //  次のジオメトリ
-                    geometry = geometry->NextSiblingElement(GEOMETRY_NODE_NAME);
-                }
-            
-                //  メッシュデータ解析
-                const tinyxml2::XMLElement* mesh_node = firstChildElement(
-                    geometry,
-                    MESH_NODE_NAME
-                );
-                while (mesh_node) {
-                
-                    std::shared_ptr<ColladaMesh> mesh = std::make_shared<ColladaMesh>();
-                    parseMeshNode(mesh_node, mesh);
-                
-                    //  頂点と法線の並びが同じになっているかチェック
-                    if (mesh->hasVertex()) {
-                        const auto& v_array = mesh->vertices();
-                        if (mesh->hasNormal()) {
-                            const auto& n_array = mesh->normals();
-                            size_t visize = v_array.data().size();
-                            size_t nisize = n_array.data().size();
-                            TINY_COLLADA_TRACE("%lu[v] == %lu[n]\n", visize, nisize);
-                            TINY_COLLADA_ASSERT(visize == nisize);
-                        }
-                    }
 
-                    //  データ登録
-                    scene->addMesh(mesh);
-                    
-                    //  次へ
-                    mesh_node = mesh_node->NextSiblingElement(MESH_NODE_NAME);
+                //  目的の名前か判定
+                if (std::strncmp(vs->url_, geometry_id, PARSE_STRING_SIZE) != 0) {
+                    //  違うので再チャレンジ
+                    geometry = geometry->NextSiblingElement(GEOMETRY_NODE_NAME);
+                } else {
+                    //  見つけた
+                    break;
                 }
-                break;
             }
             
+            if (!geometry) {
+                //  対象のデータを持ったジオメトリは無い！
+                continue;
+            }
+            
+            //
+            //  以下、ジオメトリを見つけたのでメッシュ構造を解析する
+            //
+            
+            //  メッシュデータ解析
+            const tinyxml2::XMLElement* mesh_node = firstChildElement(
+                geometry,
+                MESH_NODE_NAME
+            );
+            while (mesh_node) {
+            
+                std::shared_ptr<ColladaMesh> mesh = std::make_shared<ColladaMesh>();
+                parseMeshNode(mesh_node, mesh);
+                
+                //  データ登録
+                scene->addMesh(mesh);
+                
+                //  次へ
+                mesh_node = mesh_node->NextSiblingElement(MESH_NODE_NAME);
+            }
         }
-        
-        
         
         return Result::Code::SUCCESS;
     }
@@ -1249,7 +1254,9 @@ public:
                 );
             }
             
+            mesh->normals().data(normal_source->data_);
             //  頂点インデックスにあわせてデータ変更
+/*
             Indices& vindices = mesh->vertices().indices();
             Indices& nindices = mesh->normals().indices();
             mesh->normals().data().resize(pos_source->data_.size(), 8.8);
@@ -1268,6 +1275,8 @@ public:
                     normal_data[to_idx + di] = normal_source->data_.at(from_idx + di);
                 }
             }
+*/
+            
             
         }
 

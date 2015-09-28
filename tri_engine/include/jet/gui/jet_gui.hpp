@@ -1,6 +1,6 @@
 /**
     @file jet_gui.hpp
-    GUI“‡ƒwƒbƒ_.
+    GUIçµ±åˆãƒ˜ãƒƒãƒ€.
 */
 
 #ifndef JET_GUI_HPP_INCLUDED

@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
+
 /**
     @file tri_mesh.hpp
     メッシュ.
@@ -100,6 +108,23 @@ public:
         material_ = m;
     }
 
+    ///
+    /// 基本姿勢行列設定
+    void matrix(
+        const Mtx44& mtx
+    ) {
+        base_matrix_ = mtx;
+    }
+    
+    ///
+    /// 基本姿勢行列取得
+    const auto& matrix() const {
+        return base_matrix_;
+    }
+
+
+    ///
+    /// 生成
     static SubMeshPtr create(SubMeshDataPtr& data);
 
 private:
@@ -125,6 +150,11 @@ private:
     ///
     /// 頂点バッファ
     VertexBuffer vb_;
+    
+    
+    ///
+    /// 基本姿勢行列
+    Mtx44 base_matrix_;
     
     ///
     /// インデックスバッファ
@@ -156,45 +186,65 @@ using MeshPtr = SharedPtr<Mesh>;
 class Mesh
     : Resource
 {
-public:
+private:
     Mesh();
+    
+public:
     ~Mesh();
 
-
+    ///
+    /// 生成
     static MeshPtr create(
         const FilePath& path
     );
     
     
-    
+    ///
+    /// モデルデータのロード
     void load(
         const FilePath& filepath
     );
 
+    ///
+    /// .objのロード
     void loadObj(
         const FilePath& filepath
     );
 
+    ///
+    /// .daeのロード
     void loadDae(
         const FilePath& filepath
     );
 
-    
+    ///
+    /// メッシュリスト取得
     auto& meshes() {
         return meshes_;
     }
     
+    ///
+    /// メッシュリスト取得
     const auto& meshes() const {
         return meshes_;
     }
     
+    ///
+    /// 境界球を取得
     auto& boundingSphere() {
         return bounding_sphere_;
     }
     
+    ///
+    /// 境界球を取得
     const auto& boundingSphere() const {
         return bounding_sphere_;
     }
+    
+private:
+    ///
+    /// 境界球を計算
+    void calcBoundingSphere();
     
 private:
     Sphere bounding_sphere_;

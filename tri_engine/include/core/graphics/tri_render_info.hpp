@@ -1,10 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
 //
-//  tri_render_info.hpp
-//  tri_engine
-//
-//  Created by KANI Tetsuro on 2015/06/09.
-//  Copyright (c) 2015年 KANI Tetsuro. All rights reserved.
-//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
+
 
 #ifndef tri_engine_tri_render_info_hpp
 #define tri_engine_tri_render_info_hpp
@@ -21,8 +22,8 @@ TRI_CORE_NS_BEGIN
 
 class RenderInfo {
 public:
-    const Mtx44* transform() const {
-        return transform_;
+    const auto& transform() const {
+        return *transform_;
     }
     
     void transform(const Mtx44* m) {

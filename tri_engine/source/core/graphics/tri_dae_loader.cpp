@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
+
 #include "core/graphics/tri_dae_loader.hpp"
 #include "core/graphics/tri_vertex_types.hpp"
 #include "../../third_party/tiny_collada/tiny_collada_parser.hpp"
@@ -27,7 +35,16 @@ SubMeshesDataPtr DaeLoader::load(
         //  シーンからメッシュを取り出す
         auto& meshes = s->meshes();
 
-
+        auto& bm = s->matrix();
+        Mtx44 mtx(
+            bm[ 0], bm[ 1], bm[ 2], bm[ 3],
+            bm[ 4], bm[ 5], bm[ 6], bm[ 7],
+            bm[ 8], bm[ 9], bm[10], bm[11],
+            bm[12], bm[13], bm[14], bm[15]
+        );
+        submesh->matrix(mtx);
+        
+        
         //  マテリアル取得
         auto& scene_material = s->material();
         auto new_material = Material::create();
@@ -119,8 +136,6 @@ SubMeshesDataPtr DaeLoader::load(
                 continue;
             }
 
-
-
             auto& mesh_vertex = mesh->vertices();
             auto& mesh_vertex_data = mesh_vertex.data();
 
@@ -179,11 +194,11 @@ SubMeshesDataPtr DaeLoader::load(
 
         //  最終的にワンインデックスのストリームを作る
         int indices_size = indices.size();
-        for (int i = 0; i < indices_size; ++i) {
+        for (int indices_idx = 0; indices_idx < indices_size; ++indices_idx) {
             SubMeshData::VerticesType::value_type vtx;
             if (has_uv) {
                 //  取得したUVのインデックス値が、集めたUVの数以内に収まってるかチェック
-                int target_uv_index = uv_indices.at(i);
+                int target_uv_index = uv_indices.at(indices_idx);
                 T3_ASSERT(target_uv_index < uvs.size());
 
                 //  インデックスで並び替える
@@ -192,14 +207,16 @@ SubMeshesDataPtr DaeLoader::load(
             } else {
                 vtx.uv_ = Vec2(0,0);
             }
-            vtx.normal_ = vertices.at(indices.at(i)).normal_;
-            vtx.position_ = vertices.at(indices.at(i)).position_;
+            vtx.normal_ = vertices.at(indices.at(indices_idx)).normal_;
+            vtx.position_ = vertices.at(indices.at(indices_idx)).position_;
             
             submesh->vertices().push_back(vtx);
-            submesh->indices().push_back(i);
+            submesh->indices().push_back(indices_idx);
         }
 
-    
+
+
+        //  メッシュ追加
         submeshes->push_back(submesh);
     }
 

@@ -1,3 +1,10 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 
 
 #include "core/graphics/tri_mesh.hpp"
@@ -10,7 +17,8 @@
 
 TRI_CORE_NS_BEGIN
 
-
+///
+/// コンストラクタ
 SubMesh::SubMesh()
     : vertex_count_(0)
     , index_count_(0)
@@ -21,6 +29,9 @@ SubMesh::SubMesh()
     , aabb_()
 {}
 
+
+///
+/// サブメッシュデータからメッシュ生成
 void SubMesh::setupFromSubMeshData(
     SubMeshDataPtr& submesh
 ) {
@@ -35,11 +46,15 @@ void SubMesh::setupFromSubMeshData(
         v.normal_.normalize();
     }
 
+    //  ベースの姿勢行列設定
+    matrix(submesh->matrix());
 
     //  aabbをもとに境界球作成
     Vec3 radius = aabb_.radius();
     Vec3 center = aabb_.center();
     
+    //  なんちゃって境界球なので
+    //  大きい方の半径をそのまま使う
     float sphere_radius = radius.x_;
     if (sphere_radius < radius.y_) {
         sphere_radius = radius.y_;

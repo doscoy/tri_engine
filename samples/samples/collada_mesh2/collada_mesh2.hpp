@@ -1,3 +1,10 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 
 #ifndef COLLADA_MESH2_HPP_INCLUDED
 #define COLLADA_MESH2_HPP_INCLUDED
@@ -26,6 +33,7 @@ private:
     t3::LookAtCameraUpdater light_camera_;
     t3::SceneGraph scene_graph_;
     t3::TransformNodePtr node_cone_;
+    t3::TransformNodePtr node_object3_;
 
 
 };

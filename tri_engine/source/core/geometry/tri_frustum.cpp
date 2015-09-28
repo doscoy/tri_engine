@@ -1,10 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
 //
-//  tri_frustum.cpp
-//  dev_t3
-//
-//  Created by 哲郎 可児 on 12/06/13.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
-//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
+
 
 #include "core/geometry/tri_frustum.hpp"
 #include <cmath>

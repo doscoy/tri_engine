@@ -1,10 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
 //
-//  tri_pause_level.cpp
-//  star01
-//
-//  Created by KANI Tetsuro on 2014/07/19.
-//  Copyright (c) 2014年 KANI Tetsuro. All rights reserved.
-//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
+
 
 #include "core/base/tri_pause_level.hpp"
 

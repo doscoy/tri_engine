@@ -1,6 +1,13 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 /**
     @file cross_sdk.hpp
-    cross_sdkìùçáÉwÉbÉ_Å[.
+    cross_sdkÁµ±Âêà„Éò„ÉÉ„ÉÄ„Éº.
 */
 
 #ifndef CROSS_SDK_HPP_INCLUDED

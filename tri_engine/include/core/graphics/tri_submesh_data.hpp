@@ -1,3 +1,10 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 /**
     @file tri_submesh_data.hpp
     頂点情報データ.
@@ -45,10 +52,27 @@ public:
     MaterialPtr material() {
         return material_;
     }
+    
+    void matrix(Mtx44& mtx) {
+        matrix_ = mtx;
+    }
+    
+    const Mtx44& matrix() const {
+        return matrix_;
+    }
 
 private:
+    ///
+    ///  頂点
     VerticesType vertices_;
+
+    ///
+    ///  インデックス
     IndicesType indices_;
+
+    ///
+    /// 基本姿勢
+    Mtx44 matrix_;
 
     ///
     /// マテリアル

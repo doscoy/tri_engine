@@ -1,6 +1,13 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 /**
     @file tri_kernel.hpp
-    カーネル統合ヘッダ.
+    繧ｫ繝ｼ繝阪Ν邨ｱ蜷医�倥ャ繝.
 */
 
 #ifndef TRI_KERNEL_HPP_INCLUDED

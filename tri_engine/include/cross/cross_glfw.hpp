@@ -1,10 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
 //
-//  cross_glfw.hpp
-//  tri_engine
-//
-//  Created by KANI Tetsuro on 2015/06/03.
-//  Copyright (c) 2015年 KANI Tetsuro. All rights reserved.
-//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
+
 
 #ifndef tri_engine_cross_glfw_hpp
 #define tri_engine_cross_glfw_hpp

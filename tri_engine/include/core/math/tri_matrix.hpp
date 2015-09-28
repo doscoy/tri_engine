@@ -1,3 +1,10 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 /**
     @file tri_matrix.hpp
     行列.
@@ -40,6 +47,21 @@ public:
         z_.x_ = m[8];  z_.y_ = m[9];  z_.z_ = m[10]; z_.w_ = m[11];
         w_.x_ = m[12]; w_.y_ = m[13]; w_.z_ = m[14]; w_.w_ = m[15];
     }
+
+    ///
+    /// 行列初期化
+    Mtx44(
+        float  a0, float  a1, float  a2, float  a3,
+        float  a4, float  a5, float  a6, float  a7,
+        float  a8, float  a9, float a10, float a11,
+        float a12, float a13, float a14, float a15
+    ) {
+        x_.x_ =  a0;  x_.y_ =  a1;  x_.z_ =  a2;  x_.w_ =  a3;
+        y_.x_ =  a4;  y_.y_ =  a5;  y_.z_ =  a6;  y_.w_ =  a7;
+        z_.x_ =  a8;  z_.y_ =  a9;  z_.z_ = a10;  z_.w_ = a11;
+        w_.x_ = a12;  w_.y_ = a13;  w_.z_ = a14;  w_.w_ = a15;
+    }
+
 
     ///
     /// 行列初期化
