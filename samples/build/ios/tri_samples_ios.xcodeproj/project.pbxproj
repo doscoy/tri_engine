@@ -73,11 +73,10 @@
 		3A6EE1961B088AEF00BB4247 /* thread_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4071619AE2B8900762711 /* thread_test.cpp */; };
 		3A6EE1971B088AEF00BB4247 /* ui_button_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070919AE257000762711 /* ui_button_test.cpp */; };
 		3A6EE19C1B089B5400BB4247 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE19B1B089B5400BB4247 /* libglfw.dylib */; };
-		3A6EE19E1B08A1C500BB4247 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE19D1B08A1C500BB4247 /* OpenGL.framework */; };
 		3A6EE1A81B08C98700BB4247 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE1A71B08C98700BB4247 /* libGLEW.a */; };
-		3A6EE1A91B08FBC300BB4247 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE1A51B08AD8A00BB4247 /* IOKit.framework */; };
 		3AC867171B1DEE6400AADEA8 /* shadow_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC867151B1DEE6400AADEA8 /* shadow_test.cpp */; };
 		3AC867181B1DEE6400AADEA8 /* shadow_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC867151B1DEE6400AADEA8 /* shadow_test.cpp */; };
+		3ACB9C9B1BB93BDB00428176 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACB9C9A1BB93BDB00428176 /* OpenGL.framework */; };
 		3AD301461AFBBD2500516996 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD301451AFBBD2500516996 /* main.cpp */; };
 		3AD4070C19AE257000762711 /* audio_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F519AE257000762711 /* audio_test.cpp */; };
 		3AD4070D19AE257000762711 /* event_handling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD406F819AE257000762711 /* event_handling.cpp */; };
@@ -170,8 +169,6 @@
 		04D6B6B019E9071D002C8E77 /* t9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t9.png; sourceTree = "<group>"; };
 		04F100251985587400C8D498 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		04F100271985589300C8D498 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		04F10029198558B600C8D498 /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = ../../../third_party_lib/ios/libpng.a; sourceTree = "<group>"; };
-		04F1002B198558BF00C8D498 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		04F1FE5B1985557F00C8D498 /* tri_samples_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tri_samples_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F1FE5E1985557F00C8D498 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04F1FE601985557F00C8D498 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -208,14 +205,11 @@
 		3A6331841B67DB100007D1C1 /* collada_mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = collada_mesh.hpp; sourceTree = "<group>"; };
 		3A6EE17D1B08891500BB4247 /* tri_samples_osx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tri_samples_osx; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6EE19B1B089B5400BB4247 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../opt/local/lib/libglfw.dylib; sourceTree = "<group>"; };
-		3A6EE19D1B08A1C500BB4247 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
-		3A6EE19F1B08A20F00BB4247 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 		3A6EE1A11B08A25100BB4247 /* libpng.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng.dylib; path = ../../../../../../../opt/local/lib/libpng.dylib; sourceTree = "<group>"; };
-		3A6EE1A31B08AD7B00BB4247 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		3A6EE1A51B08AD8A00BB4247 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 		3A6EE1A71B08C98700BB4247 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../../../../opt/local/lib/libGLEW.a; sourceTree = "<group>"; };
 		3AC867151B1DEE6400AADEA8 /* shadow_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = shadow_test.cpp; sourceTree = "<group>"; };
 		3AC867161B1DEE6400AADEA8 /* shadow_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shadow_test.hpp; sourceTree = "<group>"; };
+		3ACB9C9A1BB93BDB00428176 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		3AD301451AFBBD2500516996 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = main.cpp; sourceTree = "<group>"; };
 		3AD406F519AE257000762711 /* audio_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audio_test.cpp; sourceTree = "<group>"; };
 		3AD406F619AE257000762711 /* audio_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = audio_test.hpp; sourceTree = "<group>"; };
@@ -270,9 +264,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ACB9C9B1BB93BDB00428176 /* OpenGL.framework in Frameworks */,
 				3A480C811B2D35E3001064BB /* libtri_engine_osx.a in Frameworks */,
-				3A6EE19E1B08A1C500BB4247 /* OpenGL.framework in Frameworks */,
-				3A6EE1A91B08FBC300BB4247 /* IOKit.framework in Frameworks */,
 				3A6EE1A81B08C98700BB4247 /* libGLEW.a in Frameworks */,
 				3A6EE19C1B089B5400BB4247 /* libglfw.dylib in Frameworks */,
 			);
@@ -374,15 +367,10 @@
 		04F1FE5D1985557F00C8D498 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3ACB9C9A1BB93BDB00428176 /* OpenGL.framework */,
 				3A6EE1A71B08C98700BB4247 /* libGLEW.a */,
-				3A6EE1A51B08AD8A00BB4247 /* IOKit.framework */,
-				3A6EE1A31B08AD7B00BB4247 /* Cocoa.framework */,
 				3A6EE1A11B08A25100BB4247 /* libpng.dylib */,
-				3A6EE19F1B08A20F00BB4247 /* libz.dylib */,
-				3A6EE19D1B08A1C500BB4247 /* OpenGL.framework */,
 				3A6EE19B1B089B5400BB4247 /* libglfw.dylib */,
-				04F1002B198558BF00C8D498 /* libz.dylib */,
-				04F10029198558B600C8D498 /* libpng.a */,
 				04F100271985589300C8D498 /* CoreMotion.framework */,
 				04F100251985587400C8D498 /* OpenAL.framework */,
 				04F1FE5E1985557F00C8D498 /* Foundation.framework */,

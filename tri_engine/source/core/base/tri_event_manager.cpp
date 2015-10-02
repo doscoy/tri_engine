@@ -15,45 +15,9 @@
 TRI_CORE_NS_BEGIN
 
 
-
-class LounchEventTask
-    : public Task
-{
-public:
-    LounchEventTask(const EventPtr& event)
-        : Task()
-        , event_(event)
-    {
-    }
-    
-    void taskUpdate(
-        const tick_t delta_time
-    ) override {
-        EventManager::queueEvent(event_);
-        killTask();
-    }
-    
-private:
-    EventPtr event_;
-};
-
 EventManager::EventTypeSet EventManager::type_list_;
 EventManager::EventListenerMap EventManager::registry_;
 EventManager::EventQueue EventManager::queue_;
-
-
-
-void EventManager::queueEvent(
-    const EventPtr& in_event,
-    float delay_sec
-) {
-    T3_NULL_ASSERT(in_event);
-
-    auto lounch_event = std::make_shared<LounchEventTask>(in_event);
-    auto delay_task = std::make_shared<WaitingTask>(delay_sec);
-    delay_task->nextTask(lounch_event);
-    t3::SceneManager::addSceneTask(delay_task);
-}
 
 
 bool EventManager::addListenerCore(

@@ -83,6 +83,16 @@ public:
     }
     
     ///
+    /// AABBの拡張.
+    /// AABB同士のマージ
+    void marge(
+        const AABB& aabb
+    ) {
+        margePoint(aabb.max_);
+        margePoint(aabb.min_);
+    }
+    
+    ///
     /// 最小値設定.
     void min(
         const Vec3& min ///< 最小値

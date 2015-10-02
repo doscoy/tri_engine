@@ -214,8 +214,8 @@ SubMeshDataPtr ObjLoader::load(
     //  最終的にワンインデックスのストリームを作る
 
 
-    int indices_size = indices.size();
-    for (int i = 0; i < indices_size; ++i) {
+    auto indices_size = indices.size();
+    for (auto i = 0; i < indices_size; ++i) {
         SubMeshData::VerticesType::value_type vtx;
         
         T3_ASSERT(uv_indices.at(i) < uvs.size());

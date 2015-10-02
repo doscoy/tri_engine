@@ -114,14 +114,6 @@ public:
     );
     
     ///
-    /// イベント登録
-    static void queueEvent(
-        const EventPtr& in_event,
-        float delay_sec
-    );
-
-    
-    ///
     /// イベント停止
     static bool abortEvent(
         const EventType& in_type,

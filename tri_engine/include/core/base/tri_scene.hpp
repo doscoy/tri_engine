@@ -76,11 +76,11 @@ public:
     virtual ~SceneBase();
 
 public:
-    virtual void initializeScene(){}
-    virtual void terminateScene(){}
-    virtual void updateScene(tick_t){}
-    virtual void suspendScene(tick_t){}
-    virtual void debugRenderScene(){}
+    virtual void initializeScene() {}
+    virtual void terminateScene() {}
+    virtual void updateScene(tick_t) {}
+    virtual void suspendScene(tick_t) {}
+    virtual void debugRenderScene() {}
 
 public:
     void update(tick_t delta_time);
@@ -104,14 +104,6 @@ public:
         return TypedSceneGenerator<SceneType>::instancePtr();
     }
 
-    void addSceneTask(SharedPtr<Task> task) {
-        task_manager_.attach(task);
-    }
-
-    const TaskManager& taskManager() const {
-        return task_manager_;
-    }
-    
 protected:
     void finish() {
         finish_ = true;
@@ -119,11 +111,8 @@ protected:
 
 private:
     bool finish_;
-    bool show_task_;
     const char* scene_name_;
     DebugMenuFrame scene_debug_menu_frame_;
-    DebugMenuItem<bool> dmi_show_task_;
-    TaskManager task_manager_;
 };
 
 
@@ -149,15 +138,23 @@ private:
     ~SceneManager();
     
 public:
-    void updateScene(tick_t delta_time);
-    void suspendScene(tick_t delta_time);
+    void updateScene(
+        tick_t delta_time
+    );
+    void suspendScene(
+        tick_t delta_time
+    );
     void debugRender();
     
-    static void requestNextScene(SceneGenerator* const next_scene_generator){
+    static void requestNextScene(
+        SceneGenerator* const next_scene_generator
+    ) {
         instance().next_scene_generator_ = next_scene_generator;
     }
     
-    void forceChangeScene(SceneGenerator* const next_scene_generator){
+    void forceChangeScene(
+        SceneGenerator* const next_scene_generator
+    ) {
         next_scene_generator_ = next_scene_generator;
         force_change_ = true;
     }
@@ -171,13 +168,6 @@ public:
     }
     
     void directScene();
-
-public:
-    static void addSceneTask(
-        SharedPtr<Task> task
-    );
-
-    static const TaskManager& taskManager();
 
 private:
     void sceneChange();

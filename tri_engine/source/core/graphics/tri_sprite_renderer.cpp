@@ -318,7 +318,6 @@ void SpriteRenderer::margeSprites() {
             current_batch->vertexBuffer().bind();
             current_batch->indexBuffer().bind();
             size_t vbo_size = static_cast<size_t>(vertices.size() * sizeof(VertexP2CT));
-            intptr_t offset = 0;
             size_t ibo_size = static_cast<int>(indices.size() * sizeof(uint32_t));
 #ifndef USE_GLMAP
             cross::RenderSystem::setupBufferData(
@@ -338,6 +337,7 @@ void SpriteRenderer::margeSprites() {
 
 
 #else
+            intptr_t offset = 0;
             cross::RenderSystem::fenceDrawWaiting();
             cross::RenderSystem::mapBuffer(cross::RenderSystem::BufferType::TYPE_VERTEX, offset, vbo_size, vertices.data());
             cross::RenderSystem::unmapBuffer(cross::RenderSystem::BufferType::TYPE_VERTEX);

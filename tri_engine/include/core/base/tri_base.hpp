@@ -1,6 +1,13 @@
+////////////////////////////////////////////////////////////////////////
+//  Tri ENGINE
+//    copyright 2012... Tri ENGINE project team.
+//
+//  Website: http://tri-engine.aquariuscode.com/
+//  License: https://github.com/doscoy/tri_engine/wiki/License
+////////////////////////////////////////////////////////////////////////
 /**
     @file tri_base.hpp
-    base‚Ü‚í‚è‚Ì“‡ƒwƒbƒ_.
+    baseã¾ã‚ã‚Šã®çµ±åˆãƒ˜ãƒƒãƒ€.
 */
 
 #ifndef TRI_BASE_HPP_INCLUDED
@@ -19,7 +26,6 @@
 #include "tri_scene.hpp"
 #include "tri_std.hpp"
 #include "tri_system_events.hpp"
-#include "tri_task_generator.hpp"
 #include "tri_task_manager.hpp"
 #include "tri_task.hpp"
 #include "tri_types.hpp"

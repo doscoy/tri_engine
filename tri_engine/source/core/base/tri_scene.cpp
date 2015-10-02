@@ -19,11 +19,8 @@ TRI_CORE_NS_BEGIN
 SceneBase::SceneBase(
     const char* const scene_name
 )   : finish_(false)
-    , show_task_(false)
     , scene_name_( scene_name )
     , scene_debug_menu_frame_(nullptr, scene_name)
-    , dmi_show_task_(&scene_debug_menu_frame_, "show task", show_task_)
-    , task_manager_()
 {
     DebugMenu& debug_menu_root = DebugMenu::instance();
 
@@ -41,7 +38,6 @@ SceneBase::~SceneBase()
 void SceneBase::update(
     tick_t delta_time
 ) {
-    task_manager_.updateTask(delta_time);
     updateScene(delta_time);
     
 }
@@ -53,9 +49,6 @@ void SceneBase::suspend(
 }
 
 void SceneBase::debugRender() {
-    if (show_task_) {
-        task_manager_.printTask();
-    }
     debugRenderScene();
 }
 
@@ -90,8 +83,7 @@ void SceneManager::updateScene(
 }
 
 
-void SceneManager::directScene()
-{
+void SceneManager::directScene() {
     if (current_scene_->isFinished() || force_change_) {
         force_change_ = false;
         sceneChange();
@@ -103,7 +95,7 @@ void SceneManager::directScene()
 
 void SceneManager::suspendScene(
     tick_t delta_time
-){
+) {
     current_scene_->suspend(delta_time);
 }
 
@@ -112,11 +104,9 @@ void SceneManager::debugRender() {
 }
 
 
-void SceneManager::sceneChange()
-{
+void SceneManager::sceneChange() {
     T3_RENDER_ASSERT();
     EventManager::dumpListeners();
-    
     
     //  シーン終了
     //  後片付け
@@ -146,16 +136,6 @@ void SceneManager::sceneChange()
 }
 
 
-
-void SceneManager::addSceneTask(
-    SharedPtr<Task> task
-) {
-    instance().current_scene_->addSceneTask(task);
-}
-
-const TaskManager& SceneManager::taskManager() {
-    return instance().current_scene_->taskManager();
-}
 
 
 TRI_CORE_NS_END

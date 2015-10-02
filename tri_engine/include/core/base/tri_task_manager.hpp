@@ -45,6 +45,12 @@ public:
     void attach(TaskPtr task);
     
     ///
+    /// タスクを外す
+    void detach(TaskPtr task) {
+        taskes_.remove(task);
+    }
+    
+    ///
     /// タスクを持っているか
     bool hasTask() {
         return !taskes_.empty();
@@ -81,12 +87,7 @@ protected:
     TaskList taskes_;
     
 private:
-    ///
-    /// タスクを外す
-    void detach(TaskPtr task) {
-        taskes_.remove(task);
-        task->attachTask(false);
-    }
+    
     
     ///
     /// 管理している全てのタスクを破棄

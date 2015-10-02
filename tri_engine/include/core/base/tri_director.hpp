@@ -203,9 +203,12 @@ public:
     static void setClearColor(const Color& c);
 
     ///
-    /// システムタスク登録
-    static void addSystemTask(SharedPtr<Task> task);
+    /// タスク登録
+    static void attachTask(TaskPtr task);
     
+    ///
+    /// タスク削除
+    static void detachTask(TaskPtr task);
 
     ///
     /// 入力情報を取得

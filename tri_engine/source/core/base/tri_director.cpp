@@ -36,10 +36,16 @@ const Input& Director::input(
     return Director::instance().input_.at(player_no);
 }
     
-void Director::addSystemTask(
-    SharedPtr<Task> task
+void Director::attachTask(
+    TaskPtr task
 ) {
     instance().task_manager_.attach(task);
+}
+
+void Director::detachTask(
+    TaskPtr task
+) {
+    instance().task_manager_.detach(task);
 }
 
 

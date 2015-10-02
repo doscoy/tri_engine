@@ -14,9 +14,11 @@
 #define TRI_VEC3_HPP_INCLUDED
 
 //  include
+#include <iostream>
+
 #include "core/core_config.hpp"
 #include "../math/tri_math_util.hpp"
-#include <iostream>
+#include "../debug/tri_assert.hpp"
 
 
 TRI_CORE_NS_BEGIN
@@ -97,8 +99,10 @@ public:
     
     ///
     ///  正規化
-    void normalize(){
-        float s = 1.0f / length();
+    void normalize() {
+        float len = length();
+        T3_ASSERT(!isZeroFloat(len));
+        float s = 1.0f / len;
         x_ *= s;
         y_ *= s;
         z_ *= s;

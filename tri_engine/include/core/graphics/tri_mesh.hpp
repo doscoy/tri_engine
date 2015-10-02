@@ -241,13 +241,26 @@ public:
         return bounding_sphere_;
     }
     
+    ///
+    /// 境界ボックスを取得
+    auto& aabb() {
+        return aabb_;
+    }
+    
+    ///
+    /// 境界ボックスを取得
+    const auto& aabb() const {
+        return aabb_;
+    }
+    
 private:
     ///
     /// 境界球を計算
-    void calcBoundingSphere();
+    void calcBound();
     
 private:
     Sphere bounding_sphere_;
+    AABB aabb_;
     Vector<SubMeshPtr> meshes_;
 };
 

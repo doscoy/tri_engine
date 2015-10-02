@@ -56,7 +56,7 @@ public:
 public:
     ///
     /// ノードIDを取得
-    virtual NodeID getNodeID() const {
+    NodeID getNodeID() const override {
         return node_id_;
     }
 

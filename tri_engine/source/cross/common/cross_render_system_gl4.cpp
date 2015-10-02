@@ -14,19 +14,10 @@ CROSS_NS_BEGIN
 extern void printConsole(
     const char* const str
 );
-}   // namespace cross
+
+
 int render_call_count_ = 0;
 
-
-
-namespace  {
-
-int viewport_x_ = -99;
-int viewport_y_ = -99;
-int viewport_w_ = -99;
-int viewport_h_ = -99;
-
-};
 
 
 inline void countDrawCall() {
@@ -38,7 +29,13 @@ inline void countDrawCall() {
 
 #define CROSS_GL_ASSERT()        checkGLError(__func__)
 
-namespace {
+namespace  {
+
+int viewport_x_ = -99;
+int viewport_y_ = -99;
+int viewport_w_ = -99;
+int viewport_h_ = -99;
+
 
 
 GLsync fence_ = 0;
@@ -196,16 +193,7 @@ inline int typeFormatToGL(cross::RenderSystem::TypeFormat format) {
 
 GLFWwindow* window_ = nullptr;
 
-
 }   // unname namespace
-
-
-
-
-
-
-namespace cross {
-
 
 
 void RenderSystem::createFrameBuffer(RenderSystem::FrameBufferID* id) {

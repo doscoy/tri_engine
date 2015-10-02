@@ -47,10 +47,9 @@ void Camera::calculateDirection()
     front_ = (target_ - position_).getNormalized();
     
     //  右方向ベクトル
-    if ( !isZeroFloat( front_.x_ ) || !isZeroFloat( front_.z_ ) ){
+    if (!isZeroFloat(front_.x_) || !isZeroFloat(front_.z_)) {
         right_ = Vec3::crossProduct(front_, Vec3::axisY());
-    }
-    else {
+    } else {
         right_ = Vec3::crossProduct(front_, Vec3::axisZ());
     }
     right_.normalize();
@@ -63,19 +62,22 @@ void Camera::calculateDirection()
 
 void Camera::recalculate()
 {
-    if ( recalculation_request_ ){
-        //  各方向ベクトルを再計算
-        calculateDirection();
-        calculateFrustum();
-        calculateMatrix();
-
-        recalculation_request_ = false;
+    if (!recalculation_request_) {
+        //  再計算スキップ
+        return;
     }
+    
+    //  各方向ベクトルを再計算
+    calculateDirection();
+    calculateFrustum();
+    calculateMatrix();
+
+    recalculation_request_ = false;
 }
 
 void Camera::calculateFrustum()
 {
-    float aspect = 480/640;
+    float aspect = 480.0f / 640.0f;
     float near = 1.0f;
     float far = 10000.0f;
 

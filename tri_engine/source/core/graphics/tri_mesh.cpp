@@ -200,6 +200,7 @@ void Mesh::load(
     } else {
         T3_PANIC("Unknown file ext. [%s]", filepath.ext().c_str());
     }
+    calcBound();
 }
 
 
@@ -227,6 +228,30 @@ void Mesh::loadDae(
     }
 }
 
+///
+/// 境界球を計算
+void Mesh::calcBound() {
+
+    for (auto& m : meshes_) {
+        aabb_.marge(m->aabb());
+    }
+    
+    const auto& center = aabb_.center();
+    const auto& radius = aabb_.radius();
+    
+    //  なんちゃって境界球なので
+    //  大きい方の半径をそのまま使う
+    float sphere_radius = radius.x_;
+    if (sphere_radius < radius.y_) {
+        sphere_radius = radius.y_;
+    }
+    if (sphere_radius < radius.z_) {
+        sphere_radius = radius.z_;
+    }
+    
+    bounding_sphere_.position(center);
+    bounding_sphere_.radius(sphere_radius);
+}
 
 TRI_CORE_NS_END
 

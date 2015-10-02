@@ -20,7 +20,7 @@
 TRI_CORE_NS_BEGIN
 
 ///
-/// 強制アボート
+/// 強制停止
 bool panic(
     const char* const exp,
     const char* const filename,
@@ -52,7 +52,7 @@ TRI_CORE_NS_END
 #define T3_PANIC(...)               ::t3::panic("panic", __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 
 /*! @brief メッセージ付アサート */
-#define T3_ASSERT_MSG(exp,...)      (void)( (exp) || (::t3::panic( #exp, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__ )),0)
+#define T3_ASSERT_MSG(exp,...)      (void)((exp) || (::t3::panic(#exp, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)),0)
 
 /*! @brief アサート */
 #define T3_ASSERT(exp)              T3_ASSERT_MSG(exp, "assertion.")
