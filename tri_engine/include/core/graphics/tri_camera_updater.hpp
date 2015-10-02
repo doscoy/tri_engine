@@ -18,7 +18,7 @@
 #include "../math/tri_math.hpp"
 #include "tri_camera.hpp"
 #include "core/base/tri_std.hpp"
-
+#include "core/base/tri_task.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -27,12 +27,14 @@ TRI_CORE_NS_BEGIN
 ///
 /// カメラ操作
 class CameraUpdater
+    : public Task
 {
 public:
     ///
     /// コンストラクタ
     CameraUpdater()
-        : camera_(Camera::create())
+        : Task()
+        , camera_(Camera::create())
     {}
 
 
@@ -168,7 +170,7 @@ public:
 
     ///
     /// x軸（縦）回転 
-    void rotateV(
+    void rollV(
         float speed ///< 移動量
     ) {
         rotate_.addX(speed);
@@ -176,7 +178,7 @@ public:
 
     ///
     /// y軸（横）回転
-    void rotateH(
+    void rollH(
         float speed ///< 移動量
     ) {
         rotate_.addY(speed);
@@ -209,10 +211,25 @@ public:
         return distance_;
     }
 
-    void updateCamera();
+    ///
+    /// タスク更新
+    void taskUpdate(
+        const tick_t dt
+    ) override;
 
 private:
-
+    ///
+    /// X軸ロール
+    void onRollV(
+        const t3::EventPtr event
+    );
+    
+    ///
+    /// Y軸ロール
+    void onRollH(
+        const t3::EventPtr event
+    );
+    
 
 private:
     Vec3 center_;

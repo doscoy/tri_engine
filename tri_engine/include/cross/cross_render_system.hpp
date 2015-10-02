@@ -554,7 +554,7 @@ public:
     /// バッファデータのセットアップ
     static void setupBufferData(
         BufferType type,
-        int size,
+        size_t size,
         const void* data,
         BufferUsage usage
     );

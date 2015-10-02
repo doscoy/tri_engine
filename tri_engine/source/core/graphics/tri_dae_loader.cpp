@@ -158,7 +158,7 @@ SubMeshesDataPtr DaeLoader::load(
 
                 
             //  頂点インデックス
-            int index_size = mesh->vertices().indices().size();
+            auto index_size = mesh->vertices().indices().size();
             for (int index_loop = 0; index_loop < index_size; ++index_loop) {
                 indices.push_back(mesh->vertices().indices().at(index_loop));
             }
@@ -181,7 +181,7 @@ SubMeshesDataPtr DaeLoader::load(
 
                 //  UVインデックス
                 auto& mesh_uvs_indices = mesh_uvs.indices();
-                int uv_index_size = mesh_uvs_indices.size();
+                auto uv_index_size = mesh_uvs_indices.size();
                 for (int uv_idx_loop = 0; uv_idx_loop < uv_index_size; ++uv_idx_loop) {
                     uv_indices.push_back(mesh_uvs_indices.at(uv_idx_loop));
                 }
@@ -193,7 +193,7 @@ SubMeshesDataPtr DaeLoader::load(
 
 
         //  最終的にワンインデックスのストリームを作る
-        int indices_size = indices.size();
+        auto indices_size = indices.size();
         for (int indices_idx = 0; indices_idx < indices_size; ++indices_idx) {
             SubMeshData::VerticesType::value_type vtx;
             if (has_uv) {
@@ -215,6 +215,25 @@ SubMeshesDataPtr DaeLoader::load(
         }
 
 
+        //  出来上がったサブメッシュの法線を計算
+        for (int face_idx = 0; face_idx < submesh->indices().size(); face_idx += 3) {
+            int i0 = submesh->indices().at(face_idx);
+            int i1 = submesh->indices().at(face_idx + 1);
+            int i2 = submesh->indices().at(face_idx + 2);
+            
+            auto& v0 = submesh->vertices().at(i0);
+            auto& v1 = submesh->vertices().at(i1);
+            auto& v2 = submesh->vertices().at(i2);
+            
+            
+            Vec3 vec0 = v0.position_ - v1.position_;
+            Vec3 vec1 = v0.position_ - v2.position_;
+            auto n = vec0.crossProduct(vec1);
+            n.normalize();
+            v0.normal_ += n;
+            v1.normal_ += n;
+            v2.normal_ += n;
+        }
 
         //  メッシュ追加
         submeshes->push_back(submesh);

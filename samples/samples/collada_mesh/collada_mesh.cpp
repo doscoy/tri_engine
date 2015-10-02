@@ -60,19 +60,7 @@ void ColladaMeshScene::update() {
     const t3::Pad& pad = input.pad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
         finish();
-    }
-
-    auto& pointing = input.pointing();
-    if (pointing.isHold()) {
-        if (pointing.isMoving()) {
-
-            cam_updater_.rotateH(pointing.moveDistance().x_);
-            cam_updater_.rotateV(pointing.moveDistance().y_);
-            cam_updater_.updateCamera();
-        }
-
-    }
- 
+    } 
 
 }
 

@@ -34,7 +34,7 @@ private:
     t3::SceneGraph scene_graph_;
     t3::TransformNodePtr node_cone_;
     t3::TransformNodePtr node_object3_;
-
-
+    t3::CameraTouchController cam_controller_;
 };
+
 #endif // SIMPLE_MESH2_HPP_INCLUDED

@@ -10,7 +10,7 @@
 #include "core/graphics/tri_camera_updater.hpp"
 #include "core/math/tri_math_util.hpp"
 #include "core/graphics/tri_camera.hpp"
-
+#include "core/graphics/tri_camera_updater_events.hpp"
 
 
 TRI_CORE_NS_BEGIN
@@ -159,15 +159,19 @@ RotateCameraUpdater::RotateCameraUpdater()
     , rotate_(-20.0f, 0)
     , distance_(50.0f)
 {
+    EventManager::addListener(this, &RotateCameraUpdater::onRollH, event::CameraRollH::TYPE);
+    EventManager::addListener(this, &RotateCameraUpdater::onRollV, event::CameraRollV::TYPE);
 }
 
 
 RotateCameraUpdater::~RotateCameraUpdater() {
-
+    EventManager::removeListener(this);
 }
 
 
-void RotateCameraUpdater::updateCamera() {
+void RotateCameraUpdater::taskUpdate(
+    const tick_t dt
+) {
     //  注視点設定
     camera()->targetPosition(center_);
     
@@ -177,6 +181,20 @@ void RotateCameraUpdater::updateCamera() {
     v = rot_mtx.xform(v);
     
     camera()->position(v);
+}
+
+void RotateCameraUpdater::onRollV(
+    const t3::EventPtr event
+) {
+    const auto eve = static_cast<const event::CameraRollV*>(event.get());
+    rollV(eve->speed());
+}
+
+void RotateCameraUpdater::onRollH(
+    const t3::EventPtr event
+) {
+    const auto eve = static_cast<const event::CameraRollH*>(event.get());
+    rollH(eve->speed());
 }
 
 

@@ -39,7 +39,6 @@ void ColladaMesh2Scene::initialize() {
         
     //  シーングラフにカメラ設定
     sceneGraph().camera(cam_updater_.camera());
-    cam_updater_.updateCamera();
 
 
     T3_RENDER_ASSERT();
@@ -59,19 +58,6 @@ void ColladaMesh2Scene::update() {
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
         finish();
     }
-
-    auto& pointing = input.pointing();
-    if (pointing.isHold()) {
-        if (pointing.isMoving()) {
-
-            cam_updater_.rotateH(pointing.moveDistance().x_);
-            cam_updater_.rotateV(pointing.moveDistance().y_);
-            cam_updater_.updateCamera();
-        }
-
-    }
- 
-
 }
 
 

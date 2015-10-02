@@ -91,20 +91,13 @@ public:
         t3::Mtx44 projection;
         projection.perspective(60, screen.x_, screen.y_, 0.01f, 1000.0f);
     
-        const auto view_mtx = cam_update_.camera()->viewMatrix();
-
-
-        static int rotY;
-        rotY++;
-        t3::Mtx44 transform = t3::Mtx44::getRotateY(rotY);
-        
     
         t3::RenderSystem::setBlend(false);
         t3::RenderSystem::setCulling(true);
         t3::RenderSystem::setCullingMode(t3::RenderSystem::CullingMode::MODE_BACK);
 
         t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
-//        model_->render(mtx);
+        
     }
 
     void spriteInit() {

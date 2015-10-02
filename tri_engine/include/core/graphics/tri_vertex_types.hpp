@@ -39,6 +39,11 @@ struct VertexP2CT {
 /// 頂点定義.
 /// 座標とUV値を持つ
 struct VertexP2T {
+    VertexP2T()
+        : position_(0,0)
+        , uv_(0,0)
+    {}
+
     Vec2 position_;
     Vec2 uv_;
 };
@@ -47,7 +52,11 @@ struct VertexP2T {
 /// 頂点定義.
 /// 座標と法線を持つ
 struct VertexP3N {
-
+    VertexP3N()
+        : position_(0,0,0)
+        , normal_(0,0,0)
+    {}
+    
     Vec3 position_;
     Vec3 normal_;
 
@@ -57,7 +66,12 @@ struct VertexP3N {
 /// 頂点定義.
 /// 座標と法線とUVを持つ
 struct VertexP3NT {
-
+    VertexP3NT()
+        : position_(0,0,0)
+        , normal_(0,0,0)
+        , uv_(0,0)
+    {}
+    
     Vec3 position_;
     Vec3 normal_;
     Vec2 uv_;

@@ -36,7 +36,7 @@ private:
     t3::TransformNodePtr node_box_;
     t3::TransformNodePtr node_torus_;
     t3::TransformNodePtr node_earth_;
-
-
+    t3::CameraTouchController cam_controller_;
 };
+
 #endif // SIMPLE_MESH_HPP_INCLUDED

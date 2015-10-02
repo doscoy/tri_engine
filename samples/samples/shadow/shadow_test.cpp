@@ -30,7 +30,7 @@ void ShadowTestScene::initialize() {
     node_chara_ = createModel("character_chr_old.obj");
     t3::ModelPtr chara = std::dynamic_pointer_cast<t3::Model>(node_chara_->entity());
     chara->enableShadowCast();
-//    chara->enalbeShadowReceive();
+
     //  フィールド作成
     node_field_ = createModel("field.obj");
     t3::ModelPtr field = std::dynamic_pointer_cast<t3::Model>(node_field_->entity());

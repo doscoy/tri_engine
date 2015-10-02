@@ -8,12 +8,12 @@
 
 
 #include "cross_os.hpp"
-#include "cstdio"
+#include <cstdio>
 
 CROSS_NS_BEGIN
 
 void printConsole(
-    const char* const str
+    const char* str
 ) {
     std::printf(str);
 }

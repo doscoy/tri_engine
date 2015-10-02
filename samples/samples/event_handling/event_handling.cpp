@@ -90,8 +90,8 @@ public:
   
 public:
     void initialize(){
-        t3::EventManager::addListener<HpText>(hp_text_, &HpText::krif, EventAAA::TYPE);
-        t3::EventManager::addListener<HpText>(hp_text_, &HpText::krif, EventBBB::TYPE);
+        t3::EventManager::addListener(hp_text_, &HpText::krif, EventAAA::TYPE);
+        t3::EventManager::addListener(hp_text_, &HpText::krif, EventBBB::TYPE);
     }
     
     void terminate(){

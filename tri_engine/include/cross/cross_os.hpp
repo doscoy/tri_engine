@@ -68,7 +68,7 @@ bool isExitRequest();
 ///
 /// デバッグプリント
 void printConsole(
-    const char* const str
+    const char* str
 );
 
 ///

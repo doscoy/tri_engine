@@ -28,7 +28,7 @@ local int gz_load(state, buf, len, have)
     unsigned len;
     unsigned *have;
 {
-    int ret;
+    ssize_t ret;
 
     *have = 0;
     do {

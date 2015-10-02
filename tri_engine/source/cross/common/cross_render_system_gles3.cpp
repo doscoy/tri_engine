@@ -869,7 +869,7 @@ void RenderSystem::deleteBufferC(uint32_t* buffer) {
 
 void RenderSystem::setupBufferData(
     RenderSystem::BufferType type,
-    int size,
+    size_t size,
     const void* data,
     RenderSystem::BufferUsage usage
 ) {

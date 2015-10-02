@@ -96,7 +96,7 @@ private:
         transform = rot * scale;
         
         t3::Mtx44 mtx = transform * view_mtx * projection;
-        
+        (void)mtx;
 //        model_->render(mtx);
 
     }
