@@ -72,6 +72,8 @@ private:
     using EventQueue = List<EventPtr>;
 
 public:
+    static void initialize();
+
     ///
     /// リスナー登録
     static bool addListenerCore(
@@ -90,15 +92,6 @@ public:
         auto handler = std::make_shared<MethodCallbackX1<T,const EventPtr>>(listener, func);
         return addListenerCore(handler, in_type);
     }
-
-
-    
-    ///
-    /// リスナーの削除
-    static bool removeListener(
-        const EventListenerPtr in_handler,
-        const EventType& in_type
-    );
     
     ///
     /// リスナーの削除
@@ -122,7 +115,7 @@ public:
     
     ///
     /// 更新
-    static bool broadCast();
+    static bool broadCast(const tick_t dt);
     
     
     ///
@@ -130,30 +123,39 @@ public:
     static bool isValidateEventType(const EventType& in_type);
 
     ///
-    /// リスナーリストを取得
+    /// リスナリストを取得
     static EventListenerList getListenerList(
         const EventType& event_type
     );
 
     ///
-    /// タイプリストを取得
+    /// イベントタイプリストを取得
     static EventTypeList getTypeList();
     
     ///
-    /// リスナー一覧をダンプ
+    /// リスナ一覧をダンプ
     static void dumpListeners();
 
     ///
     /// イベント名をキーから取得
     static String getEventNameByKey(HashString::key_t key);
+
+
+    static void switchQueue();
+    
+    static EventQueue& currentQueue();
+    static EventQueue& backQueue();
+    
 private:
     
     static EventTypeSet type_list_;        ///< 登録済のイベントリスト
     
     static EventListenerMap registry_;     ///< 登録済のリスナ
     
-    static EventQueue queue_;               ///< イベントキュー
+    static EventQueue queue_[2];           ///< イベントキュー
   
+    static int current_queue_id_;
+    static int back_queue_id_;
 };
 
 

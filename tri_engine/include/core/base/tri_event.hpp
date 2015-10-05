@@ -60,6 +60,12 @@ public:
     void delay(tick_t delay) {
         delay_ = delay;
     }
+    
+    ///
+    /// イベント発行までの時間経過
+    void update(tick_t dt) {
+        delay_ -= dt;
+    }
 
     ///
     /// イベント発行可能か判定

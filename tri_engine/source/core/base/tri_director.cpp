@@ -188,7 +188,11 @@ Director::Director()
     
     //  シーンマネージャ生成
     SceneManager::createInstance();
-
+    
+    //  イベントマネージャ初期化
+    EventManager::initialize();
+    
+    //  クリアカラー設定
 	clear_colors_[0] = color_sample::darkgray();
 	clear_colors_[1] = color_sample::green();
 	clear_colors_[2] = color_sample::white();
@@ -203,14 +207,12 @@ Director::Director()
 
 
 //  デストラクタ
-Director::~Director()
-{
+Director::~Director() {
     SceneManager::destroyInstance();
     CollisionManager::destroyInstance();
     AudioManager::destroyInstance();
     TextureManager::destroyInstance();
-    DebugMenu::destroyInstance();
-    
+    DebugMenu::destroyInstance();    
 }
 
 
@@ -286,7 +288,7 @@ void Director::update(
     
     
     //  イベントのブロードキャスト
-    EventManager::broadCast();
+    EventManager::broadCast(delta_time);
     
     //  レイヤーの更新
     LayerBase::updateLayers(layers(), delta_time);
@@ -299,7 +301,8 @@ void Director::update(
 }
 
   
-
+///
+/// 入力情報更新
 void Director::updateInput(
     const tick_t delta_time
 ) {
@@ -382,10 +385,6 @@ void Director::updateInput(
         
     }
     
-    
-    
-    
-    
     //  debug pad
     cross::GamePadData dbg_pad_data;
     cross::platformPadData(1, &dbg_pad_data);
@@ -396,6 +395,8 @@ void Director::updateInput(
 
 }
 
+///
+/// デバッグ文字用のスプライトを全リセット
 void Director::prepareDebugPrintFontSprites() {
 
     //  前のフレームで作ったスプライトは全て削除
@@ -432,8 +433,9 @@ void Director::prepareDebugPrintFontSprites() {
         font->textureCoord(u0, v0, u1, v1);
     }
 }
-    
-    
+
+///
+/// デバッグメニューを登録
 void Director::registryToDebugMenu( 
     DebugMenuFrame& parent_frame
 ) {
@@ -449,21 +451,29 @@ void Director::registryToDebugMenu(
 }
 
 
-void Director::attachLayer(LayerBase* layer)
-{
+///
+/// レイヤーを登録する
+void Director::attachLayer(
+    LayerBase* layer
+) {
     T3_NULL_ASSERT(layer);
     layers_.push_back(layer);
     sortLayers();
-    
-
 }
 
-void Director::detachLayer(LayerBase* layer)
-{
+///
+/// レイヤーを外す
+void Director::detachLayer(
+    LayerBase* layer
+) {
     layers_.remove(layer);
     sortLayers();
 }
 
+
+///
+/// レイヤーをソート
+/// プライオリティ順にならべかえる
 void Director::sortLayers() {
     layers_.sort(
         [](LayerBase*lhs, LayerBase* rhs) {
