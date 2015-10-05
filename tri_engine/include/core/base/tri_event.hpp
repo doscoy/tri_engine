@@ -27,65 +27,59 @@ TRI_CORE_NS_BEGIN
 using EventType = HashString;   ///< ハッシュ文字列をイベントタイプとして使用
 
 ///
-/// イベントのインターフェース
-class Event
-    : private Uncopyable
+/// イベント基底クラス
+class EventBase
+    : public Uncopyable
 {
 public:
     ///
-    /// イベントタイプ
+    /// コンストラクタ
+    EventBase()
+       : delay_(0.0f)
+    {}
+    
+    ///
+    /// デストラクタ
+    virtual ~EventBase() {}
+    
+public:
+    ///
+    /// イベントタイプ取得
     virtual const EventType& eventType() const = 0;
+    
+
+public:
+    ///
+    /// イベント発行までの時間取得
+    tick_t delay() const {
+        return delay_;
+    }
+    
+    ///
+    /// イベント発行までの時間設定
+    void delay(tick_t delay) {
+        delay_ = delay;
+    }
 
     ///
-    /// タイムスタンプ
-    virtual tick_t timeStamp() const = 0;
+    /// イベント発行可能か判定
+    bool isReady() const {
+        return delay_ <= 0.0f;
+    }
 
     ///
     /// イベント名
     String eventName() {
         return eventType().string();
     }
-};
-
-
-using EventPtr = SharedPtr<Event>;  ///< イベントのポインタ
-
-
-///
-/// イベント基底クラス
-class EventBase
-    : public Event
-{
-public:
-    ///
-    /// コンストラクタ
-    explicit EventBase(
-        const float time_stamp = 0.0f
-    )   : time_stamp_(time_stamp)
-    {}
-    
-    ///
-    /// デストラクタ
-    ~EventBase() {}
-    
-public:
-    ///
-    /// イベントタイプ取得
-    const EventType& eventType() const override = 0;
-    
-
-public:
-    ///
-    /// タイムスタンプ取得
-    tick_t timeStamp() const override {
-        return time_stamp_;
-    }
 
 private:
     ///
-    /// タイムスタンプ
-    const tick_t time_stamp_;
+    /// イベント発行までの時間
+    tick_t delay_;
 };
+
+using EventPtr = SharedPtr<EventBase>;  ///< イベントのポインタ
 
 
 TRI_CORE_NS_END
