@@ -214,7 +214,7 @@ public:
     ///
     /// タスク更新
     void taskUpdate(
-        const tick_t dt
+        const DeltaTime dt
     ) override;
 
 private:

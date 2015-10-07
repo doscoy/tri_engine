@@ -73,7 +73,7 @@ public:
 public:
     ///
     /// 入力情報更新
-    void updatePad(const cross::GamePadData& paddata, tick_t delta_time);
+    void updatePad(const cross::GamePadData& paddata, DeltaTime delta_time);
     
     ///
     /// トリガー判定
@@ -144,7 +144,7 @@ public:
 private:
     ///
     /// リピートを更新
-    void updateRepeat( tick_t delta_time );
+    void updateRepeat( DeltaTime delta_time );
     
 private:
     ///

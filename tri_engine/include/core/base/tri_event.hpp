@@ -51,19 +51,19 @@ public:
 public:
     ///
     /// イベント発行までの時間取得
-    tick_t delay() const {
+    DeltaTime delay() const {
         return delay_;
     }
     
     ///
     /// イベント発行までの時間設定
-    void delay(tick_t delay) {
+    void delay(DeltaTime delay) {
         delay_ = delay;
     }
     
     ///
     /// イベント発行までの時間経過
-    void update(tick_t dt) {
+    void update(DeltaTime dt) {
         delay_ -= dt;
     }
 
@@ -82,7 +82,7 @@ public:
 private:
     ///
     /// イベント発行までの時間
-    tick_t delay_;
+    DeltaTime delay_;
 };
 
 using EventPtr = SharedPtr<EventBase>;  ///< イベントのポインタ

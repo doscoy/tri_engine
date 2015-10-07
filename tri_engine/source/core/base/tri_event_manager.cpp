@@ -178,7 +178,7 @@ bool EventManager::queueEvent(
 ///
 /// 毎フレーム呼ばれるイベント通達処理
 bool EventManager::broadCast(
-    const tick_t dt
+    const DeltaTime dt
 ) {
     //  キューを取得
     auto& current_queue = currentQueue();
@@ -195,7 +195,7 @@ bool EventManager::broadCast(
             //  まだ時間になっていない
             event->update(dt);
             //  バックキューに登録しなおし
-            backQueue().push_back(event);
+            back_queue.push_back(event);
             
             //  このイベントの処理はここで終了。次へ。
             continue;

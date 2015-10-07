@@ -35,7 +35,7 @@ DrawLayer::~DrawLayer()
 
 
 void DrawLayer::updateLayer(
-    tick_t delta_time
+    DeltaTime delta_time
 ) {
     if (update_func_) {
         update_func_->invoke();

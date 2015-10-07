@@ -49,7 +49,7 @@ public:
     /// 更新
     virtual void onUpdate(
         SceneGraph* scene,  ///< シーングラフ
-        tick_t delta_time   ///< デルタタイム
+        DeltaTime delta_time   ///< デルタタイム
     ) = 0;
 
     ///

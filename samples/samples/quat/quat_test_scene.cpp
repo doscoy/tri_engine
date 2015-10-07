@@ -43,7 +43,7 @@ public:
 
     }
     
-    void update(t3::tick_t delta_time){
+    void update(t3::DeltaTime delta_time){
 
         auto& pt = t3::Director::input().pointing();
 
@@ -63,10 +63,7 @@ public:
         }
     }
 
-    void suspend(t3::tick_t delta_time) {
-    
-    }
-    
+
     
 private:
     
@@ -135,7 +132,7 @@ void QuatTestScene::terminateScene() {
 }
 
 
-void QuatTestScene::updateScene(t3::tick_t delta_time) {
+void QuatTestScene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     auto& gs = t3::Director::instance();
@@ -144,13 +141,6 @@ void QuatTestScene::updateScene(t3::tick_t delta_time) {
         finish();
     }
 }
-
-void QuatTestScene::suspendScene(t3::tick_t delta_time) {
-
-    context_->suspend(delta_time);
-}
-
-
 
 
 

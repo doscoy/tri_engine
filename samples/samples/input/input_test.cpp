@@ -29,12 +29,12 @@ public:
 
     }
     
-    void update(t3::tick_t delta_time) {
+    void update(t3::DeltaTime delta_time) {
         
     }
 
 
-    void suspend(t3::tick_t delta_time) {
+    void suspend(t3::DeltaTime delta_time) {
 
     }
     
@@ -189,7 +189,7 @@ void InputTestScene::terminateScene() {
 }
 
 
-void InputTestScene::updateScene(t3::tick_t delta_time) {
+void InputTestScene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     t3::Director& gs = t3::Director::instance();
@@ -199,10 +199,6 @@ void InputTestScene::updateScene(t3::tick_t delta_time) {
     }
 }
 
-void InputTestScene::suspendScene(t3::tick_t delta_time) {
-
-    context_->suspend(delta_time);
-}
 
 void InputTestScene::debugRenderScene() {
     context_->debugRender();

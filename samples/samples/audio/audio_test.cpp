@@ -41,17 +41,13 @@ public:
 
     }
     
-    void update(t3::tick_t delta_time){
+    void update(t3::DeltaTime delta_time){
         const t3::Input& input = t3::Director::instance().input();
         const t3::Pointing& ptng = input.pointing();
         stream_.poling();
         if (ptng.isRelease()) {
             handle_->playSE();
         }
-    }
-
-    void suspend(t3::tick_t delta_time) {
-
     }
 
     
@@ -92,7 +88,7 @@ void AudioTestScene::terminateScene() {
 }
 
 
-void AudioTestScene::updateScene(t3::tick_t delta_time) {
+void AudioTestScene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     t3::Director& gs = t3::Director::instance();
@@ -100,11 +96,6 @@ void AudioTestScene::updateScene(t3::tick_t delta_time) {
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
         finish();
     }
-}
-
-void AudioTestScene::suspendScene(t3::tick_t delta_time) {
-
-    context_->suspend(delta_time);
 }
 
 

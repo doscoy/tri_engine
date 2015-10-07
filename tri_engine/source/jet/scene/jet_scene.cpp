@@ -50,7 +50,7 @@ void Scene::terminateScene() {
     terminate();
 }
 
-void Scene::updateScene(tick_t dt) {
+void Scene::updateScene(DeltaTime dt) {
     update();
 }
 

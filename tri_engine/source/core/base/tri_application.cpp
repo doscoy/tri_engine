@@ -287,15 +287,15 @@ void Application::updateApplication() {
     
     
     
-    auto& gs = Director::instance();
+    auto& director = Director::instance();
     DebugMenu& dm = DebugMenu::instance();
 
     //  ゲームスピード変更
-    float game_speed = gs.getGameSpeed();
+    float game_speed = director.getGameSpeed();
     delta_time *= game_speed;
     
     
-    gs.update(delta_time);
+    director.update(delta_time);
 
 
     
@@ -314,7 +314,7 @@ void Application::updateApplication() {
 void Application::renderApplication() {
     T3_RENDER_ASSERT();
 
-    auto& gs = Director::instance();
+    auto& director = Director::instance();
     DebugMenu& dm = DebugMenu::instance();
 
     app_cost_timer_.end();              // app cost 計測終了
@@ -339,7 +339,7 @@ void Application::renderApplication() {
     debug_cost_timer_.end();
     rendering_cost_timer_.start();      // rendering cost 計算開始
     //  レイヤーの描画
-    LayerBase::drawLayers(gs.layers());
+    LayerBase::drawLayers(director.layers());
     rendering_cost_timer_.end();           // rendering cost 計算終了
 
     //  描画終了
@@ -523,7 +523,7 @@ bool Application::isSuspend() const {
     auto& director = t3::Director::instance();
     auto& dm = t3::DebugMenu::instance();
     
-    if (director.isSuspend() || dm.isOpened()) {
+    if (dm.isOpened()) {
         return true;
     }
    

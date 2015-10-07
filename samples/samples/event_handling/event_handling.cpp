@@ -98,7 +98,7 @@ public:
         t3::EventManager::removeListener(hp_text_);
     }
     
-    void update(t3::tick_t delta_time){
+    void update(t3::DeltaTime delta_time){
         t3::Director& d = t3::Director::instance();
         const t3::Input& input = d.input();
         if (input.pointing().isTrigger()) {
@@ -111,10 +111,6 @@ public:
                 
             }
         }
-    }
-
-    void suspend(t3::tick_t delta_time) {
-    
     }
 
     
@@ -150,7 +146,7 @@ void EventHandlingScene::terminateScene() {
 }
 
 
-void EventHandlingScene::updateScene(t3::tick_t delta_time) {
+void EventHandlingScene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     t3::Director& gs = t3::Director::instance();
@@ -158,11 +154,6 @@ void EventHandlingScene::updateScene(t3::tick_t delta_time) {
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
         finish();
     }
-}
-
-void EventHandlingScene::suspendScene(t3::tick_t delta_time) {
-
-    context_->suspend(delta_time);
 }
 
 

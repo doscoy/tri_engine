@@ -52,7 +52,7 @@ public:
     void terminate(){
     }
     
-    void update(t3::tick_t delta_time){
+    void update(t3::DeltaTime delta_time){
 
         //  現在のスプライト数表示
         T3_PRINT_DISP(400, 0, "%d", sprites_.size());
@@ -79,9 +79,6 @@ public:
         
     }
 
-    void suspend(t3::tick_t delta_time) {
-        adjustSpritesPosition();
-    }
 
 private:
     void rollingSprites() {
@@ -152,7 +149,7 @@ private:
 
 
 private:
-    t3::tick_t total_time_;
+    t3::DeltaTime total_time_;
     t3::SpriteLayer sprite_layer_;
     t3::Vector<t3::SpritePtr> sprites_;
     t3::TexturePtr textures_[9];
@@ -183,7 +180,7 @@ void SimpleSpriteScene::terminateScene() {
 }
 
 
-void SimpleSpriteScene::updateScene(t3::tick_t delta_time) {
+void SimpleSpriteScene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     auto& director = t3::Director::instance();
@@ -191,11 +188,6 @@ void SimpleSpriteScene::updateScene(t3::tick_t delta_time) {
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
         finish();
     }
-}
-
-void SimpleSpriteScene::suspendScene(t3::tick_t delta_time) {
-
-    context_->suspend(delta_time);
 }
 
 

@@ -40,7 +40,7 @@ Pointing::~Pointing()
 
 void Pointing::updatePointing(
     const cross::PointingData& data,
-    tick_t delta_time
+    DeltaTime delta_time
 ){
     bool hit = data.hit_;
 
@@ -127,7 +127,7 @@ void Pointing::clearPositionList() {
 }
 
 
-void Pointing::updateRepeat(tick_t delta_time) {
+void Pointing::updateRepeat(DeltaTime delta_time) {
     repeat_ = trigger_;
     if (hold_) {
         pressed_time_ += delta_time;

@@ -66,7 +66,7 @@ public:
 protected:
     ///
     /// レイヤーの更新
-    void updateLayer(tick_t delta_time) override;
+    void updateLayer(DeltaTime delta_time) override;
 
     ///
     /// レイヤーの描画

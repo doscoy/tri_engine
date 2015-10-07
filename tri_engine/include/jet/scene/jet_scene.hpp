@@ -29,7 +29,7 @@ public:
 public:
     void initializeScene() final;
     void terminateScene() final;
-    void updateScene(tick_t dt) final;
+    void updateScene(DeltaTime dt) final;
     
 protected:
     TransformNodePtr createModel(const FilePath& path);

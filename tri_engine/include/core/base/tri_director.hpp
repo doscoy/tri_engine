@@ -17,7 +17,6 @@
 //  include
 #include "core/core_config.hpp"
 #include "tri_event_manager.hpp"
-#include "tri_task_manager.hpp"
 #include "core/debug/tri_debugmenu.hpp"
 #include "core/debug/tri_debug_string_buffer.hpp"
 #include "core/kernel/tri_kernel.hpp"
@@ -27,6 +26,8 @@
 #include "core/graphics/tri_render_layer.hpp"
 #include "core/graphics/tri_fade_layer.hpp"
 #include "core/graphics/tri_sprite_layer.hpp"
+#include "core/base/tri_task.hpp"
+
 #include <array>
 
 
@@ -103,6 +104,11 @@ public:
         return screen_revise_;
     }
     
+    
+    TaskPtr rootTask() {
+        return root_task_;
+    }
+    
 // ---------------------------------------------
 //  乱数管理    
     
@@ -116,31 +122,14 @@ public:
     ///
     /// 通常の更新
     void update(
-        const tick_t delta_time
+        const DeltaTime delta_time
     );
-    
-    ///
-    /// サスペンドの更新
-    void suspend(
-        const tick_t delta_time
-    );
-    
-    ///
-    /// サスペンド判定
-    bool isSuspend() const {
-        return suspend_;
-    }
-
-    ///
-    /// サスペンド設定
-    void setSuspend( const bool suspend ){
-        suspend_ = suspend;
-    }
+  
     
     ///
     /// 入力更新
     void updateInput(
-        const tick_t delta_time
+        const DeltaTime delta_time
     );
     
     
@@ -201,14 +190,6 @@ public:
     ///
     /// クリアカラー設定
     static void setClearColor(const Color& c);
-
-    ///
-    /// タスク登録
-    static void attachTask(TaskPtr task);
-    
-    ///
-    /// タスク削除
-    static void detachTask(TaskPtr task);
 
     ///
     /// 入力情報を取得
@@ -321,8 +302,9 @@ private:
     //  イベントマネージャ
     EventManager event_manager_;    ///< イベントマネージャ
     
-    //  タスクマネージャ
-    TaskManager task_manager_;      ///< タスクマネージャ
+    //  ルートタスク
+    //  全タスクはここにぶら下がる形になる
+    TaskPtr root_task_;
     
     
     //  クリアカラー
@@ -345,7 +327,6 @@ private:
     Array<DebugMenuLabel*, 24> layer_list_; ///< デバッグメニューリスト
 
     bool exit_request_; ///< 終了リクエスト
-    bool suspend_;      ///< サスペンドフラグ
     
 };
 

@@ -65,17 +65,12 @@ public:
 
     }
     
-    void update(t3::tick_t delta_time) {
+    void update(t3::DeltaTime delta_time) {
         float r = sprite_->transform()->rotation().z_;
         sprite_->transform()->rotation(t3::Vec3(0,0,r + 0.33f));
         
         pola_.updateInterpolation(delta_time);
         shader_->setConstFloat(0, moz_lv_);
-    }
-
-
-    void suspend(t3::tick_t delta_time) {
-
     }
 
 private:
@@ -113,7 +108,7 @@ void BlurScene::terminateScene() {
 }
 
 
-void BlurScene::updateScene(t3::tick_t delta_time) {
+void BlurScene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     t3::Director& gs = t3::Director::instance();
@@ -123,10 +118,6 @@ void BlurScene::updateScene(t3::tick_t delta_time) {
     }
 }
 
-void BlurScene::suspendScene(t3::tick_t delta_time) {
-
-    context_->suspend(delta_time);
-}
 
 
 

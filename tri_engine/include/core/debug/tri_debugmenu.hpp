@@ -90,7 +90,7 @@ public:
        
     ///
     /// 更新
-    void update( tick_t delta_time );
+    void update( DeltaTime delta_time );
     
     ///
     /// 描画

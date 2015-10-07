@@ -49,7 +49,7 @@ public:
     /// ポインティングデータの更新
     void updatePointing(
         const cross::PointingData& data,
-        tick_t delta_time
+        DeltaTime delta_time
     );
     
     ///
@@ -138,7 +138,7 @@ private:
     
     ///
     /// リピート情報の更新
-    void updateRepeat(tick_t delta_time);
+    void updateRepeat(DeltaTime delta_time);
     
     ///
     /// スライド情報の更新

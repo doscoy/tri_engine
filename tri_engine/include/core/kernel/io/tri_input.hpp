@@ -51,7 +51,7 @@ public:
     /// ゲームパッド情報を更新
     void updatePad(
         const cross::GamePadData& paddata,
-        tick_t delta_time
+        DeltaTime delta_time
     ) {
         pad_.updatePad(paddata, delta_time);
     }
@@ -60,7 +60,7 @@ public:
     /// ポインティングデバイス情報を更新
     void updatePointing(
         const cross::PointingData& pointing_data,
-        tick_t delta_time
+        DeltaTime delta_time
     ) {
         pointing_.updatePointing(pointing_data, delta_time);
     }
@@ -69,7 +69,7 @@ public:
     /// 加速度センサー情報を更新
     void updateAccelermeter(
         const cross::AccelerometerData acc_data,
-        tick_t delta_time
+        DeltaTime delta_time
     ) {
         (void)delta_time;
         accele_ = acc_data;

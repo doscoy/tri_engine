@@ -136,7 +136,7 @@ public:
 
     ///
     ///  更新処理
-    void updateInterpolation(const tick_t delta_time) {
+    void updateInterpolation(const DeltaTime delta_time) {
         if (!active_) {
             //  startされていないのですぐ終了
             return;

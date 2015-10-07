@@ -144,14 +144,10 @@ public:
         t3::drawRectangleCenterSize(box_df2_.center(), box_df2_.size(), t3::Color(205, 13, 195, 100));
     }
     
-    void update(t3::tick_t delta_time) {
+    void update(t3::DeltaTime delta_time) {
     
     }
 
-
-    void suspend(t3::tick_t delta_time) {
-
-    }
 
 private:
     t3::SpriteLayer layer_;
@@ -194,7 +190,7 @@ void FontTestScene::terminateScene() {
 }
 
 
-void FontTestScene::updateScene(t3::tick_t delta_time) {
+void FontTestScene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     t3::Director& gs = t3::Director::instance();
@@ -207,12 +203,6 @@ void FontTestScene::updateScene(t3::tick_t delta_time) {
 void FontTestScene::debugRenderScene() {
     context_->debugRender();
 }
-
-void FontTestScene::suspendScene(t3::tick_t delta_time) {
-
-    context_->suspend(delta_time);
-}
-
 
 
 

@@ -25,7 +25,7 @@ TRI_CORE_NS_BEGIN
 class CameraTouchController
     : public Task
 {
-    void taskUpdate(const tick_t dt);
+    void taskUpdate(const DeltaTime dt);
 };
 
 TRI_CORE_NS_END

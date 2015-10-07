@@ -32,7 +32,7 @@ Pad::~Pad() {
 
 }
 
-void Pad::updatePad(const cross::GamePadData& paddata, tick_t delta_time) {
+void Pad::updatePad(const cross::GamePadData& paddata, DeltaTime delta_time) {
     uint32_t current_frame_data = paddata.buttonData();
     trigger_ = current_frame_data & (current_frame_data ^ last_frame_data_);
     release_ = last_frame_data_ & (current_frame_data ^ last_frame_data_);
@@ -54,7 +54,7 @@ void Pad::updatePad(const cross::GamePadData& paddata, tick_t delta_time) {
 }
 
 
-void Pad::updateRepeat(tick_t delta_time) {
+void Pad::updateRepeat(DeltaTime delta_time) {
     
     if (last_frame_data_ > 0) {
         //  何か一つでもボタンが押され続けている時間を計測

@@ -18,7 +18,7 @@
 
 TRI_CORE_NS_BEGIN
 
-using tick_t = float;   ///< tick値
+using DeltaTime = float;   ///< tick値
 
 TRI_CORE_NS_END
 

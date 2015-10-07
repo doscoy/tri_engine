@@ -115,7 +115,7 @@ public:
     
     ///
     /// 更新
-    static bool broadCast(const tick_t dt);
+    static bool broadCast(const DeltaTime dt);
     
     
     ///

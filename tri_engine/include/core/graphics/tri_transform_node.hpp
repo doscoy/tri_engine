@@ -136,7 +136,7 @@ public:
     /// 更新
     void onUpdate(
         SceneGraph* scene_graph,
-        tick_t delta_time
+        DeltaTime delta_time
     ) override;
     
     

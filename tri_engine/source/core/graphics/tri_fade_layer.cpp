@@ -42,7 +42,7 @@ FadeLayer::~FadeLayer() {
 
 
 void FadeLayer::updateLayer(
-    tick_t delta_time
+    DeltaTime delta_time
 ) {
     if (!fading_) {
         return;

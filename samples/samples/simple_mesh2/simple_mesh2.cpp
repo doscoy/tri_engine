@@ -56,16 +56,13 @@ public:
     
     }
     
-    void update(t3::tick_t delta_time){
+    void update(t3::DeltaTime delta_time){
         static float angle = 0;
         angle += 1;
         node1_->rotationY(angle);
         node2_->rotation(angle, 0, 0);
     }
 
-    void suspend(t3::tick_t delta_time) {
-    
-    }
     
 private:
     void layerUpdate() {
@@ -111,7 +108,7 @@ void SimpleMesh2Scene::terminateScene() {
 }
 
 
-void SimpleMesh2Scene::updateScene(t3::tick_t delta_time) {
+void SimpleMesh2Scene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     auto& gs = t3::Director::instance();
@@ -121,10 +118,6 @@ void SimpleMesh2Scene::updateScene(t3::tick_t delta_time) {
     }
 }
 
-void SimpleMesh2Scene::suspendScene(t3::tick_t delta_time) {
-
-    context_->suspend(delta_time);
-}
 
 
 

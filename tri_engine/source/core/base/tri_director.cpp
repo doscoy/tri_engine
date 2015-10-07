@@ -35,18 +35,6 @@ const Input& Director::input(
 )  {
     return Director::instance().input_.at(player_no);
 }
-    
-void Director::attachTask(
-    TaskPtr task
-) {
-    instance().task_manager_.attach(task);
-}
-
-void Director::detachTask(
-    TaskPtr task
-) {
-    instance().task_manager_.detach(task);
-}
 
 
 LayerBase* Director::findLayer(
@@ -158,7 +146,7 @@ Director::Director()
     , input_()
     , layers_()
     , event_manager_()
-    , task_manager_()
+    , root_task_()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
     , use_clear_color_index_(0)
     , clear_colors_()
@@ -169,8 +157,10 @@ Director::Director()
     , dm_layers_(nullptr, "LAYERS")
     , layer_list_()
     , exit_request_(false)
-    , suspend_(false)
 {
+    //  ルートタスク生成
+    root_task_.reset(T3_NEW Task());
+
     //  ファイルシステムベースパス設定
     FilePath::setBaseDirectory(cross::getDeviceFilePath());
 
@@ -198,7 +188,7 @@ Director::Director()
 	clear_colors_[2] = color_sample::white();
 	clear_colors_[3] = color_sample::blue();
 
-
+    
 #if TRI_DEVFLAG_AGING_CHECK
     random_pointing_ = true;
 #endif
@@ -220,7 +210,7 @@ Director::~Director() {
 void Director::initializeDirector() {
     
     DebugMenu::instance().initialize();
-    
+    SceneManager::instance().initialize();
     
     dm_layers_.setFocusCallback(
         this,
@@ -263,7 +253,7 @@ void Director::terminateDirector() {
 
 //  アップデート
 void Director::update(
-    const tick_t delta_time
+    const DeltaTime delta_time
 ) {
     //  起動からのフレーム数カウント
     frame_counter_.countup();
@@ -271,18 +261,15 @@ void Director::update(
     //  入力更新
     updateInput(delta_time);
 
-
-    auto& sm = SceneManager::instance();
-    sm.updateScene(delta_time);
     
     //  タスク更新
-    task_manager_.updateTask(delta_time);
+    root_task_->taskFrame(delta_time);
 
     //  コリジョン判定
     CollisionManager& col_manager = CollisionManager::instance();
     col_manager.collisionDetection();
     
-    
+    //  デバッグメニューの更新
     auto& dm = DebugMenu::instance();
     dm.update(delta_time);
     
@@ -304,7 +291,7 @@ void Director::update(
 ///
 /// 入力情報更新
 void Director::updateInput(
-    const tick_t delta_time
+    const DeltaTime delta_time
 ) {
     for (int pad_idx = 0; pad_idx < MAX_PAD; ++pad_idx){
         Input& input = input_[pad_idx];
@@ -499,7 +486,6 @@ void Director::unregistryLayersToDebugMenu()
 
 void Director::showTask() const {
 
-    task_manager_.printTask();
 }
 
 void Director::calcScreenRevise() {

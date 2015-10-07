@@ -170,7 +170,7 @@ RotateCameraUpdater::~RotateCameraUpdater() {
 
 
 void RotateCameraUpdater::taskUpdate(
-    const tick_t dt
+    const DeltaTime dt
 ) {
     //  注視点設定
     camera()->targetPosition(center_);

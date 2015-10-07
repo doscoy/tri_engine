@@ -110,11 +110,11 @@ public:
         t3::EventManager::removeListener(this);
     }
     
-    void update(t3::tick_t delta_time) {
+    void update(t3::DeltaTime delta_time) {
         
     }
 
-    void suspend(t3::tick_t delta_time) {
+    void suspend(t3::DeltaTime delta_time) {
 
     }
     
@@ -172,7 +172,7 @@ void UiButtonScene::terminateScene() {
 }
 
 
-void UiButtonScene::updateScene(t3::tick_t delta_time) {
+void UiButtonScene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     t3::Director& gs = t3::Director::instance();
@@ -182,10 +182,6 @@ void UiButtonScene::updateScene(t3::tick_t delta_time) {
     }
 }
 
-void UiButtonScene::suspendScene(t3::tick_t delta_time) {
-
-    context_->suspend(delta_time);
-}
 
 
 

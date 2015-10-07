@@ -71,7 +71,7 @@ SpritePtr SpriteLayer::createSprite(const String& tex_name) {
 
 
 void SpriteLayer::updateLayer(
-    tick_t delta_time
+    DeltaTime delta_time
     ) {
     //  レンダリング用にスプライトをマージする
     for (auto& sp : sprites_) {

@@ -70,7 +70,7 @@ void LayerBase::unregistryToDebugMenu()
 //  レイヤー更新
 void LayerBase::updateLayers(
     Layers& layers,
-    tick_t delta_time
+    DeltaTime delta_time
 ){
     for (auto& layer : layers) {
         //  ポーズしてるレイヤーはスキップ

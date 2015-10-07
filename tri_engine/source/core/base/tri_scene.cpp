@@ -19,7 +19,7 @@ TRI_CORE_NS_BEGIN
 SceneBase::SceneBase(
     const char* const scene_name
 )   : finish_(false)
-    , scene_name_( scene_name )
+    , scene_name_(scene_name)
     , scene_debug_menu_frame_(nullptr, scene_name)
 {
     DebugMenu& debug_menu_root = DebugMenu::instance();
@@ -29,24 +29,17 @@ SceneBase::SceneBase(
     );
 }
 
-SceneBase::~SceneBase()
-{
+SceneBase::~SceneBase() {
     scene_debug_menu_frame_.detachSelf();
 }
 
 
-void SceneBase::update(
-    tick_t delta_time
+void SceneBase::taskUpdate(
+    DeltaTime delta_time
 ) {
     updateScene(delta_time);
-    
 }
 
-void SceneBase::suspend(
-    tick_t delta_time
-) {
-    suspendScene(delta_time);
-}
 
 void SceneBase::debugRender() {
     debugRenderScene();
@@ -59,29 +52,23 @@ void SceneBase::debugRender() {
 
     
 SceneManager::SceneManager()
-    : current_scene_( nullptr )
-    , next_scene_generator_( nullptr )
-    , force_change_( false )
-    , scene_changed_( false )
+    : current_scene_(nullptr)
+    , next_scene_generator_(nullptr)
+    , force_change_(false)
+    , scene_changed_(false)
 {
+}
+
+
+SceneManager::~SceneManager() {
+    
+    
+}
+
+void SceneManager::initialize() {
     SceneGenerator* sg = SceneBase::sceneGenerator<NullScene>();
     current_scene_ = sg->createScene();
 }
-
-
-SceneManager::~SceneManager()
-{
-    
-    
-}
-
-
-void SceneManager::updateScene(
-    tick_t delta_time
-){
-    current_scene_->update(delta_time);
-}
-
 
 void SceneManager::directScene() {
     if (current_scene_->isFinished() || force_change_) {
@@ -93,11 +80,6 @@ void SceneManager::directScene() {
     }
 }
 
-void SceneManager::suspendScene(
-    tick_t delta_time
-) {
-    current_scene_->suspend(delta_time);
-}
 
 void SceneManager::debugRender() {
     current_scene_->debugRender();

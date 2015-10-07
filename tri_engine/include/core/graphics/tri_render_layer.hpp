@@ -227,7 +227,7 @@ public:
     ///  全てのレイヤーを更新
     static void updateLayers(
         Layers& layers,
-        tick_t delta_time
+        DeltaTime delta_time
     );
     
     ///
@@ -241,7 +241,7 @@ protected:
     
     ///
     /// 更新
-    virtual void updateLayer(tick_t delta_time) {}
+    virtual void updateLayer(DeltaTime delta_time) {}
     
     ///
     /// 描画

@@ -21,10 +21,8 @@
 #include "core/base/tri_types.hpp"
 #include "core/base/tri_std.hpp"
 #include "core/debug/tri_trace.hpp"
-
-#include "tri_task_manager.hpp"
-
-
+#include "core/base/tri_task.hpp"
+#include "core/base/tri_director.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -58,14 +56,15 @@ public:
     
     //  シーン生成
     ScenePtr createScene() override {
-        return ScenePtr(T3_SYS_NEW scene_t);
+        return Director::instance().rootTask()->createTask<T>();
+//        return ScenePtr(T3_SYS_NEW scene_t);
     }
 
 };
 
 
 class SceneBase
-    : private Uncopyable
+    : public Task
 {
     friend class SceneGenerator;
     
@@ -78,13 +77,11 @@ public:
 public:
     virtual void initializeScene() {}
     virtual void terminateScene() {}
-    virtual void updateScene(tick_t) {}
-    virtual void suspendScene(tick_t) {}
+    virtual void updateScene(DeltaTime) {}
     virtual void debugRenderScene() {}
 
 public:
-    void update(tick_t delta_time);
-    void suspend(tick_t delta_time);
+    void taskUpdate(DeltaTime dt) override;
     void debugRender();
     
     bool isFinished() const {
@@ -138,12 +135,8 @@ private:
     ~SceneManager();
     
 public:
-    void updateScene(
-        tick_t delta_time
-    );
-    void suspendScene(
-        tick_t delta_time
-    );
+    void initialize();
+
     void debugRender();
     
     static void requestNextScene(

@@ -21,19 +21,21 @@
 #include "tri_pause_level.hpp"
 #include "tri_event_manager.hpp"
 #include "core/base/tri_std.hpp"
-
+#include "core/kernel/memory/tri_new.hpp"
 
 TRI_CORE_NS_BEGIN
 
 ///
 /// タスク
 class Task;
-using TaskPtr = Task*;
+using TaskPtr = SharedPtr<Task>;
+using TaskList = List<TaskPtr>;
 
 class Task
     : private Uncopyable
     , virtual public Nameable
 {
+    friend class Director;
     using self_t = Task;
 public:
     ///
@@ -46,7 +48,7 @@ public:
         PRIORITY_SYS_BEFORE_APP = 100000,   ///< 最初に実行されるタスク（システム用）
     };
 
-public:
+protected:
     ///
     /// コンストラクタ
     Task();
@@ -58,7 +60,8 @@ public:
         int priority,
         PauseLevel pause_lv
     );
-        
+
+public:
     ///
     /// デストラクタ
     virtual ~Task();
@@ -101,7 +104,6 @@ public:
         pause_lv_ = lv;
     }
 
-public:
     ///
     /// operator <
     bool operator <(const Task& rhs) {
@@ -113,24 +115,53 @@ public:
     bool operator >(const Task& rhs) {
         return priority_ > rhs.priority_;
     }
-
-public:
+    
     ///
-    /// タスクの更新
-    virtual void taskFrame(tick_t delta_time) {
-        taskUpdate(delta_time);
+    /// 削除予定か
+    bool isKill() const {
+        return kill_;
     }
 
     ///
     /// タスクの更新
-    virtual void taskUpdate(const tick_t delta_time) {}
+    /// 子タスクの更新と
+    void taskFrame(
+        const DeltaTime dt
+    );
+
+    ///
+    /// タスクの更新
+    virtual void taskUpdate(
+        const DeltaTime dt
+    ) {}
+
+
+    ///
+    /// 子タスク生成
+    template <class T>
+    auto createTask() {
+        SharedPtr<T> t(T3_NEW T());
+        children_.push_back(t);
+        return t;
+    }
+    
+    
+protected:
+    void killTask() {
+        kill_ = true;
+    }
     
 
 private:
     int priority_;          ///< 優先度
     int type_;              ///< タイプ
     PauseLevel pause_lv_;   ///< ポーズレベル
-    
+
+    //
+    bool kill_;
+
+    /// 子タスク
+    TaskList children_;
 };
 
 

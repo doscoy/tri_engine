@@ -27,12 +27,12 @@ public:
     void terminate(){
     }
     
-    void update(t3::tick_t delta_time){
+    void update(t3::DeltaTime delta_time){
 
         
     }
 
-    void suspend(t3::tick_t delta_time) {
+    void suspend(t3::DeltaTime delta_time) {
 
     }
 
@@ -71,7 +71,7 @@ void SimplePrimitiveScene::terminateScene() {
 }
 
 
-void SimplePrimitiveScene::updateScene(t3::tick_t delta_time) {
+void SimplePrimitiveScene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     auto& director = t3::Director::instance();
@@ -81,10 +81,6 @@ void SimplePrimitiveScene::updateScene(t3::tick_t delta_time) {
     }
 }
 
-void SimplePrimitiveScene::suspendScene(t3::tick_t delta_time) {
-
-    context_->suspend(delta_time);
-}
 
 
 void SimplePrimitiveScene::debugRenderScene() {

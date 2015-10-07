@@ -55,7 +55,7 @@ public:
 protected:
     ///
     /// レイヤ更新
-    void updateLayer(tick_t delta_time) override;
+    void updateLayer(DeltaTime delta_time) override;
 
     ///
     /// レイヤ描画

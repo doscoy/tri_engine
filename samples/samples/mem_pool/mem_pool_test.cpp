@@ -120,7 +120,7 @@ public:
         
     }
     
-    void update(t3::tick_t delta_time) {
+    void update(t3::DeltaTime delta_time) {
 
 
         size_t req = t3::Director::instance().random().getInt(100) + 4;
@@ -145,10 +145,6 @@ public:
 
     }
 
-
-    void suspend(t3::tick_t delta_time) {
-
-    }
     
 private:
     t3::MemoryPool pool_;
@@ -183,7 +179,7 @@ void MemPoolScene::terminateScene() {
 }
 
 
-void MemPoolScene::updateScene(t3::tick_t delta_time) {
+void MemPoolScene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     t3::Director& gs = t3::Director::instance();
@@ -193,10 +189,7 @@ void MemPoolScene::updateScene(t3::tick_t delta_time) {
     }
 }
 
-void MemPoolScene::suspendScene(t3::tick_t delta_time) {
 
-    context_->suspend(delta_time);
-}
 
 void MemPoolScene::debugRenderScene() {
 }

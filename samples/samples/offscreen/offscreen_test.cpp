@@ -32,7 +32,7 @@ public:
     
     }
     
-    void update(t3::tick_t delta_time) {
+    void update(t3::DeltaTime delta_time) {
         float rot = sprite_->transform()->rotation().z_;
         sprite_->transform()->rotation(t3::Vec3(0,0,rot + 0.1f));
     }
@@ -110,10 +110,6 @@ public:
     }
     
 
-    void suspend(t3::tick_t delta_time) {
-
-    }
-
 private:
     t3::SpriteLayer sprite_layer_;
     t3::SpritePtr sprite_;
@@ -147,7 +143,7 @@ void OffscreenTestScene::terminateScene() {
 }
 
 
-void OffscreenTestScene::updateScene(t3::tick_t delta_time) {
+void OffscreenTestScene::updateScene(t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     t3::Director& gs = t3::Director::instance();
@@ -157,10 +153,6 @@ void OffscreenTestScene::updateScene(t3::tick_t delta_time) {
     }
 }
 
-void OffscreenTestScene::suspendScene(t3::tick_t delta_time) {
-
-    context_->suspend(delta_time);
-}
 
 void OffscreenTestScene::debugRenderScene() {
     context_->debugRender();

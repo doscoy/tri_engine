@@ -126,7 +126,7 @@ CinemaLayer::~CinemaLayer() {
 }
 
 
-void CinemaLayer::updateLayer(tick_t delta_time) {
+void CinemaLayer::updateLayer(DeltaTime delta_time) {
 
 
 }

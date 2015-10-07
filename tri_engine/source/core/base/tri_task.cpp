@@ -9,8 +9,6 @@
 
 //  include
 #include "core/base/tri_task.hpp"
-#include "core/base/tri_task_manager.hpp"
-#include "core/base/tri_director.hpp"
 
 
 TRI_CORE_NS_BEGIN
@@ -27,14 +25,35 @@ Task::Task(
 )   : priority_(priority)
     , type_(type)
     , pause_lv_(pause_lv)
+    , kill_(false)
+    , children_()
 {
-    Director::attachTask(this);
+
 }
 
 
 
 Task::~Task() {
-    Director::detachTask(this);
+
+}
+
+void Task::taskFrame(
+    const DeltaTime dt
+) {
+    taskUpdate(dt);
+
+    //  直前のアップデートでkillされてなければ子タスクを実行
+    if (!kill_) {
+        for (auto& child : children_) {
+            child->taskFrame(dt);
+        }
+    }
+    
+    children_.remove_if(
+        [](TaskPtr p){
+            return p->isKill();
+        }
+    );
 }
 
 
