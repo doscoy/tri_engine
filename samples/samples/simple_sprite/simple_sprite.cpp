@@ -52,7 +52,7 @@ public:
     void terminate(){
     }
     
-    void update(t3::DeltaTime delta_time){
+    void update(const t3::DeltaTime delta_time){
 
         //  現在のスプライト数表示
         T3_PRINT_DISP(400, 0, "%d", sprites_.size());
@@ -180,7 +180,7 @@ void SimpleSpriteScene::terminateScene() {
 }
 
 
-void SimpleSpriteScene::updateScene(t3::DeltaTime delta_time) {
+void SimpleSpriteScene::updateScene(const t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     auto& director = t3::Director::instance();

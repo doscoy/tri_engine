@@ -57,13 +57,13 @@ public:
     
     ///
     /// イベント発行までの時間設定
-    void delay(DeltaTime delay) {
+    void delay(const DeltaTime delay) {
         delay_ = delay;
     }
     
     ///
     /// イベント発行までの時間経過
-    void update(DeltaTime dt) {
+    void update(const DeltaTime dt) {
         delay_ -= dt;
     }
 

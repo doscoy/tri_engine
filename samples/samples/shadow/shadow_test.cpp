@@ -44,17 +44,19 @@ void ShadowTestScene::initialize() {
 
     //  カメラ位置調整
     float len = chara->mesh()->boundingSphere().radius();
-    cam_updater_.position(0, len*4, len*8);
-    cam_updater_.targetPosition(0,0,0);
+    cam_updater_ = createTask<t3::LookAtCameraUpdater>();
+    cam_updater_->position(0, len*4, len*8);
+    cam_updater_->targetPosition(0,0,0);
         
     //  ライトカメラ
     //  太陽の位置からキャラを見る
-    light_camera_.position(node_sun_->position());
-    light_camera_.targetPosition(node_chara_->position());
+    light_camera_ = createTask<t3::LookAtCameraUpdater>();
+    light_camera_->position(node_sun_->position());
+    light_camera_->targetPosition(node_chara_->position());
         
     //  シーングラフにカメラ設定
-    sceneGraph().camera(cam_updater_.camera());
-    sceneGraph().shadowCamera(light_camera_.camera());
+    sceneGraph().camera(cam_updater_->camera());
+    sceneGraph().shadowCamera(light_camera_->camera());
     
     
     cinema_.renderTarget(&shadowSurface());
@@ -78,7 +80,7 @@ void ShadowTestScene::update() {
     if (pointing.isHold()) {
         float move_y = pointing.moveDistance().y_;
         if (std::abs(move_y) > 2) {
-            cam_updater_.dollyFront(move_y*0.1f);
+            cam_updater_->dollyFront(move_y*0.1f);
         }
     }
 

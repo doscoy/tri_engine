@@ -14,6 +14,16 @@
 
 ColladaMeshScene::ColladaMeshScene()
     : Scene("ColladaMeshScene") 
+    , final_layer_()
+    , cinema_()
+    , cam_updater_()
+    , light_camera_()
+    , scene_graph_()
+    , node_field_()
+    , node_box_()
+    , node_torus_()
+    , node_earth_()
+    , cam_controller_()
 {
 
 }
@@ -37,11 +47,12 @@ void ColladaMeshScene::initialize() {
     node_earth_->position(0.0f, 5.0f, 0.0f);
 
     //  カメラ位置調整
-    cam_updater_.center(t3::Vec3(0.0f, 2.0f, 0.0f));
-    cam_updater_.distance(20.0f);
+    cam_updater_ = createTask<t3::RotateCameraUpdater>();
+    cam_updater_->center(t3::Vec3(0.0f, 2.0f, 0.0f));
+    cam_updater_->distance(20.0f);
         
     //  シーングラフにカメラ設定
-    sceneGraph().camera(cam_updater_.camera());
+    sceneGraph().camera(cam_updater_->camera());
 
 
     T3_RENDER_ASSERT();

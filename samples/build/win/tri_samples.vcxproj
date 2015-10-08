@@ -21,7 +21,7 @@
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_pause_level.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_scene.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_system_events.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_task_manager.cpp" />
+    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_task.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_assert.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debugmenu.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debugmenu_frame.cpp" />
@@ -43,7 +43,9 @@
     <ClCompile Include="..\..\..\tri_engine\source\core\geometry\tri_frustum.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\geometry\tri_point_collider.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_camera.cpp" />
+    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_camera_touch_controller.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_camera_updater.cpp" />
+    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_camera_updater_events.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_cinema_layer.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_dae_loader.cpp" />
     <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_draw_layer.cpp" />
@@ -133,6 +135,7 @@
     <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\uncompr.c" />
     <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\zutil.c" />
     <ClCompile Include="..\..\samples\blur\blur_test.cpp" />
+    <ClCompile Include="..\..\samples\collada_mesh2\collada_mesh2.cpp" />
     <ClCompile Include="..\..\samples\collada_mesh\collada_mesh.cpp" />
     <ClCompile Include="..\..\samples\input\input_test.cpp" />
     <ClCompile Include="..\..\samples\main.cpp" />
@@ -164,8 +167,6 @@
     <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_std.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_system_events.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_task.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_task_generator.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_task_manager.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_types.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\core_config.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\core_engine.hpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_transform.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_camera.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_camera_updater.hpp" />
+    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_camera_updater_events.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_cinema_layer.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_color.hpp" />
     <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_dae_loader.hpp" />
@@ -328,6 +330,7 @@
     <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\zlib.h" />
     <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\zutil.h" />
     <ClInclude Include="..\..\samples\blur\blur_test.hpp" />
+    <ClInclude Include="..\..\samples\collada_mesh2\collada_mesh2.hpp" />
     <ClInclude Include="..\..\samples\collada_mesh\collada_mesh.hpp" />
     <ClInclude Include="..\..\samples\input\input_test.hpp" />
     <ClInclude Include="..\..\samples\samples.hpp" />

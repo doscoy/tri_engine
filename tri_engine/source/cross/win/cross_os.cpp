@@ -16,7 +16,7 @@ CROSS_NS_BEGIN
 
 
 void printConsole(
-    const char* const str
+    const char* str
 ) {
     OutputDebugStringA(str);
 

@@ -81,7 +81,7 @@ public:
 private:
     ///
     /// 更新関数
-    void updateLayer(DeltaTime delta_time) override;
+    void updateLayer(const DeltaTime delta_time) override;
 
     ///
     /// 描画関数

@@ -29,12 +29,11 @@ public:
 private:
     t3::DrawLayer final_layer_;
     t3::CinemaLayer cinema_;
-    t3::RotateCameraUpdater cam_updater_;
-    t3::LookAtCameraUpdater light_camera_;
+    t3::RotateCameraUpdaterPtr cam_updater_;
     t3::SceneGraph scene_graph_;
     t3::TransformNodePtr node_cone_;
     t3::TransformNodePtr node_object3_;
-    t3::CameraTouchController cam_controller_;
+    t3::CameraTouchControllerPtr cam_controller_;
 };
 
 #endif // SIMPLE_MESH2_HPP_INCLUDED

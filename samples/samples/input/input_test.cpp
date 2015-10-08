@@ -29,14 +29,10 @@ public:
 
     }
     
-    void update(t3::DeltaTime delta_time) {
+    void update(const t3::DeltaTime delta_time) {
         
     }
 
-
-    void suspend(t3::DeltaTime delta_time) {
-
-    }
     
     void debugRender() {
         const auto& input = t3::Director::instance().input(0);
@@ -189,7 +185,7 @@ void InputTestScene::terminateScene() {
 }
 
 
-void InputTestScene::updateScene(t3::DeltaTime delta_time) {
+void InputTestScene::updateScene(const t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     t3::Director& gs = t3::Director::instance();

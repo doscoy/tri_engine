@@ -96,7 +96,7 @@ local void make_crc_table()
     static volatile int first = 1;      /* flag to limit concurrent making */
     static const unsigned char p[] = {0,1,2,4,5,7,8,10,11,12,16,22,23,26};
 
-    /* See if another task is already doing this (not thread-safe, but better
+    /* See if another TaskBase is already doing this (not thread-safe, but better
        than nothing -- significantly reduces duration of vulnerability in
        case the advice about DYNAMIC_CRC_TABLE is ignored) */
     if (first) {

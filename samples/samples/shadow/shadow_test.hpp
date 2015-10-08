@@ -28,8 +28,8 @@ public:
 private:
     t3::DrawLayer final_layer_;
     t3::CinemaLayer cinema_;
-    t3::LookAtCameraUpdater cam_updater_;
-    t3::LookAtCameraUpdater light_camera_;
+    t3::LookAtCameraUpdaterPtr cam_updater_;
+    t3::LookAtCameraUpdaterPtr light_camera_;
     t3::SceneGraph scene_graph_;
     t3::TransformNodePtr node_field_;
     t3::TransformNodePtr node_chara_;

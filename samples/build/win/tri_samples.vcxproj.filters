@@ -257,9 +257,6 @@
     <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_system_events.cpp">
       <Filter>tri_engine\source\core\base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_task_manager.cpp">
-      <Filter>tri_engine\source\core\base</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\tri_engine\source\core\audio\tri_audio_handle.cpp">
       <Filter>tri_engine\source\core\audio</Filter>
     </ClCompile>
@@ -395,6 +392,18 @@
     <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_obj_loader.cpp">
       <Filter>tri_engine\source\core\graphics</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_task.cpp">
+      <Filter>tri_engine\source\core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_camera_touch_controller.cpp">
+      <Filter>tri_engine\source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\samples\collada_mesh2\collada_mesh2.cpp">
+      <Filter>sample\collada_mesh2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_camera_updater_events.cpp">
+      <Filter>tri_engine\source\core\graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\samples\samples.hpp">
@@ -512,12 +521,6 @@
       <Filter>tri_engine\include\core\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_task.hpp">
-      <Filter>tri_engine\include\core\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_task_generator.hpp">
-      <Filter>tri_engine\include\core\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_task_manager.hpp">
       <Filter>tri_engine\include\core\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_types.hpp">
@@ -976,6 +979,12 @@
     <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_submesh_data.hpp">
       <Filter>tri_engine\include\core\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\samples\collada_mesh2\collada_mesh2.hpp">
+      <Filter>sample\collada_mesh2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_camera_updater_events.hpp">
+      <Filter>tri_engine\include\core\graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="sample">
@@ -1112,6 +1121,9 @@
     </Filter>
     <Filter Include="tri_engine\source\third_party\tiny_collada">
       <UniqueIdentifier>{c514faf2-411c-4973-a290-af96d7b25fac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample\collada_mesh2">
+      <UniqueIdentifier>{3407fefb-9646-40fd-a4dc-87b8b602d30e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

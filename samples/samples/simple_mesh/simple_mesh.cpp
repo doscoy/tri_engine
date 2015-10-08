@@ -48,12 +48,8 @@ public:
     
     }
     
-    void update(t3::DeltaTime delta_time){
+    void update(const t3::DeltaTime delta_time){
         
-    }
-
-    void suspend(t3::DeltaTime delta_time) {
-    
     }
     
 private:
@@ -98,7 +94,7 @@ void SimpleMeshScene::terminateScene() {
 }
 
 
-void SimpleMeshScene::updateScene(t3::DeltaTime delta_time) {
+void SimpleMeshScene::updateScene(const t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     auto& gs = t3::Director::instance();

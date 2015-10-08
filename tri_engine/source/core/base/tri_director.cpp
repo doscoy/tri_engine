@@ -159,7 +159,7 @@ Director::Director()
     , exit_request_(false)
 {
     //  ルートタスク生成
-    root_task_.reset(T3_NEW Task());
+    root_task_.reset(T3_NEW RootTask());
 
     //  ファイルシステムベースパス設定
     FilePath::setBaseDirectory(cross::getDeviceFilePath());
@@ -198,6 +198,7 @@ Director::Director()
 
 //  デストラクタ
 Director::~Director() {
+    
     SceneManager::destroyInstance();
     CollisionManager::destroyInstance();
     AudioManager::destroyInstance();
@@ -247,7 +248,13 @@ void Director::initializeDirector() {
 
 
 void Director::terminateDirector() {
+    dbg_print_layer_.reset();
+    dbg_print_buffer_.reset();
+    dbg_font_sheet_.reset();
     fade_layer_.reset();
+
+    root_task_.reset();
+
 }
 
 
@@ -427,14 +434,14 @@ void Director::registryToDebugMenu(
     DebugMenuFrame& parent_frame
 ) {
     //  塗りつぶしカラーの登録
-    dm_color_idx_.attachSelf(parent_frame);
+    dm_color_idx_.attachSelf(&parent_frame);
     
     //  レイヤーのメニューフレーム登録
-    dm_layers_.attachSelf(parent_frame);
+    dm_layers_.attachSelf(&parent_frame);
 
 
     //  ゲームスピード登録
-    dm_game_speed_.attachSelf(parent_frame);
+    dm_game_speed_.attachSelf(&parent_frame);
 }
 
 

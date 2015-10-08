@@ -126,7 +126,7 @@ CinemaLayer::~CinemaLayer() {
 }
 
 
-void CinemaLayer::updateLayer(DeltaTime delta_time) {
+void CinemaLayer::updateLayer(const DeltaTime delta_time) {
 
 
 }

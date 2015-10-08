@@ -38,11 +38,12 @@ public:
 
 
         //  カメラ生成
-        cam_update_.position(0, model_radius * 5, model_radius * 5);
-        cam_update_.targetPosition(0,0,0);
+//        cam_update_ = createTask<t3::LookAtCameraUpdater>();
+        cam_update_->position(0, model_radius * 5, model_radius * 5);
+        cam_update_->targetPosition(0,0,0);
         
         //  シーングラフ初期化
-        scene_graph_.camera(cam_update_.camera());
+        scene_graph_.camera(cam_update_->camera());
         node1_ = scene_graph_.createNode();
         node1_->entity(model_);
         node2_ = node1_->createNode("node2");
@@ -56,7 +57,7 @@ public:
     
     }
     
-    void update(t3::DeltaTime delta_time){
+    void update(const t3::DeltaTime delta_time){
         static float angle = 0;
         angle += 1;
         node1_->rotationY(angle);
@@ -76,7 +77,7 @@ private:
 private:
     t3::DrawLayer layer_;
     t3::ModelPtr model_;
-    t3::LookAtCameraUpdater cam_update_;
+    t3::LookAtCameraUpdaterPtr cam_update_;
     t3::SceneGraph scene_graph_;
     
     t3::TransformNodePtr node1_;
@@ -108,7 +109,7 @@ void SimpleMesh2Scene::terminateScene() {
 }
 
 
-void SimpleMesh2Scene::updateScene(t3::DeltaTime delta_time) {
+void SimpleMesh2Scene::updateScene(const t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     auto& gs = t3::Director::instance();

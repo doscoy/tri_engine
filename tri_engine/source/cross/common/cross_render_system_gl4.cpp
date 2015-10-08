@@ -12,7 +12,7 @@ CROSS_NS_BEGIN
 
 
 extern void printConsole(
-    const char* const str
+    const char* str
 );
 
 

@@ -65,7 +65,7 @@ public:
 
     }
     
-    void update(t3::DeltaTime delta_time) {
+    void update(const t3::DeltaTime delta_time) {
         float r = sprite_->transform()->rotation().z_;
         sprite_->transform()->rotation(t3::Vec3(0,0,r + 0.33f));
         

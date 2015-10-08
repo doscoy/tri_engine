@@ -78,19 +78,19 @@ public:
 
     ///
     /// ルートメニュー取得
-    DebugMenuFrame& rootMenu() {
-        return menu_root_;
+    DebugMenuFrame* rootMenu() {
+        return &menu_root_;
     }
     
     ///
     /// ルートメニュー取得
-    const DebugMenuFrame& rootMenu() const {
-        return menu_root_;
+    const DebugMenuFrame* rootMenu() const {
+        return &menu_root_;
     }
        
     ///
     /// 更新
-    void update( DeltaTime delta_time );
+    void update(const DeltaTime delta_time );
     
     ///
     /// 描画
@@ -99,9 +99,9 @@ public:
     ///
     /// フレームに追加
     void attachFrame(
-        DebugMenuFrame& frame
-    ){
-        frame.attachSelf( menu_root_ );
+        DebugMenuFrame* frame
+    ) {
+        frame->attachSelf(&menu_root_);
     }
     
     ///

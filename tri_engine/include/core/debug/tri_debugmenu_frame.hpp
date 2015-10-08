@@ -33,7 +33,7 @@ class DebugMenuFrame
     : public DebugMenuLabel
 {
     //  friends
-    friend void DebugMenuLabel::attachSelf(t3::DebugMenuFrame &frame);
+    friend void DebugMenuLabel::attachSelf(t3::DebugMenuFrame* frame);
     friend void DebugMenuLabel::detachSelf();
     
 public:
@@ -117,11 +117,11 @@ public:
 private:
     ///
     /// アイテムをアタッチ
-    void attachItem(DebugMenuLabel& item);
+    void attachItem(DebugMenuLabel* item);
     
     ///
     /// アイテムをデタッチ
-    void detachItem(DebugMenuLabel& item);
+    void detachItem(DebugMenuLabel* item);
     
 private:
     DebugMenuList items_;           ///< 子アイテム一覧

@@ -50,7 +50,7 @@ void Scene::terminateScene() {
     terminate();
 }
 
-void Scene::updateScene(DeltaTime dt) {
+void Scene::updateScene(const DeltaTime dt) {
     update();
 }
 

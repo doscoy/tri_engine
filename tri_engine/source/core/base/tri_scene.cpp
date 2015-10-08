@@ -62,7 +62,6 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager() {
     
-    
 }
 
 void SceneManager::initialize() {
@@ -96,6 +95,7 @@ void SceneManager::sceneChange() {
     current_scene_->terminateScene();
 
     //  次のシーンに遷移
+    current_scene_->killTask();
     current_scene_ = next_scene_generator_->createScene();
     next_scene_generator_ = SceneBase::sceneGenerator<NullScene>();
     

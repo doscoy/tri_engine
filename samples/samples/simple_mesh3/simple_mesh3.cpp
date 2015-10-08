@@ -38,11 +38,12 @@ public:
         
         //  カメラ位置調整
         float len = model_->mesh()->boundingSphere().radius();
-        cam_updater_.position(0, len*2, len*4);
-        cam_updater_.targetPosition(0,0,0);
+//        cam_updater_ = createTask<t3::LookAtCameraUpdater>();
+        cam_updater_->position(0, len*2, len*4);
+        cam_updater_->targetPosition(0,0,0);
         
         //  シーングラフ初期化
-        scene_graph_.camera(cam_updater_.camera());
+        scene_graph_.camera(cam_updater_->camera());
         node1_ = scene_graph_.createNode();
         node1_->entity(model_);
     }
@@ -51,7 +52,7 @@ public:
     
     }
     
-    void update(t3::DeltaTime delta_time){
+    void update(const t3::DeltaTime delta_time){
         static float angle;
         angle += 0.25f;
         node1_->rotationY(angle);
@@ -68,7 +69,7 @@ private:
 private:
     t3::DrawLayer layer_;
     t3::ModelPtr model_;
-    t3::LookAtCameraUpdater cam_updater_;
+    t3::LookAtCameraUpdaterPtr cam_updater_;
     t3::SceneGraph scene_graph_;
     t3::TransformNodePtr node1_;
 };
@@ -98,7 +99,7 @@ void SimpleMesh3Scene::terminateScene() {
 }
 
 
-void SimpleMesh3Scene::updateScene(t3::DeltaTime delta_time) {
+void SimpleMesh3Scene::updateScene(const t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     auto& gs = t3::Director::instance();

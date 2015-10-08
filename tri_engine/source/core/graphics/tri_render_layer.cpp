@@ -57,7 +57,7 @@ void LayerBase::priority(
 void LayerBase::registryToDebugMenu(
     DebugMenuFrame& parent
 ) {
-    dmf_me_.attachSelf(parent);
+    dmf_me_.attachSelf(&parent);
 }
 
 void LayerBase::unregistryToDebugMenu()

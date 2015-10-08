@@ -93,7 +93,7 @@ public:
     ///
     /// 自身を親にアタッチ
     void attachSelf(
-        DebugMenuFrame& frame   ///< 親
+        DebugMenuFrame* frame   ///< 親
     );
     
     ///

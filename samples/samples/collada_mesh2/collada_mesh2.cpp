@@ -14,9 +14,15 @@
 //
 
 ColladaMesh2Scene::ColladaMesh2Scene()
-    : Scene("ColladaMeshScene") 
+    : t3::jet::Scene("ColladaMesh2Scene") 
+    , final_layer_()
+    , cinema_()
+    , cam_updater_()
+    , scene_graph_()
+    , node_cone_()
+    , node_object3_()
+    , cam_controller_()
 {
-
 }
 
 ColladaMesh2Scene::~ColladaMesh2Scene() {
@@ -34,11 +40,15 @@ void ColladaMesh2Scene::initialize() {
     node_object3_->position(3, 0, 2);
     
     //  カメラ位置調整
-    cam_updater_.center(t3::Vec3(0.0f, 0.0f, 0.0f));
-    cam_updater_.distance(20.0f);
+    cam_updater_ = createTask<t3::LookAtCameraUpdater>();
+    cam_updater_->center(t3::Vec3(0.0f, 0.0f, 0.0f));
+    cam_updater_->distance(20.0f);
+
         
     //  シーングラフにカメラ設定
-    sceneGraph().camera(cam_updater_.camera());
+    sceneGraph().camera(cam_updater_->camera());
+
+    cam_controller_ = createTask<t3::CameraTouchController>();
 
 
     T3_RENDER_ASSERT();

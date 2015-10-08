@@ -22,11 +22,19 @@
 
 TRI_CORE_NS_BEGIN
 
+///
+/// タッチでカメラ操作
 class CameraTouchController
-    : public Task
+    : public TaskBase
 {
-    void taskUpdate(const DeltaTime dt);
+    void taskUpdate(const DeltaTime dt) override;
 };
+
+///
+/// タッチでカメラ操作タスク
+
+using CameraTouchControllerPtr = SharedPtr<CameraTouchController>;
+
 
 TRI_CORE_NS_END
 

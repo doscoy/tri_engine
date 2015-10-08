@@ -13,33 +13,29 @@
 
 TRI_CORE_NS_BEGIN
 
-Task::Task()
-    : Task(0, PRIORITY_APP_DEFAULT, PAUSE_LV_1)
+TaskBase::TaskBase()
+    : priority_(PRIORITY_APP_DEFAULT)
+    , type_(0)
+    , pause_lv_(PAUSE_LV_1)
+    , kill_(false)
+    , children_()
 {}
 
 
-Task::Task(
-    int type,
-    int priority,
-    PauseLevel pause_lv
-)   : priority_(priority)
-    , type_(type)
-    , pause_lv_(pause_lv)
-    , kill_(false)
-    , children_()
-{
+
+TaskBase::~TaskBase() {
 
 }
 
-
-
-Task::~Task() {
-
-}
-
-void Task::taskFrame(
+void TaskBase::taskFrame(
     const DeltaTime dt
 ) {
+    if (kill_) {
+        //  キル済タスクは何もしない
+        //  親タスク側でインスタンスが破棄される
+        return;
+    }
+
     taskUpdate(dt);
 
     //  直前のアップデートでkillされてなければ子タスクを実行

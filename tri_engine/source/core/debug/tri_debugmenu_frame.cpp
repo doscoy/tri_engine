@@ -20,6 +20,7 @@ DebugMenuFrame::DebugMenuFrame(
     DebugMenuFrame* parent,
     const String& label
 )   : DebugMenuLabel(parent, label)
+    , items_()
     , focus_item_(nullptr)
     , select_idx_(0)
 {
@@ -59,35 +60,35 @@ void DebugMenuFrame::closeFrame()
 
 
 void DebugMenuFrame::attachItem(
-    DebugMenuLabel& item
+    DebugMenuLabel* item
 ){
-    if (item.getParent()){
+    if (item->getParent()){
         //  既にどこかのFrameに付いている
         //  ので外す
-        item.detachSelf();
+        item->detachSelf();
         
     }
     //  自分を親フレームにする
-    item.setParent(this);
+    item->setParent(this);
     
     //  子リストに追加
-    items_.push_back(&item);
+    items_.push_back(item);
 }
 
 
 void DebugMenuFrame::detachItem(
-    DebugMenuLabel& item
+    DebugMenuLabel* item
 ){
     //  自分の管理アイテムか判定
-    T3_ASSERT(item.getParent() == this);
-    if (&item == focus_item_) {
+    T3_ASSERT(item->getParent() == this);
+    if (item == focus_item_) {
         setFocusItem(nullptr);
     }
     //  親を無効化
-    item.setParent( nullptr );
+    item->setParent(nullptr);
 
     //  子リストから外す
-    items_.remove(&item);
+    items_.remove(item);
     
     
 

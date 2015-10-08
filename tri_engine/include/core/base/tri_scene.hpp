@@ -24,6 +24,7 @@
 #include "core/base/tri_task.hpp"
 #include "core/base/tri_director.hpp"
 
+
 TRI_CORE_NS_BEGIN
 
 
@@ -43,31 +44,30 @@ template <typename T>
 class TypedSceneGenerator
     : public SceneGenerator
 {
-    typedef TypedSceneGenerator<T>  self_t;
-    typedef T                       scene_t;
+
+    using GenType = T;
+    using SelfType = TypedSceneGenerator<T>;
 public:
     
     //  インスタンス取得
-    static self_t* instancePtr() {
-        static self_t instance_;
+    static SelfType* instancePtr() {
+        static SelfType instance_;
         return &instance_;
     }
     
-    
     //  シーン生成
     ScenePtr createScene() override {
-        return Director::instance().rootTask()->createTask<T>();
-//        return ScenePtr(T3_SYS_NEW scene_t);
-    }
+        return Director::instance().rootTask()->createTask<GenType>();
 
+    }
 };
 
 
 class SceneBase
-    : public Task
+    : public TaskBase
 {
     friend class SceneGenerator;
-    
+    friend class SceneManager;
 public:
     explicit SceneBase(
         const char* const scene_name 
@@ -77,11 +77,11 @@ public:
 public:
     virtual void initializeScene() {}
     virtual void terminateScene() {}
-    virtual void updateScene(DeltaTime) {}
+    virtual void updateScene(const DeltaTime) {}
     virtual void debugRenderScene() {}
 
 public:
-    void taskUpdate(DeltaTime dt) override;
+    void taskUpdate(const DeltaTime dt) override;
     void debugRender();
     
     bool isFinished() const {

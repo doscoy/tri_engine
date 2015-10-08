@@ -241,7 +241,7 @@ protected:
     
     ///
     /// 更新
-    virtual void updateLayer(DeltaTime delta_time) {}
+    virtual void updateLayer(const DeltaTime delta_time) {}
     
     ///
     /// 描画

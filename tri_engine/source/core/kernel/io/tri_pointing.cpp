@@ -127,7 +127,7 @@ void Pointing::clearPositionList() {
 }
 
 
-void Pointing::updateRepeat(DeltaTime delta_time) {
+void Pointing::updateRepeat(const DeltaTime delta_time) {
     repeat_ = trigger_;
     if (hold_) {
         pressed_time_ += delta_time;

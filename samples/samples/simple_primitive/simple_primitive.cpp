@@ -27,13 +27,9 @@ public:
     void terminate(){
     }
     
-    void update(t3::DeltaTime delta_time){
+    void update(const t3::DeltaTime delta_time){
 
         
-    }
-
-    void suspend(t3::DeltaTime delta_time) {
-
     }
 
     void debugRender() {
@@ -71,7 +67,7 @@ void SimplePrimitiveScene::terminateScene() {
 }
 
 
-void SimplePrimitiveScene::updateScene(t3::DeltaTime delta_time) {
+void SimplePrimitiveScene::updateScene(const t3::DeltaTime delta_time) {
     context_->update(delta_time);
     
     auto& director = t3::Director::instance();

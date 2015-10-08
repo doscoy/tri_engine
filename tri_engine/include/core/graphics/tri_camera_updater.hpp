@@ -27,13 +27,13 @@ TRI_CORE_NS_BEGIN
 ///
 /// カメラ操作
 class CameraUpdater
-    : public Task
+    : public TaskBase
 {
 public:
     ///
     /// コンストラクタ
     CameraUpdater()
-        : Task()
+        : TaskBase()
         , camera_(Camera::create())
     {}
 
@@ -136,11 +136,17 @@ public:
         const float speed   ///< 速度
     );
     
+    ///
+    /// タスク更新
+    void taskUpdate(
+        const DeltaTime dt
+    ) override {}
 
 private:
 
 
 };
+using LookAtCameraUpdaterPtr = SharedPtr<LookAtCameraUpdater>;
 
 
 
@@ -237,6 +243,7 @@ private:
     float distance_;
 };
 
+using RotateCameraUpdaterPtr = SharedPtr<RotateCameraUpdater>;
 
 
 

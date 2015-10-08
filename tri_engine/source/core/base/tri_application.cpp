@@ -79,7 +79,7 @@ public:
         , dm_show_work_time_(&dmf_system_, "SHOW WORKTIME", show_work_time_)
         , dm_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_)
         , dm_show_heap_(&dmf_system_, "SHOW HEAP", show_heap_)
-        , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_)
+        , dm_show_task_(&dmf_system_, "SHOW TaskBase", show_task_)
     {
         t3::Director::instance().registryToDebugMenu(dmf_system_);
         render_avg.reserve(LIMIT_AVG_SUM);

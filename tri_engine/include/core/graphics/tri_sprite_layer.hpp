@@ -88,7 +88,7 @@ private:
 
     ///
     /// レイヤーの更新
-    void updateLayer(DeltaTime delta_time) override;
+    void updateLayer(const DeltaTime delta_time) override;
     
     ///
     /// レイヤーの描画

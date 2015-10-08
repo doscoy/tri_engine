@@ -27,16 +27,16 @@ TRI_CORE_NS_BEGIN
 
 ///
 /// タスク
-class Task;
-using TaskPtr = SharedPtr<Task>;
+class TaskBase;
+using TaskPtr = SharedPtr<TaskBase>;
 using TaskList = List<TaskPtr>;
 
-class Task
+class TaskBase
     : private Uncopyable
     , virtual public Nameable
 {
     friend class Director;
-    using self_t = Task;
+    using self_t = TaskBase;
 public:
     ///
     /// タスクのプライオリティ
@@ -51,20 +51,13 @@ public:
 protected:
     ///
     /// コンストラクタ
-    Task();
+    TaskBase();
     
-    ///
-    /// コンストラクタ
-    Task(
-        int type,
-        int priority,
-        PauseLevel pause_lv
-    );
 
 public:
     ///
     /// デストラクタ
-    virtual ~Task();
+    virtual ~TaskBase();
 
 public:
 
@@ -106,13 +99,13 @@ public:
 
     ///
     /// operator <
-    bool operator <(const Task& rhs) {
+    bool operator <(const TaskBase& rhs) {
         return priority_ < rhs.priority_;
     }
     
     ///
     /// operator >
-    bool operator >(const Task& rhs) {
+    bool operator >(const TaskBase& rhs) {
         return priority_ > rhs.priority_;
     }
     
@@ -128,24 +121,19 @@ public:
     void taskFrame(
         const DeltaTime dt
     );
-
-    ///
-    /// タスクの更新
-    virtual void taskUpdate(
-        const DeltaTime dt
-    ) {}
-
-
+    
     ///
     /// 子タスク生成
-    template <class T>
+    template <class U>
     auto createTask() {
-        SharedPtr<T> t(T3_NEW T());
+        SharedPtr<U> t(T3_NEW U());
         children_.push_back(t);
         return t;
     }
-    
-    
+
+
+    virtual void taskUpdate(const DeltaTime dt) = 0;
+
 protected:
     void killTask() {
         kill_ = true;
@@ -164,6 +152,15 @@ private:
     TaskList children_;
 };
 
+
+
+///
+/// タスクシステムルート
+class RootTask
+    : public TaskBase
+{
+    void taskUpdate(const DeltaTime dt) override {}
+};
 
 
 TRI_CORE_NS_END

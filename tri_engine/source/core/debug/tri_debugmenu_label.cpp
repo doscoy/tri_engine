@@ -27,7 +27,8 @@ DebugMenuLabel::DebugMenuLabel(
 
 {
     if (parent) {
-        attachSelf(*parent);
+        attachSelf(parent);
+        T3_ASSERT(parent_->getItems().size() < 1000);
     }
 }
 
@@ -37,14 +38,17 @@ DebugMenuLabel::~DebugMenuLabel()
 }
 
 void DebugMenuLabel::attachSelf(
-    DebugMenuFrame& frame
+    DebugMenuFrame* frame
 ) {
-    frame.attachItem(*this);
+    T3_NULL_ASSERT(frame);
+    frame->attachItem(this);
+    T3_ASSERT(parent_->getItems().size() < 1000);
 }
     
 void DebugMenuLabel::detachSelf(){
+    T3_ASSERT(parent_->getItems().size() < 1000);
     T3_NULL_ASSERT(parent_);
-    parent_->detachItem(*this);
+    parent_->detachItem(this);
 }
 
 void DebugMenuLabel::draw(

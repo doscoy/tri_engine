@@ -5,6 +5,8 @@
 
 #if defined(__APPLE__)
     #include <unistd.h>
+#else
+    typedef int ssize_t;
 #endif
 
 

@@ -138,7 +138,7 @@ private:
     
     ///
     /// リピート情報の更新
-    void updateRepeat(DeltaTime delta_time);
+    void updateRepeat(const DeltaTime delta_time);
     
     ///
     /// スライド情報の更新
