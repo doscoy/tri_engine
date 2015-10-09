@@ -40,7 +40,7 @@ void ColladaMesh2Scene::initialize() {
     node_object3_->position(3, 0, 2);
     
     //  カメラ位置調整
-    cam_updater_ = createTask<t3::LookAtCameraUpdater>();
+    cam_updater_ = createTask<t3::RotateCameraUpdater>();
     cam_updater_->center(t3::Vec3(0.0f, 0.0f, 0.0f));
     cam_updater_->distance(20.0f);
 
