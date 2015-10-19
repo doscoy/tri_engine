@@ -270,7 +270,7 @@ void Director::update(
 
     
     //  タスク更新
-    root_task_->taskFrame(delta_time);
+    root_task_->doTaskUpdate(delta_time);
 
     //  コリジョン判定
     CollisionManager& col_manager = CollisionManager::instance();

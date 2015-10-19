@@ -114,29 +114,82 @@ public:
     bool isKill() const {
         return kill_;
     }
-
-    ///
-    /// タスクの更新
-    /// 子タスクの更新と
-    void taskFrame(
-        const DeltaTime dt
-    );
     
     ///
     /// 子タスク生成
     template <class U>
     auto createTask() {
         SharedPtr<U> t(T3_NEW U());
+        t->doTaskInitialize();
+        children_.push_back(t);
+        return t;
+    }
+    
+    ///
+    /// 子タスク生成
+    template <class U, class Arg1>
+    auto createTask(Arg1& arg1) {
+        SharedPtr<U> t(T3_NEW U(arg1));
+        t->taskInitialize();
         children_.push_back(t);
         return t;
     }
 
+    ///
+    /// 子タスク生成
+    template <class U, class Arg1, class Arg2>
+    auto createTask(Arg1& arg1, Arg1& arg2) {
+        SharedPtr<U> t(T3_NEW U(arg1, arg2));
+        t->doTaskInitialize();
+        children_.push_back(t);
+        return t;
+    }
+    
+    
+private:
+    ///
+    /// タスクの初期化呼び出し
+    ///
+    void doTaskInitialize();
+    
+    ///
+    /// タスクの後片付け呼び出し
+    ///
+    void doTaskTerminate();
+    
+    ///
+    /// タスクの更新呼び出し
+    /// 子タスクの更新と
+    void doTaskUpdate(
+        const DeltaTime dt
+    );
+    
+protected:
+    ///
+    /// タスクの初期化
+    /// createTask直後に呼ばれる
+    virtual void taskInitialize() {}
 
+    ///
+    /// タスクの更新
+    /// 毎フレーム呼ばれる
     virtual void taskUpdate(const DeltaTime dt) = 0;
 
-protected:
+    ///
+    /// タスクの後片付け
+    /// killTask呼び出し時に呼ばれる
+    virtual void taskTerminate() {}
+
+public:
+    ///
+    /// タスクの削除予約
     void killTask() {
         kill_ = true;
+        doTaskTerminate();
+        for (auto& child : children_) {
+            child->killTask();
+        }
+
     }
     
 
@@ -150,6 +203,34 @@ private:
 
     /// 子タスク
     TaskList children_;
+};
+
+
+///
+/// タスクジェネレータ
+/// 一定間隔でタスク生成し続ける
+template <class T>
+class TaskGenerator
+    : public TaskBase
+{
+public:
+    void taskUpdate(const DeltaTime dt) {
+        if (timer_ < 0) {
+            timer_ = interval_;
+            createTask<T>();
+        } else {
+            timer_ -= dt;
+        }
+    }
+
+    void interval(float time) {
+        interval_ = time;
+        timer_ = time;
+    }
+
+private:
+    float interval_;
+    float timer_;
 };
 
 

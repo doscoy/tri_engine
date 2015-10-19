@@ -27,7 +27,15 @@ TaskBase::~TaskBase() {
 
 }
 
-void TaskBase::taskFrame(
+void TaskBase::doTaskInitialize() {
+    taskInitialize();
+}
+
+void TaskBase::doTaskTerminate() {
+    taskTerminate();
+}
+
+void TaskBase::doTaskUpdate(
     const DeltaTime dt
 ) {
     if (kill_) {
@@ -41,7 +49,7 @@ void TaskBase::taskFrame(
     //  直前のアップデートでkillされてなければ子タスクを実行
     if (!kill_) {
         for (auto& child : children_) {
-            child->taskFrame(dt);
+            child->doTaskUpdate(dt);
         }
     }
     
