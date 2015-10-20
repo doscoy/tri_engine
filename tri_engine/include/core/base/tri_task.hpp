@@ -119,8 +119,10 @@ public:
     /// 子タスク生成
     template <class U>
     auto createTask() {
+        
         SharedPtr<U> t(T3_NEW U());
-        t->doTaskInitialize();
+        TaskBase* tb = t.get();
+        tb->doTaskInitialize();
         children_.push_back(t);
         return t;
     }

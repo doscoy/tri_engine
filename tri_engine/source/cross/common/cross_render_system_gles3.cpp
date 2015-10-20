@@ -386,6 +386,7 @@ RenderSystem::ShaderVariableLocation RenderSystem::getUniformLocation(
     RenderSystem::ShaderProgramID program,
     const char* const name
 ) {
+    CROSS_GL_ASSERT();
     int loc = glGetUniformLocation(program, name);
     CROSS_GL_ASSERT();
     return loc;

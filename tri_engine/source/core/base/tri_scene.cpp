@@ -18,7 +18,8 @@ TRI_CORE_NS_BEGIN
 
 SceneBase::SceneBase(
     const char* const scene_name
-)   : finish_(false)
+)   : TaskBase()
+    , finish_(false)
     , scene_name_(scene_name)
     , scene_debug_menu_frame_(nullptr, scene_name)
 {

@@ -520,7 +520,6 @@ bool Application::isDebugMenuOpenRequest() {
 
 bool Application::isSuspend() const {
 
-    auto& director = t3::Director::instance();
     auto& dm = t3::DebugMenu::instance();
     
     if (dm.isOpened()) {
