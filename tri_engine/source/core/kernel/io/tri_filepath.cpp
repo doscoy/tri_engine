@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-#include "cross/cross_sdk.hpp"
+#include "cross/cross.hpp"
 #include "core/kernel/io/tri_filepath.hpp"
 
 TRI_CORE_NS_BEGIN

@@ -14,9 +14,9 @@
 #define TRI_ENGINE_HPP_INCLUDED
 
 //  include
-#include "cross/cross_sdk.hpp"
-#include "core/core_engine.hpp"
-#include "jet/jet_engine.hpp"
+#include "cross/cross.hpp"
+#include "core/core.hpp"
+#include "jet/jet.hpp"
 
 #endif // TRI_ENGINE_HPP_INCLUDED
 

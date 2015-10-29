@@ -6,12 +6,12 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 /**
-    @file jet_engine.hpp
-    JetENGINE統合ヘッダー.
+    @file jet.hpp
+    Jet統合ヘッダー.
 */
 
-#ifndef JET_ENGINE_HPP_INCLUDED
-#define JET_ENGINE_HPP_INCLUDED
+#ifndef JET_HPP_INCLUDED
+#define JET_HPP_INCLUDED
 
 
 #include "gui/jet_gui.hpp"

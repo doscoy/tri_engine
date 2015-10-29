@@ -16,7 +16,7 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "cross/cross_sdk.hpp"
+#include "cross/cross.hpp"
 #include "tri_wav.hpp"
 #include <array>
 

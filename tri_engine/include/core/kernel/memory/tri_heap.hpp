@@ -14,7 +14,7 @@
 #define TRI_HEAP_HPP_INCLUDED
 
 //  include
-#include "cross/cross_sdk.hpp"
+#include "cross/cross.hpp"
 #include "core/core_config.hpp"
 #include "core/base/tri_std.hpp"
 #include "core/kernel/process/tri_mutex.hpp"

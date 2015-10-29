@@ -6,7 +6,7 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 
-#include "cross/cross_sdk.hpp"
+#include "cross/cross.hpp"
 #include "core/base/tri_types.hpp"
 #include "core/kernel/memory/tri_heap.hpp"
 #include "core/debug/tri_assert.hpp"

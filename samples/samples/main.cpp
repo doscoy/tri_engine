@@ -36,8 +36,10 @@ int main(int argc, char * argv[])
         app.rootScene(t3::SceneBase::sceneGenerator<ColladaMesh2Scene>());
     //    app.rootScene(t3::SceneBase::sceneGenerator<SimpleMesh3Scene>());
  //   app.rootScene(t3::SceneBase::sceneGenerator<ShadowTestScene>());
-
-        t3::setApplication(app);
+    app.rootScene(t3::SceneBase::sceneGenerator<WebNotificationTest>());
+    
+    
+    t3::setApplication(app);
     #if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_IOS
         @autoreleasepool {
             return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));

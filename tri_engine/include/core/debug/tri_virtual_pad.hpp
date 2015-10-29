@@ -13,7 +13,7 @@
 #define TRI_VIRTUAL_PAD_HPP_INCLUDED
 
 #include "core/core_config.hpp"
-#include "cross/cross_sdk.hpp"
+#include "cross/cross.hpp"
 #include "core/graphics/tri_draw_layer.hpp"
 
 TRI_CORE_NS_BEGIN

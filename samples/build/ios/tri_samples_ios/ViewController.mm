@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-#include "cross/cross_sdk.hpp"
+#include "cross/cross.hpp"
 #import "ViewController.h"
 
 #include "core/base/tri_application.hpp"

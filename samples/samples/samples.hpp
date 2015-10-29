@@ -31,7 +31,7 @@
 //#include "blur/blur_test.hpp"
 //#include "font/font_test.hpp"
 #include "shadow/shadow_test.hpp"
-
+#include "web_notification/web_notification_test.hpp"
 
 
 class RootTest
@@ -50,6 +50,7 @@ public:
         , simple_mesh2_(&samples_, "SIMPLE MESH2")
         , simple_mesh3_(&samples_, "SIMPLE MESH3")
         , shadow_test(&samples_, "SHADOW TEST")
+        , web_notification_test_(&samples_, "WEB NOTIFICATION TEST")
     {}
 
 public:
@@ -84,7 +85,7 @@ private:
     t3::DebugMenuSceneLouncher<SimpleMesh2Scene> simple_mesh2_;
     t3::DebugMenuSceneLouncher<SimpleMesh3Scene> simple_mesh3_;
     t3::DebugMenuSceneLouncher<ShadowTestScene> shadow_test;
-
+    t3::DebugMenuSceneLouncher<WebNotificationTest> web_notification_test_;
 };
 
 

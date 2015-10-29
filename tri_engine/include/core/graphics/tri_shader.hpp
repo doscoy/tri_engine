@@ -14,7 +14,7 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "cross/cross_sdk.hpp"
+#include "cross/cross.hpp"
 #include "core/math/tri_vec3.hpp"
 #include "core/math/tri_matrix.hpp"
 #include "core/base/tri_std.hpp"

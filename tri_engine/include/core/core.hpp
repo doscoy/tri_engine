@@ -7,12 +7,12 @@
 ////////////////////////////////////////////////////////////////////////
 
 /**
-    @file core_engine.hpp
+    @file core.hpp
     CoreENGINE統合ヘッダ.
 */
 
-#ifndef CORE_ENGINE_HPP_INCLUDED
-#define CORE_ENGINE_HPP_INCLUDED
+#ifndef CORE_HPP_INCLUDED
+#define CORE_HPP_INCLUDED
 
 //  include
 #include "core/audio/tri_audio.hpp"

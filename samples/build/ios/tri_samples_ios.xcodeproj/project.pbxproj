@@ -40,8 +40,8 @@
 		04F1FE791985557F00C8D498 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F1FE771985557F00C8D498 /* Main_iPad.storyboard */; };
 		04F1FE801985557F00C8D498 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04F1FE7F1985557F00C8D498 /* ViewController.mm */; };
 		04F1FE821985557F00C8D498 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F1FE811985557F00C8D498 /* Images.xcassets */; };
-		3A1BF32A1BB3D10C00EDBC0D /* collada_mesh2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BF3281BB3D10C00EDBC0D /* collada_mesh2.cpp */; settings = {ASSET_TAGS = (); }; };
-		3A1BF32B1BB3D10C00EDBC0D /* collada_mesh2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BF3281BB3D10C00EDBC0D /* collada_mesh2.cpp */; settings = {ASSET_TAGS = (); }; };
+		3A1BF32A1BB3D10C00EDBC0D /* collada_mesh2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BF3281BB3D10C00EDBC0D /* collada_mesh2.cpp */; };
+		3A1BF32B1BB3D10C00EDBC0D /* collada_mesh2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BF3281BB3D10C00EDBC0D /* collada_mesh2.cpp */; };
 		3A24B4D619C88A4000E9CFFE /* zip_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A24B4D419C88A4000E9CFFE /* zip_test.cpp */; };
 		3A24B4D819C9D3ED00E9CFFE /* test.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A24B4D719C9D3ED00E9CFFE /* test.zip */; };
 		3A25ED0A1B14D87A002FD2E6 /* simple_primitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A25ED081B14D87A002FD2E6 /* simple_primitive.cpp */; };
@@ -74,6 +74,7 @@
 		3A6EE1971B088AEF00BB4247 /* ui_button_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4070919AE257000762711 /* ui_button_test.cpp */; };
 		3A6EE19C1B089B5400BB4247 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE19B1B089B5400BB4247 /* libglfw.dylib */; };
 		3A6EE1A81B08C98700BB4247 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6EE1A71B08C98700BB4247 /* libGLEW.a */; };
+		3A7611AE1BE110B1008925D0 /* web_notification_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A7611AC1BE110B1008925D0 /* web_notification_test.cpp */; };
 		3AC867171B1DEE6400AADEA8 /* shadow_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC867151B1DEE6400AADEA8 /* shadow_test.cpp */; };
 		3AC867181B1DEE6400AADEA8 /* shadow_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC867151B1DEE6400AADEA8 /* shadow_test.cpp */; };
 		3ACB9C9B1BB93BDB00428176 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACB9C9A1BB93BDB00428176 /* OpenGL.framework */; };
@@ -207,6 +208,8 @@
 		3A6EE19B1B089B5400BB4247 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../opt/local/lib/libglfw.dylib; sourceTree = "<group>"; };
 		3A6EE1A11B08A25100BB4247 /* libpng.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng.dylib; path = ../../../../../../../opt/local/lib/libpng.dylib; sourceTree = "<group>"; };
 		3A6EE1A71B08C98700BB4247 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../../../../opt/local/lib/libGLEW.a; sourceTree = "<group>"; };
+		3A7611AC1BE110B1008925D0 /* web_notification_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = web_notification_test.cpp; path = web_notification/web_notification_test.cpp; sourceTree = "<group>"; };
+		3A7611AD1BE110B1008925D0 /* web_notification_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = web_notification_test.hpp; path = web_notification/web_notification_test.hpp; sourceTree = "<group>"; };
 		3AC867151B1DEE6400AADEA8 /* shadow_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = shadow_test.cpp; sourceTree = "<group>"; };
 		3AC867161B1DEE6400AADEA8 /* shadow_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shadow_test.hpp; sourceTree = "<group>"; };
 		3ACB9C9A1BB93BDB00428176 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
@@ -478,6 +481,15 @@
 			path = collada_mesh;
 			sourceTree = "<group>";
 		};
+		3A7611AB1BE1109B008925D0 /* web_notification */ = {
+			isa = PBXGroup;
+			children = (
+				3A7611AC1BE110B1008925D0 /* web_notification_test.cpp */,
+				3A7611AD1BE110B1008925D0 /* web_notification_test.hpp */,
+			);
+			name = web_notification;
+			sourceTree = "<group>";
+		};
 		3AC867141B1DEE6400AADEA8 /* shadow */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +502,7 @@
 		3AD406F019AE257000762711 /* samples */ = {
 			isa = PBXGroup;
 			children = (
+				3A7611AB1BE1109B008925D0 /* web_notification */,
 				3A1BF3271BB3D10C00EDBC0D /* collada_mesh2 */,
 				3A6331821B67DB100007D1C1 /* collada_mesh */,
 				3AC867141B1DEE6400AADEA8 /* shadow */,
@@ -747,6 +760,7 @@
 				0403CC9F19DAEDDA000329EC /* blur_test.cpp in Sources */,
 				3A6331851B67DB100007D1C1 /* collada_mesh.cpp in Sources */,
 				3AD4071119AE257000762711 /* sandbox_template.cpp in Sources */,
+				3A7611AE1BE110B1008925D0 /* web_notification_test.cpp in Sources */,
 				3AD4070C19AE257000762711 /* audio_test.cpp in Sources */,
 				3AF43DD31B0A4306005A748C /* input_test.cpp in Sources */,
 				3AD301461AFBBD2500516996 /* main.cpp in Sources */,

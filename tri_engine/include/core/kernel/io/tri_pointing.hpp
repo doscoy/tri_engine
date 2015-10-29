@@ -14,7 +14,7 @@
 #define TRI_POINTING_HPP_INCLUDED
 
 //  include
-#include "cross/cross_sdk.hpp"
+#include "cross/cross.hpp"
 #include "../../math/tri_math_types.hpp"
 #include "core/base/tri_types.hpp"
 #include "core/core_config.hpp"
