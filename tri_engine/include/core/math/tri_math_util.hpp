@@ -126,31 +126,74 @@ constexpr inline float toDegree(float radian) {
 
 ///
 /// sin
-inline float sinf(float radian) {
+inline float sin(float radian) {
     return std::sin(radian);
 }
 
 ///
 /// cos
-inline float cosf(float radian) {
+inline float cos(float radian) {
     return std::cos(radian);
 }    
 
 ///
 /// acos
-inline float acosf(float radian) {
+inline float acos(float radian) {
     return std::acos(radian);
 }
 
-//  sqrt
-inline float sqrtf(float value) {
+///
+/// sqrt
+inline float sqrt(float value) {
     return std::sqrt(value);
 }
 
-//  atan2
-inline float atan2f(float y, float x) {
+///
+/// atan2
+inline float atan2(float y, float x) {
     return std::atan2(y, x);
 }
+
+
+///
+/// x * x + y * y
+inline float hypotenuseSquare(
+    float x,
+    float y
+) {
+    return x * x + y * y;
+}
+
+///
+/// x * x + y * y + z * z
+inline float hypotenuseSquare(
+    float x,
+    float y,
+    float z
+) {
+    return x * x + y * y + z * z;
+}
+
+
+///
+/// x * x + y * yの平方根
+inline float hypotenuse(
+    float x,
+    float y
+) {
+    return sqrtf(hypotenuseSquare(x, y));
+}
+
+///
+/// x * x + y * y + z * zの平方根
+inline float hypotenuse(
+    float x,
+    float y,
+    float z
+) {
+    return sqrtf(hypotenuseSquare(x, y, z));
+}
+
 
 ///
 /// 浮動小数判定

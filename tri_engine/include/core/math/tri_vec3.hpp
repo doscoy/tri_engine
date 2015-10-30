@@ -88,13 +88,13 @@ public:
     ///
     ///  長さの二乗を取得
     T lengthSquare() const {
-        return x_ * x_ + y_ * y_ + z_ * z_;
+        return t3::hypotenuseSquare(x_, y_, z_);
     }
     
     ///
     ///  長さを取得
     T length() const {
-        return t3::sqrtf( lengthSquare() );
+        return t3::hypotenuse(x_, y_, z_);
     }
     
     ///

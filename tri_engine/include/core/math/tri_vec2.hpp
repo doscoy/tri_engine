@@ -111,13 +111,13 @@ public:
     ///
     ///  長さの二乗
     T lengthSquare() const {
-        return ( x_*x_ + y_*y_ );
+        return t3::hypotenuseSquare(x_, y_);
     }
     
     ///
     ///  長さ
     T length() const {
-        return t3::sqrtf( lengthSquare() );
+        return t3::hypotenuse(x_, y_);
     }
     
     ///

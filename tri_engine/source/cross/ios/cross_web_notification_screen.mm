@@ -46,11 +46,19 @@ void WebNotificationScreen::initialize(
     const char* const url   // リクエストするURL
 ) {
 
-    impl_->view_ = [[UIWebView alloc] init];
-    NSURL* nsurl = [NSURL URLWithString:@"http://www.yahoo.co.jp"];
+    impl_->view_ = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
+    impl_->view_.scalesPageToFit = YES;
+    NSURL* nsurl = [NSURL URLWithString:@"http://www.aquariuscode.com/cm"];
     NSURLRequest* req = [NSURLRequest requestWithURL:nsurl];
-    [impl_->view_ loadRequest:req];
-    [[UIApplication sharedApplication] openURL:nsurl];
+    
+    UIWindow* window  = [UIApplication sharedApplication].keyWindow;
+    auto view = [window rootViewController].view;
+    [view addSubview:impl_->view_];
+ //   [[UIApplication sharedApplication] openURL:nsurl];
+ 
+     [impl_->view_ loadRequest:req];
+
+ 
 }
 
 ///
