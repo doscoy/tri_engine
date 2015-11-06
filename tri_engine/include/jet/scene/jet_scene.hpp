@@ -27,8 +27,16 @@ public:
     ~Scene();
 
 public:
+    /// このクラスを継承したクラスはこのメソッドを直接オーバーロードできません。
+    /// 初期化処理はinitializeをオーバーロードして実装して下さい。
     void initializeScene() final;
+
+    /// このクラスを継承したクラスはこのメソッドを直接オーバーロードできません。
+    /// 終了処理はterminateをオーバーロードして実装して下さい。
     void terminateScene() final;
+
+    /// このクラスを継承したクラスはこのメソッドを直接オーバーロードできません。
+    /// 更新処理はupdateをオーバーロードして実装して下さい。
     void updateScene(const DeltaTime dt) final;
     
 protected:
@@ -59,7 +67,7 @@ protected:
 private:
     virtual void initialize() {}
     virtual void terminate() {}
-    virtual void update() {}
+    virtual void update(const DeltaTime dt) {}
 
 private:
     void shadowRender() {
@@ -83,6 +91,59 @@ private:
     //  シーングラフ
     SceneGraph scene_graph_;
 };
+
+
+
+
+
+
+///
+/// 2Dゲーム用シーンプリセット
+class Scene2D
+    : public core::SceneBase
+{
+public:
+    ///
+    /// コンストラクタ
+    Scene2D(const char* const name);
+
+    ///
+    /// デストラクタ
+    ~Scene2D();
+    
+public:
+    ///
+    /// シーン初期化
+    /// このクラスを継承したクラスはこのメソッドを直接オーバーロードできません。
+    /// 初期化処理はinitializeをオーバーロードして実装して下さい。
+    void initializeScene() final;
+
+    ///
+    /// シーン後片付け
+    /// このクラスを継承したクラスはこのメソッドを直接オーバーロードできません。
+    /// 終了処理はterminateをオーバーロードして実装して下さい。
+    void terminateScene() final;
+
+    ///
+    /// シーン更新
+    /// このクラスを継承したクラスはこのメソッドを直接オーバーロードできません。
+    /// 更新処理はupdateをオーバーロードして実装して下さい。
+    void updateScene(const DeltaTime dt) final;
+    
+protected:
+    auto& defaultSpriteLayer() {
+        return default_sprite_layer_;
+    }
+    
+private:
+    virtual void initialize() {}
+    virtual void terminate() {}
+    virtual void update(const DeltaTime dt) {}
+
+private:
+    SpriteLayer default_sprite_layer_;
+};
+
 
 
 TRI_JET_NS_END

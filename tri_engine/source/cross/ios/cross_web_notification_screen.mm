@@ -54,7 +54,7 @@ void WebNotificationScreen::initialize(
     UIWindow* window  = [UIApplication sharedApplication].keyWindow;
     auto view = [window rootViewController].view;
     [view addSubview:impl_->view_];
- //   [[UIApplication sharedApplication] openURL:nsurl];
+    [[UIApplication sharedApplication] openURL:nsurl];
  
      [impl_->view_ loadRequest:req];
 

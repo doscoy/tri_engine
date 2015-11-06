@@ -20,10 +20,8 @@ TRI_CORE_NS_BEGIN
 
 namespace {
 
-///
-/// トレースで有効なチャンネル
-/// このマスクで立っていないビットは無視される
-int trace_channel_mask_ = T3_TRACE_CHANNEL_BIT_ALL;
+
+int trace_channel_mask_ = T3_TRACE_CHANNEL_MASK_ALL;
 
 constexpr int TRACE_BUFFER_SIZE = 2048;
 
@@ -52,14 +50,12 @@ void trace(
     int ch,
     const char* const format, ... 
 ) {
-    //  有効なチャンネル判定
+
     if (!(trace_channel_mask_ & ch)) {
-        //  有効なチャンネルへの出力ではない
+
         return;
     }
 
-
-    //  有効なチャンネルへの出力なので文字列を作成
 
     va_list msg;
     
@@ -68,13 +64,10 @@ void trace(
 	vsnprintf(buf, TRACE_BUFFER_SIZE, format, msg);
 	va_end(msg);
     
-    //  現在のフレーム数を付記
     uint32_t count = frame_counter_.now();
 
-    //  ターミナルへ出力
     traceTerminal("[%u]%s", count, buf);
 
-    //  画面へも出力
     traceDisplay("[%u]%s", count, buf);
 }
 

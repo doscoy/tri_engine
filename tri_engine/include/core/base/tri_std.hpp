@@ -40,7 +40,10 @@ TRI_CORE_NS_BEGIN
 /// スマートポインタ
 template <typename T>
 using SharedPtr = std::shared_ptr<T>;
-  
+
+template <typename T>
+using WeakPtr = std::weak_ptr<T>;
+
 ///
 /// スマートポインタ.
 /// コピー禁止

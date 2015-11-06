@@ -51,7 +51,7 @@ void Scene::terminateScene() {
 }
 
 void Scene::updateScene(const DeltaTime dt) {
-    update();
+    update(dt);
 }
 
 
@@ -74,6 +74,43 @@ TransformNodePtr Scene::createChildModel(
     return node;
 }
 
+////////////
+
+
+
+
+
+///
+/// コンストラクタ
+Scene2D::Scene2D(const char* const name)
+    : core::SceneBase(name)
+    , default_sprite_layer_(T3_DEFAULT_SPRITE_LAYER_NAME)
+{}
+
+
+///
+/// デストラクタ
+Scene2D::~Scene2D() {
+
+}
+
+///
+/// シーンの初期化
+void Scene2D::initializeScene() {
+    initialize();
+}
+
+///
+/// シーンの後片付け
+void Scene2D::terminateScene() {
+    terminate();
+}
+
+///
+/// シーンの更新
+void Scene2D::updateScene(const DeltaTime dt) {
+    update(dt);
+}
 
 
 

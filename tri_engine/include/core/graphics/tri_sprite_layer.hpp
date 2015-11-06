@@ -32,7 +32,7 @@ class SpriteLayer
 public:
     ///
     /// スプライトコンテナ
-    using SpriteContainer = Vector<SpritePtr>;
+    using SpriteContainer = List<SpriteWeakPtr>;
 
 public:
     ///

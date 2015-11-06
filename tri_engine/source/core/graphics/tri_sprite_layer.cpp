@@ -23,30 +23,33 @@ SpriteLayer::SpriteLayer(
     const String& name,
     const int managed_size,
     const int priority
-    ) : LayerBase(name, priority)
+) : LayerBase(name, priority)
     , renderer_()
     , sprites_()
 {
-    for (int i = 0; i < managed_size; ++i) {
-        sprites_.push_back(T3_SYS_NEW Sprite());
-    }
+//    for (int i = 0; i < managed_size; ++i) {
+//        sprites_.push_back(T3_SYS_NEW Sprite());
+//    }
 }
 
 SpriteLayer::~SpriteLayer() {
-    for (int i = 0; i < sprites_.size(); ++i) {
-        T3_DELETE sprites_[i];
-    }
+//    for (int i = 0; i < sprites_.size(); ++i) {
+//        T3_DELETE sprites_[i];
+//    }
 }
 
 SpritePtr SpriteLayer::newSprite() {
-    for (int i = 0; i < sprites_.size(); ++i) {
-        SpritePtr spr = sprites_.at(i);
-        if (!spr->isEnabled()) {
-            return spr;
-        }
-    }
+    SpritePtr sprite(T3_NEW Sprite);
 
-    return nullptr;
+//    for (int i = 0; i < sprites_.size(); ++i) {
+//        SpritePtr spr = sprites_.at(i);
+//        if (!spr->isEnabled()) { 
+//            return spr;
+//        }
+//    }
+    sprites_.push_back(sprite);
+
+    return sprite;
 }
 
 SpritePtr SpriteLayer::createSprite(TexturePtr tex) {
@@ -71,11 +74,29 @@ SpritePtr SpriteLayer::createSprite(const String& tex_name) {
 
 
 void SpriteLayer::updateLayer(
-    DeltaTime delta_time
-    ) {
-    //  レンダリング用にスプライトをマージする
-    for (auto& sp : sprites_) {
+    const DeltaTime delta_time
+) {
 
+//    T3_SYSTEM_LOG_DEBUG("sp size = %d \n", sprites_.size());
+
+
+    //  期限の切れたスプライトを削除
+    sprites_.remove_if(
+        [](SpriteWeakPtr p) {
+            return p.expired();
+        }
+    );
+
+    //  レンダリング用にスプライトをマージする
+    for (auto& weak_sprite : sprites_) {
+
+        //  もうスプライトが存在していない
+        auto sp = weak_sprite.lock();
+        if (!sp) {
+            //  もうスプライトが存在していない
+            continue;
+        }
+        
         //  無効なスプライトはスキップ
         if (!sp->isEnabled()) {
             continue;
@@ -92,7 +113,7 @@ void SpriteLayer::updateLayer(
 
     //  スプライトがあれば、ドローコールを抑える為マージする
     if (!renderer_.collections().empty()) {
-        renderer_.margeSprites();    
+        renderer_.margeSprites();
     }
     
 }
@@ -110,9 +131,6 @@ void SpriteLayer::drawLayer() {
 
 void SpriteLayer::disableAllSprites() {
 
-    for (int i = 0; i < sprites_.size(); ++i) {
-        sprites_[i]->destroy();
-    }
 }
 
 

@@ -30,9 +30,16 @@
 TRI_CORE_NS_BEGIN
 
 
+
+#define T3_DEFAULT_SPRITE_LAYER_NAME    "t3_default"
+
 //  前方宣言
 class Texture;
 class SpriteLayer;
+
+class Sprite;
+using SpritePtr = SharedPtr<Sprite>;
+using SpriteWeakPtr = WeakPtr<Sprite>;
 
 ///
 /// スプライト
@@ -46,15 +53,15 @@ public:
     /// プライオリティ
     enum Priority {
         PRIORITY_LOWEST     = 10,
-        PRIORITY_LOW_1      = 50,
-        PRIORITY_LOW_2      = 70,
-        PRIORITY_LOW_3      = 90,
-        PRIORITY_NORMAL     = 120,
-        PRIORITY_HIGH_1     = 150,
-        PRIORITY_HIGH_2     = 170,
-        PRIORITY_HIGH_3     = 190,
-        PRIORITY_UI_DEFAULT = 210,
-        PRIORITY_HIGHEST    = 250
+        PRIORITY_LOW_1      = 30,
+        PRIORITY_LOW_2      = 50,
+        PRIORITY_LOW_3      = 70,
+        PRIORITY_NORMAL     = 90,
+        PRIORITY_HIGH_1     = 110,
+        PRIORITY_HIGH_2     = 130,
+        PRIORITY_HIGH_3     = 150,
+        PRIORITY_UI_DEFAULT = 170,
+        PRIORITY_HIGHEST    = 190
     };
 
 
@@ -274,12 +281,10 @@ public:
     
     ///
     /// ソート用スコアを取得
-    int sortScore() const;
+    int sortScore() const {
+        return sort_score_;
+    }
     
-    ///
-    /// ソート用のスコアを計算
-    void calcSortScore();
-
 
     ///
     /// 表示
@@ -347,10 +352,22 @@ public:
         blend_mode_ = b;
         calcSortScore();
     }
-    
+
+
+    ///
+    /// スプライト生成
+    static SpritePtr create(String tex_name, String layer_name = T3_DEFAULT_SPRITE_LAYER_NAME);
+    static SpritePtr create(TexturePtr texture, String layer_name = T3_DEFAULT_SPRITE_LAYER_NAME);
+
+    ///
+    /// 使い終わったスプライトを破棄
     void destroy();
     
 private:
+    ///
+    /// ソート用のスコアを計算
+    void calcSortScore();
+
     ///
     ///  有効化
     void enable() {
@@ -422,7 +439,7 @@ private:
 };
 
 
-using SpritePtr = Sprite*;
+
 
 
 TRI_CORE_NS_END

@@ -649,7 +649,7 @@
 		3A480D801B2D4159001064BB /* tri_debugpad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_debugpad.cpp; sourceTree = "<group>"; };
 		3A480D811B2D4159001064BB /* tri_draw_primitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_draw_primitive.cpp; sourceTree = "<group>"; };
 		3A480D821B2D4159001064BB /* tri_print.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_print.cpp; sourceTree = "<group>"; };
-		3A480D831B2D4159001064BB /* tri_trace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_trace.cpp; sourceTree = "<group>"; };
+		3A480D831B2D4159001064BB /* tri_trace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = tri_trace.cpp; sourceTree = "<group>"; };
 		3A480D841B2D4159001064BB /* tri_virtual_pad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_virtual_pad.cpp; sourceTree = "<group>"; };
 		3A480D851B2D4159001064BB /* tri_workbar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_workbar.cpp; sourceTree = "<group>"; };
 		3A480D871B2D4159001064BB /* tri_circle_collider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_circle_collider.cpp; sourceTree = "<group>"; };

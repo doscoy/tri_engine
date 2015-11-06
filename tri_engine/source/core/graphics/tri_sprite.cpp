@@ -58,21 +58,32 @@ void Sprite::texture(
 }
   
 
+///
+/// ソート時のキーとなるスコア計算
 void Sprite::calcSortScore() {
-    sort_score_ = priority() * 100;
-    int blend_score = 0;
+    int score = priority() * 100;
+
+    //  ブレンドモードによって描画グループを分ける為にスコアを変える
+    constexpr int BLEND_SCORE_MODE_NORMAL = 0;
+    constexpr int BLEND_SCORE_MODE_ADD = 20;
+    constexpr int BLEND_SCORE_MODE_NONE = 40;
+    int blend_score = BLEND_SCORE_MODE_NORMAL;
     if (blend_mode_ == cross::RenderSystem::BlendMode::ADD) {
-        blend_score = 10;
+        //  加算半透明
+        blend_score = BLEND_SCORE_MODE_ADD;
     }
     else if (blend_mode_ == cross::RenderSystem::BlendMode::NONE){
-        blend_score = 20;
+        //  ブレンド無し
+        blend_score = BLEND_SCORE_MODE_NONE;
     }
-    sort_score_ += blend_score;
+    
+    //  スプライトのプライオリティとブレンドモードのスコアから最終的なスコアを求める
+    score += blend_score;
+ 
+    //  計算結果を設定
+    sort_score_ = score;
 }
 
-int Sprite::sortScore() const {
-    return sort_score_;
-}
 
 
 void Sprite::textureCoord(
@@ -107,10 +118,45 @@ void Sprite::adjustPivotByCenter() {
     pivot(size_.x_ * 0.5f, size_.y_ * 0.5f);
 }
 
+///
+/// 無効化
 void Sprite::destroy() {
-
     disable();
 }
+
+///
+/// 生成
+SpritePtr Sprite::create(
+    String tex_name,
+    String layer_name
+) {
+    //  お目当てのレイヤーを取得
+    LayerBase* layer = Director::findLayer(layer_name);
+    SpriteLayer* sprite_layer = dynamic_cast<SpriteLayer*>(layer);
+    
+    T3_NULL_ASSERT(sprite_layer);
+    
+    auto sprite = sprite_layer->createSprite(tex_name);
+    return sprite;
+}
+
+///
+/// 生成
+SpritePtr Sprite::create(
+    TexturePtr texture,
+    String layer_name
+) {
+    //  お目当てのレイヤーを取得
+    LayerBase* layer = Director::findLayer(layer_name);
+    SpriteLayer* sprite_layer = dynamic_cast<SpriteLayer*>(layer);
+    
+    T3_NULL_ASSERT(sprite_layer);
+    
+    auto sprite = sprite_layer->createSprite(texture);
+    return sprite;
+}
+
+
 
 
 TRI_CORE_NS_END
