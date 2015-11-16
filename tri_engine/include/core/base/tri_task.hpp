@@ -27,6 +27,7 @@ TRI_CORE_NS_BEGIN
 
 ///
 /// タスク
+class TaskGeneratorBase;
 class TaskBase;
 using TaskPtr = SharedPtr<TaskBase>;
 using TaskList = List<TaskPtr>;
@@ -119,36 +120,16 @@ public:
     /// 子タスク生成
     template <class U>
     auto createTask() {
-        
         SharedPtr<U> t(T3_NEW U());
-        TaskBase* tb = t.get();
-        tb->doTaskInitialize();
-        children_.push_back(t);
+        addTask(t);
         return t;
     }
-    
-    ///
-    /// 子タスク生成
-    template <class U, class Arg1>
-    auto createTask(Arg1& arg1) {
-        SharedPtr<U> t(T3_NEW U(arg1));
-        t->taskInitialize();
-        children_.push_back(t);
-        return t;
-    }
-
-    ///
-    /// 子タスク生成
-    template <class U, class Arg1, class Arg2>
-    auto createTask(Arg1& arg1, Arg1& arg2) {
-        SharedPtr<U> t(T3_NEW U(arg1, arg2));
-        t->doTaskInitialize();
-        children_.push_back(t);
-        return t;
-    }
-    
     
 private:
+    ///
+    /// タスクの追加
+    void addTask(TaskPtr child);
+
     ///
     /// タスクの初期化呼び出し
     ///
@@ -191,7 +172,6 @@ public:
         for (auto& child : children_) {
             child->killTask();
         }
-
     }
     
 
@@ -200,39 +180,49 @@ private:
     int type_;              ///< タイプ
     PauseLevel pause_lv_;   ///< ポーズレベル
 
-    //
+    //  最初のアップデートでinitializeを呼ぶ
+    bool first_update_;
+
+    //  タスク削除リクエスト
     bool kill_;
 
     /// 子タスク
     TaskList children_;
+    
+    /// 次タスク
+    /// 自身のkillと共に生成されるタスク
+    TaskGeneratorBase* next_;
+    
+    ///
+    /// 親タスク
+    TaskBase* parent_;
 };
 
 
 ///
+/// タスクジェネレータ基底
+class TaskGeneratorBase {
+public:
+    virtual TaskPtr generate() = 0;
+};
+
+///
 /// タスクジェネレータ
-/// 一定間隔でタスク生成し続ける
+/// 次に生成するタスクの予約用
 template <class T>
 class TaskGenerator
-    : public TaskBase
+    : public TaskGeneratorBase
 {
 public:
-    void taskUpdate(const DeltaTime dt) {
-        if (timer_ < 0) {
-            timer_ = interval_;
-            createTask<T>();
-        } else {
-            timer_ -= dt;
-        }
+    static TaskGenerator* instancePtr() {
+        static TaskGenerator<T> inst_;
+        return &inst_;
     }
 
-    void interval(float time) {
-        interval_ = time;
-        timer_ = time;
+    TaskPtr generate() override {
+        TaskPtr t(T3_NEW T);
+        return t;
     }
-
-private:
-    float interval_;
-    float timer_;
 };
 
 

@@ -35,12 +35,20 @@ SceneBase::~SceneBase() {
 }
 
 
+
+void SceneBase::taskInitialize() {
+    initializeScene();
+}
+
 void SceneBase::taskUpdate(
-    DeltaTime delta_time
+    const DeltaTime delta_time
 ) {
     updateScene(delta_time);
 }
 
+void SceneBase::taskTerminate() {
+    terminateScene();
+}
 
 void SceneBase::debugRender() {
     debugRenderScene();
@@ -93,7 +101,6 @@ void SceneManager::sceneChange() {
     //  シーン終了
     //  後片付け
     const char* prev_scene_name = current_scene_->sceneName();
-    current_scene_->terminateScene();
 
     //  次のシーンに遷移
     current_scene_->killTask();
@@ -107,9 +114,6 @@ void SceneManager::sceneChange() {
     T3_SYSTEM_LOG("scene change. %s --> %s\n", prev_scene_name, next_scene_name);
     (void)(prev_scene_name);
     (void)(next_scene_name);
-
-    //  初期化
-    current_scene_->initializeScene();
 
     //  シーンが切り替わったフラグON
     scene_changed_ = true;

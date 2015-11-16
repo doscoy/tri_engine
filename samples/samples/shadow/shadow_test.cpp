@@ -70,7 +70,7 @@ void ShadowTestScene::terminate() {
 }
 
 
-void ShadowTestScene::update() {
+void ShadowTestScene::update(const t3::DeltaTime dt) {
     static float angle;
     angle += 0.25f;
     node_chara_->rotationY(angle);
