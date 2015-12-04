@@ -17,7 +17,7 @@
 #include "core/core_config.hpp"
 #include "tri_event.hpp"
 #include "core/utility/tri_method_callback.hpp"
-#include "core/base/tri_std.hpp"
+
 
 TRI_CORE_NS_BEGIN
 
@@ -29,7 +29,7 @@ struct EventListen{};
 /// イベントリスナポインタ
 using EventListenerPtr = const void*;
 
-using EventHandler = t3::SharedPtr<MethodCallbackBaseX>;
+using EventHandler = t3::SharedPtr<MethodCallbackBase>;
 
 
 #define TRI_DEV_EVENT_TRACE 1   ///< イベントのトレースフラグ
@@ -89,7 +89,7 @@ public:
         void (T::*func)(const EventPtr),
         const EventType& in_type
     ) {
-        auto handler = std::make_shared<MethodCallbackX1<T,const EventPtr>>(listener, func);
+        auto handler = std::make_shared<MethodCallback1<T,const EventPtr>>(listener, func);
         return addListenerCore(handler, in_type);
     }
     

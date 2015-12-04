@@ -19,8 +19,7 @@
 #include "core/utility/tri_uncopyable.hpp"
 #include "core/utility/tri_nameable.hpp"
 #include "core/debug/tri_debugmenu_items.hpp"
-#include <list>
-
+#include "cross/cross_std.hpp"
 
 
 TRI_CORE_NS_BEGIN
@@ -189,7 +188,7 @@ public:
         T* instance,
         void (T::*callback)()
     ) {
-        preupdate_callback_.reset(new MethodCallbackX<T>(instance, callback));
+        preupdate_callback_.reset(new MethodCallback<T>(instance, callback));
     }
 
     ///
@@ -199,7 +198,7 @@ public:
         T* instance,
         void (T::*callback)()
     ) {
-        postupdate_callback_.reset(new MethodCallbackX<T>(instance, callback));
+        postupdate_callback_.reset(new MethodCallback<T>(instance, callback));
     }
 
     ///
@@ -209,7 +208,7 @@ public:
         T* instance,
         void (T::*callback)()
     ) {
-        prerender_callback_.reset(new MethodCallbackX<T>(instance, callback));
+        prerender_callback_.reset(new MethodCallback<T>(instance, callback));
     }
 
     ///
@@ -219,7 +218,7 @@ public:
         T* instance,
         void (T::*callback)()
     ) {
-        postrender_callback_.reset(new MethodCallbackX<T>(instance, callback));
+        postrender_callback_.reset(new MethodCallback<T>(instance, callback));
     }
 
 public:
@@ -295,19 +294,19 @@ protected:
 
     ///
     /// 更新前ユーザーコールバック
-    ScopedPtr<MethodCallbackBaseX> preupdate_callback_;
+    UniquePtr<MethodCallbackBase> preupdate_callback_;
 
     ///
     /// 更新後ユーザーコールバック
-    ScopedPtr<MethodCallbackBaseX> postupdate_callback_;
+    UniquePtr<MethodCallbackBase> postupdate_callback_;
 
     ///
     /// 描画前ユーザーコールバック
-    ScopedPtr<MethodCallbackBaseX> prerender_callback_;
+    UniquePtr<MethodCallbackBase> prerender_callback_;
 
     ///
     /// 描画後ユーザーコールバック
-    ScopedPtr<MethodCallbackBaseX> postrender_callback_;
+    UniquePtr<MethodCallbackBase> postrender_callback_;
 
 };
 

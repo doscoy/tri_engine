@@ -14,8 +14,8 @@
 #define TRI_HASH_STRING_HPP_INCLUDED
 
 //  include
-#include "core/base/tri_std.hpp"
 #include "core/core_config.hpp"
+#include "cross/cross_std.hpp"
 
 TRI_CORE_NS_BEGIN
 

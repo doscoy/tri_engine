@@ -18,7 +18,6 @@
 #include "core/utility/tri_hash_string.hpp"
 #include "core/base/tri_types.hpp"
 #include "core/utility/tri_uncopyable.hpp"
-#include "tri_std.hpp"
 
 
 TRI_CORE_NS_BEGIN

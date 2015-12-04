@@ -17,7 +17,8 @@
 TRI_CORE_NS_BEGIN
 
 
-
+///
+/// ビットを文字列に変換
 const char* bitToString(
     const uint32_t v,          // 表示したいビット列
     const int bit_num       // 下位何ビットを表示するか
@@ -43,7 +44,8 @@ const char* bitToString(
     return str;
 }
 
-
+///
+/// 立ってるビットを数える
 uint32_t bitPopulation(
     const uint32_t   bits
 ){

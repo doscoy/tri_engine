@@ -9,6 +9,8 @@
 
 TRI_CORE_NS_BEGIN
 
+///
+/// フレーム数をカウントするだけ
 Counter frame_counter_;
 
 

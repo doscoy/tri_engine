@@ -6,35 +6,50 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 /**
-    @file tri_std.hpp
+    @file cross_std.hpp
     c++標準ヘッダ群インクルード用.
 */
 
-#ifndef tri_engine_tri_std_hpp
-#define tri_engine_tri_std_hpp
+#ifndef CROSS_STD_HPP_INCLUDED
+#define CROSS_STD_HPP_INCLUDED
 
 //  include
-#include "core/core_config.hpp"
-#include <cstdint>
-#include <string>
-#include <memory>
-#include <memory.h>
-#include <vector>
-#include <list>
 #include <array>
-#include <map>
-#include <set>
+#include <cstdint>
 #include <cstdio>
 #include <cstdarg>
+#include <cstddef>
+#include <cassert>
+#include <cmath>
+#include <string>
+#include <set>
+#include <memory>
+#include <memory.h>
+#include <map>
+#include <vector>
+#include <limits.h>
+#include <list>
+#include <functional>
 #include <fstream>
 #include <functional>
 #include <thread>
-#include <cstddef>
 
 
-TRI_CORE_NS_BEGIN
+#include "cross_config.hpp"
+
+CROSS_NS_BEGIN
+
+//  関数
+inline bool isNan(float f) {
+    return std::isnan(f);
+}
+
+inline bool isInf(float f) {
+    return std::isinf(f);
+}
 
 
+//  型定義
 
 ///
 /// スマートポインタ
@@ -48,7 +63,7 @@ using WeakPtr = std::weak_ptr<T>;
 /// スマートポインタ.
 /// コピー禁止
 template <typename T>
-using ScopedPtr = std::unique_ptr<T>;
+using UniquePtr = std::unique_ptr<T>;
 
 ///
 /// ベクターコンテナ
@@ -86,8 +101,14 @@ using Thread = std::thread;
 ///
 /// ファイルストリーム
 using FileStream = std::ifstream;
-  
-TRI_CORE_NS_END
+
+///
+/// 数値限界
+template <typename T>
+using NumericLimits = std::numeric_limits<T>;
 
 
-#endif
+CROSS_NS_END
+
+
+#endif  // CROSS_STD_HPP_INCLUDED

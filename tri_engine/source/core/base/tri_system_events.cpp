@@ -12,10 +12,10 @@ TRI_CORE_NS_BEGIN
 
 
 
-const EventType PointingTriggeredEvent::TYPE("PointingTriggeredEvent");
-const EventType PointingReleasedEvent::TYPE("PointingReleasedEvent");
-const EventType PointingMovingEvent::TYPE("PointingMovingEvent");
-const EventType PointingFlickEvent::TYPE("PointingFlickEvent");
+const EventType PointingTriggeredEvent::TYPE("tri_PointingTriggeredEvent");
+const EventType PointingReleasedEvent::TYPE("tri_PointingReleasedEvent");
+const EventType PointingMovingEvent::TYPE("tri_PointingMovingEvent");
+const EventType PointingFlickEvent::TYPE("tri_PointingFlickEvent");
 
 
 TRI_CORE_NS_END

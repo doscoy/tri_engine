@@ -13,8 +13,9 @@
 #ifndef TRI_RANDOM_MSEQ_HPP_INCLUDED
 #define TRI_RANDOM_MSEQ_HPP_INCLUDED
 
-#include "core/base/tri_std.hpp"
 #include "core/core_config.hpp"
+#include "cross/cross_std.hpp"
+
 
 TRI_CORE_NS_BEGIN
 

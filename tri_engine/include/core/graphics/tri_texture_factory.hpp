@@ -15,7 +15,6 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "core/base/tri_std.hpp"
 #include "core/kernel/io/tri_filepath.hpp"
 #include "tri_texture.hpp"
 

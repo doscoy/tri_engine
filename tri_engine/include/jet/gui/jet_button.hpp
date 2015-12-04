@@ -8,6 +8,10 @@
 /**
     @file jet_button.hpp
     ボタン.
+    ボタンの挙動は外部からActivator, Effectorにより置き換える設計です。
+    押された時、カーソルが乗った（ホバー状態）などの状態による挙動を指定することで
+    任意の挙動のボタンにカスタマイズできます。何も指定が無い場合デフォルトの挙動用の
+    Activator, Effectorが設定されます。
 */
 
 #ifndef JET_BUTTON_HPP_INCLUDED
@@ -308,7 +312,7 @@ TRI_JET_NS_END
 
 
 
-
-
 #endif // JET_BUTTON_HPP_INCLUDED
+
+
 

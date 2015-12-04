@@ -6,7 +6,7 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 
-
+//  include
 #include "core/audio/tri_wav.hpp"
 #include "core/kernel/memory/tri_memory.hpp"
 #include "core/debug/tri_dbg.hpp"
@@ -14,7 +14,8 @@
 
 namespace {
     
-    
+///
+/// wavのヘッダを読む
 int readWaveHeader(
     t3::FileStream& file,
     t3::Wav::Info& info
@@ -113,7 +114,8 @@ int readWaveHeader(
 TRI_CORE_NS_BEGIN
 
 
-
+///
+/// コンストラクタ
 Wav::Wav()
     : file_()
     , info_()
@@ -121,27 +123,41 @@ Wav::Wav()
     , data_(nullptr)
 {}
 
-
+///
+/// デストラクタ
 Wav::~Wav() {
     file_.close();
     T3_FREE(data_);
 }
 
-void Wav::load(const FilePath& filepath ) {
+///
+/// .wav を読み込む
+void Wav::load(
+    const FilePath& filepath
+) {
+    //  ファイルを開いてサイズを取得
     open(filepath);
     
+    //  サイズ分のメモリを確保
     data_ = (uint8_t*)T3_SYS_ALLOC(info_.size_);
+
+    //  読み込み
     read(data_, info_.size_);
     
+    //  ファイルを閉じる
     close();
 }
 
+///
+/// ファイルをひらく
 void Wav::open(const t3::FilePath &filepath) {
 
     file_.open(filepath.fullpath().c_str(), std::ios::binary);
     readWaveHeader(file_, info_);
 }
 
+///
+/// 読み込み
 size_t Wav::read(void* out, size_t size) {
 
     size_t read_size = size;
@@ -164,10 +180,14 @@ size_t Wav::read(void* out, size_t size) {
 }
 
 
+///
+/// ファイルを閉じる
 void Wav::close() {
     file_.close();
 }
 
+///
+/// 読み込み情報をリセット
 void Wav::readReset() {
     readed_size_ = 0;
     file_.clear();

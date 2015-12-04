@@ -10,11 +10,12 @@
 namespace t3 {
 
 //  ラジオボタン押されたイベント
-const EventType RadioButtonEvent::TYPE("RadioButtonEvent");
+const EventType RadioButtonEvent::TYPE("tri_RadioButtonEvent");
 
 
 
-//  コンストラクタ
+///
+///  コンストラクタ
 RadioButton::RadioButton()
     : buttons_()
     , group_id_()
@@ -23,13 +24,16 @@ RadioButton::RadioButton()
     EventManager::addListener(this, &RadioButton::onRadioButtonTriggered, RadioButtonEvent::TYPE);
 }
 
+///
+/// デストラクタ
 RadioButton::~RadioButton() {
     EventManager::removeListener(this);
 }
 
-
+///
+/// ラジオボタンのグループにボタン登録
 void RadioButton::registryButton(
-    Button* button
+    Button* button  ///< 登録するボタン
 ) {
     button->addTriggeredEvent(
         std::make_shared<RadioButtonEvent>(
@@ -43,6 +47,8 @@ void RadioButton::registryButton(
 }
 
 
+///
+/// ラジオボタンが押されたイベントハンドラ
 void RadioButton::onRadioButtonTriggered(
     const EventPtr event
 ) {

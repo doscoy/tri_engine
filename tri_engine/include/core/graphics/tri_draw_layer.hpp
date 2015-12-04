@@ -50,7 +50,7 @@ public:
         T* instance,
         void (T::*callback)()
     ) {
-        update_func_.reset(new MethodCallbackX<T>(instance, callback));
+        update_func_.reset(new MethodCallback<T>(instance, callback));
     }
     
     ///
@@ -60,7 +60,7 @@ public:
         T* instance,
         void (T::*callback)()
     ) {
-        render_func_.reset(new MethodCallbackX<T>(instance, callback));
+        render_func_.reset(new MethodCallback<T>(instance, callback));
     }
     
 protected:
@@ -74,8 +74,8 @@ protected:
 
     
 private:
-    ScopedPtr<MethodCallbackBaseX> update_func_;    ///< アップデート時コールバック関数
-    ScopedPtr<MethodCallbackBaseX> render_func_;    ///< 描画時コールバック関数
+    UniquePtr<MethodCallbackBase> update_func_;    ///< アップデート時コールバック関数
+    UniquePtr<MethodCallbackBase> render_func_;    ///< 描画時コールバック関数
 };
 
 

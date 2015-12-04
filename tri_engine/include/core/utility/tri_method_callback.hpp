@@ -21,29 +21,46 @@
 
 TRI_CORE_NS_BEGIN
 
-
-class MethodCallbackBaseX {
+///
+/// クラス・メソッドを呼び出すためのホルダー
+class MethodCallbackBase {
 public:
-    MethodCallbackBaseX()
+    ///
+    /// コンストラクタ
+    MethodCallbackBase()
         : target_(nullptr)
         , arg1_(nullptr)
     {}
 
-
-    MethodCallbackBaseX(const void* target)
+    ///
+    /// コンストラクタ
+    MethodCallbackBase(const void* target)
         : target_(target)
         , arg1_(nullptr)
     {}
 
-    virtual ~MethodCallbackBaseX() = default;
+    ///
+    /// デストラクタ
+    virtual ~MethodCallbackBase() = default;
+
+    ///
+    /// メソッド呼び出し処理
     virtual void invoke() = 0;
 
+    ///
+    /// 引数1を設定
     void arg1(void* arg) {
         arg1_ = arg;
     }
+    
+    ///
+    /// 引数1を取得
     void* arg1() {
         return arg1_;
     }
+    
+    ///
+    /// メソッドに紐付いているクラスインスタンス
     const void* target() const {
         return target_;
     }
@@ -51,6 +68,8 @@ private:
     ///
     /// インスタンス
     const void* target_;
+    
+    /// 引数
     void* arg1_;
 };
 
@@ -58,15 +77,15 @@ private:
 ///
 /// メソッドコールバック
 template <class T>
-class MethodCallbackX 
-    : public MethodCallbackBaseX {
+class MethodCallback 
+    : public MethodCallbackBase {
 public:
     typedef std::function<void(T&)> callback_t;
 
     ///
     /// コンストラクタ
-    MethodCallbackX(const T* ins, callback_t callback)
-        : MethodCallbackBaseX(ins)
+    MethodCallback(const T* ins, callback_t callback)
+        : MethodCallbackBase(ins)
         , func_(callback)
     {}
 
@@ -74,9 +93,11 @@ public:
     ///
     /// 実行
     void invoke() override{
+        //  何かわからないインスタンスのポインタを強制的に指定の型とみなす
         const T* cp = reinterpret_cast<const T*>(target());
         T3_NULL_ASSERT(cp);
         T* p = const_cast<T*>(cp);
+        //  実行！
 		func_(*p);
 	}
 
@@ -92,15 +113,15 @@ protected:
 ///
 /// メソッドコールバック2
 template <class T, class Arg1>
-class MethodCallbackX1
-    : public MethodCallbackBaseX {
+class MethodCallback1
+    : public MethodCallbackBase {
 public:
     typedef std::function<void(T&, Arg1)> callback_t;
 
     ///
     /// コンストラクタ
-    MethodCallbackX1(const T* ins, callback_t callback)
-        : MethodCallbackBaseX(ins)
+    MethodCallback1(const T* ins, callback_t callback)
+        : MethodCallbackBase(ins)
         , func_(callback)
     {}
 

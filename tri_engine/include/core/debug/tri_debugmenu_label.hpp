@@ -42,7 +42,7 @@ class DebugMenuLabel
 {
     ///
     /// コールバックメソッド
-    using callback_t = MethodCallbackX<DebugMenuLabel>;
+    using callback_t = MethodCallback<DebugMenuLabel>;
 
     ///
     /// コンストラクタ
@@ -131,7 +131,7 @@ public:
         T* owner,
         void (T::*callback)()
     ) {
-        MethodCallbackX<T> cb(owner, callback);
+        MethodCallback<T> cb(owner, callback);
         focus_callback_ = (callback_t&)cb;
     }
 
@@ -143,7 +143,7 @@ public:
         T* owner,
         void (T::*callback)()
     ) {
-        MethodCallbackX<T> cb(owner, callback);
+        MethodCallback<T> cb(owner, callback);
         unfocus_callback_ = (callback_t&)cb;
     }
 

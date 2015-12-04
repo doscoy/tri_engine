@@ -20,7 +20,6 @@
 #include "core/base/tri_event.hpp"
 #include "core/math/tri_vec2.hpp"
 #include "core/utility/tri_singleton.hpp"
-#include "core/base/tri_std.hpp"
 
 TRI_CORE_NS_BEGIN
 

@@ -18,7 +18,8 @@
 #include "core/utility/tri_uncopyable.hpp"
 #include "core/math/tri_vec3.hpp"
 #include "core/base/tri_types.hpp"
-#include "core/base/tri_std.hpp"
+#include "cross/cross_std.hpp"
+
 
 TRI_CORE_NS_BEGIN
 

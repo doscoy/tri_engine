@@ -6,6 +6,7 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 
+//  include
 #include "core/debug/tri_debug_string_buffer.hpp"
 #include "core/graphics/tri_color.hpp"
 #include "core/debug/tri_print.hpp"
@@ -16,14 +17,18 @@
 
 TRI_CORE_NS_BEGIN
 
-
+///
+/// コンストラクタ
 DebugStringBuffer::DebugStringBuffer()
 {}
 
+///
+/// デストラクタ
 DebugStringBuffer::~DebugStringBuffer()
 {}
 
-
+///
+/// 文字列追加
 void DebugStringBuffer::addString(
     const float x,
     const float y,
@@ -35,7 +40,6 @@ void DebugStringBuffer::addString(
 
     
     //  受け取った文字列を一文字づつに分解して保存
-    
     int font_size = size;
     int pitch = font_size - 2;
     int count = 0;

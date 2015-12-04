@@ -106,16 +106,15 @@ public:
     
     ///
     /// バーチャルパッド取得
-    const t3::ScopedPtr<VirtualPad>& virtualPad() const {
+    const UniquePtr<VirtualPad>& virtualPad() const {
         return vpad_;
     }
             
 private:
-    t3::ScopedPtr<VirtualPad> vpad_;               ///< バーチャルパッド
+    UniquePtr<VirtualPad> vpad_;    ///< バーチャルパッド
     DebugMenuFrame menu_root_;      ///< デバメルート
     bool enable_;                   ///< 有効判定
     bool open_;                     ///< オープン判定
-    
     short left_offset_;             ///< 左端からのオフセット位置
     
 };

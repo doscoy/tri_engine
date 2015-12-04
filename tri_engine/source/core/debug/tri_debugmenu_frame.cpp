@@ -15,7 +15,8 @@ TRI_CORE_NS_BEGIN
 
 
     
-
+///
+/// コンストラクタ
 DebugMenuFrame::DebugMenuFrame(
     DebugMenuFrame* parent,
     const String& label
@@ -24,16 +25,17 @@ DebugMenuFrame::DebugMenuFrame(
     , focus_item_(nullptr)
     , select_idx_(0)
 {
-    
 }
 
 
+///
+/// デストラクタ
 DebugMenuFrame::~DebugMenuFrame()
 {
-
 }
 
-
+///
+/// デバッグメニュー項目をひらく
 void DebugMenuFrame::openFrame()
 {
     for (auto item: items_) {
@@ -49,7 +51,8 @@ void DebugMenuFrame::openFrame()
     }
 }
 
-
+///
+/// デバッグメニュー項目を閉じる
 void DebugMenuFrame::closeFrame()
 {
     for (auto item: items_) {
@@ -58,7 +61,8 @@ void DebugMenuFrame::closeFrame()
     setFocusItem(nullptr);
 }
 
-
+///
+/// このフレームに子アイテムを登録
 void DebugMenuFrame::attachItem(
     DebugMenuLabel* item
 ){
@@ -75,7 +79,8 @@ void DebugMenuFrame::attachItem(
     items_.push_back(item);
 }
 
-
+///
+/// この項目から子アイテムを削除
 void DebugMenuFrame::detachItem(
     DebugMenuLabel* item
 ){
@@ -96,7 +101,8 @@ void DebugMenuFrame::detachItem(
 
 
 
-
+///
+/// 更新
 void DebugMenuFrame::update()
 {
     DebugMenuLabel* focus = getFocusItem();
@@ -105,6 +111,7 @@ void DebugMenuFrame::update()
         focus->update();
     }
     else {
+        //  フォーカス項目を移動
         const Pad& pad = debugPad();
         uint32_t items_size = static_cast<uint32_t>(items_.size());
         
@@ -121,6 +128,7 @@ void DebugMenuFrame::update()
             }
         }
         else if (pad.isTrigger(t3::Pad::BUTTON_A)) {
+            //  フォーカスする
             int idx = 0;
             for (auto item: items_){
                 if (select_idx_ == idx){
@@ -131,6 +139,7 @@ void DebugMenuFrame::update()
             }
         }
         else if (pad.isTrigger(t3::Pad::BUTTON_B)) {
+            //  フォーカスを外す
             if (parent_) {
                 parent_->setFocusItem(nullptr);
             }
@@ -140,14 +149,15 @@ void DebugMenuFrame::update()
 
 }
     
-
+///
+/// フレームを描画する
 void DebugMenuFrame::drawFrame(
     const float x,
     const float y,
     const Color& color
 ) const {
 
-    
+    //  描画
     printDisplay(x, y, color, TRI_DEBUG_FONT_SIZE, getLabel().c_str());
 
     int idx = 0;
@@ -182,14 +192,12 @@ void DebugMenuFrame::drawFrame(
                 y + (TRI_DEBUG_FONT_SIZE*idx) + TRI_DEBUG_FONT_SIZE / 2,
                 font_color
             );
-        }
-        
+        }        
         
         idx += 1;
     }
-    
-    
-    
 }
 
+
 TRI_CORE_NS_END
+

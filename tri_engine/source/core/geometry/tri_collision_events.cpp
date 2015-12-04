@@ -14,7 +14,7 @@ TRI_CORE_NS_BEGIN
 
 
         
-const EventType CollisionEvent::TYPE("CollisionEvent");
+const EventType CollisionEvent::TYPE("tri_CollisionEvent");
 
 
 TRI_CORE_NS_END

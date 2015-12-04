@@ -19,7 +19,6 @@
 #include "core/utility/tri_uncopyable.hpp"
 #include "core/utility/tri_singleton.hpp"
 #include "core/base/tri_types.hpp"
-#include "core/base/tri_std.hpp"
 #include "core/debug/tri_trace.hpp"
 #include "core/base/tri_task.hpp"
 #include "core/base/tri_director.hpp"

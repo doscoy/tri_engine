@@ -11,8 +11,8 @@
 
 TRI_CORE_NS_BEGIN
         
-const EventType PauseEvent::TYPE("PauseEvent");
-const EventType ResumeEvent::TYPE("ResumeEvent");
+const EventType PauseEvent::TYPE("tri_PauseEvent");
+const EventType ResumeEvent::TYPE("tri_ResumeEvent");
 
 
 TRI_CORE_NS_END

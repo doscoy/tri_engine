@@ -6,6 +6,8 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 
+
+//  include
 #include "core/base/tri_application.hpp"
 #include "core/base/tri_director.hpp"
 #include "core/base/tri_scene.hpp"
@@ -17,8 +19,6 @@
 #include "core/utility/tri_framerate.hpp"
 #include "core/utility/tri_counter.hpp"
 #include "core/kernel/tri_kernel.hpp"
-
-
 #include "core/utility/tri_stopwatch.hpp"
 #include "core/kernel/memory/tri_memory_pool.hpp"
 #include "core/kernel/memory/tri_heap.hpp"
@@ -28,34 +28,40 @@ TRI_CORE_NS_BEGIN
 
 namespace {
 
-#define LIMIT_AVG_SUM   3600
-t3::Vector<float> render_avg;
+//  処理コスト計算
+#define LIMIT_AVG_SUM   3600    //  10秒分の平均を取る
+t3::Vector<float> render_avg;   //  10秒分の値格納用
+
 
 #if DEBUG
-bool show_fps_ = true;
-bool show_heap_ = false;
-bool show_heap_bar_ = false;
-bool show_mem_pool_ = false;
-bool show_work_bar_ = false;
-bool show_work_time_ = false;
-bool show_task_ = false;
+//  デバッグモード時に各種表示を行うか判定するフラグ
+bool show_fps_ = true;          // FPS
+bool show_heap_ = false;        // ヒープ容量（数値）
+bool show_heap_bar_ = false;    // ヒープ容量（バー）
+bool show_mem_pool_ = false;    // メモリプール容量
+bool show_work_bar_ = false;    // CPUコスト（バー）
+bool show_work_time_ = false;   // CPUコスト（数値）
+bool show_task_ = false;        // タスク一覧
 
 #endif // DEBUG
-t3::Workbar cpu_bar_;
 
-t3::Stopwatch system_cost_timer_;
-t3::Stopwatch app_cost_timer_;
-t3::Stopwatch rendering_cost_timer_;
-t3::Stopwatch other_cost_timer_;
-t3::Stopwatch debug_cost_timer_;
 
-double last_system_cost_;
-double last_app_cost_;
-double last_rendering_cost_;
-double last_other_cost_;
+t3::Workbar cpu_bar_;   // CPUバー表示用
 
-bool step_update_ = false;
+t3::Stopwatch system_cost_timer_;       // システムコストタイマー
+t3::Stopwatch app_cost_timer_;          // アプリコストタイマー
+t3::Stopwatch rendering_cost_timer_;    // 描画コストタイマー
+t3::Stopwatch other_cost_timer_;        // その他のコストタイマー
+t3::Stopwatch debug_cost_timer_;        // デバッグ機能コストタイマー
 
+double last_system_cost_;       //  最後のシステムコスト
+double last_app_cost_;          // 最後のアプリコスト
+double last_rendering_cost_;    // 最後の描画コスト
+double last_other_cost_;        // 最後のその他のコスト
+
+bool step_update_ = false;      // ステップ実行用フラグ
+
+//  ステップ実行ファンクタ
 struct Step {
     void operator ()(int){
         step_update_ = true;
@@ -63,19 +69,22 @@ struct Step {
 };
 
 
-
-
-
 }   // unname namespace
 
+
+
+
 #if DEBUG
+///
+/// デバッグメニュー
 class ApplicationDebugMenu {
 public:
-    ApplicationDebugMenu(t3::Application* app)
+    ///
+    /// コンストラクタ
+    ApplicationDebugMenu(t3::Application* app)  //  いつでもルートメニューに戻れるようアプリケーションのインスタンスを受ける
         : dmf_system_(nullptr, "SYSTEM")
         , dmb_root_menu_(&dmf_system_, "RETURN ROOT MENU", app, &::t3::Application::gotoRootScene)
         , dmb_step_(&dmf_system_, "STEP", 0)
-
         , dm_show_work_time_(&dmf_system_, "SHOW WORKTIME", show_work_time_)
         , dm_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_)
         , dm_show_heap_(&dmf_system_, "SHOW HEAP", show_heap_)
@@ -86,44 +95,59 @@ public:
     }
     
     
+    ///
+    /// デバッグメニューのルートを取得
     t3::DebugMenuFrame& getSystemDebugMenuRoot() {
         return dmf_system_;
     };
     
     
 private:
+    //  システムメニュー
     t3::DebugMenuFrame dmf_system_;
+    
+    //  ルートシーンに戻るデバメボタン
     t3::DebugMenuButtonMethod<t3::Application> dmb_root_menu_;
+    
+    //  ステップ実行用デバメボタン
     t3::DebugMenuButtonFunctor<Step> dmb_step_;
-
+    
+    //  処理時間の表示・非表示切り替え
     t3::DebugMenuItem<bool> dm_show_work_time_;
+    
+    //  処理バーの表示・非表示切り替え
     t3::DebugMenuItem<bool> dm_show_work_bar_;
+    
+    //  ヒープの表示・非表示切り替え
     t3::DebugMenuItem<bool> dm_show_heap_;
+    
+    //  タスクの表示・非表示切り替え
     t3::DebugMenuItem<bool> dm_show_task_;
 };
 #endif // DEBUG
 
 
-
+///
+/// トライエンジンのシステム初期化
 bool initializeTriEngine(
-    int width,
-    int height,
-    const char* const title
+    int width,              ///< 画面横幅
+    int height,             ///< 画面縦幅
+    const char* const title ///< アプリタイトル
 ) {
     
     //  プラットフォームの初期化
     if (!cross::initializePlatform(width, height, title)) {
         return false;
     }
-    
 
     //  マネージャインスタンス生成
     Director::createInstance();
     
     //  初期化
-    Director::instance().initializeDirector();
-    
     auto& d = t3::Director::instance();
+    d.initializeDirector();
+    
+    //  デバイスの画面サイズ設定
     d.deviceScreenSize(
         Vec2(
             static_cast<float>(width),
@@ -131,6 +155,7 @@ bool initializeTriEngine(
         )
     );
     
+    //  準備完了
     T3_SYSTEM_LOG("Initialize TriEngine.\n");
     T3_SYSTEM_LOG("screen width %d  height %d\n", width, height);
     
@@ -145,8 +170,10 @@ bool initializeTriEngine(
     return true;
 }
 
+///
+/// トライエンジンのシステム後片付け
 void terminateTriEngine() {
-
+    //  マネージャ破棄
     auto& d = Director::instance();
     d.terminateDirector();
     Director::destroyInstance();
@@ -155,6 +182,8 @@ void terminateTriEngine() {
 
 
 
+///
+/// コンストラクタ
 Application::Application()
     : root_scene_generator_(nullptr)
 #if DEBUG
@@ -167,15 +196,20 @@ Application::Application()
 {
 }
 
+///
+/// デストラクタ
 Application::~Application()
 {
 }
 
+///
+/// アプリケーションがアクティブか判定
 bool Application::isActive() const {
     return !Director::instance().isExitRequest();
 }
 
-
+///
+/// ワークバーの初期化
 void Application::initializeWorkBar() {
     
     auto& d = Director::instance();
@@ -200,6 +234,8 @@ void Application::initializeWorkBar() {
 }
 
 
+///
+/// アプリケーション初期化
 void Application::initializeApplication()
 {
     T3_NULL_ASSERT(root_scene_generator_);
@@ -230,6 +266,8 @@ void Application::initializeApplication()
 }
 
 
+///
+/// アプリケーション更新
 void Application::updateApplication() {
     system_cost_timer_.start();     // system cost 計測開始
 
@@ -311,6 +349,8 @@ void Application::updateApplication() {
     cross::endUpdate();
 }
 
+///
+/// アプリケーションの描画
 void Application::renderApplication() {
     T3_RENDER_ASSERT();
 
@@ -489,12 +529,16 @@ void Application::debugPrinting() {
 
 }
 
+
+///
+/// 後片付け
 void Application::terminateApplication() {
     //  ゲームの終了処理
     terminateGame();    
 }
 
-
+///
+/// デバッグメニューの表示リクエスト
 bool Application::isDebugMenuOpenRequest() {
 
     bool result = false;
@@ -518,6 +562,8 @@ bool Application::isDebugMenuOpenRequest() {
     return result;
 }
 
+///
+/// アプリケーションのサスペンド判定
 bool Application::isSuspend() const {
 
     auto& dm = t3::DebugMenu::instance();
@@ -530,7 +576,8 @@ bool Application::isSuspend() const {
 }
 
 
-
+///
+/// 描画開始
 void Application::beginRender() {
     auto& c = t3::Director::getClearColor();
     cross::RenderSystem::clearColor(c.redFloat(), c.greenFloat(), c.blueFloat(), c.alphaFloat());
@@ -538,17 +585,23 @@ void Application::beginRender() {
 
 }
 
-
+///
+/// 描画終了
 void Application::endRender() {
     cross::endRender();
 }
 
+///
+/// ルートシーンへ飛ぶ
 void Application::gotoRootScene() {
     t3::SceneManager::instance().forceChangeScene(root_scene_generator_);
 }
 
 
 //-----------
+
+///
+/// アプリケーションのC言語風呼び出しインターフェース
 Application* app_ = nullptr;
 void setApplication(Application& app) {
     app_ = &app;

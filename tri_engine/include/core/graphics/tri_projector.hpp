@@ -14,7 +14,6 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "core/base/tri_std.hpp"
 #include "core/math/tri_matrix.hpp"
 
 TRI_CORE_NS_BEGIN

@@ -20,7 +20,6 @@
 #include "core/math/tri_matrix.hpp"
 #include "../geometry/tri_frustum.hpp"
 #include "tri_entity.hpp"
-#include "core/base/tri_std.hpp"
 
 TRI_CORE_NS_BEGIN
 

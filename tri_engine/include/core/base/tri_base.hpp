@@ -24,7 +24,6 @@
 #include "tri_resource.hpp"
 #include "tri_rtti.hpp"
 #include "tri_scene.hpp"
-#include "tri_std.hpp"
 #include "tri_system_events.hpp"
 #include "tri_task.hpp"
 #include "tri_types.hpp"

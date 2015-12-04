@@ -10,7 +10,6 @@
 #include "core/graphics/tri_mesh.hpp"
 #include "core/debug/tri_assert.hpp"
 #include "core/debug/tri_trace.hpp"
-#include "core/base/tri_std.hpp"
 #include "core/geometry/tri_aabb.hpp"
 #include "core/graphics/tri_obj_loader.hpp"
 #include "core/graphics/tri_dae_loader.hpp"

@@ -1,3 +1,5 @@
+
+//  include
 #include "cross_render_system.hpp"
 #include "cross_dbg.hpp"
 #include "cross_os.hpp"
@@ -6,14 +8,19 @@
 #include <OpenGLES/ES3/gl.h>
 #include <OpenGLES/ES3/glext.h>
 
+
+
 CROSS_NS_BEGIN
 
+
+//  ドローコールをカウント
 int render_call_count_ = 0;
 
 
 
 namespace  {
 
+//  viewportを保存
 int viewport_x_ = -99;
 int viewport_y_ = -99;
 int viewport_w_ = -99;

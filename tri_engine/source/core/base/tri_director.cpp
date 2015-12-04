@@ -6,18 +6,16 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 
+//  include
 #include "core/base/tri_director.hpp"
 #include "core/base/tri_scene.hpp"
 #include "core/utility/tri_counter.hpp"
 #include "core/kernel/tri_kernel.hpp"
 #include "core/debug/tri_dbg.hpp"
 #include "core/graphics/tri_texture.hpp"
-
 #include "core/audio/tri_audio_resource.hpp"
 #include "core/geometry/tri_geometry.hpp"
 #include "core/base/tri_system_events.hpp"
-
-
 #include "../debug/tri_debug_font_data.cpp"
 
 
@@ -25,11 +23,12 @@
 
 TRI_CORE_NS_BEGIN
 
-
+//  起動からのフレーム数カウンター
 extern Counter frame_counter_;
 
 
-    
+///
+/// インプットデータ取得
 const Input& Director::input(
     const int player_no
 )  {
@@ -37,6 +36,8 @@ const Input& Director::input(
 }
 
 
+///
+/// レイヤを検索
 LayerBase* Director::findLayer(
     const String& layer_name
 ) {
@@ -51,18 +52,24 @@ LayerBase* Director::findLayer(
     return nullptr;
 }
 
+///
+/// スクリーン座標からビューポート座標へ変換
 Vec2 Director::screenToViewport(
     const Vec2& screen_pos
 ) {
     return screen_pos / instance().virtualScreenSize() * 2.0f;
 }
 
+///
+/// ビューポート座標からスクリーン座標へ変換
 Vec2 Director::viewportToScreen(
     const Vec2& viewport_pos
 ) {
     return viewport_pos * instance().virtualScreenSize() * 0.5f;
 }
 
+///
+/// スクリーン外判定
 bool Director::isOutOfScreen(
     const Vec2 &screen_pos
 ) {
@@ -77,15 +84,20 @@ bool Director::isOutOfScreen(
     return false;
 }
 
-
+///
+/// フェードレイヤーをブラックアウト用に設定
 void Director::setupBlackOut() {
     instance().fade_layer_->setupFadeParam(1, color_sample::black());
 }
 
+///
+/// フェードレイヤーをブラックイン用に設定
 void Director::setupBlackIn() {
     instance().fade_layer_->setupFadeParam(0, color_sample::black());
 }
 
+///
+/// フェード
 void Director::fadeOut() {
     instance().fade_layer_->fadeOut(1.0f);
 }
