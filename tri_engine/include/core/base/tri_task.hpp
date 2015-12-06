@@ -125,10 +125,29 @@ public:
         return t;
     }
     
-private:
     ///
     /// タスクの追加
     void addTask(TaskPtr child);
+
+    ///
+    /// 親タスク
+    auto parent() const {
+        return parent_;
+    }
+    
+    ///
+    /// 親タスク
+    void parent(TaskBase* p) {
+        parent_ = p;
+    }
+
+    ///
+    /// 子タスクがあるか判定
+    bool hasChild() const {
+        return !children_.empty();
+    }
+    
+private:
 
     ///
     /// タスクの初期化呼び出し
@@ -151,17 +170,17 @@ protected:
     ///
     /// タスクの初期化
     /// createTask直後に呼ばれる
-    virtual void taskInitialize() {}
+    virtual void onTaskFirstUpdate() {}
 
     ///
     /// タスクの更新
     /// 毎フレーム呼ばれる
-    virtual void taskUpdate(const DeltaTime dt) = 0;
+    virtual void onTaskUpdate(const DeltaTime dt) {}
 
     ///
     /// タスクの後片付け
     /// killTask呼び出し時に呼ばれる
-    virtual void taskTerminate() {}
+    virtual void onTaskKill() {}
 
 public:
     ///
@@ -225,6 +244,57 @@ public:
     }
 };
 
+///
+/// タスクファクトリ
+/// 一定時間毎に指定のタスクを生成する
+class TaskFactory
+    : public TaskBase {
+public:
+
+    TaskFactory()
+        : TaskBase()
+        , timer_(0)
+        , interval_(0)
+        , count_(0)
+        , max_count_(0)
+    {}
+
+    void order(
+        float start_delay,
+        float interval,
+        TaskGeneratorBase* generator,
+        int max_count = std::numeric_limits<std::uint32_t>::max()
+    ) {
+        count_ = 0;
+        generator_ = generator;
+        timer_ = start_delay;
+        interval_ = interval;
+        max_count_ = max_count;
+    }
+    
+    
+    void onTaskUpdate(const DeltaTime dt) override {
+        timer_ -= dt;
+        if (timer_ < 0) {
+            timer_ = interval_;
+            //  生成したタスクはこのタスクの子ではなく、親タスクに繋げる
+            //  このタスクは生成後すぐに削除されるため
+            auto task = generator_->generate();
+            parent()->addTask(task);
+            count_ += 1;
+            if (count_ >= max_count_) {
+                killTask();
+            }
+        }
+    }
+
+private:
+    float timer_;
+    float interval_;
+    TaskGeneratorBase* generator_;
+    std::uint32_t count_;
+    std::uint32_t max_count_;
+};
 
 
 ///
@@ -232,7 +302,7 @@ public:
 class RootTask
     : public TaskBase
 {
-    void taskUpdate(const DeltaTime dt) override {}
+    void onTaskUpdate(const DeltaTime dt) override {}
 };
 
 

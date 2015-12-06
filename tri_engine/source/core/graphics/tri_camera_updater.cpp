@@ -169,7 +169,7 @@ RotateCameraUpdater::~RotateCameraUpdater() {
 }
 
 
-void RotateCameraUpdater::taskUpdate(
+void RotateCameraUpdater::onTaskUpdate(
     const DeltaTime dt
 ) {
     //  注視点設定

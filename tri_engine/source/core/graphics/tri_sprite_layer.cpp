@@ -27,26 +27,14 @@ SpriteLayer::SpriteLayer(
     , renderer_()
     , sprites_()
 {
-//    for (int i = 0; i < managed_size; ++i) {
-//        sprites_.push_back(T3_SYS_NEW Sprite());
-//    }
 }
 
 SpriteLayer::~SpriteLayer() {
-//    for (int i = 0; i < sprites_.size(); ++i) {
-//        T3_DELETE sprites_[i];
-//    }
+
 }
 
 SpritePtr SpriteLayer::newSprite() {
     SpritePtr sprite(T3_NEW Sprite);
-
-//    for (int i = 0; i < sprites_.size(); ++i) {
-//        SpritePtr spr = sprites_.at(i);
-//        if (!spr->isEnabled()) { 
-//            return spr;
-//        }
-//    }
     sprites_.push_back(sprite);
 
     return sprite;

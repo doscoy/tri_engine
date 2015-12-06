@@ -36,17 +36,17 @@ SceneBase::~SceneBase() {
 
 
 
-void SceneBase::taskInitialize() {
+void SceneBase::onTaskFirstUpdate() {
     initializeScene();
 }
 
-void SceneBase::taskUpdate(
+void SceneBase::onTaskUpdate(
     const DeltaTime delta_time
 ) {
     updateScene(delta_time);
 }
 
-void SceneBase::taskTerminate() {
+void SceneBase::onTaskKill() {
     terminateScene();
 }
 

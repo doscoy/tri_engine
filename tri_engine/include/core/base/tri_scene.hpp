@@ -81,9 +81,9 @@ public:
     virtual void debugRenderScene() {}
 
 public:
-    void taskInitialize() override;
-    void taskUpdate(const DeltaTime dt) override;
-    void taskTerminate() override;
+    void onTaskFirstUpdate() override;
+    void onTaskUpdate(const DeltaTime dt) override;
+    void onTaskKill() override;
     void debugRender();
     
     bool isFinished() const {

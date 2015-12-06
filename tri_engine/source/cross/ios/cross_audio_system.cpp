@@ -9,7 +9,7 @@
 
 #include "cross_audio_system.hpp"
 #include "cross_types.hpp"
-
+#include "cross_dbg.hpp"
 
 #include <OpenAL/al.h>
 #include <OpenAL/alc.h>
@@ -29,10 +29,10 @@ ALCcontext* context_ = nullptr;
 
 void AudioSystem::initializeAudioSystem() {
     device_ = alcOpenDevice(nullptr);
-//    T3_NULL_ASSERT(device_);
+    CROSS_ASSERT(device_);
     
     context_ = alcCreateContext(device_, nullptr);
-//    T3_NULL_ASSERT(context_);
+    CROSS_ASSERT(context_);
     
     alcMakeContextCurrent(context_);
 }

@@ -37,11 +37,11 @@ TaskBase::~TaskBase() {
 }
 
 void TaskBase::doTaskInitialize() {
-    taskInitialize();
+    onTaskFirstUpdate();
 }
 
 void TaskBase::doTaskTerminate() {
-    taskTerminate();
+    onTaskKill();
 }
 
 void TaskBase::doTaskUpdate(
@@ -65,7 +65,7 @@ void TaskBase::doTaskUpdate(
         doTaskInitialize();
     }
 
-    taskUpdate(dt);
+    onTaskUpdate(dt);
 
     //  直前のアップデートでkillされてなければ子タスクを実行
     if (!kill_) {
@@ -85,9 +85,13 @@ void TaskBase::doTaskUpdate(
 void TaskBase::addTask(
     TaskPtr child
 ) {
+    if (kill_) {
+        return;
+    }
+    
     T3_NULL_ASSERT(child.get());
     children_.push_back(child);
-    child->parent_ = this;
+    child->parent(this);
 }
 
 

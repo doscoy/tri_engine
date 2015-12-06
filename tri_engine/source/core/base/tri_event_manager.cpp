@@ -127,7 +127,7 @@ bool EventManager::removeListener(
         auto table_it = table.begin();
         auto table_end = table.end();
         
-        for (; table_it != table_end; ++table_it) {
+/*        for (; table_it != table_end; ++table_it) {
             if ((*table_it)->target() == listener) {
                 
                 table.erase(table_it);
@@ -140,7 +140,12 @@ bool EventManager::removeListener(
                 break;
             }
         }
-        
+*/
+        table.remove_if(
+            [&](EventHandler h) {
+                return h->target() == listener;
+            }
+        );
         
     }
     return result;

@@ -138,7 +138,7 @@ public:
     
     ///
     /// タスク更新
-    void taskUpdate(
+    void onTaskUpdate(
         const DeltaTime dt
     ) override {}
 
@@ -219,7 +219,7 @@ public:
 
     ///
     /// タスク更新
-    void taskUpdate(
+    void onTaskUpdate(
         const DeltaTime dt
     ) override;
 
