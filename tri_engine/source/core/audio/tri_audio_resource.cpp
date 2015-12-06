@@ -39,7 +39,7 @@ AudioResourcePtr AudioResource::create(
     FilePath& filepath  ///< ファイルパス
 ) {
     //  未サポート判定
-    T3_ASSERT_MSG(filepath.ext() != ".wav", "%s is not support. only supported .wav", filepath.filename().c_str());
+    T3_ASSERT_MSG(filepath.ext() == ".wav", "%s is not support. only supported .wav", filepath.filename().c_str());
     
     //  とりあえず.wavだけサポート
     Wav wav;

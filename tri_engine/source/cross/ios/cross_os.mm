@@ -10,7 +10,7 @@
 #include "cross_types.hpp"
 #include "cross_accelerometer.hpp"
 #include "cross_render_system.hpp"
-
+#include "cross_audio_system.hpp"
 
 t3::cross::GamePadData pad_data_[4];
 t3::cross::PointingData point_data_[4];
@@ -26,6 +26,7 @@ bool initializePlatform(
     int height,
     const char* const title
 ) {
+    AudioSystem::initializeAudioSystem();
     accelerometerInit();
     return true;
 }
@@ -33,7 +34,7 @@ bool initializePlatform(
 
 
 void terminatePlatform() {
-
+    AudioSystem::terminateAudioSystem();
 }
 
 

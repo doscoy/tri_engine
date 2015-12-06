@@ -34,6 +34,10 @@ bool PointCollider::isHit(
 bool PointCollider::isHit(
     const PointCollider &col
 ) const {
+    if (col.position_ == position_) {
+        return true;
+    }
+    
     return false;
 }
 

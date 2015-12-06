@@ -24,69 +24,61 @@ TRI_CORE_NS_BEGIN
 
 ///
 /// Vec2
-template <typename T>
-class Vec2Template {
+class Vec2 {
+    using element_t = float;
 public:
-    T x_;   ///< x要素
-    T y_;   ///< y要素
+    element_t x_;   ///< x要素
+    element_t y_;   ///< y要素
     
 public:
     ///
     ///  コンストラクタ
-    Vec2Template()
+    Vec2()
     {}
     
     ///
     /// コンストラクタ
-    Vec2Template(const T ax, const T ay)
+    Vec2(const element_t ax, const element_t ay)
         : x_(ax)
         , y_(ay)
     {}
     
     ///
-    /// コンストラクタ
-    template<typename O>
-    Vec2Template<T>( const Vec2Template<O>& rhs )
-        : x_( rhs.x_ )
-        , y_( rhs.y_ )
-    {}
- 
-    ///
     /// デストラクタ
-    ~Vec2Template(){}
+    ~Vec2(){}
     
 
 public:
     ///
     /// x加算
-    void addX(T v) {
+    void addX(element_t v) {
         x_ += v;
     }
 
     ///
     /// y加算
-    void addY(T v) {
+    void addY(element_t v) {
         y_ += v;
     }
     
     ///
     /// 加算
-    void add(Vec2Template& rhs) {
+    void add(Vec2& rhs) {
         addX(rhs.x_);
         addY(rhs.y_);
     }
     
     ///
     ///  内積
-    T dotProduct( const Vec2Template& rhs ){
+    element_t dotProduct( const Vec2& rhs ){
         return x_ * rhs.x_ + y_ * rhs.y_;
     }
     
     ///
     ///  ブレンド
-    Vec2Template& blend( 
+    Vec2& blend( 
         const float t,
-        const Vec2Template& v
+        const Vec2& v
     ) {
         x_ = x_ * (1 - t) + v.x_ * t;
         y_ = y_ * (1 - t) + v.y_ * t;
@@ -102,21 +94,21 @@ public:
     
     ///
     ///  正規化したベクトルを取得
-    Vec2Template getNormalized() const {
-        Vec2Template rhs = *this;
+    Vec2 getNormalized() const {
+        Vec2 rhs = *this;
         rhs.normalize();
         return rhs;
     }
     
     ///
     ///  長さの二乗
-    T lengthSquare() const {
+    element_t lengthSquare() const {
         return t3::hypotenuseSquare(x_, y_);
     }
     
     ///
     ///  長さ
-    T length() const {
+    element_t length() const {
         return t3::hypotenuse(x_, y_);
     }
     
@@ -141,7 +133,7 @@ public:
     
     ///
     ///  反転ベクトル取得
-    Vec2Template getReversed() const {
+    Vec2 getReversed() const {
         
         return Vec2( -x_, -y_ );
     }
@@ -149,20 +141,20 @@ public:
     
     ///
     /// ハーフベクトルを返す
-    Vec2Template half() const {
+    Vec2 half() const {
         return *this * 0.5f;
     }
     
     
     ///
     ///  pointer
-    const T* pointer() const {
+    const element_t* pointer() const {
         return &x_;
     }
     
     ///
-    ///  Vec2Template = Vec2Template
-    Vec2Template& operator =( const Vec2Template& rhs ){
+    ///  Vec2 = Vec2
+    Vec2& operator =( const Vec2& rhs ){
         x_ = rhs.x_;
         y_ = rhs.y_;
         
@@ -172,71 +164,71 @@ public:
     
     ///
     ///  vec2 + vec2
-    Vec2Template operator +(const Vec2Template& rhs) const {
-        return Vec2Template(x_ + rhs.x_, y_ + rhs.y_);
+    Vec2 operator +(const Vec2& rhs) const {
+        return Vec2(x_ + rhs.x_, y_ + rhs.y_);
     }
     
     ///
     ///  vec2 - vec2
-    Vec2Template operator -(const Vec2Template& rhs) const {
-        return Vec2Template(x_ - rhs.x_, y_ - rhs.y_);
+    Vec2 operator -(const Vec2& rhs) const {
+        return Vec2(x_ - rhs.x_, y_ - rhs.y_);
     }
     
     ///
     ///  vec2 * vec2
-    Vec2Template operator *(const Vec2Template& rhs) const {
-        return Vec2Template(x_ * rhs.x_, y_ * rhs.y_);
+    Vec2 operator *(const Vec2& rhs) const {
+        return Vec2(x_ * rhs.x_, y_ * rhs.y_);
     }
     
     ///
     ///  vec2 / vec2
-    Vec2Template operator /(const Vec2Template& rhs) const {
-        return Vec2Template(x_ / rhs.x_, y_ / rhs.y_);
+    Vec2 operator /(const Vec2& rhs) const {
+        return Vec2(x_ / rhs.x_, y_ / rhs.y_);
     }
     
     ///
-    ///  Vec2Template / s
-    Vec2Template operator /( const float s ) const {
+    ///  Vec2 / s
+    Vec2 operator /( const float s ) const {
         float tmp = 1.0f / s;
-        return Vec2Template( x_ * tmp, y_ * tmp );
+        return Vec2( x_ * tmp, y_ * tmp );
     }
     
     ///
-    ///  Vec2Template * s
-    Vec2Template operator *( const float s ) const {
-        return Vec2Template( x_ * s, y_ * s );
+    ///  Vec2 * s
+    Vec2 operator *( const float s ) const {
+        return Vec2( x_ * s, y_ * s );
     }
     
     ///
-    ///  Vec2Template += Vec2Template
-    void operator +=( const Vec2Template& rhs ) {
+    ///  Vec2 += Vec2
+    void operator +=( const Vec2& rhs ) {
         x_ += rhs.x_;
         y_ += rhs.y_;
     }
     
     ///
-    ///  Vec2Template -= Vec2Template
-    void operator -=( const Vec2Template& rhs ) {
+    ///  Vec2 -= Vec2
+    void operator -=( const Vec2& rhs ) {
         x_ -= rhs.x_;
         y_ -= rhs.y_;
     }
     
     ///
-    ///  Vec2Template *= Vec2Template
-    void operator *=( const Vec2Template& rhs ) {
+    ///  Vec2 *= Vec2
+    void operator *=( const Vec2& rhs ) {
         x_ *= rhs.x_;
         y_ *= rhs.y_;
     }
     
     ///
-    ///  Vec2Template /= Vec2Template
-    void operator /=( const Vec2Template& rhs ) {
+    ///  Vec2 /= Vec2
+    void operator /=( const Vec2& rhs ) {
         x_ /= rhs.x_;
         y_ /= rhs.y_;
     }
     
     ///
-    ///  Vec2Template /= s
+    ///  Vec2 /= s
     void operator /=( const float s ) {
         float tmp = 1.0f / s;
         x_ *= tmp;
@@ -244,7 +236,7 @@ public:
     }
     
     ///
-    ///  Vec2Template *= s
+    ///  Vec2 *= s
     void operator *=( const float s ) {
         x_ *= s;
         y_ *= s;
@@ -252,50 +244,51 @@ public:
 
     
     ///
-    ///  +Vec2Template
-    Vec2Template operator +() const {
+    ///  +Vec2
+    Vec2 operator +() const {
         return *this;
     }
  
     ///
-    ///  -Vec2Template
-    Vec2Template operator -() const {
-        return Vec2Template( -x_, -y_ );
+    ///  -Vec2
+    Vec2 operator -() const {
+        return Vec2( -x_, -y_ );
     }
     
     ///
     ///  cast
-    operator T*() {
+    operator element_t*() {
         return &x_;
     }
     
     ///
     ///  cast const
-    operator const T*() const {
+    operator const element_t*() const {
         return &x_;
     }
     
     ///
-    ///  Vec2Template == Vec2Template
-    bool operator==(const Vec2Template& v) const {
-        return x_ == v.x_ && y_ == v.y_;
+    ///  Vec2 == Vec2
+    bool operator==(const Vec2& v) const {
+        return isEqualFloat(x_, v.x_) && isEqualFloat(y_, v.y_);
     }
+    
 
 public:
     ///
     /// 内積
-    static T dotProduct(
-        const Vec2Template& v1,
-        const Vec2Template& v2
+    static element_t dotProduct(
+        const Vec2& v1,
+        const Vec2& v2
     ){
         return v1.x_ * v2.x_ + v1.y_ * v2.y_;
     }
     
     ///
     /// 正規化
-    static Vec2Template& normalize(
-        Vec2Template& dst,
-        const Vec2Template& src
+    static Vec2& normalize(
+        Vec2& dst,
+        const Vec2& src
     ){
         float s = 1.0f / src.length();
         dst.x_ *= s;
@@ -305,42 +298,42 @@ public:
     
     ///
     ///  ベクトル同士の距離を算出
-    static T distance(
-        const Vec2Template& v1,
-        const Vec2Template& v2
+    static element_t distance(
+        const Vec2& v1,
+        const Vec2& v2
     ){
         return sqrtf( distanceSquare( v1, v2 ) );
     }
     
     ///
     ///  ベクトル同士の距離の二乗を算出
-    static T distanceSquare(
-        const Vec2Template& v1,
-        const Vec2Template& v2
+    static element_t distanceSquare(
+        const Vec2& v1,
+        const Vec2& v2
     ){
-        Vec2Template tmp = v1 - v2;
+        Vec2 tmp = v1 - v2;
         return ( tmp.lengthSquare() );
     }
     
     ///
     ///  同じ方向を向いているベクトルか判定
     static bool isSameDirection(
-        const Vec2Template& v1,
-        const Vec2Template& v2,
-        const T score = 0.1f
+        const Vec2& v1,
+        const Vec2& v2,
+        const element_t score = 0.1f
     ){
-        T dotv = dot( v1, v2 );
+        element_t dotv = dotProduct(v1, v2);
         return dotv >= score;
     }
 
     ///
     ///  ベクトル同士のブレンド
-    static Vec2Template getBlendVector(
+    static Vec2 getBlendVector(
         const float t,
-        const Vec2Template& v1,
-        const Vec2Template& v2
+        const Vec2& v1,
+        const Vec2& v2
     ){
-        return Vec2Template(
+        return Vec2(
             v1.x_ * (1 - t) + v2.x_ * t,
             v1.y_ * (1 - t) + v2.y_ * t
         );
@@ -348,28 +341,24 @@ public:
  
     ///
     /// ゼロベクトル
-    static Vec2Template zero() {
-        return Vec2Template(0, 0);
+    static Vec2 zero() {
+        return Vec2(0, 0);
     }
     
     ///
     /// x軸ベクトルを生成
-    static Vec2Template axisX() {
-        return Vec2Template(1, 0);
+    static Vec2 axisX() {
+        return Vec2(1, 0);
     }
 
     ///
     /// y軸ベクトルを生成
-    static Vec2Template axisY() {
-        return Vec2Template(0, 1);
+    static Vec2 axisY() {
+        return Vec2(0, 1);
     }
 
 };
 
-
-//  typedef
-typedef Vec2Template<bool>      Vec2b;
-typedef Vec2Template<float>     Vec2;
     
 
 TRI_CORE_NS_END

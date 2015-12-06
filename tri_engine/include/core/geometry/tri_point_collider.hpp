@@ -23,15 +23,19 @@ TRI_CORE_NS_BEGIN
 
 
 class CircleCollider;
+class PointCollider;
+using PointColliderPtr = SharedPtr<PointCollider>;
+
 
 ///
 /// 点のコライダ
-class PointCollider
+class PointCollider final
     : public Collider {
-public:
     ///
     /// コンストラクタ
     PointCollider(const HashString& name);
+
+public:
     
     ///
     /// デストラクタ
@@ -65,6 +69,11 @@ public:
     /// 座標を設定
     void position(const Vec2& pos) {
         position_ = pos;
+    }
+    
+    static PointColliderPtr create(String name) {
+        PointColliderPtr c(T3_SYS_NEW PointCollider(HashString(name)));
+        return c;
     }
 
 private:

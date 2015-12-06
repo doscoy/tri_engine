@@ -136,7 +136,7 @@ TRI_CORE_NS_END
 #ifdef TRI_DEVELOPMENT_ENABLE_TRACE
 
 #define T3_TRACE(ch, ...)           ::t3::trace(ch, __VA_ARGS__)
-#define T3_TRACE_PASS()             T3_TRACE("%s[%d]\n", __FUNCTION__, __LINE__);
+#define T3_TRACE_PASS()             T3_TRACE(T3_TRACE_CHANNEL_BIT_SYSTEM_DEBUG, "%s[%d]\n", __FUNCTION__, __LINE__);
 #define T3_TRACE_VALUE(ch, x)       ::t3::traceValue(ch, #x, x)
 #define T3_TRACE_TERMINAL(...)      ::t3::traceTerminal(__VA_ARGS__) // ターミナルのみにトレース。意図が無い場合はT3_TRACEを使う
 

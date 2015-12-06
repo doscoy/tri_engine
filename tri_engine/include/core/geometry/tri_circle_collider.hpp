@@ -23,19 +23,24 @@
 TRI_CORE_NS_BEGIN
 
 
+class CircleCollider;
+using CircleColliderPtr = std::shared_ptr<CircleCollider>;
+
 
 ///
 /// 当たり判定オブジェクト.
 /// 円
-class CircleCollider
+class CircleCollider final
     : public Collider {
 
-public:
     ///
     /// コンストラクタ
     CircleCollider(
         const HashString& name
     );
+
+public:
+    
     ///
     /// デストラクタ
     ~CircleCollider() = default;
@@ -85,13 +90,25 @@ public:
         circle_ = c;
     }
 
+    ///
+    /// コライダ生成
+    static CircleColliderPtr create(
+        String name,    ///< コライダ名
+        float radius    ///< 半径
+    ) {
+        CircleColliderPtr c(T3_SYS_NEW CircleCollider(HashString(name)));
+        c->radius(radius);
+        return c;
+    }
+    
+
+
 private:
     Circle circle_; ///< 判定用円
 
 };
 
 
-using CircleColliderPtr = std::shared_ptr<CircleCollider>;
 
 
 TRI_CORE_NS_END

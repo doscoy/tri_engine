@@ -222,6 +222,7 @@ Director::~Director() {
 
 void Director::initializeDirector() {
     
+    
     DebugMenu::instance().initialize();
     SceneManager::instance().initialize();
     
@@ -260,6 +261,8 @@ void Director::initializeDirector() {
 
 
 void Director::terminateDirector() {
+
+
     dbg_print_layer_.reset();
     dbg_print_buffer_.reset();
     dbg_font_sheet_.reset();

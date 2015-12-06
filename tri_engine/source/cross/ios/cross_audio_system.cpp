@@ -7,6 +7,8 @@
 ////////////////////////////////////////////////////////////////////////
 
 
+// for iOS
+
 #include "cross_audio_system.hpp"
 #include "cross_types.hpp"
 #include "cross_dbg.hpp"
