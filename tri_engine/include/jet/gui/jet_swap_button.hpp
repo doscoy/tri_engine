@@ -8,6 +8,7 @@
 /**
     @file jet_swap_button.hpp
     スワップボタン.
+    ボタンを押す度にA <-> Bと切り替わる
 */
 
 #ifndef JET_SWAP_BUTTON_HPP_INCLUDED

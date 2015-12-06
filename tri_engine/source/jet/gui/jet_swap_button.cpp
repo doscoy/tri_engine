@@ -12,26 +12,38 @@ namespace t3 {
 
 namespace {
 
-//  スワップボタンのAが押された時のイベント
+///
+///  スワップボタンのAが押された時のイベント
 class SwapButtonAEvent
     : public EventBase {
-
+    ///
+    /// コンストラクタ
     SwapButtonAEvent();
 public:
+    ///
+    /// コンストラクタ
     SwapButtonAEvent(UniqueID id)
         : ui_id_(id)
     {}
     
+    ///
+    /// イベントタイプ
     static const EventType TYPE;
+    
+    ///
+    /// イベントタイプを取得
     const EventType& eventType() const override {
         return TYPE;
     }
+    
+    ///
+    /// スワップボタン識別用ID
     UniqueID ui_id_;
 };
-const EventType SwapButtonAEvent::TYPE("SwapButtonAEvent");
+const EventType SwapButtonAEvent::TYPE("tri_SwapButtonAEvent");
 
-
-//  スワップボタンのBが押された時のイベント
+///
+///  スワップボタンのBが押された時のイベント
 class SwapButtonBEvent
     : public EventBase {
     SwapButtonBEvent();
@@ -45,13 +57,13 @@ public:
     }
     UniqueID ui_id_;
 };
-const EventType SwapButtonBEvent::TYPE("SwapButtonBEvent");
+const EventType SwapButtonBEvent::TYPE("tri_SwapButtonBEvent");
 
 
 }   // unname namespace
 
-
-
+///
+/// コンストラクタ
 SwapButton::SwapButton()
     : a_()
     , b_()

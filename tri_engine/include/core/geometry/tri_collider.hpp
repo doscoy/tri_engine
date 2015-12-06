@@ -19,7 +19,6 @@
 #include "core/utility/tri_hash_string.hpp"
 #include "core/utility/tri_unique_id.hpp"
 #include "core/utility/tri_any.hpp"
-#include "core/base/tri_std.hpp"
 
 
 TRI_CORE_NS_BEGIN

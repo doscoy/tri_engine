@@ -20,7 +20,6 @@
 #include "core/utility/tri_nameable.hpp"
 #include "tri_pause_level.hpp"
 #include "tri_event_manager.hpp"
-#include "core/base/tri_std.hpp"
 #include "core/kernel/memory/tri_new.hpp"
 
 TRI_CORE_NS_BEGIN

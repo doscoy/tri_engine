@@ -16,7 +16,7 @@ TRI_CORE_NS_BEGIN
 
 
 
-const HashString PointCollider::TYPE("PointCollider");
+const HashString PointCollider::TYPE("tri_PointCollider");
 
 PointCollider::PointCollider(
     const HashString& name

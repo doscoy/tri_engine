@@ -12,13 +12,14 @@
 TRI_CORE_NS_BEGIN
 
 
-
-//  アーカイブの読み込み
+///
+///  アーカイブの読み込み
 void Archive::load(const String& arcname) {
     zip_.initialize(arcname);
 }
 
-//  アーカイブの展開
+///
+///  アーカイブの展開
 void Archive::decompressAll() {
     int entry_num = zip_.entries();
     for (int i = 0; i < entry_num; ++i) {
@@ -33,7 +34,8 @@ void Archive::decompressAll() {
     }
 }
 
-//  ファイル取得
+///
+///  ファイル取得
 const File* Archive::file(
     const String& filename
 ) {

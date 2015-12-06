@@ -89,9 +89,10 @@ public:
     
 public:
     ///
-    /// ボタン登録
+    /// ラジオボタンのグループにボタン登録.
+    /// 以後グループ内でアクティブ・非アクティブの制御が自動化される
     void registryButton(
-        Button* button
+        Button* button  ///< ボタン
     );
 
     ///

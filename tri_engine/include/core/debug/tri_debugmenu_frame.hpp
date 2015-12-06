@@ -64,6 +64,12 @@ public:
     }
     
     ///
+    /// フォーカス中か判定
+    bool isFocused() const {
+        return focus_item_ != nullptr;
+    }
+    
+    ///
     /// フォーカス中のアイテムを取得
     DebugMenuLabel* getFocusItem() {
         return focus_item_;

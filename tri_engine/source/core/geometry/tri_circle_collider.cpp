@@ -15,7 +15,7 @@ TRI_CORE_NS_BEGIN
 
 
 
-const HashString CircleCollider::TYPE("CircleCollider");
+const HashString CircleCollider::TYPE("tri_CircleCollider");
 
 
 CircleCollider::CircleCollider(

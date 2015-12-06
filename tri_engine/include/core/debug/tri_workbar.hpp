@@ -17,7 +17,7 @@
 #include "../utility/tri_uncopyable.hpp"
 #include "../math/tri_vec2.hpp"
 #include "../graphics/tri_color.hpp"
-#include <array>
+#include "cross/cross_std.hpp"
 
 
 TRI_CORE_NS_BEGIN

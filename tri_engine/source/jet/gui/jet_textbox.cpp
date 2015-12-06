@@ -6,12 +6,13 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 
+//  include
 #include "jet/gui/jet_textbox.hpp"
 
-namespace t3 {
+TRI_JET_NS_BEGIN
 
-
-
+///
+/// コンストラクタ
 TextBox::TextBox(SpriteLayer* layer, const GlyphList* glyph_list)
     : layer_(layer)
     , transform_(nullptr)
@@ -30,12 +31,15 @@ TextBox::TextBox(SpriteLayer* layer, const GlyphList* glyph_list)
     unknown_char_glyph_ = glyph_list->search(u8"■");
 }
 
+///
+/// デストラクタ
 TextBox::~TextBox() {
 
 }
 
 
-
+///
+/// テキストを設定
 TextBox& TextBox::text(
     const Utf8& text
 ) {
@@ -82,6 +86,8 @@ TextBox& TextBox::text(
 }
 
 
+///
+/// テキストをレイアウトに沿って整形
 void TextBox::adjustStringLayout() {
     int sprite_size = static_cast<int>(char_sprites_.size());
     float x_start = 0;
@@ -153,7 +159,8 @@ void TextBox::adjustStringLayout() {
     
 }
 
-
+///
+/// テキスト幅を取得
 int TextBox::textWidth() const {
 
     int total_width = 0;
@@ -164,11 +171,15 @@ int TextBox::textWidth() const {
     return static_cast<int>(total_width * fontScaleRatio());
 }
 
+///
+/// フォントのスケール率を取得
 float TextBox::fontScaleRatio() const {
     return (float)font_size_ / (float)glyph_list_->defaultFontSize();
 }
 
 
+///
+/// カラー更新
 void TextBox::updateColor() {
     for (auto& spr : char_sprites_) {
         spr->color(font_color_);
@@ -179,11 +190,6 @@ void TextBox::updateColor() {
 
 
 
-
-}   // namespace t3
-
-
-
-
+TRI_JET_NS_END
 
 

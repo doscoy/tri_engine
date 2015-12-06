@@ -17,7 +17,6 @@
 #include "core/core_config.hpp"
 #include "../math/tri_math.hpp"
 #include "tri_camera.hpp"
-#include "core/base/tri_std.hpp"
 #include "core/base/tri_task.hpp"
 
 TRI_CORE_NS_BEGIN

@@ -14,7 +14,6 @@
 #define TRI_TYPES_HPP_INCLUDED
 
 #include "core/core_config.hpp"
-#include "tri_std.hpp"
 
 TRI_CORE_NS_BEGIN
 

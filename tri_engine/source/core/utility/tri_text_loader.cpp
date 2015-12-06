@@ -10,9 +10,10 @@
 
 TRI_CORE_NS_BEGIN
 
-
+///
+/// テキストファイルを読み込んで文字列として返す
 String loadText(
-    const char* const path
+    const char* const path  // パス
 ) {
     File file;
     file.loadFile(path, File::IOMode::IN, File::IOType::TEXT);

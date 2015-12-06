@@ -15,6 +15,7 @@
 
 //  include
 #include "cross_define.hpp"
+#include "cross_std.hpp"
 #include "cross_accelerometer.hpp"
 #include "cross_audio_system.hpp"
 #include "cross_render_system.hpp"

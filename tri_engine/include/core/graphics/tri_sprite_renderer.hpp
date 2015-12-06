@@ -17,7 +17,6 @@
 //  include
 #include "core/core_config.hpp"
 #include "core/utility/tri_uncopyable.hpp"
-#include "core/base/tri_std.hpp"
 #include "tri_shader.hpp"
 #include "tri_sprite.hpp"
 #include "core/graphics/tri_vertex_types.hpp"

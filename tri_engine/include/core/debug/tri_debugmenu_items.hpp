@@ -21,9 +21,7 @@
 #include "tri_debugmenu_frame.hpp"
 #include "core/math/tri_math_types.hpp"
 #include "tri_print.hpp"
-#include <limits.h>
-#include <functional>
-
+#include "cross/cross_std.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -80,8 +78,8 @@ public:
         const char* const label,
         T& target,
         const T step,
-        const T low_limit = std::numeric_limits<T>::min(),
-        const T high_limit = std::numeric_limits<T>::max()
+        const T low_limit = NumericLimits<T>::min(),
+        const T high_limit = NumericLimits<T>::max()
     )   : DebugMenuLabel( parent, label )
         , target_( target )
         , step_( step )

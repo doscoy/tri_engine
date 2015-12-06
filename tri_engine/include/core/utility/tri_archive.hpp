@@ -16,7 +16,6 @@
 //  include
 #include "core/core_config.hpp"
 #include "tri_zipfile.hpp"
-#include "core/base/tri_std.hpp"
 #include "core/kernel/io/tri_file.hpp"
 
 

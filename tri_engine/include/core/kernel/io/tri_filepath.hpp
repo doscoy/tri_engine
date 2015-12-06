@@ -15,8 +15,7 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "core/base/tri_std.hpp"
-
+#include "cross/cross_std.hpp"
 
 TRI_CORE_NS_BEGIN
 

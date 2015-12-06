@@ -13,13 +13,13 @@ TRI_EVENT_NS_BEGIN
 
 
 
-const EventType CameraDollyFront::TYPE("CameraDollyFront");
-const EventType CameraDollyH::TYPE("CameraDollyH");
-const EventType CameraDollyV::TYPE("CameraDollyV");
-const EventType CameraPanH::TYPE("CameraPanH");
-const EventType CameraPanV::TYPE("CameraPanV");
-const EventType CameraRollV::TYPE("CameraRollY");
-const EventType CameraRollH::TYPE("CameraRollH");
+const EventType CameraDollyFront::TYPE("tri_CameraDollyFront");
+const EventType CameraDollyH::TYPE("tri_CameraDollyH");
+const EventType CameraDollyV::TYPE("tri_CameraDollyV");
+const EventType CameraPanH::TYPE("tri_CameraPanH");
+const EventType CameraPanV::TYPE("tri_CameraPanV");
+const EventType CameraRollV::TYPE("tri_CameraRollY");
+const EventType CameraRollH::TYPE("tri_CameraRollH");
 
 
 

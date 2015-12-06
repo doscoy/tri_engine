@@ -22,8 +22,8 @@ void ButtonDefaultActivator::activate(t3::Button *b) {
         return;
     }
 
+    //  色が明るい状態
     b->sprite()->color(color_sample::white());
-
 }
 
 //  デフォルトの非アクティベート処理
@@ -33,25 +33,34 @@ void ButtonDefaultActivator::deactivate(t3::Button* b) {
         return;
     }
 
+    //  色が暗くなる
     b->sprite()->color(color_sample::gray());
 }
 
 
+///
+/// ホバー時のエフェクタ
 void ButtonDefaultHoverEffector::hover(t3::Button* b) {
     if (!b->sprite()) {
         return;
     }
+    //  ちょっと拡大
     b->sprite()->transform()->scale(1.05f);
 }
 
+///
+/// ホバー解除時のエフェクタ
 void ButtonDefaultHoverEffector::unhover(t3::Button* b) {
     if (!b->sprite()) {
         return;
     }
+    //  通常サイズに戻す
     b->sprite()->transform()->scale(1.0f);
 }
 
 
+///
+/// コンストラクタ
 Button::Button()
     : sprite_(nullptr)
     , hit_area_()
@@ -61,6 +70,8 @@ Button::Button()
     , activator_(std::make_shared<ButtonDefaultActivator>())
     , hover_effector_(std::make_shared<ButtonDefaultHoverEffector>())
 {
+    //
+    // 各種画面タッチイベントを受ける
     EventManager::addListener(
         this,
         &self_t::onPointingTrigger,
@@ -81,11 +92,16 @@ Button::Button()
 
 }
 
+///
+/// デストラクタ
 Button::~Button() {
+    //  リスナから離脱
     EventManager::removeListener(this);
 }
 
 
+///
+/// スプライトの設定
 void Button::setupSprite(
     const FilePath path,
     const Vec2 &uv_leftup,
@@ -94,15 +110,19 @@ void Button::setupSprite(
 
 }
 
+///
+/// スプライトの設定
 void Button::setupSprite(
     SpritePtr source
 ) {
+    //  スプライトに合わせてサイズを指定
     sprite_ = source;
     sprite_->priority(Sprite::PRIORITY_UI_DEFAULT);
     updateHitArea();
 }
 
-
+///
+/// トリガイベントハンドラ
 void Button::onPointingTrigger(
     const EventPtr eve
 ) {
@@ -125,6 +145,8 @@ void Button::onPointingTrigger(
     }
 }
 
+///
+/// リリースイベントハンドラ
 void Button::onPointingRelease(
     const EventPtr eve
 ) {
@@ -143,6 +165,8 @@ void Button::onPointingRelease(
 
 }
 
+///
+/// タッチ点移動イベントハンドラ
 void Button::onPointingMoving(
     const EventPtr eve
 ) {
@@ -164,10 +188,14 @@ void Button::onPointingMoving(
 
 }
 
+///
+/// アクティベート時の挙動
 void Button::activate() {
     activator_->activate(this);
 }
 
+///
+/// 非アクティベート時の挙動
 void Button::deactivate() {
     activator_->deactivate(this);
 }

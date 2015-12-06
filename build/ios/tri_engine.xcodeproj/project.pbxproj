@@ -27,7 +27,6 @@
 		3A480DEF1B2D4159001064BB /* tri_resource_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480C951B2D4159001064BB /* tri_resource_manager.hpp */; };
 		3A480DF01B2D4159001064BB /* tri_rtti.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480C961B2D4159001064BB /* tri_rtti.hpp */; };
 		3A480DF11B2D4159001064BB /* tri_scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480C971B2D4159001064BB /* tri_scene.hpp */; };
-		3A480DF21B2D4159001064BB /* tri_std.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480C981B2D4159001064BB /* tri_std.hpp */; };
 		3A480DF31B2D4159001064BB /* tri_system_events.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480C991B2D4159001064BB /* tri_system_events.hpp */; };
 		3A480DF41B2D4159001064BB /* tri_task.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480C9A1B2D4159001064BB /* tri_task.hpp */; };
 		3A480DF71B2D4159001064BB /* tri_types.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480C9D1B2D4159001064BB /* tri_types.hpp */; };
@@ -472,7 +471,6 @@
 		3A480C951B2D4159001064BB /* tri_resource_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_resource_manager.hpp; sourceTree = "<group>"; };
 		3A480C961B2D4159001064BB /* tri_rtti.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_rtti.hpp; sourceTree = "<group>"; };
 		3A480C971B2D4159001064BB /* tri_scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_scene.hpp; sourceTree = "<group>"; };
-		3A480C981B2D4159001064BB /* tri_std.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_std.hpp; sourceTree = "<group>"; };
 		3A480C991B2D4159001064BB /* tri_system_events.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_system_events.hpp; sourceTree = "<group>"; };
 		3A480C9A1B2D4159001064BB /* tri_task.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_task.hpp; sourceTree = "<group>"; };
 		3A480C9D1B2D4159001064BB /* tri_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_types.hpp; sourceTree = "<group>"; };
@@ -717,6 +715,7 @@
 		3A480DDD1B2D4159001064BB /* jet_textbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jet_textbox.cpp; sourceTree = "<group>"; };
 		3A480DE01B2D4159001064BB /* tri_view_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_view_controller.hpp; sourceTree = "<group>"; };
 		3A480DE11B2D4159001064BB /* tri_view_controller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tri_view_controller.mm; sourceTree = "<group>"; };
+		3A5397241C06ED0D005C6B27 /* cross_std.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_std.hpp; sourceTree = "<group>"; };
 		3A62998D1B65436800E8AC76 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
 		3A62998E1B65436800E8AC76 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
 		3A62998F1B65436800E8AC76 /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
@@ -897,7 +896,6 @@
 				3A480C951B2D4159001064BB /* tri_resource_manager.hpp */,
 				3A480C961B2D4159001064BB /* tri_rtti.hpp */,
 				3A480C971B2D4159001064BB /* tri_scene.hpp */,
-				3A480C981B2D4159001064BB /* tri_std.hpp */,
 				3A480C991B2D4159001064BB /* tri_system_events.hpp */,
 				3A480C9A1B2D4159001064BB /* tri_task.hpp */,
 				3A480C9D1B2D4159001064BB /* tri_types.hpp */,
@@ -1105,6 +1103,7 @@
 		3A480D201B2D4159001064BB /* cross */ = {
 			isa = PBXGroup;
 			children = (
+				3A5397241C06ED0D005C6B27 /* cross_std.hpp */,
 				3A480D211B2D4159001064BB /* cross_accelerometer.hpp */,
 				3A480D221B2D4159001064BB /* cross_audio_system.hpp */,
 				3A480D231B2D4159001064BB /* cross_config.hpp */,
@@ -1596,7 +1595,6 @@
 				3A480DEE1B2D4159001064BB /* tri_resource.hpp in Headers */,
 				3A6299F51B65436800E8AC76 /* gzguts.h in Headers */,
 				3A480E7B1B2D4159001064BB /* jet_button.hpp in Headers */,
-				3A480DF21B2D4159001064BB /* tri_std.hpp in Headers */,
 				3A629A011B65436800E8AC76 /* inffixed.h in Headers */,
 				3A480E4F1B2D4159001064BB /* tri_matrix.hpp in Headers */,
 				3A480E571B2D4159001064BB /* tri_random_mseq.hpp in Headers */,

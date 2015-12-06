@@ -88,7 +88,8 @@ private:
     bool bgm_;  ///< BGM判定用フラグ
 };
 
-
+//  オーディオハンドルのスマートポインタ型
+using AudioHandlePtr = SharedPtr<AudioHandle>;
 
 TRI_CORE_NS_END
 

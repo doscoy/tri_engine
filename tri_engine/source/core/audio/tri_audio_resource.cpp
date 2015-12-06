@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-
+//  include
 #include "core/audio/tri_audio_resource.hpp"
 #include "core/audio/tri_wav.hpp"
 #include "core/debug/tri_trace.hpp"
@@ -16,38 +16,48 @@
 TRI_CORE_NS_BEGIN
 
 
-
+///
+/// コンストラクタ
 AudioResource::AudioResource()
     : id_()
 {
+    //  オーディオのリソース用バッファを割当
     id_ = cross::AudioSystem::createBuffer();
 }
 
+///
+/// デストラクタ
 AudioResource::~AudioResource() {
+    //  バッファを削除
     cross::AudioSystem::deleteBuffer(id_);
 }
 
 
-SharedPtr<AudioResource> AudioResource::create(
-    FilePath& filepath
+///
+/// オーディオリソース生成
+AudioResourcePtr AudioResource::create(
+    FilePath& filepath  ///< ファイルパス
 ) {
-    if (filepath.ext() != ".wav") {
-        T3_PANIC("%s is not found.\n", filepath.fullpath().c_str());
-    }
+    //  未サポート判定
+    T3_ASSERT_MSG(filepath.ext() != ".wav", "%s is not support. only supported .wav", filepath.filename().c_str());
     
+    //  とりあえず.wavだけサポート
     Wav wav;
     wav.load(filepath);
     
-    SharedPtr<AudioResource> res;
+    //  リソース生成
+    AudioResourcePtr res;
     res.reset(T3_SYS_NEW AudioResource);
     res->setupBuffer(wav);
     return res;
 }
 
 
-SharedPtr<AudioHandle> AudioResource::createSound() {
+///
+/// サウンドファイル生成
+AudioHandlePtr AudioResource::createSound() {
     
-    SharedPtr<AudioHandle> audio_handle;
+    AudioHandlePtr audio_handle;
     audio_handle.reset(
         T3_SYS_NEW AudioHandle(id_)
     );
@@ -55,9 +65,12 @@ SharedPtr<AudioHandle> AudioResource::createSound() {
     return audio_handle;
 }
 
+///
+/// バッファ構築
 void AudioResource::setupBuffer(
-    const Wav& wav
+    const Wav& wav  ///< 元となるサウンドデータ
 ) {
+    //  オーディオフォーマット調査
     cross::AudioSystem::AudioFormat format;
 
     if (wav.channel() == 1) {
@@ -79,6 +92,7 @@ void AudioResource::setupBuffer(
         }
     }
     
+    //  バッファ生成
     cross::AudioSystem::setBufferData(
         id_,
         format,
@@ -87,6 +101,7 @@ void AudioResource::setupBuffer(
         wav.samplingRate()
     );
  
+    //  生成ログ出力
     T3_SYSTEM_LOG("create Wav\n");
     T3_SYSTEM_LOG(" channel %d\n", wav.channel());
     T3_SYSTEM_LOG(" bit sample %d\n", wav.bitPerSample());
@@ -97,3 +112,4 @@ void AudioResource::setupBuffer(
 
 
 TRI_CORE_NS_END
+

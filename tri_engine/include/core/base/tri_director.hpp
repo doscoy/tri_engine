@@ -275,13 +275,13 @@ private:
     
 private:
     //  デバッグ用レイヤー
-    ScopedPtr<SpriteLayer> dbg_print_layer_;
-    ScopedPtr<DebugStringBuffer> dbg_print_buffer_;
+    UniquePtr<SpriteLayer> dbg_print_layer_;
+    UniquePtr<DebugStringBuffer> dbg_print_buffer_;
     TexturePtr dbg_font_sheet_;
 
 
     //  システムフェード
-    ScopedPtr<FadeLayer> fade_layer_;   ///< フェードレイヤー
+    UniquePtr<FadeLayer> fade_layer_;   ///< フェードレイヤー
     
     //  乱数
     random_t random_number_generator_;  ///< 乱数生成器

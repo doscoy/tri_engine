@@ -25,6 +25,8 @@ TRI_CORE_NS_BEGIN
 
 //  前方宣言
 class Wav;
+class AudioResource;
+using AudioResourcePtr = SharedPtr<AudioResource>;
 
 ///
 /// オーディオリソース
@@ -44,7 +46,7 @@ public:
 
     ///
     /// サウンド生成
-    SharedPtr<AudioHandle>  createSound();
+    AudioHandlePtr  createSound();
 
 public:
     ///

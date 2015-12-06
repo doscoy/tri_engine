@@ -7,12 +7,10 @@
 ////////////////////////////////////////////////////////////////////////
 
 //  includes
-#include <cmath>
-#include <iostream>
 #include "core/debug/tri_assert.hpp"
 #include "core/debug/tri_trace.hpp"
 #include "cross/cross_dbg.hpp"
-
+#include "cross/cross_std.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -22,10 +20,10 @@ TRI_CORE_NS_BEGIN
 bool isInvalidFloat(const float f)
 {
     //  浮動少数の無効値チェック
-    if (std::isnan(f)) {
+    if (isNan(f)) {
         return true;
     }
-    if (std::isinf(f)) {
+    if (isInf(f)) {
         return true;
     }
     //  正常な浮動少数

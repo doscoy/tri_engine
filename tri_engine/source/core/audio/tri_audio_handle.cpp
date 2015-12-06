@@ -13,53 +13,76 @@
 TRI_CORE_NS_BEGIN
 
 
-
+///
+/// コンストラクタ
 AudioHandle::AudioHandle(
     const cross::AudioSystem::BufferID buffer_id
 )   : sid_(0)
     , bgm_(false)
 {
+    //  ソースIDを生成
     sid_ = cross::AudioSystem::createSource(buffer_id);
 }
 
+///
+/// デストラクタ
 AudioHandle::~AudioHandle() {
+    //  ソースIDを破棄
     cross::AudioSystem::deleteSource(sid_);
 }
 
-
-void AudioHandle::play(bool loop) {
+///
+/// 単純再生
+void AudioHandle::play(
+    bool loop   ///< ループ指定
+) {
+    //  ループを指定して再生
     cross::AudioSystem::setLoop(sid_, loop);
     cross::AudioSystem::play(sid_);
 }
 
+///
+/// 停止
 void AudioHandle::stop() {
     cross::AudioSystem::stop(sid_);
 }
 
+///
+/// BGMとして再生
 void AudioHandle::playBGM() {
     bgm_ = true;
     play(true);
 }
 
+///
+/// BGMを静止
 void AudioHandle::stopBGM() {
     stop();
 }
 
+///
+/// SEとして再生
 void AudioHandle::playSE() {
     bgm_ = false;
     play();
 }
 
+///
+/// SEを停止
 void AudioHandle::stopSE() {
     stop();
 }
 
+///
+/// ピッチの設定
 void AudioHandle::pitch(
     const float speed
 ) {
     cross::AudioSystem::pitch(sid_, speed);
 }
 
+///
+/// ボリュームの設定
 void AudioHandle::volume(
     const float vol
 ) {

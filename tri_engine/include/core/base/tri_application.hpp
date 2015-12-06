@@ -17,10 +17,9 @@
 //  インクルード
 #include "core/core_config.hpp"
 #include "core/utility/tri_uncopyable.hpp"
-#include "core/base/tri_std.hpp"
 #include "tri_types.hpp"
 #include "core/utility/tri_stopwatch.hpp"
-
+#include "cross/cross_std.hpp"
 
 
 TRI_CORE_NS_BEGIN
@@ -126,7 +125,7 @@ public:
     
 private:
 #if DEBUG
-    ScopedPtr<ApplicationDebugMenu> system_menu_;
+    UniquePtr<ApplicationDebugMenu> system_menu_;
 #endif
     SceneGenerator* root_scene_generator_;  ///< ルートシーンのジェネレータ
     uint32_t last_scene_change_frame_;  ///< 最後にシーンチェンジしたフレーム

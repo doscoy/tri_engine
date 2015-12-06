@@ -17,7 +17,6 @@
 #include "cross/cross.hpp"
 #include "core/math/tri_vec3.hpp"
 #include "core/math/tri_matrix.hpp"
-#include "core/base/tri_std.hpp"
 
 
 TRI_CORE_NS_BEGIN

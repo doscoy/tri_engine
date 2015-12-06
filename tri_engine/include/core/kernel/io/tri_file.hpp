@@ -15,10 +15,10 @@
 
 
 //  include
+#include "cross/cross_std.hpp"
 #include "core/core_config.hpp"
 #include "core/utility/tri_uncopyable.hpp"
 #include "core/base/tri_types.hpp"
-#include "core/base/tri_std.hpp"
 #include "tri_filepath.hpp"
 
 TRI_CORE_NS_BEGIN

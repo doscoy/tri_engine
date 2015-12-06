@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////
 /**
     @file tri_signature.hpp
-    シグネチャ生成.
+    32bitシグネチャ生成.
 */
 
 #ifndef TRI_SIGNATURE_HPP_INCLUDED
@@ -19,7 +19,9 @@ TRI_CORE_NS_BEGIN
 
 
 ///
-/// シグネチャ生成
+/// シグネチャ生成.
+/// ex. TriEngineを識別するためのシグネチャ　"TriE"　を作成する
+///   uint32_t sig = makeSignature('T', 'r', 'i', 'E');
 inline constexpr uint32_t makeSignature(
     char a,
     char b,
