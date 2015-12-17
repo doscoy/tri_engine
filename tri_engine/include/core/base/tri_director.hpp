@@ -185,67 +185,64 @@ public:
 
     ///
     /// クリアカラー取得
-    static const Color& getClearColor();
+    const Color& getClearColor();
 
     ///
     /// クリアカラー設定
-    static void setClearColor(const Color& c);
+    void setClearColor(const Color& c);
 
     ///
     /// 入力情報を取得
-    static const Input& input(const int player_no = 0);
+    const Input& input(const int player_no = 0);
     
     ///
     /// 登録されている指定レイヤーを探す
-    static LayerBase* findLayer(const String& layer_name);
+    LayerBase* findLayer(const String& layer_name);
     
     ///
     /// ビューポートの位置に変換
-    static Vec2 screenToViewport(const Vec2& screen_pos);
+    Vec2 screenToViewport(const Vec2& screen_pos);
     
     ///
     /// スクリーンのピクセル位置へ変換
-    static Vec2 viewportToScreen(const Vec2& viewport_pos);
+    Vec2 viewportToScreen(const Vec2& viewport_pos);
     
     ///
     /// スクリーン外判定
-    static bool isOutOfScreen(const Vec2& screen_pos);
+    bool isOutOfScreen(const Vec2& screen_pos);
     
     ///
     /// ブラックアウト設定
-    static void setupBlackOut();
+    void setupBlackOut();
 
     ///
     /// ブラックイン設定
-    static void setupBlackIn();
+    void setupBlackIn();
     
     ///
     /// フェードアウト
-    static void fadeOut();
+    void fadeOut();
     
     ///
     /// フェードイン
-    static void fadeIn();
+    void fadeIn();
     
     ///
     /// フェード終了判定
-    static bool isFadeEnd();
+    bool isFadeEnd();
     
     ///
     /// フェードイン終了判定
-    static bool isFadeInEnd();
+    bool isFadeInEnd();
     
     ///
     /// フェードアウト終了判定
-    static bool isFadeOutEnd();
+    bool isFadeOutEnd();
     
-    ///
-    /// スクリーンサイズ取得
-    static const Vec2& screenSize();
     
     ///
     /// 画面にデバッグ文字を描画
-    static void printDisplay(
+    void printDisplay(
         const float x,
         const float y,
         const uint32_t color,

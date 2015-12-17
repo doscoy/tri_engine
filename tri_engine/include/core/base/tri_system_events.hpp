@@ -24,7 +24,7 @@
 
 TRI_CORE_NS_BEGIN
 
-
+TRI_EVENT_NS_BEGIN
 
 ///
 ///  タッチトリガーイベント
@@ -230,6 +230,8 @@ private:
     Pointing::FlickDirection flick_dir_;    ///< フリック方向の種別
 };
 
+
+TRI_EVENT_NS_END
 TRI_CORE_NS_END
 
 

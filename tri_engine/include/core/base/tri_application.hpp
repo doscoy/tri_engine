@@ -33,7 +33,7 @@ class ApplicationDebugMenu;
 
 
 //  前方宣言
-class SceneGenerator;
+class TaskGeneratorBase;
 
 ///
 /// アプリケーションクラス.
@@ -85,7 +85,7 @@ public:
     ///
     /// アプリケーションのルートシーンを設定
     void rootScene(
-        SceneGenerator* root    ///< root
+        TaskGeneratorBase* root    ///< root
     ) {
         root_scene_generator_ = root;
     }
@@ -127,7 +127,7 @@ private:
 #if DEBUG
     UniquePtr<ApplicationDebugMenu> system_menu_;
 #endif
-    SceneGenerator* root_scene_generator_;  ///< ルートシーンのジェネレータ
+    TaskGeneratorBase* root_scene_generator_;  ///< ルートシーンのジェネレータ
     uint32_t last_scene_change_frame_;  ///< 最後にシーンチェンジしたフレーム
     uint32_t memory_leak_check_filter_; ///< メモリリークチェックフィルタ
     Stopwatch fps_timer_;   ///< fps計測用タイマー

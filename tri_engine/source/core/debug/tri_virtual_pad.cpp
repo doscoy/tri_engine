@@ -76,7 +76,8 @@ void VirtualPad::updateVirtualPad() {
 
 
     //  ポインティング情報取得
-    const Input& input = Director::input();
+    auto& director = Director::instance();
+    const Input& input = director.input();
     const Pointing& pointing = input.pointing();
 
     if (!pointing.isHold()) {

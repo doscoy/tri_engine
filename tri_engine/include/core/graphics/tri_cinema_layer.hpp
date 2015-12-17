@@ -29,8 +29,7 @@ TRI_CORE_NS_BEGIN
 ///
 /// シネマレイヤー
 ///
-/// @par 別レンダリングしたテクスチャを貼るレイヤーです。
-/// むにゃむにゃわちゃわちゃ
+/// @par 別レンダリングしたテクスチャを簡単に貼るレイヤーです。
 class CinemaLayer
     : public LayerBase {
     

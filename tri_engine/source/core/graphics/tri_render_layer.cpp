@@ -123,6 +123,7 @@ void LayerBase::drawLayers(
 
 void LayerBase::callDraw() {
     if (render_target_) {
+
         //  専用の描画ターゲットが指定されているので
         //  描画ターゲットの描画前後処理も呼ぶ
         render_target_->preRender();

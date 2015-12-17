@@ -239,7 +239,9 @@ void Application::initializeWorkBar() {
 void Application::initializeApplication()
 {
     T3_NULL_ASSERT(root_scene_generator_);
-    SceneManager::instance().forceChangeScene(root_scene_generator_);
+    //  ルートシーン作成
+    auto& d = Director::instance();
+    d.rootTask()->addTaskRequest(root_scene_generator_);
 
 
 #if DEBUG
@@ -257,9 +259,10 @@ void Application::initializeApplication()
 
     
     //  デバッグ文字描画の初期化
-
     initializeDrawPrimitive();
    
+
+    cross::RenderSystem::setViewport(0, 0, d.deviceScreenSize().x_, d.deviceScreenSize().y_);
 
     //  ゲームの初期化
     initializeGame();
@@ -374,7 +377,6 @@ void Application::renderApplication() {
 
 
     auto& sm = SceneManager::instance();
-    sm.debugRender();
 
     debug_cost_timer_.end();
     rendering_cost_timer_.start();      // rendering cost 計算開始
@@ -401,9 +403,6 @@ void Application::renderApplication() {
 #endif // DEBUG
 
 
-    //  最後にシーンチェンジ処理
-    sm.directScene();
-    
     //  シーン切り替わり判定
     if (sm.isSceneChenged()) {
         //  シーンが切り替わったのでデバッグメニューを閉じる
@@ -554,7 +553,8 @@ bool Application::isDebugMenuOpenRequest() {
     
     
     //  ポインティングでのオープンリクエスト
-    const Pointing& pointing = Director::input().pointing();
+    auto& director = Director::instance();
+    const Pointing& pointing = director.input().pointing();
     if (pointing.isDoubleClick() /*&& pointing.getPointingCount() == 3*/) {
         result = true;
     }
@@ -579,7 +579,8 @@ bool Application::isSuspend() const {
 ///
 /// 描画開始
 void Application::beginRender() {
-    auto& c = t3::Director::getClearColor();
+    auto& director = Director::instance();
+    auto& c = director.getClearColor();
     cross::RenderSystem::clearColor(c.redFloat(), c.greenFloat(), c.blueFloat(), c.alphaFloat());
     cross::RenderSystem::clearBuffer(true, true, false);
 

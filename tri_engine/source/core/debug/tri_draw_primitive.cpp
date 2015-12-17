@@ -25,7 +25,7 @@ TRI_CORE_NS_BEGIN
 namespace {
 
 
-Shader simple2d_;
+ShaderPtr simple2d_;
 
 
 }   // unname namespace
@@ -38,7 +38,7 @@ Shader simple2d_;
 
 void initializeDrawPrimitive()
 {
-    simple2d_.build(simple2d_vsh, simple2d_fsh);
+    simple2d_ = Shader::create(simple2d_vsh, simple2d_fsh);
 
 }
 
@@ -124,12 +124,12 @@ void drawRectangleViewport(
 
 
     //  シェーダ設定
-    bool result = simple2d_.use();
+    bool result = simple2d_->use();
     T3_ASSERT(result);
     
     //  描画
     // シェーダで描画
-    cross::RenderSystem::ShaderVariableLocation position_slot = simple2d_.getAttributeLocation("in_position");
+    cross::RenderSystem::ShaderVariableLocation position_slot = simple2d_->getAttributeLocation("in_position");
     cross::RenderSystem::setEnableVertexAttribute(position_slot);
     
     cross::RenderSystem::setVertexAttributePointer(
@@ -142,7 +142,7 @@ void drawRectangleViewport(
     );
     
     
-    simple2d_.setUniform(
+    simple2d_->setUniform(
         "in_color",
         color.redFloat(),
         color.greenFloat(),

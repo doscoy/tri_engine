@@ -135,11 +135,12 @@ private:
     
     ///
     /// デフォルトシェーダ
-    Shader model_shader_;
-    Shader simple_shader_;
+    ShaderPtr model_shader_;
+    ShaderPtr simple_shader_;
+
     ///
     /// 使用しているシェーダ
-    Shader* current_shader_;
+    ShaderPtr current_shader_;
 
     ///
     /// カリング設定

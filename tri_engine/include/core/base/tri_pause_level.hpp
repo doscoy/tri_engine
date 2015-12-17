@@ -35,6 +35,11 @@ enum PauseLevel {
     PAUSE_LV_8
 };
 
+
+TRI_EVENT_NS_BEGIN
+
+
+
 ///
 /// ポーズイベント
 class PauseEvent
@@ -98,6 +103,7 @@ private:
 };
 
 
+TRI_EVENT_NS_END
 TRI_CORE_NS_END
 
 

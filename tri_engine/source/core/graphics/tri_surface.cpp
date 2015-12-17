@@ -91,7 +91,6 @@ Surface::Surface(
             depth_texture_->id()
         );
     }
-    cross::RenderSystem::bindFrameBuffer(0);
  
     fb_.unbind();
 }
@@ -129,12 +128,30 @@ void Surface::preRender() {
     //  フレームバッファ接続
     bind();
     clear();
+    
     auto half = size_.half();
+    
+    cross::RenderSystem::getViewport(
+        &last_viewport_pos_x_,
+        &last_viewport_pos_y_,
+        &last_viewport_width_,
+        &last_viewport_height_
+    );
+    
     cross::RenderSystem::setViewport(half.x_, half.y_, size_.x_, size_.y_);
 }
 
 
 void Surface::postRender() {
+
+
+    cross::RenderSystem::setViewport(
+        last_viewport_pos_x_,
+        last_viewport_pos_y_,
+        last_viewport_width_,
+        last_viewport_height_
+    );
+
     //  フレームバッファへの接続解除
     unbind();
 }

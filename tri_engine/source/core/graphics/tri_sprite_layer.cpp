@@ -66,7 +66,7 @@ void SpriteLayer::updateLayer(
 ) {
 
 //    T3_SYSTEM_LOG_DEBUG("sp size = %d \n", sprites_.size());
-
+    renderer_.beginCollect();
 
     //  期限の切れたスプライトを削除
     sprites_.remove_if(
@@ -100,7 +100,7 @@ void SpriteLayer::updateLayer(
     }
 
     //  スプライトがあれば、ドローコールを抑える為マージする
-    if (!renderer_.collections().empty()) {
+    if (renderer_.hasSprites()) {
         renderer_.margeSprites();
     }
     
@@ -108,7 +108,7 @@ void SpriteLayer::updateLayer(
 
 void SpriteLayer::drawLayer() {
 
-    if (renderer_.collections().empty()) {
+    if (!renderer_.hasSprites()) {
         //  スプライト無ければ処理スキップ
         return;
     }

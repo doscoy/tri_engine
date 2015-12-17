@@ -75,19 +75,19 @@ Button::Button()
     EventManager::addListener(
         this,
         &self_t::onPointingTrigger,
-        PointingTriggeredEvent::TYPE
+        event::PointingTriggeredEvent::TYPE
     );
 
     EventManager::addListener(
         this,
         &self_t::onPointingMoving,
-        PointingMovingEvent::TYPE
+        event::PointingMovingEvent::TYPE
     );
     
     EventManager::addListener(
         this,
         &self_t::onPointingRelease,
-        PointingReleasedEvent::TYPE
+        event::PointingReleasedEvent::TYPE
     );
 
 }
@@ -137,7 +137,7 @@ void Button::onPointingTrigger(
         return;
     }
     
-    auto trg_event = static_cast<const PointingTriggeredEvent*>(eve.get());
+    auto trg_event = static_cast<const event::PointingTriggeredEvent*>(eve.get());
     if (isHitPointRectangle(trg_event->position(), hit_area_)) {
         //  ファーストタッチで触っていた
         first_touch_ = true;
@@ -176,7 +176,7 @@ void Button::onPointingMoving(
     }
 
     
-    auto move_event = static_cast<const t3::PointingMovingEvent*>(eve.get());
+    auto move_event = static_cast<const event::PointingMovingEvent*>(eve.get());
     if (isHitPointRectangle(move_event->position(), hit_area_)) {
         hover();
     }

@@ -134,6 +134,13 @@ private:
     Vec2 size_;
     
     ///
+    /// 変更前のビューポート位置
+    int last_viewport_pos_x_;
+    int last_viewport_pos_y_;
+    int last_viewport_width_;
+    int last_viewport_height_;
+
+    ///
     /// フレームバッファ
     FrameBuffer fb_;
         

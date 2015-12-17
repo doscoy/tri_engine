@@ -24,13 +24,46 @@
 
 TRI_CORE_NS_BEGIN
 
-///
-/// タスク
-class TaskGeneratorBase;
+
+//  タスクポインタ型定義
 class TaskBase;
 using TaskPtr = SharedPtr<TaskBase>;
 using TaskList = List<TaskPtr>;
 
+
+
+///
+/// タスクジェネレータ基底
+class TaskGeneratorBase {
+public:
+    virtual TaskPtr generate() = 0;
+};
+
+
+
+///
+/// タスクジェネレータ
+/// 任意の型のタスクを生成する
+template <class T>
+class TaskGenerator
+    : public TaskGeneratorBase
+{
+public:
+    static TaskGenerator* instancePtr() {
+        static TaskGenerator<T> inst_;
+        return &inst_;
+    }
+
+    TaskPtr generate() override {
+        SharedPtr<T> t(T3_NEW T);
+        return t;
+    }
+};
+
+
+
+///
+/// タスク
 class TaskBase
     : private Uncopyable
     , virtual public Nameable
@@ -117,16 +150,38 @@ public:
     
     ///
     /// 子タスク生成
-    template <class U>
-    auto createTask() {
-        SharedPtr<U> t(T3_NEW U());
+    template <class TaskType>
+    SharedPtr<TaskType> createTask() {
+        //  任意のタスク型のジェネレータ取得
+        TaskGenerator<TaskType>* task_gen = TaskGenerator<TaskType>::instancePtr();
+        
+        //  ジェネレータからタスク生成
+        SharedPtr<TaskType> t = std::dynamic_pointer_cast<TaskType>(createTask(task_gen));
+        return t;
+    }
+
+    ///
+    /// 子タスク生成
+    /// ジェネレータで指定
+    TaskPtr createTask(TaskGeneratorBase* gen) {
+        TaskPtr t = gen->generate();
         addTask(t);
         return t;
     }
-    
+
     ///
-    /// タスクの追加
-    void addTask(TaskPtr child);
+    /// 子タスクの追加リクエスト
+    void addTaskRequest(TaskGeneratorBase* request) {
+        add_requests_.push_back(request);
+    }
+
+    ///
+    /// このタスクの破棄時に生成されるタスクを登録
+    void nextTaskGenerator(
+        TaskGeneratorBase* next
+    ) {
+        next_ = next;
+    }
 
     ///
     /// 親タスク
@@ -147,6 +202,10 @@ public:
     }
     
 private:
+    ///
+    /// タスクの追加
+    void addTask(TaskPtr child);
+
 
     ///
     /// タスクの初期化呼び出し
@@ -181,7 +240,7 @@ protected:
     /// killTask呼び出し時に呼ばれる
     virtual void onTaskKill() {}
 
-public:
+protected:
     ///
     /// タスクの削除予約
     void killTask() {
@@ -214,33 +273,11 @@ private:
     ///
     /// 親タスク
     TaskBase* parent_;
-};
-
-
-///
-/// タスクジェネレータ基底
-class TaskGeneratorBase {
-public:
-    virtual TaskPtr generate() = 0;
-};
-
-///
-/// タスクジェネレータ
-/// 次に生成するタスクの予約用
-template <class T>
-class TaskGenerator
-    : public TaskGeneratorBase
-{
-public:
-    static TaskGenerator* instancePtr() {
-        static TaskGenerator<T> inst_;
-        return &inst_;
-    }
-
-    TaskPtr generate() override {
-        TaskPtr t(T3_NEW T);
-        return t;
-    }
+    
+    
+    ///
+    /// タスク追加リクエスト
+    Vector<TaskGeneratorBase*> add_requests_;
 };
 
 ///
@@ -276,10 +313,8 @@ public:
         timer_ -= dt;
         if (timer_ < 0) {
             timer_ = interval_;
-            //  生成したタスクはこのタスクの子ではなく、親タスクに繋げる
-            //  このタスクは生成後すぐに削除されるため
-            auto task = generator_->generate();
-            parent()->addTask(task);
+            //  指定の時間が過ぎたら親タスクにタスク追加の依頼を出す
+            parent()->addTaskRequest(generator_);
             count_ += 1;
             if (count_ >= max_count_) {
                 killTask();
@@ -295,14 +330,6 @@ private:
     std::uint32_t max_count_;
 };
 
-
-///
-/// タスクシステムルート
-class RootTask
-    : public TaskBase
-{
-    void onTaskUpdate(const DeltaTime dt) override {}
-};
 
 
 TRI_CORE_NS_END

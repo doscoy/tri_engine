@@ -29,10 +29,10 @@ TaskBase::TaskBase()
 
 
 TaskBase::~TaskBase() {
-    //  次のタスクがある場合は破棄タイミングで生成
+    //  次のタスクがある場合は破棄タイミングで親タスクにリクエストを送る
     if (next_) {
         T3_NULL_ASSERT(parent_);
-        parent_->addTask(next_->generate());
+        parent_->addTaskRequest(next_);
     }
 }
 
@@ -79,6 +79,16 @@ void TaskBase::doTaskUpdate(
             return p->isKill();
         }
     );
+    
+    
+    //  タスク追加リクエストに応じる
+    if (!add_requests_.empty()) {
+        for (auto req : add_requests_) {
+            createTask(req);
+        }
+    
+        add_requests_.clear();
+    }
 }
 
 

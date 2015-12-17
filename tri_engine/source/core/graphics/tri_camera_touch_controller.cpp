@@ -19,10 +19,10 @@ void CameraTouchController::onTaskUpdate(const DeltaTime dt) {
     if (pointing.isHold()) {
         if (pointing.isMoving()) {
         
-            auto roll_h = std::make_shared<t3::event::CameraRollH>();
+            auto roll_h = std::make_shared<event::CameraRollH>();
             roll_h->speed(pointing.moveDistance().x_);
 
-            auto roll_v = std::make_shared<t3::event::CameraRollV>();
+            auto roll_v = std::make_shared<event::CameraRollV>();
             roll_v->speed(pointing.moveDistance().y_);
             
             t3::EventManager::queueEvent(roll_h);

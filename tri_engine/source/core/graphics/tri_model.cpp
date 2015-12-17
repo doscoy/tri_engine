@@ -39,15 +39,15 @@ Model::Model()
     : mesh_(nullptr)
     , model_shader_()
     , simple_shader_()
-    , current_shader_(&model_shader_)
+    , current_shader_(model_shader_)
     , shadow_cast_(false)
     , shadow_receive_(false)
     , culling_mode_(cross::RenderSystem::CullingMode::MODE_BACK)
 {
 
     //  シェーダ作成
-    model_shader_.build(model_vsh, model_fsh);
-    simple_shader_.build(simple3d_vsh, simple3d_fsh);
+    model_shader_ = Shader::create(model_vsh, model_fsh);
+    simple_shader_ = Shader::create(simple3d_vsh, simple3d_fsh);
 }
 
 
@@ -64,9 +64,9 @@ void Model::render(const RenderInfo& info) {
         if (!shadow_cast_) {
             return;
         }
-        current_shader_ = &simple_shader_;
+        current_shader_ = simple_shader_;
     } else {
-        current_shader_ = &model_shader_;
+        current_shader_ = model_shader_;
     }
 
     auto& meshes = mesh_->meshes();

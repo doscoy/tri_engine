@@ -32,7 +32,7 @@ extern Counter frame_counter_;
 const Input& Director::input(
     const int player_no
 )  {
-    return Director::instance().input_.at(player_no);
+    return input_.at(player_no);
 }
 
 
@@ -41,9 +41,8 @@ const Input& Director::input(
 LayerBase* Director::findLayer(
     const String& layer_name
 ) {
-    Layers layers = Director::instance().layers();
     
-    for (auto layer : layers) {
+    for (auto layer : layers_) {
         if (layer_name == layer->name()) {
             return layer;
         }
@@ -57,7 +56,7 @@ LayerBase* Director::findLayer(
 Vec2 Director::screenToViewport(
     const Vec2& screen_pos
 ) {
-    return screen_pos / instance().virtualScreenSize() * 2.0f;
+    return screen_pos / virtualScreenSize() * 2.0f;
 }
 
 ///
@@ -65,7 +64,7 @@ Vec2 Director::screenToViewport(
 Vec2 Director::viewportToScreen(
     const Vec2& viewport_pos
 ) {
-    return viewport_pos * instance().virtualScreenSize() * 0.5f;
+    return viewport_pos * virtualScreenSize() * 0.5f;
 }
 
 ///
@@ -87,39 +86,35 @@ bool Director::isOutOfScreen(
 ///
 /// フェードレイヤーをブラックアウト用に設定
 void Director::setupBlackOut() {
-    instance().fade_layer_->setupFadeParam(1, color_sample::black());
+    fade_layer_->setupFadeParam(1, color_sample::black());
 }
 
 ///
 /// フェードレイヤーをブラックイン用に設定
 void Director::setupBlackIn() {
-    instance().fade_layer_->setupFadeParam(0, color_sample::black());
+    fade_layer_->setupFadeParam(0, color_sample::black());
 }
 
 ///
 /// フェード
 void Director::fadeOut() {
-    instance().fade_layer_->fadeOut(1.0f);
+    fade_layer_->fadeOut(1.0f);
 }
 
 void Director::fadeIn() {
-    instance().fade_layer_->fadeIn(1.0f);
+    fade_layer_->fadeIn(1.0f);
 }
 
 bool Director::isFadeEnd() {
-    return instance().fade_layer_->isFadeEnd();
+    return fade_layer_->isFadeEnd();
 }
 
 bool Director::isFadeInEnd() {
-    return instance().fade_layer_->isFadeInEnd();
+    return fade_layer_->isFadeInEnd();
 }
 
 bool Director::isFadeOutEnd() {
-    return instance().fade_layer_->isFadeOutEnd();
-}
-
-const Vec2& Director::screenSize() {
-    return instance().virtualScreenSize();
+    return fade_layer_->isFadeOutEnd();
 }
 
 
@@ -130,16 +125,16 @@ void Director::printDisplay(
     const int font_size,
     const char* const str
 ) {
-    instance().dbg_print_buffer_->addString(x, y, color, font_size, str);
+    dbg_print_buffer_->addString(x, y, color, font_size, str);
 }
 
 
 const Color& Director::getClearColor() {
-    return instance().clear_colors_[instance().use_clear_color_index_];
+    return clear_colors_[use_clear_color_index_];
 }
 
 void Director::setClearColor(const Color& c) {
-    instance().clear_colors_[0] = c;
+    clear_colors_[0] = c;
 }
 
 
@@ -171,7 +166,7 @@ Director::Director()
     , exit_request_(false)
 {
     //  ルートタスク生成
-    root_task_.reset(T3_NEW RootTask());
+    root_task_.reset(T3_NEW TaskBase());
 
     //  ファイルシステムベースパス設定
     FilePath::setBaseDirectory(cross::getDeviceFilePath());
@@ -224,7 +219,6 @@ void Director::initializeDirector() {
     
     
     DebugMenu::instance().initialize();
-    SceneManager::instance().initialize();
     
     dm_layers_.setFocusCallback(
         this,
@@ -363,21 +357,21 @@ void Director::updateInput(
         const Pointing& pointing = input.pointing();
         //  トリガー
         if (pointing.isTrigger()) {
-            auto eve_point_trg = std::make_shared<PointingTriggeredEvent>();
+            auto eve_point_trg = std::make_shared<event::PointingTriggeredEvent>();
             eve_point_trg->inputNo(pad_idx);
             eve_point_trg->position(pointing.position());
             EventManager::queueEvent(eve_point_trg);
         }
         //  リリース
         if (pointing.isRelease()) {
-            auto eve_point_rls = std::make_shared<PointingReleasedEvent>();
+            auto eve_point_rls = std::make_shared<event::PointingReleasedEvent>();
             eve_point_rls->inputNo(pad_idx);
             eve_point_rls->position(pointing.position());
             EventManager::queueEvent(eve_point_rls);
         }
         //  ムーブ
         if (pointing.isMoving()) {
-            auto eve_point_move = std::make_shared<PointingMovingEvent>();
+            auto eve_point_move = std::make_shared<event::PointingMovingEvent>();
             eve_point_move->inputNo(pad_idx);
             eve_point_move->position(pointing.position());
             eve_point_move->moveDistance(pointing.moveDistance());
@@ -385,7 +379,7 @@ void Director::updateInput(
         }
         //  フリック
         if (pointing.isFlick()) {
-            auto eve_point_flick = std::make_shared<PointingFlickEvent>();
+            auto eve_point_flick = std::make_shared<event::PointingFlickEvent>();
             eve_point_flick->inputNo(pad_idx);
             eve_point_flick->flickDirection(pointing.flickDirection());
             eve_point_flick->flickMoveOffset(pointing.flickMoveOffset());

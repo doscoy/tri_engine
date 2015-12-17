@@ -31,6 +31,8 @@ TRI_CORE_NS_BEGIN
 class SceneBase;
 using ScenePtr = SharedPtr<SceneBase>;
 
+
+
 class SceneGenerator
 {
 public:
@@ -62,6 +64,9 @@ public:
 };
 
 
+///
+/// メインシーンの基底
+/// メインシーンはアプリケーションの中で同時に１つしか存在できない
 class SceneBase
     : public TaskBase
 {
@@ -85,9 +90,6 @@ public:
     void onTaskKill() override;
     void debugRender();
     
-    bool isFinished() const {
-        return finish_;
-    };
     
     const char* sceneName() const {
         return scene_name_;
@@ -96,15 +98,11 @@ public:
     DebugMenuFrame& sceneDebugMenuFrame() {
         return scene_debug_menu_frame_;
     }
-    
-    template <typename SceneType>
-    static SceneGenerator* sceneGenerator(){
-        return TypedSceneGenerator<SceneType>::instancePtr();
-    }
+
 
 protected:
     void finish() {
-        finish_ = true;
+        killTask();
     }
 
 private:
@@ -126,6 +124,8 @@ public:
 
 
 
+
+
 class SceneManager
     : public Singleton<SceneManager>
 {
@@ -136,41 +136,38 @@ private:
     ~SceneManager();
     
 public:
-    void initialize();
-
-    void debugRender();
-    
-    static void requestNextScene(
-        SceneGenerator* const next_scene_generator
-    ) {
-        instance().next_scene_generator_ = next_scene_generator;
-    }
     
     void forceChangeScene(
-        SceneGenerator* const next_scene_generator
+        TaskGeneratorBase* const next_scene_generator
     ) {
-        next_scene_generator_ = next_scene_generator;
-        force_change_ = true;
+        if (cur_) {
+            cur_->nextTaskGenerator(next_scene_generator);
+            cur_->killTask();
+        }
     }
     
     bool isSceneChenged() const {
         return scene_changed_;
     }
     
-    bool isForceChangeRequested() const {
-        return force_change_;
-    }
     
-    void directScene();
+    void current(SceneBase* s) {
+        T3_ASSERT_MSG(cur_ == nullptr || s == nullptr, "Scene instance must only one in frame.");
+        cur_ = s;
+    }
+
+
+    void addSceneHistory(const char* const name) {
+        history_.push_back(name);
+    }
 
 private:
     void sceneChange();
 
 private:
-    ScenePtr current_scene_;
-    SceneGenerator* next_scene_generator_;
-    bool force_change_;
+    SceneBase* cur_;
     bool scene_changed_;
+    Vector<const char*> history_;
 };
 
 

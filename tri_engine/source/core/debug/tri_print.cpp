@@ -27,8 +27,8 @@ void printDisplay(
     char buf[256];
     vsnprintf(buf, 256, fmt, arg);
     va_end(arg);
-    
-    t3::Director::printDisplay(
+    auto& d = Director::instance();
+    d.printDisplay(
         x,
         y,
         color.rgba32(),

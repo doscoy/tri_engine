@@ -31,7 +31,7 @@ Sprite::Sprite()
     , enable_(false)
 {
     calcSortScore();
-    transform_ = std::make_shared<Transform2D>();
+    transform_ = Transform2D::create();
 
 	texture_coord_ = { 0,0,1,1 };
 }
@@ -119,19 +119,14 @@ void Sprite::adjustPivotByCenter() {
 }
 
 ///
-/// 無効化
-void Sprite::destroy() {
-    disable();
-}
-
-///
 /// 生成
 SpritePtr Sprite::create(
     String tex_name,
     String layer_name
 ) {
     //  お目当てのレイヤーを取得
-    LayerBase* layer = Director::findLayer(layer_name);
+    auto& director = Director::instance();
+    LayerBase* layer = director.findLayer(layer_name);
     SpriteLayer* sprite_layer = dynamic_cast<SpriteLayer*>(layer);
     
     T3_NULL_ASSERT(sprite_layer);
@@ -147,7 +142,8 @@ SpritePtr Sprite::create(
     String layer_name
 ) {
     //  お目当てのレイヤーを取得
-    LayerBase* layer = Director::findLayer(layer_name);
+    auto& director = Director::instance();
+    LayerBase* layer = director.findLayer(layer_name);
     SpriteLayer* sprite_layer = dynamic_cast<SpriteLayer*>(layer);
     
     T3_NULL_ASSERT(sprite_layer);

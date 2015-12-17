@@ -1166,10 +1166,20 @@ void RenderSystem::getViewport(
     int* w,
     int* h
 ) {
+/*
+    int tmp[4];
+    glGetIntegerv(GL_VIEWPORT, tmp);
+
+    *x = tmp[0];
+    *y = tmp[1];
+    *w = tmp[2];
+    *h = tmp[3];
+*/
     *x = viewport_x_;
     *y = viewport_y_;
     *w = viewport_w_;
     *h = viewport_h_;
+
 }
 
 void RenderSystem::setTextureWrap(
