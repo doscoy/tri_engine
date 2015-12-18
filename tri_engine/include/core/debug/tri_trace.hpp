@@ -151,6 +151,10 @@ TRI_CORE_NS_END
 #define T3_TRACE_VALUE(x)           (void)0
 #define T3_TRACE_TERMINAL(...)      (void)0
 
+#define T3_SYSTEM_LOG(...)          (void)0
+#define T3_SYSTEM_WARNING(...)      (void)0
+#define T3_SYSTEM_LOG_DEBUG(...)    (void)0
+
 #endif // TRI_DEVELOPMENT_ENABLE_TRACE
 
 #endif // TRI_TRACE_HPP_INCLUDED

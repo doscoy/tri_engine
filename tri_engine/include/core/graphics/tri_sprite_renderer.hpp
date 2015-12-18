@@ -144,7 +144,7 @@ class SpriteRenderer
 
     ///
     /// バッチグループの集合
-    using BatchGroups = Array<BatchGroup, 2048>;
+    using BatchGroups = Array<BatchGroup, 256>;
 
 public:
     ///

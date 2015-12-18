@@ -20,7 +20,7 @@ TRI_CORE_NS_BEGIN
 
 
 CinemaLayer::CinemaLayer()
-    : CinemaLayer(Vec2(-1,-1), Vec2(1,1), "cinema", LayerBase::PRIORITY_APP_FRONT1)
+    : CinemaLayer(Vec2(-1,-1), Vec2(1,1))
 {}
 
 
@@ -28,7 +28,7 @@ CinemaLayer::CinemaLayer(
     const Vec2 min_pos,
     const Vec2 max_pos,
     const String& name,
-    const int priority
+    const Priority priority
 )   : LayerBase(name, priority)
     , vao_()
     , vb_()
@@ -78,9 +78,12 @@ CinemaLayer::CinemaLayer(
     );
     
     
-        //  デフォルトのカラーシェーダ作成
+    //  デフォルトのカラーシェーダ作成
+    //  テクスチャのカラー値を表示するシェーダ
     color_shader_ = Shader::create(simple_tex_vsh, simple_tex_fsh);
+    
     //  デフォルトのデプスシェーダ作成
+    //  テクスチャのデプス値を表示するシェーダ
     depth_shader_ = Shader::create(simple_tex_vsh, show_depth_tex_fsh);
     
     //  デフォルトシェーダを設定

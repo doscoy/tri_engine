@@ -111,7 +111,7 @@ SpriteRenderer::SpriteRenderer()
 
         cross::RenderSystem::setupBufferData(
             cross::RenderSystem::BufferType::TYPE_VERTEX,
-            sizeof(VertexP2CT) * 4096 * 4,
+            sizeof(VertexP2CT) * 4096 * 2,
             nullptr,
             cross::RenderSystem::BufferUsage::DYNAMIC_DRAW
         );
@@ -119,7 +119,7 @@ SpriteRenderer::SpriteRenderer()
         group.indexBuffer().bind();
         cross::RenderSystem::setupBufferData(
             cross::RenderSystem::BufferType::TYPE_INDEX,
-            sizeof(uint32_t) * 4096 * 4 * 2,
+            sizeof(uint32_t) * 4096 * 2 * 4,
             nullptr,
             cross::RenderSystem::BufferUsage::DYNAMIC_DRAW
         );

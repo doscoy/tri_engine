@@ -37,7 +37,7 @@ public:
 
     ///
     /// コンストラクタ
-    explicit DrawLayer(const String name, const int priority);
+    explicit DrawLayer(const String name, const Priority priority = Priority::DEFAULT);
 
     ///
     /// デストラクタ

@@ -16,7 +16,6 @@ TRI_CORE_NS_BEGIN
 TaskBase::TaskBase()
     : priority_(PRIORITY_APP_DEFAULT)
     , type_(0)
-    , pause_lv_(PAUSE_LV_1)
     , first_update_(true)
     , kill_(false)
     , children_()
@@ -65,21 +64,23 @@ void TaskBase::doTaskUpdate(
         doTaskInitialize();
     }
 
-    onTaskUpdate(dt);
+    if (!paused()) {
+        onTaskUpdate(dt);
+        
+        //  直前のアップデートでkillされてなければ子タスクを実行
+        if (!kill_) {
+            for (auto& child : children_) {
+                child->doTaskUpdate(dt);
+            }
+        }
+        
+        children_.remove_if(
+            [](TaskPtr p){
+                return p->isKill();
+            }
+        );
 
-    //  直前のアップデートでkillされてなければ子タスクを実行
-    if (!kill_) {
-        for (auto& child : children_) {
-            child->doTaskUpdate(dt);
-        }
     }
-    
-    children_.remove_if(
-        [](TaskPtr p){
-            return p->isKill();
-        }
-    );
-    
     
     //  タスク追加リクエストに応じる
     if (!add_requests_.empty()) {

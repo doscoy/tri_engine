@@ -38,35 +38,39 @@ class LayerBase
 public:
     ///
     /// 描画プライオリティ
-    enum LayerPriority {
-        PRIORITY_LOWEST      =  10, // 奥
-        PRIORITY_SYS_BACK    =  50,
-        PRIORITY_APP_BACK1   =  60,
-        PRIORITY_APP_BACK2   =  65,
-        PRIORITY_APP_BACK3   =  70,
-        PRIORITY_APP_BACK4   =  75,
-        PRIORITY_APP_BACK5   =  80,
-        PRIORITY_APP_DEFAULT = 100,
-        PRIORITY_APP_FRONT1  = 120,
-        PRIORITY_APP_FRONT2  = 125,
-        PRIORITY_APP_FRONT3  = 130,
-        PRIORITY_APP_FRONT4  = 135,
-        PRIORITY_APP_FRONT5  = 140,
-        PRIORITY_APP_UI      = 160,
-        PRIORITY_SYS_FRONT   = 170,
-        PRIORITY_SYS_FADE    = 180,
-        PRIORITY_DEBUG       = 200,
-        PRIORITY_HIGHEST     = 240, // 手前
+    enum class Priority {
+        LOWEST      =  10, // 奥
+        
+        SYS_BACK    =  20,
+
+        BACK1       =  100,
+        BACK2,
+        BACK3,
+        BACK4,
+        BACK5,
+
+        DEFAULT     = 200,
+
+        FRONT1      = 300,
+        FRONT2,
+        FRONT3,
+        FRONT4,
+        FRONT5,
+
+        UI          = 400,
+
+        SYS_FRONT   = 2000,
+        SYS_FADE    = 3000,
+        SYS_DEBUG   = 4000,
+        
+        HIGHEST     = 5000, // 手前
     };
     
 public:
     ///
     /// コンストラクタ
-    LayerBase(const String& name, const int priority);
+    explicit LayerBase(const String& name, const Priority priority = LayerBase::Priority::DEFAULT);
     
-    ///
-    /// コンストラクタ
-    explicit LayerBase(const String& name);
     
     ///
     /// デストラクタ
@@ -90,11 +94,11 @@ public:
 
     ///
     /// プライオリティを設定
-    void priority(const int priority);
+    void priority(const Priority priority);
     
     ///
     /// プライオリティを取得
-    int priority() const {
+    Priority priority() const {
         return priority_;
     }
     
@@ -270,7 +274,7 @@ protected:
     
     ///
     /// プライオリティ
-    uint8_t priority_;
+    Priority priority_;
     
     ///
     /// 描画ターゲット

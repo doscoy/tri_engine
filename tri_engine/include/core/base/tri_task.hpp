@@ -18,7 +18,7 @@
 #include "core/base/tri_types.hpp"
 #include "core/utility/tri_uncopyable.hpp"
 #include "core/utility/tri_nameable.hpp"
-#include "tri_pause_level.hpp"
+#include "tri_pausable.hpp"
 #include "tri_event_manager.hpp"
 #include "core/kernel/memory/tri_new.hpp"
 
@@ -66,6 +66,7 @@ public:
 /// タスク
 class TaskBase
     : private Uncopyable
+    , public Pausable
     , virtual public Nameable
 {
     friend class Director;
@@ -118,18 +119,6 @@ public:
         type_ = type;
     }
     
-    ///
-    /// ポーズレベル取得
-    PauseLevel pauseLevel() const {
-        return pause_lv_;
-    }
-    
-    ///
-    /// ポーズレベル設定
-    void pauseLevel(const PauseLevel lv) {
-        pause_lv_ = lv;
-    }
-
     ///
     /// operator <
     bool operator <(const TaskBase& rhs) {
@@ -255,7 +244,6 @@ protected:
 private:
     int priority_;          ///< 優先度
     int type_;              ///< タイプ
-    PauseLevel pause_lv_;   ///< ポーズレベル
 
     //  最初のアップデートでinitializeを呼ぶ
     bool first_update_;

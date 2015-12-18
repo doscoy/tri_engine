@@ -15,14 +15,13 @@ TRI_CORE_NS_BEGIN
 
 
 SpriteLayer::SpriteLayer()
-    : SpriteLayer("Sprite", 2048, PRIORITY_APP_DEFAULT)
+    : SpriteLayer("Sprite")
 {
 }
 
 SpriteLayer::SpriteLayer(
     const String& name,
-    const int managed_size,
-    const int priority
+    const Priority priority
 ) : LayerBase(name, priority)
     , renderer_()
     , sprites_()

@@ -19,7 +19,7 @@
 #include "tri_director.hpp"
 #include "tri_event.hpp"
 #include "tri_event_manager.hpp"
-#include "tri_pause_level.hpp"
+#include "tri_pausable.hpp"
 #include "tri_resource_manager.hpp"
 #include "tri_resource.hpp"
 #include "tri_rtti.hpp"

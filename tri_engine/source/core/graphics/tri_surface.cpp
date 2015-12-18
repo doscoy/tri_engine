@@ -129,8 +129,6 @@ void Surface::preRender() {
     bind();
     clear();
     
-    auto half = size_.half();
-    
     cross::RenderSystem::getViewport(
         &last_viewport_pos_x_,
         &last_viewport_pos_y_,
@@ -138,7 +136,7 @@ void Surface::preRender() {
         &last_viewport_height_
     );
     
-    cross::RenderSystem::setViewport(half.x_, half.y_, size_.x_, size_.y_);
+    cross::RenderSystem::setViewport(0, 0, size_.x_, size_.y_);
 }
 
 

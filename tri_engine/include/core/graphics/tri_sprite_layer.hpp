@@ -43,8 +43,7 @@ public:
     /// コンストラクタ
     SpriteLayer(
         const String& name,                         ///< レイヤー名
-        const int managed_size = 2048,              ///< 管理スプライト数
-        const int priority = PRIORITY_APP_DEFAULT   ///< プライオリティ
+        const LayerBase::Priority priority = Priority::DEFAULT   ///< プライオリティ
     );
     
     ///

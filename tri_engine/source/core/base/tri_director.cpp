@@ -167,7 +167,9 @@ Director::Director()
 {
     //  ルートタスク生成
     root_task_.reset(T3_NEW TaskBase());
-
+    root_task_->pauseLevel(t3::PauseLevel::PAUSE_NONE);
+    
+    
     //  ファイルシステムベースパス設定
     FilePath::setBaseDirectory(cross::getDeviceFilePath());
 
@@ -231,7 +233,7 @@ void Director::initializeDirector() {
  
     
     //  システムフェードレイヤー生成
-    fade_layer_.reset(T3_SYS_NEW FadeLayer("sys-fade", LayerBase::PRIORITY_SYS_FADE));
+    fade_layer_.reset(T3_SYS_NEW FadeLayer("sys-fade", LayerBase::Priority::SYS_FADE));
     
     //  デバッグ用レイヤー生成
     dbg_print_layer_.reset(T3_SYS_NEW SpriteLayer("dbg print"));

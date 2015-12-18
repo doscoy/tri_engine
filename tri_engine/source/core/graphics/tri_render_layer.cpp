@@ -18,7 +18,7 @@ TRI_CORE_NS_BEGIN
 
 LayerBase::LayerBase(
     const String& layer_name,
-    const int priority
+    const Priority priority
 )   : pause_(false)
     , visible_(true)
     , priority_(priority)
@@ -34,11 +34,6 @@ LayerBase::LayerBase(
 {
     attachSystem();
 }
-    
-LayerBase::LayerBase(const String& name)
-    : LayerBase(name, PRIORITY_APP_DEFAULT)
-{}
-
 
 
 LayerBase::~LayerBase() {
@@ -46,9 +41,9 @@ LayerBase::~LayerBase() {
 }
 
 void LayerBase::priority(
-    const int priority
+    const Priority priority
 ) {
-    T3_ASSERT( PRIORITY_LOWEST <= priority && priority <= PRIORITY_HIGHEST  );
+    T3_ASSERT(Priority::LOWEST <= priority && priority <= Priority::HIGHEST);
     priority_ = priority;
 }
 

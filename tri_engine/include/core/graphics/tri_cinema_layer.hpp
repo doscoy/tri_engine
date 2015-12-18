@@ -41,10 +41,10 @@ public:
     ///
     /// コンストラクタ. レイヤ名と優先度を設定
     CinemaLayer(
-        const Vec2 min_pos,                                     ///< ビューポート座標最小値
-        const Vec2 max_pos,                                     ///< ビューポート座標最大値
-        const String& name = "cinema",                          ///< レイヤー名
-        const int priority = LayerBase::PRIORITY_APP_FRONT1   ///< 優先度
+        const Vec2 min_pos,                         ///< ビューポート座標最小値
+        const Vec2 max_pos,                         ///< ビューポート座標最大値
+        const String& name = "cinema",              ///< レイヤー名
+        const Priority priority = Priority::FRONT1  ///< 優先度
     );
 
     ///
