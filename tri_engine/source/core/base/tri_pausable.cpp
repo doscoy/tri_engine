@@ -24,7 +24,7 @@ TRI_EVENT_NS_END
 /// Pausable
 Pausable::Pausable()
     : pause_(false)
-    , pause_lv_(PAUSE_LV_1)
+    , pause_lv_(PAUSE_NONE)
 {
     t3::EventManager::addListener(this, &Pausable::onPause, event::PauseEvent::TYPE);
     t3::EventManager::addListener(this, &Pausable::onResume, event::ResumeEvent::TYPE);

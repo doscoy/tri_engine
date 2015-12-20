@@ -15,13 +15,6 @@ TRI_CORE_NS_BEGIN
 
 
 
-
-Surface::Surface()
-    : Surface(VIRTUAL_SCREEN_WIDTH, VIRTUAL_SCREEN_HEIGHT, Type::COLOR_DEPTH)
-{
-}
-
-
 Surface::Surface(
     float width,
     float height,

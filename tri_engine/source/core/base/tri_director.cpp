@@ -17,7 +17,7 @@
 #include "core/geometry/tri_geometry.hpp"
 #include "core/base/tri_system_events.hpp"
 #include "../debug/tri_debug_font_data.cpp"
-
+#include "core/base/tri_screen_manager.hpp"
 
 
 
@@ -49,38 +49,6 @@ LayerBase* Director::findLayer(
     }
     
     return nullptr;
-}
-
-///
-/// スクリーン座標からビューポート座標へ変換
-Vec2 Director::screenToViewport(
-    const Vec2& screen_pos
-) {
-    return screen_pos / virtualScreenSize() * 2.0f;
-}
-
-///
-/// ビューポート座標からスクリーン座標へ変換
-Vec2 Director::viewportToScreen(
-    const Vec2& viewport_pos
-) {
-    return viewport_pos * virtualScreenSize() * 0.5f;
-}
-
-///
-/// スクリーン外判定
-bool Director::isOutOfScreen(
-    const Vec2 &screen_pos
-) {
-    Vec2 vpos = screenToViewport(screen_pos);
-    if (!inRange(vpos.x_, -1.0f, 1.0f)) {
-        return true;
-    }
-    else if (!inRange(vpos.y_, -1.0f, 1.0f)) {
-        return true;
-    }
-    
-    return false;
 }
 
 ///
@@ -145,11 +113,6 @@ Director::Director()
     , dbg_print_buffer_(nullptr)
     , fade_layer_(nullptr)
     , random_number_generator_(1)    
-    , device_screen_size_(640.0f, 1136.0f)
-    , virtual_screen_size_(
-        VIRTUAL_SCREEN_WIDTH,
-        VIRTUAL_SCREEN_HEIGHT)
-    , screen_revise_()
     , input_()
     , layers_()
     , event_manager_()
@@ -191,6 +154,10 @@ Director::Director()
     //  イベントマネージャ初期化
     EventManager::initialize();
     
+    //  スクリーンマネージャ生成
+    ScreenManager::createInstance();
+    
+    
     //  クリアカラー設定
 	clear_colors_[0] = color_sample::darkgray();
 	clear_colors_[1] = color_sample::green();
@@ -208,6 +175,7 @@ Director::Director()
 //  デストラクタ
 Director::~Director() {
     
+    ScreenManager::destroyInstance();
     SceneManager::destroyInstance();
     CollisionManager::destroyInstance();
     AudioManager::destroyInstance();
@@ -311,6 +279,9 @@ void Director::update(
 void Director::updateInput(
     const DeltaTime delta_time
 ) {
+    auto& screen_mgr = ScreenManager::instance();
+
+
     for (int pad_idx = 0; pad_idx < MAX_PAD; ++pad_idx){
         Input& input = input_[pad_idx];
     
@@ -330,7 +301,7 @@ void Director::updateInput(
         if (random_pointing_) {
             if ((frame_counter_.now() % 4) == 0) {
                 point_data.hit_ = true;
-                const Vec2& screen_size = virtualScreenSize();
+                const Vec2& screen_size = screen_mgr.virtualScreenSize();
                 const Vec2 half = screen_size / 2;
                 point_data.x_ = random_number_generator_.getInt(static_cast<int>(screen_size.x_)) - half.x_;
                 point_data.y_ = random_number_generator_.getInt(static_cast<int>(screen_size.y_)) - half.y_;
@@ -506,10 +477,6 @@ void Director::showTask() const {
 
 }
 
-void Director::calcScreenRevise() {
-
-    screen_revise_ = virtual_screen_size_ / device_screen_size_;
-}
 
 TRI_CORE_NS_END
 

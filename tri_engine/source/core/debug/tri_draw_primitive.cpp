@@ -10,7 +10,7 @@
 
 
 #include "core/geometry/tri_geometry.hpp"
-#include "core/base/tri_director.hpp"
+#include "core/base/tri_screen_manager.hpp"
 
 #include "core/graphics/tri_shader.hpp"
 
@@ -71,10 +71,10 @@ void drawRectangleMinSize(
     const Color& color
 ){
     
-    auto& director = t3::Director::instance();
+    auto& screen_mgr = t3::ScreenManager::instance();
     
-    float screen_width = director.virtualScreenSize().x_ * 0.5f;
-    float screen_height = director.virtualScreenSize().y_ * 0.5f;
+    float screen_width = screen_mgr.virtualScreenSize().x_ * 0.5f;
+    float screen_height = screen_mgr.virtualScreenSize().y_ * 0.5f;
     
     Vec2 view_left_top(
         min_pos.x_ / screen_width,

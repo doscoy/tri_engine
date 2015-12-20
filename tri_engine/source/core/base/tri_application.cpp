@@ -22,6 +22,7 @@
 #include "core/utility/tri_stopwatch.hpp"
 #include "core/kernel/memory/tri_memory_pool.hpp"
 #include "core/kernel/memory/tri_heap.hpp"
+#include "core/base/tri_screen_manager.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -148,7 +149,8 @@ bool initializeTriEngine(
     d.initializeDirector();
     
     //  デバイスの画面サイズ設定
-    d.deviceScreenSize(
+    auto& screen_mgr = t3::ScreenManager::instance();
+    screen_mgr.deviceScreenSize(
         Vec2(
             static_cast<float>(width),
             static_cast<float>(height)
@@ -212,8 +214,8 @@ bool Application::isActive() const {
 /// ワークバーの初期化
 void Application::initializeWorkBar() {
     
-    auto& d = Director::instance();
-    const Vec2& screen_size = d.virtualScreenSize();
+    auto& screen_mgr = ScreenManager::instance();
+    const Vec2& screen_size = screen_mgr.virtualScreenSize();
     Vec2 half_screen_size = screen_size / 2;
     
     //  ワークバーの配置
@@ -261,8 +263,13 @@ void Application::initializeApplication()
     //  デバッグ文字描画の初期化
     initializeDrawPrimitive();
    
-
-    cross::RenderSystem::setViewport(0, 0, d.deviceScreenSize().x_, d.deviceScreenSize().y_);
+    auto& screen_mgr = ScreenManager::instance();
+    cross::RenderSystem::setViewport(
+        0,
+        0,
+        screen_mgr.deviceScreenSize().x_,
+        screen_mgr.deviceScreenSize().y_
+    );
 
     //  ゲームの初期化
     initializeGame();

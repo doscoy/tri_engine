@@ -11,6 +11,9 @@
 #include "core/base/tri_director.hpp"
 #include "core/graphics/tri_texture.hpp"
 #include "core/math/tri_matrix.hpp"
+#include "core/base/tri_screen_manager.hpp"
+
+
 
 #include <algorithm>
 
@@ -285,7 +288,7 @@ void SpriteRenderer::margeSprites() {
     indices.reserve(collections_.size() * 8);
 
 
-    Vec2 screen_size = Director::instance().virtualScreenSize();
+    Vec2 screen_size = ScreenManager::instance().virtualScreenSize();
     Vec2 half = screen_size / 2;
     half.x_ = 1.0f / half.x_;
     half.y_ = 1.0f / half.y_;

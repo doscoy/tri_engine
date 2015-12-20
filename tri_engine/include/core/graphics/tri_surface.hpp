@@ -31,11 +31,7 @@ public:
         COLOR_ONLY,
         COLOR_DEPTH
     };
-public:
-    ///
-    /// コンストラクタ
-    Surface();
-    
+public:   
     ///
     /// コンストラクタ
     Surface(

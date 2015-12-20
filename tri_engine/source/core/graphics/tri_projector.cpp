@@ -9,7 +9,7 @@
 #include "core/kernel/memory/tri_new.hpp"
 #include "core/graphics/tri_projector.hpp"
 #include "core/math/tri_math_util.hpp"
-#include "core/base/tri_director.hpp"
+#include "core/base/tri_screen_manager.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -34,8 +34,13 @@ Projector::~Projector()
 {}
 
 ProjectorPtr Projector::create() {
-    auto& d = Director::instance();
-    ProjectorPtr projctor(T3_SYS_NEW Projector(d.deviceScreenSize(), 45.0f, 1.0f, 1000.0f));
+    auto& screen_mgr = ScreenManager::instance();
+    ProjectorPtr projctor(T3_SYS_NEW Projector(
+        screen_mgr.deviceScreenSize(),
+        45.0f,
+        1.0f,
+        1000.0f
+    ));
     return projctor;
 }
 

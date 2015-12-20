@@ -28,5 +28,7 @@
 #include "tri_task.hpp"
 #include "tri_types.hpp"
 #include "tri_font_glyph.hpp"
+#include "tri_screen_manager.hpp"
+
 
 #endif // TRI_BASE_HPP_INCLUDED

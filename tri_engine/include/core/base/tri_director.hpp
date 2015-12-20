@@ -34,10 +34,6 @@
 
 TRI_CORE_NS_BEGIN
 
-
-constexpr float VIRTUAL_SCREEN_WIDTH = 640.0f; ///< ゲーム内仮想スクリーンサイズ幅
-constexpr float VIRTUAL_SCREEN_HEIGHT = 1136.0f; ///< ゲーム内仮想スクリーンサイズ高さ
-
 constexpr int MAX_PAD = 4;  ///< パッド数
 
 ///
@@ -71,38 +67,6 @@ public:
     /// ディレクターの後片付け
     void terminateDirector();
     
-    
-    ///
-    /// デバイスのスクリーンサイズ設定
-    void deviceScreenSize(const Vec2& vp) {
-        device_screen_size_ = vp;
-        calcScreenRevise();
-    }
-    
-    ///
-    /// デバイスのスクリーンサイズ取得
-    const Vec2& deviceScreenSize() const {
-        return device_screen_size_;
-    }
-    
-    ///
-    /// 仮想スクリーンサイズ設定
-    void virtualScreenSize(const Vec2 screen) {
-        virtual_screen_size_ = screen;
-        calcScreenRevise();
-    }
-    
-    ///
-    /// 仮想スクリーンサイズ取得
-    const Vec2& virtualScreenSize() const {
-        return virtual_screen_size_;
-    }
-    
-    ///
-    /// スクリーンの補正値取得
-    const Vec2& screenRevise() const {
-        return screen_revise_;
-    }
     
     
     TaskPtr rootTask() {
@@ -181,7 +145,6 @@ public:
     /// タスク表示
     void showTask() const;
     
-public:
 
     ///
     /// クリアカラー取得
@@ -199,17 +162,6 @@ public:
     /// 登録されている指定レイヤーを探す
     LayerBase* findLayer(const String& layer_name);
     
-    ///
-    /// ビューポートの位置に変換
-    Vec2 screenToViewport(const Vec2& screen_pos);
-    
-    ///
-    /// スクリーンのピクセル位置へ変換
-    Vec2 viewportToScreen(const Vec2& viewport_pos);
-    
-    ///
-    /// スクリーン外判定
-    bool isOutOfScreen(const Vec2& screen_pos);
     
     ///
     /// ブラックアウト設定
@@ -252,9 +204,6 @@ public:
         
 private:
     
-    ///
-    /// スクリーン計算
-    void calcScreenRevise();
 
     ///
     /// デバッグメニューに登録
@@ -283,18 +232,11 @@ private:
     //  乱数
     random_t random_number_generator_;  ///< 乱数生成器
 
-    //   スクリーンサイズ
-    Vec2 device_screen_size_;           ///< デバイススクリーンサイズ
-    Vec2 virtual_screen_size_;          ///< 仮想スクリーンサイズ
-    Vec2 screen_revise_;
-    
     //  インプットデータ
     Array<Input, MAX_PAD> input_;   ///< 入力データ
 
     //  描画レイヤー
     Layers layers_;           ///<  描画レイヤー
-    
-    
     
     //  イベントマネージャ
     EventManager event_manager_;    ///< イベントマネージャ

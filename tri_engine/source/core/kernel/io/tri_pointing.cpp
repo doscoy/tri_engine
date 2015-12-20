@@ -8,6 +8,8 @@
 
 #include "core/kernel/io/tri_pointing.hpp"
 #include "core/base/tri_director.hpp"
+#include "core/base/tri_screen_manager.hpp"
+
 
 TRI_CORE_NS_BEGIN
 
@@ -56,7 +58,7 @@ void Pointing::updatePointing(
     
     //  座標系補正
     //  仮想スクリーン座標に変換
-    const Vec2& screen_size = t3::Director::instance().virtualScreenSize().half();
+    const Vec2& screen_size = t3::ScreenManager::instance().virtualScreenSize().half();
     float new_point_x = data.x_ * screen_size.x_;
     float new_point_y = data.y_ * screen_size.y_;
     
