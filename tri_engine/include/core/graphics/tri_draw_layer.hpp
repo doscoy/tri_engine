@@ -17,7 +17,7 @@
 #include "core/core_config.hpp"
 #include <iostream>
 #include <functional>
-#include "tri_render_layer.hpp"
+#include "tri_layer_base.hpp"
 #include "../utility/tri_method_callback.hpp"
 
 

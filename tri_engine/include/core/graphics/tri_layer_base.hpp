@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 /**
-    @file tri_render_layer.hpp
+    @file tri_layer_base.hpp
     描画レイヤー基底.
 */
 
@@ -39,11 +39,11 @@ public:
     ///
     /// 描画プライオリティ
     enum class Priority {
-        LOWEST      =  10, // 奥
+        LOWEST      = 10, // 奥
         
-        SYS_BACK    =  20,
+        SYS_BACK    = 20,
 
-        BACK1       =  100,
+        BACK1       = 100,
         BACK2,
         BACK3,
         BACK4,
@@ -59,8 +59,8 @@ public:
 
         UI          = 400,
 
-        SYS_FRONT   = 2000,
-        SYS_FADE    = 3000,
+        SYS_FADE    = 2000,
+        SYS_FRONT   = 3000,
         SYS_DEBUG   = 4000,
         
         HIGHEST     = 5000, // 手前
@@ -241,6 +241,8 @@ public:
     
 protected:
 
+    void initializeRender();
+    
     
     ///
     /// 更新

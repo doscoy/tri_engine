@@ -127,20 +127,6 @@ bool EventManager::removeListener(
         auto table_it = table.begin();
         auto table_end = table.end();
         
-/*        for (; table_it != table_end; ++table_it) {
-            if ((*table_it)->target() == listener) {
-                
-                table.erase(table_it);
-                
-               
-                result = true;
-                
-                //  addListenerにおいてイベントの処理リストにリスナーが
-                //  重複しないことを保証しているので内側のループは抜けて良い
-                break;
-            }
-        }
-*/
         table.remove_if(
             [&](EventHandler h) {
                 return h->target() == listener;

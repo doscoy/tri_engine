@@ -19,40 +19,52 @@
 #include "core/core_config.hpp"
 #include "../math/tri_math_util.hpp"
 #include "../debug/tri_assert.hpp"
-
+#include "core/math/tri_vec2.hpp"
 
 TRI_CORE_NS_BEGIN
 
 ///
 /// Vec3
-template <typename T>
-class Vec3Template {
+
+class Vec3 {
+    using element_t = float;
 public:
-    T x_;   ///< x要素
-    T y_;   ///< y要素
-    T z_;   ///< z要素
+    element_t x_;   ///< x要素
+    element_t y_;   ///< y要素
+    element_t z_;   ///< z要素
 
 public:
     ///
     ///  コンストラクタ
-    Vec3Template()
+    Vec3()
     {}
     
     
     ///
     /// コンストラクタ
-    Vec3Template( T x, T y, T z )
-        : x_(x)
+    Vec3(
+        element_t x,
+        element_t y,
+        element_t z
+    )   : x_(x)
         , y_(y)
         , z_(z)
     {}
     
     ///
     /// コンストラクタ
-    Vec3Template( const Vec3Template& rhs )
+    Vec3( const Vec3& rhs )
         : x_(rhs.x_)
         , y_(rhs.y_)
         , z_(rhs.z_)
+    {}
+
+    ///
+    /// コンストラクタ
+    Vec3(const Vec2& rhs)
+        : x_(rhs.x_)
+        , y_(rhs.y_)
+        , z_(0.0f)
     {}
 
 
@@ -61,25 +73,25 @@ public:
 
     ///
     /// xを加算
-    void addX(T v) {
+    void addX(element_t v) {
         x_ += v;
     }
 
     ///
     /// yを加算
-    void addY(T v) {
+    void addY(element_t v) {
         y_ += v;
     }
     
     ///
     /// zを加算
-    void addZ(T v) {
+    void addZ(element_t v) {
         z_ += v;
     }
     
     ///
     /// 加算
-    void add(Vec3Template& rhs) {
+    void add(Vec3& rhs) {
         addX(rhs.x_);
         addY(rhs.y_);
         addZ(rhs.z_);
@@ -87,13 +99,13 @@ public:
     
     ///
     ///  長さの二乗を取得
-    T lengthSquare() const {
+    element_t lengthSquare() const {
         return t3::hypotenuseSquare(x_, y_, z_);
     }
     
     ///
     ///  長さを取得
-    T length() const {
+    element_t length() const {
         return t3::hypotenuse(x_, y_, z_);
     }
     
@@ -110,8 +122,8 @@ public:
     
     ///
     ///  正規化したベクトルを取得
-    Vec3Template getNormalized() const {
-        Vec3Template v = *this;
+    Vec3 getNormalized() const {
+        Vec3 v = *this;
         v.normalize();
         return v;
     }
@@ -124,9 +136,9 @@ public:
 
     ///
     ///  ブレンド
-    Vec3Template& blend( 
+    Vec3& blend( 
         const float t,
-        const Vec3Template& v
+        const Vec3& v
     ) {
         x_ = x_ * (1 - t) + v.x_ * t;
         y_ = y_ * (1 - t) + v.y_ * t;
@@ -136,8 +148,8 @@ public:
     
     ///
     ///  外積
-    Vec3Template crossProduct(
-        const Vec3Template& v 
+    Vec3 crossProduct(
+        const Vec3& v 
     ) const {
         return crossProduct(
             *this, v
@@ -151,7 +163,7 @@ public:
     
     ///
     ///  内積
-    T dotProduct( const Vec3Template& v ) const {
+    element_t dotProduct( const Vec3& v ) const {
         return x_ * v.x_ + y_ * v.y_ + z_ * v.z_;
     }
     
@@ -183,48 +195,48 @@ public:
     
     ///
     ///  反転ベクトルの取得
-    Vec3Template getReverse() const {
-        return Vec3Template( -x_, -y_, -z_ );
+    Vec3 getReverse() const {
+        return Vec3( -x_, -y_, -z_ );
     }
     
     ///
     ///  距離を取得
-    T distance(
-        const Vec3Template& target
+    element_t distance(
+        const Vec3& target
     ) const {
         return distance( *this, target );
     }
     
     ///
     ///  距離の二乗を取得
-    T distanceSquare(
-        const Vec3Template& target
+    element_t distanceSquare(
+        const Vec3& target
     ) const {
         return distanceSquare( *this, target );
     }
     
     ///
     ///  Vec + Vec
-    Vec3Template operator +( const Vec3Template& v ) const {
-        return Vec3Template(x_ + v.x_, y_ + v.y_, z_ + v.z_);
+    Vec3 operator +( const Vec3& v ) const {
+        return Vec3(x_ + v.x_, y_ + v.y_, z_ + v.z_);
     }
     
     ///
     ///  Vec - Vec
-    Vec3Template operator -( const Vec3Template& v ) const {
-        return Vec3Template(x_ - v.x_, y_ - v.y_, z_ - v.z_);
+    Vec3 operator -( const Vec3& v ) const {
+        return Vec3(x_ - v.x_, y_ - v.y_, z_ - v.z_);
     }
     
     ///
     ///  +Vec
-    Vec3Template operator +() const {
-        return Vec3Template( *this );
+    Vec3 operator +() const {
+        return Vec3( *this );
     }
     
     ///
     ///  -Vec
-    Vec3Template operator -() const {
-        Vec3Template tmp;
+    Vec3 operator -() const {
+        Vec3 tmp;
         tmp.x_ = -x_;
         tmp.y_ = -y_;
         tmp.z_ = -z_;
@@ -233,7 +245,7 @@ public:
     
     ///
     ///  Vec += Vec
-    void operator +=( const Vec3Template& v ) {
+    void operator +=( const Vec3& v ) {
         x_ += v.x_;
         y_ += v.y_;
         z_ += v.z_;
@@ -241,22 +253,22 @@ public:
     
     ///
     ///  Vec -= Vec
-    void operator -=( const Vec3Template& v ) {
-        x_ -= v.x;
-        y_ -= v.y;
-        z_ -= v.z;
+    void operator -=( const Vec3& v ) {
+        x_ -= v.x_;
+        y_ -= v.y_;
+        z_ -= v.z_;
     }
     
     ///
     ///  Vec *= s
-    void operator *=( T s ) {
+    void operator *=( element_t s ) {
         x_ *= s;
         y_ *= s;
         z_ *= s;
     }
     
     //  Vec /= s
-    void operator /=( T s ) {
+    void operator /=( element_t s ) {
         float tmp = 1.0f / s;
         x_ *= tmp;
         y_ *= tmp;
@@ -265,13 +277,13 @@ public:
     
     ///
     /// pointer
-    const T* pointer() const {
+    const element_t* pointer() const {
         return &x_;
     }
 
     ///
-    ///  Vec3Template == Vec3Template
-    bool operator==(const Vec3Template& v) const {
+    ///  Vec3 == Vec3
+    bool operator==(const Vec3& v) const {
         return x_ == v.x_ && y_ == v.y_ && z_ == v.z_;
     }
     
@@ -279,44 +291,44 @@ public:
 
     ///
     /// ゼロベクトル
-    static Vec3Template zero() {
-        return Vec3Template(0, 0, 0);
+    static Vec3 zero() {
+        return Vec3(0, 0, 0);
     }
     
     ///
     /// x軸ベクトルを生成
-    static Vec3Template axisX() {
-        return Vec3Template(1, 0, 0);
+    static Vec3 axisX() {
+        return Vec3(1, 0, 0);
     }
 
     ///
     /// y軸ベクトルを生成
-    static Vec3Template axisY() {
-        return Vec3Template(0, 1, 0);
+    static Vec3 axisY() {
+        return Vec3(0, 1, 0);
     }
 
     ///
     /// z軸ベクトルを生成
-    static Vec3Template axisZ() {
-        return Vec3Template(0, 0, 1);
+    static Vec3 axisZ() {
+        return Vec3(0, 0, 1);
     }
 
     ///
     ///  外積計算
-    static T dotProduct(
-        const Vec3Template& v1,
-        const Vec3Template& v2
+    static element_t dotProduct(
+        const Vec3& v1,
+        const Vec3& v2
     ){
         return v1.x_ * v2.x_ + v1.y_ * v2.y_ + v1.z_ * v2.z_;
     }
     
     ///
     ///  外積計算
-    static Vec3Template crossProduct(
-        const Vec3Template& v1,
-        const Vec3Template& v2
+    static Vec3 crossProduct(
+        const Vec3& v1,
+        const Vec3& v2
     ){
-        return Vec3Template(
+        return Vec3(
             v1.y_ * v2.z_ - v1.z_ * v2.y_,
             v1.z_ * v2.x_ - v1.x_ * v2.z_,
             v1.x_ * v2.y_ - v1.y_ * v2.x_
@@ -325,12 +337,12 @@ public:
     
     ///
     ///  正規化
-    static Vec3Template& normalize(
-        Vec3Template& dst,
-        const Vec3Template& src
+    static void normalize(
+        Vec3& dst,
+        const Vec3& src
     ){
-        T length = src.length();
-        T tmp = 1.0f / length;
+        element_t length = src.length();
+        element_t tmp = 1.0f / length;
         dst.x_ = src.x_ * tmp;
         dst.y_ = src.y_ * tmp;
         dst.z_ = src.z_ * tmp;
@@ -338,31 +350,31 @@ public:
     
     ///
     ///  距離の算出
-    static T distance(
-        const Vec3Template& v1,
-        const Vec3Template& v2
+    static element_t distance(
+        const Vec3& v1,
+        const Vec3& v2
     ){
         return sqrtf(distanceSquare(v1, v2));
     }
     
     ///
     ///  距離の二乗算出
-    static T distanceSquare(
-        const Vec3Template& v1,
-        const Vec3Template& v2
+    static element_t distanceSquare(
+        const Vec3& v1,
+        const Vec3& v2
     ){
-        Vec3Template tmp = v1 - v2;
+        Vec3 tmp = v1 - v2;
         return tmp.lengthSquare();
     }
     
     ///
     ///  ベクトル同士のブレンド
-    static Vec3Template getBlendVector(
+    static Vec3 getBlendVector(
         const float t,
-        const Vec3Template& v1,
-        const Vec3Template& v2
+        const Vec3& v1,
+        const Vec3& v2
     ){
-        return Vec3Template(
+        return Vec3(
             v1.x_ * (1 - t) + v2.x_ * t,
             v1.y_ * (1 - t) + v2.y_ * t,
             v1.z_ * (1 - t) + v2.z_ * t
@@ -374,38 +386,28 @@ public:
 
 ///
 /// オペレータ *
-template <class T>
-Vec3Template<T> operator *(const Vec3Template<T>& v, T s) {
-    return Vec3Template<T>(v.x_ * s, v.y_ * s, v.z_ * s);
+Vec3 operator *(const Vec3& v, float s) {
+    return Vec3(v.x_ * s, v.y_ * s, v.z_ * s);
 }
 
 ///
 /// オペレータ *
-template <class T>
-Vec3Template<T> operator *(T s, const Vec3Template<T>& v) {
-    return Vec3Template<T>(v.x_ * s, v.y_ * s, v.z_ * s);
+Vec3 operator *(float s, const Vec3& v) {
+    return Vec3(v.x_ * s, v.y_ * s, v.z_ * s);
 }
 
 ///
 /// オペレータ /
-template <class T>
-Vec3Template<T> operator /(const Vec3Template<T>& v, T s) {
-    return Vec3Template<T>(v.x_ / s, v.y_ / s, v.z_ / s);
+Vec3 operator /(const Vec3& v, float s) {
+    return Vec3(v.x_ / s, v.y_ / s, v.z_ / s);
 }
 
 ///
 /// オペレータ /
-template <class T>
-Vec3Template<T> operator /(T s, const Vec3Template<T>& v) {
-    return Vec3Template<T>(v.x_ / s, v.y_ / s, v.z_ / s);
+Vec3 operator /(float s, const Vec3& v) {
+    return Vec3(v.x_ / s, v.y_ / s, v.z_ / s);
 }
 
-
-
-
-//  typedef
-using Vec3 = Vec3Template<float>;
-using Point3 = Vec3Template<int>;
 
 
 

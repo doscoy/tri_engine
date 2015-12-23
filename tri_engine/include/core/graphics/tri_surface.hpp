@@ -31,10 +31,42 @@ public:
         COLOR_ONLY,
         COLOR_DEPTH
     };
+
+public:
+    virtual ~Surface() = default;
+    
+public:
+    virtual void onBeginRender() = 0;
+    virtual void onPreRender() = 0;
+    virtual void onPostRender() = 0;
+
+    ///
+    /// サーフェスのタイプ判定
+    bool isDepthOnly() const {
+        return type_ == Type::DEPTH_ONLY;
+    }
+
+    ///
+    /// カラーのタイプ判定
+    bool isColorOnly() const {
+        return type_ == Type::COLOR_ONLY;
+    }
+
+protected:
+    ///
+    /// サーフェスタイプ
+    Type type_;
+};
+
+///
+/// サーフェス
+class FrameBufferSurface
+    : public Surface
+{
 public:   
     ///
     /// コンストラクタ
-    Surface(
+    FrameBufferSurface(
         float width,
         float height,
         Type type
@@ -42,7 +74,7 @@ public:
     
     ///
     /// デストラクタ
-    ~Surface();
+    ~FrameBufferSurface() = default;
 
 
 public:
@@ -78,39 +110,35 @@ public:
     
     ///
     /// 幅取得
-    float width() {
+    float width() const {
         return size_.x_;
     }
     
     ///
     /// 高さ取得
-    float height() {
+    float height() const {
         return size_.y_;
     }
     
     ///
+    /// 描画開始時処理
+    void onBeginRender() override;
+    
+    ///
     /// 描画前処理
-    void preRender();
+    void onPreRender() override;
 
     ///
     /// 描画後処理
-    void postRender();
+    void onPostRender() override;
+
 
     ///
-    /// サーフェスのタイプ判定
-    bool isDepthOnly() const {
-        return type_ == Type::DEPTH_ONLY;
-    }
-
-    ///
-    /// カラーのタイプ判定
-    bool isColorOnly() const {
-        return type_ == Type::COLOR_ONLY;
-    }
+    /// クリア
+    void clearBuffer();
 
 
-
-private:
+protected:
 
     ///
     /// バインド
@@ -121,8 +149,12 @@ private:
     void unbind();
     
     ///
-    /// クリア
-    void clear();
+    /// ビューポート設定
+    void setupViewport();
+    
+    ///
+    /// ビューポート設定解除
+    void resetViewport();
 
 private:
     ///
@@ -149,11 +181,27 @@ private:
     ///
     /// バインド中フラグ
     bool bound_;
-
+    
     ///
-    /// サーフェスタイプ
-    Type type_;
+    /// バッファクリア済フラグ
+    bool buffer_cleared_;
+
+
 };
+
+
+class DeviceSurface
+    : public Surface
+{
+public:
+    void onBeginRender() override {}
+    void onPreRender() override {}
+    void onPostRender() override {}
+
+};
+
+
+
 
 
 TRI_CORE_NS_END

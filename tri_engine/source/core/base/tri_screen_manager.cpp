@@ -7,18 +7,18 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "core/base/tri_screen_manager.hpp"
+#include "core/math/tri_math.hpp"
+
 
 TRI_CORE_NS_BEGIN
 
 
-constexpr float VIRTUAL_SCREEN_WIDTH = 640.0f; ///< ゲーム内仮想スクリーンサイズ幅
-constexpr float VIRTUAL_SCREEN_HEIGHT = 1136.0f; ///< ゲーム内仮想スクリーンサイズ高さ
 
 
 ///
-///
+/// コンストラクタ
 ScreenManager::ScreenManager()
-    : device_screen_size_(640.0f, 1136.0f)
+    : device_screen_size_(VIRTUAL_SCREEN_WIDTH, VIRTUAL_SCREEN_HEIGHT)
     , virtual_screen_size_(
         VIRTUAL_SCREEN_WIDTH,
         VIRTUAL_SCREEN_HEIGHT)
@@ -61,8 +61,39 @@ bool ScreenManager::isOutOfScreen(
 
 void ScreenManager::calcScreenRevise() {
 
-    screen_revise_ = virtual_screen_size_ / device_screen_size_;
+    auto revise = device_screen_size_ / virtual_screen_size_;
+    float div = revise.x_ > revise.y_ ? revise.x_ : revise.y_;
+    screen_revise_.x_ = revise.y_ / div;
+    screen_revise_.y_ = revise.x_ / div;
 }
+
+void ScreenManager::calcAspectMode() {
+    constexpr float ASPECT_RATIO[ASPECT_MODE_NUM] = {
+        [MODE_16_9] = (16.0f / 9.0f),
+        [MODE_4_3] = (4.0f / 3.0f),
+        [MODE_9_16] = (9.0f / 16.0f),
+        [MODE_3_4] = (3.0f / 4.0f)
+    };
+    
+    
+    float device_aspect = device_screen_size_.x_ / device_screen_size_.y_;
+    
+    float near_aspect = 100.0f;
+    int near_aspect_index = 0;
+    for (int i = 0; i < ASPECT_MODE_NUM; ++i) {
+        float diff = ASPECT_RATIO[i] - device_aspect;
+        diff = absolute(diff);
+        if (near_aspect > diff) {
+            //  より近いアスペクト比を見つけた
+            near_aspect = diff;
+            near_aspect_index = i;
+        }
+    }
+    
+    aspect_mode_ = static_cast<AspectMode>(near_aspect_index);
+    
+}
+
 
 
 

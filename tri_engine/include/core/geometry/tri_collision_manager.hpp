@@ -35,7 +35,7 @@ using CollidersPtr = SharedPtr<Colliders>;
 
 ///
 /// コリジョンマネージャ
-class CollisionManager
+class CollisionManager final
     : public Singleton<CollisionManager>
 {
     friend class Singleton<CollisionManager>;
@@ -43,7 +43,8 @@ class CollisionManager
 private:
     ///
     /// 判定済みペア
-    using JudgedPairs = Vector<CollisionPair>;
+    using ColliderPairs = Set<CollisionPair>;
+    CollisionManager();
 public:
 
     ///
@@ -58,7 +59,6 @@ public:
     void removeCollider(
         ColliderPtr collider    ///< コライダ
     );
-
 
     ///
     /// 総当たり判定
@@ -78,6 +78,18 @@ private:
         const CollisionPair& pair
     );
     
+    ///
+    /// カレントフレームでのヒットグループに登録
+    void addCurrentCollidedPair(CollisionPair pair);
+    
+    ///
+    /// 衝突中のペアのイベントを発行
+    void queueCollisionEvent(ColliderPairs& pairs);
+    
+    void queueCollisionTriggerEvent(ColliderPairs& pairs);
+    
+    void queueCollisionLeaveEvent(ColliderPairs& pairs);
+    
 private:
     ///
     ///  コライダコンテナ
@@ -85,7 +97,10 @@ private:
 
     CollidersMap colliders_;            ///< 管理コライダ
     CollidersMap same_target_group_;    ///< 同じ当たり判定対象を持つグループ
-    JudgedPairs judged_pairs_;          ///< 判定済みのペア
+    ColliderPairs judged_pairs_;        ///< 判定済みのペア
+    ColliderPairs collided_[2];
+    int current_collided_idx_;
+    int last_collider_idx_;
 };
 
 

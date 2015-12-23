@@ -72,7 +72,7 @@ struct QuaternionTemplate
     ///
     /// 値設定
     void set(
-        const Vec3Template<T>& axis,
+        const Vec3& axis,
         const float degree
     ) {
         makeFromAxisAngle(*this, axis, toRadian(degree));
@@ -198,8 +198,8 @@ struct QuaternionTemplate
     ///
     /// ２つのベクトル間を移動するクォータニオンを生成
     static QuaternionTemplate<T> makeFromVectors(
-        const Vec3Template<T>& start,
-        const Vec3Template<T>& goal
+        const Vec3& start,
+        const Vec3& goal
     ){
     
         QuaternionTemplate<T> q;
@@ -211,7 +211,7 @@ struct QuaternionTemplate
             );
             return q;
         }
-        Vec3Template<T> c = start.crossProduct(goal);
+        Vec3 c = start.crossProduct(goal);
         T d = start.dotProduct(goal);
         T s = sqrtf((1 + d) * 2);
 
@@ -227,7 +227,7 @@ struct QuaternionTemplate
     /// 軸回転値からクォータニオンを生成
     static void makeFromAxisAngle(
         QuaternionTemplate<T>& q,
-        const Vec3Template<T>& axis, 
+        const Vec3& axis,
         float angle
     ){
         float ang_div_2 = angle * 0.5f;
@@ -242,7 +242,7 @@ struct QuaternionTemplate
     /// オイラー角から生成
     static void makeFromEuler(
         QuaternionTemplate<T>& dest,
-        Vec3Template<T> euler
+        Vec3 euler
     ) {
         makeQuaternionFromEuler(dest, euler.x_, euler.y_, euler.z_);
     }

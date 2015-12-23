@@ -79,7 +79,7 @@
 		3A480E291B2D4159001064BB /* tri_object.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CD21B2D4159001064BB /* tri_object.hpp */; };
 		3A480E2A1B2D4159001064BB /* tri_projector.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CD31B2D4159001064BB /* tri_projector.hpp */; };
 		3A480E2B1B2D4159001064BB /* tri_render_info.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CD41B2D4159001064BB /* tri_render_info.hpp */; };
-		3A480E2C1B2D4159001064BB /* tri_render_layer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CD51B2D4159001064BB /* tri_render_layer.hpp */; };
+		3A480E2C1B2D4159001064BB /* tri_layer_base.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CD51B2D4159001064BB /* tri_layer_base.hpp */; };
 		3A480E2D1B2D4159001064BB /* tri_renderable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CD61B2D4159001064BB /* tri_renderable.hpp */; };
 		3A480E2E1B2D4159001064BB /* tri_scene_graph.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CD71B2D4159001064BB /* tri_scene_graph.hpp */; };
 		3A480E2F1B2D4159001064BB /* tri_scene_node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CD81B2D4159001064BB /* tri_scene_node.hpp */; };
@@ -87,7 +87,6 @@
 		3A480E311B2D4159001064BB /* tri_sprite.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CDA1B2D4159001064BB /* tri_sprite.hpp */; };
 		3A480E321B2D4159001064BB /* tri_sprite_layer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CDB1B2D4159001064BB /* tri_sprite_layer.hpp */; };
 		3A480E331B2D4159001064BB /* tri_sprite_renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CDC1B2D4159001064BB /* tri_sprite_renderer.hpp */; };
-		3A480E341B2D4159001064BB /* tri_surface.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CDD1B2D4159001064BB /* tri_surface.hpp */; };
 		3A480E351B2D4159001064BB /* tri_test_entity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CDE1B2D4159001064BB /* tri_test_entity.hpp */; };
 		3A480E361B2D4159001064BB /* tri_texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CDF1B2D4159001064BB /* tri_texture.hpp */; };
 		3A480E371B2D4159001064BB /* tri_texture_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CE01B2D4159001064BB /* tri_texture_factory.hpp */; };
@@ -245,8 +244,8 @@
 		3A480EF21B2D4159001064BB /* tri_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D971B2D4159001064BB /* tri_model.cpp */; };
 		3A480EF31B2D4159001064BB /* tri_projector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D981B2D4159001064BB /* tri_projector.cpp */; };
 		3A480EF41B2D4159001064BB /* tri_projector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D981B2D4159001064BB /* tri_projector.cpp */; };
-		3A480EF51B2D4159001064BB /* tri_render_layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D991B2D4159001064BB /* tri_render_layer.cpp */; };
-		3A480EF61B2D4159001064BB /* tri_render_layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D991B2D4159001064BB /* tri_render_layer.cpp */; };
+		3A480EF51B2D4159001064BB /* tri_layer_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D991B2D4159001064BB /* tri_layer_base.cpp */; };
+		3A480EF61B2D4159001064BB /* tri_layer_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D991B2D4159001064BB /* tri_layer_base.cpp */; };
 		3A480EF71B2D4159001064BB /* tri_scene_graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D9A1B2D4159001064BB /* tri_scene_graph.cpp */; };
 		3A480EF81B2D4159001064BB /* tri_scene_graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D9A1B2D4159001064BB /* tri_scene_graph.cpp */; };
 		3A480EF91B2D4159001064BB /* tri_scene_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480D9B1B2D4159001064BB /* tri_scene_node.cpp */; };
@@ -529,7 +528,7 @@
 		3A480CD21B2D4159001064BB /* tri_object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_object.hpp; sourceTree = "<group>"; };
 		3A480CD31B2D4159001064BB /* tri_projector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_projector.hpp; sourceTree = "<group>"; };
 		3A480CD41B2D4159001064BB /* tri_render_info.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_render_info.hpp; sourceTree = "<group>"; };
-		3A480CD51B2D4159001064BB /* tri_render_layer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_render_layer.hpp; sourceTree = "<group>"; };
+		3A480CD51B2D4159001064BB /* tri_layer_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_layer_base.hpp; sourceTree = "<group>"; };
 		3A480CD61B2D4159001064BB /* tri_renderable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_renderable.hpp; sourceTree = "<group>"; };
 		3A480CD71B2D4159001064BB /* tri_scene_graph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_scene_graph.hpp; sourceTree = "<group>"; };
 		3A480CD81B2D4159001064BB /* tri_scene_node.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_scene_node.hpp; sourceTree = "<group>"; };
@@ -672,7 +671,7 @@
 		3A480D961B2D4159001064BB /* tri_mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_mesh.cpp; sourceTree = "<group>"; };
 		3A480D971B2D4159001064BB /* tri_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_model.cpp; sourceTree = "<group>"; };
 		3A480D981B2D4159001064BB /* tri_projector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_projector.cpp; sourceTree = "<group>"; };
-		3A480D991B2D4159001064BB /* tri_render_layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_render_layer.cpp; sourceTree = "<group>"; };
+		3A480D991B2D4159001064BB /* tri_layer_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_layer_base.cpp; sourceTree = "<group>"; };
 		3A480D9A1B2D4159001064BB /* tri_scene_graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_scene_graph.cpp; sourceTree = "<group>"; };
 		3A480D9B1B2D4159001064BB /* tri_scene_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_scene_node.cpp; sourceTree = "<group>"; };
 		3A480D9C1B2D4159001064BB /* tri_shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_shader.cpp; sourceTree = "<group>"; };
@@ -982,7 +981,7 @@
 				3A480CD21B2D4159001064BB /* tri_object.hpp */,
 				3A480CD31B2D4159001064BB /* tri_projector.hpp */,
 				3A480CD41B2D4159001064BB /* tri_render_info.hpp */,
-				3A480CD51B2D4159001064BB /* tri_render_layer.hpp */,
+				3A480CD51B2D4159001064BB /* tri_layer_base.hpp */,
 				3A480CD61B2D4159001064BB /* tri_renderable.hpp */,
 				3A480CD71B2D4159001064BB /* tri_scene_graph.hpp */,
 				3A480CD81B2D4159001064BB /* tri_scene_node.hpp */,
@@ -1277,7 +1276,7 @@
 				3AA833FA1BA3FEC400C6443F /* tri_mtl_loader.cpp */,
 				3AA833F91BA3FEC400C6443F /* tri_obj_loader.cpp */,
 				3A480D981B2D4159001064BB /* tri_projector.cpp */,
-				3A480D991B2D4159001064BB /* tri_render_layer.cpp */,
+				3A480D991B2D4159001064BB /* tri_layer_base.cpp */,
 				3A480D9A1B2D4159001064BB /* tri_scene_graph.cpp */,
 				3A480D9B1B2D4159001064BB /* tri_scene_node.cpp */,
 				3A480D9C1B2D4159001064BB /* tri_shader.cpp */,
@@ -1598,7 +1597,7 @@
 				3A480DF71B2D4159001064BB /* tri_types.hpp in Headers */,
 				3A480E691B2D4159001064BB /* tri_string_util.hpp in Headers */,
 				3A480E1B1B2D4159001064BB /* tri_camera.hpp in Headers */,
-				3A480E2C1B2D4159001064BB /* tri_render_layer.hpp in Headers */,
+				3A480E2C1B2D4159001064BB /* tri_layer_base.hpp in Headers */,
 				3A480E311B2D4159001064BB /* tri_sprite.hpp in Headers */,
 				3A480E521B2D4159001064BB /* tri_vec2.hpp in Headers */,
 				3A480E4B1B2D4159001064BB /* tri_math.hpp in Headers */,
@@ -1724,7 +1723,6 @@
 				3A480DE61B2D4159001064BB /* tri_wav.hpp in Headers */,
 				3A480E781B2D4159001064BB /* cross.hpp in Headers */,
 				3A480E811B2D4159001064BB /* jet.hpp in Headers */,
-				3A480E341B2D4159001064BB /* tri_surface.hpp in Headers */,
 				3A480E411B2D4159001064BB /* tri_heap.hpp in Headers */,
 				3A480E021B2D4159001064BB /* tri_debugmenu_frame.hpp in Headers */,
 				3A480E7F1B2D4159001064BB /* jet_textbox.hpp in Headers */,
@@ -1935,7 +1933,7 @@
 				3A480F5D1B2D4159001064BB /* jet_radio_button.cpp in Sources */,
 				3A63317F1B67D7E60007D1C1 /* tinyxml2.cpp in Sources */,
 				3A480EEF1B2D4159001064BB /* tri_mesh.cpp in Sources */,
-				3A480EF51B2D4159001064BB /* tri_render_layer.cpp in Sources */,
+				3A480EF51B2D4159001064BB /* tri_layer_base.cpp in Sources */,
 				3A480EC31B2D4159001064BB /* tri_debugmenu_items.cpp in Sources */,
 				3A480EB91B2D4159001064BB /* tri_debug_string_buffer.cpp in Sources */,
 				3A6299C11B65436800E8AC76 /* png.c in Sources */,
@@ -2070,7 +2068,7 @@
 				3A480F5E1B2D4159001064BB /* jet_radio_button.cpp in Sources */,
 				3A629A091B65436800E8AC76 /* trees.c in Sources */,
 				3A480EF01B2D4159001064BB /* tri_mesh.cpp in Sources */,
-				3A480EF61B2D4159001064BB /* tri_render_layer.cpp in Sources */,
+				3A480EF61B2D4159001064BB /* tri_layer_base.cpp in Sources */,
 				3ACB9C9F1BBA3AE500428176 /* tri_task.cpp in Sources */,
 				3A6299C91B65436800E8AC76 /* pngget.c in Sources */,
 				3A480EC41B2D4159001064BB /* tri_debugmenu_items.cpp in Sources */,

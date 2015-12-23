@@ -89,7 +89,7 @@ public:
         , dm_show_work_time_(&dmf_system_, "SHOW WORKTIME", show_work_time_)
         , dm_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_)
         , dm_show_heap_(&dmf_system_, "SHOW HEAP", show_heap_)
-        , dm_show_task_(&dmf_system_, "SHOW TaskBase", show_task_)
+        , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_)
     {
         t3::Director::instance().registryToDebugMenu(dmf_system_);
         render_avg.reserve(LIMIT_AVG_SUM);
@@ -270,6 +270,8 @@ void Application::initializeApplication()
         screen_mgr.deviceScreenSize().x_,
         screen_mgr.deviceScreenSize().y_
     );
+    
+    d.setupFinalLayer();
 
     //  ゲームの初期化
     initializeGame();
@@ -587,6 +589,8 @@ bool Application::isSuspend() const {
 /// 描画開始
 void Application::beginRender() {
     auto& director = Director::instance();
+
+    //  クリアカラー設定
     auto& c = director.getClearColor();
     cross::RenderSystem::clearColor(c.redFloat(), c.greenFloat(), c.blueFloat(), c.alphaFloat());
     cross::RenderSystem::clearBuffer(true, true, false);

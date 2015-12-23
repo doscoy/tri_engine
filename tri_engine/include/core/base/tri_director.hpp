@@ -23,10 +23,13 @@
 #include "core/utility/random/tri_random.hpp"
 #include "core/utility/tri_singleton.hpp"
 #include "core/graphics/tri_color.hpp"
-#include "core/graphics/tri_render_layer.hpp"
+#include "core/graphics/tri_layer_base.hpp"
 #include "core/graphics/tri_fade_layer.hpp"
 #include "core/graphics/tri_sprite_layer.hpp"
+#include "core/graphics/tri_surface.hpp"
+#include "core/graphics/tri_cinema_layer.hpp"
 #include "core/base/tri_task.hpp"
+
 
 #include <array>
 
@@ -67,6 +70,9 @@ public:
     /// ディレクターの後片付け
     void terminateDirector();
     
+    ///
+    /// 最終レイヤーのセットアップ
+    void setupFinalLayer();
     
     
     TaskPtr rootTask() {
@@ -99,8 +105,9 @@ public:
     
     ///
     /// デバッグメニュー登録
-    void registryToDebugMenu(DebugMenuFrame& parent_frame);
-    
+    void registryToDebugMenu(
+        DebugMenuFrame& parent_frame
+    );
     
 
     ///
@@ -201,7 +208,14 @@ public:
         const int font_size,
         const char* const str
     );
-        
+    
+    ///
+    /// 最終レンダーターゲット取得
+    auto& finalSurface() {
+        return final_surface_;
+    }
+    
+    
 private:
     
 
@@ -233,13 +247,20 @@ private:
     random_t random_number_generator_;  ///< 乱数生成器
 
     //  インプットデータ
-    Array<Input, MAX_PAD> input_;   ///< 入力データ
+    Array<Input, MAX_PAD> input_;       ///< 入力データ
 
     //  描画レイヤー
-    Layers layers_;           ///<  描画レイヤー
+    Layers layers_;                     ///<  描画レイヤー
     
-    //  イベントマネージャ
-    EventManager event_manager_;    ///< イベントマネージャ
+    //  デバイスのレンダーターゲット
+    UniquePtr<DeviceSurface> device_surface_;
+    
+    //  最終レンダーターゲット
+    UniquePtr<FrameBufferSurface> final_surface_;
+    
+    //  最終レンダーターゲット描画レイヤ
+    UniquePtr<CinemaLayer> final_layer_;
+    
     
     //  ルートタスク
     //  全タスクはここにぶら下がる形になる

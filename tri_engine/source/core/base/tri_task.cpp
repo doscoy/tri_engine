@@ -21,6 +21,7 @@ TaskBase::TaskBase()
     , children_()
     , next_(nullptr)
     , parent_(nullptr)
+    , delay_(0.0f)
 {
     
 }
@@ -40,12 +41,24 @@ void TaskBase::doTaskInitialize() {
 }
 
 void TaskBase::doTaskTerminate() {
+    if (first_update_) {
+        first_update_ = false;
+        doTaskInitialize();
+    }
+
     onTaskKill();
 }
 
 void TaskBase::doTaskUpdate(
     const DeltaTime dt
 ) {
+    //  更新遅延設定がある場合
+    if (delay_ > 0.0f) {
+        //  指定時間がすぎるまで更新しない
+        delay_ -= dt;
+        return;
+    }
+
     //  前フレームでキル済のを取り除く
     children_.remove_if(
         [](TaskPtr p){

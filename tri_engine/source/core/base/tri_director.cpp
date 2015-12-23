@@ -115,7 +115,8 @@ Director::Director()
     , random_number_generator_(1)    
     , input_()
     , layers_()
-    , event_manager_()
+    , final_surface_()
+    , final_layer_()
     , root_task_()
     , dm_color_idx_(nullptr, "CLEAR COLOR IDX", use_clear_color_index_, 1, 0, 3)
     , use_clear_color_index_(0)
@@ -129,7 +130,7 @@ Director::Director()
     , exit_request_(false)
 {
     //  ルートタスク生成
-    root_task_.reset(T3_NEW TaskBase());
+    root_task_.reset(T3_NEW TaskGroup());
     root_task_->pauseLevel(t3::PauseLevel::PAUSE_NONE);
     
     
@@ -221,6 +222,7 @@ void Director::initializeDirector() {
         cross::RenderSystem::TypeFormat::UNSIGNED_BYTE,
         (uint8_t*)dbg_font_.pixel_data_
     );
+    
 }
 
 
@@ -236,6 +238,28 @@ void Director::terminateDirector() {
 
 }
 
+
+//  最終レイヤの設定
+void Director::setupFinalLayer() {
+
+    auto& screen_mgr = ScreenManager::instance();
+    const Vec2& virtual_screen_to_device_ratio = screen_mgr.screenRevise();
+    
+    
+    //  最終描画用レイヤー
+    final_layer_.reset(T3_SYS_NEW CinemaLayer(
+        Vec2(-virtual_screen_to_device_ratio.x_,-virtual_screen_to_device_ratio.y_),
+        Vec2(virtual_screen_to_device_ratio.x_, virtual_screen_to_device_ratio.y_),
+        "final", t3::LayerBase::Priority::SYS_FRONT
+    ));
+    final_surface_.reset(T3_SYS_NEW FrameBufferSurface(ScreenManager::VIRTUAL_SCREEN_WIDTH, ScreenManager::VIRTUAL_SCREEN_HEIGHT, Surface::Type::COLOR_DEPTH));
+    final_layer_->texture(final_surface_->colorTexture());
+
+    device_surface_.reset(T3_SYS_NEW DeviceSurface());
+
+    //  最終描画用レイヤーの描画先はデバイスサーフェス
+    final_layer_->renderTarget(device_surface_.get());
+}
 
 //  アップデート
 void Director::update(

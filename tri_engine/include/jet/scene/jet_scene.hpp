@@ -83,7 +83,7 @@ private:
     DrawLayer shadow_render_layer_;
 
     //  影テクスチャ用サーフェス
-    Surface shadow_render_target_;
+    FrameBufferSurface shadow_render_target_;
 
     //  3Dシーン通常描画用レイヤー
     DrawLayer scene_layer_;

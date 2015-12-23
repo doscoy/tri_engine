@@ -94,6 +94,18 @@ public:
     virtual ~TaskBase();
 
 public:
+    ///
+    /// 遅延設定
+    void delay(float time) {
+        delay_ = time;
+    }
+    
+    ///
+    /// 遅延取得
+    float delay() const {
+        return delay_;
+    }
+
 
     ///
     /// タスクのプライオリティ取得
@@ -190,7 +202,7 @@ public:
         return !children_.empty();
     }
     
-private:
+protected:
     ///
     /// タスクの追加
     void addTask(TaskPtr child);
@@ -213,7 +225,6 @@ private:
         const DeltaTime dt
     );
     
-protected:
     ///
     /// タスクの初期化
     /// createTask直後に呼ばれる
@@ -229,7 +240,6 @@ protected:
     /// killTask呼び出し時に呼ばれる
     virtual void onTaskKill() {}
 
-protected:
     ///
     /// タスクの削除予約
     void killTask() {
@@ -266,6 +276,8 @@ private:
     ///
     /// タスク追加リクエスト
     Vector<TaskGeneratorBase*> add_requests_;
+    
+    float delay_;
 };
 
 ///
@@ -317,6 +329,24 @@ private:
     std::uint32_t count_;
     std::uint32_t max_count_;
 };
+
+
+///
+/// タスクグループ
+/// 単に複数のタスクをまとめるルートの役割
+class TaskGroup final
+    : public TaskBase
+{
+public:
+    TaskGroup()
+        : TaskBase()
+    {}
+    
+    ~TaskGroup() = default;
+};
+
+
+
 
 
 

@@ -288,7 +288,8 @@ void SpriteRenderer::margeSprites() {
     indices.reserve(collections_.size() * 8);
 
 
-    Vec2 screen_size = ScreenManager::instance().virtualScreenSize();
+    auto& screen_mgr = ScreenManager::instance();
+    Vec2 screen_size = screen_mgr.virtualScreenSize();
     Vec2 half = screen_size / 2;
     half.x_ = 1.0f / half.x_;
     half.y_ = 1.0f / half.y_;

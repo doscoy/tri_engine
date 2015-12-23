@@ -46,7 +46,7 @@ public:
     
     ///
     /// コンストラクタ
-    Vec4Template(Vec3Template<T> v)
+    Vec4Template(Vec3 v)
         : x_(v.x_)
         , y_(v.y_)
         , z_(v.z_)
@@ -55,7 +55,7 @@ public:
     
     ///
     /// コンストラクタ
-    Vec4Template(Vec3Template<T> v, T w)
+    Vec4Template(Vec3 v, T w)
         : x_(v.x_)
         , y_(v.y_)
         , z_(v.z_)

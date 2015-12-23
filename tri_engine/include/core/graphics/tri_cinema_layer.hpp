@@ -16,7 +16,7 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "tri_render_layer.hpp"
+#include "tri_layer_base.hpp"
 #include "tri_shader.hpp"
 #include "tri_texture.hpp"
 #include "tri_vertex_buffer.hpp"
