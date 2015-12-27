@@ -105,7 +105,7 @@ private:
             spr->scaledSize().x_,
             spr->scaledSize().y_
         );
-        const t3::Vec2& screen_size = t3::Director::instance().virtualScreenSize();
+        const t3::Vec2& screen_size = t3::ScreenManager::instance().virtualScreenSize();
         
         int x_count = static_cast<int>(screen_size.x_ / offset.x_ -1);
         int y_start = 16;

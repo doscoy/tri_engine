@@ -56,7 +56,7 @@ public:
   
 public:
     void initialize() {
-        auto shader = std::make_shared<t3::Shader>(sprite_vsh, font_fsh);
+        auto shader = t3::Shader::create(sprite_vsh, font_fsh);
         layer_.renderer().useCustomShader(shader);
 
         box1_.text(u8"left")
@@ -107,7 +107,7 @@ public:
         
         
         
-        auto df_shader =  std::make_shared<t3::Shader>(sprite_vsh, df_font_fsh);
+        auto df_shader = t3::Shader::create(sprite_vsh, df_font_fsh);
      //   layer_.renderer().useCustomShader(df_shader);
         df_layer_.renderer().useCustomShader(df_shader);
 

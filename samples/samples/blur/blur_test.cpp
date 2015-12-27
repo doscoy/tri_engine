@@ -40,7 +40,7 @@ public:
             }
         );
         
-        shader_ = std::make_shared<t3::Shader>(simple_tex_vsh, my_fsh);
+        shader_ = t3::Shader::create(simple_tex_vsh, my_fsh);
 
     }
     
@@ -77,7 +77,7 @@ private:
     t3::SpriteLayer layer_;
     t3::CinemaLayer screen_;
     t3::SpritePtr sprite_;
-    t3::Surface surface_;
+    t3::FrameBufferSurface surface_;
     t3::ShaderPtr shader_;
     t3::Interpolation<int> pola_;
     int moz_lv_;

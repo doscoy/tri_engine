@@ -54,6 +54,23 @@ AudioResourcePtr AudioResource::create(
 
 
 ///
+/// オーディオリソース生成
+AudioResourcePtr AudioResource::create(
+    const t3::File& file    ///< ファイル
+) {    
+    //  とりあえず.wavだけサポート
+    Wav wav;
+    wav.setup(file);
+    
+    //  リソース生成
+    AudioResourcePtr res;
+    res.reset(T3_SYS_NEW AudioResource);
+    res->setupBuffer(wav);
+    return res;
+}
+
+
+///
 /// サウンドファイル生成
 AudioHandlePtr AudioResource::createSound() {
     

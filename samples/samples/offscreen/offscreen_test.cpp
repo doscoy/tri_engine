@@ -15,7 +15,7 @@ class OffscreenTestScene::SceneContext {
 
 public:
     SceneContext()
-        : surface_(t3::Director::screenSize().x_, t3::Director::screenSize().y_, t3::Surface::Type::COLOR_DEPTH)
+        : surface_(500, 300, t3::Surface::Type::COLOR_DEPTH)
     {}
     
     ~SceneContext()
@@ -43,7 +43,7 @@ public:
     }
 
     void draw() {
-        surface_.preRender();
+        surface_.onPreRender();
         
         
         t3::RenderSystem::setDepthWrite(true);
@@ -62,7 +62,7 @@ public:
       
         
         //  フレームバッファを戻す
-        surface_.postRender();
+        surface_.onPostRender();
 
     }
     
@@ -82,10 +82,8 @@ public:
     
     void modelDraw() {
         
-        
-        
-        auto& d = t3::Director::instance();
-        auto& screen = d.virtualScreenSize();
+        auto& screen_mgr = t3::ScreenManager::instance();
+        auto& screen = screen_mgr.virtualScreenSize();
     
         t3::RenderSystem::setViewport(0, 0, surface_.width(), surface_.height());
         t3::Mtx44 projection;
@@ -115,7 +113,7 @@ private:
     t3::SpritePtr sprite_;
     t3::ModelPtr model_;
     t3::LookAtCameraUpdater cam_update_;
-    t3::Surface surface_;
+    t3::FrameBufferSurface surface_;
 };
 
 

@@ -13,7 +13,20 @@
 #include "core/utility/tri_util.hpp"
 
 namespace {
+
+
+
+void* setupWavFromMemory(
+    void* data,
+    t3::
     
+) {
+    header_ = ()*data
+    return nullptr;
+}
+
+
+
 ///
 /// wavのヘッダを読む
 int readWaveHeader(
@@ -74,7 +87,7 @@ int readWaveHeader(
     // サンプルあたりのビット数(bit/sample)
     file.read((char*)&info.bit_per_sample_, 2);
     
-    //  データの先頭の取得
+    //  データの先頭を探す "data"からデータが始まる
     for(int i = 0; i < 200; ++i){
         uint8_t c;
         file.read((char*)&c, 1);
@@ -117,7 +130,7 @@ TRI_CORE_NS_BEGIN
 ///
 /// コンストラクタ
 Wav::Wav()
-    : file_()
+    : file_steram_()
     , info_()
     , readed_size_(0)
     , data_(nullptr)
@@ -126,7 +139,7 @@ Wav::Wav()
 ///
 /// デストラクタ
 Wav::~Wav() {
-    file_.close();
+    file_steram_.close();
     T3_FREE(data_);
 }
 
@@ -148,12 +161,22 @@ void Wav::load(
     close();
 }
 
+
+///
+/// .wavのファイルからデータ作成
+void Wav::setup(
+    const File& file
+) {
+    
+}
+
+
 ///
 /// ファイルをひらく
 void Wav::open(const t3::FilePath &filepath) {
 
-    file_.open(filepath.fullpath().c_str(), std::ios::binary);
-    readWaveHeader(file_, info_);
+    file_steram_.open(filepath.fullpath().c_str(), std::ios::binary);
+    readWaveHeader(file_steram_, info_);
 }
 
 ///
@@ -172,7 +195,7 @@ size_t Wav::read(void* out, size_t size) {
     }
     
     //  指定サイズを読み込む
-    file_.read((char*)out, size);
+    file_steram_.read((char*)out, size);
     
     //  トータル読み込みサイズ更新
     readed_size_ += read_size;
@@ -183,15 +206,15 @@ size_t Wav::read(void* out, size_t size) {
 ///
 /// ファイルを閉じる
 void Wav::close() {
-    file_.close();
+    file_steram_.close();
 }
 
 ///
 /// 読み込み情報をリセット
 void Wav::readReset() {
     readed_size_ = 0;
-    file_.clear();
-    file_.seekg(info_.data_pos_);
+    file_steram_.clear();
+    file_steram_.seekg(info_.data_pos_);
 }
 
 

@@ -83,11 +83,6 @@ public:
     }
     
     
-    ///
-    ///  テクスチャ生成
-    static TexturePtr create(
-        const FilePath& filepath    ///< ファイルパス
-    );
     
     ///
     /// テクスチャ生成
@@ -100,6 +95,12 @@ public:
         uint8_t* data
     );
     
+    ///
+    ///  テクスチャ生成
+    static TexturePtr create(
+        const FilePath& filepath    ///< ファイルパス
+    );
+
     ///
     /// テクスチャ生成
     static TexturePtr create(

@@ -37,15 +37,9 @@ TRI_CORE_NS_BEGIN
 
 
 //  前方宣言
-template <class T>
-class Vec2Template;
-
-template <class T>
-class Vec3Template;
-
-template <class T>
-class Vec4Template;
-
+class Vec2;
+class Vec4;
+//class Vec3;
 class Mtx44;
 
 
@@ -107,17 +101,17 @@ void traceValue(int ch, const char* const name, const char* value);
 ///
 /// ログ出力.
 /// Vec2版
-void traceValue(int ch, const char* const name, const Vec2Template<float>& value);
+void traceValue(int ch, const char* const name, const Vec2& value);
 
 ///
 /// ログ出力.
 /// Vec3版
-void traceValue(int ch, const char* const name, const Vec3Template<float>& value);
+//void traceValue(int ch, const char* const name, const Vec3& value);
 
 ///
 /// ログ出力.
 /// Vec4版
-void traceValue(int ch, const char* const name, const Vec4Template<float>& value);
+void traceValue(int ch, const char* const name, const Vec4& value);
 
 ///
 /// ログ出力.

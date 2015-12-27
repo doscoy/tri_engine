@@ -26,7 +26,7 @@ public:
     void updateScene(t3::DeltaTime delta_time) override;
 private:
     class SceneContext;
-    t3::ScopedPtr<SceneContext> context_;
+    t3::UniquePtr<SceneContext> context_;
 
 };
 

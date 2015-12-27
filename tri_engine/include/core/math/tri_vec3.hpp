@@ -154,11 +154,6 @@ public:
         return crossProduct(
             *this, v
         );
-/*
-            y_ * v.z_ - z_ * v.y_,
-            z_ * v.x_ - x_ * v.z_,
-            x_ * v.y_ - y_ * v.x_
-*/
     }
     
     ///
@@ -384,27 +379,29 @@ public:
 
 };
 
+
+
 ///
 /// オペレータ *
-Vec3 operator *(const Vec3& v, float s) {
+inline Vec3 operator *(const Vec3& v, float s) {
     return Vec3(v.x_ * s, v.y_ * s, v.z_ * s);
 }
 
 ///
 /// オペレータ *
-Vec3 operator *(float s, const Vec3& v) {
+inline Vec3 operator *(float s, const Vec3& v) {
     return Vec3(v.x_ * s, v.y_ * s, v.z_ * s);
 }
 
 ///
 /// オペレータ /
-Vec3 operator /(const Vec3& v, float s) {
+inline Vec3 operator /(const Vec3& v, float s) {
     return Vec3(v.x_ / s, v.y_ / s, v.z_ / s);
 }
 
 ///
 /// オペレータ /
-Vec3 operator /(float s, const Vec3& v) {
+inline Vec3 operator /(float s, const Vec3& v) {
     return Vec3(v.x_ / s, v.y_ / s, v.z_ / s);
 }
 
@@ -416,3 +413,4 @@ TRI_CORE_NS_END
 
 
 #endif // TRI_VEC3_HPP_INCLUDED
+

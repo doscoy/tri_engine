@@ -49,9 +49,16 @@ public:
     AudioHandlePtr  createSound();
 
 public:
+
     ///
     /// リソースの生成関数.
-    static SharedPtr<AudioResource> create(FilePath& filepath);
+    static AudioResourcePtr create(FilePath& filepath);
+
+    ///
+    /// サウンド生成
+    static AudioResourcePtr create(
+        const File& file    ///< ファイル
+    );
 
 
 

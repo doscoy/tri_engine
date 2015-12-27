@@ -27,6 +27,23 @@ class Wav {
 public:
     ///
     /// ウェブ情報
+
+    ///
+    /// wavのヘッダ構造体
+    struct WavFileHeader {
+        uint32_t riff_signature_;       // RIFF
+        uint32_t size_;                 // Data size (filesize - 8 byte)
+        uint32_t wav_signature_;        // WAVE
+        uint32_t fmt_signature_;        // fmt
+        uint32_t fmt_chunk_byte_size_;  // fmtチャンクのバイト数
+        uint16_t format_id_;
+        uint16_t channel_;
+        uint32_t sampling_rate_;
+        uint32_t byte_per_sec_;
+        uint16_t block_size_;
+        uint16_t bit_per_sample_;
+    };
+
     struct Info {
         Info()
             : size_(0)
@@ -59,6 +76,9 @@ public:
     /// ロード
     void load(const FilePath& filepath);
 
+    ///
+    ///
+    void setup(const t3::File& file);
     
     ///
     /// ビットレート取得
@@ -132,10 +152,11 @@ public:
 
 
 private:
-    FileStream file_;       ///< ファイルストリーム
-    Info info_;             ///< 情報
-    size_t readed_size_;    ///< 読み込み済サイズ
-    uint8_t* data_;         ///< データ
+    FileStream file_steram_;    ///< ファイルストリーム
+    Info info_;                 ///< 情報
+    WavFileHeader header_;      ///< wavファイルヘッダ
+    size_t readed_size_;        ///< 読み込み済サイズ
+    uint8_t* data_;             ///< データ
 };
 
 

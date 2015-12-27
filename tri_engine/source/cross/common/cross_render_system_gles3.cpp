@@ -1280,7 +1280,7 @@ void RenderSystem::setTextureBorderColor(
     float b,
     float a
 ) {
-    GLfloat border[] = {r, g, b, a};
+//    GLfloat border[] = {r, g, b, a};
 //    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, border);
     CROSS_GL_ASSERT();
 }

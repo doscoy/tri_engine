@@ -22,22 +22,22 @@ TRI_CORE_NS_BEGIN
 
 ///
 /// vec4
-template <typename T>
-class Vec4Template {
+class Vec4 {
+    using element_t = float;
 public:
-    T x_;   ///< x要素
-    T y_;   ///< y要素
-    T z_;   ///< z要素
-    T w_;   ///< w要素
+    element_t x_;   ///< x要素
+    element_t y_;   ///< y要素
+    element_t z_;   ///< z要素
+    element_t w_;   ///< w要素
     
     ///
     /// コンストラクタ
-    Vec4Template()
+    Vec4()
     {}
         
     ///
     /// コンストラクタ
-    Vec4Template( T x, T y, T z, T w )
+    Vec4( element_t x, element_t y, element_t z, element_t w )
         : x_(x)
         , y_(y)
         , z_(z)
@@ -46,7 +46,7 @@ public:
     
     ///
     /// コンストラクタ
-    Vec4Template(Vec3 v)
+    Vec4(Vec3 v)
         : x_(v.x_)
         , y_(v.y_)
         , z_(v.z_)
@@ -55,7 +55,7 @@ public:
     
     ///
     /// コンストラクタ
-    Vec4Template(Vec3 v, T w)
+    Vec4(Vec3 v, element_t w)
         : x_(v.x_)
         , y_(v.y_)
         , z_(v.z_)
@@ -66,16 +66,12 @@ public:
     
     ///
     /// ポインタを取得
-    const T* pointer() const {
+    const element_t* pointer() const {
         return &x_;
     }
   
 };
 
-
-//  typedef
-typedef Vec4Template<float>   Vec4;
-typedef Vec4Template<int>     Point4;
     
 
 TRI_CORE_NS_END

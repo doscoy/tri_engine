@@ -107,18 +107,6 @@
 		3A480E461B2D4159001064BB /* tri_safe_delete.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CF21B2D4159001064BB /* tri_safe_delete.hpp */; };
 		3A480E471B2D4159001064BB /* tri_mutex.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CF41B2D4159001064BB /* tri_mutex.hpp */; };
 		3A480E481B2D4159001064BB /* tri_kernel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CF51B2D4159001064BB /* tri_kernel.hpp */; };
-		3A480E491B2D4159001064BB /* tri_bezier_curve.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CF71B2D4159001064BB /* tri_bezier_curve.hpp */; };
-		3A480E4A1B2D4159001064BB /* tri_interpolation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CF81B2D4159001064BB /* tri_interpolation.hpp */; };
-		3A480E4B1B2D4159001064BB /* tri_math.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CF91B2D4159001064BB /* tri_math.hpp */; };
-		3A480E4C1B2D4159001064BB /* tri_math_define.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CFA1B2D4159001064BB /* tri_math_define.hpp */; };
-		3A480E4D1B2D4159001064BB /* tri_math_types.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CFB1B2D4159001064BB /* tri_math_types.hpp */; };
-		3A480E4E1B2D4159001064BB /* tri_math_util.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CFC1B2D4159001064BB /* tri_math_util.hpp */; };
-		3A480E4F1B2D4159001064BB /* tri_matrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CFD1B2D4159001064BB /* tri_matrix.hpp */; };
-		3A480E501B2D4159001064BB /* tri_matrix_stack.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CFE1B2D4159001064BB /* tri_matrix_stack.hpp */; };
-		3A480E511B2D4159001064BB /* tri_quaternion.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480CFF1B2D4159001064BB /* tri_quaternion.hpp */; };
-		3A480E521B2D4159001064BB /* tri_vec2.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D001B2D4159001064BB /* tri_vec2.hpp */; };
-		3A480E531B2D4159001064BB /* tri_vec3.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D011B2D4159001064BB /* tri_vec3.hpp */; };
-		3A480E541B2D4159001064BB /* tri_vec4.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D021B2D4159001064BB /* tri_vec4.hpp */; };
 		3A480E551B2D4159001064BB /* tri_random.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D051B2D4159001064BB /* tri_random.hpp */; };
 		3A480E561B2D4159001064BB /* tri_random_linear_congruential.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D061B2D4159001064BB /* tri_random_linear_congruential.hpp */; };
 		3A480E571B2D4159001064BB /* tri_random_mseq.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3A480D071B2D4159001064BB /* tri_random_mseq.hpp */; };
@@ -1586,8 +1574,6 @@
 				3A480E121B2D4159001064BB /* tri_collision_manager.hpp in Headers */,
 				3A480E6A1B2D4159001064BB /* tri_text_loader.hpp in Headers */,
 				3A480E101B2D4159001064BB /* tri_collision.hpp in Headers */,
-				3A480E501B2D4159001064BB /* tri_matrix_stack.hpp in Headers */,
-				3A480E491B2D4159001064BB /* tri_bezier_curve.hpp in Headers */,
 				3A480E6C1B2D4159001064BB /* tri_unique_id.hpp in Headers */,
 				3A480E761B2D4159001064BB /* cross_os.hpp in Headers */,
 				3A480E551B2D4159001064BB /* tri_random.hpp in Headers */,
@@ -1599,27 +1585,22 @@
 				3A480E1B1B2D4159001064BB /* tri_camera.hpp in Headers */,
 				3A480E2C1B2D4159001064BB /* tri_layer_base.hpp in Headers */,
 				3A480E311B2D4159001064BB /* tri_sprite.hpp in Headers */,
-				3A480E521B2D4159001064BB /* tri_vec2.hpp in Headers */,
-				3A480E4B1B2D4159001064BB /* tri_math.hpp in Headers */,
 				3A480E151B2D4159001064BB /* tri_plane.hpp in Headers */,
 				3A480DED1B2D4159001064BB /* tri_pausable.hpp in Headers */,
 				3A480DEE1B2D4159001064BB /* tri_resource.hpp in Headers */,
 				3A6299F51B65436800E8AC76 /* gzguts.h in Headers */,
 				3A480E7B1B2D4159001064BB /* jet_button.hpp in Headers */,
 				3A629A011B65436800E8AC76 /* inffixed.h in Headers */,
-				3A480E4F1B2D4159001064BB /* tri_matrix.hpp in Headers */,
 				3A480E571B2D4159001064BB /* tri_random_mseq.hpp in Headers */,
 				3A480DE91B2D4159001064BB /* tri_director.hpp in Headers */,
 				3A480E1A1B2D4159001064BB /* tri_transform.hpp in Headers */,
 				3A480E131B2D4159001064BB /* tri_frustum.hpp in Headers */,
-				3A480E4C1B2D4159001064BB /* tri_math_define.hpp in Headers */,
 				3A480DEC1B2D4159001064BB /* tri_font_glyph.hpp in Headers */,
 				3A480E261B2D4159001064BB /* tri_material.hpp in Headers */,
 				3A480DE21B2D4159001064BB /* tri_audio.hpp in Headers */,
 				3A480E421B2D4159001064BB /* tri_heap_manager.hpp in Headers */,
 				3A480E791B2D4159001064BB /* cross_types.hpp in Headers */,
 				3A480DFC1B2D4159001064BB /* tri_debug_log_buffer.hpp in Headers */,
-				3A480E531B2D4159001064BB /* tri_vec3.hpp in Headers */,
 				3A480E631B2D4159001064BB /* tri_json.hpp in Headers */,
 				3A480E081B2D4159001064BB /* tri_print.hpp in Headers */,
 				3A480E481B2D4159001064BB /* tri_kernel.hpp in Headers */,
@@ -1648,10 +1629,8 @@
 				3A480E3E1B2D4159001064BB /* tri_io.hpp in Headers */,
 				3A480E741B2D4159001064BB /* cross_define.hpp in Headers */,
 				3A480E041B2D4159001064BB /* tri_debugmenu_label.hpp in Headers */,
-				3A480E4D1B2D4159001064BB /* tri_math_types.hpp in Headers */,
 				3A480E0D1B2D4159001064BB /* tri_circle.hpp in Headers */,
 				3A480E581B2D4159001064BB /* tri_random_mt.hpp in Headers */,
-				3A480E511B2D4159001064BB /* tri_quaternion.hpp in Headers */,
 				3A480DF81B2D4159001064BB /* core_config.hpp in Headers */,
 				3A480E351B2D4159001064BB /* tri_test_entity.hpp in Headers */,
 				3A6299CB1B65436800E8AC76 /* pnglibconf.h in Headers */,
@@ -1729,12 +1708,10 @@
 				3A480E3C1B2D4159001064BB /* tri_filepath.hpp in Headers */,
 				3A480E371B2D4159001064BB /* tri_texture_factory.hpp in Headers */,
 				3A480E681B2D4159001064BB /* tri_stopwatch.hpp in Headers */,
-				3A480E4A1B2D4159001064BB /* tri_interpolation.hpp in Headers */,
 				3A480E251B2D4159001064BB /* tri_index_buffer.hpp in Headers */,
 				3A7611B01BE1125F008925D0 /* cross_web_notification_screen.hpp in Headers */,
 				3A480E0E1B2D4159001064BB /* tri_circle_collider.hpp in Headers */,
 				3A480E611B2D4159001064BB /* tri_framerate.hpp in Headers */,
-				3A480E541B2D4159001064BB /* tri_vec4.hpp in Headers */,
 				3A480DE41B2D4159001064BB /* tri_audio_resource.hpp in Headers */,
 				3A480E471B2D4159001064BB /* tri_mutex.hpp in Headers */,
 				3A480E361B2D4159001064BB /* tri_texture.hpp in Headers */,
@@ -1748,7 +1725,6 @@
 				3A480DF11B2D4159001064BB /* tri_scene.hpp in Headers */,
 				3A480E161B2D4159001064BB /* tri_point_collider.hpp in Headers */,
 				3A480E2F1B2D4159001064BB /* tri_scene_node.hpp in Headers */,
-				3A480E4E1B2D4159001064BB /* tri_math_util.hpp in Headers */,
 				3A480E5B1B2D4159001064BB /* tri_random_xorshift.hpp in Headers */,
 				3A480E701B2D4159001064BB /* cross_accelerometer.hpp in Headers */,
 				3A480E6B1B2D4159001064BB /* tri_uncopyable.hpp in Headers */,

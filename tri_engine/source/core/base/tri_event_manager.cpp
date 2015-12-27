@@ -124,9 +124,6 @@ bool EventManager::removeListener(
         
         EventListenerTable& table = map_it->second;
         
-        auto table_it = table.begin();
-        auto table_end = table.end();
-        
         table.remove_if(
             [&](EventHandler h) {
                 return h->target() == listener;
