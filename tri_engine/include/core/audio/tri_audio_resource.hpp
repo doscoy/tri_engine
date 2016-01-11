@@ -31,7 +31,7 @@ using AudioResourcePtr = SharedPtr<AudioResource>;
 ///
 /// オーディオリソース
 class AudioResource final
-    : Resource
+    : public Resource
 {
 private:
     /// 
@@ -44,9 +44,10 @@ public:
     /// デストラクタ
     ~AudioResource();
 
-    ///
-    /// サウンド生成
-    AudioHandlePtr  createSound();
+
+    AudioHandlePtr handle() {
+        return handle_;
+    }
 
 public:
 
@@ -64,6 +65,10 @@ public:
 
 private:
     ///
+    /// サウンド生成
+    void  createHandle();
+
+    ///
     /// バッファ構築
     void setupBuffer(
         const Wav& wav  ///< wavから構築
@@ -71,6 +76,7 @@ private:
 
 private:
     cross::AudioSystem::BufferID id_;   ///< バッファID
+    AudioHandlePtr handle_;
 };
 
 

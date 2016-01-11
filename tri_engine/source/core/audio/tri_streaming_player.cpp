@@ -33,7 +33,7 @@ StreamingPlayer::StreamingPlayer()
 
 StreamingPlayer::~StreamingPlayer() {
     stop();
-    wav_.close();
+    wav_.closestream();
     cross::AudioSystem::deleteSource(source_id_);
     
     
@@ -62,7 +62,7 @@ void StreamingPlayer::initialize(
     }
     
     //  wav 一部読み込み
-    wav_.open(path);
+    wav_.openstream(path);
     
     cross::AudioSystem::queueBuffers(
         source_id_,
@@ -77,7 +77,7 @@ void StreamingPlayer::initialize(
 void StreamingPlayer::readMore() {
 
     //  読み込み
-    size_t read_size = wav_.read(readingBufferStorage(), read_byte_);
+    size_t read_size = wav_.readstream(readingBufferStorage(), read_byte_);
     T3_SYSTEM_LOG("Streaming read %d  buf %d.\n", read_size, reading_buffer_index_);
     
     if (read_size < read_byte_) {
@@ -85,7 +85,7 @@ void StreamingPlayer::readMore() {
         if (loop_) {
             //  ループなら先頭に戻って続きを読む
             wav_.readReset();
-            wav_.read(buffer_[reading_buffer_index_].storage_ + read_size, read_byte_ - read_size);
+            wav_.readstream(buffer_[reading_buffer_index_].storage_ + read_size, read_byte_ - read_size);
             read_size = read_byte_;
         }
     }

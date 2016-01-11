@@ -12,26 +12,99 @@
 #include "core/debug/tri_dbg.hpp"
 #include "core/utility/tri_util.hpp"
 
-namespace {
 
 
+TRI_CORE_NS_BEGIN
 
-void* setupWavFromMemory(
-    void* data,
-    t3::
-    
-) {
-    header_ = ()*data
-    return nullptr;
+
+///
+/// コンストラクタ
+Wav::Wav()
+    : file_steram_()
+    , size_(0)
+    , readed_size_(0)
+    , data_(nullptr)
+    , datastrage_allocated_(false)
+{}
+
+///
+/// デストラクタ
+Wav::~Wav() {
+    file_steram_.close();
+
+    if (datastrage_allocated_) {
+        T3_FREE(data_);
+    }
 }
+
+///
+/// .wav を読み込む
+void Wav::load(
+    const FilePath& filepath
+) {
+    //  ファイルを開いてサイズを取得
+    openstream(filepath);
+    
+    //  サイズ分のメモリを確保
+    data_ = (uint8_t*)T3_SYS_ALLOC(size_);
+    datastrage_allocated_ = true;
+    
+    //  読み込み
+    readstream(data_, size_);
+    
+    //  ファイルを閉じる
+    closestream();
+}
+
+
+///
+/// .wavのファイルからデータ作成
+
+void Wav::setup(
+    const t3::File& file
+) {
+    const uint8_t* data = file.data();
+    header_ = *reinterpret_cast<const Wav::WavFileHeader*>(data);
+    
+    //  データの先頭を探す "data"からデータが始まる
+    bool data_section_found = false;
+    for(int i = 0; i < 200; ++i){
+        uint8_t c = data[i];
+        
+        if (c == 'd') {
+            i++;
+            c = data[i];
+            if (c == 'a') {
+                i++;
+                c = data[i];
+                if (c == 't') {
+                i++;
+                c = data[i];
+                    if (c == 'a') {
+                        //  データサイズ
+                        i++;
+                        size_ = *reinterpret_cast<const int*>(&data[i]);
+                        data_ = const_cast<uint8_t*>(&data[i]);
+
+                        // データの開始位置を保存
+                        data_section_found = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+
 
 
 
 ///
 /// wavのヘッダを読む
-int readWaveHeader(
-    t3::FileStream& file,
-    t3::Wav::Info& info
+void Wav::setupstream(
+    t3::FileStream& file
 ) {
 
     // "RIFF" の読み込み
@@ -41,7 +114,8 @@ int readWaveHeader(
     
     // データサイズを取得
     // データサイズ = ファイルサイズ - 8 byte
-    file.read((char*)&info.size_, 4);
+    size_t datasize;
+    file.read((char*)&datasize, 4);
 
     // "WAVE" の読み込み
     uint32_t wave;
@@ -62,18 +136,16 @@ int readWaveHeader(
     if (format_id != 1){
         //  非対応フォーマット
         //  リニアPCMじゃない
-        return false;
     }
             
     // モノラル(1), ステレオ(2)
-    file.read((char*)&info.channel_, 2);
-    if (info.channel_ > 2) {
+    file.read((char*)&header_.channel_, 2);
+    if (header_.channel_ > 2) {
         //  ２チャンネル以上は非対応
-        return false;
     }
             
     // サンプリングレート
-    file.read((char*)&info.sampling_rate_, 4);
+    file.read((char*)&header_.sampling_rate_, 4);
             
     //  データ速度
     //  1秒あたりのバイト数(byte/sec)
@@ -85,7 +157,7 @@ int readWaveHeader(
     file.read((char*)&block_size, 2);
             
     // サンプルあたりのビット数(bit/sample)
-    file.read((char*)&info.bit_per_sample_, 2);
+    file.read((char*)&header_.bit_per_sample_, 2);
     
     //  データの先頭を探す "data"からデータが始まる
     for(int i = 0; i < 200; ++i){
@@ -104,8 +176,8 @@ int readWaveHeader(
                         file.read((char*)&size, 4);
             
                         // データの開始位置を保存
-                        info.data_pos_ = file.tellg();
-                        info.size_ = size;
+                        data_pos_ = file.tellg();
+                        size_ = size;
                         break;
                     }
                 }
@@ -113,81 +185,29 @@ int readWaveHeader(
         }
     }
     // データの開始位置までシーク
-    T3_ASSERT(info.data_pos_);
-    file.seekg( info.data_pos_ );
-
-    return true;
-
-}
-    
-    
-}   // unname namespace
-
-
-TRI_CORE_NS_BEGIN
-
-
-///
-/// コンストラクタ
-Wav::Wav()
-    : file_steram_()
-    , info_()
-    , readed_size_(0)
-    , data_(nullptr)
-{}
-
-///
-/// デストラクタ
-Wav::~Wav() {
-    file_steram_.close();
-    T3_FREE(data_);
+    T3_ASSERT(data_pos_);
+    file.seekg(data_pos_ );
 }
 
-///
-/// .wav を読み込む
-void Wav::load(
-    const FilePath& filepath
-) {
-    //  ファイルを開いてサイズを取得
-    open(filepath);
-    
-    //  サイズ分のメモリを確保
-    data_ = (uint8_t*)T3_SYS_ALLOC(info_.size_);
-
-    //  読み込み
-    read(data_, info_.size_);
-    
-    //  ファイルを閉じる
-    close();
-}
-
-
-///
-/// .wavのファイルからデータ作成
-void Wav::setup(
-    const File& file
-) {
-    
-}
 
 
 ///
 /// ファイルをひらく
-void Wav::open(const t3::FilePath &filepath) {
+void Wav::openstream(const t3::FilePath &filepath) {
 
     file_steram_.open(filepath.fullpath().c_str(), std::ios::binary);
-    readWaveHeader(file_steram_, info_);
+    setupstream(file_steram_);
 }
 
 ///
 /// 読み込み
-size_t Wav::read(void* out, size_t size) {
+size_t Wav::readstream(void* out, size_t size) {
 
     size_t read_size = size;
     
     //  読み込み予定サイズがデータサイズを超えないよう調整
-    if (readed_size_ + size > info_.size_) {
-        read_size = info_.size_ - readed_size_;
+    if (readed_size_ + size > size_) {
+        read_size = size_ - readed_size_;
     }
     
     if (read_size <= 0) {
@@ -205,7 +225,7 @@ size_t Wav::read(void* out, size_t size) {
 
 ///
 /// ファイルを閉じる
-void Wav::close() {
+void Wav::closestream() {
     file_steram_.close();
 }
 
@@ -214,7 +234,7 @@ void Wav::close() {
 void Wav::readReset() {
     readed_size_ = 0;
     file_steram_.clear();
-    file_steram_.seekg(info_.data_pos_);
+    file_steram_.seekg(data_pos_);
 }
 
 

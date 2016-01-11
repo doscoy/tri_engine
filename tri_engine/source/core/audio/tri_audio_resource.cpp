@@ -20,6 +20,7 @@ TRI_CORE_NS_BEGIN
 /// コンストラクタ
 AudioResource::AudioResource()
     : id_()
+    , handle_()
 {
     //  オーディオのリソース用バッファを割当
     id_ = cross::AudioSystem::createBuffer();
@@ -49,6 +50,8 @@ AudioResourcePtr AudioResource::create(
     AudioResourcePtr res;
     res.reset(T3_SYS_NEW AudioResource);
     res->setupBuffer(wav);
+    res->resourceName(filepath.filename().c_str());
+    res->createHandle();
     return res;
 }
 
@@ -65,21 +68,20 @@ AudioResourcePtr AudioResource::create(
     //  リソース生成
     AudioResourcePtr res;
     res.reset(T3_SYS_NEW AudioResource);
+    res->resourceName(file.name().c_str());
     res->setupBuffer(wav);
+    res->createHandle();
     return res;
 }
 
 
 ///
 /// サウンドファイル生成
-AudioHandlePtr AudioResource::createSound() {
+void AudioResource::createHandle() {
     
-    AudioHandlePtr audio_handle;
-    audio_handle.reset(
+    handle_.reset(
         T3_SYS_NEW AudioHandle(id_)
     );
-    
-    return audio_handle;
 }
 
 ///
