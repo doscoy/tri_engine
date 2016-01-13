@@ -16,7 +16,7 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "tri_render_layer.hpp"
+#include "tri_layer_base.hpp"
 #include "tri_shader.hpp"
 #include "tri_texture.hpp"
 #include "tri_vertex_buffer.hpp"
@@ -29,8 +29,7 @@ TRI_CORE_NS_BEGIN
 ///
 /// シネマレイヤー
 ///
-/// @par 別レンダリングしたテクスチャを貼るレイヤーです。
-/// むにゃむにゃわちゃわちゃ
+/// @par 別レンダリングしたテクスチャを簡単に貼るレイヤーです。
 class CinemaLayer
     : public LayerBase {
     
@@ -42,10 +41,10 @@ public:
     ///
     /// コンストラクタ. レイヤ名と優先度を設定
     CinemaLayer(
-        const Vec2 min_pos,                                     ///< ビューポート座標最小値
-        const Vec2 max_pos,                                     ///< ビューポート座標最大値
-        const String& name = "cinema",                          ///< レイヤー名
-        const int priority = LayerBase::PRIORITY_APP_FRONT1   ///< 優先度
+        const Vec2 min_pos,                         ///< ビューポート座標最小値
+        const Vec2 max_pos,                         ///< ビューポート座標最大値
+        const String& name = "cinema",              ///< レイヤー名
+        const Priority priority = Priority::FRONT1  ///< 優先度
     );
 
     ///

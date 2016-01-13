@@ -28,10 +28,15 @@ SceneBase::SceneBase(
     scene_debug_menu_frame_.attachSelf(
         debug_menu_root.rootMenu()
     );
+    
+    
+    SceneManager::instance().current(this);
+    SceneManager::instance().addSceneHistory(scene_name);
 }
 
 SceneBase::~SceneBase() {
     scene_debug_menu_frame_.detachSelf();
+    SceneManager::instance().current(nullptr);
 }
 
 
@@ -57,70 +62,22 @@ void SceneBase::debugRender() {
 
 
 
-
-
     
 SceneManager::SceneManager()
-    : current_scene_(nullptr)
-    , next_scene_generator_(nullptr)
-    , force_change_(false)
+    : cur_(nullptr)
     , scene_changed_(false)
 {
 }
 
 
 SceneManager::~SceneManager() {
-    
-}
-
-void SceneManager::initialize() {
-    SceneGenerator* sg = SceneBase::sceneGenerator<NullScene>();
-    current_scene_ = sg->createScene();
-}
-
-void SceneManager::directScene() {
-    if (current_scene_->isFinished() || force_change_) {
-        force_change_ = false;
-        sceneChange();
-    }
-    else {
-        scene_changed_ = false;
+    for (auto name : history_) {
+        T3_SYSTEM_LOG_DEBUG(name);
     }
 }
 
 
-void SceneManager::debugRender() {
-    current_scene_->debugRender();
-}
 
-
-void SceneManager::sceneChange() {
-    T3_RENDER_ASSERT();
-    EventManager::dumpListeners();
-    
-    //  シーン終了
-    //  後片付け
-    const char* prev_scene_name = current_scene_->sceneName();
-
-    //  次のシーンに遷移
-    current_scene_->killTask();
-    current_scene_ = next_scene_generator_->createScene();
-    next_scene_generator_ = SceneBase::sceneGenerator<NullScene>();
-    
-    EventManager::dumpListeners();
-
-    //  シーン切り替え情報表示
-    const char* next_scene_name = current_scene_->sceneName();
-    T3_SYSTEM_LOG("scene change. %s --> %s\n", prev_scene_name, next_scene_name);
-    (void)(prev_scene_name);
-    (void)(next_scene_name);
-
-    //  シーンが切り替わったフラグON
-    scene_changed_ = true;
-    
-    EventManager::dumpListeners();
-
-}
 
 
 

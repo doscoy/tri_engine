@@ -11,6 +11,9 @@
 #include "core/base/tri_director.hpp"
 #include "core/graphics/tri_texture.hpp"
 #include "core/math/tri_matrix.hpp"
+#include "core/base/tri_screen_manager.hpp"
+
+
 
 #include <algorithm>
 
@@ -61,9 +64,7 @@ SpriteRenderer::SpriteRenderer()
     , current_batch_idx_(-1)
 {
     //  デフォルトのシェーダ準備
-    default_shader_ = std::make_shared<Shader>();
-
-    default_shader_->build(sprite_vsh, sprite_fsh);
+    default_shader_ = Shader::create(sprite_vsh, sprite_fsh);
     
     //  デフォルトのシェーダを使う
     useDefaultShader();
@@ -113,7 +114,7 @@ SpriteRenderer::SpriteRenderer()
 
         cross::RenderSystem::setupBufferData(
             cross::RenderSystem::BufferType::TYPE_VERTEX,
-            sizeof(VertexP2CT) * 4096 * 4,
+            sizeof(VertexP2CT) * 4096 * 2,
             nullptr,
             cross::RenderSystem::BufferUsage::DYNAMIC_DRAW
         );
@@ -121,7 +122,7 @@ SpriteRenderer::SpriteRenderer()
         group.indexBuffer().bind();
         cross::RenderSystem::setupBufferData(
             cross::RenderSystem::BufferType::TYPE_INDEX,
-            sizeof(uint32_t) * 4096 * 4 * 2,
+            sizeof(uint32_t) * 4096 * 2 * 4,
             nullptr,
             cross::RenderSystem::BufferUsage::DYNAMIC_DRAW
         );
@@ -287,7 +288,8 @@ void SpriteRenderer::margeSprites() {
     indices.reserve(collections_.size() * 8);
 
 
-    Vec2 screen_size = Director::instance().virtualScreenSize();
+    auto& screen_mgr = ScreenManager::instance();
+    Vec2 screen_size = screen_mgr.virtualScreenSize();
     Vec2 half = screen_size / 2;
     half.x_ = 1.0f / half.x_;
     half.y_ = 1.0f / half.y_;
@@ -599,13 +601,19 @@ void SpriteRenderer::endRender()
     
     //  描画設定解除
     cross::RenderSystem::setBlend(false);
-
-    //  描画コンテナのクリア
-    collections_.clear();
     
     current_batch_idx_ = -1;
 
 }
+
+
+void SpriteRenderer::beginCollect() {
+
+    //  描画コンテナのクリア
+    collections_.clear();
+    
+}
+
 
 TRI_CORE_NS_END
 

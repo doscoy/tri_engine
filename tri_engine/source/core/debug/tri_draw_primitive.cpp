@@ -10,7 +10,7 @@
 
 
 #include "core/geometry/tri_geometry.hpp"
-#include "core/base/tri_director.hpp"
+#include "core/base/tri_screen_manager.hpp"
 
 #include "core/graphics/tri_shader.hpp"
 
@@ -25,7 +25,7 @@ TRI_CORE_NS_BEGIN
 namespace {
 
 
-Shader simple2d_;
+ShaderPtr simple2d_;
 
 
 }   // unname namespace
@@ -38,7 +38,7 @@ Shader simple2d_;
 
 void initializeDrawPrimitive()
 {
-    simple2d_.build(simple2d_vsh, simple2d_fsh);
+    simple2d_ = Shader::create(simple2d_vsh, simple2d_fsh);
 
 }
 
@@ -71,10 +71,10 @@ void drawRectangleMinSize(
     const Color& color
 ){
     
-    auto& director = t3::Director::instance();
+    auto& screen_mgr = t3::ScreenManager::instance();
     
-    float screen_width = director.virtualScreenSize().x_ * 0.5f;
-    float screen_height = director.virtualScreenSize().y_ * 0.5f;
+    float screen_width = screen_mgr.virtualScreenSize().x_ * 0.5f;
+    float screen_height = screen_mgr.virtualScreenSize().y_ * 0.5f;
     
     Vec2 view_left_top(
         min_pos.x_ / screen_width,
@@ -124,12 +124,12 @@ void drawRectangleViewport(
 
 
     //  シェーダ設定
-    bool result = simple2d_.use();
+    bool result = simple2d_->use();
     T3_ASSERT(result);
     
     //  描画
     // シェーダで描画
-    cross::RenderSystem::ShaderVariableLocation position_slot = simple2d_.getAttributeLocation("in_position");
+    cross::RenderSystem::ShaderVariableLocation position_slot = simple2d_->getAttributeLocation("in_position");
     cross::RenderSystem::setEnableVertexAttribute(position_slot);
     
     cross::RenderSystem::setVertexAttributePointer(
@@ -142,7 +142,7 @@ void drawRectangleViewport(
     );
     
     
-    simple2d_.setUniform(
+    simple2d_->setUniform(
         "in_color",
         color.redFloat(),
         color.greenFloat(),

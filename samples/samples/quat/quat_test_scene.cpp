@@ -44,8 +44,8 @@ public:
     }
     
     void update(t3::DeltaTime delta_time){
-
-        auto& pt = t3::Director::input().pointing();
+        auto& d = t3::Director::instance();
+        auto& pt = d.input().pointing();
 
         if (pt.isHold()) {
         
@@ -76,8 +76,8 @@ private:
         t3::RenderSystem::setDepthWrite(true);
         t3::RenderSystem::setDepthTestMode(t3::RenderSystem::DepthTestMode::MODE_LESS);
 
-        auto& d = t3::Director::instance();
-        auto& screen = d.virtualScreenSize();
+       
+        auto& screen = t3::ScreenManager::instance().virtualScreenSize();
     
         t3::RenderSystem::setViewport(0, 0, screen.x_, screen.y_);
         t3::Mtx44 projection;

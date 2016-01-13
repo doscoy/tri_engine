@@ -144,7 +144,7 @@ class SpriteRenderer
 
     ///
     /// バッチグループの集合
-    using BatchGroups = Array<BatchGroup, 64>;
+    using BatchGroups = Array<BatchGroup, 256>;
 
 public:
     ///
@@ -162,6 +162,11 @@ public:
     
     
 public:
+
+    ///
+    /// スプライトを集める準備
+    void beginCollect();
+
     ///
     /// スプライトを集める
     void collectSprite(SpritePtr sprite);
@@ -186,12 +191,12 @@ public:
         shader_ = shader;
     }
 
-
     ///
-    /// 集めたスプライト取得
-    const Container& collections() const {
-        return collections_;
+    /// 描画するスプライトがあるか判定
+    bool hasSprites() const {
+        return !collections_.empty();
     }
+
 
 private:
     ///

@@ -106,22 +106,22 @@ inline int colorFormatToGLInternalFormat(cross::RenderSystem::ColorFormat format
     switch (format) {
         case cross::RenderSystem::ColorFormat::RGBA:
             glcolor_format = GL_RGBA;
-            cross::printConsole("colorFormatToGLInternalFormat:GL_RGBA\n");
+//            cross::printConsole("colorFormatToGLInternalFormat:GL_RGBA\n");
             break;
             
         case cross::RenderSystem::ColorFormat::RGB:
             glcolor_format = GL_RGB;
-            cross::printConsole("colorFormatToGLInternalFormat:GL_RGB\n");
+//            cross::printConsole("colorFormatToGLInternalFormat:GL_RGB\n");
             break;
             
         case cross::RenderSystem::ColorFormat::DEPTH:
             glcolor_format = GL_DEPTH_COMPONENT16;
-            cross::printConsole("colorFormatToGLInternalFormat:GL_DEPTH_COMPONENT16\n");
+//            cross::printConsole("colorFormatToGLInternalFormat:GL_DEPTH_COMPONENT16\n");
             break;
 
         case cross::RenderSystem::ColorFormat::LUMINANCE_ALPHA:
             glcolor_format = GL_RG8;
-            cross::printConsole("colorFormatToGLInternalFormat:GL_RG8\n");
+//            cross::printConsole("colorFormatToGLInternalFormat:GL_RG8\n");
             break;
 
         default:
@@ -139,22 +139,22 @@ inline int colorFormatToGLFormat(cross::RenderSystem::ColorFormat format) {
     
     switch (format) {
         case cross::RenderSystem::ColorFormat::RGBA:
-            cross::printConsole("colorFormatToGLFormat:GL_RGBA\n");
+//            cross::printConsole("colorFormatToGLFormat:GL_RGBA\n");
             glcolor_format = GL_RGBA;
             break;
             
         case cross::RenderSystem::ColorFormat::RGB:
-            cross::printConsole("colorFormatToGLFormat:GL_RGB\n");
+//            cross::printConsole("colorFormatToGLFormat:GL_RGB\n");
             glcolor_format = GL_RGB;
             break;
             
         case cross::RenderSystem::ColorFormat::LUMINANCE_ALPHA:
-            cross::printConsole("colorFormatToGLFormat:GL_RG\n");
+//            cross::printConsole("colorFormatToGLFormat:GL_RG\n");
             glcolor_format = GL_RG;
             break;
 
         case cross::RenderSystem::ColorFormat::DEPTH:
-            cross::printConsole("colorFormatToGLFormat:GL_DEPTH_COMPONENT\n");
+//            cross::printConsole("colorFormatToGLFormat:GL_DEPTH_COMPONENT\n");
             glcolor_format = GL_DEPTH_COMPONENT;
             break;
 
@@ -170,22 +170,22 @@ inline int typeFormatToGL(cross::RenderSystem::TypeFormat format) {
     
     switch (format) {
         case cross::RenderSystem::TypeFormat::UNSIGNED_BYTE:
-            cross::printConsole("typeFormatToGL:GL_UNSIGNED_BYTE\n");
+//            cross::printConsole("typeFormatToGL:GL_UNSIGNED_BYTE\n");
             gltype_format = GL_UNSIGNED_BYTE;
             break;
             
         case cross::RenderSystem::TypeFormat::INT:
-            cross::printConsole("typeFormatToGL:GL_INT\n");
+//            cross::printConsole("typeFormatToGL:GL_INT\n");
             gltype_format = GL_INT;
             break;
 
         case cross::RenderSystem::TypeFormat::FLOAT:
-            cross::printConsole("typeFormatToGL:GL_FLOAT\n");
+//            cross::printConsole("typeFormatToGL:GL_FLOAT\n");
             gltype_format = GL_FLOAT;
             break;
 
         case cross::RenderSystem::TypeFormat::UNSIGNED_SHORT:
-            cross::printConsole("typeFormatToGL:GL_UNSIGNED_SHORT\n");
+//            cross::printConsole("typeFormatToGL:GL_UNSIGNED_SHORT\n");
             gltype_format = GL_UNSIGNED_SHORT;
             break;
 
@@ -206,22 +206,22 @@ inline int colorFormatToGL(cross::RenderSystem::ColorFormat format) {
     
     switch (format) {
         case cross::RenderSystem::ColorFormat::RGBA:
-            cross::printConsole("colorFormatToGL:GL_RGBA\n");
+//            cross::printConsole("colorFormatToGL:GL_RGBA\n");
             glcolor_format = GL_RGBA;
             break;
             
         case cross::RenderSystem::ColorFormat::RGB:
-            cross::printConsole("colorFormatToGL:GL_RGB\n");
+//            cross::printConsole("colorFormatToGL:GL_RGB\n");
             glcolor_format = GL_RGB;
             break;
             
         case cross::RenderSystem::ColorFormat::LUMINANCE_ALPHA:
-            cross::printConsole("colorFormatToGL:GL_RG\n");
+//            cross::printConsole("colorFormatToGL:GL_RG\n");
             glcolor_format = GL_RG;
             break;
 
         case cross::RenderSystem::ColorFormat::DEPTH:
-            cross::printConsole("colorFormatToGL:GL_DEPTH_COMPONENT\n");
+//            cross::printConsole("colorFormatToGL:GL_DEPTH_COMPONENT\n");
             glcolor_format = GL_DEPTH_COMPONENT;
             break;
 
@@ -1166,10 +1166,20 @@ void RenderSystem::getViewport(
     int* w,
     int* h
 ) {
+/*
+    int tmp[4];
+    glGetIntegerv(GL_VIEWPORT, tmp);
+
+    *x = tmp[0];
+    *y = tmp[1];
+    *w = tmp[2];
+    *h = tmp[3];
+*/
     *x = viewport_x_;
     *y = viewport_y_;
     *w = viewport_w_;
     *h = viewport_h_;
+
 }
 
 void RenderSystem::setTextureWrap(
@@ -1270,7 +1280,7 @@ void RenderSystem::setTextureBorderColor(
     float b,
     float a
 ) {
-    GLfloat border[] = {r, g, b, a};
+//    GLfloat border[] = {r, g, b, a};
 //    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, border);
     CROSS_GL_ASSERT();
 }

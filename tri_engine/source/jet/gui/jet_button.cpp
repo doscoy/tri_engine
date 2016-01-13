@@ -9,8 +9,8 @@
 
 #include "jet/gui/jet_button.hpp"
 #include "core/base/tri_system_events.hpp"
-#include "core/geometry/tri_collision.hpp"
-
+#include "core/geometry/tri_geometry.hpp"
+#include "core/audio/tri_audio.hpp"
 
 namespace t3 {
 
@@ -66,6 +66,7 @@ Button::Button()
     , hit_area_()
     , first_touch_(false)
     , hover_(false)
+    , active_(true)
     , triggerd_events_()
     , activator_(std::make_shared<ButtonDefaultActivator>())
     , hover_effector_(std::make_shared<ButtonDefaultHoverEffector>())
@@ -75,19 +76,19 @@ Button::Button()
     EventManager::addListener(
         this,
         &self_t::onPointingTrigger,
-        PointingTriggeredEvent::TYPE
+        event::PointingTriggeredEvent::TYPE
     );
 
     EventManager::addListener(
         this,
         &self_t::onPointingMoving,
-        PointingMovingEvent::TYPE
+        event::PointingMovingEvent::TYPE
     );
     
     EventManager::addListener(
         this,
         &self_t::onPointingRelease,
-        PointingReleasedEvent::TYPE
+        event::PointingReleasedEvent::TYPE
     );
 
 }
@@ -137,7 +138,7 @@ void Button::onPointingTrigger(
         return;
     }
     
-    auto trg_event = static_cast<const PointingTriggeredEvent*>(eve.get());
+    auto trg_event = static_cast<const event::PointingTriggeredEvent*>(eve.get());
     if (isHitPointRectangle(trg_event->position(), hit_area_)) {
         //  ファーストタッチで触っていた
         first_touch_ = true;
@@ -152,6 +153,9 @@ void Button::onPointingRelease(
 ) {
     //  触った状態で離されたか？
     if (hover_) {
+        //  押された
+        playSE(push_se_);
+        
         if (!triggerd_events_.empty()) {
             for (auto event: triggerd_events_) {
                 EventManager::queueEvent(event);
@@ -176,7 +180,7 @@ void Button::onPointingMoving(
     }
 
     
-    auto move_event = static_cast<const t3::PointingMovingEvent*>(eve.get());
+    auto move_event = static_cast<const event::PointingMovingEvent*>(eve.get());
     if (isHitPointRectangle(move_event->position(), hit_area_)) {
         hover();
     }
@@ -192,12 +196,14 @@ void Button::onPointingMoving(
 /// アクティベート時の挙動
 void Button::activate() {
     activator_->activate(this);
+    active_ = true;
 }
 
 ///
 /// 非アクティベート時の挙動
 void Button::deactivate() {
     activator_->deactivate(this);
+    active_ = false;
 }
 
 

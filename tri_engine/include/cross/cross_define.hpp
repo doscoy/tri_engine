@@ -14,6 +14,8 @@
 #define PLATFORM_SDK_HPP_INCLUDED
 
 
+#define TRI_VERSION_ECHO    0
+
 
 #define CROSS_TARGET_PLATFORM_WIN32     (2)
 #define CROSS_TARGET_PLATFORM_OSX       (3)
@@ -30,21 +32,29 @@
 
     //  iOS device
     #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
+#if TRI_VERSION_ECHO
         #warning "target ios"
+#endif
         #define CROSS_TARGET_PLATFORM       CROSS_TARGET_PLATFORM_IOS
 
         #ifdef __i386__
+#if TRI_VERSION_ECHO
             #warning "ios sim 32bit"
+#endif
             #define CROSS_TARGET_IOS_SIMULATER    1
         #endif // __i386__
 
         #ifdef __x86_64
+#if TRI_VERSION_ECHO
             #warning "ios sim 64bit"
+#endif
             #define CROSS_TARGET_IOS_SIMULATER    1
         #endif
 
         #ifdef PNG_ARM_NEON
+#if TRI_VERSION_ECHO
             #warning "png neon"
+#endif
         #endif
 
     //  MAC
@@ -75,16 +85,19 @@
 
 #if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_WIN32
     #define CROSS_GL_VERSION    CROSS_GL_40
-//    #warning "target gl4"
-
+#if TRI_VERSION_ECHO
+    #warning "target gl4"
+#endif
 #elif CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_OSX
     #define CROSS_GL_VERSION    CROSS_GL_40
+#if TRI_VERSION_ECHO
     #warning "target gl4"
-
+#endif
 #else
     #define CROSS_GL_VERSION    CROSS_GL_ES3
+#if TRI_VERSION_ECHO
     #warning "target gles3"
-
+#endif
 #endif
 
 

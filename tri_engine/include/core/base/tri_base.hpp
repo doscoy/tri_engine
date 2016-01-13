@@ -19,7 +19,7 @@
 #include "tri_director.hpp"
 #include "tri_event.hpp"
 #include "tri_event_manager.hpp"
-#include "tri_pause_level.hpp"
+#include "tri_pausable.hpp"
 #include "tri_resource_manager.hpp"
 #include "tri_resource.hpp"
 #include "tri_rtti.hpp"
@@ -28,5 +28,7 @@
 #include "tri_task.hpp"
 #include "tri_types.hpp"
 #include "tri_font_glyph.hpp"
+#include "tri_screen_manager.hpp"
+
 
 #endif // TRI_BASE_HPP_INCLUDED

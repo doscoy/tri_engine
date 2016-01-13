@@ -90,7 +90,7 @@ TRI_CORE_NS_END
 /*! @brief アサート */
 #define T3_ASSERT_RANGE(v, l, h)    T3_ASSERT_MSG((v >= l && v <= h), "%s is out of range.", #v)
 
-#define T3_RENDER_ASSERT()          (void)
+#define T3_RENDER_ASSERT()          (void)0
 
 #endif // ENABLE_ASSERT
 

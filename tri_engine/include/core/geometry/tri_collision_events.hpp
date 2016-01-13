@@ -21,12 +21,9 @@
 #include "tri_collider.hpp"
 
 TRI_CORE_NS_BEGIN
+TRI_EVENT_NS_BEGIN
 
 
-///
-/// コライダ同士のペア
-using CollisionPair = std::pair<ColliderPtr, ColliderPtr>;
-    
 ///
 /// コリジョンイベント
 class CollisionEvent
@@ -68,12 +65,46 @@ public:
     }
 
 
-
-    Vec2 pos_;  ///< 位置
     CollisionPair collision_pair_;  ///< ペア
 };
 
+///
+/// コリジョンイベント
+class CollisionTriggerEvent
+    : public CollisionEvent {
+public:
+    ///
+    /// イベントタイプ
+    static const EventType TYPE;
 
+    ///
+    /// イベントタイプ取得
+    const EventType& eventType() const override {
+        return TYPE;
+    }
+};
+
+
+///
+/// コリジョンイベント
+class CollisionLeaveEvent
+    : public CollisionEvent {
+public:
+    ///
+    /// イベントタイプ
+    static const EventType TYPE;
+
+    ///
+    /// イベントタイプ取得
+    const EventType& eventType() const override {
+        return TYPE;
+    }
+};
+
+
+
+
+TRI_EVENT_NS_END
 TRI_CORE_NS_END
 
 #endif  // TRI_COLLISION_EVENTS_HPP_INCLUDED

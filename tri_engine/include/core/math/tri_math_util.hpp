@@ -31,7 +31,7 @@ inline const T judgeMaximum(
 ){
     static_assert( sizeof(T) <= sizeof(int), "This size is not support." );
 
-    return ( a >= b ? a : b );
+    return (a >= b ? a : b);
 }
 
 ///
@@ -43,7 +43,7 @@ inline const T judgeMinimum(
 ){
     static_assert( sizeof(T) <= sizeof(int), "This size is not support." );
 
-	return ( a <= b ? a : b );
+	return (a <= b ? a : b);
 }
 
 ///
@@ -96,7 +96,7 @@ bool inRange(
     const U& low,
     const U& high
 ){
-    if(low <= value && value <= high){
+    if (low <= value && value <= high) {
         
         return true;
     }

@@ -27,7 +27,7 @@ TextBox::TextBox(SpriteLayer* layer, const GlyphList* glyph_list)
     , auto_resize_(false)
     , font_color_()
 {
-    transform_ = std::make_shared<Transform2D>();
+    transform_ = Transform2D::create();
     unknown_char_glyph_ = glyph_list->search(u8"■");
 }
 

@@ -19,17 +19,20 @@
 #include "core/math/tri_vec3.hpp"
 #include "core/base/tri_types.hpp"
 #include "cross/cross_std.hpp"
+#include "core/kernel/memory/tri_new.hpp"
 
 
 TRI_CORE_NS_BEGIN
 
+class Transform2D;
+using Transform2DPtr = SharedPtr<Transform2D>;
+
 
 ///
 /// 2次元姿勢制御クラス
-class Transform2D
+class Transform2D final
     :  Uncopyable
 {
-public:
     ///
     /// コンストラクタ
     Transform2D()
@@ -38,6 +41,7 @@ public:
         , scale_(1.0f, 1.0f)
         , parent_(nullptr)
     {}
+public:
     
     ///
     /// デストラクタ
@@ -136,7 +140,7 @@ public:
     ///
     /// 親の姿勢を設定
     void parent(
-        SharedPtr<Transform2D> p
+        Transform2DPtr p
     ) {
         parent_ = p;
     }
@@ -149,13 +153,13 @@ public:
     
     ///
     /// 親情報を取得
-    SharedPtr<Transform2D> parent() {
+    Transform2DPtr parent() {
         return parent_;
     }
     
     ///
     /// 親情報を取得
-    const SharedPtr<Transform2D> parent() const {
+    const Transform2DPtr parent() const {
         return parent_;
     }
 
@@ -211,6 +215,14 @@ public:
     }
 
 
+
+    ///
+    /// 生成
+    static Transform2DPtr create() {
+        Transform2DPtr tr(T3_SYS_NEW Transform2D);
+        return tr;
+    }
+
 private:
     ///
     /// 座標
@@ -226,10 +238,9 @@ private:
     
     ///
     /// 親の姿勢
-    SharedPtr<Transform2D> parent_;
+    Transform2DPtr parent_;
 };
 
-using Transform2DPtr = SharedPtr<Transform2D>;
 
 
 TRI_CORE_NS_END

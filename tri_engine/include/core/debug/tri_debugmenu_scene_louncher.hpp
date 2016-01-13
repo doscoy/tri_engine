@@ -46,14 +46,13 @@ public:
         //  フォーカスされて決定したら登録してあるシーンに強制的に飛ばす
         if (pad.isTrigger(Pad::BUTTON_A)) {
             auto& sm = SceneManager::instance();
-            sm.forceChangeScene(gen_.instancePtr());
+            sm.forceChangeScene(TaskGenerator<T>::instancePtr());
         }
         else if (pad.isTrigger(Pad::BUTTON_B)) {
             parent_->setFocusItem(nullptr);
         }
 
     }
-    TypedSceneGenerator<T> gen_;    ///< 切り替えるシーン
 };
 
 TRI_CORE_NS_END

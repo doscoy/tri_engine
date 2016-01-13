@@ -34,7 +34,7 @@ public:
 
     ///
     /// コンストラクタ
-    FadeLayer(const String& name, const int priority);
+    FadeLayer(const String& name, const Priority priority);
 
     ///
     /// デストラクタ

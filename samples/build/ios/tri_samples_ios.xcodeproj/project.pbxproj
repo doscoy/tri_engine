@@ -948,6 +948,7 @@
 					../../../tri_engine/include,
 				);
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "AquariusCode.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -973,6 +974,7 @@
 					../../../tri_engine/include,
 				);
 				INFOPLIST_FILE = "tri_samples_ios/tri_samples_ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "AquariusCode.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

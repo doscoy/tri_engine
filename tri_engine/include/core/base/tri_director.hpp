@@ -23,20 +23,19 @@
 #include "core/utility/random/tri_random.hpp"
 #include "core/utility/tri_singleton.hpp"
 #include "core/graphics/tri_color.hpp"
-#include "core/graphics/tri_render_layer.hpp"
+#include "core/graphics/tri_layer_base.hpp"
 #include "core/graphics/tri_fade_layer.hpp"
 #include "core/graphics/tri_sprite_layer.hpp"
+#include "core/graphics/tri_surface.hpp"
+#include "core/graphics/tri_cinema_layer.hpp"
 #include "core/base/tri_task.hpp"
+
 
 #include <array>
 
 
 
 TRI_CORE_NS_BEGIN
-
-
-constexpr float VIRTUAL_SCREEN_WIDTH = 640.0f; ///< ゲーム内仮想スクリーンサイズ幅
-constexpr float VIRTUAL_SCREEN_HEIGHT = 1136.0f; ///< ゲーム内仮想スクリーンサイズ高さ
 
 constexpr int MAX_PAD = 4;  ///< パッド数
 
@@ -71,38 +70,9 @@ public:
     /// ディレクターの後片付け
     void terminateDirector();
     
-    
     ///
-    /// デバイスのスクリーンサイズ設定
-    void deviceScreenSize(const Vec2& vp) {
-        device_screen_size_ = vp;
-        calcScreenRevise();
-    }
-    
-    ///
-    /// デバイスのスクリーンサイズ取得
-    const Vec2& deviceScreenSize() const {
-        return device_screen_size_;
-    }
-    
-    ///
-    /// 仮想スクリーンサイズ設定
-    void virtualScreenSize(const Vec2 screen) {
-        virtual_screen_size_ = screen;
-        calcScreenRevise();
-    }
-    
-    ///
-    /// 仮想スクリーンサイズ取得
-    const Vec2& virtualScreenSize() const {
-        return virtual_screen_size_;
-    }
-    
-    ///
-    /// スクリーンの補正値取得
-    const Vec2& screenRevise() const {
-        return screen_revise_;
-    }
+    /// 最終レイヤーのセットアップ
+    void setupFinalLayer();
     
     
     TaskPtr rootTask() {
@@ -135,8 +105,9 @@ public:
     
     ///
     /// デバッグメニュー登録
-    void registryToDebugMenu(DebugMenuFrame& parent_frame);
-    
+    void registryToDebugMenu(
+        DebugMenuFrame& parent_frame
+    );
     
 
     ///
@@ -181,83 +152,72 @@ public:
     /// タスク表示
     void showTask() const;
     
-public:
 
     ///
     /// クリアカラー取得
-    static const Color& getClearColor();
+    const Color& getClearColor();
 
     ///
     /// クリアカラー設定
-    static void setClearColor(const Color& c);
+    void setClearColor(const Color& c);
 
     ///
     /// 入力情報を取得
-    static const Input& input(const int player_no = 0);
+    const Input& input(const int player_no = 0);
     
     ///
     /// 登録されている指定レイヤーを探す
-    static LayerBase* findLayer(const String& layer_name);
+    LayerBase* findLayer(const String& layer_name);
     
-    ///
-    /// ビューポートの位置に変換
-    static Vec2 screenToViewport(const Vec2& screen_pos);
-    
-    ///
-    /// スクリーンのピクセル位置へ変換
-    static Vec2 viewportToScreen(const Vec2& viewport_pos);
-    
-    ///
-    /// スクリーン外判定
-    static bool isOutOfScreen(const Vec2& screen_pos);
     
     ///
     /// ブラックアウト設定
-    static void setupBlackOut();
+    void setupBlackOut();
 
     ///
     /// ブラックイン設定
-    static void setupBlackIn();
+    void setupBlackIn();
     
     ///
     /// フェードアウト
-    static void fadeOut();
+    void fadeOut();
     
     ///
     /// フェードイン
-    static void fadeIn();
+    void fadeIn();
     
     ///
     /// フェード終了判定
-    static bool isFadeEnd();
+    bool isFadeEnd();
     
     ///
     /// フェードイン終了判定
-    static bool isFadeInEnd();
+    bool isFadeInEnd();
     
     ///
     /// フェードアウト終了判定
-    static bool isFadeOutEnd();
+    bool isFadeOutEnd();
     
-    ///
-    /// スクリーンサイズ取得
-    static const Vec2& screenSize();
     
     ///
     /// 画面にデバッグ文字を描画
-    static void printDisplay(
+    void printDisplay(
         const float x,
         const float y,
         const uint32_t color,
         const int font_size,
         const char* const str
     );
-        
-private:
     
     ///
-    /// スクリーン計算
-    void calcScreenRevise();
+    /// 最終レンダーターゲット取得
+    auto& finalSurface() {
+        return final_surface_;
+    }
+    
+    
+private:
+    
 
     ///
     /// デバッグメニューに登録
@@ -286,21 +246,21 @@ private:
     //  乱数
     random_t random_number_generator_;  ///< 乱数生成器
 
-    //   スクリーンサイズ
-    Vec2 device_screen_size_;           ///< デバイススクリーンサイズ
-    Vec2 virtual_screen_size_;          ///< 仮想スクリーンサイズ
-    Vec2 screen_revise_;
-    
     //  インプットデータ
-    Array<Input, MAX_PAD> input_;   ///< 入力データ
+    Array<Input, MAX_PAD> input_;       ///< 入力データ
 
     //  描画レイヤー
-    Layers layers_;           ///<  描画レイヤー
+    Layers layers_;                     ///<  描画レイヤー
     
+    //  デバイスのレンダーターゲット
+    UniquePtr<DeviceSurface> device_surface_;
     
+    //  最終レンダーターゲット
+    UniquePtr<FrameBufferSurface> final_surface_;
     
-    //  イベントマネージャ
-    EventManager event_manager_;    ///< イベントマネージャ
+    //  最終レンダーターゲット描画レイヤ
+    UniquePtr<CinemaLayer> final_layer_;
+    
     
     //  ルートタスク
     //  全タスクはここにぶら下がる形になる

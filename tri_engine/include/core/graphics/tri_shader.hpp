@@ -29,9 +29,8 @@ using ShaderPtr = SharedPtr<Shader>;
 
 ///
 /// シェーダ
-class Shader {
+class Shader final {
 
-public:
     ///
     /// コンストラクタ
     Shader();
@@ -42,6 +41,7 @@ public:
         const char* const vsh,  ///< 頂点シェーダ
         const char* const fsh   ///< フラグメントシェーダ
     );
+public:
     
     ///
     /// デストラクタ

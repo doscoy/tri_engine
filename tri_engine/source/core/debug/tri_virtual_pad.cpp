@@ -45,7 +45,7 @@ const t3::Rectangle B_BUTTON(POS_B, POS_B + BUTTON_SIZE);
 
 
 VirtualPad::VirtualPad()
-    : pad_layer_("vpad", LayerBase::PRIORITY_DEBUG)
+    : pad_layer_("vpad", LayerBase::Priority::SYS_DEBUG)
 {
     pad_layer_.setUpdateCallback<VirtualPad>(this, &VirtualPad::updateVirtualPad);
     pad_layer_.setRenderCallback<VirtualPad>(this, &VirtualPad::renderVirtualPad);
@@ -76,7 +76,8 @@ void VirtualPad::updateVirtualPad() {
 
 
     //  ポインティング情報取得
-    const Input& input = Director::input();
+    auto& director = Director::instance();
+    const Input& input = director.input();
     const Pointing& pointing = input.pointing();
 
     if (!pointing.isHold()) {

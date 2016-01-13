@@ -14,14 +14,14 @@ TRI_CORE_NS_BEGIN
 
 
 DrawLayer::DrawLayer()
-    : DrawLayer("Draw", PRIORITY_APP_DEFAULT)
+    : DrawLayer("Draw", Priority::DEFAULT)
 {
 }
 
 
 DrawLayer::DrawLayer(
     const String name,
-    const int priority
+    const Priority priority
 )   : LayerBase(name, priority)
     , update_func_(nullptr)
     , render_func_(nullptr)

@@ -16,12 +16,12 @@ TRI_CORE_NS_BEGIN
 TaskBase::TaskBase()
     : priority_(PRIORITY_APP_DEFAULT)
     , type_(0)
-    , pause_lv_(PAUSE_LV_1)
     , first_update_(true)
     , kill_(false)
     , children_()
     , next_(nullptr)
     , parent_(nullptr)
+    , delay_(0.0f)
 {
     
 }
@@ -29,10 +29,10 @@ TaskBase::TaskBase()
 
 
 TaskBase::~TaskBase() {
-    //  次のタスクがある場合は破棄タイミングで生成
+    //  次のタスクがある場合は破棄タイミングで親タスクにリクエストを送る
     if (next_) {
         T3_NULL_ASSERT(parent_);
-        parent_->addTask(next_->generate());
+        parent_->addTaskRequest(next_);
     }
 }
 
@@ -41,12 +41,24 @@ void TaskBase::doTaskInitialize() {
 }
 
 void TaskBase::doTaskTerminate() {
+    if (first_update_) {
+        first_update_ = false;
+        doTaskInitialize();
+    }
+
     onTaskKill();
 }
 
 void TaskBase::doTaskUpdate(
     const DeltaTime dt
 ) {
+    //  更新遅延設定がある場合
+    if (delay_ > 0.0f) {
+        //  指定時間がすぎるまで更新しない
+        delay_ -= dt;
+        return;
+    }
+
     //  前フレームでキル済のを取り除く
     children_.remove_if(
         [](TaskPtr p){
@@ -65,20 +77,32 @@ void TaskBase::doTaskUpdate(
         doTaskInitialize();
     }
 
-    onTaskUpdate(dt);
-
-    //  直前のアップデートでkillされてなければ子タスクを実行
-    if (!kill_) {
-        for (auto& child : children_) {
-            child->doTaskUpdate(dt);
+    if (!paused()) {
+        onTaskUpdate(dt);
+        
+        //  直前のアップデートでkillされてなければ子タスクを実行
+        if (!kill_) {
+            for (auto& child : children_) {
+                child->doTaskUpdate(dt);
+            }
         }
+        
+        children_.remove_if(
+            [](TaskPtr p){
+                return p->isKill();
+            }
+        );
+
     }
     
-    children_.remove_if(
-        [](TaskPtr p){
-            return p->isKill();
+    //  タスク追加リクエストに応じる
+    if (!add_requests_.empty()) {
+        for (auto req : add_requests_) {
+            createTask(req);
         }
-    );
+    
+        add_requests_.clear();
+    }
 }
 
 

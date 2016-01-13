@@ -44,6 +44,7 @@ public:
     virtual ~Collider(){};
     
 public:
+
     ///
     /// 当たり判定
     virtual bool isHit(
@@ -112,6 +113,10 @@ private:
 ///
 /// コライダのポインタ
 using ColliderPtr = SharedPtr<Collider>;
+
+///
+/// コライダ同士のペア
+using CollisionPair = std::pair<ColliderPtr, ColliderPtr>;
 
         
 

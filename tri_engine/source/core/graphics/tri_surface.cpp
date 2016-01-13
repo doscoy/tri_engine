@@ -15,14 +15,7 @@ TRI_CORE_NS_BEGIN
 
 
 
-
-Surface::Surface()
-    : Surface(VIRTUAL_SCREEN_WIDTH, VIRTUAL_SCREEN_HEIGHT, Type::COLOR_DEPTH)
-{
-}
-
-
-Surface::Surface(
+FrameBufferSurface::FrameBufferSurface(
     float width,
     float height,
     Type type
@@ -31,7 +24,7 @@ Surface::Surface(
     , color_texture_()
     , depth_texture_()
     , bound_(false)
-    , type_(type)
+    , buffer_cleared_(false)
 {
     //  各テクスチャの使用状況
     bool use_color = (type == Type::COLOR_DEPTH || type == Type::COLOR_ONLY);
@@ -91,53 +84,95 @@ Surface::Surface(
             depth_texture_->id()
         );
     }
-    cross::RenderSystem::bindFrameBuffer(0);
  
     fb_.unbind();
 }
 
-Surface::~Surface() {
-
-}
 
 
-void Surface::bind() {
+void FrameBufferSurface::bind() {
 
     fb_.bind();
     T3_ASSERT(!bound_);
     bound_ = true;
 }
 
-void Surface::clear() {
+void FrameBufferSurface::clearBuffer() {
+    if (buffer_cleared_) {
+        //  既にクリア済のバッファなのでクリアはスキップ
+        return;
+    }
+    
+    
     if (type_ == Type::DEPTH_ONLY) {
         cross::RenderSystem::clearBuffer(false, true, false);
     }
     else {
         cross::RenderSystem::clearBuffer(true, true, false);
     }
+    
+    //  バッファクリア済フラグを立てておく
+     buffer_cleared_ = true;
 }
 
 
-void Surface::unbind() {
+void FrameBufferSurface::unbind() {
     T3_ASSERT(bound_);
     bound_ = false;
     fb_.unbind();
 }
 
+void FrameBufferSurface::setupViewport() {
+    cross::RenderSystem::getViewport(
+        &last_viewport_pos_x_,
+        &last_viewport_pos_y_,
+        &last_viewport_width_,
+        &last_viewport_height_
+    );
+    
+    cross::RenderSystem::setViewport(0, 0, size_.x_, size_.y_);
 
-void Surface::preRender() {
-    //  フレームバッファ接続
-    bind();
-    clear();
-    auto half = size_.half();
-    cross::RenderSystem::setViewport(half.x_, half.y_, size_.x_, size_.y_);
 }
 
 
-void Surface::postRender() {
+void FrameBufferSurface::resetViewport() {
+
+    cross::RenderSystem::setViewport(
+        last_viewport_pos_x_,
+        last_viewport_pos_y_,
+        last_viewport_width_,
+        last_viewport_height_
+    );
+
+}
+
+void FrameBufferSurface::onBeginRender() {
+    buffer_cleared_ = false;
+}
+
+
+void FrameBufferSurface::onPreRender() {
+    //  フレームバッファ接続
+    bind();
+    clearBuffer();
+    setupViewport();
+}
+
+
+void FrameBufferSurface::onPostRender() {
+    resetViewport();
     //  フレームバッファへの接続解除
     unbind();
 }
+
+
+
+
+
+
+
+
+
 
 TRI_CORE_NS_END
 

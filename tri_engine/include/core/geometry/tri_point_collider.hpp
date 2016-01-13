@@ -17,7 +17,6 @@
 #include "tri_collider.hpp"
 #include "core/math/tri_vec2.hpp"
 
-
 TRI_CORE_NS_BEGIN
 
 

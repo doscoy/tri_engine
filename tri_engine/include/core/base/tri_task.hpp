@@ -18,21 +18,55 @@
 #include "core/base/tri_types.hpp"
 #include "core/utility/tri_uncopyable.hpp"
 #include "core/utility/tri_nameable.hpp"
-#include "tri_pause_level.hpp"
+#include "tri_pausable.hpp"
 #include "tri_event_manager.hpp"
 #include "core/kernel/memory/tri_new.hpp"
 
 TRI_CORE_NS_BEGIN
 
-///
-/// タスク
-class TaskGeneratorBase;
+
+//  タスクポインタ型定義
 class TaskBase;
 using TaskPtr = SharedPtr<TaskBase>;
 using TaskList = List<TaskPtr>;
 
+
+
+///
+/// タスクジェネレータ基底
+class TaskGeneratorBase {
+public:
+    virtual TaskPtr generate() = 0;
+};
+
+
+
+///
+/// タスクジェネレータ
+/// 任意の型のタスクを生成する
+template <class T>
+class TaskGenerator
+    : public TaskGeneratorBase
+{
+public:
+    static TaskGenerator* instancePtr() {
+        static TaskGenerator<T> inst_;
+        return &inst_;
+    }
+
+    TaskPtr generate() override {
+        SharedPtr<T> t(T3_NEW T);
+        return t;
+    }
+};
+
+
+
+///
+/// タスク
 class TaskBase
     : private Uncopyable
+    , public Pausable
     , virtual public Nameable
 {
     friend class Director;
@@ -60,6 +94,18 @@ public:
     virtual ~TaskBase();
 
 public:
+    ///
+    /// 遅延設定
+    void delay(float time) {
+        delay_ = time;
+    }
+    
+    ///
+    /// 遅延取得
+    float delay() const {
+        return delay_;
+    }
+
 
     ///
     /// タスクのプライオリティ取得
@@ -86,18 +132,6 @@ public:
     }
     
     ///
-    /// ポーズレベル取得
-    PauseLevel pauseLevel() const {
-        return pause_lv_;
-    }
-    
-    ///
-    /// ポーズレベル設定
-    void pauseLevel(const PauseLevel lv) {
-        pause_lv_ = lv;
-    }
-
-    ///
     /// operator <
     bool operator <(const TaskBase& rhs) {
         return priority_ < rhs.priority_;
@@ -117,16 +151,38 @@ public:
     
     ///
     /// 子タスク生成
-    template <class U>
-    auto createTask() {
-        SharedPtr<U> t(T3_NEW U());
+    template <class TaskType>
+    SharedPtr<TaskType> createTask() {
+        //  任意のタスク型のジェネレータ取得
+        TaskGenerator<TaskType>* task_gen = TaskGenerator<TaskType>::instancePtr();
+        
+        //  ジェネレータからタスク生成
+        SharedPtr<TaskType> t = std::dynamic_pointer_cast<TaskType>(createTask(task_gen));
+        return t;
+    }
+
+    ///
+    /// 子タスク生成
+    /// ジェネレータで指定
+    TaskPtr createTask(TaskGeneratorBase* gen) {
+        TaskPtr t = gen->generate();
         addTask(t);
         return t;
     }
-    
+
     ///
-    /// タスクの追加
-    void addTask(TaskPtr child);
+    /// 子タスクの追加リクエスト
+    void addTaskRequest(TaskGeneratorBase* request) {
+        add_requests_.push_back(request);
+    }
+
+    ///
+    /// このタスクの破棄時に生成されるタスクを登録
+    void nextTaskGenerator(
+        TaskGeneratorBase* next
+    ) {
+        next_ = next;
+    }
 
     ///
     /// 親タスク
@@ -146,7 +202,11 @@ public:
         return !children_.empty();
     }
     
-private:
+protected:
+    ///
+    /// タスクの追加
+    void addTask(TaskPtr child);
+
 
     ///
     /// タスクの初期化呼び出し
@@ -165,7 +225,6 @@ private:
         const DeltaTime dt
     );
     
-protected:
     ///
     /// タスクの初期化
     /// createTask直後に呼ばれる
@@ -181,7 +240,6 @@ protected:
     /// killTask呼び出し時に呼ばれる
     virtual void onTaskKill() {}
 
-public:
     ///
     /// タスクの削除予約
     void killTask() {
@@ -196,7 +254,6 @@ public:
 private:
     int priority_;          ///< 優先度
     int type_;              ///< タイプ
-    PauseLevel pause_lv_;   ///< ポーズレベル
 
     //  最初のアップデートでinitializeを呼ぶ
     bool first_update_;
@@ -214,33 +271,13 @@ private:
     ///
     /// 親タスク
     TaskBase* parent_;
-};
-
-
-///
-/// タスクジェネレータ基底
-class TaskGeneratorBase {
-public:
-    virtual TaskPtr generate() = 0;
-};
-
-///
-/// タスクジェネレータ
-/// 次に生成するタスクの予約用
-template <class T>
-class TaskGenerator
-    : public TaskGeneratorBase
-{
-public:
-    static TaskGenerator* instancePtr() {
-        static TaskGenerator<T> inst_;
-        return &inst_;
-    }
-
-    TaskPtr generate() override {
-        TaskPtr t(T3_NEW T);
-        return t;
-    }
+    
+    
+    ///
+    /// タスク追加リクエスト
+    Vector<TaskGeneratorBase*> add_requests_;
+    
+    float delay_;
 };
 
 ///
@@ -276,10 +313,8 @@ public:
         timer_ -= dt;
         if (timer_ < 0) {
             timer_ = interval_;
-            //  生成したタスクはこのタスクの子ではなく、親タスクに繋げる
-            //  このタスクは生成後すぐに削除されるため
-            auto task = generator_->generate();
-            parent()->addTask(task);
+            //  指定の時間が過ぎたら親タスクにタスク追加の依頼を出す
+            parent()->addTaskRequest(generator_);
             count_ += 1;
             if (count_ >= max_count_) {
                 killTask();
@@ -297,12 +332,22 @@ private:
 
 
 ///
-/// タスクシステムルート
-class RootTask
+/// タスクグループ
+/// 単に複数のタスクをまとめるルートの役割
+class TaskGroup final
     : public TaskBase
 {
-    void onTaskUpdate(const DeltaTime dt) override {}
+public:
+    TaskGroup()
+        : TaskBase()
+    {}
+    
+    ~TaskGroup() = default;
 };
+
+
+
+
 
 
 TRI_CORE_NS_END

@@ -254,6 +254,20 @@ public:
     /// 非アクティブ化
     void deactivate();
 
+
+    ///
+    /// ボタンを押した時の音設定
+    void pushSound(String name) {
+        push_se_ = name;
+    }
+    
+    ///
+    /// 押せない時に押した時の音設定
+    void ngSound(String name) {
+        ng_se_ = name;
+    }
+
+
 private:
 
     ///
@@ -299,10 +313,14 @@ private:
     Rectangle hit_area_;        ///< 判定エリア
     bool first_touch_;          ///< 触ったか判定
     bool hover_;                ///< ホバー中フラグ
+    bool active_;
     Vector<EventPtr> triggerd_events_;          ///< ボタンが押された時に発動するイベント
     ButtonActivatorPtr activator_;              ///< アクティブ挙動制御
     ButtonHoverEffectorPtr hover_effector_;     ///< ホバー挙動制御
+    String push_se_;
+    String ng_se_;
     UniqueID button_id_;        ///< ボタンID
+    
 
 };   // class Button
 

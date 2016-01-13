@@ -358,9 +358,6 @@ public:
     static SpritePtr create(String tex_name, String layer_name = T3_DEFAULT_SPRITE_LAYER_NAME);
     static SpritePtr create(TexturePtr texture, String layer_name = T3_DEFAULT_SPRITE_LAYER_NAME);
 
-    ///
-    /// 使い終わったスプライトを破棄
-    void destroy();
     
 private:
     ///

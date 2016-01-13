@@ -7,18 +7,16 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-#include "core/graphics/tri_render_layer.hpp"
+#include "core/graphics/tri_layer_base.hpp"
 #include "core/base/tri_director.hpp"
 #include "core/graphics/tri_surface.hpp"
 
 
 TRI_CORE_NS_BEGIN
 
-    
-
 LayerBase::LayerBase(
     const String& layer_name,
-    const int priority
+    const Priority priority
 )   : pause_(false)
     , visible_(true)
     , priority_(priority)
@@ -34,11 +32,6 @@ LayerBase::LayerBase(
 {
     attachSystem();
 }
-    
-LayerBase::LayerBase(const String& name)
-    : LayerBase(name, PRIORITY_APP_DEFAULT)
-{}
-
 
 
 LayerBase::~LayerBase() {
@@ -46,9 +39,9 @@ LayerBase::~LayerBase() {
 }
 
 void LayerBase::priority(
-    const int priority
+    const Priority priority
 ) {
-    T3_ASSERT( PRIORITY_LOWEST <= priority && priority <= PRIORITY_HIGHEST  );
+    T3_ASSERT(Priority::LOWEST <= priority && priority <= Priority::HIGHEST);
     priority_ = priority;
 }
 
@@ -96,6 +89,10 @@ void LayerBase::updateLayers(
 void LayerBase::drawLayers(
     Layers& layers
 ) {
+    for (auto& layer : layers) {
+        layer->initializeRender();
+    }
+
 
     for (auto& layer : layers) {
         T3_ASSERT(layer);
@@ -121,20 +118,31 @@ void LayerBase::drawLayers(
     }
 }
 
-void LayerBase::callDraw() {
+
+void LayerBase::initializeRender() {
     if (render_target_) {
-        //  専用の描画ターゲットが指定されているので
-        //  描画ターゲットの描画前後処理も呼ぶ
-        render_target_->preRender();
-
-        drawLayer();
-
-        render_target_->postRender();
-   
+        render_target_->onBeginRender();
     } else {
-        //  描画ターゲットの指定が無い場合はただ描画
-        drawLayer();
+        Director::instance().finalSurface()->onBeginRender();
     }
+}
+
+void LayerBase::callDraw() {
+
+    Surface* render_target = render_target_;
+    
+    if (!render_target) {
+        //  レンダーターゲットの指定がない時はシステムの最終レンダーターゲット向けに描画する
+        auto& director = Director::instance();
+        auto& final_render_target = director.finalSurface();
+        render_target = final_render_target.get();
+    }
+
+    render_target->onPreRender();
+
+    drawLayer();
+
+    render_target->onPostRender();
     
 
 }

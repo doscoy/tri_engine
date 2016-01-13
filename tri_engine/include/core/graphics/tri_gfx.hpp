@@ -29,7 +29,7 @@
 #include "tri_material.hpp"
 #include "tri_mesh.hpp"
 #include "tri_model.hpp"
-#include "tri_render_layer.hpp"
+#include "tri_layer_base.hpp"
 
 #include "tri_renderable.hpp"
 #include "tri_scene_graph.hpp"

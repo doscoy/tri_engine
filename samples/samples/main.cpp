@@ -32,11 +32,11 @@ int main(int argc, char * argv[])
     //    app.setRootScene(t3::SceneBase::sceneGenerator<ZipTestScene>());
     //    app.setRootScene(t3::SceneBase::sceneGenerator<MemPoolScene>());
     //    app.rootScene(t3::SceneBase::sceneGenerator<SimpleSpriteScene>());
-        app.rootScene(t3::SceneBase::sceneGenerator<ColladaMeshScene>());
-        app.rootScene(t3::SceneBase::sceneGenerator<ColladaMesh2Scene>());
+        app.rootScene(t3::TaskGenerator<ColladaMeshScene>::instancePtr());
+        app.rootScene(t3::TaskGenerator<ColladaMesh2Scene>::instancePtr());
     //    app.rootScene(t3::SceneBase::sceneGenerator<SimpleMesh3Scene>());
  //   app.rootScene(t3::SceneBase::sceneGenerator<ShadowTestScene>());
-    app.rootScene(t3::SceneBase::sceneGenerator<WebNotificationTest>());
+    app.rootScene(t3::TaskGenerator<WebNotificationTest>::instancePtr());
     
     
     t3::setApplication(app);

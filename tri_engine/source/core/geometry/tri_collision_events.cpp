@@ -11,10 +11,12 @@
 
 
 TRI_CORE_NS_BEGIN
-
+TRI_EVENT_NS_BEGIN
 
         
 const EventType CollisionEvent::TYPE("tri_CollisionEvent");
+const EventType CollisionTriggerEvent::TYPE("tri_CollisionTrigger");
+const EventType CollisionLeaveEvent::TYPE("tri_CollisionLeave");
 
-
+TRI_EVENT_NS_END
 TRI_CORE_NS_END

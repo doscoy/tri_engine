@@ -6,7 +6,7 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 /**
-    @file tri_pause_level.hpp
+    @file tri_pausable.hpp
     ポーズレベル. ex. LV5のポーズ処理はLV4以下の対象も全てポーズさせる
 */
 
@@ -23,7 +23,6 @@ TRI_CORE_NS_BEGIN
 ///
 /// ポーズレベル
 enum PauseLevel {
-    PAUSE_NONE,
     
     PAUSE_LV_1 = 1,
     PAUSE_LV_2,
@@ -32,8 +31,15 @@ enum PauseLevel {
     PAUSE_LV_5,
     PAUSE_LV_6,
     PAUSE_LV_7,
-    PAUSE_LV_8
+    PAUSE_LV_8,
+    
+    PAUSE_NONE,
 };
+
+
+TRI_EVENT_NS_BEGIN
+
+
 
 ///
 /// ポーズイベント
@@ -96,6 +102,71 @@ public:
 private:
     PauseLevel pause_lv_;   ///< ポーズレベル
 };
+
+
+
+TRI_EVENT_NS_END
+
+
+///
+/// ポーズイベントハンドルクラス
+class Pausable {
+public:
+    Pausable();
+    ~Pausable();
+
+
+public:
+    void pauseLevel(PauseLevel lv) {
+        pause_lv_ = lv;
+    }
+    
+    PauseLevel pauseLevel() const {
+        return pause_lv_;
+    }
+
+
+protected:
+    ///
+    /// ポーズ
+    void pause() {
+        pause_ = true;
+    }
+    
+    ///
+    /// ポーズ解除
+    void resume() {
+        pause_ = false;
+    }
+    
+    ///
+    /// ポーズ中判定
+    bool paused() const {
+        return pause_;
+    }
+    
+    
+    ///
+    /// ポーズイベントハンドラ
+    void onPause(const EventPtr e);
+    
+    ///
+    /// レジュームハンドラ
+    void onResume(const EventPtr e);
+
+private:
+    bool pause_;
+    PauseLevel pause_lv_;
+};
+
+
+
+
+
+
+
+
+
 
 
 TRI_CORE_NS_END

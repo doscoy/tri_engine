@@ -22,6 +22,7 @@
 #include "core/utility/tri_stopwatch.hpp"
 #include "core/kernel/memory/tri_memory_pool.hpp"
 #include "core/kernel/memory/tri_heap.hpp"
+#include "core/base/tri_screen_manager.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -88,7 +89,7 @@ public:
         , dm_show_work_time_(&dmf_system_, "SHOW WORKTIME", show_work_time_)
         , dm_show_work_bar_(&dmf_system_, "SHOW WORKBAR", show_work_bar_)
         , dm_show_heap_(&dmf_system_, "SHOW HEAP", show_heap_)
-        , dm_show_task_(&dmf_system_, "SHOW TaskBase", show_task_)
+        , dm_show_task_(&dmf_system_, "SHOW TASK", show_task_)
     {
         t3::Director::instance().registryToDebugMenu(dmf_system_);
         render_avg.reserve(LIMIT_AVG_SUM);
@@ -148,7 +149,8 @@ bool initializeTriEngine(
     d.initializeDirector();
     
     //  デバイスの画面サイズ設定
-    d.deviceScreenSize(
+    auto& screen_mgr = t3::ScreenManager::instance();
+    screen_mgr.deviceScreenSize(
         Vec2(
             static_cast<float>(width),
             static_cast<float>(height)
@@ -212,8 +214,8 @@ bool Application::isActive() const {
 /// ワークバーの初期化
 void Application::initializeWorkBar() {
     
-    auto& d = Director::instance();
-    const Vec2& screen_size = d.virtualScreenSize();
+    auto& screen_mgr = ScreenManager::instance();
+    const Vec2& screen_size = screen_mgr.virtualScreenSize();
     Vec2 half_screen_size = screen_size / 2;
     
     //  ワークバーの配置
@@ -239,7 +241,9 @@ void Application::initializeWorkBar() {
 void Application::initializeApplication()
 {
     T3_NULL_ASSERT(root_scene_generator_);
-    SceneManager::instance().forceChangeScene(root_scene_generator_);
+    //  ルートシーン作成
+    auto& d = Director::instance();
+    d.rootTask()->addTaskRequest(root_scene_generator_);
 
 
 #if DEBUG
@@ -257,9 +261,17 @@ void Application::initializeApplication()
 
     
     //  デバッグ文字描画の初期化
-
     initializeDrawPrimitive();
    
+    auto& screen_mgr = ScreenManager::instance();
+    cross::RenderSystem::setViewport(
+        0,
+        0,
+        screen_mgr.deviceScreenSize().x_,
+        screen_mgr.deviceScreenSize().y_
+    );
+    
+    d.setupFinalLayer();
 
     //  ゲームの初期化
     initializeGame();
@@ -374,7 +386,6 @@ void Application::renderApplication() {
 
 
     auto& sm = SceneManager::instance();
-    sm.debugRender();
 
     debug_cost_timer_.end();
     rendering_cost_timer_.start();      // rendering cost 計算開始
@@ -401,9 +412,6 @@ void Application::renderApplication() {
 #endif // DEBUG
 
 
-    //  最後にシーンチェンジ処理
-    sm.directScene();
-    
     //  シーン切り替わり判定
     if (sm.isSceneChenged()) {
         //  シーンが切り替わったのでデバッグメニューを閉じる
@@ -554,7 +562,8 @@ bool Application::isDebugMenuOpenRequest() {
     
     
     //  ポインティングでのオープンリクエスト
-    const Pointing& pointing = Director::input().pointing();
+    auto& director = Director::instance();
+    const Pointing& pointing = director.input().pointing();
     if (pointing.isDoubleClick() /*&& pointing.getPointingCount() == 3*/) {
         result = true;
     }
@@ -579,7 +588,10 @@ bool Application::isSuspend() const {
 ///
 /// 描画開始
 void Application::beginRender() {
-    auto& c = t3::Director::getClearColor();
+    auto& director = Director::instance();
+
+    //  クリアカラー設定
+    auto& c = director.getClearColor();
     cross::RenderSystem::clearColor(c.redFloat(), c.greenFloat(), c.blueFloat(), c.alphaFloat());
     cross::RenderSystem::clearBuffer(true, true, false);
 

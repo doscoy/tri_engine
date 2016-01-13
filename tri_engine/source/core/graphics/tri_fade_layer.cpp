@@ -18,14 +18,14 @@ TRI_CORE_NS_BEGIN
 
 
 FadeLayer::FadeLayer()
-    : FadeLayer("fade", PRIORITY_SYS_FADE)
+    : FadeLayer("fade", Priority::SYS_FADE)
 {
 }
 
 
 FadeLayer::FadeLayer(
     const String& name,
-    const int priority
+    const Priority priority
 )   : LayerBase(name, priority)
     , fading_(false)
     , fade_in_(true)

@@ -17,7 +17,7 @@
 #include "core/core_config.hpp"
 #include <iostream>
 #include <functional>
-#include "tri_render_layer.hpp"
+#include "tri_layer_base.hpp"
 #include "../utility/tri_method_callback.hpp"
 
 
@@ -37,7 +37,7 @@ public:
 
     ///
     /// コンストラクタ
-    explicit DrawLayer(const String name, const int priority);
+    explicit DrawLayer(const String name, const Priority priority = Priority::DEFAULT);
 
     ///
     /// デストラクタ
