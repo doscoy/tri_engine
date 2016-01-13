@@ -33,7 +33,7 @@ class ResourceManager
 {
     friend class Singleton<ResourceManager<ResourceType>>;
 
-    typedef List<SharedPtr<ResourceType>> Resources;
+    using Resources = List<SharedPtr<ResourceType>>;
 
     
 protected:
@@ -114,6 +114,18 @@ public:
         }
         
         return 0;
+    }
+
+    ///
+    /// 管理リソースを取得
+    auto& resources() {
+        return resources_;
+    }
+
+    ///
+    /// 管理リソースを取得
+    const auto& resources() const {
+        return resources_;
     }
 
 private:

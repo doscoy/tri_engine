@@ -72,6 +72,29 @@ public:
         return bgm_;
     }
 
+    ///
+    /// ミュート設定
+    void mute(
+        bool flag   ///< true ミュートする false ミュートを戻す
+    ) {
+        if (muted_ == flag) {
+            //  設定と現状が同一ステータスの場合は何もしない
+            //  ミュート中にさらにミュートを設定した場合など。
+            return;
+        }
+        
+        if (flag) {
+            //  ミュート開始
+            volume(0.0f);
+            muted_ = true;
+        } else {
+            //  ミュート終了
+            muted_ = false;
+            volume(last_volume_);
+        }
+    }
+
+
 private:
     
     ///
@@ -83,9 +106,11 @@ private:
     void stop();
     
 private:
-    
     cross::AudioSystem::SourceID sid_;  ///< ソースID
     bool bgm_;  ///< BGM判定用フラグ
+    bool muted_;
+    float volume_;
+    float last_volume_;
 };
 
 //  オーディオハンドルのスマートポインタ型

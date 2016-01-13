@@ -317,6 +317,8 @@
 		3A480F611B2D4159001064BB /* jet_textbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DDD1B2D4159001064BB /* jet_textbox.cpp */; };
 		3A480F621B2D4159001064BB /* jet_textbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DDD1B2D4159001064BB /* jet_textbox.cpp */; };
 		3A480F641B2D4159001064BB /* tri_view_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DE11B2D4159001064BB /* tri_view_controller.mm */; };
+		3A515D431C4625D80031FB88 /* tri_audio_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A515D421C4625D80031FB88 /* tri_audio_util.cpp */; };
+		3A515D441C4625D80031FB88 /* tri_audio_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A515D421C4625D80031FB88 /* tri_audio_util.cpp */; };
 		3A6299C11B65436800E8AC76 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A62998D1B65436800E8AC76 /* png.c */; };
 		3A6299C21B65436800E8AC76 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A62998D1B65436800E8AC76 /* png.c */; };
 		3A6299C31B65436800E8AC76 /* png.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A62998E1B65436800E8AC76 /* png.h */; };
@@ -707,6 +709,8 @@
 		3A480DDD1B2D4159001064BB /* jet_textbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jet_textbox.cpp; sourceTree = "<group>"; };
 		3A480DE01B2D4159001064BB /* tri_view_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_view_controller.hpp; sourceTree = "<group>"; };
 		3A480DE11B2D4159001064BB /* tri_view_controller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tri_view_controller.mm; sourceTree = "<group>"; };
+		3A515D411C46257C0031FB88 /* tri_audio_util.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_audio_util.hpp; sourceTree = "<group>"; };
+		3A515D421C4625D80031FB88 /* tri_audio_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_audio_util.cpp; sourceTree = "<group>"; };
 		3A5397241C06ED0D005C6B27 /* cross_std.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cross_std.hpp; sourceTree = "<group>"; };
 		3A62998D1B65436800E8AC76 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
 		3A62998E1B65436800E8AC76 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
@@ -872,6 +876,7 @@
 				3A480C891B2D4159001064BB /* tri_audio_resource.hpp */,
 				3A480C8A1B2D4159001064BB /* tri_streaming_player.hpp */,
 				3A480C8B1B2D4159001064BB /* tri_wav.hpp */,
+				3A515D411C46257C0031FB88 /* tri_audio_util.hpp */,
 			);
 			path = audio;
 			sourceTree = "<group>";
@@ -1194,6 +1199,7 @@
 				3A480D681B2D4159001064BB /* tri_audio_resource.cpp */,
 				3A480D691B2D4159001064BB /* tri_streaming_player.cpp */,
 				3A480D6A1B2D4159001064BB /* tri_wav.cpp */,
+				3A515D421C4625D80031FB88 /* tri_audio_util.cpp */,
 			);
 			path = audio;
 			sourceTree = "<group>";
@@ -1830,6 +1836,7 @@
 				3A480F191B2D4159001064BB /* tri_new.cpp in Sources */,
 				3A480F431B2D4159001064BB /* cross_audio_system.cpp in Sources */,
 				3A24583B1B341FF600E928B9 /* jet_scene.cpp in Sources */,
+				3A515D431C4625D80031FB88 /* tri_audio_util.cpp in Sources */,
 				3A480F111B2D4159001064BB /* tri_pointing.cpp in Sources */,
 				3A480E9F1B2D4159001064BB /* tri_wav.cpp in Sources */,
 				3A480EE31B2D4159001064BB /* tri_camera_updater.cpp in Sources */,
@@ -2026,6 +2033,7 @@
 				3A480F1C1B2D4159001064BB /* tri_mutex.cpp in Sources */,
 				3A480F141B2D4159001064BB /* tri_heap.cpp in Sources */,
 				3A6299D61B65436800E8AC76 /* pngrtran.c in Sources */,
+				3A515D441C4625D80031FB88 /* tri_audio_util.cpp in Sources */,
 				3A480EF81B2D4159001064BB /* tri_scene_graph.cpp in Sources */,
 				3A480F2A1B2D4159001064BB /* tri_random_xorshift.cpp in Sources */,
 				3A480F2E1B2D4159001064BB /* tri_bit.cpp in Sources */,

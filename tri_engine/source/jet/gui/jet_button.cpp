@@ -9,8 +9,8 @@
 
 #include "jet/gui/jet_button.hpp"
 #include "core/base/tri_system_events.hpp"
-#include "core/geometry/tri_collision.hpp"
-
+#include "core/geometry/tri_geometry.hpp"
+#include "core/audio/tri_audio.hpp"
 
 namespace t3 {
 
@@ -134,6 +134,8 @@ void Button::onPointingTrigger(
     
     //  スプライトがアクティブじゃない場合スキップ
     if (!sprite_->isVisible()) {
+        //  NGサウンド再生
+        playSE(ng_se_);
         return;
     }
     
@@ -152,6 +154,7 @@ void Button::onPointingRelease(
 ) {
     //  触った状態で離されたか？
     if (hover_) {
+        //  押された
         if (!triggerd_events_.empty()) {
             for (auto event: triggerd_events_) {
                 EventManager::queueEvent(event);

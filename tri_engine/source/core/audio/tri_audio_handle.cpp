@@ -19,6 +19,8 @@ AudioHandle::AudioHandle(
     const cross::AudioSystem::BufferID buffer_id
 )   : sid_(0)
     , bgm_(false)
+    , volume_(1.0f)
+    , last_volume_(1.0f)
 {
     //  ソースIDを生成
     sid_ = cross::AudioSystem::createSource(buffer_id);
@@ -86,7 +88,15 @@ void AudioHandle::pitch(
 void AudioHandle::volume(
     const float vol
 ) {
-    cross::AudioSystem::volume(sid_, vol);
+    if (muted_) {
+        //  ミュート中はボリューム変更せず、ミュートが終了した時に反映されるようにする
+        last_volume_ = vol;
+    } else {
+        //  ミュート中じゃないので通常の音量変更処理
+        last_volume_ = volume_;
+        volume_ = vol;
+        cross::AudioSystem::volume(sid_, vol);
+    }
 }
 
 

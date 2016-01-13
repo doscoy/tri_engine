@@ -20,7 +20,7 @@
 #include "tri_audio_resource.hpp"
 #include "tri_streaming_player.hpp"
 #include "tri_wav.hpp"
-
+#include "tri_audio_util.hpp"
 
 
 #endif // TRI_AUDIO_HPP_INCLUDED
