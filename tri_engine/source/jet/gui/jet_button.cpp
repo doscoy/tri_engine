@@ -66,6 +66,7 @@ Button::Button()
     , hit_area_()
     , first_touch_(false)
     , hover_(false)
+    , active_(true)
     , triggerd_events_()
     , activator_(std::make_shared<ButtonDefaultActivator>())
     , hover_effector_(std::make_shared<ButtonDefaultHoverEffector>())
@@ -134,8 +135,6 @@ void Button::onPointingTrigger(
     
     //  スプライトがアクティブじゃない場合スキップ
     if (!sprite_->isVisible()) {
-        //  NGサウンド再生
-        playSE(ng_se_);
         return;
     }
     
@@ -155,6 +154,8 @@ void Button::onPointingRelease(
     //  触った状態で離されたか？
     if (hover_) {
         //  押された
+        playSE(push_se_);
+        
         if (!triggerd_events_.empty()) {
             for (auto event: triggerd_events_) {
                 EventManager::queueEvent(event);
@@ -195,12 +196,14 @@ void Button::onPointingMoving(
 /// アクティベート時の挙動
 void Button::activate() {
     activator_->activate(this);
+    active_ = true;
 }
 
 ///
 /// 非アクティベート時の挙動
 void Button::deactivate() {
     activator_->deactivate(this);
+    active_ = false;
 }
 
 
