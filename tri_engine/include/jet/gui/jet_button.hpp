@@ -284,14 +284,7 @@ private:
 
     ///
     /// 判定エリア更新
-    void updateHitArea() {
-        T3_NULL_ASSERT(sprite_);
-        hit_area_.setupFromCenterSize(
-            sprite_->transform()->position(),
-            sprite_->size()
-        );
-    }
-    
+    void updateHitArea();
     
     ///
     /// ホバー

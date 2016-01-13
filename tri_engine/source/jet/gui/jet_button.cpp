@@ -122,6 +122,21 @@ void Button::setupSprite(
     updateHitArea();
 }
 
+
+///
+///
+void Button::updateHitArea() {
+
+    T3_NULL_ASSERT(sprite_);
+
+    auto& screen_man = ScreenManager::instance();
+    auto& ratio = screen_man.screenRevise();
+    hit_area_.setupFromCenterSize(
+        sprite_->transform()->position() * ratio,
+        sprite_->size() * ratio
+    );
+}
+
 ///
 /// トリガイベントハンドラ
 void Button::onPointingTrigger(
@@ -181,6 +196,7 @@ void Button::onPointingMoving(
 
     
     auto move_event = static_cast<const event::PointingMovingEvent*>(eve.get());
+    
     if (isHitPointRectangle(move_event->position(), hit_area_)) {
         hover();
     }
