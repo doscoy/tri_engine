@@ -49,6 +49,7 @@ VirtualPad::VirtualPad()
 {
     pad_layer_.setUpdateCallback<VirtualPad>(this, &VirtualPad::updateVirtualPad);
     pad_layer_.setRenderCallback<VirtualPad>(this, &VirtualPad::renderVirtualPad);
+    pad_layer_.setupRenderTargetToDevice();
 }
 
 VirtualPad::~VirtualPad() {

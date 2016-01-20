@@ -90,11 +90,17 @@ public:
     
 
     ///
-    /// 通常の更新
+    /// ディレクターの更新
     void update(
         const DeltaTime delta_time
     );
   
+    
+    ///
+    /// ディレクターの描画
+    void render();
+    
+    
     
     ///
     /// 入力更新
@@ -215,6 +221,13 @@ public:
         return final_surface_;
     }
     
+    ///
+    /// デバイス向けレンダーターゲット取得
+    auto& deviceSurface() {
+        return device_surface_;
+    }
+    
+    
     
 private:
     
@@ -237,6 +250,8 @@ private:
     //  デバッグ用レイヤー
     UniquePtr<SpriteLayer> dbg_print_layer_;
     UniquePtr<DebugStringBuffer> dbg_print_buffer_;
+    Vector<SpritePtr> dbg_print_sprites_;
+    
     TexturePtr dbg_font_sheet_;
 
 

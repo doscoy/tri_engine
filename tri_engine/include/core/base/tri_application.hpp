@@ -20,15 +20,29 @@
 #include "tri_types.hpp"
 #include "core/utility/tri_stopwatch.hpp"
 #include "cross/cross_std.hpp"
-
+#include "core/kernel/memory/tri_new.hpp"
 
 TRI_CORE_NS_BEGIN
 
-//  前方宣言
-class ApplicationDebugMenu;
 
+///
+/// アプリケーションジェネレータ
+class Application;
+using ApplicationPtr = SharedPtr<Application>;
+class ApplicationGenerator {
+public:
+    virtual ApplicationPtr create() const = 0;
+};
 
-
+template <class T>
+class TypedApplicationGenerator
+    : public ApplicationGenerator {
+public:
+    ApplicationPtr create() const override {
+        ApplicationPtr app(T3_SYS_NEW T);
+        return app;
+    }
+};
 
 
 
@@ -66,7 +80,7 @@ public:
 
     ///
     /// 更新
-    void updateApplication();
+    void updateApplication(const DeltaTime dt);
 
     ///
     /// 描画
@@ -82,6 +96,11 @@ public:
     /// @retval true 実行中
     bool isActive() const;
 
+
+    bool isReady() const {
+        return  initialized_;
+    }
+
     ///
     /// アプリケーションのルートシーンを設定
     void rootScene(
@@ -90,33 +109,16 @@ public:
         root_scene_generator_ = root;
     }
     
-private:
+    
     ///
-    /// 描画前処理
-    void beginRender();
-
-    ///
-    /// 描画後処理
-    void endRender();
-
-
-    ///
-    /// デバッグメニューのオープンリクエストが発生しているか判定
-    /// @retval true リクエストが発生した
-    bool isDebugMenuOpenRequest();
-
-    ///
-    /// サスペンド中か判定
-    /// @retval true サスペンド中
-    bool isSuspend() const;
-
-    ///
-    /// ワークバーの初期化
-    void initializeWorkBar();
-
-    ///
-    /// デバッグ用描画
-    void debugPrinting();
+    /// アプリケーションのジェネレータ取得
+    template <class T>
+    static const ApplicationGenerator* getGenerator() {
+        static TypedApplicationGenerator<T> generator;
+        return &generator;
+    }
+    
+    
 public:
     ///
     /// ルートシーンへ遷移
@@ -124,61 +126,13 @@ public:
     
     
 private:
-#if DEBUG
-    UniquePtr<ApplicationDebugMenu> system_menu_;
-#endif
     TaskGeneratorBase* root_scene_generator_;  ///< ルートシーンのジェネレータ
     uint32_t last_scene_change_frame_;  ///< 最後にシーンチェンジしたフレーム
     uint32_t memory_leak_check_filter_; ///< メモリリークチェックフィルタ
-    Stopwatch fps_timer_;   ///< fps計測用タイマー
-    Array<float, 260> fps_stack_;   ///< fps保存用コンテナ
-    float fps_; ///< fps
+    bool initialized_;
 };
 
 
-
-
-///
-/// エンジンの初期化
-bool initializeTriEngine(
-    const int width,        ///< スクリーン幅
-    const int height,       ///< スクリーン高さ
-    const char* const title ///< 任意の文字列
-);
-
-
-///
-/// エンジンの後片付け
-void terminateTriEngine();
-
-
-///
-/// 起動するアプリを設定.
-void setApplication(
-    Application& app    ///< アプリケーション
-);
-
-
-///
-/// 初期化.
-void initializeApplication();
-
-
-///
-/// 後片付け.
-void terminateApplication();
-
-///
-/// 更新.
-void updateApplication();
-
-///
-/// 描画.
-void renderApplication();
-
-///
-/// アプリ有効判定
-bool isActiveApplication();
 
 TRI_CORE_NS_END
 

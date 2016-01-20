@@ -35,7 +35,7 @@ void printDisplay(
 
 ///
 /// デバッグフォントのサイズ
-#define TRI_DEBUG_FONT_SIZE    16
+#define TRI_DEBUG_FONT_SIZE    10
 
 
 

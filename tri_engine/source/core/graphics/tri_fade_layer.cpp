@@ -70,7 +70,7 @@ void FadeLayer::updateLayer(
 }
 
 
-void FadeLayer::drawLayer() {
+void FadeLayer::renderLayer() {
     if (isZeroFloat(alpha_)) {
         return;
     }

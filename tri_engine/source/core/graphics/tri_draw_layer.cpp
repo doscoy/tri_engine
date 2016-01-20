@@ -42,7 +42,7 @@ void DrawLayer::updateLayer(
     }
 }
 
-void DrawLayer::drawLayer() {
+void DrawLayer::renderLayer() {
     if (render_func_) {
         render_func_->invoke();
     }

@@ -20,6 +20,7 @@ LayerBase::LayerBase(
 )   : pause_(false)
     , visible_(true)
     , priority_(priority)
+    , render_target_type_(RenderTargetType::DEFAULT)
     , render_target_(nullptr)
     , dmf_me_(nullptr, layer_name)
     , dmi_visible_(&dmf_me_, "VISIBLE", visible_)
@@ -86,7 +87,7 @@ void LayerBase::updateLayers(
     }
 }
     
-void LayerBase::drawLayers(
+void LayerBase::renderLayers(
     Layers& layers
 ) {
     for (auto& layer : layers) {
@@ -108,7 +109,7 @@ void LayerBase::drawLayers(
         }
 
         //  描画
-        layer->callDraw();
+        layer->render();
 
         //  描画後コールバック
         if (layer->postrender_callback_) {
@@ -127,26 +128,57 @@ void LayerBase::initializeRender() {
     }
 }
 
-void LayerBase::callDraw() {
+void LayerBase::render() {
 
-    Surface* render_target = render_target_;
+    Surface* render_target = nullptr;
+    auto& director = Director::instance();
     
-    if (!render_target) {
-        //  レンダーターゲットの指定がない時はシステムの最終レンダーターゲット向けに描画する
-        auto& director = Director::instance();
-        auto& final_render_target = director.finalSurface();
-        render_target = final_render_target.get();
+    switch (render_target_type_) {
+        //  デフォルトの描画ターゲット
+        case RenderTargetType::DEFAULT:
+            //  デフォルトはシステムの最終描画サーフェス向け
+            {
+                auto& final_render_target = director.finalSurface();
+                render_target = final_render_target.get();
+            }
+            break;
+            
+
+        //   ユーザー指定
+        case RenderTargetType::USER_CUSTOM:
+            //  ユーザー指定のレンダーターゲットに描画する
+            render_target = render_target_;
+            break;
+        
+        //  デバイスの画面に直接描画する
+        case RenderTargetType::DEVICE:
+            {
+                auto& device_render_target = director.deviceSurface();
+                render_target = device_render_target.get();
+            }
+            break;
+            
+            
+        default:
+            T3_PANIC("unknown render target type.");
+            break;
     }
-
-    render_target->onPreRender();
-
-    drawLayer();
-
-    render_target->onPostRender();
     
 
+    doRenderLayer(render_target);
 }
-    
+
+void LayerBase::doRenderLayer(
+    Surface* surface
+) {
+    T3_NULL_ASSERT(surface);
+
+    surface->onPreRender();
+    renderLayer();
+    surface->onPostRender();
+}
+
+
     
 void LayerBase::attachSystem() {
     t3::Director::instance().attachLayer(this);

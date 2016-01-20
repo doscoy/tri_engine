@@ -135,7 +135,7 @@ void CinemaLayer::updateLayer(const DeltaTime delta_time) {
 }
 
 
-void CinemaLayer::drawLayer() {
+void CinemaLayer::renderLayer() {
     
     if (!texture_) {
         return;

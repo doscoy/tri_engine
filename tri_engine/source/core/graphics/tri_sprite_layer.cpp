@@ -64,7 +64,6 @@ void SpriteLayer::updateLayer(
     const DeltaTime delta_time
 ) {
 
-//    T3_SYSTEM_LOG_DEBUG("sp size = %d \n", sprites_.size());
     renderer_.beginCollect();
 
     //  期限の切れたスプライトを削除
@@ -105,7 +104,7 @@ void SpriteLayer::updateLayer(
     
 }
 
-void SpriteLayer::drawLayer() {
+void SpriteLayer::renderLayer() {
 
     if (!renderer_.hasSprites()) {
         //  スプライト無ければ処理スキップ
@@ -116,9 +115,7 @@ void SpriteLayer::drawLayer() {
 }
 
 
-void SpriteLayer::disableAllSprites() {
 
-}
 
 
 TRI_CORE_NS_END

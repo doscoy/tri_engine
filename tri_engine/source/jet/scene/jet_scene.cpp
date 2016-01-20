@@ -30,14 +30,14 @@ void Scene::initializeScene() {
     //  レイヤー準備
     shadow_render_layer_.name("shadow_render_layer_");
     shadow_render_layer_.setRenderCallback<Scene>(this, &Scene::shadowRender);
-    shadow_render_layer_.renderTarget(&shadow_render_target_);
+    shadow_render_layer_.setupRenderTargetToUserCustom(&shadow_render_target_);
 
     //  レイヤー準備
     scene_layer_.name("scene_layer_");
     scene_layer_.setRenderCallback<Scene>(this, &Scene::sceneRender);
 
     //  シャドウ設定
-    shadow_render_layer_.renderTarget(&shadow_render_target_);
+    shadow_render_layer_.setupRenderTargetToUserCustom(&shadow_render_target_);
     scene_graph_.shadowTexture(shadow_render_target_.depthTexture());
     scene_graph_.shadowProjector()->screenSize(shadow_render_target_.size());
 

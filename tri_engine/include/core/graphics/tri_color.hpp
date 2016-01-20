@@ -56,6 +56,19 @@ public:
         T3_ASSERT_RANGE(alpha_, 0, 255);
     }
     
+    ///
+    /// コンストラクタ
+    /// 32bit -> Color
+    Color(
+        const rgba32_t color32
+    )   : Color(
+        (color32 >> 24) & 0xff, // red
+        (color32 >> 16) & 0xff, // green
+        (color32 >> 8) & 0xff,  // blue
+        color32 & 0xff          // alpha
+    )
+    {}
+    
 public:
     ///
     /// 同一色判定

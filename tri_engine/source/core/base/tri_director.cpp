@@ -203,9 +203,13 @@ void Director::initializeDirector() {
     
     //  システムフェードレイヤー生成
     fade_layer_.reset(T3_SYS_NEW FadeLayer("sys-fade", LayerBase::Priority::SYS_FADE));
-    
+
     //  デバッグ用レイヤー生成
-    dbg_print_layer_.reset(T3_SYS_NEW SpriteLayer("dbg print"));
+    dbg_print_layer_.reset(T3_SYS_NEW SpriteLayer("dbg print", LayerBase::Priority::SYS_DEBUG));
+    dbg_print_layer_->setupRenderTargetToUserCustom(device_surface_.get());
+    dbg_print_layer_->setupRenderTargetToDevice();  // デバイスの画面に直接描画する
+
+    
     dbg_print_buffer_.reset(T3_SYS_NEW DebugStringBuffer());
 
     dbg_print_layer_->setPreUpdateCallback(
@@ -248,17 +252,18 @@ void Director::setupFinalLayer() {
     
     //  最終描画用レイヤー
     final_layer_.reset(T3_SYS_NEW CinemaLayer(
-        Vec2(-virtual_screen_to_device_ratio.x_,-virtual_screen_to_device_ratio.y_),
+        Vec2(-virtual_screen_to_device_ratio.x_, -virtual_screen_to_device_ratio.y_),
         Vec2(virtual_screen_to_device_ratio.x_, virtual_screen_to_device_ratio.y_),
         "final", t3::LayerBase::Priority::SYS_FRONT
     ));
     final_surface_.reset(T3_SYS_NEW FrameBufferSurface(ScreenManager::VIRTUAL_SCREEN_WIDTH, ScreenManager::VIRTUAL_SCREEN_HEIGHT, Surface::Type::COLOR_DEPTH));
     final_layer_->texture(final_surface_->colorTexture());
 
-    device_surface_.reset(T3_SYS_NEW DeviceSurface());
-
     //  最終描画用レイヤーの描画先はデバイスサーフェス
-    final_layer_->renderTarget(device_surface_.get());
+    final_layer_->setupRenderTargetToDevice();
+
+    //  デバイス用サーフェス作成
+    device_surface_.reset(T3_SYS_NEW DeviceSurface());
 }
 
 //  アップデート
@@ -399,9 +404,9 @@ void Director::updateInput(
 /// デバッグ文字用のスプライトを全リセット
 void Director::prepareDebugPrintFontSprites() {
 
-    //  前のフレームで作ったスプライトは全て削除
-    dbg_print_layer_->disableAllSprites();
+    dbg_print_sprites_.clear();
 
+    //  今フレームで登録されたデバッグ文字を新たに登録
     while (!dbg_print_buffer_->empty()) {
         //  末尾の文字を取り出す
         auto& item = dbg_print_buffer_->back();
@@ -409,17 +414,22 @@ void Director::prepareDebugPrintFontSprites() {
 
         //  スプライト生成
         auto font = dbg_print_layer_->createSprite(dbg_font_sheet_);
+        dbg_print_sprites_.push_back(font);
         font->size(item.size_);
+        
+        font->color(item.color_);
+        
+        //  位置設定
         font->transform()->position(item.x_, item.y_);
         
 
 
         //  UV設定
         char char_idx = item.character_ - '!' + 1;
-        constexpr int font_size = 8;
-        int width_num = dbg_font_sheet_->width() / font_size;
-        int tex_x = (char_idx % width_num) * font_size;
-        int tex_y = (char_idx / width_num) * font_size;
+        constexpr int font_char_size = 8;
+        int width_num = dbg_font_sheet_->width() / font_char_size;
+        int tex_x = (char_idx % width_num) * font_char_size;
+        int tex_y = (char_idx / width_num) * font_char_size;
     
         float dbg_font_tex_width = static_cast<float>(dbg_font_sheet_->width());
         float dbg_font_tex_height = static_cast<float>(dbg_font_sheet_->height());
@@ -427,11 +437,12 @@ void Director::prepareDebugPrintFontSprites() {
         float u0 = static_cast<float>(tex_x) / dbg_font_tex_width;
         float v0 = static_cast<float>(tex_y) / dbg_font_tex_height;
     
-        float u1 = static_cast<float>(tex_x + font_size) / dbg_font_tex_width;
-        float v1 = static_cast<float>(tex_y + font_size) / dbg_font_tex_height;
+        float u1 = static_cast<float>(tex_x + font_char_size) / dbg_font_tex_width;
+        float v1 = static_cast<float>(tex_y + font_char_size) / dbg_font_tex_height;
     
         font->textureCoord(u0, v0, u1, v1);
     }
+    
 }
 
 ///
@@ -499,6 +510,11 @@ void Director::unregistryLayersToDebugMenu()
 
 void Director::showTask() const {
 
+}
+
+void Director::render() {
+    //  レイヤーの描画
+    LayerBase::renderLayers(layers());
 }
 
 

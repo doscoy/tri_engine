@@ -84,7 +84,7 @@ private:
 
     ///
     /// 描画関数
-    void drawLayer() override;
+    void renderLayer() override;
     
 
 private:

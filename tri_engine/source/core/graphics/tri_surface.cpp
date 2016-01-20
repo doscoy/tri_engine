@@ -112,7 +112,7 @@ void FrameBufferSurface::clearBuffer() {
     }
     
     //  バッファクリア済フラグを立てておく
-     buffer_cleared_ = true;
+    buffer_cleared_ = true;
 }
 
 

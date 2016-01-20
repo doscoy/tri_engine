@@ -14,14 +14,15 @@
 #define TRI_BASE_HPP_INCLUDED
 
 //  include
+
 #include "tri_application.hpp"
-#include "core/core_config.hpp"
 #include "tri_director.hpp"
 #include "tri_event.hpp"
 #include "tri_event_manager.hpp"
 #include "tri_pausable.hpp"
 #include "tri_resource_manager.hpp"
 #include "tri_resource.hpp"
+#include "tri_framework.hpp"
 #include "tri_rtti.hpp"
 #include "tri_scene.hpp"
 #include "tri_system_events.hpp"

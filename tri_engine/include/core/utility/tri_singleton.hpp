@@ -48,8 +48,9 @@ public:
     
     ///
     /// インスタンス生成
-    static void createInstance(){
+    static auto& createInstance(){
         instance_ = T3_SYS_NEW T;
+        return instance();
     }
     
     ///

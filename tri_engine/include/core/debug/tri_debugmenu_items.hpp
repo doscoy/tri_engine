@@ -132,7 +132,7 @@ public:
         );
         
         printDisplay(
-            x + (TRI_DEBUG_FONT_SIZE*13),
+            x + 13,
             y,
             color,
             TRI_DEBUG_FONT_SIZE,
@@ -211,7 +211,7 @@ public:
         );
 
         printDisplay(
-            x + (TRI_DEBUG_FONT_SIZE * 13),
+            x + 13,
             y,
             color,
             TRI_DEBUG_FONT_SIZE,

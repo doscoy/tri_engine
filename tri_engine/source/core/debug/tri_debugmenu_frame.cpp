@@ -180,16 +180,16 @@ void DebugMenuFrame::drawFrame(
             //  フレームなのでさらにフレームの内容を描画
             DebugMenuFrame* dmf = static_cast<DebugMenuFrame*>(item);
             dmf->drawFrame(
-                x + getLabelWidth() * TRI_DEBUG_FONT_SIZE,
-                y + (idx * TRI_DEBUG_FONT_SIZE) + TRI_DEBUG_FONT_SIZE / 2,
+                x + getLabelWidth(),
+                y + idx,
                 font_color
             );
         }
         else {
             //  アイテムを描画
             item->draw(
-                x + getLabelWidth() * TRI_DEBUG_FONT_SIZE,
-                y + (TRI_DEBUG_FONT_SIZE*idx) + TRI_DEBUG_FONT_SIZE / 2,
+                x + getLabelWidth(),
+                y + idx,
                 font_color
             );
         }        

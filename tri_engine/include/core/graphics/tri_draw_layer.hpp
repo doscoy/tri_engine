@@ -70,7 +70,7 @@ protected:
 
     ///
     /// レイヤーの描画
-    void drawLayer() override;
+    void renderLayer() override;
 
     
 private:

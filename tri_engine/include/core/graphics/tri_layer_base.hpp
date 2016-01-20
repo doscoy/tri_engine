@@ -66,6 +66,15 @@ public:
         HIGHEST     = 5000, // 手前
     };
     
+    
+    ///
+    /// 描画ターゲットタイプ
+    enum class RenderTargetType {
+        DEFAULT,
+        DEVICE,
+        USER_CUSTOM
+    };
+    
 public:
     ///
     /// コンストラクタ
@@ -79,16 +88,29 @@ public:
 public:
 
     ///
-    /// レンダーターゲットを設定
-    void renderTarget(
-        Surface* target
+    /// レンダーターゲットをシステムのサーフェスに設定
+    void setupRenderTargetToSystem() {
+        render_target_type_ = RenderTargetType::DEFAULT;
+    }
+    
+    ///
+    /// レンダーターゲットをデバイスに設定
+    void setupRenderTargetToDevice() {
+        render_target_type_ = RenderTargetType::DEVICE;
+    }
+
+    ///
+    /// レンダーターゲットをユーザー指定のサーフェスにする
+    void setupRenderTargetToUserCustom(
+        Surface* surface
     ) {
-        render_target_ = target;
+        render_target_ = surface;
+        render_target_type_ = RenderTargetType::USER_CUSTOM;
     }
     
     ///
     /// レンダーターゲットを取得
-    const Surface* renderTarget() const {
+    const Surface* userRenderTarget() const {
         return render_target_;
     }
 
@@ -235,7 +257,7 @@ public:
     
     ///
     /// 全てのレイヤーを描画
-    static void drawLayers(
+    static void renderLayers(
         Layers& layers
     );
     
@@ -250,11 +272,16 @@ protected:
     
     ///
     /// 描画
-    virtual void drawLayer() {}
+    virtual void renderLayer() {}
     
     ///
-    /// drawLayerを呼ぶ
-    void callDraw();
+    /// 描画処理を呼ぶ
+    void render();
+    
+    
+    ///
+    /// 指定したサーフェスに向けてrenderLayer()を呼ぶ
+    void doRenderLayer(Surface* surface);
     
     ///
     /// システムに追加
@@ -277,6 +304,10 @@ protected:
     ///
     /// プライオリティ
     Priority priority_;
+
+    ///
+    /// 描画ターゲット指定
+    RenderTargetType render_target_type_;
     
     ///
     /// 描画ターゲット

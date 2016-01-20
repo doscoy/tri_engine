@@ -12,7 +12,7 @@
 #include "core/debug/tri_print.hpp"
 #include "core/kernel/tri_kernel.hpp"
 #include "core/base/tri_director.hpp"
-
+#include "core/base/tri_screen_manager.hpp"
 
 
 TRI_CORE_NS_BEGIN
@@ -41,13 +41,19 @@ void DebugStringBuffer::addString(
     
     //  受け取った文字列を一文字づつに分解して保存
     int font_size = size;
-    int pitch = font_size - 2;
+    int pitch = font_size;
     int count = 0;
+    int start_x = x * font_size;
+    int start_y = y * font_size;
+    
+    // (0, 0)が左端になる座標系
+    auto half_size = ScreenManager::instance().virtualScreenSize().half();
+
     const char* c = str;
     while(*c){
         DebugStringItem character;
-        character.x_ = x + (pitch * count);
-        character.y_ = y;
+        character.x_ = start_x + (pitch * count) - half_size.x_ + 32;
+        character.y_ = half_size.y_ - start_y + 32;
         character.size_ = size;
         character.character_ = *c;
         character.color_ = color;

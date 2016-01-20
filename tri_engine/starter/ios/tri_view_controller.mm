@@ -36,10 +36,8 @@ extern float screen_y_;
     CGRect bounds = [UIScreen mainScreen].bounds;
     screen_x_ = bounds.size.width * screen_scale_;
     screen_y_ = bounds.size.height * screen_scale_;
-    
-    if (t3::initializeTriEngine(screen_x_, screen_y_, "ios")) {
-        t3::initializeApplication();
-    } else {
+    auto& framework = t3::Framework::instance();
+    if (!framework.initializeFramework(screen_x_, screen_y_, "ios")) {
         T3_PANIC("initialize failed");
     }
     T3_RENDER_ASSERT();
@@ -49,7 +47,8 @@ extern float screen_y_;
 
 
 - (void)dealloc {
-    t3::terminateApplication();
+    auto& framework = t3::Framework::instance();
+    framework.terminateFramework();
 }
 
 
@@ -60,12 +59,14 @@ extern float screen_y_;
 - (void)update
 {
     T3_RENDER_ASSERT();
-    t3::updateApplication();
+    auto& framework = t3::Framework::instance();
+    framework.updateFramework();
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    t3::renderApplication();
+    auto& framework = t3::Framework::instance();
+    framework.renderFramework();
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation

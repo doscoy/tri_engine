@@ -21,7 +21,7 @@ void makeTargetValueString(
     char* buf,
     size_t buf_size
 ) {
-    snprintf( buf, buf_size, "%7d", target );
+    snprintf(buf, buf_size, "%7d", target);
 }
 
 ///
@@ -31,7 +31,7 @@ void makeTargetValueString(
     char* buf,
     size_t buf_size
 ) {
-    snprintf( buf, buf_size, "%7.3f", target );
+    snprintf(buf, buf_size, "%7.3f", target);
 }
 
 ///
@@ -41,7 +41,7 @@ void makeTargetValueString(
     char* buf,
     size_t buf_size
 ) {
-    snprintf( buf, buf_size, "%7.3f", target );
+    snprintf(buf, buf_size, "%7.3f", target);
 }
 
 ///

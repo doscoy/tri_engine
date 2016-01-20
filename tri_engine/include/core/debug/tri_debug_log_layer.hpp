@@ -59,7 +59,7 @@ protected:
 
     ///
     /// レイヤ描画
-    void drawLayer() override;
+    void renderLayer() override;
     
     ///
     /// ログの現在の表示行を取得

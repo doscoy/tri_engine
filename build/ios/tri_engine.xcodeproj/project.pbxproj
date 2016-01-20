@@ -416,6 +416,7 @@
 		3AA833FF1BA3FEC400C6443F /* tri_mtl_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA833FA1BA3FEC400C6443F /* tri_mtl_loader.cpp */; };
 		3AA834001BA3FEC400C6443F /* tri_dae_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA833FB1BA3FEC400C6443F /* tri_dae_loader.cpp */; };
 		3AA834011BA3FEC400C6443F /* tri_dae_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA833FB1BA3FEC400C6443F /* tri_dae_loader.cpp */; };
+		3AB5C00A1C4A1E2500F200D6 /* tri_framework.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5C0091C4A1E2500F200D6 /* tri_framework.cpp */; };
 		3ABAFE0A1BBE18D5005E0127 /* tri_camera_updater_events.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3ABAFE091BBE18D5005E0127 /* tri_camera_updater_events.hpp */; };
 		3ABAFE0C1BBE1B0D005E0127 /* tri_camera_updater_events.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ABAFE0B1BBE1B0D005E0127 /* tri_camera_updater_events.cpp */; };
 		3ABAFE0D1BBE1B0D005E0127 /* tri_camera_updater_events.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ABAFE0B1BBE1B0D005E0127 /* tri_camera_updater_events.cpp */; };
@@ -778,6 +779,8 @@
 		3AA834031BA3FEF300C6443F /* tri_obj_loader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_obj_loader.hpp; sourceTree = "<group>"; };
 		3AA834041BA3FEF300C6443F /* tri_mtl_loader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_mtl_loader.hpp; sourceTree = "<group>"; };
 		3AA834051BA3FEF300C6443F /* tri_dae_loader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_dae_loader.hpp; sourceTree = "<group>"; };
+		3AB5C0081C4A1E0F00F200D6 /* tri_framework.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_framework.hpp; sourceTree = "<group>"; };
+		3AB5C0091C4A1E2500F200D6 /* tri_framework.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_framework.cpp; sourceTree = "<group>"; };
 		3ABAFE091BBE18D5005E0127 /* tri_camera_updater_events.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tri_camera_updater_events.hpp; sourceTree = "<group>"; };
 		3ABAFE0B1BBE1B0D005E0127 /* tri_camera_updater_events.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tri_camera_updater_events.cpp; sourceTree = "<group>"; };
 		3ABAFE0E1BBE7513005E0127 /* tri_camera_touch_controller.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tri_camera_touch_controller.hpp; sourceTree = "<group>"; };
@@ -884,6 +887,7 @@
 		3A480C8C1B2D4159001064BB /* base */ = {
 			isa = PBXGroup;
 			children = (
+				3AB5C0081C4A1E0F00F200D6 /* tri_framework.hpp */,
 				3A480C8D1B2D4159001064BB /* tri_application.hpp */,
 				3A480C8E1B2D4159001064BB /* tri_base.hpp */,
 				3A480C8F1B2D4159001064BB /* tri_director.hpp */,
@@ -1207,14 +1211,15 @@
 		3A480D6B1B2D4159001064BB /* base */ = {
 			isa = PBXGroup;
 			children = (
-				3ACB9C9D1BBA3AE500428176 /* tri_task.cpp */,
 				3A480D6C1B2D4159001064BB /* tri_application.cpp */,
 				3A480D6D1B2D4159001064BB /* tri_director.cpp */,
 				3A480D6E1B2D4159001064BB /* tri_event_manager.cpp */,
+				3AB5C0091C4A1E2500F200D6 /* tri_framework.cpp */,
 				3A480D6F1B2D4159001064BB /* tri_pausable.cpp */,
 				3A480D711B2D4159001064BB /* tri_scene.cpp */,
-				3A480D721B2D4159001064BB /* tri_system_events.cpp */,
 				3AE597B61C26599400166227 /* tri_screen_manager.cpp */,
+				3A480D721B2D4159001064BB /* tri_system_events.cpp */,
+				3ACB9C9D1BBA3AE500428176 /* tri_task.cpp */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -1943,6 +1948,7 @@
 				3A480EA71B2D4159001064BB /* tri_pausable.cpp in Sources */,
 				3A480EDD1B2D4159001064BB /* tri_frustum.cpp in Sources */,
 				3A480F0F1B2D4159001064BB /* tri_pad.cpp in Sources */,
+				3AB5C00A1C4A1E2500F200D6 /* tri_framework.cpp in Sources */,
 				3A480F331B2D4159001064BB /* tri_text_loader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

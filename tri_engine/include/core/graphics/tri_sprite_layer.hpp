@@ -76,9 +76,6 @@ public:
         return renderer_;
     }
 
-    ///
-    /// 全てのスプライトを無効にする
-    void disableAllSprites();
     
 private:
     ///
@@ -91,7 +88,7 @@ private:
     
     ///
     /// レイヤーの描画
-    void drawLayer() override;
+    void renderLayer() override;
     
 private:
     ///
