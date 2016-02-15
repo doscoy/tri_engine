@@ -77,7 +77,7 @@ public:
     }
 
     
-private:
+protected:
     ///
     /// 管理領域から未使用のスプライトを探す
     SpritePtr newSprite();

@@ -16,7 +16,7 @@
 
 #include "core/core_config.hpp"
 #include "tri_debug_log_buffer.hpp"
-
+#include "core/debug/tri_debug_string_layer.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -30,7 +30,10 @@ class DebugLogLayer
 public:
     ///
     /// コンストラクタ
-    DebugLogLayer(const char* const name = "DISPLAY LOG");
+    DebugLogLayer(
+        const String& name,                         ///< レイヤー名
+        const LayerBase::Priority priority          ///< プライオリティ
+    );
 
     ///
     /// デストラクタ
@@ -39,9 +42,11 @@ public:
 public:
     ///
     /// レイヤーにログを追加
-    void writeString(
+    void addLog(
         const char* const str
-    );
+    ) {
+        buffer_.addString(str);
+    }
     
     ///
     /// ログレイヤをスクロール
@@ -57,16 +62,8 @@ protected:
     /// レイヤ更新
     void updateLayer(DeltaTime delta_time) override;
 
-    ///
-    /// レイヤ描画
-    void renderLayer() override;
-    
-    ///
-    /// ログの現在の表示行を取得
-    int getLogShowLineIndex() const;
-
 protected:
-    DebugLogBuffer debug_log_buffer_;   ///< ログバッファ
+    DebugLogBuffer buffer_;   ///< ログバッファ
     int log_show_offset_;               ///< 表示用オフセット
 };
 

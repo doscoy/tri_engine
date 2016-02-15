@@ -314,34 +314,34 @@ public:
     
     ///
     /// 回転行列生成
-    void rotateX(float r) {
+    void rotateX(Radian r) {
         makeRotateX(*this, r);
     }
     
     ///
     /// 回転行列生成
-    void rotateY(float r) {
+    void rotateY(Radian r) {
         makeRotateY(*this, r);
     }
     
     ///
     /// 回転行列生成
-    void rotateZ(float r) {
+    void rotateZ(Radian r) {
         makeRotateZ(*this, r);
     }
     
     ///
     /// 回転行列生成
-    void rotate(Vec3 v) {
+    void rotate(Rotation v) {
         makeRotateYawPitchRoll(*this, v.y_, v.x_, v.z_);
     }
 
     ///
     /// 回転行列生成
     void rotate(
-        float x,
-        float y,
-        float z
+        Radian x,
+        Radian y,
+        Radian z
     ) {
         makeRotateYawPitchRoll(*this, y, x, z);
     }
@@ -365,9 +365,9 @@ public:
     ///
     /// 回転行列生成
     static Mtx44 getRotate(
-        float x,
-        float y,
-        float z
+        Radian x,
+        Radian y,
+        Radian z
     ) {
         Mtx44 m;
         return makeRotateYawPitchRoll(m, y, x, z);
@@ -376,7 +376,7 @@ public:
     ///
     /// 回転行列生成
     static Mtx44 getRotate(
-        Vec3 r
+        Rotation r
     ) {
         return getRotate(r.x_, r.y_, r.z_);
     }
@@ -385,19 +385,19 @@ public:
     ///
     /// 回転行列生成
     static Mtx44 getRotateY(
-        float degrees
+        Radian radian
     ) {
         Mtx44 m;
-        return makeRotateY(m, degrees);
+        return makeRotateY(m, radian);
     }
     
     ///
     /// 回転行列生成
     static Mtx44 getRotateZ(
-        float degrees
+        Radian radian
     ) {
         Mtx44 m;
-        return makeRotateZ(m, degrees);
+        return makeRotateZ(m, radian);
     }
     
     
@@ -406,11 +406,11 @@ public:
     /// 回転行列生成
     static Mtx44& makeRotateX(
         Mtx44& m,
-        float degrees
+        Radian radian
     ) {
-        float radians = t3::toRadian( degrees );
-        float sin = std::sinf(radians);
-        float cos = std::cosf(radians);
+        float r = radian.angle();
+        float sin = std::sinf(r);
+        float cos = std::cosf(r);
 
         m.x_.x_ = 1.0f;  m.x_.y_ = 0.0f;  m.x_.z_ = 0.0f;  m.x_.w_ = 0.0f;
         m.y_.x_ = 0.0f;  m.y_.y_ = cos;   m.y_.z_ = -sin;  m.y_.w_ = 0.0f;
@@ -424,11 +424,11 @@ public:
     /// 回転行列生成
     static Mtx44& makeRotateY(
         Mtx44& m,
-        float degrees
+        Radian radian
     ) {
-        float radians = t3::toRadian( degrees );
-        float sin = std::sinf(radians);
-        float cos = std::cosf(radians);
+        float r = radian.angle();
+        float sin = std::sinf(r);
+        float cos = std::cosf(r);
     
         m.x_.x_ =  cos;  m.x_.y_ = 0.0f;  m.x_.z_ =  sin;  m.x_.w_ = 0.0f;
         m.y_.x_ = 0.0f;  m.y_.y_ = 1.0f;  m.y_.z_ = 0.0f;  m.y_.w_ = 0.0f;
@@ -442,11 +442,11 @@ public:
     ///
     static Mtx44& makeRotateZ(
         Mtx44& m,
-        float degrees
+        Radian radian
     ) {
-        float radians = t3::toRadian( degrees );
-        float sin = std::sinf(radians);
-        float cos = std::cosf(radians);
+        float r = radian.angle();
+        float sin = std::sinf(r);
+        float cos = std::cosf(r);
         
         m.x_.x_ =  cos;  m.x_.y_ =  sin;  m.x_.z_ = 0.0f;  m.x_.w_ = 0.0f;
         m.y_.x_ = -sin;  m.y_.y_ =  cos;  m.y_.z_ = 0.0f;  m.y_.w_ = 0.0f;
@@ -461,9 +461,9 @@ public:
     /// 回転行列生成
     static Mtx44& makeRotateYawPitchRoll(
         Mtx44& m,
-        float yaw,
-        float pitch,
-        float roll
+        Radian yaw,
+        Radian pitch,
+        Radian roll
     ) {
         Mtx44 yaw_mtx;
         makeRotateY(yaw_mtx, yaw);
@@ -525,11 +525,11 @@ public:
     static Mtx44& makeRotateAxis(
         Mtx44& out,
         const Vec3& axis,
-        float radian
+        Radian radian
     ) {
-
-        float s = ::std::sinf(radian);
-        float c = ::std::cosf(radian);
+        float r = radian.angle()
+        float s = ::std::sinf(r);
+        float c = ::std::cosf(r);
         float t = 1.0f - c;
 
         Vec3 vN = axis.getNormalized();

@@ -44,7 +44,17 @@ void traceTerminal(const char* const format, ...)
 }
 
 void traceDisplay(const char* const format, ...)
-{}
+{
+    va_list msg;
+    
+	char buf[TRACE_BUFFER_SIZE];    
+	va_start( msg, format );
+	vsnprintf(buf, TRACE_BUFFER_SIZE, format, msg);
+	va_end(msg);
+
+    auto& director = Director::instance();
+    director.logDisplay(buf); 
+}
 
 void trace( 
     int ch,

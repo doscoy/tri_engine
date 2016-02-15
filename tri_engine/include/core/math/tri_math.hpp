@@ -15,6 +15,7 @@
 
     
 //  include
+#include "tri_angle_types.hpp"
 #include "tri_math_util.hpp"
 #include "tri_math_define.hpp"
 #include "tri_bezier_curve.hpp"

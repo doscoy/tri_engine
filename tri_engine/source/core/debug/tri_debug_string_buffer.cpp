@@ -35,9 +35,7 @@ void DebugStringBuffer::addString(
     const rgba32_t color,
     const int size,
     const char* const str
-){
-
-
+) {
     
     //  受け取った文字列を一文字づつに分解して保存
     int font_size = size;
@@ -63,8 +61,6 @@ void DebugStringBuffer::addString(
         ++c;
         ++count;
     }
-
-    
 }
 
 TRI_CORE_NS_END

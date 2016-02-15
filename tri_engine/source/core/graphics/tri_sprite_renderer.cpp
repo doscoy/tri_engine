@@ -601,9 +601,6 @@ void SpriteRenderer::endRender()
     
     //  描画設定解除
     cross::RenderSystem::setBlend(false);
-    
-    current_batch_idx_ = -1;
-
 }
 
 
@@ -611,7 +608,8 @@ void SpriteRenderer::beginCollect() {
 
     //  描画コンテナのクリア
     collections_.clear();
-    
+    current_batch_idx_ = -1;
+
 }
 
 

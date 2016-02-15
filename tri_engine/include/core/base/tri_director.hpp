@@ -18,7 +18,8 @@
 #include "core/core_config.hpp"
 #include "tri_event_manager.hpp"
 #include "core/debug/tri_debugmenu.hpp"
-#include "core/debug/tri_debug_string_buffer.hpp"
+#include "core/debug/tri_debug_string_layer.hpp"
+#include "core/debug/tri_debug_log_layer.hpp"
 #include "core/kernel/tri_kernel.hpp"
 #include "core/utility/random/tri_random.hpp"
 #include "core/utility/tri_singleton.hpp"
@@ -216,6 +217,12 @@ public:
     );
     
     ///
+    /// 画面にログ出力
+    void logDisplay(
+        const char* const str
+    );
+    
+    ///
     /// 最終レンダーターゲット取得
     auto& finalSurface() {
         return final_surface_;
@@ -248,12 +255,8 @@ private:
     
 private:
     //  デバッグ用レイヤー
-    UniquePtr<SpriteLayer> dbg_print_layer_;
-    UniquePtr<DebugStringBuffer> dbg_print_buffer_;
-    Vector<SpritePtr> dbg_print_sprites_;
-    
-    TexturePtr dbg_font_sheet_;
-
+    UniquePtr<DebugStringLayer> dbg_string_layer_;
+    UniquePtr<DebugLogLayer> dbg_log_layer_;
 
     //  システムフェード
     UniquePtr<FadeLayer> fade_layer_;   ///< フェードレイヤー

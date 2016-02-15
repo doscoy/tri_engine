@@ -19,5 +19,28 @@
 #include "tri_vec4.hpp"
 #include "tri_matrix.hpp"
 
+TRI_CORE_NS_BEGIN
+
+///
+/// 3次元座標
+struct Position3D
+    : public Vec3
+{};
+
+///
+/// 2次元座標
+struct Position2D
+    : public Vec2
+{};
+
+///
+/// 回転角
+struct Rotation
+    : public Vec3
+{};
+
+
+
+TRI_CORE_NS_END
 
 #endif // TRI_MATH_TYPES_HPP_INCLUDED

@@ -23,7 +23,6 @@ TRI_CORE_NS_BEGIN
 
 
 //  定数
-constexpr int DEBUG_LOG_BUFFER_SIZE = 2048;
 constexpr int DEBUG_LOG_STRING_LENGTH = 80;
 
 ///
@@ -55,13 +54,13 @@ public:
     
     ///
     /// ログ数カウント
-    size_t getStringCount() const {
+    size_t size() const {
         return buffer_.size();
     }
     
     ///
     /// 文字列取得
-    const char* getString(
+    const char* at(
         int index
     ) {
         return buffer_.at(index).str_;

@@ -16,7 +16,6 @@
 #include "core/audio/tri_audio_resource.hpp"
 #include "core/geometry/tri_geometry.hpp"
 #include "core/base/tri_system_events.hpp"
-#include "../debug/tri_debug_font_data.cpp"
 #include "core/base/tri_screen_manager.hpp"
 
 
@@ -64,28 +63,37 @@ void Director::setupBlackIn() {
 }
 
 ///
-/// フェード
+/// フェードアウト
 void Director::fadeOut() {
     fade_layer_->fadeOut(1.0f);
 }
 
+///
+/// フェードイン
 void Director::fadeIn() {
     fade_layer_->fadeIn(1.0f);
 }
 
+///
+/// フェード終了判定
 bool Director::isFadeEnd() {
     return fade_layer_->isFadeEnd();
 }
 
+///
+/// フェードイン終了判定
 bool Director::isFadeInEnd() {
     return fade_layer_->isFadeInEnd();
 }
 
+///
+/// フェードアウト終了判定
 bool Director::isFadeOutEnd() {
     return fade_layer_->isFadeOutEnd();
 }
 
-
+///
+/// 文字列描画処理
 void Director::printDisplay(
     const float x,
     const float y,
@@ -93,7 +101,15 @@ void Director::printDisplay(
     const int font_size,
     const char* const str
 ) {
-    dbg_print_buffer_->addString(x, y, color, font_size, str);
+    dbg_string_layer_->addString(x, y, color, font_size, str);
+}
+
+///
+/// ログ追加
+void Director::logDisplay(
+    const char* const str
+) {
+    dbg_log_layer_->addLog(str);
 }
 
 
@@ -109,8 +125,7 @@ void Director::setClearColor(const Color& c) {
 
 //  コンストラクタ
 Director::Director()
-    : dbg_print_layer_(nullptr)
-    , dbg_print_buffer_(nullptr)
+    : dbg_string_layer_(nullptr)
     , fade_layer_(nullptr)
     , random_number_generator_(1)    
     , input_()
@@ -205,37 +220,17 @@ void Director::initializeDirector() {
     fade_layer_.reset(T3_SYS_NEW FadeLayer("sys-fade", LayerBase::Priority::SYS_FADE));
 
     //  デバッグ用レイヤー生成
-    dbg_print_layer_.reset(T3_SYS_NEW SpriteLayer("dbg print", LayerBase::Priority::SYS_DEBUG));
-    dbg_print_layer_->setupRenderTargetToUserCustom(device_surface_.get());
-    dbg_print_layer_->setupRenderTargetToDevice();  // デバイスの画面に直接描画する
-
+    dbg_string_layer_.reset(T3_SYS_NEW DebugStringLayer("dbg print", LayerBase::Priority::SYS_DEBUG));
+    dbg_string_layer_->setupRenderTargetToDevice();  // デバイスの画面に直接描画する
     
-    dbg_print_buffer_.reset(T3_SYS_NEW DebugStringBuffer());
-
-    dbg_print_layer_->setPreUpdateCallback(
-        this, 
-        &Director::prepareDebugPrintFontSprites
-    );
-
-    //  デバッグ用フォントシート作成
-    dbg_font_sheet_ = Texture::create(
-        String("debugfont"),
-        dbg_font_.width_,
-        dbg_font_.height_,
-        cross::RenderSystem::ColorFormat::LUMINANCE_ALPHA,
-        cross::RenderSystem::TypeFormat::UNSIGNED_BYTE,
-        (uint8_t*)dbg_font_.pixel_data_
-    );
-    
+    dbg_log_layer_.reset(T3_SYS_NEW DebugLogLayer("dbg log", LayerBase::Priority::SYS_DEBUG));
+    dbg_log_layer_->setupRenderTargetToDevice();
 }
 
 
 void Director::terminateDirector() {
-
-
-    dbg_print_layer_.reset();
-    dbg_print_buffer_.reset();
-    dbg_font_sheet_.reset();
+    dbg_string_layer_.reset();
+    dbg_log_layer_.reset();
     fade_layer_.reset();
 
     root_task_.reset();
@@ -400,50 +395,6 @@ void Director::updateInput(
 
 }
 
-///
-/// デバッグ文字用のスプライトを全リセット
-void Director::prepareDebugPrintFontSprites() {
-
-    dbg_print_sprites_.clear();
-
-    //  今フレームで登録されたデバッグ文字を新たに登録
-    while (!dbg_print_buffer_->empty()) {
-        //  末尾の文字を取り出す
-        auto& item = dbg_print_buffer_->back();
-        dbg_print_buffer_->pop_back();
-
-        //  スプライト生成
-        auto font = dbg_print_layer_->createSprite(dbg_font_sheet_);
-        dbg_print_sprites_.push_back(font);
-        font->size(item.size_);
-        
-        font->color(item.color_);
-        
-        //  位置設定
-        font->transform()->position(item.x_, item.y_);
-        
-
-
-        //  UV設定
-        char char_idx = item.character_ - '!' + 1;
-        constexpr int font_char_size = 8;
-        int width_num = dbg_font_sheet_->width() / font_char_size;
-        int tex_x = (char_idx % width_num) * font_char_size;
-        int tex_y = (char_idx / width_num) * font_char_size;
-    
-        float dbg_font_tex_width = static_cast<float>(dbg_font_sheet_->width());
-        float dbg_font_tex_height = static_cast<float>(dbg_font_sheet_->height());
-    
-        float u0 = static_cast<float>(tex_x) / dbg_font_tex_width;
-        float v0 = static_cast<float>(tex_y) / dbg_font_tex_height;
-    
-        float u1 = static_cast<float>(tex_x + font_char_size) / dbg_font_tex_width;
-        float v1 = static_cast<float>(tex_y + font_char_size) / dbg_font_tex_height;
-    
-        font->textureCoord(u0, v0, u1, v1);
-    }
-    
-}
 
 ///
 /// デバッグメニューを登録

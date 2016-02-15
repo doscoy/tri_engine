@@ -16,6 +16,7 @@
 //  include
 #include "core/core_config.hpp"
 #include "tri_math_define.hpp"
+#include "tri_angle_types.hpp"
 #include <cmath>
 
 
@@ -112,17 +113,7 @@ inline const T absolute(const T& val)
 	return (val < 0 ? -val : val);
 }
 
-///
-/// デグリーからラジアンへ変換
-constexpr inline float toRadian(float degree) {
-    return degree * PI / 180.0f;
-}
 
-///
-/// ラジアンからデグリーへ変換
-constexpr inline float toDegree(float radian) {
-    return radian / PI * 180.0f;
-}
 
 ///
 /// sin
