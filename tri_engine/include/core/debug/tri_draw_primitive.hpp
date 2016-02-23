@@ -37,7 +37,7 @@ void initializeDrawPrimitive();
 ///
 /// 点を描画
 void drawPoint(
-    const Vec3& pos,    ///< 座標
+    const Position2D& pos,    ///< 座標
     const Color& color  ///< 色
 );
 

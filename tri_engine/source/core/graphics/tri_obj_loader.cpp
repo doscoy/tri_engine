@@ -98,7 +98,7 @@ SubMeshDataPtr ObjLoader::load(
         if (buf[0] == 'v' && buf[1] == ' ') {
             // ------------------------------------------
             //  頂点データ取得
-            Vec3 new_point;
+            Position3D new_point;
             sscanf(buf, "%*s %f %f %f",
                 &new_point.x_,
                 &new_point.y_,
@@ -165,7 +165,7 @@ SubMeshDataPtr ObjLoader::load(
             
             Vec3 v12 = face_vertex1.position_ - face_vertex2.position_;
             Vec3 v13 = face_vertex1.position_ - face_vertex3.position_;
-            Vec3 normal = Vec3::crossProduct(v12, v13).getNormalized();
+            Vec3 normal = v12.crossProduct(v13).getNormalized();
             
             //  面法線を頂点法線に追加
             //  最終的に正規化するがここでは足すだけ

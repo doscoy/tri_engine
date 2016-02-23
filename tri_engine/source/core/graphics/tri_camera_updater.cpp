@@ -27,8 +27,9 @@ LookAtCameraUpdater::~LookAtCameraUpdater()
 {
 }
 
-void LookAtCameraUpdater::position(const Vec3 &v)
-{
+void LookAtCameraUpdater::position(
+    const Position3D& v
+) {
     camera()->position(v);
 }
 
@@ -37,12 +38,13 @@ void LookAtCameraUpdater::position(
     const float y,
     const float z
 ) {
-    position(Vec3(x, y, z));
+    position(Position3D(x, y, z));
 }
 
 
-void LookAtCameraUpdater::targetPosition(const Vec3 &v)
-{
+void LookAtCameraUpdater::targetPosition(
+    const Position3D& v
+) {
     camera()->targetPosition(v);
 }
 
@@ -51,7 +53,7 @@ void LookAtCameraUpdater::targetPosition(
     const float y,
     const float z
 ) {
-    targetPosition(Vec3(x, y, z));
+    targetPosition(Position3D(x, y, z));
 }
 
 void LookAtCameraUpdater::dollyH(
@@ -86,11 +88,10 @@ void LookAtCameraUpdater::dolly(
     const float speed
 ){
     CameraPtr cam = camera();
-    Vec3 pos = *cam->position();
-    Vec3 tar = *cam->targetPosition();
-
-    pos += (dir * speed);
-    tar += (dir * speed);
+    Position3D pos = *cam->position();
+    Position3D tar = *cam->targetPosition();
+    pos += dir * speed;
+    tar += dir * speed;
     
     cam->position(pos);
     cam->targetPosition(tar);
@@ -98,35 +99,35 @@ void LookAtCameraUpdater::dolly(
 
 
 void LookAtCameraUpdater::panV(
-    const float speed
+    const Degree angle
 ){
     const Vec3* right = camera()->rightVector();
 
     //  上下にパン
-    pan(*right, toRadian(speed));
+    pan(*right, angle);
 }
 
 void LookAtCameraUpdater::panH(
-    const float speed
+    const Degree angle
 ){
     const Vec3* up = camera()->upVector();
 
     //  左右にパン
-    pan(*up, toRadian(speed));
+    pan(*up, angle);
 }
 
 //-----------------------------------------------------------------------------
 void
 LookAtCameraUpdater::pan(
     const Vec3& axis,
-    const float speed
+    const Degree angle
 ){
     CameraPtr cam = camera();
     
     Vec3 dir = *cam->targetPosition() - *cam->position();
 
     Mtx44 mtx;
-    Mtx44::makeRotateAxis(mtx, axis, speed);
+    Mtx44::makeRotateAxis(mtx, axis, toRadian(angle));
 
     Vec3 a = mtx.xform(dir);
     cam->targetPosition( *cam->position() + a );
@@ -156,7 +157,7 @@ LookAtCameraUpdater::pan(
 RotateCameraUpdater::RotateCameraUpdater()
     : CameraUpdater()
     , center_(0, 0, 0)
-    , rotate_(-20.0f, 0)
+    , rotate_(-20.0f, 0, 0)
     , distance_(50.0f)
 {
     EventManager::addListener(this, &RotateCameraUpdater::onRollH, event::CameraRollH::TYPE);
@@ -177,7 +178,7 @@ void RotateCameraUpdater::onTaskUpdate(
     
     //  長さと回転からカメラ位置を決定
     Vec3 v(0,0,distance_);
-    Mtx44 rot_mtx = Mtx44::getRotate(rotate_.x_, rotate_.y_, 0);
+    Mtx44 rot_mtx = Mtx44::getRotate(rotate_.x_, rotate_.y_, Degree(0));
     v = rot_mtx.xform(v);
     
     camera()->position(v);

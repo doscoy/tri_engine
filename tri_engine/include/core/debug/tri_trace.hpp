@@ -37,9 +37,8 @@ TRI_CORE_NS_BEGIN
 
 
 //  前方宣言
-class Vec2;
 class Vec4;
-//class Vec3;
+
 class Mtx44;
 
 
@@ -101,7 +100,7 @@ void traceValue(int ch, const char* const name, const char* value);
 ///
 /// ログ出力.
 /// Vec2版
-void traceValue(int ch, const char* const name, const Vec2& value);
+//void traceValue(int ch, const char* const name, const Vec2& value);
 
 ///
 /// ログ出力.

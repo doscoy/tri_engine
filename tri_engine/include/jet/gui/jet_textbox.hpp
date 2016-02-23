@@ -60,7 +60,7 @@ public:
     
     ///
     /// 位置設定
-    TextBox& center(const Vec2& pos) {
+    TextBox& center(const Position2D& pos) {
         transform_->position(pos);
         return *this;
     }
@@ -74,7 +74,7 @@ public:
     
     ///
     /// 位置取得
-    const Vec2& center() const {
+    const Position2D& center() const {
         return transform_->position();
     }
     

@@ -53,7 +53,7 @@ public:
 public:
     ///
     /// 視野角を設定
-    void setFov(float fov){
+    void setFov(Degree fov){
         fov_ = fov;
     }
 
@@ -78,7 +78,7 @@ public:
     ///
     /// フラスタム初期化
     void initializeFrustum(
-        float fov,          ///< 視野角
+        Degree fov,          ///< 視野角
         float aspect,       ///< アスペクト比
         float near,         ///< ニアクリップ
         float far,          ///< ファークリップ
@@ -99,14 +99,14 @@ public:
     ///
     /// 内側判定
     bool isInside(
-        const Vec3& point   ///< 位置
+        const Position3D& point   ///< 位置
     );
 
     ///
     /// 内側判定.
     /// 位置と半径
     bool isInSide(
-		const Vec3& point,  ///< 位置
+		const Position3D& point,  ///< 位置
 		float radius        ///< 半径
     );
 
@@ -114,8 +114,8 @@ private:
     Plane plane_[SIDE_NUM];     ///< フラスタムを構成する各面
     Vec3 near_clip_[4];         ///< 手前の面座標
     Vec3 far_clip_[4];          ///< 奥の面座標
-    Vec3 pos_;                  ///< 位置
-    float fov_;                 ///< 視野角
+    Position3D pos_;                  ///< 位置
+    Degree fov_;                 ///< 視野角
     float aspect_;              ///< アスペクト比
     float near_;                ///< 前面オフセット
     float far_;                 ///< 奥面オフセット

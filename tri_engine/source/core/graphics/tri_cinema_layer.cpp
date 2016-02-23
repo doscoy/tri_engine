@@ -20,13 +20,13 @@ TRI_CORE_NS_BEGIN
 
 
 CinemaLayer::CinemaLayer()
-    : CinemaLayer(Vec2(-1,-1), Vec2(1,1))
+    : CinemaLayer(Position2D(-1,-1), Position2D(1,1))
 {}
 
 
 CinemaLayer::CinemaLayer(
-    const Vec2 min_pos,
-    const Vec2 max_pos,
+    const Position2D min_pos,
+    const Position2D max_pos,
     const String& name,
     const Priority priority
 )   : LayerBase(name, priority)
@@ -51,10 +51,10 @@ CinemaLayer::CinemaLayer(
     varray[0].position_ = min_pos;
     varray[0].uv_ = t3::Vec2(0,0);
 
-    varray[1].position_ = t3::Vec2(max_pos.x_, min_pos.y_);
+    varray[1].position_ = Position2D(max_pos.x_, min_pos.y_);
     varray[1].uv_ = t3::Vec2(1,0);
 
-    varray[2].position_ = t3::Vec2(min_pos.x_, max_pos.y_);
+    varray[2].position_ = Position2D(min_pos.x_, max_pos.y_);
     varray[2].uv_ = t3::Vec2(0,1);
 
     varray[3].position_ = max_pos;

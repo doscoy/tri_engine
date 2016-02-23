@@ -16,7 +16,7 @@
 //  include
 #include "core/graphics/tri_vertex_types.hpp"
 #include "tri_material.hpp"
-
+#include "core/math/tri_matrix.hpp"
 
 TRI_CORE_NS_BEGIN
 

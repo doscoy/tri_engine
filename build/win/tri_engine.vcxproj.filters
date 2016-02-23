@@ -1,783 +1,894 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="src">
-      <UniqueIdentifier>{dfa54f99-2382-4f68-a2ad-27c8aece3631}</UniqueIdentifier>
-    </Filter>
     <Filter Include="include">
-      <UniqueIdentifier>{fcc05452-ab7c-472c-bfd4-c30b0fefacb9}</UniqueIdentifier>
+      <UniqueIdentifier>{6da215a8-c2b3-44d7-9062-9bb3861a5dc3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cross_sdk">
-      <UniqueIdentifier>{c2221049-ec98-4823-bea6-0196e6326472}</UniqueIdentifier>
+    <Filter Include="source">
+      <UniqueIdentifier>{7108ebc3-79cc-4499-a18d-94a3a6cfa778}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\audio">
-      <UniqueIdentifier>{594de322-76fa-47d2-ad52-c79470455cea}</UniqueIdentifier>
+    <Filter Include="include\cross">
+      <UniqueIdentifier>{09403ca0-029f-454a-89ce-96488f9a6339}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\base">
-      <UniqueIdentifier>{e3dcaf4a-ee22-4a07-ba9a-09a3eb1a792a}</UniqueIdentifier>
+    <Filter Include="include\core">
+      <UniqueIdentifier>{03c864a7-e67d-41cd-b43f-127638e5fe29}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\dbg">
-      <UniqueIdentifier>{c855513c-9200-4031-86b6-21d740cf3c22}</UniqueIdentifier>
+    <Filter Include="include\jet">
+      <UniqueIdentifier>{98f84d28-8922-46f8-820b-0a03e4cbf590}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\geometry">
-      <UniqueIdentifier>{b0aa19fc-7107-4ed3-8681-f48a7ffc5f53}</UniqueIdentifier>
+    <Filter Include="include\core\audio">
+      <UniqueIdentifier>{cc64fad8-964e-40b9-b681-2ef5405e1a2b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\gfx">
-      <UniqueIdentifier>{d71b5322-1040-4455-a405-0d96e28bd02a}</UniqueIdentifier>
+    <Filter Include="include\core\base">
+      <UniqueIdentifier>{c383a6ea-701d-498d-8e9e-349c7aeaeaf0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\gui">
-      <UniqueIdentifier>{3d19149d-729b-4919-97f1-0b241083b56d}</UniqueIdentifier>
+    <Filter Include="include\core\debug">
+      <UniqueIdentifier>{1ad4157d-7d2d-47c7-a553-2831b8ee3267}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\kernel">
-      <UniqueIdentifier>{c974d07b-c24f-42ff-bc4c-7dbb9cc6963e}</UniqueIdentifier>
+    <Filter Include="include\core\geometry">
+      <UniqueIdentifier>{4c1ee8ad-8ec4-415d-9e94-ddf866317a69}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\math">
-      <UniqueIdentifier>{f3a72176-49b0-4cab-8477-495d3c1e061e}</UniqueIdentifier>
+    <Filter Include="include\core\graphics">
+      <UniqueIdentifier>{9b24678e-95c3-4c8b-86e6-a1007cb54d1c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\theater">
-      <UniqueIdentifier>{b16ee545-93e7-406e-9967-6a8b070dd70e}</UniqueIdentifier>
+    <Filter Include="include\core\kernel">
+      <UniqueIdentifier>{78c7d964-5ba8-4835-b396-bbc91f2444fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\util">
-      <UniqueIdentifier>{bce12222-5a1d-49be-beb6-4b29d1a3072b}</UniqueIdentifier>
+    <Filter Include="include\core\math">
+      <UniqueIdentifier>{a11587df-5eef-4ceb-a633-f5a42e83f07f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cross_sdk\src">
-      <UniqueIdentifier>{d0a81206-ba48-460a-9a7a-27352911b652}</UniqueIdentifier>
+    <Filter Include="include\core\utility">
+      <UniqueIdentifier>{c5c525c6-2a75-4431-aff3-92c0ae942914}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cross_sdk\include">
-      <UniqueIdentifier>{caddc140-b781-4fb8-bd3f-175113e79f8f}</UniqueIdentifier>
+    <Filter Include="include\jet\gui">
+      <UniqueIdentifier>{4576f4ee-f142-4da6-8201-793cb99aa038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\jet\scene">
+      <UniqueIdentifier>{f02e3d89-c086-4475-beed-4a0e5241f020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core">
+      <UniqueIdentifier>{da19a719-61af-4ac4-9b81-b2c5c4311c2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\cross">
+      <UniqueIdentifier>{e5762e5e-f683-474c-8a2c-9f2627850ce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\jet">
+      <UniqueIdentifier>{782afd35-9b7b-4bd6-9164-b4a1203468a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\jet\gui">
+      <UniqueIdentifier>{6a3bb142-eab8-4ac5-b7c8-67c9988652c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\jet\scene">
+      <UniqueIdentifier>{ab6d5261-40c2-49fb-b143-1e480a06553f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core\audio">
+      <UniqueIdentifier>{735f2563-957f-4d3a-8341-7e41b9ddbd16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core\base">
+      <UniqueIdentifier>{da004b5b-ec23-4c64-bb64-fa804b773d83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core\debug">
+      <UniqueIdentifier>{ec045d3d-0bb1-4f6c-876a-c523fc652ce0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core\geometry">
+      <UniqueIdentifier>{dc04252c-d5ee-4a52-893b-df057f76b967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core\graphics">
+      <UniqueIdentifier>{4e1acca1-0b27-4dff-9aa8-868ca1070913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core\kernel">
+      <UniqueIdentifier>{21702f32-ea6a-48e0-b577-ad1f1671bfb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core\math">
+      <UniqueIdentifier>{1f8e0a52-7bd5-4e46-be70-1a611ff54804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core\utility">
+      <UniqueIdentifier>{8c440a5f-8490-43f0-803a-b18c0aea0df0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\tri_engine\source\audio\tri_audio_handle.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\audio\tri_audio_resource.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\audio\tri_streaming_player.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\audio\tri_wav.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\base\tri_application.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\base\tri_director.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\base\tri_event_manager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\base\tri_pause_level.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\base\tri_resource.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\base\tri_scene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\base\tri_system_events.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\base\tri_task.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\base\tri_task_manager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_assert.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_debugmenu.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_debugmenu_frame.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_debugmenu_items.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_debugmenu_label.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_debugpad.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_debug_font_data.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_debug_log_buffer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_debug_log_layer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_debug_string_buffer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_debug_string_layer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_draw_primitive.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_print.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_trace.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_virtual_pad.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\dbg\tri_workbar.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\geometry\tri_circle_collider.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\geometry\tri_collider.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\geometry\tri_collision.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\geometry\tri_collision_events.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\geometry\tri_collision_manager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\geometry\tri_frustum.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\geometry\tri_point_collider.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_camera.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_camera_updater.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_cinema_layer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_color.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_draw_layer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_entity.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_fade_layer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_image_png.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_mesh.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_model.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_render_layer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_render_system.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_scene_graph.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_scene_node.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_shader.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_sprite.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_sprite_layer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_sprite_renderer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_surface.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_texture.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_texture_factory.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gfx\tri_transform_node.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gui\tri_gui_button.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gui\tri_gui_radio_button.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gui\tri_gui_swap_button.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\gui\tri_gui_textbox.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\kernel\io\tri_file.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\kernel\io\tri_filepath.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\kernel\io\tri_pad.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\kernel\io\tri_pointing.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\kernel\memory\tri_heap.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\kernel\memory\tri_heap_manager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\kernel\memory\tri_memory_pool.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\kernel\memory\tri_new.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\kernel\process\tri_mutex.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\math\tri_bezier_curve.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\math\tri_matrix_stack.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\theater\tri_box.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\theater\tri_object.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\random\tri_random_linear_congruential.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\random\tri_random_mseq.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\random\tri_random_mt.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\random\tri_random_well.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\random\tri_random_xorshift.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\tri_archive.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\tri_bit.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\tri_counter.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\tri_string_util.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\tri_unique_id.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\tri_utf8.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\util\tri_zipfile.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\cross_sdk\source\win\cross_accelerometer.cpp">
-      <Filter>cross_sdk\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\cross_sdk\source\win\cross_audio_system.cpp">
-      <Filter>cross_sdk\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\cross_sdk\source\win\cross_os.cpp">
-      <Filter>cross_sdk\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\cross_sdk\source\win\cross_render_system.cpp">
-      <Filter>cross_sdk\src</Filter>
-    </ClCompile>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_accelerometer.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_audio_system.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_config.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_dbg.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_define.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_glfw.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_os.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_render_system.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_std.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_types.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_view_controller.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_web_notification_screen.hpp">
+      <Filter>include\cross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\core.hpp">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\core_config.hpp">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\random\tri_random.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\random\tri_random_linear_congruential.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\random\tri_random_mseq.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\random\tri_random_mt.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\random\tri_random_number_generator.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\random\tri_random_well.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\random\tri_random_xorshift.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_any.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_archive.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_bit.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_bytesize.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_counter.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_framerate.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_hash_string.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_json.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_method_callback.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_nameable.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_signature.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_singleton.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_stopwatch.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_string_util.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_text_loader.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_uncopyable.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_unique_id.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_utf8.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_util.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\utility\tri_zipfile.hpp">
+      <Filter>include\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_angle_types.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_bezier_curve.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_interpolation.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_math.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_math_define.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_math_types.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_math_util.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_matrix.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_matrix_stack.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_quaternion.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_vec2.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_vec3.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\math\tri_vec4.hpp">
+      <Filter>include\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\io\tri_file.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\io\tri_filepath.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\io\tri_input.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\io\tri_io.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\io\tri_pad.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\io\tri_pointing.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\memory\tri_heap.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\memory\tri_heap_manager.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\memory\tri_memory.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\memory\tri_memory_pool.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\memory\tri_new.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\memory\tri_safe_delete.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\process\tri_mutex.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\kernel\tri_kernel.hpp">
+      <Filter>include\core\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_camera.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_camera_touch_controller.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_camera_updater.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_camera_updater_events.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_cinema_layer.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_color.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_dae_loader.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_draw_layer.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_entity.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_fade_layer.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_framebuffer.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_gfx.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_gfx_types.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_image_png.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_index_buffer.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_layer_base.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_material.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_mesh.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_model.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_mtl_loader.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_object.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_obj_loader.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_projector.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_renderable.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_render_info.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_scene_graph.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_scene_node.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_shader.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_sprite.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_sprite_layer.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_sprite_renderer.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_submesh_data.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_surface.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_test_entity.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_texture.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_texture_factory.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_transform_node.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_vertex_buffer.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_vertex_types.hpp">
+      <Filter>include\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_aabb.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_circle.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_circle_collider.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_collider.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_collision.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_collision_events.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_collision_manager.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_frustum.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_geometry.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_plane.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_point_collider.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_rectangle.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_segment.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_sphere.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\geometry\tri_transform.hpp">
+      <Filter>include\core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_assert.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_dbg.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_debugmenu.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_debugmenu_frame.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_debugmenu_items.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_debugmenu_label.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_debugmenu_scene_louncher.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_debugpad.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_debug_log_buffer.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_debug_log_layer.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_debug_string_buffer.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_debug_string_layer.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_draw_primitive.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_print.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_trace.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_virtual_pad.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\debug\tri_workbar.hpp">
+      <Filter>include\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_application.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_base.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_director.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_event.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_event_manager.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_font_glyph.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_framework.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_pausable.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_resource.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_resource_manager.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_rtti.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_scene.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_screen_manager.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_system_events.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_task.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_types.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\audio\tri_audio.hpp">
+      <Filter>include\core\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\audio\tri_audio_handle.hpp">
+      <Filter>include\core\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\audio\tri_audio_resource.hpp">
+      <Filter>include\core\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\audio\tri_audio_util.hpp">
+      <Filter>include\core\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\audio\tri_streaming_player.hpp">
+      <Filter>include\core\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\audio\tri_wav.hpp">
+      <Filter>include\core\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\jet\jet_config.hpp">
+      <Filter>include\jet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\jet\jet.hpp">
+      <Filter>include\jet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\jet\scene\jet_scene.hpp">
+      <Filter>include\jet\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_button.hpp">
+      <Filter>include\jet\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_gui.hpp">
+      <Filter>include\jet\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_radio_button.hpp">
+      <Filter>include\jet\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_swap_button.hpp">
+      <Filter>include\jet\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_textbox.hpp">
+      <Filter>include\jet\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\tri_engine\include\audio\tri_audio.hpp">
-      <Filter>include\audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\audio\tri_audio_handle.hpp">
-      <Filter>include\audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\audio\tri_audio_resource.hpp">
-      <Filter>include\audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\audio\tri_streaming_player.hpp">
-      <Filter>include\audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\audio\tri_wav.hpp">
-      <Filter>include\audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_application.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_base.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_director.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_event.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_event_manager.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_font_glyph.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_pause_level.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_resource.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_resource_manager.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_rtti.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_scene.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_std.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_system_events.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_task.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_task_generator.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_task_manager.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\base\tri_types.hpp">
-      <Filter>include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_assert.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_dbg.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_debugmenu.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_debugmenu_frame.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_debugmenu_items.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_debugmenu_label.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_debugmenu_scene_louncher.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_debugpad.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_debug_log_buffer.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_debug_log_layer.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_debug_string_buffer.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_debug_string_layer.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_draw_primitive.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_print.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_trace.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_virtual_pad.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\dbg\tri_workbar.hpp">
-      <Filter>include\dbg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\io\tri_file.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\io\tri_filepath.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\io\tri_input.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\io\tri_io.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\io\tri_pad.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\io\tri_pointing.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\memory\tri_heap.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\memory\tri_heap_manager.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\memory\tri_memory.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\memory\tri_memory_pool.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\memory\tri_new.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\memory\tri_safe_delete.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\process\tri_mutex.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\kernel\tri_kernel.hpp">
-      <Filter>include\kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gui\tri_gui.hpp">
-      <Filter>include\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gui\tri_gui_button.hpp">
-      <Filter>include\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gui\tri_gui_radio_button.hpp">
-      <Filter>include\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gui\tri_gui_swap_button.hpp">
-      <Filter>include\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gui\tri_gui_textbox.hpp">
-      <Filter>include\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_camera.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_camera_updater.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_cinema_layer.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_color.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_draw_layer.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_entity.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_fade_layer.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_gfx.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_gfx_types.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_image_png.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_index_buffer.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_material.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_mesh.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_model.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_object.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_renderable.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_render_layer.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_scene_graph.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_scene_node.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_shader.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_sprite.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_sprite_layer.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_sprite_renderer.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_surface.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_test_entity.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_texture.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_texture_factory.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_transform_node.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_vertex_buffer.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\gfx\tri_vertex_types.hpp">
-      <Filter>include\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_aabb.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_circle.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_circle_collider.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_collider.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_collision.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_collision_events.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_collision_manager.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_frustum.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_geometry.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_plane.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_point_collider.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_rectangle.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_segment.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_sphere.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\geometry\tri_transform.hpp">
-      <Filter>include\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_bezier_curve.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_interpolation.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_math.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_math_define.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_math_types.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_math_util.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_matrix.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_matrix_stack.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_quaternion.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_vec2.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_vec3.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\math\tri_vec4.hpp">
-      <Filter>include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\random\tri_random.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\random\tri_random_linear_congruential.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\random\tri_random_mseq.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\random\tri_random_mt.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\random\tri_random_number_generator.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\random\tri_random_well.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\random\tri_random_xorshift.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_any.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_archive.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_bit.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_bytesize.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_counter.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_framerate.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_hash_string.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_method_callback.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_nameable.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_signature.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_singleton.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_stopwatch.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_string_util.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_uncopyable.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_unique_id.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_utf8.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_util.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\util\tri_zipfile.hpp">
-      <Filter>include\util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\theater\tri_box.hpp">
-      <Filter>include\theater</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\theater\tri_object.hpp">
-      <Filter>include\theater</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\theater\tri_theater.hpp">
-      <Filter>include\theater</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\tri_engine.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\cross_sdk\include\cross_accelerometer.hpp">
-      <Filter>cross_sdk\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\cross_sdk\include\cross_audio_system.hpp">
-      <Filter>cross_sdk\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\cross_sdk\include\cross_dbg.hpp">
-      <Filter>cross_sdk\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\cross_sdk\include\cross_define.hpp">
-      <Filter>cross_sdk\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\cross_sdk\include\cross_os.hpp">
-      <Filter>cross_sdk\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\cross_sdk\include\cross_render_system.hpp">
-      <Filter>cross_sdk\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\cross_sdk\include\cross_sdk.hpp">
-      <Filter>cross_sdk\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\cross_sdk\include\cross_types.hpp">
-      <Filter>cross_sdk\include</Filter>
-    </ClInclude>
+    <ClCompile Include="..\..\tri_engine\source\jet\scene\jet_scene.cpp">
+      <Filter>source\jet\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\jet\gui\jet_button.cpp">
+      <Filter>source\jet\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\jet\gui\jet_radio_button.cpp">
+      <Filter>source\jet\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\jet\gui\jet_swap_button.cpp">
+      <Filter>source\jet\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\jet\gui\jet_textbox.cpp">
+      <Filter>source\jet\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\cross\win\cross_accelerometer.cpp">
+      <Filter>source\cross</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\cross\win\cross_audio_system.cpp">
+      <Filter>source\cross</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\cross\win\cross_dbg.cpp">
+      <Filter>source\cross</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\cross\win\cross_os.cpp">
+      <Filter>source\cross</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\cross\common\cross_render_system_selector.cpp">
+      <Filter>source\cross</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\random\tri_random_linear_congruential.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\random\tri_random_mseq.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\random\tri_random_mt.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\random\tri_random_well.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\random\tri_random_xorshift.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\tri_archive.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\tri_bit.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\tri_counter.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\tri_text_loader.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\tri_unique_id.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\tri_utf8.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\utility\tri_zipfile.cpp">
+      <Filter>source\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\math\tri_angle_types.cpp">
+      <Filter>source\core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\math\tri_bezier_curve.cpp">
+      <Filter>source\core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\math\tri_matrix_stack.cpp">
+      <Filter>source\core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\kernel\io\tri_file.cpp">
+      <Filter>source\core\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\kernel\io\tri_filepath.cpp">
+      <Filter>source\core\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\kernel\io\tri_pad.cpp">
+      <Filter>source\core\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\kernel\io\tri_pointing.cpp">
+      <Filter>source\core\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\kernel\memory\tri_heap.cpp">
+      <Filter>source\core\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\kernel\memory\tri_heap_manager.cpp">
+      <Filter>source\core\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\kernel\memory\tri_memory_pool.cpp">
+      <Filter>source\core\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\kernel\memory\tri_new.cpp">
+      <Filter>source\core\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\kernel\process\tri_mutex.cpp">
+      <Filter>source\core\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_camera.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_camera_touch_controller.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_camera_updater.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_camera_updater_events.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_cinema_layer.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_dae_loader.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_draw_layer.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_fade_layer.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_image_png.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_layer_base.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_material.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_mesh.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_model.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_mtl_loader.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_obj_loader.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_projector.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_scene_graph.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_scene_node.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_shader.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_sprite.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_sprite_layer.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_sprite_renderer.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_surface.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_texture.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_texture_factory.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_transform_node.cpp">
+      <Filter>source\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\geometry\tri_circle_collider.cpp">
+      <Filter>source\core\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\geometry\tri_collider.cpp">
+      <Filter>source\core\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\geometry\tri_collision.cpp">
+      <Filter>source\core\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\geometry\tri_collision_events.cpp">
+      <Filter>source\core\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\geometry\tri_collision_manager.cpp">
+      <Filter>source\core\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\geometry\tri_frustum.cpp">
+      <Filter>source\core\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\geometry\tri_point_collider.cpp">
+      <Filter>source\core\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_assert.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_debugmenu.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_debugmenu_frame.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_debugmenu_items.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_debugmenu_label.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_debugpad.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_debug_font_data.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_debug_log_buffer.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_debug_log_layer.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_debug_string_buffer.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_debug_string_layer.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_draw_primitive.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_print.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_trace.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_virtual_pad.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\debug\tri_workbar.cpp">
+      <Filter>source\core\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\base\tri_application.cpp">
+      <Filter>source\core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\base\tri_director.cpp">
+      <Filter>source\core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\base\tri_event_manager.cpp">
+      <Filter>source\core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\base\tri_framework.cpp">
+      <Filter>source\core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\base\tri_pausable.cpp">
+      <Filter>source\core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\base\tri_scene.cpp">
+      <Filter>source\core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\base\tri_screen_manager.cpp">
+      <Filter>source\core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\base\tri_system_events.cpp">
+      <Filter>source\core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\base\tri_task.cpp">
+      <Filter>source\core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\audio\tri_audio_handle.cpp">
+      <Filter>source\core\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\audio\tri_audio_resource.cpp">
+      <Filter>source\core\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\audio\tri_audio_util.cpp">
+      <Filter>source\core\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\audio\tri_streaming_player.cpp">
+      <Filter>source\core\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\audio\tri_wav.cpp">
+      <Filter>source\core\audio</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

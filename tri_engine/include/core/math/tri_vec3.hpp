@@ -21,13 +21,15 @@
 #include "../debug/tri_assert.hpp"
 #include "core/math/tri_vec2.hpp"
 
+
+
 TRI_CORE_NS_BEGIN
 
 ///
-/// Vec3
-
-class Vec3 {
-    using element_t = float;
+/// Vec3Template
+template <class VecType, class element_t>
+class Vec3Template
+{
 public:
     element_t x_;   ///< x要素
     element_t y_;   ///< y要素
@@ -36,13 +38,13 @@ public:
 public:
     ///
     ///  コンストラクタ
-    Vec3()
+    Vec3Template()
     {}
     
     
     ///
     /// コンストラクタ
-    Vec3(
+    Vec3Template(
         element_t x,
         element_t y,
         element_t z
@@ -53,7 +55,7 @@ public:
     
     ///
     /// コンストラクタ
-    Vec3( const Vec3& rhs )
+    Vec3Template(const VecType& rhs)
         : x_(rhs.x_)
         , y_(rhs.y_)
         , z_(rhs.z_)
@@ -61,7 +63,7 @@ public:
 
     ///
     /// コンストラクタ
-    Vec3(const Vec2& rhs)
+    Vec3Template(const Vec2& rhs)
         : x_(rhs.x_)
         , y_(rhs.y_)
         , z_(0.0f)
@@ -91,7 +93,7 @@ public:
     
     ///
     /// 加算
-    void add(Vec3& rhs) {
+    void add(const VecType& rhs) {
         addX(rhs.x_);
         addY(rhs.y_);
         addZ(rhs.z_);
@@ -122,8 +124,8 @@ public:
     
     ///
     ///  正規化したベクトルを取得
-    Vec3 getNormalized() const {
-        Vec3 v = *this;
+    VecType getNormalized() const {
+        VecType v(x_, y_, z_);
         v.normalize();
         return v;
     }
@@ -136,9 +138,9 @@ public:
 
     ///
     ///  ブレンド
-    Vec3& blend( 
+    VecType& blend( 
         const float t,
-        const Vec3& v
+        const VecType& v
     ) {
         x_ = x_ * (1 - t) + v.x_ * t;
         y_ = y_ * (1 - t) + v.y_ * t;
@@ -148,8 +150,8 @@ public:
     
     ///
     ///  外積
-    Vec3 crossProduct(
-        const Vec3& v 
+    VecType crossProduct(
+        const Vec3Template& v 
     ) const {
         return crossProduct(
             *this, v
@@ -158,7 +160,7 @@ public:
     
     ///
     ///  内積
-    element_t dotProduct( const Vec3& v ) const {
+    element_t dotProduct(const VecType& v) const {
         return x_ * v.x_ + y_ * v.y_ + z_ * v.z_;
     }
     
@@ -190,14 +192,14 @@ public:
     
     ///
     ///  反転ベクトルの取得
-    Vec3 getReverse() const {
-        return Vec3( -x_, -y_, -z_ );
+    VecType getReverse() const {
+        return VecType( -x_, -y_, -z_ );
     }
     
     ///
     ///  距離を取得
     element_t distance(
-        const Vec3& target
+        const VecType& target
     ) const {
         return distance( *this, target );
     }
@@ -205,33 +207,60 @@ public:
     ///
     ///  距離の二乗を取得
     element_t distanceSquare(
-        const Vec3& target
+        const VecType& target
     ) const {
         return distanceSquare( *this, target );
     }
     
     ///
     ///  Vec + Vec
-    Vec3 operator +( const Vec3& v ) const {
-        return Vec3(x_ + v.x_, y_ + v.y_, z_ + v.z_);
+    VecType operator +(const VecType& v) const {
+        return VecType(x_ + v.x_, y_ + v.y_, z_ + v.z_);
     }
     
     ///
     ///  Vec - Vec
-    Vec3 operator -( const Vec3& v ) const {
-        return Vec3(x_ - v.x_, y_ - v.y_, z_ - v.z_);
+    VecType operator -(const VecType& v) const {
+        return VecType(x_ - v.x_, y_ - v.y_, z_ - v.z_);
+    }
+
+    ///
+    ///  Vec * Vec
+    VecType operator *(const VecType& v) const {
+        return VecType(x_ * v.x_, y_ * v.y_, z_ * v.z_);
     }
     
     ///
+    ///  Vec / Vec
+    VecType operator /(const VecType& v) const {
+        return VecType(x_ / v.x_, y_ / v.y_, z_ / v.z_);
+    }
+
+    
+    
+    ///
+    /// Vec * s
+    VecType operator *(const element_t s) const {
+        return VecType(x_ * s, y_ * s, z_ * s);
+    }
+    
+    ///
+    /// Vec / s
+    VecType operator /(const element_t s) const {
+        float tmp = 1.0f / s;
+        return VecType(x_ * tmp, y_ * tmp, z_ * tmp);
+    }
+
+    ///
     ///  +Vec
-    Vec3 operator +() const {
-        return Vec3( *this );
+    VecType operator +() const {
+        return VecType(*this);
     }
     
     ///
     ///  -Vec
-    Vec3 operator -() const {
-        Vec3 tmp;
+    VecType operator -() const {
+        VecType tmp;
         tmp.x_ = -x_;
         tmp.y_ = -y_;
         tmp.z_ = -z_;
@@ -240,7 +269,7 @@ public:
     
     ///
     ///  Vec += Vec
-    void operator +=( const Vec3& v ) {
+    void operator +=(const VecType& v) {
         x_ += v.x_;
         y_ += v.y_;
         z_ += v.z_;
@@ -248,22 +277,39 @@ public:
     
     ///
     ///  Vec -= Vec
-    void operator -=( const Vec3& v ) {
+    void operator -=(const VecType& v) {
         x_ -= v.x_;
         y_ -= v.y_;
         z_ -= v.z_;
     }
     
     ///
+    ///  Vec *= Vec
+    void operator *=(const VecType& v) {
+        x_ *= v.x_;
+        y_ *= v.y_;
+        z_ *= v.z_;
+    }
+    
+    ///
+    ///  Vec /= Vec
+    void operator /=(const VecType& v) {
+        x_ /= v.x_;
+        y_ /= v.y_;
+        z_ /= v.z_;
+    }
+    
+    ///
     ///  Vec *= s
-    void operator *=( element_t s ) {
+    void operator *=(element_t s) {
         x_ *= s;
         y_ *= s;
         z_ *= s;
     }
     
-    //  Vec /= s
-    void operator /=( element_t s ) {
+    ///
+    ///  Vec /= s
+    void operator /=(element_t s) {
         float tmp = 1.0f / s;
         x_ *= tmp;
         y_ *= tmp;
@@ -277,8 +323,8 @@ public:
     }
 
     ///
-    ///  Vec3 == Vec3
-    bool operator==(const Vec3& v) const {
+    ///  Vec3Template == Vec3Template
+    bool operator==(const VecType& v) const {
         return x_ == v.x_ && y_ == v.y_ && z_ == v.z_;
     }
     
@@ -286,44 +332,44 @@ public:
 
     ///
     /// ゼロベクトル
-    static Vec3 zero() {
-        return Vec3(0, 0, 0);
+    static VecType zero() {
+        return VecType(0, 0, 0);
     }
     
     ///
     /// x軸ベクトルを生成
-    static Vec3 axisX() {
-        return Vec3(1, 0, 0);
+    static VecType axisX() {
+        return VecType(1, 0, 0);
     }
 
     ///
     /// y軸ベクトルを生成
-    static Vec3 axisY() {
-        return Vec3(0, 1, 0);
+    static VecType axisY() {
+        return VecType(0, 1, 0);
     }
 
     ///
     /// z軸ベクトルを生成
-    static Vec3 axisZ() {
-        return Vec3(0, 0, 1);
+    static VecType axisZ() {
+        return VecType(0, 0, 1);
     }
 
     ///
-    ///  外積計算
+    ///  内積計算
     static element_t dotProduct(
-        const Vec3& v1,
-        const Vec3& v2
+        const VecType& v1,
+        const VecType& v2
     ){
         return v1.x_ * v2.x_ + v1.y_ * v2.y_ + v1.z_ * v2.z_;
     }
     
     ///
     ///  外積計算
-    static Vec3 crossProduct(
-        const Vec3& v1,
-        const Vec3& v2
+    static VecType crossProduct(
+        const Vec3Template& v1,
+        const Vec3Template& v2
     ){
-        return Vec3(
+        return VecType(
             v1.y_ * v2.z_ - v1.z_ * v2.y_,
             v1.z_ * v2.x_ - v1.x_ * v2.z_,
             v1.x_ * v2.y_ - v1.y_ * v2.x_
@@ -333,8 +379,8 @@ public:
     ///
     ///  正規化
     static void normalize(
-        Vec3& dst,
-        const Vec3& src
+        VecType& dst,
+        const VecType& src
     ){
         element_t length = src.length();
         element_t tmp = 1.0f / length;
@@ -346,8 +392,8 @@ public:
     ///
     ///  距離の算出
     static element_t distance(
-        const Vec3& v1,
-        const Vec3& v2
+        const VecType& v1,
+        const VecType& v2
     ){
         return sqrtf(distanceSquare(v1, v2));
     }
@@ -355,21 +401,21 @@ public:
     ///
     ///  距離の二乗算出
     static element_t distanceSquare(
-        const Vec3& v1,
-        const Vec3& v2
+        const VecType& v1,
+        const VecType& v2
     ){
-        Vec3 tmp = v1 - v2;
+        VecType tmp = v1 - v2;
         return tmp.lengthSquare();
     }
     
     ///
     ///  ベクトル同士のブレンド
-    static Vec3 getBlendVector(
+    static VecType getBlendVector(
         const float t,
-        const Vec3& v1,
-        const Vec3& v2
+        const VecType& v1,
+        const VecType& v2
     ){
-        return Vec3(
+        return VecType(
             v1.x_ * (1 - t) + v2.x_ * t,
             v1.y_ * (1 - t) + v2.y_ * t,
             v1.z_ * (1 - t) + v2.z_ * t
@@ -379,32 +425,76 @@ public:
 
 };
 
-
-
 ///
-/// オペレータ *
-inline Vec3 operator *(const Vec3& v, float s) {
-    return Vec3(v.x_ * s, v.y_ * s, v.z_ * s);
-}
+/// 3次元座標
+struct Vec3
+    : public Vec3Template<Vec3, float>
+{
+    Vec3() {}
+	Vec3(
+		float x,
+		float y,
+		float z
+	)	: Vec3Template(x, y, z)
+	{}
+};
 
-///
-/// オペレータ *
+using Position3D = Vec3;
+
+
 inline Vec3 operator *(float s, const Vec3& v) {
-    return Vec3(v.x_ * s, v.y_ * s, v.z_ * s);
+    return v * s;
 }
 
-///
-/// オペレータ /
-inline Vec3 operator /(const Vec3& v, float s) {
-    return Vec3(v.x_ / s, v.y_ / s, v.z_ / s);
-}
-
-///
-/// オペレータ /
 inline Vec3 operator /(float s, const Vec3& v) {
-    return Vec3(v.x_ / s, v.y_ / s, v.z_ / s);
+    return v / s;
 }
 
+
+
+
+
+///
+///	3次元拡大倍率
+struct Scale3D
+	: public Vec3Template<Scale3D, float>
+{
+	Scale3D(
+		float x,
+		float y,
+		float z
+	)   : Vec3Template(x, y, z)
+	{}
+
+};
+
+inline Vec3 operator *(const Vec3& lhs, const Scale3D& rhs) {
+    return Vec3(lhs.x_ * rhs.x_, lhs.y_ * rhs.y_, lhs.z_ * rhs.z_);
+}
+
+inline Vec3 operator /(const Vec3& lhs, const Scale3D& rhs) {
+    return Vec3(lhs.x_ / rhs.x_, lhs.y_ / rhs.y_, lhs.z_ * rhs.z_);
+}
+
+///
+/// 回転角
+struct Rotation
+    : public Vec3Template<Rotation, Degree>
+{
+	Rotation(
+		float x,
+		float y,
+		float z
+	)	: Vec3Template(x, y, z)
+	{}
+
+	Rotation(
+		Degree x,
+		Degree y,
+		Degree z
+	)	: Vec3Template(x, y, z)
+	{}
+};
 
 
 

@@ -42,8 +42,8 @@ public:
     /// コンストラクタ.
     /// 最小値、最大値指定
     AABB(
-        const Vec3& min,    ///< 最小値
-        const Vec3& max     ///< 最大値
+        const Position3D& min,    ///< 最小値
+        const Position3D& max     ///< 最大値
     )   : min_(min)
         , max_(max)
     {}
@@ -58,7 +58,7 @@ public:
     /// AABBの拡張.
     /// 受け取った座標を含む大きさに拡張する
     void margePoint(
-        const Vec3& p   ///< 座標
+        const Position3D& p   ///< 座標
     ) {
         //  x軸
         if (min_.x_ > p.x_) {
@@ -95,21 +95,21 @@ public:
     ///
     /// 最小値設定.
     void min(
-        const Vec3& min ///< 最小値
+        const Position3D& min ///< 最小値
     ) {
         min_ = min;
     }
 
     ///
     /// 最小値取得.
-    const Vec3& min() const {
+    const Position3D& min() const {
         return min_;
     }
     
     /// 
     /// 最大値設定.
     void max(
-        const Vec3& max ///< 最大値
+        const Position3D& max ///< 最大値
     ) {
         max_ = max;
     }
@@ -117,7 +117,7 @@ public:
     ///
     /// 最大値取得.
     /// @return 最大値
-    const Vec3& max() const {
+    const Position3D& max() const {
         return max_;
     }
     
@@ -126,7 +126,7 @@ public:
     /// @retval true 内側
     /// @retval false 外側
     bool isInside(
-        const Vec3& p   ///< 判定する点
+        const Position3D& p   ///< 判定する点
     ) const {
         //  x
         if (p.x_ > max_.x_) {
@@ -156,7 +156,7 @@ public:
     }
 
     /// 中心点取得.
-    Vec3 center() const {
+    Position3D center() const {
         return (min_ + max_) * 0.5f;
     }
     
@@ -168,8 +168,8 @@ public:
 
 
 private:
-    Vec3 min_;          ///< 最小値
-    Vec3 max_;          ///< 最大値
+    Position3D min_;          ///< 最小値
+    Position3D max_;          ///< 最大値
 
 };
 

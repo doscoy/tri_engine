@@ -50,7 +50,7 @@ void SubMesh::setupFromSubMeshData(
 
     //  aabbをもとに境界球作成
     Vec3 radius = aabb_.radius();
-    Vec3 center = aabb_.center();
+    Position3D center = aabb_.center();
     
     //  なんちゃって境界球なので
     //  大きい方の半径をそのまま使う

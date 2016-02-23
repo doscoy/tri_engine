@@ -11,7 +11,7 @@
 #include "core/base/tri_director.hpp"
 #include "core/geometry/tri_collision.hpp"
 #include "core/geometry/tri_rectangle.hpp"
-
+#include "core/math/tri_math_types.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -22,15 +22,15 @@ const float PAD_Y = -310;
 const t3::Vec2 BUTTON_SIZE(64, 64);
 
 const float offset = 64;
-const t3::Vec2 CROSS_BASE_POS(-200, PAD_Y);
-const t3::Vec2 POS_UP = CROSS_BASE_POS + t3::Vec2(0, offset);
-const t3::Vec2 POS_DOWN = CROSS_BASE_POS + t3::Vec2(0, -offset);
-const t3::Vec2 POS_LEFT = CROSS_BASE_POS + t3::Vec2(-offset, 0);
-const t3::Vec2 POS_RIGHT = CROSS_BASE_POS + t3::Vec2(offset, 0);
+const t3::Position2D CROSS_BASE_POS(-200, PAD_Y);
+const t3::Position2D POS_UP = CROSS_BASE_POS + t3::Vec2(0, offset);
+const t3::Position2D POS_DOWN = CROSS_BASE_POS + t3::Vec2(0, -offset);
+const t3::Position2D POS_LEFT = CROSS_BASE_POS + t3::Vec2(-offset, 0);
+const t3::Position2D POS_RIGHT = CROSS_BASE_POS + t3::Vec2(offset, 0);
 
-const t3::Vec2 AB_BASE = t3::Vec2(100, PAD_Y);
-const t3::Vec2 POS_A = AB_BASE + t3::Vec2(0, 0);
-const t3::Vec2 POS_B = AB_BASE + t3::Vec2(offset + 32, 0);
+const t3::Position2D AB_BASE = t3::Vec2(100, PAD_Y);
+const t3::Position2D POS_A = AB_BASE + t3::Vec2(0, 0);
+const t3::Position2D POS_B = AB_BASE + t3::Vec2(offset + 32, 0);
 
 
 const t3::Rectangle UP_BUTTON(POS_UP, POS_UP + BUTTON_SIZE);

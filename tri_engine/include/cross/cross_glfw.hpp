@@ -7,8 +7,8 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-#ifndef tri_engine_cross_glfw_hpp
-#define tri_engine_cross_glfw_hpp
+#ifndef TRI_CROSS_GLFW_HPP_INCLUDED
+#define TRI_CROSS_GLFW_HPP_INCLUDED
 
 
 #if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_WIN32
@@ -26,4 +26,5 @@
 //#include "GLFW/glfw3native.h"
 #endif
 
-#endif
+#endif // TRI_CROSS_GLFW_HPP_INCLUDED
+

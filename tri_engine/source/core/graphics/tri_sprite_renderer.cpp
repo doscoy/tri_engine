@@ -37,7 +37,7 @@ namespace {
 class PriorityCompare
 {
 public:
-    bool operator()(const t3::SpritePtr lhs, const t3::SpritePtr rhs) const {
+    bool operator()(const t3::core::SpritePtr lhs, const t3::core::SpritePtr rhs) const {
         int lhs_score = lhs->sortScore();
         int rhs_score = rhs->sortScore();
         
@@ -219,7 +219,7 @@ void spriteTransformCore(
     const Transform2DPtr transform
 ) {
     //  スケーリング
-    const Vec2& scale = transform->scale();
+    const Scale2D& scale = transform->scale();
     lt *= scale;
     lb *= scale;
     rt *= scale;
@@ -227,12 +227,12 @@ void spriteTransformCore(
 
 
     //  回転
-    float rot_z = transform->rotation().z_;
+    Degree rot_z = transform->rotation().z_;
 
-    if (!isZeroFloat(rot_z)) {
-        float angle = toRadian(rot_z);
-        float cos_angle = std::cos(angle);
-        float sin_angle = std::sin(angle);
+    if (!isZeroFloat(rot_z.angle())) {
+        Radian angle = toRadian(rot_z);
+        float cos_angle = std::cos(angle.angle());
+        float sin_angle = std::sin(angle.angle());
         {
             float ltx = lt.x_;
             float lty = lt.y_;
@@ -262,7 +262,7 @@ void spriteTransformCore(
     }
     
     //  位置移動
-    const Vec2& pos = transform->position();
+    const Position2D& pos = transform->position();
 
     lt += pos;
     lb += pos;

@@ -14,7 +14,8 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "../math/tri_vec2.hpp"
+#include "core/math/tri_math_types.hpp"
+
 
 TRI_CORE_NS_BEGIN
 
@@ -42,8 +43,8 @@ public:
     ///
     /// コンストラクタ
     Rectangle(
-        const Vec2& min,
-        const Vec2& max
+        const Position2D& min,
+        const Position2D& max
     )   : min_(min)
         , max_(max)
         , size_()
@@ -64,10 +65,10 @@ public:
     ///
     /// 数値をリセット
     void reset() {
-        min_ = Vec2(
+        min_ = Position2D(
             std::numeric_limits<float>::max(),
             std::numeric_limits<float>::max());
-        max_ = Vec2(
+        max_ = Position2D(
             std::numeric_limits<float>::min(),
             std::numeric_limits<float>::min());
         
@@ -77,7 +78,7 @@ public:
     ///
     /// 中心とサイズから矩形を構築
     void setupFromCenterSize(
-        const Vec2& center,
+        const Position2D& center,
         const Vec2& size
     ) {
         //  下限上限を計算
@@ -112,38 +113,38 @@ public:
 public:
     ///
     /// 最小値設定
-    void min(const Vec2& min) {
+    void min(const Position2D& min) {
         min_ = min;
         calcCenterFromMinMax();
     }
 
     ///
     /// 最小値を取得
-    const Vec2& min() const {
+    const Position2D& min() const {
         return min_;
     }
     
     ///
     /// 最大値を設定
-    void max(const Vec2& max) {
+    void max(const Position2D& max) {
         max_ = max;
         calcCenterFromMinMax();
     }
     
     ///
     /// 最大値を取得
-    const Vec2& max() const {
+    const Position2D& max() const {
         return max_;
     }
 
     ///
     /// 中心点を取得
-    const Vec2& center() const {
+    const Position2D& center() const {
         return center_;
     }
     
     ///
-    /// 中心点を設定
+    /// サイズを取得
     const Vec2& size() const {
         return size_;
     }
@@ -175,11 +176,11 @@ private:
 
     ///
     /// 最小値
-    Vec2 min_;
+    Position2D min_;
     
     ///
     /// 最大値
-    Vec2 max_;
+    Position2D max_;
 
     ///
     /// サイズ
@@ -187,7 +188,7 @@ private:
     
     ///
     /// 中心点
-    Vec2 center_;
+    Position2D center_;
 
 };
 

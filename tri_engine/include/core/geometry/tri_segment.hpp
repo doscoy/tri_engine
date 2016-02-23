@@ -36,8 +36,8 @@ public:
     ///
     /// コンストラクタ
     Segment(
-        const Vec3& a,
-        const Vec3& b
+        const Position3D& a,
+        const Position3D& b
     )   : a_(a)
         , b_(b)
     {}
@@ -49,24 +49,24 @@ public:
     
     ///
     /// 始点を設定
-    const Vec3* getPointA() const {
+    const Position3D* getPointA() const {
         return &a_;
     }
     
     ///
     /// 終点を設定
-    const Vec3* getPointB() const {
+    const Position3D* getPointB() const {
         return &b_;
     }
 
 private:
     ///
     /// 始点
-    Vec3 a_;
+    Position3D a_;
     
     ///
     /// 終点
-    Vec3 b_;
+    Position3D b_;
 };
 
 

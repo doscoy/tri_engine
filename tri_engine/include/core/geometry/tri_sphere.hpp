@@ -15,7 +15,7 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "../math/tri_vec3.hpp"
+#include "../math/tri_math_types.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -31,7 +31,7 @@ public:
     ///
     /// コンストラクタ
     Sphere(
-        const Vec3& position,   ///< 座標
+        const Position3D& position,   ///< 座標
         const float radius      ///< 半径
     )   : position_(position)
         , radius_(radius)
@@ -66,14 +66,14 @@ public:
     ///
     /// 座標を設定
     void position(
-        const Vec3& position    ///< 座標
+        const Position3D& position    ///< 座標
     ) {
         position_ = position;
     }
     
     ///
     /// 座標を取得
-    const Vec3& position() const {
+    const Position3D& position() const {
         return position_;
     }
     
@@ -81,7 +81,7 @@ private:
 
     ///
     /// 座標
-    Vec3 position_;
+    Position3D position_;
     
     ///
     /// 半径

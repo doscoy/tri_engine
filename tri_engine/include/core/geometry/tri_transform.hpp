@@ -50,20 +50,20 @@ public:
 public:
     ///
     /// 座標を取得
-    Vec2& position() {
+	Position2D& position() {
         return position_;
     }
     
     ///
     /// 座標を取得
-    const Vec2& position() const {
+    const Position2D& position() const {
         return position_;
     }
     
     ///
     /// 座標を設定
     void position(
-        const Vec2& pos
+        const Position2D& pos
     ) {
         position_ = pos;
     }
@@ -80,40 +80,40 @@ public:
     
     ///
     ///  回転情報を取得
-    Vec3& rotation() {
+	Rotation& rotation() {
         return rotation_;
     }
     
     ///
     /// 回転情報を取得
-    const Vec3& rotation() const {
+    const Rotation& rotation() const {
         return rotation_;
     }
     
     ///
     /// 回転情報を設定
     void rotation(
-        const Vec3& rot
+        const Rotation& rot
     ) {
         rotation_ = rot;
     }
     
     ///
     ///  スケールを取得
-    Vec2& scale() {
+    Scale2D& scale() {
         return scale_;
     }
     
     ///
     /// スケールを取得
-    const Vec2& scale() const {
+    const Scale2D& scale() const {
         return scale_;
     }
     
     ///
     /// スケールを設定
     void scale(
-        const Vec2& scale
+        const Scale2D& scale
     ) {
         scale_ = scale;
     }
@@ -165,7 +165,7 @@ public:
 
     ///
     /// 階層構造を加味した座標を取得
-    t3::Vec2 globalPosition() const {
+    t3::Position2D globalPosition() const {
         if (!hasParent()) {
             //  親が居ないのでただ座標を返す
             return position_;
@@ -176,11 +176,11 @@ public:
         
         
         //  親の回転の影響を受けた座標
-        float parent_rotate = toRadian(parent_->globalRotation().z_);
-        float cos_angle = std::cos(parent_rotate);
-        float sin_angle = std::sin(parent_rotate);
+        Radian parent_rotate = toRadian(parent_->globalRotation().z_);
+        float cos_angle = std::cos(parent_rotate.angle());
+        float sin_angle = std::sin(parent_rotate.angle());
 
-        t3::Vec2 rotate_pos(
+        t3::Position2D rotate_pos(
             (position_.x_ * cos_angle) - (position_.y_ * sin_angle),
             (position_.x_ * sin_angle) + (position_.y_ * cos_angle)
         );
@@ -192,7 +192,7 @@ public:
     
     ///
     /// 階層構造を加味した回転情報を取得
-    Vec3 globalRotation() const {
+    Rotation globalRotation() const {
         if (!hasParent()) {
             //  親が居ないのでただ回転情報を返す
             return rotation_;
@@ -204,7 +204,7 @@ public:
 
     ///
     /// 階層構造を加味したスケールを取得
-    t3::Vec2 globalScale() const {
+    Scale2D globalScale() const {
         if (!hasParent()) {
             //  親が居ないのでただ回転情報を返す
             return scale_;
@@ -226,15 +226,15 @@ public:
 private:
     ///
     /// 座標
-    Vec2 position_;
+    Position2D position_;
     
     ///
     /// 回転
-    Vec3 rotation_;
+    Rotation rotation_;
     
     ///
     /// スケール
-    Vec2 scale_;
+    Scale2D scale_;
     
     ///
     /// 親の姿勢

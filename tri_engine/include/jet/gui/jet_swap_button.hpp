@@ -83,7 +83,7 @@ public:
     
     ///
     /// 座標設定
-    void position(const Vec2& pos) {
+    void position(const Position2D& pos) {
         a_.position(pos);
         b_.position(pos);
     }

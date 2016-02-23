@@ -46,7 +46,7 @@ public:
     
     ///
     /// コンストラクタ
-    Vec4(Vec3 v)
+    Vec4(const Vec3& v)
         : x_(v.x_)
         , y_(v.y_)
         , z_(v.z_)
@@ -55,7 +55,7 @@ public:
     
     ///
     /// コンストラクタ
-    Vec4(Vec3 v, element_t w)
+    Vec4(const Vec3& v, element_t w)
         : x_(v.x_)
         , y_(v.y_)
         , z_(v.z_)

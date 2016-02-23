@@ -82,7 +82,7 @@ void Camera::calculateFrustum()
     float far = 10000.0f;
 
     frustum_.initializeFrustum(
-        fieldOfViewRadian(),
+        fieldOfView(),
         aspect,
         near,
         far,

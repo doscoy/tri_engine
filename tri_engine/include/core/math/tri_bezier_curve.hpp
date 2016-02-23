@@ -24,28 +24,28 @@ TRI_CORE_NS_BEGIN
 ///
 ///  2次ベジェ曲線計算
 void calcBezierCurve2(
-	Vec2& ans,      ///< 結果
-	const Vec2& p0, ///< 点１
-	const Vec2& p1, ///< 点２
-	const Vec2& p2, ///< 点３
+	Position2D& ans,      ///< 結果
+	const Position2D& p0, ///< 点１
+	const Position2D& p1, ///< 点２
+	const Position2D& p2, ///< 点３
 	const float t   ///< 係数
 );
 
 ///
 ///  2次ベジェ曲線計算
 void calcBezierCurve2(
-	Vec3& ans,      ///< 結果
-	const Vec3& p0, ///< 点１
-	const Vec3& p1, ///< 点２
-	const Vec3& p2, ///< 点３
+	Position3D& ans,      ///< 結果
+	const Position3D& p0, ///< 点１
+	const Position3D& p1, ///< 点２
+	const Position3D& p2, ///< 点３
 	const float t   ///< 係数
 );
 
 ///
 ///  2次ベジェ曲線計算　配列版
 void calcBezierCurve2(
-	Vec3& ans,          ///< 結果
-	const Vec3 pa[3],   ///< 3点
+	Position3D& ans,          ///< 結果
+	const Position3D pa[3],   ///< 3点
 	const float t       ///< 係数
 );
 

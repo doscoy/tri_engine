@@ -69,10 +69,10 @@ void ScreenManager::calcScreenRevise() {
 
 void ScreenManager::calcAspectMode() {
     constexpr float ASPECT_RATIO[ASPECT_MODE_NUM] = {
-        [MODE_16_9] = (16.0f / 9.0f),
-        [MODE_4_3] = (4.0f / 3.0f),
-        [MODE_9_16] = (9.0f / 16.0f),
-        [MODE_3_4] = (3.0f / 4.0f)
+        (16.0f / 9.0f),
+        (4.0f / 3.0f),
+        (9.0f / 16.0f),
+        (3.0f / 4.0f)
     };
     
     

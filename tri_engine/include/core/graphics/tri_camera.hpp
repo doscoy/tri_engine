@@ -58,7 +58,7 @@ public:
     ///
     /// 位置設定.
     void position(
-        const Vec3& pos
+        const Position3D& pos
     ) {
         position_ = pos;
         recalculation_request_ = true;
@@ -66,14 +66,14 @@ public:
 
     ///
     /// 位置取得.
-    const Vec3* position() const {
+    const Position3D* position() const {
         return &position_;
     }
 
     ///
     /// 注視点設定.
     void targetPosition(
-        const Vec3& pos
+        const Position3D& pos
     ) {
         target_ = pos;
         recalculation_request_ = true;
@@ -81,7 +81,7 @@ public:
     
     ///
     /// 注視点取得
-    const Vec3* targetPosition() const {
+    const Position3D* targetPosition() const {
         return &target_;
     }
     
@@ -107,16 +107,16 @@ public:
     ///
     /// 視野角設定
     void fieldOfView( 
-        const float fov     ///< 視野角
+        Degree fov     ///< 視野角
     ) {
         fov_ = fov;
     }
     
-    float fieldOfView() const {
+    Degree fieldOfView() const {
         return fov_;
     }
     
-    float fieldOfViewRadian() const {
+    Radian fieldOfViewRadian() const {
         return toRadian(fov_);
     }
 
@@ -144,9 +144,9 @@ private:
     void recalculate();
 
 private:
-    Vec3 position_;   ///< カメラ座標
-    Vec3 target_;     ///< 注視点
-    float fov_;       ///< 視野角
+    Position3D position_;   ///< カメラ座標
+    Position3D target_;     ///< 注視点
+    Degree fov_;       ///< 視野角
     Vec3 up_;         ///< 上方向ベクトル
     Vec3 front_;      ///< 前方向ベクトル
     Vec3 right_;      ///< 右方向ベクトル

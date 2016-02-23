@@ -3,3 +3,8 @@ xcschememanagement.plist
 *.sdf
 *.idb
 *.opensdf
+.vs
+build/win/Debug
+build/win/Release
+*.user
+*.filters

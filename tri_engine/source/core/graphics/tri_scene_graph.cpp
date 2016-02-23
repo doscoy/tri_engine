@@ -27,7 +27,7 @@ SceneGraph::SceneGraph()
     , shadow_texture_()
     , render_mode_()
 {
-    shadow_camera_->position(Vec3(0, 1000, 1));
+    shadow_camera_->position(Position3D(0, 1000, 1));
 }
 
 

@@ -204,7 +204,7 @@ public:
     ///
     /// 座標を設定
     void position(
-        const Vec3& v
+        const Position3D& v
     ) {
         calc_request_ = true;
         position_ = v;
@@ -212,14 +212,14 @@ public:
     
     ///
     /// 座標を取得
-    const Vec3& position() const {
+    const Position3D& position() const {
         return position_;
     }
     
     ///
     /// 座標を加算
     void addPosition(
-        const Vec3& v
+        const Position3D& v
     ) {
         calc_request_ = true;
         position_ += v;
@@ -255,9 +255,9 @@ public:
     ///
     /// 回転情報を設定
     void rotation(
-        float x,
-        float y,
-        float z
+        Degree x,
+        Degree y,
+        Degree z
     ) {
         calc_request_ = true;
         rotation_.x_ = x;
@@ -269,7 +269,7 @@ public:
     ///
     /// x軸回転を設定
     void rotationX(
-        const float r
+        const Degree r
     ) {
         calc_request_ = true;
         rotation_.x_ = r;
@@ -278,7 +278,7 @@ public:
     ///
     /// y軸回転を設定
     void rotationY(
-        const float r
+        const Degree r
     ) {
         calc_request_ = true;
         rotation_.y_ = r;
@@ -287,7 +287,7 @@ public:
     ///
     /// z軸回転を設定
     void rotationZ(
-        const float r
+        const Degree r
     ) {
         calc_request_ = true;
         rotation_.z_ = r;
@@ -296,7 +296,7 @@ public:
     ///
     /// 回転情報を設定
     void rotation(
-        const Vec3& v
+        const Rotation& v
     ) {
         calc_request_ = true;
         rotation_ = v;
@@ -304,14 +304,14 @@ public:
     
     ///
     /// 回転情報を取得
-    const Vec3& rotation() const {
+    const Rotation& rotation() const {
         return rotation_;
     }
     
     ///
     /// x軸回転を加算
     void addRotationX(
-        const float r
+        const Degree r
     ) {
         calc_request_ = true;
         rotation_.x_ += r;
@@ -320,7 +320,7 @@ public:
     ///
     /// y軸回転を加算
     void addRotationY(
-        const float r
+        const Degree r
     ) {
         calc_request_ = true;
         rotation_.y_ += r;
@@ -329,7 +329,7 @@ public:
     ///
     /// ｚ軸回転を加算
     void addRotationZ(
-        const float r
+        const Degree r
     ) {
         calc_request_ = true;
         rotation_.z_ += r;
@@ -358,7 +358,7 @@ public:
     ///
     /// スケール設定
     void scale(
-        const Vec3& v
+        const Scale3D& v
     ) {
         calc_request_ = true;
         scale_ = v;
@@ -366,7 +366,7 @@ public:
     
     ///
     /// スケール取得
-    const Vec3& scale() const {
+    const Scale3D& scale() const {
         return scale_;
     }
     
@@ -397,15 +397,15 @@ private:
 private:
     ///
     /// 座標
-    Vec3 position_;
+    Position3D position_;
     
     ///
     /// 回転情報
-    Vec3 rotation_;
+    Rotation rotation_;
     
     ///
     /// スケール
-    Vec3 scale_;
+    Scale3D scale_;
     
     ///
     /// 描画フラグ

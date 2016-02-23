@@ -32,7 +32,7 @@ Frustum::~Frustum()
 }
 
 void Frustum::initializeFrustum(
-    float fov,
+    Degree fov,
     float aspect,
     float near,
     float far,
@@ -47,8 +47,8 @@ void Frustum::initializeFrustum(
     far_ = far;
     pos_ = pos;
 
-
-    float tan_fov_over2 = std::tan(fov/2.0f);
+    Radian fov_radian = toRadian(fov.angle() * 0.5f);
+    float tan_fov_over2 = std::tan(fov_radian.angle());
 
     Vec3 near_right = (near * tan_fov_over2) * aspect * right;
     Vec3 far_right = (far * tan_fov_over2) * aspect * right;

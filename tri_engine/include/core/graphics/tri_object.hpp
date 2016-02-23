@@ -47,15 +47,15 @@ private:
 private:
     ///
     /// 座標
-    Vec3 position_;
+    Position3D position_;
     
     ///
     /// 回転
-    Vec3 rotation_;
+    Rotation rotation_;
     
     ///
     /// スケール
-    Vec3 scale_;
+    Scale3D scale_;
     
     ///
     /// 描画判定

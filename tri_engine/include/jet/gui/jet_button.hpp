@@ -195,7 +195,7 @@ public:
     
     ///
     /// ボタン位置設定
-    void position(const Vec2& pos) {
+    void position(const Position2D& pos) {
         T3_NULL_ASSERT(sprite_);
         sprite_->transform()->position(pos);
         updateHitArea();

@@ -133,7 +133,7 @@ void TextBox::adjustStringLayout() {
         float y_bearing = glyph->metrics_.y_bearing_ * scale_ratio;
         float x_advance = glyph->metrics_.x_advance_ * scale_ratio;
 
-        Vec2 pen_pos(
+        Position2D pen_pos(
             x + x_bearing + (width / 2),
             y - y_bearing - (height / 2)
         );

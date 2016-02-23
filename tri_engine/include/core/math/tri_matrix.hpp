@@ -15,12 +15,13 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "tri_vec2.hpp"
-#include "tri_vec3.hpp"
-#include "tri_vec4.hpp"
+#include "tri_math_types.hpp"
 #include "tri_quaternion.hpp"
 #include "../math/tri_math_util.hpp"
 #include "../debug/tri_assert.hpp"
+
+#include "tri_math_types.hpp"
+#include "tri_vec4.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -219,8 +220,8 @@ public:
     
     ///
     /// 並行移動行列生成
-    void translate(const Vec3& v) {
-        makeTranslate( *this, v.x_, v.y_, v.z_ );
+    void translate(const Position3D& v) {
+        makeTranslate(*this, v.x_, v.y_, v.z_);
     }
     
     ///
@@ -273,8 +274,8 @@ public:
     
     ///
     /// 平行移動成分取得
-    Vec3 position() const {
-        return Vec3(w_.x_, w_.y_, w_.z_);
+    Position3D position() const {
+        return Position3D(w_.x_, w_.y_, w_.z_);
     }
     
     ///
@@ -285,7 +286,7 @@ public:
     
     ///
     /// スケール行列生成
-    void scale(const Vec3& v) {
+    void scale(const Scale3D& v) {
         makeScale(*this, v.x_, v.y_, v.z_);
     }
     
@@ -332,8 +333,13 @@ public:
     
     ///
     /// 回転行列生成
-    void rotate(Rotation v) {
-        makeRotateYawPitchRoll(*this, v.y_, v.x_, v.z_);
+    void rotate(Rotation& v) {
+        makeRotateYawPitchRoll(
+			*this, 
+			toRadian(v.y_), 
+			toRadian(v.x_), 
+			toRadian(v.z_)
+		);
     }
 
     ///
@@ -376,9 +382,24 @@ public:
     ///
     /// 回転行列生成
     static Mtx44 getRotate(
-        Rotation r
+        Degree x,
+        Degree y,
+        Degree z
     ) {
-        return getRotate(r.x_, r.y_, r.z_);
+        return getRotate(toRadian(y), toRadian(x), toRadian(z));
+    }
+
+
+    ///
+    /// 回転行列生成
+    static Mtx44 getRotate(
+        const Rotation& r
+    ) {
+        return getRotate(
+            toRadian(r.x_), 
+            toRadian(r.y_), 
+            toRadian(r.z_)
+        );
     }
 
 
@@ -527,7 +548,7 @@ public:
         const Vec3& axis,
         Radian radian
     ) {
-        float r = radian.angle()
+		float r = radian.angle();
         float s = ::std::sinf(r);
         float c = ::std::cosf(r);
         float t = 1.0f - c;

@@ -13,8 +13,7 @@
 #define TRI_VERTEX_TYPES_HPP_INCLUDED
 
 //  include
-#include "core/math/tri_vec2.hpp"
-#include "core/math/tri_vec3.hpp"
+#include "core/math/tri_math_types.hpp"
 #include "core/core_config.hpp"
 
 
@@ -44,7 +43,7 @@ struct VertexP2T {
         , uv_(0,0)
     {}
 
-    Vec2 position_;
+    Position2D position_;
     Vec2 uv_;
 };
 
@@ -57,7 +56,7 @@ struct VertexP3N {
         , normal_(0,0,0)
     {}
     
-    Vec3 position_;
+    Position3D position_;
     Vec3 normal_;
 
 };
@@ -72,7 +71,7 @@ struct VertexP3NT {
         , uv_(0,0)
     {}
     
-    Vec3 position_;
+    Position3D position_;
     Vec3 normal_;
     Vec2 uv_;
 };

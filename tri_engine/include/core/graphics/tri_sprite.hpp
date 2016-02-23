@@ -136,9 +136,9 @@ public:
     void direction(
         const Vec2& dir
     ) {
-        float angle = std::atan2(dir.y_, dir.x_);
+        Radian angle = std::atan2(dir.y_, dir.x_);
         transform_->rotation(
-            t3::Vec3(
+            Rotation(
                 0.0f,
                 0.0f,
                 t3::toDegree(angle)
@@ -148,14 +148,14 @@ public:
 
     ///
     ///  回転中心を取得
-    const Vec2& pivot() const {
+    const Position2D& pivot() const {
         return pivot_;
     }
 
     ///
     ///  回転中心を設定
     void pivot(
-        const Vec2& pivot
+        const Position2D& pivot
     ){
         pivot_ = pivot;
     }
@@ -397,7 +397,7 @@ private:
     
     ///
     /// 回転中心点
-    Vec2 pivot_;
+    Position2D pivot_;
 
     ///
     /// 色

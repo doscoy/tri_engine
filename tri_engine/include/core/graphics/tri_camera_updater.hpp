@@ -81,7 +81,7 @@ public:
 public:
     ///
     /// 座標設定
-    void position(const Vec3& v);
+    void position(const Position3D& v);
 
     ///
     /// 座標設定
@@ -89,7 +89,7 @@ public:
 
     ///
     /// 注視点設定
-    void targetPosition(const Vec3& v);
+    void targetPosition(const Position3D& v);
 
     /// 
     /// 注視点設定
@@ -122,17 +122,17 @@ public:
 
     ///
     /// 縦首振り
-    void panV( const float speed );
+    void panV(const Degree angle);
 
     ///
     /// 横首振り
-    void panH( const float speed );
+    void panH(const Degree angle);
 
     ///
     /// 任意軸首振り
     void pan(
         const Vec3& axis,   ///< 軸
-        const float speed   ///< 速度
+        const Degree angle  ///< 角速度
     );
     
     ///
@@ -164,8 +164,8 @@ public:
     ///
     /// 姿勢設定
     void setup(
-        Vec3 center,
-        Vec2 rotate,
+        Position3D center,
+        Rotation rotate,
         float distance
     ) {
         center_ = center;
@@ -192,14 +192,14 @@ public:
 
     ///
     /// 中心点を取得
-    const Vec3& center() const {
+    const Position3D& center() const {
         return center_;
     }
 
     ///
     /// 中心点を設定
     void center(
-        const Vec3& pos
+        const Position3D& pos
     ) {
         center_ = pos;
     }
@@ -237,8 +237,8 @@ private:
     
 
 private:
-    Vec3 center_;
-    Vec2 rotate_;
+    Position3D center_;
+    Rotation rotate_;
     float distance_;
 };
 
