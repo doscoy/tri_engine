@@ -514,10 +514,10 @@ public:
         float yy, yz, zz;
 
 
-        float xang = quat.x_.angle();
-        float yang = quat.y_.angle();
-        float zang = quat.z_.angle();
-        float wang = quat.w_.angle();
+        float xang = quat.x_;
+        float yang = quat.y_;
+        float zang = quat.z_;
+        float wang = quat.w_;
 
 
         xs = xang * s;  ys = yang * s;  zs = zang * s;

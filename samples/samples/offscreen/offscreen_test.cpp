@@ -33,8 +33,8 @@ public:
     }
     
     void update(t3::DeltaTime delta_time) {
-        float rot = sprite_->transform()->rotation().z_;
-        sprite_->transform()->rotation(t3::Vec3(0,0,rot + 0.1f));
+        t3::Degree rot = sprite_->transform()->rotation().z_;
+        sprite_->transform()->rotation(t3::Rotation(0, 0, rot + t3::Degree(0.1f)));
     }
 
     void debugRender() {

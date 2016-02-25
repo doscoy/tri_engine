@@ -9,6 +9,12 @@
 
 #include "cross_os.hpp"
 #include <cstdio>
+#include "cross_types.hpp"
+#include "cross_accelerometer.hpp"
+#include "cross_render_system.hpp"
+#include "cross_audio_system.hpp"
+
+
 
 CROSS_NS_BEGIN
 
@@ -28,6 +34,9 @@ std::string getDeviceFilePath() {
 #endif
 }
 
+//
+//  他のcross定義は os_glfw.cppで実装済
+//
 
 
 

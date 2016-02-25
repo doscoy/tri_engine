@@ -18,7 +18,6 @@ class AudioTestScene::SceneContext {
 public:
     SceneContext()
         : res_(nullptr)
-        , handle_(nullptr)
     {}
     
     ~SceneContext()
@@ -28,7 +27,6 @@ public:
     void initialize(){
         t3::FilePath wav_path("sample.wav");
         res_ = t3::AudioResource::create(wav_path);
-        handle_ = res_->createSound();
 
 
         t3::FilePath stream_path("akb48.wav");
@@ -46,7 +44,8 @@ public:
         const t3::Pointing& ptng = input.pointing();
         stream_.poling();
         if (ptng.isRelease()) {
-            handle_->playSE();
+            
+            res_->handle()->playSE();
         }
     }
 
@@ -56,7 +55,6 @@ private:
 
 private:
     t3::SharedPtr<t3::AudioResource> res_;
-    t3::SharedPtr<t3::AudioHandle> handle_;
 
 
     t3::StreamingPlayer stream_;

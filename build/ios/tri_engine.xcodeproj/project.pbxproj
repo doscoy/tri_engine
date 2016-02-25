@@ -317,6 +317,7 @@
 		3A480F611B2D4159001064BB /* jet_textbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DDD1B2D4159001064BB /* jet_textbox.cpp */; };
 		3A480F621B2D4159001064BB /* jet_textbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DDD1B2D4159001064BB /* jet_textbox.cpp */; };
 		3A480F641B2D4159001064BB /* tri_view_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A480DE11B2D4159001064BB /* tri_view_controller.mm */; };
+		3A49A9F01C7F6899008E0E39 /* tri_framework.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5C0091C4A1E2500F200D6 /* tri_framework.cpp */; };
 		3A515D431C4625D80031FB88 /* tri_audio_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A515D421C4625D80031FB88 /* tri_audio_util.cpp */; };
 		3A515D441C4625D80031FB88 /* tri_audio_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A515D421C4625D80031FB88 /* tri_audio_util.cpp */; };
 		3A5C16661C589EE300893F9A /* tri_debug_log_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C16651C589EE300893F9A /* tri_debug_log_buffer.cpp */; };
@@ -2075,6 +2076,7 @@
 				3A480F201B2D4159001064BB /* tri_matrix_stack.cpp in Sources */,
 				3A63317D1B67D7E60007D1C1 /* tiny_collada_parser.cpp in Sources */,
 				3A480F5C1B2D4159001064BB /* jet_button.cpp in Sources */,
+				3A49A9F01C7F6899008E0E39 /* tri_framework.cpp in Sources */,
 				3A480ED41B2D4159001064BB /* tri_circle_collider.cpp in Sources */,
 				3A6299DA1B65436800E8AC76 /* pngset.c in Sources */,
 				3A480F241B2D4159001064BB /* tri_random_mseq.cpp in Sources */,

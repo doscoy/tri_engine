@@ -73,7 +73,7 @@ struct QuaternionTemplate
     /// 値設定
     void set(
         const Vec3& axis,
-        const float degree
+        const Degree degree
     ) {
         makeFromAxisAngle(*this, axis, toRadian(degree));
     }
@@ -179,7 +179,7 @@ struct QuaternionTemplate
     ///
     /// 正規化
     void normalize(){
-        *this = getScaledQuaternion(1 / sqrtf( dotProduct(*this)));
+        *this = getScaledQuaternion(1.0f / sqrtf( dotProduct(*this)));
     }
     
     ///
@@ -228,9 +228,9 @@ struct QuaternionTemplate
     static void makeFromAxisAngle(
         QuaternionTemplate<T>& q,
         const Vec3& axis,
-        Degree angle
+        Radian angle
     ){
-        Degree ang_div_2 = angle * 0.5f;
+        float ang_div_2 = angle.angle() * 0.5f;
         q.w_ = cosf(ang_div_2);
         q.x_ = q.y_ = q.z_ = sinf(ang_div_2);
         q.x_ *= axis.x_;
@@ -283,7 +283,7 @@ struct QuaternionTemplate
 };
 
 //  typedef
-typedef QuaternionTemplate<Degree> Quaternion;
+typedef QuaternionTemplate<float> Quaternion;
 
 
 TRI_CORE_NS_END

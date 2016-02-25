@@ -24,10 +24,10 @@ int main(int argc, char * argv[])
 
     tri.setApplication(t3::Application::getGenerator<SampleApp>());
 #if CROSS_TARGET_PLATFORM == CROSS_TARGET_PLATFORM_IOS
-        @autoreleasepool {
-            return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
-        }
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
+    
 #else // MacOSX or Windows
 
     if (!tri.initializeFramework(800, 600, "win")) {
