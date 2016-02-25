@@ -409,7 +409,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw32.lib;glew32.lib;opengl32.lib;glu32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw32.lib;glew32s.lib;opengl32.lib;glu32.lib</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(TRI_ENGINE_ROOT)/tri_engine/third_party_lib/win/glew;$(TRI_ENGINE_ROOT)/tri_engine/third_party_lib/win/GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -433,7 +433,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw64.lib;glew64.lib;opengl32.lib;glu32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw64.lib;glew64s.lib;opengl32.lib;glu32.lib</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(TRI_ENGINE_ROOT)/tri_engine/third_party_lib/win/glew;$(TRI_ENGINE_ROOT)/tri_engine/third_party_lib/win/GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
