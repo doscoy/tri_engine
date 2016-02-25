@@ -58,10 +58,10 @@ SubMeshesDataPtr DaeLoader::load(
             } else {
                 //  ディフューズ値があった
                 new_material->diffuse(Color(
-                    diffuse.color_.at(0) * 255.0f,
-                    diffuse.color_.at(1) * 255.0f,
-                    diffuse.color_.at(2) * 255.0f,
-                    diffuse.color_.at(3) * 255.0f
+                    static_cast<uint_fast8_t>(diffuse.color_.at(0) * 255.0f),
+                    static_cast<uint_fast8_t>(diffuse.color_.at(1) * 255.0f),
+                    static_cast<uint_fast8_t>(diffuse.color_.at(2) * 255.0f),
+                    static_cast<uint_fast8_t>(diffuse.color_.at(3) * 255.0f)
                 ));
             }
             
@@ -99,10 +99,10 @@ SubMeshesDataPtr DaeLoader::load(
             // -----------------------
             //  スペキュラ
             new_material->specular(Color(
-                scene_material->specular_.color_.at(0) * 255.0f,
-                scene_material->specular_.color_.at(1) * 255.0f,
-                scene_material->specular_.color_.at(2) * 255.0f,
-                scene_material->specular_.color_.at(3) * 255.0f
+                static_cast<uint_fast8_t>(scene_material->specular_.color_.at(0) * 255.0f),
+                static_cast<uint_fast8_t>(scene_material->specular_.color_.at(1) * 255.0f),
+                static_cast<uint_fast8_t>(scene_material->specular_.color_.at(2) * 255.0f),
+                static_cast<uint_fast8_t>(scene_material->specular_.color_.at(3) * 255.0f)
             ));
         }
 

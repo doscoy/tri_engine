@@ -33,7 +33,7 @@ void png_memread_func(
     my_png_buffer* png_buff = (my_png_buffer*)png_get_io_ptr(png_ptr);
     if (png_buff->data_offset_ + size <= png_buff->data_len_) {
         memcpy(buf, png_buff->data_ + png_buff->data_offset_, size);
-        png_buff->data_offset_ += size;
+        png_buff->data_offset_ += static_cast<uint32_t>(size);
     }
     else {
         png_error(png_ptr,"png_mem_read_func failed");

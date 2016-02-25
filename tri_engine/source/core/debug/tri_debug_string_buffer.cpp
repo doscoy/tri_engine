@@ -41,8 +41,8 @@ void DebugStringBuffer::addString(
     int font_size = size;
     int pitch = font_size;
     int count = 0;
-    int start_x = x * font_size;
-    int start_y = y * font_size;
+    int start_x = static_cast<int>(x * font_size);
+    int start_y = static_cast<int>(y * font_size);
     
     // (0, 0)が左端になる座標系
     auto half_size = ScreenManager::instance().virtualScreenSize().half();
@@ -50,8 +50,8 @@ void DebugStringBuffer::addString(
     const char* c = str;
     while(*c){
         DebugStringItem character;
-        character.x_ = start_x + (pitch * count) - half_size.x_ + 32;
-        character.y_ = half_size.y_ - start_y + 32;
+        character.x_ = static_cast<int16_t>(start_x + (pitch * count) - half_size.x_ + 32);
+        character.y_ = static_cast<int16_t>(half_size.y_ - start_y + 32);
         character.size_ = size;
         character.character_ = *c;
         character.color_ = color;

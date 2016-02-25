@@ -178,8 +178,8 @@ bool Framework::initializeFramework(int width, int height, const char* const tit
     cross::RenderSystem::setViewport(
         0,
         0,
-        screen_mgr.deviceScreenSize().x_,
-        screen_mgr.deviceScreenSize().y_
+        static_cast<int>(screen_mgr.deviceScreenSize().x_),
+        static_cast<int>(screen_mgr.deviceScreenSize().y_)
     );
     
 

@@ -122,10 +122,10 @@ bool initializePlatform(
 
 
     //  スクリーンサイズを覚えておく
-    window_width_ = w;
-    window_height_ = h;
-    half_width_ = w / 2;
-    half_height_ = h / 2;
+    window_width_ = static_cast<float>(w);
+    window_height_ = static_cast<float>(h);
+    half_width_ = static_cast<float>(w / 2);
+    half_height_ = static_cast<float>(h / 2);
 
     //  オーディオシステムの初期化
     AudioSystem::initializeAudioSystem();
@@ -276,7 +276,7 @@ void platformPointingData(
 
 bool isExitRequest() {
 
-    return glfwWindowShouldClose(window_);
+    return glfwWindowShouldClose(window_) != 0;
 }
 
 CROSS_NS_END

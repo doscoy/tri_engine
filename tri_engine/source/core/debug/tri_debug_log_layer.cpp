@@ -45,7 +45,13 @@ void DebugLogLayer::updateLayer(const DeltaTime delta_time) {
     auto buffer_size = buffer_.size();
     for (int i = 0; i < buffer_size; ++i) {
         const char* str = buffer_.at(i);
-        addString(0, i, t3::color_sample::white().rgba32(), 10, str);
+        addString(
+            static_cast<float>(0), 
+            static_cast<float>(i), 
+            t3::color_sample::white().rgba32(), 
+            10, 
+            str
+        );
     }
     
     
