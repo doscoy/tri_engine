@@ -87,10 +87,10 @@ SubMeshesDataPtr DaeLoader::load(
             } else {
                 //  アンビエント値があった
                 new_material->ambient(Color(
-                    ambient.color_.at(0) * 255.0f,
-                    ambient.color_.at(1) * 255.0f,
-                    ambient.color_.at(2) * 255.0f,
-                    ambient.color_.at(3) * 255.0f
+                    static_cast<int_fast8_t>(ambient.color_.at(0) * 255.0f),
+                    static_cast<int_fast8_t>(ambient.color_.at(1) * 255.0f),
+                    static_cast<int_fast8_t>(ambient.color_.at(2) * 255.0f),
+                    static_cast<int_fast8_t>(ambient.color_.at(3) * 255.0f)
                 ));
             
             }

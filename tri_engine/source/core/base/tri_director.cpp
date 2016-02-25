@@ -251,7 +251,12 @@ void Director::setupFinalLayer() {
         Vec2(virtual_screen_to_device_ratio.x_, virtual_screen_to_device_ratio.y_),
         "final", t3::LayerBase::Priority::SYS_FRONT
     ));
-    final_surface_.reset(T3_SYS_NEW FrameBufferSurface(ScreenManager::VIRTUAL_SCREEN_WIDTH, ScreenManager::VIRTUAL_SCREEN_HEIGHT, Surface::Type::COLOR_DEPTH));
+    final_surface_.reset(T3_SYS_NEW FrameBufferSurface(
+        static_cast<float>(ScreenManager::VIRTUAL_SCREEN_WIDTH), 
+        static_cast<float>(ScreenManager::VIRTUAL_SCREEN_HEIGHT), 
+        Surface::Type::COLOR_DEPTH)
+    );
+
     final_layer_->texture(final_surface_->colorTexture());
 
     //  最終描画用レイヤーの描画先はデバイスサーフェス

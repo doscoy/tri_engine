@@ -88,8 +88,8 @@ private:
         }
         
         for (auto spr : sprites_) {
-            float angle = spr->transform()->rotation().z_;
-            spr->transform()->rotation(t3::Vec3(0,0,angle + 1));
+            t3::Degree angle = spr->transform()->rotation().z_;
+            spr->transform()->rotation(t3::Rotation(0, 0, angle + t3::Degree(1)));
         }
     }
     

@@ -53,7 +53,7 @@ public:
         sprite_ = layer_.createSprite("piko.png");
         
         //  スプライトレイヤはオフスクリーンに書く
-        layer_.renderTarget(&surface_);
+        layer_.setupRenderTargetToUserCustom(&surface_);
         
         screen_.texture(surface_.colorTexture());
         screen_.shader(shader_);
@@ -66,11 +66,11 @@ public:
     }
     
     void update(const t3::DeltaTime delta_time) {
-        float r = sprite_->transform()->rotation().z_;
-        sprite_->transform()->rotation(t3::Vec3(0,0,r + 0.33f));
+        t3::Degree r = sprite_->transform()->rotation().z_;
+        sprite_->transform()->rotation(t3::Rotation(0,0,r + t3::Degree(0.33f)));
         
         pola_.updateInterpolation(delta_time);
-        shader_->setConstFloat(0, moz_lv_);
+        shader_->setConstFloat(0, static_cast<float>(moz_lv_));
     }
 
 private:

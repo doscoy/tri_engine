@@ -130,7 +130,12 @@ void FrameBufferSurface::setupViewport() {
         &last_viewport_height_
     );
     
-    cross::RenderSystem::setViewport(0, 0, size_.x_, size_.y_);
+    cross::RenderSystem::setViewport(
+        0, 
+        0, 
+        static_cast<int>(size_.x_), 
+        static_cast<int>(size_.y_)
+    );
 
 }
 

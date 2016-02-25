@@ -23,7 +23,7 @@ public:
 public:
     void initialize() override;
     void terminate() override;
-    void update(t3::DeltaTime dt) override;
+    void update(const t3::DeltaTime dt) override;
     
 private:
     t3::DrawLayer final_layer_;

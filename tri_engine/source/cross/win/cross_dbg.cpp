@@ -3,6 +3,6 @@
 CROSS_NS_BEGIN
 void breakpoint() {
 
-    __asm int 3;
+//    __asm int 3;
 }
 CROSS_NS_END

@@ -5,135 +5,20 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\tri_engine\source\core\audio\tri_audio_handle.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\audio\tri_audio_resource.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\audio\tri_streaming_player.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\audio\tri_wav.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_application.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_director.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_event_manager.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_pause_level.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_scene.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_system_events.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\base\tri_task.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_assert.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debugmenu.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debugmenu_frame.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debugmenu_items.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debugmenu_label.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debugpad.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_font_data.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_debug_string_buffer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_draw_primitive.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_print.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_trace.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_virtual_pad.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\debug\tri_workbar.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\geometry\tri_circle_collider.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\geometry\tri_collider.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\geometry\tri_collision.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\geometry\tri_collision_events.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\geometry\tri_collision_manager.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\geometry\tri_frustum.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\geometry\tri_point_collider.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_camera.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_camera_touch_controller.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_camera_updater.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_camera_updater_events.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_cinema_layer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_dae_loader.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_draw_layer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_fade_layer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_image_png.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_material.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_mesh.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_model.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_mtl_loader.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_obj_loader.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_projector.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_render_layer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_scene_graph.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_scene_node.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_shader.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_sprite.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_sprite_layer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_sprite_renderer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_surface.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_texture.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_texture_factory.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\graphics\tri_transform_node.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\kernel\io\tri_file.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\kernel\io\tri_filepath.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\kernel\io\tri_pad.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\kernel\io\tri_pointing.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\kernel\memory\tri_heap.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\kernel\memory\tri_heap_manager.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\kernel\memory\tri_memory_pool.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\kernel\memory\tri_new.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\kernel\process\tri_mutex.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\math\tri_bezier_curve.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\math\tri_matrix_stack.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\random\tri_random_linear_congruential.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\random\tri_random_mseq.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\random\tri_random_mt.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\random\tri_random_well.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\random\tri_random_xorshift.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_archive.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_bit.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_counter.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_text_loader.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_unique_id.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_utf8.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\core\utility\tri_zipfile.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\cross\common\cross_os_glfw.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\cross\common\cross_render_system_gl4.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\cross\win\cross_accelerometer.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\cross\win\cross_audio_system.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\cross\win\cross_dbg.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\cross\win\cross_os.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\jet\gui\jet_button.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\jet\gui\jet_radio_button.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\jet\gui\jet_swap_button.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\jet\gui\jet_textbox.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\jet\scene\jet_scene.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\png.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngerror.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngget.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngmem.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngpread.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngread.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngrio.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngrtran.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngrutil.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngset.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngtrans.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngwio.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngwrite.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngwtran.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\libpng\pngwutil.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\tiny_collada\tinyxml2.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\tiny_collada\tiny_collada_parser.cpp" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\adler32.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\compress.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\crc32.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\deflate.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\gzclose.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\gzlib.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\gzread.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\gzwrite.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\infback.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\inffast.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\inflate.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\inftrees.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\trees.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\uncompr.c" />
-    <ClCompile Include="..\..\..\tri_engine\source\third_party\zlib\zutil.c" />
     <ClCompile Include="..\..\samples\blur\blur_test.cpp" />
     <ClCompile Include="..\..\samples\collada_mesh2\collada_mesh2.cpp" />
     <ClCompile Include="..\..\samples\collada_mesh\collada_mesh.cpp" />
@@ -148,187 +33,6 @@
     <ClCompile Include="..\..\samples\ui_button\ui_button_test.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\tri_engine\include\core\audio\tri_audio.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\audio\tri_audio_handle.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\audio\tri_audio_resource.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\audio\tri_streaming_player.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\audio\tri_wav.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_application.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_base.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_director.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_event.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_event_manager.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_font_glyph.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_pause_level.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_resource.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_resource_manager.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_rtti.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_scene.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_std.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_system_events.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_task.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\base\tri_types.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\core_config.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\core_engine.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_assert.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_dbg.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debugmenu.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debugmenu_frame.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debugmenu_items.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debugmenu_label.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debugmenu_scene_louncher.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debugpad.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_debug_string_buffer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_draw_primitive.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_print.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_trace.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_virtual_pad.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\debug\tri_workbar.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_aabb.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_circle.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_circle_collider.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_collider.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_collision.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_collision_events.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_collision_manager.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_frustum.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_geometry.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_plane.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_point_collider.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_rectangle.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_segment.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_sphere.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\geometry\tri_transform.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_camera.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_camera_updater.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_camera_updater_events.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_cinema_layer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_color.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_dae_loader.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_draw_layer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_entity.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_fade_layer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_gfx.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_gfx_types.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_image_png.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_index_buffer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_material.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_mesh.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_model.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_mtl_loader.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_object.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_obj_loader.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_projector.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_renderable.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_render_info.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_render_layer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_scene_graph.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_scene_node.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_shader.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_sprite.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_sprite_layer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_sprite_renderer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_submesh_data.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_surface.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_test_entity.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_texture.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_texture_factory.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_transform_node.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_vertex_buffer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\graphics\tri_vertex_types.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\io\tri_file.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\io\tri_filepath.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\io\tri_input.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\io\tri_io.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\io\tri_pad.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\io\tri_pointing.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\memory\tri_heap.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\memory\tri_heap_manager.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\memory\tri_memory.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\memory\tri_memory_pool.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\memory\tri_new.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\memory\tri_safe_delete.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\process\tri_mutex.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\kernel\tri_kernel.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_bezier_curve.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_interpolation.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_math.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_math_define.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_math_types.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_math_util.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_matrix.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_matrix_stack.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_quaternion.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_vec2.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_vec3.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\math\tri_vec4.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\random\tri_random.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\random\tri_random_linear_congruential.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\random\tri_random_mseq.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\random\tri_random_mt.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\random\tri_random_number_generator.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\random\tri_random_well.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\random\tri_random_xorshift.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_any.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_archive.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_bit.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_bytesize.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_counter.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_framerate.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_hash_string.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_json.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_method_callback.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_nameable.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_signature.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_singleton.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_stopwatch.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_string_util.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_text_loader.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_uncopyable.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_unique_id.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_utf8.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_util.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\core\utility\tri_zipfile.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\cross\cross_accelerometer.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\cross\cross_audio_system.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\cross\cross_config.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\cross\cross_dbg.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\cross\cross_define.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\cross\cross_glfw.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\cross\cross_os.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\cross\cross_render_system.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\cross\cross_sdk.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\cross\cross_types.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\jet\gui\jet_button.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\jet\gui\jet_gui.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\jet\gui\jet_radio_button.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\jet\gui\jet_swap_button.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\jet\gui\jet_textbox.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\jet\jet_config.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\jet\jet_engine.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\jet\scene\jet_scene.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\include\tri_engine.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\png.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pngconf.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pngdebug.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pnginfo.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pnglibconf.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pngpriv.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\libpng\pngstruct.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\picojson\picojson.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\tiny_collada\tinyxml2.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\tiny_collada\tiny_collada_parser.hpp" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\crc32.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\deflate.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\gzguts.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\inffast.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\inffixed.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\inflate.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\inftrees.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\trees.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\zconf.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\zlib.h" />
-    <ClInclude Include="..\..\..\tri_engine\source\third_party\zlib\zutil.h" />
     <ClInclude Include="..\..\samples\blur\blur_test.hpp" />
     <ClInclude Include="..\..\samples\collada_mesh2\collada_mesh2.hpp" />
     <ClInclude Include="..\..\samples\collada_mesh\collada_mesh.hpp" />
@@ -354,7 +58,20 @@
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
@@ -369,15 +86,31 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(TRI_ENGINE_ROOT)/build/win/Debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(TRI_ENGINE_ROOT)/build/win/Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -386,7 +119,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\third_party_lib\win\GLFW;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\third_party_lib\win\lpng;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\third_party_lib\win\glew;C:\Users\kani\Documents\SourceTreeProjects\tri_engine/tri_engine/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(TRI_ENGINE_ROOT)/tri_engine/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile />
       <DisableSpecificWarnings>4819;4018;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -394,8 +127,28 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine/lib/third_party_lib\win\GLFW;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine/lib/third_party_lib\win\glew;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;GLU32.Lib;OpenGL32.Lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);tri_engine.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(TRI_ENGINE_ROOT)/tri_engine/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4819;4018;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);tri_engine.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -407,7 +160,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\third_party_lib\win\GLFW;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\third_party_lib\win\lpng;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine\third_party_lib\win\glew;C:\Users\kani\Documents\SourceTreeProjects\tri_engine/tri_engine/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(TRI_ENGINE_ROOT)/tri_engine/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile />
       <DisableSpecificWarnings>4819;4018;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -417,8 +170,32 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine/lib/third_party_lib\win\zlib;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine/lib/third_party_lib\win\GLFW;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine/lib/third_party_lib\win\lpng;C:\Users\kani\Documents\SourceTreeProjects\tri_engine\tri_engine/lib/third_party_lib\win\glew;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libpng.lib;zlib.lib;glfw3.lib;GLU32.Lib;OpenGL32.Lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);tri_engine.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(TRI_ENGINE_ROOT)/tri_engine/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4819;4018;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);tri_engine.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

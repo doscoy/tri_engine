@@ -228,9 +228,9 @@ struct QuaternionTemplate
     static void makeFromAxisAngle(
         QuaternionTemplate<T>& q,
         const Vec3& axis,
-        float angle
+        Degree angle
     ){
-        float ang_div_2 = angle * 0.5f;
+        Degree ang_div_2 = angle * 0.5f;
         q.w_ = cosf(ang_div_2);
         q.x_ = q.y_ = q.z_ = sinf(ang_div_2);
         q.x_ *= axis.x_;
@@ -242,9 +242,9 @@ struct QuaternionTemplate
     /// オイラー角から生成
     static void makeFromEuler(
         QuaternionTemplate<T>& dest,
-        Vec3 euler
+        Rotation euler
     ) {
-        makeQuaternionFromEuler(dest, euler.x_, euler.y_, euler.z_);
+        makeFromEuler(dest, euler.x_, euler.y_, euler.z_);
     }
     
     
@@ -283,7 +283,7 @@ struct QuaternionTemplate
 };
 
 //  typedef
-typedef QuaternionTemplate<float> Quaternion;
+typedef QuaternionTemplate<Degree> Quaternion;
 
 
 TRI_CORE_NS_END

@@ -8,7 +8,7 @@
 #include "core/kernel/memory/tri_memory_pool.hpp"
 #include "core/debug/tri_dbg.hpp"
 #include "core/utility/tri_signature.hpp"
-
+#include "core/graphics/tri_color.hpp"
 
 
 //  メモリプールの使用最大値を検証

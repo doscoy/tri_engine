@@ -32,7 +32,9 @@ public:
         : angle_(0)
     {}
 
-    Radian(float angle);
+    Radian(float angle)
+        : angle_(angle)
+    {}
     
     float angle() const {
         return angle_;
@@ -88,7 +90,9 @@ public:
         : angle_(0)
     {}
 
-    Degree(float angle);
+    Degree(float angle)
+        : angle_(angle)
+    {}
     
     float angle() const {
         return angle_;

@@ -61,7 +61,7 @@ public:
 protected:
     ///
     /// レイヤ更新
-    void updateLayer(DeltaTime delta_time) override;
+    void updateLayer(const DeltaTime delta_time) override;
     
 
 private:

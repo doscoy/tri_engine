@@ -512,10 +512,18 @@ public:
         float wx, wy, wz;
         float xx, xy, xz;
         float yy, yz, zz;
-        xs = quat.x_ * s;  ys = quat.y_ * s;  zs = quat.z_ * s;
-        wx = quat.w_ * xs; wy = quat.w_ * ys; wz = quat.w_ * zs;
-        xx = quat.x_ * xs; xy = quat.x_ * ys; xz = quat.x_ * zs;
-        yy = quat.y_ * ys; yz = quat.y_ * zs; zz = quat.z_ * zs;
+
+
+        float xang = quat.x_.angle();
+        float yang = quat.y_.angle();
+        float zang = quat.z_.angle();
+        float wang = quat.w_.angle();
+
+
+        xs = xang * s;  ys = yang * s;  zs = zang * s;
+        wx = wang * xs; wy = wang * ys; wz = wang * zs;
+        xx = xang * xs; xy = xang * ys; xz = xang * zs;
+        yy = yang * ys; yz = yang * zs; zz = zang * zs;
         
         out.x_.x_ = float(1) - (yy + zz);
         out.x_.y_ = xy + wz;

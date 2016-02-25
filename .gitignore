@@ -4,7 +4,12 @@ xcschememanagement.plist
 *.idb
 *.opensdf
 .vs
-build/win/Debug
-build/win/Release
+build/win/Debug/
+build/win/Release/
+build/win/x64/
+samples/build/win/Debug/
+samples/build/win/Release/
+samples/build/win/x64/
 *.user
 *.filters
+*.opendb

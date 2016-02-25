@@ -58,7 +58,7 @@ public:
     }
     
     void update(const t3::DeltaTime delta_time){
-        static float angle = 0;
+        static t3::Degree angle = 0;
         angle += 1;
         node1_->rotationY(angle);
         node2_->rotation(angle, 0, 0);

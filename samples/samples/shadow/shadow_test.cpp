@@ -59,7 +59,7 @@ void ShadowTestScene::initialize() {
     sceneGraph().shadowCamera(light_camera_->camera());
     
     
-    cinema_.renderTarget(&shadowSurface());
+    cinema_.setupRenderTargetToUserCustom(&shadowSurface());
 
     T3_RENDER_ASSERT();
 }
@@ -71,7 +71,7 @@ void ShadowTestScene::terminate() {
 
 
 void ShadowTestScene::update(const t3::DeltaTime dt) {
-    static float angle;
+    static t3::Degree angle;
     angle += 0.25f;
     node_chara_->rotationY(angle);
         
