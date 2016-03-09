@@ -34,6 +34,11 @@ FilePath::FilePath(
     if (last_slash != String::npos) {
         //  最後のスラッシュから先がファイル名
         filename_ = filepath.substr(last_slash, filepath.length());
+    } 
+    else {
+        //  スラッシュを含まないファイル名だった
+        //  つまりファイルパスが name.ext 形式なのでパス全体がファイル名
+        filename_ = filepath;
     }
 
 

@@ -14,6 +14,7 @@
 #define CROSS_AUDIO_SYSTEM_HPP_INCLUDED
 
 //  include
+#include "cross_buildlevel.hpp"
 #include "cross_config.hpp"
 #include <cstdlib>
 #include <cstdint>

@@ -58,9 +58,9 @@ VirtualPad::~VirtualPad() {
 
 
 void VirtualPad::open() {
-#ifndef DEBUG
+#ifndef TRI_DEBUG
     return;
-#endif // DEBUG
+#endif // TRI_DEBUG
 
 
     pad_layer_.enableLayer();

@@ -12,7 +12,7 @@
 #ifndef CROSS_CONFIG_HPP_INCLUDED
 #define CROSS_CONFIG_HPP_INCLUDED
 
-
+#include "cross_buildlevel.hpp"
 
 
 //  cross_sdkを囲むネームスペース

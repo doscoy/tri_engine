@@ -50,7 +50,7 @@ void DebugMenu::terminate() {
 ///
 /// メニューをひらく
 void DebugMenu::openMenu() {
-#ifndef DEBUG
+#ifndef TRI_DEBUG
     //  デバッグモード以外では開かない
     return;
 #endif

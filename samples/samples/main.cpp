@@ -29,8 +29,9 @@ int main(int argc, char * argv[])
     }
     
 #else // MacOSX or Windows
-
-    if (!tri.initializeFramework(800, 600, "win")) {
+    float screen_x = 16 * 10;
+    float screen_y =  9 * 10;
+    if (!tri.initializeFramework(screen_x, screen_y, "win")) {
         //  初期化に失敗
         return 0;
     }

@@ -71,9 +71,6 @@ SceneManager::SceneManager()
 
 
 SceneManager::~SceneManager() {
-    for (auto name : history_) {
-        T3_SYSTEM_LOG_DEBUG(name);
-    }
 }
 
 

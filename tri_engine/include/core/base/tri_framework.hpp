@@ -119,7 +119,7 @@ private:
     ApplicationPtr app_;
     const ApplicationGenerator* next_app_generator_;
 
-#if DEBUG
+#ifdef TRI_DEBUG
     UniquePtr<FrameworkDebugMenu> system_menu_;
 #endif
     Stopwatch fps_timer_;   ///< fps計測用タイマー

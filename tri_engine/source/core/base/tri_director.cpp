@@ -232,9 +232,7 @@ void Director::terminateDirector() {
     dbg_string_layer_.reset();
     dbg_log_layer_.reset();
     fade_layer_.reset();
-
     root_task_.reset();
-
 }
 
 

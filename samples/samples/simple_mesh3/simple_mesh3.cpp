@@ -15,9 +15,10 @@
 class SimpleMesh3Scene::SceneContext
 {
 public:
-    SceneContext()
+    SceneContext(t3::SceneBase* owner)
         : layer_()
         , model_()
+        , owner_(owner)
     {}
     
     ~SceneContext()
@@ -32,13 +33,13 @@ public:
 
 
         //  モデル作成
-        t3::FilePath obj_path("character_chr_old.obj");
+        t3::FilePath obj_path("vox.obj");
         model_ = t3::Model::create(obj_path);
 
         
         //  カメラ位置調整
         float len = model_->mesh()->boundingSphere().radius();
-//        cam_updater_ = createTask<t3::LookAtCameraUpdater>();
+        cam_updater_ = owner_->createTask<t3::LookAtCameraUpdater>();
         cam_updater_->position(0, len*2, len*4);
         cam_updater_->targetPosition(0,0,0);
         
@@ -72,6 +73,7 @@ private:
     t3::LookAtCameraUpdaterPtr cam_updater_;
     t3::SceneGraph scene_graph_;
     t3::TransformNodePtr node1_;
+    SceneBase* owner_;
 };
 
 
@@ -81,7 +83,7 @@ private:
 
 SimpleMesh3Scene::SimpleMesh3Scene()
     : SceneBase("MeshObjScene") {
-    context_.reset(T3_SYS_NEW SceneContext());
+    context_.reset(T3_SYS_NEW SceneContext(this));
 }
 
 SimpleMesh3Scene::~SimpleMesh3Scene() {

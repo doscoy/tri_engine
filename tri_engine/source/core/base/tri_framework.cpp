@@ -34,7 +34,7 @@ namespace {
 t3::Vector<float> render_avg;   //  10秒分の値格納用
 
 
-#if DEBUG
+#ifdef TRI_DEBUG
 //  デバッグモード時に各種表示を行うか判定するフラグ
 bool show_fps_ = true;          // FPS
 bool show_heap_ = false;        // ヒープ容量（数値）
@@ -44,7 +44,7 @@ bool show_work_bar_ = false;    // CPUコスト（バー）
 bool show_work_time_ = false;   // CPUコスト（数値）
 bool show_task_ = false;        // タスク一覧
 
-#endif // DEBUG
+#endif // TRI_DEBUG
 
 
 t3::Workbar cpu_bar_;   // CPUバー表示用
@@ -75,7 +75,7 @@ struct Step {
 
 
 
-#if DEBUG
+#ifdef TRI_DEBUG
 
 ///
 /// デバッグメニュー
@@ -122,7 +122,7 @@ private:
     //  タスクの表示・非表示切り替え
     t3::DebugMenuItem<bool> dm_show_task_;
 };
-#endif // DEBUG
+#endif // TRI_DEBUG
 
 
 //----------------------------------------------------------------------
@@ -131,7 +131,7 @@ private:
 Framework::Framework()
     : app_(nullptr)
     , next_app_generator_(nullptr)
-#if DEBUG
+#ifdef TRI_DEBUG
     , system_menu_(nullptr)
 #endif
     , fps_timer_()
@@ -200,7 +200,7 @@ bool Framework::initializeFramework(int width, int height, const char* const tit
 
     
     
-#if DEBUG
+#ifdef TRI_DEBUG
     show_fps_ = true;
     show_mem_pool_ = true;
     show_work_bar_ = true;
@@ -210,7 +210,7 @@ bool Framework::initializeFramework(int width, int height, const char* const tit
 
 
 
-#if DEBUG
+#ifdef TRI_DEBUG
     //  システムデバッグメニュー登録
     system_menu_.reset(T3_SYS_NEW FrameworkDebugMenu);
     
@@ -218,7 +218,7 @@ bool Framework::initializeFramework(int width, int height, const char* const tit
     system_menu_->getSystemDebugMenuRoot().attachSelf(
         debug_menu_root.rootMenu()
     );
-#endif // DEBUG
+#endif // TRI_DEBUG
     
 
     return true;
@@ -254,7 +254,7 @@ void Framework::updateFramework() {
 
 
     //  FPS表示
-#if DEBUG
+#ifdef TRI_DEBUG
     if (show_fps_) {
         //  直近数フレームの平均値を表示
         
@@ -291,7 +291,7 @@ void Framework::updateFramework() {
         );
         cross::RenderSystem::resetDrawCallCount();
     }
-#endif // DEBUG
+#endif // TRI_DEBUG
     
     
     
@@ -369,9 +369,9 @@ void Framework::renderFramework() {
         last_other_cost_ = other_cost_timer_.interval();
     }
     
-#if DEBUG
+#ifdef TRI_DEBUG
     debugPrinting();
-#endif // DEBUG
+#endif // TRI_DEBUG
 
 
 
@@ -418,7 +418,7 @@ void Framework::initializeWorkBar() {
 
 void Framework::debugPrinting() {
 
-#if DEBUG
+#ifdef TRI_DEBUG
     auto& gs = Director::instance();
 
 
@@ -530,7 +530,7 @@ bool Framework::isDebugMenuOpenRequest() {
 
     bool result = false;
 
-#if DEBUG
+#ifdef TRI_DEBUG
 
     //  パッド操作でのオープンリクエスト
     const Pad& pad = debugPad();
@@ -546,7 +546,7 @@ bool Framework::isDebugMenuOpenRequest() {
     if (pointing.isDoubleClick() /*&& pointing.getPointingCount() == 3*/) {
         result = true;
     }
-#endif // DEBUG
+#endif // TRI_DEBUG
     return result;
 }
 

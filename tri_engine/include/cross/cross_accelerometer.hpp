@@ -15,6 +15,7 @@
 #define CROSS_ACCELEROMETER_HPP_INCLUDED
 
 #include "cross_config.hpp"
+#include "cross_buildlevel.hpp"
 
 
 CROSS_NS_BEGIN

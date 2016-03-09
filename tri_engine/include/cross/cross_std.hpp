@@ -33,6 +33,7 @@
 #include <fstream>
 #include <functional>
 #include <thread>
+#include <regex>
 
 
 #include "cross_config.hpp"

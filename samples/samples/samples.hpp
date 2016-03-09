@@ -107,8 +107,8 @@ class SampleApp
         //    app.rootScene(t3::SceneBase::sceneGenerator<SimpleSpriteScene>());
         //    app.rootScene(t3::TaskGenerator<ColladaMeshScene>::instancePtr());
         //    app.rootScene(t3::TaskGenerator<ColladaMesh2Scene>::instancePtr());
-        //    app.rootScene(t3::SceneBase::sceneGenerator<SimpleMesh3Scene>());
-        rootScene(t3::TaskGenerator<ShadowTestScene>::instancePtr());
+        rootScene(t3::TaskGenerator<SimpleMesh3Scene>::instancePtr());
+        //rootScene(t3::TaskGenerator<ShadowTestScene>::instancePtr());
         //app.rootScene(t3::TaskGenerator<WebNotificationTest>::instancePtr());
     
     

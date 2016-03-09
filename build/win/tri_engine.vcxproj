@@ -171,6 +171,7 @@
     <ClInclude Include="..\..\tri_engine\include\cross\cross.hpp" />
     <ClInclude Include="..\..\tri_engine\include\cross\cross_accelerometer.hpp" />
     <ClInclude Include="..\..\tri_engine\include\cross\cross_audio_system.hpp" />
+    <ClInclude Include="..\..\tri_engine\include\cross\cross_buildlevel.hpp" />
     <ClInclude Include="..\..\tri_engine\include\cross\cross_config.hpp" />
     <ClInclude Include="..\..\tri_engine\include\cross\cross_dbg.hpp" />
     <ClInclude Include="..\..\tri_engine\include\cross\cross_define.hpp" />

@@ -12,7 +12,7 @@
 
 
 //  メモリプールの使用最大値を検証
-#if DEBUG
+#ifdef TRI_DEBUG
 #define TRI_PEAK_POOL_CHECK     1
 #else
 #define TRI_PEAK_POOL_CHECK     1

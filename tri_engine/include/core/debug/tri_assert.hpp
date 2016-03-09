@@ -40,11 +40,11 @@ TRI_CORE_NS_END
 
 
 
-#ifdef DEBUG
+#ifdef TRI_DEBUG
     #define ENABLE_ASSERT   1
 #else
     #define ENABLE_ASSERT   0
-#endif // DEBUG
+#endif // TRI_DEBUG
 
 #if ENABLE_ASSERT
 

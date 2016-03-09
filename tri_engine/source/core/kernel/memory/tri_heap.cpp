@@ -14,7 +14,7 @@
 #include "core/utility/tri_util.hpp"
 #include "core/utility/tri_counter.hpp"
 
-#ifdef DEBUG
+#ifdef TRI_DEBUG
     #define TRI_DIRTY_MEMORY        1
     #define TRI_ALLOC_ENDMARKING    1
 #else

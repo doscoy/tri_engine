@@ -14,6 +14,7 @@
 #define CROSS_HPP_INCLUDED
 
 //  include
+#include "cross_buildlevel.hpp"
 #include "cross_define.hpp"
 #include "cross_std.hpp"
 #include "cross_accelerometer.hpp"

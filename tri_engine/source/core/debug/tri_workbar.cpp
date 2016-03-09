@@ -68,9 +68,9 @@ void Workbar::setParam(
 void Workbar::draw() {
 
 
-#ifndef DEBUG
+#ifndef TRI_DEBUG
     return;
-#endif  // DEBUG
+#endif  // TRI_DEBUG
 
     //
     float start_x = position_.x_;

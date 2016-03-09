@@ -122,9 +122,9 @@ void traceValue(int ch, const char* const name, const Mtx44& value);
 TRI_CORE_NS_END
 
 
-#ifdef DEBUG
+#ifdef TRI_DEBUG
     #define TRI_DEVELOPMENT_ENABLE_TRACE
-#endif // DEBUG
+#endif // TRI_DEBUG
 
 #ifdef TRI_DEVELOPMENT_ENABLE_TRACE
 
