@@ -15,7 +15,6 @@
 
 #if CROSS_GL_VERSION == CROSS_GL_40
 
-    #include "cross_os_glfw.cpp"
     #include "cross_render_system_gl4.cpp"
 
 #elif CROSS_GL_VERSION == CROSS_GL_ES2

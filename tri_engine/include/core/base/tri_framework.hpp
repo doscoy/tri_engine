@@ -49,7 +49,9 @@ private:
 public:
     ///
     /// 初期化
-    bool initializeFramework(int width, int height, const char* const title);
+    bool initializeFramework(
+        const InitConfiguration& config
+    );
 
     ///
     /// 更新

@@ -11,7 +11,7 @@
 TRI_JET_NS_BEGIN
 
 
-Scene::Scene(const char* const name) 
+Scene3D::Scene3D(const char* const name) 
     : core::SceneBase(name)
     , shadow_render_layer_()
     , shadow_render_target_(256,256,Surface::Type::DEPTH_ONLY)
@@ -21,20 +21,20 @@ Scene::Scene(const char* const name)
 
 
 
-Scene::~Scene() {
+Scene3D::~Scene3D() {
 }
 
-void Scene::initializeScene() {
+void Scene3D::initializeScene() {
     T3_RENDER_ASSERT();
 
     //  レイヤー準備
     shadow_render_layer_.name("shadow_render_layer_");
-    shadow_render_layer_.setRenderCallback<Scene>(this, &Scene::shadowRender);
+    shadow_render_layer_.setRenderCallback<Scene3D>(this, &Scene3D::shadowRender);
     shadow_render_layer_.setupRenderTargetToUserCustom(&shadow_render_target_);
 
     //  レイヤー準備
     scene_layer_.name("scene_layer_");
-    scene_layer_.setRenderCallback<Scene>(this, &Scene::sceneRender);
+    scene_layer_.setRenderCallback<Scene3D>(this, &Scene3D::sceneRender);
 
     //  シャドウ設定
     shadow_render_layer_.setupRenderTargetToUserCustom(&shadow_render_target_);
@@ -46,16 +46,16 @@ void Scene::initializeScene() {
     initialize();
 }
 
-void Scene::terminateScene() {
+void Scene3D::terminateScene() {
     terminate();
 }
 
-void Scene::updateScene(const DeltaTime dt) {
+void Scene3D::updateScene(const DeltaTime dt) {
     update(dt);
 }
 
 
-TransformNodePtr Scene::createModel(
+TransformNodePtr Scene3D::createModel(
     const FilePath& path
 ) {
     ModelPtr model = Model::create(path);
@@ -64,7 +64,7 @@ TransformNodePtr Scene::createModel(
     return node;
 }
 
-TransformNodePtr Scene::createChildModel(
+TransformNodePtr Scene3D::createChildModel(
     const FilePath& path,
     TransformNodePtr& parent
 ) {

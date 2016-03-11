@@ -32,8 +32,7 @@ TRI_CORE_NS_BEGIN
 ///
 /// コンストラクタ
 Application::Application()
-    : root_scene_generator_(nullptr)
-    , last_scene_change_frame_(0)
+    : last_scene_change_frame_(0)
     , initialized_(false)
 {
 }
@@ -64,11 +63,10 @@ void Application::initializeApplication()
     //  ゲームの初期化initializeGameの終了までにアプリのルートシーンを
     //  設定しておく
 
-    T3_NULL_ASSERT(root_scene_generator_);
-    //  ルートシーン作成
+    //  最初に起動するのはブートシーン
     auto& d = Director::instance();
-    d.rootTask()->addTaskRequest(root_scene_generator_);
-
+    auto boot_scene = TaskGenerator<BootScene>::instancePtr();
+    d.rootTask()->addTaskRequest(boot_scene);
 
     
     initialized_ = true;
@@ -114,7 +112,7 @@ void Application::terminateApplication() {
 ///
 /// ルートシーンへ飛ぶ
 void Application::gotoRootScene() {
-    t3::SceneManager::instance().forceChangeScene(root_scene_generator_);
+    t3::SceneManager::instance().restart();
 }
 
 

@@ -27,7 +27,7 @@ class Projector {
 private:
     Projector(
         const Vec2& screen,
-        float fov,
+        Degree fov,
         float near,
         float far  
     );
@@ -64,12 +64,12 @@ public:
         return far_;
     }
 
-    void fieldOfView(float fov) {
+    void fieldOfView(Degree fov) {
         fov_ = fov;
         calc_request_ = true;
     }
 
-    float fieldOfView() const {
+    Degree fieldOfView() const {
         return fov_;
     }
 
@@ -85,7 +85,7 @@ public:
     static ProjectorPtr create();
     static ProjectorPtr create(
         const Vec2& screen,
-        float fov,
+        Degree fov,
         float near,
         float far  
     );
@@ -96,7 +96,7 @@ private:
     Mtx44 mtx_;
     Vec2 screen_size_;
     bool calc_request_;
-    float fov_;
+    Degree fov_;
     float near_;
     float far_;
 

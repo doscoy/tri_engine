@@ -250,8 +250,8 @@ void Director::setupFinalLayer() {
         "final", t3::LayerBase::Priority::SYS_FRONT
     ));
     final_surface_.reset(T3_SYS_NEW FrameBufferSurface(
-        static_cast<float>(ScreenManager::VIRTUAL_SCREEN_WIDTH), 
-        static_cast<float>(ScreenManager::VIRTUAL_SCREEN_HEIGHT), 
+        screen_mgr.virtualScreenSize().x_, 
+        screen_mgr.virtualScreenSize().y_, 
         Surface::Type::COLOR_DEPTH)
     );
 

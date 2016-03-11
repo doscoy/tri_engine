@@ -12,7 +12,7 @@
 
 
 ShadowTestScene::ShadowTestScene()
-    : Scene("ShadowTest")
+    : Scene3D("ShadowTest")
     , cinema_(t3::Vec2(0,0), t3::Vec2(1.0f, 0.6f))
 {
 }

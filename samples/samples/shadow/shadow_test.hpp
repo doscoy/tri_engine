@@ -14,7 +14,7 @@
 
 
 class ShadowTestScene
-    : public t3::jet::Scene
+    : public t3::jet::Scene3D
 {
 public:
     ShadowTestScene();

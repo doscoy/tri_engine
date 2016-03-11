@@ -22,13 +22,24 @@
 /// cross_sdkのトップレベルネームスペース.
 CROSS_NS_BEGIN
 
+///
+/// 初期化用設定
+class InitConfiguration {
+public:
+    int window_width_ = 100;
+    int window_height_ = 100;
+    int virtual_screen_width_ = 100;
+    int virtual_screen_height_ = 100;
+    bool full_screen_ = false;
+    bool window_resizable_ = false;
+    const char* title_ = "TriENGINE Application";
+};
+
 
 ///
 /// プラットフォーム初期化
 bool initializePlatform(
-    int w,
-    int h,
-    const char* title
+    const InitConfiguration& config
 );
 
 ///

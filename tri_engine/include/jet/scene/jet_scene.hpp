@@ -19,12 +19,14 @@
 
 TRI_JET_NS_BEGIN
 
-class Scene 
+///
+/// 3Dシーン
+class Scene3D
     : public core::SceneBase 
 {
 public:
-    Scene(const char* const name);
-    ~Scene();
+    Scene3D(const char* const name);
+    ~Scene3D();
 
 public:
     /// このクラスを継承したクラスはこのメソッドを直接オーバーロードできません。

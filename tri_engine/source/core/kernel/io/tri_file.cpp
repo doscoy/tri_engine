@@ -76,7 +76,7 @@ bool File::loadFile(
     File::IOType type
 ) {
     int flag = 0;
-    if (mode == IOMode::IN) {
+    if (mode == IOMode::READ) {
         flag |= std::ios::in;
     } else {
         flag |= std::ios::out;

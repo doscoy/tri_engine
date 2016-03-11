@@ -16,8 +16,8 @@
 
 //  include
 #include "cross_config.hpp"
-#include <cstdint>
-#include <cstdlib>
+#include "cross_std.hpp"
+
 
 ///
 /// ソースファイルに直接書かれたシェーダコードを文字列化

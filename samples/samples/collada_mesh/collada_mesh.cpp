@@ -13,7 +13,7 @@
 
 
 ColladaMeshScene::ColladaMeshScene()
-    : Scene("ColladaMeshScene") 
+    : Scene3D("ColladaMeshScene") 
     , final_layer_()
     , cinema_()
     , cam_updater_()

@@ -14,7 +14,7 @@
 //
 
 ColladaMesh2Scene::ColladaMesh2Scene()
-    : t3::jet::Scene("ColladaMesh2Scene") 
+    : t3::jet::Scene3D("ColladaMesh2Scene") 
     , final_layer_()
     , cinema_()
     , cam_updater_()

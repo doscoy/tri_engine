@@ -26,8 +26,18 @@ public:
     void updateScene(const t3::DeltaTime delta_time) override;
 
 private:
-    class SceneContext;
-    t3::UniquePtr<SceneContext> context_;
+    void layerUpdate() {
+    }
+    void layerRender() {
+        scene_graph_.renderScene(t3::RenderInfo::NORMAL);
+    }
+
+private:
+    t3::DrawLayer layer_;
+    t3::ModelPtr model_;
+    t3::LookAtCameraUpdaterPtr cam_updater_;
+    t3::SceneGraph scene_graph_;
+    t3::TransformNodePtr node1_;
 
 };
 

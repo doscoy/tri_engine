@@ -652,11 +652,11 @@ public:
     ///
     /// 投影行列生成
     void perspective(
-        float const & fov,
-		float const & width,
-		float const & height,
-		float const & near,
-		float const & far
+        Radian fov,
+		float width,
+		float height,
+		float near,
+		float far
     ) {
         makePerspective(*this, fov, width, height, near, far);
     }
@@ -666,15 +666,15 @@ public:
     /// 投影行列生成
     static void makePerspective(
         Mtx44& mtx,
-        float const & fov_radian,
-		float const & width,
-		float const & height,
-		float const & near,
-		float const & far
+        Radian fov_radian,
+		float width,
+		float height,
+		float near,
+		float far
 	) {
 
         //  mesa
-	    float radians = fov_radian * 0.5f;
+	    float radians = fov_radian.angle() * 0.5f;
 	    float deltaZ = far - near;
 	    float sine = std::sin(radians);
 	    float cotangent = std::cos(radians) / sine;
@@ -694,11 +694,11 @@ public:
     ///
     /// 投影行列生成
     static Mtx44 getPerspective(
-        float const & fov,
-		float const & width,
-		float const & height,
-		float const & near,
-		float const & far
+        Radian fov,
+		float width,
+		float height,
+		float near,
+		float far
     ) {
         Mtx44 m;
         makePerspective(m, fov, width, height, near, far);

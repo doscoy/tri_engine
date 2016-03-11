@@ -15,8 +15,8 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "../debug/tri_assert.hpp"
-#include "../kernel/tri_kernel.hpp"
+#include "core/debug/tri_assert.hpp"
+#include "core/kernel/memory/tri_new.hpp"
 #include "core/utility/tri_uncopyable.hpp"
 
 

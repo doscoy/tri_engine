@@ -29,13 +29,20 @@ int main(int argc, char * argv[])
     }
     
 #else // MacOSX or Windows
-    float screen_x = 16 * 10;
-    float screen_y =  9 * 10;
-    if (!tri.initializeFramework(screen_x, screen_y, "win")) {
+
+    //  フレームワーク構成
+    t3::InitConfiguration config;
+    config.full_screen_ = false;
+    config.window_resizable_ = true;
+    config.virtual_screen_width_ = 640;
+    config.virtual_screen_height_ = 1156;
+
+    if (!tri.initializeFramework(config)) {
         //  初期化に失敗
         return 0;
     }
         
+    //  メインループ
     while (tri.isActive()) {
         tri.updateFramework();
         tri.renderFramework();

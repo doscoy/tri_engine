@@ -47,15 +47,9 @@ public:
     };
 
 public:
-
-
     ///
-    /// デバイスのスクリーンサイズ設定
-    void deviceScreenSize(const Vec2& vp) {
-        device_screen_size_ = vp;
-        calcScreenRevise();
-        calcAspectMode();
-    }
+    /// スクリーンリサイズ
+    void resizeScreen(const Vec2& screen);
     
     ///
     /// デバイスのスクリーンサイズ取得
@@ -100,8 +94,11 @@ public:
         return aspect_mode_;
     }
 
-    static constexpr int VIRTUAL_SCREEN_WIDTH = 640;
-    static constexpr int VIRTUAL_SCREEN_HEIGHT = 1136;
+    static constexpr int VIRTUAL_SCREEN_WIDTH_PORTRAIT = 640;
+    static constexpr int VIRTUAL_SCREEN_HEIGHT_PORTRAIT = 1136;
+
+    static constexpr int VIRTUAL_SCREEN_WIDTH_LANDSCAPE = 1920;
+    static constexpr int VIRTUAL_SCREEN_HEIGHT_LANDSCAPE = 1080;
 
 private:
     ///
@@ -112,6 +109,14 @@ private:
     /// アスペクトモード調査
     void calcAspectMode();
     
+    ///
+    /// デバイスのスクリーンサイズ設定
+    void deviceScreenSize(const Vec2& vp) {
+        device_screen_size_ = vp;
+        calcScreenRevise();
+        calcAspectMode();
+    }
+
 private:
     //   スクリーンサイズ
     Vec2 device_screen_size_;           ///< デバイススクリーンサイズ
@@ -124,4 +129,4 @@ private:
 
 TRI_CORE_NS_END
 
-#endif // TRI_SCREEN_MANAGER_INCLUDED
+#endif // TRI_SCREEN_MANAGER_HPP_INCLUDED

@@ -16,7 +16,7 @@ String loadText(
     const char* const path  // パス
 ) {
     File file;
-    file.loadFile(path, File::IOMode::IN, File::IOType::TEXT);
+    file.loadFile(path, File::IOMode::READ, File::IOType::TEXT);
     return String(reinterpret_cast<const char*>(file.data()));
 }
 

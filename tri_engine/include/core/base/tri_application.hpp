@@ -100,15 +100,6 @@ public:
     bool isReady() const {
         return  initialized_;
     }
-
-    ///
-    /// アプリケーションのルートシーンを設定
-    void rootScene(
-        TaskGeneratorBase* root    ///< root
-    ) {
-        root_scene_generator_ = root;
-    }
-    
     
     ///
     /// アプリケーションのジェネレータ取得
@@ -126,7 +117,6 @@ public:
     
     
 private:
-    TaskGeneratorBase* root_scene_generator_;  ///< ルートシーンのジェネレータ
     uint32_t last_scene_change_frame_;  ///< 最後にシーンチェンジしたフレーム
     uint32_t memory_leak_check_filter_; ///< メモリリークチェックフィルタ
     bool initialized_;

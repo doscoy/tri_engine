@@ -5,19 +5,40 @@
 #include "cross/cross_render_system.hpp"
 #include "cross/cross_dbg.hpp"
 
+
+//#include "core/kernel/io/tri_file.hpp"
+#include "cross/cross_std.hpp"
+#include "core/core_config.hpp"
+#include "core/utility/tri_uncopyable.hpp"
+#include "core/base/tri_types.hpp"
+#include "core/kernel/io/tri_filepath.hpp"
+
+#include "core/base/tri_screen_manager.hpp"
+#include "core/base/tri_director.hpp"
+
 namespace {
 
 GLFWwindow* window_ = nullptr;
-float window_width_;
-float window_height_;
-float half_width_;
-float half_height_;
 
 
 }   // unname namespace
 
 CROSS_NS_BEGIN
 
+/// ウィンドウリサイズ時のコールバック
+///     ウィンドウサイズが変更された時に呼ばれる
+void windowResizeCallback(
+    GLFWwindow* window, // リサイズされたウィンドウ
+    int width,          // 新しい幅
+    int height          // 新しい高さ
+) {
+    auto& screen_mgr = t3::ScreenManager::instance();
+    Vec2 new_size(width, height);
+    screen_mgr.resizeScreen(new_size);
+
+    auto& director = t3::Director::instance();
+    director.setupFinalLayer();
+}
 
 
 uint32_t padEmulateKeyboard() {
@@ -73,9 +94,7 @@ uint32_t padEmulateKeyboard() {
 
 
 bool initializePlatform(
-    int w,
-    int h,
-    const char* title
+    const InitConfiguration& config
 ) {
 
     if (!glfwInit()) {
@@ -92,7 +111,15 @@ bool initializePlatform(
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, true);
 
     //  ウィンドウリサイズ設定
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    if (config.window_resizable_) {
+        //  リサイズ許可
+        glfwWindowHint(GLFW_RESIZABLE, true);
+    } else {
+        //  リサイズ禁止
+        glfwWindowHint(GLFW_RESIZABLE, false);
+
+    }
+
 
     //  デプスバッファビット深度
     glfwWindowHint(GLFW_DEPTH_BITS, 16);
@@ -103,9 +130,33 @@ bool initializePlatform(
     //  コアプロファイル
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window_ = glfwCreateWindow(w, h, title, nullptr, nullptr);
+    // ----------------------------------------
+    //  window生成
+    float w = config.window_width_;
+    float h = config.window_height_;
+    GLFWmonitor* monitor = nullptr;
+    if (config.full_screen_) {
+        monitor = glfwGetPrimaryMonitor();
+    }
+
+    //  生成
+    window_ = glfwCreateWindow(
+        w, h, 
+        config.title_, 
+        monitor, 
+        nullptr
+    );
+
+
     if (window_) {
+        //  window
         glfwMakeContextCurrent(window_);
+
+        //  ウィンドウリサイズが許可されている場合はコールバック設定
+        if (config.window_resizable_) {
+            glfwSetWindowSizeCallback(window_, windowResizeCallback);
+        }
+
     } else {
         return false;
     }
@@ -118,14 +169,6 @@ bool initializePlatform(
 		std::cout << "error: " << glewGetErrorString( init_result ) << std::endl;
         return false;
 	}
-
-
-
-    //  スクリーンサイズを覚えておく
-    window_width_ = static_cast<float>(w);
-    window_height_ = static_cast<float>(h);
-    half_width_ = static_cast<float>(w / 2);
-    half_height_ = static_cast<float>(h / 2);
 
     //  オーディオシステムの初期化
     AudioSystem::initializeAudioSystem();
@@ -266,9 +309,12 @@ void platformPointingData(
     
     double x, y;
     glfwGetCursorPos(window_, &x, &y);
-    
-    data->x_ = (x - half_width_) / half_width_;
-    data->y_ = -((y - half_height_) / half_height_);
+
+
+    auto& screen_mgr = t3::ScreenManager::instance();
+    Vec2 screen_half = screen_mgr.deviceScreenSize().half();
+    data->x_ = (x - screen_half.x_) / screen_half.x_;
+    data->y_ = -((y - screen_half.y_) / screen_half.y_);
     
     data->hit_ = (glfwGetMouseButton(window_, GLFW_MOUSE_BUTTON_LEFT) != 0);
 

@@ -125,7 +125,6 @@ public:
 
 
 
-
 class SceneManager
     : public Singleton<SceneManager>
 {
@@ -136,7 +135,8 @@ private:
     ~SceneManager();
     
 public:
-    
+    ///
+    /// 強制シーン切り替え
     void forceChangeScene(
         TaskGeneratorBase* const next_scene_generator
     ) {
@@ -146,29 +146,83 @@ public:
         }
     }
     
+    ///
+    /// 強制ルートシーンへ
+    void restart() {
+        forceChangeScene(root_scene_generator_);
+    }
+
+
+    ///
+    /// シーン切り替え完了判定
     bool isSceneChenged() const {
         return scene_changed_;
     }
     
-    
+    ///
+    /// カレントシーン設定
     void current(SceneBase* s) {
         T3_ASSERT_MSG(cur_ == nullptr || s == nullptr, "Scene instance must only one in frame.");
         cur_ = s;
     }
 
-
+    ///
+    /// シーン切り替え順登録
     void addSceneHistory(const char* const name) {
         history_.push_back(name);
     }
 
-private:
-    void sceneChange();
+    ///
+    /// アプリケーションのルートシーンを設定
+    void rootScene(
+        TaskGeneratorBase* root    ///< root
+    ) {
+        root_scene_generator_ = root;
+    }
 
+    TaskGeneratorBase* rootScene() const {
+        return root_scene_generator_;
+    }
+    
 private:
+    ///
+    /// カレントシーン
     SceneBase* cur_;
+
+    ///
+    /// シーン切り替え完了フラグ
     bool scene_changed_;
+
+    ///
+    /// シーンヒストリ
     Vector<const char*> history_;
+
+    ///
+    /// ルートシーン
+    TaskGeneratorBase* root_scene_generator_;
 };
+
+///
+/// ブートシーン
+class BootScene
+    : public SceneBase
+{
+public:
+    BootScene()
+        : SceneBase("BootScene")
+    {}
+
+    
+    void initializeScene() override {
+        auto& sm = SceneManager::instance();
+        nextTaskGenerator(sm.rootScene());
+    }
+
+    void updateScene(const DeltaTime dt) override {
+        finish();
+    }
+};
+
 
 
 

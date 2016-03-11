@@ -31,8 +31,8 @@ class File
 {
 public:
     enum class IOMode {
-        IN,
-        OUT
+        READ,
+        WRITE
     };
     
     enum class IOType {
@@ -69,7 +69,7 @@ public:
     ///  ファイル読み込み
     bool loadFile(
         const FilePath& filepath,
-        IOMode mode = IOMode::IN,
+        IOMode mode = IOMode::READ,
         IOType type = IOType::BINARY
     );
 
@@ -77,7 +77,7 @@ public:
     ///  ファイル読み込み
     bool loadFile(
         const char* const filepath,
-        IOMode mode = IOMode::IN,
+        IOMode mode = IOMode::READ,
         IOType type = IOType::BINARY
     );
 

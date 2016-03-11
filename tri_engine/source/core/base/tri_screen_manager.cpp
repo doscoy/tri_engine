@@ -18,10 +18,8 @@ TRI_CORE_NS_BEGIN
 ///
 /// コンストラクタ
 ScreenManager::ScreenManager()
-    : device_screen_size_(VIRTUAL_SCREEN_WIDTH, VIRTUAL_SCREEN_HEIGHT)
-    , virtual_screen_size_(
-        VIRTUAL_SCREEN_WIDTH,
-        VIRTUAL_SCREEN_HEIGHT)
+    : device_screen_size_()
+    , virtual_screen_size_()
     , screen_revise_()
 {}
 
@@ -95,7 +93,21 @@ void ScreenManager::calcAspectMode() {
 }
 
 
+///
+/// スクリーンリサイズ
+void ScreenManager::resizeScreen(
+    const Vec2& screen
+) {
+    deviceScreenSize(screen);
 
+    cross::RenderSystem::setViewport(
+        0,
+        0,
+        static_cast<int>(screen.x_),
+        static_cast<int>(screen.y_)
+    );
+
+}
 
 TRI_CORE_NS_END
 

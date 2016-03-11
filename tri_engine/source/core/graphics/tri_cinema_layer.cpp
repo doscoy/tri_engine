@@ -18,12 +18,14 @@ TRI_CORE_NS_BEGIN
 
   
 
-
+///
+/// コンストラクタ
 CinemaLayer::CinemaLayer()
     : CinemaLayer(Position2D(-1,-1), Position2D(1,1))
 {}
 
-
+///
+/// コンストラクタ
 CinemaLayer::CinemaLayer(
     const Position2D min_pos,
     const Position2D max_pos,

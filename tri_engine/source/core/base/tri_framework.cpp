@@ -152,12 +152,12 @@ Framework::~Framework()
 //----------------------------------------------------------------------
 ///
 /// フレームワーク初期化
-bool Framework::initializeFramework(int width, int height, const char* const title)
+bool Framework::initializeFramework(const InitConfiguration& config)
 {
 
 
     //  プラットフォームの初期化
-    if (!cross::initializePlatform(width, height, title)) {
+    if (!cross::initializePlatform(config)) {
         return false;
     }
 
@@ -169,24 +169,26 @@ bool Framework::initializeFramework(int width, int height, const char* const tit
     
     //  デバイスの画面サイズ設定
     auto& screen_mgr = t3::ScreenManager::instance();
-    screen_mgr.deviceScreenSize(
+    screen_mgr.resizeScreen(
         Vec2(
-            static_cast<float>(width),
-            static_cast<float>(height)
+            static_cast<float>(config.window_width_),
+            static_cast<float>(config.window_height_)
         )
     );
-    cross::RenderSystem::setViewport(
-        0,
-        0,
-        static_cast<int>(screen_mgr.deviceScreenSize().x_),
-        static_cast<int>(screen_mgr.deviceScreenSize().y_)
+
+    //  仮想スクリーンの画面サイズ設定
+    screen_mgr.virtualScreenSize(
+        Vec2(
+            static_cast<float>(config.virtual_screen_width_),
+            static_cast<float>(config.virtual_screen_height_)
+        )
     );
+    
     
 
     
     //  準備完了
     T3_SYSTEM_LOG("Initialize TriEngine.\n");
-    T3_SYSTEM_LOG("screen width %d  height %d\n", width, height);
     
     
     //  ワークバー初期化
@@ -196,6 +198,7 @@ bool Framework::initializeFramework(int width, int height, const char* const tit
     //  デバッグ描画の初期化
     initializeDrawPrimitive();
    
+    //  最終描画レイヤー初期化
     director.setupFinalLayer();
 
     
@@ -572,9 +575,12 @@ void Framework::beginRender() {
     auto& director = Director::instance();
 
     //  クリアカラー設定
-    auto& c = director.getClearColor();
+    auto c = director.getClearColor();
     cross::RenderSystem::clearColor(c.redFloat(), c.greenFloat(), c.blueFloat(), c.alphaFloat());
     cross::RenderSystem::clearBuffer(true, true, false);
+
+    c = color_sample::black();
+    cross::RenderSystem::clearColor(c.redFloat(), c.greenFloat(), c.blueFloat(), c.alphaFloat());
 
 }
 
