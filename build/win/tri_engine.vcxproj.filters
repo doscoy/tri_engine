@@ -678,6 +678,9 @@
     <ClInclude Include="..\..\tri_engine\include\cross\cross_buildlevel.hpp">
       <Filter>include\cross</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_numbers.hpp">
+      <Filter>include\jet\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\tri_engine\source\jet\scene\jet_scene.cpp">
@@ -1069,6 +1072,9 @@
     </ClCompile>
     <ClCompile Include="..\..\tri_engine\source\third_party\zlib\crc32.c">
       <Filter>source\third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\jet\gui\jet_numbers.cpp">
+      <Filter>source\jet\gui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

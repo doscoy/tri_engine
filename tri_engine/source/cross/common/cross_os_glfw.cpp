@@ -32,6 +32,7 @@ void windowResizeCallback(
     int width,          // 新しい幅
     int height          // 新しい高さ
 ) {
+
     auto& screen_mgr = t3::ScreenManager::instance();
     Vec2 new_size(width, height);
     screen_mgr.resizeScreen(new_size);

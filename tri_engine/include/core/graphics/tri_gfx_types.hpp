@@ -19,7 +19,7 @@ TRI_CORE_NS_BEGIN
 
 ///
 /// テクスチャ座標構造体
-struct texture_coord_t {
+struct TextureUV {
     float u0_;
     float v0_;
     float u1_;

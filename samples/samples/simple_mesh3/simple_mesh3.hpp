@@ -22,16 +22,12 @@ public:
     
 public:
     void initializeScene() override;
-    void terminateScene() override;
     void updateScene(const t3::DeltaTime delta_time) override;
 
 private:
-    void layerUpdate() {
-    }
     void layerRender() {
         scene_graph_.renderScene(t3::RenderInfo::NORMAL);
     }
-
 private:
     t3::DrawLayer layer_;
     t3::ModelPtr model_;

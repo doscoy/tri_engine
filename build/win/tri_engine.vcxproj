@@ -184,6 +184,7 @@
     <ClInclude Include="..\..\tri_engine\include\cross\cross_web_notification_screen.hpp" />
     <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_button.hpp" />
     <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_gui.hpp" />
+    <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_numbers.hpp" />
     <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_radio_button.hpp" />
     <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_swap_button.hpp" />
     <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_textbox.hpp" />
@@ -306,6 +307,7 @@
     <ClCompile Include="..\..\tri_engine\source\cross\win\cross_dbg.cpp" />
     <ClCompile Include="..\..\tri_engine\source\cross\win\cross_os.cpp" />
     <ClCompile Include="..\..\tri_engine\source\jet\gui\jet_button.cpp" />
+    <ClCompile Include="..\..\tri_engine\source\jet\gui\jet_numbers.cpp" />
     <ClCompile Include="..\..\tri_engine\source\jet\gui\jet_radio_button.cpp" />
     <ClCompile Include="..\..\tri_engine\source\jet\gui\jet_swap_button.cpp" />
     <ClCompile Include="..\..\tri_engine\source\jet\gui\jet_textbox.cpp" />

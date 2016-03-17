@@ -26,7 +26,6 @@ SimpleMesh3Scene::~SimpleMesh3Scene() {
 void SimpleMesh3Scene::initializeScene() {
     //  レイヤー準備
     layer_.name("SimpleMesh3Scene::DrawLayer");
-    layer_.setUpdateCallback(this, &SimpleMesh3Scene::layerUpdate);
     layer_.setRenderCallback(this, &SimpleMesh3Scene::layerRender);
 
 
@@ -36,7 +35,7 @@ void SimpleMesh3Scene::initializeScene() {
 
         
     //  カメラ位置調整
-    float len = model_->mesh()->boundingSphere().radius();
+    float len = 0.75;//model_->mesh()->boundingSphere().radius();
     cam_updater_ = createTask<t3::LookAtCameraUpdater>();
     cam_updater_->position(0, len*2, len*4);
     cam_updater_->targetPosition(0,0,0);
@@ -45,11 +44,6 @@ void SimpleMesh3Scene::initializeScene() {
     scene_graph_.camera(cam_updater_->camera());
     node1_ = scene_graph_.createNode();
     node1_->entity(model_);
-
-}
-
-
-void SimpleMesh3Scene::terminateScene() {
 
 }
 

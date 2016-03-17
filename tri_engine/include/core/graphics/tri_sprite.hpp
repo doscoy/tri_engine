@@ -176,14 +176,14 @@ public:
 
     ///
     ///  テクスチャ座標を取得
-    const texture_coord_t& textureCoord() const {
+    const TextureUV& textureCoord() const {
         return texture_coord_;
     }
 
     ///
     ///  テクスチャ座標を設定
     void textureCoord(
-        const texture_coord_t& tex_coord
+        const TextureUV& tex_coord
     ){
         texture_coord_ = tex_coord;
     }
@@ -418,7 +418,7 @@ private:
     
     ///
     /// テクスチャUV
-    texture_coord_t texture_coord_;
+    TextureUV texture_coord_;
     
     ///
     /// ソート用スコア

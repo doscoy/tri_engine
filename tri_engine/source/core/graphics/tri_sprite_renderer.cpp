@@ -390,7 +390,7 @@ void SpriteRenderer::margeSprites() {
         rb *= half;
 
         //  頂点バッファは普通に並べる
-        const texture_coord_t& uv = spr->textureCoord();
+        const TextureUV& uv = spr->textureCoord();
         const Color& color = spr->color();
         {
             VertexP2CT v1;

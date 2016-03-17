@@ -20,6 +20,10 @@ FrameBufferSurface::FrameBufferSurface(
     float height,
     Type type
 )   : size_(width, height)
+    , last_viewport_pos_x_(0)
+    , last_viewport_pos_y_(0)
+    , last_viewport_width_(0)
+    , last_viewport_height_(0)
     , fb_()
     , color_texture_()
     , depth_texture_()
