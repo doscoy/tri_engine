@@ -36,7 +36,7 @@ public:
         : angle_(angle)
     {}
     
-    float angle() const {
+    float value() const {
         return angle_;
     }
 
@@ -94,7 +94,7 @@ public:
         : angle_(angle)
     {}
     
-    float angle() const {
+    float value() const {
         return angle_;
     }
 
@@ -144,7 +144,7 @@ public:
 ///
 /// デグリーからラジアンへ変換
 inline Radian toRadian(const Degree& degree) {
-    return Radian(degree.angle() * PI / 180.0f);
+    return Radian(degree.value() * PI / 180.0f);
 }
 
 
@@ -153,7 +153,7 @@ inline Radian toRadian(const Degree& degree) {
 ///
 /// ラジアンからデグリーへ変換
 inline Degree toDegree(const Radian& radian) {
-    return Degree(radian.angle() / PI * 180.0f);
+    return Degree(radian.value() / PI * 180.0f);
 }
 
 

@@ -429,7 +429,7 @@ public:
         Mtx44& m,
         Radian radian
     ) {
-        float r = radian.angle();
+        float r = radian.value();
         float sin = std::sinf(r);
         float cos = std::cosf(r);
 
@@ -447,7 +447,7 @@ public:
         Mtx44& m,
         Radian radian
     ) {
-        float r = radian.angle();
+        float r = radian.value();
         float sin = std::sinf(r);
         float cos = std::cosf(r);
     
@@ -465,7 +465,7 @@ public:
         Mtx44& m,
         Radian radian
     ) {
-        float r = radian.angle();
+        float r = radian.value();
         float sin = std::sinf(r);
         float cos = std::cosf(r);
         
@@ -556,7 +556,7 @@ public:
         const Vec3& axis,
         Radian radian
     ) {
-		float r = radian.angle();
+		float r = radian.value();
         float s = ::std::sinf(r);
         float c = ::std::cosf(r);
         float t = 1.0f - c;
@@ -674,7 +674,7 @@ public:
 	) {
 
         //  mesa
-	    float radians = fov_radian.angle() * 0.5f;
+	    float radians = fov_radian.value() * 0.5f;
 	    float deltaZ = far - near;
 	    float sine = std::sin(radians);
 	    float cotangent = std::cos(radians) / sine;

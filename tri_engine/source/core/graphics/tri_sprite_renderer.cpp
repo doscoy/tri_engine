@@ -229,10 +229,10 @@ void spriteTransformCore(
     //  回転
     Degree rot_z = transform->rotation().z_;
 
-    if (!isZeroFloat(rot_z.angle())) {
+    if (!isZeroFloat(rot_z.value())) {
         Radian angle = toRadian(rot_z);
-        float cos_angle = std::cos(angle.angle());
-        float sin_angle = std::sin(angle.angle());
+        float cos_angle = std::cos(angle.value());
+        float sin_angle = std::sin(angle.value());
         {
             float ltx = lt.x_;
             float lty = lt.y_;

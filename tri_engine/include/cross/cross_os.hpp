@@ -26,10 +26,10 @@ CROSS_NS_BEGIN
 /// 初期化用設定
 class InitConfiguration {
 public:
-    int window_width_ = 100;
-    int window_height_ = 100;
-    int virtual_screen_width_ = 100;
-    int virtual_screen_height_ = 100;
+    int window_width_ = 500;
+    int window_height_ = 500;
+    int virtual_screen_width_ = 640;
+    int virtual_screen_height_ = 1136;
     bool full_screen_ = false;
     bool window_resizable_ = false;
     const char* title_ = "TriENGINE Application";
