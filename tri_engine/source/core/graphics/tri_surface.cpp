@@ -19,7 +19,8 @@ FrameBufferSurface::FrameBufferSurface(
     float width,
     float height,
     Type type
-)   : size_(width, height)
+)   : Surface(type)
+    , size_(width, height)
     , fb_()
     , color_texture_()
     , depth_texture_()
@@ -98,13 +99,13 @@ void FrameBufferSurface::bind() {
 }
 
 void FrameBufferSurface::clearBuffer() {
+    T3_ASSERT(surfaceType() != Surface::Type::ERROR_TYPE);
     if (buffer_cleared_) {
         //  既にクリア済のバッファなのでクリアはスキップ
         return;
     }
     
-    
-    if (type_ == Type::DEPTH_ONLY) {
+    if (surfaceType() == Type::DEPTH_ONLY) {
         cross::RenderSystem::clearBuffer(false, true, false);
     }
     else {

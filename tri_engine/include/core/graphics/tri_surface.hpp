@@ -27,12 +27,17 @@ TRI_CORE_NS_BEGIN
 class Surface {
 public:
     enum class Type {
+        ERROR_TYPE,
         DEPTH_ONLY,
         COLOR_ONLY,
         COLOR_DEPTH
     };
 
 public:
+    explicit Surface(Type t)
+        : type_(t)
+    {}
+    
     virtual ~Surface() = default;
     
 public:
@@ -52,7 +57,12 @@ public:
         return type_ == Type::COLOR_ONLY;
     }
 
-protected:
+    Type surfaceType() const {
+        return type_;
+    }
+    
+
+private:
     ///
     /// サーフェスタイプ
     Type type_;
@@ -194,6 +204,10 @@ class DeviceSurface
     : public Surface
 {
 public:
+    DeviceSurface()
+        : Surface(Surface::Type::COLOR_DEPTH)
+    {}
+    
     void onBeginRender() override {}
     void onPreRender() override {}
     void onPostRender() override {}

@@ -22,25 +22,30 @@ public:
         , moz_lv_(0)
     {
 
-        
-        const char* my_fsh = TRI_INSTANT_SHADER(
-            varying lowp vec2 v_texture_uv;
-            uniform sampler2D sampler;
 
-            uniform mediump float const_f0;
+    const char* pass1_fsh = R"(
+        #version 300 es
+        precision mediump float;
 
-            void main() {
-                mediump float pix =const_f0;
-                highp vec2 size = vec2(512.0, 512.0);
-                highp vec2 target;
-                target.x = float(int((v_texture_uv.x * size.x) / pix) * int(pix));
-                target.y = float(int((v_texture_uv.y * size.y) / pix) * int(pix));
-                highp vec4 c = texture2D(sampler, (target / size));
-                gl_FragColor = c;
+        in vec2 v_texture_uv;
+        uniform sampler2D sampler;
+        uniform float const_f_0;       // texel offset = (1/height)
+        uniform float const_fa_0[5];   // weight
+        layout (location = 0) out vec4 FragColor;
+
+        void main() {
+            vec4 sum = texture(sampler, v_texture_uv) * const_fa_0[0];
+            for (int i = 1; i < 5; ++i) {
+                sum += texture(sampler, v_texture_uv + vec2(0.0, float(i) * const_f_0)) * const_fa_0[i];
+                sum += texture(sampler, v_texture_uv - vec2(0.0, float(i) * const_f_0)) * const_fa_0[i];
             }
-        );
-        
-        shader_ = t3::Shader::create(simple_tex_vsh, my_fsh);
+
+            FragColor = sum;
+        }
+    )";
+
+
+        shader_ = t3::Shader::create(simple_tex_vsh, pass1_fsh);
 
     }
     
@@ -53,10 +58,10 @@ public:
         sprite_ = layer_.createSprite("piko.png");
         
         //  スプライトレイヤはオフスクリーンに書く
-        layer_.setupRenderTargetToUserCustom(&surface_);
+//        layer_.setupRenderTargetToUserCustom(&surface_);
         
-        screen_.texture(surface_.colorTexture());
-        screen_.shader(shader_);
+//        screen_.texture(surface_.colorTexture());
+//        screen_.shader(shader_);
         
         pola_.startInterpolation(moz_lv_, 13, 33.0f, t3::InterpolationType::LINER);
     }
@@ -66,8 +71,8 @@ public:
     }
     
     void update(const t3::DeltaTime delta_time) {
-        t3::Degree r = sprite_->transform()->rotation().z_;
-        sprite_->transform()->rotation(t3::Rotation(0,0,r + t3::Degree(0.33f)));
+
+        sprite_->transform()->rotateZ(t3::Degree(0.33f * t3::deltaRate(delta_time)));
         
         pola_.updateInterpolation(delta_time);
         shader_->setConstFloat(0, static_cast<float>(moz_lv_));

@@ -111,10 +111,10 @@ class SampleApp
         
         //app.rootScene(t3::TaskGenerator<WebNotificationTest>::instancePtr());
     
-//        rootScene(t3::TaskGenerator<SimpleSpriteScene>::instancePtr());
-        sm.rootScene(t3::TaskGenerator<SimpleMesh3Scene>::instancePtr());
+//        sm.rootScene(t3::TaskGenerator<SimpleSpriteScene>::instancePtr());
+//        sm.rootScene(t3::TaskGenerator<SimpleMesh3Scene>::instancePtr());
 //        sm.rootScene(t3::TaskGenerator<ShadowTestScene>::instancePtr());
-        
+        sm.rootScene(t3::TaskGenerator<BlurScene>::instancePtr());
         
     }
     
