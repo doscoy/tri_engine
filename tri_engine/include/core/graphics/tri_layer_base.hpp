@@ -252,7 +252,7 @@ public:
     ///  全てのレイヤーを更新
     static void updateLayers(
         Layers& layers,
-        DeltaTime delta_time
+        const FrameInfo& frame_info
     );
     
     ///
@@ -268,7 +268,7 @@ protected:
     
     ///
     /// 更新
-    virtual void updateLayer(const DeltaTime delta_time) {}
+    virtual void updateLayer(const FrameInfo& frame_info) {}
     
     ///
     /// 描画

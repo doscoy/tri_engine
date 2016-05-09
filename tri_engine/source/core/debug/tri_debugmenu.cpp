@@ -88,7 +88,7 @@ void DebugMenu::closeMenu() {
 
 ///
 /// 更新
-void DebugMenu::update(const DeltaTime delta_time) {
+void DebugMenu::update(const FrameInfo& frame_info) {
     if (!isOpened()) {
         return;
     }

@@ -24,9 +24,11 @@ const Pad& debugPad(){
     return debug_pad_;
 }
     
-void updateDebugPad( const cross::GamePadData& pad_data, DeltaTime delta_time )
-{
-    debug_pad_.updatePad( pad_data, delta_time );
+void updateDebugPad( 
+    const cross::GamePadData& pad_data, 
+    const FrameInfo& frame_info 
+) {
+    debug_pad_.updatePad( pad_data, frame_info );
 }
 
 TRI_CORE_NS_END

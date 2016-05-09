@@ -17,6 +17,7 @@
 #include "core/core_config.hpp"
 #include "tri_pad.hpp"
 #include "tri_pointing.hpp"
+#include "core/base/tri_frame_info.hpp"
 
 
 TRI_CORE_NS_BEGIN
@@ -51,27 +52,27 @@ public:
     /// ゲームパッド情報を更新
     void updatePad(
         const cross::GamePadData& paddata,
-        DeltaTime delta_time
+        const FrameInfo& frame_info
     ) {
-        pad_.updatePad(paddata, delta_time);
+        pad_.updatePad(paddata, frame_info);
     }
     
     ///
     /// ポインティングデバイス情報を更新
     void updatePointing(
         const cross::PointingData& pointing_data,
-        DeltaTime delta_time
+        const FrameInfo& frame_info
     ) {
-        pointing_.updatePointing(pointing_data, delta_time);
+        pointing_.updatePointing(pointing_data, frame_info);
     }
     
     ///
     /// 加速度センサー情報を更新
     void updateAccelermeter(
         const cross::AccelerometerData acc_data,
-        DeltaTime delta_time
+        const FrameInfo& frame_info
     ) {
-        (void)delta_time;
+        (void)frame_info;
         accele_ = acc_data;
     }
 

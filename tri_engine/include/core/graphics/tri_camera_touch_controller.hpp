@@ -26,7 +26,7 @@ TRI_CORE_NS_BEGIN
 class CameraTouchController
     : public TaskBase
 {
-    void onTaskUpdate(const DeltaTime dt) override;
+    void onTaskUpdate(const FrameInfo& frame_info) override;
 };
 
 ///

@@ -50,12 +50,12 @@ void TaskBase::doTaskTerminate() {
 }
 
 void TaskBase::doTaskUpdate(
-    const DeltaTime dt
+    const FrameInfo& frame_info
 ) {
     //  更新遅延設定がある場合
     if (delay_ > 0.0f) {
         //  指定時間がすぎるまで更新しない
-        delay_ -= dt;
+        delay_ -= frame_info.deltaTime();
         return;
     }
 
@@ -78,12 +78,12 @@ void TaskBase::doTaskUpdate(
     }
 
     if (!paused()) {
-        onTaskUpdate(dt);
+        onTaskUpdate(frame_info);
         
         //  直前のアップデートでkillされてなければ子タスクを実行
         if (!kill_) {
             for (auto& child : children_) {
-                child->doTaskUpdate(dt);
+                child->doTaskUpdate(frame_info);
             }
         }
         

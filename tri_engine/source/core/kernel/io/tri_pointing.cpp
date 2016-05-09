@@ -42,7 +42,7 @@ Pointing::~Pointing()
 
 void Pointing::updatePointing(
     const cross::PointingData& data,
-    DeltaTime delta_time
+    const FrameInfo& frame_info
 ){
     bool hit = data.hit_;
 
@@ -54,7 +54,7 @@ void Pointing::updatePointing(
     release_ = hold_ & (hit ^ hold_);
     hold_ = hit;
     
-    updateRepeat(delta_time);
+    updateRepeat(frame_info);
     
     //  座標系補正
     //  仮想スクリーン座標に変換
@@ -78,7 +78,7 @@ void Pointing::updatePointing(
     //  ダブルクリック判定
     double_click_ = false;
     if (double_click_timer_ > 0) {
-        double_click_timer_ -= delta_time;
+        double_click_timer_ -= frame_info.deltaTime();
         if (release_) {
             double_click_release_count_ += 1;
             if (double_click_release_count_ == 2) {
@@ -129,10 +129,10 @@ void Pointing::clearPositionList() {
 }
 
 
-void Pointing::updateRepeat(const DeltaTime delta_time) {
+void Pointing::updateRepeat(const FrameInfo& frame_info) {
     repeat_ = trigger_;
     if (hold_) {
-        pressed_time_ += delta_time;
+        pressed_time_ += frame_info.deltaTime();
         if (pressed_time_ > repeat_interval_) {
             pressed_time_ = 0;
             repeat_ = true;

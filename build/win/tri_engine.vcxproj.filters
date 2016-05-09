@@ -681,6 +681,9 @@
     <ClInclude Include="..\..\tri_engine\include\jet\gui\jet_numbers.hpp">
       <Filter>include\jet\gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_frame_info.hpp">
+      <Filter>include\core\base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\tri_engine\source\jet\scene\jet_scene.cpp">
@@ -1075,6 +1078,9 @@
     </ClCompile>
     <ClCompile Include="..\..\tri_engine\source\jet\gui\jet_numbers.cpp">
       <Filter>source\jet\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\base\tri_frame_info.cpp">
+      <Filter>source\core\base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

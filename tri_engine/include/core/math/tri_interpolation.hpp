@@ -15,7 +15,8 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "../base/tri_types.hpp"
+#include "core/base/tri_frame_info.hpp"
+
 
 TRI_CORE_NS_BEGIN
 
@@ -136,14 +137,14 @@ public:
 
     ///
     ///  更新処理
-    void updateInterpolation(const DeltaTime delta_time) {
+    void updateInterpolation(const FrameInfo& frame_info) {
         if (!active_) {
             //  startされていないのですぐ終了
             return;
         }
 
         //  時間更新
-        now_time_ += delta_time;
+        now_time_ += frame_info.deltaTime();
 
         float t = 0;
         if (interpolation_time_ < now_time_) {

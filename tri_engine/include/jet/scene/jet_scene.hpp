@@ -39,7 +39,7 @@ public:
 
     /// このクラスを継承したクラスはこのメソッドを直接オーバーロードできません。
     /// 更新処理はupdateをオーバーロードして実装して下さい。
-    void updateScene(const DeltaTime dt) final;
+    void updateScene(const FrameInfo& frame_info) final;
     
 protected:
     TransformNodePtr createModel(const FilePath& path);
@@ -69,7 +69,7 @@ protected:
 private:
     virtual void initialize() {}
     virtual void terminate() {}
-    virtual void update(const DeltaTime dt) {}
+    virtual void update(const FrameInfo& frame_info) {}
 
 private:
     void shadowRender() {
@@ -85,7 +85,7 @@ private:
     DrawLayer shadow_render_layer_;
 
     //  影テクスチャ用サーフェス
-    FrameBufferSurface shadow_render_target_;
+    DepthSurface shadow_render_target_;
 
     //  3Dシーン通常描画用レイヤー
     DrawLayer scene_layer_;
@@ -130,7 +130,7 @@ public:
     /// シーン更新
     /// このクラスを継承したクラスはこのメソッドを直接オーバーロードできません。
     /// 更新処理はupdateをオーバーロードして実装して下さい。
-    void updateScene(const DeltaTime dt) final;
+    void updateScene(const FrameInfo& frame_info) final;
     
 protected:
     auto& defaultSpriteLayer() {
@@ -140,7 +140,7 @@ protected:
 private:
     virtual void initialize() {}
     virtual void terminate() {}
-    virtual void update(const DeltaTime dt) {}
+    virtual void update(const FrameInfo& frame_info) {}
 
 private:
     SpriteLayer default_sprite_layer_;

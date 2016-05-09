@@ -48,7 +48,7 @@ void SimpleMesh3Scene::initializeScene() {
 }
 
 
-void SimpleMesh3Scene::updateScene(const t3::DeltaTime delta_time) {
+void SimpleMesh3Scene::updateScene(const t3::FrameInfo& frame_info) {
     static t3::Degree angle;
     angle += 0.0025f;
     node1_->rotationY(angle);

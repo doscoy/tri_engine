@@ -46,7 +46,7 @@ public:
     
     ///
     /// 更新
-    void updateLayer(const DeltaTime delta_time) override;
+    void updateLayer(const FrameInfo& frame_info) override;
     
     ///
     /// 描画
@@ -64,7 +64,7 @@ public:
     ///
     /// フェードイン
     void fadeIn(
-        const t3::DeltaTime sec
+        const float sec
     ) {
         alpha_ = fade_color_.alphaFloat();
         fading_ = true;
@@ -75,7 +75,7 @@ public:
     ///
     /// フェードアウト
     void fadeOut(
-        const DeltaTime sec
+        const float sec
     ) {
         alpha_ = fade_color_.alphaFloat();
         fading_ = true;

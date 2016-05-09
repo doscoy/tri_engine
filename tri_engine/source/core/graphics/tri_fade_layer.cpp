@@ -42,13 +42,13 @@ FadeLayer::~FadeLayer() {
 
 
 void FadeLayer::updateLayer(
-    DeltaTime delta_time
+    const FrameInfo& frame_info
 ) {
     if (!fading_) {
         return;
     }
 
-    alpha_ += fade_speed_ * deltaRate(delta_time);
+    alpha_ += fade_speed_ * frame_info.deltaRate();
 
     //  フェード中
     if (fade_in_) {

@@ -48,7 +48,7 @@ public:
     
     }
     
-    void update(const t3::DeltaTime delta_time){
+    void update(const t3::FrameInfo& frame_info){
         
     }
     
@@ -94,8 +94,8 @@ void SimpleMeshScene::terminateScene() {
 }
 
 
-void SimpleMeshScene::updateScene(const t3::DeltaTime delta_time) {
-    context_->update(delta_time);
+void SimpleMeshScene::updateScene(const t3::FrameInfo& frame_info) {
+    context_->update(frame_info);
     
     auto& gs = t3::Director::instance();
     auto& pad = gs.input().pad();

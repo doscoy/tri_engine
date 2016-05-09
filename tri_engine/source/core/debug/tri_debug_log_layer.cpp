@@ -40,7 +40,7 @@ void DebugLogLayer::slideDown() {
 }
 
 
-void DebugLogLayer::updateLayer(const DeltaTime delta_time) {
+void DebugLogLayer::updateLayer(const FrameInfo& frame_info) {
     //  ログの内容を描画する
     auto buffer_size = buffer_.size();
     for (int i = 0; i < buffer_size; ++i) {
@@ -56,7 +56,7 @@ void DebugLogLayer::updateLayer(const DeltaTime delta_time) {
     
     
     //
-    DebugStringLayer::updateLayer(delta_time);
+    DebugStringLayer::updateLayer(frame_info);
 }
 
 

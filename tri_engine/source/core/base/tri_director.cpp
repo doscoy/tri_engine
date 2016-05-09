@@ -249,10 +249,9 @@ void Director::setupFinalLayer() {
         Vec2(virtual_screen_to_device_ratio.x_, virtual_screen_to_device_ratio.y_),
         "final", t3::LayerBase::Priority::SYS_FRONT
     ));
-    final_surface_.reset(T3_SYS_NEW FrameBufferSurface(
+    final_surface_.reset(T3_SYS_NEW ColorDepthSurface(
         screen_mgr.virtualScreenSize().x_, 
-        screen_mgr.virtualScreenSize().y_, 
-        Surface::Type::COLOR_DEPTH)
+        screen_mgr.virtualScreenSize().y_)
     );
 
     final_layer_->texture(final_surface_->colorTexture());
@@ -266,17 +265,17 @@ void Director::setupFinalLayer() {
 
 //  アップデート
 void Director::update(
-    const DeltaTime delta_time
+    const FrameInfo& frame_info
 ) {
     //  起動からのフレーム数カウント
     frame_counter_.countup();
 
     //  入力更新
-    updateInput(delta_time);
+    updateInput(frame_info);
 
     
     //  タスク更新
-    root_task_->doTaskUpdate(delta_time);
+    root_task_->doTaskUpdate(frame_info);
 
     //  コリジョン判定
     CollisionManager& col_manager = CollisionManager::instance();
@@ -284,14 +283,14 @@ void Director::update(
     
     //  デバッグメニューの更新
     auto& dm = DebugMenu::instance();
-    dm.update(delta_time);
+    dm.update(frame_info);
     
     
     //  イベントのブロードキャスト
-    EventManager::broadCast(delta_time);
+    EventManager::broadCast(frame_info);
     
     //  レイヤーの更新
-    LayerBase::updateLayers(layers(), delta_time);
+    LayerBase::updateLayers(layers(), frame_info);
 
     
     //  終了リクエストチェック
@@ -304,7 +303,7 @@ void Director::update(
 ///
 /// 入力情報更新
 void Director::updateInput(
-    const DeltaTime delta_time
+    const FrameInfo& frame_info
 ) {
     auto& screen_mgr = ScreenManager::instance();
 
@@ -315,7 +314,7 @@ void Director::updateInput(
         //  パッド情報更新
         cross::GamePadData pad_data;
         cross::platformPadData(pad_idx, &pad_data);
-        input.updatePad(pad_data, delta_time);
+        input.updatePad(pad_data, frame_info);
         
         
         //  ポインティング情報更新
@@ -340,7 +339,7 @@ void Director::updateInput(
         
         input.updatePointing(
             point_data,
-            delta_time
+            frame_info
         );
         
         //  加速度センサー更新
@@ -348,7 +347,7 @@ void Director::updateInput(
         cross::accelerometerRead(pad_idx, &acc_data);
         input.updateAccelermeter(
             acc_data,
-            delta_time
+            frame_info
         );
         
         
@@ -394,7 +393,7 @@ void Director::updateInput(
 
     auto& debug_menu = DebugMenu::instance();
     const auto& vpad = debug_menu.virtualPad();
-    updateDebugPad(*vpad->getPadData(), delta_time);
+    updateDebugPad(*vpad->getPadData(), frame_info);
 
 }
 

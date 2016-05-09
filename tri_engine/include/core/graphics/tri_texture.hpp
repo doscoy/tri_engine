@@ -154,9 +154,12 @@ private:
     cross::RenderSystem::TextureID texture_handle_;
 };
     
-
+//  テクスチャを使う型定義
+//  マネージャ
 using TextureManager = ResourceManager<Texture>;
 
+//  集合
+using Textures = Vector<TexturePtr>;
     
 TRI_CORE_NS_END
 

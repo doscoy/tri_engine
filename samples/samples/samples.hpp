@@ -59,7 +59,7 @@ public:
         samples_.attachSelf(dm.rootMenu());
     }
 
-    void updateScene(const t3::DeltaTime delta_time) override {
+    void updateScene(const t3::FrameInfo& frame_info) override {
         T3_PRINT_DISP(
             0,
             100,

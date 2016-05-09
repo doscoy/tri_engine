@@ -27,7 +27,7 @@ public:
     void terminate(){
     }
     
-    void update(const t3::DeltaTime delta_time){
+    void update(const t3::FrameInfo& frame_info){
 
         
     }
@@ -67,8 +67,8 @@ void SimplePrimitiveScene::terminateScene() {
 }
 
 
-void SimplePrimitiveScene::updateScene(const t3::DeltaTime delta_time) {
-    context_->update(delta_time);
+void SimplePrimitiveScene::updateScene(const t3::FrameInfo& frame_info) {
+    context_->update(frame_info);
     
     auto& director = t3::Director::instance();
     auto& pad = director.input().pad();

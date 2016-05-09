@@ -29,7 +29,7 @@ public:
 
     }
     
-    void update(const t3::DeltaTime delta_time) {
+    void update(const t3::FrameInfo& frame_info) {
         
     }
 
@@ -185,8 +185,8 @@ void InputTestScene::terminateScene() {
 }
 
 
-void InputTestScene::updateScene(const t3::DeltaTime delta_time) {
-    context_->update(delta_time);
+void InputTestScene::updateScene(const t3::FrameInfo& frame_info) {
+    context_->update(frame_info);
     
     t3::Director& gs = t3::Director::instance();
     const t3::Pad& pad = gs.input().pad();

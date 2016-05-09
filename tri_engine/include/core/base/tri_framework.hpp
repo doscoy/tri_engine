@@ -21,6 +21,7 @@
 #include "core/utility/tri_singleton.hpp"
 #include "cross/cross_std.hpp"
 #include "core/base/tri_application.hpp"
+#include "core/base/tri_frame_info.hpp"
 
 
 
@@ -82,7 +83,7 @@ public:
 private:
     ///
     /// アプリケーションの更新を呼ぶ
-    void doUpdateApplication(const DeltaTime dt);
+    void doUpdateApplication(const FrameInfo& frame_info);
     
     ///
     /// アプリケーションの描画を呼ぶ

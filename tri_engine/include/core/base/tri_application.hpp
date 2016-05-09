@@ -80,7 +80,7 @@ public:
 
     ///
     /// 更新
-    void updateApplication(const DeltaTime dt);
+    void updateApplication(const FrameInfo& frame_info);
 
     ///
     /// 描画

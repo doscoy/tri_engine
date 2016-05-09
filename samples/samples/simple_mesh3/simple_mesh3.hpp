@@ -22,7 +22,7 @@ public:
     
 public:
     void initializeScene() override;
-    void updateScene(const t3::DeltaTime delta_time) override;
+    void updateScene(const t3::FrameInfo& frame_info) override;
 
 private:
     void layerRender() {

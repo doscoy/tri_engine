@@ -84,7 +84,7 @@ protected:
 
     ///
     /// レイヤーの更新
-    void updateLayer(const DeltaTime delta_time) override;
+    void updateLayer(const FrameInfo& frame_info) override;
     
     ///
     /// レイヤーの描画

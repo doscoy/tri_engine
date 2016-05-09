@@ -80,7 +80,7 @@ public:
 private:
     ///
     /// 更新関数
-    void updateLayer(const DeltaTime delta_time) override;
+    void updateLayer(const FrameInfo& frame_info) override;
 
     ///
     /// 描画関数

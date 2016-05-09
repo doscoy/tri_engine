@@ -21,6 +21,7 @@
 #include "tri_pausable.hpp"
 #include "tri_event_manager.hpp"
 #include "core/kernel/memory/tri_new.hpp"
+#include "core/base/tri_frame_info.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -222,7 +223,7 @@ protected:
     /// タスクの更新呼び出し
     /// 子タスクの更新と
     void doTaskUpdate(
-        const DeltaTime dt
+        const FrameInfo& frame_info
     );
     
     ///
@@ -233,7 +234,7 @@ protected:
     ///
     /// タスクの更新
     /// 毎フレーム呼ばれる
-    virtual void onTaskUpdate(const DeltaTime dt) {}
+    virtual void onTaskUpdate(const FrameInfo& frame_info) {}
 
     ///
     /// タスクの後片付け
@@ -309,8 +310,8 @@ public:
     }
     
     
-    void onTaskUpdate(const DeltaTime dt) override {
-        timer_ -= dt;
+    void onTaskUpdate(const FrameInfo& frame_info) override {
+        timer_ -= frame_info.deltaTime();
         if (timer_ < 0) {
             timer_ = interval_;
             //  指定の時間が過ぎたら親タスクにタスク追加の依頼を出す

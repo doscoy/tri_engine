@@ -12,7 +12,7 @@
 
 TRI_CORE_NS_BEGIN
 
-void CameraTouchController::onTaskUpdate(const DeltaTime dt) {
+void CameraTouchController::onTaskUpdate(const FrameInfo& frame_info) {
     auto& gs = t3::Director::instance();
     auto& input = gs.input();
     auto& pointing = input.pointing();

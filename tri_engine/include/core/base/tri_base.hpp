@@ -20,6 +20,7 @@
 #include "tri_event.hpp"
 #include "tri_event_manager.hpp"
 #include "tri_pausable.hpp"
+#include "tri_frame_info.hpp"
 #include "tri_resource_manager.hpp"
 #include "tri_resource.hpp"
 #include "tri_framework.hpp"

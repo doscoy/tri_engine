@@ -61,7 +61,7 @@ SpritePtr SpriteLayer::createSprite(const String& tex_name) {
 
 
 void SpriteLayer::updateLayer(
-    const DeltaTime delta_time
+    const FrameInfo& frame_info
 ) {
 
     renderer_.beginCollect();

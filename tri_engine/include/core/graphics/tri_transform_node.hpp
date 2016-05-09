@@ -136,7 +136,7 @@ public:
     /// 更新
     void onUpdate(
         SceneGraph* scene_graph,
-        DeltaTime delta_time
+        const FrameInfo& frame_info
     ) override;
     
     

@@ -35,7 +35,7 @@ DrawLayer::~DrawLayer()
 
 
 void DrawLayer::updateLayer(
-    DeltaTime delta_time
+    const FrameInfo& frame_info
 ) {
     if (update_func_) {
         update_func_->invoke();

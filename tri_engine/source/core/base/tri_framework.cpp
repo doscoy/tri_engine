@@ -251,9 +251,9 @@ void Framework::updateFramework() {
     fps_timer_.start();
 
     //  delta time取得
-    float delta_time = fps_timer_.interval();
+    float dt = fps_timer_.interval();
     //  ブレークポイント貼ってる時に異常な数値になる為、最大でも１０フレの遅延に収める
-    clampMaximum(delta_time, frameSec<30>());
+    clampMaximum(dt, frameSec<30>());
 
 
     //  FPS表示
@@ -262,7 +262,7 @@ void Framework::updateFramework() {
         //  直近数フレームの平均値を表示
         
         //  fpsを保存
-        float current_fps = 60.0f / (delta_time / frameToSec(1));
+        float current_fps = 60.0f / (dt / frameToSec(1));
     
         const size_t fps_size = fps_stack_.size();
         for (int fps_idx = 1; fps_idx < fps_size; ++fps_idx) {
@@ -303,10 +303,11 @@ void Framework::updateFramework() {
 
     //  ゲームスピード変更
     float game_speed = director.getGameSpeed();
-    delta_time *= game_speed;
+    dt *= game_speed;
     
-    
-    director.update(delta_time);
+    FrameInfo frame_info;
+    frame_info.deltaTime(dt);
+    director.update(frame_info);
 
 
     
@@ -319,7 +320,7 @@ void Framework::updateFramework() {
         dm.openMenu();
     }
     
-    doUpdateApplication(delta_time);
+    doUpdateApplication(frame_info);
     
     cross::endUpdate();
 }
@@ -594,7 +595,7 @@ void Framework::endRender() {
 
 ///
 /// アプリケーションの更新
-void Framework::doUpdateApplication(const DeltaTime dt) {
+void Framework::doUpdateApplication(const FrameInfo& frame_info) {
     //  アプリケーションの切り替え
     if (next_app_generator_) {
         //  アプリケーションの切り替えリクエストがあった
@@ -606,7 +607,7 @@ void Framework::doUpdateApplication(const DeltaTime dt) {
         if (!app_->isReady()) {
             app_->initializeApplication();
         }
-        app_->updateApplication(dt);
+        app_->updateApplication(frame_info);
     }
 }
 

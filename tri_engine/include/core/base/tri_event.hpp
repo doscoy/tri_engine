@@ -50,20 +50,20 @@ public:
 public:
     ///
     /// イベント発行までの時間取得
-    DeltaTime delay() const {
+    float delay() const {
         return delay_;
     }
     
     ///
     /// イベント発行までの時間設定
-    void delay(const DeltaTime delay) {
+    void delay(const float delay) {
         delay_ = delay;
     }
     
     ///
     /// イベント発行までの時間経過
-    void update(const DeltaTime dt) {
-        delay_ -= dt;
+    void update(const FrameInfo& frame_info) {
+        delay_ -= frame_info.deltaTime();
     }
 
     ///
@@ -81,7 +81,7 @@ public:
 private:
     ///
     /// イベント発行までの時間
-    DeltaTime delay_;
+    float delay_;
 };
 
 using EventPtr = SharedPtr<EventBase>;  ///< イベントのポインタ

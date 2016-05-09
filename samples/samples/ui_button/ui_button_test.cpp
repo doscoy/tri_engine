@@ -110,7 +110,7 @@ public:
         t3::EventManager::removeListener(this);
     }
     
-    void update(const t3::DeltaTime delta_time) {
+    void update(const t3::FrameInfo& frame_info) {
         
     }
     
@@ -168,8 +168,8 @@ void UiButtonScene::terminateScene() {
 }
 
 
-void UiButtonScene::updateScene(const t3::DeltaTime delta_time) {
-    context_->update(delta_time);
+void UiButtonScene::updateScene(const t3::FrameInfo& frame_info) {
+    context_->update(frame_info);
     
     t3::Director& gs = t3::Director::instance();
     const t3::Pad& pad = gs.input().pad();

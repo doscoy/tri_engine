@@ -57,7 +57,7 @@ public:
     
     }
     
-    void update(const t3::DeltaTime delta_time){
+    void update(const t3::FrameInfo& frame_info){
         static t3::Degree angle = 0;
         angle += 1;
         node1_->rotationY(angle);
@@ -109,8 +109,8 @@ void SimpleMesh2Scene::terminateScene() {
 }
 
 
-void SimpleMesh2Scene::updateScene(const t3::DeltaTime delta_time) {
-    context_->update(delta_time);
+void SimpleMesh2Scene::updateScene(const t3::FrameInfo& frame_info) {
+    context_->update(frame_info);
     
     auto& gs = t3::Director::instance();
     auto& pad = gs.input().pad();

@@ -81,12 +81,12 @@ public:
 public:
     virtual void initializeScene() {}
     virtual void terminateScene() {}
-    virtual void updateScene(const DeltaTime) {}
+    virtual void updateScene(const FrameInfo&) {}
     virtual void debugRenderScene() {}
 
 public:
     void onTaskFirstUpdate() override;
-    void onTaskUpdate(const DeltaTime dt) override;
+    void onTaskUpdate(const FrameInfo& frame_info) override;
     void onTaskKill() override;
     void debugRender();
     
@@ -218,7 +218,7 @@ public:
         nextTaskGenerator(sm.rootScene());
     }
 
-    void updateScene(const DeltaTime dt) override {
+    void updateScene(const FrameInfo& frame_info) override {
         finish();
     }
 };

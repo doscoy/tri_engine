@@ -64,7 +64,7 @@ void LayerBase::unregistryToDebugMenu()
 //  レイヤー更新
 void LayerBase::updateLayers(
     Layers& layers,
-    DeltaTime delta_time
+    const FrameInfo& frame_info
 ){
     for (auto& layer : layers) {
         //  ポーズしてるレイヤーはスキップ
@@ -78,7 +78,7 @@ void LayerBase::updateLayers(
         }
 
         //  更新
-        layer->updateLayer(delta_time);
+        layer->updateLayer(frame_info);
 
         //  更新後コールバック
         if (layer->postupdate_callback_) {
@@ -122,7 +122,7 @@ void LayerBase::renderLayers(
 
 void LayerBase::initializeRender() {
     if (render_target_) {
-        render_target_->onBeginRender();
+        render_target_->beginRender();
     } else {
         Director::instance().finalSurface()->onBeginRender();
     }
@@ -173,9 +173,9 @@ void LayerBase::doRenderLayer(
 ) {
     T3_NULL_ASSERT(surface);
 
-    surface->onPreRender();
+    surface->preRender();
     renderLayer();
-    surface->onPostRender();
+    surface->postRender();
 }
 
 

@@ -138,7 +138,7 @@ public:
     ///
     /// タスク更新
     void onTaskUpdate(
-        const DeltaTime dt
+        const FrameInfo& frame_info
     ) override {}
 
 private:
@@ -219,7 +219,7 @@ public:
     ///
     /// タスク更新
     void onTaskUpdate(
-        const DeltaTime dt
+        const FrameInfo& frame_info
     ) override;
 
 private:

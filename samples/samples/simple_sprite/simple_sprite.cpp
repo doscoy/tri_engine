@@ -52,7 +52,7 @@ public:
     void terminate(){
     }
     
-    void update(const t3::DeltaTime delta_time){
+    void update(const t3::FrameInfo& frame_info){
 
         //  現在のスプライト数表示
         T3_PRINT_DISP(400, 0, "%d", sprites_.size());
@@ -149,7 +149,7 @@ private:
 
 
 private:
-    t3::DeltaTime total_time_;
+    float total_time_;
     t3::SpriteLayer sprite_layer_;
     t3::Vector<t3::SpritePtr> sprites_;
     t3::TexturePtr textures_[9];
@@ -180,8 +180,8 @@ void SimpleSpriteScene::terminateScene() {
 }
 
 
-void SimpleSpriteScene::updateScene(const t3::DeltaTime delta_time) {
-    context_->update(delta_time);
+void SimpleSpriteScene::updateScene(const t3::FrameInfo& frame_info) {
+    context_->update(frame_info);
     
     auto& director = t3::Director::instance();
     auto& pad = director.input().pad();

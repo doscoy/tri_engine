@@ -14,7 +14,7 @@ TRI_JET_NS_BEGIN
 Scene3D::Scene3D(const char* const name) 
     : core::SceneBase(name)
     , shadow_render_layer_()
-    , shadow_render_target_(256,256,Surface::Type::DEPTH_ONLY)
+    , shadow_render_target_(256, 256)
     , scene_layer_()
     , scene_graph_()
 {}
@@ -50,8 +50,8 @@ void Scene3D::terminateScene() {
     terminate();
 }
 
-void Scene3D::updateScene(const DeltaTime dt) {
-    update(dt);
+void Scene3D::updateScene(const FrameInfo& frame_info) {
+    update(frame_info);
 }
 
 
@@ -108,8 +108,8 @@ void Scene2D::terminateScene() {
 
 ///
 /// シーンの更新
-void Scene2D::updateScene(const DeltaTime dt) {
-    update(dt);
+void Scene2D::updateScene(const FrameInfo& frame_info) {
+    update(frame_info);
 }
 
 

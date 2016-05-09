@@ -166,7 +166,7 @@ bool EventManager::queueEvent(
 ///
 /// 毎フレーム呼ばれるイベント通達処理
 bool EventManager::broadCast(
-    const DeltaTime dt
+    const FrameInfo& frame_info
 ) {
     //  キューを取得
     auto& current_queue = currentQueue();
@@ -181,7 +181,7 @@ bool EventManager::broadCast(
         //  ブロードキャスト時間になっている？
         if (!event->isReady()) {
             //  まだ時間になっていない
-            event->update(dt);
+            event->update(frame_info);
             //  バックキューに登録しなおし
             back_queue.push_back(event);
             

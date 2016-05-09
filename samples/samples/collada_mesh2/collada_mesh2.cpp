@@ -60,7 +60,7 @@ void ColladaMesh2Scene::terminate() {
 }
 
 
-void ColladaMesh2Scene::update(const t3::DeltaTime dt) {
+void ColladaMesh2Scene::update(const t3::FrameInfo& frame_info) {
 
     auto& gs = t3::Director::instance();
     auto& input = gs.input();

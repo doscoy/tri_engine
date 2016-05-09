@@ -19,6 +19,7 @@
 #include "core/utility/tri_uncopyable.hpp"
 #include "core/base/tri_types.hpp"
 #include "core/math/tri_math_types.hpp"
+#include "core/base/tri_frame_info.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -72,7 +73,10 @@ public:
 public:
     ///
     /// 入力情報更新
-    void updatePad(const cross::GamePadData& paddata, DeltaTime delta_time);
+    void updatePad(
+        const cross::GamePadData& paddata,
+        const FrameInfo& frame_info
+    );
     
     ///
     /// トリガー判定
@@ -143,7 +147,7 @@ public:
 private:
     ///
     /// リピートを更新
-    void updateRepeat( DeltaTime delta_time );
+    void updateRepeat(const FrameInfo& frame_info );
     
 private:
     ///

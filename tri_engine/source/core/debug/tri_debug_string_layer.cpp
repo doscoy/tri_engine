@@ -40,10 +40,10 @@ DebugStringLayer::~DebugStringLayer() {
 
 
 void DebugStringLayer::updateLayer(
-    DeltaTime delta_time
+    const FrameInfo& frame_info
 ) {
     resetSprites();
-    SpriteLayer::updateLayer(delta_time);
+    SpriteLayer::updateLayer(frame_info);
 }
 
 

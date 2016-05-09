@@ -32,6 +32,7 @@
     <ClInclude Include="..\..\tri_engine\include\core\base\tri_event_manager.hpp" />
     <ClInclude Include="..\..\tri_engine\include\core\base\tri_font_glyph.hpp" />
     <ClInclude Include="..\..\tri_engine\include\core\base\tri_framework.hpp" />
+    <ClInclude Include="..\..\tri_engine\include\core\base\tri_frame_info.hpp" />
     <ClInclude Include="..\..\tri_engine\include\core\base\tri_pausable.hpp" />
     <ClInclude Include="..\..\tri_engine\include\core\base\tri_resource.hpp" />
     <ClInclude Include="..\..\tri_engine\include\core\base\tri_resource_manager.hpp" />
@@ -223,6 +224,7 @@
     <ClCompile Include="..\..\tri_engine\source\core\base\tri_director.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\base\tri_event_manager.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\base\tri_framework.cpp" />
+    <ClCompile Include="..\..\tri_engine\source\core\base\tri_frame_info.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\base\tri_pausable.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\base\tri_scene.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\base\tri_screen_manager.cpp" />

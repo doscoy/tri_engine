@@ -46,9 +46,9 @@ void SceneBase::onTaskFirstUpdate() {
 }
 
 void SceneBase::onTaskUpdate(
-    const DeltaTime delta_time
+    const FrameInfo& frame_info
 ) {
-    updateScene(delta_time);
+    updateScene(frame_info);
 }
 
 void SceneBase::onTaskKill() {

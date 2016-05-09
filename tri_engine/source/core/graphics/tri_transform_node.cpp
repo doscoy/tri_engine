@@ -43,13 +43,13 @@ TransformNode::~TransformNode()
 
 void TransformNode::onUpdate(
     t3::SceneGraph* scene_graph,
-    DeltaTime delta_time
+    const FrameInfo& frame_info
 ) {
     SceneNodeList::iterator it = children_.begin();
     SceneNodeList::iterator end = children_.end();
     
     while (it != end) {
-        (*it)->onUpdate(scene_graph, delta_time);
+        (*it)->onUpdate(scene_graph, frame_info);
         it++;
     }
 }

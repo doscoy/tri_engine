@@ -65,7 +65,7 @@ void ColladaMeshScene::terminate() {
 
 
 void ColladaMeshScene::update(
-    const t3::DeltaTime dt
+    const t3::FrameInfo& frame_info
 ) {
 
     auto& gs = t3::Director::instance();

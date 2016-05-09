@@ -90,7 +90,7 @@ public:
        
     ///
     /// 更新
-    void update(const DeltaTime delta_time );
+    void update(const FrameInfo& frame_info );
     
     ///
     /// 描画

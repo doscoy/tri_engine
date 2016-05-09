@@ -75,7 +75,7 @@ void Application::initializeApplication()
 
 ///
 /// アプリケーション更新
-void Application::updateApplication(const DeltaTime dt) {
+void Application::updateApplication(const FrameInfo& frame_info) {
     
     //  シーン切り替わり判定
     auto& sm = SceneManager::instance();

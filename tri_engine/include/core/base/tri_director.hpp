@@ -93,7 +93,7 @@ public:
     ///
     /// ディレクターの更新
     void update(
-        const DeltaTime delta_time
+        const FrameInfo& frame_info
     );
   
     
@@ -106,7 +106,7 @@ public:
     ///
     /// 入力更新
     void updateInput(
-        const DeltaTime delta_time
+        const FrameInfo& frame_info
     );
     
     
@@ -274,7 +274,7 @@ private:
     UniquePtr<DeviceSurface> device_surface_;
     
     //  最終レンダーターゲット
-    UniquePtr<FrameBufferSurface> final_surface_;
+    UniquePtr<ColorDepthSurface> final_surface_;
     
     //  最終レンダーターゲット描画レイヤ
     UniquePtr<CinemaLayer> final_layer_;

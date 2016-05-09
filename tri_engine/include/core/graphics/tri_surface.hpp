@@ -25,41 +25,83 @@ TRI_CORE_NS_BEGIN
 ///
 /// サーフェス
 class Surface {
-public:
-    enum class Type {
-        DEPTH_ONLY,
-        COLOR_ONLY,
-        COLOR_DEPTH
-    };
+    ///
+    /// コンストラクタ
+    Surface() = delete;
+protected:
+    ///
+    /// コンストラクタ
+    Surface(float width, float height);
+
 
 public:
-    virtual ~Surface() = default;
-    
-public:
-    virtual void onBeginRender() = 0;
-    virtual void onPreRender() = 0;
-    virtual void onPostRender() = 0;
 
     ///
-    /// サーフェスのタイプ判定
-    bool isDepthOnly() const {
-        return type_ == Type::DEPTH_ONLY;
+    /// デストラクタ
+    virtual ~Surface() = default;
+
+public:
+    ///
+    /// 描画開始処理
+    void beginRender();
+
+    ///
+    /// 描画前処理
+    void preRender();
+
+    ///
+    /// 描画後処理
+    void postRender();
+
+    ///
+    /// 幅取得
+    float width() const {
+        return size_.x_;
     }
 
     ///
-    /// カラーのタイプ判定
-    bool isColorOnly() const {
-        return type_ == Type::COLOR_ONLY;
+    /// 高さ取得
+    float height() const {
+        return size_.y_;
+    }    
+
+    ///
+    /// サイズ取得
+    const Vec2& size() {
+        return size_;
+    }
+
+    ///
+    /// テクスチャ取得
+    const Textures textures() const {
+        return textures_;
     }
 
 protected:
     ///
-    /// サーフェスタイプ
-    Type type_;
+    ///
+    virtual void onBeginRender() {}
+    virtual void onPreRender() {}
+    virtual void onPostRender() {}
+
+    
+
+protected:
+    Textures textures_;
+    Vec2 size_;
 };
 
 ///
-/// サーフェス
+/// カラーサーフェス
+class ColorSurface
+    : public Surface
+{
+
+};
+
+
+///
+/// フレームバッファサーフェス
 class FrameBufferSurface
     : public Surface
 {
@@ -68,13 +110,141 @@ public:
     /// コンストラクタ
     FrameBufferSurface(
         float width,
-        float height,
-        Type type
+        float height
     );
     
     ///
     /// デストラクタ
     ~FrameBufferSurface() = default;
+
+protected:
+    virtual void createTexture() = 0;
+    virtual void attachTexture() = 0;
+    virtual void clearSurfaceCore() = 0;
+
+public:
+    
+    
+    ///
+    /// 描画開始時処理
+    void onBeginRender() override;
+    
+    ///
+    /// 描画前処理
+    void onPreRender() override;
+
+    ///
+    /// 描画後処理
+    void onPostRender() override;
+
+
+
+
+protected:
+    ///
+    /// クリア
+    void clearSurface();
+
+    ///
+    /// バインド
+    void bind();
+    
+    ///
+    /// バインド解除
+    void unbind();
+    
+    ///
+    /// ビューポート設定
+    void setupViewport();
+    
+    ///
+    /// ビューポート設定解除
+    void resetViewport();
+
+private:
+    
+    ///
+    /// 変更前のビューポート位置
+    int last_viewport_pos_x_;
+    int last_viewport_pos_y_;
+    int last_viewport_width_;
+    int last_viewport_height_;
+
+    ///
+    /// フレームバッファ
+    FrameBuffer fb_;
+        
+
+
+    ///
+    /// バインド中フラグ
+    bool bound_;
+    
+    ///
+    /// バッファクリア済フラグ
+    bool buffer_cleared_;
+};
+
+class DepthSurface
+    : public FrameBufferSurface
+{
+public:
+    ///
+    /// コンストラクタ
+    DepthSurface(
+        float width,
+        float height
+    );
+
+
+protected:
+    ///
+    /// テクスチャ生成の詳細
+    void createTexture() override;
+
+    ///
+    /// テクスチャアタッチの詳細
+    void attachTexture() override;
+
+    ///
+    /// サーフェスのクリアの詳細
+    void clearSurfaceCore() override;
+
+public:
+    ///
+    /// デプステクスチャ取得
+    TexturePtr depthTexture() {
+        return depth_texture_;
+    }
+    ///
+    /// デプステクスチャ取得
+    const TexturePtr depthTexture() const {
+        return depth_texture_;
+    }
+private:
+    ///
+    /// テクスチャ
+    TexturePtr depth_texture_;
+
+};
+
+///
+/// カラーアンドデプスバッファサーフェス
+class ColorDepthSurface
+    : public FrameBufferSurface
+{
+public:
+    ///
+    /// コンストラクタ
+    ColorDepthSurface(
+        float width,
+        float height
+    );
+
+protected:
+    void createTexture() override;
+    void attachTexture() override;
+    void clearSurfaceCore() override;
 
 
 public:
@@ -101,99 +271,24 @@ public:
     const TexturePtr depthTexture() const {
         return depth_texture_;
     }
-    
-    ///
-    /// サイズ取得
-    const Vec2& size() const {
-        return size_;
-    }
-    
-    ///
-    /// 幅取得
-    float width() const {
-        return size_.x_;
-    }
-    
-    ///
-    /// 高さ取得
-    float height() const {
-        return size_.y_;
-    }
-    
-    ///
-    /// 描画開始時処理
-    void onBeginRender() override;
-    
-    ///
-    /// 描画前処理
-    void onPreRender() override;
-
-    ///
-    /// 描画後処理
-    void onPostRender() override;
-
-
-    ///
-    /// クリア
-    void clearBuffer();
-
-
-protected:
-
-    ///
-    /// バインド
-    void bind();
-    
-    ///
-    /// バインド解除
-    void unbind();
-    
-    ///
-    /// ビューポート設定
-    void setupViewport();
-    
-    ///
-    /// ビューポート設定解除
-    void resetViewport();
 
 private:
-    ///
-    /// サイズ
-    Vec2 size_;
-    
-    ///
-    /// 変更前のビューポート位置
-    int last_viewport_pos_x_;
-    int last_viewport_pos_y_;
-    int last_viewport_width_;
-    int last_viewport_height_;
-
-    ///
-    /// フレームバッファ
-    FrameBuffer fb_;
-        
     ///
     /// テクスチャ
     TexturePtr color_texture_;
     TexturePtr depth_texture_;
 
-
-    ///
-    /// バインド中フラグ
-    bool bound_;
-    
-    ///
-    /// バッファクリア済フラグ
-    bool buffer_cleared_;
-
-
 };
 
 
+
+///
+/// デバイスサーフェス
 class DeviceSurface
     : public Surface
 {
 public:
+    DeviceSurface();
     void onBeginRender() override {}
     void onPreRender() override {}
     void onPostRender() override {}

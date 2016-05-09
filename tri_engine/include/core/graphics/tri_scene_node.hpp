@@ -48,7 +48,7 @@ public:
     /// 更新
     virtual void onUpdate(
         SceneGraph* scene,  ///< シーングラフ
-        DeltaTime delta_time   ///< デルタタイム
+        const FrameInfo& frame_info   ///< デルタタイム
     ) = 0;
 
     ///

@@ -18,7 +18,7 @@ public:
         : layer_()
         , screen_()
         , sprite_(nullptr)
-        , surface_(512, 512, t3::Surface::Type::COLOR_DEPTH)
+        , surface_(512, 512)
         , moz_lv_(0)
     {
 
@@ -65,11 +65,11 @@ public:
 
     }
     
-    void update(const t3::DeltaTime delta_time) {
+    void update(const t3::FrameInfo& frame_info) {
         t3::Degree r = sprite_->transform()->rotation().z_;
         sprite_->transform()->rotation(t3::Rotation(0,0,r + t3::Degree(0.33f)));
         
-        pola_.updateInterpolation(delta_time);
+        pola_.updateInterpolation(frame_info);
         shader_->setConstFloat(0, static_cast<float>(moz_lv_));
     }
 
@@ -77,7 +77,7 @@ private:
     t3::SpriteLayer layer_;
     t3::CinemaLayer screen_;
     t3::SpritePtr sprite_;
-    t3::FrameBufferSurface surface_;
+    t3::ColorDepthSurface surface_;
     t3::ShaderPtr shader_;
     t3::Interpolation<int> pola_;
     int moz_lv_;
@@ -108,8 +108,8 @@ void BlurScene::terminateScene() {
 }
 
 
-void BlurScene::updateScene(t3::DeltaTime delta_time) {
-    context_->update(delta_time);
+void BlurScene::updateScene(const t3::FrameInfo& frame_info) {
+    context_->update(frame_info);
     
     t3::Director& gs = t3::Director::instance();
     const t3::Pad& pad = gs.input().pad();
