@@ -62,7 +62,7 @@ protected:
         return scene_graph_;
     }
 
-    Surface& shadowSurface() {
+    SurfacePtr shadowSurface() {
         return shadow_render_target_;
     }
 
@@ -85,7 +85,7 @@ private:
     DrawLayer shadow_render_layer_;
 
     //  影テクスチャ用サーフェス
-    DepthSurface shadow_render_target_;
+    SurfacePtr shadow_render_target_;
 
     //  3Dシーン通常描画用レイヤー
     DrawLayer scene_layer_;

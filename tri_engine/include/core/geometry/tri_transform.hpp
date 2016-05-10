@@ -99,6 +99,42 @@ public:
     }
     
     ///
+    /// 回転情報を設定
+    void rotation(
+        const Degree x,
+        const Degree y,
+        const Degree z
+    ) {
+        rotation_.x_ = x;
+        rotation_.y_ = y;
+        rotation_.z_ = z;
+    }
+    
+    ///
+    /// 角度を移動
+    void rotateX(
+        const Degree r
+    ) {
+        rotation_.x_ += r;
+    }
+    
+    ///
+    /// 角度を移動
+    void rotateY(
+        const Degree r
+    ) {
+        rotation_.y_ += r;
+    }
+    
+    ///
+    /// 角度を移動
+    void rotateZ(
+        const Degree r
+    ) {
+        rotation_.z_ += r;
+    }
+    
+    ///
     ///  スケールを取得
     Scale2D& scale() {
         return scale_;
@@ -177,8 +213,8 @@ public:
         
         //  親の回転の影響を受けた座標
         Radian parent_rotate = toRadian(parent_->globalRotation().z_);
-        float cos_angle = std::cos(parent_rotate.angle());
-        float sin_angle = std::sin(parent_rotate.angle());
+        float cos_angle = std::cos(parent_rotate.value());
+        float sin_angle = std::sin(parent_rotate.value());
 
         t3::Position2D rotate_pos(
             (position_.x_ * cos_angle) - (position_.y_ * sin_angle),

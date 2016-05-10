@@ -230,7 +230,7 @@ struct QuaternionTemplate
         const Vec3& axis,
         Radian angle
     ){
-        float ang_div_2 = angle.angle() * 0.5f;
+        float ang_div_2 = angle.value() * 0.5f;
         q.w_ = cosf(ang_div_2);
         q.x_ = q.y_ = q.z_ = sinf(ang_div_2);
         q.x_ *= axis.x_;

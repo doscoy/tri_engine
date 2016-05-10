@@ -37,7 +37,12 @@ extern float screen_y_;
     screen_x_ = bounds.size.width * screen_scale_;
     screen_y_ = bounds.size.height * screen_scale_;
     auto& framework = t3::Framework::instance();
-    if (!framework.initializeFramework(screen_x_, screen_y_, "ios")) {
+    
+    t3::InitConfiguration config;
+    config.window_width_ = screen_x_;
+    config.window_height_ = screen_y_;
+    
+    if (!framework.initializeFramework(config)) {
         T3_PANIC("initialize failed");
     }
     T3_RENDER_ASSERT();

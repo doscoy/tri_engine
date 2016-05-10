@@ -255,9 +255,9 @@ public:
     ///
     /// 回転情報を設定
     void rotation(
-        Degree x,
-        Degree y,
-        Degree z
+        const Degree x,
+        const Degree y,
+        const Degree z
     ) {
         calc_request_ = true;
         rotation_.x_ = x;

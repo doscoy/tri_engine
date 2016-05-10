@@ -14,7 +14,7 @@ TRI_JET_NS_BEGIN
 Scene3D::Scene3D(const char* const name) 
     : core::SceneBase(name)
     , shadow_render_layer_()
-    , shadow_render_target_(256, 256)
+    , shadow_render_target_()
     , scene_layer_()
     , scene_graph_()
 {}
@@ -27,19 +27,21 @@ Scene3D::~Scene3D() {
 void Scene3D::initializeScene() {
     T3_RENDER_ASSERT();
 
+    shadow_render_target_ = DepthSurface::create(256,256);
+
     //  レイヤー準備
     shadow_render_layer_.name("shadow_render_layer_");
     shadow_render_layer_.setRenderCallback<Scene3D>(this, &Scene3D::shadowRender);
-    shadow_render_layer_.setupRenderTargetToUserCustom(&shadow_render_target_);
+    shadow_render_layer_.setupRenderTargetToUserCustom(shadow_render_target_);
 
     //  レイヤー準備
     scene_layer_.name("scene_layer_");
     scene_layer_.setRenderCallback<Scene3D>(this, &Scene3D::sceneRender);
 
     //  シャドウ設定
-    shadow_render_layer_.setupRenderTargetToUserCustom(&shadow_render_target_);
-    scene_graph_.shadowTexture(shadow_render_target_.depthTexture());
-    scene_graph_.shadowProjector()->screenSize(shadow_render_target_.size());
+    shadow_render_layer_.setupRenderTargetToUserCustom(shadow_render_target_);
+    scene_graph_.shadowTexture(shadow_render_target_->depthTexture());
+    scene_graph_.shadowProjector()->screenSize(shadow_render_target_->size());
 
 
 

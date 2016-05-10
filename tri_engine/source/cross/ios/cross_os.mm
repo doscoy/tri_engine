@@ -7,10 +7,14 @@
 ////////////////////////////////////////////////////////////////////////
 #include <cstdio>
 #import <UIKit/UIKit.h>
+
+#include "cross_os.hpp"
 #include "cross_types.hpp"
 #include "cross_accelerometer.hpp"
 #include "cross_render_system.hpp"
 #include "cross_audio_system.hpp"
+
+
 
 t3::cross::GamePadData pad_data_[4];
 t3::cross::PointingData point_data_[4];
@@ -18,13 +22,11 @@ t3::cross::PointingData point_data_[4];
 CROSS_NS_BEGIN
 
 
-
+//  platform ios
 
 
 bool initializePlatform(
-    int width,
-    int height,
-    const char* const title
+    const InitConfiguration& canfig
 ) {
     AudioSystem::initializeAudioSystem();
     accelerometerInit();

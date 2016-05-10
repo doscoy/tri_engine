@@ -59,7 +59,7 @@ void ShadowTestScene::initialize() {
     sceneGraph().shadowCamera(light_camera_->camera());
     
     
-    cinema_.setupRenderTargetToUserCustom(&shadowSurface());
+    cinema_.setupRenderTargetToUserCustom(shadowSurface());
 
     T3_RENDER_ASSERT();
 }

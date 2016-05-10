@@ -249,9 +249,9 @@ void Director::setupFinalLayer() {
         Vec2(virtual_screen_to_device_ratio.x_, virtual_screen_to_device_ratio.y_),
         "final", t3::LayerBase::Priority::SYS_FRONT
     ));
-    final_surface_.reset(T3_SYS_NEW ColorDepthSurface(
+    final_surface_ = ColorDepthSurface::create(
         screen_mgr.virtualScreenSize().x_, 
-        screen_mgr.virtualScreenSize().y_)
+        screen_mgr.virtualScreenSize().y_
     );
 
     final_layer_->texture(final_surface_->colorTexture());
@@ -260,7 +260,7 @@ void Director::setupFinalLayer() {
     final_layer_->setupRenderTargetToDevice();
 
     //  デバイス用サーフェス作成
-    device_surface_.reset(T3_SYS_NEW DeviceSurface());
+    device_surface_ = DeviceSurface::create();
 }
 
 //  アップデート

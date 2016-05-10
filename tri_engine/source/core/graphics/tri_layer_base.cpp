@@ -124,13 +124,13 @@ void LayerBase::initializeRender() {
     if (render_target_) {
         render_target_->beginRender();
     } else {
-        Director::instance().finalSurface()->onBeginRender();
+        Director::instance().finalSurface()->beginRender();
     }
 }
 
 void LayerBase::render() {
 
-    Surface* render_target = nullptr;
+    SurfacePtr render_target = nullptr;
     auto& director = Director::instance();
     
     switch (render_target_type_) {
@@ -139,7 +139,7 @@ void LayerBase::render() {
             //  デフォルトはシステムの最終描画サーフェス向け
             {
                 auto& final_render_target = director.finalSurface();
-                render_target = final_render_target.get();
+                render_target = final_render_target;
             }
             break;
             
@@ -154,7 +154,7 @@ void LayerBase::render() {
         case RenderTargetType::DEVICE:
             {
                 auto& device_render_target = director.deviceSurface();
-                render_target = device_render_target.get();
+                render_target = device_render_target;
             }
             break;
             
@@ -169,7 +169,7 @@ void LayerBase::render() {
 }
 
 void LayerBase::doRenderLayer(
-    Surface* surface
+    SurfacePtr surface
 ) {
     T3_NULL_ASSERT(surface);
 

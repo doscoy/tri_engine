@@ -271,10 +271,10 @@ private:
     Layers layers_;                     ///<  描画レイヤー
     
     //  デバイスのレンダーターゲット
-    UniquePtr<DeviceSurface> device_surface_;
+    SurfacePtr device_surface_;
     
     //  最終レンダーターゲット
-    UniquePtr<ColorDepthSurface> final_surface_;
+    SurfacePtr final_surface_;
     
     //  最終レンダーターゲット描画レイヤ
     UniquePtr<CinemaLayer> final_layer_;

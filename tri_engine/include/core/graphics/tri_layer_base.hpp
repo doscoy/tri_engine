@@ -20,13 +20,13 @@
 #include "core/utility/tri_nameable.hpp"
 #include "core/debug/tri_debugmenu_items.hpp"
 #include "cross/cross_std.hpp"
-
+#include "core/graphics/tri_surface.hpp"
 
 TRI_CORE_NS_BEGIN
 
 
 //  前方参照
-class Surface;
+
 class LayerBase;
 using Layers = List<LayerBase*>;
 
@@ -102,7 +102,7 @@ public:
     ///
     /// レンダーターゲットをユーザー指定のサーフェスにする
     void setupRenderTargetToUserCustom(
-        Surface* surface
+        SurfacePtr surface
     ) {
         render_target_ = surface;
         render_target_type_ = RenderTargetType::USER_CUSTOM;
@@ -110,7 +110,7 @@ public:
     
     ///
     /// レンダーターゲットを取得
-    const Surface* userRenderTarget() const {
+    const SurfacePtr userRenderTarget() const {
         return render_target_;
     }
 
@@ -281,7 +281,7 @@ protected:
     
     ///
     /// 指定したサーフェスに向けてrenderLayer()を呼ぶ
-    void doRenderLayer(Surface* surface);
+    void doRenderLayer(SurfacePtr surface);
     
     ///
     /// システムに追加
@@ -311,7 +311,7 @@ protected:
     
     ///
     /// 描画ターゲット
-    Surface* render_target_;
+    SurfacePtr render_target_;
 
     ///
     ///  デバッグメニュー登録用フレーム

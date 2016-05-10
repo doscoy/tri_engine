@@ -16,7 +16,7 @@
 //  include
 #include "core/core_config.hpp"
 #include "../math/tri_math_util.hpp"
-
+#include "../debug/tri_assert.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -86,20 +86,6 @@ public:
         return *this;
     }
     
-    ///
-    ///  正規化
-    void normalize()
-    {
-        normalize( *this, *this );
-    }
-    
-    ///
-    ///  正規化したベクトルを取得
-    Vec2Template getNormalized() const {
-        Vec2Template rhs = *this;
-        rhs.normalize();
-        return rhs;
-    }
     
     ///
     ///  長さの二乗
@@ -111,6 +97,25 @@ public:
     ///  長さ
     element_t length() const {
         return t3::hypotenuse(x_, y_);
+    }
+    
+    ///
+    ///  正規化
+    void normalize()
+    {
+        float len = length();
+        T3_ASSERT(!isZeroFloat(len));
+        float s = 1.0f / len;
+        x_ *= s;
+        y_ *= s;
+    }
+    
+    ///
+    ///  正規化したベクトルを取得
+    Vec2Template getNormalized() const {
+        Vec2Template rhs = *this;
+        rhs.normalize();
+        return rhs;
     }
     
     ///

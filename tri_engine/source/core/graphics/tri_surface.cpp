@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////
+﻿////////////////////////////////////////////////////////////////////////
 //  Tri ENGINE
 //    copyright 2012... Tri ENGINE project team.
 //
@@ -53,6 +53,9 @@ FrameBufferSurface::FrameBufferSurface(
     , bound_(false)
     , buffer_cleared_(false)
 {
+}
+
+void FrameBufferSurface::onInitialize() {
     //  テクスチャ作成
     createTexture();
     
@@ -68,7 +71,6 @@ FrameBufferSurface::FrameBufferSurface(
 }
 
 
-
 void FrameBufferSurface::bind() {
 
     fb_.bind();
@@ -76,15 +78,13 @@ void FrameBufferSurface::bind() {
     bound_ = true;
 }
 
-void FrameBufferSurface::clearSurface() {
-    if (buffer_cleared_) {
-        //  既にクリア済のバッファなのでクリアはスキップ
-        return;
-    }
 
-    //      
+void FrameBufferSurface::clearSurface() {
+
+
     clearSurfaceCore();
-    
+
+        
     //  バッファクリア済フラグを立てておく
     buffer_cleared_ = true;
 }
@@ -151,10 +151,17 @@ void FrameBufferSurface::onPostRender() {
 
 ///////////////////////////////////////////////////////////////
 
+///
+/// デバイス用サーフェス
 DeviceSurface::DeviceSurface()
     : Surface(100,100)
 {
-    auto screen = ScreenManager::instance();
+}
+
+///
+/// 初期化
+void DeviceSurface::onInitialize() {
+    auto& screen = ScreenManager::instance();
     size_ = screen.deviceScreenSize();
 }
 
@@ -201,6 +208,7 @@ void DepthSurface::attachTexture() {
 ///
 /// サーフェスクリア
 void DepthSurface::clearSurfaceCore() {
+    //  デプス値のみクリア
     cross::RenderSystem::clearBuffer(false, true, false);
 }
 
@@ -265,6 +273,7 @@ void ColorDepthSurface::attachTexture() {
 ///
 /// サーフェスクリア
 void ColorDepthSurface::clearSurfaceCore() {
+    //  カラーとデプスクリア
     cross::RenderSystem::clearBuffer(true, true, false);
 }
 
