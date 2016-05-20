@@ -126,14 +126,21 @@ public:
     ///
     ///	値を取り出す
     template <class T>
+    T& cast() {
+        return (dynamic_cast<holder<T>&>(*content_).value_);
+    }
+
+    ///
+    ///	値を取り出す
+    template <class T>
     const T& cast() const {
-        return ( dynamic_cast< holder<T>& >(*content_).value_ );
+        return (dynamic_cast<holder<T>&>(*content_).value_);
     }
 
     ///
     ///	型情報取得
     const std::type_info& type() const {
-        return content_ ? content_->type() : typeid( void );
+        return content_ ? content_->type() : typeid(void);
     }
 
 
@@ -153,9 +160,9 @@ TRI_CORE_NS_END
 
 
 ///
-/// サービス関数 Any_cast用意
+/// サービス関数 any_cast用意
 template < class To >
-inline To any_cast(
+inline To& any_cast(
     t3::Any& from	///< 変換前
 ){
     return from.cast<To>();

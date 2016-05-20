@@ -54,6 +54,16 @@ public:
   
 public:
     void initialize() {
+
+
+        t3::Any a = 15;
+
+        auto& b = any_cast<int>(a);
+
+        b = 99;
+
+        int goal = any_cast<int>(a);
+
         //  スプライト生成
         sprite_ = layer_.createSprite("piko.png");
         
