@@ -6,7 +6,7 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 /**
-    @file surface/tri_surface.hpp
+    @file tri_surface.hpp
     描画ターゲット.
 */
 
@@ -16,7 +16,7 @@
 //  include
 #include "core/core_config.hpp"
 #include "core/graphics/tri_texture.hpp"
-#include "tri_framebuffer.hpp"
+#include "core/graphics/tri_framebuffer.hpp"
 
 
 TRI_CORE_NS_BEGIN

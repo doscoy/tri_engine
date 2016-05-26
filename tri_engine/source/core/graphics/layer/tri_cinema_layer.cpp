@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-#include "core/graphics/layer/tri_cinema_layer.hpp"
+#include "core/graphics/tri_cinema_layer.hpp"
 #include "shader/tri_simple_tex.fsh"
 #include "shader/tri_simple_tex.vsh"
 #include "shader/tri_show_depth_tex.fsh"

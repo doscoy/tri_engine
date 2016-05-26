@@ -55,18 +55,12 @@ public:
 public:
     void initialize() {
 
+        screen_ = t3::CinemaLayer::create();
 
-        t3::Any a = 15;
-
-        auto& b = any_cast<int>(a);
-
-        b = 99;
-
-        int goal = any_cast<int>(a);
 
         //  スプライト生成
         sprite_ = layer_.createSprite("piko.png");
-        
+        layer_.setupRenderTargetToDevice();
         //  スプライトレイヤはオフスクリーンに書く
 //        layer_.setupRenderTargetToUserCustom(&surface_);
         
@@ -90,7 +84,7 @@ public:
 
 private:
     t3::SpriteLayer layer_;
-    t3::CinemaLayer screen_;
+    t3::CinemaLayerPtr screen_;
     t3::SpritePtr sprite_;
     t3::SurfacePtr surface_;
     t3::ShaderPtr shader_;
@@ -126,8 +120,8 @@ void BlurScene::terminateScene() {
 void BlurScene::updateScene(const t3::FrameInfo& frame_info) {
     context_->update(frame_info);
     
-    t3::Director& gs = t3::Director::instance();
-    const t3::Pad& pad = gs.input().pad();
+    auto& gs = t3::Director::instance();
+    auto& pad = gs.input().pad();
     if (pad.isTrigger(t3::Pad::BUTTON_B)) {
         finish();
     }

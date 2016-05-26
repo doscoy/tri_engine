@@ -6,7 +6,7 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 /**
-    @file layer/tri_cinema_layer.hpp
+    @file tri_cinema_layer.hpp
     シネマレイヤー.
 */
 
@@ -16,11 +16,11 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "layer/layer/tri_layer_base.hpp"
-#include "tri_shader.hpp"
-#include "tri_texture.hpp"
-#include "tri_vertex_buffer.hpp"
-#include "tri_index_buffer.hpp"
+#include "core/graphics/layer/tri_layer_base.hpp"
+#include "core/graphics/tri_shader.hpp"
+#include "core/graphics/tri_texture.hpp"
+#include "core/graphics/tri_vertex_buffer.hpp"
+#include "core/graphics/tri_index_buffer.hpp"
 
 TRI_CORE_NS_BEGIN
 

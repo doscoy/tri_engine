@@ -6,33 +6,30 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 /**
-    @file tri_obj_loader.hpp
-    .obj ローダ.
+    @file tri_material.hpp
+    mtlファイルローダ.
 */
 
-#ifndef TRI_OBJ_LOADER_HPP_INCLUDED
-#define TRI_OBJ_LOADER_HPP_INCLUDED
+#ifndef TRI_MTL_LOADER_HPP_INCLUDED
+#define TRI_MTL_LOADER_HPP_INCLUDED
 
 //  include
-#include "tri_submesh_data.hpp"
+#include "core/graphics/tri_material.hpp"
+
 
 
 TRI_CORE_NS_BEGIN
 
-
-
 ///
-/// .obj ローダ
-class ObjLoader {
-public:
-    static SubMeshDataPtr load(
+/// マテリアル
+struct MtlLoader {
+    static MaterialPtr load(
         const char* const path  
     );
 };
-
 
 TRI_CORE_NS_END
 
 
 
-#endif  // TRI_OBJ_LOADER_HPP_INCLUDED
+#endif  // TRI_MATERIAL_HPP_INCLUDED

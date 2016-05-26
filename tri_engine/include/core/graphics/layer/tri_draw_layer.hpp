@@ -6,7 +6,7 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 /**
-    @file layer/tri_draw_layer.hpp
+    @file tri_draw_layer.hpp
     描画レイヤー.
 */
 
@@ -17,8 +17,8 @@
 #include "core/core_config.hpp"
 #include <iostream>
 #include <functional>
-#include "layer/layer/tri_layer_base.hpp"
-#include "../utility/tri_method_callback.hpp"
+#include "core/graphics/layer/tri_layer_base.hpp"
+#include "core/utility/tri_method_callback.hpp"
 
 
 TRI_CORE_NS_BEGIN

@@ -6,7 +6,7 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 
-#include "core/graphics/layer/tri_sprite_layer.hpp"
+#include "core/graphics/tri_sprite_layer.hpp"
 #include "core/graphics/tri_texture.hpp"
 
 

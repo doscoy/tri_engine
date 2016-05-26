@@ -24,11 +24,11 @@
 #include "core/utility/random/tri_random.hpp"
 #include "core/utility/tri_singleton.hpp"
 #include "core/graphics/tri_color.hpp"
-#include "core/graphics/tri_layer_base.hpp"
-#include "core/graphics/tri_fade_layer.hpp"
-#include "core/graphics/tri_sprite_layer.hpp"
-#include "core/graphics/tri_surface.hpp"
-#include "core/graphics/tri_cinema_layer.hpp"
+#include "core/graphics/layer/tri_layer_base.hpp"
+#include "core/graphics/layer/tri_fade_layer.hpp"
+#include "core/graphics/layer/tri_sprite_layer.hpp"
+#include "core/graphics/surface/tri_surface.hpp"
+#include "core/graphics/layer/tri_cinema_layer.hpp"
 #include "core/base/tri_task.hpp"
 
 
@@ -277,7 +277,7 @@ private:
     SurfacePtr final_surface_;
     
     //  最終レンダーターゲット描画レイヤ
-    UniquePtr<CinemaLayer> final_layer_;
+    CinemaLayerPtr final_layer_;
     
     
     //  ルートタスク

@@ -6,7 +6,7 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 /**
-    @file layer/tri_fade_layer.hpp
+    @file tri_fade_layer.hpp
     フェードレイヤー.
 */
 
@@ -15,8 +15,8 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "layer/tri_draw_layer.hpp"
-#include "tri_color.hpp"
+#include "core/graphics/layer/tri_draw_layer.hpp"
+#include "core/graphics/tri_color.hpp"
 
 
 TRI_CORE_NS_BEGIN

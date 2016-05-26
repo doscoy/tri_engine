@@ -37,6 +37,8 @@ void ColladaMeshScene::initialize() {
 
     T3_RENDER_ASSERT();
 
+    cinema_ = t3::CinemaLayer::create();
+
     //  キャラクタ作成
     node_box_ = createModel("blue_box.dae");
     node_box_->position(5.0f, 3.0f, 0.0f);

@@ -18,7 +18,7 @@
 //  include
 #include "core/core_config.hpp"
 #include "cross/cross_std.hpp"
-#include "core/graphics/tri_sprite_layer.hpp"
+#include "core/graphics/layer/tri_sprite_layer.hpp"
 #include "tri_debug_string_buffer.hpp"
 
 

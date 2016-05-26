@@ -11,8 +11,8 @@
 #include "core/debug/tri_assert.hpp"
 #include "core/debug/tri_trace.hpp"
 #include "core/geometry/tri_aabb.hpp"
-#include "core/graphics/tri_obj_loader.hpp"
-#include "core/graphics/tri_dae_loader.hpp"
+#include "core/graphics/loader/tri_obj_loader.hpp"
+#include "core/graphics/loader/tri_dae_loader.hpp"
 
 TRI_CORE_NS_BEGIN
 

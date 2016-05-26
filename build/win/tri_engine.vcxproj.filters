@@ -100,6 +100,24 @@
     <Filter Include="source\third_party\libpng">
       <UniqueIdentifier>{cab8d205-4690-4268-b114-3ff0c9931289}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\core\graphics\layer">
+      <UniqueIdentifier>{1fffb6bd-00e1-4633-8fcf-a75ca4374337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\core\graphics\loader">
+      <UniqueIdentifier>{93f9c975-2c61-4320-8332-8e3c83ee8d99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\core\graphics\surface">
+      <UniqueIdentifier>{f18e724c-43e1-4d23-b656-a73b2da17eda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core\graphics\loader">
+      <UniqueIdentifier>{7d5407d4-0176-4243-ac75-67e64214f25f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core\graphics\layer">
+      <UniqueIdentifier>{1710343f-63f2-48f3-98f4-f62209368936}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core\graphics\surface">
+      <UniqueIdentifier>{c7dcbee1-283f-431d-9981-8802a363381c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\tri_engine\include\cross\cross.hpp">
@@ -321,22 +339,10 @@
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_camera_updater_events.hpp">
       <Filter>include\core\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_cinema_layer.hpp">
-      <Filter>include\core\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_color.hpp">
       <Filter>include\core\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_dae_loader.hpp">
-      <Filter>include\core\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_draw_layer.hpp">
-      <Filter>include\core\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_entity.hpp">
-      <Filter>include\core\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_fade_layer.hpp">
       <Filter>include\core\graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_framebuffer.hpp">
@@ -354,9 +360,6 @@
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_index_buffer.hpp">
       <Filter>include\core\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_layer_base.hpp">
-      <Filter>include\core\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_material.hpp">
       <Filter>include\core\graphics</Filter>
     </ClInclude>
@@ -366,13 +369,7 @@
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_model.hpp">
       <Filter>include\core\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_mtl_loader.hpp">
-      <Filter>include\core\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_object.hpp">
-      <Filter>include\core\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_obj_loader.hpp">
       <Filter>include\core\graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_projector.hpp">
@@ -396,16 +393,10 @@
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_sprite.hpp">
       <Filter>include\core\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_sprite_layer.hpp">
-      <Filter>include\core\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_sprite_renderer.hpp">
       <Filter>include\core\graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_submesh_data.hpp">
-      <Filter>include\core\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_surface.hpp">
       <Filter>include\core\graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_test_entity.hpp">
@@ -684,6 +675,33 @@
     <ClInclude Include="..\..\tri_engine\include\core\base\tri_frame_info.hpp">
       <Filter>include\core\base</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_dae_loader.hpp">
+      <Filter>include\core\graphics\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_cinema_layer.hpp">
+      <Filter>include\core\graphics\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_draw_layer.hpp">
+      <Filter>include\core\graphics\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_fade_layer.hpp">
+      <Filter>include\core\graphics\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_mtl_loader.hpp">
+      <Filter>include\core\graphics\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_obj_loader.hpp">
+      <Filter>include\core\graphics\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_layer_base.hpp">
+      <Filter>include\core\graphics\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_sprite_layer.hpp">
+      <Filter>include\core\graphics\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tri_engine\include\core\graphics\tri_surface.hpp">
+      <Filter>include\core\graphics\surface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\tri_engine\source\jet\scene\jet_scene.cpp">
@@ -800,22 +818,7 @@
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_camera_updater_events.cpp">
       <Filter>source\core\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_cinema_layer.cpp">
-      <Filter>source\core\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_dae_loader.cpp">
-      <Filter>source\core\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_draw_layer.cpp">
-      <Filter>source\core\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_fade_layer.cpp">
-      <Filter>source\core\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_image_png.cpp">
-      <Filter>source\core\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_layer_base.cpp">
       <Filter>source\core\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_material.cpp">
@@ -825,12 +828,6 @@
       <Filter>source\core\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_model.cpp">
-      <Filter>source\core\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_mtl_loader.cpp">
-      <Filter>source\core\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_obj_loader.cpp">
       <Filter>source\core\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_projector.cpp">
@@ -848,13 +845,7 @@
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_sprite.cpp">
       <Filter>source\core\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_sprite_layer.cpp">
-      <Filter>source\core\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_sprite_renderer.cpp">
-      <Filter>source\core\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_surface.cpp">
       <Filter>source\core\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_texture.cpp">
@@ -1081,6 +1072,33 @@
     </ClCompile>
     <ClCompile Include="..\..\tri_engine\source\core\base\tri_frame_info.cpp">
       <Filter>source\core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_draw_layer.cpp">
+      <Filter>source\core\graphics\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_cinema_layer.cpp">
+      <Filter>source\core\graphics\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_dae_loader.cpp">
+      <Filter>source\core\graphics\loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_sprite_layer.cpp">
+      <Filter>source\core\graphics\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_surface.cpp">
+      <Filter>source\core\graphics\surface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_layer_base.cpp">
+      <Filter>source\core\graphics\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\loader\tri_obj_loader.cpp">
+      <Filter>source\core\graphics\loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\loader\tri_mtl_loader.cpp">
+      <Filter>source\core\graphics\loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\layer\tri_fade_layer.cpp">
+      <Filter>source\core\graphics\layer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

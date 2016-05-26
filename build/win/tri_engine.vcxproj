@@ -253,6 +253,9 @@
     <ClCompile Include="..\..\tri_engine\source\core\geometry\tri_collision_manager.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\geometry\tri_frustum.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\geometry\tri_point_collider.cpp" />
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\layer\tri_fade_layer.cpp" />
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\loader\tri_mtl_loader.cpp" />
+    <ClCompile Include="..\..\tri_engine\source\core\graphics\loader\tri_obj_loader.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_camera.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_camera_touch_controller.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_camera_updater.cpp" />
@@ -260,14 +263,11 @@
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_cinema_layer.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_dae_loader.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_draw_layer.cpp" />
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_fade_layer.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_image_png.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_layer_base.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_material.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_mesh.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_model.cpp" />
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_mtl_loader.cpp" />
-    <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_obj_loader.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_projector.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_scene_graph.cpp" />
     <ClCompile Include="..\..\tri_engine\source\core\graphics\tri_scene_node.cpp" />

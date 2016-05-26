@@ -14,7 +14,7 @@
 
 #include "core/core_config.hpp"
 #include "cross/cross.hpp"
-#include "core/graphics/tri_draw_layer.hpp"
+#include "core/graphics/layer/tri_draw_layer.hpp"
 
 TRI_CORE_NS_BEGIN
 

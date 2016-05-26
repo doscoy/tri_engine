@@ -244,11 +244,12 @@ void Director::setupFinalLayer() {
     
     
     //  最終描画用レイヤー
-    final_layer_.reset(T3_SYS_NEW CinemaLayer(
+    final_layer_ = CinemaLayer::create(
         Vec2(-virtual_screen_to_device_ratio.x_, -virtual_screen_to_device_ratio.y_),
         Vec2(virtual_screen_to_device_ratio.x_, virtual_screen_to_device_ratio.y_),
-        "final", t3::LayerBase::Priority::SYS_FRONT
-    ));
+        "final", 
+        t3::LayerBase::Priority::SYS_FRONT
+    );
     final_surface_ = ColorDepthSurface::create(
         screen_mgr.virtualScreenSize().x_, 
         screen_mgr.virtualScreenSize().y_

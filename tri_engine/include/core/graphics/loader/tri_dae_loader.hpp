@@ -15,8 +15,7 @@
 
 //  include
 
-#include "tri_submesh_data.hpp"
-
+#include "core/graphics/tri_submesh_data.hpp"
 
 
 TRI_CORE_NS_BEGIN

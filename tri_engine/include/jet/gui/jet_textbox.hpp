@@ -16,7 +16,7 @@
 //  include
 #include "jet/jet_config.hpp"
 #include "core/math/tri_vec2.hpp"
-#include "core/graphics/tri_sprite_layer.hpp"
+#include "core/graphics/layer/tri_sprite_layer.hpp"
 #include "core/base/tri_font_glyph.hpp"
 #include "core/geometry/tri_transform.hpp"
 #include "core/utility/tri_utf8.hpp"

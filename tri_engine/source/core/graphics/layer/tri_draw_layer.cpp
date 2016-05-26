@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-#include "core/graphics/layer/tri_draw_layer.hpp"
+#include "core/graphics/tri_draw_layer.hpp"
 
 
 TRI_CORE_NS_BEGIN

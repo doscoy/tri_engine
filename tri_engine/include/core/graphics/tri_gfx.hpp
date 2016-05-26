@@ -20,8 +20,8 @@
 #include "tri_camera_updater_events.hpp"
 #include "tri_camera_touch_controller.hpp"
 #include "tri_color.hpp"
-#include "tri_cinema_layer.hpp"
-#include "tri_draw_layer.hpp"
+#include "layer/tri_cinema_layer.hpp"
+#include "layer/tri_draw_layer.hpp"
 #include "tri_entity.hpp"
 #include "tri_gfx.hpp"
 #include "tri_gfx_types.hpp"
@@ -29,14 +29,14 @@
 #include "tri_material.hpp"
 #include "tri_mesh.hpp"
 #include "tri_model.hpp"
-#include "tri_layer_base.hpp"
+#include "layer/tri_layer_base.hpp"
 
 #include "tri_renderable.hpp"
 #include "tri_scene_graph.hpp"
 #include "tri_scene_node.hpp"
 #include "tri_shader.hpp"
 #include "tri_sprite.hpp"
-#include "tri_sprite_layer.hpp"
+#include "layer/tri_sprite_layer.hpp"
 #include "tri_sprite_renderer.hpp"
 #include "tri_texture.hpp"
 #include "tri_texture_factory.hpp"
@@ -44,7 +44,7 @@
 #include "tri_transform_node.hpp"
 #include "tri_vertex_types.hpp"
 #include "tri_vertex_buffer.hpp"
-#include "tri_surface.hpp"
+#include "surface/tri_surface.hpp"
 
 
 #endif // TRI_GFX_HPP_INCLUDED

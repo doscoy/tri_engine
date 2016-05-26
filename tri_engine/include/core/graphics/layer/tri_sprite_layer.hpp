@@ -15,9 +15,9 @@
 
 //  include
 #include "core/core_config.hpp"
-#include "tri_layer_base.hpp"
-#include "tri_sprite.hpp"
-#include "tri_sprite_renderer.hpp"
+#include "core/graphics/layer/tri_layer_base.hpp"
+#include "core/graphics/tri_sprite.hpp"
+#include "core/graphics/tri_sprite_renderer.hpp"
 #include <list>
 #include <memory.h>
 

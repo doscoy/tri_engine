@@ -9,7 +9,7 @@
 #include "core/graphics/tri_sprite.hpp"
 #include "core/base/tri_director.hpp"
 #include "core/graphics/tri_texture.hpp"
-#include "core/graphics/tri_sprite_layer.hpp"
+#include "core/graphics/layer/tri_sprite_layer.hpp"
 #include "core/graphics/tri_vertex_types.hpp"
 
 

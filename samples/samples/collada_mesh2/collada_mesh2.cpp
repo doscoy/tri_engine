@@ -34,6 +34,8 @@ void ColladaMesh2Scene::initialize() {
 
     T3_RENDER_ASSERT();
 
+    cinema_ = t3::CinemaLayer::create();
+
     //  キャラクタ作成
     node_cone_ = createModel("cone2.dae");
     node_object3_ = createModel("object3.dae");
