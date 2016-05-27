@@ -259,7 +259,7 @@ private:
     UniquePtr<DebugLogLayer> dbg_log_layer_;
 
     //  システムフェード
-    UniquePtr<FadeLayer> fade_layer_;   ///< フェードレイヤー
+    FadeLayerPtr fade_layer_;   ///< フェードレイヤー
     
     //  乱数
     random_t random_number_generator_;  ///< 乱数生成器

@@ -29,7 +29,7 @@ private:
         scene_graph_.renderScene(t3::RenderInfo::NORMAL);
     }
 private:
-    t3::DrawLayer layer_;
+    t3::DrawLayerPtr layer_;
     t3::ModelPtr model_;
     t3::LookAtCameraUpdaterPtr cam_updater_;
     t3::SceneGraph scene_graph_;

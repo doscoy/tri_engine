@@ -27,17 +27,19 @@ TRI_CORE_NS_BEGIN
 
 ///
 /// 描画レイヤー
+class DrawLayer;
+using DrawLayerPtr = SharedPtr<DrawLayer>;
 class DrawLayer
     : public LayerBase
 {
+protected:
+    ///
+    /// コンストラクタ
+    DrawLayer(
+        const String& name, 
+        const Priority priority
+    );
 public:
-    ///
-    /// コンストラクタ
-    DrawLayer();
-
-    ///
-    /// コンストラクタ
-    explicit DrawLayer(const String name, const Priority priority = Priority::DEFAULT);
 
     ///
     /// デストラクタ
@@ -72,6 +74,15 @@ protected:
     /// レイヤーの描画
     void renderLayer() override;
 
+public:
+    static DrawLayerPtr create(
+        const String& name = "Draw", 
+        const Priority priority = Priority::DEFAULT
+    ) {
+        DrawLayerPtr layer(T3_SYS_NEW DrawLayer(name, priority));
+        layer->setupRenderTargetToSystem();
+        return layer;
+    }
     
 private:
     UniquePtr<MethodCallbackBase> update_func_;    ///< アップデート時コールバック関数

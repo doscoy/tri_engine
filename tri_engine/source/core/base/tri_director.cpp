@@ -126,7 +126,7 @@ void Director::setClearColor(const Color& c) {
 //  コンストラクタ
 Director::Director()
     : dbg_string_layer_(nullptr)
-    , fade_layer_(nullptr)
+    , fade_layer_()
     , random_number_generator_(1)    
     , input_()
     , layers_()
@@ -202,10 +202,7 @@ Director::~Director() {
 
 
 void Director::initializeDirector() {
-    
-    
-    DebugMenu::instance().initialize();
-    
+        
     dm_layers_.setFocusCallback(
         this,
         &Director::registryLayersToDebugMenu
@@ -214,10 +211,12 @@ void Director::initializeDirector() {
         this,
         &Director::unregistryLayersToDebugMenu
     );
- 
-    
+
+    //  システム用レイヤー作成 
+    setupFinalLayer();
+
     //  システムフェードレイヤー生成
-    fade_layer_.reset(T3_SYS_NEW FadeLayer("sys-fade", LayerBase::Priority::SYS_FADE));
+    fade_layer_ = FadeLayer::create();
 
     //  デバッグ用レイヤー生成
     dbg_string_layer_.reset(T3_SYS_NEW DebugStringLayer("dbg print", LayerBase::Priority::SYS_DEBUG));
@@ -225,6 +224,10 @@ void Director::initializeDirector() {
     
     dbg_log_layer_.reset(T3_SYS_NEW DebugLogLayer("dbg log", LayerBase::Priority::SYS_DEBUG));
     dbg_log_layer_->setupRenderTargetToDevice();
+
+    //  VirtualPad内でDrawLayerを作るためファイナルレイヤー作成後に初期化する必要がある
+    DebugMenu::instance().initialize();
+
 }
 
 
@@ -239,11 +242,12 @@ void Director::terminateDirector() {
 //  最終レイヤの設定
 void Director::setupFinalLayer() {
 
-    auto& screen_mgr = ScreenManager::instance();
-    const Vec2& virtual_screen_to_device_ratio = screen_mgr.screenRevise();
-    
+    //  デバイス用サーフェス作成
+    device_surface_ = DeviceSurface::create();
     
     //  最終描画用レイヤー
+    auto& screen_mgr = ScreenManager::instance();
+    const Vec2& virtual_screen_to_device_ratio = screen_mgr.screenRevise();
     final_layer_ = CinemaLayer::create(
         Vec2(-virtual_screen_to_device_ratio.x_, -virtual_screen_to_device_ratio.y_),
         Vec2(virtual_screen_to_device_ratio.x_, virtual_screen_to_device_ratio.y_),
@@ -260,8 +264,6 @@ void Director::setupFinalLayer() {
     //  最終描画用レイヤーの描画先はデバイスサーフェス
     final_layer_->setupRenderTargetToDevice();
 
-    //  デバイス用サーフェス作成
-    device_surface_ = DeviceSurface::create();
 }
 
 //  アップデート

@@ -6,9 +6,9 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 
-#include "core/graphics/tri_dae_loader.hpp"
+#include "core/graphics/loader/tri_dae_loader.hpp"
 #include "core/graphics/tri_vertex_types.hpp"
-#include "../../third_party/tiny_collada/tiny_collada_parser.hpp"
+#include "../../../third_party/tiny_collada/tiny_collada_parser.hpp"
 
 
 

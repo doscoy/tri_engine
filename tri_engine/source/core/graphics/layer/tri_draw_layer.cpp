@@ -7,31 +7,23 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-#include "core/graphics/tri_draw_layer.hpp"
+#include "core/graphics/layer/tri_draw_layer.hpp"
 
 
 TRI_CORE_NS_BEGIN
 
 
-DrawLayer::DrawLayer()
-    : DrawLayer("Draw", Priority::DEFAULT)
-{
-}
-
 
 DrawLayer::DrawLayer(
-    const String name,
+    const String& name,
     const Priority priority
 )   : LayerBase(name, priority)
     , update_func_(nullptr)
     , render_func_(nullptr)
-{
-}
+{}
 
 DrawLayer::~DrawLayer()
-{
-
-}
+{}
 
 
 void DrawLayer::updateLayer(

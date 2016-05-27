@@ -13,7 +13,6 @@
 
 ShadowTestScene::ShadowTestScene()
     : Scene3D("ShadowTest")
-    , cinema_()
 {
 }
 
@@ -24,7 +23,6 @@ ShadowTestScene::~ShadowTestScene() {
 
 void ShadowTestScene::initialize() {
     T3_RENDER_ASSERT();
-    cinema_ = t3::CinemaLayer::create(t3::Vec2(0,0), t3::Vec2(1.0f, 0.6f));
 
     //  キャラクタ作成
     node_chara_ = createModel("character_chr_old.obj");
@@ -56,10 +54,7 @@ void ShadowTestScene::initialize() {
         
     //  シーングラフにカメラ設定
     sceneGraph().camera(cam_updater_->camera());
-    sceneGraph().shadowCamera(light_camera_->camera());
-    
-    
-    cinema_->setupRenderTargetToUserCustom(shadowSurface());
+    sceneGraph().shadowCamera(light_camera_->camera());    
 
     T3_RENDER_ASSERT();
 }

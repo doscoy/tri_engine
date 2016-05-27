@@ -64,9 +64,11 @@ public:
   
 public:
     void initialize() {
+        layer_ = t3::SpriteLayer::create();
+
         //  通常ボタン
         t3::String tex_name = "tri_engine_ui_sample.png";
-        sprite_ = layer_.createSprite(tex_name);
+        sprite_ = layer_->createSprite(tex_name);
         sprite_->setupTextureCoordAndSize(t3::Vec2(0, 0), t3::Vec2(64, 64));
         button_.setupSprite(sprite_);
         button_.addTriggeredEvent(
@@ -77,9 +79,9 @@ public:
         
         
         //  スワップボタン
-        swap_a_ = layer_.createSprite(tex_name);
+        swap_a_ = layer_->createSprite(tex_name);
         swap_a_->setupTextureCoordAndSize(t3::Vec2(0, 128), t3::Vec2(64, 64));
-        swap_b_ = layer_.createSprite(tex_name);
+        swap_b_ = layer_->createSprite(tex_name);
         swap_b_->setupTextureCoordAndSize(t3::Vec2(64, 128), t3::Vec2(64, 64));
         
         swap_button_.setupSprite(swap_a_, swap_b_);
@@ -94,7 +96,7 @@ public:
         
         // ラジオボタン作成
         for (int i = 0; i < RADIO_BUTTON_NUM; ++i) {
-            auto spr = layer_.createSprite(tex_name);
+            auto spr = layer_->createSprite(tex_name);
             spr->setupTextureCoordAndSize(
                 t3::Vec2(0, 64),
                 t3::Vec2(64, 64)
@@ -126,7 +128,7 @@ public:
         T3_TRACE_TERMINAL("onSwapB\n");
     }
 private:
-    t3::SpriteLayer layer_;
+    t3::SpriteLayerPtr layer_;
     t3::Button button_;
     t3::SpritePtr sprite_;
     

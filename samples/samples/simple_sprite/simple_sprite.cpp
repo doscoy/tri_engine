@@ -23,6 +23,8 @@ public:
 public:
     void initialize(){
         
+        sprite_layer_ = t3::SpriteLayer::create();
+
         //  テクスチャ読み込み
         t3::TextureManager& texture_manager = t3::TextureManager::instance();
         t3::String texpath[9] = {
@@ -133,7 +135,7 @@ private:
 
         static int tex_idx;
         //  スプライト増やす
-        auto sprite = sprite_layer_.createSprite(textures_[tex_idx]);
+        auto sprite = sprite_layer_->createSprite(textures_[tex_idx]);
         tex_idx = (tex_idx +1) % 9;
         sprites_.push_back(sprite);
     }
@@ -150,7 +152,7 @@ private:
 
 private:
     float total_time_;
-    t3::SpriteLayer sprite_layer_;
+    t3::SpriteLayerPtr sprite_layer_;
     t3::Vector<t3::SpritePtr> sprites_;
     t3::TexturePtr textures_[9];
 };

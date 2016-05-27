@@ -154,18 +154,14 @@ Framework::~Framework()
 /// フレームワーク初期化
 bool Framework::initializeFramework(const InitConfiguration& config)
 {
+    //  マネージャインスタンス生成
+    auto& director = Director::createInstance();
 
 
     //  プラットフォームの初期化
     if (!cross::initializePlatform(config)) {
         return false;
     }
-
-    //  マネージャインスタンス生成
-    auto& director = Director::createInstance();
-    
-    //  初期化
-    director.initializeDirector();
     
     //  デバイスの画面サイズ設定
     auto& screen_mgr = t3::ScreenManager::instance();
@@ -187,8 +183,6 @@ bool Framework::initializeFramework(const InitConfiguration& config)
     
 
     
-    //  準備完了
-    T3_SYSTEM_LOG("Initialize TriEngine.\n");
     
     
     //  ワークバー初期化
@@ -199,7 +193,11 @@ bool Framework::initializeFramework(const InitConfiguration& config)
     initializeDrawPrimitive();
    
     //  最終描画レイヤー初期化
-    director.setupFinalLayer();
+    
+    //  初期化
+    director.initializeDirector();
+
+    
 
     
     
@@ -223,6 +221,8 @@ bool Framework::initializeFramework(const InitConfiguration& config)
     );
 #endif // TRI_DEBUG
     
+    //  準備完了
+    T3_SYSTEM_LOG("Initialize TriEngine.\n");
 
     return true;
 }

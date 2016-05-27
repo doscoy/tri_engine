@@ -21,6 +21,10 @@ public:
         , surface_()
         , moz_lv_(0)
     {
+
+    layer_ = t3::SpriteLayer::create();
+    layer_->setupRenderTargetToDevice();
+
     surface_ = t3::ColorDepthSurface::create(512, 512);
 
     const char* pass1_fsh = R"(
@@ -59,8 +63,7 @@ public:
 
 
         //  スプライト生成
-        sprite_ = layer_.createSprite("piko.png");
-        layer_.setupRenderTargetToDevice();
+        sprite_ = layer_->createSprite("piko.png");
         //  スプライトレイヤはオフスクリーンに書く
 //        layer_.setupRenderTargetToUserCustom(&surface_);
         
@@ -83,7 +86,7 @@ public:
     }
 
 private:
-    t3::SpriteLayer layer_;
+    t3::SpriteLayerPtr layer_;
     t3::CinemaLayerPtr screen_;
     t3::SpritePtr sprite_;
     t3::SurfacePtr surface_;

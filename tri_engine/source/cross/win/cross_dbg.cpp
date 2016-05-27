@@ -2,7 +2,9 @@
 
 CROSS_NS_BEGIN
 void breakpoint() {
-
-//    __asm int 3;
+#ifndef _WIN64
+    //  x64ではインラインアセンブラ使えません
+    __asm int 3;
+#endif
 }
 CROSS_NS_END

@@ -82,6 +82,7 @@ public:
     }
 
 public:
+    ///
     /// 生成関数
     static CinemaLayerPtr create(
         const Position2D& min_pos,

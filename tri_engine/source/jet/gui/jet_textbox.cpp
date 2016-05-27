@@ -13,7 +13,7 @@ TRI_JET_NS_BEGIN
 
 ///
 /// コンストラクタ
-TextBox::TextBox(SpriteLayer* layer, const GlyphList* glyph_list)
+TextBox::TextBox(SpriteLayerPtr layer, const GlyphList* glyph_list)
     : layer_(layer)
     , transform_(nullptr)
     , size_(128, 128)

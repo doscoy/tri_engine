@@ -24,9 +24,9 @@ public:
 public:
     void initialize(){
         //  レイヤー準備
-        layer_.name("SimpleMeshScene::DrawLayer");
-        layer_.setUpdateCallback(this, &SceneContext::layerUpdate);
-        layer_.setRenderCallback(this, &SceneContext::layerRender);
+        layer_ = t3::DrawLayer::create("SimpleMeshScene::DrawLayer");
+        layer_->setUpdateCallback(this, &SceneContext::layerUpdate);
+        layer_->setRenderCallback(this, &SceneContext::layerRender);
 
 
         //  モデル作成
@@ -61,7 +61,7 @@ private:
 
 
 private:
-    t3::DrawLayer layer_;
+    t3::DrawLayerPtr layer_;
     t3::ModelPtr model_;
     t3::LookAtCameraUpdater cam_updater_;
     t3::SceneGraph scene_graph_;

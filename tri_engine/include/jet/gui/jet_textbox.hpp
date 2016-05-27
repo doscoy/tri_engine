@@ -47,7 +47,7 @@ public:
 public:
     ///
     /// コンストラクタ
-    TextBox(SpriteLayer* layer, const GlyphList* glyph_list);
+    TextBox(SpriteLayerPtr layer, const GlyphList* glyph_list);
 
     ///
     /// デストラクタ
@@ -187,7 +187,7 @@ private:
     float fontScaleRatio() const;
     
 private:
-    SpriteLayer* layer_;            ///< 描画するスプライトレイヤ
+    SpriteLayerPtr layer_;            ///< 描画するスプライトレイヤ
     Transform2DPtr transform_;      ///< 姿勢制御情報
     Vec2 size_;                     ///< サイズ
     const GlyphList* glyph_list_;   ///< 使用するフォントグリフ

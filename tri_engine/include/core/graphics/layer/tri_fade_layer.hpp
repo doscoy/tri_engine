@@ -24,18 +24,17 @@ TRI_CORE_NS_BEGIN
 
 ///
 /// フェードレイヤー
+class FadeLayer;
+using FadeLayerPtr = SharedPtr<FadeLayer>;
 class FadeLayer
     : public LayerBase
 {
-public:
-    ///
-    /// コンストラクタ
-    FadeLayer();
-
+protected:
     ///
     /// コンストラクタ
     FadeLayer(const String& name, const Priority priority);
 
+public:
     ///
     /// デストラクタ
     ~FadeLayer();
@@ -145,7 +144,17 @@ public:
         fade_color_ = c;
     }
 
-
+public:
+    ///
+    /// 生成関数
+    static FadeLayerPtr create(
+        const String& name = "Fade",                    ///< 名前
+        const Priority priority = Priority::SYS_FADE    ///< プライオリティ
+    ) {
+        FadeLayerPtr layer(T3_SYS_NEW FadeLayer(name, priority));
+        layer->setupRenderTargetToSystem();
+        return layer;
+    }
 private:
     bool fading_;           ///< フェード中かどうかのフラグ
     bool fade_in_;          ///< フェードインかどうかのフラグ

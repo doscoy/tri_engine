@@ -45,11 +45,12 @@ const t3::Rectangle B_BUTTON(POS_B, POS_B + BUTTON_SIZE);
 
 
 VirtualPad::VirtualPad()
-    : pad_layer_("vpad", LayerBase::Priority::SYS_DEBUG)
+    : pad_layer_()
 {
-    pad_layer_.setUpdateCallback<VirtualPad>(this, &VirtualPad::updateVirtualPad);
-    pad_layer_.setRenderCallback<VirtualPad>(this, &VirtualPad::renderVirtualPad);
-    pad_layer_.setupRenderTargetToDevice();
+    pad_layer_ = DrawLayer::create("vpad", LayerBase::Priority::SYS_DEBUG);
+    pad_layer_->setUpdateCallback<VirtualPad>(this, &VirtualPad::updateVirtualPad);
+    pad_layer_->setRenderCallback<VirtualPad>(this, &VirtualPad::renderVirtualPad);
+    pad_layer_->setupRenderTargetToDevice();
 }
 
 VirtualPad::~VirtualPad() {
@@ -63,11 +64,11 @@ void VirtualPad::open() {
 #endif // TRI_DEBUG
 
 
-    pad_layer_.enableLayer();
+    pad_layer_->enableLayer();
 }
 
 void VirtualPad::close() {
-    pad_layer_.disableLayer();
+    pad_layer_->disableLayer();
 }
 
 void VirtualPad::updateVirtualPad() {

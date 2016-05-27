@@ -26,7 +26,6 @@ public:
     void update(const t3::FrameInfo& frame_info) override;
     
 private:
-    t3::DrawLayer final_layer_;
     t3::CinemaLayerPtr cinema_;
     t3::LookAtCameraUpdaterPtr cam_updater_;
     t3::LookAtCameraUpdaterPtr light_camera_;

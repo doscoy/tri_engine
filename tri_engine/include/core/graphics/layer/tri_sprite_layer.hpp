@@ -26,6 +26,8 @@ TRI_CORE_NS_BEGIN
 
 ///
 /// スプライトレイヤー
+class SpriteLayer;
+using SpriteLayerPtr = SharedPtr<SpriteLayer>;
 class SpriteLayer
     : public LayerBase
 {
@@ -34,17 +36,16 @@ public:
     /// スプライトコンテナ
     using SpriteContainer = List<SpriteWeakPtr>;
 
-public:
-    ///
-    /// コンストラクタ
-    SpriteLayer();
-    
+protected:
+
     ///
     /// コンストラクタ
     SpriteLayer(
-        const String& name,                         ///< レイヤー名
-        const LayerBase::Priority priority = Priority::DEFAULT   ///< プライオリティ
+        const String& name,                     ///< レイヤー名
+        const LayerBase::Priority priority      ///< プライオリティ
     );
+
+public:
     
     ///
     /// デストラクタ
@@ -90,6 +91,17 @@ protected:
     /// レイヤーの描画
     void renderLayer() override;
     
+
+public:
+    static SpriteLayerPtr create(
+        const String& name = "Sprite",                         ///< レイヤー名
+        const LayerBase::Priority priority = Priority::DEFAULT   ///< プライオリティ
+    ) {
+        SpriteLayerPtr layer(T3_SYS_NEW SpriteLayer(name, priority));
+        layer->setupRenderTargetToSystem();
+        return layer;
+    }
+
 private:
     ///
     /// スプライトレンダラ

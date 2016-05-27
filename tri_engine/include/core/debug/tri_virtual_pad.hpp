@@ -53,7 +53,7 @@ private:
     
 private:
     //  バーチャルパッド用のレイヤー
-    DrawLayer pad_layer_;
+    DrawLayerPtr pad_layer_;
     
     //  パッド情報
     cross::GamePadData pad_data_;

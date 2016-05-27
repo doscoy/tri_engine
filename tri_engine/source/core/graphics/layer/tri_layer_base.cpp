@@ -129,6 +129,7 @@ void LayerBase::setupRenderTargetToSystem() {
     //  ディレクターからファイナルサーフェスを取得して設定
     auto& d = Director::instance();
     render_target_ = d.finalSurface();
+    T3_NULL_ASSERT(render_target_);
 }
     
 ///
@@ -139,6 +140,7 @@ void LayerBase::setupRenderTargetToDevice() {
     //  ディレクターからデバイスサーフェスを取得して設定
     auto& d = Director::instance();
     render_target_ = d.deviceSurface();
+    T3_NULL_ASSERT(render_target_);
 }
 
 ///
@@ -148,6 +150,7 @@ void LayerBase::setupRenderTargetToUserCustom(
 ) {
     render_target_ = surface;
     render_target_type_ = RenderTargetType::USER_CUSTOM;
+    T3_NULL_ASSERT(render_target_);
 }
 
 

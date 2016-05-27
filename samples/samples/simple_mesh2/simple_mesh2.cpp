@@ -25,8 +25,9 @@ public:
   
 public:
     void initialize(){
-        layer_.setUpdateCallback(this, &SceneContext::layerUpdate);
-        layer_.setRenderCallback(this, &SceneContext::layerRender);
+        layer_ = t3::DrawLayer::create();
+        layer_->setUpdateCallback(this, &SceneContext::layerUpdate);
+        layer_->setRenderCallback(this, &SceneContext::layerRender);
 
         //  メッシュ読み込み
         t3::FilePath donut_path("poly.obj");
@@ -75,7 +76,7 @@ private:
 
 
 private:
-    t3::DrawLayer layer_;
+    t3::DrawLayerPtr layer_;
     t3::ModelPtr model_;
     t3::LookAtCameraUpdaterPtr cam_update_;
     t3::SceneGraph scene_graph_;

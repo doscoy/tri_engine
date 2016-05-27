@@ -6,18 +6,12 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 
-#include "core/graphics/tri_sprite_layer.hpp"
+#include "core/graphics/layer/tri_sprite_layer.hpp"
 #include "core/graphics/tri_texture.hpp"
 
 
 TRI_CORE_NS_BEGIN
 
-
-
-SpriteLayer::SpriteLayer()
-    : SpriteLayer("Sprite")
-{
-}
 
 SpriteLayer::SpriteLayer(
     const String& name,

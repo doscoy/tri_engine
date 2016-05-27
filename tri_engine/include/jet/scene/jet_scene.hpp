@@ -82,13 +82,13 @@ private:
 
 private:
     //  影テクスチャ用レイヤ
-    DrawLayer shadow_render_layer_;
+    DrawLayerPtr shadow_render_layer_;
 
     //  影テクスチャ用サーフェス
     SurfacePtr shadow_render_target_;
 
     //  3Dシーン通常描画用レイヤー
-    DrawLayer scene_layer_;
+    DrawLayerPtr scene_layer_;
 
     //  シーングラフ
     SceneGraph scene_graph_;
@@ -143,7 +143,7 @@ private:
     virtual void update(const FrameInfo& frame_info) {}
 
 private:
-    SpriteLayer default_sprite_layer_;
+    SpriteLayerPtr default_sprite_layer_;
 };
 
 

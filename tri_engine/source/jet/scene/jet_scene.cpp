@@ -30,16 +30,16 @@ void Scene3D::initializeScene() {
     shadow_render_target_ = DepthSurface::create(256,256);
 
     //  レイヤー準備
-    shadow_render_layer_.name("shadow_render_layer_");
-    shadow_render_layer_.setRenderCallback<Scene3D>(this, &Scene3D::shadowRender);
-    shadow_render_layer_.setupRenderTargetToUserCustom(shadow_render_target_);
+    shadow_render_layer_ = DrawLayer::create("shadow_render_layer_");
+    shadow_render_layer_->setRenderCallback<Scene3D>(this, &Scene3D::shadowRender);
+    shadow_render_layer_->setupRenderTargetToUserCustom(shadow_render_target_);
 
     //  レイヤー準備
-    scene_layer_.name("scene_layer_");
-    scene_layer_.setRenderCallback<Scene3D>(this, &Scene3D::sceneRender);
+    scene_layer_ = DrawLayer::create("scene_layer_");
+    scene_layer_->setRenderCallback<Scene3D>(this, &Scene3D::sceneRender);
 
     //  シャドウ設定
-    shadow_render_layer_.setupRenderTargetToUserCustom(shadow_render_target_);
+    shadow_render_layer_->setupRenderTargetToUserCustom(shadow_render_target_);
     scene_graph_.shadowTexture(shadow_render_target_->depthTexture());
     scene_graph_.shadowProjector()->screenSize(shadow_render_target_->size());
 
@@ -86,8 +86,10 @@ TransformNodePtr Scene3D::createChildModel(
 /// コンストラクタ
 Scene2D::Scene2D(const char* const name)
     : core::SceneBase(name)
-    , default_sprite_layer_(T3_DEFAULT_SPRITE_LAYER_NAME)
-{}
+    , default_sprite_layer_()
+{
+    default_sprite_layer_ = SpriteLayer::create(T3_DEFAULT_SPRITE_LAYER_NAME);
+}
 
 
 ///

@@ -25,8 +25,9 @@ SimpleMesh3Scene::~SimpleMesh3Scene() {
 
 void SimpleMesh3Scene::initializeScene() {
     //  レイヤー準備
-    layer_.name("SimpleMesh3Scene::DrawLayer");
-    layer_.setRenderCallback(this, &SimpleMesh3Scene::layerRender);
+    layer_ = t3::DrawLayer::create();
+    layer_->name("SimpleMesh3Scene::DrawLayer");
+    layer_->setRenderCallback(this, &SimpleMesh3Scene::layerRender);
 
 
     //  モデル作成

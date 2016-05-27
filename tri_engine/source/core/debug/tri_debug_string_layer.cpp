@@ -21,7 +21,7 @@ DebugStringLayer::DebugStringLayer(
     , sprites_()
     , font_sheet_()
 {
-
+    
 
     //  デバッグ用フォントシート作成
     font_sheet_ = Texture::create(

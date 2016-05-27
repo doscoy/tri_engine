@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-#include "core/graphics/tri_fade_layer.hpp"
+#include "core/graphics/layer/tri_fade_layer.hpp"
 #include "core/debug/tri_draw_primitive.hpp"
 
 
@@ -15,12 +15,6 @@
 
 TRI_CORE_NS_BEGIN
 
-
-
-FadeLayer::FadeLayer()
-    : FadeLayer("fade", Priority::SYS_FADE)
-{
-}
 
 
 FadeLayer::FadeLayer(

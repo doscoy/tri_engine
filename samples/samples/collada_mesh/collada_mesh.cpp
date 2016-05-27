@@ -14,8 +14,6 @@
 
 ColladaMeshScene::ColladaMeshScene()
     : Scene3D("ColladaMeshScene") 
-    , final_layer_()
-    , cinema_()
     , cam_updater_()
     , light_camera_()
     , scene_graph_()
@@ -36,8 +34,6 @@ ColladaMeshScene::~ColladaMeshScene() {
 void ColladaMeshScene::initialize() {
 
     T3_RENDER_ASSERT();
-
-    cinema_ = t3::CinemaLayer::create();
 
     //  キャラクタ作成
     node_box_ = createModel("blue_box.dae");
