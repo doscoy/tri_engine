@@ -10,6 +10,8 @@
 #ifndef TRI_CROSS_GLFW_HPP_INCLUDED
 #define TRI_CROSS_GLFW_HPP_INCLUDED
 
+
+
 /*
 glfw3.lib
 GLU32.Lib

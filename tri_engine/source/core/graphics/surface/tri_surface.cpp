@@ -6,7 +6,7 @@
 //  License: https://github.com/doscoy/tri_engine/wiki/License
 ////////////////////////////////////////////////////////////////////////
 
-#include "core/graphics/tri_surface.hpp"
+#include "core/graphics/surface/tri_surface.hpp"
 #include "core/base/tri_screen_manager.hpp"
 #include "core/base/tri_director.hpp"
 

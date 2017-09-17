@@ -20,7 +20,7 @@
 #include "core/utility/tri_nameable.hpp"
 #include "core/debug/tri_debugmenu_items.hpp"
 #include "cross/cross_std.hpp"
-#include "core/graphics/tri_surface.hpp"
+#include "core/graphics/surface/tri_surface.hpp"
 
 TRI_CORE_NS_BEGIN
 

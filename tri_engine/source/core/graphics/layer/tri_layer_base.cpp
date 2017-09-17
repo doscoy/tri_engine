@@ -7,9 +7,9 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-#include "core/graphics/tri_layer_base.hpp"
+#include "core/graphics/layer/tri_layer_base.hpp"
 #include "core/base/tri_director.hpp"
-#include "core/graphics/tri_surface.hpp"
+#include "core/graphics/surface/tri_surface.hpp"
 
 
 TRI_CORE_NS_BEGIN
