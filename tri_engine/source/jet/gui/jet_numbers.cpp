@@ -173,7 +173,7 @@ void Numbers::initialize(
 ///
 /// 中央寄せする
 void Numbers::alignCenter() {
-    int digit = numbers_.size();
+    size_t digit = numbers_.size();
     float sprite_width = numbers_.at(0).sprite()->size().x_;
     float start_x = sprite_width * digit * 0.5f;
     for (int i = 0; i < digit; ++i) {

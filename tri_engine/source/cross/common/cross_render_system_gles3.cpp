@@ -948,7 +948,7 @@ void RenderSystem::attachRenderBuffer(
     RenderSystem::RenderBufferID id
 ) {
 
-    int gltype;
+    int gltype = 0;
     
     if (type == RenderSystem::RenderBufferAttachType::COLOR0) {
         gltype = GL_COLOR_ATTACHMENT0;
@@ -974,7 +974,7 @@ void RenderSystem::attachFrameBufferTexture(
     RenderSystem::RenderBufferAttachType type,
     RenderSystem::TextureID id
 ) {
-    int gltype;
+    int gltype = 0;
     
     if (type == RenderSystem::RenderBufferAttachType::COLOR0) {
         gltype = GL_COLOR_ATTACHMENT0;
@@ -1002,7 +1002,7 @@ void RenderSystem::setupRenderBufferStorage(
     int width,
     int height
 ) {
-    int glusage;
+    int glusage = 0;
     
     if (usage == RenderSystem::RenderBufferUsage::COLOR) {
         glusage = GL_RGBA4;
