@@ -92,7 +92,6 @@ public:
     ) {
         CinemaLayerPtr layer(T3_SYS_NEW CinemaLayer(name, priority));
         layer->initialize(min_pos, max_pos);
-        layer->setupRenderTargetToSystem();
         return layer;
     }
 
