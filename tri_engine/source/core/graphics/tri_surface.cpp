@@ -1,4 +1,4 @@
-﻿////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 //  Tri ENGINE
 //    copyright 2012... Tri ENGINE project team.
 //
@@ -15,9 +15,10 @@ TRI_CORE_NS_BEGIN
 
 ///
 /// コンストラクタ
-Surface::Surface(float width, float height)
+Surface::Surface(float width, float height, String name)
     : textures_()
     , size_(width, height)
+    , name_(name)
 {}
 
 
@@ -37,7 +38,7 @@ void Surface::postRender() {
 FrameBufferSurface::FrameBufferSurface(
     float width,
     float height
-)   : Surface(width, height)
+)   : Surface(width, height, "FrameBufferSurface")
     , last_viewport_pos_x_(0)
     , last_viewport_pos_y_(0)
     , last_viewport_width_(0)
@@ -136,7 +137,7 @@ void FrameBufferSurface::onPostRender() {
 ///
 /// デバイス用サーフェス
 DeviceSurface::DeviceSurface()
-    : Surface(100,100)
+    : Surface(100,100, "DeviceSurface")
 {
 }
 
@@ -154,7 +155,9 @@ void DeviceSurface::onInitialize() {
 DepthSurface::DepthSurface(
     float width, float height
 )   : FrameBufferSurface(width, height)
-{}
+{
+    name("DepthSurface");
+}
 
 ///
 /// テクスチャ生成

@@ -72,8 +72,8 @@ public:
     
     ///
     /// スクリーンの補正値取得
-    const Vec2& screenRevise() const {
-        return screen_revise_;
+    const Vec2& renderRevise() const {
+        return render_revise_;
     }
     
     ///
@@ -100,6 +100,10 @@ public:
     static constexpr int VIRTUAL_SCREEN_WIDTH_LANDSCAPE = 1920;
     static constexpr int VIRTUAL_SCREEN_HEIGHT_LANDSCAPE = 1080;
 
+    void dump();
+    
+
+
 private:
     ///
     /// スクリーン拡大縮小率計算
@@ -121,7 +125,7 @@ private:
     //   スクリーンサイズ
     Vec2 device_screen_size_;           ///< デバイススクリーンサイズ
     Vec2 virtual_screen_size_;          ///< 仮想スクリーンサイズ
-    Vec2 screen_revise_;
+    Vec2 render_revise_;
     AspectMode aspect_mode_;
 };
 

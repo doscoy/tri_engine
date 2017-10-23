@@ -162,42 +162,6 @@ void LayerBase::clearSurface() {
 void LayerBase::render() {
 
     SurfacePtr render_target = render_target_;
-
-/*
-    auto& director = Director::instance();
-    
-    switch (render_target_type_) {
-        //  デフォルトの描画ターゲット
-        case RenderTargetType::DEFAULT:
-            //  デフォルトはシステムの最終描画サーフェス向け
-            {
-                auto& final_render_target = director.finalSurface();
-                render_target = final_render_target;
-            }
-            break;
-            
-
-        //   ユーザー指定
-        case RenderTargetType::USER_CUSTOM:
-            //  ユーザー指定のレンダーターゲットに描画する
-            render_target = render_target_;
-            break;
-        
-        //  デバイスの画面に直接描画する
-        case RenderTargetType::DEVICE:
-            {
-                auto& device_render_target = director.deviceSurface();
-                render_target = device_render_target;
-            }
-            break;
-            
-            
-        default:
-            T3_PANIC("unknown render target type.");
-            break;
-    }
-    
-*/
     doRenderLayer(render_target);
 }
 
@@ -205,7 +169,7 @@ void LayerBase::doRenderLayer(
     SurfacePtr surface
 ) {
     T3_NULL_ASSERT(surface);
-
+    surface->name();
     surface->preRender();
     renderLayer();
     surface->postRender();

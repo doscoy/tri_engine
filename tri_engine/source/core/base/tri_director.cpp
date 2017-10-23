@@ -247,7 +247,7 @@ void Director::setupFinalLayer() {
     
     //  最終描画用レイヤー
     auto& screen_mgr = ScreenManager::instance();
-    const Vec2& virtual_screen_to_device_ratio = screen_mgr.screenRevise();
+    const Vec2& virtual_screen_to_device_ratio = screen_mgr.renderRevise();
     final_layer_ = CinemaLayer::create(
         Vec2(-virtual_screen_to_device_ratio.x_, -virtual_screen_to_device_ratio.y_),
         Vec2(virtual_screen_to_device_ratio.x_, virtual_screen_to_device_ratio.y_),

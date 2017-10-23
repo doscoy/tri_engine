@@ -8,7 +8,7 @@
 
 #include "core/base/tri_screen_manager.hpp"
 #include "core/math/tri_math.hpp"
-
+#include "core/debug/tri_dbg.hpp"
 
 TRI_CORE_NS_BEGIN
 
@@ -20,13 +20,13 @@ TRI_CORE_NS_BEGIN
 ScreenManager::ScreenManager()
     : device_screen_size_()
     , virtual_screen_size_()
-    , screen_revise_()
+    , render_revise_()
 {}
 
 
 ///
 /// スクリーン座標からビューポート座標へ変換
-Vec2 ScreenManager::screenToViewport(
+Vec2 ScreenManager:: screenToViewport(
     const Vec2& screen_pos
 ) {
     return screen_pos / virtualScreenSize() * 2.0f;
@@ -61,8 +61,9 @@ void ScreenManager::calcScreenRevise() {
 
     auto revise = device_screen_size_ / virtual_screen_size_;
     float div = revise.x_ > revise.y_ ? revise.x_ : revise.y_;
-    screen_revise_.x_ = revise.y_ / div;
-    screen_revise_.y_ = revise.x_ / div;
+    render_revise_.x_ = revise.y_ / div;
+    render_revise_.y_ = revise.x_ / div;
+    
 }
 
 void ScreenManager::calcAspectMode() {
@@ -106,6 +107,14 @@ void ScreenManager::resizeScreen(
         static_cast<int>(screen.x_),
         static_cast<int>(screen.y_)
     );
+
+}
+
+
+void ScreenManager::dump() {
+    T3_SYSTEM_LOG("DEVICE SIZE (%f, %f)\n", device_screen_size_.x_, device_screen_size_.y_);
+    T3_SYSTEM_LOG("VIRTUAL SCREEN SIZE (%f, %f)\n", virtual_screen_size_.x_, virtual_screen_size_.y_);
+    T3_SYSTEM_LOG("RENDER REVISE (%f, %f)\n", render_revise_.x_, render_revise_.y_);
 
 }
 

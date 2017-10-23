@@ -32,7 +32,7 @@ class Surface {
 protected:
     ///
     /// コンストラクタ
-    Surface(float width, float height);
+    Surface(float width, float height, String name);
 
 
 public:
@@ -114,6 +114,14 @@ public:
         onInitialize();
     }
 
+    const String name() const {
+        return name_;
+    }
+    
+    void name(const String& name) {
+        name_ = name;
+    }
+
 public:
     ///
     /// サーフェスをクリアする用オーバーライド
@@ -142,6 +150,10 @@ protected:
     ///
     /// サイズ
     Vec2 size_;
+    
+    ///
+    /// サーフェス名
+    String name_;
 };
 
 ///
@@ -364,6 +376,7 @@ private:
 
 private:
     void onInitialize() override;
+    void onPreRender() override;
     void clearSurface() override;
 public:
     ///

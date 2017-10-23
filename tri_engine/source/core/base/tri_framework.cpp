@@ -182,7 +182,7 @@ bool Framework::initializeFramework(const InitConfiguration& config)
     
     
 
-    
+    screen_mgr.dump();
     
     
     //  ワークバー初期化

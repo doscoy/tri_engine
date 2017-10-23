@@ -29,9 +29,15 @@ extern float screen_y_;
 
     [super viewDidLoad];
     
+    
+    float native_scale = [UIScreen mainScreen].nativeScale;
+    CGRect nativeBounds = [UIScreen mainScreen].nativeBounds;
+    float native_x = nativeBounds.size.width * native_scale;
+    float native_y = nativeBounds.size.height * native_scale;
+
         
     // 各機種で内部の座標系を統一する
-    screen_scale_ = [UIScreen mainScreen].scale;
+    screen_scale_ = [UIScreen mainScreen].nativeScale;
 
     CGRect bounds = [UIScreen mainScreen].bounds;
     screen_x_ = bounds.size.width * screen_scale_;
@@ -42,6 +48,14 @@ extern float screen_y_;
     config.window_width_ = screen_x_;
     config.window_height_ = screen_y_;
     
+    T3_SYSTEM_LOG("SCREEN SCALE %f  BOUNDS (%d,%d)\n", screen_scale_, (int)bounds.size.width, (int)bounds.size.height );
+    T3_SYSTEM_LOG("WINDOW SIZE (%d, %d)\n", (int)screen_x_, (int)screen_y_);
+
+
+    T3_SYSTEM_LOG("NATIVE SCALE %f  BOUNDS (%d,%d)\n", native_scale, (int)nativeBounds.size.width, (int)nativeBounds.size.height );
+    T3_SYSTEM_LOG("WINDOW SIZE (%d, %d)\n", (int)native_x, (int)native_y);
+
+
     if (!framework.initializeFramework(config)) {
         T3_PANIC("initialize failed");
     }

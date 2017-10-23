@@ -130,7 +130,7 @@ void Button::updateHitArea() {
     T3_NULL_ASSERT(sprite_);
 
     auto& screen_man = ScreenManager::instance();
-    auto& ratio = screen_man.screenRevise();
+    auto& ratio = screen_man.renderRevise();
     hit_area_.setupFromCenterSize(
         sprite_->transform()->position() * ratio,
         sprite_->size() * ratio

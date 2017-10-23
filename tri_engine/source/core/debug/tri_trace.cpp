@@ -78,7 +78,7 @@ void trace(
 
     traceTerminal("[%u]%s", count, buf);
 
-    traceDisplay("[%u]%s", count, buf);
+//    traceDisplay("[%u]%s", count, buf);
 }
 
 void traceValue(
